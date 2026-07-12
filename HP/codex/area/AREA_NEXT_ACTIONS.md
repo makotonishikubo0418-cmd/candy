@@ -1,5 +1,7 @@
 # AREA_NEXT_ACTIONS
 
+> 過去スナップショット: 2026-06-05時点の確認結果です。件数、noindex、本番404、次作業は現在の状態として再確認が必要です。通常生成の正本は `HP/codex/docs/CANDY_PAGE_GENERATION_GOVERNANCE.md` と `HP/codex/docs/CANDY_AREA_PAGE_GENERATION_SPEC.md` です。
+
 作成日: 2026-06-05
 対象: H:\Data\01_CTI\candy_HP
 

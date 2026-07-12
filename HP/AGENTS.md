@@ -117,6 +117,8 @@ Codex は、1 ファイルだけを見て仕様を断定してはいけません
 - 公開入口 PHP、`source` HTML、ページ別 dataset PHP、`dataset_base.php` の登録を必須の1セットとする
 - HTML だけを生成して完了としてはいけない
 - `create.php` は通常の Codex ページ生成では原則使用しない
+- 通常生成前に `codex/docs/CANDY_PAGE_GENERATION_GOVERNANCE.md` と対象カテゴリの生成仕様書を必ず確認する
+- スタッフ・別Codexがareaページを分割制作するときは、`codex/docs/CANDY_AREA_STAFF_PRODUCTION_RUNBOOK.md` と `codex/docs/CANDY_AREA_105_PAGE_QUEUE.md` も必ず確認する
 
 この絶対ルールは通常の新規ページ生成に限定します。機能追加、不具合修正、既存機能変更、構造変更、リファクタなどの開発改修は別作業として扱い、このファイルの調査・変更・修正ルールに従ってください。
 

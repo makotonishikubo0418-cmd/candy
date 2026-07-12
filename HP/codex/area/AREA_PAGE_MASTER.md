@@ -1,5 +1,7 @@
 # AREA_PAGE_MASTER
 
+> 過去スナップショット: 2026-06-05時点の台帳です。件数、placeholder、画像、noindex、本番状態は現在の事実として再確認してください。通常生成の正本は `HP/codex/docs/CANDY_PAGE_GENERATION_GOVERNANCE.md` と `HP/codex/docs/CANDY_AREA_PAGE_GENERATION_SPEC.md` です。
+
 作成日: 2026-06-05
 対象: H:\Data\01_CTI\candy_HP
 

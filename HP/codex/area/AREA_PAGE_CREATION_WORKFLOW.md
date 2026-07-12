@@ -1,5 +1,7 @@
 # AREA_PAGE_CREATION_WORKFLOW
 
+> 旧運用資料: 2026-06-05時点の履歴です。現在の通常生成では `HP/codex/docs/CANDY_PAGE_GENERATION_GOVERNANCE.md` と `HP/codex/docs/CANDY_AREA_PAGE_GENERATION_SPEC.md` を正本として使用してください。本資料の旧パス、noindex、個別バックアップ、本番確認結果を現行ルールとして使用してはいけません。
+
 作成日: 2026-06-05
 対象: H:\Data\01_CTI\candy_HP
 
