@@ -490,3 +490,17 @@ AGENTS.md check:
 - PHP 実行結果は未確認です
 - DB 接続は未確認です
 - ブラウザ表示は未確認です
+
+---
+
+## 13. GitHub mainからKAGOYAへの自動本番反映
+
+- `main`へ自動反映対象の`HP`ファイルをPushすると、GitHub Actionsの`CANDY Production Deploy`がKAGOYA本番サーバーへ追加・更新ファイルを自動反映する
+- Codexは対象ファイルを`main`へPushする前に、本番反映が発生することをユーザーへ明示する
+- ユーザーからCommit、Push、本番反映の明示許可がない限りPushしない
+- Markdown、`HP/codex`、`HP/log`、`HP/Text_*_data`、`HP/.well-known`、`HP/AGENTS.md`は自動反映対象外とする
+- 削除・リネームは自動反映せず、FTP接続前にworkflowを停止する
+- 本番サーバー上のファイルを直接編集しない
+- `FTP_SERVER`、`FTP_USERNAME`、`FTP_PASSWORD`の値をコード、ログ、報告へ出さない
+- `CANDY FTP End-to-End Test`は診断用であり、手動実行だけとする
+- KAGOYAのFTPアクセスを「制限」に戻すと、GitHub ActionsからFTP接続できなくなる

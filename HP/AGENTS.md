@@ -648,3 +648,16 @@ Phase 0 は、以下を満たしたら完了です。
 - CANDY_OPERATION_BASICS.md の変更禁止/要承認ファイル一覧を遵守する。
 - Gitがあるため、ファイル単位の .before- コピー作成は不要とする。
 - 認証値・DB値・ログ本文・hidden値は今後も報告・資料へ転記しない。
+
+---
+
+## 21. HP変更のKAGOYA自動本番反映
+
+- `main`へ自動反映対象の`HP`ファイルをPushすると、GitHub ActionsによりKAGOYA本番サーバーへ追加・更新ファイルが自動反映される
+- HP変更をPushする前に、本番反映が発生することを明示し、Commit、Push、本番反映の明示許可を確認する
+- Markdown、`codex`、`log`、`Text_area_data`、`Text_blog_data`、`Text_hotel_data`、`.well-known`、`AGENTS.md`は自動反映対象外とする
+- 削除・リネームは自動反映せず、workflowを停止して手動承認を求める
+- 本番サーバー上のファイルを直接編集しない
+- FTP Secretsをコード、ログ、報告へ出さない
+- FTPテストworkflowは診断専用で、手動実行だけとする
+- KAGOYAのFTPアクセスを「制限」に戻すと、GitHub Actionsから接続できなくなる
