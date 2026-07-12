@@ -1,23 +1,110 @@
-name: CANDY FTP Connection Test
+name: CANDY FTP End-to-End Test
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/candy-ftp-test.yml"
+
+permissions:
+  contents: read
 
 jobs:
   ftp-test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Test FTP connection
+      - name: Upload, verify, and remove test file
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
         run: |
-          curl \
-            --verbose \
-            --ftp-pasv \
-            --list-only \
-            --max-time 30 \
-            --user "$FTP_USERNAME:$FTP_PASSWORD" \
-            "ftp://$FTP_SERVER/"
+          python3 - <<'PY'
+          import ftplib
+          import hashlib
+          import io
+          import os
+          import sys
+
+          host = os.environ["FTP_SERVER"]
+          username = os.environ["FTP_USERNAME"]
+          password = os.environ["FTP_PASSWORD"]
+
+          remote_dir = "/public_html/group/candy"
+          commit_sha = os.environ["GITHUB_SHA"]
+          run_id = os.environ["GITHUB_RUN_ID"]
+          filename = f"codex-github-deploy-test-{commit_sha[:12]}-{run_id}.txt"
+
+          payload = (
+              "CANDY GitHub FTP end-to-end test\n"
+              f"commit={commit_sha}\n"
+              f"run_id={run_id}\n"
+          ).encode("utf-8")
+
+          expected_hash = hashlib.sha256(payload).hexdigest()
+
+          ftp = ftplib.FTP(timeout=30)
+          uploaded = False
+
+          def remote_exists(name):
+              try:
+                  entries = ftp.nlst(name)
+                  return any(entry.rstrip("/").split("/")[-1] == name for entry in entries)
+              except ftplib.error_perm as exc:
+                  if str(exc).startswith("550"):
+                      return False
+                  raise
+
+          try:
+              ftp.connect(host, 21)
+              ftp.login(username, password)
+              ftp.cwd(remote_dir)
+
+              ftp.storbinary(f"STOR {filename}", io.BytesIO(payload))
+              uploaded = True
+
+              if not remote_exists(filename):
+                  raise RuntimeError("Uploaded test file was not found on the server")
+
+              downloaded = io.BytesIO()
+              ftp.retrbinary(f"RETR {filename}", downloaded.write)
+
+              actual_hash = hashlib.sha256(downloaded.getvalue()).hexdigest()
+
+              if actual_hash != expected_hash:
+                  raise RuntimeError(
+                      f"SHA256 mismatch: expected={expected_hash}, actual={actual_hash}"
+                  )
+
+              ftp.delete(filename)
+              uploaded = False
+
+              if remote_exists(filename):
+                  raise RuntimeError("Test file still exists after cleanup")
+
+              print(
+                  "SUCCESS: GitHub to KAGOYA FTP upload, download, "
+                  f"SHA256 verification, and cleanup completed: {filename}"
+              )
+
+          finally:
+              if uploaded:
+                  try:
+                      ftp.delete(filename)
+                  except Exception as cleanup_error:
+                      print(
+                          f"WARNING: cleanup failed for {filename}: {cleanup_error}",
+                          file=sys.stderr,
+                      )
+
+              try:
+                  ftp.quit()
+              except Exception:
+                  try:
+                      ftp.close()
+                  except Exception:
+                      pass
+          PY
