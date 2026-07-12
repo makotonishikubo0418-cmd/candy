@@ -50,13 +50,11 @@ jobs:
           uploaded = False
 
           def remote_exists(name):
-              try:
-                  entries = ftp.nlst(name)
-                  return any(entry.rstrip("/").split("/")[-1] == name for entry in entries)
-              except ftplib.error_perm as exc:
-                  if str(exc).startswith("550"):
-                      return False
-                  raise
+              entries = ftp.nlst()
+              return any(
+                  entry.rstrip("/").split("/")[-1] == name
+                  for entry in entries
+              )
 
           try:
               ftp.connect(host, 21)
