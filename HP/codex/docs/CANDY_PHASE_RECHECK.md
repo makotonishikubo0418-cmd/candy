@@ -27,7 +27,7 @@
 
 | フェーズ | 内容 | 成果物 |
 |---|---|---|
-| Phase 0 | AGENTS.mdをCANDY前提に確認し、管理資料作成ルールを確定 | `HP/AGENTS.md` |
+| Phase 0 | リポジトリ直下のAGENTS.mdを全PC共通の正本とし、HP固有ルールを補足化 | `AGENTS.md`, `HP/AGENTS.md` |
 | Phase A | 既存資料とcodex_backupを確認し、使える情報を備考化 | `CANDY_CODEX_BACKUP_REMARKS.md` |
 | Phase B | HP全体構成、フォルダ、全ファイル、コード/非コード台帳を整理 | `CANDY_HP_STRUCTURE_MAP.md`, `CANDY_FOLDER_ROLE_MAP.md`, `CANDY_FULL_FILE_CODE_INVENTORY.md`, `CANDY_CODE_FILE_STRUCTURE.md`, `CANDY_NON_CODE_ASSET_INVENTORY.md` |
 | Phase C | ページカテゴリとページ別役割を整理 | `CANDY_PAGE_CATEGORY_STRUCTURE.md`, `CANDY_PAGE_SPEC_INDEX.md` |

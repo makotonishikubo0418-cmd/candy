@@ -1,6 +1,14 @@
 # CANDY 運用基礎
 
 改修前に必ず確認する運用情報です。不明な項目は未確認とし、確認方法を併記します。
+
+## 0. 正本ルールとGit同期
+
+- リポジトリ全体の正本ルールは `AGENTS.md`、HP配下の補足ルールは `HP/AGENTS.md`。
+- 現在確認済みのリポジトリルートは `H:\Data\01_FSG\candy`。
+- 作業開始前にFetchとPull、作業終了後に差分確認・Commit・Pushを行う。未コミット変更や未取得変更がある場合は上書きせず、コンフリクトは勝手に解消しない。
+- `AGENTS.md` 自体も通常ファイルと同様にGitHubで同期する。
+
 ## 共通集計
 
 集計時点: 2026-07-10 04:52
@@ -75,12 +83,14 @@
 
 ## 7. 管理資料の再生成手順
 
-正本: `\\192.168.1.3\disk1\FSG_SEO\candy\HP\codex\scripts\generate_candy_management_docs.py`
+正本: `HP/codex/scripts/generate_candy_management_docs.py`
+
+現在確認済みのローカル絶対パス: `H:\Data\01_FSG\candy\HP\codex\scripts\generate_candy_management_docs.py`
 
 実行コマンド:
 
 ```powershell
-python "\\192.168.1.3\disk1\FSG_SEO\candy\HP\codex\scripts\generate_candy_management_docs.py"
+python ".\HP\codex\scripts\generate_candy_management_docs.py"
 ```
 
 Python未導入環境: PATH上の `python` または `py` を導入する。Codex環境では `Invoke-CandyDocsMaintenance.ps1` がCodexランタイムPythonへフォールバックする。
