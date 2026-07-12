@@ -107,6 +107,19 @@ HTML 出力
 
 Codex は、1 ファイルだけを見て仕様を断定してはいけません。
 
+### 4.1 通常の新規ページ生成における絶対ルール
+
+`area`、`blog`、`hotel` の通常運用として新しい公開ページを生成する場合、Codex は必ずリポジトリ直下 `AGENTS.md` の「6.1 通常の新規ページ生成における絶対ルール」に従ってください。
+
+- `Text_area_data` は `source/template_kagoshima-deliveryhealth-area.html` と組み合わせる
+- `Text_blog_data` は `source/template_kagoshima-deliveryhealth-blog.html` と組み合わせる
+- `Text_hotel_data` は `source/template_kagoshima-deliveryhealth-hotel.html` と組み合わせる
+- 公開入口 PHP、`source` HTML、ページ別 dataset PHP、`dataset_base.php` の登録を必須の1セットとする
+- HTML だけを生成して完了としてはいけない
+- `create.php` は通常の Codex ページ生成では原則使用しない
+
+この絶対ルールは通常の新規ページ生成に限定します。機能追加、不具合修正、既存機能変更、構造変更、リファクタなどの開発改修は別作業として扱い、このファイルの調査・変更・修正ルールに従ってください。
+
 特に以下を分けて確認してください。
 
 - 公開入口の PHP

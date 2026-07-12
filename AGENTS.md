@@ -238,6 +238,41 @@ HTML 出力
 
 ページによって対応関係や処理が異なるため、1 ファイルだけを見て仕様を断定してはいけません。
 
+### 6.1 通常の新規ページ生成における絶対ルール
+
+この項目は、`area`、`blog`、`hotel` の通常運用として新しい公開ページを生成する場合に必ず適用します。機能追加、不具合修正、構造変更、リファクタなどの開発改修には適用せず、該当する調査・修正ルールに従ってください。
+
+Codex は、通常の新規ページを単独の HTML ファイルだけで作成してはいけません。必ず次の対応関係と手順を守ってください。
+
+| 種別 | 元データ | HTML テンプレート |
+|---|---|---|
+| area | `HP/Text_area_data` | `HP/source/template_kagoshima-deliveryhealth-area.html` |
+| blog | `HP/Text_blog_data` | `HP/source/template_kagoshima-deliveryhealth-blog.html` |
+| hotel | `HP/Text_hotel_data` | `HP/source/template_kagoshima-deliveryhealth-hotel.html` |
+
+通常の新規ページ生成では、次を1セットとして扱います。
+
+1. 対象カテゴリの元データと `template_*.html` を対応させる
+2. `HP/source/<ページ名>.html` を生成する
+3. `HP/<ページ名>.php` を生成する
+4. `HP/includefile/dataset_<ページ名>.php` を生成する
+5. `HP/includefile/dataset_base.php` に、HTML 名と dataset PHP の対応を登録する
+6. `dataset_base.php` の HTML リンクから PHP リンクへの変換対象へ登録する
+7. 既存の同カテゴリ完成ページと比較し、ファイル名、slug、内部リンク、画像参照、置換箇所を確認する
+8. placeholder、未置換文字列、旧ページ名、誤ったカテゴリ名が残っていないことを確認する
+9. PHP 構文、差分、対象ファイル一式を確認してから完了報告する
+
+禁止事項:
+
+- `source/<ページ名>.html` だけを作って完了とする
+- 公開入口 PHP または dataset PHP を欠いた状態で完了とする
+- `dataset_base.php` への登録を省略する
+- area 用元データを blog 用テンプレートへ入れるなど、異なるカテゴリを組み合わせる
+- `create.php` を通常の Codex ページ生成手段として使用する
+- 既存ファイルを確認なく上書きする
+
+`create.php` は既存の Web ページ生成機能として残しますが、今後の通常運用では原則使用しません。Codex が上記の一式を管理します。`dataset_base.php` は影響範囲が広いため、通常の新規ページ生成でも、生成対象と登録内容を事前に明示し、ユーザーの実行指示または承認後に最小差分で変更してください。
+
 調査時は、必要に応じて以下を分けて確認してください。
 
 - 公開入口 PHP
