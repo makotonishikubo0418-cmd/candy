@@ -1,0 +1,424 @@
+/* movieページ専用スタイル - ヘッダー・フッター以外のデザイン */
+
+/* PC版 */
+@media screen and (min-width: 769px) {
+	/* movie */
+
+	#movie div.main dl.title {
+		padding: 60px 0 40px;
+		text-align: center;
+	}
+
+	#spicabox .content-iframe iframe {
+		width: 90%;
+		height: 92%;
+		max-width: unset;
+		max-height: unset;
+		border: none;
+	}
+
+	#movie div.main dl.title dt {
+		font-family: 'freightdispbooksc';
+		font-size: 48px;
+		letter-spacing: .2em;
+		line-height: 80%;
+	}
+
+	#movie div.main dl.title dd.bread {
+		font-family: 'freightdispbookitalicsc';
+		font-size: 10px;
+		line-height: 100%;
+		padding-bottom: 15px;
+		margin-bottom: 15px;
+		display: inline-block;
+	}
+
+	#movie div.main div.list {
+		width: 946px;
+		margin: 0 auto;
+		padding-bottom: 60px;
+	}
+
+	#movie div.main div.list h3 {
+		font-family: 'true_blueregular';
+		text-align: center;
+		font-size: 72px;
+		line-height: 100%;
+	}
+
+	#movie div.main div.cast h3 {
+		margin-bottom: 10px;
+	}
+
+	#movie div.main div.list div.big,
+	#movie div.main div.list ul.small li {
+		font-family: 'freightdispbooksc';
+		background: #fff;
+		box-shadow: 0 3px 5px rgba(0, 0, 0, .25);
+		width: 946px;
+		margin: 0 auto;
+		position: relative;
+	}
+
+	#movie div.main div.list div.big {
+		padding-bottom: 40px;
+		text-align: center;
+	}
+
+	#movie div.main div.list ul.small {
+		font-size: 0;
+	}
+
+	#movie div.main div.list ul.small li {
+		display: inline-block;
+		width: 310px;
+		height: 277px;
+		vertical-align: top;
+		margin: 20px 0 0 8px;
+	}
+
+	#movie div.main div.cast ul.small li {
+		height: 250px;
+	}
+
+	#movie div.main div.list ul.small li:nth-child(3n+1) {
+		margin-left: 0;
+	}
+
+	#movie div.main div.list div.big div.photo,
+	#movie div.main div.list div.big div.photo iframe,
+	#movie div.main div.list div.big div.photo img {
+		width: 946px;
+		height: 532px;
+	}
+
+	#movie div.main div.list ul.small li div.photo,
+	#movie div.main div.list ul.small li div.photo img {
+		width: 310px;
+		height: 174px;
+	}
+
+	#movie div.main div.list div.big h4,
+	#movie div.main div.list ul.small li h4,
+	#movie div.main div.list div.big p,
+	#movie div.main div.list ul.small li p {
+		margin: 40px auto 0;
+		font-size: 24px;
+		line-height: 30px;
+		letter-spacing: .3em;
+	}
+
+	#movie div.main div.list div.big h4::before,
+	#movie div.main div.list ul.small li h4::before {
+		content: 'CONCEPT MOVIE';
+		display: block;
+		font-size: 16px;
+		letter-spacing: .2em;
+		line-height: 18px;
+		color: #626262;
+	}
+
+	#movie div.main div.list div.big h4::before {
+		background: url('../imgHtml/movieIcon.png') no-repeat top center;
+		padding-top: 40px;
+	}
+
+	#movie div.main div.cast div.big h4::before,
+	#movie div.main div.cast ul.small li h4::before {
+		content: 'CAST MOVIE';
+	}
+
+	#movie div.main div.list ul.small li h4 {
+		margin: 18px 20px 0;
+		letter-spacing: 0;
+	}
+
+	#movie div.main div.list div.big p,
+	#movie div.main div.list ul.small li p {
+		margin-top: 20px;
+		line-height: 100%;
+	}
+
+	#movie div.main div.list ul.small li p {
+		font-size: 20px;
+		letter-spacing: .2em;
+		margin: 5px 20px 0;
+	}
+
+	#spicabox {
+		display: none;
+		position: absolute;
+		z-index: 10000;
+	}
+
+	#spicabox .overlay {
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		background: rgba(0, 0, 0, .8);
+	}
+
+	#spicabox .content {
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		pointer-events: none;
+	}
+
+	#spicabox .content-photo img.photo,
+	#spicabox .content-video video,
+	#spicabox .content-youtube iframe,
+	#spicabox .content-iframe iframe {
+		position: absolute;
+		max-width: 90%;
+		max-height: 90%;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		pointer-events: auto;
+	}
+
+	#spicabox .content-photo img.photo {
+		pointer-events: none;
+	}
+
+	#spicabox .content-video video {
+		width: 100%;
+		height: auto;
+	}
+
+	#spicabox .content-youtube iframe {
+		width: 100%;
+		height: auto;
+	}
+
+	#spicabox .content-iframe iframe {
+		width: 80%;
+		height: 90%;
+	}
+}
+
+/* SP版 */
+@media screen and (max-width: 768px) {
+	/* movie */
+
+	#movie div.main {
+		background: #eee;
+	}
+
+	#movie div.main h2.title {
+		padding: 50px 0 40px;
+		text-align: center;
+		font-family: 'freightdispbooksc';
+		font-size: 48px;
+		letter-spacing: .2em;
+		line-height: 80%;
+	}
+
+	#movie div.main div.list {
+		padding: 0 20px 20px;
+	}
+
+	#movie div.main div.shop {
+		padding-bottom: 60px;
+	}
+
+	#movie div.main div.list h3 {
+		font-family: 'true_blueregular';
+		text-align: center;
+		font-size: 72px;
+		line-height: 100%;
+	}
+
+	#movie div.main div.cast h3 {
+		margin-bottom: 10px;
+	}
+
+	#movie div.main div.list div.big,
+	#movie div.main div.list ul.small li {
+		font-family: 'freightdispbooksc';
+		background: #fff;
+		box-shadow: 0 3px 5px rgba(0, 0, 0, .25);
+		width: 100%;
+		max-width: 600px;
+		margin: 0 auto;
+		position: relative;
+	}
+
+	#movie div.main div.list div.big {
+		padding-bottom: 40px;
+		text-align: center;
+	}
+
+	#movie div.main div.list ul.small {
+		font-size: 0;
+	}
+
+	#movie div.main div.list ul.small {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+
+	#movie div.main div.list ul.small li {
+		display: inline-block;
+		width: calc(50% - 5px);
+		vertical-align: top;
+		margin: 10px 0 0 0;
+		padding-bottom: 15px;
+	}
+
+	#movie div.main div.list ul.small li:nth-child(odd) {
+		margin-left: 0;
+	}
+
+	#movie div.main div.list div.big div.photo,
+	#movie div.main div.list div.big div.photo iframe,
+	#movie div.main div.list div.big div.photo img,
+	#movie div.main div.list div.big div.photo video {
+		width: 100%;
+		height: auto;
+		max-width: 600px;
+	}
+
+	#movie div.main div.list ul.small li div.photo,
+	#movie div.main div.list ul.small li div.photo img,
+	#movie div.main div.list ul.small li div.photo video {
+		width: 100%;
+		height: auto;
+	}
+
+	#movie div.main div.list div.big h4,
+	#movie div.main div.list ul.small li h4,
+	#movie div.main div.list div.big p,
+	#movie div.main div.list ul.small li p {
+		margin: 40px auto 0;
+		font-size: 24px;
+		line-height: 30px;
+		letter-spacing: .3em;
+	}
+
+	#movie div.main div.list div.big h4::before,
+	#movie div.main div.list ul.small li h4::before {
+		content: 'CONCEPT MOVIE';
+		display: block;
+		font-size: 16px;
+		letter-spacing: .2em;
+		line-height: 18px;
+		color: #626262;
+	}
+
+	#movie div.main div.list div.big h4::before {
+		background: url('../imgHtml/movieIcon.png') no-repeat top center;
+		padding-top: 40px;
+	}
+
+	#movie div.main div.cast div.big h4::before,
+	#movie div.main div.cast ul.small li h4::before {
+		content: 'CAST MOVIE';
+	}
+
+	#movie div.main div.list ul.small li h4 {
+		margin: 18px 20px 0;
+		letter-spacing: 0;
+	}
+
+	#movie div.main div.list div.big p,
+	#movie div.main div.list ul.small li p {
+		margin-top: 20px;
+		line-height: 100%;
+	}
+
+	#movie div.main div.list ul.small li p {
+		font-size: 20px;
+		letter-spacing: .2em;
+		margin: 5px 20px 0;
+	}
+
+	#spicabox {
+		display: none;
+		position: absolute;
+		z-index: 10000;
+	}
+
+	#spicabox .overlay {
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		background: rgba(0, 0, 0, .8);
+	}
+
+	#spicabox .content {
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		pointer-events: none;
+	}
+
+	#spicabox .content-photo img.photo,
+	#spicabox .content-video video,
+	#spicabox .content-youtube iframe,
+	#spicabox .content-iframe iframe {
+		position: absolute;
+		max-width: 90%;
+		max-height: 90%;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		pointer-events: auto;
+	}
+
+	#spicabox .content-iframe iframe {
+		width: 640px;
+		height: 360px;
+		overflow: hidden;
+	}
+
+	/* default.cssから移動 - SP版 */
+	#movie div.main div.list div.big div.photo,
+	#movie div.main div.list div.big div.photo iframe,
+	#movie div.main div.list div.big div.photo img,
+	#movie div.main div.list div.big div.photo video {
+		width: 100% !important;
+		max-width: 100% !important;
+		height: auto !important;
+	}
+
+	#movie div.main div.list div.small ul {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+
+	#movie div.main div.list div.small ul li {
+		width: calc(50% - 5px) !important;
+		margin-bottom: 10px;
+	}
+
+	#movie div.main div.list div.small ul li img {
+		width: 100% !important;
+		height: auto !important;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

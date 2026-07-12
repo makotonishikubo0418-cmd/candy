@@ -1,0 +1,297 @@
+/* girls_listページ専用スタイル - ヘッダー・フッター以外のデザイン */
+
+/* PC版 */
+@media screen and (min-width: 769px) {
+	/* girls_list */
+
+	#girlsL div.wrap dl.title {
+		padding: 60px 0 40px;
+		text-align: center;
+	}
+
+	#girlsL div.wrap dl.title dt {
+		font-family: 'freightdispbooksc';
+		font-size: 48px;
+		letter-spacing: .2em;
+		line-height: 80%;
+	}
+
+	#girlsL div.wrap dl.title dd.bread {
+		font-family: 'freightdispbookitalicsc';
+		font-size: 10px;
+		line-height: 100%;
+		padding-bottom: 15px;
+		margin-bottom: 15px;
+		border-bottom: 1px solid #000;
+		display: inline-block;
+	}
+
+	#girlsL div.wrap dl.title dd.number {
+		font-family: 'freightdispbooksc';
+		font-size: 14px;
+		letter-spacing: .2em;
+		line-height: 120%;
+		color: #a0a0a0;
+	}
+
+	#girlsL div.wrap dl.title dd.number span {
+		color: #e5006e;
+	}
+
+	#girlsL div.wrap div.list {
+		padding: 0 10px 0;
+		width: 100%;
+		font-size: 0;
+	}
+
+	#girlsL div.wrap div.list div.box {
+		display: inline-block;
+		position: relative;
+		width: calc(25% - 5px);
+		margin-left: 5px;
+		margin-bottom: 10px;
+		text-align: center;
+		vertical-align: top;
+		min-height: 155px;
+	}
+
+
+
+	/* 4列レイアウトの間隔調整 */
+	#girlsL div.wrap div.list {
+		font-size: 0;
+		letter-spacing: -0.5em;
+	}
+
+	#girlsL div.wrap div.list div.box {
+		font-size: 14px;
+		letter-spacing: normal;
+	}
+
+	#girlsL div.wrap div.list div.box div.photo {
+		width: 100%;
+		height: auto;
+	}
+
+	#girlsL div.wrap div.list div.box div.photo img {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	#girlsL div.wrap div.list div.box dl.data {
+		bottom: 0;
+		padding-bottom: 20px;
+		background: url(../imgHtml/pc/listShadow.png) repeat-x center bottom;
+	}
+
+	/* default.cssから移動 - PC版 */
+	#girlsL div.main div.list div.box>a {
+		display: block;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		z-index: 100;
+	}
+
+	#girlsL div.main div.list div.box div.photo {
+		background: #000;
+		width: 100%;
+		height: 100%;
+	}
+
+	#girlsL div.main div.list div.box div.photo img {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	#girlsL div.main div.list div.box dl.data {
+		position: absolute;
+		color: #fff;
+		width: 100%;
+	}
+
+	#girlsL div.main div.list div.box dl.data dt.name {
+		font-family: 'freightdispbooksc';
+		font-size: 30px;
+		line-height: 120%;
+		text-shadow: 0 0 2px rgba(160, 160, 160, .8);
+	}
+
+	#girlsL div.main div.list div.box dl.data dd.size {
+		font-family: 'freightdispbookitalicsc';
+		font-size: 10px;
+		line-height: 120%;
+		text-shadow: 0 0 3px rgba(100, 100, 100, .8);
+	}
+
+	#girlsL div.main div.list div.box dl.data dt.state div {
+		font-family: "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+		width: 190px;
+		height: 20px;
+		font-size: 12px;
+		line-height: 20px;
+		background: rgba(229, 0, 110, .5);
+		margin: 8px auto 0;
+		letter-spacing: .1em;
+		font-style: italic;
+	}
+
+	#girlsL div.main div.list div.box dl.data dt.state div.tel {
+		background: rgba(0, 158, 150, .5);
+	}
+
+	#girlsL div.main div.list div.box dl.data dt.state div.thanks {
+		background: rgba(95, 82, 160, .5);
+	}
+
+	#girlsL div.main div.list div.box dl.data dt.state div.close {
+		background: rgba(0, 139, 180, .5);
+	}
+
+	#girlsL div.main div.list div.box dl.data dt.state div.add {
+		width: 114px;
+		position: relative;
+		left: 38px;
+	}
+
+	#girlsL div.main div.list div.box dl.data dt.state div.add:after {
+		content: "追加出勤";
+		display: block;
+		position: absolute;
+		left: -76px;
+		top: 0;
+		width: 76px;
+		height: 20px;
+		font-size: 12px;
+		line-height: 20px;
+		background: rgba(199, 188, 2, .5);
+	}
+}
+
+/* SP版 */
+@media screen and (max-width: 768px) {
+	/* girls_list */
+
+	#girlsL div.wrap dl.title {
+		padding: 50px 0;
+		text-align: center;
+	}
+
+	#girlsL div.wrap dl.title dt {
+		font-family: 'freightdispbooksc';
+		font-size: 48px;
+		letter-spacing: .2em;
+		line-height: 80%;
+		position: relative;
+		padding-bottom: 40px;
+	}
+
+	#girlsL div.wrap dl.title dt:after {
+		content: "";
+		position: absolute;
+		left: 50%;
+		bottom: 20px;
+		margin-left: -30px;
+		width: 60px;
+		height: 1px;
+		border-top: 1px solid #000;
+	}
+
+	#girlsL div.wrap dl.title dd.number {
+		font-family: 'freightdispbooksc';
+		font-size: 16px;
+		letter-spacing: .2em;
+		line-height: 120%;
+		color: #a0a0a0;
+	}
+
+	#girlsL div.wrap dl.title dd.number span {
+		color: #e5006e;
+	}
+
+	#girlsL div.wrap div.list div.box {
+		position: relative;
+		text-align: left;
+		width: 100%;
+		height: 427px;
+	}
+
+	/* girls_listページSP版2カラム表示対応（上書き） */
+	#girlsL div.wrap div.list div.tile div.girlsBlock {
+		width: calc(50% - 5px) !important;
+		height: auto !important;
+		margin-bottom: 10px !important;
+	}
+
+	/* default.cssから移動 */
+	#girlsL div.girlsBlock dl.data {
+		background: url(../imgHtml/s/listShadow.png) repeat-x center bottom;
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		color: #fff;
+		width: 100%;
+		height: 110px;
+		padding: 46px 0 0 80px;
+	}
+
+	#girlsL div.girlsBlock dl.data dt.name {
+		font-family: 'freightdispbooksc';
+		font-size: 24px;
+		line-height: 20px;
+	}
+
+	#girlsL div.girlsBlock dl.data dd.name {
+		font-family: "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+		font-size: 16px;
+		line-height: 18px;
+	}
+
+	#girlsL div.girlsBlock dl.data dd.size {
+		font-family: 'freightdispbookitalicsc';
+		font-size: 14px;
+		line-height: 100%;
+	}
+
+	/* girls_listページ用 */
+	#girlsL div.girlsBlock dl.data dt.name {
+		font-size: 20px !important;
+	}
+	
+	#girlsL div.girlsBlock dl.data dd.name {
+		font-size: 14px !important;
+	}
+	
+	#girlsL div.girlsBlock dl.data dd.size {
+		font-size: 12px !important;
+	}
+
+	/* girls_listページSP版2カラム表示対応 */
+	#girlsL div.wrap div.list div.tile {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+
+	#girlsL div.wrap div.list div.tile div.girlsBlock {
+		width: calc(50% - 5px) !important;
+		height: auto !important;
+		margin-bottom: 10px !important;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

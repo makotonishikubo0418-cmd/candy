@@ -1,0 +1,21 @@
+DirectoryIndex index.php index.html index.xhtml
+# ErrorDocument 404 https://www.55810.com/index.php
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin: "*"
+</IfModule>
+
+RewriteEngine On
+
+# httpsに統一
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# wwwなし に統一
+# RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+# RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+# index.php(.html)なしに統一
+# RewriteCond %{THE_REQUEST} ^.*/index.(html|php)
+# RewriteRule ^(.*)index.(html|php)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+

@@ -1,0 +1,717 @@
+/************************** フォント **************************/
+.fs_xxl {
+	font-size: 24px;
+	font-weight: bold;
+	line-height: 34px;
+}
+.fs_xl {
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 29px;
+}
+.fs_l {
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 29px;
+}
+.fs_md1 {
+	font-size: 16px;
+	line-height: 26px;
+	font-weight: bold;
+}
+.fs_md2 {
+	font-size: 16px;
+	line-height: 25px;
+}
+.fs_md3 {
+	font-size: 16px;
+	line-height: 27px;
+}
+.fs_sm1 {
+	font-size: 14px;
+	line-height: 26px;
+	font-weight: bold;
+}
+.fs_sm2 {
+	font-size: 14px;
+	line-height: 26px;
+}
+.fs_xs {
+	font-size: 13px;
+	font-weight: bold;
+}
+.f_xxs {
+	font-size: 12px;
+	line-height: 19px;
+}
+/************************** カラー **************************/
+.fc_p {
+	color: #e5006e;
+}
+.fc_w {
+	color: #ffffff;
+}
+.fc_b {
+	color: #1a73e8;
+}
+.fc_g {
+	color: #939393;
+}
+/************************** 配置 **************************/
+.center {
+	text-align: center;
+}
+/*---------------------------------------*/
+@media screen and (max-width: 768px) {
+/*---------------------------------------*/
+
+.campaign-img-wrap2 ~ .campaign-text .bt-pk-l.lmt_20 {
+	display: block;
+	text-align: center;
+	margin: 20px auto;
+}
+.campaign-img-wrap ~ .campaign-text > div:last-child {
+	text-align: center;
+}
+}
+/************************** 横幅 **************************/
+.w_130 {
+	width: 130px;
+}
+.w_1000 {
+	width: 1000px;
+}
+.w_1050 {
+	width: 1050px;
+}
+.w_1080 {
+	width: 1080px;
+}
+@media screen and (max-width: 768px) {
+.w_1000 {
+	width: 100%;
+}
+.w_1050 {
+	width: 100%;
+}
+.w_1080 {
+	width: 100%;
+}
+}
+/************************** レイアウト（padding） **************************/
+.lpt_10 {
+	padding-top: 10px;
+}
+.lpt_15 {
+	padding-top: 15px;
+}
+.lpt_20 {
+	padding-top: 20px;
+}
+.lpt_30 {
+	padding-top: 30px;
+}
+.lpt_40 {
+	padding-top: 40px;
+}
+.lpt_50 {
+	padding-top: 50px;
+}
+.lpt_headerimg {
+	padding-top: 50px;
+}
+.lpt_55 {
+	padding-top: 55px;
+}
+.lpb_7 {
+	padding-bottom: 7px;
+}
+.lpb_10 {
+	padding-bottom: 10px;
+}
+.lpb_15 {
+	padding-bottom: 15px;
+}
+.lpb_20 {
+	padding-bottom: 20px;
+}
+.lpb_30 {
+	padding-bottom: 30px;
+}
+.lpb_45 {
+	padding-bottom: 45px;
+}
+.lpb_75 {
+	padding-bottom: 75px;
+}
+.lp_5 {
+	padding: 5px;
+}
+.lp_25 {
+	padding: 25px;
+}
+.lp_15 {
+	padding: 15px;
+}
+.lp_40 {
+	padding: 40px;
+}
+.lp_0_7 {
+	padding: 0 7px;
+}
+.lp_0_20 {
+	padding: 0 20px;
+}
+.lp_0_30 {
+	padding: 0 30px;
+}
+.lp_10_0 {
+	padding: 10px 0;
+}
+.lp_13_0 {
+	padding: 13px 0;
+}
+.lp_14_0 {
+	padding: 14px 0;
+}
+.lp_20_0 {
+	padding: 20px 0;
+}
+.lp_20_10 {
+	padding: 20px 10px;
+}
+.lp_25_0 {
+	padding: 25px 0;
+}
+.lp_30_0 {
+	padding: 30px 0;
+}
+.lp_38_0 {
+	padding: 38px 0;
+}
+.lp_40_0 {
+	padding: 40px 0;
+}
+.lp_0_55_35 {
+	padding: 0 55px 35px;
+}
+.lp_0_55_40 {
+	padding: 0 55px 40px;
+}
+.lp_10_0_15 {
+	padding: 10px 0 15px;
+}
+.lp_10_0_20 {
+	padding: 10px 0 20px;
+}
+.lp_15_0_30 {
+	padding: 15px 0 30px;
+}
+.lp_15_0_65 {
+	padding: 15px 0 65px;
+}
+.lp_25_0_85 {
+	padding: 25px 0 85px;
+}
+.lp_30_0_20 {
+	padding: 30px 0 20px;
+}
+.lp_40_0_10 {
+	padding: 40px 0 10px;
+}
+.lp_40_0_20 {
+	padding: 40px 0 20px;
+}
+.lp_40_0_25 {
+	padding: 40px 0 25px;
+}
+.lp_40_0_75 {
+	padding: 40px 0 75px;
+}
+.lp_50_0_20 {
+	padding: 50px 0 20px;
+}
+.lp_50_0_38 {
+	padding: 50px 0 38px;
+}
+.lp_50_0_40 {
+	padding: 50px 0 40px;
+}
+@media screen and (max-width: 768px) {
+.lpt_40 {
+	padding-top: 0;
+	text-align: left;
+}
+.lpt_55 {
+	padding-top: 0;
+}	
+.lp_25 {
+	padding: 25px 7px;
+}
+.lp_40 {
+	padding: 30px 0;
+}
+.lpt_headerimg {
+	padding-top: 0;
+}
+.lp_0_20 {
+	padding: 0;
+}	
+.lp_0_30 {
+	padding: 0 7px;
+}
+.lp_13_0 {
+	padding: 0;
+}
+.lp_0_55_35 {
+	padding: 0 10px 10px;
+}
+.lp_0_55_40 {
+	padding: 0 10px 30px;
+}
+.lp_30_0_20 {
+	padding: 0;
+}
+.lp_40_0_10 {
+	padding: 40px 9px 10px;
+}
+.lp_50_0_40 {
+	padding: 40px 0;
+}
+}
+
+/************************** レイアウト（margin） **************************/
+.lmt_15 {
+	margin-top: 15px;
+}
+.lmt_20 {
+	margin-top: 20px;
+}
+.lmt_30 {
+	margin-top: 30px;
+}
+.lmr_10 {
+	margin-right: 10px;
+}
+.lmr_15 {
+	margin-right: 15px;
+}
+.lmr_17 {
+	margin-right: 17px;
+}
+.lmb_25 {
+	margin-bottom: 25px;
+}
+.lm_0_10 {
+	margin: 0 10px;
+}
+.lm_40_0_75 {
+	margin: 40px 0 75px;
+}
+.lm_25_0_35 {
+	margin: 25px 0 35px;
+
+}
+.lm_25_0_75 {
+	margin: 25px 0 75px;
+}
+.lm_30_0_85 {
+	margin: 30px 0 85px;
+}
+.lm_40_0_85 {
+	margin: 40px 0 85px;
+}
+.lm_0_auto {
+	margin: 0px auto;
+}
+.lm_25_auto {
+	margin: 25px auto 0;
+}
+.lm_30_auto {
+	margin: 30px auto 0;
+}
+/************************** 線 **************************/
+
+.bd_t {
+	border-top: 1px solid #e8e8e8;
+}
+.bd_b {
+	border-bottom: 1px solid #e8e8e8;
+}
+.bd_tb {
+	border-top: 1px solid #e8e8e8;
+	border-bottom: 1px solid #e8e8e8;
+}
+.bd {
+	border: 1px solid #e8e8e8;
+}
+
+@media screen and (max-width: 768px) {
+.bd {
+	border-left: none;
+	border-right: none;
+}
+.lp_0_20.bd {
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+}
+}
+/************************** ボタン **************************/
+.bt-pk-xl, .bt-pk-l, .bt-pk-m {
+	background: #d473a0;
+	display: inline-block;
+	color: #fff;
+	font-weight: bold;
+	border: none;
+	border-radius: 5px;
+	text-decoration: none;
+	cursor: pointer;
+	text-align: center;
+	transition: background 0.5s ease;
+}
+.bt-pk-xl:hover, .bt-pk-l:hover {
+	text-decoration: none;
+	background: #bd5177;
+}
+.bt-pk-xl {
+	width: 250px;
+	padding: 20px 0;
+	font-size: 16px;
+}
+.bt-pk-l {
+	width: 230px;
+	padding: 20px 0;
+	font-size: 16px;
+}
+.bt-pk-m {
+	width: 160px;
+	padding: 15px 0;
+	font-size: 15px;
+}
+
+@media screen and (max-width: 768px) {
+.bt-pk-l {
+	width: 160px;
+	padding: 15px 0;
+}
+}
+/************************** 背景色 **************************/
+.bg_f {
+	background: #ffffff;
+}
+.bg_g1 {
+	background: #f7f7f7;
+}
+.bg_g2 {
+	background: #c8c8c8;
+}
+.bg_g3 {
+	background: #383838;
+}
+.bg_p {
+	background: #e5006e;
+}
+
+/************************** 画像 **************************/
+.img_1 {
+	width: 1000px;
+}
+.img_ad1 {
+	width: 468px;
+}
+.titleimg_1 {
+	width: 100%;
+	height: 0;
+	padding-top: 25%;
+	display: block;
+	background-image: url(../imgHtml/new_202601/candy_img1.jpg);
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+@media screen and (max-width: 768px) {
+.img_1 {
+	width: 100%;
+}
+.img_ad1 {
+	width: 90%;
+}	
+.titleimg_1 {
+	background-image: url(../imgHtml/new_202601/candy_img1_sp.jpg);
+	padding-top: 88%;
+	background-position: center top;
+}
+}
+/************************** アコーディオン **************************/
+.faq-item {
+	cursor: pointer;
+}
+.faq-question {
+	height: 70px;
+	position: relative;
+	padding-right: 50px;
+	transition: color 0.3s;
+	display: flex;
+	align-items: center;
+}
+
+@media screen and (min-width: 769px) {
+	.faq-question:hover {
+		color: #e5006e;
+	}
+}
+.faq-question::after {
+	content: '+';
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 20px;
+	font-weight: bold;
+	transition: transform 0.3s;
+}
+.faq-item.active .faq-question::after {
+	content: '−';
+	transform: translateY(-50%) rotate(0deg);
+}
+.faq-item.active .faq-question {
+	font-weight: bold;
+	color: #e5006e;
+}
+.faq-answer {
+	display: none;
+	padding: 0 0 20px;
+}
+.faq-item.active .faq-answer {
+	display: block;
+}
+
+@media screen and (max-width: 768px) {
+.faq-question {
+	height: 85px;
+}
+}
+/************************** テーブル **************************/
+.info-table1,
+.info-table2 {
+	width: 100%;
+	border-collapse: collapse;
+	table-layout: fixed;
+}
+
+.info-table1 td,
+.info-table2 td {
+	padding: 10px 12px;
+	border: 1px solid #e8e8e8;
+	vertical-align: middle;
+	word-break: break-word;
+}
+
+.info-table1 {
+	--info-table-col1: 30%;
+	--info-table-col2: 70%;
+}
+
+.info-table2 {
+	--info-table-col1: 80%;
+	--info-table-col2: 20%;
+}
+
+.info-table1 td:first-child,
+.info-table2 td:first-child {
+	width: var(--info-table-col1);
+}
+
+.info-table1 td:last-child,
+.info-table2 td:last-child {
+	width: var(--info-table-col2);
+}
+
+.info-table1 td:first-child {
+	background-color: #f7f7f7;
+}
+/*----------------------- 女の子一覧（picture/img） -----------------------*/
+.girls-info-item {
+	margin: 0;
+	padding: 0;
+}
+.girls-info {
+	display: flex;
+	align-items: flex-start;
+}
+.girls-info-img-wrap {
+	flex-shrink: 0;
+	width: 300px;
+	overflow: hidden;
+}
+.girls-info-img-link {
+	display: block;
+	text-decoration: none;
+}
+.girls-info-img-link img {
+	width: 100%;
+	height: auto;
+	aspect-ratio: 300 / 498;
+	object-fit: cover;
+	display: block;
+	vertical-align: top;
+}
+.girls-info-text {
+	flex: 1;
+	min-width: 0;
+}
+@media screen and (max-width: 768px) {
+.girls-info {
+	flex-direction: column;
+}
+.girls-info-img-wrap {
+	width: 100%;
+}
+.girls-info-img-link img {
+	aspect-ratio: 1 / 1;
+}
+}
+
+/*----------------------- 提携店・キャンペーン（2カラム・背景画像） -----------------------*/
+.campaign-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.campaign-item {
+	margin: 0;
+	padding: 0;
+}
+.campaign-flex {
+	display: flex;
+	align-items: flex-start;
+}
+
+.campaign-img-wrap {
+	flex-shrink: 0;
+	width: 290px;
+}
+.campaign-img-link {
+	display: block;
+	text-decoration: none;
+}
+.campaign-img-link img {
+	width: 100%;
+	height: auto;
+	display: block;
+	object-fit: cover;
+	aspect-ratio: 290 / 480;
+	vertical-align: top;
+}
+.campaign-img-candy,
+.campaign-img-hitozuma,
+.campaign-img-kurobara,
+.campaign-img-reborn {
+	width: 290px;
+	padding-top: 480px;
+	display: block;
+	background-size: cover;
+	background-position: center top;
+	background-repeat: no-repeat;
+}
+.campaign-img-candy {
+	background-image: url(../imgHtml/new_202601/shop/candy.jpg);
+}
+.campaign-img-hitozuma {
+	background-image: url(../imgHtml/new_202601/shop/hitozuma.jpg);
+}
+.campaign-img-kurobara {
+	background-image: url(../imgHtml/new_202601/shop/kurobara.jpg);
+}
+.campaign-img-reborn {
+	background-image: url(../imgHtml/new_202601/shop/reborn.jpg);
+}
+
+.campaign-text {
+	flex: 1;
+	min-width: 0;
+}
+.campaign-img-wrap3 {
+	flex-shrink: 0;
+	width: 205px;
+}
+.campaign-img-wrap3 .campaign-img-link img {
+	width: 180px;
+	height: auto;
+	aspect-ratio: 1 / 1;
+	object-fit: cover;
+	display: block;
+	margin-bottom: 30px;
+	vertical-align: top;
+}
+.campaign-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+.campaign-table td {
+	padding: 5px;
+	border: 1px solid #e8e8e8;
+}
+.campaign-table td:first-child {
+	background-color: #f9f9f9;
+	width: 25%;
+}
+.campaign-table td:nth-child(2) {
+	width: 75%;
+}
+
+/*---------------------------------------*/
+@media screen and (max-width: 768px) {
+/*---------------------------------------*/
+.campaign-flex {
+	flex-direction: column;
+}
+.campaign-img-wrap {
+	width: 100%;
+}
+.campaign-img-link img {
+	aspect-ratio: 1 / 1;
+}
+.campaign-img-wrap3 {
+	width: 100%;
+}
+.campaign-img-wrap3 .campaign-img-link img {
+	width: 90%;
+	margin: 20px auto 0;
+	aspect-ratio: 1 / 1;
+}
+.campaign-img-candy,
+.campaign-img-hitozuma,
+.campaign-img-kurobara,
+.campaign-img-reborn {
+	width: 100%;
+	padding-top: 100%;
+	background-position: center top;
+}
+.campaign-img-candy {
+	background-image: url(../imgHtml/new_202601/shop/candy_sp.jpg);
+}
+.campaign-img-hitozuma {
+	background-image: url(../imgHtml/new_202601/shop/hitozuma_sp.jpg);
+}
+.campaign-img-kurobara {
+	background-image: url(../imgHtml/new_202601/shop/kurobara_sp.jpg);
+}
+.campaign-img-reborn {
+	background-image: url(../imgHtml/new_202601/shop/reborn_sp.jpg);
+}
+}
+
+/************************** 地図 **************************/
+.map-iframe {
+	width: 100%;
+	height: 450px;
+	border: 0;
+}
+
+/************************** パンくずリスト **************************/
+.bread_list {
+	display: flex;
+}

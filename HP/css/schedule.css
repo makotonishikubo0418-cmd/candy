@@ -1,0 +1,646 @@
+/* schedule */
+
+@media screen and (min-width: 769px) {
+	/* schedule */
+
+	#schedule div.wrap div.main {
+		background: #eee;
+		padding-bottom: 60px;
+	}
+
+	#schedule div.wrap dl.title {
+		padding: 60px 0 0;
+		text-align: center;
+	}
+
+	#schedule div.wrap dl.title dt {
+		font-family: 'freightdispbooksc';
+		font-size: 48px;
+		letter-spacing: .2em;
+		line-height: 80%;
+	}
+
+	#schedule div.wrap dl.title dd.bread {
+		font-family: 'freightdispbookitalicsc';
+		font-size: 10px;
+		line-height: 100%;
+		padding-bottom: 15px;
+		border-bottom: 1px solid #000;
+		display: inline-block;
+	}
+
+	#schedule div.wrap dl.title dd.date {
+		font-family: 'freightdispbooksc';
+		font-size: 30px;
+		letter-spacing: .2em;
+		line-height: 100%;
+		padding: 15px 0;
+	}
+
+	#schedule div.wrap dl.title dd.number {
+		font-family: 'freightdispbooksc';
+		font-size: 14px;
+		letter-spacing: .2em;
+		line-height: 120%;
+		color: #a0a0a0;
+	}
+
+	#schedule div.wrap dl.title dd.number span {
+		color: #e5006e;
+	}
+
+	#schedule div.wrap ul.tab {
+		width: 960px;
+		margin: 35px auto 25px;
+		border-radius: 3px;
+	}
+
+	#schedule div.wrap ul.tab li {
+		float: left;
+		width: calc(100% / 7);
+		height: 60px;
+		line-height: 60px;
+		background: #000;
+		text-align: center;
+		font-family: 'freightdispbooksc';
+		font-size: 18px;
+		letter-spacing: .1em;
+	}
+
+	#schedule div.wrap ul.tab li:first-child,
+	#schedule div.wrap ul.tab li:first-child a {
+		border-radius: 3px 0 0 3px;
+	}
+
+	#schedule div.wrap ul.tab li:last-child,
+	#schedule div.wrap ul.tab li:last-child a {
+		border-radius: 0 3px 3px 0;
+	}
+
+	#schedule div.wrap ul.tab li a {
+		display: block;
+		background: #fff;
+		color: #000;
+		text-decoration: none;
+	}
+
+	#schedule div.wrap ul.tab li.active {
+		background: #24252f;
+		color: #e95283;
+		font-size: 18px;
+		letter-spacing: .1em;
+		position: relative;
+	}
+
+	#schedule div.wrap ul.tab li.active a,
+	#schedule div.wrap ul.tab li.active a.fade {
+		background: #24252f !important;
+		color: #e95283 !important;
+	}
+
+	#schedule div.wrap ul.tab li.active:before {
+		border: solid transparent;
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		left: 50%;
+		margin-left: -10px;
+		bottom: -20px;
+		pointer-events: none;
+		border-color: rgba(0, 0, 0, 0);
+		border-left-color: #24252f;
+		border-width: 10px;
+		transform: rotate(90deg);
+		-webkit-transform: rotate(90deg);
+	}
+
+	#schedule div.wrap div.list{
+		padding: 0 20px;
+	}
+
+	#schedule div.wrap div.list div.box {
+		background: #fff;
+		max-width: 960px;
+		height: 387px;
+		overflow-y: hidden;
+		margin: 20px auto 0;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, .3);
+		position: relative;
+	}
+
+	#schedule div.wrap div.list div.add div.photo:after {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 560px;
+		height: 367px;
+		border: 10px solid rgba(199, 188, 2, .5);
+	}
+
+	#schedule div.wrap div.list div.add div.photo:before {
+		content: "追加出勤";
+		font-family: "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+		color: #fff;
+		font-size: 12px;
+		line-height: 100%;
+		letter-spacing: .2em;
+		position: absolute;
+		right: 10px;
+		top: 10px;
+		width: 66px;
+		height: 20px;
+		text-align: right;
+		background: rgba(199, 188, 2, .5);
+		z-index: 1;
+	}
+
+	#schedule div.wrap div.list div.box div.photo {
+		width: 60%;
+		height: 387px;
+		float: right;
+		position: relative;
+		font-size: 0;
+	}
+
+	#schedule div.wrap div.list div.box div.photo img {
+		width: 100%;
+		height: 100%;
+	}
+
+	#schedule div.wrap div.list div.box div.detail {
+		background: #fff;
+		float: left;
+		width: 40%;
+		padding: 25px 40px 30px;
+	}
+
+	#schedule div.wrap div.list div.box div.detail:before {
+		border: solid transparent;
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		left: 40%;
+		top: 50%;
+		margin-top: -20px;
+		pointer-events: none;
+		border-color: rgba(0, 0, 0, 0);
+		border-left-color: #fff;
+		border-width: 20px;
+		z-index: 2;
+	}
+
+	#schedule div.wrap div.list div.box div.detail div.icon {
+		height: 66px;
+		width: 66px;
+		margin: 0 auto 15px;
+		position: relative;
+	}
+
+	#schedule div.wrap div.list div.box div.detail div.icon img {
+		height: 66px;
+		width: 66px;
+		border-radius: 66px;
+	}
+
+	#schedule div.wrap div.list div.box div.detail div.icon:before {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 58px;
+		width: 58px;
+		border-radius: 58px;
+		border: 4px solid rgba(210, 210, 210, .5);
+		z-index: 1;
+	}
+
+	#schedule div.wrap div.list div.box div.detail dl {
+		text-align: center;
+	}
+
+	#schedule div.wrap div.list div.box div.detail dl dt {
+		font-family: 'freightdispbooksc';
+		font-size: 36px;
+		line-height: 100%;
+	}
+
+	#schedule div.wrap div.list div.box div.detail dl dd.size {
+		font-family: 'freightdispbookitalicsc';
+		font-size: 10px;
+		line-height: 100%;
+	}
+
+	#schedule div.wrap div.list div.box div.detail dl dd.name {
+		font-family: "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+		font-size: 12px;
+		line-height: 100%;
+		letter-spacing: .2em;
+		padding: 10px;
+		border-bottom: 1px solid #000;
+		display: inline-block;
+	}
+
+	#schedule div.wrap div.list div.box div.detail dl dd.state {
+		font-family: "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+		font-size: 22px;
+		line-height: 100%;
+		letter-spacing: .2em;
+		padding: 15px 0;
+		border-bottom: 1px solid #000;
+		vertical-align: middle;
+	}
+
+	#schedule div.wrap div.list div.box div.detail dl dd.state span {
+		font-size: 20px;
+	}
+
+	#schedule div.wrap div.list div.box div.detail dl dd.state span.small {
+		font-size: 18px;
+	}
+
+	#schedule div.wrap div.list div.box div.detail div.text {
+		color: #626262;
+		font-size: 11px;
+		line-height: 180%;
+		height: 120px;
+		overflow-y: hidden;
+	}
+
+	#schedule div.wrap div.list div.box div.detail div.text h3 {
+		color: #000;
+		font-weight: bold;
+		text-align: center;
+		padding: 15px 0 5px;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	/* schedule */
+
+	#schedule div.wrap div.main {
+		background: #eee;
+		padding-bottom: 20px;
+	}
+
+	#schedule div.wrap dl.title {
+		padding: 50px 0;
+		text-align: center;
+	}
+
+	#schedule div.wrap dl.title dt {
+		font-family: 'freightdispbooksc';
+		font-size: 48px;
+		letter-spacing: .2em;
+		line-height: 80%;
+		position: relative;
+		padding-bottom: 40px;
+	}
+
+	#schedule div.wrap dl.title dt:after {
+		content: "";
+		position: absolute;
+		left: 50%;
+		bottom: 20px;
+		margin-left: -30px;
+		width: 60px;
+		height: 1px;
+		border-top: 1px solid #000;
+	}
+
+	#schedule div.wrap dl.title dd.number {
+		font-family: 'freightdispbooksc';
+		font-size: 16px;
+		letter-spacing: .2em;
+		line-height: 120%;
+		color: #a0a0a0;
+	}
+
+	#schedule div.wrap dl.title dd.number span {
+		color: #e5006e;
+	}
+
+	#schedule div.wrap dl.title dd.date {
+		font-family: 'freightdispbooksc';
+		font-size: 30px;
+		letter-spacing: .2em;
+		line-height: 100%;
+	}
+
+	#schedule div.wrap ul.tab {
+		margin: 0 20px 25px;
+		border-radius: 3px;
+		width: 600px;
+	}
+
+	/* SP版でのタブのmargin削除 */
+	@media screen and (max-width: 768px) {
+		#schedule div.wrap ul.tab {
+			margin: 0 0 25px !important;
+		}
+	}
+
+	#schedule div.wrap ul.tab li {
+		float: left;
+		width: calc((100% - 12px) / 7);
+		height: 70px;
+		line-height: 70px;
+		text-align: center;
+		font-family: 'freightdispbooksc';
+		font-size: 14px;
+		letter-spacing: .05em;
+		border-radius: 3px;
+		margin: 0 1px;
+	}
+
+	#schedule div.wrap ul.tab li:first-child,
+	#schedule div.wrap ul.tab li:first-child a {
+		border-radius: 3px 0 0 3px;
+		margin-left: 0;
+	}
+
+	#schedule div.wrap ul.tab li:last-child,
+	#schedule div.wrap ul.tab li:last-child a {
+		border-radius: 0 3px 3px 0;
+		margin-right: 0;
+	}
+
+	#schedule div.wrap ul.tab li a {
+		display: block;
+		background: #fff;
+		border-radius: 3px;
+		color: #000;
+		text-decoration: none;
+	}
+
+	#schedule div.wrap ul.tab li.active {
+		background: #24252f;
+		color: #e95283;
+		font-size: 14px;
+		letter-spacing: .05em;
+		position: relative;
+	}
+
+	#schedule div.wrap ul.tab li.active a,
+	#schedule div.wrap ul.tab li.active a.fade {
+		background: #24252f !important;
+		color: #e95283 !important;
+	}
+
+	#schedule div.wrap ul.tab li.active:before {
+		border: solid transparent;
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		left: 50%;
+		margin-left: -10px;
+		bottom: -20px;
+		pointer-events: none;
+		border-color: rgba(0, 0, 0, 0);
+		border-left-color: #24252f;
+		border-width: 10px;
+		transform: rotate(90deg);
+		-webkit-transform: rotate(90deg);
+	}
+
+	#schedule div.wrap div.list div.box {
+		background: #fff;
+		overflow-y: hidden;
+		margin: 20px 20px 0;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, .3);
+		position: relative;
+	}
+
+	#schedule div.wrap div.list div.box div.girlsBlock {
+		width: 600px;
+		height: 400px;
+	}
+
+	#schedule div.wrap div.list div.box div.girlsBlock div.photo {
+		width: 100%;
+		height: 100%;
+	}
+
+	#schedule div.wrap div.list div.box div.text {
+		overflow: hidden;
+		padding: 40px 20px;
+		color: #626262;
+		font-size: 18px;
+		line-height: 140%;
+	}
+
+	#schedule div.wrap div.list div.box div.text h3 {
+		color: #000;
+		font-weight: bold;
+		padding-bottom: 10px;
+		margin-bottom: 10px;
+	}
+
+	#schedule div.wrap div.list div.box div.text p.text_box_a {
+		max-height: 75px;
+		overflow: hidden;
+	}
+
+	#schedule div.g_icon {
+		position: absolute;
+		left: 15px;
+		bottom: 13px;
+		width: 50px;
+		height: 50px;
+		border-radius: 25px;
+	}
+
+	/* SP版用girlsBlockスタイル */
+	@media screen and (max-width: 768px) {
+		#schedule div.wrap div.list div.box div.girlsBlock {
+			width: 100%;
+			height: 300px;
+			position: relative;
+		}
+
+		#schedule div.wrap div.list div.box div.girlsBlock dl.data {
+			background: url(../imgHtml/listShadow.png) repeat-x center bottom;
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			color: #fff;
+			width: 100%;
+			height: 110px;
+			padding: 46px 0 0 75px;
+		}
+
+		#schedule div.wrap div.list div.box div.girlsBlock dl.data dt.name {
+			font-family: 'freightdispbooksc';
+			font-size: 28px;
+			line-height: 20px;
+		}
+
+		#schedule div.wrap div.list div.box div.girlsBlock dl.data dd.name {
+			font-family: "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+			font-size: 16px;
+			line-height: 18px;
+		}
+
+		#schedule div.wrap div.list div.box div.girlsBlock dl.data dd.size {
+			font-family: 'freightdispbookitalicsc';
+			font-size: 14px;
+			line-height: 100%;
+		}
+
+		#schedule div.wrap div.list div.box div.g_icon {
+			position: absolute;
+			left: 15px;
+			bottom: 13px;
+			width: 50px;
+			height: 50px;
+			border-radius: 25px;
+		}
+
+
+
+		/* mypage用girlsBlockスタイル */
+		#mypage div.wrap div.list div.box {
+			width: 100%;
+			position: relative;
+		}
+
+		#mypage div.wrap div.list div.box dl.data {
+			background: url(../imgHtml/listShadow.png) repeat-x center bottom;
+			position: absolute;
+			left: 0;
+			bottom: 110px;
+			color: #fff;
+			width: 100%;
+			height: 110px;
+			padding: 46px 0 0 15px;
+		}
+
+		#mypage div.wrap div.list div.box dl.data dt.name {
+			font-family: 'freightdispbooksc';
+			font-size: 28px;
+			line-height: 20px;
+		}
+
+		#mypage div.wrap div.list div.box dl.data dd.name {
+			font-family: "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+			font-size: 16px;
+			line-height: 18px;
+		}
+
+		#mypage div.wrap div.list div.box dl.data dd.size {
+			font-family: 'freightdispbookitalicsc';
+			font-size: 14px;
+			line-height: 100%;
+		}
+
+		#mypage div.wrap div.list div.box div.g_icon {
+			position: absolute;
+			left: 15px;
+			bottom: 13px;
+			width: 50px;
+			height: 50px;
+			border-radius: 25px;
+		}
+	}
+
+	#schedule div.list div.state {
+		position: relative;
+		right: auto;
+		bottom: auto;
+		margin-bottom: 35px;
+	}
+
+	#schedule div.list div.state div {
+		display: table-cell;
+		width: 600px;
+		height: 40px;
+		font-family: "ヒラギノ明朝 ProN W3", "HiraMinProN-W3", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+		font-size: 24px;
+		line-height: 40px;
+		font-style: normal;
+		color: #fff;
+		text-align: center;
+		background: #b7447c;
+		letter-spacing: .1em;
+		vertical-align: middle;
+	}
+
+	#schedule div.list div.state div.reserve span {
+		display: inline;
+		font-size: 24px;
+		line-height: 40px;
+		font-style: normal;
+		margin-top: 0;
+	}
+
+	#schedule div.list div.state div.tel {
+		background: #449490;
+	}
+
+	#schedule div.list div.state div.thanks {
+		background: #746d95;
+	}
+
+	#schedule div.list div.state div.close {
+		background: #746d95;
+	}
+
+	#schedule div.list div.state div.reserve .tuikasyukkinn {
+		background: #a1a245;
+		width: 280px;
+		float: left;
+	}
+
+	/* スケジュールページSP版タブ修正 */
+	#schedule div.wrap ul.tab {
+		width: 100% !important;
+		margin: 0 !important;
+	}
+
+	#schedule div.wrap ul.tab li {
+		width: calc((100% - 15px) / 7) !important;
+		height: 50px !important;
+		line-height: 50px !important;
+		font-size: 12px !important;
+		margin: 0 1px !important;
+	}
+
+	#schedule div.wrap ul.tab li.today {
+		height: 100px!important;
+	}
+	#schedule div.wrap ul.tab li.today a {
+		height: 100%!important;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	#schedule div.wrap ul.tab li:first-child {
+		margin-left: 0 !important;
+	}
+
+	#schedule div.wrap ul.tab li:last-child {
+		margin-right: 0 !important;
+	}
+
+	#schedule div.wrap ul.tab li a {
+		font-size: 12px !important;
+		padding: 0 2px !important;
+	}
+
+	#schedule div.wrap ul.tab li.active {
+		background: #24252f !important;
+		color: #e95283 !important;
+		font-size: 12px !important;
+	}
+
+	#schedule div.wrap ul.tab li.active a,
+	#schedule div.wrap ul.tab li.active a.fade {
+		background: #24252f !important;
+		color: #e95283 !important;
+	}
+}
+

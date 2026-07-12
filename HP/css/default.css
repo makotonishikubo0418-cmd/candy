@@ -1,0 +1,2052 @@
+@charset "utf-8";
+
+@media screen and (min-width: 769px) {
+	.cssSprite{	background:url(../imgCss/pc/cssSprite.png) top left no-repeat;}
+	.entranceLogo{width:380px;height:116px;background-position:-0px -0px;}
+	.footLogo{width:196px;height:60px;background-position:-380px -0px;}
+	.headLogo{width:146px;height:43px;background-position:-576px -0px;}
+	.entranceR18{width:60px;height:60px;background-position:-0px -116px;}
+	.girlsTagNew2{width:60px;height:60px;background-position:-60px -116px;}
+	.girlsTagTrial2{width:60px;height:60px;background-position:-120px -116px;}
+	.headLogo2{width:100px;height:30px;background-position:-722px -0px;}
+	.girlsTagNew{width:40px;height:40px;background-position:-380px -60px;}
+	.girlsTagTrial{width:40px;height:40px;background-position:-420px -60px;}
+	.favIcon{width:32px;height:32px;background-position:-460px -60px;}
+	.topIconDiary{width:22px;height:22px;background-position:-822px -0px;}
+	.topIconFav{width:22px;height:22px;background-position:-844px -0px;}
+	.topIconPhoto{width:22px;height:22px;background-position:-866px -0px;}
+	.newsClose{width:20px;height:20px;background-position:-888px -0px;}
+	.cdIcoPhoto{width:20px;height:16px;background-position:-908px -0px;}
+	.cdIcoLoveBtn{width:12px;height:12px;background-position:-928px -0px;}
+	.cdIcoLoveBtn_on{width:12px;height:12px;background-position:-940px -0px;}
+}
+
+@media screen and (max-width: 768px) {
+	.cssSprite{	background:url(../imgCss/s/cssSprite.png) top left no-repeat;}
+	.entranceLogo{width:440px;height:134px;background-position:-0px -0px;}
+	.footLogo{width:196px;height:60px;background-position:-440px -0px;}
+	.headLogo{width:164px;height:50px;background-position:-636px -0px;}
+	.entranceR18{width:60px;height:60px;background-position:-440px -60px;}
+	.girlsTagNew2{width:60px;height:60px;background-position:-500px -60px;}
+	.girlsTagTrial2{width:60px;height:60px;background-position:-560px -60px;}
+	.headLogo2{width:100px;height:30px;background-position:-800px -0px;}
+	.favIcon{width:52px;height:52px;background-position:-620px -60px;}
+	.girlsTagNew{width:50px;height:50px;background-position:-672px -60px;}
+	.girlsTagTrial{width:50px;height:50px;background-position:-722px -60px;}
+	.footTel{width:40px;height:40px;background-position:-772px -60px;}
+	.cdIcoPhoto{width:33px;height:30px;background-position:-900px -0px;}
+	.newsClose{width:30px;height:30px;background-position:-933px -0px;}
+	.headTel{width:25px;height:25px;background-position:-963px -0px;}
+	.favIcon2{width:24px;height:24px;background-position:-988px -0px;}
+	.headMenu{width:24px;height:21px;background-position:-812px -60px;}
+	.topIconDiary{width:22px;height:22px;background-position:-0px -134px;}
+	.topIconFav{width:22px;height:22px;background-position:-22px -134px;}
+	.topIconPhoto{width:22px;height:22px;background-position:-44px -134px;}
+	.cdIcoLoveBtn{width:19px;height:18px;background-position:-836px -60px;}
+	.cdIcoLoveBtn_on{width:19px;height:18px;background-position:-855px -60px;}
+}
+
+@media screen and (min-width: 769px) {
+	.spOnly {
+		display: none !important;
+	}
+
+}
+
+@media screen and (max-width: 768px) {
+	.pcOnly {
+		display: none !important;
+	}
+}
+
+.is-hidden {
+	display: none;
+}
+
+/* スクリーンリーダー用 */
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+/* CSS Document */
+
+/* font */
+@font-face {
+	font-family: 'Lato-Regular';
+	src: url('../font/Lato-Regular.eot');
+	src: url('../font/Lato-Regular.eot?#iefix') format('embedded-opentype'), url('../font/Lato-Regular.woff') format('woff'), url('../font/Lato-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Lato-Thin';
+	src: url('../font/Lato-Thin.eot');
+	src: url('../font/Lato-Thin.eot?#iefix') format('embedded-opentype'), url('../font/Lato-Thin.woff') format('woff'), url('../font/Lato-Thin.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'unicaone-regular';
+	src: url('../font/unicaone-regular.eot');
+	src: url('../font/unicaone-regular.eot?#iefix') format('embedded-opentype'), url('../font/unicaone-regular.woff') format('woff'), url('../font/unicaone-regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'exmouth-webfont';
+	src: url('../font/exmouth-webfont.eot');
+	src: url('../font/exmouth-webfont.eot?#iefix') format('embedded-opentype'), url('../font/exmouth-webfont.woff') format('woff'), url('../font/exmouth-webfont.ttf') format('truetype');
+	font-weight: normal;
+}
+
+@font-face {
+	font-family: 'leaguegothic-webfont';
+	src: url('../font/leaguegothic-webfont.eot');
+	src: url('../font/leaguegothic-webfont.eot?#iefix') format('embedded-opentype'), url('../font/leaguegothic-webfont.woff') format('woff'), url('../font/leaguegothic-webfont.ttf') format('truetype');
+	font-weight: normal;
+}
+
+@font-face {
+	font-family: 'freightdispbook';
+	src: url('../font/freightdispbook-webfont.eot');
+	src: url('../font/freightdispbook-webfont.eot?#iefix') format('embedded-opentype'), url('../font/freightdispbook-webfont.woff') format('woff'), url('../font/freightdispbook-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'freightdispbookitalic';
+	src: url('../font/freightdispbookitalic-webfont.eot');
+	src: url('../font/freightdispbookitalic-webfont.eot?#iefix') format('embedded-opentype'), url('../font/freightdispbookitalic-webfont.woff') format('woff'), url('../font/freightdispbookitalic-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'freightdispbooksc';
+	src: url('../font/freightdispbooksc-webfont.eot');
+	src: url('../font/freightdispbooksc-webfont.eot?#iefix') format('embedded-opentype'), url('../font/freightdispbooksc-webfont.woff') format('woff'), url('../font/freightdispbooksc-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'freightdispbookitalicsc';
+	src: url('../font/freightdispbookitalicsc-webfont.eot');
+	src: url('../font/freightdispbookitalicsc-webfont.eot?#iefix') format('embedded-opentype'), url('../font/freightdispbookitalicsc-webfont.woff') format('woff'), url('../font/freightdispbookitalicsc-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'freightdisplight';
+	src: url('../font/freightdisplight-webfont.eot');
+	src: url('../font/freightdisplight-webfont.eot?#iefix') format('embedded-opentype'), url('../font/freightdisplight-webfont.woff') format('woff'), url('../font/freightdisplight-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'freightdisplightitalic';
+	src: url('../font/freightdisplightitalic-webfont.eot');
+	src: url('../font/freightdisplightitalic-webfont.eot?#iefix') format('embedded-opentype'), url('../font/freightdisplightitalic-webfont.woff') format('woff'), url('../font/freightdisplightitalic-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'freightdisplightsc';
+	src: url('../font/freightdisplightsc-webfont.eot');
+	src: url('../font/freightdisplightsc-webfont.eot?#iefix') format('embedded-opentype'), url('../font/freightdisplightsc-webfont.woff') format('woff'), url('../font/freightdisplightsc-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'freightdisplightitalicsc';
+	src: url('../font/freightdisplightitalicsc-webfont.eot');
+	src: url('../font/freightdisplightitalicsc-webfont.eot?#iefix') format('embedded-opentype'), url('../font/freightdisplightitalicsc-webfont.woff') format('woff'), url('../font/freightdisplightitalicsc-webfont.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'true_blueregular';
+	src: url('../font/true_blue-webfont.eot');
+	src: url('../font/true_blue-webfont.eot?#iefix') format('embedded-opentype'),
+		url('../font/true_blue-webfont.woff2') format('woff2'),
+		url('../font/true_blue-webfont.woff') format('woff'),
+		url('../font/true_blue-webfont.ttf') format('truetype'),
+		url('../font/true_blue-webfont.svg#true_blueregular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@media screen and (min-width: 769px) {
+	body {
+		background: #fff;
+		color: #000;
+		margin: 0;
+		padding: 0;
+		font-size: 14px;
+		line-height: 18px;
+		font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+		-webkit-font-smoothing: antialiased;
+		/*-webkit-text-size-adjust: 100%;*/
+	}
+
+	html,
+	body {
+		height: 100%;
+	}
+
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		/*background:url(../img/dummy.gif);*/
+	}
+
+	ul,
+	ol,
+	li {
+		list-style: none;
+	}
+
+	img {
+		border: none;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-size: 100%;
+		font-weight: normal;
+		margin: 0;
+	}
+
+	a {
+		color: #000;
+		text-decoration: none;
+		outline: none;
+	}
+
+	a:hover {
+		cursor: pointer;
+	}
+
+	.fade,
+	a.blackfade {
+		-webkit-transition: .4s ease-in-out;
+		-moz-transition: .4s ease-in-out;
+		-o-transition: .4s ease-in-out;
+		transition: .4s ease-in-out;
+	}
+
+	.fade:hover {
+		opacity: .6;
+		filter: alpha(opacity=60);
+	}
+
+	img.fade:hover {
+		background-color: #fff;
+	}
+
+	a.blackfade {
+		opacity: 0;
+		filter: alpha(opacity=0);
+		background: #000;
+		display: block;
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 10;
+	}
+
+	a.blackfade:hover {
+		opacity: .4;
+		filter: alpha(opacity=40);
+	}
+
+	.zoom {
+		-webkit-transition: .6s ease-in-out;
+		-moz-transition: .6s ease-in-out;
+		-o-transition: .6s ease-in-out;
+		transition: .6s ease-in-out;
+	}
+
+	.zoom:hover img.zoom {
+		-webkit-transform: scale(1.03, 1.03);
+		-moz-transform: scale(1.03, 1.03);
+		-ms-transform: scale(1.03, 1.03);
+		-o-transform: scale(1.03, 1.03);
+		transform: scale(1.03, 1.03);
+	}
+
+	.vCenter {
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+		-webkit-transform: translateY(-50%);
+		-moz-transform: translateY(-50%);
+	}
+
+	.clear {
+		float: none;
+		clear: both;
+	}
+
+	.cssSprite {
+		overflow: hidden;
+		line-height: -1000px;
+		font-size: 0;
+	}
+
+	#loading {
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		background: #fff url(../imgHtml/loading.gif) no-repeat center center fixed;
+		z-index: 2000;
+	}
+
+	/* all */
+
+	/* div.wrap {
+		min-width: 960px;
+	} */
+
+	div.main div.girlsTagNew,
+	div.main div.girlsTagTrial,
+	div.main div.girlsTagNew2,
+	div.main div.girlsTagTrial2 {
+		font-family: "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+		position: absolute;
+		left: 10px;
+		top: 0;
+		font-size: 11px;
+		text-align: center;
+		line-height: 30px;
+		color: #fff;
+		z-index: 10;
+		letter-spacing: .1em;
+	}
+
+	div.main div.girlsTagNew2,
+	div.main div.girlsTagTrial2 {
+		font-size: 18px;
+		line-height: 50px;
+		left: 20px;
+	}
+
+	div.main div.girlsTagTrial,
+	div.main div.girlsTagTrial2 {
+		letter-spacing: .2em;
+	}
+
+	div.toast {
+		position: absolute;
+		top: 15px;
+		right: 15px;
+		width: 210px;
+		height: 52px;
+		background: #E75280;
+		color: #92153b;
+		font-size: 12px;
+		line-height: 140%;
+		padding-top: 10px;
+		padding-left: 10px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, .8);
+		border-radius: 4px;
+		vertical-align: middle;
+	}
+
+	div.toast div {
+		float: left;
+		margin-right: 8px;
+		vertical-align: middle;
+	}
+
+	div.toast a {
+		border-radius: 4px;
+	}
+
+	/*header*/
+
+	div.wrap div.header,
+	div.wrap div.headNavi,
+	div.wrap div.footer {
+		background: #24252f;
+		color: #fff;
+		text-align: center;
+		height: 136px;
+		padding-top: 20px;
+	}
+
+	div.wrap div.headNavi {
+		height: 80px;
+		padding-top: 15px;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		/* min-width: 1100px; */
+		z-index: 999;
+		margin-top: -60px;
+	}
+
+	div.wrap div.header a.cssSprite.headLogo {
+		margin: 0 auto;
+	}
+
+	div.wrap div.headNavi > .headLogo2 {
+		display: inline-block;
+		vertical-align: middle;
+		margin-right: 10px;
+		margin-top: 8px;
+	}
+
+	div.wrap div.header ul.menu,
+	div.wrap div.headNavi ul.menu,
+	div.wrap div.footer ul.menu {
+		font-size: 0;
+	}
+
+	div.wrap div.header ul.menu {
+		margin: 20px auto 0;
+	}
+
+	div.wrap div.headNavi ul.menu {
+		display: inline-block;
+	}
+
+	div.wrap div.header ul.menu li,
+	div.wrap div.headNavi ul.menu li,
+	div.wrap div.footer ul.menu li {
+		display: inline-block;
+		font-size: 14px;
+		letter-spacing: .1em;
+		border-left: 1px solid #4b4d64;
+		vertical-align: middle;
+		font-family: 'freightdisplightsc';
+	}
+
+	div.wrap div.header ul.menu li:first-child,
+	div.wrap div.header ul.menu li:last-child,
+	div.wrap div.headNavi ul.menu li:first-child,
+	div.wrap div.headNavi ul.menu li:last-child,
+	div.wrap div.footer ul.menu li:first-child {
+		border-left: none;
+	}
+
+	div.wrap div.header ul.menu li a,
+	div.wrap div.headNavi ul.menu li a,
+	div.wrap div.footer ul.menu li a {
+		padding: 0 10px;
+	}
+
+	div.wrap div.headNavi ul.menu li a {
+		padding: 0 9px;
+	}
+
+	div.wrap div.header ul.menu li div.tel,
+	div.wrap div.headNavi ul.menu li div.tel {
+		display: inline-block;
+		border: 1px solid #4b4d64;
+		border-radius: 3px;
+		width: 100px;
+		height: 30px;
+		line-height: 30px;
+		vertical-align: middle;
+		letter-spacing: .1em;
+		margin-left: 20px;
+	}
+
+	div.wrap div.headNavi2 ul.menu li div.tel {
+		margin-left: 10px;
+	}
+
+	div.wrap div.header ul.menu li div.num,
+	div.wrap div.headNavi ul.menu li div.num {
+		display: inline-block;
+		width: 18px;
+		height: 18px;
+		border-radius: 18px;
+		text-align: center;
+		line-height: 18px;
+		font-size: 11px;
+		font-family: 'unicaone-regular';
+		color: #fff;
+		background: #E60012;
+		vertical-align: bottom;
+		margin-left: 6px;
+	}
+
+	div.wrap div.header a,
+	div.wrap div.headNavi a,
+	div.wrap div.footer a {
+		color: #fff;
+		display: block;
+	}
+
+	/*footer*/
+
+	div.wrap div.footer {
+		background: #24252f;
+		color: #fff;
+		text-align: center;
+		height: 340px;
+		padding-top: 50px;
+	}
+
+	div.wrap div.footer h2 div {
+		margin: 0 auto;
+	}
+
+	div.wrap div.footer .footLogo {
+		margin: 0 auto;
+		display: block;
+	}
+
+	div.wrap div.footer ul.menu {
+		margin: 35px auto 30px;
+	}
+
+	div.wrap div.footer dl.info {
+		font-family: 'freightdispbooksc';
+	}
+
+	div.wrap div.footer dl.info dt {
+		font-size: 22px;
+		line-height: 100%;
+		letter-spacing: .4em;
+	}
+
+	div.wrap div.footer dl.info dd {
+		font-size: 12px;
+		line-height: 100%;
+		letter-spacing: .2em;
+	}
+
+	div.wrap div.footer dl.info dd span {
+		color: #e5006e;
+	}
+
+	div.wrap div.footer div.copy {
+		font-family: 'unicaone-regular';
+		color: #626262;
+		font-size: 10px;
+		letter-spacing: .5em;
+		padding-top: 35px;
+	}
+
+	/* SP版動画エリアのデフォルト設定 */
+	.player.spOnly {
+		width: 100%;
+		height: auto;
+		margin: 0 auto;
+	}
+
+	.playIcon.spOnly {
+		position: absolute !important;
+		top: 50% !important;
+		left: 50% !important;
+		transform: translate(-50%, -50%) !important;
+		margin-top: 0 !important;
+		z-index: 10;
+		width: 60px !important;
+		height: 60px !important;
+	}
+
+	.playIcon.spOnly:before {
+		width: 60px !important;
+		height: 60px !important;
+		background-size: 60px 60px !important;
+	}
+
+	#index div.main div.mainImg {
+		position: relative;
+		width: 100%;
+		height: 0;
+		padding-bottom: 46%;
+		overflow: hidden;
+		z-index: 2;
+		--logo-top: 280px;
+	}
+	#index div.main div.mainImg div.bg {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 0;
+		pointer-events: none;
+	}
+	#index div.main div.mainImg div.bg #player,
+	#index div.main div.mainImg div.bg #player video {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		pointer-events: none;
+	}
+	#index div.main div.list { margin-top: 1.5rem; }
+	#index div.main div.mainImg img.logo {
+		position: absolute;
+		top: var(--logo-top);
+		left: 50%;
+		margin-left: -154px;
+		z-index: 1;
+		display: block;
+	}
+
+	#index div.main div.list {
+		margin: 0 10px 10px;
+		position: relative;
+		z-index: 1;
+	}
+
+	#index div.main div.list h1 {
+		font-family: 'Lato-Regular';
+		font-size: 18px;
+		text-align: center;
+		color: #a0a0a0;
+		height: 100px;
+		line-height: 100px;
+		letter-spacing: .2em;
+	}
+
+	#index div.main div.list h1 span {
+		color: #e5006e;
+	}
+
+	#index div.main div.list div.tile {
+		position: relative;
+		font-size: 0;
+		width: 100%;
+		text-align: center;
+	}
+
+	#index div.main div.list div.tile div.box {
+		font-size: 13px;
+		position: relative;
+		overflow: hidden;
+	}
+
+	#index div.main div.list div.tile div.boxA {
+		width: 310px;
+		height: 174px;
+	}
+
+	#index div.main div.list div.tile div.boxB {
+		width: 310px;
+		height: 356px;
+	}
+
+	#index div.main div.list div.tile div.boxC {
+		width: 100%;
+	}
+
+	#index div.main div.list div.box>a,
+	#index div.main div.list div.box div.photo,
+	#index div.main div.list div.box div.movie {
+		background: #000;
+		width: 100%;
+		height: 100%;
+	}
+
+	/* 女の子一覧：カード全体をクリック可能にする */
+	#index div.main div.list div.box>a {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		display: block;
+		z-index: 5;
+		background: transparent;
+	}
+
+	#index div.main div.list div.box div.photo img,
+	#index div.main div.list div.box div.movie img {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	#index div.main div.list div.box div.movie video {
+		position: absolute;
+		left: 0;
+		top: 0;
+		opacity: 0;
+		width: 100%;
+		height: 100%
+	}
+
+	#index div.main div.list div.box dl.data {
+		position: absolute;
+		color: #fff;
+		width: 100%;
+	}
+
+	#index div.main div.list div.box dl.data dt.name {
+		font-family: 'freightdispbooksc';
+		font-size: 30px;
+		line-height: 120%;
+		text-shadow: 0 0 2px rgba(160, 160, 160, .8);
+	}
+
+	#index div.main div.list div.box dl.data dd.size {
+		font-family: 'freightdispbookitalicsc';
+		font-size: 10px;
+		line-height: 120%;
+		text-shadow: 0 0 3px rgba(100, 100, 100, .8);
+	}
+
+	#index div.main div.list div.box dl.data dt.state div {
+		font-family: "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+		width: 190px;
+		height: 20px;
+		font-size: 12px;
+		line-height: 20px;
+		background: rgba(229, 0, 110, .5);
+		margin: 8px auto 0;
+		letter-spacing: .1em;
+		font-style: italic;
+	}
+
+	#index div.main div.list div.box dl.data dt.state div.tel {
+		background: rgba(0, 158, 150, .5);
+	}
+
+	#index div.main div.list div.box dl.data dt.state div.thanks {
+		background: rgba(95, 82, 160, .5);
+	}
+
+	#index div.main div.list div.box dl.data dt.state div.close {
+		background: rgba(0, 139, 180, .5);
+	}
+
+	#index div.main div.list div.box dl.data dt.state div.add {
+		width: 114px;
+		position: relative;
+		left: 38px;
+	}
+
+	#index div.main div.list div.box dl.data dt.state div.add:after {
+		content: "追加出勤";
+		display: block;
+		position: absolute;
+		left: -76px;
+		top: 0;
+		width: 76px;
+		height: 20px;
+		font-size: 12px;
+		line-height: 20px;
+		background: rgba(199, 188, 2, .5);
+	}
+
+	#index div.main div.list div.box div.icon {
+		position: absolute;
+		width: 100%;
+		top: 50%;
+		margin-top: 46px;
+		font-size: 0;
+	}
+
+	#index div.main div.list div.box div.icon div {
+		display: inline-block;
+		margin: 4px;
+	}
+
+	#index div.main div.other {
+		background: #c8c8c8 url(../imgHtml/pc/topOtherBg.jpg) no-repeat left center;
+		height: 720px;
+		overflow-x: hidden;
+		position: relative;
+		padding-top: 420px;
+	}
+
+	#index div.main div.other:after {
+		content: "";
+		background: #f29c9f;
+		height: 720px;
+		width: 100%;
+		position: absolute;
+		top: 0;
+		left: 50%;
+		margin-left: 320px;
+	}
+
+	#index div.main div.other dl.title {
+		position: absolute;
+		left: 50%;
+		top: 100px;
+		margin-left: 100px;
+		text-align: right;
+		z-index: 100;
+	}
+
+	#index div.main div.other dl.title dt {
+		font-size: 80px;
+		line-height: 80%;
+		letter-spacing: .1em;
+		font-family: 'freightdisplightitalic';
+	}
+
+	#index div.main div.other dl.title dd {
+		font-size: 14px;
+		line-height: 220%;
+		letter-spacing: 4px;
+		font-family: 'freightdispbookitalicsc';
+	}
+
+	#index div.main div.other dl.title span {
+		color: #fff;
+	}
+
+	#index div.main div.other ul {
+		text-align: center;
+		font-size: 0;
+		position: relative;
+		z-index: 100;
+	}
+
+	#index div.main div.other ul li {
+		color: #fff;
+		position: relative;
+		display: inline-block;
+		font-size: 14px;
+		width: 300px;
+		height: 240px;
+		background: rgba(218, 79, 112, .8) url(../imgHtml/pc/topOtherBg01.png) no-repeat center center;
+		margin-right: 10px;
+	}
+
+	#index div.main div.other ul li:nth-child(2) {
+		background: rgba(89, 92, 161, .8) url(../imgHtml/pc/topOtherBg02.png) no-repeat center center;
+	}
+
+	#index div.main div.other ul li:nth-child(3) {
+		background: rgba(65, 181, 172, .8) url(../imgHtml/pc/topOtherBg03.png) no-repeat center center;
+		margin-right: 0;
+	}
+
+	#index div.main div.other ul li dl dt {
+		font-family: 'freightdisplight';
+		font-size: 36px;
+		letter-spacing: .2em;
+		line-height: 120%;
+		padding-top: 30px;
+	}
+
+	#index div.main div.other ul li dl dd {
+		font-family: "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+		font-size: 14px;
+		line-height: 120%;
+	}
+
+	#index div.main div.other ul li dl dd h3 {
+		font-size: 18px;
+		line-height: 120%;
+		letter-spacing: .2em;
+		padding-bottom: 10px;
+	}
+
+	/* banner */
+
+	#index div.main div.banner a {
+		display: block;
+		background: #000;
+		overflow: hidden;
+	}
+
+	#index div.main div.banner a img {
+		position: relative;
+		width: 100%;
+		height: auto;
+		/* min-width: 960px; */
+		vertical-align: middle;
+		display: block;
+		-webkit-transition: .4s ease-in-out;
+		-moz-transition: .4s ease-in-out;
+		-ms-transition: .4s ease-in-out;
+		-o-transition: .4s ease-in-out;
+		transition: .4s ease-in-out;
+	}
+
+	#index div.main div.banner a img:hover {
+		opacity: 0.6;
+	}
+
+
+	/* entrance（オーバーレイ表示：クローラーとユーザー同一HTML） */
+
+	#entrance {
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		z-index: 9999;
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: cover;
+	}
+
+	#entrance div.wrap {
+		height: 480px;
+		margin: 0 auto;
+		text-align: center;
+		color: #e95283;
+	}
+
+	/* 年齢認証（#entrance）だけ中央寄せ基準を上にずらす */
+	#entrance .vCenter {
+		top: 35%;
+	}
+
+	#entrance div.wrap div.cssSprite {
+		margin: 0 auto;
+	}
+
+	#entrance div.wrap div.title {
+		font-size: 18px;
+		letter-spacing: .2em;
+		line-height: 120%;
+		position: relative;
+		margin-bottom: 30px;
+	}
+
+	#entrance div.wrap div.title div.cssSprite {
+		margin-bottom: 10px;
+	}
+
+	#entrance div.wrap div.title:after {
+		content: " ";
+		position: absolute;
+		left: 50%;
+		bottom: -20px;
+		margin-left: -30px;
+		width: 60px;
+		height: 1px;
+		border-top: 1px solid #e95283;
+	}
+
+	#entrance div.wrap div.r18 {
+		font-size: 12px;
+		line-height: 140%;
+	}
+
+	#entrance div.wrap div.r18 dl {
+		color: #e5006e;
+	}
+
+	#entrance div.wrap div.r18 dl dt {
+		font-size: 36px;
+		line-height: 120%;
+		font-family: 'freightdisplightsc';
+	}
+
+	#entrance div.wrap div.r18 dl dt span {
+		font-family: 'freightdisplightitalic';
+	}
+
+	#entrance div.wrap div.r18 dl dd {
+		font-size: 16px;
+		line-height: 180%;
+		font-weight: bold;
+	}
+
+	#entrance div.wrap div.r18 div.cssSprite {
+		margin-bottom: 10px;
+	}
+
+	#entrance div.wrap div.select {
+		margin: 20px auto 40px;
+		font-size: 0;
+	}
+
+	#entrance div.wrap div.select a {
+		display: inline-block;
+		width: 210px;
+		height: 80px;
+		color: #e95283;
+		border: 1px solid #e95283;
+		background: rgba(255, 255, 255, .5);
+		font-size: 16px;
+		padding-top: 14px;
+	}
+
+	#entrance div.wrap div.select a:first-child {
+		margin-right: 20px;
+	}
+
+	#entrance div.wrap div.select a span {
+		font-size: 36px;
+		line-height: 90%;
+		font-family: 'freightdisplightsc';
+		display: block;
+	}
+
+	#entrance div.wrap div.copy {
+		font-family: 'unicaone-regular';
+		font-size: 10px;
+		letter-spacing: .5em;
+	}
+
+	#entrance .entranceCityheaven {
+		margin: 20px auto 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 16px;
+	}
+
+	#entrance .entranceCityheavenMain img {
+		display: block;
+		height: 54px;
+		width: auto;
+	}
+
+	#entrance .entranceCityheavenRegions {
+		display: grid;
+		grid-template-columns: repeat(2, auto);
+		gap: 6px 10px;
+		align-items: center;
+		justify-items: center;
+	}
+
+	#entrance .entranceCityheavenRegions img {
+		display: block;
+		height: 28px;
+		width: auto;
+	}
+}
+
+/* SP版動画エリアのレスポンシブ対応 */
+@media screen and (max-width: 768px) {
+	.playIcon {
+		font-size: 50px;
+		position: absolute;
+		width: 1.4em;
+		height: 1.4em;
+		border: 0.1em solid #fff;
+		border-radius: 100%;
+		line-height: 1em;
+		pointer-events: none;
+		-webkit-transform: translate(260px, 140px);
+		-moz-transform: translate(260px, 140px);
+		-o-transform: translate(260px, 140px);
+		-ms-transform: translate(260px, 140px);
+	}
+
+	.playIcon::before {
+		content: "";
+		position: absolute;
+		top: 9px;
+		left: 19px;
+		width: 0;
+		height: 0;
+		border-top: 0.4em solid transparent;
+		border-left: 0.6em solid #fff;
+		border-bottom: 0.4em solid transparent;
+	}
+
+	.player.spOnly {
+		width: 100% !important;
+		height: auto !important;
+		max-width: 100%;
+		overflow: hidden;
+	}
+
+	.player.spOnly #moviePlayBox {
+		width: 100% !important;
+		height: auto !important;
+		max-width: 100%;
+	}
+
+	.player.spOnly img {
+		width: 100% !important;
+		height: auto !important;
+		max-width: 100% !important;
+	}
+
+	.playIcon.spOnly {
+		position: absolute !important;
+		top: 180px !important;
+		left: 50% !important;
+		transform: translate(-50%, -50%) !important;
+		margin-top: 0 !important;
+		z-index: 10;
+	}
+
+	/* 全ページtitle h2フォントサイズ統一（SP版） */
+	div.main dl.title dt h2,
+	div.main div.title h2 {
+		font-size: 32px !important;
+		line-height: 1.2 !important;
+	}
+
+	/* SP版ヘッダーサイズ調整 */
+	div.wrap div.header a.cssSprite.headLogo {
+		display: block;
+		margin: 0 auto;
+		margin-top: 15px;
+		transform: scale(0.85);
+		transform-origin: center;
+	}
+
+	div.wrap div.header ul.menu li {
+		font-size: 12px !important;
+	}
+
+	div.wrap div.header ul.menu li a {
+		padding: 0 8px !important;
+	}
+
+	div.wrap div.header ul.menu li div.tel {
+		width: 85px !important;
+		height: 25px !important;
+		line-height: 25px !important;
+		font-size: 11px !important;
+		margin-left: 15px !important;
+	}
+
+	div.wrap div.header ul.menu li div.num {
+		width: 15px !important;
+		height: 15px !important;
+		line-height: 15px !important;
+		font-size: 9px !important;
+		margin-left: 4px !important;
+	}
+
+	/* ムービーページSP版修正 */
+	/* トップページSP版女性パネル2列表示修正 */
+	#index div.main div.list h1 {
+		font-size: 16px !important;
+		height: auto !important;
+		line-height: 1.5 !important;
+		padding: 20px 0 !important;
+	}
+
+	#index div.main div.list div.tile {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+
+	#index div.main div.list div.tile div.boxA {
+		width: calc(50% - 5px) !important;
+		height: auto !important;
+		float: none !important;
+		margin-bottom: 10px !important;
+	}
+
+	#index div.main div.list div.tile div.boxB {
+		width: calc(50% - 5px) !important;
+		height: auto !important;
+		float: none !important;
+		margin-bottom: 10px !important;
+	}
+
+	#index div.main div.list div.tile div.boxA:nth-child(2n+2),
+	#index div.main div.list div.tile div.boxB:nth-child(2n+2) {
+		float: none !important;
+	}
+
+	#index div.main div.list div.tile div.boxC {
+		width: 100% !important;
+		height: auto !important;
+		clear: none !important;
+		margin-bottom: 10px !important;
+	}
+
+	/* トップバナーSP版レスポンシブ対応 */
+	.topbanner.spOnly {
+		width: 100% !important;
+		overflow: hidden !important;
+	}
+
+	.topbanner.spOnly a {
+		width: 100% !important;
+		display: block !important;
+	}
+
+	.topbanner.spOnly a img {
+		width: 100% !important;
+		height: auto !important;
+		max-width: 100% !important;
+		display: block !important;
+	}
+
+}
+
+@media screen and (max-width: 768px) {
+	body {
+		background: #fff;
+		color: #000;
+		margin: 0;
+		padding: 0;
+		font-size: 14px;
+		line-height: 18px;
+		font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+		-webkit-font-smoothing: antialiased;
+		-webkit-text-size-adjust: 100%;
+		/* width: 640px; */
+		margin: 0 auto;
+	}
+
+	html,
+	body {
+		height: 100%;
+	}
+
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		background: url(../img/dummy.gif);
+	}
+
+	ul,
+	ol,
+	li {
+		list-style: none;
+	}
+
+	img {
+		border: none;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-size: 100%;
+		font-weight: normal;
+		margin: 0;
+	}
+
+	a {
+		color: #000;
+		text-decoration: none;
+		outline: none;
+	}
+
+	a.blackfade {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		left: 0;
+		top: 0;
+	}
+
+	.vCenter {
+		position: relative;
+		top: 50%;
+		transform: translateY(-50%);
+		-webkit-transform: translateY(-50%);
+		-moz-transform: translateY(-50%);
+	}
+
+	.clear {
+		float: none;
+		clear: both;
+	}
+
+	.cssSprite {
+		overflow: hidden;
+		line-height: -1000px;
+		font-size: 0;
+	}
+
+	#loading {
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		background: #fff url(../imgHtml/loading.gif) no-repeat center center fixed;
+		z-index: 2000;
+	}
+
+	/* all */
+
+	.wrap .main {
+		margin-top: 80px;
+	}
+
+	div.main div.girlsTagNew,
+	div.main div.girlsTagTrial,
+	div.main div.girlsTagNew2,
+	div.main div.girlsTagTrial2 {
+		font-family: "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+		position: absolute;
+		left: 0;
+		top: -10px;
+		font-size: 14px;
+		text-align: center;
+		line-height: 40px;
+		color: #fff;
+		z-index: 10;
+		scale: 0.6;
+	}
+
+	div.main div.girlsTagNew2,
+	div.main div.girlsTagTrial2 {
+		font-size: 18px;
+		line-height: 50px;
+		left: 20px;
+	}
+
+	div.main div.list div.state {
+		position: absolute;
+		right: 5px;
+		bottom: 33px;
+		z-index: 50;
+	}
+
+	div.main div.list div.state div {
+		display: table-cell;
+		width: 67px;
+		height: 35px;
+		font-family: "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+		font-style: italic;
+		font-size: 11px;
+		line-height: 100%;
+		color: #fff;
+		text-align: center;
+		background: rgba(229, 0, 110, .5);
+		letter-spacing: .1em;
+		vertical-align: middle;
+	}
+
+	div.main div.list div.state div.reserve span {
+		display: block;
+		font-size: 6px;
+		line-height: 100%;
+		font-style: normal;
+		margin-top: 2px;
+	}
+
+	div.main div.list div.state div.tel {
+		background: rgba(0, 158, 150, .5);
+	}
+
+	div.main div.list div.state div.thanks {
+		background: rgba(95, 82, 160, .5);
+	}
+
+	div.main div.list div.state div.close {
+		background: rgba(0, 139, 180, .5);
+	}
+
+	div.main div.list div.state div.add:after {
+		content: "追加出勤";
+		display: block;
+		position: absolute;
+		left: 0;
+		top: -27px;
+		width: 100px;
+		font-style: normal;
+		height: 22px;
+		line-height: 22px;
+		background: rgba(199, 188, 2, .5);
+	}
+
+	div.girlsBlock {
+		position: relative;
+	}
+
+	div.girlsBlock>a {
+		display: block;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		z-index: 100;
+	}
+
+	div.girlsBlock div.photo img {
+		width: 100%;
+		height: 100%;
+		display: block;
+		object-fit: cover;
+	}
+
+	/* トップページ用 */
+	#index div.girlsBlock dl.data {
+		background: url(../imgHtml/s/listShadow.png) repeat-x center bottom;
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		color: #fff;
+		width: 100%;
+		height: 110px;
+		padding: 50px 0 0 10px;
+	}
+
+	#index div.girlsBlock dl.data dt.name {
+		font-family: 'freightdispbooksc';
+		font-size: 24px;
+		line-height: 20px;
+	}
+
+	#index div.girlsBlock dl.data dd.name {
+		font-family: "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+		font-size: 16px;
+		line-height: 18px;
+	}
+
+	#index div.girlsBlock dl.data dd.size {
+		font-family: 'freightdispbookitalicsc';
+		font-size: 14px;
+		line-height: 100%;
+	}
+
+
+	div.girlsBlock div.icon {
+		position: absolute;
+		left: 8px;
+		bottom: 57px;
+		font-size: 0;
+		height: 30px;
+		scale: 0.8;
+	}
+
+	div.girlsBlock div.icon div {
+		display: inline-block;
+		margin: 4px;
+	}
+
+	div.girlsBlock div.g_icon {
+		position: absolute;
+		left: 15px;
+		bottom: 13px;
+		width: 50px;
+		height: 50px;
+		border-radius: 25px;
+	}
+
+	div.toast {
+		position: fixed;
+		bottom: 20px;
+		left: 50%;
+		width: 440px;
+		height: 100px;
+		background: #E75280;
+		color: #92153b;
+		font-size: 24px;
+		line-height: 140%;
+		padding-top: 20px;
+		padding-left: 30px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, .8);
+		border-radius: 4px;
+		vertical-align: middle;
+		z-index: 900;
+		margin-left: -220px;
+	}
+
+	div.toast div {
+		float: left;
+		margin-right: 20px;
+		margin-top: 5px;
+		vertical-align: middle;
+	}
+
+	div.toast a {
+		position: absolute;
+		display: block;
+		border-radius: 4px;
+		width: 100%;
+		height: 100%;
+		left: 0;
+		top: 0;
+	}
+
+	#info {
+		position: fixed;
+		top: 85px;
+		left: calc(100% - 320px);
+		width: 170px;
+		height: 70px;
+		background: #E75280;
+		color: #92153b;
+		font-size: 20px;
+		line-height: 120%;
+		padding-top: 14px;
+		text-align: center;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, .8);
+		vertical-align: middle;
+		z-index: 1100;
+		margin-left: 140px;
+	}
+
+	#info span {
+		font-weight: bold;
+	}
+
+	#info:before {
+		border: solid transparent;
+		content: " ";
+		height: 0;
+		width: 0;
+		position: absolute;
+		right: 20px;
+		top: -20px;
+		pointer-events: none;
+		border-color: rgba(0, 0, 0, 0);
+		border-left-color: #E75280;
+		border-width: 10px;
+		transform: rotate(270deg);
+		-webkit-transform: rotate(270deg);
+		z-index: 900;
+	}
+
+	/*header*/
+
+	.header {
+		background: #24252f;
+		width: 100%;
+		height: 80px;
+		position: fixed;
+		top: 0;
+		z-index: 1000;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, .5);
+		text-align: center;
+	}
+
+	/* 重複のためコメントアウト（1028行目で定義済み）
+	.header a.cssSprite.headLogo,
+	.header a.tel>div,
+	.header div.menuBtn>div {
+		margin: 0 auto;
+	}
+
+	.header a.cssSprite.headLogo {
+		margin-top: 15px;
+	}
+	*/
+	.header a.tel>div,
+	.header div.menuBtn>div {
+		margin: 0 auto;
+	}
+
+	.header div.fav {
+		position: absolute;
+		height: 80px;
+		width: 80px;
+		right: 80px;
+		top: 0;
+		padding-top: 27px;
+		text-align: center;
+	}
+
+	.header div.fav a {
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 100%;
+		left: 0;
+		top: 0;
+		z-index: 100;
+	}
+
+	.header div.fav div.num {
+		position: absolute;
+		right: 10px;
+		top: 15px;
+		width: 24px;
+		height: 24px;
+		border-radius: 24px;
+		text-align: center;
+		line-height: 24px;
+		font-size: 16px;
+		font-family: 'unicaone-regular';
+		color: #fff;
+		background: #E60012;
+		vertical-align: middle;
+	}
+
+	.header div.fav div.cssSprite {
+		display: inline-block;
+	}
+
+	.header a.tel {
+		background: #131318;
+		width: 80px;
+		height: 80px;
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+
+	.header div.menuBtn {
+		background: #131318;
+		width: 80px;
+		height: 80px;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+
+	.header div#menuClose>div {
+		transform: rotate(90deg);
+		-webkit-transform: rotate(90deg);
+		margin-top: -10px;
+	}
+
+	.wrap ul.headMenu {
+		position: fixed;
+		top: 80px;
+		z-index: 999;
+		width: 100%;
+	}
+
+	.wrap ul.headMenu li {
+		border-top: 1px solid #24252f;
+		background: rgba(36, 37, 47, .95);
+	}
+
+	.wrap ul.headMenu li:first-child {
+		border-top: none;
+	}
+
+	.wrap ul.headMenu li a {
+		display: block;
+		height: auto;
+		border-top: 1px solid #43455a;
+		font-family: 'freightdispbook';
+		color: #fff;
+		font-size: 24px;
+		line-height: 2;
+		text-align: center;
+	}
+
+	.wrap ul.headMenu li:first-child a {
+		border-top: none;
+	}
+
+	/*footer*/
+
+	.footer {
+		text-align: center;
+		background: #24252f;
+		color: #fff;
+		padding: 60px 20px;
+	}
+
+	.footer h2>div {
+		display: inline-block;
+	}
+
+	.footer .footLogo {
+		margin: 0 auto;
+		display: block;
+	}
+
+	.footer dl.info {
+		border-top: 1px dotted #fff;
+		margin-top: 15px;
+		padding: 20px 0;
+		font-family: 'freightdispbooksc';
+	}
+
+	.footer dl.info dt {
+		font-size: 18px;
+		line-height: 100%;
+	}
+
+	.footer dl.info dd {
+		font-size: 22px;
+		line-height: 100%;
+		color: #e5006e;
+		letter-spacing: 0.1em;
+	}
+
+	.footer a.tel {
+		font-family: 'freightdispbooksc';
+		display: block;
+		height: 80px;
+		vertical-align: top;
+		background: #fff;
+		color: #e5006e;
+		font-size: 30px;
+		line-height: 80px;
+		letter-spacing: 0.05em;
+	}
+
+	.footer a.tel>div {
+		display: inline-block;
+		vertical-align: top;
+		margin-right: 10px;
+	}
+
+	.footer div.copy {
+		margin-top: 30px;
+		font-size: 16px;
+		line-height: 120%;
+		font-family: 'unicaone-regular';
+		color: #a0a0a0;
+	}
+
+	/* index */
+
+	#index div.main div.mainImg div.bg img {
+		width: 100%;
+		height: auto;
+	}
+
+	#index div.main div.list h1 {
+		font-family: 'freightdispbooksc';
+		font-size: 20px;
+		text-align: center;
+		color: #a0a0a0;
+		height: 100px;
+		line-height: 100px;
+		letter-spacing: .2em;
+	}
+
+	#index div.main div.list h1 span {
+		color: #e5006e;
+	}
+
+	#index div.main div.list div.tile {
+		position: relative;
+		font-size: 0;
+	}
+
+	#index div.main div.list div.tile div.box {
+		position: relative;
+		overflow: hidden;
+		margin-bottom: 10px;
+	}
+
+	#index div.main div.list div.tile div.boxA {
+		width: 315px;
+		height: 210px;
+		float: left;
+	}
+
+	#index div.main div.list div.tile div.boxB {
+		width: 315px;
+		/* height: 473px; */
+		float: left;
+	}
+
+	#index div.main div.list div.tile div.boxA:nth-child(2n+2),
+	#index div.main div.list div.tile div.boxB:nth-child(2n+2) {
+		float: right;
+	}
+
+	#index div.main div.list div.tile div.boxC {
+		clear: both;
+		width: 100%;
+		height: 427px;
+	}
+
+	#index div.main div.list div.tile div.box div.photo {
+		width: 100%;
+		height: 100%;
+	}
+
+	#index div.main div.list div.tile br {
+		display: none;
+	}
+
+	#index div.main div.other {
+		background: #c8c8c8 url(../imgHtml/s/topOtherBg.jpg) no-repeat center center;
+		height: 895px;
+		position: relative;
+	}
+
+	#index div.main div.other dl.title {
+		padding-top: 40px;
+		text-align: right;
+	}
+
+	#index div.main div.other dl.title dt {
+		font-size: 80px;
+		line-height: 70%;
+		letter-spacing: .1em;
+		font-family: 'freightdisplightitalic';
+		padding-right: 10px;
+	}
+
+	#index div.main div.other dl.title dd {
+		font-size: 16px;
+		line-height: 220%;
+		letter-spacing: 3px;
+		font-family: 'freightdispbookitalicsc';
+		padding-right: 15px;
+	}
+
+	#index div.main div.other dl.title span {
+		color: #fff;
+	}
+
+	#index div.main div.other ul {
+		position: absolute;
+		right: 15px;
+		top: 216px;
+		font-size: 0;
+	}
+
+	#index div.main div.other ul li {
+		position: relative;
+		color: #fff;
+		text-align: center;
+		font-size: 14px;
+		width: 285px;
+		height: 212px;
+		background: rgba(218, 79, 112, .8) url(../imgHtml/s/topOtherBg01.png) no-repeat center 135px;
+		margin-right: 15px;
+		margin-bottom: 10px;
+	}
+
+	#index div.main div.other ul li a {
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	#index div.main div.other ul li:nth-child(2) {
+		background: rgba(89, 92, 161, .8) url(../imgHtml/s/topOtherBg02.png) no-repeat center 135px;
+	}
+
+	#index div.main div.other ul li:nth-child(3) {
+		background: rgba(65, 181, 172, .8) url(../imgHtml/s/topOtherBg03.png) no-repeat center 135px;
+		margin-right: 0;
+	}
+
+	#index div.main div.other ul li dl dt {
+		font-family: 'freightdisplight';
+		font-size: 36px;
+		letter-spacing: .2em;
+		line-height: 120%;
+		padding-top: 15px;
+	}
+
+	#index div.main div.other ul li dl dd {
+		font-family: "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+		font-size: 16px;
+		line-height: 120%;
+	}
+
+	#index div.main div.other ul li dl dd h3 {
+		font-size: 20px;
+		line-height: 120%;
+		letter-spacing: .2em;
+		padding-bottom: 10px;
+	}
+
+	/* entrance（オーバーレイ表示：クローラーとユーザー同一HTML） */
+
+	#entrance {
+		position: fixed;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+		z-index: 9999;
+		background-repeat: no-repeat;
+		background-position: center center;
+		background-size: cover;
+	}
+
+	#entrance div.wrap {
+		height: 600px;
+		margin: 0 auto;
+		text-align: center;
+		color: #e95283;
+	}
+
+	/* 年齢認証（#entrance）だけ中央寄せ基準を上にずらす */
+	#entrance .vCenter {
+		top: 35%;
+	}
+
+	#entrance div.wrap div.cssSprite {
+		margin: 0 auto;
+	}
+
+	#entrance div.wrap div.title {
+		font-size: 24px;
+		letter-spacing: .2em;
+		line-height: 120%;
+		position: relative;
+		margin-bottom: 70px;
+		text-align: center;
+	}
+
+	#entrance div.wrap div.title div.cssSprite {
+		margin-bottom: 15px;
+	}
+
+	#entrance div.wrap div.title div.entranceLogo {
+		display: block;
+		transform-origin: center center;
+		margin-left: auto;
+		margin-right: auto;
+		margin-bottom: 0;
+		transform: translateX(-10%) scale(0.682);
+	}
+
+	#entrance div.wrap div.title:after {
+		content: " ";
+		position: absolute;
+		left: 50%;
+		bottom: -40px;
+		margin-left: -30px;
+		width: 60px;
+		height: 1px;
+		border-top: 1px solid #e95283;
+	}
+
+	#entrance div.wrap div.r18 {
+		font-size: 16px;
+		line-height: 140%;
+	}
+
+	#entrance div.wrap div.r18 dl {
+		color: #e5006e;
+	}
+
+	#entrance div.wrap div.r18 dl dt {
+		font-size: 36px;
+		line-height: 120%;
+		font-family: 'freightdisplightsc';
+	}
+
+	#entrance div.wrap div.r18 dl dt span {
+		font-family: 'freightdisplightitalic';
+	}
+
+	#entrance div.wrap div.r18 dl dd {
+		font-size: 16px;
+		line-height: 180%;
+		font-weight: bold;
+	}
+
+	#entrance div.wrap div.r18 div.cssSprite {
+		margin-bottom: 10px;
+	}
+
+	#entrance div.wrap div.select {
+		margin: 40px auto 40px;
+		font-size: 0;
+	}
+
+	#entrance div.wrap div.select a {
+		display: inline-block;
+		width: 210px;
+		height: 80px;
+		color: #e95283;
+		border: 1px solid #e95283;
+		background: rgba(255, 255, 255, .5);
+		font-size: 16px;
+		padding-top: 14px;
+	}
+
+	#entrance div.wrap div.select a:first-child {
+		margin-right: 20px;
+	}
+
+	#entrance div.wrap div.select a span {
+		font-size: 36px;
+		line-height: 90%;
+		font-family: 'freightdisplightsc';
+		display: block;
+	}
+
+	#entrance div.wrap div.copy {
+		font-family: 'unicaone-regular';
+		font-size: 16px;
+		letter-spacing: .1em;
+	}
+
+	#entrance .entranceCityheaven {
+		margin: 20px auto 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 12px;
+		flex-direction: column;
+	}
+
+	#entrance .entranceCityheavenMain img {
+		display: block;
+		height: 54px;
+		width: auto;
+		max-width: 100%;
+	}
+
+	#entrance .entranceCityheavenRegions {
+		display: grid;
+		grid-template-columns: repeat(2, auto);
+		gap: 6px 10px;
+		align-items: center;
+		justify-items: center;
+	}
+
+	#entrance .entranceCityheavenRegions img {
+		display: block;
+		height: 28px;
+		width: auto;
+		max-width: 100%;
+	}
+
+
+
+
+			/* SP版でのgirlsBlockフォントサイズ縮小 */
+	/* トップページ用 */
+	#index div.girlsBlock dl.data dt.name {
+		font-size: 19px !important;
+	}
+	
+	#index div.girlsBlock dl.data dd.name {
+		font-size: 14px !important;
+	}
+	
+	#index div.girlsBlock dl.data dd.size {
+		font-size: 12px !important;
+	}
+	}
+
+
+	.topbanner {
+		position: relative;
+	}
+
+	.topbanner a {
+		display: block;
+		overflow: hidden;
+	}
+
+	.topbanner a img {
+		display: block;
+		vertical-align: middle;
+	}
+}

@@ -1,0 +1,907 @@
+/* systemページ専用スタイル - ヘッダー・フッター以外のデザイン */
+
+/* PC版 */
+@media screen and (min-width: 769px) {
+	/* system */
+
+	#system div.main>div.box {
+		background: url(../imgHtml/pc/system_bg01.jpg) no-repeat center center;
+		position: relative;
+	}
+
+	#system div.main div.price01 {
+		height: 600px;
+		background-image: url(../imgHtml/pc/system_bg02.jpg);
+	}
+
+	#system div.main div.price02 {
+		height: 650px;
+		background-image: url(../imgHtml/pc/system_bg03.jpg);
+	}
+
+	#system div.main div.price03 {
+		height: 960px;
+		background-image: url(../imgHtml/pc/system_bg04.jpg);
+	}
+
+	#system div.main div.price04 {
+		height: 800px;
+		background-image: url(../imgHtml/pc/system_bg05.jpg);
+	}
+
+	#system div.main div.option {
+		height: 1583px;
+		background-image: url(../imgHtml/pc/system_bg06.jpg);
+	}
+
+	#system div.main>div.box div.width {
+		margin: 0 auto;
+		width: 960px;
+		padding: 0 20px;
+	}
+
+	#system div.main div.about {
+		height: 1120px;
+		color: #fff;
+		text-align: center;
+		padding-top: 160px;
+	}
+
+	#system div.main div.about dl.title dt {
+		text-align: left;
+		font-family: 'freightdispbooksc';
+		font-size: 36px;
+		line-height: 100%;
+		letter-spacing: .2em;
+		margin-left: 420px;
+	}
+
+	#system div.main div.about dl.title dd {
+		text-align: left;
+		font-family: 'freightdispbookitalicsc';
+		font-size: 12px;
+		line-height: 100%;
+		margin-left: 420px;
+	}
+
+	#system div.main div.about dl.title dt.main_h2 {
+		font-family: 'true_blueregular', serif;
+		font-size: 150px;
+		text-align: center;
+		line-height: 150px;
+		height: 150px;
+		letter-spacing: normal;
+		margin-bottom: -70px;
+		margin-left: 0;
+	}
+
+	#system div.main div.about dl.title dd a {
+		color: #fff;
+	}
+
+	#system div.main div.about div.text {
+		font-family: "ヒラギノ明朝 ProN W3", "HiraMinProN-W3", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+		font-size: 18px;
+		line-height: 180%;
+		padding: 50px 0 50px;
+	}
+
+	#system div.main div.about div.text h3 {
+		font-size: 48px;
+		line-height: 100%;
+		padding-bottom: 20px;
+	}
+
+	#system div.main div.about div.service {
+		font-size: 18px;
+		line-height: 180%;
+		padding-bottom: 40px;
+		font-family: "ヒラギノ明朝 ProN W3", "HiraMinProN-W3", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+	}
+
+	#system div.main div.about div.service h3 {
+		font-size: 24px;
+		padding-bottom: 5px;
+	}
+
+	#system div.main div.about dl.info {
+		font-family: "ヒラギノ明朝 ProN W3", "HiraMinProN-W3", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+		font-size: 18px;
+		line-height: 120%;
+	}
+
+	#system div.main div.about dl.info dt {
+		padding-bottom: 10px;
+	}
+
+	#system div.main div.about dl.info span {
+		font-family: 'freightdispbooksc';
+		font-size: 48px;
+		line-height: 90%;
+		letter-spacing: .2em;
+		color: #fff;
+	}
+
+
+
+	#system div.main div.price dl.title {
+		text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+		text-align: left;
+		font-family: "ヒラギノ明朝 ProN W3", "HiraMinProN-W3", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+		display: inline-block;
+		font-size: 18px;
+		line-height: 24px;
+	}
+
+	#system div.main div.price01 dl.title {
+		padding-left: 305px;
+	}
+
+	#system div.main div.price03 dl.title {
+		margin-left: 85px;
+		padding-left: 315px;
+	}
+
+	#system div.main div.price dl.title dt {
+		font-size: 48px;
+		line-height: 60px;
+		white-space: nowrap;
+	}
+
+	#system div.main div.price dl.title dt.small {
+		font-family: 'exmouth-webfont';
+		font-size: 24px;
+		line-height: 140%;
+		padding: 0;
+	}
+
+	#system div.main div.price dl.title dd.nedan {
+		font-family: 'freightdisplightitalicsc';
+		display: inline-block;
+		font-size: 30px;
+		line-height: 100%;
+		letter-spacing: .2em;
+		padding-top: 15px;
+	}
+
+	#system div.main div.price01 h3.main_h3 {
+		font-family: 'true_blueregular', serif;
+		font-size: 150px;
+		text-align: center;
+		line-height: 150px;
+	}
+
+	#system div.main div.price .sy_time {
+		text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+		padding-top: 290px;
+		height: 390px;
+		overflow: hidden;
+		display: inline-block;
+	}
+
+	#system div.main div.price01 .sy_time {
+		padding-left: 276px;
+		width: 940px;
+	}
+
+	#system div.main div.price02 .sy_time {
+		padding-top: 330px;
+		height: 430px;
+	}
+
+	#system div.main div.price03 .sy_time {
+		padding-top: 350px;
+		height: 450px;
+		padding-left: 315px;
+	}
+
+	#system div.main div.price04 .sy_time {
+		padding-top: 160px;
+		height: 230px;
+	}
+
+	#system div.main div.price .sy_time p {
+		float: left;
+		font-family: 'true_blueregular', serif;
+		font-size: 36px;
+		line-height: 10px;
+		position: relative;
+		bottom: 57px;
+	}
+
+	#system div.main div.price01 .sy_time p {
+		display: inline-block;
+		width: 400px;
+	}
+
+	#system div.main div.price .sy_time p span {
+		font-size: 150px;
+		display: block;
+		line-height: 20px;
+		padding-top: 40px;
+	}
+
+	#system div.main div.price .sy_time .sy_big {
+		font-size: 300px;
+		line-height: 200px;
+		margin-left: 0;
+		margin-right: -100px;
+		width: 350px;
+		letter-spacing: -2px;
+	}
+
+	#system div.main div.price01 .sy_time .sy_big {
+		width: 250px;
+		margin-right: 0;
+
+	}
+
+	#system div.main div.price02 .sy_time .sy_big {
+		margin-left: -55px;
+	}
+
+	#system div.main div.price03 .sy_time .sy_big {
+		line-height: 200px;
+		margin-left: 36px;
+		margin-right: 0;
+		width: 310px;
+	}
+
+	#system div.main div.price04 .sy_time .sy_big {
+		line-height: 200px;
+		margin-left: -45px;
+		margin-right: 0;
+		width: 310px;
+	}
+
+	#system div.main div.option {
+		font-size: 24px;
+		line-height: 170%;
+	}
+
+	#system div.main div.option h3 {
+		font-size: 30px;
+		line-height: 180%;
+	}
+
+	#system div.main div.option img {
+		display: block;
+		margin: 15px 0 5px 515px;
+	}
+
+	#system div.main div.option .text {
+		text-align: right;
+		padding-top: 160px;
+	}
+
+	#system div.main div.option .otitext {
+		text-align: left;
+		padding-top: 0;
+	}
+
+
+
+	#system div.main div.option dl.info {
+		text-align: right;
+		font-family: "ヒラギノ明朝 ProN W3", "HiraMinProN-W3", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+		font-size: 24px;
+		line-height: 120%;
+		padding: 30px 0 40px;
+	}
+
+	#system div.main div.option dl.info span {
+		font-family: 'freightdispbooksc';
+		font-size: 60px;
+		line-height: 100%;
+		letter-spacing: .2em;
+		color: #e35081;
+	}
+
+	#system div.main div.option div.text:last-child ul {
+		margin-bottom: 1.5em;
+	}
+
+	#system div.wrap div.main div.hotel {
+		background: #fff;
+	}
+
+	#system div.wrap div.main div.hotel div.width {
+		padding: 0 0 60px;
+	}
+
+	#system div.wrap div.main div.hotel dl.title {
+		padding: 60px 0 40px;
+		text-align: center;
+		font-size: 18px;
+		line-height: 180%;
+	}
+
+	#system div.wrap div.main div.hotel dl.title dt {
+		font-size: 24px;
+		line-height: 180%;
+	}
+
+	#system div.wrap div.main div.hotel dl.title dt h3 {
+		font-family: 'freightdispbooksc';
+		font-size: 48px;
+		line-height: 100%;
+		letter-spacing: .2em;
+		position: relative;
+		padding-bottom: 30px;
+	}
+
+	#system div.wrap div.main div.hotel dl.title dt h3:after {
+		content: "";
+		position: absolute;
+		left: 50%;
+		bottom: 15px;
+		margin-left: -30px;
+		width: 60px;
+		height: 1px;
+		border-top: 1px solid #000;
+	}
+
+	#system div.wrap div.main div.hotel ul.list li {
+		border: 1px solid #626262;
+		width: 230px;
+		height: 246px;
+		float: left;
+		background: #000;
+		color: #fff;
+		text-align: center;
+		margin: 0 5px 10px;
+		padding: 20px;
+	}
+
+	#system div.wrap div.main div.hotel ul.list li div.thum {
+		width: 190px;
+		height: 120px;
+		overflow: hidden;
+	}
+
+	#system div.wrap div.main div.hotel ul.list li dl dt {
+		font-size: 16px;
+		line-height: 120%;
+		font-weight: bold;
+		padding: 18px 0 6px;
+		margin-bottom: 8px;
+		border-bottom: 1px solid #626262;
+	}
+
+	#system div.wrap div.main div.hotel ul.list li dl dd.add {
+		font-size: 11px;
+		line-height: 160%;
+	}
+
+	#system div.wrap div.main div.hotel ul.list li dl dd.tel {
+		font-size: 14px;
+		line-height: 140%;
+		font-weight: bold;
+	}
+}
+
+/* SP版 */
+@media screen and (max-width: 768px) {
+	/* system */
+
+	#system div.main>div.box {
+		background: url(../imgHtml/s/systemBg01.jpg) no-repeat center top;
+		position: relative;
+	}
+
+	#system div.main div.price01 {
+		background-image: url(../imgHtml/s/systemBg02.jpg);
+	}
+
+	#system div.main div.price02 {
+		background-image: url(../imgHtml/s/systemBg03.jpg);
+	}
+
+	#system div.main div.price03 {
+		background-image: url(../imgHtml/s/systemBg04.jpg);
+	}
+
+	#system div.main div.price04 {
+		background-image: url(../imgHtml/s/systemBg05.jpg);
+	}
+
+	#system div.main div.option {
+		background-image: url(../imgHtml/s/systemBg06.jpg);
+	}
+
+	#system div.main>div.box div.width {
+		padding: 0 20px;
+	}
+
+	#system div.main div.about {
+		overflow: hidden;
+	}
+
+	#system div.main div.about {
+		height: 700px;
+		text-align: center;
+		color: #fff;
+		text-shadow: 0 0 5px rgba(0, 0, 0, 0.75);
+	}
+
+	#system div.main div.about dl.title h2 {
+		padding-top: 50px;
+	}
+
+	#system div.main div.about dl.title dt {
+		font-family: 'freightdispbooksc';
+		font-size: 48px;
+		line-height: 80%;
+		letter-spacing: .2em;
+		text-align: center;
+		position: relative;
+		padding-bottom: 40px;
+	}
+
+	#system div.main div.about dl.title dt:after {
+		content: "";
+		position: absolute;
+		left: 50%;
+		bottom: 20px;
+		margin-left: -30px;
+		width: 60px;
+		height: 1px;
+		border-top: 1px solid #fff;
+	}
+
+	#system div.main div.about div.text {
+		font-family: "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+		font-size: 16px;
+		line-height: 180%;
+		padding: 0 0 40px;
+	}
+
+	#system div.main div.about div.text h3 {
+		font-size: 30px;
+		line-height: 100%;
+		padding-bottom: 10px;
+	}
+
+	#system div.main div.about div.service {
+		font-family: "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+		font-size: 16px;
+		line-height: 160%;
+		padding-bottom: 50px;
+	}
+
+	#system div.main div.about div.service h3 {
+		font-size: 24px;
+		padding-bottom: 15px;
+	}
+
+	#system div.main div.about dl.info {
+		font-family: "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+		font-size: 18px;
+		line-height: 140%;
+		margin-bottom: 30px;
+	}
+
+	#system div.main div.about dl.info span {
+		font-family: 'freightdispbooksc';
+		font-size: 44px;
+		line-height: 100%;
+		letter-spacing: .2em;
+		color: #fff;
+	}
+
+	#system div.main div.about dl.info a {
+		color: #e35081;
+	}
+
+	#system div.main div.price {
+		text-align: left;
+		text-shadow: 0 0 5px rgba(214, 214, 214, .9);
+	}
+
+	#system div.main div.price div.width {
+		padding: 0 20px;
+
+	}
+
+	#system div.main div.price01 {
+		height: 600px;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+
+	#system div.main div.price01 h3.main_h3 {
+		font-family: 'true_blueregular', serif;
+		font-size: 80px;
+		text-align: center;
+		line-height: 80px;
+	}
+
+	#system div.main div.price .sy_time {
+		padding-top: 400px;
+		overflow: hidden;
+		height: 300px;
+	}
+
+	#system div.main div.price02 {
+		height: 600px;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+
+	#system div.main div.price02 .sy_time {
+		padding-top: 425px;
+		height: 250px;
+	}
+
+	#system div.main div.price03 {
+		height: 700px;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+
+	#system div.main div.price03 .sy_time {
+		padding-top: 535px;
+		height: 300px;
+	}
+
+	#system div.main div.price04 {
+		height: 500px;
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+
+	#system div.main div.price04 .sy_time {
+		padding-top: 150px;
+		height: 0;
+	}
+
+
+	#system div.main div.price01 .sy_time p {
+		float: left;
+		font-family: 'true_blueregular', serif;
+		font-size: 16px;
+		line-height: 10px;
+		position: relative;
+		bottom: 65px;
+	}
+
+	#system div.main div.price02 .sy_time p {
+		float: left;
+		font-family: 'true_blueregular', serif;
+		font-size: 16px;
+		line-height: 10px;
+		position: relative;
+		bottom: 70px;
+	}
+
+	#system div.main div.price03 .sy_time p {
+		float: left;
+		font-family: 'true_blueregular', serif;
+		font-size: 16px;
+		line-height: 10px;
+		position: relative;
+		bottom: 50px;
+	}
+
+	#system div.main div.price04 .sy_time p {
+		float: left;
+		font-family: 'true_blueregular', serif;
+		font-size: 16px;
+		line-height: 10px;
+		position: relative;
+		bottom: 50px;
+	}
+
+	#system div.main div.price .sy_time p span {
+		font-size: 100px;
+		display: block;
+		line-height: 20px;
+		padding-top: 20px;
+	}
+
+	#system div.main div.price .sy_time .sy_big {
+		font-size: 170px;
+		line-height: 1;
+		margin-left: -10px;
+		margin-right: 35px;
+		width: auto;
+		letter-spacing: -2px;
+		position: relative;
+		bottom: 90px;
+	}
+
+	#system div.main div.price02 .sy_time .sy_big {
+		margin-left: -20px;
+		margin-right: 40px;
+	}
+
+	#system div.main div.price03 .sy_time .sy_big {
+		line-height: 200px;
+		margin-left: 0;
+		margin-right: 10px;
+		width: 175px;
+	}
+
+	#system div.main div.price04 .sy_time .sy_big {
+		line-height: 200px;
+		margin-left: -10px;
+		margin-right: 10px;
+		width: 183px;
+	}
+
+	#system div.main div.price02 {
+		height: 600px;
+	}
+
+	#system div.main div.price03 {
+		height: 700px;
+	}
+
+	#system div.main div.price04 {
+		height: 500px;
+	}
+
+	#system div.main div.price05 {
+		height: 838px;
+	}
+
+	#system div.main div.price dl.title {
+		font-family: "ヒラギノ明朝 ProN W3", "HiraMinProN-W3", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+		display: inline-block;
+		font-size: 18px;
+		line-height: 24px;
+	}
+
+	#system div.main div.price03 dl.title {
+		margin-left: 0;
+	}
+
+	#system div.main div.price dl.title dt {
+		font-size: 28px;
+		line-height: 40px;
+		white-space: nowrap;
+	}
+
+	#system div.main div.price dl.title dt.small {
+		font-family: 'exmouth-webfont';
+		font-size: 24px;
+		line-height: 140%;
+		padding: 0;
+	}
+
+	#system div.main div.price dl.title dd.nedan {
+		font-family: 'freightdisplightitalicsc';
+		display: inline-block;
+		font-size: 24px;
+		line-height: 100%;
+		letter-spacing: .2em;
+		padding-top: 15px;
+	}
+
+	#system div.main div.option {
+		padding-top: 30px;
+		text-align: right;
+		text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+		height: auto;
+		font-size: 20px;
+		line-height: 170%;
+	}
+
+	#system div.main div.option h3 {
+		font-size: 30px;
+		line-height: 180%;
+	}
+
+	#system div.main div.option img {
+		display: block;
+		margin: 15px 0 5px 150px;
+	}
+
+	#system div.main div.option dl.info {
+		font-family: "ヒラギノ明朝 ProN W3", "HiraMinProN-W3", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+		font-size: 24px;
+		line-height: 120%;
+		padding: 30px 0 60px;
+	}
+
+	#system div.main div.option dl.info span {
+		font-family: 'freightdispbooksc';
+		font-size: 40px;
+		line-height: 100%;
+		letter-spacing: .2em;
+		color: #e35081;
+	}
+
+	#system div.main div.option dl.info span a {
+		color: #e35081;
+	}
+
+	#system div.main div.option div.text:last-child ul {
+		margin-bottom: 1.5em;
+	}
+
+	#system div.main div.option .trtext {
+		text-align: left;
+	}
+
+	/* SP版でのtrtextフォントサイズ縮小 */
+	@media screen and (max-width: 768px) {
+		#system div.main div.option .trtext {
+			font-size: 18px !important;
+		}
+	}
+
+	/* システムページSP版修正 */
+	#system div.main div.about div.text h3 {
+		font-size: 24px !important;
+	}
+
+	#system div.main div.about dl.info span {
+		font-size: 36px !important;
+	}
+
+	#system div.main div.price01 h3.main_h3 {
+		margin-left: 0 !important;
+	}
+
+	#system div.main div.option img {
+		margin-left: 0 !important;
+		width: 100% !important;
+		height: auto !important;
+	}
+
+	.kagoderi.spOnly {
+		background-size: contain !important;
+		background-repeat: no-repeat !important;
+		background-position: center !important;
+		width: 100% !important;
+		height: 305px !important;
+	}
+
+	#system div.wrap div.main div.hotel ul.list {
+		font-size: 12px !important;
+	}
+
+	#system div.wrap div.main div.hotel ul.list li {
+		width: calc(50% - 5px) !important;
+		display: inline-block;
+		margin-bottom: 10px;
+	}
+
+	#system div.wrap div.main div.hotel ul.list li:nth-child(odd) {
+		margin-right: 5px;
+	}
+
+	#system div.wrap div.main div.hotel ul.list li:nth-child(even) {
+		margin-left: 5px;
+	}
+
+	#system div.wrap div.main div.hotel ul.list li div.thum img {
+		width: 100% !important;
+		height: auto !important;
+	}
+
+	#system div.wrap div.main div.hotel {
+		background: #fff;
+	}
+
+	#system div.wrap div.main div.hotel div.width {
+		padding: 20px;
+	}
+
+	#system div.wrap div.main div.hotel dl.title {
+		padding: 10px 0 30px;
+		text-align: center;
+		font-size: 18px;
+		line-height: 180%;
+	}
+
+	#system div.wrap div.main div.hotel dl.title dt {
+		font-size: 18px;
+		line-height: 120%;
+		padding-bottom: 10px;
+	}
+
+	#system div.wrap div.main div.hotel dl.title dt h3 {
+		font-family: 'freightdispbooksc';
+		font-size: 44px;
+		line-height: 100%;
+		letter-spacing: .2em;
+		position: relative;
+		padding-bottom: 10px;
+	}
+
+	#system div.wrap div.main div.hotel ul.list li {
+		width: 290px;
+		height: 288px;
+		float: left;
+		background: #000;
+		color: #fff;
+		text-align: center;
+		margin-bottom: 20px;
+		margin-right: 20px;
+		padding: 20px;
+	}
+
+	#system div.wrap div.main div.hotel ul.list li a {
+		color: #fff;
+	}
+
+	#system div.wrap div.main div.hotel ul.list li:nth-child(2n+2) {
+		margin-right: 0;
+	}
+
+	#system div.wrap div.main div.hotel ul.list li div.thum {
+		width: 100%;
+		height: auto;
+		overflow: hidden;
+	}
+
+	#system div.wrap div.main div.hotel ul.list li div.thum img {
+		width: 100%;
+		height: auto;
+	}
+
+	#system div.wrap div.main div.hotel ul.list li dl dt {
+		font-size: 20px;
+		line-height: 120%;
+		font-weight: bold;
+		padding: 15px 0 4px;
+		margin-bottom: 8px;
+		border-bottom: 1px solid #626262;
+	}
+
+	#system div.wrap div.main div.hotel ul.list li dl dd {
+		font-size: 16px;
+		line-height: 140%;
+	}
+
+	#system div.wrap div.main div.hotel ul.list li dl dd.tel {
+		font-weight: bold;
+	}
+
+	#system div.wrap div.main div.kagoderi {
+		background: url(../imgHtml/s/systemKd.jpg) center top;
+		background-size: 100% auto;
+		height: 520px;
+		position: relative;
+	}
+
+	#system div.wrap div.main div.kagoderi a {
+		color: #304153;
+		position: absolute;
+		text-align: center;
+		display: block;
+		font-weight: bold;
+	}
+
+	#system div.wrap div.main div.kagoderi a.more {
+		font-size: 20px;
+		width: 282px;
+		height: 52px;
+		line-height: 52px;
+		left: calc(50% - 213px);
+		top: 173px;
+	}
+
+	#system div.wrap div.main div.kagoderi a.login {
+		font-size: 26px;
+		width: 100%;
+		height: 100px;
+		line-height: 100px;
+		left: 0px;
+		bottom: -22px;
+		text-decoration: underline;
+	}
+
+	/* default.cssから移動 - SP版 */
+	#system div.main div.about dl.title h2 {
+		font-size: 32px !important;
+		line-height: 1.2 !important;
+	}
+}
+

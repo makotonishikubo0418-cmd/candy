@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>rep00010320eot｜プロフィール｜鹿児島 デリヘル キャンディ</title>
+    <meta name="description" content="鹿児島 デリヘル「キャンディ」rep00010320eotのプロフィールページ">
+	<meta property="og:title" content="rep00010320eot｜プロフィール｜鹿児島 デリヘル キャンディ">
+	<meta property="og:type" content="article">
+	<link rel="canonical" href="rep03010092eot">
+	<link rel="icon" href="./favicon.ico" type="image/x-icon">
+	<meta property="og:url" content="rep03010092eot">
+	<meta property="og:image" content="rep01010007eot">
+	<meta property="og:description" content="鹿児島 デリヘル「キャンディ」rep00010320eotのプロフィールページ">
+	<meta property="og:site_name" content="鹿児島 デリヘル キャンディ">
+    <link href="./css/default.css" rel="stylesheet" type="text/css">
+    <link href="./css/jquery.fs.boxer.css" rel="stylesheet" type="text/css">
+    <link href="./css/girls.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville|Roboto" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/amadare_webapp2.4.php"></script>
+    <script type="text/javascript" src="./js/common.js"></script>
+    <script type="text/javascript" src="./js/jquery.fs.boxer.min.js"></script>
+    <script type="text/javascript" src="./js/jquery.colorbox-min.js"></script>
+    <script type="text/javascript">
+        window.onpageshow = function(event) {
+            if (event.persisted) {
+                window.location.reload()
+            }
+        };
+        // 画像と動画の自動判別・表示切り替え
+        $(document).ready(function() {
+            // mainImgの動画判定
+            var $mainImg = $('.mainImg');
+            var $mainImgImage = $mainImg.find('.mainImg-image');
+            var $mainImgVideo = $mainImg.find('.mainImg-video');
+            var mainImgSrc = $mainImgImage.attr('src');
+            
+            if (mainImgSrc && (mainImgSrc.indexOf('.mp4') !== -1 || mainImgSrc.indexOf('.avi') !== -1 || 
+                mainImgSrc.indexOf('.mov') !== -1 || mainImgSrc.indexOf('.wmv') !== -1 || 
+                mainImgSrc.indexOf('.flv') !== -1 || mainImgSrc.indexOf('.webm') !== -1)) {
+                // 動画の場合
+                console.log('mainImg: 動画を検出:', mainImgSrc);
+                $mainImgImage.hide();
+                $mainImgVideo.show();
+                $mainImgVideo.find('source').attr('src', mainImgSrc);
+                $mainImgVideo[0].load(); // 動画を再読み込み
+            } else {
+                // 画像の場合
+                $mainImgImage.show();
+                $mainImgVideo.hide();
+            }
+            
+            $('.photo, .tate, .photo.spOnly a.lightbox').each(function() {
+                var $img = $(this).find('.media-image');
+                var $video = $(this).find('.media-video');
+                var $link = $(this).find('a.lightbox');
+                var imgSrc = $img.attr('src');
+                
+                // SP版詳細の場合は直接aタグを処理
+                if ($(this).is('a.lightbox')) {
+                    $img = $(this).find('.media-image');
+                    $video = $(this).find('.media-video');
+                    $link = $(this);
+                    imgSrc = $img.attr('src');
+                }
+                
+                // 動画URLかどうかを判定（.mp4, .avi, .mov, .wmv, .flv, .webm）
+                if (imgSrc && (imgSrc.indexOf('.mp4') !== -1 || imgSrc.indexOf('.avi') !== -1 || 
+                    imgSrc.indexOf('.mov') !== -1 || imgSrc.indexOf('.wmv') !== -1 || 
+                    imgSrc.indexOf('.flv') !== -1 || imgSrc.indexOf('.webm') !== -1)) {
+                    // 動画の場合
+                    console.log('動画を検出:', imgSrc);
+                    $img.hide();
+                    $video.show();
+                    $video.find('source').attr('src', imgSrc);
+                    
+                    // 動画のサイズを画像と同じにする
+                    $video.css({
+                        'width': '100%',
+                        'height': 'auto',
+                        'max-width': '100%',
+                        'object-fit': 'cover'
+                    });
+                    
+                    // 動画の場合はlightboxクラスを削除してオリジナル拡大表示を使用
+                    console.log('lightboxクラス削除前:', $link.attr('class'));
+                    $link.removeClass('lightbox box');
+                    $link.addClass('video-lightbox');
+                    console.log('lightboxクラス削除後:', $link.attr('class'));
+                    
+                    $video[0].load(); // 動画を再読み込み
+                } else {
+                    // 画像の場合
+                    $img.show();
+                    $video.hide();
+                    
+                    // 画像の場合はhref属性を画像URLに設定
+                    if ($link.attr('href') === '') {
+                        $link.attr('href', imgSrc);
+                    }
+                }
+            });
+            
+            // SPギャラリー: 空スロット除去＋2列再配置（奇数枚なら最後のみ1列フル幅）
+            (function() {
+                var $gallery = $('.gallery.spOnly');
+                if ($gallery.length === 0) return;
+
+                var $allSlots = $gallery.find('.tate');
+                var $valid = $();
+
+                // 有効なスロットだけ集約
+                $allSlots.each(function() {
+                    var $slot = $(this);
+                    var src = $slot.find('.media-image').attr('src');
+                    if (src && src.trim() !== '') {
+                        $valid = $valid.add($slot);
+                    }
+                });
+
+                if ($valid.length === 0) {
+                    $gallery.empty();
+                    return;
+                }
+
+                // 既存配置を一旦外してギャラリーをクリア
+                $valid.detach();
+                $gallery.empty();
+
+                var total = $valid.length;
+                for (var i = 0; i < total; ) {
+                    var $box = $('<div class="box"></div>');
+
+                    // 1枚目
+                    var $first = $valid.eq(i);
+                    $first.removeClass('full-width-item').show().css({
+                        'float': '',
+                        'width': '',
+                        'margin-left': ''
+                    });
+                    $box.append($first);
+                    i++;
+
+                    if (i < total) {
+                        // 2枚目があれば同じ行に配置
+                        var $second = $valid.eq(i);
+                        $second.removeClass('full-width-item').show().css({
+                            'float': '',
+                            'width': '',
+                            'margin-left': ''
+                        });
+                        $box.append($second);
+                        i++;
+                    } else {
+                        // 奇数枚の最後の1枚だけフル幅
+                        $first.addClass('full-width-item').css({
+                            'float': 'none',
+                            'width': '100%',
+                            'margin-left': 0
+                        });
+                    }
+
+                    $gallery.append($box);
+                }
+            })();
+            
+            // PCギャラリー: 空スロット非表示 & 奇数時の末尾フル幅
+            (function() {
+                var $pcSlots = $('.gallery.pcOnly td.tate');
+                var $pcValid = $();
+                
+                $pcSlots.each(function() {
+                    var $slot = $(this);
+                    var src = $slot.find('img').attr('src');
+                    if (src && src.trim() !== '') {
+                        $slot.removeClass('is-empty pc-full-width').show().removeAttr('colspan');
+                        $slot.siblings().show();
+                        $pcValid = $pcValid.add($slot);
+                    } else {
+                        $slot.addClass('is-empty').hide();
+                    }
+                });
+                
+                if ($pcValid.length > 0 && $pcValid.length % 2 === 1) {
+                    var $last = $pcValid.last();
+                    $last.addClass('pc-full-width').attr('colspan', 2);
+                    $last.siblings().hide();
+                }
+            })();
+            
+            // 動画判別完了後にlightboxを初期化（画像のみ対象）
+            $(".lightbox").boxer({
+                fixed: true,
+                margin: 0,
+                mobile: false,
+            });
+            
+            // 動画用オリジナル拡大表示
+            $(document).on('click', '.video-lightbox', function(e) {
+                e.preventDefault();
+                
+                var videoSrc = $(this).find('video source').attr('src');
+                if (!videoSrc) return;
+                
+                // 動画拡大表示用のオーバーレイを作成
+                var overlay = $('<div id="video-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; display: flex; justify-content: center; align-items: center; cursor: pointer;">');
+                
+                var videoContainer = $('<div style="position: relative; max-width: 90vw; max-height: 90vh;">');
+                var closeBtn = $('<div style="position: absolute; top: -40px; right: 0; color: white; font-size: 24px; cursor: pointer; z-index: 10000;">×</div>');
+                var video = $('<video controls autoplay style="max-width: 90vw; max-height: 90vh; width: auto; height: auto;">' +
+                    '<source src="' + videoSrc + '" type="video/mp4">' +
+                    'お使いのブラウザは動画タグをサポートしていません。' +
+                    '</video>');
+                
+                videoContainer.append(closeBtn).append(video);
+                overlay.append(videoContainer);
+                $('body').append(overlay);
+                
+                // 閉じる処理
+                overlay.on('click', function(e) {
+                    if (e.target === overlay[0] || $(e.target).hasClass('close-btn')) {
+                        overlay.remove();
+                    }
+                });
+                
+                closeBtn.on('click', function() {
+                    overlay.remove();
+                });
+            });
+        });
+        
+        $(function() {
+            $(".newstwt").colorbox({
+                iframe:true,
+                width:"560px",
+                height:"650px",
+                opacity: 0.7
+            });
+        });
+
+        window.onload = CookieWrite('gid', value, days);
+        window.onload = CookieWrite('did', value, days);
+    </script>
+    <script type="text/javascript" src="./js/love2.js"></script>
+<!-- Google tag (gtag.js) START -->
+	<script>
+	  document.addEventListener('DOMContentLoaded', function() {
+		var script = document.createElement('script');
+		script.async = true;
+		script.src = 'https://www.googletagmanager.com/gtag/js?id=G-0VBTBPHDD2';
+		document.head.appendChild(script);
+		
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'G-0VBTBPHDD2');
+	  });
+	</script>
+<!-- Google tag (gtag.js) END -->
+</head>
+<body>
+    <div id="loading" aria-label="読み込み中"></div>
+    <div id="girls">
+        <div class="wrap">
+<!-- メニュー START -->
+		<div class="header">
+			<a href="tel:0992266956" onClick="amadareAcRec('0992266956');" class="tel spOnly"><div class="cssSprite headTel vCenter"></div></a>
+			<a href="./" class="cssSprite headLogo" aria-label="鹿児島デリヘルキャンディトップページへ"></a>
+			<div class="headNavi pcOnly" id="headNavi">
+				<div class="cssSprite headLogo2">鹿児島 デリヘル キャンディ メインメニュー</div>
+			</div>
+			<div class="menuBtn spOnly" id="menuOpen" onclick="WAtoggle('-menuOpen,+menuClose,+headMenu');">
+				<div class="cssSprite headMenu vCenter"></div>
+			</div>
+			<div class="menuBtn spOnly is-hidden" id="menuClose" onclick="WAtoggle('-menuClose,-headMenu,+menuOpen');">
+				<div class="cssSprite headMenu vCenter"></div>
+			</div>
+			<ul class="menu pcOnly">
+				<li><a href="./" title="鹿児島デリヘルキャンディトップページ" class="fade">TOP</a></li>
+				<li><a href="./news.php" title="鹿児島デリヘルキャンディからのお知らせ" class="fade">お知らせ</a></li>
+				<li><a href="./girls_list.php" title="鹿児島デリヘルキャンディに在籍している女の子一覧" class="fade">女の子一覧</a></li>
+				<li><a href="./schedule.php" title="鹿児島デリヘルキャンディの本日の出勤情報" class="fade">出勤情報</a></li>
+				<li><a href="./system.php" title="鹿児島デリヘルキャンディの料金・システム情報" class="fade">料金</a></li>
+				<li><a href="./movie.php" title="鹿児島デリヘルキャンディの動画情報" class="fade">動画</a></li>
+				<li><a href="./mypage.php" title="鹿児島デリヘルキャンディ会員専用マイページ" class="fade">マイページ</a></li>
+				<li><a href="http://new-cast.com/" title="ガールズヘブン内キャンディ高収入求人専用サイト" class="fade">求人情報</a></li>
+				<li><a href="https://www.cityheaven.net/kagoshima/A4601/A460102/newcandy/diarylist/?of=y" title="シティヘブンネット内キャンディ写メ日記" target="_blank" rel="noopener noreferrer" class="fade">写メ日記</a></li>
+				<li><a href="http://candy6956.blog.fc2.com/" title="鹿児島デリヘルキャンディのSNS" target="_blank" rel="noopener noreferrer" class="fade">SNS</a></li>
+				<li><div class="tel">099.226.6956</div></li>
+			</ul>
+		</div>
+		<ul id="headMenu" class="headMenu spOnly is-hidden">
+			<li><a href="./" class="fade">TOP</a></li>
+				<li><a href="./news.php" title="鹿児島デリヘルキャンディのお知らせ" class="fade">お知らせ</a></li>
+				<li><a href="./girls_list.php" title="鹿児島デリヘルキャンディの在籍一覧" class="fade">女の子一覧</a></li>
+				<li><a href="./schedule.php" title="鹿児島デリヘルキャンディの本日の出勤スケジュール" class="fade">出勤情報</a></li>
+				<li><a href="./system.php" title="鹿児島デリヘルキャンディの料金" class="fade">料金</a></li>
+				<li><a href="./movie.php" title="鹿児島デリヘルキャンディの動画" class="fade">動画</a></li>
+				<li><a href="./mypage.php" title="鹿児島デリヘルキャンディのマイページ" class="fade">マイページ</a></li>
+				<li><a href="http://new-cast.com/" title="鹿児島デリヘルキャンディの高収入求人サイト" class="fade">求人情報</a></li>
+				<li><a href="https://www.cityheaven.net/kagoshima/A4601/A460102/newcandy/diarylist/?of=y" target="_blank" rel="noopener noreferrer" class="fade">写メ日記</a></li>
+				<li><a href="http://candy6956.blog.fc2.com/" target="_blank" rel="noopener noreferrer" class="fade">SNS</a></li>
+		</ul>
+<!-- メニュー END -->	
+            <div class="main">
+                <div class="mainImg">
+                    <!-- NEWFACE <div class="cssSprite girlsTagNew2 pcOnly">NEW</div> /NEWFACE -->
+                    <!-- NEWFACE <div class="cssSprite girlsTagNew spOnly">NEW</div> /NEWFACE -->
+                    <!-- TOPPHOTO -->
+                    <img src="rep01010007eot" class="mainImg-image">
+                    <video autoplay loop muted class="mainImg-video" style="display:none; width:100%;">
+                        <source src="rep01010007eot" type="video/mp4">
+                        お使いのブラウザは動画タグをサポートしていません。
+                    </video>
+                    <!-- /TOPPHOTO -->
+                    <!-- TOPMOVIE
+                    <video poster="rep01010321eot" autoplay loop muted style="width:100%;">
+                        <source src="rep01010312eot" type="video/webm">
+                        <source src="rep01010311eot" type="video/ogg">
+                        <source src="rep01010310eot" type="video/mp4">
+                    </video>
+                    /TOPMOVIE -->
+                </div>
+                
+                <!-- PC版詳細 -->
+                <div class="detail pcOnly">
+                    <div class="photo">
+                        <a href="rep01010019eot" class="blackfade lightbox"></a>
+                        <img src="rep01010009eot" class="media-image">
+                        <video autoplay muted loop class="media-video" style="display:none;">
+                            <source src="rep01010009eot" type="video/mp4">
+                            お使いのブラウザは動画タグをサポートしていません。
+                        </video>
+                    </div>
+                    <div class="prof">
+                        <dl>
+                            <dt class="name"><h2>rep00010331eot</h2></dt>
+                            <dd class="size">AGErep00010321eot Trep00010322eot Brep00010323eot-rep00010324eot Wrep00010325eot Hrep00010326eot</dd>
+                            <dd class="name">rep00010320eot</dd>
+                            <dd class="state">rep00010354eot</dd>
+                        </dl>
+                        <div class="text">
+                            <h3>rep00010329eot</h3> rep00010330eot
+                        </div>
+                        <div class="btn">
+                            <a href="rep03010093eot" class="fade" target="_blank" rel="noopener noreferrer">口コミを確認する</a>
+                            <!-- FAVFLW --><a href="rep03010091eot" class="fade">マイページに登録する</a>
+                            <!-- /FAVFLW -->
+                            <!-- FAVUNFLW <a href="rep03010091eot" class="delete fade">×お気に入りを解除</a> /FAVUNFLW -->
+                            <a href="./blog.html" class="fade" style="display:none;">ブログを見る</a>
+                        </div>
+                    </div>
+                    <div class="photo">
+                        <a href="rep01010020eot" class="blackfade lightbox"></a>
+                        <img src="rep01010010eot" class="media-image">
+                        <video autoplay muted loop class="media-video" style="display:none;">
+                            <source src="rep01010010eot" type="video/mp4">
+                            お使いのブラウザは動画タグをサポートしていません。
+                        </video>
+                    </div>
+                    <br class="clear">
+                </div>
+                
+                <!-- SP版詳細 -->
+                <div class="photo spOnly">
+                    <a href="rep01010019eot" class="lightbox">
+                        <img src="rep01010009eot" class="media-image">
+                        <video autoplay muted loop class="media-video" style="display:none;">
+                            <source src="rep01010009eot" type="video/mp4">
+                            お使いのブラウザは動画タグをサポートしていません。
+                        </video>
+                    </a>
+                    <a href="rep01010020eot" class="lightbox">
+                        <img src="rep01010010eot" class="media-image">
+                        <video autoplay muted loop class="media-video" style="display:none;">
+                            <source src="rep01010010eot" type="video/mp4">
+                            お使いのブラウザは動画タグをサポートしていません。
+                        </video>
+                    </a>
+                    <br class="clear">
+                </div>
+                <div class="detail spOnly">
+                    <div class="prof">
+                        <dl>
+                            <dt class="name"><h2>rep00010331eot</h2></dt>
+                            <dd class="size">AGErep00010321eot Trep00010322eot Brep00010323eot-rep00010324eot Wrep00010325eot Hrep00010326eot</dd>
+                            <dd class="name">rep00010320eot</dd>
+                            <dd class="state">rep00010354eot</dd>
+                        </dl>
+                        <div class="text">
+                            <h3>rep00010329eot</h3>
+                            rep00010330eot
+                        </div>
+                        <div class="btn">
+                            <a href="rep03010093eot" class="fade" target="_blank" rel="noopener noreferrer">口コミを確認する</a>
+                            <!-- FAVFLW --><a href="rep03010091eot" class="fade">マイページに登録する</a><!-- /FAVFLW -->
+                            <!-- FAVUNFLW <a href="rep03010091eot" class="delete fade">×お気に入りを解除</a> /FAVUNFLW -->
+                            <a href="./blog.html" class="fade" style="display:none;">ブログを見る</a>
+                        </div>
+                    </div>
+                    <br class="clear">
+                </div>
+                
+                <!-- PC版ギャラリー -->
+                <div class="gallery pcOnly">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="photoList">
+                        <tr>
+                            <td class="tate left">
+                                <a href="rep01010013eot" class="box lightbox">
+                                    <img src="rep01010003eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010003eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                            <td class="tate right">
+                                <a href="rep01010014eot" class="box lightbox">
+                                    <img src="rep01010004eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010004eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="photoList">
+                        <tr>
+                            <td class="tate left">
+                                <a href="rep01010015eot" class="box lightbox">
+                                    <img src="rep01010005eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010005eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                            <td class="tate right">
+                                <a href="rep01010016eot" class="box lightbox">
+                                    <img src="rep01010006eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010006eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                    
+
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="photoList">
+                        <tr>
+                            <td class="tate left">
+                                <a href="rep01010017eot" class="box lightbox">
+                                    <img src="rep01010008eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010008eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                            <td class="tate right">
+                                <a href="rep01010022eot" class="box lightbox">
+                                    <img src="rep01010011eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010011eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <!-- 追加スロット: 01010012, 01010013, 01010014, 01010015 -->
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="photoList">
+                        <tr>
+                            <td class="tate left">
+                                <a href="rep01010023eot" class="box lightbox">
+                                    <img src="rep01010012eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010012eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                            <td class="tate right">
+                                <a href="rep01010024eot" class="box lightbox">
+                                    <img src="rep01010013eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010013eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="photoList">
+                        <tr>
+                            <td class="tate left">
+                                <a href="rep01010025eot" class="box lightbox">
+                                    <img src="rep01010014eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010014eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                            <td class="tate right">
+                                <a href="rep01010026eot" class="box lightbox">
+                                    <img src="rep01010015eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010015eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <!-- SP版ギャラリー -->
+                <div class="gallery spOnly">
+                    <div class="box">
+                        <div class="tate box01">
+                            <!-- LNK01010003 --><a href="rep01010013eot" class="blackfade lightbox"></a><!-- /LNK01010003 -->
+                            <img src="rep01010003eot" class="media-image">
+                            <video autoplay muted loop class="media-video" style="display:none;">
+                                <source src="rep01010003eot" type="video/mp4">
+                                お使いのブラウザは動画タグをサポートしていません。
+                            </video>
+                        </div>
+                        <div class="tate box04">
+                            <!-- LNK01010004 --><a href="rep01010014eot" class="blackfade lightbox"></a><!-- /LNK01010004 -->
+                            <img src="rep01010004eot" class="media-image">
+                            <video autoplay muted loop class="media-video" style="display:none;">
+                                <source src="rep01010004eot" type="video/mp4">
+                                お使いのブラウザは動画タグをサポートしていません。
+                            </video>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="tate box05">
+                            <!-- LNK01010005 --><a href="rep01010015eot" class="blackfade lightbox"></a><!-- /LNK01010005 -->
+                            <img src="rep01010005eot" class="media-image">
+                            <video autoplay muted loop class="media-video" style="display:none;">
+                                <source src="rep01010005eot" type="video/mp4">
+                                お使いのブラウザは動画タグをサポートしていません。
+                            </video>
+                        </div>
+                        <div class="tate box06">
+                            <!-- LNK01010006 --><a href="rep01010016eot" class="blackfade lightbox"></a><!-- /LNK01010006 -->
+                            <img src="rep01010006eot" class="media-image">
+                            <video autoplay muted loop class="media-video" style="display:none;">
+                                <source src="rep01010006eot" type="video/mp4">
+                                お使いのブラウザは動画タグをサポートしていません。
+                            </video>
+                        </div>
+                    </div>
+                    
+                    <div class="box">
+                        <div class="tate box08">
+                            <!-- LNK01010008 --><a href="rep01010017eot" class="blackfade lightbox"></a><!-- /LNK01010008 -->
+                            <img src="rep01010008eot" class="media-image">
+                            <video autoplay muted loop class="media-video" style="display:none;">
+                                <source src="rep01010008eot" type="video/mp4">
+                                お使いのブラウザは動画タグをサポートしていません。
+                            </video>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <div class="tate box11">
+                            <!-- LNK01010011 --><a href="rep01010021eot" class="blackfade lightbox"></a><!-- /LNK01010011 -->
+                            <img src="rep01010011eot" class="media-image">
+                            <video autoplay muted loop class="media-video" style="display:none;">
+                                <source src="rep01010011eot" type="video/mp4">
+                                お使いのブラウザは動画タグをサポートしていません。
+                            </video>
+                        </div>
+                        <div class="tate box12">
+                            <!-- LNK01010012 --><a href="rep01010022eot" class="blackfade lightbox"></a><!-- /LNK01010012 -->
+                            <img src="rep01010012eot" class="media-image">
+                            <video autoplay muted loop class="media-video" style="display:none;">
+                                <source src="rep01010012eot" type="video/mp4">
+                                お使いのブラウザは動画タグをサポートしていません。
+                            </video>
+                        </div>
+                    </div>
+                    
+                    <!-- 追加スロット: 01010013, 01010014, 01010015 -->
+                    <div class="box">
+                        <div class="tate box13">
+                            <!-- LNK01010013 --><a href="rep01010023eot" class="blackfade lightbox"></a><!-- /LNK01010013 -->
+                            <img src="rep01010013eot" class="media-image">
+                            <video autoplay muted loop class="media-video" style="display:none;">
+                                <source src="rep01010013eot" type="video/mp4">
+                                お使いのブラウザは動画タグをサポートしていません。
+                            </video>
+                        </div>
+                        <div class="tate box14">
+                            <!-- LNK01010014 --><a href="rep01010024eot" class="blackfade lightbox"></a><!-- /LNK01010014 -->
+                            <img src="rep01010014eot" class="media-image">
+                            <video autoplay muted loop class="media-video" style="display:none;">
+                                <source src="rep01010014eot" type="video/mp4">
+                                お使いのブラウザは動画タグをサポートしていません。
+                            </video>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="tate box15">
+                            <!-- LNK01010015 --><a href="rep01010025eot" class="blackfade lightbox"></a><!-- /LNK01010015 -->
+                            <img src="rep01010015eot" class="media-image">
+                            <video autoplay muted loop class="media-video" style="display:none;">
+                                <source src="rep01010015eot" type="video/mp4">
+                                お使いのブラウザは動画タグをサポートしていません。
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PC版日記 -->
+            <div class="diary pcOnly" style="display:none;">
+                <!-- デフォルトはnone -->
+                <div class="diary-inner">
+                    <div class="diary-left">
+                        <div class="diary-left-ttl">
+                            <h2>普段見れない<br>
+            女の子たちの<br>
+            オフショット</h2>
+                        </div>
+                        <div class="diary-left-txt">
+                            <div class="diary-head">
+                                <p><span class="cssSprite cdIcoPhoto"></span><span class="diary-date">rep00010640eot</span></p>
+								<div style="display:none;">
+                                <!-- love on -->
+                              <div class="love-btn love-btn-on" id="loveon" data-lovebtn="off">
+                                    <div class="love-btn-heart">
+                                        <div class="cssSprite cdIcoLoveBtn_on">love</div>
+                                        <span>LOVE</span>
+                                    </div>
+                                    <div class="love-btn-num" id="lovecount">rep00010630eot</div>
+                                </div>
+                                <!-- love off -->
+                                <div class="love-btn" id="loveoff">
+                                    <div class="love-btn-heart" onclick="WAtoggleee('+loveon,-loveoff');SetLovePt(gid, did);CountUp('lovecount');CountUp('lovecount2');CookieWrite(kie, value, days);">
+                                        <div class="cssSprite cdIcoLoveBtn">love+</div>
+                                        <span>LOVE</span>
+                                    </div>
+                                    <div class="love-btn-num" id="lovecount2">rep00010630eot</div>
+                                </div>
+								</div>
+                            </div>
+                            <div class="diary-body">
+                                <h3 class="diary-ttl">rep00010641eot</h3>
+                                <p class="diary-desc">rep00010642eot</p>
+                            </div>
+                        </div>
+                        <div class="diary-more-btn">
+                            <a id="seeMore" href="rep03010090eot" target="_blank" rel="noopener noreferrer">SEE MORE</a>
+                        </div>
+                    </div>
+                    <div class="diary-right">
+                        <div class="diary-img-wrap">
+                            <img class="diary-img" src="rep01010280eot">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SP版日記 -->
+            <div class="diary spOnly" style="display:none;">
+              <div class="diary-inner">
+                <div class="diary-inner-ttl">
+                  <h2>普段見れない<br>
+                  女の子たちの<br>
+                  オフショット</h2>
+                </div>
+                <div class="diary-wrap">
+                  <div class="diary-img-wrap">
+                    <div class="diary-img-wrap-inner">
+                      <img class="diary-img" src="rep01010280eot">
+                    </div>
+                  </div>
+                  <div class="diary-txt">
+                    <div class="diary-head">
+                      <p><span class="cssSprite cdIcoPhoto"></span><span class="diary-date">rep00010640eot</span></p>
+			<div style="display:none;">
+				<!-- love on -->
+              <div class="love-btn love-btn-on" id="loveon" data-lovebtn="off">
+                <div class="love-btn-heart">
+                  <div class="cssSprite cdIcoLoveBtn_on">love</div>
+                  <span>LOVE</span>
+                </div>
+                <div class="love-btn-num" id="lovecount">rep00010630eot</div>
+              </div>
+				<!-- love off -->
+              <div class="love-btn" id="loveoff">
+                <div class="love-btn-heart">
+                  <div class="cssSprite cdIcoLoveBtn" onclick="WAtoggleee('+loveon,-loveoff');SetLovePt(gid, did);CountUp('lovecount');CountUp('lovecount2');CookieWrite(kie, value, days);">love+</div>
+                  <span>LOVE</span>
+                </div>
+                <div class="love-btn-num" id="lovecount2">rep00010630eot</div>
+              </div>
+			</div>
+                    </div>
+                    <div class="diary-body">
+                      <h3 class="diary-ttl">rep00010641eot</h3>
+                      <p class="diary-desc">rep00010642eot
+                        <!--<a id="moreTxt" class="more-txt" href="http://firststar.kir.jp/group/diary/blog.html" target="_blank" rel="noopener noreferrer">…続きを読む</a>-->
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="diary-more-btn">
+                  <a id="seeMore" href="rep03010090eot" target="_blank" rel="noopener noreferrer">SEE MORE</a>
+                </div>
+              </div>
+            </div>
+
+<!-- フッター START -->		
+	  <div class="footer">
+		  <div class="cssSprite footLogo" aria-label="鹿児島のデリヘルキャンディ ロゴ">
+				<span class="sr-only">鹿児島のデリヘルキャンディ</span>
+		  </div>
+			<nav aria-label="フッターメニュー">
+				<ul class="menu pcOnly">
+					<li><a href="./" title="鹿児島デリヘルキャンディトップページ" class="fade">TOP</a></li>
+					<li><a href="./news.php" title="鹿児島デリヘルキャンディからのお知らせ" class="fade">お知らせ</a></li>
+					<li><a href="./girls_list.php" title="鹿児島デリヘルキャンディに在籍している女の子一覧" class="fade">女の子一覧</a></li>
+					<li><a href="./schedule.php" title="鹿児島デリヘルキャンディの本日の出勤情報" class="fade">出勤情報</a></li>
+					<li><a href="./system.php" title="鹿児島デリヘルキャンディの料金・システム情報" class="fade">料金</a></li>
+					<li><a href="./movie.php" title="鹿児島デリヘルキャンディの動画情報" class="fade">動画</a></li>
+					<li><a href="./mypage.php" title="鹿児島デリヘルキャンディ会員専用マイページ" class="fade">マイページ</a></li>
+					<li><a href="http://new-cast.com/" title="ガールズヘブン内キャンディ高収入求人専用サイト" class="fade">求人情報</a></li>
+					<li><a href="https://www.cityheaven.net/kagoshima/A4601/A460102/newcandy/diarylist/?of=y" title="シティヘブンネット内キャンディ写メ日記" target="_blank" rel="noopener noreferrer" class="fade">写メ日記</a></li>
+					<li><a href="http://candy6956.blog.fc2.com/" title="鹿児島デリヘルキャンディのSNS" target="_blank" rel="noopener noreferrer" class="fade">SNS</a></li>
+				</ul>
+			</nav>
+			<dl class="info pcOnly">
+				<dt>099.226.6956</dt>
+				<dd>OPEN FROM <span>9:00 am - 6:00 am</span></dd>
+			</dl>
+			<dl class="info spOnly">
+				<dt>OPEN FROM</dt>
+				<dd>9:00 am - 6:00 am</dd>
+			</dl>
+			<a href="tel:0992266956" onClick="amadareAcRec('0992266956');" class="tel spOnly">
+				<div class="cssSprite footTel vCenter spOnly"></div>099.226.6956
+			</a>
+			<div class="copy">COPYRIGHT (C) 2025 Candy All RIGHTS RESERVED.</div>
+		</div>
+<!-- フッター END -->
+
+    <iframe style="display:none;" id="iframe" src="https://can-diary.com/love.html"></iframe>
+
+    <script type="text/javascript" src="./js/fav.js"></script>
+    <script type="text/javascript" src="./js/amadareWebApp2.6.js"></script>
+    <script>
+        // windowロードイベント
+
+        addOnloadEvent(
+            function(){
+
+                gid = CookieRead("gid");
+                did = CookieRead("did");
+
+                console.log(gid);
+                console.log(did);
+
+
+//                  getObj("seeMore").setAttribute("href","./diary/list.html?gid="+gid);
+//            getObj("moreTxt").setAttribute("href","./diary/blog.html?gid="+gid+"&did="+did);
+
+                loveCheckGet();
+                loveBtnCheck();
+            }
+        )
+//        window.onload = function() {
+//
+//            gid = CookieRead("gid");
+//            did = CookieRead("did");
+//
+//            console.log(gid);
+//            console.log(did);
+//
+//
+//            getObj("seeMore").setAttribute("href","./diary/list.html?gid="+gid);
+////            getObj("moreTxt").setAttribute("href","./diary/blog.html?gid="+gid+"&did="+did);
+//
+//            loveCheckGet();
+//            loveBtnCheck();
+//
+//        };
+
+
+
+        // hidden プロパティおよび可視性の変更イベントの名前を設定
+        var hidden, visibilityChange;
+        if (typeof document.hidden !== "undefined") { // Opera 12.10 や Firefox 18 以降でサポート
+            hidden = "hidden";
+            visibilityChange = "visibilitychange";
+        } else if (typeof document.msHidden !== "undefined") {
+            hidden = "msHidden";
+            visibilityChange = "msvisibilitychange";
+        } else if (typeof document.webkitHidden !== "undefined") {
+            hidden = "webkitHidden";
+            visibilityChange = "webkitvisibilitychange";
+        }
+
+
+        //ページの表示非表示
+        function handleVisibilityChange() {
+            if (document[hidden]) {
+
+                setTimeout(function(){
+                    loveCheckGet();
+                    loveBtnCheck();
+                },300);
+
+            } else {
+
+                setTimeout(function(){
+                    loveCheckGet();
+                    loveBtnCheck();
+                },300);
+            }
+        }
+
+        // ブラウザーが addEventListener または Page Visibility API をサポートしない場合に警告
+        if (typeof document.addEventListener === "undefined" || typeof document[hidden] === "undefined") {
+//    console.log("This demo requires a browser, such as Google Chrome or Firefox, that supports the Page Visibility API.");
+        } else {
+            // Page Visibility の変更を扱う
+            document.addEventListener(visibilityChange, handleVisibilityChange, false);
+
+        }
+
+
+        function loveCheckGet(){
+            var checkId = "loveg" + gid + "/__/d" + did;
+            // iframeのwindowオブジェクトを取得
+            var ifrm = document.getElementById('iframe').contentWindow;
+            // 外部サイトにメッセージを投げる
+            ifrm.postMessage(checkId, 'https://can-diary.com/love.html');
+        }
+
+
+        function loveBtnCheck() {
+            // var value = "check" + gid + "/___/" + did;
+            var value = "check";
+            // iframeのwindowオブジェクトを取得
+            var ifrm = document.getElementById('iframe').contentWindow;
+            // 外部サイトにメッセージを投げる
+            ifrm.postMessage(value, 'https://can-diary.com/love.html');
+
+        }
+
+        // メッセージ受信イベント
+        window.addEventListener('message', function(event) {
+
+            if(event.data.length){
+
+
+                // "最初にcheckがついていたら"
+                if(event.data.substr(0,5) == "check"){
+//		    console.log(event.data);
+                    var ids = event.data.slice(5);
+                    ids = JSON.parse(ids);
+                    for (key in ids) {
+                        var idArr = key.split("/__/");
+//              console.log(idArr);
+                        if (idArr[0].slice(1) == gid && idArr[1].slice(1) == did) {
+
+//                  console.log(getObj("loveon"));
+                            loveCheckGet();
+//
+			      if(getObj("loveon").getAttribute("data-lovebtn") != "on"){
+                      document.getElementsByClassName("love-btn-num")[0].innerHTML = Number(document.getElementsByClassName("love-btn-num")[0].innerHTML) + 1;
+                      document.getElementsByClassName("love-btn-num")[1].innerHTML = Number(document.getElementsByClassName("love-btn-num")[1].innerHTML) + 1;
+				  }
+                  getObj("loveon").setAttribute("data-lovebtn" , "on");
+
+                            WAtoggle("-loveoff,+loveon");
+                            loveCheckGet();
+                            return false;
+                        } else {
+//                            getObj("loveon").setAttribute("data-lovebtn" , "off");
+                            WAtoggle("+loveoff,-loveon");
+                        }
+                    }
+
+                }else if(event.data.substr(0,6) == "submit"){
+                    var ids = event.data.slice(6);
+                    ids = JSON.parse(ids);
+                    loveCheckGet();
+                    loveBtnCheck();
+
+                } else {
+                    if(document.getElementsByClassName("love-btn-num")[0].innerHTML == event.data){
+
+                    } else {
+                        getObj("loveon").setAttribute("data-lovebtn" , "on");
+                        WAtoggle("-loveoff,+loveon");
+                    }
+                    document.getElementsByClassName("love-btn-num")[0].innerHTML = event.data;
+                    document.getElementsByClassName("love-btn-num")[1].innerHTML = event.data;
+                }
+
+            } else {
+//        loveCheckGet();
+            }
+
+
+        }, false);
+
+
+        var favCount=parseInt(CookieRead("favCount"));
+        favTask();
+        function favTask(){
+        	if(favCount>0){
+        		document.getElementsByClassName("num")[0].innerHTML=favCount;
+        		document.getElementsByClassName("fav")[0].style.display="block";
+        	}
+        }
+    </script>
+    <script type="text/javascript" src="./js/amadareAccess.1.0.js"></script>
+</body>
+
+</html>

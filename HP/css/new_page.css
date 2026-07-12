@@ -1,0 +1,28 @@
+@charset "utf-8";
+
+@media screen and (min-width: 769px) {
+	.spOnly {
+		display: none !important;
+	}
+
+}
+
+@media screen and (max-width: 768px) {
+	.pcOnly {
+		display: none !important;
+	}
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 768px;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        margin: 0 auto;
+        width: 100%;
+	}
+}
+
+/*----------------------- h -----------------------*/

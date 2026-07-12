@@ -1,0 +1,902 @@
+/* 動画のサイズ調整 */
+.media-video {
+	width: 100% !important;
+	height: auto !important;
+	max-width: 100% !important;
+	object-fit: cover !important;
+	aspect-ratio: 2 / 3;
+}
+
+/* PC版とSP版での動画サイズ調整 */
+@media screen and (min-width: 769px) {
+	.photo .media-video {
+		width: 108px !important;
+		height: 164px !important;
+		object-fit: cover !important;
+	}
+	
+	.gallery .media-video {
+		width: 100% !important;
+		height: auto !important;
+		max-width: 100% !important;
+		object-fit: cover !important;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.tate .media-video {
+		width: 100% !important;
+		height: auto !important;
+		max-width: 100% !important;
+		object-fit: cover !important;
+	}
+}
+
+/* girls */
+
+@media screen and (min-width: 769px) {
+	/* girils */
+
+	#girls div.wrap div.mainImg {
+		position: relative;
+	}
+
+	#girls div.wrap div.mainImg img {
+		width: 100%;
+		display: block;
+	}
+
+	#girls div.wrap div.detail {
+		background: #fff url(../imgHtml/girlsBg.jpg);
+		margin-top: 20px;
+		min-height: 480px;
+		position: relative;
+		display: flex;
+		align-items: center;
+		padding: 10px 0;
+		justify-content: center;
+	}
+
+	#girls div.wrap div.detail div.photo {
+		float: right;
+		width: 30%;
+		/* min-width: 320px; */
+		position: relative;
+		padding: 0 10px;
+	}
+
+	#girls div.wrap div.detail div.photo:first-child {
+		float: left;
+	}
+
+	#girls div.wrap div.detail div.photo img {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	#girls div.wrap div.detail div.prof {
+		left: 50%;
+		top: 50%;
+		background: #fff;
+		width: 33.3333%;
+		height: auto;
+		padding: 30px 20px;
+		font-size: 0;
+		float: inline-start;
+	}
+
+	#girls div.wrap div.detail div.prof dl dt.name {
+		font-family: 'freightdispbooksc';
+		color: #f961a6;
+		font-size: 48px;
+		line-height: 100%;
+	}
+
+	#girls div.wrap div.detail div.prof dl dd.size {
+		font-family: 'freightdispbookitalicsc';
+		font-size: 14px;
+		line-height: 100%;
+	}
+
+	#girls div.wrap div.detail div.prof dl dd.name {
+		font-family: "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+		font-size: 16px;
+		line-height: 100%;
+		letter-spacing: .2em;
+		padding: 10px;
+		border-bottom: 1px solid #000;
+		display: inline-block;
+	}
+
+	#girls div.wrap div.detail div.prof dl dd.state {
+		font-family: "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+		font-size: 24px;
+		line-height: 100%;
+		letter-spacing: .2em;
+		padding: 15px 0;
+		border-bottom: 1px solid #000;
+	}
+
+	#girls div.wrap div.detail div.prof dl dd.state span {
+		color: #c9c9c9;
+	}
+
+	#girls div.wrap div.detail div.prof div.text {
+		color: #626262;
+		font-size: 14px;
+		line-height: 180%;
+		height: auto;
+		margin-bottom: 30px;
+		overflow-y: hidden;
+	}
+
+	#girls div.wrap div.detail div.prof div.text h3 {
+		color: #000;
+		font-weight: bold;
+		text-align: center;
+		padding: 15px 0 10px;
+	}
+
+	#girls div.wrap div.detail div.prof div.btn {
+		display: table;
+		width: 100%;
+	}
+
+	#girls div.wrap div.detail div.prof div.btn a {
+		display: table-cell;
+		background: #f961a6;
+		color: #fff;
+		height: 40px;
+		line-height: 40px;
+		text-align: center;
+		font-size: 14px;
+	}
+
+	#girls div.wrap div.detail div.prof div.btn a.delete {
+		background: #a0a0a0;
+	}
+
+	#girls div.wrap div.detail div.prof div.btn a:last-child {
+		width: 141px;
+		border-left: 2px solid #fff;
+	}
+
+	#girls div.wrap div.gallery {
+		margin-top: 20px;
+	}
+
+	#girls div.main div.gallery table.photoList {
+		width: 100%;
+		/* min-width: 960px; */
+		border-collapse: collapse;
+	}
+
+	#girls div.main div.gallery table.photoList td {
+		overflow: hidden;
+		border-bottom: 20px solid #fff;
+	}
+
+	#girls div.main div.gallery table.photoList td.yoko {
+		width: 52%;
+	}
+
+	#girls div.main div.gallery table.photoList td.tate {
+		width: 48%;
+	}
+
+	#girls div.main div.gallery table.photoList td.left {
+		border-right: 20px solid #fff;
+	}
+
+	#girls div.main div.gallery table.photoList .box {
+		display: block;
+		position: relative;
+	}
+
+	#girls div.main div.gallery table.photoList .box>img,
+	#girls div.main div.gallery table.photoList .box>video {
+		width: 100%;
+		height: auto;
+		vertical-align: bottom;
+	}
+
+	#girls div.main div.gallery table.photoList td.tate {
+		vertical-align: top;
+	}
+
+	#girls div.main div.gallery table.photoList td.tate .box>img {
+		/* position: absoluteを削除して通常のフローで表示 */
+		width: 100%;
+		height: auto;
+	}
+	
+	/* 空の画像を非表示にする */
+	#girls div.main div.gallery table.photoList td.yoko .box>img[src=""],
+	#girls div.main div.gallery table.photoList td.yoko .box>img:not([src]),
+	#girls div.main div.gallery table.photoList td.tate .box>img[src=""],
+	#girls div.main div.gallery table.photoList td.tate .box>img:not([src]) {
+		display: none;
+	}
+
+	/* 透明な画像（横向き画像スロット）を非表示 */
+	#girls div.main div.gallery table.photoList td.yoko .box>img[src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"],
+	#girls div.main div.gallery table.photoList td.tate .box>img[src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"] {
+		display: none;
+	}
+
+	/* 横向き画像のtd要素全体を非表示 */
+	#girls div.main div.gallery table.photoList td.yoko {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	/* girils */
+
+	#girls div.wrap div.mainImg {
+		position: relative;
+		margin-bottom: 20px;
+	}
+
+	#girls div.wrap div.mainImg img {
+		width: 100%;
+		display: block;
+	}
+
+	#girls div.wrap div.photo {}
+
+	#girls div.wrap div.photo a {
+		display: block;
+		width: calc(50% - 5px);
+		float: right;
+	}
+
+	#girls div.wrap div.photo a:first-child {
+		float: left;
+	}
+
+	#girls div.wrap div.photo img {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	#girls div.wrap div.detail {
+		background: #fff url(../imgHtml/girlsBg.jpg);
+		margin-top: 10px;
+		padding: 40px;
+		position: relative;
+	}
+
+	#girls div.wrap div.detail div.prof {
+		background: #fff;
+		padding: 50px 20px 0;
+		font-size: 0;
+	}
+
+	#girls div.wrap div.detail div.prof dl dt.name {
+		font-family: 'freightdispbooksc';
+		color: #f961a6;
+		font-size: 48px;
+		line-height: 100%;
+	}
+
+	#girls div.wrap div.detail div.prof dl dd.size {
+		font-family: 'freightdispbookitalicsc';
+		font-size: 16px;
+		line-height: 100%;
+	}
+
+	#girls div.wrap div.detail div.prof dl dd.name {
+		font-family: "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "ＭＳ Ｐ明朝", "MS PMincho", "MS 明朝", serif;
+		font-size: 20px;
+		line-height: 100%;
+		letter-spacing: .2em;
+		padding: 10px;
+		border-bottom: 1px solid #000;
+		display: inline-block;
+	}
+
+	#girls div.wrap div.detail div.prof dl dd.state {
+		font-family: 'freightdispbooksc';
+		font-size: 30px;
+		line-height: 100%;
+		letter-spacing: .2em;
+		padding: 15px 0;
+		border-bottom: 1px solid #000;
+	}
+
+	#girls div.wrap div.detail div.prof dl dd.state span {
+		color: #c9c9c9;
+	}
+
+	#girls div.wrap div.detail div.prof div.text {
+		color: #626262;
+		font-size: 22px;
+		line-height: 180%;
+		overflow-y: hidden;
+	}
+
+	#girls div.wrap div.detail div.prof div.text h3 {
+		color: #000;
+		font-weight: bold;
+		text-align: center;
+		padding: 15px 0 10px;
+	}
+
+	#girls div.wrap div.detail div.prof div.btn {
+		display: table;
+		width: 100%;
+		padding: 40px 0 60px;
+	}
+
+	#girls div.wrap div.detail div.prof div.btn a {
+		display: table-cell;
+		background: #f961a6;
+		color: #fff;
+		height: 60px;
+		line-height: 60px;
+		text-align: center;
+		font-size: 18px;
+	}
+
+	#girls div.wrap div.detail div.prof div.btn a.delete {
+		background: #a0a0a0;
+	}
+
+	#girls div.wrap div.detail div.prof div.btn a:last-child {
+		width: 241px;
+		border-left: 2px solid #fff;
+	}
+
+	#girls div.wrap div.gallery {
+		margin-top: 10px;
+	}
+
+	#girls div.wrap div.gallery div.box {
+		position: relative;
+		margin-bottom: 10px;
+	}
+
+
+
+	#girls div.wrap div.gallery div.box div.box01,
+	#girls div.wrap div.gallery div.box div.box05 {
+		left: 0;
+		top: 0;
+	}
+
+	#girls div.wrap div.gallery div.box div.box02,
+	#girls div.wrap div.gallery div.box div.box04 {
+		right: 0;
+		top: 0;
+	}
+
+	#girls div.wrap div.gallery div.box div.box03 {
+		right: 0;
+		bottom: 0;
+	}
+
+	#girls div.wrap div.gallery div.box div.box06 {
+		left: 0;
+		bottom: 0;
+	}
+
+	#girls div.wrap div.gallery div.box div.tate img {
+		width: 300px;
+	}
+
+	#girls div.wrap div.gallery div.box div.yoko img {
+		width: 330px;
+	}
+
+	#girls div.wrap div.gallery div.box img {
+		display: block;
+	}
+
+	#girls div.wrap div.header.pcOnly {
+		display: none !important;
+	}
+
+	/* gallery spOnlyのレスポンシブ対応 */
+	#girls div.wrap div.gallery div.box {
+		height: auto;
+		overflow: hidden;
+	}
+
+	#girls div.wrap div.gallery div.box div {
+		position: static;
+		float: left;
+		width: calc(50% - 5px);
+	}
+
+	#girls div.wrap div.gallery div.box div:nth-child(odd) {
+	}
+
+	#girls div.wrap div.gallery div.box div:nth-child(even) {
+		margin-left: 5px;
+	}
+
+	#girls div.wrap div.gallery div.box div.tate img,
+	#girls div.wrap div.gallery div.box div.yoko img {
+		width: 100%;
+		height: auto;
+	}
+
+	/* SP版でのgirls profフォントサイズ縮小 */
+	#girls div.wrap div.detail div.prof dl dt.name {
+		font-size: 36px !important;
+	}
+	
+	#girls div.wrap div.detail div.prof dl dd.size {
+		font-size: 14px !important;
+	}
+	
+	#girls div.wrap div.detail div.prof dl dd.name {
+		font-size: 16px !important;
+	}
+	
+	#girls div.wrap div.detail div.prof dl dd.state {
+		font-size: 18px !important;
+	}
+	
+	#girls div.wrap div.detail div.prof div.text {
+		font-size: 14px !important;
+	}
+	
+	#girls div.wrap div.detail div.prof div.text h3 {
+		font-size: 16px !important;
+	}
+	
+	#girls div.wrap div.detail div.prof div.btn a {
+		font-size: 16px !important;
+	}
+	
+	/* SP版でのgirls gallery 2列レイアウト */
+	#girls div.wrap div.gallery div.box {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+	
+	#girls div.wrap div.gallery div.box div.yoko {
+		width: calc(50% - 2.5px);
+		margin-bottom: 5px;
+	}
+	
+	#girls div.wrap div.gallery div.box div.yoko:nth-child(even) {
+		margin-left: 0;
+	}
+	
+	/* SP版でのgirls gallery 固定幅解除 */
+	#girls div.wrap div.gallery div.box div.tate img {
+		width: 100% !important;
+		height: auto !important;
+	}
+	
+	#girls div.wrap div.gallery div.box div.yoko img {
+		width: 100% !important;
+		height: auto !important;
+	}
+}
+
+/* diary - PC版 */
+@media screen and (min-width: 769px) {
+	/*
+	 *	diary
+	 * * * * * * * * * * * * * * * * * * */
+
+	.diary {
+		width: 100%;
+		position: relative;
+		background: #fff url(../imgHtml/cdBgDiary.png) repeat left top;
+	}
+
+	.diary * {
+		word-wrap: break-word;
+		word-break: break-word;
+	}
+
+	.diary .diary-inner {
+		width: 960px;
+		position: relative;
+		box-sizing: border-box;
+		padding: 50px 20px;
+		margin: 0 auto;
+		overflow: hidden;
+	}
+
+	.diary .diary-inner .diary-left {
+		width: 480px;
+		margin-right: 40px;
+		float: left;
+	}
+
+	.diary .diary-inner .diary-left .diary-left-ttl {
+		position: relative;
+		width: 480px;
+		height: 88px;
+		background: url(../imgHtml/pc/cdTtlDiary.png) no-repeat center top;
+		margin-bottom: 19px;
+	}
+
+	.diary .diary-inner .diary-left .diary-left-ttl h2 {
+		font-size: 10px;
+		line-height: 14px;
+		color: #fff;
+		text-align: center;
+		font-feature-settings: "palt";
+		font-weight: 600;
+		padding-top: 18px;
+		display: inline-block;
+		position: absolute;
+		left: 50%;
+		transform: translateX(-27px);
+	}
+
+	.diary .diary-inner .diary-left .diary-left-txt {
+		background: rgba(255, 255, 255, 0.7);
+		padding: 10px 20px 25px;
+		box-sizing: border-box;
+		margin-bottom: 25px;
+	}
+
+	.diary .diary-inner .diary-left .diary-left-txt .diary-head {
+		line-height: 24px;
+		overflow: hidden;
+		padding-bottom: 15px;
+		background: url(../imgHtml/pc/cdHr.png) no-repeat center bottom;
+	}
+
+	.diary .diary-inner .diary-left .diary-left-txt .diary-head p {
+		float: left;
+		overflow: hidden;
+	}
+
+	.diary .diary-inner .diary-left .diary-left-txt .diary-head p .cdIcoPhoto {
+		width: 20px;
+		height: 16px;
+		display: inline-block;
+		margin-right: 10px;
+		margin-top: 4px;
+		float: left;
+	}
+
+	.diary .diary-inner .diary-left .diary-left-txt .diary-head p .diary-date {
+		font-family: 'Libre Baskerville', serif;
+		line-height: 24px;
+		float: left;
+	}
+
+	.diary .diary-inner .diary-left .diary-left-txt .diary-head .love-btn {
+		float: right;
+		overflow: hidden;
+		border-radius: 3px;
+	}
+
+	.diary .diary-inner .diary-left .diary-left-txt .diary-head .love-btn .love-btn-heart {
+		float: left;
+		position: relative;
+		width: 64px;
+		height: 24px;
+		line-height: 14px;
+		font-size: 12px;
+		color: #fff;
+		background: #f961a6;
+		box-sizing: border-box;
+		padding: 5px 6px;
+		cursor: pointer;
+	}
+
+	.diary .diary-inner .diary-left .diary-left-txt .diary-head .love-btn .love-btn-heart .cdIcoLoveBtn,
+	.diary .diary-inner .diary-left .diary-left-txt .diary-head .love-btn .love-btn-heart .cdIcoLoveBtn_on {
+		display: inline-block;
+		margin-right: 4px;
+		margin-top: 1px;
+		float: left;
+	}
+
+	.diary .diary-inner .diary-left .diary-left-txt .diary-head .love-btn .love-btn-heart .cdIcoLoveBtn_on {
+		display: none;
+	}
+
+	.diary .diary-inner .diary-left .diary-left-txt .diary-head .love-btn.love-btn-on .love-btn-heart .cdIcoLoveBtn {
+		display: none;
+	}
+
+	.diary .diary-inner .diary-left .diary-left-txt .diary-head .love-btn.love-btn-on .love-btn-heart .cdIcoLoveBtn_on {
+		display: inline-block;
+	}
+
+	.diary .diary-inner .diary-left .diary-left-txt .diary-head .love-btn .love-btn-heart span {
+		display: inline-block;
+		float: right;
+	}
+
+	.diary .diary-inner .diary-left .diary-left-txt .diary-head .love-btn .love-btn-num {
+		float: right;
+		position: relative;
+		width: 42px;
+		background: #fff;
+		color: #f961a6;
+		font-size: 14px;
+		line-height: 24px;
+		font-family: 'Roboto', sans-serif;
+		text-align: center;
+	}
+
+
+	/*ボタンのカウントについて*/
+	.diary .diary-inner .diary-left .diary-left-txt .diary-head .love-btn .love-btn-heart .cdIcoLoveBtn {
+		display: inline-block;
+	}
+
+	.diary .diary-inner .diary-left .diary-left-txt .diary-head .love-btn .love-btn-heart .cdIcoLoveBtn_on {
+		display: none;
+	}
+
+	.diary .diary-inner .diary-left .diary-left-txt .diary-head .love-btn .love-btn-heart {}
+
+	.diary .diary-inner .diary-left .diary-left-txt .diary-head .love-btn.love-btn-on .love-btn-heart .cdIcoLoveBtn {
+		display: none;
+	}
+
+	.diary .diary-inner .diary-left .diary-left-txt .diary-head .love-btn.love-btn-on .love-btn-heart .cdIcoLoveBtn_on {
+		display: inline-block;
+	}
+
+	.diary .diary-inner .diary-left .diary-left-txt .diary-head .love-btn.love-btn-on .love-btn-heart {
+		color: #faed5f;
+	}
+
+
+
+
+	.diary .diary-inner .diary-left .diary-left-txt .diary-body {
+		padding-top: 18px;
+		margin-bottom: 20px;
+	}
+
+	.diary .diary-inner .diary-left .diary-left-txt .diary-body .diary-ttl {
+		font-size: 14px;
+		font-weight: 600;
+	}
+
+	.diary .diary-inner .diary-left .diary-left-txt .diary-body .diary-desc {
+		line-height: 22px;
+		font-size: 14px;
+	}
+
+	.diary .diary-inner .diary-left .diary-more-btn {}
+
+	.diary .diary-inner .diary-left .diary-more-btn a {
+		font-family: 'Libre Baskerville', serif;
+		display: block;
+		width: 480px;
+		height: 40px;
+		color: #fff;
+		line-height: 40px;
+		font-size: 14px;
+		font-feature-settings: "palt";
+		text-align: center;
+		background: #f961a6;
+	}
+
+
+	.diary .diary-inner .diary-right {
+		width: 400px;
+		height: 400px;
+		position: relative;
+		float: right;
+		background: url(../imgHtml/pc/cdBgGirl.jpg) no-repeat left bottom;
+	}	.diary .diary-inner .diary-right .diary-img-wrap {
+		width: 385px;
+		height: 385px;
+		position: relative;
+		overflow: hidden;
+		margin-left: 15px;
+	}	.diary .diary-inner .diary-right .diary-img-wrap .diary-img {
+		width: 385px;
+		height: 385px;
+		object-fit: cover;
+	}
+}
+
+/* diary - SP版 */
+@media screen and (max-width: 768px) {
+	/*
+ *	diary
+ * * * * * * * * * * * * * * * * * * */
+
+	.diary {
+		width: 100%;
+		position: relative;
+		background: #fff url(../imgHtml/cdBgDiary.png) repeat left top;
+	}
+
+	.diary .diary-inner {
+		width: 560px;
+		position: relative;
+		box-sizing: border-box;
+		margin: 0 auto;
+		padding: 38px 0 40px;
+		overflow: hidden;
+	}	.diary .diary-inner .diary-inner-ttl {
+		position: relative;
+		width: 560px;
+		height: 102px;
+		background: url(../imgHtml/cdTtlDiary.png) no-repeat center top;
+		z-index: 10;
+	}	.diary .diary-inner .diary-inner-ttl h2 {
+		font-size: 16px;
+		line-height: 20px;
+		color: #fff;
+		text-align: center;
+		font-feature-settings: "palt";
+		font-weight: 600;
+		padding-top: 20px;
+		display: inline-block;
+		position: absolute;
+		left: 50%;
+		transform: translateX(-42px);
+	}	.diary .diary-inner .diary-wrap {
+		margin-top: -25px;
+		position: relative;
+		z-index: 9;
+		background: rgba(255, 255, 255, 0.7);
+		padding: 50px 45px 40px;
+		box-sizing: border-box;
+		margin-bottom: 35px;
+	}	.diary .diary-inner .diary-wrap .diary-img-wrap {
+		width: 470px;
+		height: 470px;
+		padding: 20px;
+		overflow: hidden;
+		position: relative;
+		background: url(../imgHtml/cdBgGirl.png) no-repeat center center;
+		margin-bottom: 20px;
+	}
+
+	.diary .diary-inner .diary-wrap .diary-img-wrap .diary-img-wrap-inner {
+		width: 430px;
+		height: 430px;
+		position: relative;
+		overflow: hidden;
+	}	/*.diary .diary-inner .diary-wrap .diary-img-wrap .diary-img-wrap-inner:before{
+		    content:"";
+		    display: block;
+		    padding-top: 450px;
+		  }*/
+	.diary .diary-inner .diary-wrap .diary-img-wrap .diary-img-wrap-inner img {
+		width: 430px;
+		height: 430px;
+		object-fit: cover;
+	}
+
+	.diary .diary-inner .diary-txt .diary-head {
+		line-height: 24px;
+		overflow: hidden;
+		padding-bottom: 23px;
+		background: url(../imgHtml/cdHr.png) no-repeat center bottom;
+	}
+
+	.diary .diary-inner .diary-txt .diary-head p {
+		float: left;
+		overflow: hidden;
+	}	.diary .diary-inner .diary-txt .diary-head p .cdIcoPhoto {
+		width: 33px;
+		height: 32px;
+		display: inline-block;
+		margin-right: 10px;
+		margin-top: 10px;
+		float: left;
+	}
+
+	.diary .diary-inner .diary-txt .diary-head p .diary-date {
+		font-family: 'Libre Baskerville', serif;
+		line-height: 50px;
+		font-size: 26px;
+		float: left;
+	}
+
+	.diary .diary-inner .diary-txt .diary-head .love-btn {
+		float: right;
+		overflow: hidden;
+		border-radius: 3px;
+	}
+
+	.diary .diary-inner .diary-txt .diary-head .love-btn .love-btn-heart {
+		float: left;
+		position: relative;
+		width: 95px;
+		height: 50px;
+		line-height: 20px;
+		font-size: 18px;
+		color: #fff;
+		background: #f961a6;
+		box-sizing: border-box;
+		padding: 15px 10px;
+		cursor: pointer;
+	}
+
+	.diary .diary-inner .diary-txt .diary-head .love-btn .love-btn-heart .cdIcoLoveBtn,
+	.diary .diary-inner .diary-txt .diary-head .love-btn .love-btn-heart .cdIcoLoveBtn_on {
+		display: inline-block;
+		margin-right: 6px;
+		margin-top: 1px;
+		float: left;
+	}
+
+	.diary .diary-inner .diary-txt .diary-head .love-btn .love-btn-heart span {
+		display: inline-block;
+		float: left;
+		font-family: 'Roboto', sans-serif;
+	}	.diary .diary-inner .diary-txt .diary-head .love-btn .love-btn-num {
+		float: right;
+		position: relative;
+		width: 60px;
+		background: #fff;
+		color: #f961a6;
+		font-size: 22px;
+		line-height: 50px;
+		font-family: 'Roboto', sans-serif;
+		text-align: center;
+	}
+
+
+	/*ボタンのカウントについて*/
+	.diary .diary-inner .diary-txt .diary-head .love-btn .love-btn-heart .cdIcoLoveBtn {
+		display: inline-block;
+	}	.diary .diary-inner .diary-txt .diary-head .love-btn .love-btn-heart .cdIcoLoveBtn_on {
+		display: none;
+	}
+
+	.diary .diary-inner .diary-txt .diary-head .love-btn .love-btn-heart {}
+
+	.diary .diary-inner .diary-txt .diary-head .love-btn.love-btn-on .love-btn-heart .cdIcoLoveBtn {
+		display: none;
+	}	.diary .diary-inner .diary-txt .diary-head .love-btn.love-btn-on .love-btn-heart .cdIcoLoveBtn_on {
+		display: inline-block;
+	}
+
+	.diary .diary-inner .diary-txt .diary-head .love-btn.love-btn-on .love-btn-heart {
+		color: #faed5f;
+	}
+
+
+
+
+	.diary .diary-inner .diary-txt .diary-body {
+		padding-top: 25px;
+	}	.diary .diary-inner .diary-txt .diary-body .diary-ttl {
+		font-size: 24px;
+		line-height: 1.5em;
+		font-weight: 600;
+		margin-bottom: 35px;
+	}
+
+	.diary .diary-inner .diary-txt .diary-body .diary-desc {
+		line-height: 30px;
+		font-size: 20px;
+	}
+
+	.diary .diary-inner .diary-txt .diary-body .diary-desc .more-txt {
+		color: #a0a0a0;
+	}
+
+	.diary .diary-inner .diary-more-btn {}
+
+	.diary .diary-inner .diary-more-btn a {
+		font-family: 'Libre Baskerville', serif;
+		display: block;
+		width: 560px;
+		height: 70px;
+		color: #fff;
+		line-height: 70px;
+		font-size: 20px;
+		font-feature-settings: "palt";
+		text-align: center;
+		background: #f961a6;
+	}
+}

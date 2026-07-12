@@ -1,0 +1,24 @@
+/* jobページ専用スタイル - ヘッダー・フッター以外のデザイン */
+
+/* SP版 */
+@media screen and (max-width: 768px) {
+	/* default.cssから移動 - SP版 */
+	#job div.main div.guide div.title h2,
+	#job div.main div.facilities div.title h2 {
+		font-size: 32px !important;
+		line-height: 1.2 !important;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

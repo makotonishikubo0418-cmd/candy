@@ -1,0 +1,92 @@
+
+@charset "utf-8";
+/*----------------------- side menu -----------------------*/
+.titleimg_1 {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+/*----------------------- font -----------------------*/
+.fs_1 {
+	font-size: 22px;
+	font-weight: bold;
+	line-height: 30px;
+}
+.fs_2 {
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 28px;
+}
+.fs_3 {
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 26px;
+}
+.fs_4 {
+	font-size: 14px;
+	line-height: 23px;
+}
+.fs_5 {
+	font-size: 13px;
+	font-weight: bold;
+}
+/*----------------------- font collar -----------------------*/
+.fc_pink {
+	color: #e5006e;
+}
+.fc_white {
+	color: #ffffff;
+}
+/*----------------------- text-align -----------------------*/
+.t_center {
+	text-align: center;
+}
+/*----------------------- layout padding -----------------------*/
+.lyp-1 {
+	padding: 30px 0 20px;
+}
+.lyp-2 {
+	padding: 0 20px;
+	width: 980px;
+}
+.lyp-3 {
+	padding: 0 0 30px;
+}
+.lyp-4 {
+	padding: 0 30px;
+}
+.lyp-5 {
+	padding: 0 30px;
+	width: 1050px;
+}
+.lyp-6 {
+	padding: 20px 0 10px;
+}
+.lyp-7 {
+	padding: 5px;
+}
+/*----------------------- layout margin -----------------------*/
+.lym-1 {
+	margin: 0 auto;
+	width: 1050px;
+}
+.lym-2 {
+	margin: 0 auto;
+}
+.lym-3 {
+	margin: 25px auto 0;
+}
+.lym-4 {
+	margin: 0 auto;
+	width: 100px;
+}
+/*----------------------- background -----------------------*/
+.bg-1 {
+	background: #f7f7f7;	
+}
+.bg-2 {
+	background: #ffffff;	
+}
+.bg-3 {
+	background: #e5006e;	
+}
