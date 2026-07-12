@@ -8,28 +8,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Get repository files
-        uses: actions/checkout@v6
-
-      - name: Check FTP deployment
-        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftp
-          port: 21
-          local-dir: ./HP/
-          server-dir: /public_html/group/candy/
-          dry-run: true
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            **/AGENTS.md
-            **/*.md
-            codex/**
-            log/**
-            Text_area_data/**
-            Text_blog_data/**
-            Text_hotel_data/**
+      - name: Test FTP connection
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          curl \
+            --verbose \
+            --ftp-pasv \
+            --list-only \
+            --max-time 30 \
+            --user "$FTP_USERNAME:$FTP_PASSWORD" \
+            "ftp://$FTP_SERVER/"
