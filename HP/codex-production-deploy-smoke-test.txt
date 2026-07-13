@@ -1,0 +1,3 @@
+CANDY production deployment smoke test
+Purpose: verify GitHub main to KAGOYA automatic deployment
+Date: 2026-07-13
