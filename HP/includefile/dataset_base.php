@@ -7,20 +7,20 @@
  *********************************************************************/
 
 //-----  SESSION設定  -----//
-require_once("/home/firststar/public_html/group_test/control/includefile/setting_session_vv.php"); //SESSION設定ファイル
+require_once("/home/firststar/public_html/group/control/includefile/setting_session_vv.php"); //SESSION設定ファイル
 //ini_set( 'display_errors', 'on' );
 //error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED);
 
 //-----  設定読込  -----//
 // テスト環境でも本番環境のデータベースを使用するため、本番環境の設定ファイルを読み込む
 require_once("/home/firststar/public_html/group/control/includefile/incfiles_vv.php"); //設定ファイル（本番環境のデータベース接続を使用）
-require_once("/home/firststar/public_html/group_test/candy/includefile/class.hpgcoder2.php"); //変換クラス2
-require_once("/home/firststar/public_html/group_test/candy/includefile/funcs.php");           //関数ファイル
+require_once("/home/firststar/public_html/group/candy/includefile/class.hpgcoder2.php"); //変換クラス2
+require_once("/home/firststar/public_html/group/candy/includefile/funcs.php");           //関数ファイル
 
 
 //-----  変数取得・設定  -----//
 define("CLUBID", 2);
-define("INCLUDE_DIR", '/home/firststar/public_html/group_test/candy/includefile/');
+define("INCLUDE_DIR", '/home/firststar/public_html/group/candy/includefile/');
 $trs     = 9;   //
 
 //
@@ -47,7 +47,7 @@ $Database = new Database($DSN);
 $path = $_SERVER['SCRIPT_FILENAME'];
 
 //テンプレートhtml取得
-$path = str_replace('/group_test/candy/', '/group_test/candy/source/', $path);
+$path = str_replace('/group/candy/', '/group/candy/source/', $path);
 $siteTransNum = 11;
 
 //$path = str_replace('/site2/', '/source2/', $path);
@@ -66,10 +66,10 @@ $siteTransNum = 11;
 // 	if (isset($_SERVER['HTTP_USER_AGENT'])) {
 // 		$user_agent = $_SERVER['HTTP_USER_AGENT'];
 // 		if (preg_match("/(iPhone|iPad|Android|DoCoMo|UP\.Browser|J-PHONE|Vodafone|SoftBank|J-EMULATOR)/i", $user_agent)) {
-// 			$path = str_replace('/group_test/candy/source/', '/group_test/candy/source/s/', $path);
+// 			$path = str_replace('/group/candy/source/', '/group/candy/source/s/', $path);
 // 			$siteTransNum = 11;
 // 		} else {
-// 			$path = str_replace('/group_test/candy/source/', '/group_test/candy/source/pc/', $path);
+// 			$path = str_replace('/group/candy/source/', '/group/candy/source/pc/', $path);
 // 			$siteTransNum = 12;
 // 		}
 // 	}
@@ -268,6 +268,10 @@ switch ($hdir) {
 
 	case 'kagoshima-deliveryhealth-area-nagayoshi.html':
 		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-nagayoshi.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-hanaomachi.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-hanaomachi.php');
 		break;
 
 	case 'contact.html':
@@ -1145,6 +1149,7 @@ $source = str_replace('kagoshima-deliveryhealth-poccharigirl.html', 'kagoshima-d
 $source = str_replace('kagoshima-deliveryhealth-glamourgirl.html', 'kagoshima-deliveryhealth-glamourgirl.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-area-arata.html', 'kagoshima-deliveryhealth-area-arata.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-area-nagayoshi.html', 'kagoshima-deliveryhealth-area-nagayoshi.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-hanaomachi.html', 'kagoshima-deliveryhealth-area-hanaomachi.php', $source);
 $source = str_replace('contact.html', 'contact.php', $source);
 $source = str_replace('area.html', 'area.php', $source);
 $source = str_replace('hotel.html', 'hotel.php', $source);
