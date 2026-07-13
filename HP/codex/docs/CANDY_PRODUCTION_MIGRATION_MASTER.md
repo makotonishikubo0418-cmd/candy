@@ -1,352 +1,237 @@
-# CANDY 本番移行マスター管理書
+# CANDY 本番移行・手動反映 正本
 
-更新日: 2026-07-13
+## 1. 目的
 
-## 1. 結論
+最新 `HP/` を KAGOYA 本番へ段階的に反映し、表示崩れ、リンク切れ、転送解除、不要ファイル残存を防ぐ。
 
-初回移行では、ユーザーの明示承認により、転送用`index.php`を除くGit管理中の本番用ファイルを一度だけ全件反映します。管理資料、元データ、ログ、`.well-known`は除外し、サーバーファイルは削除しません。
+この資料は本番移行の判断基準を扱う。2026-07-13 の詳しい経緯と事故記録は `CANDY_20260713_CONTEXT_AND_IMPROVEMENT.md`、全件検証は `CANDY_VERIFICATION_PLAN.md` を参照する。
 
-全件反映後も本番`index.php`のシティヘブン転送を維持します。トップ以外のPHP、CSS、JavaScript、画像、動画は最新状態となり、直接URLで確認できます。最終公開時だけ最新`HP/index.php`で上書きします。
+## 2. 対象環境
 
-現在は次の3つを分離して管理します。
-
-| 区分 | パス・対象 | 現在の扱い |
+| 用途 | パス・場所 | 扱い |
 |---|---|---|
-| 本番スナップショット | `HP_旧データ` | 2026-07-13にユーザーが実サーバーから再ダウンロードした取得時点の本番データ |
-| 最新制作データ | `HP` | GitHubで管理し、今後本番へ段階反映する正本候補 |
-| 実サーバー | `/public_html/group/candy/` | 実体一覧・ハッシュ未取得。現時点では最終的な正本状態を断定しない |
+| 最新ローカル | `HP/` | 今後反映する開発・制作データ |
+| 本番スナップショット | `HP_旧データ/` | ユーザーが本番から再ダウンロードした取得時点の旧データ |
+| 本番サーバー | `/public_html/group/candy/` | 実際の公開先 |
+| テストサーバー | `/public_html/group_test/candy/` | ユーザーが制作時に設けたテスト版 |
 
-`HP_旧データ`は、ユーザーが既存データを削除後、実サーバーから再ダウンロードしたデータです。取得後に実サーバーが変更されていないことまでは未確認ですが、移行管理では取得時点の本番スナップショットとして扱います。
+ローカルパスは PC ごとに変わる。作業時の Git ルートを基準にする。本番とテストを混同しない。
 
-本番移行前は、実サーバー全件照合よりも、転送設定、入口ファイル、本番・テスト版の参照先、最新HPの依存関係、ロールバック方法を優先して確認します。
+## 3. 最重要の公開切替ルール
 
-## 1.1 サーバー環境の確定区分
+### 3.1 本番 index.php
 
-ユーザー確認により、次を正しい環境区分として固定します。
+- 本番スナップショットの `index.php` はシティヘブンへ `301` 転送する。
+- 最新 `HP/index.php` は新サイトの入口であり、役割が異なる。
+- 段階移行中は本番の転送用 `index.php` を維持する。
+- 最新 `HP/index.php` はPush、preview、deployのすべてで対象外にする。
+- 全準備完了後、ユーザーが最終公開切替を明示指示した場合だけ、最新 `HP/index.php` を単独反映する。
+- 反映後はトップの転送終了、HTTP、画面、PC/SP、主要導線を確認する。
 
-| サーバーパス | 役割 |
-|---|---|
-| `/public_html/group/candy/` | 本番環境 |
-| `/public_html/group_test/candy/` | ユーザーが制作時に設けたテスト版環境 |
+### 3.2 index 以外
 
-Codexはこの2環境を混同してはいけません。本番反映先は`/group/candy`、制作・確認用は`/group_test/candy`です。
+PHP、include、source、CSS、JavaScript、画像、動画等は、転送用 index を維持したまま先行更新できる。ただし「転送が維持された」ことと「他ページが正常」の確認は別である。
 
-現在の最新HPに残る`group_test/candy`参照は、制作時のテスト版参照です。本番移行では、動作確認中はテスト版を維持し、最終切替対象として本番参照へ変更します。ユーザー承認なしに一括置換しません。
+## 4. GitHub Actions の現行設計
 
-## 2. 全ファイル照合結果
-
-2026-07-13に全ファイルを相対パスとSHA-256で照合しました。
-
-| 状態 | 件数 | 意味 |
-|---|---:|---|
-| `IDENTICAL` | 609 | 新旧でパス・内容が完全一致 |
-| `CHANGED` | 40 | 同じパスだが内容が異なる |
-| `NEW_ONLY` | 1,046 | 最新HPにだけ存在 |
-| `OLD_ONLY` | 72 | 本番スナップショットにだけ存在 |
-| 合計ユニークパス | 1,767 | 新旧を統合した管理対象 |
-
-元フォルダ件数:
-
-- `HP_旧データ`: 721ファイル、26フォルダ
-- `HP`: 台帳生成対象1,695ファイル、38フォルダ
-- 自己参照を防ぐため、生成物`CANDY_PRODUCTION_MIGRATION_INVENTORY.csv`自身は台帳集計から除外
-- 0バイトファイル: 新旧とも0件
-- 大文字小文字だけが異なる同一パス衝突: 新旧とも0件
-
-全1,767件の判定は `CANDY_PRODUCTION_MIGRATION_INVENTORY.csv` を正本台帳とします。
-
-## 3. 最重要STOP条件
-
-### 3.1 実サーバー全件照合の扱い
-
-`HP_旧データ`は2026-07-13に実サーバーから再ダウンロードした取得時点の本番スナップショットです。
-
-ただし、実サーバーは転送中で通常利用されていなかったため、全ファイル・全ハッシュの一致確認は必須Gateから外します。次の重要箇所だけは本番切替前に確認します。
-
-- ルートの`index.php`、`index.html`、`.htaccess`
-- 現在の転送設定と転送先
-- `/group/candy`と`/group_test/candy`の実配置
-- 本番切替対象ファイルの反映前ハッシュ
-- 公開URLの切替前後の実応答
-
-全件照合は、旧ファイル削除を検討するときに実施します。旧ファイルを削除しない段階移行では、優先必須作業ではありません。
-
-### 3.2 PHPがテスト版環境を参照している
-
-最新HPのルート直下PHPは98件あり、そのうち97件が次を読み込みます。
+対象 workflow:
 
 ```text
-/home/firststar/public_html/group_test/candy/includefile/dataset_base.php
+.github/workflows/candy-production-deploy.yml
 ```
 
-一方、自動FTP配置先は次です。
+対象 deploy script:
 
 ```text
-/public_html/group/candy/
+.github/scripts/candy_ftp_deploy.py
 ```
 
-さらに最新`HP/includefile/dataset_base.php`にも、`group_test/candy`への絶対参照があります。
+### 4.1 起動条件
 
-- session設定: `group_test/control`参照
-- class、funcs、INCLUDE_DIR: `group_test/candy`参照
-- DB設定の一部: `group/control`参照
-- sourceパス変換: `group_test/candy/source`参照
+- `main` へのPushでは本番処理を起動しない。
+- 本番処理は手動 `workflow_dispatch` だけで起動する。
+- `preview` と `deploy` は別操作であり、それぞれユーザーの明示指示を必要とする。
+- `preview` はFTP秘密値を使用せず、FTP接続もサーバー変更も行わない。
+- `deploy` jobには `candy-production` environmentを指定する。
+- previewは5分、deployは10分でtimeoutする。
+- concurrencyにより同時deployを禁止する。
 
-`/group/candy/`は本番、`/group_test/candy/`は制作時のテスト版であることを確認済みです。この状態で本番へファイルを配置しても、入口PHPがテスト版の共通処理を読み続けます。
+### 4.2 二段階承認
 
-したがって、本番移行では次を別工程にします。
+previewは次を出力する。
 
-1. テスト版参照のまま制作・動作確認する
-2. 本番配置対象を段階反映する
-3. 最終切替バッチで絶対参照を本番`/group/candy`へ変更する
-4. PHP・DB・session・source・全主要ページを確認する
+- 比較元の40文字commit SHA
+- 反映対象の40文字commit SHA
+- deploy対象一覧と除外一覧
+- 削除・renameの有無
+- deploy対象件数
+- 各対象内容のSHA256を含む `PLAN_TOKEN`
 
-参照先変更は最終切替であり、通常ページ追加や静的資産反映へ混ぜません。
+deployは次がpreviewと完全一致する場合だけFTP接続へ進む。
 
-### 3.3 本番スナップショットのみの72件は自動削除禁止
+- 比較元SHAと対象SHA
+- 対象件数
+- `PLAN_TOKEN`
+- 確認文言 `DEPLOY-CANDY-PRODUCTION`
 
-自動デプロイは追加・更新のみで、削除・リネームを停止します。この仕様を維持します。
+一項目でも不一致ならFTP接続前に失敗させる。Push指示、preview指示、deploy指示を相互に流用しない。
 
-本番スナップショット側だけにある全72件の上位区分:
+### 4.3 強制上限と禁止経路
 
-| 区分 | 件数 |
+- 一回のdeployは最大25ファイル、合計50MiB以下。
+- 26ファイル以上または50MiB超はpreviewできてもdeployできない。小バッチへ分割する。
+- full deploy経路は持たない。
+- Git上の削除・renameを検出した場合はdeploy全体を停止する。
+- サーバーだけに存在するファイルを削除しない。
+- 対象SHAはcheckout中のHEADと完全一致させる。
+- 比較元SHAは対象SHAのancestorでなければならない。
+
+### 4.4 保護・除外
+
+workflow/scriptの実物で確認する主な除外:
+
+- `HP/index.php`
+- `HP/.htaccess`
+- `HP/AGENTS.md`
+- `HP/codex/`
+- `HP/log/`
+- `HP/Text_area_data/`
+- `HP/Text_blog_data/`
+- `HP/Text_hotel_data/`
+- `HP/.well-known/`
+- Markdown
+- `.env`
+- `.bak`、`.backup`、`.zip`
+- `.candy-backup-*`、`.candy-upload-*`
+
+除外一覧は将来のworkflowへ推測で適用せず、previewの実出力で再確認する。
+
+## 5. FTP デプロイの安全要件
+
+FTP接続前に、40文字SHA、ancestor、checkout HEAD、対象件数、最大25件、合計50MiB、`PLAN_TOKEN`、確認文言を検証する。検証失敗時はFTP秘密値を使わず停止する。
+
+対象ファイルごとに次を完結させる。
+
+1. 一時名で upload
+2. 一時ファイルを download して SHA256 照合
+3. 既存ファイルがあれば一時 backup 名へ rename
+4. 一時ファイルを正式名へ promote
+5. 正式名を download して SHA256 再照合
+6. 成功した対象の backup を削除
+7. `現在件数/総件数` を即時出力
+
+失敗時:
+
+- 失敗中の対象だけを rollback する。
+- すでに成功・完結した対象は反映済みとして残る。
+- 失敗位置、対象、rollback の成否を報告する。
+- 一時・backup ファイルが残っていないか実サーバーで確認する。
+
+注意: 手動二段階workflowと対象ごとに完結するscriptはローカルの未Commit差分である。Commit・Push・Actions preview成功を確認するまでGitHub上の現行動作になったと断定しない。旧workflowがGitHubに残る間は、HP変更を含むPushを行わない。
+
+## 6. 2026-07-13 の本番作業結果
+
+### 6.1 自動 full deploy（失敗・廃止）
+
+- 多数ファイルを一括処理する旧方式が長時間化した。
+- backup・一時ファイルが多数残り、実進捗と報告が一致しなかった。
+- controlled な完了を確認できず、ユーザーが WinSCP で直下 PHP を手動反映した。
+- したがって当該 Actions を「正常な全件反映完了」の証拠として使わない。
+
+### 6.2 cleanup
+
+ユーザーの手動反映後、確実に不要と確認できた次を本番から削除した。
+
+| 対象 | 件数 |
 |---|---:|
-| `magaimg` | 44 |
-| `imgHtml` | 10 |
-| `source` | 5 |
-| `.well-known` | 4 |
-| `css` | 4 |
-| `includefile` | 2 |
-| ルート直下 | 2 |
-| `js` | 1 |
+| `.candy-backup-*` | 319 |
+| サーバー上の `.gitignore` | 1 |
+| FTP smoke test | 1 |
+| 合計 | 321 |
 
-旧ページがこれらを使用している可能性があるため、全公開ページの参照確認とユーザー承認なしに削除しません。
+削除後:
 
-### 3.4 転送用index.phpを維持し、最後に公開切替する
+- 本番ルート PHP: 100
+- 本番 `index.php`: 転送用を維持
+- 本番 inventory: 1,428 ファイル、29ディレクトリ
 
-`.htaccess`は新旧で完全一致し、次の順でDirectoryIndexを指定しています。
+inventory の全ファイル SHA256 同一性まで確認した記録ではない。必要時は再取得する。
 
-```text
-DirectoryIndex index.php index.html index.xhtml
-```
+### 6.3 HTTP
 
-本番スナップショットの`index.php`は、サイトトップをシティヘブンのCANDYページへ301転送します。最新`HP/index.php`とは内容が異なります。
+- 公開 PHP 100 件のうち 99 件が `200`
+- `index.php` は意図した `301`
+- 想定外 PHP status は 0
 
-段階移行中は、この転送用`index.php`を本番で維持します。その他の承認済みファイルを先行反映しても、トップ転送は解除しません。最新`HP/index.php`は、workflowのpaths除外とデプロイスクリプトの保護対象によって二重に自動反映を防止します。
+これは 2026-07-13 のスナップショットであり、現在確認には再検査が必要。
 
-全準備と確認の完了後、ユーザーが最終公開切替を明示承認した場合だけ、最後に最新`HP/index.php`で上書きします。この上書きが、シティヘブン転送終了と新しいCANDYサイト公開の切替スイッチです。
+## 7. 2026-07-13 のローカル移行状態
 
-## 4. 同一パスで内容が異なる40ファイル
+記録時点:
 
-再取得後の正確な40件は、`CANDY_PRODUCTION_MIGRATION_INVENTORY.csv`の`State=CHANGED`を正本とします。内訳は、ルートPHP等13件、CSS4件、画像1件、includefile7件、JavaScript1件、source14件です。
-
-特に`index.php`は同名でも役割が異なります。本番スナップショット版は転送用、最新HP版は新サイト公開用です。他の変更ファイルと同じバッチで自動上書きしてはいけません。
-
-40件はいずれも同名上書きになるため、台帳の全40行を対象に依存関係と反映順を確認します。抜粋一覧だけで確認完了にしてはいけません。
-
-## 5. 移行フェーズ
-
-### 初回全件反映
-
-- Git管理中の本番用ファイルを全件列挙する
-- `HP/index.php`をworkflowとデプロイスクリプトの両方で除外する
-- `HP/codex`、`HP/log`、`HP/Text_*_data`、`HP/.well-known`、`HP/AGENTS.md`、Markdownを除外する
-- サーバー上のファイルを削除しない
-- 全件を一時名でアップロードし、読戻しSHA-256確認後に反映する
-- 完了後にトップの301転送維持と、代表PHP・CSS・JS・画像の直接表示を確認する
-
-以下のフェーズは、初回全件反映後の検証、修正、追加反映、最終公開切替に使用します。
-
-台帳上の現在件数:
-
-| フェーズ | 件数 | 内訳 |
-|---|---:|---|
-| `EXCLUDED` | 333 | 自動反映しない |
-| `HOLD_OLD_ONLY` | 68 | 本番スナップショット側だけ。削除せず保留 |
-| `PHASE_1_STATIC_ASSET` | 1,071 | 同一360、変更13、新規698 |
-| `PHASE_2_SHARED_ENGINE` | 102 | 同一4、変更10、新規88 |
-| `PHASE_3_SOURCE` | 90 | 変更7、新規83 |
-| `PHASE_4_PUBLIC_ENTRY` | 99 | 同一11、新規88 |
-| `PHASE_5_ENTRY_SWITCH` | 4 | 同一2、新規2 |
-
-状態別の最新件数は、同名置換候補40件、変更不要609件、最新HPのみ1,046件、本番スナップショットのみ72件です。フェーズ別件数と状態別件数は軸が異なるため混同しません。候補は承認済みを意味しません。
-
-### Gate 0: 実体確定
-
-- 実サーバーの入口ファイルと転送設定を読取確認する
-- `/group/candy`を本番、`/group_test/candy`をテスト版として参照箇所を分類する
-- 97入口PHPの絶対include先を、現行仕様・移行後仕様に分ける
-- 取得済み本番`index.php`のシティヘブン301転送を維持し、最終公開切替の実施時期を確認する
-- workflowとデプロイスクリプトの両方で、最新`HP/index.php`が自動反映されないことを自己テスト・dry-runで確認する
-- PHPバージョン、短縮タグ、必要拡張、DB接続を確認する
-- 最初の反映対象について、反映前ハッシュとロールバック方法を確定する
-
-Gate 0が未完了なら、Phase 2以降へ進みません。
-
-### Phase 1: 静的資産
-
-対象:
-
-- `imgHtml`
-- `imgCss`
-- `font`
-- `movie`
-- 新規CSS・JS。ただし既存共通ファイルの上書きは別検証
-
-条件:
-
-- HTML・CSS・JSからの参照先とファイル名を照合
-- PC/SP画像の組を確認
-- 大文字小文字を完全一致
-- 動画・画像のサイズとSHA-256を確認
-- 公開ページから未参照でも、旧側ファイルは削除しない
-
-### Phase 2: 共通処理
-
-対象:
-
-- `includefile/class.hpgcoder2.php`
-- `includefile/funcs.php`
-- `includefile/dataset_base.php`
-- 共通dataset
-
-条件:
-
-- `/group`と`/group_test`の絶対パス方針確定
-- 本番PHP構文確認
-- DB・session・control側依存確認
-- 置換トークンと既存ページへの影響確認
-- ロールバック元のハッシュ記録
-
-### Phase 3: sourceとページ別dataset
-
-対象:
-
-- `source/*.html`
-- `includefile/dataset_*.php`
-
-条件:
-
-- ページ別3点セットと`dataset_base.php`登録を照合
-- placeholder、JSON-LD、画像、内部リンクを確認
-- 元データの可変件数を確認
-- sourceだけ、datasetだけの先行切替をしない
-
-### Phase 4: 公開入口PHP
-
-対象:
-
-- `HP`直下の公開PHP
-
-条件:
-
-- 対応source、dataset、画像が先に存在する
-- include先が確定している
-- 1ページずつHTTP表示確認できる
-- エラー時に直前版へ戻せる
-
-### Phase 5: 入口・一覧・SEO切替
-
-対象:
-
-- `index.php`
-- `main.php`
-- `.htaccess`
-- area・blog・hotel一覧
-- `sitemap.xml`
-- 広告転送設定
-
-条件:
-
-- 主要ページのPC/SP確認完了
-- 404、500、画像切れ、console、内部リンク確認完了
-- noindex・canonical・robots・sitemap方針確定
-- 広告転送の解除をユーザーが明示承認
-- 最新`HP/index.php`の上書きを最後の単独切替として実施
-- 切替直前に転送状態、切替直後に新トップ表示とHTTP状態を確認
-
-## 6. 1バッチの必須手順
-
-1. 対象ファイルを台帳から選ぶ
-2. 依存ファイルが先行反映済みか確認する
-3. 旧・新・実サーバーのハッシュを記録する
-4. 本番反映対象と除外対象をユーザーへ提示する
-5. Commit、Push、本番反映の明示承認を得る
-6. mainへPushする
-7. Actionsの対象一覧を確認する
-8. FTP一時アップロード、読戻しSHA-256、置換、最終SHA-256を確認する
-9. 対象URLのHTTP応答を確認する
-10. PC、SP、画像、リンク、JavaScript consoleを分けて確認する
-11. 台帳の`ServerVerified`、`ReviewStatus`、`Notes`を更新する
-12. 問題があれば次バッチを開始せず停止する
-
-## 7. ロールバック基準
-
-次の場合は次バッチを停止します。
-
-- HTTP 500、PHP fatal、白画面
-- DB/session/control依存エラー
-- CSS・JS崩れ
-- 主要画像切れ
-- canonical、robots、転送先の誤り
-- sourceとdatasetの不一致
-- SHA-256不一致
-- Actions失敗
-
-ロールバックは、Actionsが作成する同一Runの一時バックアップを使用します。複数バッチを同時実行しません。旧ファイルの削除・リネームは自動化せず、別の手動承認作業とします。
-
-## 8. 判定状態
-
-台帳の`ReviewStatus`は次だけを使用します。
-
-| 状態 | 意味 |
+| 対象 | 状態 |
 |---|---|
-| `NOT_REVIEWED` | 自動集計のみ |
-| `LOCAL_VERIFIED` | 新旧ローカル照合済み |
-| `SERVER_MATCHED` | 実サーバーとの一致確認済み |
-| `APPROVED` | 対象バッチの本番反映承認済み |
-| `DEPLOYED` | Actions成功済み |
-| `HTTP_VERIFIED` | 実URL確認済み |
-| `BLOCKED` | STOP条件あり |
+| HP 直下 PHP | 100 |
+| 本番 `group/candy` include 参照 | 97 |
+| テスト `group_test/candy` include 参照 | 2 |
+| dataset include を持たない PHP | `makeSitemap.php` |
 
-`DEPLOYED`だけで表示確認済みとしてはいけません。
+テスト参照が残る入口:
 
-## 9. 現在の確認済み・未確認
+- `HP/kagoshima-deliveryhealth-petitegirl.php`
+- `HP/kagoshima-deliveryhealth-slendergirl.php`
 
-確認済み:
+この二件を意図した例外か未移行か確認せず、一括置換しない。`dataset_base.php` 等の絶対パス、session、control、source 変換も対象の実物で再確認する。
 
-- 再取得後の新旧1,767相対パスの存在状態
-- 609件同一、40件変更
-- 本番スナップショットのみ72件、最新HPのみ1,046件
-- `HP_旧データ`はユーザーが実サーバーから再ダウンロードした取得時点の本番スナップショット
-- `.htaccess`は新旧同一
-- 本番スナップショット`index.php`はシティヘブンへ301転送し、最新`HP/index.php`とは異なる
-- 入口PHP97件が`group_test/candy`を参照
-- FTP自動反映は追加・更新とSHA-256照合に成功
+## 8. 反映前の必須手順
 
-未確認:
+1. root/HP `AGENTS.md` を確認する。
+2. branch、remote、status、HEAD、`origin/main`を確認する。
+3. 対象変更と既存変更の重なりを確認する。
+4. workflowとdeploy scriptの構文・self-test・`test_candy_ftp_deploy.py`統合テストを行う。
+5. workflowにpush triggerとfull deployが存在しないことを確認する。
+6. Commit対象を限定し、ユーザーの明示指示後だけCommitする。
+7. Push対象を再確認し、ユーザーの別の明示指示後だけPushする。
+8. Push完了だけでは本番反映しない。
+9. ユーザーの別の明示指示後、Actions previewを実行する。
+10. previewの対象SHA、対象一覧、除外、削除・rename、件数、`PLAN_TOKEN`を記録する。
+11. 対象件数が25以下、合計が50MiB以下であることを確認する。26以上または50MiB超ならCommitを分けず、SHA差分を小さく作り直して再previewする。
+12. 本番 `index.php` と保護対象が除外されていることを確認する。
+13. ユーザーへpreview結果と本番影響を報告し、deployの別の明示指示を得る。
+14. 同じSHA、件数、`PLAN_TOKEN`、確認文言で手動deployを実行する。
 
-- ダウンロード完了後から現在まで実サーバー側に追加変更がないこと
-- 実URLで301転送が現在も有効であること
-- GitHub Actions上での`HP/index.php`除外dry-run結果
-- テスト版参照を本番参照へ切り替える対象ファイル、実施日時、ロールバック方法
-- 本番PHP、DB、session、control依存の実行結果
-- 全ページのPC/SP表示
-- 本番スナップショットのみ72件の利用状況
-- 旧ファイルの削除可否
+## 9. 反映中
 
-## 10. スモークテストファイル
+- Actions Run 番号と commit SHA を記録する。
+- 実ログの `DEPLOYED 現在/総数`、失敗対象、終了コードを確認する。
+- 根拠のない残り時間を報告しない。実測速度と残件数がある場合だけ推定する。
+- ユーザーが停止を命じた場合は、停止操作と実際の停止状態を確認する。
+- GUI を見ているだけで「監視中」と報告しない。
 
-`HP/codex-production-deploy-smoke-test.txt`は自動反映確認のため本番へ配置済みです。サイト機能には使用しません。
+## 10. 反映後
 
-Gitから削除すると自動デプロイが削除・リネーム検出で停止します。本番とGitの削除は、移行とは別の明示承認作業として処理します。
+1. Actions の最終結果を確認する。
+2. 対象ファイルが本番に存在し、SHA256 が一致することを確認する。
+3. 一時・backup ファイルの残存を確認する。
+4. 本番 `index.php` の転送維持を確認する。
+5. 対象 PHP の HTTP を確認する。
+6. CSS/JS/画像、内部リンク、ブラウザ PC/SP を必要範囲で確認する。
+7. ローカル、GitHub、本番の結果を分けて報告する。
 
-## 11. 更新ルール
+## 11. rollback
 
-- 最新HPまたは`HP_旧データ`が変わった場合は、生成スクリプトで台帳を再作成する
-- `HP_旧データ`を実サーバーから再取得した場合、以前の件数、ハッシュ、差分、結論をすべて無効として全件再集計する
-- 「全て」「100％」「漏れなく」の確認では、対象総数と未確認数を示し、未確認が1件でもあれば完全確認済みと報告しない
-- 自動再作成すると手動入力列が初期化されるため、実サーバー確認後は台帳をバックアップしてから再生成する
-- 件数は管理書へ手入力で転記せず、台帳との一致を確認する
-- 実サーバーの秘密情報、認証値、ログ本文を台帳へ記載しない
-- 本資料だけで本番反映を許可したことにはならない。各バッチごとにユーザーの明示承認が必要
+- deploy 中の単一対象失敗は script の対象別 rollback を使う。
+- Actions 完了後の rollback は、戻す commit/file、対象サーバーパス、index 影響、DB/外部依存を確認して別作業として行う。
+- サーバーの一括削除や旧 snapshot の一括上書きを、根拠なしに行わない。
+- `HP_旧データ` は取得時点の本番比較資料であり、現在本番と常に同一とはみなさない。
+
+## 12. 現在の未完了事項
+
+- 手動二段階workflowと承認ゲートをreview、Commit、Pushし、Actions previewの成功を確認すること
+- GitHub environment `candy-production` に必要な保護ルールが設定されているか確認すること
+- 残るテスト include 二件の意図確認
+- 本番 inventory と Git 管理対象の完全な hash 照合
+- `CANDY_VERIFICATION_PLAN.md` に記録された不足内部リンク・画像・外部 URL の修正判断
+- 最終公開切替日と最新 `HP/index.php` の単独反映手順の承認
+
+未完了が残る間、「本番移行100%完了」と報告しない。

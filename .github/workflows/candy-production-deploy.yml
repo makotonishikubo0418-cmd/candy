@@ -1,30 +1,39 @@
 name: CANDY Production Deploy
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - "HP/**"
-      - "!HP/index.php"
-      - "!HP/codex/**"
-      - "!HP/log/**"
-      - "!HP/Text_area_data/**"
-      - "!HP/Text_blog_data/**"
-      - "!HP/Text_hotel_data/**"
-      - "!HP/.well-known/**"
-      - "!HP/.git/**"
-      - "!HP/.github/**"
-      - "!HP/.vscode/**"
-      - "!HP/AGENTS.md"
-      - "!HP/**/*.md"
   workflow_dispatch:
     inputs:
-      full_deploy:
-        description: "Upload all tracked production HP files except protected/excluded paths"
+      operation:
+        description: "preview first; deploy only with the approved preview values"
         required: true
-        default: false
-        type: boolean
+        default: preview
+        type: choice
+        options:
+          - preview
+          - deploy
+      before_sha:
+        description: "40-character base commit SHA"
+        required: true
+        type: string
+      after_sha:
+        description: "40-character target commit SHA"
+        required: true
+        type: string
+      expected_file_count:
+        description: "Exact deployable count printed by preview (deploy only)"
+        required: true
+        default: "0"
+        type: string
+      approved_plan_token:
+        description: "Exact PLAN_TOKEN printed by preview (deploy only)"
+        required: false
+        default: ""
+        type: string
+      confirmation:
+        description: "For deploy, enter DEPLOY-CANDY-PRODUCTION"
+        required: false
+        default: ""
+        type: string
 
 permissions:
   contents: read
@@ -34,45 +43,91 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  preview:
+    if: inputs.operation == 'preview'
     runs-on: ubuntu-latest
+    timeout-minutes: 5
 
     steps:
-      - name: Check out repository history
+      - name: Check out the exact target commit
         uses: actions/checkout@v4
         with:
+          ref: ${{ inputs.after_sha }}
           fetch-depth: 0
 
       - name: Validate deployment script
         run: |
           python3 -m py_compile .github/scripts/candy_ftp_deploy.py
           python3 .github/scripts/candy_ftp_deploy.py --self-test
+          python3 .github/scripts/test_candy_ftp_deploy.py
 
-      - name: Deploy changed HP files
-        if: github.event_name == 'push'
+      - name: Preview exact production plan without FTP
+        env:
+          BEFORE_SHA: ${{ inputs.before_sha }}
+          AFTER_SHA: ${{ inputs.after_sha }}
+        run: |
+          set -o pipefail
+          test "$(git rev-parse HEAD)" = "$AFTER_SHA"
+          python3 .github/scripts/candy_ftp_deploy.py \
+            --before "$BEFORE_SHA" \
+            --after "$AFTER_SHA" \
+            --dry-run | tee deploy-preview.txt
+          cat deploy-preview.txt >> "$GITHUB_STEP_SUMMARY"
+
+  deploy:
+    if: inputs.operation == 'deploy'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: candy-production
+
+    steps:
+      - name: Check out the exact approved target commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.after_sha }}
+          fetch-depth: 0
+
+      - name: Validate deployment script
+        run: |
+          python3 -m py_compile .github/scripts/candy_ftp_deploy.py
+          python3 .github/scripts/candy_ftp_deploy.py --self-test
+          python3 .github/scripts/test_candy_ftp_deploy.py
+
+      - name: Validate approved count and plan token without FTP
+        env:
+          BEFORE_SHA: ${{ inputs.before_sha }}
+          AFTER_SHA: ${{ inputs.after_sha }}
+          EXPECTED_FILE_COUNT: ${{ inputs.expected_file_count }}
+          APPROVED_PLAN_TOKEN: ${{ inputs.approved_plan_token }}
+          PRODUCTION_CONFIRMATION: ${{ inputs.confirmation }}
+        run: |
+          set -o pipefail
+          test "$(git rev-parse HEAD)" = "$AFTER_SHA"
+          python3 .github/scripts/candy_ftp_deploy.py \
+            --before "$BEFORE_SHA" \
+            --after "$AFTER_SHA" \
+            --expected-file-count "$EXPECTED_FILE_COUNT" \
+            --approved-plan-token "$APPROVED_PLAN_TOKEN" \
+            --confirm-production "$PRODUCTION_CONFIRMATION" \
+            --verify-approval | tee deploy-approval.txt
+          cat deploy-approval.txt >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Deploy only the approved files
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          BEFORE_SHA: ${{ inputs.before_sha }}
+          AFTER_SHA: ${{ inputs.after_sha }}
+          EXPECTED_FILE_COUNT: ${{ inputs.expected_file_count }}
+          APPROVED_PLAN_TOKEN: ${{ inputs.approved_plan_token }}
+          PRODUCTION_CONFIRMATION: ${{ inputs.confirmation }}
         run: |
+          set -o pipefail
           python3 .github/scripts/candy_ftp_deploy.py \
-            --before "${{ github.event.before }}" \
-            --after "${{ github.sha }}"
-
-      - name: Deploy full HP snapshot except protected files
-        if: github.event_name == 'workflow_dispatch' && inputs.full_deploy
-        env:
-          FTP_SERVER: ${{ secrets.FTP_SERVER }}
-          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-        run: |
-          python3 .github/scripts/candy_ftp_deploy.py --full-deploy
-
-      - name: Preview previous commit difference
-        if: github.event_name == 'workflow_dispatch' && !inputs.full_deploy
-        run: |
-          BEFORE="$(git rev-parse HEAD^)"
-          python3 .github/scripts/candy_ftp_deploy.py \
-            --before "$BEFORE" \
-            --after "${{ github.sha }}" \
-            --dry-run
+            --before "$BEFORE_SHA" \
+            --after "$AFTER_SHA" \
+            --expected-file-count "$EXPECTED_FILE_COUNT" \
+            --approved-plan-token "$APPROVED_PLAN_TOKEN" \
+            --confirm-production "$PRODUCTION_CONFIRMATION" | tee deploy-result.txt
+          cat deploy-result.txt >> "$GITHUB_STEP_SUMMARY"

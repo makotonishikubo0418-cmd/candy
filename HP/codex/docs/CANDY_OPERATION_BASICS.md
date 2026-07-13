@@ -1,106 +1,117 @@
-# CANDY 運用基礎
+# CANDY 通常運用の基本
 
-改修前に必ず確認する運用情報です。不明な項目は未確認とし、確認方法を併記します。
+## 1. 役割
 
-## 0. 正本ルールとGit同期
+既存 HP の調査・修正・確認で共通使用する短い手順である。新規ページ生成は `CANDY_PAGE_GENERATION_GOVERNANCE.md`、本番作業は `CANDY_PRODUCTION_MIGRATION_MASTER.md` を優先する。
 
-- リポジトリ全体の正本ルールは `AGENTS.md`、HP配下の補足ルールは `HP/AGENTS.md`。
-- 現在確認済みのリポジトリルートは `C:\Users\nishi\Desktop\data\candy`。
-- 作業開始前にFetchとPull、作業終了後に差分確認・Commit・Pushを行う。未コミット変更や未取得変更がある場合は上書きせず、コンフリクトは勝手に解消しない。
-- `AGENTS.md` 自体も通常ファイルと同様にGitHubで同期する。
+## 2. 開始前
 
-## 共通集計
-
-集計時点: 2026-07-10 04:52
-
-| 項目 | 件数 |
-|---|---:|
-| 全フォルダ | 37 |
-| 全ファイル | 1683 |
-| コード/設定ファイル | 328 |
-| 非コードファイル | 1355 |
-| codex配下ファイル | 34 |
-| codex/docs配下ファイル | 13 |
-| 管理MD(CANDY_*.md) | 13 |
-| ルート直下PHP | 98 |
-| source HTML | 89 |
-| includefile PHP | 101 |
-| dataset_*.php | 99 |
-| Text_*_data配下ファイル | 175 |
-| log配下ファイル | 74 |
-
-注記: `全フォルダ` は `[root]` を除く実フォルダ数。フォルダ台帳は管理行として `[root]` を追加するため、台帳行数は `全フォルダ + 1`。
-
-## 1. 公開方式
-
-確認済み:
-
-- GitHub `main`の対象HP変更は、GitHub ActionsからKAGOYAの`/public_html/group/candy/`へFTPで追加・更新反映する
-- `/public_html/group/candy/`が本番、`/public_html/group_test/candy/`が制作時のテスト版
-- 段階移行中のトップは、本番`index.php`によるシティヘブンへの301転送を維持する
-- 最新`HP/index.php`の上書きが、転送終了と新サイト公開の最終切替になる
-- 段階移行中は、workflowとデプロイスクリプトの二重保護により`HP/index.php`を自動反映しない
-- 初回移行では、明示承認後に`HP/index.php`を除くGit管理中の本番用ファイルを一度だけ全件反映する。削除は行わない
-- この状態ではトップだけがシティヘブンへ転送され、その他のPHP、CSS、JS、画像は直接URLで最新状態を確認できる
-
-未確認: 本番PHPバージョン、Webサーバー種別、DB・session・control依存の実行結果。
-
-## 2. 本番URL / PHPバージョン / Webサーバー
-
-| 項目 | 状態 | 確認方法 |
-|---|---|---|
-| 本番URL | 未確認 | オーナー確認、またはサーバー設定/公開中URLを確認 |
-| PHPバージョン | 未確認 | 本番サーバーの管理画面またはphpinfo相当の安全な確認手段で確認 |
-| Webサーバー種別 | 未確認 | 本番サーバーの管理画面、レスポンスヘッダ、契約情報で確認 |
-
-## 3. 動作確認手順
-
-未確認 / 確認方法: テスト環境の有無をオーナー確認する。テスト環境がある場合は、改修前バックアップ、差分確認、テスト環境反映、主要ページ表示確認、フォーム/動的ページ確認、ログ/DB値の非転記確認の順で行う。
-
-テスト環境がない場合: 本番反映前にバックアップを取り、反映ファイルを限定し、反映直後にトップ、一覧、詳細、問い合わせ、サイトマップを確認する。
-
-## 4. 変更禁止/要承認ファイル
-
-| ファイル | 判定 | 理由 |
-|---|---|---|
-| `create.php` | 変更禁止 | 認証値とファイル生成処理に関わる。値は転記禁止。 |
-| `includefile/dataset_base.php` | 要承認 | 全ページ生成の共通入口で、DB/外部設定読込にも関わる。 |
-| `.htaccess` | 要承認 | 公開ルート設定。URL/アクセス制御へ影響する。 |
-| `includefile/class.hpgcoder2.php` | 要承認 | 置換エンジン。多数ページに影響する。 |
-| `includefile/dataset_*.php` | 要承認 | ページ別表示データ。変更範囲確認が必要。 |
-| `source/system.html` | 要承認 | 決済/外部連携/hidden値を含む可能性。値は転記禁止。 |
-| `log`配下 | 変更禁止 | ログ本文は転記禁止。削除も承認なし禁止。 |
-
-## 5. DB接続定義の所在
-
-所在のみ記載。値は記載しない。
-
-| 種別 | パス | 状態 |
-|---|---|---|
-| require元 | `includefile/dataset_base.php` | 確認済み |
-| 外部設定候補 | `/home/firststar/public_html/group/control/includefile/incfiles_vv.php` | 未確認 / 確認方法: 本番サーバー上で所在と役割を確認。値は転記しない。 |
-| セッション設定候補 | `/home/firststar/public_html/group_test/control/includefile/setting_session_vv.php` | 未確認 / 確認方法: 本番サーバー上で所在と役割を確認。値は転記しない。 |
-
-## 6. バックアップ手順
-
-既存慣例: `HP/codex/area/backups` に、対象ファイル名 + 変更理由 + 日付の形で保存された実績あり。
-
-推奨ルール: 改修前に `HP/codex/area/backups/<元ファイル名>.before-<作業名>-YYYYMMDD.<ext>` の形式で管理コピーを作る。
-
-未確認 / 確認方法: 今後の正式な保管先を `HP/codex/area/backups` 継続でよいかオーナー確認する。
-
-## 7. 管理資料の再生成手順
-
-正本: `HP/codex/scripts/generate_candy_management_docs.py`
-
-現在確認済みのローカル絶対パス: `C:\Users\nishi\Desktop\data\candy\HP\codex\scripts\generate_candy_management_docs.py`
-
-実行コマンド:
+1. root `AGENTS.md`、`HP/AGENTS.md` を読む。
+2. `CANDY_MASTER_DOC_INDEX.md` で今回の正本資料を選ぶ。
+3. Git ルート、branch、remote、status を確認する。
+4. 対象ファイルと既存変更の重なりを確認する。
+5. やること、やらないこと、完了証拠を短く示す。
 
 ```powershell
-python ".\HP\codex\scripts\generate_candy_management_docs.py"
+git remote -v
+git branch --show-current
+git status --short --branch
 ```
 
-Python未導入環境: PATH上の `python` または `py` を導入する。Codex環境では `Invoke-CandyDocsMaintenance.ps1` がCodexランタイムPythonへフォールバックする。
-必要バージョン/依存: Python 3.9以上。標準ライブラリのみ使用し、外部パッケージ依存なし。
-補足: `HP/codex/scripts/Invoke-CandyDocsMaintenance.ps1` は互換用ラッパーのみ。管理資料の生成・出力ロジックは正本Pythonに集約する。
+Fetch/Pull は作業ツリーと履歴が安全な場合だけ行う。Commit/Push は作業終了時の自動手順ではなく、ユーザーの明示指示がある場合だけ行う。
+
+## 3. 調査の基本単位
+
+必要に応じ、次を一組として確認する。
+
+- HP 直下の公開 PHP
+- `HP/source/` の対応 HTML
+- `HP/includefile/dataset_*.php`
+- `dataset_base.php`、`class.hpgcoder2.php`、`funcs.php`
+- CSS、JavaScript、画像、動画
+- Text 元データ
+- 一覧、関連ページ、内部リンク、sitemap
+- DB、session、外部連携の有無
+
+ファイル数や参照数は変化するため、この資料の固定値を使わず実ファイルから数える。一ファイルだけを見て仕様を断定しない。
+
+## 4. 変更前
+
+- 結論と変更理由
+- 変更ファイルと変更しないファイル
+- 影響するページ、PC/SP、共通処理
+- DB、本番、秘密値、ログ、決済への影響
+- 検証方法
+- 未確認とユーザー判断が必要な点
+
+を確認し、`AGENTS.md` の変更ゲートに該当する場合は承認を得る。
+
+Git 管理中ファイルへ機械的な `.before` コピーを作らない。Git と明示された本番ロールバック方式を使用する。未追跡資産や本番ファイルの保全が必要な場合は、対象、保存先、復元方法を決めてから実施する。
+
+## 5. 変更中
+
+- 指定範囲だけを変更する。
+- 既存変更を上書きしない。
+- 置換トークン、dataset、include、リンク、画像参照を同時に確認する。
+- 固定のファイル数上限は設けない。
+- 共通処理の変更は、対象外ページへの影響も確認する。
+- 認証値、DB 接続値、決済値、ログ本文、個人情報を転記しない。
+
+## 6. 変更後
+
+最低限:
+
+```powershell
+git status --short
+git diff --stat
+git diff --check
+```
+
+作業に応じて次を追加する。
+
+- PHP/HTML/JavaScript 構文
+- 生成結果
+- 内部リンクと参照画像
+- PC/SP 表示
+- JavaScript console
+- DB・session・外部サービス
+- HTTP 応答
+
+実行していない検査は未確認と書く。
+
+## 7. 本番・テスト
+
+| 用途 | パス |
+|---|---|
+| 本番 | `/public_html/group/candy/` |
+| テスト | `/public_html/group_test/candy/` |
+
+- テスト環境の存在は確認済み。
+- 段階移行中、本番 `index.php` はシティヘブンへの 301 転送を維持する。
+- 最新 `HP/index.php` の本番反映は最終公開切替であり、明示承認が必要。
+- `main` へのPushだけでは本番反映しない。Commit、Push、preview、deployを別操作として扱う。
+- 本番は手動previewで対象SHA・対象一覧・件数・`PLAN_TOKEN`を取得し、同じ値を指定した手動deployだけを許可する。
+- 一回のdeployは最大25ファイル。full deploy、自動削除、rename反映は行わない。
+- workflow と deploy script の実物を見ずに反映対象・除外を断定しない。
+- サーバー変更、削除、Actions preview、Actions deployは、それぞれ明示指示を必要とする。
+
+詳細は `CANDY_PRODUCTION_MIGRATION_MASTER.md` を確認する。
+
+## 8. 未確認の扱い
+
+本番 PHP バージョン、Web サーバー種別、DB 実体、外部サービス設定等は、実際に再確認するまで未確認とする。古い資料のパス候補や値を現在値として断定しない。秘密値に近い内容は値を出さず、所在だけを報告する。
+
+## 9. 完了報告
+
+次を必要な範囲だけ分ける。
+
+- ローカル変更
+- 構文・静的検証
+- Commit
+- Push
+- Actions
+- 本番ファイル
+- HTTP
+- ブラウザ表示
+
+「完了」だけで済ませず、対象、件数、失敗、未確認、未実施を示す。

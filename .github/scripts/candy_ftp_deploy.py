@@ -18,7 +18,13 @@ REMOTE_ROOT = PurePosixPath("/public_html/group/candy")
 ZERO_SHA = "0" * 40
 DEPLOYABLE_STATUSES = {"A", "M", "T"}
 BLOCKED_STATUSES = {"D", "R"}
-PROTECTED_PATHS = {"HP/index.php"}
+PROTECTED_PATHS = {"HP/index.php", "HP/.htaccess"}
+BLOCKED_FILE_MARKERS = (".candy-backup-", ".candy-upload-")
+BLOCKED_FILE_NAMES = {".env"}
+BLOCKED_FILE_SUFFIXES = (".bak", ".backup", ".zip")
+MAX_DEPLOY_FILES = 25
+MAX_DEPLOY_TOTAL_BYTES = 50 * 1024 * 1024
+DEPLOY_CONFIRMATION = "DEPLOY-CANDY-PRODUCTION"
 EXCLUDED_PREFIXES = (
     "HP/codex/",
     "HP/log/",
@@ -57,7 +63,13 @@ def is_excluded(path: str) -> bool:
         return True
     if path == "HP/AGENTS.md":
         return True
-    if path.lower().endswith(".md"):
+    lower_path = path.lower()
+    name = PurePosixPath(path).name.lower()
+    if lower_path.endswith(".md"):
+        return True
+    if name in BLOCKED_FILE_NAMES or name.endswith(BLOCKED_FILE_SUFFIXES):
+        return True
+    if any(marker in name for marker in BLOCKED_FILE_MARKERS):
         return True
     return any(path.startswith(prefix) for prefix in EXCLUDED_PREFIXES)
 
@@ -112,13 +124,31 @@ def commit_exists(commit: str) -> bool:
     return result.returncode == 0
 
 
+def validate_full_commit_sha(value: str, label: str) -> None:
+    if len(value) != 40 or any(character not in "0123456789abcdefABCDEF" for character in value):
+        raise RuntimeError(f"{label} must be a full 40-character commit SHA")
+
+
+def is_ancestor(before: str, after: str) -> bool:
+    result = subprocess.run(
+        ["git", "merge-base", "--is-ancestor", before, after],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    )
+    return result.returncode == 0
+
 def collect_changes(before: str, after: str) -> list[Change]:
+    validate_full_commit_sha(before, "Comparison base")
+    validate_full_commit_sha(after, "Comparison target")
     if not before or before == ZERO_SHA:
         raise RuntimeError("Comparison base is missing or all zeros; refusing full upload")
     if not after:
         raise RuntimeError("Comparison target is missing")
     if not commit_exists(before) or not commit_exists(after):
         raise RuntimeError("Comparison commit is unavailable; refusing full upload")
+    if not is_ancestor(before, after):
+        raise RuntimeError("Comparison base is not an ancestor of target")
     result = subprocess.run(
         [
             "git",
@@ -139,31 +169,6 @@ def collect_changes(before: str, after: str) -> list[Change]:
     if result.returncode != 0:
         raise RuntimeError(f"git diff failed: {result.stderr.strip()}")
     return parse_diff_output(result.stdout)
-
-
-def collect_full_deploy_paths() -> tuple[list[str], list[str]]:
-    result = subprocess.run(
-        ["git", "ls-files", "-z", "--", "HP"],
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-        check=False,
-    )
-    if result.returncode != 0:
-        raise RuntimeError(
-            f"git ls-files failed: {result.stderr.decode('utf-8', errors='replace').strip()}"
-        )
-    deployable: list[str] = []
-    excluded: list[str] = []
-    for raw_path in result.stdout.split(b"\0"):
-        if not raw_path:
-            continue
-        path = raw_path.decode("utf-8")
-        validate_repository_path(path)
-        if is_excluded(path):
-            excluded.append(path)
-        else:
-            deployable.append(path)
-    return sorted(set(deployable)), sorted(set(excluded))
 
 
 def classify_changes(changes: list[Change]) -> tuple[list[str], list[str], list[Change]]:
@@ -218,6 +223,58 @@ def print_plan(
     else:
         print("  (none)")
 
+
+def current_head() -> str:
+    result = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        text=True,
+        encoding="utf-8",
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    if result.returncode != 0:
+        raise RuntimeError(f"git rev-parse HEAD failed: {result.stderr.strip()}")
+    return result.stdout.strip()
+
+
+def plan_token(before: str, after: str, deployable: list[str]) -> str:
+    digest = hashlib.sha256()
+    digest.update(f"{before}\n{after}\n".encode("utf-8"))
+    for path in deployable:
+        digest.update(f"{path}\t{sha256_file(Path(path))}\n".encode("utf-8"))
+    return digest.hexdigest()
+
+
+def validate_deploy_approval(
+    deployable: list[str],
+    expected_file_count: int | None,
+    approved_plan_token: str | None,
+    actual_plan_token: str,
+    confirmation: str | None,
+) -> None:
+    if not deployable:
+        raise RuntimeError("No deployable files were approved")
+    if len(deployable) > MAX_DEPLOY_FILES:
+        raise RuntimeError(
+            f"Deploy plan has {len(deployable)} files; maximum is {MAX_DEPLOY_FILES}. "
+            "Split the change into smaller reviewed batches."
+        )
+    total_bytes = sum(Path(path).stat().st_size for path in deployable)
+    if total_bytes > MAX_DEPLOY_TOTAL_BYTES:
+        raise RuntimeError(
+            f"Deploy plan has {total_bytes} bytes; maximum is {MAX_DEPLOY_TOTAL_BYTES}. "
+            "Split large assets into a separate reviewed batch."
+        )
+    if expected_file_count != len(deployable):
+        raise RuntimeError(
+            f"Expected file count {expected_file_count!r} does not match "
+            f"actual count {len(deployable)}"
+        )
+    if approved_plan_token != actual_plan_token:
+        raise RuntimeError("Approved plan token does not match the current deploy plan")
+    if confirmation != DEPLOY_CONFIRMATION:
+        raise RuntimeError("Production confirmation text is missing or incorrect")
 
 def sha256_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
@@ -309,29 +366,23 @@ def build_targets(paths: list[str], run_id: str) -> list[UploadTarget]:
     return targets
 
 
-def rollback_promotions(ftp: ftplib.FTP, targets: list[UploadTarget]) -> None:
-    for target in reversed(targets):
-        if not target.promoted:
-            continue
-        ftp.cwd(target.remote_directory)
-        if remote_exists(ftp, target.remote_directory, target.final_name):
+def rollback_target(ftp: ftplib.FTP, target: UploadTarget) -> None:
+    """Restore only the file currently being promoted."""
+    ftp.cwd(target.remote_directory)
+    names = list_remote_names(ftp, target.remote_directory)
+    if target.had_original and target.backup_name in names:
+        if target.final_name in names:
             ftp.delete(target.final_name)
-        if target.had_original and remote_exists(
-            ftp, target.remote_directory, target.backup_name
-        ):
-            ftp.rename(target.backup_name, target.final_name)
-        target.promoted = False
-
-
-def cleanup_temporary_files(ftp: ftplib.FTP, targets: list[UploadTarget]) -> None:
-    for target in targets:
-        try:
-            delete_if_exists(ftp, target.remote_directory, target.temporary_name)
-        except Exception as exc:
-            print(
-                f"WARNING: temporary cleanup failed for {target.repository_path}: {exc}",
-                file=sys.stderr,
-            )
+            names.discard(target.final_name)
+        ftp.rename(target.backup_name, target.final_name)
+        names.discard(target.backup_name)
+        names.add(target.final_name)
+    elif target.promoted and target.final_name in names:
+        ftp.delete(target.final_name)
+        names.discard(target.final_name)
+    if target.temporary_name in names:
+        ftp.delete(target.temporary_name)
+    target.promoted = False
 
 
 def deploy(paths: list[str]) -> None:
@@ -344,23 +395,39 @@ def deploy(paths: list[str]) -> None:
     if not run_id.isdigit():
         raise RuntimeError("GITHUB_RUN_ID must be numeric")
     targets = build_targets(paths, run_id)
-    ftp = ftplib.FTP(timeout=60)
+    ftp = ftplib.FTP(timeout=30)
     try:
         ftp.connect(os.environ["FTP_SERVER"], 21)
         ftp.login(os.environ["FTP_USERNAME"], os.environ["FTP_PASSWORD"])
         ftp.cwd(REMOTE_ROOT.as_posix())
 
-        try:
-            for target in targets:
-                ensure_remote_directory(ftp, target.remote_directory)
-                if remote_exists(ftp, target.remote_directory, target.backup_name):
+        ensured_directories: set[str] = set()
+        directory_names: dict[str, set[str]] = {}
+        total = len(targets)
+        for position, target in enumerate(targets, start=1):
+            try:
+                if target.remote_directory not in ensured_directories:
+                    ensure_remote_directory(ftp, target.remote_directory)
+                    ensured_directories.add(target.remote_directory)
+                names = directory_names.get(target.remote_directory)
+                if names is None:
+                    names = list_remote_names(ftp, target.remote_directory)
+                    directory_names[target.remote_directory] = names
+
+                ftp.cwd(target.remote_directory)
+                if target.backup_name in names:
                     raise RuntimeError(
                         f"Backup collision for {target.repository_path}; manual inspection required"
                     )
-                delete_if_exists(ftp, target.remote_directory, target.temporary_name)
+                if target.temporary_name in names:
+                    ftp.delete(target.temporary_name)
+                    names.discard(target.temporary_name)
+
+                ensure_remote_directory(ftp, target.remote_directory)
                 ftp.cwd(target.remote_directory)
                 with target.local_path.open("rb") as handle:
                     ftp.storbinary(f"STOR {target.temporary_name}", handle)
+                names.add(target.temporary_name)
                 temporary_data = download_remote(
                     ftp, target.remote_directory, target.temporary_name
                 )
@@ -369,38 +436,52 @@ def deploy(paths: list[str]) -> None:
                         f"Temporary SHA256 mismatch for {target.repository_path}"
                     )
 
-            for target in targets:
-                target.had_original = remote_exists(
-                    ftp, target.remote_directory, target.final_name
-                )
+                target.had_original = target.final_name in names
                 ftp.cwd(target.remote_directory)
                 if target.had_original:
                     ftp.rename(target.final_name, target.backup_name)
+                    names.discard(target.final_name)
+                    names.add(target.backup_name)
                 try:
                     ftp.rename(target.temporary_name, target.final_name)
                 except Exception:
-                    if target.had_original and remote_exists(
-                        ftp, target.remote_directory, target.backup_name
-                    ):
+                    if target.had_original and target.backup_name in names:
                         ftp.rename(target.backup_name, target.final_name)
+                        names.discard(target.backup_name)
+                        names.add(target.final_name)
                     raise
+                names.discard(target.temporary_name)
+                names.add(target.final_name)
                 target.promoted = True
                 final_data = download_remote(
                     ftp, target.remote_directory, target.final_name
                 )
                 if sha256_bytes(final_data) != target.sha256:
                     raise RuntimeError(f"Final SHA256 mismatch for {target.repository_path}")
-        except Exception:
-            rollback_promotions(ftp, targets)
-            cleanup_temporary_files(ftp, targets)
-            raise
 
-        for target in targets:
-            if target.had_original:
-                delete_if_exists(ftp, target.remote_directory, target.backup_name)
-        cleanup_temporary_files(ftp, targets)
-        for target in targets:
-            print(f"DEPLOYED: {target.repository_path} -> {server_path_for(target.repository_path)}")
+                if target.had_original:
+                    ftp.cwd(target.remote_directory)
+                    ftp.delete(target.backup_name)
+                    names.discard(target.backup_name)
+                target.promoted = False
+                print(
+                    f"DEPLOYED {position}/{total}: {target.repository_path} "
+                    f"-> {server_path_for(target.repository_path)}",
+                    flush=True,
+                )
+            except Exception as exc:
+                try:
+                    rollback_target(ftp, target)
+                except Exception as rollback_exc:
+                    raise RuntimeError(
+                        f"Deployment failed at {position}/{total} for "
+                        f"{target.repository_path}; rollback also failed: {rollback_exc}"
+                    ) from exc
+                raise RuntimeError(
+                    f"Deployment stopped at {position}/{total} for "
+                    f"{target.repository_path}; previously completed files remain deployed"
+                ) from exc
+
         print(f"SUCCESS: deployed and SHA256-verified {len(targets)} file(s)")
     finally:
         try:
@@ -414,6 +495,10 @@ def deploy(paths: list[str]) -> None:
 
 def self_test() -> None:
     assert is_excluded("HP/index.php")
+    assert is_excluded("HP/.htaccess")
+    assert is_excluded("HP/img/.photo.jpg.candy-backup-123")
+    assert is_excluded("HP/archive.zip")
+    assert is_excluded("HP/.env")
     assert is_excluded("HP/AGENTS.md")
     assert is_excluded("HP/codex/example.txt")
     assert is_excluded("HP/log/example.log")
@@ -439,6 +524,32 @@ def self_test() -> None:
     assert deployable == ["HP/main.php"]
     assert excluded == ["HP/index.php"]
     assert blocked == []
+    token = "a" * 64
+    validate_deploy_approval(["HP/main.php"], 1, token, token, DEPLOY_CONFIRMATION)
+    for invalid in (
+        (None, token, DEPLOY_CONFIRMATION),
+        (2, token, DEPLOY_CONFIRMATION),
+        (1, "b" * 64, DEPLOY_CONFIRMATION),
+        (1, token, "WRONG"),
+    ):
+        try:
+            validate_deploy_approval(["HP/main.php"], invalid[0], invalid[1], token, invalid[2])
+        except RuntimeError:
+            pass
+        else:
+            raise AssertionError(f"Invalid deploy approval was accepted: {invalid}")
+    try:
+        validate_deploy_approval(
+            [f"HP/file-{index}.php" for index in range(MAX_DEPLOY_FILES + 1)],
+            MAX_DEPLOY_FILES + 1,
+            token,
+            token,
+            DEPLOY_CONFIRMATION,
+        )
+    except RuntimeError:
+        pass
+    else:
+        raise AssertionError("Oversized deploy plan was accepted")
     print("SELF-TEST: passed")
 
 
@@ -448,31 +559,27 @@ def main() -> int:
     parser.add_argument("--after")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--self-test", action="store_true")
-    parser.add_argument("--full-deploy", action="store_true")
+    parser.add_argument("--expected-file-count", type=int)
+    parser.add_argument("--approved-plan-token")
+    parser.add_argument("--confirm-production")
+    parser.add_argument("--verify-approval", action="store_true")
     args = parser.parse_args()
 
     if args.self_test:
         self_test()
         return 0
-    if args.full_deploy:
-        if args.before or args.after:
-            parser.error("--full-deploy cannot be combined with --before or --after")
-        deployable, excluded = collect_full_deploy_paths()
-        print_plan("(full tracked HP snapshot)", os.environ.get("GITHUB_SHA", "HEAD"), deployable, excluded, [])
-        if not deployable:
-            print("No deployable HP files found.")
-            return 0
-        if args.dry_run:
-            print("DRY-RUN: FTP connection and server changes were not performed.")
-            return 0
-        deploy(deployable)
-        return 0
     if not args.before or not args.after:
         parser.error("--before and --after are required unless --self-test is used")
+    if current_head() != args.after:
+        raise RuntimeError("Checked-out HEAD does not match --after; refusing deployment")
 
     changes = collect_changes(args.before, args.after)
     deployable, excluded, blocked = classify_changes(changes)
     print_plan(args.before, args.after, deployable, excluded, blocked)
+    actual_plan_token = plan_token(args.before, args.after, deployable)
+    print(f"Deployable file count: {len(deployable)}")
+    print(f"Deployable total bytes: {sum(Path(path).stat().st_size for path in deployable)}")
+    print(f"PLAN_TOKEN: {actual_plan_token}")
 
     if blocked:
         print("Automatic server deletion is disabled.", file=sys.stderr)
@@ -488,9 +595,26 @@ def main() -> int:
         print("DRY-RUN: FTP connection and server changes were not performed.")
         return 0
 
+    if args.verify_approval:
+        validate_deploy_approval(
+            deployable,
+            args.expected_file_count,
+            args.approved_plan_token,
+            actual_plan_token,
+            args.confirm_production,
+        )
+        print("APPROVAL CHECK: passed; FTP connection was not performed.")
+        return 0
+
+    validate_deploy_approval(
+        deployable,
+        args.expected_file_count,
+        args.approved_plan_token,
+        actual_plan_token,
+        args.confirm_production,
+    )
     deploy(deployable)
     return 0
-
 
 if __name__ == "__main__":
     try:
