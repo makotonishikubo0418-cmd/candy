@@ -10,6 +10,7 @@ from pathlib import Path
 
 GIT = shutil.which("git") or r"C:\Program Files\Git\cmd\git.exe"
 SCRIPT = Path(__file__).with_name("candy_ftp_deploy.py").resolve()
+WORKFLOW = SCRIPT.parent.parent / "workflows" / "candy-production-deploy.yml"
 CONFIRMATION = "DEPLOY-CANDY-PRODUCTION"
 
 
@@ -46,7 +47,32 @@ def make_repository(root: Path) -> tuple[str, str]:
     return before, after
 
 
+def assert_workflow_contract() -> None:
+    text = WORKFLOW.read_text(encoding="utf-8")
+    required = (
+        "push:",
+        "workflow_dispatch:",
+        'branches:\n      - main',
+        '".github/workflows/candy-production-deploy.yml"',
+        '".github/scripts/candy_release_check.py"',
+        '"!HP/codex/**"',
+        '"!HP/AGENTS.md"',
+        '"!HP/Text_area_data/**"',
+        "github.event.before",
+        "github.sha",
+        "steps.plan.outputs.count",
+        "steps.plan.outputs.token",
+        "--verify-approval",
+        "cancel-in-progress: false",
+    )
+    for marker in required:
+        assert marker in text, f"workflow contract is missing: {marker}"
+    assert "full_deploy" not in text
+    assert "--full-deploy" not in text
+
+
 def main() -> None:
+    assert_workflow_contract()
     with tempfile.TemporaryDirectory() as temp_dir:
         root = Path(temp_dir)
         before, after = make_repository(root)
@@ -132,7 +158,7 @@ def main() -> None:
         assert oversized.returncode != 0
         assert "maximum is 52428800" in oversized.stderr
 
-    print("TWO_STAGE_CLI_INTEGRATION: passed")
+    print("DEPLOY_AUTOMATION_INTEGRATION: passed")
 
 
 if __name__ == "__main__":

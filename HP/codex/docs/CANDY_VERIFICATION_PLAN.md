@@ -150,16 +150,16 @@ form actionがGETで400を返しただけではリンク切れとしない。Goo
 
 ローカル再現コマンドは `python .github/scripts/candy_ftp_deploy.py --self-test` と `python .github/scripts/test_candy_ftp_deploy.py`。Actionsでもpreview/deployの前に両方を実行する。
 
-1. workflowに `push` triggerがない。
+1. workflowに `main` のdeploy対象変更だけを受ける `push` triggerがあり、管理資料・元Text等がpathsで除外される。
 2. full deploy経路がない。
-3. previewがFTP秘密値を受け取らず、FTP接続しない。
-4. deployが40文字SHA、ancestor、checkout HEAD、対象件数、`PLAN_TOKEN`、確認文言をFTP接続前に検証する。
+3. Push後のplan生成と手動previewがFTP秘密値を受け取らず、FTP接続しない。
+4. deployが40文字SHA、ancestor、checkout HEAD、対象件数、`PLAN_TOKEN`、確認文言を同一Run内で自動生成・照合し、FTP接続前に検証する。
 5. 一回のdeployが最大25ファイル・合計50MiB以下に制限される。
 6. `index.php`、`.htaccess`、管理資料、元Text、秘密値候補、backup類が除外される。
 7. 削除・renameが検出された場合、全deployが停止する。
 8. ファイル単位でupload、一時SHA256、backup、promote、最終SHA256、backup削除、進捗出力が完結する。
 9. previewは5分、deployは10分でtimeoutする。
-10. Commit、Push、preview、deployの各操作に別々のユーザー指示が記録されている。
+10. 「アップしろ」がCommit、Push、自動Actions、本番HTTP確認までの一括指示として記録され、正常時に途中再承認を要求しない。
 
 ローカル検査、GitHub上のworkflow構文、Actions preview、Actions deploy、本番SHA256、HTTP、ブラウザを別結果として記録する。ローカル差分だけで本番安全化済みとしない。
 ## 4. 結果分類
@@ -203,7 +203,7 @@ form actionがGETで400を返しただけではリンク切れとしない。Goo
 5. 生成元の将来リンク
 6. 未使用CSS・テンプレートだけの参照
 
-調査指示だけなら変更しない。削除、置換、Commit、Push、本番反映は明示承認なしに行わない。
+調査指示だけなら変更しない。削除、置換、Commit、Push、本番反映は明示承認なしに行わない。「アップしろ」は今回の進行内容に対するCommit、Push、自動本番反映、本番HTTP確認までの明示承認として扱い、途中で再承認を求めない。ただし削除、DB、noindex/index、`HP/index.php` 公開切替は含まない。
 
 ## 7. 修正後再確認
 

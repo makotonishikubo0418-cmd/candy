@@ -1,6 +1,21 @@
 name: CANDY Production Deploy
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - "HP/**"
+      - ".github/workflows/candy-production-deploy.yml"
+      - ".github/scripts/candy_ftp_deploy.py"
+      - ".github/scripts/test_candy_ftp_deploy.py"
+      - ".github/scripts/candy_release_check.py"
+      - "!HP/codex/**"
+      - "!HP/**/*.md"
+      - "!HP/AGENTS.md"
+      - "!HP/Text_area_data/**"
+      - "!HP/Text_blog_data/**"
+      - "!HP/Text_hotel_data/**"
   workflow_dispatch:
     inputs:
       operation:
@@ -44,7 +59,7 @@ concurrency:
 
 jobs:
   preview:
-    if: inputs.operation == 'preview'
+    if: github.event_name == 'workflow_dispatch' && inputs.operation == 'preview'
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
@@ -57,7 +72,7 @@ jobs:
 
       - name: Validate deployment script
         run: |
-          python3 -m py_compile .github/scripts/candy_ftp_deploy.py
+          python3 -m py_compile .github/scripts/candy_ftp_deploy.py .github/scripts/candy_release_check.py
           python3 .github/scripts/candy_ftp_deploy.py --self-test
           python3 .github/scripts/test_candy_ftp_deploy.py
 
@@ -75,7 +90,7 @@ jobs:
           cat deploy-preview.txt >> "$GITHUB_STEP_SUMMARY"
 
   deploy:
-    if: inputs.operation == 'deploy'
+    if: github.event_name == 'push' || inputs.operation == 'deploy'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment: candy-production
@@ -84,22 +99,64 @@ jobs:
       - name: Check out the exact approved target commit
         uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.after_sha }}
+          ref: ${{ github.event_name == 'push' && github.sha || inputs.after_sha }}
           fetch-depth: 0
 
       - name: Validate deployment script
         run: |
-          python3 -m py_compile .github/scripts/candy_ftp_deploy.py
+          python3 -m py_compile .github/scripts/candy_ftp_deploy.py .github/scripts/candy_release_check.py
           python3 .github/scripts/candy_ftp_deploy.py --self-test
           python3 .github/scripts/test_candy_ftp_deploy.py
 
-      - name: Validate approved count and plan token without FTP
+      - name: Build exact deployment plan without FTP
+        id: plan
         env:
-          BEFORE_SHA: ${{ inputs.before_sha }}
-          AFTER_SHA: ${{ inputs.after_sha }}
-          EXPECTED_FILE_COUNT: ${{ inputs.expected_file_count }}
-          APPROVED_PLAN_TOKEN: ${{ inputs.approved_plan_token }}
-          PRODUCTION_CONFIRMATION: ${{ inputs.confirmation }}
+          BEFORE_SHA: ${{ github.event_name == 'push' && github.event.before || inputs.before_sha }}
+          AFTER_SHA: ${{ github.event_name == 'push' && github.sha || inputs.after_sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$AFTER_SHA"
+          python3 .github/scripts/candy_ftp_deploy.py \
+            --before "$BEFORE_SHA" \
+            --after "$AFTER_SHA" \
+            --dry-run | tee deploy-plan.txt
+          cat deploy-plan.txt >> "$GITHUB_STEP_SUMMARY"
+          count="$(sed -n 's/^Deployable file count: //p' deploy-plan.txt | tail -1)"
+          token="$(sed -n 's/^PLAN_TOKEN: //p' deploy-plan.txt | tail -1)"
+          test -n "$count"
+          test -n "$token"
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+          echo "token=$token" >> "$GITHUB_OUTPUT"
+
+      - name: Select automatic or manual approval values
+        id: approval
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          PLAN_COUNT: ${{ steps.plan.outputs.count }}
+          PLAN_TOKEN: ${{ steps.plan.outputs.token }}
+          MANUAL_COUNT: ${{ inputs.expected_file_count }}
+          MANUAL_TOKEN: ${{ inputs.approved_plan_token }}
+          MANUAL_CONFIRMATION: ${{ inputs.confirmation }}
+        run: |
+          set -euo pipefail
+          if [ "$EVENT_NAME" = "push" ]; then
+            echo "count=$PLAN_COUNT" >> "$GITHUB_OUTPUT"
+            echo "token=$PLAN_TOKEN" >> "$GITHUB_OUTPUT"
+            echo "confirmation=DEPLOY-CANDY-PRODUCTION" >> "$GITHUB_OUTPUT"
+          else
+            echo "count=$MANUAL_COUNT" >> "$GITHUB_OUTPUT"
+            echo "token=$MANUAL_TOKEN" >> "$GITHUB_OUTPUT"
+            echo "confirmation=$MANUAL_CONFIRMATION" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Validate count, limits, and plan token without FTP
+        if: steps.plan.outputs.count != '0'
+        env:
+          BEFORE_SHA: ${{ github.event_name == 'push' && github.event.before || inputs.before_sha }}
+          AFTER_SHA: ${{ github.event_name == 'push' && github.sha || inputs.after_sha }}
+          EXPECTED_FILE_COUNT: ${{ steps.approval.outputs.count }}
+          APPROVED_PLAN_TOKEN: ${{ steps.approval.outputs.token }}
+          PRODUCTION_CONFIRMATION: ${{ steps.approval.outputs.confirmation }}
         run: |
           set -o pipefail
           test "$(git rev-parse HEAD)" = "$AFTER_SHA"
@@ -113,15 +170,16 @@ jobs:
           cat deploy-approval.txt >> "$GITHUB_STEP_SUMMARY"
 
       - name: Deploy only the approved files
+        if: steps.plan.outputs.count != '0'
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
           FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
-          BEFORE_SHA: ${{ inputs.before_sha }}
-          AFTER_SHA: ${{ inputs.after_sha }}
-          EXPECTED_FILE_COUNT: ${{ inputs.expected_file_count }}
-          APPROVED_PLAN_TOKEN: ${{ inputs.approved_plan_token }}
-          PRODUCTION_CONFIRMATION: ${{ inputs.confirmation }}
+          BEFORE_SHA: ${{ github.event_name == 'push' && github.event.before || inputs.before_sha }}
+          AFTER_SHA: ${{ github.event_name == 'push' && github.sha || inputs.after_sha }}
+          EXPECTED_FILE_COUNT: ${{ steps.approval.outputs.count }}
+          APPROVED_PLAN_TOKEN: ${{ steps.approval.outputs.token }}
+          PRODUCTION_CONFIRMATION: ${{ steps.approval.outputs.confirmation }}
         run: |
           set -o pipefail
           python3 .github/scripts/candy_ftp_deploy.py \

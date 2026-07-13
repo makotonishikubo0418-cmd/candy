@@ -59,6 +59,8 @@ AGENTS.md check:
 
 `git reset --hard`、`git clean`、force push、無断の merge/rebase は行わない。
 
+ユーザーの「アップしろ」は、今回の作業範囲に対する Commit、Push、GitHub Actions の自動本番反映、本番HTTP確認までの明示指示として扱う。各段階で追加確認を返さない。ただし、削除、DB、noindex/index、`HP/index.php` の公開切替、競合解消は含まない。
+
 ### 3.4 秘密情報
 
 認証値、パスワード、API キー、DB 接続値、決済値、ログ本文、個人情報を、チャット、Markdown、Commit メッセージ、差分説明へ転記しない。必要な場合は値を出さず、所在と対応要否だけを報告する。
@@ -72,6 +74,20 @@ AGENTS.md check:
 3. 全対象を同じ基準で検査する。
 4. 成功、失敗、未確認、接続先制限を分けて集計する。
 5. 未確認が一件でもあれば「100%確認済み」と書かない。
+
+### 3.6 「アップしろ」の絶対定義
+
+「アップしろ」と指示された場合、次を一つの連続作業として最速で実行する。
+
+1. 今回作成・修正したファイルと、同じ進行内容を記録する関連 `.md` を特定して整合させる。
+2. 対象だけを同一基準で検証し、既存の無関係なdirtyをCommitへ混ぜない。
+3. 対象だけをstageしてCommitする。
+4. `fetch` とremote差分を確認し、安全なら `main` へPushする。
+5. Pushで起動した本番ActionsをAPIで追跡し、成功・失敗を確認する。通常経路でブラウザUIを操作しない。
+6. 対象ページの本番URLをHTTP確認する。
+7. 本番URL、GitHub Commit URL、Actions Run URLを同じ最終報告に記載する。
+
+正常系では途中質問や段階別承認を挟まない。通常の1ページ公開は、制作完了後の「アップしろ」から本番URL報告まで5分以内を運用目標とする。外部障害、競合、STOP条件、Actions失敗時だけ、停止位置と必要対応を即時報告する。
 
 ## 4. 作業別の必読資料
 
@@ -117,9 +133,10 @@ git diff --check
 - Commit は明示指示がある場合だけ行う。
 - Push 前に `fetch` し、remote 更新と Push 対象を再確認する。
 - Push は明示指示がある場合だけ行う。
-- `main` への Push だけでは本番 Actions は起動しない。本番反映は手動 `workflow_dispatch` の preview と deploy を別操作で行う。
-- Commit、Push、本番 preview、本番 deploy はそれぞれ別の明示指示を必要とする。Push 指示を Actions 実行許可として扱わない。
-- 本番 deploy は preview の対象件数・`PLAN_TOKEN`・対象SHAが一致し、確認文言がある場合だけ実行する。
+- 「アップしろ」はCommit・Push・自動本番Actions・本番HTTP確認をまとめた明示指示である。
+- deploy対象を含む `main` Pushは本番Actionsを自動起動する。Actions内で対象SHA・件数・`PLAN_TOKEN`・上限をFTP接続前に検証する。
+- 手動 `workflow_dispatch` のpreview/deployは障害調査・再実行用の例外経路とする。
+- Actions状態確認はGitHub APIを優先し、認証切れのCLIやブラウザUI操作を通常経路にしない。
 
 ## 6. STOP 条件
 
@@ -143,6 +160,7 @@ git diff --check
 確認済み:
 実施内容:
 変更ファイル:
+確認用URL:
 未確認・未実施:
 次に必要な操作:
 ```
@@ -150,3 +168,9 @@ git diff --check
 禁止表現: 「一通り確認」「たぶん」「おそらく問題ない」「だいたい理解」「完了」だけの報告。
 
 完了と書く場合は、対象と証拠を併記する。Commit、Push、本番、ブラウザ表示が未実施なら明記する。
+
+- Pushを報告する場合は、対象CommitのGitHub確認用URLを同時に記載する。
+- Actionsを報告する場合は、対象Runの確認用URLを同時に記載する。
+- 本番反映またはページ公開を報告する場合は、対象ページごとの本番確認用URLを同時に記載する。複数ページを代表URL一件で済ませない。
+- URLは実在と対象の対応を確認してから記載する。未取得・未確認のURLを推測で作らず、「確認用URL未取得」と明記する。
+- GitHub URL、Actions URL、本番URLは別物として扱い、一つのURLを別状態の完了証拠にしない。

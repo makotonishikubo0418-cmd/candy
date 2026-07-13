@@ -1,6 +1,6 @@
 # CANDY AREA STAFF PRODUCTION RUNBOOK
 
-更新日: 2026-07-13
+更新日: 2026-07-14
 対象: スタッフが別のCodexへ依頼し、未作成areaページを通常生成する作業
 
 ## 1. この資料の役割
@@ -39,10 +39,12 @@ CANDYのareaページを通常生成してください。
 
 必ず CANDY_AREA_STAFF_PRODUCTION_RUNBOOK.md と関連正本を読み、公開PHP、source HTML、dataset PHP、dataset_base、area一覧、内部リンク、sitemap、画像、JSON-LDまで確認してください。
 画像不足・入力不足・slug不一致・既存ファイル競合があれば、そのページは停止して報告してください。
-Commit・Pushは別途明示指示があるまで実施しないでください。
+制作後に「アップしろ」と指示されたら、関連管理 `.md` の整合、Commit、Push、自動本番Actions、本番URL確認まで途中質問なしで実施してください。
 ```
 
 地域名だけを指示せず、`CANDY_AREA_105_PAGE_QUEUE.md`に記載されたslugも併記します。
+
+「アップしろ」は単なるGitHub Pushではありません。今回バッチの進行記録更新、本番自動反映、全対象ページの本番URL報告までを含みます。通常の1ページ公開は5分以内を運用目標とし、ActionsはGitHub APIで追跡します。ブラウザUI操作は通常経路に使用しません。
 
 ## 4. 作業開始前の必須確認
 
@@ -239,7 +241,7 @@ PHP構文確認は利用可能なPHP CLIで各変更PHPへ `php -l` を実行し
 - `git add -A`を使わず、対象ファイルだけを指定してstageする
 - Push前にfetchし、origin/main更新を確認する
 - ユーザーの明示指示がある場合だけPushする
-- 次のスタッフ・PCは作業開始前にPullする
+- 次のスタッフ・PCは作業開始前にstatusとfetchを確認し、作業ツリーと履歴が安全な場合だけ`pull --ff-only`する
 - 1バッチのPush確認前に次バッチを開始しない
 
 ## 14. STOP条件

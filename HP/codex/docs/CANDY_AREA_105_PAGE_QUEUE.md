@@ -26,13 +26,13 @@
 - 状態変更時は担当、日付、Commit hashまたは停止理由を記録する
 - 複数Codexで同時に別バッチを処理しない
 
-状態欄: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUSHED / BLOCKED`
+状態欄: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUSHED / PUBLISHED / BLOCKED`
 
 ## 3. 制作候補105件
 
 | No. | 地域名 | slug | 状態 | 記録 |
 |---:|---|---|---|---|
-| 1 | 花尾町 | `hanaomachi` | READY_CANDIDATE | |
+| 1 | 花尾町 | `hanaomachi` | PUBLISHED | Codex / 2026-07-14 / Commit `44df27b` / Actions `29289499915` / 本番HTTP・ブラウザ確認済み |
 | 2 | 皆与志町 | `minayoshicho` | READY_CANDIDATE | |
 | 3 | 吉野 | `yoshino` | READY_CANDIDATE | |
 | 4 | 吉野町 | `yoshinocho` | READY_CANDIDATE | |
@@ -166,4 +166,4 @@ kawadacho, hirakawacho, shimizucho
 
 | Batch | 対象No./slug | 担当 | 状態 | 日付 | Commit | 未確認・停止理由 |
 |---|---|---|---|---|---|---|
-| TEST-01 | 未着手 |  | READY |  |  | 初回2ページを指定する |
+| TEST-01 | 1 / `hanaomachi` | Codex | PUBLISHED | 2026-07-14 | `44df27b` | Actions `29289499915`、本番HTTP 200・ブラウザ確認済み |

@@ -93,13 +93,15 @@ HTML だけ、PHP だけ、dataset だけを作って「ページ完成」と報
 - 移行中、本番 `index.php` はシティヘブンへの転送を維持する。
 - 最新 `HP/index.php` の本番反映は最終公開切替であり、ユーザーの明示指示を必要とする。
 - `index.php` 以外を先に更新できるが、それぞれのアップロードと HTTP/表示確認は別に行う。
-- `main` への Pushだけでは本番反映しない。本番は手動 preview と手動 deploy の二段階に分ける。
-- preview と deploy の対象SHA、対象件数、`PLAN_TOKEN` が一致しなければFTP接続前に停止する。
+- deploy対象を含む `main` Pushは、安全検査後に本番反映を自動実行する。
+- 「アップしろ」は関連 `.md` の整合、Commit、Push、自動本番Actions、本番URL確認までの一括指示であり、途中で追加承認を求めない。
+- Actionsは対象SHA、対象件数、`PLAN_TOKEN`、上限を自動生成・照合し、不一致ならFTP接続前に停止する。
 - 一回の本番deployは最大25ファイルとし、超える場合は小バッチへ分割する。
 - GitHub Actions の除外を推測しない。workflow と deploy script の実物で確認する。
 - サーバーだけにあるファイルを一括削除しない。
 - 一時・backup ファイルは作成規則、削除規則、途中失敗時の残存確認を持たせる。
 - 本番作業は preview、対象一覧、少数試行、実測速度、進捗、終了コードを確認する。
+- Actionsの起動・監視はGitHub APIを通常経路とし、ブラウザUI操作を前提にしない。
 
 本番の詳細は `HP/codex/docs/CANDY_PRODUCTION_MIGRATION_MASTER.md` を正本とする。
 
@@ -165,3 +167,5 @@ HTML だけ、PHP だけ、dataset だけを作って「ページ完成」と報
 - ブラウザ表示
 
 実行していない項目は未確認・未実施と書く。「ページ完成」は、今回合意した完了範囲を全て満たした場合だけ使用する。
+
+Push、Actions、本番反映、ページ公開を報告する場合は、対応する確認用URLを同じ報告内に記載する。PushはCommit URL、ActionsはRun URL、本番反映・ページ公開は対象ページごとの本番URLを使う。複数ページを代表URL一件で済ませない。実在確認していないURLは推測で記載せず、未取得と報告する。

@@ -10,12 +10,12 @@
 
 1. Codex が実ファイルと管理資料を確認する。
 2. Codex が HP を修正または新規作成する。
-3. Codex がローカル検証結果と変更範囲を報告する。
-4. ユーザーの明示承認後だけ Commit・Pushする。
-5. Pushだけでは本番反映しない。ユーザーの別の明示指示でActions previewを実行する。
-6. previewの対象SHA・件数・`PLAN_TOKEN`をユーザーが確認した後、別の明示指示でActions deployを実行する。
-7. deployは最大25ファイルとし、各ファイルのupload・SHA256照合・置換・backup削除を完結させる。
-8. Actions、本番ファイル、HTTP、ブラウザ表示を別々に確認し、確認した範囲だけを報告する。
+3. ユーザーが「アップしろ」と指示したら、関連 `.md` を整合させ、対象だけをCommit・Pushする。
+4. deploy対象を含むPushでActionsがplan生成・安全検査・本番反映を自動実行する。
+5. CodexはGitHub APIでActions完了を追跡し、通常経路でブラウザUIを操作しない。
+6. deployは最大25ファイルとし、各ファイルのupload・SHA256照合・置換・backup削除を完結させる。
+7. Actions成功後、対象ページのHTTPを確認する。
+8. 本番URL、Commit URL、Actions Run URLを同じ最終報告に記載する。
 
 「ローカル変更完了」「Commit 完了」「Push 完了」「Actions 完了」「本番反映完了」「表示確認完了」は同じ意味ではない。以後は必ず区別する。
 
@@ -468,7 +468,7 @@ AGENTS.md に置かないもの:
 4. 大量に書くだけでは読めないため、AGENTS.md を重要ルールと目次に限定する案が示された。
 5. この指示に基づき、root/HP AGENTS の短文化、作業別ルーター、日付付き記録、運用基礎、本番移行資料、スナップショット警告を再設計した。
 
-## 17. 2026-07-14 本番反映設計の全面改修
+## 17. 2026-07-14 手動二段階設計（同日廃止）
 
 昨日の長時間化、未達成、不要backup残存、進捗誤報を再発させないため、次を強制仕様とした。
 
@@ -483,4 +483,30 @@ AGENTS.md に置かないもの:
 9. deploy jobは10分でtimeoutし、無制限に待機しない。
 10. Commit、Push、Actions preview、Actions deployは別々の明示指示を必要とする。
 
-この変更はローカル差分であり、Commit・Push・GitHub上のpreview成功を確認するまでGitHubの現行動作とはみなさない。旧workflowがGitHubに残る間は、HP変更を含むPushを行わない。
+この設計は安全性を優先したが、「アップしろ」をPushだけと誤解させ、手動Actionsとブラウザ操作を増やし、ユーザーの求める一括自動公開を妨げたため、同日廃止した。安全上限・除外・SHA256照合は維持し、起動方式だけを第18節へ改めた。
+
+## 18. 2026-07-14 「アップしろ」一括自動公開への確定変更
+
+### 18.1 原因
+
+1. Codexが「アップしろ」をGitHub Pushまでと誤解した。
+2. Commit、Push、preview、deployを別指示にしたため、簡単な1ページ公開に不要な待ち時間を作った。
+3. GitHub CLI認証が失効した状態で手動Actionsを選び、ブラウザ操作へ回避したため、事前準備済みの自動化を活用できなかった。
+
+### 18.2 絶対運用
+
+1. 「アップしろ」は、今回の進行内容と関連 `.md` の整合、検証、Commit、Push、自動本番Actions、本番HTTP確認までの一括許可である。
+2. 正常時は途中質問・追加承認を挟まず、最後まで実行する。
+3. deploy対象を含む `main` PushでActionsを自動起動する。
+4. Actions内で対象SHA・件数・`PLAN_TOKEN`を生成し、25ファイル・50MiB上限、削除・rename禁止、保護対象除外をFTP接続前に検証する。
+5. Actionsの起動・監視はGitHub APIを使い、通常経路でブラウザを開いて操作しない。
+6. 本番確認は対象URLのHTTP、title、canonical、主要本文、画像を必要範囲で確認する。
+7. 最終報告は本番URLを先頭にし、Commit URLとActions Run URLを併記する。
+8. 通常の1ページ公開は、制作完了後の「アップしろ」から本番URL報告まで5分以内を運用目標とする。
+9. 削除、DB、noindex/index、`HP/index.php` の公開切替、競合解消は一括許可に含めない。
+
+### 18.3 直近の実証
+
+- 花尾町ページはCommit `44df27b`、Actions Run `29289499915`で6ファイルをSHA256照合付きで本番反映した。
+- 本番URL `https://www.55810.com/kagoshima-deliveryhealth-area-hanaomachi.php` はHTTP 200、title、canonical、主要本文、画像2枚、ブラウザ表示を確認した。
+- deploy処理自体は37秒で成功しており、長時間化の主因は転送速度ではなく、Codexが手動経路とブラウザ操作を選んだ運用設計だった。
