@@ -47,10 +47,10 @@ Codex は以下を禁止します。
 | プロジェクト | candy |
 | 管理名 | CANDY SEO / candy_HP |
 | 対象サイト | 鹿児島キャンディ公式ホームページ |
-| 現在確認済みのリポジトリルート | `H:\Data\01_FSG\candy` |
-| 現在のHP作業ルート | `H:\Data\01_FSG\candy\HP` |
-| Codex 管理フォルダ | `H:\Data\01_FSG\candy\HP\codex` |
-| Codex 既存資料 | `H:\Data\01_FSG\candy\HP\codex\docs` |
+| 現在確認済みのリポジトリルート | `C:\Users\nishi\Desktop\data\candy` |
+| 現在のHP作業ルート | `C:\Users\nishi\Desktop\data\candy\HP` |
+| Codex 管理フォルダ | `C:\Users\nishi\Desktop\data\candy\HP\codex` |
+| Codex 既存資料 | `C:\Users\nishi\Desktop\data\candy\HP\codex\docs` |
 | サイト種別 | PHP テンプレート生成型サイト |
 | 主な用途 | 店舗案内、女の子一覧、出勤情報、料金案内、動画、対応エリア、ホテル情報、問い合わせ導線 |
 
@@ -653,6 +653,17 @@ Phase 0 は、以下を満たしたら完了です。
 
 ## 21. HP変更のKAGOYA自動本番反映
 
+- `/public_html/group/candy/`は本番、`/public_html/group_test/candy/`は制作時のテスト版である。Codexは両環境を混同しない
+- HP内の`group_test/candy`絶対参照は本番移行の最終切替対象とし、ユーザー承認なしに一括置換しない
+- 段階移行・本番反映前に、`codex/docs/CANDY_PRODUCTION_MIGRATION_MASTER.md`と`codex/docs/CANDY_PRODUCTION_MIGRATION_INVENTORY.csv`を必ず確認する
+- 移行マスターのGate 0が完了するまで、自動反映対象ファイルを通常運用としてPushしない。例外は対象と本番影響を限定した明示承認済み検証だけとする
+- 再取得した`HP_旧データ`は取得時点の本番スナップショットである。再取得後は旧件数・旧ハッシュ・旧結論を流用せず、必ず再集計する
+- 段階移行中は本番の転送用`index.php`を維持し、workflowのpaths除外とデプロイスクリプトの保護対象によって最新`HP/index.php`を二重に除外する
+- 最新`HP/index.php`の上書きは、ユーザーが明示承認した最終公開切替でのみ行う。上書きがシティヘブン転送終了と新サイト公開の切替スイッチになる
+- 「全て」「100％」「漏れなく」と指示された場合、対象全件を機械列挙・集計し、未確認が1件でもあれば100％確認済みと報告しない
+- チャット内の古い貼付ルールより、現在の実`AGENTS.md`と実ファイルを優先する。差異があれば作業前に報告する
+- 初回移行の明示承認時は、転送用`index.php`を除くGit管理中の本番用ファイルを一度だけ全件反映する。管理資料、元データ、ログ、`.well-known`は除外し、サーバーファイルは削除しない
+- 全件反映後もトップ転送を維持し、他のPHP・CSS・JS・画像は直接URLで確認可能な最新状態にする
 - `main`へ自動反映対象の`HP`ファイルをPushすると、GitHub ActionsによりKAGOYA本番サーバーへ追加・更新ファイルが自動反映される
 - HP変更をPushする前に、本番反映が発生することを明示し、Commit、Push、本番反映の明示許可を確認する
 - Markdown、`codex`、`log`、`Text_area_data`、`Text_blog_data`、`Text_hotel_data`、`.well-known`、`AGENTS.md`は自動反映対象外とする

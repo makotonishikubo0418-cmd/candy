@@ -18,6 +18,7 @@ REMOTE_ROOT = PurePosixPath("/public_html/group/candy")
 ZERO_SHA = "0" * 40
 DEPLOYABLE_STATUSES = {"A", "M", "T"}
 BLOCKED_STATUSES = {"D", "R"}
+PROTECTED_PATHS = {"HP/index.php"}
 EXCLUDED_PREFIXES = (
     "HP/codex/",
     "HP/log/",
@@ -52,6 +53,8 @@ class UploadTarget:
 
 
 def is_excluded(path: str) -> bool:
+    if path in PROTECTED_PATHS:
+        return True
     if path == "HP/AGENTS.md":
         return True
     if path.lower().endswith(".md"):
@@ -136,6 +139,31 @@ def collect_changes(before: str, after: str) -> list[Change]:
     if result.returncode != 0:
         raise RuntimeError(f"git diff failed: {result.stderr.strip()}")
     return parse_diff_output(result.stdout)
+
+
+def collect_full_deploy_paths() -> tuple[list[str], list[str]]:
+    result = subprocess.run(
+        ["git", "ls-files", "-z", "--", "HP"],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    if result.returncode != 0:
+        raise RuntimeError(
+            f"git ls-files failed: {result.stderr.decode('utf-8', errors='replace').strip()}"
+        )
+    deployable: list[str] = []
+    excluded: list[str] = []
+    for raw_path in result.stdout.split(b"\0"):
+        if not raw_path:
+            continue
+        path = raw_path.decode("utf-8")
+        validate_repository_path(path)
+        if is_excluded(path):
+            excluded.append(path)
+        else:
+            deployable.append(path)
+    return sorted(set(deployable)), sorted(set(excluded))
 
 
 def classify_changes(changes: list[Change]) -> tuple[list[str], list[str], list[Change]]:
@@ -385,11 +413,12 @@ def deploy(paths: list[str]) -> None:
 
 
 def self_test() -> None:
+    assert is_excluded("HP/index.php")
     assert is_excluded("HP/AGENTS.md")
     assert is_excluded("HP/codex/example.txt")
     assert is_excluded("HP/log/example.log")
     assert is_excluded("HP/example.md")
-    assert not is_excluded("HP/index.php")
+    assert not is_excluded("HP/main.php")
     assert server_path_for("HP/css/style.css").as_posix() == (
         "/public_html/group/candy/css/style.css"
     )
@@ -405,6 +434,11 @@ def self_test() -> None:
     assert deployable == ["HP/a.php", "HP/b.php", "HP/c.php"]
     assert excluded == []
     assert [item.status for item in blocked] == ["D", "R"]
+    protected = parse_diff_output("M\tHP/index.php\nM\tHP/main.php\n")
+    deployable, excluded, blocked = classify_changes(protected)
+    assert deployable == ["HP/main.php"]
+    assert excluded == ["HP/index.php"]
+    assert blocked == []
     print("SELF-TEST: passed")
 
 
@@ -414,10 +448,24 @@ def main() -> int:
     parser.add_argument("--after")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--self-test", action="store_true")
+    parser.add_argument("--full-deploy", action="store_true")
     args = parser.parse_args()
 
     if args.self_test:
         self_test()
+        return 0
+    if args.full_deploy:
+        if args.before or args.after:
+            parser.error("--full-deploy cannot be combined with --before or --after")
+        deployable, excluded = collect_full_deploy_paths()
+        print_plan("(full tracked HP snapshot)", os.environ.get("GITHUB_SHA", "HEAD"), deployable, excluded, [])
+        if not deployable:
+            print("No deployable HP files found.")
+            return 0
+        if args.dry_run:
+            print("DRY-RUN: FTP connection and server changes were not performed.")
+            return 0
+        deploy(deployable)
         return 0
     if not args.before or not args.after:
         parser.error("--before and --after are required unless --self-test is used")

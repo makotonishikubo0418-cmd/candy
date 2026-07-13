@@ -5,7 +5,7 @@
 ## 0. 正本ルールとGit同期
 
 - リポジトリ全体の正本ルールは `AGENTS.md`、HP配下の補足ルールは `HP/AGENTS.md`。
-- 現在確認済みのリポジトリルートは `H:\Data\01_FSG\candy`。
+- 現在確認済みのリポジトリルートは `C:\Users\nishi\Desktop\data\candy`。
 - 作業開始前にFetchとPull、作業終了後に差分確認・Commit・Pushを行う。未コミット変更や未取得変更がある場合は上書きせず、コンフリクトは勝手に解消しない。
 - `AGENTS.md` 自体も通常ファイルと同様にGitHubで同期する。
 
@@ -33,9 +33,17 @@
 
 ## 1. 公開方式
 
-未確認 / 確認方法: オーナーまたはサーバー管理者に、現在のNASフォルダが直接公開なのか、別サーバーへFTP/rsync等でアップロードしているのかを確認する。
+確認済み:
 
-確認済みの事実: PHP内のinclude先にはサーバー上の絶対パスが使われているため、NASパスだけで公開方式は断定しない。
+- GitHub `main`の対象HP変更は、GitHub ActionsからKAGOYAの`/public_html/group/candy/`へFTPで追加・更新反映する
+- `/public_html/group/candy/`が本番、`/public_html/group_test/candy/`が制作時のテスト版
+- 段階移行中のトップは、本番`index.php`によるシティヘブンへの301転送を維持する
+- 最新`HP/index.php`の上書きが、転送終了と新サイト公開の最終切替になる
+- 段階移行中は、workflowとデプロイスクリプトの二重保護により`HP/index.php`を自動反映しない
+- 初回移行では、明示承認後に`HP/index.php`を除くGit管理中の本番用ファイルを一度だけ全件反映する。削除は行わない
+- この状態ではトップだけがシティヘブンへ転送され、その他のPHP、CSS、JS、画像は直接URLで最新状態を確認できる
+
+未確認: 本番PHPバージョン、Webサーバー種別、DB・session・control依存の実行結果。
 
 ## 2. 本番URL / PHPバージョン / Webサーバー
 
@@ -85,7 +93,7 @@
 
 正本: `HP/codex/scripts/generate_candy_management_docs.py`
 
-現在確認済みのローカル絶対パス: `H:\Data\01_FSG\candy\HP\codex\scripts\generate_candy_management_docs.py`
+現在確認済みのローカル絶対パス: `C:\Users\nishi\Desktop\data\candy\HP\codex\scripts\generate_candy_management_docs.py`
 
 実行コマンド:
 
