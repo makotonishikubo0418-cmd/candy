@@ -152,6 +152,8 @@ def collect_changes(before: str, after: str) -> list[Change]:
     result = subprocess.run(
         [
             "git",
+            "-c",
+            "core.quotepath=false",
             "diff",
             "--name-status",
             "--find-renames",
@@ -523,6 +525,11 @@ def self_test() -> None:
     deployable, excluded, blocked = classify_changes(protected)
     assert deployable == ["HP/main.php"]
     assert excluded == ["HP/index.php"]
+    assert blocked == []
+    unicode_path = parse_diff_output("M\tHP/Text_area_data/花尾町_テンプレート.txt\n")
+    deployable, excluded, blocked = classify_changes(unicode_path)
+    assert deployable == []
+    assert excluded == ["HP/Text_area_data/花尾町_テンプレート.txt"]
     assert blocked == []
     token = "a" * 64
     validate_deploy_approval(["HP/main.php"], 1, token, token, DEPLOY_CONFIRMATION)
