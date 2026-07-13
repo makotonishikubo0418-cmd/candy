@@ -29,6 +29,26 @@
 
 理由: 各ページ固有3ファイルに加えて、`dataset_base.php`、`source/area.html`、`sitemap.xml`という共有ファイルを更新するため、並行作業は競合・登録漏れ・重複を起こします。
 
+## 2.1 最短の標準実行
+
+通常の1ページ制作は次の順で実行します。毎回、長い即席生成コードを作り直しません。
+
+```powershell
+HP\codex\scripts\candy-area.cmd build --input "HP/Text_area_data/対象.txt"
+HP\codex\scripts\candy-area.cmd check --input "HP/Text_area_data/対象.txt"
+```
+
+このツールは、入力監査、テンプレート複製、店舗ブロック抽出、可変scene、JSON-LD、公開PHP、dataset、dataset_base、sitemap、制作記録、キュー更新、静的検査を一つの処理として実行します。元Textにない店舗指定は既存の組み合わせ頻度、交通費は地図座標と近隣完成ページを根拠に決定し、根拠を制作記録へ残します。
+
+`RESULT=STOP` の場合は、表示された未知例外を調査します。再利用可能な例外はツールへ追加し、対象ページだけの即席処理で終わらせません。PHP CLIがない場合は `PHP_LINT=UNAVAILABLE` と明示し、PHP確認済みとは扱いません。
+
+全入力の形式対応確認:
+
+```powershell
+HP\codex\scripts\candy-area.cmd audit-inputs
+HP\codex\scripts\candy-area.cmd audit-inputs --render
+```
+
 ## 3. スタッフがCodexへ渡す指示
 
 ```text

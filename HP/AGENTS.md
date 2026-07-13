@@ -43,6 +43,23 @@ HP 直下の公開入口 PHP
 
 `HP/create.php` は旧来の Web 生成手段であり、通常の Codex 制作では使用しない。使用・変更は事前承認を必要とする。
 
+### 4.1.1 area専用ツールの必須使用
+
+通常のareaページ制作は、手作業の置換や即席スクリプトではなく、次の専用ツールを最初に使用する。
+
+```powershell
+HP\codex\scripts\candy-area.cmd build --input "HP/Text_area_data/対象.txt"
+HP\codex\scripts\candy-area.cmd check --input "HP/Text_area_data/対象.txt"
+```
+
+- ツールは正式areaテンプレートを複製し、可変の店舗・通常記事・ホテル・周辺スポット・電話番号を入力件数に合わせて生成する。
+- 元Textの店舗、移動時間、交通費を最優先する。店舗未指定時は既存ページで使用頻度の低い組み合わせを選び、値未指定時は地図座標から近い完成ページの同店舗設定を使用する。
+- 既知パターンは自動処理し、必須情報不足、未知店舗、slug競合、画像不足、共有登録重複など、公開情報を安全に確定できない例外だけ停止する。
+- 既知例外を手作業で毎回回避せず、専用ツールへパターンを追加して以後の制作へ再利用する。
+- 現行入力全体の解析確認は `HP\codex\scripts\candy-area.cmd audit-inputs` を使用する。
+- 全入力の生成可否と画像を含む停止理由は `HP\codex\scripts\candy-area.cmd audit-inputs --render` で集計する。
+
+
 ### 4.2 一ページの完了範囲
 
 通常ページ生成では、必要なものを全て一つの制作範囲として扱う。

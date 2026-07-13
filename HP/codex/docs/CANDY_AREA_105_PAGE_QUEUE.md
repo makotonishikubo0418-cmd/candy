@@ -33,8 +33,8 @@
 | No. | 地域名 | slug | 状態 | 記録 |
 |---:|---|---|---|---|
 | 1 | 花尾町 | `hanaomachi` | PUBLISHED | Codex / 2026-07-14 / Commit `44df27b` / Actions `29289499915` / 本番HTTP・ブラウザ確認済み |
-| 2 | 皆与志町 | `minayoshicho` | READY_CANDIDATE | |
-| 3 | 吉野 | `yoshino` | READY_CANDIDATE | |
+| 2 | 皆与志町 | `minayoshicho` | IN_PROGRESS | Codex / 2026-07-14 / 3ファイル・共有登録・静的検査済み / PHP CLI未確認 |
+| 3 | 吉野 | `yoshino` | IN_PROGRESS | 専用ツール / 2026-07-14 / 3ファイル・共有登録・静的検査済み / PHP CLI未確認 |
 | 4 | 吉野町 | `yoshinocho` | READY_CANDIDATE | |
 | 5 | 宮之浦町 | `miyanouracho` | READY_CANDIDATE | |
 | 6 | 玉里団地 | `tamazatodanchi` | READY_CANDIDATE | |
@@ -167,3 +167,4 @@ kawadacho, hirakawacho, shimizucho
 | Batch | 対象No./slug | 担当 | 状態 | 日付 | Commit | 未確認・停止理由 |
 |---|---|---|---|---|---|---|
 | TEST-01 | 1 / `hanaomachi` | Codex | PUBLISHED | 2026-07-14 | `44df27b` | Actions `29289499915`、本番HTTP 200・ブラウザ確認済み |
+| TEST-02 | 2 / `minayoshicho` | Codex | IN_PROGRESS | 2026-07-14 |  | PHP CLI未確認。静的検査・JSON・画像・共有登録は成功 |
