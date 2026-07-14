@@ -37,7 +37,7 @@
 | 3 | 吉野 | `yoshino` | PUBLISHED | Codex / 2026-07-14 / Commit `f1ba7fd` / Actions `29294348852` / 本番HTTP確認済み |
 | 4 | 吉野町 | `yoshinocho` | PUBLISHED | Codex / 2026-07-14 / Commit `98b009d` / Actions `29295020132` / 本番HTTP確認済み |
 | 5 | 宮之浦町 | `miyanouracho` | BLOCKED_SLUG_CONFLICT | area一覧は `miyanouramachi`、Text canonicalは `miyanouracho`。自動置換せず判断待ち |
-| 6 | 玉里団地 | `tamazatodanchi` | IN_PROGRESS | 専用ツール / 2026-07-14 / 3ファイル・共有登録・静的検査済み / PHP CLI未確認 |
+| 6 | 玉里団地 | `tamazatodanchi` | PUBLISHED | Codex / 2026-07-14 / Commit `60fa1ab` / Actions `29300812695` / 本番HTTP確認済み |
 | 7 | 玉里町 | `tamazatocho` | READY_CANDIDATE | |
 | 8 | 原良 | `harara` | READY_CANDIDATE | |
 | 9 | 光山 | `hikariyama` | READY_CANDIDATE | |
@@ -171,4 +171,5 @@ kawadacho, hirakawacho, shimizucho
 | TEST-02 | 2 / `minayoshicho` | Codex | PUBLISHED | 2026-07-14 | `f1ba7fd` | Actions `29294348852`、本番HTTP 200・title・canonical・h1・店舗・画像・一覧・sitemap確認済み |
 | TEST-03 | 3 / `yoshino` | Codex | PUBLISHED | 2026-07-14 | `f1ba7fd` | Actions `29294348852`、本番HTTP 200・title・canonical・h1・店舗・画像・一覧・sitemap確認済み |
 | TEST-04 | 4 / `yoshinocho` | Codex | PUBLISHED | 2026-07-14 | `98b009d` | Actions `29295020132`、本番HTTP 200・title・canonical・h1・店舗・画像・一覧・sitemap確認済み |
+| TEST-05 | 6 / `tamazatodanchi` | Codex | PUBLISHED | 2026-07-14 | `60fa1ab` | Actions `29300812695`、本番HTTP 200・title・canonical・h1・店舗・画像SHA・一覧・sitemap・redirect確認済み |
 <!-- CANDY_AREA_BATCH_HISTORY_END -->
