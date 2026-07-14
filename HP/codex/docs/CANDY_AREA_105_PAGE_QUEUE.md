@@ -37,7 +37,7 @@
 | 3 | 吉野 | `yoshino` | PUBLISHED | Codex / 2026-07-14 / Commit `f1ba7fd` / Actions `29294348852` / 本番HTTP確認済み |
 | 4 | 吉野町 | `yoshinocho` | PUBLISHED | Codex / 2026-07-14 / Commit `98b009d` / Actions `29295020132` / 本番HTTP確認済み |
 | 5 | 宮之浦町 | `miyanouracho` | BLOCKED_SLUG_CONFLICT | area一覧は `miyanouramachi`、Text canonicalは `miyanouracho`。自動置換せず判断待ち |
-| 6 | 玉里団地 | `tamazatodanchi` | READY_CANDIDATE | |
+| 6 | 玉里団地 | `tamazatodanchi` | IN_PROGRESS | 専用ツール / 2026-07-14 / 3ファイル・共有登録・静的検査済み / PHP CLI未確認 |
 | 7 | 玉里町 | `tamazatocho` | READY_CANDIDATE | |
 | 8 | 原良 | `harara` | READY_CANDIDATE | |
 | 9 | 光山 | `hikariyama` | READY_CANDIDATE | |
