@@ -40,7 +40,7 @@
 | 6 | 玉里団地 | `tamazatodanchi` | PUBLISHED | Codex / 2026-07-14 / Commit `60fa1ab` / Actions `29300812695` / 本番HTTP確認済み |
 | 7 | 玉里町 | `tamazatocho` | PUBLISHED | Codex / 2026-07-14 / Commit `80eb495` / Actions `29301384229` / 本番HTTP確認済み |
 | 8 | 原良 | `harara` | PUBLISHED | Codex / 2026-07-14 / Commit `edc27df` / Actions `29301447744` / 本番HTTP確認済み |
-| 9 | 光山 | `hikariyama` | READY_CANDIDATE | |
+| 9 | 光山 | `hikariyama` | IN_PROGRESS | 専用ツール / 2026-07-14 / 3ファイル・共有登録・静的検査済み / PHP CLI未確認 |
 | 10 | 広木 | `hiroki` | READY_CANDIDATE | |
 | 11 | 山下町 | `yamashitacho` | READY_CANDIDATE | |
 | 12 | 山田町 | `yamadacho` | READY_CANDIDATE | |
