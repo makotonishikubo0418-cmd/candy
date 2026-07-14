@@ -1056,8 +1056,17 @@ def run_build(args: argparse.Namespace) -> int:
     area_path = hp_root / "source" / "area.html"
     page_notes_path = root / "ページ作成用.md"
     queue_path = hp_root / "codex" / "docs" / "CANDY_AREA_105_PAGE_QUEUE.md"
-    if read_utf8(area_path).count(f'./kagoshima-deliveryhealth-area-{data.slug}.php') != 1:
-        raise AreaToolError("area一覧の正式リンクが1件ではありません。未知の一覧例外として停止します")
+    area_source = read_utf8(area_path)
+    area_link = f'./kagoshima-deliveryhealth-area-{data.slug}.php'
+    if area_source.count(area_link) != 1:
+        region_links = re.findall(
+            rf'href="\./kagoshima-deliveryhealth-area-([^"]+)\.php"[^>]*>{re.escape(data.region)}</a>',
+            area_source,
+        )
+        detail = f" existing_region_slugs={','.join(region_links)}" if region_links else " existing_region_slugs=none"
+        raise AreaToolError(
+            f"area一覧slug不一致: canonical={data.slug}{detail}。自動置換せず停止します"
+        )
     new_base = update_dataset_base(read_utf8(base_path), data.slug)
     new_sitemap = update_sitemap(read_utf8(sitemap_path), data.canonical)
     new_notes = update_page_notes(read_utf8(page_notes_path), data, resolved)

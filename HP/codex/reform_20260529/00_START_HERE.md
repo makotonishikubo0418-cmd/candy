@@ -1,5 +1,7 @@
 ﻿# FSG改修案ベース CANDY SEO 改修準備
 
+> **旧資料:** 2026-05-29時点の検討記録であり、現行正本ではありません。現在の作業判断は `HP/codex/docs/CANDY_MASTER_DOC_INDEX.md` から選んだ正本と実ファイルを使用してください。
+
 作成日: 2026-06-09
 対象サイト: `H:\Data\01_CTI\candy_HP`
 管理資料: `H:\Data\01_CTI\candy_HP\codex\reform_20260529`
@@ -65,4 +67,3 @@ FSG改修案に基づいてCANDY SEO側の改修準備は進められる。
 3. AI受付連携を公開HP側に出す範囲
 4. CTI/DB側のデータを公開HPに反映する範囲
 5. noindex解除やsitemap更新を行うタイミング
-

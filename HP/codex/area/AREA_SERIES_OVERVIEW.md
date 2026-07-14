@@ -1,5 +1,7 @@
 # AREA_SERIES_OVERVIEW
 
+> **旧資料:** 現行正本ではありません。area作業は `HP/codex/docs/CANDY_MASTER_DOC_INDEX.md` が指定する現行資料を使用してください。固定パス・件数・手順は現在値として使用しません。
+
 作成日: 2026-06-05
 対象: H:\Data\01_CTI\candy_HP
 

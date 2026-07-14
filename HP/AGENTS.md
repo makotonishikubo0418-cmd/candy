@@ -45,12 +45,30 @@ HP 直下の公開入口 PHP
 
 ### 4.1.1 area専用ツールの必須使用
 
-通常のareaページ制作は、手作業の置換や即席スクリプトではなく、次の専用ツールを最初に使用する。
+通常の「次の1ページ作成→アップ→本番URL報告」は `publish-next` だけを実行する。`publish-next` が内部で生成・検証まで行うため、事前に `build` と `check` を重ねて実行しない。
+
+本番操作なしのローカル生成・再検証だけを指示された場合は、次を使用する。
 
 ```powershell
 HP\codex\scripts\candy-area.cmd build --input "HP/Text_area_data/対象.txt"
 HP\codex\scripts\candy-area.cmd check --input "HP/Text_area_data/対象.txt"
 ```
+
+「次の1ページ作成→アップ→本番URL報告」を連続実行する場合は、次の一括コマンドを使う。
+
+```powershell
+HP\codex\scripts\candy-area.cmd publish-next
+```
+
+一括コマンドはキュー先頭の `READY_CANDIDATE` を選び、生成、検証、対象限定stage、Commit、remote再確認、Push、自動Actions追跡、本番HTTP確認、公開台帳更新、確認用URL出力まで行う。STOP条件では停止地点を明示し、別slugや旧slugを自動置換しない。
+
+通常の1ページ公開で必須とする公開安全条件は次の3点である。
+
+1. Commit前にstage対象の `name-status` を許可表と照合し、指示外変更、削除、rename、copy、type変更を混ぜない。
+2. Actionsで反映対象PHPをFTP接続前に `php -d short_open_tag=1 -l` し、失敗時はFTPへ進まない。
+3. 複数ファイル反映の途中失敗時は、その実行で反映済みの全対象を逆順rollbackし、全対象の検証完了後にbackupを削除する。
+
+フェーズ保存、`resume`、全依存ファイルのclean強制、画像SHA照合は通常1ページ公開の必須条件にしない。対象または共有ファイルの既存変更と安全に共存できない場合だけSTOPする。本番実装の詳細は `CANDY_PRODUCTION_MIGRATION_MASTER.md` を正本とする。
 
 - ツールは正式areaテンプレートを複製し、可変の店舗・通常記事・ホテル・周辺スポット・電話番号を入力件数に合わせて生成する。
 - 元Textの店舗、移動時間、交通費を最優先する。店舗未指定時は既存ページで使用頻度の低い組み合わせを選び、値未指定時は地図座標から近い完成ページの同店舗設定を使用する。
@@ -111,7 +129,7 @@ HTML だけ、PHP だけ、dataset だけを作って「ページ完成」と報
 - 最新 `HP/index.php` の本番反映は最終公開切替であり、ユーザーの明示指示を必要とする。
 - `index.php` 以外を先に更新できるが、それぞれのアップロードと HTTP/表示確認は別に行う。
 - deploy対象を含む `main` Pushは、安全検査後に本番反映を自動実行する。
-- 「アップしろ」は関連 `.md` の整合、Commit、Push、自動本番Actions、本番URL確認までの一括指示であり、途中で追加承認を求めない。
+- 「アップしろ」の意味、5分目標、除外事項はroot `AGENTS.md` 第3.6節を唯一の定義とし、途中で追加承認を求めない。
 - Actionsは対象SHA、対象件数、`PLAN_TOKEN`、上限を自動生成・照合し、不一致ならFTP接続前に停止する。
 - 一回の本番deployは最大25ファイルとし、超える場合は小バッチへ分割する。
 - GitHub Actions の除外を推測しない。workflow と deploy script の実物で確認する。

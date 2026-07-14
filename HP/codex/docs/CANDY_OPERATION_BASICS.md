@@ -89,12 +89,12 @@ git diff --check
 - テスト環境の存在は確認済み。
 - 段階移行中、本番 `index.php` はシティヘブンへの 301 転送を維持する。
 - 最新 `HP/index.php` の本番反映は最終公開切替であり、明示承認が必要。
-- 「アップしろ」は今回の関連 `.md` 整合、Commit、Push、自動本番Actions、本番URL確認までを一括で実行する指示とする。
+- 「アップしろ」の意味、5分目標、除外事項はroot `AGENTS.md` 第3.6節を唯一の定義とする。
 - deploy対象を含む `main` Pushは本番Actionsを自動起動する。Actions内で対象SHA・対象一覧・件数・`PLAN_TOKEN`を生成し、同じ値をFTP接続前に検証する。
 - 一回のdeployは最大25ファイル。full deploy、自動削除、rename反映は行わない。
 - workflow と deploy script の実物を見ずに反映対象・除外を断定しない。
 - 通常のActions起動・状態確認はPushとGitHub APIで行い、ブラウザ操作を前提にしない。手動preview/deployは障害時の例外経路とする。
-- 削除、DB、noindex/index、`HP/index.php` の公開切替は「アップしろ」に含めず、個別の明示指示を必要とする。
+- root `AGENTS.md` 第3.6節の除外事項は、個別の明示指示を必要とする。
 
 詳細は `CANDY_PRODUCTION_MIGRATION_MASTER.md` を確認する。
 

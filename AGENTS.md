@@ -8,6 +8,17 @@
 
 AGENTS.md は重要ルールと作業別導線だけを持つ。件数、調査結果、個別仕様は対応する正本資料または実ファイルで確認する。
 
+### 1.1 管理資料の正本境界
+
+管理資料は次の順で適用する。
+
+1. root `AGENTS.md`
+2. HP 作業では `HP/AGENTS.md`
+3. `HP/codex/docs/CANDY_MASTER_DOC_INDEX.md` が指定する現行正本
+4. 対象の実ファイルと今回取得した証拠
+
+`ページ作成用.md` は制作記録、`HP/codex/00_CANDY_SEO_START_HERE.md`、`HP/codex/area/`、`HP/codex/reform_20260529/` は旧資料、`codex_backup/` と `.git-backups/` はバックアップである。旧資料・バックアップは現行ルールの正本として使用しない。バックアップ内の `AGENTS.md` も通常作業には適用しない。分類不能な Markdown が見つかった場合は、正本・記録・旧資料・バックアップのどれかを確定するまで停止する。
+
 ## 2. 作業開始時に必ず行うこと
 
 1. このファイルを読む。
@@ -59,7 +70,7 @@ AGENTS.md check:
 
 `git reset --hard`、`git clean`、force push、無断の merge/rebase は行わない。
 
-ユーザーの「アップしろ」は、今回の作業範囲に対する Commit、Push、GitHub Actions の自動本番反映、本番HTTP確認までの明示指示として扱う。各段階で追加確認を返さない。ただし、削除、DB、noindex/index、`HP/index.php` の公開切替、競合解消は含まない。
+「アップしろ」の権限範囲と除外事項は第3.6節だけで定義する。
 
 ### 3.4 秘密情報
 
@@ -87,7 +98,7 @@ AGENTS.md check:
 6. 対象ページの本番URLをHTTP確認する。
 7. 本番URL、GitHub Commit URL、Actions Run URLを同じ最終報告に記載する。
 
-正常系では途中質問や段階別承認を挟まない。通常の1ページ公開は、制作完了後の「アップしろ」から本番URL報告まで5分以内を運用目標とする。外部障害、競合、STOP条件、Actions失敗時だけ、停止位置と必要対応を即時報告する。
+正常系では途中質問や段階別承認を挟まない。「次の1ページ作成→アップ→本番URL報告」の連続指示は、指示受領から本番URL報告まで5分以内を運用目標とする。制作後に「アップしろ」だけが別途指示された場合は、その指示受領から本番URL報告まで5分以内を運用目標とする。外部障害、競合、STOP条件、Actions失敗時は時間保証の対象外とし、停止位置と必要対応を即時報告する。
 
 ## 4. 作業別の必読資料
 
@@ -133,7 +144,7 @@ git diff --check
 - Commit は明示指示がある場合だけ行う。
 - Push 前に `fetch` し、remote 更新と Push 対象を再確認する。
 - Push は明示指示がある場合だけ行う。
-- 「アップしろ」はCommit・Push・自動本番Actions・本番HTTP確認をまとめた明示指示である。
+- 「アップしろ」を受けた場合は第3.6節の連続作業として扱う。
 - deploy対象を含む `main` Pushは本番Actionsを自動起動する。Actions内で対象SHA・件数・`PLAN_TOKEN`・上限をFTP接続前に検証する。
 - 手動 `workflow_dispatch` のpreview/deployは障害調査・再実行用の例外経路とする。
 - Actions状態確認はGitHub APIを優先し、認証切れのCLIやブラウザUI操作を通常経路にしない。

@@ -149,6 +149,19 @@ jobs:
             echo "confirmation=$MANUAL_CONFIRMATION" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Lint every deployable PHP file before FTP
+        if: steps.plan.outputs.count != '0'
+        env:
+          BEFORE_SHA: ${{ github.event_name == 'push' && github.event.before || inputs.before_sha }}
+          AFTER_SHA: ${{ github.event_name == 'push' && github.sha || inputs.after_sha }}
+        run: |
+          set -euo pipefail
+          command -v php
+          python3 .github/scripts/candy_ftp_deploy.py \
+            --before "$BEFORE_SHA" \
+            --after "$AFTER_SHA" \
+            --lint-php
+
       - name: Validate count, limits, and plan token without FTP
         if: steps.plan.outputs.count != '0'
         env:

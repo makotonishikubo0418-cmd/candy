@@ -8,6 +8,7 @@ import ftplib
 import hashlib
 import io
 import os
+import shutil
 from dataclasses import dataclass
 from pathlib import Path, PurePosixPath
 import subprocess
@@ -290,6 +291,29 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def lint_php_files(paths: list[str]) -> None:
+    php_files = [path for path in paths if PurePosixPath(path).suffix.lower() == ".php"]
+    if not php_files:
+        print("PHP LINT: no deployable PHP files")
+        return
+    php = os.environ.get("PHP_BINARY") or shutil.which("php")
+    if not php:
+        raise RuntimeError("PHP executable is unavailable; refusing FTP deployment")
+    for path in php_files:
+        result = subprocess.run(
+            [php, "-d", "short_open_tag=1", "-l", path],
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            check=False,
+        )
+        if result.returncode != 0:
+            raise RuntimeError(f"PHP lint failed before FTP for {path}: {result.stdout.strip()}")
+        print(f"PHP_LINT_OK: {path}")
+
+
 def list_remote_names(ftp: ftplib.FTP, directory: str) -> set[str]:
     ftp.cwd(directory)
     try:
@@ -369,7 +393,7 @@ def build_targets(paths: list[str], run_id: str) -> list[UploadTarget]:
 
 
 def rollback_target(ftp: ftplib.FTP, target: UploadTarget) -> None:
-    """Restore only the file currently being promoted."""
+    """Restore one promoted file while its backup is still retained."""
     ftp.cwd(target.remote_directory)
     names = list_remote_names(ftp, target.remote_directory)
     if target.had_original and target.backup_name in names:
@@ -406,8 +430,11 @@ def deploy(paths: list[str]) -> None:
         ensured_directories: set[str] = set()
         directory_names: dict[str, set[str]] = {}
         total = len(targets)
-        for position, target in enumerate(targets, start=1):
-            try:
+        completed: list[UploadTarget] = []
+        current: UploadTarget | None = None
+        try:
+            for position, target in enumerate(targets, start=1):
+                current = target
                 if target.remote_directory not in ensured_directories:
                     ensure_remote_directory(ftp, target.remote_directory)
                     ensured_directories.add(target.remote_directory)
@@ -460,29 +487,47 @@ def deploy(paths: list[str]) -> None:
                 )
                 if sha256_bytes(final_data) != target.sha256:
                     raise RuntimeError(f"Final SHA256 mismatch for {target.repository_path}")
-
-                if target.had_original:
-                    ftp.cwd(target.remote_directory)
-                    ftp.delete(target.backup_name)
-                    names.discard(target.backup_name)
-                target.promoted = False
+                completed.append(target)
                 print(
-                    f"DEPLOYED {position}/{total}: {target.repository_path} "
+                    f"VERIFIED {position}/{total}: {target.repository_path} "
                     f"-> {server_path_for(target.repository_path)}",
                     flush=True,
                 )
-            except Exception as exc:
+
+        except Exception as exc:
+            rollback_targets: list[UploadTarget] = []
+            if current is not None and current not in completed:
+                rollback_targets.append(current)
+            rollback_targets.extend(reversed(completed))
+            rollback_failures: list[str] = []
+            for rollback in rollback_targets:
                 try:
-                    rollback_target(ftp, target)
+                    rollback_target(ftp, rollback)
                 except Exception as rollback_exc:
-                    raise RuntimeError(
-                        f"Deployment failed at {position}/{total} for "
-                        f"{target.repository_path}; rollback also failed: {rollback_exc}"
-                    ) from exc
+                    rollback_failures.append(f"{rollback.repository_path}: {rollback_exc}")
+            if rollback_failures:
                 raise RuntimeError(
-                    f"Deployment stopped at {position}/{total} for "
-                    f"{target.repository_path}; previously completed files remain deployed"
+                    f"Deployment failed at {len(completed) + 1}/{total}; full rollback also failed: "
+                    + "; ".join(rollback_failures)
                 ) from exc
+            failed_path = current.repository_path if current is not None else "before first file"
+            raise RuntimeError(
+                f"Deployment failed for {failed_path}; all files changed by this run were rolled back"
+            ) from exc
+
+        cleanup_failures: list[str] = []
+        for target in completed:
+            if target.had_original:
+                try:
+                    delete_if_exists(ftp, target.remote_directory, target.backup_name)
+                except Exception as cleanup_exc:
+                    cleanup_failures.append(f"{target.repository_path}: {cleanup_exc}")
+            target.promoted = False
+        if cleanup_failures:
+            raise RuntimeError(
+                "All files are deployed and verified, but retained backup cleanup failed: "
+                + "; ".join(cleanup_failures)
+            )
 
         print(f"SUCCESS: deployed and SHA256-verified {len(targets)} file(s)")
     finally:
@@ -570,6 +615,7 @@ def main() -> int:
     parser.add_argument("--approved-plan-token")
     parser.add_argument("--confirm-production")
     parser.add_argument("--verify-approval", action="store_true")
+    parser.add_argument("--lint-php", action="store_true")
     args = parser.parse_args()
 
     if args.self_test:
@@ -597,6 +643,9 @@ def main() -> int:
         return 2
     if not deployable:
         print("No deployable HP files changed.")
+        return 0
+    if args.lint_php:
+        lint_php_files(deployable)
         return 0
     if args.dry_run:
         print("DRY-RUN: FTP connection and server changes were not performed.")

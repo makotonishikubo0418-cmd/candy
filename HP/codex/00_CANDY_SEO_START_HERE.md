@@ -1,5 +1,7 @@
 ﻿# CANDY SEO Codex 管理入口
 
+> **旧資料:** 現行正本ではありません。通常作業はroot `AGENTS.md` → `HP/AGENTS.md` → `HP/codex/docs/CANDY_MASTER_DOC_INDEX.md` の順で開始してください。固定パス・件数・手順は現在値として使用しません。
+
 作成日: 2026-06-09
 対象プロジェクト: CANDY SEO
 リポジトリ: `H:\Data\01_FSG\candy`

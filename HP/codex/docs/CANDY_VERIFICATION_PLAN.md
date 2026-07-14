@@ -157,9 +157,9 @@ form actionがGETで400を返しただけではリンク切れとしない。Goo
 5. 一回のdeployが最大25ファイル・合計50MiB以下に制限される。
 6. `index.php`、`.htaccess`、管理資料、元Text、秘密値候補、backup類が除外される。
 7. 削除・renameが検出された場合、全deployが停止する。
-8. ファイル単位でupload、一時SHA256、backup、promote、最終SHA256、backup削除、進捗出力が完結する。
+8. ファイル単位でupload、一時SHA256、backup、promote、最終SHA256を行い、全対象の検証完了までbackupを保持する。途中失敗時は同じ実行で反映済みの全対象を逆順rollbackし、全件成功後だけbackupを削除する。
 9. previewは5分、deployは10分でtimeoutする。
-10. 「アップしろ」がCommit、Push、自動Actions、本番HTTP確認までの一括指示として記録され、正常時に途中再承認を要求しない。
+10. 「アップしろ」がroot `AGENTS.md` 第3.6節の定義を参照し、正常時に途中再承認を要求しない。
 
 ローカル検査、GitHub上のworkflow構文、Actions preview、Actions deploy、本番SHA256、HTTP、ブラウザを別結果として記録する。ローカル差分だけで本番安全化済みとしない。
 ## 4. 結果分類
@@ -203,7 +203,7 @@ form actionがGETで400を返しただけではリンク切れとしない。Goo
 5. 生成元の将来リンク
 6. 未使用CSS・テンプレートだけの参照
 
-調査指示だけなら変更しない。削除、置換、Commit、Push、本番反映は明示承認なしに行わない。「アップしろ」は今回の進行内容に対するCommit、Push、自動本番反映、本番HTTP確認までの明示承認として扱い、途中で再承認を求めない。ただし削除、DB、noindex/index、`HP/index.php` 公開切替は含まない。
+調査指示だけなら変更しない。削除、置換、Commit、Push、本番反映は明示承認なしに行わない。「アップしろ」を受けた場合はroot `AGENTS.md` 第3.6節の範囲だけを明示承認として扱い、途中で再承認を求めない。
 
 ## 7. 修正後再確認
 

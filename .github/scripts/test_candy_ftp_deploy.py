@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import re
+import importlib.util
+import os
 import shutil
 import subprocess
 import sys
@@ -12,6 +14,110 @@ GIT = shutil.which("git") or r"C:\Program Files\Git\cmd\git.exe"
 SCRIPT = Path(__file__).with_name("candy_ftp_deploy.py").resolve()
 WORKFLOW = SCRIPT.parent.parent / "workflows" / "candy-production-deploy.yml"
 CONFIRMATION = "DEPLOY-CANDY-PRODUCTION"
+
+
+def load_deploy_module():
+    spec = importlib.util.spec_from_file_location("candy_ftp_deploy_tested", SCRIPT)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+class FakeFTP:
+    ROOT = "/public_html/group/candy"
+
+    def __init__(self, files: dict[str, bytes], *, fail_final_name: str | None = None, **_kwargs):
+        self.files = files
+        self.directory = self.ROOT
+        self.fail_final_name = fail_final_name
+        self.failed = False
+
+    def connect(self, *_args):
+        return None
+
+    def login(self, *_args):
+        return None
+
+    def cwd(self, directory: str):
+        if directory.startswith("/"):
+            self.directory = directory.rstrip("/")
+        else:
+            self.directory = f"{self.directory}/{directory}".rstrip("/")
+
+    def nlst(self):
+        prefix = self.directory.rstrip("/") + "/"
+        return [path[len(prefix):] for path in self.files if path.startswith(prefix) and "/" not in path[len(prefix):]]
+
+    def mkd(self, _directory: str):
+        return None
+
+    def storbinary(self, command: str, handle):
+        name = command.split(" ", 1)[1]
+        self.files[f"{self.directory}/{name}"] = handle.read()
+
+    def retrbinary(self, command: str, callback):
+        name = command.split(" ", 1)[1]
+        if name == self.fail_final_name and not self.failed:
+            self.failed = True
+            raise RuntimeError("injected final verification failure")
+        callback(self.files[f"{self.directory}/{name}"])
+
+    def delete(self, name: str):
+        del self.files[f"{self.directory}/{name}"]
+
+    def rename(self, old: str, new: str):
+        self.files[f"{self.directory}/{new}"] = self.files.pop(f"{self.directory}/{old}")
+
+    def quit(self):
+        return None
+
+    def close(self):
+        return None
+
+
+def assert_transactional_rollback() -> None:
+    module = load_deploy_module()
+    with tempfile.TemporaryDirectory() as temp_dir:
+        root = Path(temp_dir)
+        (root / "HP").mkdir()
+        new_files = {"a.php": b"new-a", "b.php": b"new-b", "c.php": b"new-c"}
+        for name, body in new_files.items():
+            (root / "HP" / name).write_bytes(body)
+        remote = {
+            f"{FakeFTP.ROOT}/a.php": b"old-a",
+            f"{FakeFTP.ROOT}/c.php": b"old-c",
+        }
+        fake = FakeFTP(remote, fail_final_name="c.php")
+        original_factory = module.ftplib.FTP
+        original_cwd = Path.cwd()
+        original_env = os.environ.copy()
+        try:
+            module.ftplib.FTP = lambda **_kwargs: fake
+            os.chdir(root)
+            os.environ.update(
+                FTP_SERVER="example.invalid",
+                FTP_USERNAME="test",
+                FTP_PASSWORD="test",
+                GITHUB_RUN_ID="12345",
+                GITHUB_SHA="a" * 40,
+            )
+            try:
+                module.deploy([f"HP/{name}" for name in new_files])
+            except RuntimeError as exc:
+                assert "all files changed by this run were rolled back" in str(exc)
+            else:
+                raise AssertionError("Injected FTP failure did not stop deployment")
+        finally:
+            module.ftplib.FTP = original_factory
+            os.chdir(original_cwd)
+            os.environ.clear()
+            os.environ.update(original_env)
+        assert remote == {
+            f"{FakeFTP.ROOT}/a.php": b"old-a",
+            f"{FakeFTP.ROOT}/c.php": b"old-c",
+        }
 
 
 def run(args: list[str], cwd: Path, *, succeeds: bool = True) -> subprocess.CompletedProcess[str]:
@@ -63,6 +169,7 @@ def assert_workflow_contract() -> None:
         "steps.plan.outputs.count",
         "steps.plan.outputs.token",
         "--verify-approval",
+        "--lint-php",
         "cancel-in-progress: false",
     )
     for marker in required:
@@ -73,6 +180,7 @@ def assert_workflow_contract() -> None:
 
 def main() -> None:
     assert_workflow_contract()
+    assert_transactional_rollback()
     with tempfile.TemporaryDirectory() as temp_dir:
         root = Path(temp_dir)
         before, after = make_repository(root)
