@@ -10,6 +10,7 @@ import os
 import re
 import subprocess
 import sys
+import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 from urllib.error import HTTPError
@@ -24,8 +25,6 @@ ORIGIN_URL_SUFFIX = f"{REPOSITORY}.git"
 GITHUB_BASE = f"https://github.com/{REPOSITORY}"
 USER_AGENT = "candy-area-publish"
 EXPECTED_REDIRECT = "https://www.cityheaven.net/kagoshima/A4601/A460102/newcandy/"
-BATCH_START = "<!-- CANDY_AREA_BATCH_HISTORY_START -->"
-BATCH_END = "<!-- CANDY_AREA_BATCH_HISTORY_END -->"
 ACTIONS_PATTERN = re.compile(
     rf"^https://github\.com/{re.escape(REPOSITORY)}/actions/runs/(?P<run_id>\d+)$"
 )
@@ -121,10 +120,6 @@ def queue_path() -> Path:
     return root() / "HP" / "codex" / "docs" / "CANDY_AREA_105_PAGE_QUEUE.md"
 
 
-def notes_path() -> Path:
-    return root() / "ページ作成用.md"
-
-
 def find_input(region: str, slug: str) -> Path:
     candidates = list((root() / "HP" / "Text_area_data").rglob(f"{region}_テンプレート.txt"))
     matches: list[Path] = []
@@ -162,7 +157,6 @@ def paths_for(data: candy_area_page.AreaData) -> list[Path]:
         hp / "source" / "area.html",
         hp / "sitemap.xml",
         queue_path(),
-        notes_path(),
     ]
 
 
@@ -427,100 +421,6 @@ def verify_production(data: candy_area_page.AreaData, commit: str) -> None:
     print("PRODUCTION_CHECK_OK=" + ",".join(checks))
 
 
-def update_queue_publication(source: str, data: candy_area_page.AreaData, commit: str, run_id: str) -> str:
-    if source.count(BATCH_START) != 1 or source.count(BATCH_END) != 1:
-        raise PublishError("batch history markers must each occur exactly once")
-    batch_start = source.index(BATCH_START)
-    batch_end = source.index(BATCH_END)
-    if batch_start >= batch_end:
-        raise PublishError("batch history markers are reversed")
-    lines = source.splitlines()
-    matched = 0
-    for index, line in enumerate(lines):
-        parts = line.split("|")
-        if len(parts) < 7 or not parts[1].strip().isdigit():
-            continue
-        if parts[3].strip() != f"`{data.slug}`":
-            continue
-        parts[4] = " PUBLISHED "
-        parts[5] = (
-            f" Codex / {candy_area_page.date.today().isoformat()} / Commit `{commit[:7]}` / "
-            f"Actions `{run_id}` / 本番HTTP確認済み "
-        )
-        lines[index] = "|".join(parts)
-        matched += 1
-    if matched != 1:
-        raise PublishError(f"queue publication row count is not 1: {matched}")
-    batch_pattern = re.compile(rf"^\| TEST-(\d+) \| (\d+) / `{re.escape(data.slug)}` \|.*$", re.M)
-    current = "\n".join(lines)
-    batch_matches = list(batch_pattern.finditer(current))
-    if len(batch_matches) > 1:
-        raise PublishError("batch publication row count is greater than 1")
-    queue_number = next(
-        line.split("|")[1].strip()
-        for line in lines
-        if len(line.split("|")) >= 7 and line.split("|")[3].strip() == f"`{data.slug}`"
-    )
-    if batch_matches:
-        batch_number = int(batch_matches[0].group(1))
-    else:
-        numbers = [int(value) for value in re.findall(r"^\| TEST-(\d+) \|", current, re.M)]
-        batch_number = max(numbers, default=0) + 1
-    batch_row = (
-        f"| TEST-{batch_number:02d} | {queue_number} / `{data.slug}` | Codex | PUBLISHED | "
-        f"{candy_area_page.date.today().isoformat()} | `{commit[:7]}` | Actions `{run_id}`、"
-        "本番HTTP 200・title・canonical・h1・店舗・画像SHA・一覧・sitemap・redirect確認済み |"
-    )
-    updated = "\n".join(lines).rstrip() + "\n"
-    if batch_matches:
-        updated, count = batch_pattern.subn(batch_row, updated, count=1)
-        if count != 1:
-            raise PublishError("existing batch row could not be updated")
-    else:
-        insertion = updated.index(BATCH_END)
-        updated = updated[:insertion] + batch_row + "\n" + updated[insertion:]
-    return updated
-
-
-def update_notes_publication(
-    source: str,
-    data: candy_area_page.AreaData,
-    commit: str,
-    actions_url: str,
-) -> str:
-    marker = f"<!-- CANDY_AREA_TOOL_RECORD:{data.slug} -->"
-    marker_at = source.find(marker)
-    if marker_at < 0 or source.find(marker, marker_at + 1) >= 0:
-        raise PublishError("page note marker count is not 1")
-    heading = f"### 自動生成記録 {candy_area_page.date.today().isoformat()} {data.region} / {data.slug}"
-    if source.count(heading) != 1:
-        raise PublishError("exact page note heading count is not 1")
-    section_start = source.index(heading)
-    if not section_start <= marker_at:
-        raise PublishError("page note marker is outside the exact section")
-    next_section = source.find("\n### ", marker_at)
-    section_end = len(source) if next_section < 0 else next_section
-    section = source[section_start:section_end].rstrip()
-    if section.count(marker) != 1:
-        raise PublishError("page note marker is not unique inside the exact section")
-    prefixes = ("- Commit `", "- Actions Run `", "- 本番URL `", "- ブラウザ表示とローカルPHP構文")
-    kept = [line for line in section.splitlines() if not line.startswith(prefixes)]
-    run_id = actions_url.rstrip("/").rsplit("/", 1)[-1]
-    kept.extend(
-        [
-            f"- Commit `{commit[:7]}` でGitHub mainへ反映。",
-            f"- Actions Run `{run_id}` で本番へ反映。",
-            f"- 本番URL `{data.canonical}` はHTTP 200、title、canonical、h1、店舗{len(data.shops)}件、画像2枚、area一覧、sitemapを確認済み。",
-            "- ブラウザ表示とローカルPHP構文は未確認。",
-        ]
-    )
-    return source[:section_start] + "\n".join(kept) + "\n" + source[section_end:].lstrip("\n")
-
-
-def atomic_write(path: Path, source: str) -> None:
-    candy_area_page.atomic_write(path, source)
-
-
 def publish(
     input_path: Path,
     *,
@@ -543,8 +443,6 @@ def publish(
         **{path: "M" for path in path_arguments[3:]},
     }
     page_required = set(page_paths)
-    docs = [queue_path().relative_to(root()).as_posix(), notes_path().relative_to(root()).as_posix()]
-    docs_allowed = {path: "M" for path in docs}
     page_tool = root() / "HP" / "codex" / "scripts" / "candy_area_page.py"
     relative_input = input_path.relative_to(root()).as_posix()
 
@@ -652,40 +550,21 @@ def publish(
         phase = "PRODUCTION_VERIFIED"
 
     if phase == "PRODUCTION_VERIFIED":
-        print("STEP=publication_records", flush=True)
-        run_id = ACTIONS_PATTERN.fullmatch(state["actions_url"]).group("run_id")  # type: ignore[union-attr]
-        queue_source = candy_area_page.read_utf8(queue_path())
-        notes_source = candy_area_page.read_utf8(notes_path())
-        atomic_write(queue_path(), update_queue_publication(queue_source, data, page_commit, run_id))
-        atomic_write(
-            notes_path(),
-            update_notes_publication(notes_source, data, page_commit, state["actions_url"]),
-        )
-        git("add", "--", *docs)
-        assert_staged_exact(docs_allowed, set(docs), "publication docs staged changes")
-        git("commit", "-m", f"docs: record {data.slug} publication", stream=True)
-        docs_commit = git_value("rev-parse", "HEAD")
-        assert_commit_exact(docs_commit, docs_allowed, set(docs), "publication docs commit")
-        if git_value("diff", "--cached", "--name-only"):
-            raise PublishError("staged changes remain after docs commit")
-        save_state(state, "DOCS_COMMITTED", docs_commit=docs_commit)
-        phase = "DOCS_COMMITTED"
-
-    docs_commit = state.get("docs_commit", "")
-    if phase == "DOCS_COMMITTED":
-        if git_value("rev-parse", "HEAD") != docs_commit:
-            raise PublishError("HEAD does not match docs commit")
-        remote = fetch_remote_head()
-        if remote == page_commit:
-            save_state(state, "DOCS_COMMITTED", remote_state="UNKNOWN_AFTER_DOCS_PUSH_ATTEMPT")
-            git("push", "origin", "main", stream=True)
-            remote = fetch_remote_head()
-        if remote != docs_commit:
-            raise PublishError(f"final origin/main does not match docs commit: {remote}")
         final_status = git_value("status", "--porcelain=v1", "--", *path_arguments)
         if final_status:
             raise PublishError("target files are not clean after publication:\n" + final_status)
-        save_state(state, "COMPLETED", remote_state=docs_commit)
+        save_state(state, "COMPLETED", remote_state=page_commit)
+        phase = "COMPLETED"
+
+    # 旧版が資料専用Commitまで終えていた場合だけ互換処理する。
+    if phase == "DOCS_COMMITTED":
+        legacy_commit = state.get("docs_commit", "")
+        if not legacy_commit or git_value("rev-parse", "HEAD") != legacy_commit:
+            raise PublishError("HEAD does not match legacy docs commit")
+        remote = fetch_remote_head()
+        if remote != legacy_commit:
+            raise PublishError(f"origin/main does not match legacy docs commit: {remote}")
+        save_state(state, "COMPLETED", remote_state=legacy_commit)
         phase = "COMPLETED"
 
     if phase != "COMPLETED":
@@ -696,20 +575,10 @@ def publish(
     print(f"PRODUCTION_URL={data.canonical}")
     print(f"COMMIT_URL={GITHUB_BASE}/commit/{page_commit}")
     print(f"ACTIONS_URL={state['actions_url']}")
-    print(f"DOCS_COMMIT_URL={GITHUB_BASE}/commit/{docs_commit}")
     return 0
 
 
 def self_test() -> int:
-    today = candy_area_page.date.today().isoformat()
-    queue = (
-        "| No. | 地域名 | slug | 状態 | 記録 |\n"
-        "|---:|---|---|---|---|\n"
-        "| 4 | 吉野町 | `yoshinocho` | IN_PROGRESS | old |\n"
-        f"{BATCH_START}\n"
-        f"| TEST-04 | 4 / `oldslug` | Codex | PUBLISHED | {today} | `aaaaaaa` | old |\n"
-        f"{BATCH_END}\n"
-    )
     data = candy_area_page.AreaData(
         Path("HP/Text_area_data/吉野町_テンプレート.txt"), "吉野町", "yoshinocho", "title", "description",
         "https://www.55810.com/kagoshima-deliveryhealth-area-yoshinocho.php", "image", "image1", "image2",
@@ -717,21 +586,8 @@ def self_test() -> int:
         candy_area_page.BasicInfo("basic", "map", "src", "1", "1", "date", "description"),
         None, [], None, [],
     )
-    updated_queue = update_queue_publication(queue, data, "b" * 40, "12345")
-    assert "| 4 | 吉野町 | `yoshinocho` | PUBLISHED |" in updated_queue
-    assert "| TEST-05 | 4 / `yoshinocho` |" in updated_queue
-    repeated_queue = update_queue_publication(updated_queue, data, "c" * 40, "67890")
-    assert repeated_queue.count("4 / `yoshinocho`") == 1
-    assert "`ccccccc` | Actions `67890`" in repeated_queue
-    notes = (
-        f"### 自動生成記録 {today} 吉野 / yoshino\n<!-- CANDY_AREA_TOOL_RECORD:yoshino -->\n- old\n"
-        f"### 自動生成記録 {today} 吉野町 / yoshinocho\n<!-- CANDY_AREA_TOOL_RECORD:yoshinocho -->\n- generated\n"
-    )
+    assert all(path.name != "ページ作成用.md" for path in paths_for(data))
     actions_url = f"{GITHUB_BASE}/actions/runs/12345"
-    updated_notes = update_notes_publication(notes, data, "b" * 40, actions_url)
-    first, second = updated_notes.split(f"### 自動生成記録 {today} 吉野町 / yoshinocho", 1)
-    assert "12345" not in first
-    assert "12345" in second and data.canonical in second
     values = release_values(
         f"ACTIONS_URL={actions_url}\n"
         f"PRODUCTION_URL={data.canonical}\n"
@@ -758,15 +614,17 @@ def self_test() -> int:
         "PAGE_PUSHED",
         "ACTIONS_SUCCESS",
         "PRODUCTION_VERIFIED",
-        "DOCS_COMMITTED",
         "COMPLETED",
     )
+    original_state_path = globals()["state_path"]
     try:
-        for phase in phases:
-            save_state(state, phase)
-            assert load_state("selftest-state")["phase"] == phase
+        with tempfile.TemporaryDirectory() as temp_directory:
+            globals()["state_path"] = lambda slug: Path(temp_directory) / f"{slug}.json"
+            for phase in phases:
+                save_state(state, phase)
+                assert load_state("selftest-state")["phase"] == phase
     finally:
-        state_path("selftest-state").unlink(missing_ok=True)
+        globals()["state_path"] = original_state_path
         ACTIVE_STATE.clear()
     print("PUBLISH_SELF_TEST=passed")
     return 0

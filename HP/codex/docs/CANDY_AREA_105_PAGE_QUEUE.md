@@ -1,7 +1,7 @@
 # CANDY AREA 105 PAGE QUEUE
 
 更新日: 2026-07-13
-用途: 未作成areaページの制作順・状態・引継ぎ管理
+用途: 未作成areaページの制作順と重複防止
 
 ## 1. 集計基準
 
@@ -22,8 +22,10 @@
 
 - 初回は2件、確認後は5件ずつ処理する
 - 上から順番を基本とする。順番変更は記録する
-- `LOCAL_COMPLETE`は制作runbookの全完了条件を満たした場合だけ使用する
-- 状態変更時は担当、日付、Commit hashまたは停止理由を記録する
+- 1 slug 1行とし、別の履歴表を作らない
+- build後は対象行を `LOCAL_COMPLETE` または `IN_PROGRESS` にする
+- 公開結果を後追い記録するためのCommit・Pushを行わない
+- 公開状態はGitHub Commit、Actions、本番HTTPで確認する
 - 複数Codexで同時に別バッチを処理しない
 
 状態欄: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUSHED / PUBLISHED / BLOCKED`
@@ -161,20 +163,3 @@ kawadacho, hirakawacho, shimizucho
 ```
 
 既存PHP・datasetを上書きせず、内容、dataset_base登録、area一覧、sitemap、旧slugを個別確認してから、ユーザー承認を得ます。
-
-## 6. バッチ履歴
-
-| Batch | 対象No./slug | 担当 | 状態 | 日付 | Commit | 未確認・停止理由 |
-|---|---|---|---|---|---|---|
-<!-- CANDY_AREA_BATCH_HISTORY_START -->
-| TEST-01 | 1 / `hanaomachi` | Codex | PUBLISHED | 2026-07-14 | `44df27b` | Actions `29289499915`、本番HTTP 200・ブラウザ確認済み |
-| TEST-02 | 2 / `minayoshicho` | Codex | PUBLISHED | 2026-07-14 | `f1ba7fd` | Actions `29294348852`、本番HTTP 200・title・canonical・h1・店舗・画像・一覧・sitemap確認済み |
-| TEST-03 | 3 / `yoshino` | Codex | PUBLISHED | 2026-07-14 | `f1ba7fd` | Actions `29294348852`、本番HTTP 200・title・canonical・h1・店舗・画像・一覧・sitemap確認済み |
-| TEST-04 | 4 / `yoshinocho` | Codex | PUBLISHED | 2026-07-14 | `98b009d` | Actions `29295020132`、本番HTTP 200・title・canonical・h1・店舗・画像・一覧・sitemap確認済み |
-| TEST-05 | 6 / `tamazatodanchi` | Codex | PUBLISHED | 2026-07-14 | `60fa1ab` | Actions `29300812695`、本番HTTP 200・title・canonical・h1・店舗・画像SHA・一覧・sitemap・redirect確認済み |
-| TEST-06 | 7 / `tamazatocho` | Codex | PUBLISHED | 2026-07-14 | `80eb495` | Actions `29301384229`、本番HTTP 200・title・canonical・h1・店舗・画像SHA・一覧・sitemap・redirect確認済み |
-| TEST-07 | 8 / `harara` | Codex | PUBLISHED | 2026-07-14 | `edc27df` | Actions `29301447744`、本番HTTP 200・title・canonical・h1・店舗・画像SHA・一覧・sitemap・redirect確認済み |
-| TEST-08 | 9 / `hikariyama` | Codex | PUBLISHED | 2026-07-14 | `03ba6e6` | Actions `29301654365`、本番HTTP 200・title・canonical・h1・店舗・画像SHA・一覧・sitemap・redirect確認済み |
-| TEST-09 | 10 / `hiroki` | Codex | PUBLISHED | 2026-07-14 | `1620c16` | Actions `29301707302`、本番HTTP 200・title・canonical・h1・店舗・画像SHA・一覧・sitemap・redirect確認済み |
-| TEST-10 | 11 / `yamashitacho` | Codex | PUBLISHED | 2026-07-14 | `2a8a9c4` | Actions `29301766001`、本番HTTP 200・title・canonical・h1・店舗・画像SHA・一覧・sitemap・redirect確認済み |
-<!-- CANDY_AREA_BATCH_HISTORY_END -->

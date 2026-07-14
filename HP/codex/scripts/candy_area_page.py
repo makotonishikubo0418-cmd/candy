@@ -43,12 +43,19 @@ SHOP_ALIASES = {
     "ラブ♡エル霧島": "loveel_kirishima",
 }
 KEY_TO_NAME = {value: key for key, value in SHOP_ALIASES.items()}
-PLACEHOLDERS = (
+FORBIDDEN_PLACEHOLDERS = (
     "aaaaaaaaaaaaaaaaaaaa",
-    "ここにはリンク先のタイトルを表示します。",
     "<!-- このタグを削除してここに店舗情報を設置 -->",
-    'href="#"',
     "<改行>",
+)
+RELATED_PLACEHOLDER_TEXT = "ここにはリンク先のタイトルを表示します。"
+RELATED_PLACEHOLDER_LINK = f'<a href="#" class="fade">{RELATED_PLACEHOLDER_TEXT}</a>'
+RELATED_PLACEHOLDER_COUNT = 8
+RELATED_PLACEHOLDER_BLOCK_PATTERN = (
+    r'(?s)<div class="lmt_20 lp_40 bd">\s*'
+    r'<h3 class="lpb_10 fs_l">関連記事</h3>\s*'
+    r'<div class="fs_md3">(?P<links>.*?)</div>\s*'
+    r'</div>'
 )
 SEPARATOR_RE = re.compile(r"^(?:-{10,}|━{10,})\s*$")
 SCENE_RE = re.compile(r"^scene（h2(?: / [^)]+)?）\s*$")
@@ -792,12 +799,6 @@ def render_source(
         "\n" + "".join(dynamic_parts),
         "dynamic scenes",
     )
-    source = replace_exact(
-        source,
-        r'(?s)[ \t]*<div class="lmt_20 lp_40 bd">.*?(?=[ \t]*<div class="lm_40_0_75 center" id="button_3">)',
-        "\n",
-        "related placeholder",
-    )
     source = "\n".join(line.rstrip() for line in source.splitlines())
     return source.rstrip() + "\n"
 
@@ -828,9 +829,39 @@ def validate_rendered(
     hp_root: Path,
 ) -> list[str]:
     errors: list[str] = []
-    for placeholder in PLACEHOLDERS:
+    for placeholder in FORBIDDEN_PLACEHOLDERS:
         if placeholder in source:
             errors.append(f"placeholder残存: {placeholder}")
+    related_matches = list(re.finditer(RELATED_PLACEHOLDER_BLOCK_PATTERN, source))
+    if len(related_matches) != 1:
+        errors.append(f"関連記事領域数不整合: {len(related_matches)}")
+    else:
+        related_match = related_matches[0]
+        links = related_match.group("links")
+        link_count = links.count(RELATED_PLACEHOLDER_LINK)
+        href_count = links.count('href="#"')
+        text_count = links.count(RELATED_PLACEHOLDER_TEXT)
+        if link_count or href_count or text_count:
+            remainder = links.replace(RELATED_PLACEHOLDER_LINK, "")
+            remainder = re.sub(r"<br\s*/?>", "", remainder).strip()
+            if (
+                link_count != RELATED_PLACEHOLDER_COUNT
+                or href_count != RELATED_PLACEHOLDER_COUNT
+                or text_count != RELATED_PLACEHOLDER_COUNT
+                or remainder
+            ):
+                errors.append(
+                    "関連記事予約リンク不整合: "
+                    f"expected={RELATED_PLACEHOLDER_COUNT} "
+                    f"links={link_count} hrefs={href_count} texts={text_count}"
+                )
+        else:
+            real_links = re.findall(r'<a\s+[^>]*href="(?!#)[^"]+"[^>]*>.*?</a>', links, re.S)
+            if not real_links:
+                errors.append("関連記事実リンクなし")
+        outside_related = source[: related_match.start()] + source[related_match.end() :]
+        if RELATED_PLACEHOLDER_TEXT in outside_related or 'href="#"' in outside_related:
+            errors.append("関連記事予約領域外にダミーリンク残存")
     ids = re.findall(r'\bid="([^"]+)"', source)
     duplicates = [value for value, count in Counter(ids).items() if count > 1]
     if duplicates:
@@ -930,33 +961,6 @@ def update_sitemap(source: str, canonical: str) -> str:
     return replace_exact(source, r"(?m)^</urlset>", entry + "</urlset>", "sitemap insertion")
 
 
-def page_record(data: AreaData, resolved: list[ShopResolved]) -> str:
-    lines = [
-        "",
-        f"### 自動生成記録 {date.today().isoformat()} {data.region} / {data.slug}",
-        f"<!-- CANDY_AREA_TOOL_RECORD:{data.slug} -->",
-        f"- 入力: `{data.input_path.relative_to(repo_root()).as_posix()}`",
-        f"- 可変件数: 店舗{len(resolved)}、通常記事{len(data.articles)}、ホテル{len(data.hotels)}、周辺スポット{len(data.spots)}。",
-    ]
-    for item in resolved:
-        evidence = f"、参照 `{item.reference}`、直線距離約{item.distance_km:.2f}km" if item.reference and item.distance_km is not None else ""
-        lines.append(f"- {item.name}: {item.time_text} / {item.fee_text} / 根拠 `{item.source}`{evidence}。")
-    lines.extend(
-        [
-            "- 専用ツールでテンプレート複製、可変ブロック、JSON-LD、dataset_base、sitemapを同期。",
-            "- 未知店舗、必須情報不足、slug競合、画像不足、共有登録重複は自動停止する。",
-        ]
-    )
-    return "\n".join(lines) + "\n"
-
-
-def update_page_notes(source: str, data: AreaData, resolved: list[ShopResolved]) -> str:
-    marker = f"<!-- CANDY_AREA_TOOL_RECORD:{data.slug} -->"
-    if marker in source:
-        return source
-    return source.rstrip() + "\n" + page_record(data, resolved)
-
-
 def update_queue(source: str, data: AreaData, php_status: str) -> str:
     lines = source.splitlines()
     matches = 0
@@ -1054,7 +1058,6 @@ def run_build(args: argparse.Namespace) -> int:
     base_path = hp_root / "includefile" / "dataset_base.php"
     sitemap_path = hp_root / "sitemap.xml"
     area_path = hp_root / "source" / "area.html"
-    page_notes_path = root / "ページ作成用.md"
     queue_path = hp_root / "codex" / "docs" / "CANDY_AREA_105_PAGE_QUEUE.md"
     area_source = read_utf8(area_path)
     area_link = f'./kagoshima-deliveryhealth-area-{data.slug}.php'
@@ -1069,7 +1072,6 @@ def run_build(args: argparse.Namespace) -> int:
         )
     new_base = update_dataset_base(read_utf8(base_path), data.slug)
     new_sitemap = update_sitemap(read_utf8(sitemap_path), data.canonical)
-    new_notes = update_page_notes(read_utf8(page_notes_path), data, resolved)
 
     if args.dry_run:
         print(f"RESULT=DRY_RUN_OK slug={data.slug} region={data.region}")
@@ -1085,8 +1087,6 @@ def run_build(args: argparse.Namespace) -> int:
     atomic_write(dataset_path, dataset_content())
     atomic_write(base_path, new_base)
     atomic_write(sitemap_path, new_sitemap)
-    if not args.no_docs:
-        atomic_write(page_notes_path, new_notes)
     written_at = time.perf_counter()
 
     actual_errors = validate_rendered(data, resolved, read_utf8(source_path), hp_root)
@@ -1095,8 +1095,7 @@ def run_build(args: argparse.Namespace) -> int:
     actual_errors.extend(php_errors)
     if actual_errors:
         raise AreaToolError("書込後検証失敗:\n- " + "\n- ".join(actual_errors))
-    if not args.no_docs:
-        atomic_write(queue_path, update_queue(read_utf8(queue_path), data, php_status))
+    atomic_write(queue_path, update_queue(read_utf8(queue_path), data, php_status))
     print(f"RESULT=BUILD_OK slug={data.slug} region={data.region}")
     print(f"FILES={public_path.relative_to(root)},{source_path.relative_to(root)},{dataset_path.relative_to(root)}")
     print(f"COUNTS shops={len(resolved)} articles={len(data.articles)} hotels={len(data.hotels)} spots={len(data.spots)}")
@@ -1182,7 +1181,7 @@ def create_parser() -> argparse.ArgumentParser:
     build.add_argument("--input", required=True, help="Text_area_dataの入力ファイル")
     build.add_argument("--dry-run", action="store_true", help="ファイルを書かず解析・生成・検証")
     build.add_argument("--force", action="store_true", help="既存の3ファイルを意図的に上書き")
-    build.add_argument("--no-docs", action="store_true", help="ページ作成用.mdへ記録しない")
+    build.add_argument("--no-docs", action="store_true", help=argparse.SUPPRESS)
     build.set_defaults(func=run_build)
     check = subparsers.add_parser("check", help="生成済みareaページ一式を一括検証")
     check.add_argument("--input", required=True, help="Text_area_dataの入力ファイル")
