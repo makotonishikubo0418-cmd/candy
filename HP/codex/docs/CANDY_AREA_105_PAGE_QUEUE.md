@@ -45,7 +45,7 @@
 | 9 | 光山 | `hikariyama` | PUBLISHED | Codex / 2026-07-14 / Commit `03ba6e6` / Actions `29301654365` / 本番HTTP確認済み |
 | 10 | 広木 | `hiroki` | PUBLISHED | Codex / 2026-07-14 / Commit `1620c16` / Actions `29301707302` / 本番HTTP確認済み |
 | 11 | 山下町 | `yamashitacho` | PUBLISHED | Codex / 2026-07-14 / Commit `2a8a9c4` / Actions `29301766001` / 本番HTTP確認済み |
-| 12 | 山田町 | `yamadacho` | READY_CANDIDATE | |
+| 12 | 山田町 | `yamadacho` | IN_PROGRESS | 専用ツール / 2026-07-14 / 3ファイル・共有登録・静的検査済み / PHP CLI未確認 |
 | 13 | 山之口町 | `yamanokuchicho` | READY_CANDIDATE | |
 | 14 | 四元町 | `yotsumotocho` | READY_CANDIDATE | |
 | 15 | 紫原 | `murasakibaru` | READY_CANDIDATE | |
