@@ -67,9 +67,11 @@ AGENTS.md check:
 
 ## 5. Git
 
-- fetchは安全に実行できる場合だけ行う。
-- Pullが必要なら `git pull --ff-only origin main` のみ許可する。
-- fast-forward不可、競合、対象変更との重複時は停止する。
+- 新しい作業は、ローカル `HEAD` と `origin/main` の同期状態を確定してから開始する。
+- `git fetch origin` 後、`git rev-list --left-right --count HEAD...origin/main` で先行側を確認する。
+- GitHubだけが先行している場合、remote変更とローカル変更の重複が0件なら `git pull --ff-only origin main` を行い、更新されたAGENTSを再読する。
+- ローカルだけが先行している場合、明示されたアップ指示があれば対象限定でPushし、なければ未同期を報告して新しい作業を開始しない。
+- 双方先行、fast-forward不可、競合、対象変更との重複時は停止する。
 - 終了前に次を実行する。
 
 ```powershell
