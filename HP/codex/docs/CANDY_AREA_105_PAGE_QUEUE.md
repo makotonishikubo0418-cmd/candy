@@ -35,7 +35,7 @@
 | 1 | 花尾町 | `hanaomachi` | PUBLISHED | Codex / 2026-07-14 / Commit `44df27b` / Actions `29289499915` / 本番HTTP・ブラウザ確認済み |
 | 2 | 皆与志町 | `minayoshicho` | PUBLISHED | Codex / 2026-07-14 / Commit `f1ba7fd` / Actions `29294348852` / 本番HTTP確認済み |
 | 3 | 吉野 | `yoshino` | PUBLISHED | Codex / 2026-07-14 / Commit `f1ba7fd` / Actions `29294348852` / 本番HTTP確認済み |
-| 4 | 吉野町 | `yoshinocho` | IN_PROGRESS | 専用ツール / 2026-07-14 / 3ファイル・共有登録・静的検査済み / PHP CLI未確認 |
+| 4 | 吉野町 | `yoshinocho` | PUBLISHED | Codex / 2026-07-14 / Commit `98b009d` / Actions `29295020132` / 本番HTTP確認済み |
 | 5 | 宮之浦町 | `miyanouracho` | READY_CANDIDATE | |
 | 6 | 玉里団地 | `tamazatodanchi` | READY_CANDIDATE | |
 | 7 | 玉里町 | `tamazatocho` | READY_CANDIDATE | |
@@ -169,3 +169,4 @@ kawadacho, hirakawacho, shimizucho
 | TEST-01 | 1 / `hanaomachi` | Codex | PUBLISHED | 2026-07-14 | `44df27b` | Actions `29289499915`、本番HTTP 200・ブラウザ確認済み |
 | TEST-02 | 2 / `minayoshicho` | Codex | PUBLISHED | 2026-07-14 | `f1ba7fd` | Actions `29294348852`、本番HTTP 200・title・canonical・h1・店舗・画像・一覧・sitemap確認済み |
 | TEST-03 | 3 / `yoshino` | Codex | PUBLISHED | 2026-07-14 | `f1ba7fd` | Actions `29294348852`、本番HTTP 200・title・canonical・h1・店舗・画像・一覧・sitemap確認済み |
+| TEST-04 | 4 / `yoshinocho` | Codex | PUBLISHED | 2026-07-14 | `98b009d` | Actions `29295020132`、本番HTTP 200・title・canonical・h1・店舗・画像・一覧・sitemap確認済み |
