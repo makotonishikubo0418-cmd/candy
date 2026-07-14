@@ -41,7 +41,7 @@
 | 7 | 玉里町 | `tamazatocho` | PUBLISHED | Codex / 2026-07-14 / Commit `80eb495` / Actions `29301384229` / 本番HTTP確認済み |
 | 8 | 原良 | `harara` | PUBLISHED | Codex / 2026-07-14 / Commit `edc27df` / Actions `29301447744` / 本番HTTP確認済み |
 | 9 | 光山 | `hikariyama` | PUBLISHED | Codex / 2026-07-14 / Commit `03ba6e6` / Actions `29301654365` / 本番HTTP確認済み |
-| 10 | 広木 | `hiroki` | IN_PROGRESS | 専用ツール / 2026-07-14 / 3ファイル・共有登録・静的検査済み / PHP CLI未確認 |
+| 10 | 広木 | `hiroki` | PUBLISHED | Codex / 2026-07-14 / Commit `1620c16` / Actions `29301707302` / 本番HTTP確認済み |
 | 11 | 山下町 | `yamashitacho` | READY_CANDIDATE | |
 | 12 | 山田町 | `yamadacho` | READY_CANDIDATE | |
 | 13 | 山之口町 | `yamanokuchicho` | READY_CANDIDATE | |
@@ -175,4 +175,5 @@ kawadacho, hirakawacho, shimizucho
 | TEST-06 | 7 / `tamazatocho` | Codex | PUBLISHED | 2026-07-14 | `80eb495` | Actions `29301384229`、本番HTTP 200・title・canonical・h1・店舗・画像SHA・一覧・sitemap・redirect確認済み |
 | TEST-07 | 8 / `harara` | Codex | PUBLISHED | 2026-07-14 | `edc27df` | Actions `29301447744`、本番HTTP 200・title・canonical・h1・店舗・画像SHA・一覧・sitemap・redirect確認済み |
 | TEST-08 | 9 / `hikariyama` | Codex | PUBLISHED | 2026-07-14 | `03ba6e6` | Actions `29301654365`、本番HTTP 200・title・canonical・h1・店舗・画像SHA・一覧・sitemap・redirect確認済み |
+| TEST-09 | 10 / `hiroki` | Codex | PUBLISHED | 2026-07-14 | `1620c16` | Actions `29301707302`、本番HTTP 200・title・canonical・h1・店舗・画像SHA・一覧・sitemap・redirect確認済み |
 <!-- CANDY_AREA_BATCH_HISTORY_END -->
