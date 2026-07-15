@@ -1,6 +1,43 @@
 # CANDY 修正バックログ
 
 CANDY_CODE_FILE_STRUCTURE.md と CANDY_PAGE_SPEC_INDEX.md の要確認差分を1件1行で管理します。
+
+## 2026-07-15 専用ツール再監査
+
+### 結論
+
+- area、hotel、blogの新規ページ制作・公開ツールは、起動、生成dry-run、公開セルフテストを通過している。
+- 下記STOPはツール未完成を意味しない。既存公開ページを現行ツールの完全登録条件で検査した結果、既存ページ側に未対応差分が見つかったもの。
+- 既存公開ページはこの監査では変更していない。修正時は `CANDY_OPERATION_BASICS.md` と対象カテゴリspecに従い、対象限定で別作業とする。
+
+### 全入力監査
+
+| 区分 | 母集団 | 成功 | 安全STOP・除外 |
+|---|---:|---:|---|
+| area | 135 | 125 | 10。placeholder残存または画像不足 |
+| hotel | 3 | 1 | placeholder残存1、手順書除外1 |
+| blog | 3 | 2 | 女の子指定5件に対して実物4件の不一致1 |
+
+area、hotel、blogの公開セルフテスト、FTP deployセルフテスト、deploy統合テストは成功した。
+
+### 既存公開ページ確認
+
+確認した既存ページは次の3件。既存ページ全件の監査ではない。
+
+| 区分 | 確認対象 | 現行ツールのSTOP内容 | 状態 |
+|---|---|---|---|
+| area | `kagoshima-deliveryhealth-area-sanwacho` | placeholder残存、JSON-LD不正、店舗順・交通費不整合、title不整合、sitemap登録数不整合、area一覧リンク数不整合 | 未修正 |
+| hotel | `kagoshima-deliveryhealth-hotel-greenrichkagoshimatenmonkan` | 店舗順・交通費不整合、dataset_base case・リンク変換未登録、hotel一覧リンク・JSON-LD未登録 | 未修正 |
+| blog | `kagoshima-deliveryhealth-blog-poccharigirl` | 目次とscene不一致、dataset_base case・リンク変換未登録、blog一覧・index一覧リンク未登録 | 未修正 |
+
+### 運用上の扱い
+
+1. 新規ページ制作は専用ツールを使用してよい。
+2. 上記3件のSTOPを、新規制作ツールの失敗・未完成として報告しない。
+3. 同時に、既存ページ側の未対応差分を「問題なし」「完了」と報告しない。
+4. 既存ページ修正を行う場合は、対象ページ、関連一覧、dataset_base、sitemapを実物確認し、対象限定Commitと本番検証を行う。
+5. 既存area・hotel・blogページ全件の現行ツール適合性は未確認。全件監査の明示指示がある場合だけ母集団を確定して実行する。
+
 ## 共通集計
 
 > 重要: 以下は 2026-07-10 の生成スナップショットであり、現在値ではありません。現在の件数・構成・状態は実ファイルから再集計してください。
