@@ -1,0 +1,1395 @@
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2025-12-10 10:00:51
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [PHPSESSID] => 2a10880d7c344f372c10800e2c648a23
+    [favCount] => 0
+    [candy] => 1
+    [_ga_0VBTBPHDD2] => GS2.1.s1765328318$o17$g1$t1765328353$j25$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1765328318$o17$g1$t1765328353$j25$l0$h0
+)
+
+candyfav cookie NOT found
+Favcast count: 0
+Initial favcast array: Array
+(
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 0
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2025-12-18 13:53:37
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [PHPSESSID] => c3cdb1c9c6843bff952b9129127249ae
+    [favCount] => 0
+    [candy] => 1
+    [_ga_0VBTBPHDD2] => GS2.1.s1766032358$o19$g1$t1766033516$j8$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1766032358$o19$g1$t1766033516$j8$l0$h0
+)
+
+candyfav cookie NOT found
+Favcast count: 0
+Initial favcast array: Array
+(
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 0
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2025-12-18 13:54:25
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [PHPSESSID] => c3cdb1c9c6843bff952b9129127249ae
+    [favCount] => 0
+    [candy] => 1
+    [candyfav] => 4762
+    [_ga_0VBTBPHDD2] => GS2.1.s1766032358$o19$g1$t1766033659$j18$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1766032358$o19$g1$t1766033659$j18$l0$h0
+)
+
+candyfav cookie found: 4762
+Decoded favcast: Array
+(
+    [0] => 4762
+)
+
+Favcast count: 1
+Initial favcast array: Array
+(
+    [0] => 4762
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 1
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-10 21:31:08
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [PHPSESSID] => 7c61a14bf15f01dbe283560a98581cc8
+    [accessId] => e33i8eop
+    [candy] => 1
+    [favCount] => 0
+)
+
+candyfav cookie NOT found
+Favcast count: 0
+Initial favcast array: Array
+(
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 0
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-10 21:31:35
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [PHPSESSID] => 7c61a14bf15f01dbe283560a98581cc8
+    [accessId] => e33i8eop
+    [candy] => 1
+    [favCount] => 0
+    [candyfav] => 2277
+)
+
+candyfav cookie found: 2277
+Decoded favcast: Array
+(
+    [0] => 2277
+)
+
+Favcast count: 1
+Initial favcast array: Array
+(
+    [0] => 2277
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 1
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-12 18:53:41
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [candyfav] => 4762
+    [PHPSESSID] => 8e2e53868b94344b7f86889cc351d71d
+    [candy] => 1
+    [favCount] => 0
+    [_ga_0VBTBPHDD2] => GS2.1.s1768209187$o28$g1$t1768211306$j60$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1768209187$o28$g1$t1768211306$j60$l0$h0
+)
+
+candyfav cookie found: 4762
+Decoded favcast: Array
+(
+    [0] => 4762
+)
+
+Favcast count: 1
+Initial favcast array: Array
+(
+    [0] => 4762
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 1
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-13 17:18:41
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [candyfav] => 4762
+    [favCount] => 0
+    [PHPSESSID] => 5f4670f4222c69fe1b8a482b17ea416f
+    [candy] => 1
+    [_ga_0VBTBPHDD2] => GS2.1.s1768287993$o32$g1$t1768290559$j34$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1768287993$o32$g1$t1768290559$j34$l0$h0
+)
+
+candyfav cookie found: 4762
+Decoded favcast: Array
+(
+    [0] => 4762
+)
+
+Favcast count: 1
+Initial favcast array: Array
+(
+    [0] => 4762
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 1
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-13 17:18:55
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [candyfav] => 4762
+    [favCount] => 0
+    [PHPSESSID] => 5f4670f4222c69fe1b8a482b17ea416f
+    [candy] => 1
+    [_ga_0VBTBPHDD2] => GS2.1.s1768287993$o32$g1$t1768292331$j51$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1768287993$o32$g1$t1768292331$j51$l0$h0
+)
+
+candyfav cookie found: 4762
+Decoded favcast: Array
+(
+    [0] => 4762
+)
+
+Favcast count: 1
+Initial favcast array: Array
+(
+    [0] => 4762
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 1
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-13 20:01:56
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [candyfav] => 4762
+    [favCount] => 0
+    [PHPSESSID] => 5f4670f4222c69fe1b8a482b17ea416f
+    [candy] => 1
+    [gid] => 4493
+    [did] => 119271
+    [_ga_0VBTBPHDD2] => GS2.1.s1768300190$o34$g1$t1768301867$j60$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1768300190$o34$g1$t1768301868$j59$l0$h0
+)
+
+candyfav cookie found: 4762
+Decoded favcast: Array
+(
+    [0] => 4762
+)
+
+Favcast count: 1
+Initial favcast array: Array
+(
+    [0] => 4762
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 1
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-14 16:42:21
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [candyfav] => 4762
+    [favCount] => 0
+    [PHPSESSID] => 5f4670f4222c69fe1b8a482b17ea416f
+    [candy] => 1
+    [gid] => 4493
+    [did] => 119271
+    [_ga_0VBTBPHDD2] => GS2.1.s1768373196$o36$g1$t1768376528$j43$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1768373196$o36$g1$t1768376528$j43$l0$h0
+)
+
+candyfav cookie found: 4762
+Decoded favcast: Array
+(
+    [0] => 4762
+)
+
+Favcast count: 1
+Initial favcast array: Array
+(
+    [0] => 4762
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 1
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-15 11:52:13
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [candyfav] => 4762
+    [favCount] => 0
+    [PHPSESSID] => 14ff7c4514f5128af0c8c1beb3ef7b0e
+    [candy] => 1
+    [_ga_0VBTBPHDD2] => GS2.1.s1768445481$o40$g1$t1768445482$j59$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1768445481$o40$g1$t1768445482$j59$l0$h0
+)
+
+candyfav cookie found: 4762
+Decoded favcast: Array
+(
+    [0] => 4762
+)
+
+Favcast count: 1
+Initial favcast array: Array
+(
+    [0] => 4762
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 1
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-21 19:20:03
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [favCount] => 0
+    [PHPSESSID] => 755da8ada6976402ffe05e0704eddec3
+    [candy] => 1
+    [gid] => 1741
+    [did] => 114431
+    [_ga_0VBTBPHDD2] => GS2.1.s1768989712$o78$g1$t1768990799$j60$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1768989713$o78$g1$t1768990800$j59$l0$h0
+)
+
+candyfav cookie NOT found
+Favcast count: 0
+Initial favcast array: Array
+(
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 0
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-21 19:27:20
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [favCount] => 0
+    [PHPSESSID] => 755da8ada6976402ffe05e0704eddec3
+    [candy] => 1
+    [gid] => 1741
+    [did] => 114431
+    [_ga_0VBTBPHDD2] => GS2.1.s1768989712$o78$g1$t1768991238$j11$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1768989713$o78$g1$t1768991238$j11$l0$h0
+)
+
+candyfav cookie NOT found
+Favcast count: 0
+Initial favcast array: Array
+(
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 0
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-23 14:50:20
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [PHPSESSID] => 7d9937fd1415a7e9be85dd684e5da9a0
+    [accessId] => e74arpao
+    [_ga] => GA1.1.535388071.1769146151
+    [candy] => 1
+    [favCount] => 0
+    [gid] => 3529
+    [did] => 110985
+    [_ga_0VBTBPHDD2] => GS2.1.s1769146150$o1$g1$t1769146923$j60$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1769146150$o1$g1$t1769146923$j60$l0$h0
+)
+
+candyfav cookie NOT found
+Favcast count: 0
+Initial favcast array: Array
+(
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 0
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-23 14:51:08
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [PHPSESSID] => 7d9937fd1415a7e9be85dd684e5da9a0
+    [accessId] => e74arpao
+    [_ga] => GA1.1.535388071.1769146151
+    [candy] => 1
+    [favCount] => 0
+    [gid] => 3529
+    [did] => 110985
+    [candyfav] => 4762
+    [_ga_0VBTBPHDD2] => GS2.1.s1769146150$o1$g1$t1769147458$j23$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1769146150$o1$g1$t1769147458$j23$l0$h0
+)
+
+candyfav cookie found: 4762
+Decoded favcast: Array
+(
+    [0] => 4762
+)
+
+Favcast count: 1
+Initial favcast array: Array
+(
+    [0] => 4762
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 1
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-23 14:52:39
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [PHPSESSID] => 7d9937fd1415a7e9be85dd684e5da9a0
+    [accessId] => e74arpao
+    [_ga] => GA1.1.535388071.1769146151
+    [candy] => 1
+    [favCount] => 0
+    [gid] => 3529
+    [did] => 110985
+    [candyfav] => 4762
+    [_ga_0VBTBPHDD2] => GS2.1.s1769146150$o1$g1$t1769147470$j11$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1769146150$o1$g1$t1769147470$j11$l0$h0
+)
+
+candyfav cookie found: 4762
+Decoded favcast: Array
+(
+    [0] => 4762
+)
+
+Favcast count: 1
+Initial favcast array: Array
+(
+    [0] => 4762
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 1
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-23 18:50:45
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [favCount] => 0
+    [PHPSESSID] => 0f0361a15fd7f4f2292ab5f887dd074d
+    [candy] => 1
+    [_ga_0VBTBPHDD2] => GS2.1.s1769161843$o92$g1$t1769161844$j59$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1769161843$o92$g1$t1769161844$j59$l0$h0
+)
+
+candyfav cookie NOT found
+Favcast count: 0
+Initial favcast array: Array
+(
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 0
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-23 18:55:48
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [favCount] => 0
+    [PHPSESSID] => 0f0361a15fd7f4f2292ab5f887dd074d
+    [candy] => 1
+    [gid] => 4458
+    [did] => 117368
+    [candyfav] => 4458
+    [_ga_0VBTBPHDD2] => GS2.1.s1769161843$o92$g1$t1769162045$j54$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1769161843$o92$g1$t1769162045$j54$l0$h0
+)
+
+candyfav cookie found: 4458
+Decoded favcast: Array
+(
+    [0] => 4458
+)
+
+Favcast count: 1
+Initial favcast array: Array
+(
+    [0] => 4458
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 1
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-23 18:57:18
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [favCount] => 0
+    [PHPSESSID] => 0f0361a15fd7f4f2292ab5f887dd074d
+    [candy] => 1
+    [gid] => 4458
+    [did] => 117368
+    [candyfav] => 4458
+    [_ga_0VBTBPHDD2] => GS2.1.s1769161843$o92$g1$t1769162186$j24$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1769161843$o92$g1$t1769162186$j24$l0$h0
+)
+
+candyfav cookie found: 4458
+Decoded favcast: Array
+(
+    [0] => 4458
+)
+
+Favcast count: 1
+Initial favcast array: Array
+(
+    [0] => 4458
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 1
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-23 18:57:55
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [favCount] => 0
+    [PHPSESSID] => 0f0361a15fd7f4f2292ab5f887dd074d
+    [candy] => 1
+    [gid] => 4458
+    [did] => 117368
+    [candyfav] => 4458
+    [_ga_0VBTBPHDD2] => GS2.1.s1769161843$o92$g1$t1769162240$j59$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1769161843$o92$g1$t1769162240$j59$l0$h0
+)
+
+candyfav cookie found: 4458
+Decoded favcast: Array
+(
+    [0] => 4458
+)
+
+Favcast count: 1
+Initial favcast array: Array
+(
+    [0] => 4458
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 1
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-23 18:58:57
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [favCount] => 0
+    [PHPSESSID] => 0f0361a15fd7f4f2292ab5f887dd074d
+    [candy] => 1
+    [gid] => 4458
+    [did] => 117368
+    [candyfav] => 4458
+    [_ga_0VBTBPHDD2] => GS2.1.s1769161843$o92$g1$t1769162286$j13$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1769161843$o92$g1$t1769162286$j13$l0$h0
+)
+
+candyfav cookie found: 4458
+Decoded favcast: Array
+(
+    [0] => 4458
+)
+
+Favcast count: 1
+Initial favcast array: Array
+(
+    [0] => 4458
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 1
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-23 19:05:28
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [favCount] => 0
+    [PHPSESSID] => 0f0361a15fd7f4f2292ab5f887dd074d
+    [candy] => 1
+    [gid] => 4458
+    [did] => 117368
+    [candyfav] => 4458
+    [_ga_0VBTBPHDD2] => GS2.1.s1769161843$o92$g1$t1769162339$j60$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1769161843$o92$g1$t1769162339$j60$l0$h0
+)
+
+candyfav cookie found: 4458
+Decoded favcast: Array
+(
+    [0] => 4458
+)
+
+Favcast count: 1
+Initial favcast array: Array
+(
+    [0] => 4458
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 1
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-23 19:05:56
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [favCount] => 0
+    [PHPSESSID] => 0f0361a15fd7f4f2292ab5f887dd074d
+    [candy] => 1
+    [gid] => 4458
+    [did] => 117368
+    [candyfav] => 4458%2C4753
+    [_ga_0VBTBPHDD2] => GS2.1.s1769161843$o92$g1$t1769162754$j35$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1769161843$o92$g1$t1769162755$j34$l0$h0
+)
+
+candyfav cookie found: 4458%2C4753
+Decoded favcast: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+Favcast count: 2
+Initial favcast array: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 2
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-23 20:05:05
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [favCount] => 0
+    [PHPSESSID] => 0f0361a15fd7f4f2292ab5f887dd074d
+    [candy] => 1
+    [gid] => 4458
+    [did] => 117368
+    [candyfav] => 4458%2C4753
+    [_ga_0VBTBPHDD2] => GS2.1.s1769164601$o93$g1$t1769166221$j60$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1769164601$o93$g1$t1769166221$j60$l0$h0
+)
+
+candyfav cookie found: 4458%2C4753
+Decoded favcast: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+Favcast count: 2
+Initial favcast array: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 2
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-23 20:05:09
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [favCount] => 0
+    [PHPSESSID] => 0f0361a15fd7f4f2292ab5f887dd074d
+    [candy] => 1
+    [gid] => 4458
+    [did] => 117368
+    [candyfav] => 4458%2C4753
+    [_ga_0VBTBPHDD2] => GS2.1.s1769164601$o93$g1$t1769166307$j60$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1769164601$o93$g1$t1769166307$j60$l0$h0
+)
+
+candyfav cookie found: 4458%2C4753
+Decoded favcast: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+Favcast count: 2
+Initial favcast array: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 2
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-23 20:06:08
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+)
+
+candyfav cookie NOT found
+Favcast count: 0
+Initial favcast array: Array
+(
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 0
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-23 20:06:08
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+)
+
+candyfav cookie NOT found
+Favcast count: 0
+Initial favcast array: Array
+(
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 0
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-23 20:06:09
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+)
+
+candyfav cookie NOT found
+Favcast count: 0
+Initial favcast array: Array
+(
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 0
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-24 10:20:31
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [favCount] => 0
+    [gid] => 4458
+    [did] => 117368
+    [candyfav] => 4458%2C4753
+    [PHPSESSID] => ab6d0dac88c79a584fba5ba80dffa28a
+    [candy] => 1
+    [_ga_0VBTBPHDD2] => GS2.1.s1769217328$o95$g1$t1769217617$j56$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1769217328$o95$g1$t1769217617$j56$l0$h0
+)
+
+candyfav cookie found: 4458%2C4753
+Decoded favcast: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+Favcast count: 2
+Initial favcast array: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 2
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-24 10:20:32
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [favCount] => 0
+    [gid] => 4458
+    [did] => 117368
+    [candyfav] => 4458%2C4753
+    [PHPSESSID] => ab6d0dac88c79a584fba5ba80dffa28a
+    [candy] => 1
+    [_ga_0VBTBPHDD2] => GS2.1.s1769217328$o95$g1$t1769217617$j56$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1769217328$o95$g1$t1769217617$j56$l0$h0
+)
+
+candyfav cookie found: 4458%2C4753
+Decoded favcast: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+Favcast count: 2
+Initial favcast array: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 2
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-24 10:20:51
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [favCount] => 0
+    [gid] => 4458
+    [did] => 117368
+    [candyfav] => 4458%2C4753
+    [PHPSESSID] => ab6d0dac88c79a584fba5ba80dffa28a
+    [candy] => 1
+    [_ga_0VBTBPHDD2] => GS2.1.s1769217328$o95$g1$t1769217637$j36$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1769217328$o95$g1$t1769217637$j36$l0$h0
+)
+
+candyfav cookie found: 4458%2C4753
+Decoded favcast: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+Favcast count: 2
+Initial favcast array: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 2
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-24 10:20:52
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [favCount] => 0
+    [gid] => 4458
+    [did] => 117368
+    [candyfav] => 4458%2C4753
+    [PHPSESSID] => ab6d0dac88c79a584fba5ba80dffa28a
+    [candy] => 1
+    [_ga_0VBTBPHDD2] => GS2.1.s1769217328$o95$g1$t1769217653$j20$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1769217328$o95$g1$t1769217653$j20$l0$h0
+)
+
+candyfav cookie found: 4458%2C4753
+Decoded favcast: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+Favcast count: 2
+Initial favcast array: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 2
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-24 10:21:28
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [favCount] => 0
+    [gid] => 4458
+    [did] => 117368
+    [candyfav] => 4458%2C4753
+    [PHPSESSID] => ab6d0dac88c79a584fba5ba80dffa28a
+    [candy] => 1
+    [_ga_0VBTBPHDD2] => GS2.1.s1769217328$o95$g1$t1769217657$j16$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1769217328$o95$g1$t1769217657$j16$l0$h0
+)
+
+candyfav cookie found: 4458%2C4753
+Decoded favcast: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+Favcast count: 2
+Initial favcast array: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 2
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-01-24 10:21:43
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [favCount] => 0
+    [gid] => 4458
+    [did] => 117368
+    [candyfav] => 4458%2C4753
+    [PHPSESSID] => ab6d0dac88c79a584fba5ba80dffa28a
+    [candy] => 1
+    [_ga_0VBTBPHDD2] => GS2.1.s1769217328$o95$g1$t1769217690$j60$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1769217328$o95$g1$t1769217690$j60$l0$h0
+)
+
+candyfav cookie found: 4458%2C4753
+Decoded favcast: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+Favcast count: 2
+Initial favcast array: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 2
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-02-11 17:29:22
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [candyfav] => 4458%2C4753
+    [_ga_QH9J3L54YK] => GS2.1.s1770287544$o3$g1$t1770288170$j58$l0$h0
+    [PHPSESSID] => ab3fe756e77ad86b0c7696f878249532
+    [candy] => 1
+    [gid] => 4458
+    [did] => 117368
+    [_ga_0VBTBPHDD2] => GS2.1.s1770798097$o191$g1$t1770798530$j60$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1770798097$o191$g1$t1770798531$j59$l0$h0
+)
+
+candyfav cookie found: 4458%2C4753
+Decoded favcast: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+Favcast count: 2
+Initial favcast array: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 2
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-02-11 17:43:09
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [candyfav] => 4458%2C4753
+    [_ga_QH9J3L54YK] => GS2.1.s1770287544$o3$g1$t1770288170$j58$l0$h0
+    [PHPSESSID] => ab3fe756e77ad86b0c7696f878249532
+    [candy] => 1
+    [gid] => 4458
+    [did] => 117368
+    [_ga_0VBTBPHDD2] => GS2.1.s1770798097$o191$g1$t1770798564$j26$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1770798097$o191$g1$t1770798565$j25$l0$h0
+)
+
+candyfav cookie found: 4458%2C4753
+Decoded favcast: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+Favcast count: 2
+Initial favcast array: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 2
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-02-11 17:43:48
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [candyfav] => 4458%2C4753
+    [_ga_QH9J3L54YK] => GS2.1.s1770287544$o3$g1$t1770288170$j58$l0$h0
+    [PHPSESSID] => ab3fe756e77ad86b0c7696f878249532
+    [candy] => 1
+    [gid] => 4458
+    [did] => 117368
+    [_ga_0VBTBPHDD2] => GS2.1.s1770798097$o191$g1$t1770799391$j59$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1770798097$o191$g1$t1770799391$j59$l0$h0
+)
+
+candyfav cookie found: 4458%2C4753
+Decoded favcast: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+Favcast count: 2
+Initial favcast array: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 2
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-02-12 08:10:58
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [candyfav] => 4458%2C4753
+    [_ga_QH9J3L54YK] => GS2.1.s1770287544$o3$g1$t1770288170$j58$l0$h0
+    [gid] => 4458
+    [did] => 117368
+    [PHPSESSID] => 4c997265c14517ff1ac4eca56a425c15
+    [candy] => 1
+    [_ga_0VBTBPHDD2] => GS2.1.s1770851410$o194$g1$t1770851452$j18$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1770851411$o194$g1$t1770851452$j19$l0$h0
+)
+
+candyfav cookie found: 4458%2C4753
+Decoded favcast: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+Favcast count: 2
+Initial favcast array: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 2
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-02-19 10:19:52
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [candyfav] => 4458%2C4753
+    [_ga_QH9J3L54YK] => GS2.1.s1770287544$o3$g1$t1770288170$j58$l0$h0
+    [PHPSESSID] => db012d258cb8a748e70050c0858597dc
+    [candy] => 1
+    [_ga_0VBTBPHDD2] => GS2.1.s1771460169$o233$g1$t1771463958$j59$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1771460169$o233$g1$t1771463958$j59$l0$h0
+)
+
+candyfav cookie found: 4458%2C4753
+Decoded favcast: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+Favcast count: 2
+Initial favcast array: Array
+(
+    [0] => 4458
+    [1] => 4753
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 2
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-02-21 15:06:06
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [PHPSESSID] => 7d9937fd1415a7e9be85dd684e5da9a0
+    [accessId] => e74arpao
+    [_ga] => GA1.1.535388071.1769146151
+    [candy] => 1
+    [candyfav] => 4762
+    [_ga_0VBTBPHDD2] => GS2.1.s1771653961$o2$g0$t1771653961$j60$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1771653961$o2$g0$t1771653961$j60$l0$h0
+    [favCount] => 0
+)
+
+candyfav cookie found: 4762
+Decoded favcast: Array
+(
+    [0] => 4762
+)
+
+Favcast count: 1
+Initial favcast array: Array
+(
+    [0] => 4762
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 1
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-02-27 15:16:57
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [PHPSESSID] => 7d9937fd1415a7e9be85dd684e5da9a0
+    [accessId] => e74arpao
+    [_ga] => GA1.1.535388071.1769146151
+    [candy] => 1
+    [_ga_0VBTBPHDD2] => GS2.1.s1772168909$o3$g1$t1772170831$j59$l0$h0
+    [_ga_S8PM55WFBH] => GS2.1.s1772168909$o3$g1$t1772170831$j59$l0$h0
+)
+
+candyfav cookie NOT found
+Favcast count: 0
+Initial favcast array: Array
+(
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 0
+=== MYPAGE COOKIE DEBUG ===
+Timestamp: 2026-03-16 15:34:12
+URL Parameters: Array
+(
+)
+
+unf parameter value: ''
+All cookies: Array
+(
+    [accessId] => y6685kn7
+    [_ga] => GA1.1.971035602.1764225575
+    [_ga_QH9J3L54YK] => GS2.1.s1770287544$o3$g1$t1770288170$j58$l0$h0
+    [_ga_0VBTBPHDD2] => deleted
+    [_ga_S8PM55WFBH] => deleted
+    [PHPSESSID] => c4a34c2ac98fd9b72fa42a1a0025f825
+    [candy] => 1
+    [_ga_3CYM9L9HJQ] => GS2.1.s1773642835$o25$g1$t1773642838$j57$l0$h0
+)
+
+candyfav cookie NOT found
+Favcast count: 0
+Initial favcast array: Array
+(
+)
+
+=== END MYPAGE COOKIE DEBUG ===
+Checking unf condition: unf='', empty check: TRUE
+Set data1['00010601']: 0

@@ -1,0 +1,351 @@
+[2026-01-10 21:31:26] ログファイルパス: /home/firststar/public_html/group_test/candy/log/mainImg_debug_2026-01-10_21-31-26.log
+__FILE__: /home/firststar/public_html/group_test/candy/includefile/dataset_girls.php
+dirname(__FILE__): /home/firststar/public_html/group_test/candy/includefile
+dirname(dirname(__FILE__)): /home/firststar/public_html/group_test/candy
+SQLクエリ: SELECT `type`, girls_id, filename, horw, status FROM girls_images WHERE club_id = '2' AND (type = '2' || type = '3') AND girls_id = '2277' ORDER BY sort, id DESC
+取得行数: 27
+取得行: type=2, filename=2277_2.jpg, status=1
+取得行: type=3, filename=2277_17.jpg, status=2
+取得行: type=3, filename=2277_16.jpg, status=1
+取得行: type=3, filename=2277_15.jpg, status=2
+取得行: type=3, filename=2277_14.jpg, status=2
+取得行: type=3, filename=2277_13.png, status=2
+取得行: type=3, filename=2277_10.png, status=2
+取得行: type=3, filename=2277_9.jpg, status=2
+取得行: type=3, filename=2277_8.jpg, status=2
+取得行: type=3, filename=2277_7.png, status=2
+取得行: type=3, filename=2277_6.jpg, status=2
+取得行: type=3, filename=2277_5.png, status=2
+取得行: type=3, filename=2277_4.jpg, status=2
+取得行: type=3, filename=2277_3.jpg, status=2
+取得行: type=3, filename=2277_2.jpg, status=2
+取得行: type=2, filename=2277_1.jpg, status=1
+取得行: type=3, filename=2277_12.jpg, status=2
+取得行: type=3, filename=2277_1.jpg, status=2
+取得行: type=3, filename=2277_20.png, status=2
+取得行: type=3, filename=2277_19.jpg, status=2
+取得行: type=3, filename=2277_18.jpg, status=2
+取得行: type=3, filename=2277_11.jpg, status=2
+取得行: type=3, filename=2277_21.jpg, status=2
+取得行: type=3, filename=2277_22.jpg, status=2
+取得行: type=3, filename=2277_23.jpg, status=2
+取得行: type=3, filename=2277_24.png, status=2
+取得行: type=3, filename=2277_25.png, status=2
+画像データ取得完了 - gid: 2277
+横向き画像数: 2
+縦向き画像数: 1
+デバイス判定: isSP=false, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+制限関数開始 - girl_id: 2277
+SP版は最大 10 枚、PC版は無制限（MIN 2 を保証）
+横向き画像制限: 2 → 1枚
+縦向き画像処理前: 
+MIN_VERTICAL_IMAGES: 2, MAX_VERTICAL_IMAGES: 10（上限は適用しない）
+ダミー画像追加: 
+縦向き画像処理後: 2枚
+制限関数完了
+制限適用後 - 横向き画像数: 1
+制限適用後 - 縦向き画像数: 2
+動画データクエリ: SELECT id,filetype,filename,sort FROM girls_movie_file WHERE club_id = '2' AND girls_id = '2277' AND status = '1' ORDER BY sort ASC, id DESC
+動画データ取得パラメータ: club_id=, girls_id=2277
+動画データ取得行数: 6
+取得された動画データ一覧:
+  動画データ: id=1820, filetype=v1, filename=2277_v1.mp4, sort=1
+  動画データ: id=1833, filetype=v2, filename=2277_v2.mp4, sort=2
+  動画データ: id=1834, filetype=v3, filename=2277_v3.mp4, sort=3
+  動画データ: id=1907, filetype=1, filename=2277_1.mp4, sort=14
+  動画データ: id=1908, filetype=1, filename=2277_2.mp4, sort=15
+  動画データ: id=1909, filetype=1, filename=2277_3.mp4, sort=16
+filedata配列に設定された動画: Array
+(
+    [id] => Array
+        (
+            [v1] => 1820
+            [v2] => 1833
+            [v3] => 1834
+            [1] => 1909
+        )
+
+    [filename] => Array
+        (
+            [v1] => 2277_v1.mp4
+            [v2] => 2277_v2.mp4
+            [v3] => 2277_v3.mp4
+            [1] => 2277_3.mp4
+        )
+
+    [filetype] => Array
+        (
+            [1820] => v1
+            [1833] => v2
+            [1834] => v3
+            [1907] => 1
+            [1908] => 1
+            [1909] => 1
+        )
+
+)
+
+横型動画（除外）: filetype=v1, filename=2277_v1.mp4
+横型動画（除外）: filetype=v2, filename=2277_v2.mp4
+横型動画（除外）: filetype=v3, filename=2277_v3.mp4
+縦型動画総数: 0個
+processImageData関数呼び出し開始
+縦型動画データ: Array
+(
+)
+
+processImageData開始 - 縦向き画像: 
+縦向き動画: 0個
+縦向き画像配列: Array
+(
+    [0] => 2277_16.jpg
+    [1] => dmy_h.jpg
+)
+
+縦向き画像: 2277_16.jpg, dmy_h.jpg
+ダミー画像を除外: dmy_h.jpg
+統合メディア総数: 
+統合メディア配列: Array
+(
+    [0] => Array
+        (
+            [type] => image
+            [filename] => 2277_16.jpg
+            [index] => 0
+        )
+
+)
+
+総メディア数: , ダミー画像使用: いいえ
+detailスロット 01010009 にメディア割り当て: image - 2277_16.jpg
+画像URL生成: slot=01010009, imgfile=2277_16.jpg, dir=gl_h/, URL=http://firststar.kir.jp/group/upfiles/2/gl_h/2277_16.jpg
+detailスロット 01010010 は設定しない（メディア0個または十分、ダミー画像は表示しない）
+総メディアが2個未満のため、ギャラリーにはメディアを設定しない
+processImageData完了 - 処理された画像スロット数: 1
+処理されたスロット: 01010009
+警告: スロット 01010003 が設定されていません
+警告: スロット 01010004 が設定されていません
+警告: スロット 01010005 が設定されていません
+警告: スロット 01010006 が設定されていません
+警告: スロット 01010008 が設定されていません
+警告: スロット 01010010 が設定されていません
+警告: スロット 01010011 が設定されていません
+警告: スロット 01010012 が設定されていません
+警告: スロット 01010013 が設定されていません
+警告: スロット 01010014 が設定されていません
+警告: スロット 01010015 が設定されていません
+警告: スロット 01010016 が設定されていません
+警告: スロット 01010017 が設定されていません
+警告: スロット 01010018 が設定されていません
+警告: スロット 01010019 が設定されていません
+警告: スロット 01010020 が設定されていません
+警告: スロット 01010021 が設定されていません
+警告: スロット 01010022 が設定されていません
+processImageData関数呼び出し完了 - 取得した画像データ数: 1
+processImageData戻り値: Array
+(
+    [01010009] => http://firststar.kir.jp/group/upfiles/2/gl_h/2277_16.jpg
+)
+
+data1配列マージ完了 - 総データ数: 14
+mainImg処理開始 - girl_id: 2277
+横向き画像配列: Array
+(
+    [0] => 2277_2.jpg
+)
+
+横向き画像[0]: 2277_2.jpg
+filedata配列全体: Array
+(
+    [id] => Array
+        (
+            [v1] => 1820
+            [v2] => 1833
+            [v3] => 1834
+            [1] => 1909
+        )
+
+    [filename] => Array
+        (
+            [v1] => 2277_v1.mp4
+            [v2] => 2277_v2.mp4
+            [v3] => 2277_v3.mp4
+            [1] => 2277_3.mp4
+        )
+
+    [filetype] => Array
+        (
+            [1820] => v1
+            [1833] => v2
+            [1834] => v3
+            [1907] => 1
+            [1908] => 1
+            [1909] => 1
+        )
+
+)
+
+横型動画検索開始 - filedata["filename"]の全件数: 4
+  チェック中: filetype=v1, filename=2277_v1.mp4
+    スロット番号: 1
+    横型動画候補: filetype=v1, filename=2277_v1.mp4, movie_id=1820, current_max_id=0
+    新しい最大ID動画を選択: filetype=v1, filename=2277_v1.mp4, movie_id=1820
+  チェック中: filetype=v2, filename=2277_v2.mp4
+    スロット番号: 2
+    横型動画候補: filetype=v2, filename=2277_v2.mp4, movie_id=1833, current_max_id=1820
+    新しい最大ID動画を選択: filetype=v2, filename=2277_v2.mp4, movie_id=1833
+  チェック中: filetype=v3, filename=2277_v3.mp4
+    スロット番号: 3
+    横型動画候補: filetype=v3, filename=2277_v3.mp4, movie_id=1834, current_max_id=1833
+    新しい最大ID動画を選択: filetype=v3, filename=2277_v3.mp4, movie_id=1834
+  チェック中: filetype=1, filename=2277_3.mp4
+    'v'で始まらないためスキップ: filetype=1
+mainImg: 横型動画を表示 - filetype=v3, filename=2277_v3.mp4, movie_id=1834, URL=http://firststar.kir.jp/group/upfiles/2/gl_movie/2277_v3.mp4
+data1配列の内容:
+  01010009 => http://firststar.kir.jp/group/upfiles/2/gl_h/2277_16.jpg
+  01010007 => http://firststar.kir.jp/group/upfiles/2/gl_movie/2277_v3.mp4
+=== 最終的なdata1配列の内容 ===
+  01010009 => http://firststar.kir.jp/group/upfiles/2/gl_h/2277_16.jpg
+  01010007 => http://firststar.kir.jp/group/upfiles/2/gl_movie/2277_v3.mp4
+=== ログ書き込み完了 ===
+[2026-01-10 21:31:26] === 最終的な ===
+PC版ギャラリー:
+<!-- PC版ギャラリー -->
+                <div class="gallery pcOnly">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="photoList">
+                        <tr>
+                            <td class="tate left">
+                                <a class="box lightbox">
+                                    <img src="rep01010003eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010003eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                            <td class="tate right">
+                                <a class="box lightbox">
+                                    <img src="rep01010004eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010004eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="photoList">
+                        <tr>
+                            <td class="tate left">
+                                <a href="rep01010015eot" class="box lightbox">
+                                    <img src="rep01010005eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010005eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                            <td class="tate right">
+                                <a href="rep01010016eot" class="box lightbox">
+                                    <img src="rep01010006eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010006eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                    
+
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="photoList">
+                        <tr>
+                            <td class="tate left">
+                                <a href="rep01010017eot" class="box lightbox">
+                                    <img src="rep01010008eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010008eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                            <td class="tate right">
+                                <a href="rep01010022eot" class="box lightbox">
+                                    <img src="rep01010011eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010011eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <!-- 追加スロット: 01010012, 01010013, 01010014, 01010015 -->
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="photoList">
+                        <tr>
+                            <td class="tate left">
+                                <a href="rep01010023eot" class="box lightbox">
+                                    <img src="rep01010012eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010012eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                            <td class="tate right">
+                                <a href="rep01010024eot" class="box lightbox">
+                                    <img src="rep01010013eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010013eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="photoList">
+                        <tr>
+                            <td class="tate left">
+                                <a href="rep01010025eot" class="box lightbox">
+                                    <img src="rep01010014eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010014eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                            <td class="tate right">
+                                <a href="rep01010026eot" class="box lightbox">
+                                    <img src="rep01010015eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010015eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+SP版ギャラリー:
+<!-- SP版ギャラリー -->
+                <div class="gallery spOnly">
+                    <div class="box">
+                        <div class="tate box01">
+                            <!-- LNK01010003 --><a class="blackfade lightbox"></a><!-- /LNK01010003 -->
+                            <img src="rep01010003eot" class="media-image">
+                            <video autoplay muted loop class="media-video" style="display:none;">
+                                <source src="rep01010003eot" type="video/mp4">
+                                お使いのブラウザは動画タグをサポートしていません。
+                            </video>
+                        </div>
+                        <div class="tate box04">
+                            <!-- LNK01010004 --><a class="blackfade lightbox"></a><!-- /LNK01010004 -->
+                            <img src="rep01010004eot" class="media-image">
+                            <video autoplay muted loop class="media-video" style="display:none;">
+                                <source src="rep01010004eot" type="video/mp4">
+                                お使いのブラウザは動画タグをサポートしていません。
+                            </video>
+                        </div>
+                    </div>

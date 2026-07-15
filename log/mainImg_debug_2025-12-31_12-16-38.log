@@ -1,0 +1,509 @@
+[2025-12-31 12:16:38] ログファイルパス: /home/firststar/public_html/group_test/candy/log/mainImg_debug_2025-12-31_12-16-38.log
+__FILE__: /home/firststar/public_html/group_test/candy/includefile/dataset_girls.php
+dirname(__FILE__): /home/firststar/public_html/group_test/candy/includefile
+dirname(dirname(__FILE__)): /home/firststar/public_html/group_test/candy
+SQLクエリ: SELECT `type`, girls_id, filename, horw, status FROM girls_images WHERE club_id = '2' AND (type = '2' || type = '3') AND girls_id = '3046' ORDER BY sort, id DESC
+取得行数: 74
+取得行: type=2, filename=3046_15.jpg, status=1
+取得行: type=2, filename=3046_14.jpg, status=1
+取得行: type=2, filename=3046_13.jpg, status=2
+取得行: type=3, filename=3046_31.jpg, status=2
+取得行: type=3, filename=3046_30.jpg, status=2
+取得行: type=3, filename=3046_29.jpg, status=2
+取得行: type=3, filename=3046_28.jpg, status=2
+取得行: type=3, filename=3046_27.jpg, status=2
+取得行: type=3, filename=3046_26.jpg, status=2
+取得行: type=3, filename=3046_25.png, status=2
+取得行: type=3, filename=3046_24.png, status=2
+取得行: type=3, filename=3046_23.png, status=2
+取得行: type=3, filename=3046_22.png, status=2
+取得行: type=3, filename=3046_10.jpg, status=2
+取得行: type=3, filename=3046_9.jpg, status=2
+取得行: type=3, filename=3046_8.jpg, status=2
+取得行: type=3, filename=3046_7.jpg, status=2
+取得行: type=3, filename=3046_2.jpg, status=2
+取得行: type=3, filename=3046_1.jpg, status=2
+取得行: type=2, filename=3046_2.jpg, status=2
+取得行: type=2, filename=3046_1.jpg, status=2
+取得行: type=3, filename=3046_54.jpg, status=1
+取得行: type=3, filename=3046_47.jpg, status=2
+取得行: type=3, filename=3046_11.jpg, status=2
+取得行: type=2, filename=3046_12.jpg, status=2
+取得行: type=3, filename=3046_4.jpg, status=2
+取得行: type=3, filename=3046_56.jpg, status=1
+取得行: type=3, filename=3046_36.jpg, status=2
+取得行: type=3, filename=3046_13.jpg, status=2
+取得行: type=2, filename=3046_9.jpg, status=2
+取得行: type=3, filename=3046_5.jpg, status=2
+取得行: type=3, filename=3046_57.jpg, status=1
+取得行: type=3, filename=3046_40.jpg, status=2
+取得行: type=3, filename=3046_14.jpg, status=2
+取得行: type=2, filename=3046_8.jpg, status=2
+取得行: type=3, filename=3046_6.jpg, status=2
+取得行: type=3, filename=3046_58.jpg, status=1
+取得行: type=3, filename=3046_41.jpg, status=2
+取得行: type=3, filename=3046_35.jpg, status=2
+取得行: type=3, filename=3046_15.jpg, status=2
+取得行: type=2, filename=3046_11.jpg, status=2
+取得行: type=3, filename=3046_3.jpg, status=2
+取得行: type=3, filename=3046_53.jpg, status=1
+取得行: type=3, filename=3046_39.jpg, status=2
+取得行: type=3, filename=3046_16.jpg, status=2
+取得行: type=2, filename=3046_10.jpg, status=2
+取得行: type=3, filename=3046_49.jpg, status=1
+取得行: type=3, filename=3046_43.jpg, status=2
+取得行: type=3, filename=3046_17.jpg, status=2
+取得行: type=2, filename=3046_3.jpg, status=2
+取得行: type=3, filename=3046_50.jpg, status=1
+取得行: type=3, filename=3046_32.jpg, status=2
+取得行: type=3, filename=3046_18.jpg, status=2
+取得行: type=2, filename=3046_4.jpg, status=2
+取得行: type=3, filename=3046_55.jpg, status=1
+取得行: type=3, filename=3046_34.jpg, status=2
+取得行: type=3, filename=3046_19.jpg, status=2
+取得行: type=2, filename=3046_7.jpg, status=2
+取得行: type=3, filename=3046_51.jpg, status=1
+取得行: type=3, filename=3046_33.jpg, status=2
+取得行: type=3, filename=3046_20.jpg, status=2
+取得行: type=2, filename=3046_5.jpg, status=2
+取得行: type=3, filename=3046_52.jpg, status=1
+取得行: type=3, filename=3046_44.jpg, status=2
+取得行: type=3, filename=3046_21.jpg, status=2
+取得行: type=2, filename=3046_6.jpg, status=2
+取得行: type=3, filename=3046_59.jpg, status=1
+取得行: type=3, filename=3046_48.jpg, status=2
+取得行: type=3, filename=3046_12.jpg, status=2
+取得行: type=3, filename=3046_45.jpg, status=2
+取得行: type=3, filename=3046_46.jpg, status=2
+取得行: type=3, filename=3046_37.jpg, status=2
+取得行: type=3, filename=3046_38.jpg, status=2
+取得行: type=3, filename=3046_42.jpg, status=2
+画像データ取得完了 - gid: 3046
+横向き画像数: 2
+縦向き画像数: 11
+デバイス判定: isSP=false, User-Agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
+制限関数開始 - girl_id: 3046
+SP版は最大 10 枚、PC版は無制限（MIN 2 を保証）
+横向き画像制限: 2 → 1枚
+縦向き画像処理前: 
+MIN_VERTICAL_IMAGES: 2, MAX_VERTICAL_IMAGES: 10（上限は適用しない）
+縦向き画像はPC/SPともに上限制限を適用しません（
+縦向き画像処理後: 11枚
+制限関数完了
+制限適用後 - 横向き画像数: 1
+制限適用後 - 縦向き画像数: 11
+動画データクエリ: SELECT id,filetype,filename,sort FROM girls_movie_file WHERE club_id = '2' AND girls_id = '3046' AND status = '1' ORDER BY sort ASC, id DESC
+動画データ取得パラメータ: club_id=, girls_id=3046
+動画データ取得行数: 4
+取得された動画データ一覧:
+  動画データ: id=1541, filetype=4, filename=3046_1.jpg, sort=1
+  動画データ: id=1542, filetype=1, filename=3046_1.mp4, sort=2
+  動画データ: id=1543, filetype=3, filename=3046_1.webm, sort=3
+  動画データ: id=1544, filetype=2, filename=3046_1.ogv, sort=4
+filedata配列に設定された動画: Array
+(
+    [id] => Array
+        (
+            [4] => 1541
+            [1] => 1542
+            [3] => 1543
+            [2] => 1544
+        )
+
+    [filename] => Array
+        (
+            [4] => 3046_1.jpg
+            [1] => 3046_1.mp4
+            [3] => 3046_1.webm
+            [2] => 3046_1.ogv
+        )
+
+    [filetype] => Array
+        (
+            [1541] => 4
+            [1542] => 1
+            [1543] => 3
+            [1544] => 2
+        )
+
+)
+
+縦型動画総数: 0個
+processImageData関数呼び出し開始
+縦型動画データ: Array
+(
+)
+
+processImageData開始 - 縦向き画像: 
+縦向き動画: 0個
+縦向き画像配列: Array
+(
+    [0] => 3046_54.jpg
+    [1] => 3046_56.jpg
+    [2] => 3046_57.jpg
+    [3] => 3046_58.jpg
+    [4] => 3046_53.jpg
+    [5] => 3046_49.jpg
+    [6] => 3046_50.jpg
+    [7] => 3046_55.jpg
+    [8] => 3046_51.jpg
+    [9] => 3046_52.jpg
+    [10] => 3046_59.jpg
+)
+
+縦向き画像: 3046_54.jpg, 3046_56.jpg, 3046_57.jpg, 3046_58.jpg, 3046_53.jpg, 3046_49.jpg, 3046_50.jpg, 3046_55.jpg, 3046_51.jpg, 3046_52.jpg, 3046_59.jpg
+統合メディア総数: 
+統合メディア配列: Array
+(
+    [0] => Array
+        (
+            [type] => image
+            [filename] => 3046_54.jpg
+            [index] => 0
+        )
+
+    [1] => Array
+        (
+            [type] => image
+            [filename] => 3046_56.jpg
+            [index] => 1
+        )
+
+    [2] => Array
+        (
+            [type] => image
+            [filename] => 3046_57.jpg
+            [index] => 2
+        )
+
+    [3] => Array
+        (
+            [type] => image
+            [filename] => 3046_58.jpg
+            [index] => 3
+        )
+
+    [4] => Array
+        (
+            [type] => image
+            [filename] => 3046_53.jpg
+            [index] => 4
+        )
+
+    [5] => Array
+        (
+            [type] => image
+            [filename] => 3046_49.jpg
+            [index] => 5
+        )
+
+    [6] => Array
+        (
+            [type] => image
+            [filename] => 3046_50.jpg
+            [index] => 6
+        )
+
+    [7] => Array
+        (
+            [type] => image
+            [filename] => 3046_55.jpg
+            [index] => 7
+        )
+
+    [8] => Array
+        (
+            [type] => image
+            [filename] => 3046_51.jpg
+            [index] => 8
+        )
+
+    [9] => Array
+        (
+            [type] => image
+            [filename] => 3046_52.jpg
+            [index] => 9
+        )
+
+    [10] => Array
+        (
+            [type] => image
+            [filename] => 3046_59.jpg
+            [index] => 10
+        )
+
+)
+
+総メディア数: , ダミー画像使用: いいえ
+detailスロット 01010009 にメディア割り当て: image - 3046_54.jpg
+画像URL生成: slot=01010009, imgfile=3046_54.jpg, dir=gl_h/, URL=http://firststar.kir.jp/group/upfiles/2/gl_h/3046_54.jpg
+detailスロット 01010010 にメディア割り当て: image - 3046_56.jpg
+画像URL生成: slot=01010010, imgfile=3046_56.jpg, dir=gl_h/, URL=http://firststar.kir.jp/group/upfiles/2/gl_h/3046_56.jpg
+ギャラリースロット 01010003 にメディア割り当て: image - 3046_57.jpg
+ギャラリー画像URL生成: slot=01010003, imgfile=3046_57.jpg, dir=gl_h/, URL=http://firststar.kir.jp/group/upfiles/2/gl_h/3046_57.jpg
+ギャラリースロット 01010004 にメディア割り当て: image - 3046_58.jpg
+ギャラリー画像URL生成: slot=01010004, imgfile=3046_58.jpg, dir=gl_h/, URL=http://firststar.kir.jp/group/upfiles/2/gl_h/3046_58.jpg
+ギャラリースロット 01010005 にメディア割り当て: image - 3046_53.jpg
+ギャラリー画像URL生成: slot=01010005, imgfile=3046_53.jpg, dir=gl_h/, URL=http://firststar.kir.jp/group/upfiles/2/gl_h/3046_53.jpg
+ギャラリースロット 01010006 にメディア割り当て: image - 3046_49.jpg
+ギャラリー画像URL生成: slot=01010006, imgfile=3046_49.jpg, dir=gl_h/, URL=http://firststar.kir.jp/group/upfiles/2/gl_h/3046_49.jpg
+ギャラリースロット 01010008 にメディア割り当て: image - 3046_50.jpg
+ギャラリー画像URL生成: slot=01010008, imgfile=3046_50.jpg, dir=gl_h/, URL=http://firststar.kir.jp/group/upfiles/2/gl_h/3046_50.jpg
+ギャラリースロット 01010011 にメディア割り当て: image - 3046_55.jpg
+ギャラリー画像URL生成: slot=01010011, imgfile=3046_55.jpg, dir=gl_h/, URL=http://firststar.kir.jp/group/upfiles/2/gl_h/3046_55.jpg
+ギャラリースロット 01010012 にメディア割り当て: image - 3046_51.jpg
+ギャラリー画像URL生成: slot=01010012, imgfile=3046_51.jpg, dir=gl_h/, URL=http://firststar.kir.jp/group/upfiles/2/gl_h/3046_51.jpg
+ギャラリースロット 01010013 にメディア割り当て: image - 3046_52.jpg
+ギャラリー画像URL生成: slot=01010013, imgfile=3046_52.jpg, dir=gl_h/, URL=http://firststar.kir.jp/group/upfiles/2/gl_h/3046_52.jpg
+ギャラリースロット 01010014 にメディア割り当て: image - 3046_59.jpg
+ギャラリー画像URL生成: slot=01010014, imgfile=3046_59.jpg, dir=gl_h/, URL=http://firststar.kir.jp/group/upfiles/2/gl_h/3046_59.jpg
+ギャラリースロット 01010015 は設定しない（メディア十分）
+ギャラリースロット 01010016 は設定しない（メディア十分）
+ギャラリースロット 01010017 は設定しない（メディア十分）
+ギャラリースロット 01010018 は設定しない（メディア十分）
+ギャラリースロット 01010019 は設定しない（メディア十分）
+ギャラリースロット 01010020 は設定しない（メディア十分）
+ギャラリースロット 01010021 は設定しない（メディア十分）
+ギャラリースロット 01010022 は設定しない（メディア十分）
+ギャラリーが奇数枚ですが、ダミー画像は表示しない
+processImageData完了 - 処理された画像スロット数: 11
+処理されたスロット: 01010009, 01010010, 01010003, 01010004, 01010005, 01010006, 01010008, 01010011, 01010012, 01010013, 01010014
+警告: スロット 01010015 が設定されていません
+警告: スロット 01010016 が設定されていません
+警告: スロット 01010017 が設定されていません
+警告: スロット 01010018 が設定されていません
+警告: スロット 01010019 が設定されていません
+警告: スロット 01010020 が設定されていません
+警告: スロット 01010021 が設定されていません
+警告: スロット 01010022 が設定されていません
+processImageData関数呼び出し完了 - 取得した画像データ数: 11
+processImageData戻り値: Array
+(
+    [01010009] => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_54.jpg
+    [01010010] => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_56.jpg
+    [01010003] => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_57.jpg
+    [01010004] => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_58.jpg
+    [01010005] => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_53.jpg
+    [01010006] => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_49.jpg
+    [01010008] => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_50.jpg
+    [01010011] => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_55.jpg
+    [01010012] => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_51.jpg
+    [01010013] => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_52.jpg
+    [01010014] => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_59.jpg
+)
+
+data1配列マージ完了 - 総データ数: 24
+mainImg処理開始 - girl_id: 3046
+横向き画像配列: Array
+(
+    [0] => 3046_15.jpg
+)
+
+横向き画像[0]: 3046_15.jpg
+filedata配列全体: Array
+(
+    [id] => Array
+        (
+            [4] => 1541
+            [1] => 1542
+            [3] => 1543
+            [2] => 1544
+        )
+
+    [filename] => Array
+        (
+            [4] => 3046_1.jpg
+            [1] => 3046_1.mp4
+            [3] => 3046_1.webm
+            [2] => 3046_1.ogv
+        )
+
+    [filetype] => Array
+        (
+            [1541] => 4
+            [1542] => 1
+            [1543] => 3
+            [1544] => 2
+        )
+
+)
+
+横型動画検索開始 - filedata["filename"]の全件数: 4
+  チェック中: filetype=4, filename=3046_1.jpg
+    'v'で始まらないためスキップ: filetype=4
+  チェック中: filetype=1, filename=3046_1.mp4
+    'v'で始まらないためスキップ: filetype=1
+  チェック中: filetype=3, filename=3046_1.webm
+    'v'で始まらないためスキップ: filetype=3
+  チェック中: filetype=2, filename=3046_1.ogv
+    'v'で始まらないためスキップ: filetype=2
+mainImg: 横型動画が見つかりませんでした
+mainImg: 横向き画像を使用: 3046_15.jpg
+data1配列の内容:
+  01010009 => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_54.jpg
+  01010010 => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_56.jpg
+  01010003 => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_57.jpg
+  01010004 => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_58.jpg
+  01010005 => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_53.jpg
+  01010006 => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_49.jpg
+  01010008 => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_50.jpg
+  01010011 => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_55.jpg
+  01010012 => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_51.jpg
+  01010013 => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_52.jpg
+  01010014 => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_59.jpg
+  01010007 => http://firststar.kir.jp/group/upfiles/2/gl_w/3046_15.jpg
+=== 最終的なdata1配列の内容 ===
+  01010009 => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_54.jpg
+  01010010 => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_56.jpg
+  01010003 => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_57.jpg
+  01010004 => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_58.jpg
+  01010005 => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_53.jpg
+  01010006 => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_49.jpg
+  01010008 => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_50.jpg
+  01010011 => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_55.jpg
+  01010012 => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_51.jpg
+  01010013 => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_52.jpg
+  01010014 => http://firststar.kir.jp/group/upfiles/2/gl_h/3046_59.jpg
+  01010007 => http://firststar.kir.jp/group/upfiles/2/gl_w/3046_15.jpg
+=== ログ書き込み完了 ===
+[2025-12-31 12:16:38] === 最終的な ===
+PC版ギャラリー:
+<!-- PC版ギャラリー -->
+                <div class="gallery pcOnly">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="photoList">
+                        <tr>
+                            <td class="tate left">
+                                <a href="rep01010013eot" class="box lightbox">
+                                    <img src="rep01010003eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010003eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                            <td class="tate right">
+                                <a href="rep01010014eot" class="box lightbox">
+                                    <img src="rep01010004eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010004eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="photoList">
+                        <tr>
+                            <td class="tate left">
+                                <a href="rep01010015eot" class="box lightbox">
+                                    <img src="rep01010005eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010005eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                            <td class="tate right">
+                                <a href="rep01010016eot" class="box lightbox">
+                                    <img src="rep01010006eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010006eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                    
+
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="photoList">
+                        <tr>
+                            <td class="tate left">
+                                <a href="rep01010017eot" class="box lightbox">
+                                    <img src="rep01010008eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010008eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                            <td class="tate right">
+                                <a href="rep01010022eot" class="box lightbox">
+                                    <img src="rep01010011eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010011eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <!-- 追加スロット: 01010012, 01010013, 01010014, 01010015 -->
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="photoList">
+                        <tr>
+                            <td class="tate left">
+                                <a href="rep01010023eot" class="box lightbox">
+                                    <img src="rep01010012eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010012eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                            <td class="tate right">
+                                <a href="rep01010024eot" class="box lightbox">
+                                    <img src="rep01010013eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010013eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="photoList">
+                        <tr>
+                            <td class="tate left">
+                                <a href="rep01010025eot" class="box lightbox">
+                                    <img src="rep01010014eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010014eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                            <td class="tate right">
+                                <a href="rep01010026eot" class="box lightbox">
+                                    <img src="rep01010015eot" class="fade media-image">
+                                    <video autoplay muted loop class="media-video" style="display:none;">
+                                        <source src="rep01010015eot" type="video/mp4">
+                                        お使いのブラウザは動画タグをサポートしていません。
+                                    </video>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+SP版ギャラリー:
+<!-- SP版ギャラリー -->
+                <div class="gallery spOnly">
+                    <div class="box">
+                        <div class="tate box01">
+                            <!-- LNK01010003 --><a href="rep01010013eot" class="blackfade lightbox"></a><!-- /LNK01010003 -->
+                            <img src="rep01010003eot" class="media-image">
+                            <video autoplay muted loop class="media-video" style="display:none;">
+                                <source src="rep01010003eot" type="video/mp4">
+                                お使いのブラウザは動画タグをサポートしていません。
+                            </video>
+                        </div>
+                        <div class="tate box04">
+                            <!-- LNK01010004 --><a href="rep01010014eot" class="blackfade lightbox"></a><!-- /LNK01010004 -->
+                            <img src="rep01010004eot" class="media-image">
+                            <video autoplay muted loop class="media-video" style="display:none;">
+                                <source src="rep01010004eot" type="video/mp4">
+                                お使いのブラウザは動画タグをサポートしていません。
+                            </video>
+                        </div>
+                    </div>
