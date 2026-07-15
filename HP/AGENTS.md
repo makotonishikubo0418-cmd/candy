@@ -4,6 +4,7 @@
 
 - `HP/` 配下はroot `AGENTS.md` とこのファイルを適用する。
 - 通常area制作は追加で `codex/docs/CANDY_AREA_STAFF_PRODUCTION_RUNBOOK.md` だけを読む。
+- 通常hotel制作は追加で `codex/docs/CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md` だけを読む。
 - 未知例外や別作業だけ `codex/docs/CANDY_MASTER_DOC_INDEX.md` を使う。
 
 ## 2. HP構造
@@ -18,7 +19,7 @@
 
 ページごとの例外は実ファイルで確認する。
 
-## 3. 通常area制作
+## 3. 通常area・hotel制作
 
 次の一括コマンドだけを実行する。事前の `build`、`check`、全資料再読を重ねない。
 
@@ -41,6 +42,18 @@ HP\codex\scripts\candy-area.cmd check --input "HP/Text_area_data/対象.txt"
 
 ツールは生成、検証、対象限定stage、1 Commit、1 Push、Actions、本番HTTP、URL出力を行う。公開後の資料専用Commit・Pushは行わない。
 
+通常hotel制作:
+
+```powershell
+HP\codex\scripts\candy-hotel.cmd publish --input "HP/Text_hotel_data/対象ホテル.txt"
+```
+
+未公開の完全なhotel入力を自動選択する場合:
+
+```powershell
+HP\codex\scripts\candy-hotel.cmd publish-next
+```
+
 ## 4. 制作ルール
 
 - areaは `Text_area_data` と `source/template_kagoshima-deliveryhealth-area.html` を使う。
@@ -62,6 +75,15 @@ HP\codex\scripts\candy-area.cmd check --input "HP/Text_area_data/対象.txt"
 - sitemap
 - 制作キュー1行
 
+通常hotelの変更単位:
+
+- 公開PHP
+- source HTML
+- dataset PHP
+- dataset_base登録
+- hotel一覧
+- sitemap
+
 検証は専用ツールを正本とし、同じ検査を手作業で重ねない。
 
 ## 5. 公開安全条件
@@ -71,7 +93,7 @@ HP\codex\scripts\candy-area.cmd check --input "HP/Text_area_data/対象.txt"
 - ActionsはFTP前に対象PHPをlintする。
 - 複数ファイル反映の途中失敗は、同じ実行の反映済み対象をrollbackする。
 - 一回の本番deployは最大25ファイル。
-- 本番確認は対象ページ、必要画像、area一覧、sitemap、転送をHTTPで行う。
+- 本番確認は対象ページ、必要画像、対象カテゴリ一覧、sitemap、転送をHTTPで行う。
 - Actions状態確認はAPIを使い、通常経路でブラウザUIを操作しない。
 
 ## 6. 変更ゲート
@@ -93,7 +115,7 @@ HP\codex\scripts\candy-area.cmd check --input "HP/Text_area_data/対象.txt"
 - `css/default.css`、`js/common.js`
 - `makeSitemap.php`、`sitemap.xml`
 
-通常area一括ツールが対象限定で扱う `dataset_base.php`、area一覧、sitemapは、実行指示の範囲内とする。
+通常area・hotel一括ツールが対象限定で扱う `dataset_base.php`、カテゴリ一覧、sitemapは、実行指示の範囲内とする。
 
 ## 7. STOP
 

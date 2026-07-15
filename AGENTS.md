@@ -12,8 +12,9 @@
 1. このファイルを読む。
 2. HP作業は `HP/AGENTS.md` を読む。
 3. 通常area制作は `CANDY_AREA_STAFF_PRODUCTION_RUNBOOK.md` だけを追加で読む。
-4. それ以外は `CANDY_MASTER_DOC_INDEX.md` から必要な正本だけを読む。
-5. 対象実物と次を確認する。
+4. 通常hotel制作は `CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md` だけを追加で読む。
+5. それ以外は `CANDY_MASTER_DOC_INDEX.md` から必要な正本だけを読む。
+6. 対象実物と次を確認する。
 
 ```powershell
 git remote -v

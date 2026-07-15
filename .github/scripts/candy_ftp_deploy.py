@@ -15,6 +15,7 @@ import subprocess
 import sys
 
 
+GIT = shutil.which("git") or "git"
 REMOTE_ROOT = PurePosixPath("/public_html/group/candy")
 ZERO_SHA = "0" * 40
 DEPLOYABLE_STATUSES = {"A", "M", "T"}
@@ -117,12 +118,14 @@ def parse_diff_output(output: str) -> list[Change]:
 
 def commit_exists(commit: str) -> bool:
     result = subprocess.run(
-        ["git", "cat-file", "-e", f"{commit}^{{commit}}"],
-        stdout=subprocess.DEVNULL,
+        [GIT, "cat-file", "-t", commit],
+        text=True,
+        encoding="utf-8",
+        stdout=subprocess.PIPE,
         stderr=subprocess.DEVNULL,
         check=False,
     )
-    return result.returncode == 0
+    return result.returncode == 0 and result.stdout.strip() == "commit"
 
 
 def validate_full_commit_sha(value: str, label: str) -> None:
@@ -132,7 +135,7 @@ def validate_full_commit_sha(value: str, label: str) -> None:
 
 def is_ancestor(before: str, after: str) -> bool:
     result = subprocess.run(
-        ["git", "merge-base", "--is-ancestor", before, after],
+        [GIT, "merge-base", "--is-ancestor", before, after],
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
         check=False,
@@ -152,7 +155,7 @@ def collect_changes(before: str, after: str) -> list[Change]:
         raise RuntimeError("Comparison base is not an ancestor of target")
     result = subprocess.run(
         [
-            "git",
+            GIT,
             "-c",
             "core.quotepath=false",
             "diff",
@@ -229,7 +232,7 @@ def print_plan(
 
 def current_head() -> str:
     result = subprocess.run(
-        ["git", "rev-parse", "HEAD"],
+        [GIT, "rev-parse", "HEAD"],
         text=True,
         encoding="utf-8",
         stdout=subprocess.PIPE,
