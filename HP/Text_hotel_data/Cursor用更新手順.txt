@@ -1,115 +1,107 @@
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Cursor用更新手順
+hotelページ入力・更新手順
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-■ 前提
-・更新対象のHTMLは @template_kagoshima-deliveryhealth-area.html をベースとする。
-・テンプレート内の更新箇所はすべて「aaaaaaaaaaaaaaaaaaaa」でマークされている。
-・@Text_data/[エリア名].txt の仕様に従い、HTML内の「aaaaaaaaaaaaaaaaaaaa」を該当する内容に置き換える。
-・エリア名（例：荒田）とファイル名用スラッグ（例：arata）は .txt やファイル名から判断する。
+■ 正本
+・元データ: HP/Text_hotel_data/対象ホテル.txt
+・HTML: HP/source/template_kagoshima-deliveryhealth-hotel.html
+・店舗: HP/source/template_shop.html
+・実行: HP/codex/scripts/candy-hotel.cmd publish --input "HP/Text_hotel_data/対象ホテル.txt"
 
-■ 依頼時のプロンプト例
-「@Text_data/[エリア名].txt の内容で、@template_kagoshima-deliveryhealth-area.html をベースに kagoshima-deliveryhealth-area-[スラッグ].html を更新して。実行して。」
-
-※ 事前に確認だけする場合は「修正せずに意見だけ言って」等を追記する。「実行して」と明示した場合のみファイルを編集すること。
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-置換一覧（aaaaaaaaaaaaaaaaaaaa → .txt の該当項目）
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-※ URL・パス内の aaaaaaaaaaaaaaaaaaaa は、原則として「ファイル名用スラッグ」（例：arata）に置換する。
-※ 表示文言の aaaaaaaaaaaaaaaaaaaa は、.txt の「エリア名」や該当項目の文言に置換する。
-
-【1】head 内
-・meta description の content
-  → .txt「基本情報」の description
-・title のテキスト
-  → .txt「基本情報」の title
-・link canonical の href
-  → .txt「基本情報」の canonical（※ ここで aaaaaaaaaaaaaaaaaaaa をスラッグに置換）
-・og:title の content
-  → .txt「基本情報」の title に合わせる
-・og:url の content
-  → .txt「基本情報」の canonical
-・og:image の content
-  → .txt「基本情報」の image（※ パスに aaaaaaaaaaaaaaaaaaaa があればスラッグに置換）
-・og:description の content
-  → .txt「基本情報」の description
-
-【2】構造化データ（JSON-LD）
-・BreadcrumbList の position 3 の name
-  → .txt「page_title_h1・パンくずリスト」と同じ文言
-・BreadcrumbList の position 3 の item
-  → .txt「基本情報」の canonical
-・ItemList の name
-  → 「鹿児島[エリア名]に呼べる人気デリヘル店一覧」の形式（.txt の scene1 に合わせる）
-・ItemList の numberOfItems
-  → .txt の scene1 で指定された店舗数
-・ItemList の itemListElement
-  → .txt の scene1 で指定された店舗の順で、各店の name / telephone / url / description を設定（template_shop.html や既存エリアページを参照）
-
-【3】メインコンテンツ（パンくず・見出し・本文・画像）
-・bread_list 内の span のテキスト
-  → .txt「page_title_h1・パンくずリスト」
-・#img_1 の img の src
-  → .txt「記事内容」の 1 枚目の写真の src（※ aaaaaaaaaaaaaaaaaaaa をスラッグに置換。.txt に area/ が無ければ直下パス）
-・#img_1 の img の alt
-  → 「鹿児島市[エリア名]で呼べるデリヘル」等、.txt に合わせる
-・#page_title_h1 のテキスト
-  → .txt「page_title_h1・パンくずリスト」と同じ文言（改行は <br class="spOnly"> を維持）
-・#subtitle_h1 の内容
-  → .txt の subtitle_h1（<改行> は <br> に）
-・#description_h1 のテキスト
-  → .txt の description_h1
-
-【4】scene1（人気デリヘル店）
-・#scene1 の見出し
-  → .txt の scene1
-・<ul class="campaign-list"> 内
-  → .txt の scene1 で指定された店舗のみ、template_shop.html の該当ブロック（<!-- candy -->, <!-- loveel -->, <!-- danzuma -->, <!-- yokihi --> 等）～</li> をコピーし、移動時間・交通費を .txt の数値で上書き。順序は .txt に従う。
-・#description_1 のテキスト
-  → .txt の description_1
-
-【5】画像2・scene2・scene3
-・#img_2 の img の src / alt
-  → .txt の 2 枚目の写真の src および「鹿児島「[エリア名]」について」等
-・#scene2 のテキスト
-  → .txt の scene2
-・#subtitle_2 のテキスト
-  → .txt の subtitle_2
-・#description_2 のテキスト
-  → .txt の description_2
-・#scene3 のテキスト
-  → .txt の scene3
-・iframe の title
-  → 「鹿児島市 [エリア名]の地図」
-・iframe の src
-  → 当該エリアの Google マップ embed URL（.txt に無ければ座標等で作成または要確認）
-・info-table1 の「人口」「面積」「設置年月日」の各 td
-  → .txt の scene3 直下の値（未記載は「—」）
-・#description_3 のテキスト
-  → .txt の description_3
-
-【6】scene4（ホテル）
-・#scene4 の見出し
-  → .txt の scene4（※ .txt に他エリア名が残っていても正しいエリア名に直す）
-・faq-item の数
-  → .txt の subtitle_4_n / description_4_n の件数に合わせ、ブロックの追加・削除で調整
-・各 #subtitle_4_n / #description_4_n
-  → .txt の subtitle_4_n（施設名）、description_4_n（住所・TEL・URL）。リンクは target="_blank" rel="noopener noreferrer" を付与
-
-【7】scene5（待ち合わせ・周辺スポット）
-・#scene5 の見出し
-  → .txt の scene5（※ 他エリア名は正しいエリア名に直す）
-・faq-item の数
-  → .txt の subtitle_5_n / description_5_n の件数に合わせて調整
-・各 #subtitle_5_n / #description_5_n
-  → .txt の subtitle_5_n（施設名）、description_5_n（住所・TEL・URL）。リンクは target="_blank" rel="noopener noreferrer" を付与
-・#description_5_4 の注意文
-  → そのまままたは .txt に合わせる
+■ 最重要
+・各項目の件数は原則固定しない。対象Textに存在する完成ブロックを全件、記載順で反映する。
+・通常記事scene、FAQ、料金、アクセス、周辺スポットは0件でもよい。0件なら空セクションを作らない。
+・subtitleだけ、descriptionだけ、アクセスの一部だけなど、部分入力は推測せずSTOPする。
+・店舗はtemplate_shop.htmlに存在する店舗を1件以上指定する。
+・関連記事は実リンク設定まで予約ダミー8件を維持する。
+・元データにないホテル情報、画像、URL、文章を推測しない。
+・aaaaaaaa、placeholder、未入力指示が残るTextは公開しない。
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-注意事項
+必須項目
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-・画像パス：.txt の「写真」に「area/」が無ければ ./imgHtml/new_202601/ 直下、ある場合は area/ 付きで統一する。
-・設置年月日が空の場合は表のセルは「—」等で表示する。
-・ボタンリンク（#button_1, #button_2, #button_3）は「お問い合わせはコチラ」や「デリヘル店舗情報」等、既存エリアページに合わせて必要なら修正する。
-・テンプレートを「另存為」して kagoshima-deliveryhealth-area-[スラッグ].html としてから置換する想定。元の template は残す。
+【基本情報】
+title / description / canonical / image
+
+【記事冒頭】
+img_1 / page_title_h1 / subtitle_h1 / description_h1
+
+【店舗】
+scene（h2 / 「人気デリヘル店」情報）
+見出し
+・店舗名（必要なら移動時間 / 交通費）
+
+【画像2】
+img_2
+
+【ホテル基本情報】
+scene（h2）
+基本情報
+ホテル名 / URL / 住所
+電話番号 / 部屋・駐車場 / 支払方法は任意。ない行は書かない。
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+任意ブロック
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+【旧option: 0または1】
+option / option_subtitle / option_descriptionの3項目を全部書く。
+通常sceneには数えない。3項目の一部だけは不可。
+
+【通常記事scene: 0件以上】
+scene（h2）
+見出し
+subtitle_
+小見出し
+description_
+本文
+
+必要数だけ繰り返せる。店舗、FAQ、基本情報等の前後に置け、入力順を保持する。
+
+【FAQ: 0件以上】
+scene（h2 / よくあるご質問）
+subtitle_
+質問
+description_
+回答
+
+subtitle_ / description_ の組を必要数だけ繰り返す。
+
+【料金: 0件以上】
+scene（h2）
+料金情報
+休憩 / 休憩等 / ショート / フリー / 宿泊 / 延長
+値
+
+存在する料金行だけを書く。行数は固定しない。
+料金行の後にdescription_と補足文を1件だけ追加できる。
+
+【アクセス: 0または1】
+scene（h2）
+アクセス情報
+地図URL / 地図タイトル / subtitle_ / description_
+
+4項目を全部書く。一部だけは不可。店舗の移動時間・交通費が未指定の場合、地図座標を近隣完成areaページの参照に使う。
+
+【周辺スポット: 0件以上】
+scene（h2）
+ホテル名「周辺スポット」
+subtitle_
+施設名
+description_
+住所
+TEL 任意
+URL https://...
+
+subtitle_ / description_ の組を必要数だけ繰り返す。
+全項目の後にdescription_と注意文を1件だけ追加できる。
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+生成ルール
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+・旧option以外のh2は、表示順にscene1から連番にする。
+・通常ブロックはsubtitle_N / description_Nとする。
+・FAQと周辺スポットはsubtitle_N_M / description_N_Mとする。
+・FAQ型の最終項目だけfaq-item bd_tb、それ以外はfaq-item bd_tとする。
+・FAQが0件ならFAQPage JSON-LDを作らない。
+・周辺スポットがあればItemListはスポット、なければ店舗を使う。
+・店舗の移動時間・交通費はText指定を最優先し、未指定時だけ地図座標と近隣完成areaページから設定する。
+・空欄、空コンテナ、重複ID、scene欠番、本文とJSON-LDの件数不一致を許可しない。

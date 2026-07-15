@@ -27,6 +27,7 @@ DESCRIPTION_RE = re.compile(r"^description(?:_\d+(?:_\d+)?)?_$|^description_\d+(
 PLACEHOLDER_RE = re.compile(r"a{8,}|placeholder|replace[_ -]?me|\b(?:todo|tbd)\b|不明時は削除|未入力", re.I)
 RATE_LABELS = ("休憩", "休憩等", "ショート", "フリー", "宿泊", "延長")
 CANONICAL_HOST = "www.55810.com"
+DEFAULT_SPOT_NOTE = "周辺スポット情報は変更されている場合がございますので、詳細は直接お問い合わせください。"
 
 
 @dataclass
@@ -66,15 +67,19 @@ class HotelData:
     page_title: str
     subtitle_h1: str
     description_h1: str
-    optional_scenes: list[TextBlock]
+    legacy_option: TextBlock | None
+    article_scenes: list[TextBlock]
+    scene_order: list[str]
     shop_heading: str
     shops: list[common.ShopRequest]
     faqs: list[TextBlock]
     basic: BasicInfo
     rates: list[tuple[str, str]]
-    access: AccessInfo
+    rate_note: str | None
+    access: AccessInfo | None
     spot_heading: str
     spots: list[common.Place]
+    spot_note: str
 
     @property
     def hotel_name(self) -> str:
@@ -192,6 +197,36 @@ def pair_blocks(section: list[str]) -> list[TextBlock]:
     return result
 
 
+def unmatched_descriptions(section: list[str]) -> list[str]:
+    subtitle_positions = [index for index, value in enumerate(section) if SUBTITLE_RE.fullmatch(value.strip())]
+    matched: set[int] = set()
+    for offset, position in enumerate(subtitle_positions):
+        end = subtitle_positions[offset + 1] if offset + 1 < len(subtitle_positions) else len(section)
+        description_position = next(
+            (index for index in range(position + 1, end) if DESCRIPTION_RE.fullmatch(section[index].strip())),
+            None,
+        )
+        if description_position is not None:
+            matched.add(description_position)
+    result: list[str] = []
+    for position, value in enumerate(section):
+        if position in matched or not DESCRIPTION_RE.fullmatch(value.strip()):
+            continue
+        lines: list[str] = []
+        for raw in section[position + 1 :]:
+            stripped = raw.strip()
+            if is_separator(stripped) or SCENE_MARKER_RE.fullmatch(stripped):
+                break
+            if SUBTITLE_RE.fullmatch(stripped) or DESCRIPTION_RE.fullmatch(stripped):
+                break
+            lines.append(raw.rstrip())
+        description = "\n".join(lines).strip()
+        if not description:
+            raise HotelToolError(f"単独補足文が未完成です: {value.strip()}")
+        result.append(description)
+    return result
+
+
 def parse_spots(section: list[str]) -> list[common.Place]:
     result: list[common.Place] = []
     for block in pair_blocks(section):
@@ -305,16 +340,24 @@ def parse_hotel_text(path: Path) -> HotelData:
     option_description = common.labeled_value(lines, "option_description", 0, first_scene)
     if any((option_heading, option_subtitle, option_description)) and not all((option_heading, option_subtitle, option_description)):
         raise HotelToolError("option項目が未完成です")
-    optional_scenes = [TextBlock(option_heading, f"{option_subtitle}\n{option_description}")] if option_heading and option_subtitle and option_description else []
+    legacy_option = (
+        TextBlock(option_heading, f"{option_subtitle}\n{option_description}")
+        if option_heading and option_subtitle and option_description
+        else None
+    )
+    article_scenes: list[TextBlock] = []
+    scene_order: list[str] = []
 
     shop_heading = ""
     shops: list[common.ShopRequest] = []
     faqs: list[TextBlock] = []
     basic: BasicInfo | None = None
     rates: list[tuple[str, str]] = []
+    rate_note: str | None = None
     access: AccessInfo | None = None
     spot_heading = ""
     spots: list[common.Place] = []
+    spot_note = DEFAULT_SPOT_NOTE
     basic_labels = ("ホテル名", "URL", "住所", "住所（郵便番号迄）", "電話番号", "部屋・駐車場", "支払方法")
     access_labels = ("地図URL", "地図タイトル")
     seen_sections: set[str] = set()
@@ -325,6 +368,7 @@ def parse_hotel_text(path: Path) -> HotelData:
             if "shops" in seen_sections:
                 raise HotelToolError("人気デリヘル店sceneが重複しています")
             seen_sections.add("shops")
+            scene_order.append("shops")
             shop_heading = heading
             shops = common.parse_shop_requests(section)
         elif heading == "subtitle_":
@@ -332,15 +376,20 @@ def parse_hotel_text(path: Path) -> HotelData:
                 raise HotelToolError("FAQ sceneが重複しています")
             seen_sections.add("faqs")
             faqs = pair_blocks(section)
+            if faqs:
+                scene_order.append("faqs")
         elif "よくあるご質問" in heading or "FAQ" in heading:
             if "faqs" in seen_sections:
                 raise HotelToolError("FAQ sceneが重複しています")
             seen_sections.add("faqs")
             faqs = pair_blocks(section)
+            if faqs:
+                scene_order.append("faqs")
         elif heading == "基本情報":
             if "basic" in seen_sections:
                 raise HotelToolError("基本情報sceneが重複しています")
             seen_sections.add("basic")
+            scene_order.append("basic")
             for label in basic_labels:
                 ensure_label_count(section, (label,), (0, 1), f"基本情報 {label}")
             basic = BasicInfo(
@@ -360,6 +409,14 @@ def parse_hotel_text(path: Path) -> HotelData:
                 value = field_value(section, (label,), RATE_LABELS)
                 if value:
                     rates.append((label, value))
+            rate_notes = unmatched_descriptions(section)
+            if len(rate_notes) > 1:
+                raise HotelToolError("料金情報の単独補足文が複数あります")
+            rate_note = rate_notes[0] if rate_notes else None
+            if rates:
+                scene_order.append("rates")
+            elif rate_note:
+                raise HotelToolError("料金行がないのに料金補足文だけが指定されています")
         elif heading == "アクセス情報":
             if "access" in seen_sections:
                 raise HotelToolError("アクセス情報sceneが重複しています")
@@ -373,40 +430,59 @@ def parse_hotel_text(path: Path) -> HotelData:
             else:
                 subtitle = subtitle_blocks[0].title
                 description = subtitle_blocks[0].description
-            access = AccessInfo(
+            candidate = AccessInfo(
                 map_src=map_match.group(1) if map_match else raw_map.strip(),
                 map_title=field_value(section, ("地図タイトル",), access_labels + ("subtitle_", "description_")),
                 subtitle=subtitle,
                 description=description,
             )
+            access_values = (candidate.map_src, candidate.map_title, candidate.subtitle, candidate.description)
+            if any(access_values) and not all(access_values):
+                raise HotelToolError("アクセス情報sceneが部分入力です")
+            if all(access_values):
+                access = candidate
+                scene_order.append("access")
         elif "周辺スポット" in heading:
             if "spots" in seen_sections:
                 raise HotelToolError("周辺スポットsceneが重複しています")
             seen_sections.add("spots")
             spot_heading = heading
             spots = parse_spots(section)
+            spot_notes = unmatched_descriptions(section)
+            if len(spot_notes) > 1:
+                raise HotelToolError("周辺スポットの単独注意文が複数あります")
+            if spots:
+                scene_order.append("spots")
+                if spot_notes:
+                    spot_note = spot_notes[0]
+            elif spot_notes:
+                raise HotelToolError("周辺スポットがないのに注意文だけが指定されています")
         else:
             subtitle = common.labeled_value(section, "subtitle_", stop_labels=("description_",))
             description = common.labeled_value(section, "description_")
             if not subtitle or not description:
                 raise HotelToolError(f"通常sceneが未完成です: {heading}")
-            optional_scenes.append(TextBlock(heading, f"{subtitle}\n{description}"))
+            token = f"article:{len(article_scenes)}"
+            article_scenes.append(TextBlock(heading, f"{subtitle}\n{description}"))
+            scene_order.append(token)
 
     if not shop_heading or not shops:
         raise HotelToolError("人気デリヘル店sceneの情報が不足しています")
     if basic is None or not basic.hotel_name or not basic.official_url or not basic.address:
         raise HotelToolError("基本情報sceneのホテル名・URL・住所が不足しています")
-    if not rates:
-        raise HotelToolError("料金情報が全件空です。セクション省略判断が必要です")
-    if access is None or not all((access.map_src, access.map_title, access.subtitle, access.description)):
-        raise HotelToolError("アクセス情報sceneが不足しています")
-    if not spots:
-        raise HotelToolError("周辺スポットがありません。セクション省略判断が必要です")
+    known_order = [token for token in scene_order if not token.startswith("article:")]
+    expected_order = [
+        token for token in ("shops", "faqs", "basic", "rates", "access", "spots")
+        if token in known_order
+    ]
+    if known_order != expected_order:
+        raise HotelToolError(f"hotel scene順序が不正です: {known_order}")
     ensure_unique([request.key for request in shops], "店舗")
     ensure_unique([item.title for item in faqs], "FAQ質問")
     ensure_unique([item.title for item in spots], "周辺スポット")
     validated_url(basic.official_url, "ホテル公式URL")
-    validated_url(access.map_src, "地図URL", https_only=True)
+    if access:
+        validated_url(access.map_src, "地図URL", https_only=True)
     for spot in spots:
         validated_url(spot.url, f"周辺スポットURL ({spot.title})", https_only=True)
     if basic.hotel_name not in page_title:
@@ -432,15 +508,19 @@ def parse_hotel_text(path: Path) -> HotelData:
         page_title=page_title,
         subtitle_h1=subtitle_h1,
         description_h1=description_h1,
-        optional_scenes=optional_scenes,
+        legacy_option=legacy_option,
+        article_scenes=article_scenes,
+        scene_order=scene_order,
         shop_heading=shop_heading,
         shops=shops,
         faqs=faqs,
         basic=basic,
         rates=rates,
+        rate_note=rate_note,
         access=access,
         spot_heading=spot_heading,
         spots=spots,
+        spot_note=spot_note,
     )
 
 
@@ -450,7 +530,7 @@ def resolve_shops(
     templates: dict[str, common.ShopTemplate],
 ) -> list[common.ShopResolved]:
     resolved: list[common.ShopResolved] = []
-    target_coords = common.coordinates(data.access.map_src)
+    target_coords = common.coordinates(data.access.map_src) if data.access else None
     for request in data.shops:
         template = templates[request.key]
         if request.time_text and request.fee_text:
@@ -512,27 +592,46 @@ def json_scripts(data: HotelData, resolved: list[common.ShopResolved], templates
                 ],
             }
         )
-    values.append(
-        {
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            "name": data.shop_heading.replace("情報", "一覧"),
-            "itemListOrder": "https://schema.org/ItemListUnordered",
-            "numberOfItems": len(resolved),
-            "itemListElement": [
+    item_elements: list[dict[str, object]] = []
+    if data.spots:
+        for position, spot in enumerate(data.spots, 1):
+            item: dict[str, object] = {
+                "@type": "LocalBusiness",
+                "name": spot.title,
+                "address": spot.address,
+                "url": spot.url,
+            }
+            if spot.telephone:
+                item["telephone"] = spot.telephone
+            item_elements.append({"@type": "ListItem", "position": position, "item": item})
+        item_name = f"{data.hotel_name} 周辺スポット"
+        item_count = len(data.spots)
+    else:
+        for position, shop in enumerate(resolved, 1):
+            template = templates[shop.key]
+            item_elements.append(
                 {
                     "@type": "ListItem",
                     "position": position,
                     "item": {
                         "@type": "Organization",
-                        "name": item.name,
-                        "telephone": templates[item.key].telephone,
-                        "url": templates[item.key].url,
-                        "description": templates[item.key].description,
+                        "name": shop.name,
+                        "telephone": template.telephone,
+                        "url": template.url,
+                        "description": template.description,
                     },
                 }
-                for position, item in enumerate(resolved, 1)
-            ],
+            )
+        item_name = data.shop_heading.replace("情報", "一覧")
+        item_count = len(resolved)
+    values.append(
+        {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": item_name,
+            "itemListOrder": "https://schema.org/ItemListUnordered",
+            "numberOfItems": item_count,
+            "itemListElement": item_elements,
         }
     )
     return "\n".join(
@@ -606,12 +705,86 @@ def render_rates(data: HotelData, number: int) -> str:
         f'\t\t\t\t\t\t<tr><td class="lp_15 fs_sm2">{common.htext(label)}</td><td class="lp_15 fs_sm2">{common.htext(value)}</td></tr>'
         for label, value in data.rates
     )
+    note = (
+        f'\n\t\t\t\t<div class="lp_30_0 fs_md3" id="description_{number}">{common.htext(data.rate_note)}</div>'
+        if data.rate_note
+        else ""
+    )
     return (
         f'\t\t\t\t<h2 class="lp_40_0_25 fs_xxl fc_p" id="scene{number}">料金情報</h2>\n'
         '\t\t\t\t<table class="info-table1">\n\t\t\t\t\t<tbody>\n'
         f"{body}\n"
         "\t\t\t\t\t</tbody>\n\t\t\t\t</table>"
+        f"{note}"
     )
+
+
+def render_legacy_option(item: TextBlock) -> str:
+    subtitle, _, description = item.description.partition("\n")
+    return (
+        f'\t\t\t\t<h2 class="lp_38_0 bd_t fs_xxl fc_p" id="option">{common.htext(item.title)}</h2>\n'
+        f'\t\t\t\t<div class="lpt_20 bd_t fs_l" id="option_subtitle">{common.htext(subtitle)}</div>\n'
+        f'\t\t\t\t<div class="lp_15_0_30 fs_md3" id="option_description">{common.htext(description)}</div>'
+    )
+
+
+def render_shop_scene(
+    data: HotelData,
+    resolved: list[common.ShopResolved],
+    templates: dict[str, common.ShopTemplate],
+    number: int,
+) -> str:
+    heading = common.htext(data.shop_heading).replace(
+        "「鹿児島の人気デリヘル店」",
+        '<span class="fc_p">「鹿児島の人気デリヘル店」</span>',
+    )
+    return f'''\t\t\t<div class="lm_full bg_g1">
+\t\t\t\t<h2 class="lp_38_0 fs_xxl center" id="scene{number}">{heading}</h2>
+\t\t\t\t<div class="lm_0_auto w_1080"><ul class="campaign-list" role="list">
+{common.render_shop_blocks(resolved, templates)}
+\t\t\t\t</ul>
+\t\t\t\t<div class="lp_30_0 fs_md3 center" id="description_{number}">最新の対応状況は各店舗へ<br class="spOnly">直接お問い合わせくださいませ。</div>
+\t\t\t\t<div class="lpb_75 center"><a href="./#shopinfo" class="bt-pk-xl">対応デリヘル店一覧</a></div></div>
+\t\t\t</div>'''
+
+
+def render_access(data: HotelData, number: int) -> str:
+    return (
+        f'\t\t\t\t<h2 class="lp_40_0_25 fs_xxl fc_p" id="scene{number}">アクセス情報</h2>\n'
+        f'\t\t\t\t<iframe title="{common.hattr(data.access.map_title)}" src="{common.hattr(data.access.map_src)}" class="map-iframe" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>\n'
+        f'\t\t\t\t<div class="lpt_30 fs_l" id="subtitle_{number}">{common.htext(data.access.subtitle)}</div>\n'
+        f'\t\t\t\t<div class="lm_25_0_75 fs_md3" id="description_{number}">{common.htext(data.access.description)}</div>'
+    )
+
+
+def render_spots(data: HotelData, number: int) -> str:
+    lines = [
+        f'\t\t\t\t<h2 class="lp_38_0 bd_t fs_xxl fc_p" id="scene{number}">{common.htext(data.spot_heading)}</h2>',
+        "",
+    ]
+    for index, spot in enumerate(data.spots, 1):
+        border = "bd_tb" if index == len(data.spots) else "bd_t"
+        lines.extend(
+            [
+                f'\t\t\t\t<div class="faq-item {border}">',
+                f'\t\t\t\t<div class="faq-question fs_md2" id="subtitle_{number}_{index}">{common.htext(spot.title)}</div>',
+                f'\t\t\t\t<div class="faq-answer fs_md2" id="description_{number}_{index}">{common.htext(spot.address)}<br>',
+            ]
+        )
+        if spot.telephone:
+            lines.append(f"\t\t\t\t\tTEL {common.htext(spot.telephone)}")
+        lines.extend(
+            [
+                f'\t\t\t\t\t<div class="lm_25_0_35"><a href="{common.hattr(spot.url)}" target="_blank" rel="noopener noreferrer" class="bt-pk-m">詳細はコチラ</a></div>',
+                "\t\t\t\t</div>",
+                "\t\t\t\t</div>",
+                "",
+            ]
+        )
+    lines.append(
+        f'\t\t\t\t<div class="lm_40_0_75 fs_md3" id="spot_note">{common.htext(data.spot_note)}</div>'
+    )
+    return "\n".join(lines)
 
 
 def render_related() -> str:
@@ -630,28 +803,67 @@ def render_related() -> str:
 
 
 def render_main(data: HotelData, resolved: list[common.ShopResolved], templates: dict[str, common.ShopTemplate]) -> str:
-    number = 1
-    optional = []
-    for item in data.optional_scenes:
-        optional.append(render_text_scene(item, number))
-        number += 1
-    shop_scene = number
-    number += 1
-    faq_scene = number if data.faqs else None
-    if data.faqs:
-        number += 1
-    basic_scene, rate_scene, access_scene, spot_scene = number, number + 1, number + 2, number + 3
+    numbers = {token: index for index, token in enumerate(data.scene_order, 1)}
+    articles = {f"article:{index}": item for index, item in enumerate(data.article_scenes)}
+    shop_index = data.scene_order.index("shops")
+    leading_tokens = data.scene_order[:shop_index]
+    remaining_tokens = data.scene_order[shop_index:]
     title_prefix = data.page_title[: -len(data.hotel_name)].rstrip() if data.page_title.endswith(data.hotel_name) else ""
     h1 = (
         f'{common.htext(title_prefix)} <span class="fc_p">{common.htext(data.hotel_name)}</span>'
         if title_prefix
         else common.htext(data.page_title)
     )
-    shop_heading = common.htext(data.shop_heading).replace("「鹿児島の人気デリヘル店」", '<span class="fc_p">「鹿児島の人気デリヘル店」</span>')
-    faq = render_faq(data.faqs, faq_scene) if faq_scene else ""
-    spots = common.render_places(data.spot_heading, data.spots, spot_scene, "spot")
-    related = render_related()
-    optional_html = "\n".join(optional)
+    intro_parts: list[str] = []
+    if data.legacy_option:
+        intro_parts.append(render_legacy_option(data.legacy_option))
+    intro_parts.extend(render_text_scene(articles[token], numbers[token]) for token in leading_tokens)
+    intro_html = "\n".join(intro_parts)
+
+    content: list[str] = []
+    inline: list[str] = []
+    image2_rendered = False
+
+    def flush_inline() -> None:
+        if not inline:
+            return
+        content.append(
+            '\t\t\t<div class="lm_0_auto w_1000 lp_0_7">\n'
+            + "\n".join(inline)
+            + "\n\t\t\t</div>"
+        )
+        inline.clear()
+
+    for token in remaining_tokens:
+        number = numbers[token]
+        if token == "shops":
+            flush_inline()
+            content.append(render_shop_scene(data, resolved, templates, number))
+        elif token == "faqs":
+            flush_inline()
+            content.append(render_faq(data.faqs, number))
+        else:
+            if token in {"basic", "rates", "access", "spots"} and not image2_rendered:
+                flush_inline()
+                content.append(
+                    f'\t\t\t<div class="lpt_55 center" id="img_2"><img src="{common.hattr(data.image2)}" class="img_1 nolazy" loading="lazy" alt="{common.hattr(data.hotel_name)}基本情報"></div>'
+                )
+                image2_rendered = True
+            if token.startswith("article:"):
+                inline.append(render_text_scene(articles[token], number))
+            elif token == "basic":
+                inline.append(render_basic(data, number))
+            elif token == "rates":
+                inline.append(render_rates(data, number))
+            elif token == "access":
+                inline.append(render_access(data, number))
+            elif token == "spots":
+                inline.append(render_spots(data, number))
+            else:
+                raise HotelToolError(f"未対応scene種別です: {token}")
+    inline.append(render_related())
+    flush_inline()
+    content_html = "\n".join(content)
     return f'''<!-- メインコンテンツ START -->
 \t\t<div id="main" class="main">
 \t\t\t<div class="pcOnly lm_0_auto w_1000 lp_20_0 fc_g">
@@ -666,29 +878,10 @@ def render_main(data: HotelData, resolved: list[common.ShopResolved], templates:
 \t\t\t\t<h1 class="lp_50_0_40 center fs_xxl" id="page_title_h1">{h1}</h1>
 \t\t\t\t<div class="lpt_20 bd_t fs_l" id="subtitle_h1">{common.htext(data.subtitle_h1)}</div>
 \t\t\t\t<div class="lp_15_0_30 fs_md3" id="description_h1">{common.htext(data.description_h1)}</div>
-{optional_html}
+{intro_html}
 \t\t\t\t<div class="lm_40_0_75 center"><a href="{common.hattr(data.basic.official_url)}" target="_blank" rel="noopener noreferrer" class="bt-pk-xl">ホテル詳細</a></div>
 \t\t\t</div>
-\t\t\t<div class="lm_full bg_g1">
-\t\t\t\t<h2 class="lp_38_0 fs_xxl center" id="scene{shop_scene}">{shop_heading}</h2>
-\t\t\t\t<div class="lm_0_auto w_1080"><ul class="campaign-list" role="list">
-{common.render_shop_blocks(resolved, templates)}
-\t\t\t\t</ul>
-\t\t\t\t<div class="lp_30_0 fs_md3 center" id="description_{shop_scene}">最新の対応状況は各店舗へ<br class="spOnly">直接お問い合わせくださいませ。</div>
-\t\t\t\t<div class="lpb_75 center"><a href="./#shopinfo" class="bt-pk-xl">対応デリヘル店一覧</a></div></div>
-\t\t\t</div>
-{faq}
-\t\t\t<div class="lpt_55 center" id="img_2"><img src="{common.hattr(data.image2)}" class="img_1 nolazy" loading="lazy" alt="{common.hattr(data.hotel_name)}基本情報"></div>
-\t\t\t<div class="lm_0_auto w_1000 lp_0_7">
-{render_basic(data, basic_scene)}
-{render_rates(data, rate_scene)}
-\t\t\t\t<h2 class="lp_40_0_25 fs_xxl fc_p" id="scene{access_scene}">アクセス情報</h2>
-\t\t\t\t<iframe title="{common.hattr(data.access.map_title)}" src="{common.hattr(data.access.map_src)}" class="map-iframe" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-\t\t\t\t<div class="lpt_30 fs_l" id="subtitle_{access_scene}">{common.htext(data.access.subtitle)}</div>
-\t\t\t\t<div class="lm_25_0_75 fs_md3" id="description_{access_scene}">{common.htext(data.access.description)}</div>
-{spots}
-{related}
-\t\t\t</div>
+{content_html}
 \t\t</div>
 <!-- メインコンテンツ END -->'''
 
@@ -769,6 +962,55 @@ def validate_rendered(data: HotelData, resolved: list[common.ShopResolved], sour
     scenes = [int(value) for value in re.findall(r'\bid="scene(\d+)"', source)]
     if scenes != list(range(1, len(scenes) + 1)):
         errors.append(f"scene連番不整合: {scenes}")
+    article_map = {f"article:{index}": item for index, item in enumerate(data.article_scenes)}
+    expected_headings = []
+    for token in data.scene_order:
+        if token.startswith("article:"):
+            expected_headings.append(article_map[token].title)
+        elif token == "shops":
+            expected_headings.append(data.shop_heading)
+        elif token == "faqs":
+            expected_headings.append("よくあるご質問「FAQ」")
+        elif token == "basic":
+            expected_headings.append("基本情報")
+        elif token == "rates":
+            expected_headings.append("料金情報")
+        elif token == "access":
+            expected_headings.append("アクセス情報")
+        elif token == "spots":
+            expected_headings.append(data.spot_heading)
+    actual_headings = [
+        common.strip_tags(value)
+        for value in re.findall(r'(?s)<h2\b[^>]*id="scene\d+"[^>]*>(.*?)</h2>', source)
+    ]
+    if actual_headings != expected_headings:
+        errors.append(f"scene見出し順不整合: expected={expected_headings} actual={actual_headings}")
+    option_ids = {"option", "option_subtitle", "option_description"}
+    actual_option_ids = option_ids.intersection(ids)
+    if data.legacy_option:
+        if actual_option_ids != option_ids:
+            errors.append("legacy option構造不足")
+        else:
+            option_values = [data.legacy_option.title] + data.legacy_option.description.split("\n", 1)
+            if not all(common.htext(value) in source for value in option_values):
+                errors.append("legacy option本文不整合")
+    elif actual_option_ids:
+        errors.append("optionなし入力にlegacy optionが残っています")
+    scene_numbers = {token: index for index, token in enumerate(data.scene_order, 1)}
+    rate_match = None
+    if "rates" in scene_numbers:
+        rate_match = re.search(
+            rf'(?s)<div\b[^>]*id="description_{scene_numbers["rates"]}"[^>]*>(.*?)</div>',
+            source,
+        )
+    actual_rate_note = common.strip_tags(rate_match.group(1)) if rate_match else None
+    if actual_rate_note != data.rate_note:
+        errors.append(f"料金補足文不整合: expected={data.rate_note!r} actual={actual_rate_note!r}")
+    spot_note_match = re.search(r'(?s)<div\b[^>]*id="spot_note"[^>]*>(.*?)</div>', source)
+    actual_spot_note = common.strip_tags(spot_note_match.group(1)) if spot_note_match else None
+    expected_spot_note = data.spot_note if data.spots else None
+    if actual_spot_note != expected_spot_note:
+        errors.append(f"周辺スポット注意文不整合: expected={expected_spot_note!r} actual={actual_spot_note!r}")
     json_values: list[dict[str, object]] = []
     for index, value in enumerate(re.findall(r'(?s)<script type="application/ld\+json">\s*(.*?)\s*</script>', source), 1):
         try:
@@ -791,15 +1033,16 @@ def validate_rendered(data: HotelData, resolved: list[common.ShopResolved], sour
     elif faq_json is not None:
         errors.append("FAQなしページにFAQPageが残っています")
     item_json = next((value for value in json_values if value.get("@type") == "ItemList"), None)
-    if not item_json or item_json.get("numberOfItems") != len(resolved):
-        errors.append("店舗本文とJSON-LD件数不一致")
+    expected_item_names = [item.title for item in data.spots] if data.spots else [item.name for item in resolved]
+    if not item_json or item_json.get("numberOfItems") != len(expected_item_names):
+        errors.append("ItemList本文件数不一致")
     else:
-        actual_shop_names = []
+        actual_item_names = []
         for entity in item_json.get("itemListElement", []):
             item = entity.get("item", {}) if isinstance(entity, dict) else {}
-            actual_shop_names.append(item.get("name"))
-        if actual_shop_names != [item.name for item in resolved]:
-            errors.append("店舗本文とJSON-LD順序不一致")
+            actual_item_names.append(item.get("name"))
+        if actual_item_names != expected_item_names:
+            errors.append("ItemList本文順序不一致")
     actual_keys = [value for value in re.findall(r"<!-- ([a-z0-9_]+) -->", source) if value in common.KEY_TO_NAME]
     expected_keys = [value.key for value in resolved]
     if actual_keys != expected_keys:
@@ -865,8 +1108,9 @@ def hotel_schema(data: HotelData) -> dict[str, object]:
         "name": data.hotel_name,
         "url": data.canonical,
         "address": {"@type": "PostalAddress", "streetAddress": address_text, "addressCountry": "JP"},
-        "priceRange": " / ".join(f"{label} {value}" for label, value in data.rates),
     }
+    if data.rates:
+        schema["priceRange"] = " / ".join(f"{label} {value}" for label, value in data.rates)
     if postal:
         schema["address"]["postalCode"] = postal.group(1)
     if data.basic.telephone:
@@ -889,10 +1133,15 @@ def update_hotel_list(source: str, data: HotelData) -> str:
         if stay:
             rate_lines.append(f'宿泊料金目安 {common.htext(stay)}')
         rates = '<br class="spOnly">'.join(rate_lines)
+        map_link = (
+            f'<a href="{common.hattr(data.access.map_src)}" target="_blank" rel="noopener noreferrer" class="fade lmr_10 fc_g">［MAP］</a>'
+            if data.access
+            else ""
+        )
+        rate_details = f'<br>\n\t\t\t\t\t\t{rates}' if rates else ""
         entry = (
             f'\t\t\t\t\t<div class="lpt_15 bd_t"><a href="./{php_name}" class="fs_md1 fade">{common.htext(data.hotel_name)}</a></div>\n'
-            f'\t\t\t\t\t<div class="lp_10_0_15 f_xxs fc_g">{address}<a href="{common.hattr(data.access.map_src)}" target="_blank" rel="noopener noreferrer" class="fade lmr_10 fc_g">［MAP］</a>{phone}<br>\n'
-            f'\t\t\t\t\t\t{rates}</div>'
+            f'\t\t\t\t\t<div class="lp_10_0_15 f_xxs fc_g">{address}{map_link}{phone}{rate_details}</div>'
         )
         source = common.replace_exact(
             source,
@@ -1041,7 +1290,7 @@ def run_self_test(_: argparse.Namespace) -> int:
     broken_related = source.replace(common.RELATED_PLACEHOLDER_LINK, "", 1)
     if not related_validation(broken_related):
         raise HotelToolError("related negative self-test failed")
-    faqless = replace(data, faqs=[])
+    faqless = replace(data, faqs=[], scene_order=[token for token in data.scene_order if token != "faqs"])
     faqless_source = render_source(faqless, resolved, templates, hp_root / "source" / "template_kagoshima-deliveryhealth-hotel.html")
     faqless_errors = validate_rendered(faqless, resolved, faqless_source, hp_root)
     if faqless_errors:
@@ -1052,18 +1301,111 @@ def run_self_test(_: argparse.Namespace) -> int:
     candy_index = next(index for index, line in enumerate(base_lines) if "CANDY" in line)
     duplicate_shop_lines = list(base_lines)
     duplicate_shop_lines[candy_index + 1] = duplicate_shop_lines[candy_index]
-    optional_text = base_text.replace(
+    faq_marker = "scene（h2 / よくあるご質問）"
+    pattern_text = base_text.replace(
         first_marker,
+        "option\n"
+        "ホテル固有案内\n\n"
+        "option_subtitle\n"
+        "固有案内の要点\n"
+        "option_description\n"
+        "固有案内の本文\n"
+        "------------------------------------------------------------\n"
         "scene（h2）\n"
-        "滞在時の追加案内\n\n"
+        "店舗案内前の記事\n\n"
         "subtitle_\n"
-        "追加文章の見出し\n"
+        "前記事の要点\n"
         "description_\n"
-        "追加文章の本文\n"
+        "前記事の本文\n"
         "------------------------------------------------------------\n"
         + first_marker,
         1,
     )
+    pattern_text = pattern_text.replace(
+        faq_marker,
+        "scene（h2）\n"
+        "店舗案内後の記事\n\n"
+        "subtitle_\n"
+        "後記事の要点\n"
+        "description_\n"
+        "後記事の本文\n"
+        "------------------------------------------------------------\n"
+        + faq_marker,
+        1,
+    )
+    pattern_text = pattern_text.replace(
+        "延長\n要お問い合わせ\n-------------------------------------------------------------------",
+        "延長\n要お問い合わせ\n\ndescription_\n料金情報の補足文\n-------------------------------------------------------------------",
+        1,
+    )
+    pattern_text = pattern_text.rstrip() + "\n\ndescription_\nText指定の周辺スポット注意文\n"
+    sparse_text = base_text
+    sparse_patterns = (
+        (r"(?s)scene（h2 / よくあるご質問）.*?(?=img_2\s*\n)", ""),
+        (r"(?s)scene（h2）\n料金情報.*?(?=scene（h2）\nアクセス情報)", ""),
+        (r"(?s)scene（h2）\nアクセス情報.*?(?=scene（h2）\n[^\n]*周辺スポット)", ""),
+        (r"(?s)scene（h2）\n[^\n]*周辺スポット.*$", ""),
+        (r"(?m)^・Sチャンネル.*(?:\n|$)", ""),
+        (r"(?m)^・REBORN.*(?:\n|$)", ""),
+        (r"(?m)^・楊貴妃.*(?:\n|$)", ""),
+        (r"(?m)^電話番号\n[^\n]+\n\n", ""),
+        (r"(?m)^部屋・駐車場\n[^\n]+\n\n", ""),
+        (r"(?m)^支払方法\n[^\n]+(?:\n|$)", ""),
+    )
+    for pattern, replacement in sparse_patterns:
+        sparse_text, count = re.subn(pattern, replacement, sparse_text, count=1)
+        if count != 1:
+            raise HotelToolError(f"sparse fixture replacement failed: {pattern}")
+    variable_cases: list[tuple[str, HotelData]] = []
+    for count in range(1, len(data.shops) + 1):
+        variable_cases.append((f"shops-{count}", replace(data, shops=data.shops[:count])))
+    for count in range(0, 7):
+        articles = [TextBlock(f"Article heading {index}", f"Article body {index}") for index in range(1, count + 1)]
+        order = [f"article:{index}" for index in range(count)] + data.scene_order
+        variable_cases.append(
+            (f"article-scenes-{count}", replace(data, article_scenes=articles, scene_order=order))
+        )
+    for count in range(0, 7):
+        faqs = [TextBlock(f"Question {index}", f"Answer {index}") for index in range(1, count + 1)]
+        order = [token for token in data.scene_order if token != "faqs" or count]
+        variable_cases.append((f"faqs-{count}", replace(data, faqs=faqs, scene_order=order)))
+    for count in range(0, len(RATE_LABELS) + 1):
+        rates = [(label, f"Rate {index}") for index, label in enumerate(RATE_LABELS[:count], start=1)]
+        order = [token for token in data.scene_order if token != "rates" or count]
+        variable_cases.append((f"rates-{count}", replace(data, rates=rates, rate_note=None, scene_order=order)))
+    variable_cases.append(
+        ("access-0", replace(data, access=None, scene_order=[token for token in data.scene_order if token != "access"]))
+    )
+    for count in range(0, 7):
+        spots = [
+            common.Place(
+                title=f"Nearby spot {index}",
+                address=f"Test address {index}",
+                telephone=None,
+                url=f"https://example.com/spot-{index}",
+            )
+            for index in range(1, count + 1)
+        ]
+        order = [token for token in data.scene_order if token != "spots" or count]
+        variable_cases.append((f"spots-{count}", replace(data, spots=spots, scene_order=order)))
+    for mask in range(8):
+        basic = replace(
+            data.basic,
+            telephone=data.basic.telephone if mask & 1 else None,
+            room_parking=data.basic.room_parking if mask & 2 else None,
+            payment=data.basic.payment if mask & 4 else None,
+        )
+        variable_cases.append((f"basic-optional-mask-{mask}", replace(data, basic=basic)))
+    for name, variant in variable_cases:
+        variant_resolved = resolve_shops(variant, hp_root, templates)
+        variant_source = render_source(
+            variant, variant_resolved, templates,
+            hp_root / "source" / "template_kagoshima-deliveryhealth-hotel.html",
+        )
+        variant_errors = validate_rendered(variant, variant_resolved, variant_source, hp_root)
+        if variant_errors:
+            raise HotelToolError(f"variable count self-test failed ({name}): " + "; ".join(variant_errors))
+
     fallback_shops = [
         replace(request, time_text=None, fee_text=None, source="text")
         if request.key == "schannel" else request
@@ -1100,22 +1442,74 @@ def run_self_test(_: argparse.Namespace) -> int:
         ),
     }
     with tempfile.TemporaryDirectory() as directory:
-        optional_path = Path(directory) / "optional_scene.txt"
-        optional_path.write_text(optional_text, encoding="utf-8")
-        optional_data = parse_hotel_text(optional_path)
-        if len(optional_data.optional_scenes) != 1:
-            raise HotelToolError("optional scene parse self-test failed")
-        optional_resolved = resolve_shops(optional_data, hp_root, templates)
-        optional_source = render_source(
-            optional_data, optional_resolved, templates,
+        pattern_path = Path(directory) / "information_patterns.txt"
+        pattern_path.write_text(pattern_text, encoding="utf-8")
+        pattern_data = parse_hotel_text(pattern_path)
+        if pattern_data.legacy_option is None or len(pattern_data.article_scenes) != 2:
+            raise HotelToolError("information pattern parse self-test failed")
+        if pattern_data.scene_order[:4] != ["article:0", "shops", "article:1", "faqs"]:
+            raise HotelToolError(f"scene order parse self-test failed: {pattern_data.scene_order}")
+        if pattern_data.rate_note != "料金情報の補足文":
+            raise HotelToolError("rate note parse self-test failed")
+        if pattern_data.spot_note != "Text指定の周辺スポット注意文":
+            raise HotelToolError("spot note parse self-test failed")
+        pattern_resolved = resolve_shops(pattern_data, hp_root, templates)
+        pattern_source = render_source(
+            pattern_data, pattern_resolved, templates,
             hp_root / "source" / "template_kagoshima-deliveryhealth-hotel.html",
         )
-        for expected in ("滞在時の追加案内", "追加文章の見出し", "追加文章の本文"):
-            if expected not in optional_source:
-                raise HotelToolError(f"optional scene render self-test failed: {expected}")
-        optional_errors = validate_rendered(optional_data, optional_resolved, optional_source, hp_root)
-        if optional_errors:
-            raise HotelToolError("optional scene validation self-test failed: " + "; ".join(optional_errors))
+        for expected in (
+            'id="option"',
+            "ホテル固有案内",
+            'id="scene1">店舗案内前の記事',
+            'id="scene2"',
+            'id="scene3">店舗案内後の記事',
+            "料金情報の補足文",
+            "Text指定の周辺スポット注意文",
+        ):
+            if expected not in pattern_source:
+                raise HotelToolError(f"information pattern render self-test failed: {expected}")
+        pattern_errors = validate_rendered(pattern_data, pattern_resolved, pattern_source, hp_root)
+        if pattern_errors:
+            raise HotelToolError("information pattern validation self-test failed: " + "; ".join(pattern_errors))
+
+        sparse_path = Path(directory) / "sparse_counts.txt"
+        sparse_path.write_text(sparse_text, encoding="utf-8")
+        sparse_data = parse_hotel_text(sparse_path)
+        if sparse_data.scene_order != ["shops", "basic"]:
+            raise HotelToolError(f"sparse scene order self-test failed: {sparse_data.scene_order}")
+        if (
+            len(sparse_data.shops) != 1
+            or sparse_data.faqs
+            or sparse_data.basic.telephone is not None
+            or sparse_data.basic.room_parking is not None
+            or sparse_data.basic.payment is not None
+            or sparse_data.rates
+            or sparse_data.access is not None
+            or sparse_data.spots
+        ):
+            raise HotelToolError("sparse count parse self-test failed")
+        sparse_resolved = resolve_shops(sparse_data, hp_root, templates)
+        sparse_source = render_source(
+            sparse_data, sparse_resolved, templates,
+            hp_root / "source" / "template_kagoshima-deliveryhealth-hotel.html",
+        )
+        sparse_errors = validate_rendered(sparse_data, sparse_resolved, sparse_source, hp_root)
+        if sparse_errors:
+            raise HotelToolError("sparse count validation self-test failed: " + "; ".join(sparse_errors))
+        if sparse_source.count(common.RELATED_PLACEHOLDER_LINK) != common.RELATED_PLACEHOLDER_COUNT:
+            raise HotelToolError("sparse related placeholder self-test failed")
+        sparse_hotel_list = update_hotel_list(read_utf8(hp_root / "source" / "hotel.html"), sparse_data)
+        sparse_php_name = f"kagoshima-deliveryhealth-hotel-{sparse_data.slug}.php"
+        sparse_entry = re.search(
+            rf'(?s)<div class="lpt_15 bd_t"><a href="\./{re.escape(sparse_php_name)}".*?</div>\s*'
+            r'<div class="lp_10_0_15 f_xxs fc_g">(.*?)</div>',
+            sparse_hotel_list,
+        )
+        if not sparse_entry or "［MAP］" in sparse_entry.group(1) or "料金目安" in sparse_entry.group(1):
+            raise HotelToolError("sparse hotel list self-test failed")
+        if "priceRange" in hotel_schema(sparse_data):
+            raise HotelToolError("sparse hotel schema self-test failed")
         for name, case_text in cases.items():
             case_path = Path(directory) / f"{name}.txt"
             case_path.write_text(case_text, encoding="utf-8")
@@ -1132,7 +1526,11 @@ def run_self_test(_: argparse.Namespace) -> int:
     for block in re.findall(r'(?s)<script type="application/ld\+json">\s*(.*?)\s*</script>', hotel_list_source):
         json.loads(block)
 
-    print(f"HOTEL={data.hotel_name} SLUG={data.slug} SHOPS=4 FAQS=4 RATES=2 SPOTS=4")
+    print(
+        f"HOTEL={data.hotel_name} SLUG={data.slug} "
+        f"SHOPS={len(data.shops)} FAQS={len(data.faqs)} "
+        f"RATES={len(data.rates)} SPOTS={len(data.spots)}"
+    )
     return 0
 
 

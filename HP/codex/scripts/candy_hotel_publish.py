@@ -256,11 +256,11 @@ def verify_production(data: candy_hotel_page.HotelData, commit: str) -> None:
         json_values.append(value)
     faq_json = next((value for value in json_values if value.get("@type") == "FAQPage"), None)
     item_json = next((value for value in json_values if value.get("@type") == "ItemList"), None)
-    actual_shop_names: list[object] = []
+    actual_item_names: list[object] = []
     if item_json and isinstance(item_json.get("itemListElement"), list):
         for entity in item_json["itemListElement"]:
             item = entity.get("item", {}) if isinstance(entity, dict) else {}
-            actual_shop_names.append(item.get("name") if isinstance(item, dict) else None)
+            actual_item_names.append(item.get("name") if isinstance(item, dict) else None)
     actual_faqs: list[tuple[object, object]] = []
     if faq_json and isinstance(faq_json.get("mainEntity"), list):
         for entity in faq_json["mainEntity"]:
@@ -282,8 +282,9 @@ def verify_production(data: candy_hotel_page.HotelData, commit: str) -> None:
         "json_ld": json_valid and len(json_values) == (3 if data.faqs else 2),
         "item_list": bool(
             item_json
-            and item_json.get("numberOfItems") == len(data.shops)
-            and actual_shop_names == [item.name for item in data.shops]
+            and item_json.get("numberOfItems") == (len(data.spots) if data.spots else len(data.shops))
+            and actual_item_names
+            == ([item.title for item in data.spots] if data.spots else [item.name for item in data.shops])
         ),
         "faq": actual_faqs == expected_faqs if data.faqs else faq_json is None,
     }
