@@ -47,7 +47,7 @@
 | 11 | 山下町 | `yamashitacho` | PUBLISHED | Codex / 2026-07-14 / Commit `2a8a9c4` / Actions `29301766001` / 本番HTTP確認済み |
 | 12 | 山田町 | `yamadacho` | IN_PROGRESS | 専用ツール / 2026-07-14 / 3ファイル・共有登録・静的検査済み / PHP CLI未確認 |
 | 13 | 山之口町 | `yamanokuchicho` | IN_PROGRESS | 専用ツール / 2026-07-14 / 3ファイル・共有登録・静的検査済み / PHP CLI未確認 |
-| 14 | 四元町 | `yotsumotocho` | READY_CANDIDATE | |
+| 14 | 四元町 | `yotsumotocho` | IN_PROGRESS | 専用ツール / 2026-07-15 / 3ファイル・共有登録・静的検査済み / PHP CLI未確認 |
 | 15 | 紫原 | `murasakibaru` | READY_CANDIDATE | |
 | 16 | 慈眼寺町 | `jigenjicho` | READY_CANDIDATE | |
 | 17 | 自由ヶ丘 | `jiyugaoka` | READY_CANDIDATE | |
