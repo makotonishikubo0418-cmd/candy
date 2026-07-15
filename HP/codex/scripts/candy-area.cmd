@@ -1,6 +1,13 @@
 @echo off
 setlocal
+set "PYTHONDONTWRITEBYTECODE=1"
+
+set "BUNDLED_GIT=%USERPROFILE%\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd"
+if exist "%BUNDLED_GIT%\git.exe" set "PATH=%BUNDLED_GIT%;%PATH%"
+
 set "PYTHON=%LOCALAPPDATA%\Programs\Python\Python312\python.exe"
+if exist "%PYTHON%" goto run
+set "PYTHON=%USERPROFILE%\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe"
 if exist "%PYTHON%" goto run
 set "PYTHON=python"
 :run
