@@ -6,6 +6,7 @@
 - ユーザーの最新の明示指示を最優先する。本ファイルおよび他のプロジェクト文書と矛盾する場合は、ユーザーの最新指示に従う。
 - HP作業は `HP/AGENTS.md` も適用する。矛盾時は停止する。
 - パス、件数、Git状態は毎回実物で確認し、過去資料の値を流用しない。
+- 正本作業場は `\\192.168.1.3\disk1\FSG_SEO\candy\HP`。`C:\Codex\candy` は旧ローカル退避・参照用であり、明示指示がない限り作業場にしない。
 
 ## 2. 開始
 
@@ -107,3 +108,11 @@ git diff --check
 ```
 
 Commit、Push、Actions、本番、ブラウザを実施した場合だけ、対応する確認用URLと証拠を記載する。
+## 8. User-facing explanation rule
+
+- Write explanations for the user's understanding, not for internal agent convenience.
+- Start with the plain conclusion first.
+- Then separate the explanation into: what happened, what was changed, current result, blocker if any, and the next required action.
+- Avoid long process narration before answering the user's question.
+- Do not use unexplained technical terms. If a technical term is necessary, define it in one short sentence.
+- When the user says the explanation is unclear, rebuild the explanation from the user's point of view instead of repeating the same wording.
