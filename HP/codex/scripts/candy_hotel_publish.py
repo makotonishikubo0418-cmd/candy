@@ -17,6 +17,7 @@ from urllib.parse import urljoin
 
 import candy_area_publish as shared
 import candy_hotel_page
+import candy_hotel_target_gate
 
 
 PublishError = shared.PublishError
@@ -136,33 +137,15 @@ def input_paths() -> list[Path]:
 
 
 def next_ready_input() -> Path:
-    candidates: list[tuple[Path, str]] = []
-    slug_paths: dict[str, list[Path]] = {}
-    for path in input_paths():
-        if path.name.lower().startswith("cursor"):
-            continue
-        try:
-            data = candy_hotel_page.parse_hotel_text(path)
-        except candy_hotel_page.HotelToolError as exc:
-            print(f"CANDIDATE_SKIP={path.name}|{exc}")
-            continue
-        slug_paths.setdefault(data.slug, []).append(path)
-        if any(value.exists() for value in candy_hotel_page.bundle_paths(root() / "HP", data.slug)):
-            print(f"CANDIDATE_SKIP={path.name}|page files already exist")
-            continue
-        candidates.append((path, data.slug))
-    duplicate_slugs = {slug: paths for slug, paths in slug_paths.items() if len(paths) > 1}
-    if duplicate_slugs:
-        details = ", ".join(f"{slug}={len(paths)}" for slug, paths in sorted(duplicate_slugs.items()))
-        raise PublishError(f"duplicate hotel input slugs: {details}")
-    if not candidates:
-        raise PublishError("no complete unpublished hotel input")
-    if len(candidates) > 1:
-        names = ", ".join(path.name for path, _slug in candidates)
-        raise PublishError(f"multiple unpublished hotel inputs; use publish --input: {names}")
-    selected, slug = candidates[0]
-    print(f"CANDIDATE_SELECTED={selected.name}|{slug}")
-    return selected
+    results = candy_hotel_target_gate.scan_inputs()
+    for result in results:
+        if result.category == candy_hotel_target_gate.READY:
+            print(f"CANDIDATE_SELECTED={result.path.name}|{result.slug}")
+            return result.path
+        if result.category != candy_hotel_target_gate.ADMIN_DOC:
+            reason = " / ".join(result.reasons)
+            print(f"CANDIDATE_SKIP={result.path.name}|{result.category}|{reason}")
+    raise PublishError("no eligible new hotel page target; run HP\\codex\\scripts\\candy-hotel.cmd audit-inputs")
 
 
 def paths_for(data: candy_hotel_page.HotelData) -> list[Path]:

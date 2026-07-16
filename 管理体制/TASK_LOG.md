@@ -1,4 +1,4 @@
-# Task履歴
+﻿# Task履歴
 
 - 目的: 個別Taskの結果、確認済み、未確認を残す
 - 状態: 正本
@@ -21,6 +21,13 @@
 | TASK-20260716-MGMT-002 | 2026-07-16 | 監査指摘修正 | candy用概要へ修正、Git管理側に管理正本を設置、外側文書を入口へ降格、既存179件をTask履歴へ対応付け | 旧プロジェクト表記の排除、Git管理外問題の是正方針、削除76件の承認根拠記録 | Commit/Push未実施。作業後Git状態は変更4件、削除表示76件、未追跡107件、合計187件 |
 | TASK-20260716-AREA-IMAGE-SPEC-001 | 2026-07-16 | エリア画像制作仕様の正本化 | 新規制作仕様、画像管理、area runbook、資料ルーター、Codex連絡を統合 | 1000×750、命名、保存先、組込み、権利・帰属STOP、他カテゴリ展開方針 | 実画像制作、Chrome操作、Commit/Push、本番未実施 |
 | TASK-20260716-MGMT-003 | 2026-07-16 | 再監査残件修正 | TASK_LOG表崩れ修正、PROJECT_STATUS現在値更新、管理文書8件のCommit対象候補整理 | 変更7件、削除表示76件、未追跡108件、合計191件を反映 | Commit/Push未実施 |
+| TASK-20260716-MGMT-004 | 2026-07-16 | Git Commit/Push高速実行ルール追加 | NAS/UNC上のGit確認統合、並列Git確認禁止、対象固定、Commit前確認、監査項目を管理書へ追加 | 前回の遅延原因をルール化し、監査項目へ反映 | Commit/Push未実施 |
+| TASK-20260716-MGMT-005 | 2026-07-16 | エリア対象選定管理の修正 | `間違い無し`分類と新規制作可否を分離し、publish前に既存PHP/source/dataset/共有登録を確認するゲートをrunbookへ追加 | 四元町の既存ページ選定ミスを再発防止ルール化 | Commit/Push未実施 |
+| TASK-20260716-MGMT-006 | 2026-07-16 | area一覧slug不一致の管理修正 | `target-next` / `target-check` に同一地域・別slug検査を追加し、runbook・仕様・管理規則・連絡帳へ反映 | 中央港新町でpublish後に出たslug不一致STOPをpublish前に除外する方針へ更新 | Commit/Push未実施 |
+| TASK-20260716-MGMT-007 | 2026-07-16 | area一覧リンク扱いの修正 | 対象slugのarea一覧リンク1件は必要条件、同一地域・別slugだけ除外条件としてtarget gateと管理書を修正 | 制作可否管理でarea一覧リンクを作成済み扱いにする誤分類を是正 | Commit/Push未実施 |
+| TASK-20260716-MGMT-008 | 2026-07-16 | hotel制作対象管理と既存hotel分解の再整備 | hotel target gate、hotel runbook、hotel spec、hotel入力分類、hotel画像仕様、管理規則を更新。publish-next標準化、BLOCKER_COUNTS_JSON、audit-existingを追加 | 既存3hotelの接続状態、hotel入力74件の分類、target-next停止、publish-next dry-run停止、Markdown表、Python構文、対象diff checkを確認 | Commit/Push、本番、画像制作、既存hotel登録修正は未実施 |
+| TASK-20260716-MGMT-009 | 2026-07-16 | 管理正本の外側一本化 | 外側README/AGENTS/管理体制を正本化。HP側の重複管理フォルダ、概要説明書、更新停止ページ作成用、空の外側.gitを削除 | 外側が正、HP側はHP作業導線のみ。HP GitHub作業場は維持 | Commit/Push未実施。外側正本は現時点でGit管理外 |
+| TASK-20260716-MGMT-010 | 2026-07-16 | HP階層一本化 | `.git` を外側へ移動し、旧 `HP/HP` の中身を `HP` 直下へ移動。旧HP直下の非サイト物は外側または除外リストへ退避 | `HP/HP` 不在、`HP/index.php` 存在、GitHub remote確認済み | Commit/Push未実施 |
 
 ## 3. 承認根拠メモ
 

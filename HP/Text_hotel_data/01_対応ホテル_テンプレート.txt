@@ -1,0 +1,171 @@
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+【重要】ルール
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+誤字脱字及び、情報未入力項目があった場合は、実行前にお知らせください。
+-------------------------------------------------------------------
+description_h1・各subtitle / descriptionのテキスト本文は、改行指定がない場合は、改行無しで設置してください。
+-------------------------------------------------------------------
+記事内容内の scene（h2）ブロックを上から順に自動採番し、h2に id="scene1" を付与してください。各ブロック直下の subtitle_ / description_ は subtitle_1 / description_1 のように同じ番号を付与してください。以降も同様に scene2, subtitle_2, description_2…で統一してください。scene番号は、記事内のh2（通常scene/鹿児島の人気デリヘル店/周辺スポットなど）を上から順にすべて含めて採番してください。
+-------------------------------------------------------------------
+template_shop.htmlから、上記店舗の情報を取得して<!-- 店舗名 -->～</li>までを設置。その際、移動時間と交通費は下記記載内容に合わせて修正してください。
+-------------------------------------------------------------------
+「よくあるご質問」「周辺スポット」は、各セクションのscene番号をメイン番号として使用してください。各項目は subtitle{scene番号}_{連番} / description{scene番号}_{連番} を上から連番で付与してください。例としては、scene5なら「subtitle5_1 / description5_1、subtitle5_2 / description5_2」となります。
+-------------------------------------------------------------------
+「よくあるご質問」「周辺スポット」の各セクションで、faq-itemの最終ブロックのみ開始タグを <div class="faq-item bd_tb"> にすること。最終ブロック以外は <div class="faq-item bd_t"> のままにすること。
+-------------------------------------------------------------------
+「よくあるご質問」「基本情報内項目」「料金情報内項目」に情報が書かれてない場合は、<!-- FAQ START -->～<!-- FAQ END --> / 各セクションを削除してください。
+-------------------------------------------------------------------
+img内、alt="aaaaaaaaaaaaaaaaaaaa"にはホテル名をいれてください。
+-------------------------------------------------------------------
+各項目の内容を確認の上、必要に応じてHTMLを追加・削除して調整してください。
+-------------------------------------------------------------------
+最後に、ページ内容に合わせて、<!-- 構造化データ（JSON-LD） START -->も最適化してください。
+-------------------------------------------------------------------
+基本情報内「URL」は「id="button_1"」「ホテル名（aaaaaaaaaaaaaaaaaaaa）」にリンクを設置すること。
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+基本情報
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+title
+aaaaaaaaaaaaaaaaaaaa｜鹿児島市でデリヘルが呼べるホテル
+-------------------------------------------------------------------
+description
+鹿児島市aaaaaaaaaaaaaaaaaaaaでデリヘルが呼べるホテルaaaaaaaaaaaaaaaaaaaa｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載
+-------------------------------------------------------------------
+canonical
+https://www.55810.com/kagoshima-deliveryhealth-hotel-aaaaaaaaaaaaaaaaaaaa.php
+-------------------------------------------------------------------
+image
+https://www.55810.com/imgHtml/new_202601/hotel/aaaaaaaaaaaaaaaaaaaa_1.jpg
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+記事内容
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+img_1
+src : ./imgHtml/new_202601/hotel/aaaaaaaaaaaaaaaaaaaa_1.jpg
+-------------------------------------------------------------------
+page_title_h1 / パンくずリスト
+鹿児島市でデリヘルが呼べるホテル  aaaaaaaaaaaaaaaaaaaa
+
+subtitle_h1
+こんにちは！アッキー店長です。
+aaaaaaaaaaaaaaaaaaaa
+
+description_h1
+aaaaaaaaaaaaaaaaaaaa
+-------------------------------------------------------------------
+scene（h2 / 「人気デリヘル店」情報）
+aaaaaaaaaaaaaaaaaaaaに呼べる「鹿児島の人気デリヘル店」
+
+・CANDY（内容は同じ）
+・aaaaaaaaaaaaaaaaaaaa（移動時間 : 10分～15分前後 / 交通費 : 無料～1,500円）
+・aaaaaaaaaaaaaaaaaaaa（移動時間 : 10分～20分前後 / 交通費 : 無料～2,000円）
+・aaaaaaaaaaaaaaaaaaaa（移動時間 : 10分～30分前後 / 交通費 : 無料～2,000円）
+-------------------------------------------------------------------
+scene（h2 / よくあるご質問）
+
+subtitle_
+aaaaaaaaaaaaaaaaaaaa
+description_
+aaaaaaaaaaaaaaaaaaaa
+
+subtitle_
+aaaaaaaaaaaaaaaaaaaa
+description_
+aaaaaaaaaaaaaaaaaaaa
+
+subtitle_
+aaaaaaaaaaaaaaaaaaaa
+description_
+aaaaaaaaaaaaaaaaaaaa
+
+subtitle_
+aaaaaaaaaaaaaaaaaaaa
+description_
+aaaaaaaaaaaaaaaaaaaa
+-------------------------------------------------------------------
+img_2
+src : ./imgHtml/new_202601/hotel/aaaaaaaaaaaaaaaaaaaa_2.jpg
+-------------------------------------------------------------------
+scene（h2）
+基本情報
+
+ホテル名
+aaaaaaaaaaaaaaaaaaaa
+
+URL
+aaaaaaaaaaaaaaaaaaaa
+
+住所
+〒aaaaaaaaaaaaaaaaaaaa<改行>
+aaaaaaaaaaaaaaaaaaaa
+
+電話番号
+aaaaaaaaaaaaaaaaaaaa
+
+部屋数・駐車場
+aaaaaaaaaaaaaaaaaaaa /
+
+支払方法
+aaaaaaaaaaaaaaaaaaaa
+-------------------------------------------------------------------
+scene（h2）
+料金情報
+
+休憩等
+aaaaaaaaaaaaaaaaaaaa
+
+フリー
+aaaaaaaaaaaaaaaaaaaa
+
+宿泊
+aaaaaaaaaaaaaaaaaaaa
+
+延長
+aaaaaaaaaaaaaaaaaaaa
+-------------------------------------------------------------------
+scene（h2）
+アクセス情報
+
+地図URL
+aaaaaaaaaaaaaaaaaaaa
+
+地図タイトル
+鹿児島市aaaaaaaaaaaaaaaaaaaaの地図
+
+subtitle_
+aaaaaaaaaaaaaaaaaaaa
+
+description_
+aaaaaaaaaaaaaaaaaaaa
+-------------------------------------------------------------------
+scene（h2）
+ホテル aaaaaaaaaaaaaaaaaaaa「周辺スポット」
+
+subtitle_
+aaaaaaaaaaaaaaaaaaaa
+description_
+aaaaaaaaaaaaaaaaaaaa<改行>
+TEL aaaaaaaaaaaaaaaaaaaa
+URL aaaaaaaaaaaaaaaaaaaa
+
+subtitle_
+aaaaaaaaaaaaaaaaaaaa
+description_
+aaaaaaaaaaaaaaaaaaaa<改行>
+TEL aaaaaaaaaaaaaaaaaaaa
+URL aaaaaaaaaaaaaaaaaaaa
+
+subtitle_
+aaaaaaaaaaaaaaaaaaaa
+description_
+aaaaaaaaaaaaaaaaaaaa<改行>
+TEL aaaaaaaaaaaaaaaaaaaa
+URL aaaaaaaaaaaaaaaaaaaa
+
+subtitle_
+aaaaaaaaaaaaaaaaaaaa
+description_
+aaaaaaaaaaaaaaaaaaaa<改行>
+TEL aaaaaaaaaaaaaaaaaaaa
+URL aaaaaaaaaaaaaaaaaaaa

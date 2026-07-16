@@ -1,4 +1,4 @@
-# CANDY 管理資料ルーター
+﻿# CANDY 管理資料ルーター
 
 ## 1. 用途
 
@@ -18,11 +18,14 @@
 | 作業 | 読む資料 |
 |---|---|
 | 通常area制作・公開 | `CANDY_AREA_STAFF_PRODUCTION_RUNBOOK.md` |
+| area画像の新規制作 | `CANDY_AREA_IMAGE_CREATION_SPEC.md`、`CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md` |
 | 通常hotel制作・公開 | `CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md` |
+| hotel入力分類・作成順 | `CANDY_HOTEL_TEXT_INPUT_CLASSIFICATION.md` |
+| hotel画像の新規制作 | `CANDY_HOTEL_IMAGE_CREATION_SPEC.md` |
 | 通常blog制作・公開 | `CANDY_PAGE_GENERATION_GOVERNANCE.md`、`CANDY_BLOG_PAGE_GENERATION_SPEC.md` |
 | area未知例外 | `CANDY_AREA_PAGE_GENERATION_SPEC.md`、必要時 `CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md` |
 | blog未知例外 | `CANDY_PAGE_GENERATION_GOVERNANCE.md`、`CANDY_BLOG_PAGE_GENERATION_SPEC.md` |
-| hotel未知例外 | `CANDY_PAGE_GENERATION_GOVERNANCE.md`、`CANDY_HOTEL_PAGE_GENERATION_SPEC.md` |
+| hotel未知例外 | `CANDY_PAGE_GENERATION_GOVERNANCE.md`、`CANDY_HOTEL_PAGE_GENERATION_SPEC.md`、必要時 `CANDY_HOTEL_TEXT_INPUT_CLASSIFICATION.md` |
 | area／hotel／blog以外のページ調査・修正 | `CANDY_OTHER_PAGES_MANAGEMENT.md`、`CANDY_OPERATION_BASICS.md` |
 | 既存ページ修正 | `CANDY_OPERATION_BASICS.md`、対象カテゴリspec |
 | 構造調査 | `CANDY_HP_STRUCTURE_MAP.md`、`CANDY_CODE_FILE_STRUCTURE.md` |
@@ -35,7 +38,7 @@
 
 ## 3. 通常作業から除外
 
-- `ページ作成用.md`: 更新停止した旧制作記録
+- `\\192.168.1.3\disk1\FSG_SEO\candy\ページ作成用.md`: 更新停止した旧制作記録
 - `HP/codex/00_CANDY_SEO_START_HERE.md`
 - `HP/codex/area/`
 - `HP/codex/reform_20260529/`

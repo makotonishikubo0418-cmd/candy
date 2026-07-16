@@ -1,4 +1,4 @@
-# CANDY AREA 最短制作手順
+﻿# CANDY AREA 最短制作手順
 
 更新日: 2026-07-14
 
@@ -23,6 +23,8 @@ HP\codex\scripts\candy-area.cmd build --input "HP/Text_area_data/対象.txt"
 HP\codex\scripts\candy-area.cmd check --input "HP/Text_area_data/対象.txt"
 ```
 
+必要画像が存在しない場合は、上記コマンドの前に `CANDY_AREA_IMAGE_CREATION_SPEC.md` を読む。画像元の保存・加工・商用公開条件と帰属表示を確認できる場合だけ画像を制作する。確認できない場合はSTOPとし、ページ生成・公開へ進まない。
+
 入力全体の例外調査時だけ実行する。
 
 ```powershell
@@ -32,8 +34,38 @@ HP\codex\scripts\candy-area.cmd audit-inputs --render
 
 正常系で事前の `build`、`check`、全資料再読、途中質問を追加しない。
 
-## 2. 一括処理
 
+## 1.5 作成順番と新規制作対象ゲート
+
+作成対象は手で選ばない。次の順番で、専用ゲートが `NEW_PAGE_TARGET_OK=<slug>` を出した1件だけを対象にする。
+
+1. `HP/Text_area_data` 直下にあるtxtをファイル名昇順で確認する。
+2. 最新の `HP/Text_area_data/分類_*/01_間違い無し` をファイル名昇順で確認する。
+3. 既存公開PHP、source HTML、dataset PHP、`dataset_base.php`、sitemapに既存ファイルまたは既存登録があるslugは自動で除外する。
+4. area一覧に対象slugのリンクが1件あることを必須にする。area一覧に同一地域名で別slugのリンクがある場合は `同一地域・別slug` として自動除外する。
+5. 画像2枚がないslugは自動で除外する。
+6. 最初に通過した1件だけを制作する。
+
+`01_間違い無し` はtxt内容の分類であり、新規ページとして制作可能という意味ではない。
+
+```powershell
+HP\codex\scripts\candy-area.cmd target-next
+```
+
+分類フォルダ内の候補を実際に制作する場合は、1件だけ通常位置へ戻す。
+
+```powershell
+HP\codex\scripts\candy-area.cmd target-next --restore
+```
+
+指定対象を確認する場合:
+
+```powershell
+HP\codex\scripts\candy-area.cmd target-check --input "HP/Text_area_data/対象.txt"
+```
+
+`NEW_PAGE_TARGET_OK=<slug>` が出ない対象で `publish` してはいけない。既存ファイル、既存登録、同一地域・別slug、旧slug、類似slugが出たら、制作へ進まず候補選定からやり直す。
+## 2. 一括処理
 `publish-next` は次を連続実行する。
 
 1. キュー先頭の `READY_CANDIDATE` を選ぶ。
@@ -71,7 +103,7 @@ HP/sitemap.xml
 HP/codex/docs/CANDY_AREA_105_PAGE_QUEUE.md の対象1行
 ```
 
-`ページ作成用.md` は更新しない。
+`\\192.168.1.3\disk1\FSG_SEO\candy\ページ作成用.md` は更新しない。
 
 ## 4. 検証
 

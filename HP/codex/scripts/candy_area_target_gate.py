@@ -1,0 +1,228 @@
+# -*- coding: utf-8 -*-
+"""Select and verify CANDY area page production targets.
+
+This gate separates text quality from new-page eligibility.
+"""
+
+from __future__ import annotations
+
+import argparse
+import re
+import shutil
+import subprocess
+from dataclasses import dataclass
+from pathlib import Path
+
+SITE_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
+TEXT_ROOT = SITE_ROOT / "Text_area_data"
+
+
+@dataclass(frozen=True)
+class Candidate:
+    source: Path
+    direct: Path
+    slug: str
+    region: str
+    rank: tuple[int, str, str]
+
+
+def rel(path: Path) -> str:
+    return path.relative_to(REPO_ROOT).as_posix()
+
+
+def read_text(path: Path) -> str:
+    return path.read_text(encoding="utf-8")
+
+
+def extract_slug(text: str) -> str:
+    match = re.search(r"kagoshima-deliveryhealth-area-([a-z0-9-]+)\.php", text)
+    return match.group(1) if match else ""
+
+
+def region_name(path: Path) -> str:
+    return re.sub(r"_テンプレート\s*\.txt$", "", path.name).removesuffix(".txt")
+
+
+def git_tracked(path: Path) -> bool:
+    relative = rel(path)
+    completed = subprocess.run(
+        ["git", "-c", "safe.directory=*", "-C", str(REPO_ROOT), "cat-file", "-e", f"HEAD:{relative}"],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    )
+    return completed.returncode == 0
+
+
+def artifact_paths(slug: str) -> list[Path]:
+    return [
+        SITE_ROOT / f"kagoshima-deliveryhealth-area-{slug}.php",
+        SITE_ROOT / "source" / f"kagoshima-deliveryhealth-area-{slug}.html",
+        SITE_ROOT / "includefile" / f"dataset_kagoshima-deliveryhealth-area-{slug}.php",
+    ]
+
+
+def blocking_shared_paths() -> list[Path]:
+    return [
+        SITE_ROOT / "includefile" / "dataset_base.php",
+        SITE_ROOT / "sitemap.xml",
+    ]
+
+
+def area_path() -> Path:
+    return SITE_ROOT / "source" / "area.html"
+
+
+def image_paths(slug: str) -> list[Path]:
+    return [
+        SITE_ROOT / "imgHtml" / "new_202601" / "area" / f"kagoshima-deliveryhealth-area-{slug}_1.jpg",
+        SITE_ROOT / "imgHtml" / "new_202601" / "area" / f"kagoshima-deliveryhealth-area-{slug}_2.jpg",
+    ]
+
+
+def area_list_reasons(candidate: Candidate) -> list[str]:
+    path = area_path()
+    if not path.exists():
+        return ["area list missing: " + rel(path)]
+    source = read_text(path)
+    link = f'./kagoshima-deliveryhealth-area-{candidate.slug}.php'
+    count = source.count(link)
+    reasons: list[str] = []
+    if count == 0:
+        reasons.append(f"area list missing target link: {link}")
+    elif count > 1:
+        reasons.append(f"area list duplicate target link: {link} count={count}")
+    pattern = re.compile(
+        rf'href="\./kagoshima-deliveryhealth-area-([^"]+)\.php"[^>]*>{re.escape(candidate.region)}</a>'
+    )
+    slugs = sorted(set(match.group(1) for match in pattern.finditer(source)))
+    mismatches = [slug for slug in slugs if slug != candidate.slug]
+    if mismatches:
+        reasons.append(
+            f"area list same-region slug mismatch: canonical={candidate.slug} existing_region_slugs={','.join(mismatches)}"
+        )
+    return reasons
+
+
+def check_candidate(candidate: Candidate) -> tuple[bool, list[str]]:
+    reasons: list[str] = []
+    if not candidate.slug:
+        reasons.append("canonical slug missing")
+    if not git_tracked(candidate.direct):
+        reasons.append(f"direct input is not tracked in HEAD: {rel(candidate.direct)}")
+    if candidate.source != candidate.direct and candidate.direct.exists():
+        reasons.append(f"direct input already exists while source is classified copy: {rel(candidate.direct)}")
+    for path in artifact_paths(candidate.slug):
+        if path.exists():
+            reasons.append(f"existing page artifact: {rel(path)}")
+    reasons.extend(area_list_reasons(candidate))
+    needle = f"kagoshima-deliveryhealth-area-{candidate.slug}"
+    for path in blocking_shared_paths():
+        if path.exists() and needle in read_text(path):
+            reasons.append(f"existing shared registration: {rel(path)}")
+    for path in image_paths(candidate.slug):
+        if not path.exists():
+            reasons.append(f"missing image: {rel(path)}")
+    return not reasons, reasons
+
+
+def candidate_from_path(path: Path, rank_prefix: int) -> Candidate | None:
+    text = read_text(path)
+    slug = extract_slug(text)
+    direct = TEXT_ROOT / path.name
+    return Candidate(path, direct, slug, region_name(path), (rank_prefix, path.name, slug))
+
+
+def latest_classification_ok_dirs() -> list[Path]:
+    dirs = sorted(TEXT_ROOT.glob("分類_*/01_間違い無し"), key=lambda p: p.parent.name, reverse=True)
+    return [p for p in dirs if p.is_dir()]
+
+
+def iter_candidates() -> list[Candidate]:
+    candidates: list[Candidate] = []
+    seen_names: set[str] = set()
+    for path in sorted(TEXT_ROOT.glob("*.txt"), key=lambda p: p.name):
+        candidate = candidate_from_path(path, 0)
+        if candidate:
+            candidates.append(candidate)
+            seen_names.add(path.name)
+    for ok_dir in latest_classification_ok_dirs():
+        for path in sorted(ok_dir.glob("*.txt"), key=lambda p: p.name):
+            if path.name in seen_names:
+                continue
+            candidate = candidate_from_path(path, 1)
+            if candidate:
+                candidates.append(candidate)
+                seen_names.add(path.name)
+    return sorted(candidates, key=lambda c: c.rank)
+
+
+def command_next(args: argparse.Namespace) -> int:
+    skipped: list[tuple[Candidate, list[str]]] = []
+    for candidate in iter_candidates():
+        ok, reasons = check_candidate(candidate)
+        if ok:
+            if args.restore and candidate.source != candidate.direct:
+                shutil.move(str(candidate.source), str(candidate.direct))
+                source = candidate.direct
+            else:
+                source = candidate.source
+            print(f"NEW_PAGE_TARGET_OK={candidate.slug}")
+            print(f"REGION={candidate.region}")
+            print(f"INPUT={rel(candidate.direct)}")
+            print(f"SOURCE={rel(source)}")
+            print(f"RESTORE_REQUIRED={'no' if source == candidate.direct else 'yes'}")
+            print(f"SKIPPED_COUNT={len(skipped)}")
+            return 0
+        skipped.append((candidate, reasons))
+    print("RESULT=STOP")
+    print("REASON=no eligible new area page target")
+    print(f"CHECKED_COUNT={len(skipped)}")
+    for candidate, reasons in skipped[:30]:
+        print(f"SKIP={candidate.region}\t{candidate.slug}\t" + " / ".join(reasons))
+    return 2
+
+
+def command_check(args: argparse.Namespace) -> int:
+    path = (REPO_ROOT / args.input).resolve()
+    if not path.exists():
+        print("RESULT=STOP")
+        print(f"REASON=input does not exist: {args.input}")
+        return 2
+    candidate = candidate_from_path(path, 0)
+    if not candidate:
+        print("RESULT=STOP")
+        print("REASON=could not read candidate")
+        return 2
+    ok, reasons = check_candidate(candidate)
+    if ok:
+        print(f"NEW_PAGE_TARGET_OK={candidate.slug}")
+        print(f"REGION={candidate.region}")
+        print(f"INPUT={rel(candidate.direct)}")
+        return 0
+    print("RESULT=STOP")
+    print(f"REGION={candidate.region}")
+    print(f"SLUG={candidate.slug}")
+    for reason in reasons:
+        print(f"REASON={reason}")
+    return 2
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="CANDY area target gate")
+    sub = parser.add_subparsers(dest="command", required=True)
+    next_parser = sub.add_parser("target-next")
+    next_parser.add_argument("--restore", action="store_true", help="move the selected classified txt back to HP/Text_area_data")
+    check_parser = sub.add_parser("target-check")
+    check_parser.add_argument("--input", required=True)
+    args = parser.parse_args()
+    if args.command == "target-next":
+        return command_next(args)
+    if args.command == "target-check":
+        return command_check(args)
+    return 2
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

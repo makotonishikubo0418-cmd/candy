@@ -16,7 +16,17 @@ if /I "%~1"=="publish-next" goto publish
 if /I "%~1"=="publish" goto publish
 if /I "%~1"=="publish-self-test" goto publish
 if /I "%~1"=="resume" goto publish
+if /I "%~1"=="target-next" goto targetgate
+if /I "%~1"=="target-check" goto targetgate
+if /I "%~1"=="audit-inputs" goto targetgate
+if /I "%~1"=="audit-existing" goto targetgate
 "%PYTHON%" "%~dp0candy_hotel_page.py" %*
+exit /b %ERRORLEVEL%
+
+:targetgate
+set "PYTHONUTF8=1"
+set "PYTHONIOENCODING=utf-8"
+"%PYTHON%" "%~dp0candy_hotel_target_gate.py" %*
 exit /b %ERRORLEVEL%
 
 :publish

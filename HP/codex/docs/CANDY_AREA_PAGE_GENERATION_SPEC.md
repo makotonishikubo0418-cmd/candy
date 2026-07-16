@@ -65,8 +65,13 @@ HP/includefile/dataset_base.php
 
 slugは推測だけで決めません。元データのcanonical、ファイル名、既存ページ名を照合してください。同一地域に旧slugや別表記がある場合はユーザー確認が必要です。
 
-## 5. 元データからHTMLへの基本対応
 
+### 4.1 txt分類と新規制作可否の分離
+
+`間違い無し`、`画像無し`、`情報足りない` などのtxt分類は、入力内容の状態だけを示す。新規ページとして制作可能かどうかは別判定である。
+
+新規制作可否は、canonical slugに対して公開PHP、source HTML、ページ別dataset PHP、`dataset_base.php`、sitemapに既存ファイルまたは既存登録がないこと、area一覧に対象slugのリンクが1件あること、area一覧に同一地域名で別slugのリンクがないことを確認して初めて成立する。分類OKだけで対象を選ばない。
+## 5. 元データからHTMLへの基本対応
 | 元データ項目 | HTML反映先 |
 |---|---|
 | title | `<title>`、必要に応じてOGP title |
