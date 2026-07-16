@@ -94,7 +94,7 @@
 | 58 | 鷹師 | `takashi` | READY_CANDIDATE | |
 | 59 | 谷山港 | `taniyamakou` | READY_CANDIDATE | |
 | 60 | 谷山中央 | `taniyamachuuou` | READY_CANDIDATE | |
-| 61 | 中央港新町 | `chuokoshinmachi` | READY_CANDIDATE | |
+| 61 | 中央港新町 | `chuokoshinmachi` | IN_PROGRESS | 専用ツール / 2026-07-16 / 3ファイル・共有登録・静的検査済み / PHP CLI未確認 |
 | 62 | 中央町 | `chuocho` | READY_CANDIDATE | |
 | 63 | 中山 | `chuzan` | READY_CANDIDATE | |
 | 64 | 中山町 | `chuzancho` | READY_CANDIDATE | |
