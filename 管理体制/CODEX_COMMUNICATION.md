@@ -1,4 +1,4 @@
-﻿# Codex連絡帳
+# Codex連絡帳
 
 - 目的: 複数Codex間の引継ぎ、依頼、注意点を残す
 - 状態: 正本
@@ -26,6 +26,7 @@
 | COMM-20260716-010 | 2026-07-16 | 全Codex | hotel制作は `publish-next` を標準入口にする。停止時は `COUNTS_JSON` だけでなく `BLOCKER_COUNTS_JSON` を確認し、画像なしと入力未追跡を分けて扱う | Hotel target selection | 有効 |
 | COMM-20260716-011 | 2026-07-16 | 全Codex | 外側 `candy` を管理正本に戻した。HP側の管理体制フォルダと概要説明書は削除済み。HP作業時も `../管理体制/` を読む | 管理文書 | 有効 |
 | COMM-20260716-012 | 2026-07-16 | 全Codex | GitHub作業場は `\\192.168.1.3\disk1\FSG_SEO\candy`。HP実サイト配下は `HP/`。`HP/HP/` と `HP/README.md` は作らない | HP階層 | 有効 |
+| COMM-20260716-013 | 2026-07-16 | 全Codex | 削除、移動、一括整理、Git復旧は `管理体制/SAFETY_PROTOCOL.md` を読む。対象分類、保護対象除外、対象リスト固定なしに実行しない | 高リスク操作 | 有効 |
 
 ## 3. 完了
 

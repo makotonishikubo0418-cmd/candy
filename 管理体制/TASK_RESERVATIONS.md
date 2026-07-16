@@ -1,4 +1,4 @@
-﻿# Task・ファイル予約
+# Task・ファイル予約
 
 - 目的: 複数Codexが同じファイルを同時に変更しないようにする
 - 状態: 正本
@@ -32,3 +32,4 @@
 | TASK-20260716-MGMT-009 | current | 2026-07-16 | 外側AGENTS/README/管理体制、HP AGENTS/README、HP側重複管理文書 | 外側を管理正本へ一本化し、重複を削除 |
 | TASK-20260716-MGMT-010 | current | 2026-07-16 | `.git`, `HP/HP`, `HP`直下非サイト物、管理導線 | HP階層を一本化し、GitHub作業場を外側へ移動 |
 | TASK-20260716-AREA-IMAGE-SPEC-001 | Codex | 2026-07-16 | area画像制作仕様と関連導線 | 正本化、権利STOP、他Codex導線を整備 |
+| TASK-20260716-MGMT-011 | current | 2026-07-16 | `AGENTS.md`, `README.md`, `管理体制/*` | 削除・移動・Git復旧安全プロトコルを正本化 |

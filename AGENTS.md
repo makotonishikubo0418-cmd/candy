@@ -1,4 +1,4 @@
-﻿# AGENTS.md
+# AGENTS.md
 
 ## 1. Role
 
@@ -38,6 +38,7 @@ For HP page, script, Git, or production work, also read `HP/AGENTS.md`.
 - Preserve existing user work. A dirty tree alone is not a stop reason; conflicting overlap is.
 - Do not copy secrets, personal information, or raw log contents into reports or documents.
 - Do not run `git reset --hard`, `git clean`, force push, unauthorized merge, or unauthorized rebase.
+- For deletion, movement, bulk cleanup, Git repair, or other high-risk operations, follow 管理体制/SAFETY_PROTOCOL.md before execution.
 
 Explicit user instruction is required for:
 

@@ -1,4 +1,4 @@
-﻿# Task履歴
+# Task履歴
 
 - 目的: 個別Taskの結果、確認済み、未確認を残す
 - 状態: 正本
@@ -28,6 +28,7 @@
 | TASK-20260716-MGMT-008 | 2026-07-16 | hotel制作対象管理と既存hotel分解の再整備 | hotel target gate、hotel runbook、hotel spec、hotel入力分類、hotel画像仕様、管理規則を更新。publish-next標準化、BLOCKER_COUNTS_JSON、audit-existingを追加 | 既存3hotelの接続状態、hotel入力74件の分類、target-next停止、publish-next dry-run停止、Markdown表、Python構文、対象diff checkを確認 | Commit/Push、本番、画像制作、既存hotel登録修正は未実施 |
 | TASK-20260716-MGMT-009 | 2026-07-16 | 管理正本の外側一本化 | 外側README/AGENTS/管理体制を正本化。HP側の重複管理フォルダ、概要説明書、更新停止ページ作成用、空の外側.gitを削除 | 外側が正、HP側はHP作業導線のみ。HP GitHub作業場は維持 | Commit/Push未実施。外側正本は現時点でGit管理外 |
 | TASK-20260716-MGMT-010 | 2026-07-16 | HP階層一本化 | `.git` を外側へ移動し、旧 `HP/HP` の中身を `HP` 直下へ移動。旧HP直下の非サイト物は外側または除外リストへ退避 | `HP/HP` 不在、`HP/index.php` 存在、GitHub remote確認済み | Commit/Push未実施 |
+| TASK-20260716-MGMT-011 | 2026-07-16 | Git破損事故後の安全管理再整備 | `SAFETY_PROTOCOL.md` 新設、AGENTS/README/DOCUMENT_RULES/PROJECT_STATUS/CODEX_COMMUNICATION更新 | 削除・移動・一括整理・Git復旧の分類、保護対象、停止条件を正本化 | Commit/Push未実施 |
 
 ## 3. 承認根拠メモ
 

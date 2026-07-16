@@ -1,4 +1,4 @@
-﻿# プロジェクト現在地
+# プロジェクト現在地
 
 - 目的: 全体計画、現在地、問題、次作業を1か所で見る
 - 状態: 正本
@@ -95,3 +95,13 @@ Commit/Pushは明示指示がある場合だけ実行する。
 - .git は \\192.168.1.3\disk1\FSG_SEO\candy 直下へ移動した。
 - 旧 HP 直下のGitHub設定、バックアップ、ログ、movie、root用ファイルは外側へ移動または 除外リスト\20260716_hp_flatten_non_site へ退避した。
 - HP\HP は削除済み。今後作らない。
+
+## 10. 2026-07-16 Git破損事故後の復旧と安全管理
+
+- GitHub最新反映済みCommitは `45b28c1c6b869cca7e21938b7713b5a709ed4be7`。
+- `.git/HEAD`、`.git/config`、`.git/index`、`AGENTS.md`、`README.md`、`HP/AGENTS.md`、`HP/index.php` は復旧確認済み。
+- `HP/HP` は存在しないことを確認済み。
+- `git fsck --no-dangling`、`git diff-tree --check --no-commit-id -r HEAD` は成功済み。
+- 事故原因は、削除対象分類不足、`.git` 除外明示不足、削除前対象リスト未確定、物理削除とGit管理削除の混同。
+- 再発防止の正本は `管理体制/SAFETY_PROTOCOL.md`。
+- 高リスク操作では、削除可、Git管理から削除、移動済み、Git登録、復旧、保留へ分類してから実行する。

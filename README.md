@@ -1,4 +1,4 @@
-﻿# candy 管理入口
+# candy 管理入口
 
 このREADMEは、`\\192.168.1.3\disk1\FSG_SEO\candy` の管理入口です。
 
@@ -28,6 +28,7 @@
 | Taskとファイル予約 | `管理体制/TASK_RESERVATIONS.md` |
 | 個別Task履歴 | `管理体制/TASK_LOG.md` |
 | コード・フォルダ構成 | `管理体制/CODE_STRUCTURE.md` |
+| 削除・移動・一括操作安全手順 | 管理体制/SAFETY_PROTOCOL.md |
 | HP制作・生成仕様 | `HP/codex/docs/CANDY_MASTER_DOC_INDEX.md` |
 | 旧ページ制作記録 | `ページ作成用.md` |
 
@@ -41,6 +42,8 @@
 | HPページ制作 | `AGENTS.md` -> `README.md` -> `HP/AGENTS.md` -> 該当runbook |
 | HP管理資料更新 | `AGENTS.md` -> `README.md` -> `HP/AGENTS.md` -> `HP/codex/docs/CANDY_MASTER_DOC_INDEX.md` |
 | Commit/Push | `AGENTS.md` -> `README.md` -> `管理体制/DOCUMENT_RULES.md` |
+| 削除・移動・一括整理 | AGENTS.md -> README.md -> 管理体制/SAFETY_PROTOCOL.md |
+| Git破損・復旧 | AGENTS.md -> README.md -> 管理体制/SAFETY_PROTOCOL.md |
 
 ## 重複禁止
 

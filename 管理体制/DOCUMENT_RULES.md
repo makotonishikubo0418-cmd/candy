@@ -1,4 +1,4 @@
-﻿# 文書分割・更新ルール
+# 文書分割・更新ルール
 
 - 目的: Markdown管理体制で文書の責任を分ける
 - 状態: 正本
@@ -32,6 +32,7 @@
 | `TASK_LOG.md` | 実施結果、確認済み、未確認 |
 | `TASK_RESERVATIONS.md` | 同時編集防止 |
 | `CODE_STRUCTURE.md` | フォルダと作業対象の構成 |
+| SAFETY_PROTOCOL.md | 削除、移動、一括操作、Git復旧の安全手順 |
 
 ## 4. 更新禁止
 
@@ -153,3 +154,11 @@ Git Commit・Push作業後の監査では、`git diff --check`だけで合格扱
 - HP/ 直下は実サイト配下の中身だけにする。
 - GitHub作業場は共有フォルダ直下 \\192.168.1.3\disk1\FSG_SEO\candy。
 - HP作業の対象パスはGitHub作業場から見て HP/... で固定する。
+
+## 14. 削除・移動・一括操作安全ルール
+
+- 削除、移動、一括整理、Git復旧は `SAFETY_PROTOCOL.md` を正本とする。
+- 「ゴミ」「未整理」などの曖昧な表現だけで実行しない。削除可、Git管理から削除、移動済み、Git登録、復旧、保留に分ける。
+- `.git/`、`AGENTS.md`、`README.md`、`HP/AGENTS.md`、`HP/index.php`、`管理体制/` は保護対象として扱う。
+- 物理削除、Git管理から削除、Stage、Commit、Pushを別操作として報告する。
+- Git破損を検知したら復旧操作へ進まず、被害範囲と復旧案を報告して明示承認を待つ。
