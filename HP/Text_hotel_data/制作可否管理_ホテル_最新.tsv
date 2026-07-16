@@ -1,0 +1,75 @@
+category	file	slug	hotel	blockers	reasons
+入力不備	01_対応ホテル_テンプレート.txt			placeholder残存	元データにplaceholderが残っています
+入力不備	CoCo CLASS.txt			危険URL/http URL	周辺スポットURL (Ｇrill Bar 山地)が安全なURLではありません: http://www.yukusas.com/pg/pshop.htm?sid=00516
+管理用txt	Cursor用更新手順.txt			管理用txt	hotel inputではない管理用txt
+入力不備	FAV LUX 鹿児島天文館.txt			途中入力	subtitleに対応するdescriptionがありません
+画像なし	HOTEL AZ 鹿児島喜入店.txt	hotelazkagoshimakiireten	HOTEL AZ 鹿児島喜入店	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/HOTEL AZ 鹿児島喜入店.txt / missing image: HP/imgHtml/new_202601/hotel/hotelazkagoshimakiireten_1.jpg / missing image: HP/imgHtml/new_202601/hotel/hotelazkagoshimakiireten_2.jpg
+入力不備	HOTEL MATE.txt			危険URL/http URL	周辺スポットURL (VOUL(ボウル))が安全なURLではありません: http://www.voulkagoshima.com/
+画像なし	HOTEL SERA.txt	hotelsera	HOTEL SERA	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/HOTEL SERA.txt / missing image: HP/imgHtml/new_202601/hotel/hotelsera_1.jpg / missing image: HP/imgHtml/new_202601/hotel/hotelsera_2.jpg
+入力不備	HOTEL_RESIDENCE南洲館.txt			canonical slug不足	必須項目不足: canonical slug
+入力不備	Hotel M（旧レクサス）.txt			placeholder残存	元データにplaceholderが残っています
+画像なし	Hotel クキタ.txt	hotelkukita	Ｈｏｔｅｌ クキタ	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/Hotel クキタ.txt / missing image: HP/imgHtml/new_202601/hotel/hotelkukita_1.jpg / missing image: HP/imgHtml/new_202601/hotel/hotelkukita_2.jpg
+画像なし	JR九州ホテル鹿児島.txt	jrkyushuhotelkagoshima	JR九州ホテル鹿児島	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/JR九州ホテル鹿児島.txt / missing image: HP/imgHtml/new_202601/hotel/jrkyushuhotelkagoshima_1.jpg / missing image: HP/imgHtml/new_202601/hotel/jrkyushuhotelkagoshima_2.jpg
+画像なし	KOKO HOTEL 鹿児島天文館.txt	kokohotelkagoshimatenmonkan	KOKO HOTEL 鹿児島天文館	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/KOKO HOTEL 鹿児島天文館.txt / missing image: HP/imgHtml/new_202601/hotel/kokohotelkagoshimatenmonkan_1.jpg / missing image: HP/imgHtml/new_202601/hotel/kokohotelkagoshimatenmonkan_2.jpg
+画像なし	SHIROYAMA HOTEL kagoshima(城山ホテル鹿児島).txt	shiroyamahotelkagoshima	SHIROYAMA HOTEL kagoshima	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/SHIROYAMA HOTEL kagoshima(城山ホテル鹿児島).txt / missing image: HP/imgHtml/new_202601/hotel/shiroyamahotelkagoshima_1.jpg / missing image: HP/imgHtml/new_202601/hotel/shiroyamahotelkagoshima_2.jpg
+画像なし	YOU STYLE HOTEL MARINE 鹿児島 天文館.txt	youstylehotelmarine	YOU STYLE HOTEL MARINE	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/YOU STYLE HOTEL MARINE 鹿児島 天文館.txt / missing image: HP/imgHtml/new_202601/hotel/youstylehotelmarine_1.jpg / missing image: HP/imgHtml/new_202601/hotel/youstylehotelmarine_2.jpg
+入力不備	fav 鹿児島中央.txt			canonical slug不足	必須項目不足: canonical slug
+画像なし	かごしまプラザホテル天文館.txt	kagoshimaplazahoteltenmonkan	かごしまプラザホテル天文館	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/かごしまプラザホテル天文館.txt / missing image: HP/imgHtml/new_202601/hotel/kagoshimaplazahoteltenmonkan_1.jpg / missing image: HP/imgHtml/new_202601/hotel/kagoshimaplazahoteltenmonkan_2.jpg
+入力不備	かごしま第一ホテルきしゃば店.txt			危険URL/http URL	周辺スポットURL (竹迫温泉)が安全なURLではありません: http://takezako-onsen.com/
+画像なし	かごしま第一ホテル鴨池店.txt	kagoshimadaiichihotelkamoike	かごしま第一ホテル鴨池店	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/かごしま第一ホテル鴨池店.txt / missing image: HP/imgHtml/new_202601/hotel/kagoshimadaiichihotelkamoike_1.jpg / missing image: HP/imgHtml/new_202601/hotel/kagoshimadaiichihotelkamoike_2.jpg
+画像なし	きしゃばホテル.txt	kisyabahotel	きしゃばホテル	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/きしゃばホテル.txt / missing image: HP/imgHtml/new_202601/hotel/kisyabahotel_1.jpg / missing image: HP/imgHtml/new_202601/hotel/kisyabahotel_2.jpg
+画像なし	アクアガーデン ホテル福丸.txt	aquagardenhotelfukumaru	アクアガーデン ホテル福丸	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/アクアガーデン ホテル福丸.txt / missing image: HP/imgHtml/new_202601/hotel/aquagardenhotelfukumaru_1.jpg / missing image: HP/imgHtml/new_202601/hotel/aquagardenhotelfukumaru_2.jpg
+入力不備	アートホテル鹿児島.txt			基本情報不足	基本情報sceneのホテル名・URL・住所が不足しています
+入力不備	クインテッサホテル鹿児島天文館 Relax&Sleep.txt			canonical slug不足	必須項目不足: canonical slug
+画像なし	グランドベース鹿児島中央.txt	grandbasekagoshimachuo	グランドベース鹿児島中央	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/グランドベース鹿児島中央.txt / missing image: HP/imgHtml/new_202601/hotel/grandbasekagoshimachuo_1.jpg / missing image: HP/imgHtml/new_202601/hotel/grandbasekagoshimachuo_2.jpg
+作成済み/登録あり	グリーンリッチホテル鹿児島天文館.txt	greenrichkagoshimatenmonkan	グリーンリッチホテル鹿児島天文館	共有登録あり / 既存ページファイルあり	existing page artifact: HP/kagoshima-deliveryhealth-hotel-greenrichkagoshimatenmonkan.php / existing page artifact: HP/source/kagoshima-deliveryhealth-hotel-greenrichkagoshimatenmonkan.html / existing page artifact: HP/includefile/dataset_kagoshima-deliveryhealth-hotel-greenrichkagoshimatenmonkan.php / existing shared registration: HP/sitemap.xml
+画像なし	コンフォートイン鹿児島谷山.txt	comfortinnkagoshimataniyama	コンフォートイン鹿児島谷山	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/コンフォートイン鹿児島谷山.txt / missing image: HP/imgHtml/new_202601/hotel/comfortinnkagoshimataniyama_1.jpg / missing image: HP/imgHtml/new_202601/hotel/comfortinnkagoshimataniyama_2.jpg
+入力不備	サントリーニ.txt			placeholder残存	元データにplaceholderが残っています
+入力不備	シェラトン鹿児島.txt			危険URL/http URL	周辺スポットURL (トゥーザハーブズ鹿児島店)が安全なURLではありません: http://tth-kagoshima.com/
+入力不備	シルクイン鹿児島.txt			危険URL/http URL	周辺スポットURL (すすむ屋茶店 鹿児島本店)が安全なURLではありません: http://susumuya.com/
+画像なし	ソラリア西鉄ホテル 鹿児島.txt	solarianishitetsuhotelkagoshima	ソラリア西鉄ホテル鹿児島	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/ソラリア西鉄ホテル 鹿児島.txt / missing image: HP/imgHtml/new_202601/hotel/solarianishitetsuhotelkagoshima_1.jpg / missing image: HP/imgHtml/new_202601/hotel/solarianishitetsuhotelkagoshima_2.jpg
+入力不備	ダイワロイネットホテル鹿児島天文館 PREMIER.txt			危険URL/http URL	周辺スポットURL (天文館むじゃき 本店)が安全なURLではありません: http://www.mujyaki.co.jp/
+画像なし	ビジネスホテル　アトリエ.txt	businesshotelatelier	ビジネスホテル アトリエ	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/ビジネスホテル　アトリエ.txt / missing image: HP/imgHtml/new_202601/hotel/businesshotelatelier_1.jpg / missing image: HP/imgHtml/new_202601/hotel/businesshotelatelier_2.jpg
+画像なし	ビジネスホテル　オリエンタルいづろ.txt	businesshotelorientalizuro	ビジネスホテル オリエンタルいづろ	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/ビジネスホテル　オリエンタルいづろ.txt / missing image: HP/imgHtml/new_202601/hotel/businesshotelorientalizuro_1.jpg / missing image: HP/imgHtml/new_202601/hotel/businesshotelorientalizuro_2.jpg
+画像なし	ビジネスホテル天文館.txt	businesshoteltenmonkan	ビジネスホテル天文館	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/ビジネスホテル天文館.txt / missing image: HP/imgHtml/new_202601/hotel/businesshoteltenmonkan_1.jpg / missing image: HP/imgHtml/new_202601/hotel/businesshoteltenmonkan_2.jpg
+入力不備	ホテル ウォーターゲート.txt			未登録店舗	template_shop.htmlにない店舗名です: 団地妻
+入力不備	ホテル ガストフ.txt			h1ホテル名不一致	page_title_h1とホテル名が一致しません
+画像なし	ホテル ココナッツリゾート マリーナ 鹿児島.txt	hotelcoconutsresortmarinakagoshima	ホテル ココナッツリゾート マリーナ 鹿児島	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/ホテル ココナッツリゾート マリーナ 鹿児島.txt / missing image: HP/imgHtml/new_202601/hotel/hotelcoconutsresortmarinakagoshima_1.jpg / missing image: HP/imgHtml/new_202601/hotel/hotelcoconutsresortmarinakagoshima_2.jpg
+入力不備	ホテル タイセイアネックス.txt			h1ホテル名不一致	page_title_h1とホテル名が一致しません
+画像なし	ホテル パルクス.txt	hotelparcs	ホテル パルクス	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/ホテル パルクス.txt / missing image: HP/imgHtml/new_202601/hotel/hotelparcs_1.jpg / missing image: HP/imgHtml/new_202601/hotel/hotelparcs_2.jpg
+画像なし	ホテル パームス天文館.txt	hotelpalmstenmonkan	ホテル パームス天文館	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/ホテル パームス天文館.txt / missing image: HP/imgHtml/new_202601/hotel/hotelpalmstenmonkan_1.jpg / missing image: HP/imgHtml/new_202601/hotel/hotelpalmstenmonkan_2.jpg
+画像なし	ホテル　ゲートイン鹿児島.txt	hotelgateinkagoshima	ホテルゲートイン鹿児島	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/ホテル　ゲートイン鹿児島.txt / missing image: HP/imgHtml/new_202601/hotel/hotelgateinkagoshima_1.jpg / missing image: HP/imgHtml/new_202601/hotel/hotelgateinkagoshima_2.jpg
+画像なし	ホテル　サンフレックス鹿児島.txt	hotelsunflexkagoshima	ホテルサンフレックス鹿児島	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/ホテル　サンフレックス鹿児島.txt / missing image: HP/imgHtml/new_202601/hotel/hotelsunflexkagoshima_1.jpg / missing image: HP/imgHtml/new_202601/hotel/hotelsunflexkagoshima_2.jpg
+画像なし	ホテルアービック鹿児島.txt	hotelurbickagoshima	ホテルアービック鹿児島	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/ホテルアービック鹿児島.txt / missing image: HP/imgHtml/new_202601/hotel/hotelurbickagoshima_1.jpg / missing image: HP/imgHtml/new_202601/hotel/hotelurbickagoshima_2.jpg
+入力不備	ホテルウェルビューかごしま.txt			placeholder残存	元データにplaceholderが残っています
+入力不備	ホテルオリエンタルエクスプレス鹿児島天文館.txt			危険URL/http URL	周辺スポットURL (鹿児島ラーメン 豚とろ 天文館本店)が安全なURLではありません: http://www.tontoro-ramen.com/
+入力不備	ホテルグランセレッソ鹿児島.txt			危険URL/http URL	周辺スポットURL (NEWおだまLee男爵)が安全なURLではありません: http://www.odamalee.info/
+入力不備	ホテルサンデイズ鹿児島.txt			危険URL/http URL	周辺スポットURL (鹿児島ラーメン 豚とろ 天文館本店)が安全なURLではありません: http://www.tontoro-ramen.com/
+入力不備	ホテルタイセイ.txt			canonical slug不足	必須項目不足: canonical slug
+画像なし	ホテルニューニシノ.txt	hotelnewnishino	ホテルニューニシノ	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/ホテルニューニシノ.txt / missing image: HP/imgHtml/new_202601/hotel/hotelnewnishino_1.jpg / missing image: HP/imgHtml/new_202601/hotel/hotelnewnishino_2.jpg
+入力不備	ホテルマイステイズ鹿児島天文館.txt			canonical slug不足	必須項目不足: canonical slug
+入力不備	ホテルマイステイズ鹿児島天文館2番館.txt			canonical slug不足	必須項目不足: canonical slug
+画像なし	ホテルユニオン.txt	hotelunion	ホテルユニオン	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/ホテルユニオン.txt / missing image: HP/imgHtml/new_202601/hotel/hotelunion_1.jpg / missing image: HP/imgHtml/new_202601/hotel/hotelunion_2.jpg
+画像なし	ホテルリブマックスBUDGET鹿児島.txt	hotellivemaxbudgetkagoshima	ホテルリブマックスBUDGET鹿児島	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/ホテルリブマックスBUDGET鹿児島.txt / missing image: HP/imgHtml/new_202601/hotel/hotellivemaxbudgetkagoshima_1.jpg / missing image: HP/imgHtml/new_202601/hotel/hotellivemaxbudgetkagoshima_2.jpg
+画像なし	ホテルリブマックスBUDGET鹿児島天文館.txt	hotellivemaxbudgetkagoshimatenmonkan	ホテルリブマックスBUDGET鹿児島天文館	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/ホテルリブマックスBUDGET鹿児島天文館.txt / missing image: HP/imgHtml/new_202601/hotel/hotellivemaxbudgetkagoshimatenmonkan_1.jpg / missing image: HP/imgHtml/new_202601/hotel/hotellivemaxbudgetkagoshimatenmonkan_2.jpg
+画像なし	ホテル・レクストン鹿児島.txt	hotellextonkagoshima	ホテル・レクストン鹿児島	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/ホテル・レクストン鹿児島.txt / missing image: HP/imgHtml/new_202601/hotel/hotellextonkagoshima_1.jpg / missing image: HP/imgHtml/new_202601/hotel/hotellextonkagoshima_2.jpg
+入力不備	ホテル・レクストン鹿児島アネックス.txt			危険URL/http URL	周辺スポットURL (割烹 石庵)が安全なURLではありません: http://www.kagoshima-kappousekian.com/
+入力不備	ホテル吹上荘.txt			危険URL/http URL	周辺スポットURL (三平らーめん 照国本店)が安全なURLではありません: http://kuromiso.com/
+入力不備	ホテル法華クラブ鹿児島.txt			危険URL/http URL	周辺スポットURL (うなぎのやまげん 加治屋店)が安全なURLではありません: http://unagino-yamagen.co.jp/
+画像なし	ホテル鴨池プラザ.txt	hotelkamoikeplaza	ビジネスホテル鴨池プラザ	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/ホテル鴨池プラザ.txt / missing image: HP/imgHtml/new_202601/hotel/hotelkamoikeplaza_1.jpg / missing image: HP/imgHtml/new_202601/hotel/hotelkamoikeplaza_2.jpg
+入力不備	ホテル鹿児島ヒルズ.txt			危険URL/http URL	周辺スポットURL (焼肉ヨコムラ 小松原本店)が安全なURLではありません: http://yokomura.info/
+入力不備	マリンパレスかごしま.txt			危険URL/http URL	周辺スポットURL (鴨池海づり公園)が安全なURLではありません: http://www.umiduri-kouen.com/
+入力不備	リッチモンドホテル鹿児島天文館.txt			危険URL/http URL	周辺スポットURL (天文館むじゃき 本店)が安全なURLではありません: http://www.mujyaki.co.jp/
+画像なし	リッチモンドホテル鹿児島金生町.txt	richmondhotelkagoshimakinseicho	リッチモンドホテル鹿児島金生町	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/リッチモンドホテル鹿児島金生町.txt / missing image: HP/imgHtml/new_202601/hotel/richmondhotelkagoshimakinseicho_1.jpg / missing image: HP/imgHtml/new_202601/hotel/richmondhotelkagoshimakinseicho_2.jpg
+入力不備	レム鹿児島.txt			未登録店舗	template_shop.htmlにない店舗名です: 団地妻
+入力不備	ヴィラコスタ500.txt			placeholder残存	元データにplaceholderが残っています
+画像なし	変なホテルプレミア鹿児島 天文館.txt	hennnahotelpremierkagoshimatenmonkan	変なホテルプレミア鹿児島 天文館	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/変なホテルプレミア鹿児島 天文館.txt / missing image: HP/imgHtml/new_202601/hotel/hennnahotelpremierkagoshimatenmonkan_1.jpg / missing image: HP/imgHtml/new_202601/hotel/hennnahotelpremierkagoshimatenmonkan_2.jpg
+画像なし	天然温泉 霧桜の湯 ドーミーイン鹿児島.txt	dormyinnkagoshima	天然温泉 霧桜の湯 ドーミーイン鹿児島	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/天然温泉 霧桜の湯 ドーミーイン鹿児島.txt / missing image: HP/imgHtml/new_202601/hotel/dormyinnkagoshima_1.jpg / missing image: HP/imgHtml/new_202601/hotel/dormyinnkagoshima_2.jpg
+画像なし	天然温泉　ホテル自治会館（市町村自治会館）.txt	naturalhotspringhoteljichikaikan	天然温泉 ホテル自治会館（市町村自治会館）	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/天然温泉　ホテル自治会館（市町村自治会館）.txt / missing image: HP/imgHtml/new_202601/hotel/naturalhotspringhoteljichikaikan_1.jpg / missing image: HP/imgHtml/new_202601/hotel/naturalhotspringhoteljichikaikan_2.jpg
+入力不備	東横INN鹿児島中央駅東口.txt			canonical slug不足	必須項目不足: canonical slug
+画像なし	東横INN鹿児島中央駅西口.txt	toyokoinnkagoshimachuostationnishi	東横INN鹿児島中央駅西口	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/東横INN鹿児島中央駅西口.txt / missing image: HP/imgHtml/new_202601/hotel/toyokoinnkagoshimachuostationnishi_1.jpg / missing image: HP/imgHtml/new_202601/hotel/toyokoinnkagoshimachuostationnishi_2.jpg
+入力不備	東横INN鹿児島天文館1.txt			canonical slug不足	必須項目不足: canonical slug
+入力不備	東横INN鹿児島天文館2.txt			canonical slug不足	必須項目不足: canonical slug
+画像なし	鹿児島アイネ.txt	kagoshimaaine	鹿児島アイネ	入力未追跡 / 画像なし	input is not tracked in HEAD: HP/Text_hotel_data/鹿児島アイネ.txt / missing image: HP/imgHtml/new_202601/hotel/kagoshimaaine_1.jpg / missing image: HP/imgHtml/new_202601/hotel/kagoshimaaine_2.jpg
+入力不備	鹿児島サンロイヤルホテル.txt			危険URL/http URL	周辺スポットURL (焼肉なべしま 与次郎本店)が安全なURLではありません: http://www.nabeshima-jp.com/shop/kago-yojiro/
+入力不備	Ｂ＆Ｂパークホテル鹿児島アネックス.txt			canonical slug不足	必須項目不足: canonical slug

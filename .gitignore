@@ -4,3 +4,5 @@
 HP_旧データ/
 画像データ/
 除外リスト/
+log/*.log
+includefile/debug_mypage.log
