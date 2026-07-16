@@ -51,7 +51,7 @@
 | 15 | 紫原 | `murasakibaru` | READY_CANDIDATE | |
 | 16 | 慈眼寺町 | `jigenjicho` | READY_CANDIDATE | |
 | 17 | 自由ヶ丘 | `jiyugaoka` | READY_CANDIDATE | |
-| 18 | 七ツ島 | `nanatsujima` | READY_CANDIDATE | |
+| 18 | 七ツ島 | `nanatsujima` | IN_PROGRESS | 専用ツール / 2026-07-16 / 3ファイル・共有登録・静的検査済み / PHP CLI未確認 |
 | 19 | 若葉町 | `wakabacho` | READY_CANDIDATE | |
 | 20 | 住吉町 | `sumiyoshicho` | READY_CANDIDATE | |
 | 21 | 春山町 | `haruyamacho` | READY_CANDIDATE | |
