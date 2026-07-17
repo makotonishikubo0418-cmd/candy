@@ -14,7 +14,7 @@
 | 管理正本入口 | `C:\Codex\candy\codex\README.md` | 正本 |
 | プロジェクト管理 | `C:\Codex\candy\codex\project_management` | ルール、状態、予約、履歴、安全手順 |
 | HP制作仕様 | `C:\Codex\candy\codex\docs` | area・hotel・blog等のrunbookと仕様 |
-| 作業ツール | `C:\Codex\candy\codex\scripts` | 内部パス移行未完了のため生成・公開コマンドは実行停止を継続 |
+| 作業ツール | `C:\Codex\candy\codex\scripts` | 内部パス移行・dry-run検証済み。読み取り専用のtarget-check・audit・build dry-run・previewは解除。実生成・publish・資料実書き込みは停止継続 |
 | 実サイト配下 | `C:\Codex\candy\HP` | PHP、source、includefile、画像、log、movie |
 | 制作入力 | ルート直下の `Text_area_data`、`Text_blog_data`、`Text_hotel_data` | HP外の制作元データ |
 | NAS保管 | `\\192.168.1.3\disk1\FSG_SEO\candy` | `Backup/`・受入素材の保管専用。Git操作は禁止 |
@@ -68,7 +68,7 @@
 |---|---|---|
 | ローカル作業場と管理資料の不一致 | 修正済み・未Commit | 現行導線を `C:\Codex\candy`、GitHub同期、NAS保管専用へ更新 |
 | NAS上Git運用 | 解決済み（ユーザー実施） | NASの `.git` は `Backup/` 内へ退避済みとの申告。今後NASでGit操作しない。今回NASは未操作 |
-| `codex/scripts/` 内部の旧階層前提 | 未解消・実行停止 | リポジトリルート、HPルート、`Text_*_data` の解決処理を修正し、area・hotel・blog・資料生成をdry-run検証する |
+| `codex/scripts/` 内部の旧階層前提 | 解消済み・書き込み停止継続 | 共通パスへ移行し、area・hotel・blog・資料生成の読み取り専用検証に合格。target-check・audit・build dry-run・previewは解除し、実生成・publish・資料実書き込みは停止を継続する |
 | 旧NAS作業場の大量差分・未追跡 | 解決済み | 現ローカルcloneは本Task開始時clean。旧件数は過去スナップショットとして扱う |
 | 今回の管理文書のGitHub共有 | Commit/Push未実施 | 今回は禁止。別途明示指示がある場合だけ対象を固定してCommit/Pushする |
 | area・hotel入力の停止対象 | 未解消 | 各入力分類とtarget gateを、スクリプト移行完了後に再実行する |
@@ -76,11 +76,9 @@
 
 ## 5. 次作業候補
 
-1. `codex/scripts/` のルート計算と `Text_*_data` 入力制限を新配置へ修正する
-2. area・hotel・blog・管理資料生成を本番操作なしで検証する
-3. スクリプト実行停止を解除できるか判定し、管理資料へ結果を反映する
-4. 今回の管理文書をCommit/Pushする場合は、別途明示指示を受け、対象を固定して確認する
-5. area・hotelの入力停止対象を再分類する
+1. area・hotelの入力不備・画像不足を解消し、読み取り専用のtarget gateで作成可能対象を再確認する
+2. 管理資料13件のpreview差分を確認し、実書き込みが必要な場合は別途明示指示を受ける
+3. 実ページ生成またはpublishが必要な場合は、対象を固定して別途明示指示を受ける
 
 ## 6. Commit対象候補
 

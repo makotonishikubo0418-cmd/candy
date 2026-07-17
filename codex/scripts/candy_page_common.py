@@ -28,12 +28,34 @@ class PageToolError(RuntimeError):
     pass
 
 
+def _find_repo_root(start: Path) -> Path:
+    candidate = start.resolve()
+    while True:
+        if (candidate / ".git").exists() or (
+            (candidate / "AGENTS.md").is_file() and (candidate / "HP").is_dir()
+        ):
+            return candidate
+        if candidate.parent == candidate:
+            break
+        candidate = candidate.parent
+    raise PageToolError(f"CANDY repository root was not found above: {start}")
+
+
+SCRIPTS_DIR = Path(__file__).resolve().parent
+REPO_ROOT = _find_repo_root(SCRIPTS_DIR)
+HP_ROOT = REPO_ROOT / "HP"
+TEXT_AREA_DIR = REPO_ROOT / "Text_area_data"
+TEXT_HOTEL_DIR = REPO_ROOT / "Text_hotel_data"
+TEXT_BLOG_DIR = REPO_ROOT / "Text_blog_data"
+DOCS_DIR = REPO_ROOT / "codex" / "docs"
+
+
 def repo_root() -> Path:
-    return Path(__file__).resolve().parents[3]
+    return REPO_ROOT
 
 
 def hp_root() -> Path:
-    return repo_root() / "HP"
+    return HP_ROOT
 
 
 def read_utf8(path: Path) -> str:

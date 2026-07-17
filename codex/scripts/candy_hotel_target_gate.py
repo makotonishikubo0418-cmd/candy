@@ -13,10 +13,11 @@ from datetime import datetime
 from pathlib import Path
 
 import candy_hotel_page
+import candy_page_common as common
 
-SITE_ROOT = Path(__file__).resolve().parents[2]
-REPO_ROOT = Path(__file__).resolve().parents[3]
-TEXT_ROOT = SITE_ROOT / "Text_hotel_data"
+REPO_ROOT = common.REPO_ROOT
+HP_ROOT = common.HP_ROOT
+TEXT_ROOT = common.TEXT_HOTEL_DIR
 
 READY = "作成可能"
 IMAGE_MISSING = "画像なし"
@@ -94,22 +95,22 @@ def git_tracked(path: Path) -> bool:
 
 def artifact_paths(slug: str) -> list[Path]:
     return [
-        SITE_ROOT / f"kagoshima-deliveryhealth-hotel-{slug}.php",
-        SITE_ROOT / "source" / f"kagoshima-deliveryhealth-hotel-{slug}.html",
-        SITE_ROOT / "includefile" / f"dataset_kagoshima-deliveryhealth-hotel-{slug}.php",
+        HP_ROOT / f"kagoshima-deliveryhealth-hotel-{slug}.php",
+        HP_ROOT / "source" / f"kagoshima-deliveryhealth-hotel-{slug}.html",
+        HP_ROOT / "includefile" / f"dataset_kagoshima-deliveryhealth-hotel-{slug}.php",
     ]
 
 
 def shared_paths() -> list[Path]:
     return [
-        SITE_ROOT / "includefile" / "dataset_base.php",
-        SITE_ROOT / "source" / "hotel.html",
-        SITE_ROOT / "sitemap.xml",
+        HP_ROOT / "includefile" / "dataset_base.php",
+        HP_ROOT / "source" / "hotel.html",
+        HP_ROOT / "sitemap.xml",
     ]
 
 
 def image_file(relative_image: str) -> Path:
-    return SITE_ROOT / relative_image.removeprefix("./")
+    return HP_ROOT / relative_image.removeprefix("./")
 
 
 def candidate_from_path(path: Path) -> Candidate:
@@ -245,14 +246,14 @@ def write_report(results: list[Result]) -> tuple[Path, Path]:
 
 
 def existing_hotel_rows() -> list[dict[str, object]]:
-    base = read_text(SITE_ROOT / "includefile" / "dataset_base.php")
-    hotel_list = read_text(SITE_ROOT / "source" / "hotel.html")
-    sitemap = read_text(SITE_ROOT / "sitemap.xml")
+    base = read_text(HP_ROOT / "includefile" / "dataset_base.php")
+    hotel_list = read_text(HP_ROOT / "source" / "hotel.html")
+    sitemap = read_text(HP_ROOT / "sitemap.xml")
     rows: list[dict[str, object]] = []
-    for php in sorted(SITE_ROOT.glob("kagoshima-deliveryhealth-hotel-*.php"), key=lambda path: path.name):
+    for php in sorted(HP_ROOT.glob("kagoshima-deliveryhealth-hotel-*.php"), key=lambda path: path.name):
         slug = php.name.removeprefix("kagoshima-deliveryhealth-hotel-").removesuffix(".php")
-        source = SITE_ROOT / "source" / f"kagoshima-deliveryhealth-hotel-{slug}.html"
-        dataset = SITE_ROOT / "includefile" / f"dataset_kagoshima-deliveryhealth-hotel-{slug}.php"
+        source = HP_ROOT / "source" / f"kagoshima-deliveryhealth-hotel-{slug}.html"
+        dataset = HP_ROOT / "includefile" / f"dataset_kagoshima-deliveryhealth-hotel-{slug}.php"
         html = read_text(source) if source.exists() else ""
         images = sorted(set(re.findall(r"\./imgHtml/new_202601/hotel/[^'\"]+", html)))
         canonical = f"https://www.55810.com/kagoshima-deliveryhealth-hotel-{slug}.php"
@@ -263,7 +264,7 @@ def existing_hotel_rows() -> list[dict[str, object]]:
                 "source": source.exists(),
                 "dataset": dataset.exists(),
                 "images": len(images),
-                "images_exist": all((SITE_ROOT / image.removeprefix("./")).exists() for image in images),
+                "images_exist": all((HP_ROOT / image.removeprefix("./")).exists() for image in images),
                 "dataset_base": f"kagoshima-deliveryhealth-hotel-{slug}.html" in base
                 and f"dataset_kagoshima-deliveryhealth-hotel-{slug}.php" in base,
                 "hotel_list": canonical in hotel_list or f"./kagoshima-deliveryhealth-hotel-{slug}.php" in hotel_list,
@@ -353,7 +354,7 @@ def command_audit_existing(_args: argparse.Namespace) -> int:
     print(f"EXISTING_HOTEL_COUNT={len(rows)}")
     for row in rows:
         print("EXISTING_HOTEL=" + json.dumps(row, ensure_ascii=False, sort_keys=True))
-    hotel_list = read_text(SITE_ROOT / "source" / "hotel.html")
+    hotel_list = read_text(HP_ROOT / "source" / "hotel.html")
     print("HOTEL_LIST_PLACEHOLDER_AAAAAAAAAA=" + str("kagoshima-deliveryhealth-hotel-aaaaaaaaaa.php" in hotel_list))
     return 0
 

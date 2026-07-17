@@ -18,6 +18,7 @@ from urllib.parse import urljoin
 import candy_area_publish as shared
 import candy_hotel_page
 import candy_hotel_target_gate
+import candy_page_common as path_config
 
 
 PublishError = shared.PublishError
@@ -27,7 +28,7 @@ VALID_PHASES = {"PREFLIGHT", "BUILT", "PAGE_COMMITTED", "PAGE_PUSHED", "ACTIONS_
 
 
 def root() -> Path:
-    return shared.root()
+    return path_config.REPO_ROOT
 
 
 def relative(paths: list[Path]) -> list[str]:
@@ -133,7 +134,7 @@ def load_state(slug: str) -> dict[str, str]:
 
 
 def input_paths() -> list[Path]:
-    return sorted((root() / "HP" / "Text_hotel_data").glob("*.txt"))
+    return sorted(path_config.TEXT_HOTEL_DIR.glob("*.txt"))
 
 
 def next_ready_input() -> Path:
@@ -145,11 +146,11 @@ def next_ready_input() -> Path:
         if result.category != candy_hotel_target_gate.ADMIN_DOC:
             reason = " / ".join(result.reasons)
             print(f"CANDIDATE_SKIP={result.path.name}|{result.category}|{reason}")
-    raise PublishError("no eligible new hotel page target; run HP\\codex\\scripts\\candy-hotel.cmd audit-inputs")
+    raise PublishError("no eligible new hotel page target; run codex\\scripts\\candy-hotel.cmd audit-inputs")
 
 
 def paths_for(data: candy_hotel_page.HotelData) -> list[Path]:
-    hp = root() / "HP"
+    hp = path_config.HP_ROOT
     return [
         hp / f"kagoshima-deliveryhealth-hotel-{data.slug}.php",
         hp / "source" / f"kagoshima-deliveryhealth-hotel-{data.slug}.html",
@@ -161,17 +162,17 @@ def paths_for(data: candy_hotel_page.HotelData) -> list[Path]:
 
 
 def dependency_paths(input_path: Path, data: candy_hotel_page.HotelData) -> list[Path]:
-    hp = root() / "HP"
+    hp = path_config.HP_ROOT
     paths = {
         input_path,
         hp / data.image1.removeprefix("./"),
         hp / data.image2.removeprefix("./"),
         hp / "source" / "template_shop.html",
         hp / "source" / "template_kagoshima-deliveryhealth-hotel.html",
-        hp / "codex" / "scripts" / "candy_area_page.py",
-        hp / "codex" / "scripts" / "candy_area_publish.py",
-        hp / "codex" / "scripts" / "candy_hotel_page.py",
-        hp / "codex" / "scripts" / "candy_hotel_publish.py",
+        path_config.SCRIPTS_DIR / "candy_area_page.py",
+        path_config.SCRIPTS_DIR / "candy_area_publish.py",
+        path_config.SCRIPTS_DIR / "candy_hotel_page.py",
+        path_config.SCRIPTS_DIR / "candy_hotel_publish.py",
         root() / ".github" / "scripts" / "candy_ftp_deploy.py",
         root() / ".github" / "scripts" / "candy_release_check.py",
         root() / ".github" / "workflows" / "candy-production-deploy.yml",
@@ -222,7 +223,7 @@ def verify_production(data: candy_hotel_page.HotelData, commit: str) -> None:
     page_url = shared.cache_bust(data.canonical, commit)
     status, final_url, _headers, page_bytes = shared.http_fetch(page_url)
     body = page_bytes.decode("utf-8", errors="replace")
-    hp = root() / "HP"
+    hp = path_config.HP_ROOT
     h1_match = re.search(r'(?s)<h1\b[^>]*id="page_title_h1"[^>]*>(.*?)</h1>', body)
     h1_text = candy_hotel_page.common.strip_tags(h1_match.group(1)) if h1_match else ""
     json_values: list[dict[str, object]] = []
@@ -317,16 +318,16 @@ def publish(input_path: Path, *, dry_run: bool, resume_state: dict[str, str] | N
         raise PublishError(f"input file is a symlink: {input_path}")
     input_path = input_path.resolve()
     try:
-        input_path.relative_to((root() / "HP" / "Text_hotel_data").resolve())
+        input_path.relative_to(path_config.TEXT_HOTEL_DIR.resolve())
     except ValueError as exc:
-        raise PublishError("input must be under HP/Text_hotel_data") from exc
+        raise PublishError("input must be under Text_hotel_data") from exc
     data = candy_hotel_page.parse_hotel_text(input_path)
     allowed = paths_for(data)
     path_arguments = relative(allowed)
     page_paths = relative(allowed[:3])
     expected = {**{path: "A" for path in page_paths}, **{path: "M" for path in path_arguments[3:]}}
     required = set(path_arguments)
-    page_tool = root() / "HP" / "codex" / "scripts" / "candy_hotel_page.py"
+    page_tool = path_config.SCRIPTS_DIR / "candy_hotel_page.py"
     dependencies = dependency_paths(input_path, data)
     relative_input = input_path.relative_to(root()).as_posix()
 
@@ -492,7 +493,7 @@ def self_test() -> int:
     state = {
         "slug": "selftest",
         "hotel": "test",
-        "input": "HP/Text_hotel_data/test.txt",
+        "input": "Text_hotel_data/test.txt",
         "before": "a" * 40,
         "dependency_snapshot": "{}",
     }
@@ -564,24 +565,27 @@ def main() -> int:
     try:
         if args.command == "publish-self-test":
             return self_test()
-        with publish_lock():
-            if args.command == "resume":
+        if args.command == "resume":
+            with publish_lock():
                 state = load_state(args.slug)
                 return publish(root() / state["input"], dry_run=False, resume_state=state)
-            if args.command == "publish-next":
-                input_path = next_ready_input()
-            else:
-                input_path = Path(args.input)
-                if not input_path.is_absolute():
-                    input_path = root() / input_path
+        if args.command == "publish-next":
+            input_path = next_ready_input()
+        else:
+            input_path = Path(args.input)
+            if not input_path.is_absolute():
+                input_path = root() / input_path
+        if args.dry_run:
             return publish(input_path, dry_run=args.dry_run)
+        with publish_lock():
+            return publish(input_path, dry_run=False)
     except (PublishError, candy_hotel_page.HotelToolError, OSError, json.JSONDecodeError) as exc:
         phase = ACTIVE_STATE.get("phase", "NOT_STARTED")
         page_commit = ACTIVE_STATE.get("page_commit", "NONE")
         remote_state = ACTIVE_STATE.get("remote_state", "UNVERIFIED")
         slug = ACTIVE_STATE.get("slug", "UNKNOWN")
         recovery = (
-            f"HP\\codex\\scripts\\candy-hotel.cmd resume --slug {slug}"
+            f"codex\\scripts\\candy-hotel.cmd resume --slug {slug}"
             if slug != "UNKNOWN"
             else "Fix the reported preflight error, then rerun the original command"
         )

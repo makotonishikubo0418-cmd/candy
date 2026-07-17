@@ -15,6 +15,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 import candy_area_page as common
+import candy_page_common as path_config
 
 
 class HotelToolError(RuntimeError):
@@ -87,7 +88,7 @@ class HotelData:
 
 
 def repo_root() -> Path:
-    return Path(__file__).resolve().parents[3]
+    return path_config.REPO_ROOT
 
 
 def read_utf8(path: Path) -> str:
@@ -1179,7 +1180,7 @@ def shared_validation(data: HotelData, hp_root: Path) -> list[str]:
 def run_build(args: argparse.Namespace) -> int:
     started = time.perf_counter()
     root = repo_root()
-    hp_root = root / "HP"
+    hp_root = path_config.HP_ROOT
     input_path = Path(args.input)
     if not input_path.is_absolute():
         input_path = root / input_path
@@ -1228,7 +1229,7 @@ def run_build(args: argparse.Namespace) -> int:
 
 def run_check(args: argparse.Namespace) -> int:
     root = repo_root()
-    hp_root = root / "HP"
+    hp_root = path_config.HP_ROOT
     input_path = Path(args.input)
     if not input_path.is_absolute():
         input_path = root / input_path
@@ -1254,7 +1255,7 @@ def run_check(args: argparse.Namespace) -> int:
 
 def run_audit(_: argparse.Namespace) -> int:
     root = repo_root()
-    paths = sorted((root / "HP" / "Text_hotel_data").glob("*.txt"))
+    paths = sorted(path_config.TEXT_HOTEL_DIR.glob("*.txt"))
     parsed = 0
     failures: list[str] = []
     for path in paths:
@@ -1274,8 +1275,8 @@ def run_audit(_: argparse.Namespace) -> int:
 
 def run_self_test(_: argparse.Namespace) -> int:
     root = repo_root()
-    hp_root = root / "HP"
-    input_path = hp_root / "Text_hotel_data" / "グリーンリッチホテル鹿児島天文館.txt"
+    hp_root = path_config.HP_ROOT
+    input_path = path_config.TEXT_HOTEL_DIR / "グリーンリッチホテル鹿児島天文館.txt"
     data = parse_hotel_text(input_path)
     templates = common.load_shop_templates(hp_root / "source" / "template_shop.html")
     resolved = resolve_shops(data, hp_root, templates)

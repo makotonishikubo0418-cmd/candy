@@ -18,6 +18,7 @@ from urllib.parse import urlencode, urljoin, urlsplit, urlunsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener, urlopen
 
 import candy_area_page
+import candy_page_common as path_config
 
 
 REPOSITORY = "makotonishikubo0418-cmd/candy"
@@ -47,7 +48,7 @@ class ReleaseResult:
 
 
 def root() -> Path:
-    return Path(__file__).resolve().parents[3]
+    return path_config.REPO_ROOT
 
 
 def configure_output() -> None:
@@ -117,11 +118,11 @@ def git_value(*arguments: str) -> str:
 
 
 def queue_path() -> Path:
-    return root() / "HP" / "codex" / "docs" / "CANDY_AREA_105_PAGE_QUEUE.md"
+    return path_config.DOCS_DIR / "CANDY_AREA_105_PAGE_QUEUE.md"
 
 
 def find_input(region: str, slug: str) -> Path:
-    candidates = list((root() / "HP" / "Text_area_data").rglob(f"{region}_テンプレート.txt"))
+    candidates = list(path_config.TEXT_AREA_DIR.rglob(f"{region}_テンプレート.txt"))
     matches: list[Path] = []
     for path in candidates:
         try:
@@ -148,7 +149,7 @@ def next_ready_input(queue_text: str) -> Path:
 
 
 def paths_for(data: candy_area_page.AreaData) -> list[Path]:
-    hp = root() / "HP"
+    hp = path_config.HP_ROOT
     return [
         hp / f"kagoshima-deliveryhealth-area-{data.slug}.php",
         hp / "source" / f"kagoshima-deliveryhealth-area-{data.slug}.html",
@@ -201,15 +202,15 @@ def dependency_paths(
     input_path: Path,
     data: candy_area_page.AreaData,
 ) -> list[Path]:
-    hp = root() / "HP"
+    hp = path_config.HP_ROOT
     dependencies = {
         input_path,
         hp / data.image1.removeprefix("./"),
         hp / data.image2.removeprefix("./"),
         hp / "source" / "template_shop.html",
         hp / "source" / "template_kagoshima-deliveryhealth-area.html",
-        root() / "HP" / "codex" / "scripts" / "candy_area_page.py",
-        root() / "HP" / "codex" / "scripts" / "candy_area_publish.py",
+        path_config.SCRIPTS_DIR / "candy_area_page.py",
+        path_config.SCRIPTS_DIR / "candy_area_publish.py",
         root() / ".github" / "scripts" / "candy_ftp_deploy.py",
         root() / ".github" / "scripts" / "candy_release_check.py",
         root() / ".github" / "workflows" / "candy-production-deploy.yml",
@@ -373,7 +374,7 @@ def verify_production(data: candy_area_page.AreaData, commit: str) -> None:
     page_url = cache_bust(data.canonical, commit)
     status, final_url, _headers, page_bytes = http_fetch(page_url)
     body = page_bytes.decode("utf-8", errors="replace")
-    hp = root() / "HP"
+    hp = path_config.HP_ROOT
     templates = candy_area_page.load_shop_templates(hp / "source" / "template_shop.html")
     shop_count = len(candy_area_page.resolve_shops(data, hp, templates))
     checks = {
@@ -431,9 +432,9 @@ def publish(
         raise PublishError(f"input file is a symlink: {input_path}")
     input_path = input_path.resolve()
     try:
-        input_path.relative_to((root() / "HP" / "Text_area_data").resolve())
+        input_path.relative_to(path_config.TEXT_AREA_DIR.resolve())
     except ValueError as exc:
-        raise PublishError("input must be under HP/Text_area_data") from exc
+        raise PublishError("input must be under Text_area_data") from exc
     data = candy_area_page.parse_area_text(input_path)
     allowed = paths_for(data)
     path_arguments = relative(allowed)
@@ -443,7 +444,7 @@ def publish(
         **{path: "M" for path in path_arguments[3:]},
     }
     page_required = set(page_paths)
-    page_tool = root() / "HP" / "codex" / "scripts" / "candy_area_page.py"
+    page_tool = path_config.SCRIPTS_DIR / "candy_area_page.py"
     relative_input = input_path.relative_to(root()).as_posix()
 
     if dry_run:
@@ -580,7 +581,7 @@ def publish(
 
 def self_test() -> int:
     data = candy_area_page.AreaData(
-        Path("HP/Text_area_data/吉野町_テンプレート.txt"), "吉野町", "yoshinocho", "title", "description",
+        Path("Text_area_data/吉野町_テンプレート.txt"), "吉野町", "yoshinocho", "title", "description",
         "https://www.55810.com/kagoshima-deliveryhealth-area-yoshinocho.php", "image", "image1", "image2",
         "page", "subtitle", "description", "shops", "shop description", [], [],
         candy_area_page.BasicInfo("basic", "map", "src", "1", "1", "date", "description"),
@@ -604,7 +605,7 @@ def self_test() -> int:
     state = {
         "slug": "selftest-state",
         "region": "試験",
-        "input": "HP/Text_area_data/selftest.txt",
+        "input": "Text_area_data/selftest.txt",
         "before": "a" * 40,
         "remote_state": "a" * 40,
     }
@@ -663,7 +664,7 @@ def main() -> int:
         remote_state = ACTIVE_STATE.get("remote_state", "UNVERIFIED")
         slug = ACTIVE_STATE.get("slug", "UNKNOWN")
         recovery = (
-            f"HP\\codex\\scripts\\candy-area.cmd resume --slug {slug}"
+            f"codex\\scripts\\candy-area.cmd resume --slug {slug}"
             if slug != "UNKNOWN"
             else "Fix the reported preflight error, then rerun the original command"
         )

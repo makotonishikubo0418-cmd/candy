@@ -1,6 +1,7 @@
 ﻿# -*- coding: utf-8 -*-
 from __future__ import annotations
 
+import argparse
 import csv
 import html
 import re
@@ -8,10 +9,12 @@ from collections import Counter, defaultdict
 from datetime import datetime
 from pathlib import Path
 
-SCRIPT = Path(__file__).resolve()
-HP = SCRIPT.parents[2]
-ROOT = HP.parent
-DOCS = HP / "codex" / "docs"
+import candy_page_common as common
+
+
+ROOT = common.REPO_ROOT
+HP = common.HP_ROOT
+DOCS = common.DOCS_DIR
 BACKUP = ROOT / "codex_backup"
 TS = datetime.now().strftime("%Y-%m-%d %H:%M")
 
@@ -42,15 +45,22 @@ def read_text(path: Path) -> str:
             pass
     return path.read_text(encoding="utf-8", errors="ignore")
 
+def render_doc(lines: list[str]) -> str:
+    return "\n".join(lines).rstrip() + "\n"
+
+
 def write_doc(name: str, lines: list[str]) -> None:
     DOCS.mkdir(parents=True, exist_ok=True)
-    (DOCS / name).write_text("\n".join(lines).rstrip() + "\n", encoding="utf-8")
+    (DOCS / name).write_text(render_doc(lines), encoding="utf-8")
 
 def rel(path: Path) -> str:
     try:
         return path.relative_to(HP).as_posix()
     except ValueError:
-        return path.as_posix()
+        try:
+            return path.relative_to(ROOT).as_posix()
+        except ValueError:
+            return path.as_posix()
 
 def esc(value) -> str:
     text = "" if value is None else str(value)
@@ -247,10 +257,6 @@ def common_block(stats: dict) -> list[str]:
     return out
 
 def build_analysis():
-    for n in ("CANDY_OPERATION_BASICS.md", "CANDY_FIX_BACKLOG.md"):
-        p = DOCS / n
-        if not p.exists():
-            p.write_text("\n", encoding="utf-8")
     all_files = sorted([p for p in HP.rglob("*") if p.is_file()], key=lambda p: rel(p).lower())
     all_dirs = sorted([p for p in HP.rglob("*") if p.is_dir()], key=lambda p: rel(p).lower())
     code_files = [p for p in all_files if is_code_file(p)]
@@ -259,11 +265,19 @@ def build_analysis():
     source_html = sorted((HP / "source").glob("*.html"), key=lambda p: p.name.lower()) if (HP / "source").exists() else []
     includefile_php = sorted((HP / "includefile").glob("*.php"), key=lambda p: p.name.lower()) if (HP / "includefile").exists() else []
     dataset_all = sorted((HP / "includefile").glob("dataset_*.php"), key=lambda p: p.name.lower()) if (HP / "includefile").exists() else []
-    text_data = [p for p in all_files if top_label(rel(p)).startswith("Text_")]
+    text_data = sorted(
+        [
+            path
+            for directory in (common.TEXT_AREA_DIR, common.TEXT_HOTEL_DIR, common.TEXT_BLOG_DIR)
+            for path in directory.rglob("*")
+            if path.is_file()
+        ],
+        key=lambda path: rel(path).lower(),
+    )
     log_files = [p for p in all_files if top_label(rel(p)) == "log"]
-    codex_files = [p for p in all_files if rel(p) == "codex" or rel(p).startswith("codex/")]
-    docs_files = [p for p in all_files if rel(p).startswith("codex/docs/")]
-    candy_docs = [p for p in all_files if rel(p).startswith("codex/docs/CANDY_") and p.suffix.lower() == ".md"]
+    codex_files = [p for p in (ROOT / "codex").rglob("*") if p.is_file()]
+    docs_files = [p for p in DOCS.rglob("*") if p.is_file()]
+    candy_docs = [p for p in docs_files if p.name.startswith("CANDY_") and p.suffix.lower() == ".md"]
     db = read_text(HP / "includefile" / "dataset_base.php") if (HP / "includefile" / "dataset_base.php").exists() else ""
     switch_map = {}
     for m in re.finditer(r"case\s+['\"]([^'\"]+\.html)['\"]\s*:\s*include\s*\(\s*INCLUDE_DIR\s*\.\s*['\"]([^'\"]+\.php)['\"]\s*\)", db, re.S):
@@ -333,19 +347,19 @@ def doc_master(a):
     lines += ["", "## 最初に見る順", "", "| 順 | 資料 | 役割 |", "|---:|---|---|"]
     order = [
         (1, "HP/AGENTS.md", "最上位ルール"),
-        (2, "HP/codex/docs/CANDY_MASTER_DOC_INDEX.md", "管理資料の入口"),
-        (3, "HP/codex/docs/CANDY_OPERATION_BASICS.md", "改修前に確認する運用情報"),
-        (4, "HP/codex/docs/CANDY_HP_STRUCTURE_MAP.md", "HP全体構成"),
-        (5, "HP/codex/docs/CANDY_FOLDER_ROLE_MAP.md", "フォルダ別役割"),
-        (6, "HP/codex/docs/CANDY_FULL_FILE_CODE_INVENTORY.md", "全フォルダ/全ファイル台帳"),
-        (7, "HP/codex/docs/CANDY_CODE_FILE_STRUCTURE.md", "PHP/HTML/dataset/CSS/JS構成"),
-        (8, "HP/codex/docs/CANDY_NON_CODE_ASSET_INVENTORY.md", "画像/Text/ログ/DB等の非コード台帳"),
-        (9, "HP/codex/docs/CANDY_PAGE_CATEGORY_STRUCTURE.md", "カテゴリ別ページ構成"),
-        (10, "HP/codex/docs/CANDY_PAGE_SPEC_INDEX.md", "ページごとの役割と構成"),
-        (11, "HP/codex/docs/CANDY_FIX_BACKLOG.md", "要確認差分の処理バックログ"),
-        (12, "HP/codex/docs/CANDY_CODEX_BACKUP_REMARKS.md", "codex_backup由来の備考"),
-        (13, "HP/codex/docs/CANDY_EXISTING_DOCS_INVENTORY.md", "残存資料/削除済み旧資料の説明"),
-        (14, "HP/codex/docs/CANDY_PHASE_RECHECK.md", "フェーズ再確認と未実施フェーズ"),
+        (2, "codex/docs/CANDY_MASTER_DOC_INDEX.md", "管理資料の入口"),
+        (3, "codex/docs/CANDY_OPERATION_BASICS.md", "改修前に確認する運用情報"),
+        (4, "codex/docs/CANDY_HP_STRUCTURE_MAP.md", "HP全体構成"),
+        (5, "codex/docs/CANDY_FOLDER_ROLE_MAP.md", "フォルダ別役割"),
+        (6, "codex/docs/CANDY_FULL_FILE_CODE_INVENTORY.md", "全フォルダ/全ファイル台帳"),
+        (7, "codex/docs/CANDY_CODE_FILE_STRUCTURE.md", "PHP/HTML/dataset/CSS/JS構成"),
+        (8, "codex/docs/CANDY_NON_CODE_ASSET_INVENTORY.md", "画像/Text/ログ/DB等の非コード台帳"),
+        (9, "codex/docs/CANDY_PAGE_CATEGORY_STRUCTURE.md", "カテゴリ別ページ構成"),
+        (10, "codex/docs/CANDY_PAGE_SPEC_INDEX.md", "ページごとの役割と構成"),
+        (11, "codex/docs/CANDY_FIX_BACKLOG.md", "要確認差分の処理バックログ"),
+        (12, "codex/docs/CANDY_CODEX_BACKUP_REMARKS.md", "codex_backup由来の備考"),
+        (13, "codex/docs/CANDY_EXISTING_DOCS_INVENTORY.md", "残存資料/削除済み旧資料の説明"),
+        (14, "codex/docs/CANDY_PHASE_RECHECK.md", "フェーズ再確認と未実施フェーズ"),
     ]
     for no, p, role in order:
         lines.append(f"| {no} | {code_span(p)} | {esc(role)} |")
@@ -398,7 +412,7 @@ def doc_full_inventory(a):
     lines = ["# CANDY 全フォルダ・全ファイル台帳", "", "HP配下の全ファイルを1件ずつ管理する台帳です。"]
     lines += common_block(s)
     jp = "Text_hotel_data/グリーンリッチホテル鹿児島天文館.txt"
-    jp_exists = (HP / jp).exists()
+    jp_exists = (common.TEXT_HOTEL_DIR / Path(jp).name).exists()
     lines += ["", "## エスケープ確認", "", "| 観点 | 対象 | 結果 |", "|---|---|---|", f"| 日本語ファイル名 | {code_span(jp)} | {'存在確認済み' if jp_exists else '未確認'} |", "| 表内パス | スラッシュ区切りで出力し、パイプは表崩れ防止のためエスケープ | 確認対象 |"]
     lines += ["", "## フォルダ台帳", "", "| No | フォルダ | 役割 | 配下ファイル |", "|---:|---|---|---:|"]
     for i, d in enumerate([HP] + a["dirs"], 1):
@@ -519,8 +533,8 @@ def doc_operation(a):
               "| `source/system.html` | 要承認 | 決済/外部連携/hidden値を含む可能性。値は転記禁止。 |",
               "| `log`配下 | 変更禁止 | ログ本文は転記禁止。削除も承認なし禁止。 |"]
     lines += ["", "## 5. DB接続定義の所在", "", "所在のみ記載。値は記載しない。", "", "| 種別 | パス | 状態 |", "|---|---|---|", "| require元 | `includefile/dataset_base.php` | 確認済み |", "| 外部設定候補 | `/home/firststar/public_html/group/control/includefile/incfiles_vv.php` | 未確認 / 確認方法: 本番サーバー上で所在と役割を確認。値は転記しない。 |", "| セッション設定候補 | `/home/firststar/public_html/group_test/control/includefile/setting_session_vv.php` | 未確認 / 確認方法: 本番サーバー上で所在と役割を確認。値は転記しない。 |"]
-    lines += ["", "## 6. バックアップ手順", "", "既存慣例: `HP/codex/area/backups` に、対象ファイル名 + 変更理由 + 日付の形で保存された実績あり。", "", "推奨ルール: 改修前に `HP/codex/area/backups/<元ファイル名>.before-<作業名>-YYYYMMDD.<ext>` の形式で管理コピーを作る。", "", "未確認 / 確認方法: 今後の正式な保管先を `HP/codex/area/backups` 継続でよいかオーナー確認する。"]
-    lines += ["", "## 7. 管理資料の再生成手順", "", r"正本: `\\192.168.1.3\disk1\FSG_SEO\candy\HP\codex\scripts\generate_candy_management_docs.py`", "", "実行コマンド:", "", "```powershell", r'python "\\192.168.1.3\disk1\FSG_SEO\candy\HP\codex\scripts\generate_candy_management_docs.py"', "```", "", "Python未導入環境: PATH上の `python` または `py` を導入する。Codex環境では `Invoke-CandyDocsMaintenance.ps1` がCodexランタイムPythonへフォールバックする。", "必要バージョン/依存: Python 3.9以上。標準ライブラリのみ使用し、外部パッケージ依存なし。", "補足: `HP/codex/scripts/Invoke-CandyDocsMaintenance.ps1` は互換用ラッパーのみ。管理資料の生成・出力ロジックは正本Pythonに集約する。"]
+    lines += ["", "## 6. バックアップ手順", "", "既存慣例: `codex/area/backups` に、対象ファイル名 + 変更理由 + 日付の形で保存された実績あり。", "", "推奨ルール: 改修前に `codex/area/backups/<元ファイル名>.before-<作業名>-YYYYMMDD.<ext>` の形式で管理コピーを作る。", "", "未確認 / 確認方法: 今後の正式な保管先を `codex/area/backups` 継続でよいかオーナー確認する。"]
+    lines += ["", "## 7. 管理資料の再生成手順", "", r"正本: `C:\Codex\candy\codex\scripts\generate_candy_management_docs.py`", "", "差分プレビュー:", "", "```powershell", r'.\codex\scripts\Invoke-CandyDocsMaintenance.ps1 -Preview', "```", "", "Python未導入環境: PATH上の `python` または `py` を導入する。Codex環境では `Invoke-CandyDocsMaintenance.ps1` がCodexランタイムPythonへフォールバックする。", "必要バージョン/依存: Python 3.9以上。標準ライブラリのみ使用し、外部パッケージ依存なし。", "補足: `codex/scripts/Invoke-CandyDocsMaintenance.ps1` はラッパーのみ。管理資料の生成・出力ロジックは正本Pythonに集約する。"]
     return lines
 
 def backlog_rows(a):
@@ -568,9 +582,9 @@ def doc_backup_remarks(a):
     }
     for i, p in enumerate(backup_docs, 1):
         lines.append(f"| {i} | {esc('codex_backup/docs/' + p.name)} | {p.stat().st_size} | {esc(useful.get(p.name, '旧資料。現行仕様としては再確認が必要。'))} |")
-    area = HP / "codex" / "area"
+    area = ROOT / "codex" / "area"
     area_files = sorted(area.glob("*"), key=lambda p: p.name.lower()) if area.exists() else []
-    lines += ["", "## HP/codex/area の使える情報", "", "| ファイル | 使える情報 |", "|---|---|"]
+    lines += ["", "## codex/area の使える情報", "", "| ファイル | 使える情報 |", "|---|---|"]
     for p in area_files:
         if p.is_file():
             note = "エリアページ整理の旧管理資料。現行差分の確認に使える。"
@@ -586,7 +600,7 @@ def doc_backup_remarks(a):
 
 def doc_existing_docs(a):
     s = a["stats"]
-    lines = ["# CANDY 残存管理資料説明", "", "HP/codex/docs 配下に残すCANDY資料と、削除済み旧資料の扱いを説明します。"]
+    lines = ["# CANDY 残存管理資料説明", "", "codex/docs 配下に残すCANDY資料と、削除済み旧資料の扱いを説明します。"]
     lines += common_block(s)
     lines += ["", "## 残す資料", "", "| No | 資料 | 説明 |", "|---:|---|---|"]
     desc = {
@@ -608,9 +622,9 @@ def doc_existing_docs(a):
     for i, p in enumerate(docs, 1):
         lines.append(f"| {i} | {esc(rel(p))} | {esc(desc.get(p.name, 'CANDY管理資料'))} |")
     old = ["AGENTS.md", "CODEX_MANAGEMENT_GUIDE.md", "CODEX_SITE_OVERVIEW.md", "CONTENT_ANALYSIS.md", "PAGE_LIST.md", "SITE_STRUCTURE.md", "TECHNICAL_ANALYSIS.md", "UI_DESIGN_ANALYSIS.md", "UNKNOWN_AND_RISK_LIST.md"]
-    lines += ["", "## 削除済み旧資料", "", "以下はHP/codex/docsからは削除済み。必要な場合はcodex_backup/docsの旧資料として、現行ファイルと再照合してから使う。", "", "| ファイル | 状態 |", "|---|---|"]
+    lines += ["", "## 削除済み旧資料", "", "以下はcodex/docsからは削除済み。必要な場合はcodex_backup/docsの旧資料として、現行ファイルと再照合してから使う。", "", "| ファイル | 状態 |", "|---|---|"]
     for n in old:
-        lines.append(f"| {esc(n)} | HP/codex/docsから削除済み / codex_backup/docsに旧資料あり |")
+        lines.append(f"| {esc(n)} | codex/docsから削除済み / codex_backup/docsに旧資料あり |")
     return lines
 
 def doc_phase_recheck(a):
@@ -622,7 +636,7 @@ def doc_phase_recheck(a):
               "| Phase A | 既存資料とcodex_backupを確認し、使える情報を備考化 | `CANDY_CODEX_BACKUP_REMARKS.md` |",
               "| Phase B | HP全体構成、フォルダ、全ファイル、コード/非コード台帳を整理 | `CANDY_HP_STRUCTURE_MAP.md`, `CANDY_FOLDER_ROLE_MAP.md`, `CANDY_FULL_FILE_CODE_INVENTORY.md`, `CANDY_CODE_FILE_STRUCTURE.md`, `CANDY_NON_CODE_ASSET_INVENTORY.md` |",
               "| Phase C | ページカテゴリとページ別役割を整理 | `CANDY_PAGE_CATEGORY_STRUCTURE.md`, `CANDY_PAGE_SPEC_INDEX.md` |",
-              "| Phase D | 監査不合格箇所を修正し、生成スクリプトから資料を再生成 | `HP/codex/scripts/generate_candy_management_docs.py` と `CANDY_*.md` |",
+              "| Phase D | 監査不合格箇所を修正し、生成スクリプトから資料を再生成 | `codex/scripts/generate_candy_management_docs.py` と `CANDY_*.md` |",
               "| Phase E | 改修前の運用基礎と差分バックログを新規作成 | `CANDY_OPERATION_BASICS.md`, `CANDY_FIX_BACKLOG.md` |"]
     lines += ["", "## 未実施フェーズ", "", "| フェーズ | 内容 | 前提条件 |", "|---|---|---|",
               "| Phase F | 本番URL/公開方式/PHPバージョン/Webサーバー確認 | オーナーまたはサーバー管理者から運用情報を得る |",
@@ -630,11 +644,11 @@ def doc_phase_recheck(a):
               "| Phase H | CANDY_FIX_BACKLOG.md の各行を処理 | 処理案についてオーナー判断を得る |",
               "| Phase I | 実改修 | 変更対象・バックアップ・反映手順の承認 |"]
     lines += ["", "## 件数差分の記録", "", "| 記録 | 内容 |", "|---|---|", f"| 再集計時点 | {TS} |", f"| 現在統一値 | 全ファイル {s['file_count']} / コード・設定 {s['code_count']} / codex配下 {s['codex_count']} |", "| 旧資料差分1件の正体 | 旧CANDY_HP_STRUCTURE_MAPは出力資料自身または後続CANDY管理資料の作成前に集計されており、後続資料では管理MDが1件増えた状態だった。現在は新規2資料と生成スクリプトを含め同一時点で再集計済み。 |"]
-    lines += ["", "## 削除済み", "", "| 対象 | 状態 |", "|---|---|", "| 旧docs資料9件 | HP/codex/docsから削除済み。codex_backup/docsに旧資料あり。 |"]
+    lines += ["", "## 削除済み", "", "| 対象 | 状態 |", "|---|---|", "| 旧docs資料9件 | codex/docsから削除済み。codex_backup/docsに旧資料あり。 |"]
     return lines
 
-def write_all(a):
-    docs = {
+def render_all(a) -> dict[str, list[str]]:
+    return {
         "CANDY_MASTER_DOC_INDEX.md": doc_master(a),
         "CANDY_OPERATION_BASICS.md": doc_operation(a),
         "CANDY_HP_STRUCTURE_MAP.md": doc_hp_structure(a),
@@ -649,14 +663,41 @@ def write_all(a):
         "CANDY_EXISTING_DOCS_INVENTORY.md": doc_existing_docs(a),
         "CANDY_PHASE_RECHECK.md": doc_phase_recheck(a),
     }
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Generate CANDY management documents")
+    parser.add_argument("--preview", action="store_true", help="render and compare without writing files")
+    args = parser.parse_args()
+    analysis = build_analysis()
+    docs = render_all(analysis)
+    if args.preview:
+        changed: list[str] = []
+        for name in CANDY_DOC_NAMES:
+            path = DOCS / name
+            current = path.read_text(encoding="utf-8") if path.is_file() else None
+            if current != render_doc(docs[name]):
+                changed.append(name)
+        print(
+            f"PREVIEW=OK documents={len(CANDY_DOC_NAMES)} changed={len(changed)} "
+            f"unchanged={len(CANDY_DOC_NAMES) - len(changed)}"
+        )
+        for name in changed:
+            print(f"PREVIEW_CHANGE={name}")
+        print(
+            f"files={analysis['stats']['file_count']} code={analysis['stats']['code_count']} "
+            f"codex={analysis['stats']['codex_count']} backlog={len(backlog_rows(analysis))}"
+        )
+        return 0
     for name in CANDY_DOC_NAMES:
         write_doc(name, docs[name])
+    print(
+        f"written={len(CANDY_DOC_NAMES)} files={analysis['stats']['file_count']} "
+        f"code={analysis['stats']['code_count']} codex={analysis['stats']['codex_count']} "
+        f"backlog={len(backlog_rows(analysis))}"
+    )
+    return 0
+
 
 if __name__ == "__main__":
-    analysis = build_analysis()
-    write_all(analysis)
-    print(f"written={len(CANDY_DOC_NAMES)} files={analysis['stats']['file_count']} code={analysis['stats']['code_count']} codex={analysis['stats']['codex_count']} backlog={len(backlog_rows(analysis))}")
-
-
-
-
+    raise SystemExit(main())

@@ -28,6 +28,8 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlparse
 
+import candy_page_common as path_config
+
 
 SHOP_ALIASES = {
     "CANDY": "candy",
@@ -150,7 +152,7 @@ class ShopTemplate:
 
 
 def repo_root() -> Path:
-    return Path(__file__).resolve().parents[3]
+    return path_config.REPO_ROOT
 
 
 def read_utf8(path: Path) -> str:
@@ -1037,7 +1039,7 @@ def shared_validation(data: AreaData, hp_root: Path) -> list[str]:
 def run_build(args: argparse.Namespace) -> int:
     started = time.perf_counter()
     root = repo_root()
-    hp_root = root / "HP"
+    hp_root = path_config.HP_ROOT
     input_path = Path(args.input)
     if not input_path.is_absolute():
         input_path = root / input_path
@@ -1058,7 +1060,7 @@ def run_build(args: argparse.Namespace) -> int:
     base_path = hp_root / "includefile" / "dataset_base.php"
     sitemap_path = hp_root / "sitemap.xml"
     area_path = hp_root / "source" / "area.html"
-    queue_path = hp_root / "codex" / "docs" / "CANDY_AREA_105_PAGE_QUEUE.md"
+    queue_path = path_config.DOCS_DIR / "CANDY_AREA_105_PAGE_QUEUE.md"
     area_source = read_utf8(area_path)
     area_link = f'./kagoshima-deliveryhealth-area-{data.slug}.php'
     if area_source.count(area_link) != 1:
@@ -1110,7 +1112,7 @@ def run_build(args: argparse.Namespace) -> int:
 def run_check(args: argparse.Namespace) -> int:
     started = time.perf_counter()
     root = repo_root()
-    hp_root = root / "HP"
+    hp_root = path_config.HP_ROOT
     input_path = Path(args.input)
     if not input_path.is_absolute():
         input_path = root / input_path
@@ -1138,8 +1140,8 @@ def run_check(args: argparse.Namespace) -> int:
 def run_audit_inputs(args: argparse.Namespace) -> int:
     started = time.perf_counter()
     root = repo_root()
-    hp_root = root / "HP"
-    base = hp_root / "Text_area_data"
+    hp_root = path_config.HP_ROOT
+    base = path_config.TEXT_AREA_DIR
     paths = sorted(list(base.glob("*.txt")) + (list((base / "Completion").glob("*.txt")) if args.include_completion else []))
     parse_failures: list[str] = []
     render_failures: list[str] = []

@@ -1,8 +1,11 @@
-﻿param()
+﻿param(
+    [switch]$Preview
+)
 $ErrorActionPreference = 'Stop'
+$env:PYTHONDONTWRITEBYTECODE = '1'
 
 $script = Join-Path $PSScriptRoot 'generate_candy_management_docs.py'
-$fallbackPython = 'C:\Users\teamp\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe'
+$fallbackPython = Join-Path $env:USERPROFILE '.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe'
 
 $candidates = @()
 $python = Get-Command python -ErrorAction SilentlyContinue
@@ -21,7 +24,9 @@ foreach ($candidate in $candidates) {
     try {
         & $candidate.File @($candidate.Args) --version *> $null
         if ($LASTEXITCODE -ne 0) { continue }
-        & $candidate.File @($candidate.Args) $script
+        $arguments = @($candidate.Args) + @($script)
+        if ($Preview) { $arguments += '--preview' }
+        & $candidate.File @arguments
         exit $LASTEXITCODE
     } catch {
         continue

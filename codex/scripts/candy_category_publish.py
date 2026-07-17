@@ -63,16 +63,16 @@ def paths_for(category: str, data) -> list[Path]:
 
 
 def dependency_paths(category: str, data, input_path: Path) -> list[Path]:
-    root = common.repo_root()
-    hp = common.hp_root()
+    root = common.REPO_ROOT
+    hp = common.HP_ROOT
     dependencies = {
         input_path,
         hp / data.image1.removeprefix("./"),
         hp / data.image2.removeprefix("./"),
         hp / "source" / f"template_kagoshima-deliveryhealth-{category}.html",
-        hp / "codex" / "scripts" / "candy_page_common.py",
-        hp / "codex" / "scripts" / f"candy_{category}_page.py",
-        hp / "codex" / "scripts" / "candy_category_publish.py",
+        common.SCRIPTS_DIR / "candy_page_common.py",
+        common.SCRIPTS_DIR / f"candy_{category}_page.py",
+        common.SCRIPTS_DIR / "candy_category_publish.py",
         root / ".github" / "scripts" / "candy_ftp_deploy.py",
         root / ".github" / "scripts" / "candy_release_check.py",
         root / ".github" / "workflows" / "candy-production-deploy.yml",
@@ -81,7 +81,7 @@ def dependency_paths(category: str, data, input_path: Path) -> list[Path]:
         dependencies.update(
             {
                 hp / "source" / "template_shop.html",
-                hp / "codex" / "scripts" / "candy_area_page.py",
+                common.SCRIPTS_DIR / "candy_area_page.py",
             }
         )
     else:
@@ -201,17 +201,21 @@ def publish(category: str, input_path: Path, *, dry_run: bool, resume_state: dic
     if input_path.is_symlink():
         raise CategoryPublishError(f"input is a symlink: {input_path}")
     input_path = input_path.resolve()
-    expected_parent = (common.hp_root() / f"Text_{category}_data").resolve()
+    input_roots = {
+        "hotel": common.TEXT_HOTEL_DIR,
+        "blog": common.TEXT_BLOG_DIR,
+    }
+    expected_parent = input_roots[category].resolve()
     try:
         input_path.relative_to(expected_parent)
     except ValueError as exc:
-        raise CategoryPublishError(f"input must be under HP/Text_{category}_data") from exc
+        raise CategoryPublishError(f"input must be under Text_{category}_data") from exc
     data = parse_data(category, input_path)
     allowed = paths_for(category, data)
     path_args = relative(allowed)
     statuses = {**{path: "A" for path in path_args[:3]}, **{path: "M" for path in path_args[3:]}}
     required = set(path_args)
-    page_tool = common.hp_root() / "codex" / "scripts" / f"candy_{category}_page.py"
+    page_tool = common.SCRIPTS_DIR / f"candy_{category}_page.py"
     relative_input = input_path.relative_to(common.repo_root()).as_posix()
     if dry_run:
         assert_preflight(category, data, allowed, check_remote=False)
@@ -296,7 +300,7 @@ def self_test(category: str) -> int:
     release.assert_exact_changes("A\tHP/new.php\nM\tHP/shared.php", fake_allowed, set(fake_allowed), "category self-test")
     if normalized_origin("git@github.com:makotonishikubo0418-cmd/candy.git") != EXPECTED_ORIGIN:
         raise AssertionError("origin normalization failed")
-    state = {"category": category, "slug": "selftest", "input": f"HP/Text_{category}_data/selftest.txt", "before": "a" * 40}
+    state = {"category": category, "slug": "selftest", "input": f"Text_{category}_data/selftest.txt", "before": "a" * 40}
     original = globals()["state_path"]
     try:
         with tempfile.TemporaryDirectory() as directory:
@@ -336,7 +340,7 @@ def main() -> int:
     except (CategoryPublishError, common.PageToolError, release.PublishError, OSError, json.JSONDecodeError) as exc:
         phase = ACTIVE_STATE.get("phase", "NOT_STARTED")
         slug = ACTIVE_STATE.get("slug", "UNKNOWN")
-        recovery = f"HP\\codex\\scripts\\candy-{args.category}.cmd resume --slug {slug}" if slug != "UNKNOWN" else "Fix preflight error and rerun"
+        recovery = f"codex\\scripts\\candy-{args.category}.cmd resume --slug {slug}" if slug != "UNKNOWN" else "Fix preflight error and rerun"
         print(f"RESULT=STOP\nREASON={exc}\nPHASE={phase}\nRECOVERY_COMMAND={recovery}", file=sys.stderr)
         return 2
 

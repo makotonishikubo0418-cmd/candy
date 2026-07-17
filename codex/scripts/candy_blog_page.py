@@ -485,7 +485,7 @@ def run_check(args: argparse.Namespace) -> int:
 
 
 def run_audit_inputs(args: argparse.Namespace) -> int:
-    paths = sorted((common.hp_root() / "Text_blog_data").glob("*.txt"))
+    paths = sorted(common.TEXT_BLOG_DIR.glob("*.txt"))
     failures: list[str] = []
     passed = 0
     for path in paths:

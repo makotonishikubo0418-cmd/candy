@@ -10,10 +10,14 @@
 )
 
 $ErrorActionPreference = "Stop"
+$env:PYTHONDONTWRITEBYTECODE = "1"
 $scriptPath = Join-Path $PSScriptRoot "candy_area_page.py"
 $localPython = Join-Path $env:LOCALAPPDATA "Programs\Python\Python312\python.exe"
+$bundledPython = Join-Path $env:USERPROFILE ".cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe"
 if (Test-Path -LiteralPath $localPython) {
     $python = $localPython
+} elseif (Test-Path -LiteralPath $bundledPython) {
+    $python = $bundledPython
 } else {
     $pythonCommand = Get-Command python -ErrorAction SilentlyContinue
     if (-not $pythonCommand) { throw "Python 3 が見つかりません。" }

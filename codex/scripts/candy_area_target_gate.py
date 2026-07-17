@@ -13,9 +13,12 @@ import subprocess
 from dataclasses import dataclass
 from pathlib import Path
 
-SITE_ROOT = Path(__file__).resolve().parents[2]
-REPO_ROOT = Path(__file__).resolve().parents[3]
-TEXT_ROOT = SITE_ROOT / "Text_area_data"
+import candy_page_common as common
+
+
+REPO_ROOT = common.REPO_ROOT
+HP_ROOT = common.HP_ROOT
+TEXT_ROOT = common.TEXT_AREA_DIR
 
 
 @dataclass(frozen=True)
@@ -57,27 +60,27 @@ def git_tracked(path: Path) -> bool:
 
 def artifact_paths(slug: str) -> list[Path]:
     return [
-        SITE_ROOT / f"kagoshima-deliveryhealth-area-{slug}.php",
-        SITE_ROOT / "source" / f"kagoshima-deliveryhealth-area-{slug}.html",
-        SITE_ROOT / "includefile" / f"dataset_kagoshima-deliveryhealth-area-{slug}.php",
+        HP_ROOT / f"kagoshima-deliveryhealth-area-{slug}.php",
+        HP_ROOT / "source" / f"kagoshima-deliveryhealth-area-{slug}.html",
+        HP_ROOT / "includefile" / f"dataset_kagoshima-deliveryhealth-area-{slug}.php",
     ]
 
 
 def blocking_shared_paths() -> list[Path]:
     return [
-        SITE_ROOT / "includefile" / "dataset_base.php",
-        SITE_ROOT / "sitemap.xml",
+        HP_ROOT / "includefile" / "dataset_base.php",
+        HP_ROOT / "sitemap.xml",
     ]
 
 
 def area_path() -> Path:
-    return SITE_ROOT / "source" / "area.html"
+    return HP_ROOT / "source" / "area.html"
 
 
 def image_paths(slug: str) -> list[Path]:
     return [
-        SITE_ROOT / "imgHtml" / "new_202601" / "area" / f"kagoshima-deliveryhealth-area-{slug}_1.jpg",
-        SITE_ROOT / "imgHtml" / "new_202601" / "area" / f"kagoshima-deliveryhealth-area-{slug}_2.jpg",
+        HP_ROOT / "imgHtml" / "new_202601" / "area" / f"kagoshima-deliveryhealth-area-{slug}_1.jpg",
+        HP_ROOT / "imgHtml" / "new_202601" / "area" / f"kagoshima-deliveryhealth-area-{slug}_2.jpg",
     ]
 
 
@@ -213,7 +216,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="CANDY area target gate")
     sub = parser.add_subparsers(dest="command", required=True)
     next_parser = sub.add_parser("target-next")
-    next_parser.add_argument("--restore", action="store_true", help="move the selected classified txt back to HP/Text_area_data")
+    next_parser.add_argument("--restore", action="store_true", help="move the selected classified txt back to Text_area_data")
     check_parser = sub.add_parser("target-check")
     check_parser.add_argument("--input", required=True)
     args = parser.parse_args()
