@@ -52,11 +52,11 @@
 
 ## 3. 通常作業から除外
 
-- `\\192.168.1.3\disk1\FSG_SEO\candy\codex\ページ作成用.md`: 更新停止した旧制作記録
+- `C:\Codex\candy\codex\ページ作成用.md`: 更新停止した旧制作記録
 - `codex/00_CANDY_SEO_START_HERE.md`
 - `codex/area/`
 - `codex/reform_20260529/`
-- `Backup/`
+- NAS `\\192.168.1.3\disk1\FSG_SEO\candy\Backup/`（保管専用）
 - `.git-backups/`
 
 これらは現行仕様の根拠にせず、通常検索・通読・更新の対象にしない。

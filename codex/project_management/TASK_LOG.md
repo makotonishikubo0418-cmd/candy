@@ -15,6 +15,7 @@
 
 | Task ID | 日時 | 内容 | 変更 | 確認済み | 未確認 |
 |---|---|---|---|---|---|
+| TASK-20260717-LOCAL-WORKSPACE-DOCS-001 | 2026-07-17 | Git作業場のローカルclone移行に伴う管理文書更新とGitHub同期 | 前回更新した管理文書13件と本`TASK_LOG.md`の計14件。Git作業場を`C:\Codex\candy`、GitHubを同期ハブ、NASを保管専用として記録 | `git fetch origin`後のahead/behind 0/0、14ファイルの明示Stage、`git diff --cached --check`、指定メッセージでのCommit、origin/mainへのPush、`git ls-remote`一致、Commit SHA対象のActions RunをGitHub APIで確認 | scripts修正・実行、`HP/`変更、本番操作、手動Actionsは未実施 |
 | TASK-20260717-GITHUB-SYNC-001 | 2026-07-17 | GitHub構成を現行NASへ同期 | `.github/`、`.gitignore`、`AGENTS.md`、`HP/`、`codex/`、3つの`Text_*_data/`を正とし、旧ルート構成をGit管理から除外。`Backup/`は除外 | 保護ファイル、対象範囲、未Stage、機密候補、`git diff --cached --check`を確認。Commit `7d23c91` をorigin/mainへPushし、`ls-remote`一致 | 本番操作と手動Actionsは未実施 |
 | TASK-20260717-STRUCTURE-DOCS-001 | 2026-07-17 | フォルダ再編後の管理資料更新 | `AGENTS.md`、`HP/AGENTS.md`、`codex/` 配下の管理正本・現行制作資料、計26ファイル | 実パス確認、現行資料の旧参照0件、UTF-8/BOM/見出し/表検査合格、スクリプト未移行STOPを記録 | スクリプト修正・実行、Commit/Push、本番操作は未実施 |
 | TASK-20260716-MGMT-001 | 2026-07-16 | 管理体制初期整備 | 外側親AGENTS、README、管理体制MD、HP導線 | 文書作成、導線整理 | Commit/Push未実施。監査でGit管理外問題を検出 |

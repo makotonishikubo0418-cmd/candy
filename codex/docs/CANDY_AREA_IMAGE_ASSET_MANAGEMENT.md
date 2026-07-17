@@ -7,15 +7,15 @@
 
 | 区分 | パス | 扱い |
 |---|---|---|
-| 準備・受入用 | `Text_area_data/画像データ` | ユーザーが準備した画像を一時確認する場所 |
+| 準備・受入用 | `\\192.168.1.3\disk1\FSG_SEO\candy\Text_area_data\画像データ` | NAS上の受入素材保管場所。Git作業場として扱わない |
 | 公開用正本 | `HP/imgHtml/new_202601/area` | HTMLから参照する実画像の配置先 |
 | HTML参照 | `./imgHtml/new_202601/area/<ファイル名>` | area source HTML内の参照形式 |
 
-`Text_area_data/画像データ`を公開用正本として参照してはいけません。公開ページは `HP/imgHtml/new_202601/area` を参照します。
+NASの受入素材を公開用正本として直接参照してはいけません。公開ページはローカルGit作業場の `HP/imgHtml/new_202601/area` を参照します。
 
 ## 2. 2026-07-13確認結果
 
-準備フォルダ:
+準備フォルダ（NAS保管専用。Git操作禁止）:
 
 ```text
 \\192.168.1.3\disk1\FSG_SEO\candy\Text_area_data\画像データ
@@ -108,7 +108,7 @@ kagoshima-deliveryhealth-area-ishikidai_2.jpg
 
 画像が揃ったことだけをページ制作完了としてはいけません。新規areaページへ画像を適用するときは、`CANDY_AREA_PAGE_GENERATION_SPEC.md` に従い、公開PHP、source HTML、ページ別dataset PHP、`dataset_base.php` のcase登録とリンク変換、area一覧・関連内部リンク、`sitemap.xml` への登録要否まで一体で確認します。必要なリンク設置や登録が未完了なら、ページを完成扱い・公開可能扱いにしません。
 
-1. 準備画像を `Text_area_data/画像データ` で受け取る
+1. 準備画像をNASの `\\192.168.1.3\disk1\FSG_SEO\candy\Text_area_data\画像データ` で受け取る
 2. ファイル名からslugと `_1`・`_2` を抽出する
 3. 対象txtのcanonical slugと一致するか確認する
 4. `_1`・`_2` が両方あるか確認する
@@ -125,12 +125,11 @@ kagoshima-deliveryhealth-area-ishikidai_2.jpg
 
 ## 8. Git管理
 
-- 公開ページで使用する正本画像は `HP/imgHtml/new_202601/area` 側をGit管理対象とする
-- `Text_area_data/画像データ` は準備・受入用であり、同一画像を二重Commitしない
-- 現在 `画像データ` は未追跡である
-- `.gitignore` は現在存在しない
-- 準備フォルダをGit除外するか、別保管場所へ移すかはユーザー判断が必要
-- ユーザー判断までは、`git add -A`で準備画像を一括ステージしてはいけない
+- 公開ページで使用する正本画像はローカルGit作業場の `HP/imgHtml/new_202601/area` 側をGit管理対象とする
+- NASの `Text_area_data/画像データ` は準備・受入用であり、Git管理対象にしない
+- NASではGit操作せず、受入素材を直接Stage・Commitしない
+- 公開用正本へ追加する場合は、対象画像と保存先を確認し、明示承認後にローカルGit作業場へコピーする
+- `git add -A`で受入画像を一括ステージしてはいけない
 
 ## 9. 完了判定
 

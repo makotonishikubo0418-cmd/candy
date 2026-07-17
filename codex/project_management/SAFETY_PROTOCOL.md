@@ -45,7 +45,7 @@
 | `HP/AGENTS.md` | HP作業導線 |
 | `HP/index.php` | 実サイト入口 |
 | `Text_area_data/`、`Text_blog_data/`、`Text_hotel_data/` | ページ制作入力 |
-| `Backup/` | 旧データと退避済み確認先 |
+| NASの `Backup/` | 旧データと退避済み確認先。Git作業場として扱わない |
 | `HP/HP/` | 作ってはいけない重複階層。存在したら停止して報告 |
 
 ## 4. 実行前分類
@@ -65,10 +65,10 @@
 
 実行前に最低限これを確認する。
 
-1. 作業場が `\\192.168.1.3\disk1\FSG_SEO\candy` であること。
+1. Git作業場が `C:\Codex\candy` であること。NASは保管専用とし、Git操作しないこと。
 2. `AGENTS.md`、`codex/README.md`、必要な管理文書を読んだ証拠を出すこと。
 3. `codex/project_management/TASK_RESERVATIONS.md` で対象を予約すること。
-4. Git状態を1回だけ確認すること。
+4. `git fetch origin` と `git status --short --branch` でGit状態を確認し、behindなら編集前にpullすること。
 5. 対象リストを固定すること。
 6. 対象リストに保護対象が混ざっていないこと。
 7. 削除、移動、Commit、Push、本番操作はユーザー明示指示があること。
@@ -77,6 +77,7 @@
 
 Git操作は次を守る。
 
+- Git操作は `C:\Codex\candy` だけで行い、NASでは実行しない。
 - Stageは対象パスを明示する。
 - `git add -u -- <対象>` と `git add -- <対象>` を使い分ける。
 - Stage後に `git diff --cached --name-status` で対象外がないことを確認する。
@@ -103,14 +104,14 @@ Git操作は次を守る。
 
 Git復旧は明示承認後だけ実行する。
 
-1. 壊れた `.git` を `.git-backups/broken_git_日時` へ退避する。
-2. `git -c safe.directory='*'` をすべてのGitコマンドに付ける。
-3. GitHubの最新Commitを確認する。
-4. 作業ツリー本体を壊さない方法でGit管理だけ復旧する。
-5. 誤削除された追跡ファイルだけを戻す。
-6. `git fsck --no-dangling` を実行する。
-7. `git status` が読めることを確認する。
-8. 復旧結果を報告する。
+1. 壊れたローカル作業場への書込みを止め、未Commit・未追跡ファイルの有無を読み取り確認する。
+2. GitHubの `origin/main` 最新Commitと、復旧対象に必要なローカル固有差分を確認する。
+3. 壊れた作業場を削除、上書き、移動せず、別の空ディレクトリへ再cloneする復旧案を作る。
+4. 明示承認後、GitHubからローカルへ再cloneし、Branch、upstream、Remote、`core.autocrlf` を確認する。
+5. 必要なローカル固有差分がある場合だけ、新cloneへ対象を明示して戻す。旧 `.git` を新cloneへコピーしない。
+6. `git status --short --branch`、HEADと`origin/main`、保護対象の存在を確認する。
+7. NASの退避 `.git` を復旧元やGit作業場として使用しない。
+8. 復旧結果、戻した対象、未復旧対象を報告する。
 
 ## 9. 報告ルール
 

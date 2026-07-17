@@ -56,5 +56,5 @@ Updated: 2026-07-16
 ## Notes
 
 - This file replaces the older 135-input classification from the previous Codex work folder.
-- The current correct folder is `\\192.168.1.3\disk1\FSG_SEO\candy`.
+- The current correct folder is `C:\Codex\candy`.
 - `下福元町_テンプレート.txt`、`下竜尾町.txt`、`慈眼寺町_テンプレート.txt` were reflected from the previous Codex work folder because the current folder still had placeholders or an image-path typo.

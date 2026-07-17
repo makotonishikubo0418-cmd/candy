@@ -107,7 +107,7 @@ HP/sitemap.xml
 codex/docs/CANDY_AREA_105_PAGE_QUEUE.md の対象1行
 ```
 
-`\\192.168.1.3\disk1\FSG_SEO\candy\codex\ページ作成用.md` は更新しない。
+`C:\Codex\candy\codex\ページ作成用.md` は更新しない。
 
 ## 4. 検証
 

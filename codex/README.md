@@ -1,17 +1,20 @@
 # candy 管理入口
 
-このREADMEは、`\\192.168.1.3\disk1\FSG_SEO\candy\codex\README.md` にある管理資料の入口です。
+このREADMEは、`C:\Codex\candy\codex\README.md` にある管理資料の入口です。
 
 ## 1. 正本と作業場所
 
 | 種類 | 場所 | 扱い |
 |---|---|---|
-| GitHub作業場 | `\\192.168.1.3\disk1\FSG_SEO\candy` | GitHub `makotonishikubo0418-cmd/candy` へつながるリポジトリルート |
-| Codex管理正本 | `\\192.168.1.3\disk1\FSG_SEO\candy\codex` | 管理入口、管理文書、HP制作仕様、作業ツールを置く |
-| プロジェクト管理 | `\\192.168.1.3\disk1\FSG_SEO\candy\codex\project_management` | ルール、現在地、予約、履歴、安全手順の正本 |
-| 実サイト配下 | `\\192.168.1.3\disk1\FSG_SEO\candy\HP` | PHP、source、includefile、画像、log、movieなどHPデータ |
+| ローカルGit作業場 | `C:\Codex\candy` | GitHubへ同期する唯一の作業用リポジトリルート |
+| GitHub同期ハブ | `makotonishikubo0418-cmd/candy` | Codex間でCommitを共有する。Pushは明示指示時だけ行う |
+| Codex管理正本 | `C:\Codex\candy\codex` | 管理入口、管理文書、HP制作仕様、作業ツールを置く |
+| プロジェクト管理 | `C:\Codex\candy\codex\project_management` | ルール、現在地、予約、履歴、安全手順の正本 |
+| 実サイト配下 | `C:\Codex\candy\HP` | PHP、source、includefile、画像、log、movieなどHPデータ |
 | 制作入力 | ルート直下の `Text_area_data`、`Text_blog_data`、`Text_hotel_data` | HPへ直接公開しないページ制作元データ |
-| 退避・旧資料 | `\\192.168.1.3\disk1\FSG_SEO\candy\Backup` | 旧Codex資料、旧HPデータ、除外リストなど。現行正本ではない |
+| NAS保管 | `\\192.168.1.3\disk1\FSG_SEO\candy` | `Backup/`・受入素材の保管専用。Git操作は禁止 |
+
+作業開始時は `git fetch origin` と `git status --short --branch` を実行する。`main` が `origin/main` よりbehindなら先にpullし、Pushはユーザーの明示指示がある場合だけ行う。
 
 ## 2. 最初に読むもの
 
@@ -30,10 +33,10 @@
 | `codex/docs/` | area・hotel・blogなどHP制作の現行runbookと仕様 |
 | `codex/scripts/` | ページ生成・検証・公開用スクリプトの配置先 |
 | `HP/` | 公開サイト本体。`includefile`、`log`、`movie`もHPデータとしてここに置く |
-| `Text_area_data/` | areaページの制作入力。area用の受入画像は `Text_area_data/画像データ/` |
+| `Text_area_data/` | areaページの制作入力。area用の受入画像はNASの `Text_area_data/画像データ/` に保管する |
 | `Text_blog_data/` | blogページの制作入力 |
 | `Text_hotel_data/` | hotelページの制作入力 |
-| `Backup/` | バックアップと退避。`HP_旧データ/`、`除外リスト/`、旧Codex資料を含む |
+| NASの `Backup/`・受入素材 | バックアップ、退避、旧資料、Git管理外の受入素材を保管する。NASでGit操作しない |
 
 ## 4. 正本一覧
 
@@ -69,8 +72,8 @@
 
 ## 7. 重複禁止
 
-- 管理正本を共有ルート直下や `HP/` 配下へ複製しない。
+- 管理正本をローカルリポジトリ直下や `HP/` 配下、NASへ複製しない。
 - `HP/HP/` を作らない。
 - `HP/README.md` を作らない。HP作業導線は `HP/AGENTS.md` に集約する。
-- `Backup/` 内の旧資料を現行仕様として使わない。使用時は現行ファイルと再照合する。
+- NASの `Backup/` 内にある旧資料を現行仕様として使わない。使用時はローカル正本と再照合する。
 - 仕様、現在地、Task履歴、報告を同じ文書へ混在させない。

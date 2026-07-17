@@ -8,20 +8,38 @@
 
 | 種別 | パス | 状態 |
 |---|---|---|
-| Git作業場 | `\\192.168.1.3\disk1\FSG_SEO\candy` | GitHub `makotonishikubo0418-cmd/candy` のリポジトリルート |
-| Codex管理正本 | `\\192.168.1.3\disk1\FSG_SEO\candy\codex` | 管理資料と作業ツールの正本 |
-| 管理正本入口 | `\\192.168.1.3\disk1\FSG_SEO\candy\codex\README.md` | 正本 |
-| プロジェクト管理 | `\\192.168.1.3\disk1\FSG_SEO\candy\codex\project_management` | ルール、状態、予約、履歴、安全手順 |
-| HP制作仕様 | `\\192.168.1.3\disk1\FSG_SEO\candy\codex\docs` | area・hotel・blog等のrunbookと仕様 |
-| 作業ツール | `\\192.168.1.3\disk1\FSG_SEO\candy\codex\scripts` | 移動済み。内部パス移行未完了のため実行停止 |
-| 実サイト配下 | `\\192.168.1.3\disk1\FSG_SEO\candy\HP` | PHP、source、includefile、画像、log、movie |
+| ローカルGit作業場 | `C:\Codex\candy` | GitHubへ同期する唯一の作業用リポジトリルート |
+| GitHub同期ハブ | `makotonishikubo0418-cmd/candy` | Codex間でCommitを共有する。Pushは明示指示時だけ行う |
+| Codex管理正本 | `C:\Codex\candy\codex` | 管理資料と作業ツールの正本 |
+| 管理正本入口 | `C:\Codex\candy\codex\README.md` | 正本 |
+| プロジェクト管理 | `C:\Codex\candy\codex\project_management` | ルール、状態、予約、履歴、安全手順 |
+| HP制作仕様 | `C:\Codex\candy\codex\docs` | area・hotel・blog等のrunbookと仕様 |
+| 作業ツール | `C:\Codex\candy\codex\scripts` | 内部パス移行未完了のため生成・公開コマンドは実行停止を継続 |
+| 実サイト配下 | `C:\Codex\candy\HP` | PHP、source、includefile、画像、log、movie |
 | 制作入力 | ルート直下の `Text_area_data`、`Text_blog_data`、`Text_hotel_data` | HP外の制作元データ |
-| 退避・旧資料 | `\\192.168.1.3\disk1\FSG_SEO\candy\Backup` | 旧資料。現行正本ではない |
-| HP作業導線 | `\\192.168.1.3\disk1\FSG_SEO\candy\HP\AGENTS.md` | HP作業用。管理正本ではない |
+| NAS保管 | `\\192.168.1.3\disk1\FSG_SEO\candy` | `Backup/`・受入素材の保管専用。Git操作は禁止 |
+| HP作業導線 | `C:\Codex\candy\HP\AGENTS.md` | HP作業用。管理正本ではない |
 
 ## 2. Git状態
 
-2026-07-16の管理体制修正開始時点で確認した状態。
+### 2.1 現行ローカルGit状態
+
+2026-07-17の本Task開始時に `C:\Codex\candy` で確認した状態。
+
+| 項目 | 値 |
+|---|---|
+| ブランチ | `main` |
+| upstream | `origin/main` |
+| リモート | `https://github.com/makotonishikubo0418-cmd/candy.git` |
+| `core.autocrlf` | `false` |
+| HEAD / origin/main | `1f856a7c4f513a2908ca5578eb517e9d872635e7` で一致 |
+| 作業ツリー | Task開始時はclean。本Taskの管理文書差分は未Commit |
+
+作業開始時は `git fetch origin` と `git status --short --branch` で最新状態を確認し、behindなら編集前にpullする。NASではGit操作しない。
+
+### 2.2 2026-07-16旧NAS作業場の過去スナップショット
+
+以下は2026-07-16の管理体制修正開始時点で確認した過去状態。
 
 | 項目 | 値 |
 |---|---:|
@@ -48,11 +66,11 @@
 
 | 問題 | 状態 | 次の扱い |
 |---|---|---|
-| 新フォルダ配置と管理資料の不一致 | 修正済み | 管理入口、構成、保護対象、runbookの参照を新配置へ統一済み |
+| ローカル作業場と管理資料の不一致 | 修正済み・未Commit | 現行導線を `C:\Codex\candy`、GitHub同期、NAS保管専用へ更新 |
+| NAS上Git運用 | 解決済み（ユーザー実施） | NASの `.git` は `Backup/` 内へ退避済みとの申告。今後NASでGit操作しない。今回NASは未操作 |
 | `codex/scripts/` 内部の旧階層前提 | 未解消・実行停止 | リポジトリルート、HPルート、`Text_*_data` の解決処理を修正し、area・hotel・blog・資料生成をdry-run検証する |
-| 移動後のGit差分が大量に見える | 未整理 | ユーザー実施の移動と今回の文書修正を混同せず、Commit前に対象を明示する |
-| 管理文書のGitHub共有 | Commit/Push未実施 | 明示指示がある場合だけ対象を固定してCommit/Pushする |
-| 未追跡txtが多数残っている | 未整理 | 作成可否と採用可否で分類する |
+| 旧NAS作業場の大量差分・未追跡 | 解決済み | 現ローカルcloneは本Task開始時clean。旧件数は過去スナップショットとして扱う |
+| 今回の管理文書のGitHub共有 | Commit/Push未実施 | 今回は禁止。別途明示指示がある場合だけ対象を固定してCommit/Pushする |
 | area・hotel入力の停止対象 | 未解消 | 各入力分類とtarget gateを、スクリプト移行完了後に再実行する |
 | `seiryo` / `seiryou` 画像重複 | 保留 | canonical参照を確認してから判断する |
 
@@ -61,17 +79,16 @@
 1. `codex/scripts/` のルート計算と `Text_*_data` 入力制限を新配置へ修正する
 2. area・hotel・blog・管理資料生成を本番操作なしで検証する
 3. スクリプト実行停止を解除できるか判定し、管理資料へ結果を反映する
-4. Commit/Pushする場合は、ユーザー移動分と今回の文書変更を対象固定して確認する
+4. 今回の管理文書をCommit/Pushする場合は、別途明示指示を受け、対象を固定して確認する
 5. area・hotelの入力停止対象を再分類する
 
 ## 6. Commit対象候補
 
-今回の配置変更をGitHubへ永続化する場合は、ユーザーが移動したファイル・フォルダと、今回更新した管理資料を分けて対象確認する。
+今回のローカル作業場定義変更をGitHubへ永続化する場合は、今回更新した管理文書だけを対象として確認する。
 
 管理資料の中心対象:
 
 - `AGENTS.md`
-- `HP/AGENTS.md`
 - `codex/README.md`
 - `codex/管理体制_概要説明書.md`
 - `codex/project_management/` の変更対象

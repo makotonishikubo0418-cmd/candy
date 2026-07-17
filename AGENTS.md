@@ -2,23 +2,25 @@
 
 ## 1. Role
 
-This is the local parent entrypoint for `\\192.168.1.3\disk1\FSG_SEO\candy`.
+This is the local parent entrypoint for `C:\Codex\candy`.
 
 Keep this file short. Do not turn it into a runbook.
 
-The management source of truth is the `codex` folder in this shared repository:
+The management source of truth is the `codex` folder in this local clone:
 
-`\\192.168.1.3\disk1\FSG_SEO\candy\codex`
+`C:\Codex\candy\codex`
 
 The project-management documents are:
 
-`\\192.168.1.3\disk1\FSG_SEO\candy\codex\project_management`
+`C:\Codex\candy\codex\project_management`
 
 The GitHub-connected working repository is:
 
-`\\192.168.1.3\disk1\FSG_SEO\candy`
+`C:\Codex\candy`
 
-Do not create a second management source of truth under `HP/`, the shared root, or another folder.
+GitHub is the synchronization hub. The NAS path `\\192.168.1.3\disk1\FSG_SEO\candy` is storage-only for `Backup/` and accepted source assets; it is not a Git working repository, and Git commands must not be run there.
+
+Do not create a second management source of truth under `HP/`, the repository root, the NAS, or another folder.
 
 ## 2. Required Start
 
@@ -41,6 +43,8 @@ For HP page, script, Git, or production work, also read `HP/AGENTS.md`.
 - Do not overwrite another Codex task. Check `codex/project_management/TASK_RESERVATIONS.md` first.
 - Preserve existing user work. A dirty tree alone is not a stop reason; conflicting overlap is.
 - Do not copy secrets, personal information, or raw log contents into reports or documents.
+- At the start of work, run `git fetch origin` and `git status --short --branch`; if `main` is behind `origin/main`, pull before editing.
+- Run Git commands only in `C:\Codex\candy`; Git operations on the NAS are prohibited.
 - Do not run `git reset --hard`, `git clean`, force push, unauthorized merge, or unauthorized rebase.
 - For deletion, movement, bulk cleanup, Git repair, or other high-risk operations, follow `codex/project_management/SAFETY_PROTOCOL.md` before execution.
 
@@ -98,19 +102,20 @@ Use this shape:
 
 Do not include Commit, Push, Actions, production, HTTP, or browser evidence unless that step was actually performed.
 
-# BEGIN WINDOWS UNC OPERATION RULES
+# BEGIN NAS STORAGE OPERATION RULES
 
-## Windows UNC operation rules
+## Windows NAS storage operation rules
 
-These rules apply when this repository is opened directly from:
+These rules apply only when directly reading or writing storage data under:
 
 \\192.168.1.3\disk1\FSG_SEO\candy
 
-- The NAS repository is directly readable and writable through PowerShell and .NET.
+- The NAS storage is directly readable and writable through PowerShell and .NET.
+- The NAS is storage-only. Do not treat it as a Git repository, and do not run Git commands there.
 - Do not conclude that the NAS is not writable merely because `apply_patch` or a built-in patch operation fails.
-- Do not use `apply_patch` or built-in patch editing for files in this UNC repository.
+- Do not use `apply_patch` or built-in patch editing for files in NAS storage.
 - Use PowerShell or .NET direct file operations for NAS edits.
-- Read every repository text file explicitly as UTF-8.
+- Read every NAS text file explicitly as UTF-8.
 - Never analyze, summarize, or edit mojibake output.
 - Preserve UTF-8 without BOM when modifying existing UTF-8 files.
 - Before editing, verify the exact file, target section, and intended replacement count.
@@ -120,9 +125,9 @@ These rules apply when this repository is opened directly from:
 - After editing, reread the changed section as UTF-8.
 - Run `git diff -- <target-file>` after every change.
 - Verify that no unrelated file or line changed.
-- Run Git commands with:
-  `git -C "\\192.168.1.3\disk1\FSG_SEO\candy" ...`
-- If a command cannot use the UNC path as its working directory, use a local working directory and address the NAS file by absolute UNC path.
-- Do not propose reopening this project as `K:` merely to resolve an `apply_patch` failure.
+- Run Git commands only with:
+  `git -C "C:\Codex\candy" ...`
+- Use a local working directory and address NAS storage files by absolute UNC path only when a storage operation is explicitly requested.
+- Do not propose reopening the Git project from the NAS or as `K:`.
 
-# END WINDOWS UNC OPERATION RULES
+# END NAS STORAGE OPERATION RULES

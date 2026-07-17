@@ -21,6 +21,7 @@
 
 | Task ID | Codex | 期間 | 対象 | 結果 |
 |---|---|---|---|---|
+| TASK-20260717-LOCAL-WORKSPACE-DOCS-001 | current | 2026-07-17 | 管理文書13ファイル | ローカル作業場、GitHub同期、NAS保管専用へ更新。NAS参照は保管10件・過去履歴5件だけ。scripts・Commit・Push・NAS操作は未実施 |
 | TASK-20260717-GITHUB-SYNC-001 | current | 2026-07-17 | GitHub構成同期 | Commit `7d23c91` をmainへPushし、8対象だけのリモートツリーと一致。`Backup/`除外、NAS物理削除なし |
 | TASK-20260717-STRUCTURE-DOCS-001 | current | 2026-07-17 | フォルダ再編後の管理資料26ファイル | 新配置へ導線を統一し、実体・UTF-8・見出し・表を確認。スクリプト未移行はSTOPとして記録 |
 | TASK-20260717-AREA-HOTEL-GUIDE-001 | current | 2026-07-17 | area・hotel生成仕様、管理資料ルーター、予約表 | 両ページの役割、詳細構成ツリー、可変件数、即時参照導線を正本化 |
