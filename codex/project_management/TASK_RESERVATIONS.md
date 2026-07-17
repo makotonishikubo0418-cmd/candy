@@ -14,14 +14,13 @@
 
 ## 2. Active Reservations
 
-| Task ID | Codex | Start date | Target files or scope | Objective | Status |
-|---|---|---|---|---|---|
-| CANDY-MARKDOWN-COMMIT-PUSH-20260718 | current | 2026-07-18 | Current working-tree changes, related active Markdown, generated documents, and Git synchronization | Reconcile management records, validate the accumulated work, Commit the fixed target set, and Push it to origin/main. | IN_PROGRESS |
+No active reservations.
 
 ## 3. Completed and Released Reservations
 
 | Task ID | Codex | Period | Scope | Result | Status |
 |---|---|---|---|---|---|
+| CANDY-MARKDOWN-COMMIT-PUSH-20260718 | current | 2026-07-18 | Accumulated working-tree changes, related active Markdown, generated documents, and Git synchronization | Reconciled the current-state wording, validated and committed the fixed 78-file target set as `eb54399`, pushed it to origin/main, and confirmed the remote ref match. | COMPLETE |
 | CANDY-MARKDOWN-ENGLISH-STANDARDIZATION-20260718 | current | 2026-07-18 | `AGENTS.md`, `HP/AGENTS.md`, `codex/README.md`, active `codex/**/*.md`, and `codex/scripts/candy_site_state.py` | Audited 46 active Markdown files, renamed one tracked canonical document, translated 41 manual documents, updated the generator, and regenerated four documents. Current references, names, headings, generated reproducibility, and unstaged Git state passed validation. | COMPLETE |
 | CANDY-HP-MD-MANAGEMENT-20260718 | current | 2026-07-18 | Management entry point, stable and generated documents, management and publish scripts, and four specified legacy document groups | Separated stable specifications from generated current state, implemented `candy-site-state` and the pre-stage gate, isolated 20 legacy files on the NAS with matching SHA-256 values, and deleted the four local target groups. Commit, Push, and HP content changes were not performed. | COMPLETE |
 | TASK-20260718-AREA-ARATA-BACKUP-001 | current | 2026-07-18 | 荒田 input and `Text_area_data/Backup/` | Updated the 荒田 input to the current format and passed dry-run validation. Deleted two unnecessary backup files and the empty folder. | COMPLETE |
