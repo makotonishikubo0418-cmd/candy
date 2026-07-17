@@ -20,48 +20,50 @@
 
 ページごとの例外は実ファイルで確認する。
 
-## 3. 通常area・hotel・blog制作
+## 3. 通常area・hotel・blog制作（現在は実行停止）
 
-次の一括コマンドだけを実行する。事前の `build`、`check`、全資料再読を重ねない。
+`codex/scripts/` への移動後も、スクリプト内部に旧階層を前提とするパス計算と入力制限が残っている。内部修正とdry-run検証が完了するまで、下記コマンドは実行しない。
 
-```powershell
-HP\codex\scripts\candy-area.cmd publish-next
-```
-
-対象指定:
+移行完了後の標準入口:
 
 ```powershell
-HP\codex\scripts\candy-area.cmd publish --input "HP/Text_area_data/対象.txt"
+codex\scripts\candy-area.cmd publish-next
 ```
 
-本番操作なし:
+area対象指定:
 
 ```powershell
-HP\codex\scripts\candy-area.cmd build --input "HP/Text_area_data/対象.txt"
-HP\codex\scripts\candy-area.cmd check --input "HP/Text_area_data/対象.txt"
+codex\scripts\candy-area.cmd publish --input "Text_area_data/対象.txt"
 ```
 
-ツールは生成、検証、対象限定stage、1 Commit、1 Push、Actions、本番HTTP、URL出力を行う。公開後の資料専用Commit・Pushは行わない。
+area本番操作なし:
+
+```powershell
+codex\scripts\candy-area.cmd build --input "Text_area_data/対象.txt"
+codex\scripts\candy-area.cmd check --input "Text_area_data/対象.txt"
+```
 
 通常hotel制作:
 
 ```powershell
-HP\codex\scripts\candy-hotel.cmd publish --input "HP/Text_hotel_data/対象ホテル.txt"
+codex\scripts\candy-hotel.cmd publish --input "Text_hotel_data/対象ホテル.txt"
 ```
 
 未公開の完全なhotel入力を自動選択する場合:
 
 ```powershell
-HP\codex\scripts\candy-hotel.cmd publish-next
+codex\scripts\candy-hotel.cmd publish-next
 ```
 
 通常blog制作:
 
 ```powershell
-HP\codex\scripts\candy-blog.cmd publish --input "HP/Text_blog_data/対象記事.txt"
-HP\codex\scripts\candy-blog.cmd build --input "HP/Text_blog_data/対象記事.txt"
-HP\codex\scripts\candy-blog.cmd check --input "HP/Text_blog_data/対象記事.txt"
+codex\scripts\candy-blog.cmd publish --input "Text_blog_data/対象記事.txt"
+codex\scripts\candy-blog.cmd build --input "Text_blog_data/対象記事.txt"
+codex\scripts\candy-blog.cmd check --input "Text_blog_data/対象記事.txt"
 ```
+
+移行完了後、ツールは生成、検証、対象限定stage、1 Commit、1 Push、Actions、本番HTTP、URL出力を行う。公開後の資料専用Commit・Pushは行わない。
 
 ## 4. 制作ルール
 

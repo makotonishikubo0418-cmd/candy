@@ -6,22 +6,26 @@ This is the local parent entrypoint for `\\192.168.1.3\disk1\FSG_SEO\candy`.
 
 Keep this file short. Do not turn it into a runbook.
 
-The management source of truth is this shared folder root:
+The management source of truth is the `codex` folder in this shared repository:
 
-`\\192.168.1.3\disk1\FSG_SEO\candy`
+`\\192.168.1.3\disk1\FSG_SEO\candy\codex`
+
+The project-management documents are:
+
+`\\192.168.1.3\disk1\FSG_SEO\candy\codex\project_management`
 
 The GitHub-connected working repository is:
 
 `\\192.168.1.3\disk1\FSG_SEO\candy`
 
-Do not create a second management source of truth under `HP/管理体制`.
+Do not create a second management source of truth under `HP/`, the shared root, or another folder.
 
 ## 2. Required Start
 
 Before work:
 
 1. Read this file.
-2. Read `README.md`.
+2. Read `codex/README.md`.
 3. Read only the management document or HP runbook required for the current task.
 4. Verify real paths, current files, and Git state before editing.
 
@@ -34,11 +38,11 @@ For HP page, script, Git, or production work, also read `HP/AGENTS.md`.
 - Do not mix specifications, current state, reports, and task history.
 - Do not create duplicate sources of truth. Update the existing authoritative document.
 - Do not append noisy reports to the end of documents. Put information in the correct section.
-- Do not overwrite another Codex task. Check `管理体制/TASK_RESERVATIONS.md` first.
+- Do not overwrite another Codex task. Check `codex/project_management/TASK_RESERVATIONS.md` first.
 - Preserve existing user work. A dirty tree alone is not a stop reason; conflicting overlap is.
 - Do not copy secrets, personal information, or raw log contents into reports or documents.
 - Do not run `git reset --hard`, `git clean`, force push, unauthorized merge, or unauthorized rebase.
-- For deletion, movement, bulk cleanup, Git repair, or other high-risk operations, follow 管理体制/SAFETY_PROTOCOL.md before execution.
+- For deletion, movement, bulk cleanup, Git repair, or other high-risk operations, follow `codex/project_management/SAFETY_PROTOCOL.md` before execution.
 
 Explicit user instruction is required for:
 
@@ -64,7 +68,7 @@ AGENTS.md check:
 - Work excluded
 ```
 
-For multi-Codex work, check `管理体制/TASK_RESERVATIONS.md` before editing shared files.
+For multi-Codex work, check `codex/project_management/TASK_RESERVATIONS.md` before editing shared files.
 
 ## 5. Reporting
 
@@ -93,3 +97,32 @@ Use this shape:
 ```
 
 Do not include Commit, Push, Actions, production, HTTP, or browser evidence unless that step was actually performed.
+
+# BEGIN WINDOWS UNC OPERATION RULES
+
+## Windows UNC operation rules
+
+These rules apply when this repository is opened directly from:
+
+\\192.168.1.3\disk1\FSG_SEO\candy
+
+- The NAS repository is directly readable and writable through PowerShell and .NET.
+- Do not conclude that the NAS is not writable merely because `apply_patch` or a built-in patch operation fails.
+- Do not use `apply_patch` or built-in patch editing for files in this UNC repository.
+- Use PowerShell or .NET direct file operations for NAS edits.
+- Read every repository text file explicitly as UTF-8.
+- Never analyze, summarize, or edit mojibake output.
+- Preserve UTF-8 without BOM when modifying existing UTF-8 files.
+- Before editing, verify the exact file, target section, and intended replacement count.
+- For targeted replacement, require exactly one intended match.
+- If the match count is zero or greater than one, stop without changing the file.
+- Change only the requested section.
+- After editing, reread the changed section as UTF-8.
+- Run `git diff -- <target-file>` after every change.
+- Verify that no unrelated file or line changed.
+- Run Git commands with:
+  `git -C "\\192.168.1.3\disk1\FSG_SEO\candy" ...`
+- If a command cannot use the UNC path as its working directory, use a local working directory and address the NAS file by absolute UNC path.
+- Do not propose reopening this project as `K:` merely to resolve an `apply_patch` failure.
+
+# END WINDOWS UNC OPERATION RULES
