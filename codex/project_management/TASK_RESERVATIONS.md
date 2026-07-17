@@ -16,12 +16,12 @@
 
 | Task ID | Codex | 開始 | 対象ファイル/範囲 | 目的 | 状態 |
 |---|---|---|---|---|---|
-| TASK-20260717-GITHUB-SYNC-001 | current | 2026-07-17 | `.gitignore`, Git index, `.github/`, `AGENTS.md`, `HP/`, `codex/`, `Text_area_data/`, `Text_blog_data/`, `Text_hotel_data/` | 現在の正本だけをGitHubへ同期し、旧ルート構成をGit管理から除外 | 作業中 |
 
 ## 3. 完了・解除済み
 
 | Task ID | Codex | 期間 | 対象 | 結果 |
 |---|---|---|---|---|
+| TASK-20260717-GITHUB-SYNC-001 | current | 2026-07-17 | GitHub構成同期 | Commit `7d23c91` をmainへPushし、8対象だけのリモートツリーと一致。`Backup/`除外、NAS物理削除なし |
 | TASK-20260717-STRUCTURE-DOCS-001 | current | 2026-07-17 | フォルダ再編後の管理資料26ファイル | 新配置へ導線を統一し、実体・UTF-8・見出し・表を確認。スクリプト未移行はSTOPとして記録 |
 | TASK-20260717-AREA-HOTEL-GUIDE-001 | current | 2026-07-17 | area・hotel生成仕様、管理資料ルーター、予約表 | 両ページの役割、詳細構成ツリー、可変件数、即時参照導線を正本化 |
 | TASK-20260717-SUMMARY-RULE-001 | current | 2026-07-17 | `管理体制/DOCUMENT_RULES.md`, `管理体制/TASK_RESERVATIONS.md` | `要約:` の必須情報、状態別書き分け、禁止例、正常完了・STOP例を正本化 |
