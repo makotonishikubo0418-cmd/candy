@@ -1,58 +1,82 @@
-# CANDY HP 全体構成
+# CANDY HP Structure Map
 
-HP配下を、公開入口、テンプレート、dataset、資産、管理資料に分けて管理します。
-## 共通集計
+## 1. Responsibility
 
-> 重要: 以下は 2026-07-10 の生成スナップショットであり、現在値ではありません。現在の件数・構成・状態は実ファイルから再集計してください。
+This is the canonical document for stable CANDY site-page structure and relationships. It does not store current page counts, every page name, Git state, or HTTP results. Use `generated/CANDY_SITE_PAGE_LEDGER.md` for current state.
 
-集計時点: 2026-07-10 04:52
-
-| 項目 | 件数 |
-|---|---:|
-| 全フォルダ | 37 |
-| 全ファイル | 1683 |
-| コード/設定ファイル | 328 |
-| 非コードファイル | 1355 |
-| codex配下ファイル | 34 |
-| codex/docs配下ファイル | 13 |
-| 管理MD(CANDY_*.md) | 13 |
-| ルート直下PHP | 98 |
-| source HTML | 89 |
-| includefile PHP | 101 |
-| dataset_*.php | 99 |
-| Text_*_data配下ファイル | 175 |
-| log配下ファイル | 74 |
-
-注記: `全フォルダ` は `[root]` を除く実フォルダ数。フォルダ台帳は管理行として `[root]` を追加するため、台帳行数は `全フォルダ + 1`。
-
-## 主要構成
-
-| 階層 | 役割 | 件数/状態 |
-|---|---|---:|
-| [root] | 公開入口PHPとルート設定 | 102 |
-| source | HTMLテンプレート | 90 |
-| includefile | 共通PHPとdataset | 102 |
-| css | 公開CSS | 14 |
-| js | 公開JavaScript | 18 |
-| imgHtml | HTML用画像 | 931 |
-| imgCss | CSS用画像 | 43 |
-| movie | 動画資産 | 15 |
-| Text_*_data | テキストデータ | 175 |
-| log | ログ。本文転記禁止 | 74 |
-| codex | Codex管理資料 | 34 |
-
-## 基本生成構造
+## 2. Overall Structure
 
 ```text
-ルート直下PHP
-  -> includefile/dataset_base.php
-  -> source/同名.html
-  -> includefile/dataset_同名.php
-  -> includefile/class.hpgcoder2.php
-  -> HTML出力
+top `index.php`
+├─ indexes
+│  ├─ `area.php`  ── area detail `kagoshima-deliveryhealth-area-<slug>.php`
+│  ├─ `hotel.php` ── hotel detail `kagoshima-deliveryhealth-hotel-<slug>.php`
+│  ├─ `blog.php`  ── blog detail `kagoshima-deliveryhealth-blog-<slug>.php`
+│  └─ index and dynamic pages such as girls, schedule, news, and movie
+├─ common navigation and category routes
+├─ related-article and related-page routes
+└─ `sitemap.xml`
+
+public PHP
+└─ `includefile/dataset_base.php`
+   ├─ `source/<same-name>.html`
+   ├─ `includefile/dataset_<same-name>.php`
+   ├─ `includefile/class.hpgcoder2.php`
+   └─ `includefile/funcs.php`
 ```
 
-## 要確認
+Public PHP is a thin entry point. Static body content, SEO, and layout are primarily in the matching source HTML; datasets and common PHP apply runtime data and placeholders. Verify exceptions in actual files and the ledger.
 
-- PHP実行、DB接続、ブラウザ表示は未確認。
-- 公開方式と本番URLは CANDY_OPERATION_BASICS.md で未確認項目として管理する。
+## 3. Page Types
+
+| Type | Primary entry point | Responsibility | Canonical content or generation source |
+|---|---|---|---|
+| top | `index.php` / `source/index.html` | Site entry point and routes to primary categories, shops, and articles | Actual files and `CANDY_OTHER_PAGES_MANAGEMENT.md` |
+| area index | `area.php` / `source/area.html` | Routes from supported regions to area details | Actual files and `CANDY_AREA_PAGE_GENERATION_SPEC.md` |
+| area detail | `kagoshima-deliveryhealth-area-<slug>.php` | Region-specific shops, region information, hotels, and nearby information | `Text_area_data` and the area specification/runbook |
+| hotel index | `hotel.php` / `source/hotel.html` | Routes from available hotels to hotel details | Actual files and the hotel specification |
+| hotel detail | `kagoshima-deliveryhealth-hotel-<slug>.php` | Hotel-specific shops, FAQ, basic information, fees, transportation, and nearby information | `Text_hotel_data` and the hotel specification/runbook |
+| blog index | `blog.php` / `source/blog.html` | Routes from staff articles to blog details | Actual files and the blog specification |
+| blog detail | `kagoshima-deliveryhealth-blog-<slug>.php` | Topic-specific articles, introductions, comments, FAQ, and summary | `Text_blog_data` and the blog specification |
+| girls | `girls*.php`, `schedule.php`, and related files | Database- and session-backed roster, detail, and schedule functions | Actual files and `CANDY_OTHER_PAGES_MANAGEMENT.md` |
+| system | `contact.php`, `confirm.php`, `mypage.php`, and related files | Dynamic input, confirmation, member, and related processing | Actual files and `CANDY_OTHER_PAGES_MANAGEMENT.md` |
+| special | `create.php`, `makeSitemap.php`, and related files | Special generation and operational entry points | Explicit approval and actual files. Do not use for normal page production |
+| template | `source/template_*.html` | Skeleton for a new detail page | Category specification. Do not count as a public page |
+
+## 4. Indexes, Common Routes, and Sitemap
+
+- The area, hotel, and blog indexes are the normal routes to their detail pages.
+- Blog and hotel may also have category sections on top, so confirm the category specification's change unit.
+- Synchronize both the visible breadcrumb and `BreadcrumbList`.
+- Related articles use the reserved slots or actual links defined by the category specification. Verify URL, display name, and existence together.
+- `sitemap.xml` registers search-facing URLs. It does not replace an index link; check both when adding a detail page or changing a URL.
+- A common-navigation change requires desktop/mobile impact checks on top, each index, representative details, and dynamic pages.
+
+## 5. Coupled Validation Targets
+
+| Change | Validate together |
+|---|---|
+| Detail-page body or SEO | Public PHP, source, dataset, dataset_base, source Text, required images, category index, and sitemap |
+| Area detail | Area index, related shops, repeated hotels/spots, and area queue |
+| Hotel detail | Hotel index, top hotel section, FAQ, fees, transportation, and nearby information |
+| Blog detail | Blog index, top blog section, table of contents, scenes, FAQPage, and ItemList |
+| Index | Index links, matching details, structured data, top routes, and sitemap |
+| Common PHP | dataset_base registrations, representative static and dynamic pages, and database/session/GET/Cookie dependencies |
+| Common CSS/JavaScript | All loading sources, desktop/mobile, DOM IDs/classes, external communication, Cookie, and localStorage dependencies |
+| Image | Source/CSS references, alt/OGP/JSON-LD, desktop/mobile, and separation of accepted and public assets |
+| URL, canonical, or robots | Indexes, internal links, OGP, JSON-LD, sitemap, and legacy URLs/redirects |
+
+## 6. Page-Specific Exceptions
+
+Do not append each existing page that differs from the common structure to this document. Store current structural differences in `generated/CANDY_SITE_PAGE_LEDGER.md` and `generated/CANDY_SEO_STATUS.md`, permanent generation exceptions in the category specification, and issues requiring an owner decision in `CANDY_FIX_BACKLOG.md`.
+
+## 7. Current-State Sources
+
+| Question | Source |
+|---|---|
+| All existing pages and structural files | `generated/CANDY_SITE_PAGE_LEDGER.md` |
+| Unbuilt pages, eligible production targets, and blockers | `generated/CANDY_UPCOMING_PAGES.md` |
+| Current PHP, CSS, JavaScript, and image state | `generated/CANDY_CODE_ASSET_INVENTORY.md` |
+| Per-page SEO state | `generated/CANDY_SEO_STATUS.md` |
+
+Update generated documents with `codex\scripts\candy-site-state.cmd write` and use `check` to verify agreement with actual files.

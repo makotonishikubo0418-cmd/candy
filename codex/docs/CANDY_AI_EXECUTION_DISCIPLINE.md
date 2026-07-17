@@ -45,11 +45,11 @@ For production commands such as area page creation:
 When a command stops, report only:
 
 ```text
-対象:
-停止理由:
-実施済み:
-未実施:
-次の実行コマンド:
+Target:
+STOP reason:
+Completed:
+Not executed:
+Next command:
 ```
 
 Long explanations are allowed only after the operator asks for them.

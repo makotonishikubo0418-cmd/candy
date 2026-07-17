@@ -1,40 +1,42 @@
-# CANDY AREA PAGE GENERATION SPEC
+# CANDY Area Page Generation Specification
 
-更新日: 2026-07-14
-対象: 鹿児島キャンディのarea詳細ページをCodexが通常運用で新規生成する場合
+- Updated: 2026-07-14
+- Applies to: Normal new generation of CANDY area detail pages by Codex
 
-## 1. この資料の目的
+## 1. Purpose
 
-areaページを壊さず、毎回同じ構成で生成するための正本仕様です。
+This is the canonical specification for generating area pages without damage and with a consistent structure.
 
-この資料は通常の新規ページ生成に使用します。不具合修正、既存機能変更、共通処理変更、リファクタなどの開発改修は対象外です。開発改修では `AGENTS.md` と `HP/AGENTS.md` の調査・変更・修正ルールを使用してください。
+Use it for normal new-page generation. Development changes such as bug fixes, existing-feature changes, common-processing changes, and refactoring are out of scope and follow `AGENTS.md` and `HP/AGENTS.md`.
 
-共通の入力不足・可変構造・停止条件は `CANDY_PAGE_GENERATION_GOVERNANCE.md` を先に適用します。
+Apply `CANDY_PAGE_GENERATION_GOVERNANCE.md` first for common missing-input, variable-structure, and STOP rules.
 
-area画像の受入、slug照合、公開用正本への配置、Git管理は `CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md` を必ず確認してください。
+Review `CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md` for area-image acceptance, slug reconciliation, placement in the canonical public source, and Git management.
 
-スタッフが未作成areaページを分割制作する場合は、`CANDY_AREA_STAFF_PRODUCTION_RUNBOOK.md` と `CANDY_AREA_105_PAGE_QUEUE.md` も必ず確認してください。
+For distributed staff production of unbuilt area pages, also review `CANDY_AREA_STAFF_PRODUCTION_RUNBOOK.md` and `CANDY_AREA_105_PAGE_QUEUE.md`.
 
-`codex/area/AREA_PAGE_CREATION_WORKFLOW.md`、`AREA_PAGE_MASTER.md`、`AREA_NEXT_ACTIONS.md` は2026-06-05時点の履歴・調査資料です。現在の通常生成では、この仕様書と共通ガバナンスを正本とします。
+Legacy area-production history and investigation snapshots are not current canonical sources. Normal generation uses this specification, the common governance document, and generated ledgers.
 
-### 1.1 役割とページ内構成（即時参照）
+### 1.1 Responsibility and Page Structure
 
-#### 役割
+#### Responsibility
 
-- 地域名から、その地域へ派遣できるデリヘル店、移動時間、交通費を判断できるようにする。
-- 地域の基本情報、近辺ホテル、待ち合わせ・周辺スポットをまとめ、利用場所を検討できるようにする。
-- 対応店舗一覧、店舗詳細、ホテル・スポット詳細、関連記事への導線を提供する。
-- 地域名検索に対応する本文と、パンくず・店舗一覧の構造化データを一致させる。
+- Enable users to identify delivery-health shops that can dispatch to the region, travel times, and transportation fees.
+- Combine basic regional information, nearby hotels, meeting places, and nearby spots so users can evaluate where to use the service.
+- Provide routes to supported-shop lists, shop details, hotel/spot details, and related articles.
+- Keep region-search body content consistent with breadcrumb and shop-list structured data.
 
-#### 出力・作成・修正時の指針
+#### Generation and Change Guidance
 
-- 構成確認を求められた場合は、下記ツリーを表示順の土台として回答する。
-- 店舗情報、ホテル情報、スポット情報は固定件数にせず、元データにある完成ブロック数だけ同じ項目構成で繰り返す。
-- 関連記事の予約ダミーだけは8件固定とする。実リンク設定済みの場合は実リンク1件以上へ置き換えられる。
-- 元データにない項目は推測しない。任意項目が0件なら空見出しや空コンテナを作らない。
-- scene、subtitle、description、FAQ項目のIDは、表示順に欠番・重複なしで採番する。
+- When asked for the structure, use the following tree as the visible-order basis.
+- Do not fix shop, hotel, or spot counts. Repeat the same item structure for complete blocks in source data only.
+- Only the reserved related-article dummy entries have a fixed count of eight. Actual configured links MAY replace them with one or more links.
+- Do not infer an item absent from source data. When an optional item count is zero, do not create an empty heading or container.
+- Number scene, subtitle, description, and FAQ item IDs in visible order without gaps or duplicates.
 
-#### ページ内構成
+#### Page Structure
+
+The Japanese labels below are exact website display concepts and are preserved.
 
 ```text
 エリアページ
@@ -100,96 +102,95 @@ area画像の受入、slug照合、公開用正本への配置、Git管理は `C
     └ 店舗情報ItemList
 ```
 
-## 2. 絶対ルール
+## 2. Mandatory Rules
 
-- 元データは `Text_area_data` 配下の対象地域テキストを使用する
-- HTMLテンプレートは `HP/source/template_kagoshima-deliveryhealth-area.html` を使用する
-- 公開入口PHP、source HTML、ページ別dataset PHP、`dataset_base.php`への登録を1セットとして扱う
-- HTMLだけを生成して完了としてはいけない
-- `HP/create.php` は通常のCodexページ生成では原則使用しない
-- 既存の同名ファイルが1つでもある場合は上書きせず、既存3点セットと登録状態を確認する
-- `dataset_base.php` は共通重要ファイルのため、対象と差分を事前提示し、ユーザーの実行指示または承認後に最小差分で変更する
+- Use the target-region text under `Text_area_data` as source data.
+- Use `HP/source/template_kagoshima-deliveryhealth-area.html` as the HTML template.
+- Treat public entry PHP, source HTML, page-specific dataset PHP, and `dataset_base.php` registration as one set.
+- Do not report completion after generating only HTML.
+- Do not normally use `HP/create.php` for Codex page generation.
+- When any same-name file exists, do not overwrite it; verify the existing three-file set and registrations.
+- `dataset_base.php` is a high-impact common file. Present the target and diff first, then change it minimally only after user instruction or approval.
 
-## 3. 確認した対象と件数
+## 3. Verified Population and Counts
 
-2026-07-12に実ファイルを全件読み取り、次を確認しました。
+All actual files were read on 2026-07-12 and yielded:
 
-| 対象 | 件数 | 備考 |
+| Target | Count | Notes |
 |---|---:|---|
-| `Text_area_data` 配下txt | 169 | 直下135、Completion 32、Backup 2 |
-| ページURLを取得できたtxt | 168 | 更新手順txt 1件を除く |
-| area公開候補source HTML | 61 | 完成34、placeholder残存27 |
-| area公開入口PHP | 71 | sourceがないもの10件を含む |
-| areaページ別dataset PHP | 71 | sourceがないもの10件を含む |
-| `dataset_base.php` のarea case登録 | 39 | source 61件中31件が未登録 |
-| `dataset_base.php` のareaリンク変換 | 39 | source 61件中31件が未登録 |
+| Text files under `Text_area_data` | 169 | 135 direct, 32 under Completion, and 2 under Backup |
+| Text files with a page URL | 168 | Excludes one update-procedure text file |
+| Area public-candidate source HTML | 61 | 34 complete and 27 with remaining placeholders |
+| Area public entry PHP | 71 | Includes 10 without source |
+| Area page-specific dataset PHP | 71 | Includes 10 without source |
+| Area cases in `dataset_base.php` | 39 | 31 of 61 source files are unregistered |
+| Area link transformations in `dataset_base.php` | 39 | 31 of 61 source files are unregistered |
 
-件数は将来変わるため、新規作成時に再集計してください。
+Counts may change; recalculate them for new production.
 
-## 4. ファイル対応
+## 4. File Pairing
 
-ページ識別子を `<slug>` とした場合、必須構成は次です。
+For page identifier `<slug>`, the required structure is:
 
 ```text
-元データ
+source data
 Text_area_data/.../<地域名>_テンプレート.txt
 
-HTMLテンプレート
+HTML template
 HP/source/template_kagoshima-deliveryhealth-area.html
 
-生成する3ファイル
+three generated files
 HP/kagoshima-deliveryhealth-area-<slug>.php
 HP/source/kagoshima-deliveryhealth-area-<slug>.html
 HP/includefile/dataset_kagoshima-deliveryhealth-area-<slug>.php
 
-追加登録
+additional registration
 HP/includefile/dataset_base.php
 ```
 
-slugは推測だけで決めません。元データのcanonical、ファイル名、既存ページ名を照合してください。同一地域に旧slugや別表記がある場合はユーザー確認が必要です。
+Do not determine a slug by inference alone. Reconcile canonical in source data, the filename, and existing page names. When one region has a legacy slug or alternate spelling, obtain user confirmation.
 
+### 4.1 Separation of Text Classification and New-Production Eligibility
 
-### 4.1 txt分類と新規制作可否の分離
+Text classifications such as `間違い無し`, `画像無し`, and `情報足りない` describe input content only. They do not determine new-page eligibility.
 
-`間違い無し`、`画像無し`、`情報足りない` などのtxt分類は、入力内容の状態だけを示す。新規ページとして制作可能かどうかは別判定である。
+New production is eligible only after confirming that the canonical slug has no existing public PHP, source HTML, page-specific dataset PHP, `dataset_base.php` registration, or sitemap registration; that the area index has exactly one target-slug link; and that it has no different slug for the same region name. Do not select a target from a successful classification alone.
 
-新規制作可否は、canonical slugに対して公開PHP、source HTML、ページ別dataset PHP、`dataset_base.php`、sitemapに既存ファイルまたは既存登録がないこと、area一覧に対象slugのリンクが1件あること、area一覧に同一地域名で別slugのリンクがないことを確認して初めて成立する。分類OKだけで対象を選ばない。
+## 5. Source-Data to HTML Mapping
 
-## 5. 元データからHTMLへの基本対応
-
-| 元データ項目 | HTML反映先 |
+| Source-data item | HTML target |
 |---|---|
-| title | `<title>`、必要に応じてOGP title |
-| description | meta description、OGP description |
-| canonical | canonical、OGP URL |
+| title | `<title>` and OGP title when applicable |
+| description | Meta description and OGP description |
+| canonical | Canonical and OGP URL |
 | image | OGP image |
-| img_1 | メイン画像src、alt |
-| page_title_h1 / パンくず | breadcrumb、h1 |
+| img_1 | Main-image `src` and alt |
+| page_title_h1 / breadcrumb | Breadcrumb and H1 |
 | subtitle_h1 | `id="subtitle_h1"` |
 | description_h1 | `id="description_h1"` |
-| 店舗一覧 | `scene1`内の店舗ブロック |
-| img_2 | 地域紹介画像src、alt |
-| 地域紹介 | scene、subtitle、description |
-| 地図URL・地図タイトル | iframeのsrc・title |
-| 人口・面積・設置年月日 | 基本情報表 |
-| ホテル情報 | FAQブロック |
-| 待ち合わせ・周辺スポット | FAQブロック |
-| 関連記事 | 将来利用する予約領域としてテンプレートのダミーリンク8件を保持 |
-| ページ全体情報 | JSON-LD 2ブロック |
+| Shop list | Shop blocks in `scene1` |
+| img_2 | Regional-introduction image `src` and alt |
+| Regional introduction | Scene, subtitle, and description |
+| Map URL and title | iframe `src` and title |
+| Population, area, and establishment date | Basic-information table |
+| Hotel information | FAQ blocks |
+| Meeting and nearby spots | FAQ blocks |
+| Related articles | Preserve eight template dummy links as a reserved future-use region |
+| Page-wide information | Two JSON-LD blocks |
 
-本文は、元データに明示された改行以外は不要な改行を追加しません。HTMLタグとして必要な改行と、表示文中の改行を混同しないでください。
+Do not add line breaks to body copy except where explicitly present in source data. Distinguish line breaks required by HTML markup from visible line breaks in copy.
 
-## 6. scene・subtitle・descriptionの採番
+## 6. Scene, Subtitle, and Description Numbering
 
-完成ページで確認した基本構造はscene 5個です。
+Verified complete pages have five base scenes:
 
-1. `scene1`: 人気デリヘル店情報
-2. `scene2`: 地域紹介
-3. `scene3`: 地域基本情報
-4. `scene4`: 近辺ホテル・宿泊施設
-5. `scene5`: 待ち合わせ・周辺スポット
+1. `scene1`: Popular delivery-health shop information
+2. `scene2`: Regional introduction
+3. `scene3`: Basic regional information
+4. `scene4`: Nearby hotels and lodging
+5. `scene5`: Meeting and nearby spots
 
-通常ブロックは次の形式です。
+Normal blocks use:
 
 ```text
 scene1 / description_1
@@ -197,7 +198,7 @@ scene2 / subtitle_2 / description_2
 scene3 / description_3
 ```
 
-複数項目を持つFAQは次の形式です。
+Multi-item FAQs use:
 
 ```text
 scene4
@@ -209,53 +210,51 @@ subtitle_5_1 / description_5_1
 subtitle_5_2 / description_5_2
 ```
 
-- sceneは上から連番にする
-- FAQ内の項目番号も上から連番にする
-- 重複ID、欠番、別scene番号の混入を禁止する
-- ホテルやスポットの件数に応じてFAQブロックを増減する
-- 各FAQセクションの最終項目だけ `class="faq-item bd_tb"` とする
-- 最終項目以外は `class="faq-item bd_t"` とする
+- Number scenes and FAQ items sequentially from the top.
+- Duplicate IDs, gaps, and an ID from another scene are prohibited.
+- Add or remove FAQ blocks according to hotel and spot counts.
+- Only the final item in each FAQ section uses `class="faq-item bd_tb"`; other items use `class="faq-item bd_t"`.
 
-完成34ページではscene数はすべて5でした。FAQ数は5件のページが2件、6件が31件、7件が1件であり、FAQ件数は固定ではありません。
+All 34 verified complete pages have five scenes. FAQ counts were five on two pages, six on 31 pages, and seven on one page, so FAQ count is variable.
 
-## 7. 店舗ブロック
+## 7. Shop Blocks
 
-- 店舗情報は `HP/source/template_shop.html` の対応店舗ブロックを基準にする
-- 元データが指定する店舗だけを配置する
-- 移動時間と交通費は元データへ合わせる
-- 店舗ブロックの共通構造、リンク、計測要素を不用意に変更しない
-- 元データにない店舗情報を推測で追加しない
+- Base shop information on the matching block in `HP/source/template_shop.html`.
+- Include only shops specified by source data.
+- Match travel time and transportation fees to source data.
+- Do not change common shop-block structure, links, or measurement elements without cause.
+- Do not infer a shop absent from source data.
 
-### 7.1 関連記事の予約領域
+### 7.1 Reserved Related-Article Region
 
-- `関連記事` セクションは将来実リンクへ置換するため、生成時に削除しない
-- 現段階ではテンプレートのダミーリンク8件を、文言・`href="#"`・順序を変えずに残す
-- この8件だけを許可済みplaceholderとし、同じダミーが予約領域外にあれば検証エラーとする
-- 実関連記事が設定済みのページは、ダミー8件の代わりに実リンクが1件以上あれば正常とする
-- 実リンクの選定・置換ルールが確定するまでは、推測した関連記事を設定しない
+- Do not remove the `関連記事` section during generation; it is reserved for future actual links.
+- Preserve the eight template dummy links without changing copy, `href="#"`, or order.
+- Only these eight entries are authorized placeholders. The same dummy outside the reserved region is a validation error.
+- A page with actual related links is valid when one or more actual links replace the eight dummies.
+- Do not infer related articles before selection and replacement rules are confirmed.
 
 ## 8. JSON-LD
 
-areaテンプレートと全area source HTMLにはJSON-LDが2ブロックあります。
+The area template and every area source HTML contain two JSON-LD blocks:
 
 - BreadcrumbList
-- 店舗一覧を表すItemList系ブロック
+- An ItemList-type block for shops
 
-生成時は地域名、URL、position、店舗名、電話、店舗URL、descriptionをHTML本文と一致させます。
+During generation, match region name, URL, position, shop name, telephone, shop URL, and description to visible HTML.
 
-確認手順:
+Validation:
 
-- placeholderを残さない
-- positionを数値にする
-- JSONとして構文解析できることを確認する
-- breadcrumbの階層とURLを本文のパンくずに合わせる
-- 店舗数とItemList要素数を合わせる
+- Leave no placeholder.
+- Use numeric positions.
+- Verify JSON parsing.
+- Match breadcrumb hierarchy and URLs to the visible breadcrumb.
+- Match shop count to ItemList element count.
 
-現在の完成34ページはJSON-LDを構文解析できました。placeholder残存27ページは両JSON-LDブロックが未完成です。
+The 34 currently complete pages parse successfully. Both JSON-LD blocks are incomplete on the 27 pages with remaining placeholders.
 
-## 9. 公開入口PHP
+## 9. Public Entry PHP
 
-既存area公開入口PHP 71件は同一の基本形です。
+The 71 existing area public entry PHP files share this base form. The Japanese code comment is preserved as an exact code value.
 
 ```php
 <?php
@@ -267,11 +266,11 @@ include("/home/firststar/public_html/group_test/candy/includefile/dataset_base.p
 ?>
 ```
 
-新規生成時は同カテゴリの現行完成ページを再確認し、同じ形式で作成します。サーバーパスを推測で変更しません。
+For new generation, recheck a current complete page in the same category and use the same form. Do not infer a server-path change.
 
-## 10. ページ別dataset PHP
+## 10. Page-Specific Dataset PHP
 
-既存area dataset PHP 71件は同一の基本形です。
+The 71 existing area dataset PHP files share this base form:
 
 ```php
 <?
@@ -280,13 +279,13 @@ $source = str_replace($waku0, $waku_html, $source);
 ?>
 ```
 
-新規生成時は同カテゴリの現行完成ページを複製元として確認します。短縮開始タグを通常タグへ変更するなどの開発改修は、新規ページ生成へ混ぜません。
+Use a current complete same-category page as the reference. Do not mix development changes such as replacing short opening tags with normal tags into new-page generation.
 
-## 11. dataset_base.phpへの必須登録
+## 11. Required dataset_base.php Registration
 
-通常の新規ページ生成では、次の2箇所を登録します。
+Normal new-page generation registers two locations.
 
-### 11.1 dataset振り分け
+### 11.1 Dataset Routing
 
 ```php
 case 'kagoshima-deliveryhealth-area-<slug>.html':
@@ -294,7 +293,7 @@ case 'kagoshima-deliveryhealth-area-<slug>.html':
     break;
 ```
 
-### 11.2 HTMLリンクからPHPリンクへの変換
+### 11.2 HTML-to-PHP Link Transformation
 
 ```php
 $source = str_replace(
@@ -304,75 +303,75 @@ $source = str_replace(
 );
 ```
 
-case、source HTML、dataset PHP、公開PHPのslugは完全一致させます。
+Case, source HTML, dataset PHP, and public PHP slugs MUST match exactly.
 
-未登録でも `dataset_default.php` がsource HTMLを読み込むため表示できる可能性がありますが、通常生成仕様として登録省略を許可しません。
+`dataset_default.php` may load source HTML when registration is absent, but normal generation does not permit omitted registration.
 
-## 12. 基本生成アルゴリズム
+## 12. Generation Algorithm
 
-1. Gitのブランチ、作業ツリー、リモート状態を確認する
-2. 対象txtの地域名、slug、canonical、画像、全入力項目を確認する
-3. 同名の公開PHP、source HTML、dataset PHP、dataset_base登録の有無を確認する
-4. 同カテゴリの完成ページを1件以上比較対象にする
-5. areaテンプレートを新しいsource HTMLとして複製する
-6. SEO、OGP、パンくず、h1、画像、本文、地図、基本情報を反映する
-7. `template_shop.html`から指定店舗ブロックを反映する
-8. ホテル・スポット件数に合わせてFAQブロックを増減する
-9. scene、subtitle、descriptionを上から再採番する
-10. JSON-LD 2ブロックを本文と一致させる
-11. 公開入口PHPを生成する
-12. ページ別dataset PHPを生成する
-13. `dataset_base.php`の2箇所へ登録する
-14. 内部リンク、画像、canonical、OGP、slugを確認する
-15. 関連記事の予約ダミー8件を除くplaceholder、未入力、旧slug、重複IDを検査する
-16. PHP構文、JSON構文、`git diff --check`、変更対象を確認する
-17. `source/area.html` の一覧リンク・JSON-LDと `sitemap.xml` への登録要否を確認する
-18. 実ブラウザ確認を行っていない場合は、ブラウザ表示未確認と報告する
-19. ユーザー確認後、明示指示がある場合だけCommit・Pushする
+1. Verify Git branch, worktree, and remote state.
+2. Verify region name, slug, canonical, images, and every input item in the target text file.
+3. Check for same-name public PHP, source HTML, dataset PHP, and dataset_base registration.
+4. Compare at least one complete same-category page.
+5. Copy the area template into new source HTML.
+6. Apply SEO, OGP, breadcrumb, H1, images, body, map, and basic information.
+7. Apply specified shop blocks from `template_shop.html`.
+8. Add or remove FAQ blocks according to hotel and spot counts.
+9. Renumber scenes, subtitles, and descriptions from the top.
+10. Match the two JSON-LD blocks to body content.
+11. Generate public entry PHP.
+12. Generate page-specific dataset PHP.
+13. Register both locations in `dataset_base.php`.
+14. Validate internal links, images, canonical, OGP, and slug.
+15. Check placeholders other than the eight related-article dummies, incomplete input, legacy slugs, and duplicate IDs.
+16. Validate PHP syntax, JSON syntax, `git diff --check`, and changed targets.
+17. Determine whether `source/area.html` index links and JSON-LD and `sitemap.xml` require registration.
+18. When browser validation was not performed, report browser rendering as unverified.
+19. Commit and Push only after user confirmation and explicit instruction.
 
-## 13. 例外処理
+## 13. Exceptions
 
-areaでも元データの情報量をテンプレートの固定件数へ合わせてはいけません。ホテル、スポット、店舗の件数を元データに合わせ、追加・削除後にID、最終FAQ class、JSON-LD ItemListを同期します。
+Do not force area source-data quantity into template fixed counts. Match hotel, spot, and shop counts to source data and synchronize IDs, final FAQ classes, and JSON-LD ItemList after additions or deletions.
 
-### 13.1 FAQ件数が異なる
+### 13.1 Variable FAQ Count
 
-ホテル・スポットは固定3件ではありません。元データの件数に合わせて追加・削除し、各セクションの最終FAQだけ `bd_tb` にします。
+Hotels and spots are not fixed at three. Add or delete according to source data and set only the final FAQ in each section to `bd_tb`.
 
-### 13.2 同一地域に複数slugがある
+### 13.2 Multiple Slugs for One Region
 
-既存には、同じ地域を指す可能性がある別slugが存在します。新規作成時はcanonical、ファイル名、既存リンク、ユーザー指定を確認し、勝手に統合・削除・リネームしません。
+Existing content may contain alternate slugs for the same region. During new production, verify canonical, filenames, existing links, and user instruction. Do not consolidate, delete, or rename automatically.
 
-確認対象例:
+Examples:
 
-- `hananohikarigaoka` と `kenohikarigaoka`
-- `kiireikkuracho` と `kiirehitokuracho`
+- `hananohikarigaoka` and `kenohikarigaoka`
+- `kiireikkuracho` and `kiirehitokuracho`
 
-### 13.3 元データの保管場所と完成状態が一致しない
+### 13.3 Source-Data Location Does Not Equal Completion State
 
-- `Completion`内でもsource HTMLにplaceholderが残る例がある
-- 直下の元データでも完成source HTMLが存在する例がある
-- フォルダ名だけで完成・未完成を判定しない
+- Source HTML may contain placeholders even when source data is under `Completion`.
+- Complete source HTML may exist for direct source data.
+- Do not determine completion from the folder name alone.
 
-### 13.4 画像が存在しない
+### 13.4 Missing Images
 
-完成HTMLでも参照画像が見つからない例があります。生成時は `_1` と `_2` の実ファイル存在を確認します。
+Some complete HTML references missing images. During generation, verify actual `_1` and `_2` files.
 
-新規areaページの依頼時に必要画像がない場合は、ページ作成を停止してユーザーへ報告し、次の正式名で画像提供を依頼します。
+When required images are absent for a new area-page request, STOP and request images using:
 
 ```text
 kagoshima-deliveryhealth-area-<slug>_1.jpg
 kagoshima-deliveryhealth-area-<slug>_2.jpg
 ```
 
-ユーザー承認なしに、既存画像の流用、ダミー画像の使用、画像名の推測、画像なしでの公開をしてはいけません。受領後に形式、サイズ、slug、2枚の揃い、重複を確認してから適用します。
+Without user approval, do not reuse an existing image, use a dummy image, infer an image name, or publish without images. After receipt, verify format, dimensions, slug, both-file completeness, and duplication before use.
 
-### 13.5 既存3点セットの一部または登録だけが欠ける
+### 13.5 Partial Existing Three-File Set or Registration
 
-新規作成ではなく既存不整合の修正として扱います。通常生成と混ぜず、影響範囲を提示して承認を得ます。
+Treat this as an existing-inconsistency fix, not new production. Keep it separate and obtain approval after presenting the affected scope.
 
-## 14. 現在確認済みの不整合
+## 14. Currently Verified Inconsistencies
 
-### 14.1 placeholder残存source HTML 27件
+### 14.1 Source HTML with Remaining Placeholders: 27
 
 ```text
 gionnosucho, gofukucho, gokabeppucho, hananohikarigaoka,
@@ -384,9 +383,9 @@ oroshihommachi, sakamotocho, sakanoue, sakuragaoka,
 sanwacho, shimofukumotocho, shimotatsuocho
 ```
 
-各ページで主要placeholderが79件残り、JSON-LD 2ブロックも構文不正です。
+Each page retains 79 primary placeholders and both JSON-LD blocks have invalid syntax.
 
-### 14.2 source HTMLはあるがdataset_base登録がない31件
+### 14.2 Source HTML Without dataset_base Registration: 31
 
 ```text
 ariyadacho, hananohikarigaoka, ikenouecho, inaricho,
@@ -399,9 +398,9 @@ ono, oroshihommachi, uearatacho, uenosonocho,
 uomicho, usuki, yakushi, yasuicho
 ```
 
-同じ31件はHTMLリンクからPHPリンクへの変換登録もありません。
+The same 31 entries also lack HTML-to-PHP link transformations.
 
-### 14.3 source HTMLがない公開PHP・dataset PHP 10件
+### 14.3 Public PHP and Dataset PHP Without Source HTML: 10
 
 ```text
 hirakawacho, kamifukumotocho, kamihonmachi,
@@ -410,45 +409,45 @@ kawakamicho, kiirenakamyoch（誤記候補）,
 komatsubara, shimizucho
 ```
 
-実ファイル名には `kiirenakamyoch` が存在します。`kiirenakamyocho` と混同せず、削除・統合はユーザー承認なしに行いません。
+The actual filename `kiirenakamyoch` exists. Do not confuse it with `kiirenakamyocho`, delete it, or consolidate it without user approval.
 
-### 14.4 その他
+### 14.4 Other Findings
 
-- `oroshihommachi`: Completion元データがあるがsource HTMLにplaceholderが残る
-- `shimotacho`: 直下元データだがsource HTMLは完成状態
-- `arata` と `kinkocho`: `id="button_1"` が重複
-- 完成HTMLの画像参照不足候補: `inusakocho`、`kenohikarigaoka` の `_1`・`_2`
+- `oroshihommachi`: Source data exists under Completion, but source HTML retains placeholders.
+- `shimotacho`: Source data is direct, but source HTML is complete.
+- `arata` and `kinkocho`: Duplicate `id="button_1"`.
+- Complete-HTML missing-image candidates: `_1` and `_2` for `inusakocho` and `kenohikarigaoka`.
 
-これらは確認済みの現状であり、この仕様書作成作業では修正していません。
+These are verified existing conditions and were not fixed by the specification investigation.
 
-## 15. 完了判定チェックリスト
+## 15. Completion Criteria
 
-- [ ] 元データの全必須項目が入力済み
-- [ ] 地域名とslugが確定済み
-- [ ] 同名ファイル・旧slug・類似slugを確認済み
-- [ ] 公開PHP、source HTML、dataset PHPが存在する
-- [ ] dataset_baseのcase登録が存在する
-- [ ] dataset_baseのリンク変換登録が存在する
-- [ ] 関連記事領域に予約ダミー8件または実リンクがあり、予約ダミーが領域外にない
-- [ ] 関連記事予約ダミー以外のplaceholderが0件
-- [ ] scene、subtitle、descriptionに重複・欠番がない
-- [ ] 店舗・ホテル・スポットの本文件数とJSON-LD件数が一致する
-- [ ] 元データにない店舗・ホテル・スポットを推測で追加していない
-- [ ] FAQ最終項目のclassが正しい
-- [ ] canonical、OGP URL、画像、パンくず、h1が一致する
-- [ ] JSON-LD 2ブロックが本文と一致し、構文解析できる
-- [ ] 画像 `_1`・`_2` が実在する
-- [ ] 画像不足時に既存画像、ダミー画像、推測した画像名を使用していない
-- [ ] 内部リンクが公開PHPを指す
-- [ ] robotsが公開方針と一致する
-- [ ] area一覧とsitemapへの登録要否を確認した
-- [ ] PHP構文確認済み
-- [ ] `git diff --check` 成功
-- [ ] 変更対象外ファイルを変更していない
-- [ ] ブラウザ未確認の場合、その旨を報告した
-- [ ] 元txtを勝手に移動・削除していない
-- [ ] ローカル完成と本番反映を分けて報告した
+- [ ] Every required source-data item is complete.
+- [ ] Region name and slug are confirmed.
+- [ ] Same-name files, legacy slugs, and similar slugs are checked.
+- [ ] Public PHP, source HTML, and dataset PHP exist.
+- [ ] dataset_base case registration exists.
+- [ ] dataset_base link transformation exists.
+- [ ] The related-article region contains eight reserved dummies or actual links, and no dummy is outside it.
+- [ ] Placeholder count outside the related-article dummies is zero.
+- [ ] Scenes, subtitles, and descriptions have no duplicate or gap.
+- [ ] Visible shop, hotel, and spot counts match JSON-LD counts.
+- [ ] No shop, hotel, or spot absent from source data was inferred.
+- [ ] The final FAQ item class is correct.
+- [ ] Canonical, OGP URL, images, breadcrumb, and H1 agree.
+- [ ] Both JSON-LD blocks match visible content and parse.
+- [ ] Images `_1` and `_2` exist.
+- [ ] No existing, dummy, or inferred image was used to bypass missing images.
+- [ ] Internal links point to public PHP.
+- [ ] Robots agrees with publication policy.
+- [ ] Area-index and sitemap registration requirements were checked.
+- [ ] PHP syntax is verified.
+- [ ] `git diff --check` succeeds.
+- [ ] No out-of-scope file changed.
+- [ ] Missing browser validation is reported.
+- [ ] Source text was not moved or deleted without instruction.
+- [ ] Local completion and production deployment are reported separately.
 
-## 16. 変更していないもの
+## 16. Unchanged Scope
 
-この仕様調査では、公開PHP、source HTML、dataset PHP、`dataset_base.php`、画像、元テキストを変更していません。
+This specification investigation did not change public PHP, source HTML, dataset PHP, `dataset_base.php`, images, or source Text.

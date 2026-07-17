@@ -158,7 +158,7 @@ def paths_for(data: candy_hotel_page.HotelData) -> list[Path]:
         hp / "includefile" / "dataset_base.php",
         hp / "source" / "hotel.html",
         hp / "sitemap.xml",
-    ]
+    ] + path_config.site_state_output_paths()
 
 
 def dependency_paths(input_path: Path, data: candy_hotel_page.HotelData) -> list[Path]:
@@ -173,6 +173,7 @@ def dependency_paths(input_path: Path, data: candy_hotel_page.HotelData) -> list
         path_config.SCRIPTS_DIR / "candy_area_publish.py",
         path_config.SCRIPTS_DIR / "candy_hotel_page.py",
         path_config.SCRIPTS_DIR / "candy_hotel_publish.py",
+        path_config.SCRIPTS_DIR / "candy_site_state.py",
         root() / ".github" / "scripts" / "candy_ftp_deploy.py",
         root() / ".github" / "scripts" / "candy_release_check.py",
         root() / ".github" / "workflows" / "candy-production-deploy.yml",
@@ -376,6 +377,9 @@ def publish(input_path: Path, *, dry_run: bool, resume_state: dict[str, str] | N
             command.append("--force")
         shared.run(command)
         shared.run([sys.executable, str(page_tool), "check", "--input", relative_input])
+        site_state_tool = path_config.SCRIPTS_DIR / "candy_site_state.py"
+        shared.run([sys.executable, str(site_state_tool), "write"])
+        shared.run([sys.executable, str(site_state_tool), "check", "--target", data.slug])
         save_state(state, "BUILT", output_snapshot=file_snapshot(allowed))
         phase = "BUILT"
 
@@ -499,9 +503,7 @@ def self_test() -> int:
     }
     original_state_path = globals()["state_path"]
     original_lock_path = globals()["lock_path"]
-    original_input_paths = globals()["input_paths"]
-    original_parse_hotel_text = candy_hotel_page.parse_hotel_text
-    original_bundle_paths = candy_hotel_page.bundle_paths
+    original_scan_inputs = candy_hotel_target_gate.scan_inputs
     try:
         with tempfile.TemporaryDirectory() as directory:
             globals()["state_path"] = lambda slug: Path(directory) / f"{slug}.json"
@@ -515,35 +517,31 @@ def self_test() -> int:
                         raise AssertionError("nested lock was accepted")
                 except PublishError:
                     pass
-            first = Path(directory) / "first.txt"
-            second = Path(directory) / "second.txt"
-            first.write_text("test", encoding="utf-8")
-            second.write_text("test", encoding="utf-8")
-            globals()["input_paths"] = lambda: [first, second]
-            candy_hotel_page.bundle_paths = lambda _hp, slug: (
-                Path(directory) / f"{slug}.php",
-                Path(directory) / f"{slug}.html",
-                Path(directory) / f"{slug}-dataset.php",
+            blocked = argparse.Namespace(
+                path=Path(directory) / "blocked.txt",
+                category=candy_hotel_target_gate.INPUT_ERROR,
+                reasons=("test blocker",),
+                slug="blocked",
             )
-            for slugs, expected_message in (
-                ({"first.txt": "first", "second.txt": "second"}, "multiple unpublished hotel inputs"),
-                ({"first.txt": "same", "second.txt": "same"}, "duplicate hotel input slugs"),
-            ):
-                candy_hotel_page.parse_hotel_text = lambda candidate, values=slugs: argparse.Namespace(
-                    slug=values[candidate.name]
-                )
-                try:
-                    next_ready_input()
-                except PublishError as exc:
-                    assert expected_message in str(exc)
-                else:
-                    raise AssertionError(f"candidate selection accepted: {expected_message}")
+            ready = argparse.Namespace(
+                path=Path(directory) / "ready.txt",
+                category=candy_hotel_target_gate.READY,
+                reasons=(),
+                slug="ready",
+            )
+            candy_hotel_target_gate.scan_inputs = lambda: [blocked, ready]
+            assert next_ready_input() == ready.path
+            candy_hotel_target_gate.scan_inputs = lambda: [blocked]
+            try:
+                next_ready_input()
+            except PublishError as exc:
+                assert "no eligible new hotel page target" in str(exc)
+            else:
+                raise AssertionError("candidate selection accepted an all-blocked input set")
     finally:
         globals()["state_path"] = original_state_path
         globals()["lock_path"] = original_lock_path
-        globals()["input_paths"] = original_input_paths
-        candy_hotel_page.parse_hotel_text = original_parse_hotel_text
-        candy_hotel_page.bundle_paths = original_bundle_paths
+        candy_hotel_target_gate.scan_inputs = original_scan_inputs
         ACTIVE_STATE.clear()
     print("PUBLISH_SELF_TEST=passed")
     return 0

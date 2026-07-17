@@ -1,80 +1,88 @@
-# candy 管理入口
+# candy Management Entry Point
 
-このREADMEは、`C:\Codex\candy\codex\README.md` にある管理資料の入口です。
+This README is the entry point for the management documents under `C:\Codex\candy\codex`.
 
-## 1. 正本と作業場所
+## 1. Canonical Sources and Work Locations
 
-| 種類 | 場所 | 扱い |
+| Type | Location | Responsibility |
 |---|---|---|
-| ローカルGit作業場 | `C:\Codex\candy` | GitHubへ同期する唯一の作業用リポジトリルート |
-| GitHub同期ハブ | `makotonishikubo0418-cmd/candy` | Codex間でCommitを共有する。Pushは明示指示時だけ行う |
-| Codex管理正本 | `C:\Codex\candy\codex` | 管理入口、管理文書、HP制作仕様、作業ツールを置く |
-| プロジェクト管理 | `C:\Codex\candy\codex\project_management` | ルール、現在地、予約、履歴、安全手順の正本 |
-| 実サイト配下 | `C:\Codex\candy\HP` | PHP、source、includefile、画像、log、movieなどHPデータ |
-| 制作入力 | ルート直下の `Text_area_data`、`Text_blog_data`、`Text_hotel_data` | HPへ直接公開しないページ制作元データ |
-| NAS保管 | `\\192.168.1.3\disk1\FSG_SEO\candy` | `Backup/`・受入素材の保管専用。Git操作は禁止 |
+| Local Git working repository | `C:\Codex\candy` | The only working repository root synchronized with GitHub |
+| GitHub synchronization hub | `makotonishikubo0418-cmd/candy` | Shares commits between Codex tasks. Push only with explicit user instruction |
+| Canonical Codex management source | `C:\Codex\candy\codex` | Contains the management entry point, management documents, HP production specifications, and work tools |
+| Project management | `C:\Codex\candy\codex\project_management` | Canonical source for rules, current state, reservations, history, and safety procedures |
+| Actual site tree | `C:\Codex\candy\HP` | Contains HP data such as PHP, source, includefile, images, logs, and movies |
+| Production inputs | Root-level `Text_area_data`, `Text_blog_data`, and `Text_hotel_data` | Source data for page production that is not published directly to HP |
+| NAS storage | `\\192.168.1.3\disk1\FSG_SEO\candy` | Storage-only location for `Backup/` and accepted source assets. Git operations are prohibited |
 
-作業開始時は `git fetch origin` と `git status --short --branch` を実行する。`main` が `origin/main` よりbehindなら先にpullし、Pushはユーザーの明示指示がある場合だけ行う。
+At the start of work, run `git fetch origin` and `git status --short --branch`. If `main` is behind `origin/main`, pull before editing. Push only with explicit user instruction.
 
-## 2. 最初に読むもの
+## 2. Required Start
 
-1. ルート `AGENTS.md`
-2. この `codex/README.md`
+1. Root `AGENTS.md`
+2. This `codex/README.md`
 3. `codex/project_management/TASK_RESERVATIONS.md`
-4. 今回必要な管理文書またはHP runbookだけ
-5. HP作業なら `HP/AGENTS.md`
+4. Only the management document or HP runbook required for the current task
+5. `HP/AGENTS.md` for HP work
 
-## 3. フォルダの役割
+## 3. Folder Responsibilities
 
-| フォルダ | 役割 |
+| Folder | Responsibility |
 |---|---|
-| `codex/` | Codex向け管理資料、制作仕様、スクリプト、旧調査資料 |
-| `codex/project_management/` | 管理ルール、構成、進捗、連絡、Task予約・履歴、安全手順 |
-| `codex/docs/` | area・hotel・blogなどHP制作の現行runbookと仕様 |
-| `codex/scripts/` | ページ生成・検証・公開用スクリプトの配置先 |
-| `HP/` | 公開サイト本体。`includefile`、`log`、`movie`もHPデータとしてここに置く |
-| `Text_area_data/` | areaページの制作入力。area用の受入画像はNASの `Text_area_data/画像データ/` に保管する |
-| `Text_blog_data/` | blogページの制作入力 |
-| `Text_hotel_data/` | hotelページの制作入力 |
-| NASの `Backup/`・受入素材 | バックアップ、退避、旧資料、Git管理外の受入素材を保管する。NASでGit操作しない |
+| `codex/` | Codex management documents, production specifications, and scripts. Only active canonical management sources belong on the normal route |
+| `codex/project_management/` | Management rules, structure, progress, communication, task reservations, history, and safety procedures |
+| `codex/docs/` | Active HP production runbooks and specifications for area, hotel, blog, and other categories |
+| `codex/docs/generated/` | Current page, production-candidate, code/asset, and SEO state generated from actual files. Manual editing is prohibited |
+| `codex/scripts/` | Page generation, validation, and publishing scripts |
+| `HP/` | The actual public site tree. `includefile`, `log`, and `movie` are also HP data |
+| `Text_area_data/` | Area-page production inputs. Accepted area images are stored in the NAS `Text_area_data/画像データ/` directory |
+| `Text_blog_data/` | Blog-page production inputs |
+| `Text_hotel_data/` | Hotel-page production inputs |
+| NAS `Backup/` and accepted assets | Stores backups, isolated files, legacy materials, and accepted assets outside Git. Do not run Git operations on the NAS |
 
-## 4. 正本一覧
+## 4. Canonical Document Index
 
-| 目的 | 正本 |
+| Purpose | Canonical document |
 |---|---|
-| 管理体制の概要 | `codex/管理体制_概要説明書.md` |
-| 文書分割・更新ルール | `codex/project_management/DOCUMENT_RULES.md` |
-| 全体計画・現在地・問題 | `codex/project_management/PROJECT_STATUS.md` |
-| Codex間の連絡・引継ぎ | `codex/project_management/CODEX_COMMUNICATION.md` |
-| Taskとファイル予約 | `codex/project_management/TASK_RESERVATIONS.md` |
-| 個別Task履歴 | `codex/project_management/TASK_LOG.md` |
-| コード・フォルダ構成 | `codex/project_management/CODE_STRUCTURE.md` |
-| 削除・移動・一括操作安全手順 | `codex/project_management/SAFETY_PROTOCOL.md` |
-| HP制作・生成仕様 | `codex/docs/CANDY_MASTER_DOC_INDEX.md` |
-| 更新停止した旧ページ制作記録 | `codex/ページ作成用.md` |
+| Management architecture overview | `codex/MANAGEMENT_SYSTEM_OVERVIEW.md` |
+| Document separation and update rules | `codex/project_management/DOCUMENT_RULES.md` |
+| Overall plan, current state, and issues | `codex/project_management/PROJECT_STATUS.md` |
+| Inter-Codex communication and handoff | `codex/project_management/CODEX_COMMUNICATION.md` |
+| Task and file reservations | `codex/project_management/TASK_RESERVATIONS.md` |
+| Individual task history | `codex/project_management/TASK_LOG.md` |
+| Code and folder structure | `codex/project_management/CODE_STRUCTURE.md` |
+| Safety procedure for deletion, movement, and bulk operations | `codex/project_management/SAFETY_PROTOCOL.md` |
+| HP production and generation specifications | `codex/docs/CANDY_MASTER_DOC_INDEX.md` |
+| Stable HP structure | `codex/docs/CANDY_HP_STRUCTURE_MAP.md`, `CANDY_CODE_FILE_STRUCTURE.md`, and `CANDY_SEO_SPEC.md` |
+| Current HP state | The four documents under `codex/docs/generated/` |
 
-## 5. 作業ルート
+## 5. Task Routes
 
-| 作業 | 読む導線 |
+| Task | Required route |
 |---|---|
-| 管理体制変更 | `AGENTS.md` → `codex/README.md` → `codex/管理体制_概要説明書.md` → `codex/project_management/DOCUMENT_RULES.md` |
-| 複数Codexの調整 | `AGENTS.md` → `codex/README.md` → `codex/project_management/TASK_RESERVATIONS.md` → `codex/project_management/CODEX_COMMUNICATION.md` |
-| 全体状況確認 | `AGENTS.md` → `codex/README.md` → `codex/project_management/PROJECT_STATUS.md` |
-| HPページ制作 | `AGENTS.md` → `codex/README.md` → `HP/AGENTS.md` → 該当runbook |
-| HP管理資料更新 | `AGENTS.md` → `codex/README.md` → `HP/AGENTS.md` → `codex/docs/CANDY_MASTER_DOC_INDEX.md` |
-| 削除・移動・一括整理 | `AGENTS.md` → `codex/README.md` → `codex/project_management/SAFETY_PROTOCOL.md` |
+| Management architecture change | `AGENTS.md` → `codex/README.md` → `codex/MANAGEMENT_SYSTEM_OVERVIEW.md` → `codex/project_management/DOCUMENT_RULES.md` |
+| Multi-Codex coordination | `AGENTS.md` → `codex/README.md` → `codex/project_management/TASK_RESERVATIONS.md` → `codex/project_management/CODEX_COMMUNICATION.md` |
+| Overall status review | `AGENTS.md` → `codex/README.md` → `codex/project_management/PROJECT_STATUS.md` |
+| HP page production | `AGENTS.md` → `codex/README.md` → `HP/AGENTS.md` → applicable runbook |
+| HP management-document update | `AGENTS.md` → `codex/README.md` → `HP/AGENTS.md` → `codex/docs/CANDY_MASTER_DOC_INDEX.md` |
+| Current site-wide state | `CANDY_MASTER_DOC_INDEX.md` → `generated/CANDY_SITE_PAGE_LEDGER.md` |
+| Unbuilt pages and production candidates | `CANDY_MASTER_DOC_INDEX.md` → `generated/CANDY_UPCOMING_PAGES.md` → category queue/classification |
+| PHP, source, and dataset structure | `CANDY_CODE_FILE_STRUCTURE.md` → `generated/CANDY_CODE_ASSET_INVENTORY.md` |
+| CSS, JavaScript, and image investigation | `CANDY_CODE_FILE_STRUCTURE.md` → `generated/CANDY_CODE_ASSET_INVENTORY.md` |
+| SEO investigation or change | `CANDY_SEO_SPEC.md` → `generated/CANDY_SEO_STATUS.md` → category specification |
+| After a page addition or change | `codex\scripts\candy-site-state.cmd write` → `check` |
+| Deletion, movement, or bulk cleanup | `AGENTS.md` → `codex/README.md` → `codex/project_management/SAFETY_PROTOCOL.md` |
 
-## 6. 現在の実行制限
+## 6. Current Execution Restrictions
 
-- `codex/scripts/` の内部パス移行と、area・hotel・blog・管理資料生成の読み取り専用検証は完了している。
-- 読み取り専用の `target-check`、`audit-inputs`、`build --dry-run`、資料生成 `--preview` は実行停止を解除する。
-- 実ページ生成、publish、管理資料の実書き込みは実行停止を継続し、ユーザーの明示指示なしに実行しない。
-- HP本体、制作入力、管理資料の配置変更と、生成スクリプトが正常に動くことは別状態として扱う。
+- Internal path migration under `codex/scripts/` and read-only validation for area, hotel, and blog are complete. Verify content and authority separately before actual page generation or publish operations.
+- `audit`, `preview`, and `check` in `candy-site-state` are read-only. `write` modifies only the four documents under `codex/docs/generated/`.
+- A task that changes an HP page, PHP, source, dataset, CSS, JavaScript, image, or SEO MUST run `write` and `check` before staging.
+- Publish, Commit, Push, Actions, production, and database operations still require explicit instruction. Permission to update management documents does not authorize those operations.
 
-## 7. 重複禁止
+## 7. Duplicate-Source Prohibitions
 
-- 管理正本をローカルリポジトリ直下や `HP/` 配下、NASへ複製しない。
-- `HP/HP/` を作らない。
-- `HP/README.md` を作らない。HP作業導線は `HP/AGENTS.md` に集約する。
-- NASの `Backup/` 内にある旧資料を現行仕様として使わない。使用時はローカル正本と再照合する。
-- 仕様、現在地、Task履歴、報告を同じ文書へ混在させない。
+- Do not duplicate a canonical management source at the local repository root, under `HP/`, or on the NAS.
+- Do not create `HP/HP/`.
+- Do not create `HP/README.md`. HP routing is centralized in `HP/AGENTS.md`.
+- Do not use legacy documents in NAS `Backup/` as current specifications. Reconcile them with the local canonical source before use.
+- Do not mix specifications, current state, task history, and reports in one document.

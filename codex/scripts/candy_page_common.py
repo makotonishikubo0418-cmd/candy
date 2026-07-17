@@ -48,6 +48,12 @@ TEXT_AREA_DIR = REPO_ROOT / "Text_area_data"
 TEXT_HOTEL_DIR = REPO_ROOT / "Text_hotel_data"
 TEXT_BLOG_DIR = REPO_ROOT / "Text_blog_data"
 DOCS_DIR = REPO_ROOT / "codex" / "docs"
+SITE_STATE_OUTPUT_NAMES = (
+    "CANDY_SITE_PAGE_LEDGER.md",
+    "CANDY_UPCOMING_PAGES.md",
+    "CANDY_CODE_ASSET_INVENTORY.md",
+    "CANDY_SEO_STATUS.md",
+)
 
 
 def repo_root() -> Path:
@@ -56,6 +62,10 @@ def repo_root() -> Path:
 
 def hp_root() -> Path:
     return HP_ROOT
+
+
+def site_state_output_paths() -> list[Path]:
+    return [DOCS_DIR / "generated" / name for name in SITE_STATE_OUTPUT_NAMES]
 
 
 def read_utf8(path: Path) -> str:

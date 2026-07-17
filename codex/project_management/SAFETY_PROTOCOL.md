@@ -1,136 +1,134 @@
-# 削除・移動・一括操作安全プロトコル
+# Safety Protocol for Deletion, Movement, and Bulk Operations
 
-- 目的: 削除、移動、一括整理、Git修復で作業場を壊さないための実行ルール
-- 状態: 正本
-- 更新日: 2026-07-17
+- Purpose: Prevent damage to the working repository during deletion, movement, bulk cleanup, or Git recovery
+- Status: canonical document
+- Updated: 2026-07-17
 
-## 1. 適用範囲
+## 1. Scope
 
-この文書は次の作業に必ず適用する。
+This document MUST be applied to:
 
-- ファイル削除
-- Git管理からの削除
-- ファイル移動、rename、フォルダ整理
-- `Get-ChildItem -Recurse` などの再帰処理
-- `git add`、`git rm`、Commit、Push
-- `.git` 破損、Git作業場復旧
-- 生成物、ログ、キャッシュ、未追跡ファイルの一括整理
+- File deletion
+- Removal from Git tracking
+- File movement, renaming, and folder cleanup
+- Recursive operations such as `Get-ChildItem -Recurse`
+- `git add`, `git rm`, Commit, and Push
+- `.git` damage and Git working-repository recovery
+- Bulk cleanup of generated files, logs, caches, or untracked files
 
-## 2. 絶対禁止
+## 2. Prohibited Operations
 
-次は禁止する。
+The following operations are prohibited:
 
-- 対象リスト未確定の削除、移動、Stage、Commit、Push
-- 「ゴミ」「未整理」など曖昧な呼び名のまま実行すること
-- `git add .`、`git add -A`、`git clean`、`git reset --hard`
-- `.git` 配下を削除候補に含めること
-- `Remove-Item` を再帰検索結果へ直接つなぐこと
-- root配下かどうかだけで安全判定すること
-- 大量出力を出したまま判断を進めること
-- ユーザーの質問に答えず、勝手に実行へ進むこと
+- Deletion, movement, staging, Commit, or Push before the target list is fixed
+- Execution while targets are described only with vague labels such as "junk" or "unorganized"
+- `git add .`, `git add -A`, `git clean`, or `git reset --hard`
+- Including `.git` contents in deletion candidates
+- Piping recursive search results directly into `Remove-Item`
+- Treating a target as safe only because it is under the repository root
+- Continuing analysis after producing uncontrolled large output
+- Ignoring the user's question and proceeding with execution
 
-## 3. 常時保護対象
+## 3. Always-Protected Targets
 
-次は、明示された対象でない限り、削除、移動、Stage対象にしてはいけない。
+Unless explicitly included in the authorized target list, the following targets MUST NOT be deleted, moved, or staged:
 
-| 対象 | 理由 |
+| Target | Reason |
 |---|---|
-| `.git/` | Git管理本体 |
-| `.git-backups/` | 復旧用退避先 |
-| `AGENTS.md` | 共通ルール入口 |
-| `codex/README.md` | 管理入口 |
-| `codex/project_management/` | プロジェクト管理正本 |
-| `codex/docs/` | HP制作仕様の正本 |
-| `codex/scripts/` | 生成・検証・公開ツール |
-| `HP/AGENTS.md` | HP作業導線 |
-| `HP/index.php` | 実サイト入口 |
-| `Text_area_data/`、`Text_blog_data/`、`Text_hotel_data/` | ページ制作入力 |
-| NASの `Backup/` | 旧データと退避済み確認先。Git作業場として扱わない |
-| `HP/HP/` | 作ってはいけない重複階層。存在したら停止して報告 |
+| `.git/` | Git management data |
+| `.git-backups/` | Recovery storage |
+| `AGENTS.md` | Common-rule entry point |
+| `codex/README.md` | Management entry point |
+| `codex/project_management/` | Canonical project-management source |
+| `codex/docs/` | Canonical HP production specifications |
+| `codex/scripts/` | Generation, validation, and publishing tools |
+| `HP/AGENTS.md` | HP work route |
+| `HP/index.php` | Actual site entry point |
+| `Text_area_data/`, `Text_blog_data/`, and `Text_hotel_data/` | Page-production inputs |
+| NAS `Backup/` | Verification location for legacy and isolated data. It is not a Git working repository |
+| `HP/HP/` | Prohibited duplicate hierarchy. STOP and report if it exists |
 
-## 4. 実行前分類
+## 4. Pre-Execution Classification
 
-削除、移動、一括整理の前に、必ず対象を次へ分類する。
+Before deletion, movement, or bulk cleanup, classify every target as follows:
 
-| 分類 | 意味 | 実行条件 |
+| Classification | Meaning | Execution condition |
 |---|---|---|
-| 削除可 | 実行時ログ、キャッシュ、明確な不要物 | 対象一覧と件数を提示し、承認後に実行 |
-| Git管理から削除 | ファイル実体は不要で、Git履歴から次Commitで外す | `git add -u -- <明示対象>` だけ使う |
-| 移動済み | 元位置の削除と新位置の追加が1対1で照合済み | 照合結果が不足0、重複0の時だけStage |
-| Git登録 | 管理表、分類結果、必要画像、制作入力など | 用途と保存先を確認してからStage |
-| 復旧 | 誤削除、破損、必要ファイル欠落 | GitHub最新Commitまたは退避先から戻す |
-| 保留 | 必要性や正本が不明 | 実行せずユーザーへ確認 |
+| Approved for deletion | Runtime log, cache, or clearly unnecessary file | Present the exact target list and count, then execute only after approval |
+| Remove from Git tracking | The file is unnecessary and should be removed from the next commit | Use only `git add -u -- <explicit-target>` |
+| Relocated | Original removal and new location have a verified one-to-one match | Stage only when missing count is zero and duplicate count is zero |
+| Register in Git | Management table, classification result, required image, or production input | Confirm purpose and destination before staging |
+| Recovery | Incorrect deletion, damage, or missing required file | Restore from the latest GitHub commit or verified isolated copy |
+| AWAITING_APPROVAL | Necessity or canonical responsibility is unclear | Do not execute; request a user decision |
 
-## 5. 実行前チェック
+## 5. Pre-Execution Checks
 
-実行前に最低限これを確認する。
+Before execution, verify at minimum:
 
-1. Git作業場が `C:\Codex\candy` であること。NASは保管専用とし、Git操作しないこと。
-2. `AGENTS.md`、`codex/README.md`、必要な管理文書を読んだ証拠を出すこと。
-3. `codex/project_management/TASK_RESERVATIONS.md` で対象を予約すること。
-4. `git fetch origin` と `git status --short --branch` でGit状態を確認し、behindなら編集前にpullすること。
-5. 対象リストを固定すること。
-6. 対象リストに保護対象が混ざっていないこと。
-7. 削除、移動、Commit、Push、本番操作はユーザー明示指示があること。
+1. The Git working repository is `C:\Codex\candy`. The NAS is storage-only; do not run Git operations there.
+2. Evidence has been provided for reading `AGENTS.md`, `codex/README.md`, and the required management document.
+3. The target is reserved in `codex/project_management/TASK_RESERVATIONS.md`.
+4. `git fetch origin` and `git status --short --branch` have confirmed Git state. Pull before editing when behind.
+5. The target list is fixed.
+6. The target list does not include an unauthorized protected target.
+7. Deletion, movement, Commit, Push, and production operations have explicit user authorization.
 
-## 6. Git操作ルール
+## 6. Git Rules
 
-Git操作は次を守る。
+- Run Git operations only in `C:\Codex\candy`; never on the NAS.
+- Specify every staging target explicitly.
+- Use `git add -u -- <target>` and `git add -- <target>` according to target state.
+- After staging, use `git diff --cached --name-status` to verify that no out-of-scope target is included.
+- Before Commit, `git diff --cached --check` MUST succeed.
+- Before Commit, review remaining changes with `git status --porcelain=v1 -uall`.
+- Before Push, verify the existence of `.git/HEAD`, `.git/config`, `.git/index`, `AGENTS.md`, `codex/README.md`, `HP/AGENTS.md`, and `HP/index.php`.
+- After Push, verify the GitHub commit with `git ls-remote origin refs/heads/main`.
 
-- Git操作は `C:\Codex\candy` だけで行い、NASでは実行しない。
-- Stageは対象パスを明示する。
-- `git add -u -- <対象>` と `git add -- <対象>` を使い分ける。
-- Stage後に `git diff --cached --name-status` で対象外がないことを確認する。
-- Commit前に `git diff --cached --check` を必ず通す。
-- Commit前に `git status --porcelain=v1 -uall` の残り差分を確認する。
-- Push前に `.git/HEAD`、`.git/config`、`.git/index`、`AGENTS.md`、`codex/README.md`、`HP/AGENTS.md`、`HP/index.php` の存在を確認する。
-- Push後に `git ls-remote origin refs/heads/main` でGitHub側のCommitを確認する。
+## 7. Git Damage STOP Conditions
 
-## 7. Git破損時の停止条件
+STOP when any of the following occurs:
 
-次のどれかが発生したら、作業を止める。
+- `.git/HEAD` is missing.
+- `.git/config` is missing.
+- `.git/index` is missing.
+- `git status` reports `not a git repository`.
+- HEAD is unknown.
+- The branch unexpectedly becomes `master`.
+- Any of `AGENTS.md`, `codex/README.md`, `HP/AGENTS.md`, or `HP/index.php` is missing.
 
-- `.git/HEAD` がない
-- `.git/config` がない
-- `.git/index` がない
-- `git status` が `not a git repository` になる
-- `HEAD` が不明
-- 意図せず `master` になった
-- `AGENTS.md`、`codex/README.md`、`HP/AGENTS.md`、`HP/index.php` のどれかが消えた
+After stopping, report the affected scope, latest GitHub commit, available isolated copy, and recovery proposal. Do not perform recovery without explicit approval.
 
-停止後は、被害範囲、GitHub最新Commit、退避先の有無、復旧案を報告し、明示承認なしに復旧操作をしない。
+## 8. Git Recovery Procedure
 
-## 8. Git復旧手順
+Perform Git recovery only after explicit approval:
 
-Git復旧は明示承認後だけ実行する。
+1. Stop writes to the damaged local working repository and inspect uncommitted and untracked files without modifying them.
+2. Confirm the latest `origin/main` commit and any local-only changes required for recovery.
+3. Prepare a recovery plan that clones GitHub into a separate empty directory without deleting, overwriting, or moving the damaged working repository.
+4. After explicit approval, clone from GitHub into the local directory and verify the branch, upstream, remote, and `core.autocrlf`.
+5. Restore only required local-only changes to the new clone. Do not copy the old `.git` directory into the new clone.
+6. Verify `git status --short --branch`, HEAD against `origin/main`, and the protected targets.
+7. Do not use an isolated NAS `.git` directory as a recovery source or Git working repository.
+8. Report the recovery result, restored targets, and unresolved targets.
 
-1. 壊れたローカル作業場への書込みを止め、未Commit・未追跡ファイルの有無を読み取り確認する。
-2. GitHubの `origin/main` 最新Commitと、復旧対象に必要なローカル固有差分を確認する。
-3. 壊れた作業場を削除、上書き、移動せず、別の空ディレクトリへ再cloneする復旧案を作る。
-4. 明示承認後、GitHubからローカルへ再cloneし、Branch、upstream、Remote、`core.autocrlf` を確認する。
-5. 必要なローカル固有差分がある場合だけ、新cloneへ対象を明示して戻す。旧 `.git` を新cloneへコピーしない。
-6. `git status --short --branch`、HEADと`origin/main`、保護対象の存在を確認する。
-7. NASの退避 `.git` を復旧元やGit作業場として使用しない。
-8. 復旧結果、戻した対象、未復旧対象を報告する。
+## 9. User Reporting Rules
 
-## 9. 報告ルール
+Do not report only technical status codes to the user.
 
-ユーザーへは、専門用語だけで終わらせない。
+- `D`: tracked by GitHub but currently treated as deleted in the working repository
+- `??`: not registered in GitHub
+- `M`: modified
+- Stage: prepared for inclusion in the next Commit
+- Commit: recorded in local Git
+- Push: synchronized to GitHub
 
-- `D` は「GitHubにはあるが今の作業場では消えた扱い」
-- `??` は「GitHub未登録」
-- `M` は「変更済み」
-- `Stage` は「次のCommitに入れる準備」
-- `Commit` は「ローカルGitへ保存」
-- `Push` は「GitHubへ反映」
+Every problem report MUST state what is affected, how many items are affected, where they are, and the next required action.
 
-問題報告では必ず、何が、何件、どこにあり、次に何をするかを書く。
+## 10. Fixed Lessons from the Incident
 
-## 10. 今日の事故からの固定ルール
-
-- 「ゴミは消せ」と言われても、先に分類する。
-- `.git` は削除候補検索から必ず除外する。
-- 削除対象を画面に大量出力しない。件数と代表例、必要なら保存リストで出す。
-- `root配下だから安全` という判断は禁止する。
-- 物理削除、Git管理から削除、Stage、Commit、Pushを混同しない。
-- 分からない時は、実行せず質問に答える。
+- When instructed to delete "junk," classify targets first.
+- Always exclude `.git` from deletion-candidate searches.
+- Do not print an uncontrolled deletion list. Report the count and representative examples, and save the list only when required.
+- Never treat "under the repository root" as sufficient evidence of safety.
+- Distinguish physical deletion, removal from Git tracking, Stage, Commit, and Push.
+- When the correct action is unclear, do not execute; answer the user's question and request the required decision.

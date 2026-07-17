@@ -158,7 +158,7 @@ def paths_for(data: candy_area_page.AreaData) -> list[Path]:
         hp / "source" / "area.html",
         hp / "sitemap.xml",
         queue_path(),
-    ]
+    ] + path_config.site_state_output_paths()
 
 
 def relative(paths: list[Path]) -> list[str]:
@@ -211,6 +211,7 @@ def dependency_paths(
         hp / "source" / "template_kagoshima-deliveryhealth-area.html",
         path_config.SCRIPTS_DIR / "candy_area_page.py",
         path_config.SCRIPTS_DIR / "candy_area_publish.py",
+        path_config.SCRIPTS_DIR / "candy_site_state.py",
         root() / ".github" / "scripts" / "candy_ftp_deploy.py",
         root() / ".github" / "scripts" / "candy_release_check.py",
         root() / ".github" / "workflows" / "candy-production-deploy.yml",
@@ -443,7 +444,8 @@ def publish(
         **{path: "A" for path in page_paths},
         **{path: "M" for path in path_arguments[3:]},
     }
-    page_required = set(page_paths)
+    generated_paths = set(relative(path_config.site_state_output_paths()))
+    page_required = set(page_paths) | generated_paths
     page_tool = path_config.SCRIPTS_DIR / "candy_area_page.py"
     relative_input = input_path.relative_to(root()).as_posix()
 
@@ -481,6 +483,9 @@ def publish(
             command.append("--force")
         run(command)
         run([sys.executable, str(page_tool), "check", "--input", relative_input])
+        site_state_tool = path_config.SCRIPTS_DIR / "candy_site_state.py"
+        run([sys.executable, str(site_state_tool), "write"])
+        run([sys.executable, str(site_state_tool), "check", "--target", data.slug])
         save_state(state, "BUILT")
         phase = "BUILT"
 
@@ -587,7 +592,6 @@ def self_test() -> int:
         candy_area_page.BasicInfo("basic", "map", "src", "1", "1", "date", "description"),
         None, [], None, [],
     )
-    assert all(path.name != "ページ作成用.md" for path in paths_for(data))
     actions_url = f"{GITHUB_BASE}/actions/runs/12345"
     values = release_values(
         f"ACTIONS_URL={actions_url}\n"

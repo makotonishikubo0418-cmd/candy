@@ -43,6 +43,7 @@ For HP page, script, Git, or production work, also read `HP/AGENTS.md`.
 - Do not overwrite another Codex task. Check `codex/project_management/TASK_RESERVATIONS.md` first.
 - Preserve existing user work. A dirty tree alone is not a stop reason; conflicting overlap is.
 - Do not copy secrets, personal information, or raw log contents into reports or documents.
+- HP page, PHP, source, dataset, CSS, JavaScript, image, or SEO work is not complete until `candy-site-state check` confirms that generated management data matches the repository. Use `codex/README.md` for the route.
 - At the start of work, run `git fetch origin` and `git status --short --branch`; if `main` is behind `origin/main`, pull before editing.
 - Run Git commands only in `C:\Codex\candy`; Git operations on the NAS are prohibited.
 - Do not run `git reset --hard`, `git clean`, force push, unauthorized merge, or unauthorized rebase.

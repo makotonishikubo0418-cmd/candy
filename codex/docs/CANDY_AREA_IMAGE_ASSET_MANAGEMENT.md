@@ -1,66 +1,66 @@
-# CANDY AREA IMAGE ASSET MANAGEMENT
+# CANDY Area Image Asset Management
 
-更新日: 2026-07-13
-対象: areaページ用画像の受入、照合、公開配置、Git管理
+- Updated: 2026-07-13
+- Target: Acceptance, reconciliation, public placement, and Git management of area-page images
 
-## 1. 管理区分
+## 1. Management Classes
 
-| 区分 | パス | 扱い |
+| Class | Path | Handling |
 |---|---|---|
-| 準備・受入用 | `\\192.168.1.3\disk1\FSG_SEO\candy\Text_area_data\画像データ` | NAS上の受入素材保管場所。Git作業場として扱わない |
-| 公開用正本 | `HP/imgHtml/new_202601/area` | HTMLから参照する実画像の配置先 |
-| HTML参照 | `./imgHtml/new_202601/area/<ファイル名>` | area source HTML内の参照形式 |
+| Preparation and acceptance | `\\192.168.1.3\disk1\FSG_SEO\candy\Text_area_data\画像データ` | Accepted-asset storage on the NAS. Do not treat it as a Git working repository |
+| Canonical public source | `HP/imgHtml/new_202601/area` | Actual images referenced by HTML |
+| HTML reference | `./imgHtml/new_202601/area/<filename>` | Reference format in area source HTML |
 
-NASの受入素材を公開用正本として直接参照してはいけません。公開ページはローカルGit作業場の `HP/imgHtml/new_202601/area` を参照します。
+Do not reference accepted NAS assets directly as the canonical public source. Public pages reference `HP/imgHtml/new_202601/area` in the local Git working repository.
 
-## 2. 2026-07-13確認結果
+## 2. Verification Results on 2026-07-13
 
-準備フォルダ（NAS保管専用。Git操作禁止）:
+Preparation folder, which is NAS storage only and prohibits Git operations:
 
 ```text
 \\192.168.1.3\disk1\FSG_SEO\candy\Text_area_data\画像データ
 ```
 
-| 項目 | 結果 |
+| Item | Result |
 |---|---:|
-| 全ファイル | 344 |
+| All files | 344 |
 | JPG | 343 |
-| 正式命名画像 | 342 |
-| slug数 | 171 |
-| `_1`・`_2` 完全ペア | 171 |
-| ペア不足 | 0 |
-| 読込不能画像 | 0 |
-| サイズ | 全JPG 1000×750 |
-| 正式命名外JPG | `sample.jpg` 1件 |
-| 非画像 | `Thumbs.db` 1件 |
+| Correctly named images | 342 |
+| Slugs | 171 |
+| Complete `_1` and `_2` pairs | 171 |
+| Incomplete pairs | 0 |
+| Unreadable images | 0 |
+| Dimensions | Every JPG is 1000×750 |
+| JPG outside the naming standard | One `sample.jpg` |
+| Non-image | One `Thumbs.db` |
 
-正式命名342枚は、公開用正本 `HP/imgHtml/new_202601/area` の同名画像とSHA-256が全件一致しました。現在はすでに公開用正本へ同じ画像が存在するため、コピー・上書きは不要です。
+All 342 correctly named images have SHA-256 values matching files with the same names in the canonical public source `HP/imgHtml/new_202601/area`. The same images already exist in the canonical public source, so no copy or overwrite is required.
 
-公開用正本にだけ存在し、準備フォルダにない正式画像は次の2枚です。
+Only these two correctly named images exist in the canonical public source and are absent from the preparation folder:
 
 ```text
 kagoshima-deliveryhealth-area-ikenouecho_1.jpg
 kagoshima-deliveryhealth-area-ikenouecho_2.jpg
 ```
 
-## 3. 正式ファイル名
+## 3. Standard Filenames
 
 ```text
 kagoshima-deliveryhealth-area-<slug>_1.jpg
 kagoshima-deliveryhealth-area-<slug>_2.jpg
 ```
 
-- `_1`: メイン画像、OGP画像候補
-- `_2`: 地域紹介画像
-- 拡張子は現行仕様に合わせて `.jpg`
-- 新規画像の基本サイズは現行一式と同じ1000×750
-- slugは対象txtのcanonicalと一致させる
+- `_1`: Main image and OGP-image candidate
+- `_2`: Regional introduction image
+- Extension: `.jpg`, matching the current specification
+- Default dimensions for new images: 1000×750, matching the current set
+- Slug: MUST match the canonical value in the target text file
 
-## 4. slug不一致候補
+## 4. Slug-Mismatch Candidates
 
-準備画像slugと `Text_area_data` のcanonical slugを照合した結果、次は自動対応・自動リネーム禁止です。
+Comparison of preparation-image slugs against canonical slugs in `Text_area_data` found the following candidates. Automatic pairing and renaming are prohibited.
 
-| 元テキスト側 | 準備画像側の候補 |
+| Source Text | Preparation-image candidate |
 |---|---|
 | `dairyuucho` | `dairyucho` |
 | `inusakocho` | `inuzakocho` |
@@ -71,9 +71,9 @@ kagoshima-deliveryhealth-area-<slug>_2.jpg
 | `seiryo` | `seiryou` |
 | `shinayashikicho` | `shinyashikicho` |
 | `tenpozancho` | `tempozancho` |
-| `ikenouecho` | 準備フォルダにはなし。公開用正本にはあり |
+| `ikenouecho` | Absent from the preparation folder; present in the canonical public source |
 
-準備画像側にあり、現行元テキストcanonicalと直接一致しない追加候補:
+Additional preparation-image candidates without a direct match to a current source Text canonical value:
 
 ```text
 kinkocho
@@ -82,68 +82,68 @@ sennen
 shouyoudaicho
 ```
 
-これらは別地域、別表記、旧slug、作成予定のいずれか未確認です。ユーザー確認なしに統合、削除、リネーム、流用しません。
+It is unverified whether these represent another region, alternate spelling, legacy slug, or planned page. Do not consolidate, delete, rename, or reuse them without user confirmation.
 
-## 5. 重複内容候補
+## 5. Duplicate-Content Candidate
 
-次の2枚はファイル内容が完全一致します。
+These two files have identical content:
 
 ```text
 kagoshima-deliveryhealth-area-ishikidai_1.jpg
 kagoshima-deliveryhealth-area-ishikidai_2.jpg
 ```
 
-意図的に同一画像を使うのか、画像2の用意漏れかは未確認です。新規ページ公開前にユーザー確認が必要です。
+It is unverified whether this duplication is intentional or the second image is missing. User confirmation is required before publishing a new page with the pair.
 
-## 6. 正式命名外ファイル
+## 6. Files Outside the Naming Standard
 
-- `sample.jpg`: 正式ページ画像として扱わない
-- `Thumbs.db`: Windows管理ファイル。HTMLから参照しない
+- `sample.jpg`: Do not treat as a standard page image.
+- `Thumbs.db`: Windows management file. Do not reference it from HTML.
 
-これらは現在、準備フォルダと公開用正本の両方に存在します。この調査では削除していません。削除・Git除外は別指示が必要です。
+Both files currently exist in the preparation folder and canonical public source. This investigation did not delete them. Deletion or Git exclusion requires separate instruction.
 
-## 7. 今後の受入手順
+## 7. Future Acceptance Procedure
 
-新規areaページの依頼時に `_1`・`_2` の必要画像がない場合は、`CANDY_AREA_IMAGE_CREATION_SPEC.md` を確認します。画像元の保存・加工・商用公開条件と必要な帰属表示を確認できる場合だけ同仕様に従って制作します。条件を確認できない場合は停止し、正式ファイル名と必要な画像または許可情報をユーザーへ依頼します。既存画像の無断流用、ダミー画像、画像名の推測、権利未確認画像、画像なしでの公開は禁止します。
+When a new area-page request lacks required `_1` and `_2` images, review `CANDY_AREA_IMAGE_CREATION_SPEC.md`. Produce images according to that specification only when storage, modification, commercial-publication, and required-attribution conditions for the source are verified. Otherwise STOP and request correctly named images or permission information from the user. Unauthorized reuse of existing images, dummy images, inferred image names, rights-unverified images, and publication without images are prohibited.
 
-画像が揃ったことだけをページ制作完了としてはいけません。新規areaページへ画像を適用するときは、`CANDY_AREA_PAGE_GENERATION_SPEC.md` に従い、公開PHP、source HTML、ページ別dataset PHP、`dataset_base.php` のcase登録とリンク変換、area一覧・関連内部リンク、`sitemap.xml` への登録要否まで一体で確認します。必要なリンク設置や登録が未完了なら、ページを完成扱い・公開可能扱いにしません。
+Do not report page production complete merely because images are available. When applying images to a new area page, follow `CANDY_AREA_PAGE_GENERATION_SPEC.md` and validate public PHP, source HTML, page-specific dataset PHP, case registration and link transformation in `dataset_base.php`, the area index and related internal links, and required `sitemap.xml` registration as one unit. If required links or registrations remain incomplete, do not report the page complete or publishable.
 
-1. 準備画像をNASの `\\192.168.1.3\disk1\FSG_SEO\candy\Text_area_data\画像データ` で受け取る
-2. ファイル名からslugと `_1`・`_2` を抽出する
-3. 対象txtのcanonical slugと一致するか確認する
-4. `_1`・`_2` が両方あるか確認する
-5. JPGとして読込可能か確認する
-6. 幅・高さを確認する
-7. 同一ペアや他画像との完全重複を確認する
-8. 公開用正本に同名ファイルがあるか確認する
-9. 同名がある場合はハッシュ比較する
-10. 同一ならコピーしない
-11. 内容が違う場合は上書きせず、差異を報告して承認を得る
-12. 公開用正本にない場合だけ、ユーザー承認後にコピーする
-13. source HTMLのsrc、alt、OGPを確認する
-14. ローカル画像確認と本番画像HTTP確認を分けて報告する
+1. Receive preparation images under NAS `\\192.168.1.3\disk1\FSG_SEO\candy\Text_area_data\画像データ`.
+2. Extract the slug and `_1` or `_2` from each filename.
+3. Verify a match with the target text file's canonical slug.
+4. Verify that both `_1` and `_2` exist.
+5. Verify that each file is readable as JPG.
+6. Verify width and height.
+7. Check for a duplicate pair and complete duplication against other images.
+8. Check for a file with the same name in the canonical public source.
+9. When the same name exists, compare hashes.
+10. Do not copy a matching file.
+11. When contents differ, do not overwrite; report the difference and obtain approval.
+12. Only when the file is absent from the canonical public source, copy it after user approval.
+13. Verify source HTML `src`, alt text, and OGP.
+14. Report local-image validation separately from production-image HTTP validation.
 
-## 8. Git管理
+## 8. Git Management
 
-- 公開ページで使用する正本画像はローカルGit作業場の `HP/imgHtml/new_202601/area` 側をGit管理対象とする
-- NASの `Text_area_data/画像データ` は準備・受入用であり、Git管理対象にしない
-- NASではGit操作せず、受入素材を直接Stage・Commitしない
-- 公開用正本へ追加する場合は、対象画像と保存先を確認し、明示承認後にローカルGit作業場へコピーする
-- `git add -A`で受入画像を一括ステージしてはいけない
+- Track canonical images used by public pages from `HP/imgHtml/new_202601/area` in the local Git working repository.
+- NAS `Text_area_data/画像データ` is for preparation and acceptance and is outside Git management.
+- Do not run Git operations on the NAS or stage and commit accepted assets directly.
+- Before adding to the canonical public source, verify target images and destination, then copy into the local Git working repository only after explicit approval.
+- Do not bulk-stage accepted images with `git add -A`.
 
-## 9. 完了判定
+## 9. Completion Criteria
 
-- [ ] 対象txtのslugと画像slugが一致する
-- [ ] `_1`・`_2` が揃っている
-- [ ] JPGが正常に読み込める
-- [ ] サイズが確認済み
-- [ ] 重複・同一ペアを確認済み
-- [ ] 公開用正本とのハッシュ比較済み
-- [ ] 上書きがある場合はユーザー承認済み
-- [ ] source HTMLのsrc、alt、OGPが一致する
-- [ ] 公開PHP、dataset、area一覧、内部リンク、sitemapを含むページ制作チェックが完了している
-- [ ] 本番反映未確認の場合は明記した
+- [ ] Target text-file slug matches the image slug.
+- [ ] Both `_1` and `_2` exist.
+- [ ] JPG files are readable.
+- [ ] Dimensions are verified.
+- [ ] Duplication and identical pairs are checked.
+- [ ] Hashes were compared with the canonical public source.
+- [ ] Any overwrite has user approval.
+- [ ] Source HTML `src`, alt text, and OGP agree.
+- [ ] Page-production validation covers public PHP, dataset, area index, internal links, and sitemap.
+- [ ] Any unverified production deployment is stated explicitly.
 
-## 10. 今回変更していないもの
+## 10. Unchanged Scope
 
-画像のコピー、上書き、削除、移動、リネーム、Git追加は実施していません。
+No image copy, overwrite, deletion, movement, rename, or Git registration was performed by this verification.

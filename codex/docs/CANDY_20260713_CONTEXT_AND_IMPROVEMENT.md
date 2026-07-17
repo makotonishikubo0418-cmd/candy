@@ -1,546 +1,453 @@
-# CANDY 2026-07-13 作業コンテキスト・事故記録・改善方針
+# CANDY 2026-07-13 Work Context, Incident Record, and Improvement Policy
 
-## 1. この文書の目的
+## 1. Purpose
 
-2026-07-13 の CANDY 作業で確定した要件、実施内容、失敗、未解決事項、再発防止策を一つに保存する。
+Preserve the requirements, actions, failures, unresolved items, and prevention measures established during CANDY work on 2026-07-13.
 
-この文書は当日の作業記録であり、日々変化する現在値の正本ではない。現在値は必ず実ファイル、Git、GitHub、本番サーバーで再確認する。会話中の同一内容の連投は一項目にまとめたが、作業判断に関係する要求と事実は省略しない。認証情報、パスワード、ログ本文、個人情報は保存しない。
+This is a dated work record, not the canonical current state. Recheck current actual files, Git, GitHub, and production. Repeated conversation content was consolidated, but requirements and facts affecting decisions were retained. Do not store credentials, passwords, raw logs, or personal information.
 
-## 2. ユーザーが求める最終運用
+References in this historical record to prior `AGENTS.md` section numbers describe the rule in force at that time. Current authority is root `AGENTS.md` and the current routed runbook.
 
-1. Codex が実ファイルと管理資料を確認する。
-2. Codex が HP を修正または新規作成する。
-3. 「アップしろ」の現行範囲はroot `AGENTS.md` 第3.6節に従う。
-4. deploy対象を含むPushでActionsがplan生成・安全検査・本番反映を自動実行する。
-5. CodexはGitHub APIでActions完了を追跡し、通常経路でブラウザUIを操作しない。
-6. deployは最大25ファイルとし、各ファイルのupload・SHA256照合・置換・backup削除を完結させる。
-7. Actions成功後、対象ページのHTTPを確認する。
-8. 本番URL、Commit URL、Actions Run URLを同じ最終報告に記載する。
+## 2. User-Requested Final Operation
 
-「ローカル変更完了」「Commit 完了」「Push 完了」「Actions 完了」「本番反映完了」「表示確認完了」は同じ意味ではない。以後は必ず区別する。
+1. Codex reviews actual files and management documents.
+2. Codex fixes or creates HP content.
+3. Upload authority follows root `AGENTS.md`.
+4. A Push containing deploy targets makes Actions generate the plan, run safety checks, and deploy to production automatically.
+5. Codex tracks Actions completion through the GitHub API and does not use browser UI on the normal route.
+6. A deploy is limited to 25 files and completes upload, SHA-256 verification, replacement, and backup deletion for each file.
+7. After Actions succeeds, Codex verifies target-page HTTP.
+8. The final report includes production, Commit, and Actions run URLs.
 
-## 3. 環境と公開先に関する確定事項
+Local change, Commit, Push, Actions, production deployment, and rendering validation are distinct states and MUST be reported separately.
 
-| 項目 | 確定内容 |
+## 3. Confirmed Environment and Destinations
+
+| Item | Confirmed value |
 |---|---|
 | Repository | `makotonishikubo0418-cmd/candy` |
 | Branch | `main` |
-| 2026-07-13 のローカルルート | `C:\Users\nishi\Desktop\data\candy` |
-| HP 本体 | `C:\Users\nishi\Desktop\data\candy\HP` |
-| 旧データ | `C:\Users\nishi\Desktop\data\candy\HP_旧データ` |
-| 本番サーバー | `/public_html/group/candy/` |
-| テストサーバー | `/public_html/group_test/candy/` |
-| WinSCP 保存済み接続名 | `firststar` |
-| WinSCP 実行ファイル確認先 | `C:\Program Files (x86)\WinSCP\WinSCP.exe` |
+| Local root on 2026-07-13 | `C:\Users\nishi\Desktop\data\candy` |
+| HP body | `C:\Users\nishi\Desktop\data\candy\HP` |
+| Legacy data | `C:\Users\nishi\Desktop\data\candy\HP_旧データ` |
+| Production server | `/public_html/group/candy/` |
+| Test server | `/public_html/group_test/candy/` |
+| Saved WinSCP connection | `firststar` |
+| Verified WinSCP executable | `C:\Program Files (x86)\WinSCP\WinSCP.exe` |
 
-`HP_旧データ` は、ユーザーが本番サーバーから改めてダウンロードして用意した当時の本番スナップショットである。過去の推測より、この事実を優先する。
+`HP_旧データ` was the production snapshot downloaded again by the user at that time. This verified fact supersedes earlier inference.
 
-## 4. 本番切替に関する絶対条件
+## 4. Mandatory Production-Switchover Conditions
 
-- 本番の `index.php` は現在、シティヘブンへの転送を維持するための入口である。
-- 移行中は本番 `index.php` を最新 HP の内容で上書きしない。
-- `index.php` 以外の PHP、CSS、JavaScript、画像、include、source 等は先に最新化できる。
-- 最終公開切替の時点だけ、ユーザーの明示指示により最新 `HP/index.php` を本番へ反映する。
-- 「`index.php` を除外した」は本番安全の一条件であり、他のファイルが正常に反映・表示された証明ではない。
-- 本番 `index.php` の HTTP 転送、本体ページの HTTP 応答、画面表示は個別に検証する。
+- Production `index.php` currently serves as the entry point preserving the redirect to シティヘブン.
+- Do not overwrite production `index.php` with latest HP during migration.
+- PHP, CSS, JavaScript, images, includes, and source other than `index.php` may be updated first.
+- Deploy latest `HP/index.php` only for final switchover after explicit user instruction.
+- Excluding `index.php` is only one safety condition; it does not prove other files deployed or rendered correctly.
+- Verify production `index.php` redirect, page HTTP responses, and rendering separately.
 
-## 5. 通常ページ生成の確定仕様
+## 5. Confirmed Normal-Page Generation Specification
 
-### 5.1 元データとテンプレート
+### 5.1 Source Data and Templates
 
-- `Text_area_data` は area ページの元データ。
-- `Text_blog_data` は blog ページの元データ。
-- `Text_hotel_data` は hotel ページの元データ。
-- `template_` で始まるファイルはテンプレート。
-- 対応関係は area → area、blog → blog、hotel → hotel。
+- `Text_area_data` is source data for area pages.
+- `Text_blog_data` is source data for blog pages.
+- `Text_hotel_data` is source data for hotel pages.
+- Files beginning with `template_` are templates.
+- Category mapping is area to area, blog to blog, and hotel to hotel.
 
-### 5.2 Codex が通常ページを作るときの一式
+### 5.2 Normal Generation Unit
 
-通常ページ生成は HTML 一枚の作成では完了しない。対象ページの既存完成例を複数確認し、最低限次を一つの作業単位として扱う。
+Normal generation is not complete after one HTML file. Review multiple completed examples and treat at least these as one unit:
 
-1. 元 Text データの確認
-2. 同カテゴリの完成済みページと例外パターンの確認
-3. 対応する `template_*.html` の選定
-4. `source/*.html` の作成または更新
-5. `includefile/dataset_*.php` の作成または更新
-6. HP 直下の公開入口 PHP の作成または更新
-7. `dataset_base.php` 等への登録が必要か確認
-8. HTML から公開 PHP を生成する既存経路の適用
-9. 一覧、カテゴリ入口、内部リンク、関連ページへの導線追加
-10. sitemap 反映要否の確認
-11. 画像の存在、配置先、ファイル名、参照先の確認
-12. 構文、リンク、画像、PC/SP、ブラウザ表示の必要な検証
+1. Source Text review
+2. Same-category completed pages and exceptions
+3. Matching `template_*.html`
+4. `source/*.html`
+5. `includefile/dataset_*.php`
+6. Public entry PHP directly under HP
+7. Required registration in `dataset_base.php` and related files
+8. Existing HTML-to-public-PHP route
+9. Index, category, internal-link, and related-page routes
+10. Sitemap requirement
+11. Image existence, placement, filename, and reference
+12. Required syntax, link, image, desktop/mobile, and browser checks
 
-`create.php` は Web 上から生成する旧来の方法として残っているが、今後の通常制作では Codex 管理を基本とする。通常ページ制作と、既存機能の開発改修・不具合修正は別の作業種別として扱う。
+`create.php` remains as a legacy web-generation method, but normal production is managed by Codex. Normal page production and development or bug-fix work are separate task types.
 
-### 5.3 カテゴリ別の注意
+### 5.3 Category Cautions
 
-- area: 完成済みの PHP・source HTML・dataset が多数ある。全パターンを母集団として基本形と例外を判断する。
-- hotel: 施設ごとの情報量に差があり、入力情報の有無でページ構成が変わる。空欄を機械的に出力しない。
-- blog: ルールと例外が複雑である。単一例のコピーで仕様を決めず、関連する全ファイルと完成例を比較する。
-- 依頼単位に固定上限を設けない。必要なら 100 ファイル以上を対象にできる。「最大10ファイル」は廃止された誤ルールであり、復活させない。
+- Area has many completed PHP/source/dataset files; use the full population to identify base and exception patterns.
+- Hotel structure varies by available facility information; do not emit mechanical blanks.
+- Blog rules and exceptions are complex; compare related files and completed examples instead of copying one example.
+- Do not set a fixed task-file maximum. More than 100 files may be in scope. The legacy ten-file maximum was invalid and MUST NOT return.
 
-### 5.4 画像
+### 5.4 Images
 
-- area 用の準備画像は `画像データ\area_img` を確認する。
-- 準備画像には、すでに使用済みのものと今後使用するものが混在する。
-- 新規依頼に対応する画像がない場合、無断で代替画像を作成・流用しない。
-- 画像がないページの既存表示規則を確認し、判断が必要なら制作前に報告する。
-- ページ作成時は画像ファイルだけでなく、画像参照、一覧画像、関連リンク設置箇所も確認する。
+- At that time, preparation area images were under `画像データ\area_img`.
+- Preparation images mixed already-used and future-use assets.
+- Do not create or reuse an unauthorized substitute when a new request has no image.
+- Review existing missing-image behavior and report required decisions before production.
+- Check references, index images, and related-link placement, not only image files.
 
-### 5.5 area 制作目標
+### 5.5 Area Production Objective
 
-- 当面の目標は area 105 ページの完成。
-- スタッフや別の Codex が同じ品質で作れることを管理資料の目的とする。
-- 依頼数は固定ルールにしない。差分と例外を確認できる単位に分けるが、機械的なファイル数上限は設けない。
+- The immediate objective was completion of 105 area pages.
+- Management documents were intended to enable staff and other Codex tasks to produce at the same quality.
+- Request count is not fixed. Split work by a reviewable diff and exception scope, not a mechanical file limit.
 
-## 6. GitHub・FTP 連携で実施したこと
+## 6. GitHub and FTP Work
 
-### 6.1 GitHub → KAGOYA FTP 疎通試験
+### 6.1 GitHub-to-KAGOYA FTP Test
 
-- GitHub Actions から KAGOYA FTP へテストファイルをアップロードした。
-- 同じファイルをダウンロードし、SHA256 が一致した。
-- テストファイルを削除した。
-- 初回は削除後の存在確認で KAGOYA 固有の `450` 応答を失敗と誤判定した。
-- `ftp.nlst(name)` ではなく `ftp.nlst()` の一覧から末尾ファイル名を照合する方式へ変更した。
-- 再試験でアップロード、ダウンロード、SHA256、削除、削除後の不存在確認、Actions 完了を確認した。
+- Actions uploaded a test file to KAGOYA FTP.
+- The file was downloaded and SHA-256 matched.
+- The test file was deleted.
+- The first run misclassified KAGOYA's `450` after deletion as failure.
+- Verification changed from `ftp.nlst(name)` to matching the final filename from `ftp.nlst()`.
+- The rerun verified upload, download, SHA-256, deletion, post-deletion absence, and Actions completion.
 
-### 6.2 当時の本番自動反映設計（2026-07-14廃止）
+### 6.2 Production Automation Design at Incident Time
 
-この節は事故発生時の設計記録である。現在はPush起動とfull deployを廃止し、手動preview・手動deploy方式へ変更した。
+This records the design at the incident time. It was replaced on 2026-07-14, first by a manual two-step design and later by the current Push-triggered design.
 
-- 本番向け workflow と FTP デプロイスクリプトを用意した。
-- `HP/index.php` は自動反映の対象外とした。
-- 管理資料、ログ、Text 元データ、`.well-known` 等を公開対象外にする設計を行った。
-- サーバーだけにあるファイルを一括削除する運用は採用しない。
+- A production workflow and FTP deploy script existed.
+- `HP/index.php` was excluded from automatic deployment.
+- Management documents, logs, source Text, and `.well-known` were excluded.
+- Bulk deletion of server-only files was not adopted.
 
-## 7. 2026-07-13 に発生した重大な失敗
+## 7. Major Failures on 2026-07-13
 
-### 7.1 事前確認が完了したと誤認させた
+### 7.1 Preflight Was Misrepresented as Complete
 
-管理資料に大量の説明があったが、実作業に必要な短い入口、作業別の読み先、現在値と過去スナップショットの区別が弱かった。その結果、書かれているルールを実行時に参照できず、確認済みの内容にも漏れが発生した。
+Management documents contained extensive explanation but lacked a short entry point, task-specific routes, and strong separation of current state from snapshots. Rules could not be applied reliably and verified scope had omissions.
 
-### 7.2 本番一括反映が長時間化した
+### 7.2 Bulk Production Deployment Ran Too Long
 
-- 自動デプロイが多数ファイルの転送とバックアップ処理を行い、進行が極端に遅くなった。
-- 実際の進捗と残り時間を確認できない状態で、待てば完了するかのような報告をした。
-- ユーザーは WinSCP と GitHub を目の前で確認していたが、報告と実サーバー状態が一致しなかった。
-- 本番には目的のファイルが十分反映されず、待機・バックアップ用の不要ファイルが多数残った。
-- ユーザーが最終的に WinSCP で直下 PHP を手動アップロードし、閲覧可能な状態へ復旧した。
+- Automated deploy transferred and backed up many files and became extremely slow.
+- Progress and remaining time were unknown, but reporting implied waiting would finish it.
+- The user watched WinSCP and GitHub while reports differed from actual server state.
+- Required files were not sufficiently deployed and many temporary/backup files remained.
+- The user manually uploaded root PHP through WinSCP and restored a viewable state.
 
-### 7.3 影響
+### 7.3 Impact
 
-- 作業時間を浪費した。
-- トークンを浪費した。
-- 顧客対応へ影響し、信用を損なった。
-- ユーザーへ強い不安と怒りを与えた。
-- 「監視する」「完了したら報告する」という言葉に、実際の継続監視と完了保証が伴わなかった。
+- Work time and tokens were wasted.
+- Customer response and trust were harmed.
+- The user experienced serious anxiety and anger.
+- Claims of monitoring and completion lacked continuous monitoring and completion evidence.
 
-金銭・時間・信用を返せないことを説明に使わず、以後は同じ損害を発生させない実行設計と事実確認を優先する。
+Future work must prioritize execution design and verified facts that prevent recurrence, not explanations about irreversible cost, time, or trust.
 
-## 8. 本番復旧・整理で確認したこと
+## 8. Production Recovery and Cleanup
 
-- ユーザーが WinSCP から HP 直下 PHP をアップロードし、ページを閲覧可能にした。
-- 本番には不要な待機・バックアップ系ファイルが多数存在した。
-- 確実に不要と確認できた 321 ファイルを削除した。
-  - `.candy-backup-*` 319 ファイル
-  - サーバー上の `.gitignore` 1 ファイル
-  - FTP 疎通用 smoke test 1 ファイル
-- 削除後、本番ルート PHP は 100 ファイルだった。
-- 本番 `index.php` は転送用の状態を維持した。
-- 必要か不明なファイルを名前だけで一括削除してはいけない。
+- The user uploaded PHP directly under HP through WinSCP and restored page access.
+- Many unnecessary temporary and backup files existed on production.
+- 321 confirmed unnecessary files were deleted: 319 `.candy-backup-*`, one server `.gitignore`, and one FTP smoke test.
+- Production root PHP count after deletion was 100.
+- Production `index.php` retained the redirect.
+- Do not bulk-delete an uncertain file from its name alone.
 
-## 9. リンク・公開状態の全体監査結果
+## 9. Site-Wide Audit Results
 
-2026-07-13 時点の監査結果。将来の現在値として流用せず、再監査時は実ファイルと本番を再取得する。
+These are 2026-07-13 results, not reusable current state.
 
-### 9.1 公開 PHP と本番
+### 9.1 Public PHP and Production
 
-- HP 直下 PHP: 100
-- 本番 HTTP: 99 ページが `200`
-- `index.php`: 意図した `301` 転送
-- 想定外の PHP HTTP ステータス: 0
-- 本番 inventory: 1,428 ファイル、29 ディレクトリ
+- PHP directly under HP: 100
+- Production HTTP: 99 pages returned `200`
+- `index.php`: intended `301`
+- Unexpected PHP HTTP statuses: 0
+- Production inventory: 1,428 files and 29 directories
 
-### 9.2 内部リンク・画像
+### 9.2 Internal Links and Images
 
-- 描画後の内部参照: 752
-- 誤検出を除外した不足参照: 155
-- `area.php` からの area リンク: 194
-- 不足していた area PHP: 137
-- 不足していた area 画像: 14
-- `shopinfo.php`: 不足
-- area の準備中リンク: 27 ページ
-- hotel 一覧にも未完成行がある
-- アンカー: 767、アンカー不足: 0
+- Rendered internal references: 752
+- Missing references after false-positive exclusion: 155
+- Area links from `area.php`: 194
+- Missing area PHP: 137
+- Missing area images: 14
+- `shopinfo.php`: missing
+- Preparation links on 27 area pages
+- Incomplete row in the hotel index
+- Anchors: 767; missing anchors: 0
 
-### 9.3 CSS 資産
+### 9.3 CSS Assets
 
-- 現行 CSS から参照される不足資産:
-  - `img/dummy.gif`
-  - `imgHtml/cdBgGirl.png`
-- 現在非使用の `YTPlayer.css` には不足資産が 6 件ある。
+- Missing assets referenced by active CSS: `img/dummy.gif` and `imgHtml/cdBgGirl.png`.
+- Inactive `YTPlayer.css` referenced six missing assets.
 
-### 9.4 外部 URL
+### 9.4 External URLs
 
-- 公開コード・生成ページの外部 URL: 623
-- 4xx: 26
-- payment form の GET `400` は、GET 検査だけでリンク切れと断定しない。
-- 明確な 404 の例として、旧 FC2 SNS、旧日記、kaminokawa、Lawson、Park Hotel があった。
-- `www.55810.com` のコード、template、meta、画像参照には 404 が 20 件あった。
+- External URLs in public code and generated pages: 623
+- 4xx results: 26
+- Payment-form GET `400` was not classified as broken from GET inspection alone.
+- Clear 404 examples included legacy FC2 SNS, legacy diary, kaminokawa, Lawson, and Park Hotel.
+- Code, template, metadata, and image references on `www.55810.com` included 20 404s.
 
-### 9.5 Text 元データ内 URL
+### 9.5 URLs in Source Text
 
-- Text 元データ内 URL: 1,229
-- 自サイト `www.55810.com`: 346
-  - OK: 228
-  - 404: 118（PHP 102、画像 16）
-- 外部: 883
-  - OK: 430
-  - 接続先制限: 450
-  - 到達不能: 3
-- 制限の大半は `maps.app.goo.gl` の `429` であり、リンク切れとは断定していない。
+- Source Text URLs: 1,229
+- `www.55810.com`: 346; 228 OK and 118 404 (102 PHP, 16 images)
+- External: 883; 430 OK, 450 restricted, and 3 unreachable
+- Most restrictions were `429` from `maps.app.goo.gl` and were not classified as broken.
 
-## 10. 2026-07-13 終了時点のローカル状態
+## 10. Local Snapshot at End of 2026-07-13
 
-この節は記録時点のスナップショット。次回作業では必ず再取得する。
+Reacquire every value before current work.
 
 - Branch: `main`
-- ローカル HEAD と `origin/main`: 同一を確認した時点がある
-- tracked 変更: 118
-- untracked: 348
-- 未追跡ファイルを一括削除、追加、stage していない
-- 管理資料以外にも、公開 PHP、dataset、FTP デプロイスクリプト等の未 Commit 変更がある
-- `HP` 直下 PHP: 100
-- 本番 include 参照: 97
-- テスト include 参照が残る PHP: 2
-  - `kagoshima-deliveryhealth-petitegirl.php`
-  - `kagoshima-deliveryhealth-slendergirl.php`
-- dataset include を持たない PHP: `makeSitemap.php`
-- Commit・Push はこの管理再設計作業では実施していない
+- Local HEAD and `origin/main` were confirmed equal at one point.
+- Tracked changes: 118; untracked: 348.
+- Untracked files were not bulk-deleted, added, or staged.
+- Uncommitted changes included public PHP, datasets, and FTP deploy scripts, not only management documents.
+- PHP directly under HP: 100.
+- Production include references: 97.
+- Two PHP files retained test includes: `kagoshima-deliveryhealth-petitegirl.php` and `kagoshima-deliveryhealth-slendergirl.php`.
+- `makeSitemap.php` had no dataset include.
+- This management redesign did not Commit or Push.
 
-## 11. 管理資料が機能しなかった原因
+## 11. Why the Management Documents Failed
 
-### 11.1 AGENTS.md が長すぎた
+### 11.1 AGENTS.md Was Too Long
 
-- root 約 540 行、HP 約 680 行で、同じ原則、Git 手順、ファイル件数、作成履歴が重複していた。
-- 最初に必要な禁止事項と作業別の読み先が埋もれた。
-- 全文を読むこと自体が目的化し、対象作業でどの資料を使うかが明確でなかった。
+Root was about 540 lines and HP about 680, duplicating principles, Git procedures, counts, and production history. Required prohibitions and routes were buried, and broad reading displaced task-specific selection.
 
-### 11.2 変わる数値を AGENTS.md に固定した
+### 11.2 Volatile Counts Were Fixed in AGENTS.md
 
-- PHP、HTML、dataset、資料数などの件数が増減しても、AGENTS.md と目次の古い数値が残った。
-- 古いスナップショットを現在値として誤用する原因になった。
+Old PHP, HTML, dataset, and document counts remained after actual counts changed and were misused as current state.
 
-### 11.3 「正本」が複数に見えた
+### 11.3 Multiple Documents Appeared Canonical
 
-- root AGENTS、HP AGENTS、運用基礎、生成規約、本番移行資料に似た説明が重複した。
-- 一方を更新しても別文書の古い記述が残り、矛盾した。
+Root AGENTS, HP AGENTS, operation basics, generation governance, and production migration duplicated explanations. Updating one left contradictions elsewhere.
 
-### 11.4 確認状態の定義が弱かった
+### 11.4 Verification States Were Weak
 
-- ローカル変更、GitHub、Actions、本番、HTTP、ブラウザが混同された。
-- 「完了」「確認済み」「監視中」の証拠条件が不足していた。
+Local changes, GitHub, Actions, production, HTTP, and browser were mixed. Evidence for complete, verified, and monitoring was insufficient.
 
-### 11.5 例外を本文へ足し続けた
+### 11.5 Exceptions Were Continuously Appended
 
-- 漏れが出るたび AGENTS.md へ詳細を追加し、さらに読みにくくなった。
-- 例外の保存先、担当文書、更新責任が決まっていなかった。
+Each omission added detail to AGENTS and made it harder to read. Exception ownership and update responsibility were undefined.
 
-## 12. 永続的な改善方針
+## 12. Permanent Improvement Policy
 
-### 12.1 AGENTS.md は入口に限定する
+### 12.1 Limit AGENTS.md to an Entry Point
 
-AGENTS.md に置くもの:
+Include only mandatory rules, short preflight, task routes, STOP conditions, completion-state definitions, and minimal report shape. Exclude volatile counts, dated findings, long file lists, production history, every page exception, and duplicate Git procedures.
 
-- 絶対に破ってはいけないルール
-- 作業開始前の短い確認
-- 作業種別から正本資料を選ぶ目次・導線
-- STOP 条件
-- 完了状態の定義
-- 報告の最小形式
+### 12.2 Separate Root and HP Responsibilities
 
-AGENTS.md に置かないもの:
+- Root `AGENTS.md`: Repository-wide mandatory rules, Git, production authority, and task routing.
+- `HP/AGENTS.md`: HP-specific generation routes, categories, images, production index, risky files, and validation routing.
+- Store detail in one canonical document and link to it.
 
-- 変化するファイル件数
-- 日付付きの調査結果
-- 長いファイル一覧
-- 制作フェーズの履歴
-- 個別ページの全例外
-- 同じ Git 手順の重複
+### 12.3 Make "All" and "100%" Verifiable
 
-### 12.2 root と HP の責任を分ける
+1. Enumerate the population by command.
+2. Record the count.
+3. State exclusions.
+4. Record each result mechanically.
+5. Aggregate success, failure, unverified, and restricted.
+6. Never report 100% when one item is unverified.
+7. Never report full verification without population and evidence.
 
-- root `AGENTS.md`: リポジトリ全体の絶対ルール、Git、本番権限、作業別ルーター。
-- `HP/AGENTS.md`: HP 固有の生成経路、カテゴリ、画像、本番 index、危険ファイル、検証ルーター。
-- 詳細は一つの正本資料だけに置き、AGENTS はリンクする。
+### 12.4 Keep Production Work Small and Verifiable
 
-### 12.3 「全て」「100%」を検査可能にする
+- Prepare preview and target list.
+- Verify actual time, authority, and rendering with a small first batch.
+- Emit file-level progress.
+- Estimate time only from measured speed.
+- Complete temporary and backup lifecycle per target.
+- Enumerate remaining temporary files after partial failure.
+- Do not report monitoring from merely starting a long process; inspect the process, exit code, and current progress.
+- On a user stop instruction, verify process termination.
 
-ユーザーが「全て」「100%」と指定した場合:
+### 12.5 Protect a Dirty Worktree
 
-1. 対象母集団をコマンドで列挙する。
-2. 対象件数を記録する。
-3. 除外条件を明示する。
-4. 各対象の結果を機械的に記録する。
-5. 成功、失敗、未確認、制限を集計する。
-6. 未確認が一件でもあれば 100% 完了と報告しない。
-7. 母集団と証拠を示せない場合は「全件確認済み」と書かない。
+- Do not STOP solely because dirty or untracked files exist.
+- Check overlap with current targets.
+- When there is no overlap, change only the target.
+- When overlap cannot be understood or preserved, STOP.
+- Never run `reset --hard`, `clean`, or force push.
+- Limit Stage, Commit, and Push to explicitly authorized files.
 
-### 12.4 本番作業は小さく検証可能にする
+## 13. Shortest Next-Task Start
 
-- 事前 preview と対象一覧を作る。
-- 最初の少数ファイルで実時間、権限、表示を確認する。
-- 進捗をファイル単位で出す。
-- 推定時間は実測速度から算出し、根拠なしに約束しない。
-- バックアップや一時ファイルは対象ごとに作成・削除を完結させる。
-- 途中失敗時に残った一時ファイルを一覧化する。
-- 長時間処理を開始しただけで「監視中」と報告しない。実プロセス、終了コード、最新進捗を確認する。
-- ユーザーが停止を命じたら、実行中プロセスの停止を確認して報告する。
+1. Read root `AGENTS.md`.
+2. For HP work, read `HP/AGENTS.md`.
+3. Use `CANDY_MASTER_DOC_INDEX.md` to select only the task document.
+4. Inspect `git status --short --branch` and target actual files.
+5. For production, inspect `CANDY_PRODUCTION_MIGRATION_MASTER.md` and actual workflow/script.
+6. State included work, excluded work, and completion evidence.
+7. Report local, Git, Actions, production, HTTP, and browser separately.
 
-### 12.5 変更中の作業ツリーを保護する
+## 14. Prohibited Reporting and Required Replacement
 
-- dirty や未追跡が存在するだけで一律停止しない。
-- 今回の対象と既存変更が重なるかを確認する。
-- 重ならなければ対象だけを変更する。
-- 重なる場合は内容を保存・理解できない限り停止する。
-- `reset --hard`、`clean`、force push は行わない。
-- stage、Commit、Push は指定されたファイルだけに限定し、明示指示を必要とする。
-
-## 13. 次回作業開始時の最短手順
-
-1. root `AGENTS.md` を読む。
-2. HP 作業なら `HP/AGENTS.md` を読む。
-3. `CANDY_MASTER_DOC_INDEX.md` で作業種別に対応する資料だけを選ぶ。
-4. `git status --short --branch` と対象ファイルの現物を確認する。
-5. 本番作業なら `CANDY_PRODUCTION_MIGRATION_MASTER.md` と workflow/script の現物を確認する。
-6. 「やること・やらないこと・完了証拠」を短く宣言する。
-7. 実行後は、ローカル、Git、Actions、本番、HTTP、ブラウザを分けて報告する。
-
-## 14. 今後の禁止表現と置換
-
-| 禁止 | 必須の置換 |
+| Prohibited | Required replacement |
 |---|---|
-| 管理書に書いてあります | 対象見出しと実ファイルを再確認した結果を示す |
-| 一通り確認しました | 母集団、件数、成功、失敗、未確認を示す |
-| 完了しました | 何が完了し、何が未完了かを状態別に示す |
-| 監視しています | 実行中プロセス、最新時刻、進捗、終了条件を示す |
-| 待てば終わります | 実測速度と残件数がなければ推測と明記する |
-| 100%です | 母集団と未確認ゼロの証拠を示す |
+| "It is written in the management document" | Show the result of rechecking the target section and actual file |
+| "I checked it generally" | Show population, count, success, failure, and unverified |
+| "Complete" | Show what completed and what remains by state |
+| "Monitoring" | Show running process, latest time, progress, and completion condition |
+| "It will finish if we wait" | Without measured speed and remaining count, identify it as an estimate |
+| "100%" | Show population and evidence of zero unverified items |
 
-## 15. この文書を更新する条件
+## 15. Update Conditions
 
-- 今日の記録そのものは改変せず、誤記訂正は訂正理由と日付を残す。
-- 新しい現在値は各正本資料または新しい日付の記録へ追加する。
-- 認証情報、パスワード、ログ本文、個人情報は追記しない。
-- 同じルールを複数文書へ複製せず、正本を一つ決めてリンクする。
+- Do not rewrite the historical record itself; corrections retain date and reason.
+- Put new current state in its canonical document or a new dated record.
+- Do not add credentials, passwords, raw logs, or personal information.
+- Do not duplicate one rule across documents; select one canonical source and link to it.
 
-## 16. 2026-07-13 指示・判断の時系列台帳
+## 16. Chronological Instruction and Decision Ledger for 2026-07-13
 
-以下は、当日の会話から作業判断に関係する指示、訂正、確認事項を発生順に保存した台帳である。同一文の連投は繰り返し回数を転記せず一項目に集約した。強い叱責は「重大な不信・即時是正要求」として記録し、要求内容と影響は省略していない。
+This ledger preserves decision-relevant instructions, corrections, and findings in order. Repeated identical messages were consolidated. Strong reprimands are recorded as serious distrust and immediate-correction requirements without omitting requirements or impact.
 
-### 16.1 Git と noindex/index
+### 16.1 Git and noindex/index
 
-1. noindex を index に変更したデータが Commit 済みか GitHub で確認するよう指示があった。
-2. Commit、Push、Pull を行う指示があった。
-3. 既存 AGENTS.md の「最大10ファイル」は GPT が勝手に書いた誤仕様であり、この企画では 100 ファイル以上もあり得るため削除するよう訂正された。
-4. 以後、固定の作業ファイル上限を設けないことがユーザー方針になった。
+1. The user instructed verification on GitHub that data changing noindex to index had been committed.
+2. Commit, Push, and Pull were instructed.
+3. The prior ten-file maximum in AGENTS was an invalid GPT-created rule; more than 100 files may be in scope and the rule was ordered removed.
+4. No fixed work-file limit became user policy.
 
-### 16.2 本番用・生成用ファイルの区別
+### 16.2 Production and Generation Files
 
-1. リポジトリには template HTML/PHP、今後作成するための Text、その他本番用でないファイルがあることを理解するよう指示された。
-2. `Text_area_data`、`Text_blog_data`、`Text_hotel_data` が HTML に当てはめる元データだと明示された。
-3. `template_` ファイルがテンプレートだと明示された。
-4. area は area、blog は blog、hotel は hotel に対応する同仕様だと明示された。
-5. 報告は長くせず簡単にするよう指示された。
+1. The user required understanding that the repository contains template HTML/PHP, future-production Text, and other non-production files.
+2. `Text_area_data`, `Text_blog_data`, and `Text_hotel_data` were identified as HTML source data.
+3. `template_` files were identified as templates.
+4. Category mapping was explicitly area-to-area, blog-to-blog, and hotel-to-hotel.
+5. Reports were required to remain short.
 
-### 16.3 生成アルゴリズムの解析
+### 16.3 Generation-Algorithm Analysis
 
-1. 当 Project における HTML 生成方法と必要な PHP を調査するよう指示された。
-2. Web 上から `create.php` で生成する方法があるが、今後はほとんど使わず Codex 管理にする方針が示された。
-3. Codex が新しいファイルを生成するときは、PHP 記載、PHP 生成、HTML 生成等の既存ルートを守り、壊さない絶対ルールが必要とされた。
-4. この絶対ルールは通常のページ生成に適用し、開発改修時は別扱いにするよう区別された。
-5. ルールを見落とさない場所へ書くよう指示された。
+1. The user instructed investigation of HTML generation and required PHP in this project.
+2. The existing `create.php` web route was acknowledged, but future production would normally use Codex management.
+3. New-file generation required mandatory rules preserving existing PHP and HTML generation routes.
+4. Those rules apply to normal generation; development changes remain separate.
+5. Rules were required in a location that would not be overlooked.
 
-### 16.4 area・blog・hotel の全解析
+### 16.4 Full Area, Blog, and Hotel Analysis
 
-1. area には完成済みの HTML、PHP 等が多数あるため、Text の当てはめ方と適用パターンを全ファイルから分析するよう指示された。
-2. 基本、例外、その他を分け、全ファイルを確認し、仕様を Markdown 管理して、今後 Codex が制作できるようにすることが求められた。
-3. blog、hotel も同様に、解析、分析、全ファイル確認、Markdown 管理まで行うよう指示された。
-4. 見落とし・漏れ・例外対応時のルール漏れを再確認するよう指示された。
-5. hotel は情報量の差によりページ内容が異なることを明示された。
-6. blog は特にルールが複雑であることを明示された。
-7. area も含め、理解・整理・管理体制を徹底再確認するよう指示された。
+1. Because area had many completed files, all files were to be analyzed for Text application and patterns.
+2. Base, exceptions, and other cases were to be separated, verified across all files, and managed in Markdown for future Codex production.
+3. Blog and hotel required the same analysis and management.
+4. Omission and exception-rule coverage required rechecking.
+5. Hotel page content was confirmed to vary with information quantity.
+6. Blog rules were confirmed especially complex.
+7. Understanding, organization, and management across all three categories required complete rechecking.
 
-### 16.5 area 画像と新規ページ
+### 16.5 Area Images and New Pages
 
-1. `画像データ\area_img` の準備画像を確認するよう指示された。
-2. すでに利用・作成済みの画像と、これから利用する画像が混在すると明示された。
-3. 新規依頼で画像がない場合の対応を決めるよう求められ、制作ルールへ記載するよう指示された。
-4. 「画像・情報とも準備済み」「情報は準備済みだが画像なし」を抽出・区別するよう指示された。
-5. ページ作成と同時に index、一覧、その他の生成ページへのリンク設置箇所も対象になると指摘された。
-6. 画像制作ルールだけでなく、リンク導線まで把握・管理する必要があると確認された。
-7. 当面 105 area ページを完成させる目標が示された。
-8. スタッフや他の Codex でも同じ作業を行えるよう、Markdown の内容を漏れなく再確認するよう指示された。
-9. area ページを一つ制作し、Commit・Push する作業が行われた。
+1. Preparation images under `画像データ\area_img` were to be checked.
+2. Already-used and future-use images were mixed.
+3. Missing-image handling for a new request had to be decided and documented.
+4. Inputs with both information/images and inputs with information but no images had to be separated.
+5. Page production also included link placement on index, lists, and generated pages.
+6. Link routes, not only image rules, required management.
+7. The immediate goal was 105 area pages.
+8. Markdown completeness had to support staff and other Codex tasks.
+9. One area page was produced, committed, and pushed.
 
-### 16.6 ローカル WinSCP デプロイ案
+### 16.6 Local WinSCP Deploy Proposal
 
-1. GitHub Actions の FTP を使わず、ローカル WinSCP を PowerShell から使う安全な deploy script を作る指示があった。
-2. 当初提示された別ドライブのパス情報は後で破棄され、現在のデスクトップ repository からやり直す指示へ変更された。
-3. WinSCP 保存済み接続 `firststar`、読み取り専用の `pwd`/`ls`、preview、`-Apply` 時だけ upload、delete 禁止、秘密値非保存等の条件が示された。
-4. このローカル WinSCP 案は後の GitHub Actions 本番自動反映設計と混同しない。
+1. A safe PowerShell deploy script using local WinSCP instead of Actions FTP was requested.
+2. An initial other-drive path was discarded in favor of the desktop repository.
+3. Conditions included saved connection `firststar`, read-only `pwd`/`ls`, preview, upload only with `-Apply`, no deletion, and no secret storage.
+4. This proposal must not be confused with later Actions production automation.
 
-### 16.7 GitHub → KAGOYA FTP 試験
+### 16.7 GitHub-to-KAGOYA FTP Test
 
-1. `.github/workflows/candy-ftp-test.yml` だけを変更・Commit・Pushし、実 FTP の upload/download/hash/delete を試験する明示許可があった。
-2. 未追跡ファイルは対象外として保持するよう指示された。
-3. 初回試験では upload、download、SHA256、delete は成功したが、削除後の存在確認で KAGOYA の `450` を誤判定し Actions が失敗した。
-4. `ftp.nlst(name)` をやめ、`ftp.nlst()` の全一覧から末尾名を照合する修正指示があった。
-5. 再 Commit・Push・Actions 確認により緑の成功を確認する作業が行われた。
+1. Explicit authority covered only `.github/workflows/candy-ftp-test.yml`, Commit, Push, and actual upload/download/hash/delete testing.
+2. Untracked files were preserved out of scope.
+3. The first test succeeded through delete but Actions failed by misreading KAGOYA `450` during absence validation.
+4. The user instructed replacing `ftp.nlst(name)` with full-list filename matching.
+5. A second Commit, Push, and Actions check confirmed success.
 
-### 16.8 GitHub main → 本番自動反映（2026-07-14廃止）
+### 16.8 GitHub main to Production Automation
 
-1. 「Codex が HP を修正 → 明示承認後に Commit・Push → Actions 起動 → KAGOYA 本番へ自動反映」が最終運用として提示された。
-2. 自動反映するかを確認するため、一つのファイルで実テストするよう指示された。
-3. HP 本体を無断で変更せず、認証情報を表示せず、テストファイル以外のサーバーファイルを変更しないことが前提だった。
+The final operation presented at that time was Codex changes HP, Commit/Push after explicit approval, Actions starts, and KAGOYA production deploys. One-file testing was requested, with no unauthorized HP changes, no credential display, and no other server-file changes.
 
-### 16.9 HP_旧データと段階移行
+### 16.9 Legacy HP Data and Phased Migration
 
-1. `HP_旧データ` に現在サーバー上と思われる旧データが用意された。
-2. 後にデータを削除し、サーバーから再ダウンロードしたため、本番取得時点のスナップショットとして再確認するよう指示された。
-3. 旧本番の index 等は広告サイトへ転送されており、その転送設定を維持できれば、他ファイルは最新化してよいと説明された。
-4. 本番 `/group/candy` とテスト `/group_test/candy` を明確に記録するよう指示された。
-5. 本番 index の転送は最終公開時まで維持し、その時点で最新 index を上書きして新サイトへアクセスさせる方針が確定した。
-6. これをチャット内の全コンテキストと照合し、管理ファイルへ反映するよう指示された。
-7. `HP/index.php` の自動反映を防止する実装が指示された。
+`HP_旧データ` was reacquired from production and treated as a snapshot. Production and test paths were distinguished. The production index redirect would remain until final switchover, and `HP/index.php` automatic deployment had to be prevented.
 
-### 16.10 index 以外の先行本番反映
+### 16.10 Early Deployment Excluding index
 
-1. 本番環境でアクセス可能な PHP 名の一覧確認が求められた。
-2. index 以外はほとんど直接閲覧できると判断された。
-3. `index.php` は転送を維持し、それ以外の全ファイルを一度本番へ upload し、CSS 等も最新状態で確認する方針が指示された。
-4. ユーザーは「index へアクセスすると転送、それ以外は閲覧可能」を期待した。
+The user requested the list of accessible PHP names and expected direct access to most pages while `index.php` continued redirecting. All other files, including CSS, were to be brought current and checked.
 
-### 16.11 長時間 deploy の失敗と停止
+### 16.11 Long Deploy Failure and Stop
 
-1. upload が極端に遅く、log も upload しているか質問された。
-2. なぜ遅いか、残り時間はどれくらいかを確認するよう繰り返し求められた。
-3. ユーザーは自分で行えば約10分の作業だと指摘した。
-4. 実サーバーを直接見ると目的ファイルがほとんど upload されていないと判明した。
-5. 待てば完了するか、プロセスが停止していないか、完了時に本当に報告できるかを繰り返し確認された。
-6. 顧客からクレームが発生し、契約・信用への重大な影響があると申告された。
-7. 単に「見ておく」「監視する」だけでは解決にならず、upload を完了させる実行を求められた。
-8. 謝罪文の作成、自己弁護を除いた再作成、記録保存を指示された。
-9. トークンを消費する口頭監視ではなく、完了を実確認して報告するよう求められた。
-10. 最終的にユーザーから停止命令が出た。停止命令後は監視・転送を続けてはいけない。
+The user repeatedly asked why upload was slow, whether logs were being uploaded, the remaining time, whether the process had stopped, and whether completion would actually be reported. Actual server inspection showed few target files. Customer complaints and serious contract/trust impact were reported. The user required execution to completion, an apology without self-defense, saved records, and evidence instead of token-consuming verbal monitoring. The final stop instruction prohibited continued transfer or monitoring.
 
-### 16.12 upload 対象の混乱と手動復旧
+### 16.12 Target Confusion and Manual Recovery
 
-1. upload しないファイルは `index.php` だけか、待機ファイルがサーバーに多数ある理由、不要ファイルを事前に除外したかを質問された。
-2. 「100ファイル」が何を意味し、直下 PHP を upload するのか即答を求められた。
-3. 直下 PHP を upload したのに全部見られないと指摘され、特定一ページではなく全 PHP が対象だと訂正された。
-4. ユーザーが WinSCP で upload し、閲覧可能な状態へ復旧した。
-5. WinSCP が本番へ接続中で、Codex が操作可能か確認された。
+The user requested immediate clarification of whether only `index.php` was excluded, why waiting files existed, whether unnecessary files had been excluded, and what "100 files" meant. The target was corrected from one page to all root PHP. The user restored access through WinSCP and asked whether Codex could operate the connected session.
 
-### 16.13 不要ファイル cleanup
+### 16.13 Unnecessary-File Cleanup
 
-1. 仮ファイルを削除するよう指示され、ユーザー自身も大部分を削除した。
-2. ユーザーが手動削除を実行済みと報告した後、現在の upload 状況、サーバー内の不要ファイル有無を全確認するよう指示された。
-3. 「不要なものは削除し、必要なものは残す」が判断基準として明示された。
-4. Codex は名前だけで削除せず、用途、参照、snapshot、rollback を確認した。
-5. 確実に不要な 321 ファイルを cleanup した。
+After the user manually deleted most temporary files, current upload state and all server unnecessary files were to be checked. The standard was delete unnecessary targets and preserve required targets. Codex verified purpose, references, snapshot, and rollback instead of deleting by name and cleaned 321 confirmed targets.
 
-### 16.14 全リンク監査
+### 16.14 Full Link Audit
 
-1. 全ファイルのリンク切れを探すよう指示された。
-2. 調査中か、管理書に手順があるか、書いてある内容が正しいかを繰り返し確認された。
-3. 管理書へ書いただけで実確認に使えず、漏れと誤りが続いていることが強く指摘された。
-4. 「100%」は一部確認や推測ではなく、母集団を全列挙して未確認ゼロを示す意味だと再確認された。
-5. 公開 PHP、生成後参照、CSS、画像、アンカー、外部 URL、Text 元データまで範囲を広げて監査した。
-6. 外部接続先の 403/429/timeout を 404 と同一扱いせず、制限・未確認として分離した。
+The user ordered a full broken-link audit and repeatedly challenged whether the procedure existed and was correct. "100%" was redefined as full population with zero hidden unverified items. Scope expanded to public PHP, generated references, CSS, images, anchors, external URLs, and source Text. 403/429/timeouts were separated from 404.
 
-### 16.15 管理体系の全面再設計
+### 16.15 Complete Management Redesign
 
-1. 管理ファイルで完全に把握したのか、結局どちらなのか分からない報告をしないよう求められた。
-2. 今日の全コンテキストを保存し、見直し、改善点を出し、二度と同様のことが起きない最高品質の AGENTS.md を作るよう指示された。
-3. 過去の「書いていたが漏れた」「見ていなかった」は、AGENTS.md の目次・導線・長さが悪いことが原因だと指摘された。
-4. 大量に書くだけでは読めないため、AGENTS.md を重要ルールと目次に限定する案が示された。
-5. この指示に基づき、root/HP AGENTS の短文化、作業別ルーター、日付付き記録、運用基礎、本番移行資料、スナップショット警告を再設計した。
+The user required unambiguous reporting, preservation and review of the day's full context, prevention measures, and a high-quality AGENTS design. The root cause included poor AGENTS length and routing. The redesign shortened root/HP AGENTS and created task routers, dated records, operation basics, production migration guidance, and snapshot warnings.
 
-## 17. 2026-07-14 手動二段階設計（同日廃止）
+## 17. Manual Two-Step Design on 2026-07-14, Deprecated the Same Day
 
-昨日の長時間化、未達成、不要backup残存、進捗誤報を再発させないため、次を強制仕様とした。
+To prevent the prior long-running deployment and false reporting, a temporary design removed Push-triggered deployment, used manual `workflow_dispatch`, separated preview and deploy, kept preview FTP-free, required matching SHAs/count/`PLAN_TOKEN`/confirmation, limited deployment to 25 files and 50 MiB, prohibited full deploy/deletion/rename/protected targets, completed per-file SHA-256 and backup lifecycle, timed out deploy after ten minutes, and required separate approval for Commit, Push, preview, and deploy.
 
-1. `main` Pushによる本番自動反映を廃止する。
-2. 本番Actionsは手動 `workflow_dispatch` だけにする。
-3. `preview` と `deploy` を別操作にする。
-4. previewはFTPへ接続せず、対象SHA、対象一覧、除外、件数、`PLAN_TOKEN`を出力する。
-5. deployはpreviewと同一の対象SHA、件数、`PLAN_TOKEN`、確認文言が揃わなければFTP接続前に停止する。
-6. 一回の本番deployは最大25ファイル・合計50MiB以下。超える場合は小バッチへ分割する。この上限は本番転送専用であり、ページ制作の対象ファイル数を制限しない。
-7. full deploy、自動削除、rename反映、`index.php`・`.htaccess`・backup類の自動反映を禁止する。
-8. ファイルごとにupload、SHA256照合、backup、promote、再照合、backup削除、進捗表示を完結させる。
-9. deploy jobは10分でtimeoutし、無制限に待機しない。
-10. Commit、Push、Actions preview、Actions deployは別々の明示指示を必要とする。
+It was deprecated because it made upload appear to mean Push only, increased manual Actions/browser work, and obstructed the requested integrated publication. Safety limits, exclusions, and SHA-256 checks remained; only the trigger changed.
 
-この設計は安全性を優先したが、「アップしろ」をPushだけと誤解させ、手動Actionsとブラウザ操作を増やし、ユーザーの求める一括自動公開を妨げたため、同日廃止した。安全上限・除外・SHA256照合は維持し、起動方式だけを第18節へ改めた。
+## 18. Final Integrated Upload Change on 2026-07-14
 
-## 18. 2026-07-14 「アップしろ」一括自動公開への確定変更
+### 18.1 Cause
 
-### 18.1 原因
+Codex had misread upload as GitHub Push only, created unnecessary waits by separating four actions, and selected manual Actions/browser work while GitHub CLI authentication was expired.
 
-1. Codexが「アップしろ」をGitHub Pushまでと誤解した。
-2. Commit、Push、preview、deployを別指示にしたため、簡単な1ページ公開に不要な待ち時間を作った。
-3. GitHub CLI認証が失効した状態で手動Actionsを選び、ブラウザ操作へ回避したため、事前準備済みの自動化を活用できなかった。
+### 18.2 Mandatory Operation
 
-### 18.2 絶対運用
+1. Current upload authority follows root `AGENTS.md`.
+2. On the normal path, execute to completion without intermediate questions or extra approval.
+3. A deploy-target Push to `main` starts Actions automatically.
+4. Actions validates SHA, count, `PLAN_TOKEN`, 25-file/50-MiB limits, deletion/rename prohibition, and protected exclusions before FTP.
+5. Use the GitHub API, not browser UI, for Actions.
+6. Production checks cover HTTP, title, canonical, primary body, and images as required.
+7. Final report leads with production URL and also includes Commit and Actions URLs.
+8. The operational target was five minutes from instruction to production URL for a next-page request or post-production upload instruction.
+9. Deletion, databases, noindex/index, `HP/index.php` switchover, and conflict resolution are excluded from integrated authority.
 
-1. 「アップしろ」の現行定義はroot `AGENTS.md` 第3.6節を唯一の正本とする。
-2. 正常時は途中質問・追加承認を挟まず、最後まで実行する。
-3. deploy対象を含む `main` PushでActionsを自動起動する。
-4. Actions内で対象SHA・件数・`PLAN_TOKEN`を生成し、25ファイル・50MiB上限、削除・rename禁止、保護対象除外をFTP接続前に検証する。
-5. Actionsの起動・監視はGitHub APIを使い、通常経路でブラウザを開いて操作しない。
-6. 本番確認は対象URLのHTTP、title、canonical、主要本文、画像を必要範囲で確認する。
-7. 最終報告は本番URLを先頭にし、Commit URLとActions Run URLを併記する。
-8. 「次の1ページ作成→アップ→本番URL報告」は指示受領から、制作後の「アップしろ」はその指示受領から、それぞれ本番URL報告まで5分以内を運用目標とする。
-9. 削除、DB、noindex/index、`HP/index.php` の公開切替、競合解消は一括許可に含めない。
+### 18.3 Immediate Evidence
 
-### 18.3 直近の実証
+- 花尾町 used Commit `44df27b` and Actions run `29289499915` to deploy six files with SHA-256 validation.
+- `https://www.55810.com/kagoshima-deliveryhealth-area-hanaomachi.php` returned 200 and title, canonical, primary body, two images, and browser rendering were verified.
+- Deploy itself took 37 seconds; delay came from choosing manual routes and browser work, not transfer speed.
 
-- 花尾町ページはCommit `44df27b`、Actions Run `29289499915`で6ファイルをSHA256照合付きで本番反映した。
-- 本番URL `https://www.55810.com/kagoshima-deliveryhealth-area-hanaomachi.php` はHTTP 200、title、canonical、主要本文、画像2枚、ブラウザ表示を確認した。
-- deploy処理自体は37秒で成功しており、長時間化の主因は転送速度ではなく、Codexが手動経路とブラウザ操作を選んだ運用設計だった。
+## 19. Failed One-Area-Page Test and Dedicated Tooling on 2026-07-14
 
-## 19. 2026-07-14 area1ページ制作テストの失敗と専用ツール化
+### 19.1 Failure
 
-### 19.1 発生した失敗
+Codex spent 18 minutes without reaching PHP validation, Commit, Push, or production. It used a long improvised script rather than a dedicated generator and failed four times because of Windows quoting, standard-input encoding, placeholder-count assumptions, and scene5 detection. It re-searched for the known-absent PHP CLI and split static checks into small commands. Management documents existed, but no fast reproducible execution method existed.
 
-1. ユーザーがareaページ1ページの制作テストを指示した。
-2. Codexは18分を費やしたが、PHP構文確認、Commit、Push、本番反映には到達せず、ユーザーから人間より遅く完全に失敗と判定された。
-3. Codexは正式テンプレートを利用したものの、専用生成ツールではなく長い即席コードを作成した。
-4. 即席コードは、Windows引用符、標準入力の文字コード、placeholder出現件数の誤認、scene5判定の誤りで4回失敗した。
-5. 既知のPHP CLI不在を再探索し、静的検証を複数の小コマンドへ分割したため、時間とトークンをさらに消費した。
-6. 結果として、管理資料は存在しても高速・再現可能な実行手段がなく、同じ判断と実装を毎回繰り返す設計欠陥が明確になった。
+### 19.2 Cause
 
-### 19.2 原因判断
+The primary cause was dependence on per-run judgment and improvised code instead of a prepared area generator. Documents alone could not prevent time, quoting, encoding, variable-block, or validation problems. Dedicated tooling was a required preparation for repeated one-page production.
 
-- 主因はarea専用生成ツールを事前に用意せず、Codexの都度判断と即席コードへ依存したこと。
-- 管理書の追加だけでは、処理時間、引用符、文字コード、可変ブロック、検証漏れを防止できない。
-- 1ページ制作を繰り返す計画が確定していたため、専用ツールが存在しなかったこと自体が準備不足だった。
+### 19.3 Implemented Correction
 
-### 19.3 実装した是正
+- Historical path `HP/codex/scripts/candy_area_page.py`: integrated input parsing, template copying, variable blocks, shop selection, nearby transportation, JSON-LD, three files, shared registrations, production records, and static validation.
+- Historical path `HP/codex/scripts/candy-area.cmd`: one-command entry that fixed Python detection on that computer.
+- Historical path `HP/codex/scripts/Invoke-CandyAreaPage.ps1`: PowerShell entry; cmd was preferred when execution policy blocked it.
+- Source Text shop, travel time, and transportation fees had priority; only unspecified values used existing-page frequency and map-based nearby same-shop data.
+- Shop, article, hotel, spot, and telephone-presence counts were variable. Unknown shops, missing required input, slug conflicts, missing images, and duplicate shared registrations STOP instead of inference.
 
-- `HP/codex/scripts/candy_area_page.py`: 入力解析、テンプレート複製、可変ブロック、店舗選定、近隣交通費、JSON-LD、3ファイル、共有登録、制作記録、静的検証を統合。
-- `HP/codex/scripts/candy-area.cmd`: 当PCのPythonを固定検出して1コマンドで実行する入口。
-- `HP/codex/scripts/Invoke-CandyAreaPage.ps1`: PowerShell用入口。実行ポリシー制限があるPCではcmd入口を優先する。
-- Textに店舗・移動時間・交通費がある場合はその値を最優先する。未指定時だけ既存ページの組み合わせ頻度と地図座標による近隣同店舗データを使用する。
-- 店舗数、通常記事数、ホテル数、スポット数、電話番号有無を可変処理する。未知店舗、必須情報不足、slug競合、画像不足、共有登録重複は推測せず停止する。
+### 19.4 Measured Validation
 
-### 19.4 実測検証
-
-- 現行制作対象のarea Text 135件を同一基準で解析し、135件成功・0件失敗。
-- 135件を実生成・静的検証まで通した結果は125件成功、10件安全停止。停止内訳は入力placeholder残存2件、画像不足または画像パス不整合8件であり、推測生成していない。
-- 確認できた現行パターンは、店舗4件・通常記事1件を共通とし、ホテル3件、スポット2件または3件。
-- 皆与志町の生成dry-run・静的検証は0.1秒未満、既存ページ一式checkも0.1秒未満。
-- 店舗未指定時の低頻度組み合わせ選定、ホテル・スポット件数変更、電話番号なし、交通費誤記の近隣参照を別途検証。
-- PHP CLIは当PCにないため、PHP構文は未確認のまま明示し、確認済みとは報告しない。
+- All 135 current area Text candidates parsed under one standard: 135 success and 0 failure.
+- Actual generation and static validation: 125 success and 10 safe stops; two source placeholders and eight missing or inconsistent images, with no inferred generation.
+- Verified current pattern: four shops and one normal article, with three hotels and two or three spots.
+- 皆与志町 dry-run/static validation and existing-page-set check each completed in under 0.1 seconds.
+- Low-frequency shop selection, hotel/spot count variation, missing telephone, and nearby reference for transportation-fee typo were separately validated.
+- PHP CLI was absent on that computer, so PHP syntax remained explicitly unverified.

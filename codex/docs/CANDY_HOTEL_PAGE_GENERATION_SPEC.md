@@ -1,33 +1,35 @@
-# CANDY HOTEL PAGE GENERATION SPEC
+# CANDY Hotel Page Generation Specification
 
-更新日: 2026-07-16
-対象: 鹿児島キャンディのhotel詳細ページをCodexが通常運用で新規生成する場合
+- Updated: 2026-07-16
+- Applies to: Normal new generation of CANDY hotel detail pages by Codex
 
-## 1. 目的と適用範囲
+## 1. Purpose and Scope
 
-hotelページを元テキストから壊さず生成するための正本仕様です。通常の新規ページ生成に使用し、不具合修正、既存機能変更、共通処理変更、リファクタには使用しません。
+This is the canonical specification for generating hotel pages from source Text without damage. Use it for normal new-page generation, not for bug fixes, existing-feature changes, common-processing changes, or refactoring.
 
-共通の入力不足・可変構造・停止条件は `CANDY_PAGE_GENERATION_GOVERNANCE.md` を先に適用します。
+Apply `CANDY_PAGE_GENERATION_GOVERNANCE.md` first for common missing-input, variable-structure, and STOP rules.
 
-### 1.1 役割とページ内構成（即時参照）
+### 1.1 Responsibility and Page Structure
 
-#### 役割
+#### Responsibility
 
-- 特定ホテルへデリヘルを呼ぶ利用者が、対応店舗、到着目安、交通費を判断できるようにする。
-- ホテルの特徴、公式情報、料金、アクセス、周辺スポットをまとめ、利用前の確認を1ページで完結できるようにする。
-- ホテル公式詳細、対応店舗一覧、店舗詳細、周辺スポット詳細、関連記事への導線を提供する。
-- ホテル名検索に対応する本文と、パンくず・FAQ・ItemListの構造化データを一致させる。
+- Enable a user calling delivery health to a specific hotel to identify supported shops, estimated arrival time, and transportation fees.
+- Combine hotel characteristics, official information, fees, access, and nearby spots so pre-use review can be completed on one page.
+- Provide routes to official hotel details, supported-shop lists, shop details, nearby-spot details, and related articles.
+- Keep hotel-name search body content consistent with breadcrumb, FAQ, and ItemList structured data.
 
-#### 出力・作成・修正時の指針
+#### Generation and Change Guidance
 
-- 構成確認を求められた場合は、下記ツリーを共通部品の確認表として回答する。
-- hotelは固定scene数ではない。H1導入後の既知セクションと通常記事ブロックは元データの出現順を保持し、表示したh2だけをscene1から連番にする。
-- 店舗は1件以上必要とし、通常記事、FAQ、料金、アクセス、周辺スポットは0件を許容する。0件の任意セクションは全体を省略する。
-- 旧optionはoption、option_subtitle、option_descriptionがそろう場合だけ0または1件表示し、scene採番に含めない。
-- 関連記事の予約ダミーだけは8件固定とする。実リンク設定済みの場合は実リンク1件以上へ置き換えられる。
-- 元データにない値、画像、URL、ホテル情報を推測しない。部分入力は補完せずSTOPする。
+- When asked for the structure, use the following tree as the common-component checklist.
+- Hotel pages do not have a fixed scene count. Preserve source-data order for known sections and normal article blocks after the H1 introduction; number only visible H2 elements sequentially from scene1.
+- At least one shop is required. Normal articles, FAQs, fees, access, and nearby spots MAY have zero items; omit an optional section with zero items.
+- Display the legacy option zero or one time only when `option`, `option_subtitle`, and `option_description` are all complete. Do not include it in scene numbering.
+- Only the reserved related-article dummy entries have a fixed count of eight. Actual configured links MAY replace them with one or more links.
+- Do not infer a value, image, URL, or hotel fact absent from source data. STOP on partial input instead of completing it.
 
-#### ページ内構成
+#### Page Structure
+
+The Japanese labels below are exact website display concepts and are preserved.
 
 ```text
 ホテルページ
@@ -104,59 +106,60 @@ hotelページを元テキストから壊さず生成するための正本仕様
     └ ItemList（周辺スポットがあればスポット、なければ店舗）
 ```
 
-## 2. 絶対ルール
+## 2. Mandatory Rules
 
-- 元データは `Text_hotel_data` の対象ホテルtxtを使用する
-- HTMLテンプレートは `HP/source/template_kagoshima-deliveryhealth-hotel.html` を使用する
-- 公開入口PHP、source HTML、ページ別dataset PHP、`dataset_base.php`登録を1セットとする
-- HTMLだけを生成して完了としてはいけない
-- `create.php`は通常のCodexページ生成では原則使用しない
-- 店舗、通常記事scene、FAQ、基本情報の任意行、料金行、アクセス、周辺スポットは元データの完成ブロック数に合わせ、固定上限を設けない
-- 通常記事sceneと既知セクションは入力順で保持し、部分入力ブロックは生成前に停止する
-- 「関連記事」は実リンク設定まで予約ダミー8件を保持する
-- JSON-LDと本文を一致させる
+- Use the target hotel text file under `Text_hotel_data` as source data.
+- Use `HP/source/template_kagoshima-deliveryhealth-hotel.html` as the HTML template.
+- Treat public entry PHP, source HTML, page-specific dataset PHP, and `dataset_base.php` registration as one set.
+- Do not report completion after generating only HTML.
+- Do not normally use `create.php` for Codex page generation.
+- Match shops, normal article scenes, FAQs, optional basic-information rows, fee rows, access entries, and nearby spots to complete source-data blocks. Do not set a fixed maximum.
+- Preserve input order for normal article scenes and known sections. STOP before generation on a partial block.
+- Preserve eight dummy entries under `関連記事` until actual links are configured.
+- Match JSON-LD to visible content.
 
-標準制作・公開は次の専用コマンドだけを実行します。
+Standard production and publication runs only:
 
 ```powershell
 codex\scripts\candy-hotel.cmd publish --input "Text_hotel_data/対象ホテル.txt"
 ```
 
-専用ツールは生成、検証、対象限定stage、1 Commit、1 Push、Actions、本番HTTP確認、URL出力を連続実行します。
+The dedicated tool runs generation, validation, target-limited staging, one Commit, one Push, Actions, production HTTP validation, and URL output in sequence.
 
-## 3. 現在のhotel実ファイル分解
+## 3. Current Hotel Actual-File Breakdown
 
-2026-07-16にhotel関連の実ファイルを確認した。
+Hotel-related actual files were verified on 2026-07-16.
 
-| 対象 | 件数 | 備考 |
+| Target | Count | Notes |
 |---|---:|---|
-| Text_hotel_data txt | 74 | 管理用txt 1件を含む |
-| hotel source HTML | 3 | greenrich、hotelm、villacosta500 |
-| hotel公開入口PHP | 3 | greenrich、hotelm、villacosta500 |
-| hotelページ別dataset PHP | 3 | greenrich、hotelm、villacosta500 |
-| hotel画像 | 6 | 既存3ページ分のみ |
-| 作成可能入力 | 0 | 画像なし、入力不備、既存/登録、未追跡で停止 |
+| Text files under `Text_hotel_data` | 74 | Includes one management text file |
+| Hotel source HTML | 3 | greenrich, hotelm, and villacosta500 |
+| Hotel public entry PHP | 3 | greenrich, hotelm, and villacosta500 |
+| Hotel page-specific dataset PHP | 3 | greenrich, hotelm, and villacosta500 |
+| Hotel images | 6 | Only for the three existing pages |
+| Eligible production inputs | 0 | Blocked by missing images, invalid input, existing state/registration, or untracked input |
 
-既存3ページの接続状態:
+Connection state of the three existing pages:
 
-| slug | PHP | source | dataset | 画像2枚 | dataset_base | hotel一覧 | sitemap | 備考 |
+| Slug | PHP | Source | Dataset | Two images | dataset_base | Hotel index | Sitemap | Notes |
 |---|---|---|---|---|---|---|---|---|
-| greenrichkagoshimatenmonkan | あり | あり | あり | あり | 未登録 | 未登録 | 登録あり | 既存修正Taskで扱う |
-| hotelm | あり | あり | あり | あり | 未登録 | 未登録 | 登録あり | 旧型IDあり。新規制作へ混ぜない |
-| villacosta500 | あり | あり | あり | あり | 登録あり | 登録あり | 登録あり | 既存登録あり |
+| greenrichkagoshimatenmonkan | Present | Present | Present | Present | Unregistered | Unregistered | Registered | Handle in an existing-page fix task |
+| hotelm | Present | Present | Present | Present | Unregistered | Unregistered | Registered | Has legacy IDs. Keep separate from new production |
+| villacosta500 | Present | Present | Present | Present | Registered | Registered | Registered | Existing registration present |
 
-`HP/source/hotel.html` には `kagoshima-deliveryhealth-hotel-aaaaaaaaaa.php` の仮リンクが残っている。新規制作へ混ぜず、既存hotel一覧修正Taskとして扱う。
-既存hotelの接続状態は次で再確認できる。
+`HP/source/hotel.html` retains the placeholder link `kagoshima-deliveryhealth-hotel-aaaaaaaaaa.php`. Keep it separate from new production and handle it in an existing hotel-index fix task.
+
+Recheck existing hotel connection state with:
 
 ```powershell
 codex\scripts\candy-hotel.cmd audit-existing
 ```
 
-入力分類は `BLOCKER_COUNTS_JSON` を確認し、画像なしと未追跡など複数停止理由を隠さない。
+Inspect input classification through `BLOCKER_COUNTS_JSON` and do not hide simultaneous blockers such as missing images and untracked input.
 
-この分解結果は、新規hotel制作の固定テンプレートではない。新規制作では対象txtの完成ブロック数を正とする。
+This breakdown is not a fixed template for new hotel production. Complete blocks in the target text file are authoritative.
 
-## 4. 必須ファイル構成
+## 4. Required File Set
 
 ```text
 Text_hotel_data/<ホテル名>.txt
@@ -168,100 +171,100 @@ HP/includefile/dataset_kagoshima-deliveryhealth-hotel-<slug>.php
 HP/includefile/dataset_base.php
 ```
 
-slugは元データのcanonical、画像名、ホテル名、既存ページを照合して決定します。元データにplaceholderがある場合は推測で確定しません。
+Determine the slug by reconciling canonical in source data, image names, hotel name, and existing pages. Do not infer it when source data contains a placeholder.
 
-## 5. 元データからHTMLへの対応
+## 5. Source-Data to HTML Mapping
 
-| 元データ項目 | HTML反映先 | 件数 |
+| Source-data item | HTML target | Count |
 |---|---|---|
-| title、description、canonical | SEO、OGP | 各1、必須 |
-| img_1、img_2 | メイン画像、基本情報側画像 | 各1、必須 |
-| page_title_h1、subtitle_h1、description_h1 | パンくず、h1、導入文 | 各1、必須 |
-| option一式 | 旧型の独立案内 | 0または1 |
-| 通常のscene（h2） | 通常記事ブロック | 0件以上 |
-| 店舗指定 | 人気デリヘル店ブロック | 1件以上 |
-| FAQ | FAQ本文、FAQPage JSON-LD | 0件以上 |
-| 基本情報 | ホテル名、公式URL、住所と任意行 | 必須3項目＋任意行 |
-| 料金情報 | 料金表と任意の補足文 | 0件以上 |
-| アクセス情報 | 地図、地図title、subtitle、description | 0または1 |
-| 周辺スポット | 複数項目と任意の注意文 | 0件以上 |
-| 関連記事 | 予約ダミー | 8件固定 |
+| title, description, canonical | SEO and OGP | One each, required |
+| img_1, img_2 | Main and basic-information-side images | One each, required |
+| page_title_h1, subtitle_h1, description_h1 | Breadcrumb, H1, and introduction | One each, required |
+| Complete option set | Legacy independent guidance | Zero or one |
+| Normal scene H2 | Normal article blocks | Zero or more |
+| Shop selection | Popular delivery-health shop blocks | One or more |
+| FAQ | Visible FAQ and FAQPage JSON-LD | Zero or more |
+| Basic information | Hotel name, official URL, address, and optional rows | Three required items plus optional rows |
+| Fee information | Fee table and optional supplemental copy | Zero or more |
+| Access information | Map, map title, subtitle, and description | Zero or one |
+| Nearby spots | Multiple items and optional warning copy | Zero or more |
+| Related articles | Reserved dummies | Exactly eight |
 
-本文は元データに改行指定がない場合、不要な表示改行を追加しません。
+Do not add unnecessary visible line breaks when source data does not specify them.
 
-## 6. 可変構造と採番
+## 6. Variable Structure and Numbering
 
-hotelページを6scene固定として扱いません。入力に存在する完成ブロックだけを表示し、表示順をそのまま保持します。
+Do not treat hotel pages as fixed at six scenes. Display only complete input blocks and preserve their order.
 
-必須:
+Required:
 
-- SEO、OGP、img_1、img_2、h1導入
-- ホテル名、公式URL、住所
-- template_shop.htmlに存在する店舗を1件以上
-- 関連記事ダミー8件
+- SEO, OGP, img_1, img_2, and H1 introduction
+- Hotel name, official URL, and address
+- At least one shop present in `template_shop.html`
+- Eight related-article dummies
 
-任意:
+Optional:
 
-- 旧option一式は0または1。option、option_subtitle、option_descriptionの3項目がそろう場合だけ表示する
-- 通常記事scene、FAQ、料金行、周辺スポットは0件以上
-- アクセスは0または1。存在する場合は地図URL、地図title、subtitle、descriptionの全項目を必要とする
-- 基本情報の電話、部屋・駐車場、支払方法
-- 料金補足文、周辺スポット注意文
+- Legacy option set: zero or one, displayed only when all three option fields are complete
+- Normal article scenes, FAQ, fee rows, and nearby spots: zero or more
+- Access: zero or one; when present, requires map URL, map title, subtitle, and description
+- Basic-information telephone, room/parking, and payment rows
+- Fee supplemental copy and nearby-spot warning copy
 
-採番:
+Numbering:
 
-- 旧optionはid=optionを使い、scene採番に含めない
-- それ以外のh2は表示順にscene1から連番にする
-- 通常ブロックはsubtitle_N、description_N
-- FAQと周辺スポットはsubtitle_N_M、description_N_M
-- FAQ型の最終項目だけclass=faq-item bd_tb、それ以外はclass=faq-item bd_t
-- セクションや項目の増減後に欠番・重複IDを残さない
+- Legacy option uses `id=option` and is excluded from scene numbering.
+- Number every other visible H2 sequentially from scene1.
+- Normal blocks use `subtitle_N` and `description_N`.
+- FAQ and nearby spots use `subtitle_N_M` and `description_N_M`.
+- Only the final FAQ-type item uses `class=faq-item bd_tb`; others use `class=faq-item bd_t`.
+- Leave no gap or duplicate ID after adding or removing sections or items.
 
-既知セクションは、入力内での出現順を保持します。通常記事sceneは既知セクションの前後に置けます。
+Preserve source-data order for known sections. Normal article scenes may occur before or after known sections.
 
-## 7. 店舗ブロック
+## 7. Shop Blocks
 
-- `HP/source/template_shop.html` の対応店舗ブロックを基準にする
-- 元データが指定する店舗だけを設置する
-- Textに移動時間と交通費がある場合は、その値を最優先する
-- Textで未指定の場合だけ、ホテル地図の座標から店舗別に最も近い完成areaページを選び、その移動時間と交通費を使用する
-- 近隣参照元は公開時の依存ファイルへ含め、座標または参照可能な完成ページがなければ推測せずSTOPする
-- 店舗情報、リンク、計測要素を推測で変更しない
+- Base each shop on its matching block in `HP/source/template_shop.html`.
+- Include only shops specified by source data.
+- When Text contains travel time and transportation fees, use those values first.
+- Only when Text omits them, select the nearest complete area page per shop from hotel-map coordinates and use its travel time and transportation fees.
+- Include nearby reference sources in publication dependency files. When coordinates or a suitable complete page are unavailable, STOP instead of inferring.
+- Do not infer changes to shop information, links, or measurement elements.
 
-## 8. 未入力項目の処理
+## 8. Missing-Input Handling
 
-未入力と部分入力を区別します。
+Distinguish absent input from partial input.
 
-| 状態 | 処理 |
+| State | Handling |
 |---|---|
-| 通常記事sceneなし | 生成しない |
-| FAQなし | FAQ本文とFAQPageを生成しない |
-| 基本情報の任意行なし | その行を生成しない |
-| 料金行なし | 料金セクションを生成しない |
-| アクセス一式なし | アクセスセクションを生成しない |
-| 周辺スポットなし | スポットセクションを生成しない |
-| 完成した任意ブロックあり | 入力件数・入力順で全件生成 |
-| subtitleだけ、descriptionだけ、アクセス一部だけ | 推測せずSTOP |
-| 料金補足文だけ、スポット注意文だけ | 対象本体がないためSTOP |
+| No normal article scene | Do not generate it |
+| No FAQ | Do not generate visible FAQ or FAQPage |
+| No optional basic-information row | Do not generate the row |
+| No fee row | Do not generate the fee section |
+| No complete access set | Do not generate the access section |
+| No nearby spot | Do not generate the spot section |
+| Complete optional blocks exist | Generate all in input count and order |
+| Only subtitle, only description, or partial access | STOP without inference |
+| Only fee supplemental copy or spot warning | STOP because the target body is absent |
 
-0件の任意セクションは、ユーザー確認を挟まず省略します。空欄、placeholder、意味のない見出し、空コンテナは残しません。省略後はscene番号とJSON-LDを自動で振り直します。
+Omit an optional section with zero items without asking. Do not leave blanks, placeholders, meaningless headings, or empty containers. Renumber scenes and JSON-LD after omission.
 
 ## 9. JSON-LD
 
-ブロック数を固定しません。
+Do not fix the number of blocks.
 
-- BreadcrumbListは必須
-- FAQが1件以上ある場合だけFAQPageを生成し、本文と質問・回答・件数を一致させる
-- 周辺スポットが1件以上ある場合、ItemListはスポットを使用する
-- 周辺スポットが0件の場合、ItemListは店舗を使用する
-- ItemListの件数、順序、name、URLは本文と一致させる
-- placeholderを残さず、全JSONを構文解析する
+- BreadcrumbList is required.
+- Generate FAQPage only for one or more FAQs and match visible questions, answers, and count.
+- When one or more nearby spots exist, ItemList represents spots.
+- When no nearby spot exists, ItemList represents shops.
+- ItemList count, order, name, and URL MUST match visible content.
+- Leave no placeholder and parse all JSON.
 
-## 10. 公開入口PHPとdataset PHP
+## 10. Public Entry PHP and Dataset PHP
 
-公開入口PHPはarea・blogと同じ基本形で、`dataset_base.php`を読み込みます。
+Public entry PHP uses the same base form as area and blog and loads `dataset_base.php`.
 
-hotel dataset PHP 3件は次の基本形です。
+The three hotel dataset PHP files use:
 
 ```php
 <?
@@ -270,11 +273,11 @@ $source = str_replace($waku0, $waku_html, $source);
 ?>
 ```
 
-新規生成時はこの形式を使用します。既存PHPの構造変更は開発改修として分離します。
+Use this form for new generation. Separate existing-PHP structural changes as development work.
 
-## 11. dataset_base.php、hotel一覧、sitemapへの登録
+## 11. Registration in dataset_base.php, Hotel Index, and Sitemap
 
-新規生成では次を1件ずつ登録する。
+Register one target at a time:
 
 ```php
 case 'kagoshima-deliveryhealth-hotel-<slug>.html':
@@ -290,71 +293,71 @@ $source = str_replace(
 );
 ```
 
-hotel一覧とsitemapにも対象slugを登録する。
+Register the target slug in the hotel index and sitemap.
 
-既存状態として、greenrichとhotelmはページ3ファイルとsitemapはあるが、dataset_baseとhotel一覧が未登録である。villacosta500は登録済みである。これらは新規制作へ混ぜず、既存ページ修正Taskで扱う。
+In current state, greenrich and hotelm have the three page files and sitemap entry but lack dataset_base and hotel-index registration. villacosta500 is registered. Keep these separate from new production and handle them in existing-page fix tasks.
 
-対象slugが公開PHP、source HTML、dataset PHP、dataset_base、hotel一覧、sitemapのどれかに既に存在する場合は、新規制作ではSTOPする。
+STOP new production when the target slug already exists in public PHP, source HTML, dataset PHP, dataset_base, the hotel index, or sitemap.
 
-## 12. 基本生成アルゴリズム
+## 12. Generation Algorithm
 
-1. Git状態と対象範囲を確認する
-2. 元txtの必須項目、canonical、slug、画像、placeholderを確認する
-3. 同名3ファイルと共有登録の重複を確認する
-4. 入力ブロックを種類別に解析し、通常記事sceneを含む全体順序を記録する
-5. 完成ブロックだけを生成し、0件の任意セクションは生成しない
-6. template_shop.htmlから指定店舗を全件反映する
-7. Text未指定の移動時間・交通費だけ、ホテル座標と近隣完成areaページから設定する
-8. 旧optionが完全なら独立表示し、通常sceneへ混ぜない
-9. FAQ、基本情報任意行、料金、アクセス、周辺スポットを入力件数で生成する
-10. scene、subtitle、descriptionを表示順に再採番する
-11. FAQPageとItemListを本文の有無・件数・順序に同期する
-12. 公開入口PHP、source HTML、dataset PHP、共有登録、hotel一覧、sitemapを対象限定で生成する
-13. placeholder、空コンテナ、重複ID、欠番、本文欠落を検査する
-14. canonical、画像、公式URL、地図、内部リンク、PHP、JSON、差分を検査する
-15. 明示されたpublishでは対象限定Commit、main Push、Actions、本番HTTP確認まで実行する
+1. Verify Git state and target scope.
+2. Verify required source-text items, canonical, slug, images, and placeholders.
+3. Check the same-name three-file set and shared registrations for duplication.
+4. Parse input blocks by type and record the entire order, including normal article scenes.
+5. Generate only complete blocks; omit optional sections with zero items.
+6. Apply every specified shop from `template_shop.html`.
+7. Only for Text-omitted travel time and transportation fees, derive values from hotel coordinates and nearby complete area pages.
+8. Display a complete legacy option independently and do not mix it into normal scenes.
+9. Generate FAQs, optional basic-information rows, fees, access, and nearby spots according to input count.
+10. Renumber scenes, subtitles, and descriptions in visible order.
+11. Synchronize FAQPage and ItemList to visible presence, count, and order.
+12. Generate public entry PHP, source HTML, dataset PHP, shared registrations, hotel index, and sitemap for the target only.
+13. Check placeholders, empty containers, duplicate IDs, gaps, and missing body content.
+14. Check canonical, images, official URL, map, internal links, PHP, JSON, and diff.
+15. For an explicitly authorized publish, run target-limited Commit, Push to main, Actions, and production HTTP validation.
 
-## 13. 例外・注意事項
+## 13. Exceptions and Cautions
 
-### 13.1 hotelmは旧型
+### 13.1 hotelm Uses a Legacy Structure
 
-hotelmはFAQなし、料金3行、周辺スポット3件の旧型構造です。IDはscene1, scene2, scene3, scene4, scene6と欠番があります。この情報量は有効なパターンとして扱いますが、旧IDは複製せず、新規ページでは残ったsceneを連番にします。
+hotelm has no FAQ, three fee rows, and three nearby spots. IDs are scene1, scene2, scene3, scene4, and scene6, leaving a gap. Treat the available information as a valid pattern, but do not copy legacy IDs; number remaining scenes sequentially on a new page.
 
-### 13.2 元テキスト自体にplaceholderがある
+### 13.2 Source Text Contains Placeholders
 
-villacosta500元テキストにはslug、画像、URL等のplaceholderが残ります。既存完成HTMLは完成していますが、元テキストをそのまま新規生成へ流用してはいけません。
+The villacosta500 source Text retains placeholders for slug, images, URLs, and related values. Existing complete HTML is complete, but do not reuse the source Text directly for new generation.
 
-### 13.3 更新手順txt
+### 13.3 Legacy Update-Procedure Text
 
-Text_hotel_data/Cursor用更新手順.txtもhotel可変構造へ更新し、この仕様と一致させます。件数の判断は対象Textの完成ブロックを正とします。
+The former `Text_hotel_data/Cursor用更新手順.txt` is not an active canonical document and is absent from the current working tree. Do not restore or route work through it. This specification and the hotel staff runbook are authoritative; use complete blocks in the target Text for counts.
 
-### 13.4 元テキストがない完成ページ
+### 13.4 Complete Page Without Source Text
 
-hotelmは元テキストがありません。構造参考は可能ですが、内容生成の根拠にはしません。
+hotelm has no source Text. It MAY be used as a structural reference, but not as the basis for generated content.
 
-## 14. 完了チェック
+## 14. Completion Criteria
 
-- [ ] 元テキスト、ホテル名、slug、canonicalが確定している
-- [ ] 未入力項目の処理が確定している
-- [ ] 情報量に応じて行・FAQ・セクションを増減した
-- [ ] 省略したセクションのHTML・ID・JSON-LDが残っていない
-- [ ] 公開PHP、source HTML、dataset PHPが存在する
-- [ ] dataset_baseのcaseとリンク変換が存在する
-- [ ] placeholderが0件
-- [ ] 完成した通常sceneの見出し・追加文章が欠落していない
-- [ ] scene、FAQ、周辺スポットの採番が正しい
-- [ ] 関連記事の予約ダミーが正確に8件あり、予約領域外に残っていない
-- [ ] 移動時間・交通費はText優先、未指定時だけ地図座標と近隣完成areaページを参照している
-- [ ] FAQ本文とFAQPage JSON-LDが一致する
-- [ ] FAQがない場合、FAQPage JSON-LDも存在しない
-- [ ] ホテル名、公式URL、住所、地図の対応が正しい
-- [ ] 画像が実在する
-- [ ] canonical、OGP、内部リンクが正しい
-- [ ] robotsが公開方針と一致する
-- [ ] hotel一覧とsitemapへの登録要否を確認した
-- [ ] 重複IDがない
-- [ ] PHP構文、JSON構文、`git diff --check`を確認した
+- [ ] Source Text, hotel name, slug, and canonical are confirmed.
+- [ ] Missing-input handling is determined.
+- [ ] Rows, FAQs, and sections were added or removed according to information quantity.
+- [ ] No HTML, ID, or JSON-LD remains for an omitted section.
+- [ ] Public PHP, source HTML, and dataset PHP exist.
+- [ ] dataset_base case and link transformation exist.
+- [ ] Placeholder count is zero.
+- [ ] No heading or additional copy from a complete normal scene is missing.
+- [ ] Scene, FAQ, and nearby-spot numbering is correct.
+- [ ] Exactly eight reserved related-article dummies exist and none is outside the reserved region.
+- [ ] Travel time and transportation fees prioritize Text and use map coordinates and nearby complete area pages only when Text omits them.
+- [ ] Visible FAQ matches FAQPage JSON-LD.
+- [ ] FAQPage JSON-LD is absent when no FAQ exists.
+- [ ] Hotel name, official URL, address, and map correspond correctly.
+- [ ] Images exist.
+- [ ] Canonical, OGP, and internal links are correct.
+- [ ] Robots agrees with publication policy.
+- [ ] Hotel-index and sitemap registration requirements were checked.
+- [ ] No duplicate ID exists.
+- [ ] PHP syntax, JSON syntax, and `git diff --check` were validated.
 
-## 15. 変更していないもの
+## 15. Unchanged Scope
 
-この調査では、既存hotelページ、PHP、dataset PHP、`dataset_base.php`、画像、元テキストを変更していません。
+This investigation did not change existing hotel pages, PHP, dataset PHP, `dataset_base.php`, images, or source Text.

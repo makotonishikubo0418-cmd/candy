@@ -1,292 +1,292 @@
-# CANDY PAGE GENERATION GOVERNANCE
+# CANDY Page Generation Governance
 
-更新日: 2026-07-14
-対象: Codexによるarea・blog・hotelの通常新規ページ生成
+- Updated: 2026-07-14
+- Applies to: Normal new-page generation for area, blog, and hotel by Codex
 
-## 1. 位置づけ
+## 1. Position
 
-この資料は、カテゴリ別生成仕様より上位の共通実行ルールです。
+This document contains common execution rules above the category generation specifications.
 
-- 共通ルール: この資料
-- area詳細: `CANDY_AREA_PAGE_GENERATION_SPEC.md`
-- blog詳細: `CANDY_BLOG_PAGE_GENERATION_SPEC.md`
-- hotel詳細: `CANDY_HOTEL_PAGE_GENERATION_SPEC.md`
+- Common rules: this document
+- Area detail: `CANDY_AREA_PAGE_GENERATION_SPEC.md`
+- Blog detail: `CANDY_BLOG_PAGE_GENERATION_SPEC.md`
+- Hotel detail: `CANDY_HOTEL_PAGE_GENERATION_SPEC.md`
 
-通常の新規ページ生成だけに適用します。開発改修、不具合修正、共通構造変更、リファクタには適用しません。
+Apply it only to normal new-page generation. Do not apply it to development changes, bug fixes, common-structure changes, or refactoring.
 
-## 2. 最重要原則
+## 2. Primary Principles
 
-- 元データにない内容を推測で補完しない
-- テンプレートのブロック数を完成ページへ強制しない
-- area・hotelの「関連記事」予約領域は、将来の実リンク設定までテンプレートのダミーリンク8件を保持する
-- 情報量に合わせて、項目・ブロック・セクションを増減する
-- 増減後は、ID、目次、JSON-LD、リンク、件数をすべて同期する
-- 公開PHP、source HTML、dataset PHP、dataset_base登録を1つの変更単位とする
-- 1つでも欠けた状態を完成と報告しない
-- 既存不整合の修正と新規ページ生成を混ぜない
+- Do not infer content absent from source data.
+- Do not force the template's block count onto the completed page.
+- Preserve eight template dummy links in the reserved related-article area for area and hotel until actual links are configured.
+- Add or remove items, blocks, and sections according to available information.
+- After a structural change, synchronize IDs, table of contents, JSON-LD, links, and counts.
+- Treat public PHP, source HTML, dataset PHP, and dataset_base registration as one change unit.
+- Do not report completion when any component is missing.
+- Do not mix an existing inconsistency fix with new-page generation.
 
-## 3. 入力項目の分類
+## 3. Input Classification
 
-元データを次の3種類に分けます。
+Classify source data into these three types.
 
-### 3.1 必須項目
+### 3.1 Required Items
 
-不足している場合は生成を停止します。
+STOP generation when any required item is missing:
 
-- ページ種別
-- ページ名
-- slug
-- title
-- meta description
-- canonical
-- h1
-- メイン画像または画像の正式な扱い
-- 公開ページを特定できる元情報
+- Page type
+- Page name
+- Slug
+- Title
+- Meta description
+- Canonical
+- H1
+- Main image or an explicitly defined image policy
+- Source information that identifies the public page
 
-### 3.2 任意項目
+### 3.2 Optional Items
 
-不足時に推測で埋めません。行またはセクションを省略できるか、カテゴリ仕様と完成ページで判断します。
+Do not infer a missing optional item. Use the category specification and completed pages to decide whether to omit its row or section.
 
-- subtitle
-- 補足description
-- 一部の基本情報
-- 料金表の個別行
-- 設備情報
-- FAQセクション
-- 周辺情報
+- Subtitle
+- Supplemental description
+- Some basic-information fields
+- Individual fee-table rows
+- Facility information
+- FAQ section
+- Nearby information
 
-### 3.3 繰り返し項目
+### 3.3 Repeated Items
 
-件数を固定しません。
+Do not fix these counts:
 
-- 店舗
-- 通常記事scene
-- お客様の声
-- FAQ
-- ホテル
-- 周辺スポット
-- 女の子紹介
+- Shops
+- Normal article scenes
+- Customer comments
+- FAQs
+- Hotels
+- Nearby spots
+- Girl introductions
 
-## 4. 生成前入力監査
+## 4. Pre-Generation Input Audit
 
-生成前に、対象ごとに次を整理します。
+Before generation, record for the target:
 
 ```text
-カテゴリ:
-ページ名:
-slug:
-元データ:
-使用テンプレート:
-必須項目の不足:
-任意項目の不足:
-繰り返し項目と件数:
-同名ファイルの有無:
-類似slug・旧slugの有無:
-画像の有無:
-ユーザー判断が必要な点:
+Category:
+Page name:
+Slug:
+Source data:
+Template:
+Missing required items:
+Missing optional items:
+Repeated items and counts:
+Existing same-name files:
+Similar or legacy slugs:
+Images:
+Required user decisions:
 ```
 
-必須項目不足、slug競合、既存同名ファイル、用途不明の画像不足がある場合は、ファイル生成前に停止して報告します。
+When a required item is missing, a slug conflicts, a same-name file exists, or an unexplained image shortage exists, STOP and report before creating files.
 
-## 5. 参照ページの選び方
+## 5. Reference-Page Selection
 
-参照ページは名前の近さではなく、構造の近さで選びます。
+Select a reference by structural similarity, not name similarity.
 
-優先順位:
+Priority:
 
-1. 同じカテゴリ
-2. 同じセクション構成
-3. 繰り返し項目数が近い
-4. 現行テンプレートに近い新型
-5. placeholder、欠番、登録漏れがない
+1. Same category
+2. Same section structure
+3. Similar repeated-item counts
+4. New-format page close to the current template
+5. No placeholder, numbering gap, or missing registration
 
-旧型、placeholder残存、元データなし、dataset_base未登録のページだけを複製元にしてはいけません。
+Do not use only a legacy page, a page with remaining placeholders, a page without source data, or a page absent from dataset_base registration as the copy source.
 
-## 6. 情報不足への対応
+## 6. Missing-Information Handling
 
-| 状況 | 対応 |
+| Condition | Handling |
 |---|---|
-| 必須項目がない | 生成停止。ユーザー確認 |
-| 任意の表項目がない | 該当行を削除。空欄行を残さない |
-| 繰り返し項目が0件 | セクション全体の要否を確認 |
-| 繰り返し項目がテンプレートより少ない | 余分なブロックを削除 |
-| 繰り返し項目がテンプレートより多い | 同一構造で追加し連番を再設定 |
-| 画像がない | 推測画像を使わず停止または代替方針確認 |
-| URL・電話・住所等が未確認 | 推測で記入しない |
-| 元データと既存ページが矛盾 | 変更せずユーザーへ判断依頼 |
+| Required item is missing | STOP generation and request user confirmation |
+| Optional table item is missing | Remove the row; do not leave an empty row |
+| Repeated-item count is zero | Decide whether the entire section is required |
+| Repeated-item count is below the template count | Remove extra blocks |
+| Repeated-item count exceeds the template count | Add blocks with the same structure and reset numbering |
+| Image is missing | Do not use an inferred image; STOP or request an alternate policy |
+| URL, telephone, address, or related value is unverified | Do not infer a value |
+| Source data contradicts an existing page | Do not change; request a user decision |
 
-削除する場合は、開始・終了タグ、余白class、区切り線、scene番号、JSON-LDを含む影響範囲を確認します。
+When removing content, inspect the impact on opening and closing tags, spacing classes, separators, scene numbers, and JSON-LD.
 
-## 7. 可変構造の同期対象
+## 7. Variable-Structure Synchronization
 
-ブロックを追加・削除・並べ替えた場合、次を同時に更新します。
+When adding, deleting, or reordering blocks, update together:
 
-- h2/h3のscene ID
-- subtitle ID
-- description ID
-- 目次の順序、文言、href
-- FAQの最終項目class
-- JSON-LDの質問・回答・ItemList・position
-- breadcrumb
-- canonicalとOGP
-- 画像srcとalt
-- 内部リンク
-- セクション前後のborder・padding・margin class
+- H2/H3 scene IDs
+- Subtitle IDs
+- Description IDs
+- Table-of-contents order, copy, and href values
+- Final FAQ item class
+- JSON-LD questions, answers, ItemList, and positions
+- Breadcrumb
+- Canonical and OGP
+- Image `src` and alt text
+- Internal links
+- Border, padding, and margin classes around the section
 
-一部だけを更新してはいけません。
+Do not update only part of this set.
 
-## 8. scene採番
+## 8. Scene Numbering
 
-- 新規ページは表示順に1から連番にする
-- セクション削除後に欠番を残さない
-- 親scene内の子項目は `<親番号>_<連番>` とする
-- ID重複を禁止する
-- blogの目次は全main sceneと完全一致させる
-- 既存旧型ページの欠番を新規ページへコピーしない
+- Number a new page sequentially from 1 in visible order.
+- Do not leave a gap after deleting a section.
+- Child items inside a parent scene use `<parent-number>_<sequence>`.
+- Duplicate IDs are prohibited.
+- A blog table of contents MUST match every main scene exactly.
+- Do not copy numbering gaps from a legacy page to a new page.
 
 ## 9. JSON-LD
 
-JSON-LDはHTML本文の複製データとして扱います。独立した別内容を作りません。
+Treat JSON-LD as duplicated data for visible HTML content, not as independent content.
 
-- FAQがなければFAQPageを残さない
-- FAQの質問・回答・順序・件数を本文と一致させる
-- ItemListの項目・URL・画像・positionを本文と一致させる
-- breadcrumbをパンくずと一致させる
-- 削除した項目をJSON-LDに残さない
-- JSON構文解析を必須とする
+- Remove FAQPage when no FAQ exists.
+- Match FAQ questions, answers, order, and count to visible content.
+- Match ItemList items, URLs, images, and positions to visible content.
+- Match breadcrumb structured data to the visible breadcrumb.
+- Do not leave a deleted item in JSON-LD.
+- JSON parsing is required.
 
-## 10. ファイル一式と登録
+## 10. Complete File Set and Registration
 
-通常生成では次を必須とします。
+Normal generation requires:
 
-1. 公開入口PHP
-2. source HTML
-3. ページ別dataset PHP
-4. `dataset_base.php` のcase登録
-5. `dataset_base.php` のHTML→PHPリンク変換
+1. Public entry PHP
+2. Source HTML
+3. Page-specific dataset PHP
+4. Case registration in `dataset_base.php`
+5. HTML-to-PHP link transformation in `dataset_base.php`
 
-同名ファイルが一部だけ存在する場合は新規生成ではなく、既存不整合調査へ切り替えます。
+When only part of a same-name set exists, switch from new generation to an existing-inconsistency investigation.
 
-## 10.1 公開導線への統合
+### 10.1 Integration into Public Routes
 
-ページ本体が生成できても、一覧・sitemap・関連リンクから到達できなければ公開統合は未完了です。
+Even when page files are generated, publication integration is incomplete until the page is reachable from indexes, sitemap, and required related links.
 
-カテゴリごとに次を確認します。
+Check by category:
 
-- area: `HP/source/area.html`
-- blog: `HP/source/blog.html`
-- hotel: `HP/source/hotel.html`
-- 共通: `HP/sitemap.xml`
-- 必要に応じて関連ページ内リンクとJSON-LD ItemList
+- Area: `HP/source/area.html`
+- Blog: `HP/source/blog.html`
+- Hotel: `HP/source/hotel.html`
+- Common: `HP/sitemap.xml`
+- Related-page links and JSON-LD ItemList when required
 
-新規ページを通常の公開対象とする場合は、次を確認してください。
+For a normal public page, determine:
 
-- カテゴリ一覧にリンク・名称・説明等を追加する必要があるか
-- カテゴリ一覧のJSON-LDへ追加する必要があるか
-- sitemapへURLを追加する必要があるか
-- 関連ページからの内部リンクが必要か
-- 一覧側の件数や順序を更新する必要があるか
+- Whether the category index requires a link, name, description, or related entry
+- Whether the category-index JSON-LD requires an entry
+- Whether the sitemap requires the URL
+- Whether related pages require internal links
+- Whether the index count or order requires an update
 
-`sitemap.xml` は要承認ファイルです。変更対象と追加URLを事前に提示し、ユーザー承認後に変更します。
+`sitemap.xml` requires approval. Present the target and added URL before changing it and obtain user approval.
 
-通常hotel一括ツールが対象限定で扱う `dataset_base.php`、hotel一覧、sitemapは、hotel制作・公開の明示指示範囲内とします。
+When the normal integrated hotel tool limits changes to the target, `dataset_base.php`, the hotel index, and sitemap are within an explicit hotel-production and publication instruction.
 
-`HP/makeSitemap.php` はサイト内リンクを巡回してXMLを出力する既存ツールですが、現在の `sitemap.xml` にある `lastmod`、`changefreq`、`priority` 等を同じ形で維持する更新処理ではありません。通常のCodex生成で自動実行・自動上書きしません。sitemap更新方法はユーザー承認後に決めます。
+`HP/makeSitemap.php` is an existing tool that crawls site links and emits XML, but it does not preserve `lastmod`, `changefreq`, `priority`, and related values in the current `sitemap.xml` format. Do not execute it or overwrite the sitemap automatically during normal Codex generation. Decide the sitemap-update method after user approval.
 
-詳細ページだけを作成し、一覧・sitemapへ登録していない場合は「ファイル生成完了」と「公開導線統合完了」を分けて報告します。
+When only detail-page files are created and the index or sitemap is not registered, report file-generation completion separately from public-route integration completion.
 
-## 10.2 robots
+### 10.2 Robots
 
-現行のarea・blog・hotelテンプレートは `<meta name="robots" content="index">` です。通常の公開ページ生成では現行テンプレート設定を維持します。
+Current area, blog, and hotel templates use `<meta name="robots" content="index">`. Preserve the current template setting for normal public-page generation.
 
-- noindexへ変更しない
-- robots設定を省略しない
-- 公開前下書き等でnoindexが必要な場合はユーザー指示を得る
-- robots、canonical、sitemap登録方針を矛盾させない
+- Do not change it to noindex.
+- Do not omit robots.
+- Obtain user instruction when a pre-publication draft requires noindex.
+- Keep robots, canonical, and sitemap policies consistent.
 
-## 11. 生成後の機械確認
+## 11. Post-Generation Machine Validation
 
-- 生成対象ファイルがすべて存在する
-- 未許可placeholderが0件
-- area・hotelは「関連記事」領域に予約ダミー8件または実リンクが存在し、予約ダミーが領域外にない
-- 必須項目が空でない
-- sceneに重複・欠番がない
-- subtitle/descriptionが親sceneと対応する
-- blog目次とmain sceneが一致する
-- FAQ最終ブロックclassが正しい
-- HTML本文とJSON-LDの件数が一致する
-- JSON構文が正常
-- canonicalとファイルslugが一致する
-- 画像が実在する
-- 内部リンクが公開PHPを指す
-- robotsが公開方針と一致する
-- カテゴリ一覧への登録要否を確認した
-- sitemapへの登録要否を確認した
-- PHP構文が正常
-- `git diff --check`が成功する
-- 対象外ファイルを変更していない
+- Every generated target file exists.
+- Unauthorized placeholder count is zero.
+- The area or hotel related-article region contains eight reserved dummy entries or actual links, and no reserved dummy is outside that region.
+- No required item is empty.
+- Scene IDs have no duplicate or gap.
+- Subtitle and description IDs match parent scenes.
+- Blog table of contents matches main scenes.
+- The final FAQ block class is correct.
+- HTML and JSON-LD counts agree.
+- JSON syntax is valid.
+- Canonical and file slug agree.
+- Images exist.
+- Internal links point to public PHP.
+- Robots agrees with publication policy.
+- Category-index registration requirements were checked.
+- Sitemap registration requirements were checked.
+- PHP syntax is valid.
+- `git diff --check` succeeds.
+- No out-of-scope file changed.
 
-## 11.1 ファイル形式
+### 11.1 File Format
 
-- 既存ファイルの文字コードと改行形式を確認する
-- 新規ファイルは同カテゴリの現行ファイル形式へ合わせる
-- BOM、改行コード、インデントを一括変換しない
-- HTMLの日本語、記号、ハート等が文字化けしていないことを確認する
-- PHP短縮開始タグ等の既存仕様を、新規生成と同時に勝手に改修しない
+- Verify the existing file's encoding and line endings.
+- Match a new file to current files in the same category.
+- Do not bulk-convert BOM, line endings, or indentation.
+- Verify that Japanese website text, symbols, hearts, and related characters are not mojibake.
+- Do not change existing conventions such as PHP short opening tags as part of new generation.
 
-## 11.2 元テキストの扱い
+### 11.2 Source Text Handling
 
-- 生成後も元txtを勝手に削除・移動・リネームしない
-- areaの `Completion` への移動は、生成完了だけで自動実行しない
-- 完了フォルダへ移す場合は、対象ページの検証結果を示してユーザー指示を得る
-- blog・hotelに完了フォルダがない場合、勝手に新設しない
+- Do not delete, move, or rename the source text file after generation without explicit instruction.
+- Do not automatically move an area input to `Completion` based only on generation completion.
+- Before moving to a completion folder, show validation results and obtain user instruction.
+- Do not create a completion folder for blog or hotel when none exists.
 
-## 11.3 ローカル完成と本番反映
+### 11.3 Local Completion and Production Deployment
 
-次は別の完了状態として報告します。
+Report these as separate completion states:
 
-- ローカルファイル生成
-- ローカル画像設置
-- Git Commit・Push
-- サーバー反映
-- 本番ページHTTP確認
-- 本番画像HTTP確認
-- 実ブラウザ表示確認
+- Local file generation
+- Local image placement
+- Git Commit and Push
+- Server deployment
+- Production-page HTTP validation
+- Production-image HTTP validation
+- Actual browser rendering validation
 
-ローカルにファイルや画像が存在しても、本番反映済みとは報告しません。
+The presence of local files or images does not mean production deployment is complete.
 
-## 12. 人による確認が必要な項目
+## 12. Required Human Review
 
-- 文意が元データと一致する
-- 誤字脱字がない
-- 別地域、別記事、別ホテルの文言が混ざっていない
-- 古い店舗名や別カテゴリ名が残っていない
-- 情報を削除した結果、文章やレイアウトが不自然でない
-- 目次と見出しの意味が一致する
-- 既存の営業情報、料金、電話、住所等を勝手に正しいと断定していない
+- Meaning matches source data.
+- No typographical error exists.
+- Copy from another region, article, or hotel is absent.
+- No old shop name or other category name remains.
+- Removing information did not make copy or layout unnatural.
+- Table of contents and headings have matching meaning.
+- Existing business information, fees, telephone numbers, and addresses were not assumed correct without verification.
 
-## 13. 例外発見時の停止条件
+## 13. Exception STOP Conditions
 
-次の場合、Codexは勝手に判断して完成させません。
+Codex MUST NOT decide and complete the page automatically when:
 
-- 必須情報が不足
-- 元データ内にplaceholderが残る
-- 同一対象に複数slugがある
-- 既存3点セットの一部だけが存在
-- 元データと完成ページが矛盾
-- 画像、URL、店舗、女の子情報を特定できない
-- テンプレートと元データのセクション構成が大きく異なる
-- JSON-LDへ入れる情報が不足
-- dataset_baseの既存登録と競合
-- カテゴリ一覧またはsitemapへの追加方針が不明
-- 元テキストをCompletion等へ移すか不明
-- 本番反映方法が不明
+- Required information is missing.
+- A placeholder remains in source data.
+- Multiple slugs exist for the same target.
+- Only part of the existing three-file set exists.
+- Source data contradicts a completed page.
+- An image, URL, shop, or girl cannot be identified.
+- Template and source-data section structures differ materially.
+- Information required for JSON-LD is missing.
+- An existing dataset_base registration conflicts.
+- Category-index or sitemap addition policy is unclear.
+- It is unclear whether to move source Text to `Completion` or another location.
+- The production deployment method is unclear.
 
-## 14. 完了報告
+## 14. Completion Report
 
-「アップしろ」の意味、5分目標、除外事項はroot `AGENTS.md` 第3.6節を唯一の定義とします。Actions確認はGitHub APIを使い、ブラウザUI操作を通常経路にしません。
+Use the explicit authority rules in root `AGENTS.md` and the publication procedure in `CANDY_PRODUCTION_MIGRATION_MASTER.md`. Check Actions through the GitHub API; browser UI interaction is not the normal route.
 
-短く次だけを報告します。
+Report only:
 
 ```text
 作成ページ:
@@ -299,10 +299,10 @@ Commit・Push:
 確認用URL:
 ```
 
-Push済みならGitHub Commit URL、Actions実行済みならRun URL、本番公開済みなら作成した全ページの本番URLを同時に記載します。ローカル作成だけの場合は「確認用URL: 未取得（本番未反映）」とします。実在確認していないURLは推測で記載しません。
+After Push, include the GitHub Commit URL; after Actions, include the run URL; after production publication, include every created page's production URL. For local-only production, report `確認用URL: 未取得（本番未反映）`. Do not infer an unverified URL.
 
-## 15. 現状不整合との分離
+## 15. Separation from Existing Inconsistencies
 
-既存ページには登録漏れ、旧型、placeholder、元データ欠落、ID重複等があります。新規生成時はこれらを複製せず、カテゴリ仕様の現状不整合一覧を確認します。
+Existing pages may have missing registrations, legacy structures, placeholders, absent source data, or duplicate IDs. Do not reproduce these in new generation; review the category specification's current inconsistency list.
 
-既存不整合を修正する場合は、通常生成ではなく開発改修または既存機能修正として別承認を得ます。
+Handle an existing inconsistency as a separately authorized development or existing-feature fix, not normal generation.

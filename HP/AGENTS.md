@@ -1,61 +1,61 @@
 # HP/AGENTS.md
 
-## 1. 適用
+## 1. Applicability
 
-- `HP/` 配下はroot `AGENTS.md` とこのファイルを適用する。
-- 通常area制作は追加で `codex/docs/CANDY_AREA_STAFF_PRODUCTION_RUNBOOK.md` だけを読む。
-- 通常hotel制作は追加で `codex/docs/CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md` だけを読む。
-- 通常blog制作は追加で `codex/docs/CANDY_PAGE_GENERATION_GOVERNANCE.md` と `codex/docs/CANDY_BLOG_PAGE_GENERATION_SPEC.md` だけを読む。
-- 未知例外や別作業だけ `codex/docs/CANDY_MASTER_DOC_INDEX.md` を使う。
+- Work under `HP/` is governed by root `AGENTS.md` and this file.
+- For normal area production, additionally read only `codex/docs/CANDY_AREA_STAFF_PRODUCTION_RUNBOOK.md`.
+- For normal hotel production, additionally read only `codex/docs/CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md`.
+- For normal blog production, additionally read only `codex/docs/CANDY_PAGE_GENERATION_GOVERNANCE.md` and `codex/docs/CANDY_BLOG_PAGE_GENERATION_SPEC.md`.
+- Use `codex/docs/CANDY_MASTER_DOC_INDEX.md` only for an unknown exception or another task type.
 
-## 2. HP構造
+## 2. HP Structure
 
 ```text
-公開PHP
+public PHP
   → includefile/dataset_base.php
-  → source/対応HTML
+  → matching source HTML
   → includefile/dataset_*.php
   → includefile/class.hpgcoder2.php
 ```
 
-ページごとの例外は実ファイルで確認する。
+Verify page-specific exceptions in actual files.
 
-## 3. 通常area・hotel・blog制作（現在は実行停止）
+## 3. Normal Area, Hotel, and Blog Production
 
-`codex/scripts/` への移動後も、スクリプト内部に旧階層を前提とするパス計算と入力制限が残っている。内部修正とdry-run検証が完了するまで、下記コマンドは実行しない。
+Internal path migration under `codex/scripts/` and read-only dry runs are verified. Recheck target selection, input, images, Git, and safety gates in the applicable runbook. Publish includes Commit, Push, Actions, and production operations, so execute it only with explicit user instruction.
 
-移行完了後の標準入口:
+Standard area entry point:
 
 ```powershell
 codex\scripts\candy-area.cmd publish-next
 ```
 
-area対象指定:
+Area production with an explicit target:
 
 ```powershell
 codex\scripts\candy-area.cmd publish --input "Text_area_data/対象.txt"
 ```
 
-area本番操作なし:
+Area production without production operations:
 
 ```powershell
 codex\scripts\candy-area.cmd build --input "Text_area_data/対象.txt"
 codex\scripts\candy-area.cmd check --input "Text_area_data/対象.txt"
 ```
 
-通常hotel制作:
+Normal hotel production:
 
 ```powershell
 codex\scripts\candy-hotel.cmd publish --input "Text_hotel_data/対象ホテル.txt"
 ```
 
-未公開の完全なhotel入力を自動選択する場合:
+Automatically select a complete unpublished hotel input:
 
 ```powershell
 codex\scripts\candy-hotel.cmd publish-next
 ```
 
-通常blog制作:
+Normal blog production:
 
 ```powershell
 codex\scripts\candy-blog.cmd publish --input "Text_blog_data/対象記事.txt"
@@ -63,88 +63,93 @@ codex\scripts\candy-blog.cmd build --input "Text_blog_data/対象記事.txt"
 codex\scripts\candy-blog.cmd check --input "Text_blog_data/対象記事.txt"
 ```
 
-移行完了後、ツールは生成、検証、対象限定stage、1 Commit、1 Push、Actions、本番HTTP、URL出力を行う。公開後の資料専用Commit・Pushは行わない。
+The publish tools treat generation, validation, generated-document updates, target-limited staging, one Commit, one Push, Actions, production HTTP checks, and URL reporting as one work unit. Do not create a separate management-document-only Commit and Push after publication.
 
-## 4. 制作ルール
+## 4. Production Rules
 
-- areaは `Text_area_data` と `source/template_kagoshima-deliveryhealth-area.html` を使う。
-- blog、hotelも同カテゴリのTextとtemplateを対応させる。
-- `create.php` は通常制作に使用しない。
-- Textの店舗、移動時間、交通費を最優先する。
-- 未指定時だけ、店舗組合せ頻度、地図座標、近隣完成ページを使用する。
-- 関連記事は実リンク設定まで予約ダミー8件を残す。
-- 各項目の件数は原則固定しない。店舗、通常記事scene、FAQ、基本情報の任意行、料金行、アクセス、周辺スポットは入力の完成ブロック数へ合わせる。
-- 通常記事scene、FAQ、料金、アクセス、周辺スポットは0件を許容し、空セクションを生成しない。hotelの店舗は1件以上を必要とする。
-- hotelの旧optionは入力に3項目がそろう場合だけ独立表示し、通常sceneへ混ぜない。
-- 固定数の例外は明示仕様だけとし、関連記事ダミー8件を維持する。
-- 元データにない値、画像、URLを推測しない。
+- Area production uses `Text_area_data` and `source/template_kagoshima-deliveryhealth-area.html`.
+- Blog and hotel production use the matching category Text and template.
+- Do not use `create.php` for normal production.
+- Give the source Text values for shops, travel time, and transportation fees highest priority.
+- Only when a value is unspecified, use shop-combination frequency, map coordinates, or nearby complete pages.
+- Preserve eight reserved dummy related-article entries until actual links are configured.
+- Do not fix item counts by default. Match shops, normal article scenes, FAQs, optional basic-information rows, fee rows, access entries, and nearby spots to the number of complete input blocks.
+- Normal article scenes, FAQs, fee rows, access entries, and nearby spots MAY contain zero items. Do not generate an empty section. A hotel page requires at least one shop.
+- Include a legacy hotel option as an independent item only when all three required input fields are present. Do not merge it into a normal scene.
+- Fixed-count exceptions require an explicit specification. Preserve the eight related-article dummy entries.
+- Do not infer a value, image, or URL absent from the source data.
 
-通常areaの変更単位:
+Normal area change unit:
 
-- 公開PHP
-- source HTML
-- dataset PHP
-- dataset_base登録
-- area一覧
-- sitemap
-- 制作キュー1行
+- Public PHP
+- Source HTML
+- Dataset PHP
+- dataset_base registration
+- Area index
+- Sitemap
+- One production-queue row
 
-通常hotelの変更単位:
+Normal hotel change unit:
 
-- 公開PHP
-- source HTML
-- dataset PHP
-- dataset_base登録
-- hotel一覧
-- sitemap
+- Public PHP
+- Source HTML
+- Dataset PHP
+- dataset_base registration
+- Hotel index
+- Sitemap
 
-通常blogの変更単位:
+Normal blog change unit:
 
-- 公開PHP
-- source HTML
-- dataset PHP
-- dataset_base登録
-- blog一覧
-- indexのblog欄
-- sitemap
+- Public PHP
+- Source HTML
+- Dataset PHP
+- dataset_base registration
+- Blog index
+- Index-page blog section
+- Sitemap
 
-検証は専用ツールを正本とし、同じ検査を手作業で重ねない。
+All-category change unit:
 
-## 5. 公開安全条件
+- Generated management documents, reviewed and updated when required
+- Successful `codex\scripts\candy-site-state.cmd check`
 
-- Commit前にstage対象を許可表と照合する。
-- 削除、rename、copy、type変更、許可外ファイルがあれば停止する。
-- ActionsはFTP前に対象PHPをlintする。
-- 複数ファイル反映の途中失敗は、同じ実行の反映済み対象をrollbackする。
-- 一回の本番deployは最大25ファイル。
-- 本番確認は対象ページ、必要画像、対象カテゴリ一覧、sitemap、転送をHTTPで行う。
-- Actions状態確認はAPIを使い、通常経路でブラウザUIを操作しない。
+The dedicated tools are the canonical validation method. Do not duplicate the same checks manually.
 
-## 6. 変更ゲート
+## 5. Publication Safety Conditions
 
-事前承認が必要:
+- Before Commit, compare staged targets against the allowlist.
+- STOP on an unauthorized deletion, rename, copy, type change, or file.
+- Actions MUST lint target PHP before FTP operations.
+- When a multi-file deployment partially fails, roll back files already deployed by that run.
+- One production deployment may contain at most 25 files.
+- Production verification MUST check the target page, required images, target category index, sitemap, and redirects over HTTP.
+- Check Actions state through the API. Do not use the browser UI for the normal route.
 
-- `create.php`、`log/`、`.well-known/`、`.htaccess`
-- `movie/` の削除・置換
-- noindex/index、認証、DB、決済、本番設定
-- `index.php` の本番反映
+## 6. Change Gates
 
-影響範囲を示してから変更:
+Prior approval is required for:
+
+- `create.php`, `log/`, `.well-known/`, and `.htaccess`
+- Deletion or replacement under `movie/`
+- noindex/index, authentication, databases, payments, and production settings
+- Production deployment of `index.php`
+
+Show the affected scope before changing:
 
 - `includefile/dataset_base.php`
 - `includefile/class.hpgcoder2.php`
 - `includefile/funcs.php`
 - `includefile/dataset_*.php`
 - `source/system.html`
-- `css/default.css`、`js/common.js`
-- `makeSitemap.php`、`sitemap.xml`
+- `css/default.css` and `js/common.js`
+- `makeSitemap.php` and `sitemap.xml`
 
-通常area・hotel・blog一括ツールが対象限定で扱う `dataset_base.php`、カテゴリ一覧、indexの対象カテゴリ欄、sitemapは、実行指示の範囲内とする。
+The normal area, hotel, and blog integrated tools may handle `dataset_base.php`, the category index, the applicable index-page category section, and the sitemap when the tool limits them to the explicitly authorized target.
 
-## 7. STOP
+## 7. STOP Conditions
 
-- main以外、remote不一致、fast-forward不可、競合
-- 入力不足、画像不足、slug不一致、既存ファイル競合
-- 共有登録重複、旧slug・誤記の自動置換が必要
-- JSON、PHP、stage許可表、Actions、本番HTTP検証失敗
-- root `AGENTS.md` のSTOP条件
+- The branch is not `main`, the remote differs, fast-forward is impossible, or a conflict exists.
+- Input is incomplete, images are missing, a slug does not match, or an existing file conflicts.
+- A shared registration is duplicated, or an old slug or typo requires automatic replacement.
+- JSON, PHP, the stage allowlist, Actions, or production HTTP validation fails.
+- A STOP condition in root `AGENTS.md` applies.

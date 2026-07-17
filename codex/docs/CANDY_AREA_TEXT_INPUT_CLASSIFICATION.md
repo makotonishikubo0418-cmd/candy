@@ -2,9 +2,9 @@
 
 Updated: 2026-07-16
 
-## Scope
+## 1. Scope
 
-- Target: `Text_area_data/*.txt` direct files
+- Target: Direct files matching `Text_area_data/*.txt`
 - Command: `codex\scripts\candy-area.cmd audit-inputs --render`
 - Input total: 169
 - Parsed: 157
@@ -13,48 +13,54 @@ Updated: 2026-07-16
 - Render passed: 147
 - Render stopped: 10
 
-## Classification Summary
+## 2. Classification Summary
+
+The category values in this table are exact domain values used by the area-input workflow.
 
 | Category | Count | Meaning |
-| --- | ---: | --- |
-| 通常 | 147 | parse/render事前検証OK |
-| 情報足りない | 20 | 必須項目不足、scene不足、画像不足 |
-| 間違い | 2 | 店舗名不一致、placeholder残存 |
+|---|---:|---|
+| `通常` | 147 | Parse and pre-render validation succeeded |
+| `情報足りない` | 20 | Required field, scene, or image is missing |
+| `間違い` | 2 | Shop-name mismatch or remaining placeholder |
 
-## 情報足りない
+## 3. Incomplete Inputs
 
-| File | Reason |
-| --- | --- |
-| `伊敷.txt` | 人気デリヘル店sceneの情報不足 |
-| `宇宿_テンプレート.txt` | 通常記事sceneの情報不足 |
-| `小原町_テンプレート.txt` | canonical slug不足 |
-| `小川町_テンプレート.txt` | canonical slug不足 |
-| `小野_テンプレート.txt` | canonical slug不足 |
-| `岡野原町_テンプレート.txt` | canonical slug不足 |
-| `易居町_テンプレート.txt` | scene h2なし |
-| `有屋田町_テンプレート.txt` | canonical slug不足 |
-| `石谷町_テンプレート.txt` | 基本情報scene不足 |
-| `荒田.txt` | img_1、img_2、page_title_h1不足 |
-| `薬師_テンプレート.txt` | canonical slug不足 |
-| `向陽_テンプレート.txt` | 画像不足: koyo_1/koyo_2 |
-| `城南町_テンプレート.txt` | 画像不足: jonancho_1/jonancho_2 |
-| `大竜町_テンプレート.txt` | 画像不足: dairyuucho_1/dairyuucho_2 |
-| `天保山町_テンプレート.txt` | 画像不足: tenpozancho_1/tenpozancho_2 |
-| `新屋敷町_テンプレート .txt` | 画像不足: shinayashikicho_1/shinayashikicho_2 |
-| `松陽台町_テンプレート.txt` | 画像不足: shouyoudaichou_1/shouyoudaichou_2 |
-| `池之上町_テンプレート.txt` | 画像不足: ikenouecho |
-| `甲突町_テンプレート.txt` | 画像不足: kotsukicho_1/kotsukicho_2 |
-| `花野光ヶ丘_テンプレート.txt` | 画像不足: kenohikarigaoka.1/kenohikarigaoka.2 |
-
-## 間違い
+These files have the exact domain classification `情報足りない`.
 
 | File | Reason |
-| --- | --- |
-| `伊敷台_テンプレート.txt` | template_shop.htmlにない店舗名: 劇場団地妻 |
-| `喜入生見町_テンプレート.txt` | placeholder残存: aaaaaaaaaaaaaaaaaaaa |
+|---|---|
+| `伊敷.txt` | Insufficient information for the popular-delivery-health-shop scene |
+| `宇宿_テンプレート.txt` | Insufficient information for a normal article scene |
+| `小原町_テンプレート.txt` | Missing canonical slug |
+| `小川町_テンプレート.txt` | Missing canonical slug |
+| `小野_テンプレート.txt` | Missing canonical slug |
+| `岡野原町_テンプレート.txt` | Missing canonical slug |
+| `易居町_テンプレート.txt` | Scene has no H2 |
+| `有屋田町_テンプレート.txt` | Missing canonical slug |
+| `石谷町_テンプレート.txt` | Insufficient basic-information scene |
+| `荒田.txt` | Missing `img_1`, `img_2`, and `page_title_h1` |
+| `薬師_テンプレート.txt` | Missing canonical slug |
+| `向陽_テンプレート.txt` | Missing images: `koyo_1` and `koyo_2` |
+| `城南町_テンプレート.txt` | Missing images: `jonancho_1` and `jonancho_2` |
+| `大竜町_テンプレート.txt` | Missing images: `dairyuucho_1` and `dairyuucho_2` |
+| `天保山町_テンプレート.txt` | Missing images: `tenpozancho_1` and `tenpozancho_2` |
+| `新屋敷町_テンプレート .txt` | Missing images: `shinayashikicho_1` and `shinayashikicho_2` |
+| `松陽台町_テンプレート.txt` | Missing images: `shouyoudaichou_1` and `shouyoudaichou_2` |
+| `池之上町_テンプレート.txt` | Missing image: `ikenouecho` |
+| `甲突町_テンプレート.txt` | Missing images: `kotsukicho_1` and `kotsukicho_2` |
+| `花野光ヶ丘_テンプレート.txt` | Missing images: `kenohikarigaoka.1` and `kenohikarigaoka.2` |
 
-## Notes
+## 4. Incorrect Inputs
+
+These files have the exact domain classification `間違い`.
+
+| File | Reason |
+|---|---|
+| `伊敷台_テンプレート.txt` | Shop name absent from `template_shop.html`: `劇場団地妻` |
+| `喜入生見町_テンプレート.txt` | Remaining placeholder: `aaaaaaaaaaaaaaaaaaaa` |
+
+## 5. Notes
 
 - This file replaces the older 135-input classification from the previous Codex work folder.
 - The current correct folder is `C:\Codex\candy`.
-- `下福元町_テンプレート.txt`、`下竜尾町.txt`、`慈眼寺町_テンプレート.txt` were reflected from the previous Codex work folder because the current folder still had placeholders or an image-path typo.
+- `下福元町_テンプレート.txt`, `下竜尾町.txt`, and `慈眼寺町_テンプレート.txt` were carried over from the previous Codex work folder because the current folder still contained placeholders or an image-path typo.

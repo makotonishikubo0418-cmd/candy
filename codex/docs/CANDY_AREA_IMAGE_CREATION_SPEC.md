@@ -1,224 +1,224 @@
-# CANDY AREA IMAGE CREATION SPEC
+# CANDY Area Image Creation Specification
 
-- 目的: エリアページ制作時に使用する2枚の地域画像を、安全かつ既存デザインと整合する形で制作する
-- 状態: 条件付き正本
-- 更新日: 2026-07-16
-- 適用範囲: candyのエリアページ用画像制作
+- Purpose: Safely produce two regional images for an area page while matching the existing design
+- Status: conditional canonical document
+- Updated: 2026-07-16
+- Applies to: Image production for candy area pages
 
-## 1. 優先順位と権利条件
+## 1. Priority and Rights Conditions
 
-本書は画像の構図、加工、命名、保存、組込みを定める。画像の受入、slug照合、重複確認、Git管理は `CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md` に従う。
+This document defines composition, modification, naming, storage, and page integration. Follow `CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md` for image acceptance, slug reconciliation, duplication checks, and Git management.
 
-画像生成AIは使用しない。実在地域を確認できる画像を使用する。
+Do not use generative AI. Use images that verify the actual region.
 
-Googleマップ、Google Earth、航空写真、地図タイル、第三者写真を使用する場合は、制作前に当該用途での保存、加工、商用公開が許可されていることを確認する。帰属表示、Googleロゴ、著作権表示、画像提供元表示を削除、隠蔽、改変しない。
+Before using Google Maps, Google Earth, aerial photography, map tiles, or third-party photographs, verify that storage, modification, and commercial publication are permitted for the intended use. Do not remove, hide, or alter attribution, Google logos, copyright notices, or data-provider notices.
 
-Googleの現行案内では、Google Mapsコンテンツの公開には適切な帰属表示が必要であり、Google Mapsの衛星画像をWeb上の商用・宣伝用途へ使用することには制限がある。個別許可または適用可能な利用条件を確認できない間は、Googleマップのスクリーンショットを公開画像として制作、保存、組込み、公開してはいけない。
+Current Google guidance requires appropriate attribution when publishing Google Maps content and restricts commercial or promotional use of Google Maps satellite imagery on the web. Until individual permission or applicable usage terms are verified, do not create, save, integrate, or publish a Google Maps screenshot as a public image.
 
-確認先:
+Verification sources:
 
 - `https://about.google/brand-resource-center/products-and-services/geo-guidelines/`
 - `https://www.google.com/help/terms_maps/`
 
-権利条件を満たす代替画像元が指定された場合は、本書の構図、加工、命名、保存、組込み手順を適用できる。
+When the user specifies an alternate image source with verified rights, apply this document's composition, modification, naming, storage, and integration procedure.
 
-## 2. 成果物
+## 2. Deliverables
 
-1地域につき次の2枚を作成する。
+Produce two images per region:
 
-- `_1`: 対象地域を広く見せる引き画像。メイン画像・OGP画像候補
-- `_2`: 同じ地域を少しアップし、角度または方角を変えた地域紹介画像
+- `_1`: A wider view of the target region; candidate main and OGP image
+- `_2`: A closer view of the same region with a changed angle or direction
 
-地域ごとに市街地、海、山、森林、農地など背景が異なることは正常である。背景を他地域へ合わせず、対象地域の特徴を優先する。
+Differences in cityscape, sea, mountains, forests, and farmland between regions are expected. Prioritize the target region's actual characteristics instead of matching another region's background.
 
-正式仕様:
+Standard:
 
-- 寸法: `1000×750`
-- 形式: JPG
-- 公開用保存先: `HP/imgHtml/new_202601/area/`
-- HTML参照: `./imgHtml/new_202601/area/<ファイル名>`
+- Dimensions: `1000×750`
+- Format: JPG
+- Public destination: `HP/imgHtml/new_202601/area/`
+- HTML reference: `./imgHtml/new_202601/area/<filename>`
 
-## 3. 制作開始前の確定事項
+## 3. Required Decisions Before Production
 
-ページデータ制作と同じTaskで画像も制作する場合、最初に次を確定する。
+When producing page data and images in the same task, confirm first:
 
-- 日本語の正式地域名
-- 画面表示用の地域名ローマ字
-- canonicalと一致する小文字slug
-- 画像元と利用条件
-- 公開用保存先
-- source HTML内の参照先
-- 同名ファイルの有無
-- 基準にする既存エリア画像
+- Official Japanese region name
+- Romanized region name used for display
+- Lowercase slug matching canonical
+- Image source and usage conditions
+- Public destination
+- Source HTML reference
+- Same-name file existence
+- Existing area image used as the design reference
 
-ローマ字とslugは対象txtのcanonical、既存ページ、既存ファイル名、管理資料を照合する。同じ地域に複数表記を混在させず、不一致候補を自動変換しない。
+Reconcile romanization and slug against canonical in the target text file, existing pages, existing filenames, and management documents. Do not mix multiple spellings for one region or automatically convert a mismatch candidate.
 
-## 4. Chromeと地図表示を使用する場合
+## 4. Chrome and Map Display
 
-CodexアプリとChrome拡張を接続し、Codexが通常のChromeを操作できる状態で行う。ログイン情報、個人情報、通知、他タブの内容を成果物へ含めない。
+Connect the Codex app and Chrome extension so Codex can operate the normal Chrome session. Do not include credentials, personal information, notifications, or other-tab content in the deliverable.
 
-Googleマップを使用できる権利条件が確認済みの場合に限り、検索欄へ次の形式で入力する。
+Only when rights conditions for Google Maps use are verified, enter this exact search form:
 
 `鹿児島県鹿児島市［地域名］`
 
-検索結果が対象地域と一致することを確認する。同名地域や別自治体が表示された場合は、住所を追加して一意に特定する。
+Verify that the result matches the target region. When the same name in another municipality appears, add the address required to identify it uniquely.
 
-航空写真または3D表示を使う場合は、利用条件で許可された範囲内で次を調整する。
+When using aerial or 3D display, adjust within the permitted usage conditions:
 
-- ズーム
-- 画面中心
-- 角度
-- 方角
-- 3Dの傾き
+- Zoom
+- Center
+- Angle
+- Direction
+- 3D tilt
 
-地名ラベル、道路名、施設名、検索パネルなどは、権利表示を損なわない範囲で閉じるか構図から外す。地図の描画が完了し、建物や地形が鮮明になってから取得する。
+Close or frame out place labels, road names, facility names, search panels, and related elements only when doing so does not impair required rights notices. Capture only after map rendering completes and buildings or terrain are clear.
 
-## 5. 1枚目
+## 5. First Image
 
-対象地域を広く確認できる引き画像にする。
+Use a wider composition that identifies the target region:
 
-- 地域全体または周辺の特徴が分かる
-- 極端に引きすぎない
-- 対象地域が中央付近にある
-- 中央の文字配置領域を確保する
-- 検索パネルなど不要UIが主画面に残らない
-- 未読込や単色部分が画面の大半を占めない
-- 必須の帰属表示は画像内に残り、読める
+- Shows the region or relevant surroundings
+- Is not excessively zoomed out
+- Keeps the target region near center
+- Preserves central space for text
+- Does not leave a search panel or unnecessary UI in the main view
+- Is not dominated by unloaded or flat-color areas
+- Retains required attribution in readable form
 
-## 6. 2枚目
+## 6. Second Image
 
-1枚目と同じ地域を使用し、次の2点を必ず変更する。
+Use the same region and change both:
 
-- 1枚目より少しアップする
-- 角度または方角を変える
+- Zoom in slightly compared with the first image.
+- Change the angle or direction.
 
-別地域へ移動せず、1枚目との差が視認できる構図にする。中央の文字領域、描画完了、必須の帰属表示を確認する。
+Do not move to another region. The difference from the first composition must be visible. Verify central text space, completed rendering, and required attribution.
 
-## 7. 切り出し
+## 7. Cropping
 
-スクリーンショットから、許可された画像表示部分を `1000×750` で切り出す。
+Crop the permitted image-display area to `1000×750`.
 
-除外対象:
+Exclude:
 
-- Chromeのタブ、アドレスバー、ブックマークバー
-- 検索パネルと不要な操作ボタン
-- OSのタスクバー
-- 通知、ポップアップ、不要な余白
+- Chrome tabs, address bar, and bookmarks bar
+- Search panels and unnecessary controls
+- Operating-system taskbar
+- Notifications, popups, and unnecessary margins
 
-除外禁止:
+Do not exclude:
 
-- Google Maps等の必須帰属表示
-- Googleロゴ
-- 著作権表示
-- 航空写真・地図データ提供元表示
+- Required attribution for Google Maps or another source
+- Google logo
+- Copyright notice
+- Aerial-imagery or map-data provider notice
 
-必要な権利表示を残したまま既存デザインを成立させられない場合は停止する。
+STOP when the existing design cannot be achieved while preserving required rights notices.
 
-## 8. 文字配置
+## 8. Text Placement
 
-画像中央に地域名ローマ字を配置する。
+Place the romanized region name in the image center.
 
-地域名:
+Region name:
 
-- 英字大文字
-- 白色、太字、中央揃え
-- 画像内で最も大きい文字
-- 1行表示を基本とする
+- Uppercase letters
+- White, bold, and centered
+- Largest text in the image
+- One line by default
 
-地域名の下へ固定文を配置する。
+Place this fixed text below the region name:
 
 `Kagoshima Area Information`
 
-固定文:
+Fixed text:
 
-- 大文字・小文字を変更しない
-- 白色、中央揃え
-- 地域名より小さい
+- Preserve capitalization exactly.
+- White and centered
+- Smaller than the region name
 
-書体、太さ、サイズ、行間、位置、影、縁取り、暗調整は、Task開始時に指定した既存基準画像へ合わせる。独自装飾、強い帯、枠、既存にないグラデーションを追加しない。
+Match typeface, weight, size, line height, position, shadow, outline, and darkening to the existing reference image selected at task start. Do not add custom decoration, strong bands, frames, or new gradients.
 
-基準画像と数値化された文字テンプレートが整備された場合は、目視合わせよりテンプレートを優先する。
+When a measured text template exists, prioritize it over visual matching.
 
-## 9. 視認性
+## 9. Legibility
 
-- 地域名と固定文を一目で読める
-- 白文字が背景へ埋もれない
-- 文字が画像外へ出ない
-- 地域名と固定文が重ならない
-- 2枚の文字位置が一致する
-- 背景を暗くしすぎない
-- 必須の帰属表示と追加文字が重ならない
-- 既存画像と大きく異ならない
+- Region name and fixed text are immediately readable.
+- White text does not disappear into the background.
+- Text remains inside the image.
+- Region name and fixed text do not overlap.
+- Text position matches between both images.
+- The background is not excessively dark.
+- Required attribution and added text do not overlap.
+- The result does not differ materially from existing images.
 
-## 10. ファイル名
+## 10. Filenames
 
 ```text
 kagoshima-deliveryhealth-area-<slug>_1.jpg
 kagoshima-deliveryhealth-area-<slug>_2.jpg
 ```
 
-- 先頭は `kagoshima-deliveryhealth-area-`
-- slugは対象txtのcanonicalと完全一致
-- 小文字、スペースなし
-- 同じ地域の2枚はslugを一致させる
-- 末尾だけ `_1` と `_2` に分ける
-- 拡張子は `.jpg`
+- Prefix: `kagoshima-deliveryhealth-area-`
+- Slug: exact canonical value from the target text file
+- Lowercase with no spaces
+- Same slug for both images of one region
+- Distinguish only with `_1` and `_2`
+- Extension: `.jpg`
 
-## 11. 保存と上書き防止
+## 11. Storage and Overwrite Prevention
 
-公開用正本 `HP/imgHtml/new_202601/area/` へ保存する。
+Save to the canonical public source `HP/imgHtml/new_202601/area/`.
 
-保存前に同名ファイルを確認する。同名がある場合は既存画像とのハッシュを比較し、同一なら保存しない。内容が異なる場合は上書きせず、差異と必要な判断を報告する。
+Before saving, check for a same-name file. When present, compare hashes. Do not save when identical. When contents differ, do not overwrite; report the difference and required decision.
 
-JPG品質は、文字と地形に目立つ劣化がなく、既存画像と大きく異ならない設定にする。
+Use JPG quality that preserves readable text and terrain without visible degradation and does not differ materially from existing images.
 
-## 12. ページへの組込み
+## 12. Page Integration
 
-対象エリアページの指定箇所へ2枚を設定する。
+Place both images in the specified locations on the target area page. Verify:
 
-- `_1`と`_2`の順序
-- ファイル名の大文字・小文字
-- 保存先とsource HTML参照先
-- OGP、src、alt
-- 旧画像名の残存
-- PCとスマートフォンの表示
-- トリミングによる文字・帰属表示の欠け
+- `_1` and `_2` order
+- Filename case
+- Destination and source HTML reference
+- OGP, `src`, and alt text
+- Absence of legacy image names
+- Desktop and mobile rendering
+- No clipping of text or attribution caused by cropping
 
-画像以外のページ生成物と共有登録は `CANDY_AREA_STAFF_PRODUCTION_RUNBOOK.md` と `CANDY_AREA_PAGE_GENERATION_SPEC.md` に従う。
+For non-image page outputs and shared registrations, follow `CANDY_AREA_STAFF_PRODUCTION_RUNBOOK.md` and `CANDY_AREA_PAGE_GENERATION_SPEC.md`.
 
-## 13. 完了確認
+## 13. Completion Criteria
 
-- [ ] 画像元の保存、加工、商用公開条件を確認した
-- [ ] 必須の帰属表示を保持した
-- [ ] 対象地域が正しい
-- [ ] 1枚目が引き画像である
-- [ ] 2枚目が少しアップした別角度・別方角である
-- [ ] 2枚が同一構図でない
-- [ ] 地域名ローマ字とcanonical slugが正しい
-- [ ] `Kagoshima Area Information` が正しい
-- [ ] 2枚とも1000×750のJPGである
-- [ ] ファイル名、保存先、HTML参照が一致する
-- [ ] PCとスマートフォンで正常表示される
-- [ ] リンク切れと既存レイアウト破損がない
+- [ ] Storage, modification, and commercial-publication conditions for the image source are verified.
+- [ ] Required attribution is preserved.
+- [ ] The target region is correct.
+- [ ] The first image is a wider view.
+- [ ] The second image is slightly closer with a different angle or direction.
+- [ ] The two images do not use the same composition.
+- [ ] Romanized region name and canonical slug are correct.
+- [ ] `Kagoshima Area Information` is exact.
+- [ ] Both images are 1000×750 JPG files.
+- [ ] Filenames, destination, and HTML references agree.
+- [ ] Desktop and mobile rendering are correct.
+- [ ] No broken link or existing-layout damage exists.
 
-## 14. STOP
+## 14. STOP Conditions
 
-- 対象地域を一意に特定できない
-- 正式なローマ字またはcanonical slugを確定できない
-- 画像元の保存、加工、商用公開条件を確認できない
-- 必須の帰属表示を保持できない
-- Chromeを操作できない
-- 地図、3D、航空写真を読み込めない
-- スクリーンショットを保存できない
-- 画像加工ツールを実行できない
-- 既存画像の寸法または文字仕様を確認できない
-- 保存先を確定できない
-- 同名ファイルの上書き可否を判断できない
+- The target region cannot be uniquely identified.
+- Official romanization or canonical slug cannot be confirmed.
+- Storage, modification, and commercial-publication conditions for the image source cannot be verified.
+- Required attribution cannot be preserved.
+- Chrome cannot be operated.
+- Map, 3D, or aerial imagery cannot load.
+- A screenshot cannot be saved.
+- The image-modification tool cannot run.
+- Existing-image dimensions or text specification cannot be verified.
+- The destination cannot be confirmed.
+- Same-name overwrite eligibility cannot be decided.
 
-停止時は、停止段階、確認済み、未実施、必要な判断を報告する。
+On STOP, report the stopped phase, verified items, unexecuted work, and required decision.
 
-## 15. 他カテゴリへの展開
+## 15. Extension to Other Categories
 
-hotel、blog、他企画へ展開するときは、本書のエリア固有要素をそのままコピーしない。
+Do not copy area-specific elements directly to hotel, blog, or another project.
 
-共通化候補は、画像元と権利確認、Chrome操作、切り出し、帰属表示、上書き防止、品質確認である。枚数、構図、文字、固定文、命名、保存先、ページ組込みはカテゴリ別仕様へ分ける。
+Candidate common elements are image-source and rights checks, Chrome operation, cropping, attribution, overwrite prevention, and quality checks. Keep count, composition, text, fixed copy, naming, destination, and page integration in category-specific specifications.

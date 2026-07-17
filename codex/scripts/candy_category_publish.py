@@ -59,7 +59,7 @@ def paths_for(category: str, data) -> list[Path]:
         hp / "source" / f"{category}.html",
         hp / "source" / "index.html",
         hp / "sitemap.xml",
-    ]
+    ] + common.site_state_output_paths()
 
 
 def dependency_paths(category: str, data, input_path: Path) -> list[Path]:
@@ -73,6 +73,7 @@ def dependency_paths(category: str, data, input_path: Path) -> list[Path]:
         common.SCRIPTS_DIR / "candy_page_common.py",
         common.SCRIPTS_DIR / f"candy_{category}_page.py",
         common.SCRIPTS_DIR / "candy_category_publish.py",
+        common.SCRIPTS_DIR / "candy_site_state.py",
         root / ".github" / "scripts" / "candy_ftp_deploy.py",
         root / ".github" / "scripts" / "candy_release_check.py",
         root / ".github" / "workflows" / "candy-production-deploy.yml",
@@ -243,6 +244,9 @@ def publish(category: str, input_path: Path, *, dry_run: bool, resume_state: dic
     if phase == "PREFLIGHT":
         release.run([sys.executable, str(page_tool), "build", "--input", relative_input] + (["--force"] if resume_state else []))
         release.run([sys.executable, str(page_tool), "check", "--input", relative_input])
+        site_state_tool = common.SCRIPTS_DIR / "candy_site_state.py"
+        release.run([sys.executable, str(site_state_tool), "write"])
+        release.run([sys.executable, str(site_state_tool), "check", "--target", data.slug])
         save_state(state, "BUILT")
         phase = "BUILT"
     if phase == "BUILT":

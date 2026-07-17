@@ -1,95 +1,95 @@
-# CANDY 本番移行・自動反映 正本
+# CANDY Production Migration and Automated Deployment
 
-## 1. 目的
+## 1. Purpose
 
-最新 `HP/` を KAGOYA 本番へ段階的に反映し、表示崩れ、リンク切れ、転送解除、不要ファイル残存を防ぐ。
+Deploy the latest `HP/` to KAGOYA production in phases while preventing rendering damage, broken links, unintended redirect removal, and obsolete-file retention.
 
-この資料は本番移行の判断基準を扱う。2026-07-13 の詳しい経緯と事故記録は `CANDY_20260713_CONTEXT_AND_IMPROVEMENT.md`、全件検証は `CANDY_VERIFICATION_PLAN.md` を参照する。
+This document contains production-migration decision criteria. See `CANDY_20260713_CONTEXT_AND_IMPROVEMENT.md` for detailed 2026-07-13 context and incident history and `CANDY_VERIFICATION_PLAN.md` for full-population validation.
 
-## 2. 対象環境
+## 2. Environments
 
-| 用途 | パス・場所 | 扱い |
+| Purpose | Path or location | Handling |
 |---|---|---|
-| 最新ローカル | `HP/` | 今後反映する開発・制作データ |
-| 本番スナップショット | `Backup/HP_旧データ/` | ユーザーが本番から再ダウンロードした取得時点の旧データ |
-| 本番サーバー | `/public_html/group/candy/` | 実際の公開先 |
-| テストサーバー | `/public_html/group_test/candy/` | ユーザーが制作時に設けたテスト版 |
+| Latest local | `HP/` | Development and production data for future deployment |
+| Production snapshot | `Backup/HP_旧データ/` | Legacy data downloaded again from production by the user at the acquisition time |
+| Production server | `/public_html/group/candy/` | Actual public destination |
+| Test server | `/public_html/group_test/candy/` | Test version created by the user during production |
 
-ローカルパスは PC ごとに変わる。作業時の Git ルートを基準にする。本番とテストを混同しない。
+Local paths vary by computer. Use the current Git root. Do not confuse production and test.
 
-## 3. 最重要の公開切替ルール
+## 3. Primary Publication-Switchover Rules
 
-### 3.1 本番 index.php
+### 3.1 Production index.php
 
-- 本番スナップショットの `index.php` はシティヘブンへ `301` 転送する。
-- 最新 `HP/index.php` は新サイトの入口であり、役割が異なる。
-- 段階移行中は本番の転送用 `index.php` を維持する。
-- 最新 `HP/index.php` はPush、preview、deployのすべてで対象外にする。
-- 全準備完了後、ユーザーが最終公開切替を明示指示した場合だけ、最新 `HP/index.php` を単独反映する。
-- 反映後はトップの転送終了、HTTP、画面、PC/SP、主要導線を確認する。
+- Production-snapshot `index.php` sends a `301` redirect to シティヘブン.
+- Latest `HP/index.php` is the new-site entry point and has a different responsibility.
+- Preserve the production redirecting `index.php` during phased migration.
+- Exclude latest `HP/index.php` from Push, preview, and deploy.
+- Deploy latest `HP/index.php` alone only after all preparation completes and the user explicitly instructs final publication switchover.
+- After deployment, verify that the top redirect ended, HTTP, rendering, desktop/mobile, and primary routes.
 
-### 3.2 index 以外
+### 3.2 Targets Other Than index
 
-PHP、include、source、CSS、JavaScript、画像、動画等は、転送用 index を維持したまま先行更新できる。ただし「転送が維持された」ことと「他ページが正常」の確認は別である。
+PHP, include, source, CSS, JavaScript, images, and movies may be deployed before the final switchover while preserving the redirecting index. Verify redirect preservation separately from other-page correctness.
 
-## 4. GitHub Actions の現行設計
+## 4. Current GitHub Actions Design
 
-対象 workflow:
+Workflow:
 
 ```text
 .github/workflows/candy-production-deploy.yml
 ```
 
-対象 deploy script:
+Deploy script:
 
 ```text
 .github/scripts/candy_ftp_deploy.py
 ```
 
-### 4.1 起動条件
+### 4.1 Trigger
 
-- deploy対象を含む `main` Pushで本番処理を自動起動する。
-- 「アップしろ」の意味、5分目標、除外事項はroot `AGENTS.md` 第3.6節を唯一の定義とする。
-- Push後、同一job内でFTP接続なしのplan生成、承認値の自動確定、FTP接続前検証、本番deployを連続実行する。
-- 手動 `workflow_dispatch` のpreview/deployは障害調査・再実行用の例外経路として残す。
-- deploy jobには `candy-production` environmentを指定する。
-- previewは5分、deployは10分でtimeoutする。
-- concurrencyにより同時deployを禁止する。
-- Actionsの起動・監視はGitHub APIを通常経路とし、ブラウザUI操作や認証切れのGitHub CLIを前提にしない。
+- A Push to `main` containing deploy targets starts production processing automatically.
+- Use the explicit authority rules in root `AGENTS.md`; do not infer upload authority from another instruction.
+- After Push, the same job generates a plan without FTP, determines automatic approval values, validates them before FTP, and deploys to production.
+- Manual `workflow_dispatch` preview/deploy remains an exception route for incident investigation and reruns.
+- The deploy job uses the `candy-production` environment.
+- Preview times out after five minutes; deploy after ten minutes.
+- Concurrency prohibits simultaneous deploys.
+- Use the GitHub API as the normal Actions start and monitoring route; do not depend on browser UI or an expired GitHub CLI session.
 
-### 4.2 自動承認ゲート
+### 4.2 Automatic Approval Gate
 
-Pushで起動したActionsは次を自動生成する。
+Push-triggered Actions generates:
 
-- 比較元の40文字commit SHA
-- 反映対象の40文字commit SHA
-- deploy対象一覧と除外一覧
-- 削除・renameの有無
-- deploy対象件数
-- 各対象内容のSHA256を含む `PLAN_TOKEN`
+- 40-character comparison-source commit SHA
+- 40-character target commit SHA
+- Deploy and exclusion lists
+- Deletion and rename presence
+- Deploy-target count
+- `PLAN_TOKEN` containing SHA-256 for each target
 
-deployは次が同一Actions内のplanと完全一致する場合だけFTP接続へ進む。
+FTP connection is permitted only when the following exactly match the plan from the same Actions run:
 
-- 比較元SHAと対象SHA
-- 対象件数
+- Comparison-source and target SHAs
+- Target count
 - `PLAN_TOKEN`
-- 自動確認文言 `DEPLOY-CANDY-PRODUCTION`
+- Automatic confirmation phrase `DEPLOY-CANDY-PRODUCTION`
 
-一項目でも不一致ならFTP接続前に失敗させる。通常経路ではplan確認のためにユーザーを待たせず、安全ゲートを機械実行する。
+Any mismatch fails before FTP connection. The normal route applies this safety gate mechanically without waiting for manual plan confirmation.
 
-### 4.3 強制上限と禁止経路
+### 4.3 Hard Limits and Prohibited Routes
 
-- 一回のdeployは最大25ファイル、合計50MiB以下。
-- 26ファイル以上または50MiB超はpreviewできてもdeployできない。小バッチへ分割する。
-- full deploy経路は持たない。
-- Git上の削除・renameを検出した場合はdeploy全体を停止する。
-- サーバーだけに存在するファイルを削除しない。
-- 対象SHAはcheckout中のHEADと完全一致させる。
-- 比較元SHAは対象SHAのancestorでなければならない。
+- One deploy is limited to 25 files and 50 MiB total.
+- A set of 26 or more files or more than 50 MiB may be previewed but not deployed; split it into small batches.
+- No full-deploy route exists.
+- Any Git deletion or rename stops the entire deploy.
+- Do not delete files that exist only on the server.
+- Target SHA MUST exactly match checked-out HEAD.
+- Comparison-source SHA MUST be an ancestor of target SHA.
 
-### 4.4 保護・除外
+### 4.4 Protection and Exclusion
 
-workflow/scriptの実物で確認する主な除外:
+Primary exclusions verified from actual workflow/script:
 
 - `HP/index.php`
 - `HP/.htaccess`
@@ -102,146 +102,146 @@ workflow/scriptの実物で確認する主な除外:
 - `HP/.well-known/`
 - Markdown
 - `.env`
-- `.bak`、`.backup`、`.zip`
-- `.candy-backup-*`、`.candy-upload-*`
+- `.bak`, `.backup`, and `.zip`
+- `.candy-backup-*` and `.candy-upload-*`
 
-除外一覧は将来のworkflowへ推測で適用せず、previewの実出力で再確認する。
+Do not infer this list for a future workflow; recheck actual preview output.
 
-## 5. FTP デプロイの安全要件
+## 5. FTP Deployment Safety Requirements
 
-FTP接続前に、40文字SHA、ancestor、checkout HEAD、対象件数、最大25件、合計50MiB、`PLAN_TOKEN`、確認文言を検証する。検証失敗時はFTP秘密値を使わず停止する。
+Before FTP connection, validate 40-character SHAs, ancestor relationship, checked-out HEAD, target count, 25-file maximum, 50 MiB total, `PLAN_TOKEN`, and confirmation phrase. On failure, STOP without using FTP secrets.
 
-対象ファイルごとに次を実行し、全対象の検証完了まで各backupを保持する。
+For each target, retain backups until every target validates:
 
-1. 一時名で upload
-2. 一時ファイルを download して SHA256 照合
-3. 既存ファイルがあれば一時 backup 名へ rename
-4. 一時ファイルを正式名へ promote
-5. 正式名を download して SHA256 再照合
-6. 全対象の正式名・SHA256検証が成功した後に各backupを削除
-7. `現在件数/総件数` を即時出力
+1. Upload with a temporary name.
+2. Download the temporary file and compare SHA-256.
+3. When an existing file exists, rename it to a temporary backup name.
+4. Promote the temporary file to the final name.
+5. Download the final name and compare SHA-256 again.
+6. Delete backups only after every target final name and SHA-256 validates.
+7. Output `current-count/total-count` immediately.
 
-失敗時:
+On failure:
 
-- 失敗中の対象を復元し、その実行ですでに反映済みの全対象も逆順にrollbackする。
-- rollback完了まで当該実行を本番反映成功として扱わない。
-- 失敗位置、対象、rollback の成否を報告する。
-- 一時・backup ファイルが残っていないか実サーバーで確認する。
+- Restore the failing target and roll back every target already deployed by the same run in reverse order.
+- Do not report production deployment successful before rollback completes.
+- Report failure position, target, and rollback result.
+- Verify on the actual server that no temporary or backup file remains.
 
-workflow/scriptを変更した場合は、構文・統合テスト後にCommit・Pushし、GitHub上の自動Run成功を確認するまで新しい動作として報告しない。
+After changing workflow/script, run syntax and integration tests, Commit and Push, and verify the automatic GitHub run before reporting new behavior.
 
-## 6. 2026-07-13 の本番作業結果
+## 6. Production Work Results on 2026-07-13
 
-### 6.1 自動 full deploy（失敗・廃止）
+### 6.1 Automated Full Deploy: Failed and Deprecated
 
-- 多数ファイルを一括処理する旧方式が長時間化した。
-- backup・一時ファイルが多数残り、実進捗と報告が一致しなかった。
-- controlled な完了を確認できず、ユーザーが WinSCP で直下 PHP を手動反映した。
-- したがって当該 Actions を「正常な全件反映完了」の証拠として使わない。
+- The legacy bulk method ran for an excessive time.
+- Many backup and temporary files remained, and actual progress differed from reports.
+- Controlled completion could not be verified; the user manually deployed root PHP through WinSCP.
+- Therefore, do not use that Actions run as evidence of successful full deployment.
 
-### 6.2 cleanup
+### 6.2 Cleanup
 
-ユーザーの手動反映後、確実に不要と確認できた次を本番から削除した。
+After the user's manual deployment, these confirmed unnecessary production targets were deleted:
 
-| 対象 | 件数 |
+| Target | Count |
 |---|---:|
 | `.candy-backup-*` | 319 |
-| サーバー上の `.gitignore` | 1 |
+| Server `.gitignore` | 1 |
 | FTP smoke test | 1 |
-| 合計 | 321 |
+| Total | 321 |
 
-削除後:
+After deletion:
 
-- 本番ルート PHP: 100
-- 本番 `index.php`: 転送用を維持
-- 本番 inventory: 1,428 ファイル、29ディレクトリ
+- Production root PHP: 100
+- Production `index.php`: redirect preserved
+- Production inventory: 1,428 files and 29 directories
 
-inventory の全ファイル SHA256 同一性まで確認した記録ではない。必要時は再取得する。
+This is not a record that verifies SHA-256 equality for every inventory file. Reacquire when required.
 
 ### 6.3 HTTP
 
-- 公開 PHP 100 件のうち 99 件が `200`
-- `index.php` は意図した `301`
-- 想定外 PHP status は 0
+- 99 of 100 public PHP files returned `200`.
+- `index.php` returned the intended `301`.
+- Unexpected PHP statuses: 0.
 
-これは 2026-07-13 のスナップショットであり、現在確認には再検査が必要。
+This is a 2026-07-13 snapshot and requires revalidation for current state.
 
-## 7. 2026-07-13 のローカル移行状態
+## 7. Local Migration State on 2026-07-13
 
-記録時点:
+At record time:
 
-| 対象 | 状態 |
+| Target | State |
 |---|---|
-| HP 直下 PHP | 100 |
-| 本番 `group/candy` include 参照 | 97 |
-| テスト `group_test/candy` include 参照 | 2 |
-| dataset include を持たない PHP | `makeSitemap.php` |
+| PHP directly under HP | 100 |
+| Production `group/candy` include references | 97 |
+| Test `group_test/candy` include references | 2 |
+| PHP without dataset include | `makeSitemap.php` |
 
-テスト参照が残る入口:
+Entry points retaining test references:
 
 - `HP/kagoshima-deliveryhealth-petitegirl.php`
 - `HP/kagoshima-deliveryhealth-slendergirl.php`
 
-この二件を意図した例外か未移行か確認せず、一括置換しない。`dataset_base.php` 等の絶対パス、session、control、source 変換も対象の実物で再確認する。
+Do not bulk-replace these before determining whether they are intended exceptions or incomplete migration. Recheck absolute paths, session, control, and source transformation in actual `dataset_base.php` and related files.
 
-## 8. 反映前の必須手順
+## 8. Required Pre-Deployment Procedure
 
-1. root/HP `AGENTS.md` を確認する。
-2. branch、remote、status、HEAD、`origin/main`を確認する。
-3. 対象変更と既存変更の重なりを確認する。
-4. 今回の進行内容と関連 `.md` の記録を整合させる。
-5. stage対象の `name-status` を許可表と照合し、指示外変更、削除、rename、copy、type変更がないことを確認する。
-6. workflowとdeploy scriptの構文・self-test・`test_candy_ftp_deploy.py`統合テストを行う。
-7. workflowにpush triggerがあり、full deployが存在しないことを確認する。
-8. 「アップしろ」を受けたら、今回対象だけをstage・Commitする。
-9. `fetch` 後にremote先行更新がなければ `main` へPushする。
-10. Pushで起動したActions RunをGitHub APIで取得する。
-11. Actionsの対象SHA、対象一覧、除外、削除・rename、件数、`PLAN_TOKEN`を確認する。
-12. 25ファイル以下・合計50MiB以下、`index.php` 等の保護対象除外を確認する。超過・削除・renameはFTP接続前に自動停止する。
-13. 反映対象PHPの `php -d short_open_tag=1 -l` 成功後だけFTPへ進む。
-14. Actions成功後、対象ページのHTTPと本番URLを確認する。
+1. Review root and HP `AGENTS.md`.
+2. Verify branch, remote, status, HEAD, and `origin/main`.
+3. Check overlap between target and existing changes.
+4. Reconcile the planned work with related `.md` records.
+5. Compare staged `name-status` to the allowlist and exclude out-of-scope changes, deletions, renames, copies, and type changes.
+6. Run workflow/deploy-script syntax, self-test, and `test_candy_ftp_deploy.py` integration tests.
+7. Verify a Push trigger exists and no full-deploy route exists.
+8. On explicit upload instruction, stage and Commit only current targets.
+9. After Fetch, Push to `main` only if the remote has no leading update.
+10. Retrieve the Push-triggered Actions run through the GitHub API.
+11. Verify target SHA, lists, exclusions, deletion/rename, count, and `PLAN_TOKEN`.
+12. Verify no more than 25 files, no more than 50 MiB, and protected targets such as `index.php` are excluded. Oversize, deletion, or rename MUST stop before FTP.
+13. Proceed to FTP only after target PHP succeeds with `php -d short_open_tag=1 -l`.
+14. After Actions succeeds, verify target-page HTTP and production URLs.
 
-通常の追跡コマンド:
+Normal tracking command:
 
 ```powershell
-python .github/scripts/candy_release_check.py --sha <40文字Commit SHA> --url <本番URL> --expect-text <対象ページ固有文字列>
+python .github/scripts/candy_release_check.py --sha <40-character-Commit-SHA> --url <production-URL> --expect-text <target-page-specific-text>
 ```
 
-## 9. 反映中
+## 9. During Deployment
 
-- Actions Run 番号と commit SHA を記録する。
-- Actions Runの確認用URLを記録し、進捗報告にも同時に記載する。
-- 通常はGitHub APIで状態を取得し、ブラウザ画面を探して操作しない。
-- 実ログの `DEPLOYED 現在/総数`、失敗対象、終了コードを確認する。
-- 根拠のない残り時間を報告しない。実測速度と残件数がある場合だけ推定する。
-- ユーザーが停止を命じた場合は、停止操作と実際の停止状態を確認する。
-- GUI を見ているだけで「監視中」と報告しない。
+- Record Actions run number and commit SHA.
+- Record and report the Actions run URL with progress.
+- Normally query state through the GitHub API; do not search and operate the browser UI.
+- Check actual log `DEPLOYED current/total`, failing target, and exit code.
+- Do not report unsupported remaining time. Estimate only from measured rate and remaining count.
+- When the user orders a stop, verify both the stop operation and actual stopped state.
+- Do not report monitoring while only watching a GUI.
 
-## 10. 反映後
+## 10. After Deployment
 
-1. Actions の最終結果を確認する。
-2. 対象ファイルが本番に存在し、SHA256 が一致することを確認する。
-3. 一時・backup ファイルの残存を確認する。
-4. 本番 `index.php` の転送維持を確認する。
-5. 対象 PHP の HTTP を確認する。
-6. CSS/JS/画像、内部リンク、ブラウザ PC/SP を必要範囲で確認する。
-7. ローカル、GitHub、本番の結果を分けて報告する。
-8. GitHub Commit URL、Actions Run URL、反映した全ページの本番URLを同じ報告内へ記載する。未確認URLは推測しない。
+1. Verify the final Actions result.
+2. Verify production target existence and SHA-256 equality.
+3. Check for remaining temporary and backup files.
+4. Verify preservation of the production `index.php` redirect.
+5. Check target-PHP HTTP.
+6. Check CSS/JavaScript/images, internal links, and desktop/mobile browser rendering as required.
+7. Report local, GitHub, and production results separately.
+8. Include the GitHub Commit URL, Actions run URL, and every deployed production page URL in one report. Do not infer an unverified URL.
 
-## 11. rollback
+## 11. Rollback
 
-- deploy 中の単一対象失敗は、失敗対象と同じ実行で反映済みの全対象を逆順rollbackする。全対象の検証完了前にbackupを削除しない。
-- Actions 完了後の rollback は、戻す commit/file、対象サーバーパス、index 影響、DB/外部依存を確認して別作業として行う。
-- サーバーの一括削除や旧 snapshot の一括上書きを、根拠なしに行わない。
-- `Backup/HP_旧データ` は取得時点の本番比較資料であり、現在本番と常に同一とはみなさない。
+- A single-target failure during deploy rolls back the failing target and every target already deployed in that run in reverse order. Do not delete backups before every target validates.
+- After Actions completes, rollback is separate work requiring verification of the commit/file to restore, server path, index impact, and database/external dependencies.
+- Do not bulk-delete server files or overwrite from a legacy snapshot without evidence.
+- `Backup/HP_旧データ` is a production comparison snapshot from its acquisition time and is not assumed identical to current production.
 
-## 12. 現在の未完了事項
+## 12. Current Remaining Work
 
-- Push起点の自動workflowを変更した場合、対象Commitの自動Run成功を確認すること
-- GitHub environment `candy-production` に必要な保護ルールが設定されているか確認すること
-- 残るテスト include 二件の意図確認
-- 本番 inventory と Git 管理対象の完全な hash 照合
-- `CANDY_VERIFICATION_PLAN.md` に記録された不足内部リンク・画像・外部 URL の修正判断
-- 最終公開切替日と最新 `HP/index.php` の単独反映手順の承認
+- After changing the Push-triggered workflow, verify success of the automatic run for the target Commit.
+- Verify whether the GitHub `candy-production` environment has required protection rules.
+- Confirm intent for the two remaining test includes.
+- Perform complete hash reconciliation between production inventory and Git-tracked targets.
+- Decide fixes for missing internal links, images, and external URLs recorded in `CANDY_VERIFICATION_PLAN.md`.
+- Approve the final switchover date and standalone deployment procedure for latest `HP/index.php`.
 
-未完了が残る間、「本番移行100%完了」と報告しない。
+Do not report production migration 100% complete while any item remains.

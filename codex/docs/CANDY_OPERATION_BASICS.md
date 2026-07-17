@@ -1,65 +1,78 @@
-# CANDY 通常運用の基本
+# CANDY Operation Basics
 
-## 1. 役割
+## 1. Responsibility
 
-既存 HP の調査・修正・確認で共通使用する短い手順である。新規ページ生成は `CANDY_PAGE_GENERATION_GOVERNANCE.md`、本番作業は `CANDY_PRODUCTION_MIGRATION_MASTER.md` を優先する。
+This is the short common procedure for investigating, fixing, and validating the existing HP site. For new-page generation, prioritize `CANDY_PAGE_GENERATION_GOVERNANCE.md`; for production work, prioritize `CANDY_PRODUCTION_MIGRATION_MASTER.md`.
 
-## 2. 開始前
+## 2. Preflight
 
-1. root `AGENTS.md`、`HP/AGENTS.md` を読む。
-2. `CANDY_MASTER_DOC_INDEX.md` で今回の正本資料を選ぶ。
-3. Git ルート、branch、remote、status を確認する。
-4. 対象ファイルと既存変更の重なりを確認する。
-5. やること、やらないこと、完了証拠を短く示す。
+1. Read root `AGENTS.md` and `HP/AGENTS.md`.
+2. Use `CANDY_MASTER_DOC_INDEX.md` to select the canonical document for the task.
+3. Verify the Git root, branch, remote, and status.
+4. Check overlap between target files and existing changes.
+5. State the included work, excluded work, and completion evidence briefly.
+6. When a target page exists, verify agreement between the generated ledger and actual files.
 
 ```powershell
 git remote -v
 git branch --show-current
 git status --short --branch
+codex\scripts\candy-site-state.cmd check --target "<slug>"
 ```
 
-Fetch/Pull は作業ツリーと履歴が安全な場合だけ行う。Commit/Push は作業終了時の自動手順ではなく、ユーザーの明示指示がある場合だけ行う。
+Run Fetch or Pull only when the worktree and history make it safe. Commit and Push are not automatic end-of-task steps; run them only with explicit user instruction.
 
-## 3. 調査の基本単位
+## 3. Investigation Unit
 
-必要に応じ、次を一組として確認する。
+As required, review the following as one unit:
 
-- HP 直下の公開 PHP
-- `HP/source/` の対応 HTML
+- Public PHP directly under HP
+- Matching HTML under `HP/source/`
 - `HP/includefile/dataset_*.php`
-- `dataset_base.php`、`class.hpgcoder2.php`、`funcs.php`
-- CSS、JavaScript、画像、動画
-- Text 元データ
-- 一覧、関連ページ、内部リンク、sitemap
-- DB、session、外部連携の有無
+- `dataset_base.php`, `class.hpgcoder2.php`, and `funcs.php`
+- CSS, JavaScript, images, and movies
+- Source Text data
+- Indexes, related pages, internal links, and sitemap
+- Database, session, and external-integration dependencies
 
-ファイル数や参照数は変化するため、この資料の固定値を使わず実ファイルから数える。一ファイルだけを見て仕様を断定しない。
+File and reference counts change. Count actual files instead of using fixed values in this document. Do not infer a specification from one file.
 
-## 4. 変更前
+## 4. Before a Change
 
-- 結論と変更理由
-- 変更ファイルと変更しないファイル
-- 影響するページ、PC/SP、共通処理
-- DB、本番、秘密値、ログ、決済への影響
-- 検証方法
-- 未確認とユーザー判断が必要な点
+Confirm:
 
-を確認し、`AGENTS.md` の変更ゲートに該当する場合は承認を得る。
+- Conclusion and reason for the change
+- Changed and unchanged files
+- Affected pages, desktop/mobile, and common processing
+- Impact on databases, production, secrets, logs, and payments
+- Validation method
+- Unverified items and required user decisions
 
-Git 管理中ファイルへ機械的な `.before` コピーを作らない。Git と明示された本番ロールバック方式を使用する。未追跡資産や本番ファイルの保全が必要な場合は、対象、保存先、復元方法を決めてから実施する。
+Obtain approval when an `AGENTS.md` change gate applies.
 
-## 5. 変更中
+When `check --target` fails because of drift, identify the cause of the existing inconsistency first. Do not mix an existing inconsistency fix with separate new production or a feature change.
 
-- 指定範囲だけを変更する。
-- 既存変更を上書きしない。
-- 置換トークン、dataset、include、リンク、画像参照を同時に確認する。
-- 固定のファイル数上限は設けない。
-- 共通処理の変更は、対象外ページへの影響も確認する。
-- 認証値、DB 接続値、決済値、ログ本文、個人情報を転記しない。
+Do not create mechanical `.before` copies beside Git-tracked files. Use Git and the explicitly defined production rollback method. When an untracked asset or production file requires preservation, identify the target, destination, and recovery method before acting.
 
-## 6. 変更後
+## 5. During a Change
 
-最低限:
+- Change only the authorized scope.
+- Do not overwrite existing changes.
+- Validate replacement tokens, datasets, includes, links, and image references together.
+- Do not set a fixed maximum file count.
+- For a common-processing change, check impact on out-of-scope pages.
+- Do not copy authentication values, database connection values, payment values, raw logs, or personal information.
+
+## 6. After a Change
+
+After changing an HP page, PHP, source, dataset, CSS, JavaScript, image, or SEO, update the generated documents and verify agreement before staging.
+
+```powershell
+codex\scripts\candy-site-state.cmd write
+codex\scripts\candy-site-state.cmd check
+```
+
+Then run at minimum:
 
 ```powershell
 git status --short
@@ -67,55 +80,55 @@ git diff --stat
 git diff --check
 ```
 
-作業に応じて次を追加する。
+Add as required:
 
-- PHP/HTML/JavaScript 構文
-- 生成結果
-- 内部リンクと参照画像
-- PC/SP 表示
+- PHP, HTML, or JavaScript syntax validation
+- Generated-output validation
+- Internal links and referenced images
+- Desktop/mobile rendering
 - JavaScript console
-- DB・session・外部サービス
-- HTTP 応答
+- Database, session, and external service behavior
+- HTTP responses
 
-実行していない検査は未確認と書く。
+Report every unexecuted check as unverified.
 
-## 7. 本番・テスト
+## 7. Production and Test
 
-| 用途 | パス |
+| Purpose | Path |
 |---|---|
-| 本番 | `/public_html/group/candy/` |
-| テスト | `/public_html/group_test/candy/` |
+| Production | `/public_html/group/candy/` |
+| Test | `/public_html/group_test/candy/` |
 
-- テスト環境の存在は確認済み。
-- 段階移行中、本番 `index.php` はシティヘブンへの 301 転送を維持する。
-- 最新 `HP/index.php` の本番反映は最終公開切替であり、明示承認が必要。
-- 「アップしろ」の意味、5分目標、除外事項はroot `AGENTS.md` 第3.6節を唯一の定義とする。
-- deploy対象を含む `main` Pushは本番Actionsを自動起動する。Actions内で対象SHA・対象一覧・件数・`PLAN_TOKEN`を生成し、同じ値をFTP接続前に検証する。
-- 一回のdeployは最大25ファイル。full deploy、自動削除、rename反映は行わない。
-- workflow と deploy script の実物を見ずに反映対象・除外を断定しない。
-- 通常のActions起動・状態確認はPushとGitHub APIで行い、ブラウザ操作を前提にしない。手動preview/deployは障害時の例外経路とする。
-- root `AGENTS.md` 第3.6節の除外事項は、個別の明示指示を必要とする。
+- The test environment is verified to exist.
+- During phased migration, production `index.php` retains the 301 redirect to シティヘブン.
+- Deploying the latest `HP/index.php` to production is the final public switchover and requires explicit approval.
+- Use the explicit authority rules in root `AGENTS.md` and the publication procedure in `CANDY_PRODUCTION_MIGRATION_MASTER.md`. Do not infer upload authority from another instruction.
+- A Push to `main` that contains deploy targets starts production Actions automatically. Actions generates the target SHA, target list, count, and `PLAN_TOKEN`, then verifies the same values before FTP connection.
+- One deployment may contain at most 25 files. Do not perform full deployment, automatic deletion, or rename propagation.
+- Do not infer included or excluded targets without inspecting the actual workflow and deploy script.
+- Start and inspect normal Actions through Push and the GitHub API; do not require browser interaction. Manual preview/deploy is an exception route for incidents.
+- Every operation excluded by root `AGENTS.md` requires separate explicit instruction.
 
-詳細は `CANDY_PRODUCTION_MIGRATION_MASTER.md` を確認する。
+See `CANDY_PRODUCTION_MIGRATION_MASTER.md` for details.
 
-## 8. 未確認の扱い
+## 8. Unverified Scope
 
-本番 PHP バージョン、Web サーバー種別、DB 実体、外部サービス設定等は、実際に再確認するまで未確認とする。古い資料のパス候補や値を現在値として断定しない。秘密値に近い内容は値を出さず、所在だけを報告する。
+Treat the production PHP version, web-server type, actual database, and external-service settings as unverified until rechecked. Do not treat path candidates or values from old documents as current values. For information close to secrets, report only its location and not the value.
 
-## 9. 完了報告
+## 9. Completion Report
 
-次を必要な範囲だけ分ける。
+Separate only the applicable states:
 
-- ローカル変更
-- 構文・静的検証
+- Local changes
+- Syntax and static validation
 - Commit
 - Push
 - Actions
-- 本番ファイル
+- Production files
 - HTTP
-- ブラウザ表示
-- 確認用URL
+- Browser rendering
+- Verification URLs
 
-「完了」だけで済ませず、対象、件数、失敗、未確認、未実施を示す。
+Do not report only "complete." State targets, counts, failures, unverified items, and unexecuted work.
 
-確認用URLは状態ごとに分ける。Push後はGitHub Commit URL、Actions後はRun URL、本番反映後は対象ページごとの本番URLを同じ報告内へ記載する。複数ページの場合は全対象URLを列挙する。URL未取得・未確認の場合は推測せず、その状態を明記する。
+Separate verification URLs by state. After Push, include the GitHub Commit URL; after Actions, include the run URL; after production deployment, include every target production URL in the same report. For multiple pages, list every target URL. When a URL is unavailable or unverified, do not infer it; report that state explicitly.

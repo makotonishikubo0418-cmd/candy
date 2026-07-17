@@ -1,49 +1,49 @@
-# CANDY HOTEL IMAGE CREATION SPEC
+# CANDY Hotel Image Creation Specification
 
-更新日: 2026-07-16
-対象: hotelページ用画像
-状態: 正本
+- Updated: 2026-07-16
+- Target: Images for hotel pages
+- Status: canonical document
 
-## 1. 必須条件
+## 1. Requirements
 
-hotelページは画像2枚を必須とする。
+A hotel page requires two images.
 
 ```text
 HP/imgHtml/new_202601/hotel/<slug>_1.jpg
 HP/imgHtml/new_202601/hotel/<slug>_2.jpg
 ```
 
-入力txt内の `img_1`、`img_2` は次の形にする。
+`img_1` and `img_2` in the input text file use:
 
 ```text
 ./imgHtml/new_202601/hotel/<slug>_1.jpg
 ./imgHtml/new_202601/hotel/<slug>_2.jpg
 ```
 
-OGP image は `img_1` と一致させる。
+The OGP image MUST match `img_1`.
 
-## 2. 画像元の扱い
+## 2. Image-Source Handling
 
-画像元の保存、加工、商用公開条件、必要な帰属表示を確認できない場合は制作しない。
+Do not produce an image when storage, modification, commercial-publication, or required-attribution conditions for its source cannot be verified.
 
-Googleマップ、ホテル公式サイト、予約サイト、SNS、第三者投稿写真は、利用条件が確認できない限り保存・加工・公開しない。
+Do not save, modify, or publish Google Maps, hotel official-site, reservation-site, social-media, or third-party-posted images unless their applicable usage conditions are verified.
 
-## 3. 作成後の確認
+## 3. Post-Creation Validation
 
-- ファイル名がcanonical slugと一致している
-- `_1` と `_2` が別画像である
-- 実ファイルが存在する
-- 入力txtの `image`、`img_1`、`img_2` と一致する
-- 画像不足のまま `publish` しない
+- The filename matches the canonical slug.
+- `_1` and `_2` are different images.
+- Both actual files exist.
+- Files match `image`, `img_1`, and `img_2` in the input text file.
+- Do not run `publish` while images are missing.
 
-## 4. 現在確認済み画像
+## 4. Currently Verified Images
 
-2026-07-16時点で存在確認済みのhotel画像は次の3ページ分だけ。
+As of 2026-07-16, hotel images were verified for only these three pages:
 
-| slug | 画像 |
+| Slug | Images |
 |---|---|
 | greenrichkagoshimatenmonkan | `_1.jpg`, `_2.jpg` |
 | hotelm | `_1.jpg`, `_2.jpg` |
 | villacosta500 | `_1.jpg`, `_2.jpg` |
 
-その他のhotel入力は、画像がない限り新規制作対象にしない。
+Do not select another hotel input for new production while its images are absent.

@@ -1,143 +1,236 @@
-# 文書分割・更新ルール
+# Document Separation and Update Rules
 
-- 目的: Markdown管理体制で文書の責任を分ける
-- 状態: 正本
-- 更新日: 2026-07-17
+- Purpose: Separate document responsibilities in the Markdown management system
+- Status: canonical document
+- Updated: 2026-07-18
+- Canonical scope: Management-document naming, language, responsibility, structure, and update rules
+- Update trigger: A management document, route, responsibility, naming rule, or generated-document contract changes
 
-## 1. 原則
+## 1. Principles
 
-- 1つの内容に正本は1つだけ。
-- 同じ説明を複数文書へ重複して持たない。
-- 入口はルート `AGENTS.md` と `codex/README.md` に限定する。
-- 詳細手順は作業別の正本へ置く。
-- 報告や履歴は仕様書に混ぜない。
-- 管理情報の正本は `codex/` に置き、プロジェクト管理文書は `codex/project_management/` に分ける。
+- One subject MUST have one canonical document.
+- Do not duplicate the same explanation across documents.
+- Entry points are limited to root `AGENTS.md` and `codex/README.md`.
+- Store detailed procedures in the canonical document for the task type.
+- Do not mix reports or history into specifications.
+- Canonical management information belongs under `codex/`; project-management documents belong under `codex/project_management/`.
+- Do not convert unverified information into confirmed information.
+- Keep stable specifications, current state, generated facts, and task history separate.
 
-## 2. 管理正本の場所
+## 2. Canonical Management Locations
 
-Codex管理正本は `C:\Codex\candy\codex` に置く。プロジェクト管理文書は `codex/project_management/`、HP制作仕様は `codex/docs/`、作業ツールは `codex/scripts/` を使用する。
+The canonical Codex management source is `C:\Codex\candy\codex`. Use `codex/project_management/` for project-management documents, `codex/docs/` for HP production specifications, and `codex/scripts/` for work tools.
 
-ローカルリポジトリルートには共通入口 `AGENTS.md` とGit管理に必要なファイルだけを置き、同じ管理文書を複製しない。`HP/` は実サイト配下専用とし、管理正本を置かない。NASは `Backup/`・受入素材の保管専用とし、管理正本を置かず、Git操作を行わない。
+Keep only the common entry point `AGENTS.md` and files required for Git management at the local repository root. Do not duplicate management documents there. `HP/` is exclusively for the actual site tree and MUST NOT contain canonical management documents. The NAS is storage-only for `Backup/` and accepted assets; it MUST NOT contain a canonical management source or be used for Git operations.
 
-## 3. 文書の役割
+## 3. Markdown Naming and Language Standard
 
-| 種別 | 役割 |
+### 3.1 Folder Names
+
+- Active management folder names MUST use English ASCII `lowercase_snake_case`.
+- Preserve an existing compliant folder name. Do not rename it only to use a different English synonym.
+- Preserve the current authoritative separation between `codex/project_management/`, `codex/docs/`, `codex/docs/generated/`, and `codex/scripts/`.
+- Do not create generic top-level duplicates such as `rules/`, `specs/`, `runbooks/`, `state/`, `records/`, or `decisions/`.
+
+### 3.2 Markdown Filenames
+
+- Active Markdown filenames MUST use English ASCII `UPPER_SNAKE_CASE.md`.
+- `AGENTS.md` and `README.md` are standard-name exceptions and MUST remain unchanged.
+- Documents under `codex/docs/` SHOULD use `CANDY_<SUBJECT>_<DOCUMENT_TYPE>.md` when that name materially improves identification.
+- Preserve an existing compliant filename. Do not rename it without a material naming improvement.
+- Do not create an English copy while leaving the original canonical document active. Rename the canonical document itself.
+
+### 3.3 Document Language
+
+The following management content MUST be English:
+
+- Titles and headings
+- Explanatory paragraphs and instructions
+- Rules, completion criteria, and STOP conditions
+- Table headers and metadata labels
+- File-responsibility, architecture, and dependency descriptions
+- Runbook procedures and task-record labels
+- Generated-document labels, notes, and warnings intended for Codex
+
+The following content MUST preserve its exact real value and MUST NOT be translated or rewritten:
+
+- Public website copy and Japanese page titles or headings used by the website
+- Customer-provided source text and user-approved Japanese wording
+- Japanese legal or contractual text
+- Region, hotel, shop, and person names; addresses; and other proper nouns
+- Exact quoted source material or relevant exact error messages
+- Code identifiers, commands, paths, URLs, slugs, branch names, commit identifiers, API names, class names, function names, and variable names
+
+Japanese proper nouns and source data MAY remain inside an English document. Reports, questions, STOP reports, and final summaries addressed to the user MUST be Japanese.
+
+### 3.4 English Terminology and Status Values
+
+- Use direct operational English and the normative keywords `MUST`, `MUST NOT`, `SHOULD`, `SHOULD NOT`, `MAY`, and `STOP` consistently.
+- Use one canonical term for one concept. In particular, do not use `archived`, `backup`, `relocated`, `deprecated`, `deleted`, and `excluded` interchangeably.
+- General project-management status values are `NOT_STARTED`, `IN_PROGRESS`, `BLOCKED`, `AWAITING_APPROVAL`, `COMPLETE`, `ARCHIVED`, `UNVERIFIED`, and `NOT_APPLICABLE`.
+- Preserve an existing domain-specific status model when its canonical document defines it.
+- Do not translate an executable status value unless every script, parser, test, and reference is updated in the same task.
+
+### 3.5 Document-Type Structures
+
+- Entry and router documents MUST remain short and route to detailed canonical documents.
+- Rule documents MUST identify purpose, status, canonical scope, mandatory rules, prohibited operations, STOP conditions, and validation when those sections apply.
+- Stable specifications MUST contain non-volatile requirements and MUST NOT store current counts, Git state, HTTP results, or task history.
+- Runbooks MUST contain scope, preflight, procedure, validation, STOP conditions, completion criteria, and reporting requirements when applicable. They MUST link to the canonical specification instead of duplicating it.
+- Current-state documents MUST separate current state, in-progress work, blockers, unverified scope, next actions, and update rules. Detailed history belongs in `TASK_LOG.md`.
+- Task records MUST identify objective, scope, actions performed, verified items, unverified items, changed files, remaining work, and the next action.
+- Do not add empty headings solely to make documents visually identical.
+
+### 3.6 Generated Documents
+
+- A generated document MUST identify that manual editing is prohibited, its generator, generation time, branch, commit, population, and unverified scope when those values apply.
+- Change generated labels, headings, and fixed wording in the generator, then regenerate the output. Do not edit generated output manually.
+- Run the generator twice and verify that the second run creates no difference.
+- Generated documents MUST remain current-state outputs and MUST NOT become manually maintained specifications or task histories.
+
+### 3.7 Paths, Links, Commands, and Dates
+
+- Wrap paths in backticks.
+- Repository Markdown links MUST be relative. Do not use a machine-specific absolute path as a Markdown link.
+- A local absolute path MAY appear as code when the path itself is operationally required.
+- Put commands in fenced code blocks with the correct language identifier.
+- Use `YYYY-MM-DD` for dates and `YYYY-MM-DD HH:mm JST` when time is required.
+
+### 3.8 Migration and Rename Requirements
+
+- Before a rename, verify that the document is active, owns a unique responsibility, has no target-name collision, and can have every active reference updated safely.
+- Record an exact old-to-new mapping with the reason, Git tracking state, reference count, affected scripts, affected generated outputs, and conflict status.
+- Use `git mv` for a tracked Markdown file. Handle untracked and ignored files separately.
+- If an ignored file appears to be an active canonical document, STOP and report it.
+- Update active Markdown links, plain-text path references, scripts, wrappers, configurations, generators, and routing tables in the same task.
+- Historical task records MAY preserve an old path only when it is clearly identified as historical.
+- Do not merge competing canonical documents automatically. STOP and request resolution.
+- Renaming does not authorize document deletion, folder reorganization, specification changes, or status changes without verification.
+
+## 4. Document Responsibilities
+
+| Document type or path | Responsibility |
 |---|---|
-| `AGENTS.md` | 共通ルールと導線 |
-| `codex/README.md` | 正本一覧と読む順番 |
-| `codex/管理体制_概要説明書.md` | 管理体制の目的と設計思想 |
-| 仕様書 | 確定仕様 |
-| `PROJECT_STATUS.md` | 計画、問題、残件、次作業 |
-| `CODEX_COMMUNICATION.md` | 引継ぎ、依頼、注意 |
-| `TASK_LOG.md` | 実施結果、確認済み、未確認 |
-| `TASK_RESERVATIONS.md` | 同時編集防止 |
-| `CODE_STRUCTURE.md` | フォルダと作業対象の構成 |
-| SAFETY_PROTOCOL.md | 削除、移動、一括操作、Git復旧の安全手順 |
+| `AGENTS.md` | Common rules and routes |
+| `codex/README.md` | Canonical document index and required reading order |
+| `codex/MANAGEMENT_SYSTEM_OVERVIEW.md` | Management-system purpose and design principles |
+| Specifications | Confirmed requirements |
+| `PROJECT_STATUS.md` | Plan, current problems, remaining work, and next actions |
+| `CODEX_COMMUNICATION.md` | Handoffs, requests, and active warnings |
+| `TASK_LOG.md` | Per-task results, verified items, and unverified items |
+| `TASK_RESERVATIONS.md` | Concurrent-edit prevention |
+| `CODE_STRUCTURE.md` | Folder and work-target structure |
+| `SAFETY_PROTOCOL.md` | Safety rules for deletion, movement, bulk operations, and Git recovery |
+| Stable specifications under `codex/docs/` | Non-volatile page, code, and SEO specifications. Do not store current counts |
+| `codex/docs/generated/` | Current state regenerated from actual files. Manual editing is prohibited |
 
-## 4. 更新禁止
+## 5. Prohibited Document Updates
 
-- 末尾へ無秩序に追記しない。
-- 未確認情報を確定仕様へ入れない。
-- 古い報告を現在状態として扱わない。
-- 既存正本がある内容の新規MDを増やさない。
-- ルート `AGENTS.md` に実質的な管理履歴を持たせない。
+- Do not append unstructured content to the end of a document.
+- Do not place unverified information in a confirmed specification.
+- Do not treat an old report as current state.
+- Do not add a new Markdown document for a subject that already has a canonical document.
+- Do not store substantive management history in root `AGENTS.md`.
+- Do not edit a generated document manually. Use actual files as the source and update it with `candy-site-state write`.
+- Do not store page counts, file counts, Git state, HTTP state, Actions state, or other volatile values in a stable specification.
 
-## 5. 状態ラベル
+## 6. Information-State Labels
 
-文書内で不確定情報を扱う場合は、次のどれかを明記する。
+When a document contains uncertain information, label it with one of:
 
-- 確定
-- ユーザー申告
-- 実装確認済み
-- 未確認
-- 保留
+- `CANONICAL`
+- `USER_REPORTED`
+- `IMPLEMENTATION_VERIFIED`
+- `UNVERIFIED`
+- `AWAITING_APPROVAL`
 
-## 6. 変更時の確認
+## 7. Validation After a Document Change
 
-文書を更新したら、最低限次を確認する。
+At minimum, verify:
 
-- 正本の重複が増えていない
-- READMEの導線が壊れていない
-- 仕様と履歴が混ざっていない
-- 未確認を完了扱いしていない
-- 管理文書の正本がローカルの `codex/` にあり、リポジトリルート、HP側、NASに重複していない
+- No duplicate canonical source was introduced.
+- README routes are intact.
+- Specifications and history remain separate.
+- Unverified work was not reported as complete.
+- Canonical management documents remain under local `codex/` and were not duplicated at the repository root, under HP, or on the NAS.
+- `candy-site-state check` succeeds and generated documents agree with actual files.
 
-## 7. Git作業開始・同期ルール
+## 8. Git Start and Synchronization Rules
 
-- Git操作はローカル作業場 `C:\Codex\candy` だけで行う。NASではGit操作しない。
-- 作業開始時に `git fetch origin`、続けて `git status --short --branch` を実行する。
-- Branchが `main`、upstreamが `origin/main`、Remoteが正しいことを確認する。
-- `main` が `origin/main` よりbehindなら、編集前にpullする。作業差分、競合、divergedがある場合は自動でpullせず停止する。
-- 今回の対象ファイルを固定し、対象外の変更、削除、未追跡をStage、Commitへ含めない。
-- `git add .`、`git add -A`は禁止。対象ファイルを明示してStageする。
-- Commit前に、Stage済みが対象ファイルだけであること、`git diff --cached --check`成功、Commit内容が指示範囲と一致することを確認する。
-- PushはユーザーがPush、アップ、またはCommit/Pushを明示承認したTaskだけで行う。
+- Run Git operations only in the local working repository `C:\Codex\candy`; never on the NAS.
+- At the start of work, run `git fetch origin`, followed by `git status --short --branch`.
+- Verify that the branch is `main`, the upstream is `origin/main`, and the remote is correct.
+- If `main` is behind `origin/main`, pull before editing. When existing changes, conflicts, or divergence prevent a safe pull, STOP instead of pulling automatically.
+- Freeze the target-file list and exclude out-of-scope changes, deletions, and untracked files from Stage and Commit.
+- `git add .` and `git add -A` are prohibited. Specify every staged file.
+- Before Commit, verify that only target files are staged, `git diff --cached --check` succeeds, and the commit content matches the authorized scope.
+- Push only in a task where the user explicitly authorized Push, upload, or Commit and Push.
 
-## 8. Git Commit・Push監査項目
+## 9. Git Commit and Push Audit
 
-Git Commit・Push作業後の監査では、`git diff --check`だけで合格扱いしない。次を確認する。
+`git diff --check` alone is insufficient for a Git Commit or Push audit. Verify:
 
-| 項目 | 確認内容 |
+| Item | Required verification |
 |---|---|
-| 対象固定 | Stage、Commit、Push対象が指示された対象だけである |
-| 作業場所 | Git操作が `C:\Codex\candy` だけで行われ、NASで実行されていない |
-| 開始時同期 | `git fetch origin` と `git status --short --branch` でahead/behindを確認している |
-| behind対応 | behindなら編集前にpull済み。競合、diverged、既存差分がある場合は停止している |
-| Commit前確認 | `git diff --cached --check`が成功している |
-| Markdown表 | ヘッダーと各行の列数が一致している |
-| 配置 | Task履歴、連絡帳、現在地が正しい節に入っている |
-| 状態 | 「有効」「完了」など状態と配置が一致している |
-| 権限 | 上位AGENTSのCommit/Push許可条件と矛盾していない |
-| GitHub確認 | 開始時に決めた方法だけで確認している |
+| Fixed scope | Stage, Commit, and Push contain only authorized targets |
+| Work location | Git operations ran only in `C:\Codex\candy`, never on the NAS |
+| Start synchronization | `git fetch origin` and `git status --short --branch` confirmed ahead/behind state |
+| Behind handling | A behind branch was pulled before editing; conflicts, divergence, or overlapping existing changes caused a STOP |
+| Pre-Commit check | `git diff --cached --check` succeeded |
+| Markdown tables | Header and row column counts match |
+| Placement | Task history, communication, and current state are in the correct sections |
+| Status | Status values agree with document placement |
+| Authority | Commit and Push authorization does not conflict with a higher-level AGENTS rule |
+| GitHub verification | Only the verification method selected at task start was used |
 
-## 9. Area制作対象管理
+## 10. Area Production-Target Management
 
-- `間違い無し`分類は新規制作可能を意味しない。
-- publish前にcanonical slugから公開PHP、source HTML、dataset PHP、dataset_base、area一覧、sitemapの既存有無を確認する。
-- 同一地域名で別slugのarea一覧リンクがある候補は、新規制作対象にしない。
-- area一覧の対象slugリンク1件は必要条件として扱う。同一地域名で別slugがある場合だけ除外する。
-- `NEW_PAGE_TARGET_OK` が出た対象だけ制作へ進める。
+- The `間違い無し` classification does not mean a new page may be produced.
+- Before publish, use the canonical slug to check for an existing public PHP file, source HTML, dataset PHP file, dataset_base registration, area-index entry, and sitemap entry.
+- Do not select a candidate when the area index contains the same region name under a different slug.
+- One target-slug link in the area index is a requirement. Exclude only a conflicting different slug for the same region name.
+- Proceed with production only for a target that returns `NEW_PAGE_TARGET_OK`.
 
-## 10. Hotel制作対象管理
+## 11. Hotel Production-Target Management
 
-- hotel制作は `candy-hotel.cmd target-next` または `target-check` で `NEW_HOTEL_TARGET_OK` が出た1件だけ進める。
-- 画像なし、入力不備、作成済み、入力未追跡、未登録店舗は制作前に除外する。
-- hotel制作は `candy-hotel.cmd publish-next` を標準入口にする。
-- 停止時は `COUNTS_JSON` だけでなく `BLOCKER_COUNTS_JSON` を確認し、画像なしと入力未追跡を分けて扱う。
-- `HP/source/hotel.html`、`dataset_base.php`、`sitemap.xml`、既存3ファイルのどれかに対象slugがある場合は、新規制作として進めない。
+- Hotel production may proceed only for one target that returns `NEW_HOTEL_TARGET_OK` from `candy-hotel.cmd target-next` or `target-check`.
+- Exclude missing-image, invalid-input, already-built, untracked-input, and unregistered-shop candidates before production.
+- Use `candy-hotel.cmd publish-next` as the standard hotel-production entry point.
+- On STOP, inspect both `COUNTS_JSON` and `BLOCKER_COUNTS_JSON` and distinguish missing images from untracked input.
+- Do not proceed as a new hotel page when the target slug exists in `HP/source/hotel.html`, `dataset_base.php`, `sitemap.xml`, or any of the three page-specific files.
 
-## 11. ユーザー向け説明
+## 12. User-Facing Explanations
 
-- まず結論を言う。
-- 専門用語を使う場合は、ユーザーに必要な意味を短く説明する。
-- 「不足があります」だけで止めず、何が、何件、どのファイルで足りないかを言う。
-- 要約しすぎて、原因、対象、次の作業が分からなくなる説明は禁止。
-- 最終報告には必ず `要約:` を入れる。
+- Lead with the conclusion.
+- When a technical term is required, explain only the meaning needed by the user.
+- Do not report only that something is missing. State what is missing, how many items are affected, and which files contain the shortage.
+- Do not shorten the explanation until the cause, target, and next action become unclear.
+- Every final report MUST include `要約:`.
 
-### 11.1 `要約:` の役割
+### 12.1 Purpose of the Required Summary Field
 
-`要約:` は結論の一言だけを繰り返す欄ではない。本文を読み直さなくても、作業対象、結果、問題、残件、次の操作を判断できる最終整理とする。
+`要約:` is not a repetition of the conclusion. It MUST allow the user to identify the target, result, problem, remaining work, and next action without rereading the full report.
 
-最低限、次の5点を含める。
+Include at least:
 
-1. 何を目的に、どの対象を扱ったか。
-2. 何が完了し、どの確認まで実行したか。
-3. できていないこと、問題、停止理由があるか。
-4. 影響するファイル、ページ、slug、件数は何か。
-5. 次に誰が何をすれば、再開または完了できるか。
+1. The objective and target scope.
+2. What completed and which checks ran.
+3. What remains incomplete and whether a blocker exists.
+4. The affected files, pages, slugs, and counts.
+5. Who must do what next to resume or complete the work.
 
-問題や未実施がない場合も「問題なし」だけで終わらせず、変更対象と確認結果を書く。複数の問題がある場合は、重要度または作業順に整理する。
+Even when no problem remains, identify the changed scope and validation result. When multiple problems exist, order them by impact or execution sequence.
 
-### 11.2 状態別の書き分け
+### 12.2 Reporting by State
 
-- 正常完了: 対象、実施結果、確認結果、残件の有無を書く。
-- 一部完了: 完了した範囲、未完了の範囲、未完了理由、影響対象、再開操作を書く。
-- STOP: 停止位置、停止理由、不足または誤り、影響するファイル・ページ・slug・件数、解除条件、再実行操作を書く。
-- 調査のみ: 調査対象、確認済み事実、未確認範囲、変更していないこと、次の判断材料を書く。
+- `COMPLETE`: State the target, result, validation, and whether anything remains.
+- Partial completion: State the completed scope, incomplete scope, reason, affected targets, and resume action.
+- `BLOCKED`: State the stopping point, reason, missing or incorrect input, affected file/page/slug/count, unblock condition, and rerun action.
+- Investigation only: State the investigated scope, verified facts, unverified scope, confirmation that no change was made, and the next decision input.
 
-### 11.3 禁止例
+### 12.3 Prohibited Examples
 
-次のように、状態だけを一言で書く要約は禁止する。
+Do not use a summary that reports only a state:
 
 ```text
 要約: 完了しました。
@@ -145,9 +238,9 @@ Git Commit・Push作業後の監査では、`git diff --check`だけで合格扱
 要約: 管理書は未更新です。
 ```
 
-### 11.4 記載例
+### 12.4 Examples
 
-正常完了:
+Normal completion:
 
 ```text
 要約: area生成仕様のページ内構成節を更新し、対象1ファイルの差分とUTF-8表示を確認した。ページ本体と生成ツールは変更していない。未実施作業はなく、この仕様を次回のarea制作時から参照できる。
@@ -159,26 +252,26 @@ STOP:
 要約: hotel入力73件を確認したが、画像不足35件、入力不備37件、既存登録1件のため新規作成可能な対象は0件だった。ページ生成は開始しておらず、対象ファイルの変更もない。再開には画像不足または入力不備を解消し、target-nextでNEW_HOTEL_TARGET_OKが出る1件を用意する必要がある。
 ```
 
-## 12. Codex管理正本ルール
+## 13. Canonical Codex Management Rules
 
-- Codex管理正本は `C:\Codex\candy\codex` に置く。
-- プロジェクト管理文書は `codex/project_management/`、HP制作仕様は `codex/docs/`、作業ツールは `codex/scripts/` に分ける。
-- ローカルリポジトリルートには共通入口 `AGENTS.md` を残し、管理文書を重複配置しない。
-- `HP/` は実サイト配下専用とし、管理文書や `Text_*_data` を置かない。
-- `HP/AGENTS.md` はHP作業導線にする。`HP/README.md` は作らない。
-- Git作業場と `.git` は `C:\Codex\candy` に置く。GitHubを同期ハブとし、NASは `Backup/`・受入素材の保管専用にする。
+- The canonical Codex management source is `C:\Codex\candy\codex`.
+- Separate project-management documents under `codex/project_management/`, HP production specifications under `codex/docs/`, and work tools under `codex/scripts/`.
+- Keep only the common entry point `AGENTS.md` at the local repository root; do not duplicate management documents there.
+- `HP/` is exclusively for the actual site tree and MUST NOT contain management documents or `Text_*_data`.
+- Use `HP/AGENTS.md` as the HP work route. Do not create `HP/README.md`.
+- Keep the Git working repository and `.git` at `C:\Codex\candy`. Use GitHub as the synchronization hub and the NAS only for `Backup/` and accepted assets.
 
-## 13. HP階層ルール
+## 14. HP Hierarchy Rules
 
-- HP/HP/ は作らない。
-- HP/ 直下は実サイト配下の中身だけにする。
-- Git作業場は `C:\Codex\candy` とし、NASでGit操作しない。
-- HP作業の対象パスはローカルリポジトリルートから見て `HP/...` で固定する。
+- Do not create `HP/HP/`.
+- Keep only actual site-tree contents directly under `HP/`.
+- The Git working repository is `C:\Codex\candy`; do not run Git operations on the NAS.
+- Address HP work targets as `HP/...` from the local repository root.
 
-## 14. 削除・移動・一括操作安全ルール
+## 15. Safety Rules for Deletion, Movement, and Bulk Operations
 
-- 削除、移動、一括整理、Git復旧は `SAFETY_PROTOCOL.md` を正本とする。
-- 「ゴミ」「未整理」などの曖昧な表現だけで実行しない。削除可、Git管理から削除、移動済み、Git登録、復旧、保留に分ける。
-- `.git/`、`AGENTS.md`、`codex/README.md`、`codex/project_management/`、`HP/AGENTS.md`、`HP/index.php` は保護対象として扱う。
-- 物理削除、Git管理から削除、Stage、Commit、Pushを別操作として報告する。
-- Git破損を検知したら復旧操作へ進まず、被害範囲と復旧案を報告して明示承認を待つ。
+- `SAFETY_PROTOCOL.md` is the canonical source for deletion, movement, bulk cleanup, and Git recovery.
+- Do not execute based only on vague labels such as "junk" or "unorganized." Classify targets as approved for deletion, remove from Git tracking, relocated, register in Git, recovery, or `AWAITING_APPROVAL`.
+- Treat `.git/`, `AGENTS.md`, `codex/README.md`, `codex/project_management/`, `HP/AGENTS.md`, and `HP/index.php` as protected targets.
+- Report physical deletion, removal from Git tracking, Stage, Commit, and Push as separate operations.
+- When Git damage is detected, STOP before recovery, report the affected scope and recovery options, and wait for explicit approval.

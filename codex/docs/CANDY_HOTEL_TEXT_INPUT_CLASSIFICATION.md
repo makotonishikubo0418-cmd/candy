@@ -1,61 +1,63 @@
-# CANDY HOTEL TEXT INPUT CLASSIFICATION
+# CANDY Hotel Text Input Classification
 
-更新日: 2026-07-16
-対象: `Text_hotel_data/*.txt`
-状態: 正本
+- Updated: 2026-07-16
+- Target: `Text_hotel_data/*.txt`
+- Status: canonical document
 
-## 1. 目的
+## 1. Purpose
 
-hotel入力txtの状態と、新規ページとして制作できるかを分ける。
+Separate hotel-input text quality from eligibility for new-page production.
 
-`作成可能` は、入力txtの文章状態だけではなく、画像、既存ページ、共有登録、Git追跡状態まで通過したものだけを指す。
+The exact domain value `作成可能` applies only when the input text, images, existing pages, shared registrations, and Git tracking state all pass their gates.
 
-## 2. 分類
+## 2. Classifications
 
-| 分類 | 意味 | 次の扱い |
+These classification names are exact domain values used by the hotel-input workflow.
+
+| Classification | Meaning | Next handling |
 |---|---|---|
-| 作成可能 | ゲートを通過し、`NEW_HOTEL_TARGET_OK` が出る | 1件だけ制作へ進む |
-| 画像なし | 入力は読めるが必要画像2枚がない | 画像を用意してから再判定 |
-| 入力不備 | placeholder、canonical不足、危険URL、未登録店舗、部分入力など | txt修正後に再判定 |
-| 作成済み/登録あり | 公開PHP、source、dataset、dataset_base、hotel一覧、sitemapのどれかに既存状態がある | 新規制作へ進めない。既存修正Taskとして扱う |
-| 入力未追跡 | txtがGit HEADにない | Git管理へ入れるか確認してから制作 |
-| 重複slug | 複数txtが同じslugを持つ | 1つに確定するまで停止 |
-| 管理用txt | 手順など制作入力ではないtxt | 制作対象外 |
+| `作成可能` | The target passes the gate and returns `NEW_HOTEL_TARGET_OK` | Proceed with only one target |
+| `画像なし` | The input is readable but the two required images are absent | Prepare images, then re-evaluate |
+| `入力不備` | Placeholder, missing canonical value, unsafe URL, unregistered shop, partial input, or another input defect exists | Correct the text file, then re-evaluate |
+| `作成済み/登録あり` | An existing state is present in public PHP, source, dataset, dataset_base, the hotel index, or the sitemap | Do not proceed as new production. Handle it as an existing-page fix task |
+| `入力未追跡` | The text file is absent from Git HEAD | Decide whether to register it in Git before production |
+| `重複slug` | Multiple text files have the same slug | STOP until one canonical input is selected |
+| `管理用txt` | The text file is an instruction or another non-production file | Exclude it from production targets |
 
-## 3. 現在値
+## 3. Current State
 
-2026-07-16に実ファイルを専用ゲートで確認した結果。
+The dedicated gate verified actual files on 2026-07-16.
 
-主分類:
+Primary classifications:
 
-| 分類 | 件数 |
+| Classification | Count |
 |---|---:|
-| 作成可能 | 0 |
-| 画像なし | 35 |
-| 入力不備 | 37 |
-| 作成済み/登録あり | 1 |
-| 管理用txt | 1 |
-| 合計 | 74 |
+| `作成可能` | 0 |
+| `画像なし` | 35 |
+| `入力不備` | 37 |
+| `作成済み/登録あり` | 1 |
+| `管理用txt` | 1 |
+| Total | 74 |
 
-停止理由は複数同時に存在するため、主分類だけで判断しない。
+Multiple blockers may apply at the same time. Do not decide eligibility from only the primary classification.
 
-| 停止理由 | 件数 |
+| Blocker | Count |
 |---|---:|
-| 画像なし | 35 |
-| 入力未追跡 | 35 |
-| 危険URL/http URL | 16 |
-| canonical slug不足 | 10 |
-| placeholder残存 | 5 |
-| 未登録店舗 | 2 |
-| h1ホテル名不一致 | 2 |
-| 途中入力 | 1 |
-| 基本情報不足 | 1 |
-| 既存ページファイルあり | 1 |
-| 共有登録あり | 1 |
+| Missing images | 35 |
+| Untracked input | 35 |
+| Unsafe URL or HTTP URL | 16 |
+| Missing canonical slug | 10 |
+| Remaining placeholder | 5 |
+| Unregistered shop | 2 |
+| Hotel-name mismatch in H1 | 2 |
+| Partial input | 1 |
+| Insufficient basic information | 1 |
+| Existing page file | 1 |
+| Existing shared registration | 1 |
 
-`画像なし` の35件は、同時に `入力未追跡` でも止まる。画像だけを置いても、対象txtがGit管理へ入っていなければ公開へ進めない。
+All 35 inputs classified as `画像なし` are also blocked as `入力未追跡`. Adding images alone does not authorize publication while the target text file remains outside Git tracking.
 
-## 4. 実行コマンド
+## 4. Commands
 
 ```powershell
 codex\scripts\candy-hotel.cmd audit-inputs
@@ -65,16 +67,16 @@ codex\scripts\candy-hotel.cmd target-next
 codex\scripts\candy-hotel.cmd target-check --input "Text_hotel_data/対象ホテル.txt"
 ```
 
-`--write-report` は次を出力する。
+`--write-report` produces:
 
 ```text
 Text_hotel_data/制作可否管理_ホテル_最新.tsv
 Text_hotel_data/制作可否管理_ホテル_<timestamp>.tsv
 ```
 
-## 5. 禁止
+## 5. Prohibitions
 
-- `画像なし` を作成可能として扱わない。
-- `入力不備` を推測で補完しない。
-- `作成済み/登録あり` を新規ページとして上書きしない。
-- Git未追跡txtをそのまま本番制作へ使わない。
+- Do not treat `画像なし` as eligible for production.
+- Do not infer missing content in an `入力不備` input.
+- Do not overwrite `作成済み/登録あり` as a new page.
+- Do not use an untracked text file directly for production publication.

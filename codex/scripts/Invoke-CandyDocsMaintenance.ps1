@@ -4,7 +4,7 @@
 $ErrorActionPreference = 'Stop'
 $env:PYTHONDONTWRITEBYTECODE = '1'
 
-$script = Join-Path $PSScriptRoot 'generate_candy_management_docs.py'
+$script = Join-Path $PSScriptRoot 'candy_site_state.py'
 $fallbackPython = Join-Path $env:USERPROFILE '.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe'
 
 $candidates = @()
@@ -24,8 +24,8 @@ foreach ($candidate in $candidates) {
     try {
         & $candidate.File @($candidate.Args) --version *> $null
         if ($LASTEXITCODE -ne 0) { continue }
-        $arguments = @($candidate.Args) + @($script)
-        if ($Preview) { $arguments += '--preview' }
+        $command = if ($Preview) { 'preview' } else { 'write' }
+        $arguments = @($candidate.Args) + @($script, $command)
         & $candidate.File @arguments
         exit $LASTEXITCODE
     } catch {
