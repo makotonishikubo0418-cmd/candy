@@ -39,14 +39,13 @@ For the normal path, do not add preliminary `build`, `check`, full-document rere
 
 ### 1.1 Production Order and New-Page Target Gate
 
-Do not select the target manually. In this order, use only the first target for which the dedicated gate returns `NEW_PAGE_TARGET_OK=<slug>`:
+Do not select the target manually. Work through `READY_CANDIDATE` rows in `CANDY_AREA_105_PAGE_QUEUE.md` from the smallest queue number and use only the first row for which the dedicated gate returns `NEW_PAGE_TARGET_OK=<slug>`:
 
-1. Review direct text files under `Text_area_data` in filename order.
-2. Review the latest `Text_area_data/分類_*/01_間違い無し` in filename order.
-3. Automatically exclude a slug with an existing public PHP file, source HTML, dataset PHP file, `dataset_base.php` registration, or sitemap registration.
-4. Require exactly one target-slug link in the area index. When the area index has the same region name under another slug, automatically exclude it as a same-region/different-slug candidate.
-5. Automatically exclude a slug without both required images.
-6. Produce only the first target that passes.
+1. Resolve the queue row to exactly one tracked input, using a direct Text under `Text_area_data` or the latest `Text_area_data/分類_*/01_間違い無し`.
+2. Automatically exclude a slug with an existing public PHP file, source HTML, dataset PHP file, `dataset_base.php` registration, or sitemap registration.
+3. Require exactly one target-slug link in the area index. When the area index has the same region name under another slug, automatically exclude it as a same-region/different-slug candidate.
+4. Automatically exclude a slug without both required images.
+5. Produce only the first target that passes. Once production starts for that target, STOP on a later failure and do not substitute another slug.
 
 `01_間違い無し` classifies text-file content; it does not mean a new page is eligible for production.
 
@@ -54,11 +53,7 @@ Do not select the target manually. In this order, use only the first target for 
 codex\scripts\candy-area.cmd target-next
 ```
 
-When actually producing a candidate from the classification folder, restore only one file to the normal location:
-
-```powershell
-codex\scripts\candy-area.cmd target-next --restore
-```
+Keep a classified input at its tracked source path. `publish-next` passes that source directly to the publisher; do not restore or copy it to the Text root before publication.
 
 Validate an explicit target:
 
@@ -72,7 +67,7 @@ Do not run `publish` for a target that does not return `NEW_PAGE_TARGET_OK=<slug
 
 `publish-next` runs:
 
-1. Select the first `READY_CANDIDATE` queue row.
+1. Select the first `READY_CANDIDATE` queue row that passes the same new-page target gate used by `target-next`.
 2. Validate Text, slug, images, existing files, shared registrations, Git, and remote.
 3. Generate the complete page set from templates.
 4. Run static validation and synchronize generated management documents with `candy-site-state write` and `check`.

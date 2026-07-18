@@ -8,7 +8,6 @@ from __future__ import annotations
 
 import argparse
 import re
-import shutil
 import subprocess
 from dataclasses import dataclass
 from pathlib import Path
@@ -19,6 +18,7 @@ import candy_page_common as common
 REPO_ROOT = common.REPO_ROOT
 HP_ROOT = common.HP_ROOT
 TEXT_ROOT = common.TEXT_AREA_DIR
+QUEUE_PATH = common.DOCS_DIR / "CANDY_AREA_105_PAGE_QUEUE.md"
 
 
 @dataclass(frozen=True)
@@ -112,8 +112,8 @@ def check_candidate(candidate: Candidate) -> tuple[bool, list[str]]:
     reasons: list[str] = []
     if not candidate.slug:
         reasons.append("canonical slug missing")
-    if not git_tracked(candidate.direct):
-        reasons.append(f"direct input is not tracked in HEAD: {rel(candidate.direct)}")
+    if not git_tracked(candidate.source):
+        reasons.append(f"source input is not tracked in HEAD: {rel(candidate.source)}")
     if candidate.source != candidate.direct and candidate.direct.exists():
         reasons.append(f"direct input already exists while source is classified copy: {rel(candidate.direct)}")
     for path in artifact_paths(candidate.slug):
@@ -139,10 +139,10 @@ def candidate_from_path(path: Path, rank_prefix: int) -> Candidate | None:
 
 def latest_classification_ok_dirs() -> list[Path]:
     dirs = sorted(TEXT_ROOT.glob("分類_*/01_間違い無し"), key=lambda p: p.parent.name, reverse=True)
-    return [p for p in dirs if p.is_dir()]
+    return [p for p in dirs if p.is_dir()][:1]
 
 
-def iter_candidates() -> list[Candidate]:
+def available_candidates() -> list[Candidate]:
     candidates: list[Candidate] = []
     seen_names: set[str] = set()
     for path in sorted(TEXT_ROOT.glob("*.txt"), key=lambda p: p.name):
@@ -158,27 +158,71 @@ def iter_candidates() -> list[Candidate]:
             if candidate:
                 candidates.append(candidate)
                 seen_names.add(path.name)
-    return sorted(candidates, key=lambda c: c.rank)
+    return candidates
 
 
-def command_next(args: argparse.Namespace) -> int:
+def ready_queue_rows() -> list[tuple[int, str, str]]:
+    if not QUEUE_PATH.is_file():
+        return []
+    rows: list[tuple[int, str, str]] = []
+    for line in read_text(QUEUE_PATH).splitlines():
+        parts = line.split("|")
+        if len(parts) < 7 or not parts[1].strip().isdigit():
+            continue
+        if parts[4].strip() != "READY_CANDIDATE":
+            continue
+        rows.append((int(parts[1].strip()), parts[2].strip(), parts[3].strip().strip("`")))
+    return rows
+
+
+def iter_candidates() -> list[Candidate]:
+    by_slug: dict[str, list[Candidate]] = {}
+    for candidate in available_candidates():
+        by_slug.setdefault(candidate.slug, []).append(candidate)
+    ordered: list[Candidate] = []
+    for queue_number, region, slug in ready_queue_rows():
+        matches = [candidate for candidate in by_slug.get(slug, []) if candidate.region == region]
+        if len(matches) != 1:
+            continue
+        candidate = matches[0]
+        ordered.append(
+            Candidate(
+                candidate.source,
+                candidate.direct,
+                candidate.slug,
+                candidate.region,
+                (queue_number, candidate.source.name, candidate.slug),
+            )
+        )
+    return ordered
+
+
+def select_next_candidate() -> tuple[Candidate | None, list[tuple[Candidate, list[str]]]]:
     skipped: list[tuple[Candidate, list[str]]] = []
     for candidate in iter_candidates():
         ok, reasons = check_candidate(candidate)
         if ok:
-            if args.restore and candidate.source != candidate.direct:
-                shutil.move(str(candidate.source), str(candidate.direct))
-                source = candidate.direct
-            else:
-                source = candidate.source
-            print(f"NEW_PAGE_TARGET_OK={candidate.slug}")
-            print(f"REGION={candidate.region}")
-            print(f"INPUT={rel(candidate.direct)}")
-            print(f"SOURCE={rel(source)}")
-            print(f"RESTORE_REQUIRED={'no' if source == candidate.direct else 'yes'}")
-            print(f"SKIPPED_COUNT={len(skipped)}")
-            return 0
+            return candidate, skipped
         skipped.append((candidate, reasons))
+    return None, skipped
+
+
+def command_next(args: argparse.Namespace) -> int:
+    candidate, skipped = select_next_candidate()
+    if candidate:
+        if args.restore and candidate.source != candidate.direct:
+            print("RESULT=STOP")
+            print("REASON=classified input must remain at its tracked source path; publish SOURCE directly")
+            print(f"SOURCE={rel(candidate.source)}")
+            return 2
+        print(f"NEW_PAGE_TARGET_OK={candidate.slug}")
+        print(f"REGION={candidate.region}")
+        print(f"INPUT={rel(candidate.source)}")
+        print(f"SOURCE={rel(candidate.source)}")
+        print("RESTORE_REQUIRED=no")
+        print(f"QUEUE_NUMBER={candidate.rank[0]}")
+        print(f"SKIPPED_COUNT={len(skipped)}")
+        return 0
     print("RESULT=STOP")
     print("REASON=no eligible new area page target")
     print(f"CHECKED_COUNT={len(skipped)}")

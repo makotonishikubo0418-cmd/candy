@@ -21,7 +21,7 @@ The 105 candidates are not guaranteed to have complete input content. The 96 nor
 ## 2. Operating Rules
 
 - Process two targets in the first batch, then five per batch after review.
-- Work from the top by default. Record any order change.
+- Work from the top. The dedicated gate skips an ineligible `READY_CANDIDATE` during selection and chooses the first row that returns `NEW_PAGE_TARGET_OK=<slug>`; record any explicit user-directed order change.
 - Use one row per slug and do not create a separate history table.
 - After build, set the target row to `LOCAL_COMPLETE` or `IN_PROGRESS`.
 - Do not create a later Commit or Push solely to record publication results.

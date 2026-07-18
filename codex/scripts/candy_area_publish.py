@@ -18,6 +18,7 @@ from urllib.parse import urlencode, urljoin, urlsplit, urlunsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener, urlopen
 
 import candy_area_page
+import candy_area_target_gate
 import candy_page_common as path_config
 
 
@@ -135,17 +136,20 @@ def find_input(region: str, slug: str) -> Path:
     return matches[0]
 
 
-def next_ready_input(queue_text: str) -> Path:
-    for line in queue_text.splitlines():
-        parts = line.split("|")
-        if len(parts) < 7 or not parts[1].strip().isdigit():
-            continue
-        if parts[4].strip() != "READY_CANDIDATE":
-            continue
-        region = parts[2].strip()
-        slug = parts[3].strip().strip("`")
-        return find_input(region, slug)
-    raise PublishError("READY_CANDIDATE is not present in the area queue")
+def next_ready_input(_queue_text: str) -> Path:
+    candidate, skipped = candy_area_target_gate.select_next_candidate()
+    if candidate:
+        print(
+            f"TARGET_GATE_OK queue={candidate.rank[0]} "
+            f"region={candidate.region} slug={candidate.slug}"
+        )
+        return candidate.source
+    details = "\n".join(
+        f"- queue={item.rank[0]} region={item.region} slug={item.slug}: {' / '.join(reasons)}"
+        for item, reasons in skipped[:10]
+    )
+    suffix = f"\n{details}" if details else ""
+    raise PublishError(f"no READY_CANDIDATE passed the new-page target gate{suffix}")
 
 
 def paths_for(data: candy_area_page.AreaData) -> list[Path]:
@@ -437,6 +441,14 @@ def publish(
     except ValueError as exc:
         raise PublishError("input must be under Text_area_data") from exc
     data = candy_area_page.parse_area_text(input_path)
+    if resume_state is None:
+        gate_candidate = candy_area_target_gate.candidate_from_path(input_path, 0)
+        if gate_candidate is None:
+            raise PublishError("target gate could not read the input")
+        gate_ok, gate_reasons = candy_area_target_gate.check_candidate(gate_candidate)
+        if not gate_ok:
+            raise PublishError("target gate rejected the input:\n- " + "\n- ".join(gate_reasons))
+        print(f"NEW_PAGE_TARGET_OK={data.slug}")
     allowed = paths_for(data)
     path_arguments = relative(allowed)
     page_paths = relative(allowed[:3])
