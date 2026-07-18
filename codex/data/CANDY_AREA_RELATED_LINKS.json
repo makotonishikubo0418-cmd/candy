@@ -32,6 +32,7 @@
     "shimotacho",
     "tamazatocho",
     "tamazatodanchi",
+    "wakabacho",
     "yamadacho",
     "yamanokuchicho",
     "yamashitacho",
@@ -465,6 +466,12 @@
       "longitude": 130.540619,
       "latitude": 31.591347,
       "links": ["harara", "nagayoshi", "yamanokuchicho", "yamashitacho", "arata", "shimoarata"]
+    },
+    "wakabacho": {
+      "region": "若葉町",
+      "longitude": 130.539805,
+      "latitude": 31.623378,
+      "links": ["tamazatodanchi", "tamazatocho", "shimoishiki", "shimoishikicho"]
     },
     "yamadacho": {
       "region": "山田町",
