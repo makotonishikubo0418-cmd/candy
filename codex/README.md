@@ -32,6 +32,7 @@ At the start of work, run `git fetch origin` and `git status --short --branch`. 
 | `codex/project_management/` | Management rules, structure, progress, communication, task reservations, history, and safety procedures |
 | `codex/docs/` | Active HP production runbooks and specifications for area, hotel, blog, and other categories |
 | `codex/docs/generated/` | Current page, production-candidate, code/asset, and SEO state generated from actual files. Manual editing is prohibited |
+| `codex/data/` | Canonical operational mapping data consumed by production tooling, including the approved area nearby-link graph |
 | `codex/scripts/` | Page generation, validation, and publishing scripts |
 | `HP/` | The actual public site tree. `includefile`, `log`, and `movie` are also HP data |
 | `Text_area_data/` | Area-page production inputs. Accepted area images are stored in the NAS `Text_area_data/画像データ/` directory |
@@ -52,6 +53,7 @@ At the start of work, run `git fetch origin` and `git status --short --branch`. 
 | Code and folder structure | `codex/project_management/CODE_STRUCTURE.md` |
 | Safety procedure for deletion, movement, and bulk operations | `codex/project_management/SAFETY_PROTOCOL.md` |
 | HP production and generation specifications | `codex/docs/CANDY_MASTER_DOC_INDEX.md` |
+| Area nearby-link mapping | `codex/data/CANDY_AREA_RELATED_LINKS.json` |
 | Stable HP structure | `codex/docs/CANDY_HP_STRUCTURE_MAP.md`, `CANDY_CODE_FILE_STRUCTURE.md`, and `CANDY_SEO_SPEC.md` |
 | Current HP state | The four documents under `codex/docs/generated/` |
 

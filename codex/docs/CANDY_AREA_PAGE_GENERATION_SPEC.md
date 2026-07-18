@@ -1,6 +1,6 @@
 # CANDY Area Page Generation Specification
 
-- Updated: 2026-07-14
+- Updated: 2026-07-18
 - Applies to: Normal new generation of CANDY area detail pages by Codex
 
 ## 1. Purpose
@@ -23,14 +23,14 @@ Legacy area-production history and investigation snapshots are not current canon
 
 - Enable users to identify delivery-health shops that can dispatch to the region, travel times, and transportation fees.
 - Combine basic regional information, nearby hotels, meeting places, and nearby spots so users can evaluate where to use the service.
-- Provide routes to supported-shop lists, shop details, hotel/spot details, and related articles.
+- Provide routes to supported-shop lists, shop details, hotel/spot details, and verified nearby area pages.
 - Keep region-search body content consistent with breadcrumb and shop-list structured data.
 
 #### Generation and Change Guidance
 
 - When asked for the structure, use the following tree as the visible-order basis.
 - Do not fix shop, hotel, or spot counts. Repeat the same item structure for complete blocks in source data only.
-- Only the reserved related-article dummy entries have a fixed count of eight. Actual configured links MAY replace them with one or more links.
+- `周辺の対応エリア` uses three to six verified nearby published area links, normally four. Omit the entire block when fewer than three suitable completed targets exist.
 - Do not infer an item absent from source data. When an optional item count is zero, do not create an empty heading or container.
 - Number scene, subtitle, description, and FAQ item IDs in visible order without gaps or duplicates.
 
@@ -87,15 +87,13 @@ The Japanese labels below are exact website display concepts and are preserved.
         ├ 電話番号（元データにある場合）
         └ ボタン（詳細はコチラ）
     └ 情報変更に関する注記
-├ 関連記事
-    ├ 関連記事リンク1
-    ├ 関連記事リンク2
-    ├ 関連記事リンク3
-    ├ 関連記事リンク4
-    ├ 関連記事リンク5
-    ├ 関連記事リンク6
-    ├ 関連記事リンク7
-    └ 関連記事リンク8
+├ 周辺の対応エリア（適切な完成済みリンクが3件以上ある場合のみ）
+    ├ 周辺エリアリンク1
+    ├ 周辺エリアリンク2
+    ├ 周辺エリアリンク3
+    ├ 周辺エリアリンク4（基本件数）
+    ├ 周辺エリアリンク5（周辺地域が多い場合）
+    └ 周辺エリアリンク6（最大件数）
 ├ ボタン（対応デリヘル店一覧／button_3）
 └ 表示外の構造化データ
     ├ BreadcrumbList
@@ -175,7 +173,7 @@ New production is eligible only after confirming that the canonical slug has no 
 | Population, area, and establishment date | Basic-information table |
 | Hotel information | FAQ blocks |
 | Meeting and nearby spots | FAQ blocks |
-| Related articles | Preserve eight template dummy links as a reserved future-use region |
+| Nearby supported areas | Render the exact target order from `codex/data/CANDY_AREA_RELATED_LINKS.json`; link text is `鹿児島市{リンク先地域名}で呼べるデリヘル` |
 | Page-wide information | Two JSON-LD blocks |
 
 Do not add line breaks to body copy except where explicitly present in source data. Distinguish line breaks required by HTML markup from visible line breaks in copy.
@@ -225,13 +223,16 @@ All 34 verified complete pages have five scenes. FAQ counts were five on two pag
 - Do not change common shop-block structure, links, or measurement elements without cause.
 - Do not infer a shop absent from source data.
 
-### 7.1 Reserved Related-Article Region
+### 7.1 Nearby Supported Areas
 
-- Do not remove the `関連記事` section during generation; it is reserved for future actual links.
-- Preserve the eight template dummy links without changing copy, `href="#"`, or order.
-- Only these eight entries are authorized placeholders. The same dummy outside the reserved region is a validation error.
-- A page with actual related links is valid when one or more actual links replace the eight dummies.
-- Do not infer related articles before selection and replacement rules are confirmed.
+- The canonical mapping is `codex/data/CANDY_AREA_RELATED_LINKS.json`. Do not maintain another page-by-page mapping.
+- Use the heading `周辺の対応エリア` and the link text `鹿児島市{リンク先地域名}で呼べるデリヘル`.
+- Normally output four links. Output five or six only when multiple strong nearby candidates exist, and stop at three when only three suitable candidates exist.
+- Do not add an unrelated target to reach six. Self-links, duplicate links, incomplete targets, non-public targets, `href="#"`, and placeholder copy are prohibited.
+- A target is eligible only when its public PHP and complete source/dataset structure exist and its title, description, canonical, robots, H1, OGP, JSON-LD, internal links, and image alt checks are normal.
+- Select candidates from actual geographic proximity, then review city area and life-zone relevance before fixing their order. The current mapping uses the Geospatial Information Authority of Japan's GSI Maps place/address search as the geographic source.
+- When fewer than three eligible nearby targets exist, omit the entire block; do not render an empty heading or container.
+- The area template contains only the `AREA_RELATED_LINKS` generation marker. A generated public source HTML must not retain the marker.
 
 ## 8. JSON-LD
 
@@ -323,7 +324,7 @@ Case, source HTML, dataset PHP, and public PHP slugs MUST match exactly.
 12. Generate page-specific dataset PHP.
 13. Register both locations in `dataset_base.php`.
 14. Validate internal links, images, canonical, OGP, and slug.
-15. Check placeholders other than the eight related-article dummies, incomplete input, legacy slugs, and duplicate IDs.
+15. Check all placeholders, the exact nearby-area mapping, incomplete input, legacy slugs, and duplicate IDs.
 16. Validate PHP syntax, JSON syntax, `git diff --check`, and changed targets.
 17. Determine whether `source/area.html` index links and JSON-LD and `sitemap.xml` require registration.
 18. When browser validation was not performed, report browser rendering as unverified.
@@ -428,8 +429,8 @@ These are verified existing conditions and were not fixed by the specification i
 - [ ] Public PHP, source HTML, and dataset PHP exist.
 - [ ] dataset_base case registration exists.
 - [ ] dataset_base link transformation exists.
-- [ ] The related-article region contains eight reserved dummies or actual links, and no dummy is outside it.
-- [ ] Placeholder count outside the related-article dummies is zero.
+- [ ] The nearby-area block exactly matches the canonical mapping, contains three to six approved links when present, and is absent when the mapping has fewer than three targets.
+- [ ] Placeholder count is zero, including related-link placeholder copy and `href="#"`.
 - [ ] Scenes, subtitles, and descriptions have no duplicate or gap.
 - [ ] Visible shop, hotel, and spot counts match JSON-LD counts.
 - [ ] No shop, hotel, or spot absent from source data was inferred.

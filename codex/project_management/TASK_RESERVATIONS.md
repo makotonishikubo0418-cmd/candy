@@ -14,7 +14,9 @@
 
 ## 2. Active Reservations
 
-No active reservations.
+| Task ID | Codex | Period | Scope | Purpose | Status |
+|---|---|---|---|---|---|
+| TASK-20260718-AREA-RELATED-LINKS-001 | current | 2026-07-18 | All 78 `HP/source/kagoshima-deliveryhealth-area-*.html` files, `HP/source/template_kagoshima-deliveryhealth-area.html`, the canonical area-related-link data, area generation/validation tooling, `HP/AGENTS.md`, `codex/README.md`, area/SEO specifications and runbook, generated current-state documents, and this reservation record | Replace public dummy related-article entries with verified nearby published area links, update the normal generation rule, validate the complete link graph, and publish in deployment batches of no more than 25 HP files. | ACTIVE |
 
 ## 3. Completed and Released Reservations
 

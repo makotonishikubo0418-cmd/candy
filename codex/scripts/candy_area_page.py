@@ -51,11 +51,12 @@ FORBIDDEN_PLACEHOLDERS = (
     "<改行>",
 )
 RELATED_PLACEHOLDER_TEXT = "ここにはリンク先のタイトルを表示します。"
-RELATED_PLACEHOLDER_LINK = f'<a href="#" class="fade">{RELATED_PLACEHOLDER_TEXT}</a>'
-RELATED_PLACEHOLDER_COUNT = 8
-RELATED_PLACEHOLDER_BLOCK_PATTERN = (
-    r'(?s)<div class="lmt_20 lp_40 bd">\s*'
-    r'<h3 class="lpb_10 fs_l">関連記事</h3>\s*'
+RELATED_MARKER = "<!-- AREA_RELATED_LINKS -->"
+RELATED_HEADING = "周辺の対応エリア"
+RELATED_LINKS_PATH = path_config.REPO_ROOT / "codex" / "data" / "CANDY_AREA_RELATED_LINKS.json"
+RELATED_BLOCK_PATTERN = (
+    r'(?s)[ \t]*<div class="lmt_20 lp_40 bd">\s*'
+    r'<h3 class="lpb_10 fs_l">(?:関連記事|周辺の対応エリア)</h3>\s*'
     r'<div class="fs_md3">(?P<links>.*?)</div>\s*'
     r'</div>'
 )
@@ -160,6 +161,186 @@ def read_utf8(path: Path) -> str:
         return path.read_text(encoding="utf-8-sig").replace("\r\n", "\n")
     except UnicodeDecodeError as exc:
         raise AreaToolError(f"UTF-8で読めません: {path}") from exc
+
+
+def load_related_config() -> dict:
+    try:
+        config = json.loads(read_utf8(RELATED_LINKS_PATH))
+    except json.JSONDecodeError as exc:
+        raise AreaToolError(f"周辺エリア設定JSONが不正です: {exc}") from exc
+    if config.get("schema_version") != 1:
+        raise AreaToolError("周辺エリア設定schema_versionが1ではありません")
+    if config.get("heading") != RELATED_HEADING:
+        raise AreaToolError(f"周辺エリア見出しが不正です: {config.get('heading')!r}")
+    if config.get("link_text_pattern") != "鹿児島市{region}で呼べるデリヘル":
+        raise AreaToolError("周辺エリアリンク文言パターンが不正です")
+    if not isinstance(config.get("eligible_targets"), list) or not isinstance(config.get("pages"), dict):
+        raise AreaToolError("周辺エリア設定のeligible_targetsまたはpagesが不正です")
+    return config
+
+
+def related_links_for(config: dict, slug: str) -> list[str] | None:
+    page = config["pages"].get(slug)
+    if page is None:
+        return None
+    links = page.get("links")
+    if not isinstance(links, list):
+        raise AreaToolError(f"周辺エリアlinksが配列ではありません: {slug}")
+    return links
+
+
+def render_related_block(config: dict, slug: str) -> str:
+    links = related_links_for(config, slug)
+    if not links:
+        return ""
+    pages = config["pages"]
+    rendered: list[str] = []
+    for target in links:
+        target_page = pages.get(target)
+        if not isinstance(target_page, dict) or not target_page.get("region"):
+            raise AreaToolError(f"周辺エリアリンク先設定がありません: {slug} -> {target}")
+        text = config["link_text_pattern"].format(region=target_page["region"])
+        rendered.append(
+            f'\t\t\t\t\t<a href="./kagoshima-deliveryhealth-area-{target}.php" class="fade">{htext(text)}</a>'
+        )
+    link_html = "<br>\n".join(rendered)
+    return (
+        '\t\t\t\t<div class="lmt_20 lp_40 bd">\n'
+        f'\t\t\t\t\t<h3 class="lpb_10 fs_l">{RELATED_HEADING}</h3>\n'
+        '\t\t\t\t\t<div class="fs_md3">\n'
+        f"{link_html}\n"
+        "\t\t\t\t\t</div>\n"
+        "\t\t\t\t</div>"
+    )
+
+
+def replace_related_region(source: str, config: dict, slug: str) -> str:
+    marker_matches = list(
+        re.finditer(rf"(?m)^[ \t]*{re.escape(RELATED_MARKER)}[ \t]*$", source)
+    )
+    matches = list(re.finditer(RELATED_BLOCK_PATTERN, source))
+    links = related_links_for(config, slug)
+    if links == [] and not marker_matches and not matches:
+        return source
+    if len(marker_matches) + len(matches) != 1:
+        raise AreaToolError(
+            f"周辺エリア置換対象数不整合: slug={slug} marker={len(marker_matches)} block={len(matches)}"
+        )
+    replacement = render_related_block(config, slug)
+    if marker_matches:
+        marker = marker_matches[0]
+        return source[: marker.start()] + replacement + source[marker.end() :]
+    match = matches[0]
+    return source[: match.start()] + replacement + source[match.end() :]
+
+
+def validate_related_config(config: dict, hp_root: Path, *, require_source_coverage: bool) -> list[str]:
+    errors: list[str] = []
+    pages = config["pages"]
+    eligible = config["eligible_targets"]
+    eligible_set = set(eligible)
+    if len(eligible_set) != len(eligible):
+        errors.append("eligible_targetsに重複があります")
+    current_slugs = {
+        path.stem.removeprefix("kagoshima-deliveryhealth-area-")
+        for path in (hp_root / "source").glob("kagoshima-deliveryhealth-area-*.html")
+    }
+    configured_slugs = set(pages)
+    if require_source_coverage and configured_slugs != current_slugs:
+        missing = sorted(current_slugs - configured_slugs)
+        extra = sorted(configured_slugs - current_slugs)
+        errors.append(f"周辺エリア設定のsource範囲不整合: missing={missing} extra={extra}")
+    for slug, page in pages.items():
+        if not isinstance(page, dict) or not isinstance(page.get("region"), str) or not page["region"].strip():
+            errors.append(f"地域名設定不正: {slug}")
+            continue
+        links = page.get("links")
+        if not isinstance(links, list):
+            errors.append(f"links設定不正: {slug}")
+            continue
+        if links and not 3 <= len(links) <= 6:
+            errors.append(f"周辺エリア件数不正: {slug}={len(links)}")
+        if len(set(links)) != len(links):
+            errors.append(f"周辺エリアリンク重複: {slug}")
+        if slug in links:
+            errors.append(f"周辺エリア自己リンク: {slug}")
+        for target in links:
+            if target not in eligible_set:
+                errors.append(f"未承認リンク先: {slug} -> {target}")
+            if target not in pages:
+                errors.append(f"リンク先設定なし: {slug} -> {target}")
+    for slug in eligible:
+        page = pages.get(slug)
+        if not isinstance(page, dict):
+            errors.append(f"eligible target設定なし: {slug}")
+            continue
+        public_path = hp_root / f"kagoshima-deliveryhealth-area-{slug}.php"
+        source_path = hp_root / "source" / f"kagoshima-deliveryhealth-area-{slug}.html"
+        dataset_path = hp_root / "includefile" / f"dataset_kagoshima-deliveryhealth-area-{slug}.php"
+        for path in (public_path, source_path, dataset_path):
+            if not path.is_file():
+                errors.append(f"リンク先構造ファイルなし: {slug} -> {path.relative_to(repo_root())}")
+        if not source_path.is_file():
+            continue
+        target_source = read_utf8(source_path)
+        canonical = f"https://www.55810.com/kagoshima-deliveryhealth-area-{slug}.php"
+        if target_source.count(f'<link rel="canonical" href="{canonical}">') != 1:
+            errors.append(f"リンク先canonical不整合: {slug}")
+        if target_source.count('<meta name="robots" content="index">') != 1:
+            errors.append(f"リンク先robots不整合: {slug}")
+        if len(re.findall(r"<h1\b", target_source, re.I)) != 1:
+            errors.append(f"リンク先H1件数不整合: {slug}")
+        title_match = re.search(r"<title>(.*?)</title>", target_source, re.S)
+        if not title_match or "aaaaaa" in title_match.group(1):
+            errors.append(f"リンク先title不整合: {slug}")
+    return errors
+
+
+def validate_related_source(
+    slug: str,
+    source: str,
+    config: dict,
+    hp_root: Path,
+    *,
+    require_mapping: bool,
+) -> list[str]:
+    errors: list[str] = []
+    if RELATED_PLACEHOLDER_TEXT in source or 'href="#"' in source:
+        errors.append("周辺エリア領域に仮リンクが残っています")
+    expected = related_links_for(config, slug)
+    if expected is None:
+        if require_mapping:
+            errors.append(f"周辺エリア設定がありません: {slug}")
+        return errors
+    matches = list(re.finditer(RELATED_BLOCK_PATTERN, source))
+    if not expected:
+        if matches or RELATED_HEADING in source or "<h3 class=\"lpb_10 fs_l\">関連記事</h3>" in source:
+            errors.append(f"リンクなしページに周辺エリア領域があります: {slug}")
+        return errors
+    if len(matches) != 1:
+        errors.append(f"周辺エリア領域数不整合: {slug}={len(matches)}")
+        return errors
+    links_html = matches[0].group("links")
+    actual = re.findall(
+        r'<a href="\./kagoshima-deliveryhealth-area-([a-z0-9-]+)\.php" class="fade">(.*?)</a>',
+        links_html,
+        re.S,
+    )
+    expected_values = [
+        (target, config["link_text_pattern"].format(region=config["pages"][target]["region"]))
+        for target in expected
+    ]
+    actual_values = [(target, strip_tags(text).strip()) for target, text in actual]
+    if actual_values != expected_values:
+        errors.append(f"周辺エリアリンク不整合: {slug} expected={expected_values} actual={actual_values}")
+    remainder = re.sub(r'<a href="[^"]+" class="fade">.*?</a>', "", links_html, flags=re.S)
+    remainder = re.sub(r"<br\s*/?>", "", remainder).strip()
+    if remainder:
+        errors.append(f"周辺エリア領域に許可されていない内容があります: {slug}")
+    for target, _text in actual_values:
+        if not (hp_root / f"kagoshima-deliveryhealth-area-{target}.php").is_file():
+            errors.append(f"周辺エリアリンク先PHPなし: {slug} -> {target}")
+    return errors
 
 
 def is_separator(value: str) -> bool:
@@ -797,10 +978,11 @@ def render_source(
 
     source = replace_exact(
         source,
-        r'(?s)[ \t]*<h2[^>]+id="scene2">.*?(?=[ \t]*<div class="lmt_20 lp_40 bd">)',
+        rf'(?s)[ \t]*<h2[^>]+id="scene2">.*?(?=[ \t]*(?:{re.escape(RELATED_MARKER)}|<div class="lmt_20 lp_40 bd">))',
         "\n" + "".join(dynamic_parts),
         "dynamic scenes",
     )
+    source = replace_related_region(source, load_related_config(), data.slug)
     source = "\n".join(line.rstrip() for line in source.splitlines())
     return source.rstrip() + "\n"
 
@@ -829,41 +1011,22 @@ def validate_rendered(
     resolved: list[ShopResolved],
     source: str,
     hp_root: Path,
+    *,
+    require_related_mapping: bool = True,
 ) -> list[str]:
     errors: list[str] = []
     for placeholder in FORBIDDEN_PLACEHOLDERS:
         if placeholder in source:
             errors.append(f"placeholder残存: {placeholder}")
-    related_matches = list(re.finditer(RELATED_PLACEHOLDER_BLOCK_PATTERN, source))
-    if len(related_matches) != 1:
-        errors.append(f"関連記事領域数不整合: {len(related_matches)}")
-    else:
-        related_match = related_matches[0]
-        links = related_match.group("links")
-        link_count = links.count(RELATED_PLACEHOLDER_LINK)
-        href_count = links.count('href="#"')
-        text_count = links.count(RELATED_PLACEHOLDER_TEXT)
-        if link_count or href_count or text_count:
-            remainder = links.replace(RELATED_PLACEHOLDER_LINK, "")
-            remainder = re.sub(r"<br\s*/?>", "", remainder).strip()
-            if (
-                link_count != RELATED_PLACEHOLDER_COUNT
-                or href_count != RELATED_PLACEHOLDER_COUNT
-                or text_count != RELATED_PLACEHOLDER_COUNT
-                or remainder
-            ):
-                errors.append(
-                    "関連記事予約リンク不整合: "
-                    f"expected={RELATED_PLACEHOLDER_COUNT} "
-                    f"links={link_count} hrefs={href_count} texts={text_count}"
-                )
-        else:
-            real_links = re.findall(r'<a\s+[^>]*href="(?!#)[^"]+"[^>]*>.*?</a>', links, re.S)
-            if not real_links:
-                errors.append("関連記事実リンクなし")
-        outside_related = source[: related_match.start()] + source[related_match.end() :]
-        if RELATED_PLACEHOLDER_TEXT in outside_related or 'href="#"' in outside_related:
-            errors.append("関連記事予約領域外にダミーリンク残存")
+    errors.extend(
+        validate_related_source(
+            data.slug,
+            source,
+            load_related_config(),
+            hp_root,
+            require_mapping=require_related_mapping,
+        )
+    )
     ids = re.findall(r'\bid="([^"]+)"', source)
     duplicates = [value for value, count in Counter(ids).items() if count > 1]
     if duplicates:
@@ -1044,6 +1207,8 @@ def run_build(args: argparse.Namespace) -> int:
     if not input_path.is_absolute():
         input_path = root / input_path
     data = parse_area_text(input_path)
+    if related_links_for(load_related_config(), data.slug) is None:
+        raise AreaToolError(f"周辺エリア設定がありません。生成前にリンク先を確定してください: {data.slug}")
     parsed_at = time.perf_counter()
     templates = load_shop_templates(hp_root / "source" / "template_shop.html")
     resolved = resolve_shops(data, hp_root, templates)
@@ -1117,6 +1282,8 @@ def run_check(args: argparse.Namespace) -> int:
     if not input_path.is_absolute():
         input_path = root / input_path
     data = parse_area_text(input_path)
+    if related_links_for(load_related_config(), data.slug) is None:
+        raise AreaToolError(f"周辺エリア設定がありません: {data.slug}")
     templates = load_shop_templates(hp_root / "source" / "template_shop.html")
     resolved = resolve_shops(data, hp_root, templates)
     public_path, source_path, dataset_path = bundle_paths(hp_root, data.slug)
@@ -1134,6 +1301,91 @@ def run_check(args: argparse.Namespace) -> int:
     print(f"RESULT=CHECK_OK slug={data.slug}")
     print(f"PHP_LINT={php_status}")
     print(f"TIMING total={time.perf_counter()-started:.3f}s")
+    return 0
+
+
+def area_source_paths(hp_root: Path) -> list[Path]:
+    return sorted((hp_root / "source").glob("kagoshima-deliveryhealth-area-*.html"))
+
+
+def run_related_write(args: argparse.Namespace) -> int:
+    hp_root = path_config.HP_ROOT
+    config = load_related_config()
+    config_errors = validate_related_config(config, hp_root, require_source_coverage=True)
+    if config_errors:
+        raise AreaToolError("周辺エリア設定検証失敗:\n- " + "\n- ".join(config_errors))
+    changed: list[Path] = []
+    errors: list[str] = []
+    for path in area_source_paths(hp_root):
+        slug = path.stem.removeprefix("kagoshima-deliveryhealth-area-")
+        source = read_utf8(path)
+        try:
+            rendered = replace_related_region(source, config, slug)
+        except AreaToolError as exc:
+            errors.append(str(exc))
+            continue
+        source_errors = validate_related_source(
+            slug,
+            rendered,
+            config,
+            hp_root,
+            require_mapping=True,
+        )
+        if source_errors:
+            errors.extend(source_errors)
+            continue
+        if rendered != source:
+            changed.append(path)
+            if not args.dry_run:
+                atomic_write(path, rendered)
+    if errors:
+        raise AreaToolError("周辺エリア一括更新失敗:\n- " + "\n- ".join(errors))
+    print(f"RESULT={'RELATED_DRY_RUN_OK' if args.dry_run else 'RELATED_WRITE_OK'}")
+    print(f"SOURCE_FILES={len(area_source_paths(hp_root))} CHANGED={len(changed)}")
+    print("CHANGED_PATHS=" + ",".join(str(path.relative_to(repo_root())) for path in changed))
+    return 0
+
+
+def run_related_check(_args: argparse.Namespace) -> int:
+    hp_root = path_config.HP_ROOT
+    config = load_related_config()
+    errors = validate_related_config(config, hp_root, require_source_coverage=True)
+    template = read_utf8(hp_root / "source" / "template_kagoshima-deliveryhealth-area.html")
+    if template.count(RELATED_MARKER) != 1:
+        errors.append(f"エリアテンプレート周辺リンクマーカー件数不整合: {template.count(RELATED_MARKER)}")
+    if RELATED_PLACEHOLDER_TEXT in template or 'href="#"' in template or "<h3 class=\"lpb_10 fs_l\">関連記事</h3>" in template:
+        errors.append("エリアテンプレートに旧関連記事ダミーが残っています")
+    link_total = 0
+    blocks = 0
+    omitted = 0
+    count_distribution: Counter[int] = Counter()
+    paths = area_source_paths(hp_root)
+    for path in paths:
+        slug = path.stem.removeprefix("kagoshima-deliveryhealth-area-")
+        source = read_utf8(path)
+        source_errors = validate_related_source(
+            slug,
+            source,
+            config,
+            hp_root,
+            require_mapping=True,
+        )
+        errors.extend(source_errors)
+        links = related_links_for(config, slug) or []
+        count_distribution[len(links)] += 1
+        link_total += len(links)
+        if links:
+            blocks += 1
+        else:
+            omitted += 1
+    if errors:
+        raise AreaToolError("周辺エリア検証失敗:\n- " + "\n- ".join(errors))
+    print("RESULT=RELATED_CHECK_OK")
+    print(
+        f"SOURCE_FILES={len(paths)} BLOCKS={blocks} OMITTED={omitted} "
+        f"LINKS={link_total} ELIGIBLE_TARGETS={len(config['eligible_targets'])}"
+    )
+    print("COUNT_DISTRIBUTION=" + ",".join(f"{count}:{count_distribution[count]}" for count in sorted(count_distribution)))
     return 0
 
 
@@ -1158,7 +1410,13 @@ def run_audit_inputs(args: argparse.Namespace) -> int:
             try:
                 resolved = resolve_shops(data, hp_root, templates)
                 source = render_source(data, resolved, templates, hp_root / "source" / "template_kagoshima-deliveryhealth-area.html")
-                errors = validate_rendered(data, resolved, source, hp_root)
+                errors = validate_rendered(
+                    data,
+                    resolved,
+                    source,
+                    hp_root,
+                    require_related_mapping=False,
+                )
                 if errors:
                     render_failures.append(f"{path.relative_to(root)}: {"; ".join(errors)}")
             except AreaToolError as exc:
@@ -1193,6 +1451,11 @@ def create_parser() -> argparse.ArgumentParser:
     audit.add_argument("--include-completion", action="store_true", help="Completion配下も含める")
     audit.add_argument("--render", action="store_true", help="全入力を生成し画像を含む静的検証まで行う")
     audit.set_defaults(func=run_audit_inputs)
+    related_write = subparsers.add_parser("related-write", help="周辺エリア設定を既存area sourceへ反映")
+    related_write.add_argument("--dry-run", action="store_true", help="ファイルを書かず変更対象を検証")
+    related_write.set_defaults(func=run_related_write)
+    related_check = subparsers.add_parser("related-check", help="周辺エリア設定と既存area sourceを検証")
+    related_check.set_defaults(func=run_related_check)
     return parser
 
 

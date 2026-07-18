@@ -72,11 +72,11 @@ The publish tools treat generation, validation, generated-document updates, targ
 - Do not use `create.php` for normal production.
 - Give the source Text values for shops, travel time, and transportation fees highest priority.
 - Only when a value is unspecified, use shop-combination frequency, map coordinates, or nearby complete pages.
-- Preserve eight reserved dummy related-article entries until actual links are configured.
+- Area pages use the canonical mapping in `codex/data/CANDY_AREA_RELATED_LINKS.json` for the `周辺の対応エリア` block. Output three to six verified nearby published area links, normally four; omit the whole block when fewer than three suitable completed targets exist.
 - Do not fix item counts by default. Match shops, normal article scenes, FAQs, optional basic-information rows, fee rows, access entries, and nearby spots to the number of complete input blocks.
 - Normal article scenes, FAQs, fee rows, access entries, and nearby spots MAY contain zero items. Do not generate an empty section. A hotel page requires at least one shop.
 - Include a legacy hotel option as an independent item only when all three required input fields are present. Do not merge it into a normal scene.
-- Fixed-count exceptions require an explicit specification. Preserve the eight related-article dummy entries.
+- Fixed-count exceptions require an explicit specification. Area related links are the approved variable-count exception: three to six links, with no dummy, self-link, duplicate, or incomplete target.
 - Do not infer a value, image, or URL absent from the source data.
 
 Normal area change unit:
@@ -88,6 +88,7 @@ Normal area change unit:
 - Area index
 - Sitemap
 - One production-queue row
+- Canonical related-link mapping when the target slug or its nearby-area links change
 
 Normal hotel change unit:
 

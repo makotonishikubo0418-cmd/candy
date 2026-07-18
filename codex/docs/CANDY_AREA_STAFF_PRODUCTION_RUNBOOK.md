@@ -88,7 +88,7 @@ Do not update `.md` solely to record publication after the fact, create a manage
 - When a value is unspecified, use map coordinates and settings for the same shop from nearby complete pages.
 - Match shops, articles, hotels, spots, and telephone numbers to input counts.
 - Do not infer a value, image, or URL absent from source data.
-- Preserve the eight template dummy related-article entries until actual links are configured.
+- Configure `周辺の対応エリア` from `codex/data/CANDY_AREA_RELATED_LINKS.json`. Use three to six verified nearby published area links, normally four, with link text `鹿児島市{地域名}で呼べるデリヘル`; omit the block when fewer than three suitable targets exist.
 - Add known exceptions to the dedicated tool; do not create page-specific improvised handling.
 
 Created or updated targets:
@@ -101,6 +101,7 @@ HP/includefile/dataset_base.php
 HP/source/area.html
 HP/sitemap.xml
 one target row in codex/docs/CANDY_AREA_105_PAGE_QUEUE.md
+one target entry in codex/data/CANDY_AREA_RELATED_LINKS.json
 ```
 
 After generation or a fix and before staging, run `codex\scripts\candy-site-state.cmd write` and `check`. Treat the queue update and generated-document update as the same work unit.
@@ -113,7 +114,7 @@ The dedicated tool validates the following. Do not repeat successful checks manu
 - Three page files and shared registrations
 - Shop order, travel times, and transportation fees
 - Scenes, IDs, FAQ, and JSON-LD
-- Eight reserved dummy related articles or actual links
+- Exact nearby-area links from the canonical mapping, with no dummy, self-link, duplicate, missing target, or unapproved link text
 - Area index, sitemap, and internal links
 - PHP lint, JSON, images, and diff
 - Stage targets, deletion, rename, and unauthorized changes

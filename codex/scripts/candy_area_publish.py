@@ -162,6 +162,7 @@ def paths_for(data: candy_area_page.AreaData) -> list[Path]:
         hp / "source" / "area.html",
         hp / "sitemap.xml",
         queue_path(),
+        candy_area_page.RELATED_LINKS_PATH,
     ] + path_config.site_state_output_paths()
 
 

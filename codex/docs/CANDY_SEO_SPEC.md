@@ -86,13 +86,14 @@ Current content pages use a structure containing `og:title`, `og:type`, `og:url`
 
 - Use the current schema corresponding to visible shop, girl, or related lists.
 - `position`, names, URLs, images, and counts MUST match visible blocks.
-- Do not structure reserved dummy related articles as real items.
+- Do not add the nearby-area links to structured data unless a separately approved schema visibly represents the same list.
 
 ## 9. Internal Links, Related Articles, and Orphans
 
 - Category indexes are the normal route to detail pages.
-- For top category sections, breadcrumbs, related articles, and cross-category links, verify both display names and public-PHP existence.
-- Use the eight reserved related-article dummy entries only in a state permitted by the category specification. Do not replace them with nonexistent URLs.
+- For top category sections, breadcrumbs, nearby-area links, and cross-category links, verify both display names and public-PHP existence.
+- Area detail pages use `周辺の対応エリア` with three to six exact links from `codex/data/CANDY_AREA_RELATED_LINKS.json`, normally four. Use descriptive link text, reject self-links and duplicates, and omit the block when fewer than three suitable completed targets exist.
+- Placeholder link copy and `href="#"` are prohibited in generated public area sources.
 - A page with no detected static-source references is an orphan candidate. Do not delete or redirect it until PHP-, database-, or JavaScript-generated links are excluded.
 - Record broken internal links, different slugs, and legacy URLs as findings. Do not fix them automatically.
 
