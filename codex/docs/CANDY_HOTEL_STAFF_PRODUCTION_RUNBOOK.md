@@ -120,7 +120,7 @@ HP/sitemap.xml
 - `target-next` does not return `NEW_HOTEL_TARGET_OK`.
 - A shop is unknown, or travel time/transportation fees are unspecified and cannot be derived from hotel coordinates or a nearby complete area page.
 - A target registration is duplicated in dataset_base, the hotel index, or sitemap, or the hotel index has no reserved slot.
-- Deletion, rename, an unauthorized file, or deployment of more than 25 files is required.
+- An unauthorized file, deployment of more than 125 files, deployment over 50 MiB, or deletion/rename without explicit approval and rollback protection is required.
 - Dependency/output hash, PHP, JSON, stage allowlist, Actions, or production HTTP validation fails.
 
 On STOP, report the stopped phase, completed state, unexecuted state, and emitted `RECOVERY_COMMAND`.

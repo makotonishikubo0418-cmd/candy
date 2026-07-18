@@ -79,7 +79,7 @@ Any mismatch fails before FTP connection. The normal route applies this safety g
 
 ### 4.3 Hard Limits and Prohibited Routes
 
-- One deploy is limited to 25 files and 50 MiB total.
+- One deploy is limited to 125 files and 50 MiB total. Approved deletions and rename-source removals require reversible server-side staging and rollback support.
 - A set of 26 or more files or more than 50 MiB may be previewed but not deployed; split it into small batches.
 - No full-deploy route exists.
 - Any Git deletion or rename stops the entire deploy.
@@ -197,7 +197,7 @@ Do not bulk-replace these before determining whether they are intended exception
 9. After Fetch, Push to `main` only if the remote has no leading update.
 10. Retrieve the Push-triggered Actions run through the GitHub API.
 11. Verify target SHA, lists, exclusions, deletion/rename, count, and `PLAN_TOKEN`.
-12. Verify no more than 25 files, no more than 50 MiB, and protected targets such as `index.php` are excluded. Oversize, deletion, or rename MUST stop before FTP.
+12. Verify no more than 125 files, no more than 50 MiB, and protected targets such as `index.php` are excluded. Oversize MUST stop before FTP. Deletion or rename MUST stop unless the exact plan is explicitly approved and the transactional rollback gate passes.
 13. Proceed to FTP only after target PHP succeeds with `php -d short_open_tag=1 -l`.
 14. After Actions succeeds, verify target-page HTTP and production URLs.
 

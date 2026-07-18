@@ -104,7 +104,7 @@ Report every unexecuted check as unverified.
 - Deploying the latest `HP/index.php` to production is the final public switchover and requires explicit approval.
 - Use the explicit authority rules in root `AGENTS.md` and the publication procedure in `CANDY_PRODUCTION_MIGRATION_MASTER.md`. Do not infer upload authority from another instruction.
 - A Push to `main` that contains deploy targets starts production Actions automatically. Actions generates the target SHA, target list, count, and `PLAN_TOKEN`, then verifies the same values before FTP connection.
-- One deployment may contain at most 25 files. Do not perform full deployment, automatic deletion, or rename propagation.
+- One deployment may contain at most 125 files and 50 MiB. Full deployment remains prohibited. Deletion and rename-source removal are permitted only inside an explicitly approved plan and MUST use reversible server-side staging with rollback before final cleanup.
 - Do not infer included or excluded targets without inspecting the actual workflow and deploy script.
 - Start and inspect normal Actions through Push and the GitHub API; do not require browser interaction. Manual preview/deploy is an exception route for incidents.
 - Every operation excluded by root `AGENTS.md` requires separate explicit instruction.

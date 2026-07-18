@@ -15,7 +15,7 @@ References in this historical record to prior `AGENTS.md` section numbers descri
 3. Upload authority follows root `AGENTS.md`.
 4. A Push containing deploy targets makes Actions generate the plan, run safety checks, and deploy to production automatically.
 5. Codex tracks Actions completion through the GitHub API and does not use browser UI on the normal route.
-6. A deploy is limited to 25 files and completes upload, SHA-256 verification, replacement, and backup deletion for each file.
+6. A deploy is limited to 125 files and completes upload, SHA-256 verification, replacement, and backup deletion for each file. Explicitly approved deletions and rename-source removals use reversible server-side staging before final cleanup.
 7. After Actions succeeds, Codex verifies target-page HTTP.
 8. The final report includes production, Commit, and Actions run URLs.
 
@@ -397,7 +397,7 @@ The user required unambiguous reporting, preservation and review of the day's fu
 
 ## 17. Manual Two-Step Design on 2026-07-14, Deprecated the Same Day
 
-To prevent the prior long-running deployment and false reporting, a temporary design removed Push-triggered deployment, used manual `workflow_dispatch`, separated preview and deploy, kept preview FTP-free, required matching SHAs/count/`PLAN_TOKEN`/confirmation, limited deployment to 25 files and 50 MiB, prohibited full deploy/deletion/rename/protected targets, completed per-file SHA-256 and backup lifecycle, timed out deploy after ten minutes, and required separate approval for Commit, Push, preview, and deploy.
+To prevent the prior long-running deployment and false reporting, a temporary design removed Push-triggered deployment, used manual `workflow_dispatch`, separated preview and deploy, kept preview FTP-free, required matching SHAs/count/`PLAN_TOKEN`/confirmation, limited deployment to 25 files and 50 MiB, prohibited full deploy/deletion/rename/protected targets, completed per-file SHA-256 and backup lifecycle, timed out deploy after ten minutes, and required separate approval for Commit, Push, preview, and deploy. The current implementation supersedes those temporary count, timeout, deletion, and rename restrictions with a 125-file limit, a 30-minute timeout, and rollback-protected deletion for an explicitly approved plan.
 
 It was deprecated because it made upload appear to mean Push only, increased manual Actions/browser work, and obstructed the requested integrated publication. Safety limits, exclusions, and SHA-256 checks remained; only the trigger changed.
 

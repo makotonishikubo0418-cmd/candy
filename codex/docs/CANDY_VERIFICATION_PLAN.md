@@ -159,7 +159,7 @@ Actions also runs both before preview/deploy. Verify:
 2. No full-deploy route exists.
 3. Push plan and manual preview do not receive FTP secrets or connect to FTP.
 4. Deploy generates and compares 40-character SHAs, ancestor, checked-out HEAD, target count, `PLAN_TOKEN`, and confirmation phrase in the same run before FTP.
-5. One deploy is limited to 25 files and 50 MiB.
+5. One deploy is limited to 125 files and 50 MiB. Explicitly approved deletions and rename-source removals require transactional rollback verification.
 6. `index.php`, `.htaccess`, management documents, source Text, secret candidates, and backups are excluded.
 7. Any deletion or rename stops the entire deploy.
 8. Each file follows upload, temporary SHA-256, backup, promote, and final SHA-256; backups remain until all targets validate. A partial failure rolls back every already-deployed target in reverse order and deletes backups only after complete success.
