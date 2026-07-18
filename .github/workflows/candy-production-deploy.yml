@@ -92,7 +92,7 @@ jobs:
   deploy:
     if: github.event_name == 'push' || inputs.operation == 'deploy'
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 30
     environment: candy-production
 
     steps:

@@ -24,7 +24,7 @@ PROTECTED_PATHS = {"HP/index.php", "HP/.htaccess"}
 BLOCKED_FILE_MARKERS = (".candy-backup-", ".candy-upload-")
 BLOCKED_FILE_NAMES = {".env"}
 BLOCKED_FILE_SUFFIXES = (".bak", ".backup", ".zip")
-MAX_DEPLOY_FILES = 25
+MAX_DEPLOY_FILES = 125
 MAX_DEPLOY_TOTAL_BYTES = 50 * 1024 * 1024
 DEPLOY_CONFIRMATION = "DEPLOY-CANDY-PRODUCTION"
 EXCLUDED_PREFIXES = (
@@ -58,6 +58,16 @@ class UploadTarget:
     sha256: str
     had_original: bool = False
     promoted: bool = False
+
+
+@dataclass
+class DeleteTarget:
+    repository_path: str
+    remote_directory: str
+    final_name: str
+    backup_name: str
+    existed: bool = False
+    staged: bool = False
 
 
 def is_excluded(path: str) -> bool:
@@ -185,7 +195,12 @@ def classify_changes(changes: list[Change]) -> tuple[list[str], list[str], list[
         validate_repository_path(change.path)
         if change.old_path is not None:
             validate_repository_path(change.old_path)
-        if change.status in BLOCKED_STATUSES:
+        if change.status == "R":
+            blocked.append(change)
+            if not is_excluded(change.path):
+                deployable.append(change.path)
+            continue
+        if change.status == "D":
             blocked.append(change)
             continue
         if is_excluded(change.path):
@@ -244,11 +259,22 @@ def current_head() -> str:
     return result.stdout.strip()
 
 
-def plan_token(before: str, after: str, deployable: list[str]) -> str:
+def deletion_paths(blocked: list[Change]) -> list[str]:
+    paths: list[str] = []
+    for change in blocked:
+        path = change.old_path if change.status == "R" else change.path
+        if path is not None and not is_excluded(path):
+            paths.append(path)
+    return sorted(set(paths))
+
+
+def plan_token(before: str, after: str, deployable: list[str], deleted: list[str] | None = None) -> str:
     digest = hashlib.sha256()
     digest.update(f"{before}\n{after}\n".encode("utf-8"))
     for path in deployable:
         digest.update(f"{path}\t{sha256_file(Path(path))}\n".encode("utf-8"))
+    for path in deleted or []:
+        digest.update(f"DELETE\t{path}\n".encode("utf-8"))
     return digest.hexdigest()
 
 
@@ -414,7 +440,7 @@ def rollback_target(ftp: ftplib.FTP, target: UploadTarget) -> None:
     target.promoted = False
 
 
-def deploy(paths: list[str]) -> None:
+def deploy(paths: list[str], deleted_paths: list[str] | None = None) -> None:
     required_env = ("FTP_SERVER", "FTP_USERNAME", "FTP_PASSWORD", "GITHUB_RUN_ID", "GITHUB_SHA")
     missing = [name for name in required_env if not os.environ.get(name)]
     if missing:
@@ -424,6 +450,17 @@ def deploy(paths: list[str]) -> None:
     if not run_id.isdigit():
         raise RuntimeError("GITHUB_RUN_ID must be numeric")
     targets = build_targets(paths, run_id)
+    delete_targets: list[DeleteTarget] = []
+    for repository_path in deleted_paths or []:
+        destination = server_path_for(repository_path)
+        delete_targets.append(
+            DeleteTarget(
+                repository_path=repository_path,
+                remote_directory=destination.parent.as_posix(),
+                final_name=destination.name,
+                backup_name=f".{destination.name}.candy-delete-{run_id}",
+            )
+        )
     ftp = ftplib.FTP(timeout=30)
     try:
         ftp.connect(os.environ["FTP_SERVER"], 21)
@@ -518,6 +555,50 @@ def deploy(paths: list[str]) -> None:
                 f"Deployment failed for {failed_path}; all files changed by this run were rolled back"
             ) from exc
 
+        staged_deletions: list[DeleteTarget] = []
+        try:
+            for target in delete_targets:
+                ensure_remote_directory(ftp, target.remote_directory)
+                names = list_remote_names(ftp, target.remote_directory)
+                target.existed = target.final_name in names
+                if not target.existed:
+                    continue
+                if target.backup_name in names:
+                    raise RuntimeError(
+                        f"Delete backup collision for {target.repository_path}; manual inspection required"
+                    )
+                ftp.cwd(target.remote_directory)
+                ftp.rename(target.final_name, target.backup_name)
+                target.staged = True
+                staged_deletions.append(target)
+                print(f"STAGED DELETE: {target.repository_path}", flush=True)
+        except Exception as exc:
+            deletion_rollback_failures: list[str] = []
+            for target in reversed(staged_deletions):
+                try:
+                    ftp.cwd(target.remote_directory)
+                    ftp.rename(target.backup_name, target.final_name)
+                    target.staged = False
+                except Exception as rollback_exc:
+                    deletion_rollback_failures.append(
+                        f"{target.repository_path}: {rollback_exc}"
+                    )
+            for target in reversed(completed):
+                try:
+                    rollback_target(ftp, target)
+                except Exception as rollback_exc:
+                    deletion_rollback_failures.append(
+                        f"{target.repository_path}: {rollback_exc}"
+                    )
+            if deletion_rollback_failures:
+                raise RuntimeError(
+                    "Deletion staging failed and rollback was incomplete: "
+                    + "; ".join(deletion_rollback_failures)
+                ) from exc
+            raise RuntimeError(
+                "Deletion staging failed; uploaded files and deletions were rolled back"
+            ) from exc
+
         cleanup_failures: list[str] = []
         for target in completed:
             if target.had_original:
@@ -526,13 +607,23 @@ def deploy(paths: list[str]) -> None:
                 except Exception as cleanup_exc:
                     cleanup_failures.append(f"{target.repository_path}: {cleanup_exc}")
             target.promoted = False
+        for target in staged_deletions:
+            try:
+                delete_if_exists(ftp, target.remote_directory, target.backup_name)
+                target.staged = False
+                print(f"DELETED: {target.repository_path}", flush=True)
+            except Exception as cleanup_exc:
+                cleanup_failures.append(f"{target.repository_path}: {cleanup_exc}")
         if cleanup_failures:
             raise RuntimeError(
                 "All files are deployed and verified, but retained backup cleanup failed: "
                 + "; ".join(cleanup_failures)
             )
 
-        print(f"SUCCESS: deployed and SHA256-verified {len(targets)} file(s)")
+        print(
+            f"SUCCESS: deployed and SHA256-verified {len(targets)} file(s); "
+            f"deleted {len(staged_deletions)} obsolete file(s)"
+        )
     finally:
         try:
             ftp.quit()
@@ -566,9 +657,10 @@ def self_test() -> None:
             raise AssertionError(f"Unsafe path was accepted: {unsafe}")
     parsed = parse_diff_output("A\tHP/a.php\nM\tHP/b.php\nT\tHP/c.php\nD\tHP/d.php\nR100\tHP/e.php\tHP/f.php\n")
     deployable, excluded, blocked = classify_changes(parsed)
-    assert deployable == ["HP/a.php", "HP/b.php", "HP/c.php"]
+    assert deployable == ["HP/a.php", "HP/b.php", "HP/c.php", "HP/f.php"]
     assert excluded == []
     assert [item.status for item in blocked] == ["D", "R"]
+    assert deletion_paths(blocked) == ["HP/d.php", "HP/e.php"]
     protected = parse_diff_output("M\tHP/index.php\nM\tHP/main.php\n")
     deployable, excluded, blocked = classify_changes(protected)
     assert deployable == ["HP/main.php"]
@@ -632,18 +724,12 @@ def main() -> int:
     changes = collect_changes(args.before, args.after)
     deployable, excluded, blocked = classify_changes(changes)
     print_plan(args.before, args.after, deployable, excluded, blocked)
-    actual_plan_token = plan_token(args.before, args.after, deployable)
+    deleted = deletion_paths(blocked)
+    actual_plan_token = plan_token(args.before, args.after, deployable, deleted)
     print(f"Deployable file count: {len(deployable)}")
     print(f"Deployable total bytes: {sum(Path(path).stat().st_size for path in deployable)}")
     print(f"PLAN_TOKEN: {actual_plan_token}")
 
-    if blocked:
-        print("Automatic server deletion is disabled.", file=sys.stderr)
-        print(
-            "Manual approval is required for deleted or renamed production files.",
-            file=sys.stderr,
-        )
-        return 2
     if not deployable:
         print("No deployable HP files changed.")
         return 0
@@ -672,7 +758,7 @@ def main() -> int:
         actual_plan_token,
         args.confirm_production,
     )
-    deploy(deployable)
+    deploy(deployable, deleted)
     return 0
 
 if __name__ == "__main__":
