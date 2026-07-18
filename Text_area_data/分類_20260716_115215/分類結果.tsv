@@ -1,27 +1,25 @@
 file	category	slug	parsed_ok	issues
-七ツ島_テンプレート.txt	01_間違い無し	nanatsujima	yes	-
-三和町_テンプレート.txt	01_間違い無し	sanwacho	yes	-
+三和町_テンプレート.txt	09_作成済み	sanwacho	yes	-
 上之園町_テンプレート.txt	01_間違い無し	uenosonocho	yes	-
 上本町_テンプレート.txt	01_間違い無し	kamihonmachi	yes	-
 上福元町_テンプレート.txt	01_間違い無し	kamifukumotocho	yes	-
 上竜尾町_テンプレート.txt	01_間違い無し	kamitatsuocho	yes	-
 上荒田町_テンプレート.txt	01_間違い無し	uearatacho	yes	-
 上谷口町_テンプレート.txt	01_間違い無し	kamitaniguchicho	yes	-
-下伊敷町_テンプレート.txt	01_間違い無し	shimoishikicho	yes	-
-下田町_テンプレート.txt	01_間違い無し	shimotacho	yes	-
-下福元町_テンプレート.txt	01_間違い無し	shimofukumotocho	yes	-
-下竜尾町.txt	01_間違い無し	shimotatsuocho	yes	-
+下伊敷町_テンプレート.txt	09_作成済み	shimoishikicho	yes	-
+下田町_テンプレート.txt	09_作成済み	shimotacho	yes	-
+下福元町_テンプレート.txt	09_作成済み	shimofukumotocho	yes	-
+下竜尾町.txt	09_作成済み	shimotatsuocho	yes	-
 与次郎_テンプレート.txt	01_間違い無し	yojiro	yes	-
-中央港新町_テンプレート.txt	01_間違い無し	chuokoshinmachi	yes	-
 中央町_テンプレート.txt	01_間違い無し	chuocho	yes	-
 中山_テンプレート.txt	01_間違い無し	chuzan	yes	-
 中山町_テンプレート.txt	01_間違い無し	chuzancho	yes	-
 中町_テンプレート.txt	01_間違い無し	nakamachi	yes	-
-五ヶ別府町_テンプレート.txt	01_間違い無し	gokabeppucho	yes	-
+五ヶ別府町_テンプレート.txt	09_作成済み	gokabeppucho	yes	-
 伊敷.txt	08_複合_画像無し_情報足りない_間違い	ishiki	no	画像無し: image referenced file missing: https://www.55810.com/imgHtml/new_202601/kagoshima-deliveryhealth-area-ishiki_1.jpg / 情報足りない: L15: - 地図URL が未入力です（【1】地図URL） / 情報足りない: parser: 人気デリヘル店sceneの情報が不足しています / 間違い: image URL mismatch: expected https://www.55810.com/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-ishiki_1.jpg, actual https://www.55810.com/imgHtml/new_202601/kagoshima-deliveryhealth-area-ishiki_1.jpg
 伊敷台_テンプレート.txt	08_複合_画像無し_情報足りない_間違い	ishikidai	no	画像無し: image referenced file missing: https://www.55810.com/imgHtml/new_202601/kagoshima-deliveryhealth-area-ishikidai_1.jpg / 情報足りない: L72: 未確認 / 間違い: parser: template_shop.htmlにない店舗名です: 劇場団地妻 / 間違い: image URL mismatch: expected https://www.55810.com/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-ishikidai_1.jpg, actual https://www.55810.com/imgHtml/new_202601/kagoshima-deliveryhealth-area-ishikidai_1.jpg
 住吉町_テンプレート.txt	01_間違い無し	sumiyoshicho	yes	-
-光山_テンプレート.txt	01_間違い無し	hikariyama	yes	-
+光山_テンプレート.txt	09_作成済み	hikariyama	yes	-
 入佐町_テンプレート.txt	01_間違い無し	irisacho	yes	-
 冷水町_テンプレート.txt	01_間違い無し	hiyamizucho	yes	-
 千日町_テンプレート.txt	01_間違い無し	sennichicho	yes	-
@@ -30,19 +28,18 @@ file	category	slug	parsed_ok	issues
 南栄_テンプレート.txt	01_間違い無し	nanei	yes	-
 南郡元町_テンプレート.txt	01_間違い無し	minamikorimotocho	yes	-
 卸本町_テンプレート.txt	01_間違い無し	oroshihonmachi	yes	-
-原良_テンプレート.txt	01_間違い無し	harara	yes	-
-吉野_テンプレート.txt	01_間違い無し	yoshino	yes	-
-吉野町_テンプレート.txt	01_間違い無し	yoshinocho	yes	-
+原良_テンプレート.txt	09_作成済み	harara	yes	-
+吉野_テンプレート.txt	09_作成済み	yoshino	yes	-
+吉野町_テンプレート.txt	09_作成済み	yoshinocho	yes	-
 名山町_テンプレート.txt	01_間違い無し	meizancho	yes	-
-向陽_テンプレート.txt	02_画像無し	koyo	yes	画像無し: official image missing: kagoshima-deliveryhealth-area-koyo_1.jpg / 画像無し: official image missing: kagoshima-deliveryhealth-area-koyo_2.jpg / 画像無し: image referenced file missing: https://www.55810.com/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-koyo_1.jpg / 画像無し: img_1 referenced file missing: ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-koyo_1.jpg / 画像無し: img_2 referenced file missing: ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-koyo_2.jpg
-呉服町_テンプレート.txt	01_間違い無し	gofukucho	yes	-
+向陽_テンプレート.txt	09_作成済み	koyo	yes	画像無し: official image missing: kagoshima-deliveryhealth-area-koyo_1.jpg / 画像無し: official image missing: kagoshima-deliveryhealth-area-koyo_2.jpg / 画像無し: image referenced file missing: https://www.55810.com/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-koyo_1.jpg / 画像無し: img_1 referenced file missing: ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-koyo_1.jpg / 画像無し: img_2 referenced file missing: ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-koyo_2.jpg
+呉服町_テンプレート.txt	09_作成済み	gofukucho	yes	-
 和田_テンプレート.txt	01_間違い無し	wada	yes	-
 唐湊_テンプレート.txt	01_間違い無し	toso	yes	-
 喜入中名町_テンプレート.txt	01_間違い無し	kiirenakamyocho	yes	-
-喜入町_テンプレート.txt	01_間違い無し	kiirecho	yes	-
-四元町_テンプレート.txt	01_間違い無し	yotsumotocho	yes	-
-坂之上_テンプレート.txt	01_間違い無し	sakanoue	yes	-
-坂元町_テンプレート.txt	01_間違い無し	sakamotocho	yes	-
+喜入町_テンプレート.txt	09_作成済み	kiirecho	yes	-
+坂之上_テンプレート.txt	09_作成済み	sakanoue	yes	-
+坂元町_テンプレート.txt	09_作成済み	sakamotocho	yes	-
 城南町_テンプレート.txt	02_画像無し	jonancho	yes	画像無し: official image missing: kagoshima-deliveryhealth-area-jonancho_1.jpg / 画像無し: official image missing: kagoshima-deliveryhealth-area-jonancho_2.jpg / 画像無し: image referenced file missing: https://www.55810.com/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-jonancho_1.jpg / 画像無し: img_1 referenced file missing: ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-jonancho_1.jpg / 画像無し: img_2 referenced file missing: ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-jonancho_2.jpg
 城山_テンプレート.txt	01_間違い無し	shiroyama	yes	-
 城山町_テンプレート.txt	01_間違い無し	shiroyamacho	yes	-
@@ -55,22 +52,22 @@ file	category	slug	parsed_ok	issues
 宇宿_テンプレート.txt	08_複合_画像無し_情報足りない_間違い	usuki	no	画像無し: img_1 referenced file missing: ./imgHtml/new_202601/area/usuki.jpg / 画像無し: img_2 referenced file missing: ./imgHtml/new_202601/area/usuki.jpg / 画像無し: img_1 and img_2 are same / 情報足りない: parser: 通常記事sceneの情報が不足しています / 間違い: img_1 path mismatch: expected ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-usuki_1.jpg, actual ./imgHtml/new_202601/area/usuki.jpg / 間違い: img_2 path mismatch: expected ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-usuki_2.jpg, actual ./imgHtml/new_202601/area/usuki.jpg
 宮之浦町_テンプレート.txt	01_間違い無し	miyanouracho	yes	-
 小原町_テンプレート.txt	08_複合_画像無し_情報足りない_間違い		no	画像無し: image referenced file missing: https://www.55810.com/imgHtml/new_202601/area/obaracho.jpg / 画像無し: img_1 referenced file missing: ./imgHtml/new_202601/area/obaracho.jpg / 画像無し: img_2 referenced file missing: ./imgHtml/new_202601/area/aaaaaaaaaaaaaaaaaaaa.jpg / 情報足りない: parser: 必須項目不足: canonical slug / 間違い: L59: placeholder aaaaaaaaaaaaaaaaaaaa / 間違い: canonical slug cannot be identified
-小山田町_テンプレート.txt	01_間違い無し	koyamadacho	yes	-
+小山田町_テンプレート.txt	09_作成済み	koyamadacho	yes	-
 小川町_テンプレート.txt	08_複合_画像無し_情報足りない_間違い		no	画像無し: image referenced file missing: https://www.55810.com/imgHtml/new_202601/area/ogawacho.jpg / 画像無し: img_1 referenced file missing: ./imgHtml/new_202601/area/ogawacho.jpg / 画像無し: img_2 referenced file missing: ./imgHtml/new_202601/area/ogawacho.jpg / 画像無し: img_1 and img_2 are same / 情報足りない: parser: 必須項目不足: canonical slug / 間違い: canonical slug cannot be identified
 小松原_テンプレート.txt	01_間違い無し	komatsubara	yes	-
 小野_テンプレート.txt	08_複合_画像無し_情報足りない_間違い		no	画像無し: image referenced file missing: https://www.55810.com/imgHtml/new_202601/area/ono.jpg / 画像無し: img_1 referenced file missing: ./imgHtml/new_202601/area/ono.jpg / 画像無し: img_2 referenced file missing: ./imgHtml/new_202601/area/ono.jpg / 画像無し: img_1 and img_2 are same / 情報足りない: parser: 必須項目不足: canonical slug / 間違い: canonical slug cannot be identified
-山下町_テンプレート.txt	01_間違い無し	yamashitacho	yes	-
-山之口町_テンプレート.txt	01_間違い無し	yamanokuchicho	yes	-
-山田町_テンプレート.txt	01_間違い無し	yamadacho	yes	-
+山下町_テンプレート.txt	09_作成済み	yamashitacho	yes	-
+山之口町_テンプレート.txt	09_作成済み	yamanokuchicho	yes	-
+山田町_テンプレート.txt	09_作成済み	yamadacho	yes	-
 岡野原町_テンプレート.txt	08_複合_画像無し_情報足りない_間違い		no	画像無し: image referenced file missing: https://www.55810.com/imgHtml/new_202601/area/okanoharacho.jpg / 画像無し: img_1 referenced file missing: ./imgHtml/new_202601/area/okanoharacho.jpg / 画像無し: img_2 referenced file missing: ./imgHtml/new_202601/area/okanoharacho.jpg / 画像無し: img_1 and img_2 are same / 情報足りない: parser: 必須項目不足: canonical slug / 間違い: canonical slug cannot be identified
 川上町_テンプレート.txt	01_間違い無し	kawakamicho	yes	-
 川田町_テンプレート.txt	01_間違い無し	kawadacho	yes	-
-希望ヶ丘町_テンプレート.txt	01_間違い無し	kibougaokacho	yes	-
+希望ヶ丘町_テンプレート.txt	09_作成済み	kibougaokacho	yes	-
 常盤_テンプレート.txt	01_間違い無し	tokiwa	yes	-
 平之町_テンプレート.txt	01_間違い無し	hiranocho	yes	-
 平川町.txt	01_間違い無し	hirakawacho	yes	-
 平田町_テンプレート.txt	01_間違い無し	hiratacho	yes	-
-広木_テンプレート.txt	01_間違い無し	hiroki	yes	-
+広木_テンプレート.txt	09_作成済み	hiroki	yes	-
 慈眼寺町_テンプレート.txt	01_間違い無し	jigenjicho	yes	-
 新屋敷町_テンプレート .txt	02_画像無し	shinayashikicho	yes	画像無し: official image missing: kagoshima-deliveryhealth-area-shinayashikicho_1.jpg / 画像無し: official image missing: kagoshima-deliveryhealth-area-shinayashikicho_2.jpg / 画像無し: image referenced file missing: https://www.55810.com/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-shinayashikicho_1.jpg / 画像無し: img_1 referenced file missing: ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-shinayashikicho_1.jpg / 画像無し: img_2 referenced file missing: ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-shinayashikicho_2.jpg
 新栄町_テンプレート.txt	01_間違い無し	shineicho	yes	-
@@ -81,7 +78,7 @@ file	category	slug	parsed_ok	issues
 易居町_テンプレート.txt	08_複合_画像無し_情報足りない_間違い	yasuicho	no	画像無し: image referenced file missing: https://www.55810.com/imgHtml/new_202601/kagoshima-deliveryhealth-area-yasuicho_1.jpg / 情報足りない: L17: 【1】地図URL：未確認 / 情報足りない: L18: 【2】地図タイトル：未確認 / 情報足りない: L77: 未確認 / 情報足りない: L80: 未確認 / 情報足りない: parser: scene（h2）がありません / 間違い: image URL mismatch: expected https://www.55810.com/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-yasuicho_1.jpg, actual https://www.55810.com/imgHtml/new_202601/kagoshima-deliveryhealth-area-yasuicho_1.jpg
 星ヶ峯_テンプレート.txt	01_間違い無し	hoshigamine	yes	-
 春山町_テンプレート.txt	01_間違い無し	haruyamacho	yes	-
-春日町_テンプレート.txt	01_間違い無し	kasugacho	yes	-
+春日町_テンプレート.txt	09_作成済み	kasugacho	yes	-
 有屋田町_テンプレート.txt	08_複合_画像無し_情報足りない_間違い		no	画像無し: image referenced file missing: https://www.55810.com/imgHtml/new_202601/area/ariyadacho.jpg / 画像無し: img_1 referenced file missing: ./imgHtml/new_202601/area/ariyadacho.jpg / 画像無し: img_2 referenced file missing: ./imgHtml/new_202601/area/ariyadacho.jpg / 画像無し: img_1 and img_2 are same / 情報足りない: parser: 必須項目不足: canonical slug / 間違い: canonical slug cannot be identified
 本名町_テンプレート.txt	01_間違い無し	honmyocho	yes	-
 本城町_テンプレート.txt	01_間違い無し	honjocho	yes	-
@@ -96,7 +93,7 @@ file	category	slug	parsed_ok	issues
 松原町_テンプレート.txt	01_間違い無し	matsubaracho	yes	-
 松陽台町_テンプレート.txt	02_画像無し	shouyoudaichou	yes	画像無し: official image missing: kagoshima-deliveryhealth-area-shouyoudaichou_1.jpg / 画像無し: official image missing: kagoshima-deliveryhealth-area-shouyoudaichou_2.jpg / 画像無し: image referenced file missing: https://www.55810.com/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-shouyoudaichou_1.jpg / 画像無し: img_1 referenced file missing: ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-shouyoudaichou_1.jpg / 画像無し: img_2 referenced file missing: ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-shouyoudaichou_2.jpg
 柳町_テンプレート.txt	01_間違い無し	yanagimachi	yes	-
-桜ヶ丘_テンプレート.txt	01_間違い無し	sakuragaoka	yes	-
+桜ヶ丘_テンプレート.txt	09_作成済み	sakuragaoka	yes	-
 樋之口町_テンプレート.txt	01_間違い無し	tenokuchicho	yes	-
 武_テンプレート.txt	01_間違い無し	take	yes	-
 武岡_テンプレート.txt	01_間違い無し	takeoka	yes	-
@@ -109,31 +106,31 @@ file	category	slug	parsed_ok	issues
 照国町_テンプレート.txt	01_間違い無し	terukunicho	yes	-
 牟礼岡_テンプレート.txt	01_間違い無し	muregaoka	yes	-
 犬迫町_テンプレート.txt	01_間違い無し	inuzakocho	yes	-
-玉里団地_テンプレート.txt	01_間違い無し	tamazatodanchi	yes	-
-玉里町_テンプレート.txt	01_間違い無し	tamazatocho	yes	-
+玉里団地_テンプレート.txt	09_作成済み	tamazatodanchi	yes	-
+玉里町_テンプレート.txt	09_作成済み	tamazatocho	yes	-
 田上_テンプレート.txt	01_間違い無し	tagami	yes	-
 田上台_テンプレート.txt	01_間違い無し	tagamidai	yes	-
 田上町_テンプレート.txt	01_間違い無し	tagamicho	yes	-
-甲突町_テンプレート.txt	02_画像無し	kotsukicho	yes	画像無し: official image missing: kagoshima-deliveryhealth-area-kotsukicho_1.jpg / 画像無し: official image missing: kagoshima-deliveryhealth-area-kotsukicho_2.jpg / 画像無し: image referenced file missing: https://www.55810.com/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-kotsukicho_1.jpg / 画像無し: img_1 referenced file missing: ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-kotsukicho_1.jpg / 画像無し: img_2 referenced file missing: ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-kotsukicho_2.jpg
-皆与志町_テンプレート.txt	01_間違い無し	minayoshicho	yes	-
-皇徳寺台_テンプレート.txt	01_間違い無し	koutokujidai	yes	-
+甲突町_テンプレート.txt	09_作成済み	kotsukicho	yes	画像無し: official image missing: kagoshima-deliveryhealth-area-kotsukicho_1.jpg / 画像無し: official image missing: kagoshima-deliveryhealth-area-kotsukicho_2.jpg / 画像無し: image referenced file missing: https://www.55810.com/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-kotsukicho_1.jpg / 画像無し: img_1 referenced file missing: ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-kotsukicho_1.jpg / 画像無し: img_2 referenced file missing: ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-kotsukicho_2.jpg
+皆与志町_テンプレート.txt	09_作成済み	minayoshicho	yes	-
+皇徳寺台_テンプレート.txt	09_作成済み	koutokujidai	yes	-
 皷川町_テンプレート.txt	01_間違い無し	tsuzugawacho	yes	-
 直木町_テンプレート.txt	01_間違い無し	naokicho	yes	-
 真砂本町_テンプレート .txt	06_複合_画像無し_間違い	masagohonmachi	yes	画像無し: image referenced file missing: https://www.55810.com/imgHtml/new_202601/area/kagoshima-deliveryhealth-masagohonmachi_1.jpg / 間違い: image URL mismatch: expected https://www.55810.com/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-masagohonmachi_1.jpg, actual https://www.55810.com/imgHtml/new_202601/area/kagoshima-deliveryhealth-masagohonmachi_1.jpg
 真砂町_テンプレート.txt	01_間違い無し	masagocho	yes	-
 石谷町_テンプレート.txt	07_複合_情報足りない_間違い	ishidanicho	no	情報足りない: parser: 基本情報sceneの情報が不足しています / 間違い: L75: placeholder aaaaaaaaaaaaaaaaaaaa
-祇園之洲町_テンプレート.txt	01_間違い無し	gionnosucho	yes	-
+祇園之洲町_テンプレート.txt	09_作成済み	gionnosucho	yes	-
 福山町_テンプレート.txt	01_間違い無し	fukuyamacho	yes	-
 稲荷町_テンプレート.txt	01_間違い無し	inaricho	yes	-
 紫原_テンプレート.txt	01_間違い無し	murasakibaru	yes	-
 緑ヶ丘町_テンプレート.txt	01_間違い無し	midorigaokacho	yes	-
 自由ヶ丘_テンプレート.txt	01_間違い無し	jiyugaoka	yes	-
 船津町_テンプレート.txt	01_間違い無し	funatsucho	yes	-
-花尾町_テンプレート.txt	01_間違い無し	hanaomachi	yes	-
+花尾町_テンプレート.txt	09_作成済み	hanaomachi	yes	-
 若葉町_テンプレート.txt	01_間違い無し	wakabacho	yes	-
 草牟田_テンプレート.txt	01_間違い無し	soumuta	yes	-
 草牟田町_テンプレート.txt	01_間違い無し	soumutacho	yes	-
-荒田.txt	08_複合_画像無し_情報足りない_間違い	arata	no	画像無し: image referenced file missing: https://www.55810.com/imgHtml/new_202601/kagoshima-deliveryhealth-area-arata_1.jpg / 画像無し: img_1 referenced file missing: ./imgHtml/new_202601/kagoshima-deliveryhealth-area-arata_1.jpg / 画像無し: img_2 referenced file missing: ./imgHtml/new_202601/kagoshima-deliveryhealth-area-arata_2.jpg / 情報足りない: parser: 必須項目不足: img_1, img_2, page_title_h1 / 間違い: image URL mismatch: expected https://www.55810.com/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-arata_1.jpg, actual https://www.55810.com/imgHtml/new_202601/kagoshima-deliveryhealth-area-arata_1.jpg / 間違い: img_1 path mismatch: expected ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-arata_1.jpg, actual ./imgHtml/new_202601/kagoshima-deliveryhealth-area-arata_1.jpg / 間違い: img_2 path mismatch: expected ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-arata_2.jpg, actual ./imgHtml/new_202601/kagoshima-deliveryhealth-area-arata_2.jpg
+荒田.txt	09_作成済み	arata	yes	-
 薬師_テンプレート.txt	08_複合_画像無し_情報足りない_間違い		no	画像無し: image referenced file missing: https://www.55810.com/imgHtml/new_202601/area/yakushi.jpg / 画像無し: img_1 referenced file missing: ./imgHtml/new_202601/area/yakushi.jpg / 画像無し: img_2 referenced file missing: ./imgHtml/new_202601/area/yakushi.jpg / 画像無し: img_1 and img_2 are same / 情報足りない: parser: 必須項目不足: canonical slug / 間違い: canonical slug cannot be identified
 西伊敷_テンプレート.txt	01_間違い無し	nishiishiki	yes	-
 西佐多町_テンプレート.txt	01_間違い無し	nishisatacho	yes	-
@@ -147,14 +144,14 @@ file	category	slug	parsed_ok	issues
 西陵_テンプレート.txt	01_間違い無し	seiryo	yes	-
 谷山中央_テンプレート.txt	01_間違い無し	taniyamachuuou	yes	-
 谷山港_テンプレート.txt	01_間違い無し	taniyamakou	yes	-
-郡元_テンプレート.txt	01_間違い無し	korimoto	yes	-
-郡元町_テンプレート.txt	01_間違い無し	korimotocho	yes	-
-郡山岳町_テンプレート.txt	01_間違い無し	koriyamadakecho	yes	-
-郡山町_テンプレート.txt	01_間違い無し	koriyamacho	yes	-
-金生町_テンプレート.txt	01_間違い無し	kinseicho	yes	-
-錦江台_テンプレート.txt	01_間違い無し	kinkodai	yes	-
+郡元_テンプレート.txt	09_作成済み	korimoto	yes	-
+郡元町_テンプレート.txt	09_作成済み	korimotocho	yes	-
+郡山岳町_テンプレート.txt	09_作成済み	koriyamadakecho	yes	-
+郡山町_テンプレート.txt	09_作成済み	koriyamacho	yes	-
+金生町_テンプレート.txt	09_作成済み	kinseicho	yes	-
+錦江台_テンプレート.txt	09_作成済み	kinkodai	yes	-
 長田町_テンプレート.txt	01_間違い無し	nagatacho	yes	-
-高麗町_テンプレート.txt	01_間違い無し	koraicho	yes	-
+高麗町_テンプレート.txt	09_作成済み	koraicho	yes	-
 魚見町_テンプレート.txt	01_間違い無し	uomicho	yes	-
 鴨池_テンプレート.txt	01_間違い無し	kamoike	yes	-
 鷹師_テンプレート.txt	01_間違い無し	takashi	yes	-
