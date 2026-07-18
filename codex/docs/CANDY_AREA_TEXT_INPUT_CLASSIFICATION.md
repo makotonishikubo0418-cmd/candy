@@ -19,7 +19,7 @@ These are the exact domain values and counts required for the area-input workflo
 
 | Category | Count | Meaning |
 |---|---:|---|
-| `01_間違い無し` | 100 | No classification issue; page bundle is not yet complete |
+| `01_間違い無し` | 98 | No classification issue; page bundle is not yet complete |
 | `02_画像無し` | 5 | Image missing; page bundle is not yet complete |
 | `03_情報足りない` | 0 | No current file |
 | `04_間違い` | 0 | No current file |
@@ -27,7 +27,7 @@ These are the exact domain values and counts required for the area-input workflo
 | `06_複合_画像無し_間違い` | 2 | Image missing and incorrect information |
 | `07_複合_情報足りない_間違い` | 1 | Information missing and incorrect information |
 | `08_複合_画像無し_情報足りない_間違い` | 10 | Image missing, information missing, and incorrect information |
-| `09_作成済み` | 38 | Public PHP, source HTML, dataset PHP, and the required `dataset_base.php` registrations are complete |
+| `09_作成済み` | 40 | Public PHP, source HTML, dataset PHP, and the required `dataset_base.php` registrations are complete |
 | **Total** | **156** | Active Text inputs |
 
 Categories `01` through `08` are the fixed combinations of the three input issues: image missing, information missing, and incorrect information. `03`, `04`, and `05` are intentionally shown as zero so the numbering is not mistaken for an omission; physical folders are not created for empty categories. `09_作成済み` is an operational status and takes priority over an `01`-`08` input-issue category once the page bundle is complete. Its TSV `issues` field continues to preserve any input issue details.
@@ -72,12 +72,12 @@ All 342 retained JPEG files are readable. `kagoshima-deliveryhealth-area-ishikid
 
 | Category | Files | Parser passed | Parser failed | Pre-render passed | Pre-render stopped |
 |---|---:|---:|---:|---:|---:|
-| `01_間違い無し` | 100 | 100 | 0 | 100 | 0 |
+| `01_間違い無し` | 98 | 98 | 0 | 98 | 0 |
 | `02_画像無し` | 5 | 5 | 0 | 0 | 5 |
 | `06_複合_画像無し_間違い` | 2 | 2 | 0 | 1 | 1 |
 | `07_複合_情報足りない_間違い` | 1 | 0 | 1 | 0 | 0 |
 | `08_複合_画像無し_情報足りない_間違い` | 10 | 0 | 10 | 0 | 0 |
-| `09_作成済み` | 38 | 38 | 0 | 36 | 2 |
+| `09_作成済み` | 40 | 40 | 0 | 38 | 2 |
 
 The folder category is the current operational classification. Runtime parser and pre-render results are tracked separately. The two pre-render stops under `09_作成済み` are `向陽_テンプレート.txt` and `甲突町_テンプレート.txt`: their page bundles are complete, while their source image shortages remain recorded in the TSV.
 
@@ -89,7 +89,7 @@ The folder category is the current operational classification. Runtime parser an
 | `06_複合_画像無し_間違い` | `池之上町_テンプレート.txt`, `真砂本町_テンプレート .txt` |
 | `07_複合_情報足りない_間違い` | `石谷町_テンプレート.txt` |
 | `08_複合_画像無し_情報足りない_間違い` | `伊敷.txt`, `伊敷台_テンプレート.txt`, `宇宿_テンプレート.txt`, `小原町_テンプレート.txt`, `小川町_テンプレート.txt`, `小野_テンプレート.txt`, `岡野原町_テンプレート.txt`, `易居町_テンプレート.txt`, `有屋田町_テンプレート.txt`, `薬師_テンプレート.txt` |
-| `09_作成済み` | `三和町_テンプレート.txt`, `下伊敷町_テンプレート.txt`, `下田町_テンプレート.txt`, `下福元町_テンプレート.txt`, `下竜尾町.txt`, `五ヶ別府町_テンプレート.txt`, `光山_テンプレート.txt`, `原良_テンプレート.txt`, `吉野_テンプレート.txt`, `吉野町_テンプレート.txt`, `呉服町_テンプレート.txt`, `喜入町_テンプレート.txt`, `坂之上_テンプレート.txt`, `坂元町_テンプレート.txt`, `小山田町_テンプレート.txt`, `山下町_テンプレート.txt`, `山之口町_テンプレート.txt`, `山田町_テンプレート.txt`, `希望ヶ丘町_テンプレート.txt`, `広木_テンプレート.txt`, `春日町_テンプレート.txt`, `桜ヶ丘_テンプレート.txt`, `玉里団地_テンプレート.txt`, `玉里町_テンプレート.txt`, `皆与志町_テンプレート.txt`, `皇徳寺台_テンプレート.txt`, `祇園之洲町_テンプレート.txt`, `花尾町_テンプレート.txt`, `郡元_テンプレート.txt`, `郡元町_テンプレート.txt`, `郡山岳町_テンプレート.txt`, `郡山町_テンプレート.txt`, `金生町_テンプレート.txt`, `錦江台_テンプレート.txt`, `高麗町_テンプレート.txt`, `向陽_テンプレート.txt`, `甲突町_テンプレート.txt`, `荒田.txt` |
+| `09_作成済み` | `三和町_テンプレート.txt`, `下伊敷町_テンプレート.txt`, `下田町_テンプレート.txt`, `下福元町_テンプレート.txt`, `下竜尾町.txt`, `五ヶ別府町_テンプレート.txt`, `光山_テンプレート.txt`, `原良_テンプレート.txt`, `吉野_テンプレート.txt`, `吉野町_テンプレート.txt`, `呉服町_テンプレート.txt`, `喜入町_テンプレート.txt`, `坂之上_テンプレート.txt`, `坂元町_テンプレート.txt`, `小山田町_テンプレート.txt`, `山下町_テンプレート.txt`, `山之口町_テンプレート.txt`, `山田町_テンプレート.txt`, `希望ヶ丘町_テンプレート.txt`, `広木_テンプレート.txt`, `春日町_テンプレート.txt`, `桜ヶ丘_テンプレート.txt`, `玉里団地_テンプレート.txt`, `玉里町_テンプレート.txt`, `皆与志町_テンプレート.txt`, `皇徳寺台_テンプレート.txt`, `祇園之洲町_テンプレート.txt`, `花尾町_テンプレート.txt`, `郡元_テンプレート.txt`, `郡元町_テンプレート.txt`, `郡山岳町_テンプレート.txt`, `郡山町_テンプレート.txt`, `金生町_テンプレート.txt`, `錦江台_テンプレート.txt`, `高麗町_テンプレート.txt`, `向陽_テンプレート.txt`, `甲突町_テンプレート.txt`, `荒田.txt`, `慈眼寺町_テンプレート.txt`, `自由ヶ丘_テンプレート.txt` |
 
 Use `分類結果.tsv` for all 156 file names, slugs, parser states, and issue details.
 
@@ -99,7 +99,7 @@ When asked for the Text total and breakdown, answer:
 
 ```text
 Text total: 156
-01_間違い無し: 100
+01_間違い無し: 98
 02_画像無し: 5
 03_情報足りない: 0
 04_間違い: 0
@@ -107,7 +107,7 @@ Text total: 156
 06_複合_画像無し_間違い: 2
 07_複合_情報足りない_間違い: 1
 08_複合_画像無し_情報足りない_間違い: 10
-09_作成済み: 38
+09_作成済み: 40
 Unnecessary Text remaining inside Text_area_data: 0
 ```
 
