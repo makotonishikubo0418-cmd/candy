@@ -14,14 +14,13 @@
 
 ## 2. Active Reservations
 
-| Task ID | Codex | Period | Scope | Purpose | Status |
-|---|---|---|---|---|---|
-| TASK-20260718-AREA-RELATED-LINKS-001 | current | 2026-07-18 | All 78 `HP/source/kagoshima-deliveryhealth-area-*.html` files, `HP/source/template_kagoshima-deliveryhealth-area.html`, the canonical area-related-link data, area generation/validation tooling, `HP/AGENTS.md`, `codex/README.md`, area/SEO specifications and runbook, generated current-state documents, and this reservation record | Replace public dummy related-article entries with verified nearby published area links, update the normal generation rule, validate the complete link graph, and publish in deployment batches of no more than 25 HP files. | ACTIVE |
+No active reservations.
 
 ## 3. Completed and Released Reservations
 
 | Task ID | Codex | Period | Scope | Result | Status |
 |---|---|---|---|---|---|
+| TASK-20260718-AREA-RELATED-LINKS-001 | current | 2026-07-18 | All 78 `HP/source/kagoshima-deliveryhealth-area-*.html` files, `HP/source/template_kagoshima-deliveryhealth-area.html`, the canonical area-related-link data, area generation/validation tooling, `HP/AGENTS.md`, `codex/README.md`, area/SEO specifications and runbook, generated current-state documents, and this reservation record | Replaced the area dummy entries with the fixed nearby-area graph, established three-to-six-link generation and validation, and published 79 HP files in four successful deployment batches. Production verification passed for all 78 pages: 71 blocks, seven omissions, 361 links, and 24 canonical/robots/H1-valid targets. | COMPLETE |
 | TASK-20260718-AREA-JIGENJI-JIYUGAOKA-PUBLISH-001 | current | 2026-07-18 | `jigenjicho` and `jiyugaoka` area page change units, shared area registrations, queue, generated current-state documents, final Text classification synchronization, and this reservation record | Published `jigenjicho` and `jiyugaoka` in queue order with successful Actions and production HTTP verification, then moved both verified inputs to `09_作成済み` and synchronized the classification inventory. | COMPLETE |
 | TASK-20260718-AREA-TWO-PAGE-PUBLISH-001 | current | 2026-07-18 | Area target/publish scripts, area production runbook, two selected page change units, generated current-state documents, Text classification records, and this reservation record | Unified `target-next` and `publish-next` on queue order plus the new-page target gate, rejected untracked or ineligible inputs before publication, and verified the first eligible targets as queue 16 `jigenjicho` and queue 17 `jiyugaoka`. Page publication continues as separate integrated work units. | COMPLETE |
 | TASK-20260718-AREA-09-COMPLETED-001 | current | 2026-07-18 | `Text_area_data/分類_20260716_115215/**/*.txt`, `分類結果.tsv`, area Text classification document, generated current-state documents, and this reservation record | Created `09_作成済み`, moved the 38 exact complete page-bundle inputs without content changes, synchronized the TSV and current-state documents, and verified the 156-file inventory, category counts, UTF-8, SHA-256 uniqueness, parser and pre-render totals, and generated `EXISTING` set. | COMPLETE |
