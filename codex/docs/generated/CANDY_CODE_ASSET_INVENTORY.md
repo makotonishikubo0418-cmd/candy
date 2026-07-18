@@ -2,11 +2,11 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-18T11:49:57+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-18T12:01:20+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: f4bd1773ba26d4508677ffd78deb3dd81e6735b1
+> Commit: 1691942f1a48d986a6cc980bf2084864b7a56240
 > Scope: Public PHP, source files, datasets, shared PHP, CSS, JavaScript, images, videos, and fonts
-> Population: Public PHP files: 116 / assets: 1054
+> Population: Public PHP files: 116 / assets: 1064
 > Generator: `codex/scripts/candy_site_state.py`
 > Result: Missing references: 40 / duplicate hash groups: 165
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -195,7 +195,7 @@ Only the external session and database configuration references in `dataset_base
 | .css | 15 |
 | .eot | 16 |
 | .gif | 10 |
-| .jpg | 824 |
+| .jpg | 834 |
 | .js | 16 |
 | .png | 135 |
 | .svg | 2 |
@@ -215,7 +215,7 @@ Only the external session and database configuration references in `dataset_base
 | HP/imgHtml | 91 |
 | HP/imgHtml/new_202601 | 7 |
 | HP/imgHtml/new_202601/adsite | 1 |
-| HP/imgHtml/new_202601/area | 347 |
+| HP/imgHtml/new_202601/area | 357 |
 | HP/imgHtml/new_202601/banner | 23 |
 | HP/imgHtml/new_202601/blog | 12 |
 | HP/imgHtml/new_202601/girl | 112 |
@@ -407,7 +407,7 @@ These candidates have no confirmed static HTML or CSS reference. They may be ref
 | HP/imgHtml | 76 | age_verification.jpg, age_verification_bk.jpg, banner.jpg, cdBgGirl.jpg, cdImgGirl.jpg |
 | HP/imgHtml/new_202601 | 3 | candy_img1.jpg, candy_img1_sp.jpg, placeholder_image_picture.gif |
 | HP/imgHtml/new_202601/adsite | 1 | heavennetlink_ohp_red01.png |
-| HP/imgHtml/new_202601/area | 203 | kagoshima-deliveryhealth-area-chuocho_1.jpg, kagoshima-deliveryhealth-area-chuocho_2.jpg, kagoshima-deliveryhealth-area-chuzan_1.jpg, kagoshima-deliveryhealth-area-chuzan_2.jpg, kagoshima-deliveryhealth-area-chuzancho_1.jpg |
+| HP/imgHtml/new_202601/area | 213 | kagoshima-deliveryhealth-area-chuocho_1.jpg, kagoshima-deliveryhealth-area-chuocho_2.jpg, kagoshima-deliveryhealth-area-chuzan_1.jpg, kagoshima-deliveryhealth-area-chuzan_2.jpg, kagoshima-deliveryhealth-area-chuzancho_1.jpg |
 | HP/imgHtml/new_202601/banner | 18 | cityheaven_2.png, girlsheaven_1.jpg, girlsheaven_2.png, girlsheaven_kagoshima.jpg, girlsheaven_kumamoto.jpg |
 | HP/imgHtml/new_202601/girl | 56 | alice_1_sp.jpg, ami_1_sp.jpg, ann_1_sp.jpg, anya_1_sp.jpg, aoba_1_sp.jpg |
 | HP/imgHtml/new_202601/shop | 11 | after5_sp.jpg, beloved_sp.jpg, candy_sp.jpg, danzuma_sp.jpg, hitozuma_sp.jpg |

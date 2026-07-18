@@ -15,7 +15,7 @@
 | Project management | `C:\Codex\candy\codex\project_management` | Contains rules, current state, reservations, history, and safety procedures |
 | Actual HP site tree | `C:\Codex\candy\HP` | Contains public PHP, source, includefile, images, logs, and movies |
 | Production inputs | Root-level `Text_area_data`, `Text_blog_data`, and `Text_hotel_data` | Non-public source data for page production |
-| NAS storage | `\\192.168.1.3\disk1\FSG_SEO\candy` | Storage-only location for `Backup/` and accepted source assets. Git operations are prohibited |
+| NAS storage | `\\192.168.1.3\disk1\FSG_SEO\candy` | Storage-only location for `Backup/`. Git operations are prohibited |
 
 ## 2. Primary Areas
 
@@ -29,10 +29,10 @@
 | HP generation tools | Area, hotel, and blog generation, validation, and publishing scripts | `codex/scripts/` |
 | Public HP files | PHP, source, dataset, images, logs, and movies | `HP/` |
 | Area input | Regional text files and classification results | `Text_area_data/` |
-| Accepted area images | Assets outside Git used before area-page production | NAS `Text_area_data/画像データ/` |
+| Accepted area images | Git-managed source assets used before area-page production | `Text_area_data/画像データ/` |
 | Blog input | Article text files | `Text_blog_data/` |
 | Hotel input | Hotel text files and classification results | `Text_hotel_data/` |
-| Backups and accepted assets | Legacy data, excluded data, historical materials, and accepted assets outside Git | NAS `Backup/` and accepted-asset locations |
+| Backups | Legacy data, excluded data, and historical materials outside Git | NAS `Backup/` |
 
 ## 3. Current Constraints
 
@@ -40,7 +40,8 @@
 - Canonical management sources belong under `codex/`; project-management documents belong under `codex/project_management/`.
 - `Text_*_data/` is not published directly to HP.
 - At the start of work, run `git fetch origin` and `git status --short --branch`. Pull first when the branch is behind.
-- The NAS is storage-only for `Backup/` and accepted assets. Do not run Git operations there.
+- Accepted area images are stored and versioned under local `Text_area_data/画像データ/`.
+- The NAS is storage-only for `Backup/`. Do not run Git operations there.
 - NAS `Backup/` is for reference and MUST NOT be used as the basis for a current specification.
 - Internal path migration under `codex/scripts/` and read-only dry runs are verified. Page generation and publish operations remain subject to the applicable runbook and explicit authority.
 - After an HP change, include generated-document synchronization in the same work unit by running `candy-site-state write` and `check`.

@@ -24,7 +24,7 @@ Do not mix stable specifications with current state. Regenerate `generated/` to 
 |---|---|
 | Normal area production and publication | `CANDY_AREA_STAFF_PRODUCTION_RUNBOOK.md` |
 | Area structure or unknown exception | `CANDY_AREA_PAGE_GENERATION_SPEC.md` |
-| Area-image production and management | `CANDY_AREA_IMAGE_CREATION_SPEC.md` and `CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md` |
+| Area-image production and management | `CANDY_AREA_IMAGE_CREATION_RUNBOOK.md` → `CANDY_AREA_IMAGE_CREATION_SPEC.md` → `CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md` |
 | Area production order | `CANDY_AREA_105_PAGE_QUEUE.md` and `generated/CANDY_UPCOMING_PAGES.md` |
 | Normal hotel production and publication | `CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md` |
 | Hotel structure or unknown exception | `CANDY_PAGE_GENERATION_GOVERNANCE.md` and `CANDY_HOTEL_PAGE_GENERATION_SPEC.md` |

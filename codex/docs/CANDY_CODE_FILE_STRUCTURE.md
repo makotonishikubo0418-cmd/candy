@@ -87,7 +87,7 @@ The `<script>` elements in source HTML are the canonical loading source. Before 
 | `HP/imgCss/` and images adjacent to CSS | Assets referenced by CSS, including backgrounds |
 | `HP/movie/` | Public movies and related assets. Deletion or replacement requires approval |
 | `HP/font/` and related locations | Fonts referenced from CSS |
-| `Text_area_data/画像データ/` and accepted NAS assets | Accepted or candidate assets before production. Do not treat them as public assets |
+| `Text_area_data/画像データ/` | Git-managed accepted or candidate source assets before production. Do not treat them as public assets; public HTML uses the copied files under `HP/imgHtml/new_202601/area/` |
 
 For detail-page images, use the category specification's naming and required count, then synchronize source, OGP, JSON-LD, and alt values. The generated inventory identifies missing, unconfirmed-reference, and same-hash candidates, but machine evaluation alone MUST NOT trigger deletion or replacement.
 

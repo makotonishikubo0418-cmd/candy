@@ -17,10 +17,15 @@ Do not count the NAS backup as active Text input. The NAS is storage-only and is
 
 These are the exact domain values and counts required for the area-input workflow.
 
+The folder and TSV classifications are the retained input-audit snapshot. They
+are not the authority for current image-file availability after later image
+creation. Use actual files and `generated/CANDY_UPCOMING_PAGES.md` for the live
+image gate.
+
 | Category | Count | Meaning |
 |---|---:|---|
 | `01_間違い無し` | 98 | No classification issue; page bundle is not yet complete |
-| `02_画像無し` | 5 | Image missing; page bundle is not yet complete |
+| `02_画像無し` | 5 | Image was missing at classification time; the folder has not been moved or reclassified |
 | `03_情報足りない` | 0 | No current file |
 | `04_間違い` | 0 | No current file |
 | `05_複合_画像無し_情報足りない` | 0 | No current file |
@@ -32,6 +37,12 @@ These are the exact domain values and counts required for the area-input workflo
 
 Categories `01` through `08` are the fixed combinations of the three input issues: image missing, information missing, and incorrect information. `03`, `04`, and `05` are intentionally shown as zero so the numbering is not mistaken for an omission; physical folders are not created for empty categories. `09_作成済み` is an operational status and takes priority over an `01`-`08` input-issue category once the page bundle is complete. Its TSV `issues` field continues to preserve any input issue details.
 
+As of 2026-07-18, all five inputs physically retained under `02_画像無し`
+have complete canonical accepted and public image pairs. Their folder placement
+and TSV issue text remain the original classification record; changing that
+classification requires a separately authorized file-movement and inventory
+update task.
+
 The exact `09_作成済み` gate is all of the following: the public PHP exists, the source HTML exists, the dataset PHP exists, and `HP/includefile/dataset_base.php` contains exactly one case registration and exactly one conversion registration for the slug. Area-list and sitemap status are tracked separately and do not change whether the page itself is classified as created. A partial page artifact does not qualify.
 
 ## 3. Necessary and Unnecessary Files
@@ -39,7 +50,7 @@ The exact `09_作成済み` gate is all of the following: the public PHP exists,
 | Decision | Count | Verified reason | Current location |
 |---|---:|---|---|
 | Necessary active Text | 156 | One unique filename and one unique SHA-256 per classified input | `Text_area_data/分類_20260716_115215/` |
-| Necessary source images | 342 | All files were opened and verified as valid JPEG data; 171 `_1`/`_2` filename pairs are retained | `Text_area_data/画像データ/` |
+| Necessary source images | 352 | All files are valid 1000×750 JPEG data; 176 complete `_1`/`_2` filename pairs are retained | `Text_area_data/画像データ/` |
 | Necessary classification inventory | 1 | The 156 TSV rows match the 156 active Text files one-to-one | `Text_area_data/分類_20260716_115215/分類結果.tsv` |
 | Unnecessary old Text | 35 | A current public, source, and dataset page bundle exists for every file | NAS `Backup/Text_area_data_unneeded_20260718/` |
 | Unnecessary duplicate Text | 2 | Byte-for-byte duplicate of the classified `新屋敷町` and `真砂本町` inputs | NAS `Backup/Text_area_data_unneeded_20260718/` |
@@ -58,7 +69,7 @@ No file was discarded. The 42 unnecessary files were relocated to storage after 
 
 All 156 active files were read as UTF-8 and passed one-to-one inventory checks.
 
-All 342 retained JPEG files are readable. `kagoshima-deliveryhealth-area-ishikidai_1.jpg` and `_2.jpg` have identical content, but both remain because they are the two explicitly named correction targets for the classified `ishikidai` input; they are not treated as an extra backup copy.
+All 352 retained JPEG files are readable. `kagoshima-deliveryhealth-area-ishikidai_1.jpg` and `_2.jpg` have identical content, but both remain because they are the two explicitly named correction targets for the classified `ishikidai` input; they are not treated as an extra backup copy.
 
 | Check | Result |
 |---|---:|
@@ -111,4 +122,4 @@ Text total: 156
 Unnecessary Text remaining inside Text_area_data: 0
 ```
 
-The physical file total under `Text_area_data/` is 499: 156 `.txt`, 342 `.jpg`, and one `.tsv`. The `.tsv` is the active classification inventory; images are not part of the Text count.
+The physical file total under `Text_area_data/` is 509: 156 `.txt`, 352 `.jpg`, and one `.tsv`. The `.tsv` is the active classification inventory; images are not part of the Text count.

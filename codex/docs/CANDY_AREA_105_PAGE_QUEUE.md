@@ -140,17 +140,14 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 104 | 和田 | `wada` | READY_CANDIDATE | |
 | 105 | 皷川町 | `tsuzugawacho` | READY_CANDIDATE | |
 
-## 4. Blocked by Missing Images: 5
+## 4. Blocked by Missing Images: 0
 
-These candidates have information files but do not have two correctly named images that exactly match the canonical slug. Do not automatically reuse images with similar slugs.
+Current accepted and public files contain complete canonical `_1` and `_2`
+pairs for every candidate previously listed in this section. Similar-slug legacy
+images remain separate and MUST NOT be renamed or substituted automatically.
 
-| Region name | Canonical slug | Status | Reason |
-|---|---|---|---|
-| 城南町 | `jonancho` | BLOCKED | Correctly named slug images are missing |
-| 新屋敷町 | `shinayashikicho` | BLOCKED | Correctly named slug images are missing |
-| 西陵 | `seiryo` | BLOCKED | Correctly named slug images are missing |
-| 大竜町 | `dairyuucho` | BLOCKED | Correctly named slug images are missing |
-| 天保山町 | `tenpozancho` | BLOCKED | Correctly named slug images are missing |
+Image availability alone does not make a candidate publishable. Continue to
+apply the area-index, page-structure, input, and publication gates.
 
 ## 5. Blocked by Existing Inconsistencies: 9
 

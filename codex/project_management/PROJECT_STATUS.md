@@ -16,7 +16,8 @@
 | Generated HP current state | `codex/docs/generated/` | Four documents generated from actual files. Manual editing is prohibited |
 | Actual site | `HP/` | Public PHP, source, includefile, CSS, JavaScript, images, movies, and logs |
 | Production inputs | `Text_area_data/`, `Text_blog_data/`, and `Text_hotel_data/` | Source data not published directly to HP |
-| NAS | `\\192.168.1.3\disk1\FSG_SEO\candy` | Storage-only for backups and accepted assets. Git operations are prohibited |
+| Accepted area images | `Text_area_data/画像データ/` | Git-managed local source assets used before public placement |
+| NAS | `\\192.168.1.3\disk1\FSG_SEO\candy` | Storage-only for backups. Git operations are prohibited |
 
 ## 2. Completed Management Foundation
 

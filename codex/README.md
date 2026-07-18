@@ -12,7 +12,7 @@ This README is the entry point for the management documents under `C:\Codex\cand
 | Project management | `C:\Codex\candy\codex\project_management` | Canonical source for rules, current state, reservations, history, and safety procedures |
 | Actual site tree | `C:\Codex\candy\HP` | Contains HP data such as PHP, source, includefile, images, logs, and movies |
 | Production inputs | Root-level `Text_area_data`, `Text_blog_data`, and `Text_hotel_data` | Source data for page production that is not published directly to HP |
-| NAS storage | `\\192.168.1.3\disk1\FSG_SEO\candy` | Storage-only location for `Backup/` and accepted source assets. Git operations are prohibited |
+| NAS storage | `\\192.168.1.3\disk1\FSG_SEO\candy` | Storage-only location for `Backup/`. Git operations are prohibited |
 
 At the start of work, run `git fetch origin` and `git status --short --branch`. If `main` is behind `origin/main`, pull before editing. Push only with explicit user instruction.
 
@@ -35,10 +35,10 @@ At the start of work, run `git fetch origin` and `git status --short --branch`. 
 | `codex/data/` | Canonical operational mapping data consumed by production tooling, including the approved area nearby-link graph |
 | `codex/scripts/` | Page generation, validation, and publishing scripts |
 | `HP/` | The actual public site tree. `includefile`, `log`, and `movie` are also HP data |
-| `Text_area_data/` | Area-page production inputs. Accepted area images are stored in the NAS `Text_area_data/画像データ/` directory |
+| `Text_area_data/` | Area-page production inputs. Accepted area images are stored in the Git-managed local `Text_area_data/画像データ/` directory |
 | `Text_blog_data/` | Blog-page production inputs |
 | `Text_hotel_data/` | Hotel-page production inputs |
-| NAS `Backup/` and accepted assets | Stores backups, isolated files, legacy materials, and accepted assets outside Git. Do not run Git operations on the NAS |
+| NAS `Backup/` | Stores backups, isolated files, and legacy materials outside Git. Do not run Git operations on the NAS |
 
 ## 4. Canonical Document Index
 

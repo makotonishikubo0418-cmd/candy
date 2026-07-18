@@ -1,42 +1,46 @@
 # CANDY Area Image Asset Management
 
-- Updated: 2026-07-13
+- Updated: 2026-07-18
 - Target: Acceptance, reconciliation, public placement, and Git management of area-page images
 
 ## 1. Management Classes
 
 | Class | Path | Handling |
 |---|---|---|
-| Preparation and acceptance | `\\192.168.1.3\disk1\FSG_SEO\candy\Text_area_data\画像データ` | Accepted-asset storage on the NAS. Do not treat it as a Git working repository |
+| Preparation and acceptance | `C:\Codex\Candy\Text_area_data\画像データ` | Git-managed local source for accepted area images |
 | Canonical public source | `HP/imgHtml/new_202601/area` | Actual images referenced by HTML |
 | HTML reference | `./imgHtml/new_202601/area/<filename>` | Reference format in area source HTML |
 
-Do not reference accepted NAS assets directly as the canonical public source. Public pages reference `HP/imgHtml/new_202601/area` in the local Git working repository.
+Do not reference accepted source assets under `Text_area_data/画像データ/` directly from HTML. Public pages reference `HP/imgHtml/new_202601/area` in the local Git working repository.
 
-## 2. Verification Results on 2026-07-13
+## 2. Current Verified State
 
-Preparation folder, which is NAS storage only and prohibits Git operations:
+Preparation and acceptance folder in the local Git working repository:
 
 ```text
-\\192.168.1.3\disk1\FSG_SEO\candy\Text_area_data\画像データ
+C:\Codex\Candy\Text_area_data\画像データ
 ```
 
 | Item | Result |
 |---|---:|
-| All files | 344 |
-| JPG | 343 |
-| Correctly named images | 342 |
-| Slugs | 171 |
-| Complete `_1` and `_2` pairs | 171 |
+| Accepted JPG files | 352 |
+| Correctly named accepted images | 352 |
+| Accepted slugs | 176 |
+| Complete accepted `_1` and `_2` pairs | 176 |
 | Incomplete pairs | 0 |
 | Unreadable images | 0 |
 | Dimensions | Every JPG is 1000×750 |
-| JPG outside the naming standard | One `sample.jpg` |
-| Non-image | One `Thumbs.db` |
+| Accepted files outside the naming standard | 0 |
+| Accepted files missing from the canonical public source | 0 |
+| Accepted/public same-name hash mismatches | 0 |
 
-All 342 correctly named images have SHA-256 values matching files with the same names in the canonical public source `HP/imgHtml/new_202601/area`. The same images already exist in the canonical public source, so no copy or overwrite is required.
+All 352 accepted images have SHA-256 values matching files with the same names
+in the canonical public source `HP/imgHtml/new_202601/area`.
 
-Only these two correctly named images exist in the canonical public source and are absent from the preparation folder:
+The public source contains two complete canonical pairs that are not accepted
+source pairs, plus one nonstandard `sample.jpg`. These public-only items remain
+outside the accepted-source count and MUST NOT be copied, renamed, or removed
+automatically.
 
 ```text
 kagoshima-deliveryhealth-area-ikenouecho_1.jpg
@@ -55,6 +59,7 @@ kagoshima-deliveryhealth-area-<slug>_2.jpg
 - Extension: `.jpg`, matching the current specification
 - Default dimensions for new images: 1000×750, matching the current set
 - Slug: MUST match the canonical value in the target text file
+- The displayed title is a separate value and MUST NOT be inferred by uppercasing the slug
 
 ## 4. Slug-Mismatch Candidates
 
@@ -84,6 +89,11 @@ shouyoudaicho
 
 It is unverified whether these represent another region, alternate spelling, legacy slug, or planned page. Do not consolidate, delete, rename, or reuse them without user confirmation.
 
+Canonical pairs now exist independently for `dairyuucho`, `jonancho`,
+`shinayashikicho`, `tenpozancho`, and `shouyoudaichou`. Their legacy
+similar-slug candidates remain separate historical assets and are not the
+canonical pairs.
+
 ## 5. Duplicate-Content Candidate
 
 These two files have identical content:
@@ -97,10 +107,9 @@ It is unverified whether this duplication is intentional or the second image is 
 
 ## 6. Files Outside the Naming Standard
 
-- `sample.jpg`: Do not treat as a standard page image.
-- `Thumbs.db`: Windows management file. Do not reference it from HTML.
-
-Both files currently exist in the preparation folder and canonical public source. This investigation did not delete them. Deletion or Git exclusion requires separate instruction.
+The accepted source contains no file outside the standard filename pattern.
+The public source still contains `sample.jpg`; do not treat it as a standard
+page image. Deletion or Git exclusion requires separate instruction.
 
 ## 7. Future Acceptance Procedure
 
@@ -108,32 +117,38 @@ When a new area-page request lacks required `_1` and `_2` images, review `CANDY_
 
 Do not report page production complete merely because images are available. When applying images to a new area page, follow `CANDY_AREA_PAGE_GENERATION_SPEC.md` and validate public PHP, source HTML, page-specific dataset PHP, case registration and link transformation in `dataset_base.php`, the area index and related internal links, and required `sitemap.xml` registration as one unit. If required links or registrations remain incomplete, do not report the page complete or publishable.
 
-1. Receive preparation images under NAS `\\192.168.1.3\disk1\FSG_SEO\candy\Text_area_data\画像データ`.
+1. Receive preparation images under local `C:\Codex\Candy\Text_area_data\画像データ`.
 2. Extract the slug and `_1` or `_2` from each filename.
 3. Verify a match with the target text file's canonical slug.
-4. Verify that both `_1` and `_2` exist.
-5. Verify that each file is readable as JPG.
-6. Verify width and height.
-7. Check for a duplicate pair and complete duplication against other images.
-8. Check for a file with the same name in the canonical public source.
-9. When the same name exists, compare hashes.
-10. Do not copy a matching file.
-11. When contents differ, do not overwrite; report the difference and obtain approval.
-12. Only when the file is absent from the canonical public source, copy it after user approval.
-13. Verify source HTML `src`, alt text, and OGP.
-14. Report local-image validation separately from production-image HTTP validation.
+4. Verify the exact displayed Romanization independently from the slug.
+5. Verify that both image titles match the confirmed display value exactly.
+6. Verify that both `_1` and `_2` exist.
+7. Verify that each file is readable as JPG.
+8. Verify width and height.
+9. Check for a duplicate pair and complete duplication against other images.
+10. Check for a file with the same name in the canonical public source.
+11. When the same name exists, compare hashes.
+12. Do not copy a matching file.
+13. When contents differ, do not overwrite; report the difference and obtain approval.
+14. Only when the file is absent from the canonical public source, copy it after user approval.
+15. Verify source HTML `src`, alt text, and OGP.
+16. Report local-image validation separately from production-image HTTP validation.
 
 ## 8. Git Management
 
-- Track canonical images used by public pages from `HP/imgHtml/new_202601/area` in the local Git working repository.
-- NAS `Text_area_data/画像データ` is for preparation and acceptance and is outside Git management.
-- Do not run Git operations on the NAS or stage and commit accepted assets directly.
-- Before adding to the canonical public source, verify target images and destination, then copy into the local Git working repository only after explicit approval.
-- Do not bulk-stage accepted images with `git add -A`.
+- `Text_area_data/画像データ/` is the Git-managed local source for preparation and acceptance.
+- `HP/imgHtml/new_202601/area/` is the Git-managed canonical public source used by HTML.
+- Add or update an accepted source image and its public copy in the same authorized work unit when both are required.
+- Verify that matching accepted and public files have identical SHA-256 values.
+- Stage only the explicitly authorized image pair and required generated management files.
+- Do not use `git add -A` or treat the NAS as an area-image source.
+- Commit and Push still require explicit user instruction.
 
 ## 9. Completion Criteria
 
 - [ ] Target text-file slug matches the image slug.
+- [ ] Display Romanization was verified independently from the slug.
+- [ ] Both rendered titles exactly match the confirmed display value.
 - [ ] Both `_1` and `_2` exist.
 - [ ] JPG files are readable.
 - [ ] Dimensions are verified.
@@ -144,6 +159,9 @@ Do not report page production complete merely because images are available. When
 - [ ] Page-production validation covers public PHP, dataset, area index, internal links, and sitemap.
 - [ ] Any unverified production deployment is stated explicitly.
 
-## 10. Unchanged Scope
+## 10. Storage Boundary
 
-No image copy, overwrite, deletion, movement, rename, or Git registration was performed by this verification.
+- Accepted source: `C:\Codex\Candy\Text_area_data\画像データ`.
+- Canonical public source: `C:\Codex\Candy\HP\imgHtml\new_202601\area`.
+- NAS: backup storage only; it is not an accepted area-image source.
+- HTML MUST reference only the canonical public source, never `Text_area_data/画像データ/` directly.

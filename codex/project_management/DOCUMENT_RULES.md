@@ -21,7 +21,7 @@
 
 The canonical Codex management source is `C:\Codex\candy\codex`. Use `codex/project_management/` for project-management documents, `codex/docs/` for HP production specifications, and `codex/scripts/` for work tools.
 
-Keep only the common entry point `AGENTS.md` and files required for Git management at the local repository root. Do not duplicate management documents there. `HP/` is exclusively for the actual site tree and MUST NOT contain canonical management documents. The NAS is storage-only for `Backup/` and accepted assets; it MUST NOT contain a canonical management source or be used for Git operations.
+Keep only the common entry point `AGENTS.md` and files required for Git management at the local repository root. Do not duplicate management documents there. `HP/` is exclusively for the actual site tree and MUST NOT contain canonical management documents. Accepted area images belong in the Git-managed local `Text_area_data/画像データ/` directory. The NAS is storage-only for `Backup/`; it MUST NOT contain a canonical management source or be used for Git operations.
 
 ## 3. Markdown Naming and Language Standard
 
@@ -259,7 +259,7 @@ STOP:
 - Keep only the common entry point `AGENTS.md` at the local repository root; do not duplicate management documents there.
 - `HP/` is exclusively for the actual site tree and MUST NOT contain management documents or `Text_*_data`.
 - Use `HP/AGENTS.md` as the HP work route. Do not create `HP/README.md`.
-- Keep the Git working repository and `.git` at `C:\Codex\candy`. Use GitHub as the synchronization hub and the NAS only for `Backup/` and accepted assets.
+- Keep the Git working repository and `.git` at `C:\Codex\candy`. Store accepted area images under local `Text_area_data/画像データ/`, use GitHub as the synchronization hub, and use the NAS only for `Backup/`.
 
 ## 14. HP Hierarchy Rules
 

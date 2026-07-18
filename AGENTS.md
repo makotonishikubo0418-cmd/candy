@@ -18,7 +18,7 @@ The GitHub-connected working repository is:
 
 `C:\Codex\candy`
 
-GitHub is the synchronization hub. The NAS path `\\192.168.1.3\disk1\FSG_SEO\candy` is storage-only for `Backup/` and accepted source assets; it is not a Git working repository, and Git commands must not be run there.
+GitHub is the synchronization hub. Accepted area-image source assets are stored in the Git-managed local folder `C:\Codex\candy\Text_area_data\画像データ`. The NAS path `\\192.168.1.3\disk1\FSG_SEO\candy` is storage-only for `Backup/`; it is not a Git working repository, and Git commands must not be run there.
 
 Do not create a second management source of truth under `HP/`, the repository root, the NAS, or another folder.
 
