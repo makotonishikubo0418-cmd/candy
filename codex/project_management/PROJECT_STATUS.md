@@ -31,6 +31,7 @@
 
 | Type | Canonical source | Handling |
 |---|---|---|
+| Dated repository-wide SEO audit | `CANDY_REPOSITORY_SEO_AUDIT_2026-07-18.md` | Use this as the 2026-07-18 repository evidence snapshot and remediation handoff. Reverify volatile repository and production state before implementing a finding |
 | Machine-detected page-structure, Text-candidate, SEO, and asset issues | `codex/docs/generated/` | Regenerate after actual-file changes. Detection alone MUST NOT trigger automatic fixes or deletion |
 | Issues requiring specification or owner decisions | `codex/docs/CANDY_FIX_BACKLOG.md` | Handle in a separate task after an explicit decision for the target |
 | Area production order | `CANDY_AREA_105_PAGE_QUEUE.md` and generated upcoming pages | Handle only one target that passes the target gate |
@@ -46,13 +47,15 @@
 
 ## 5. Candidate Next Actions
 
-1. Resolve category-specific blockers in `generated/CANDY_UPCOMING_PAGES.md`, then use the dedicated target gate to select an eligible production target.
-2. Handle issues explicitly selected by the owner from `generated/CANDY_SEO_STATUS.md` and `CANDY_FIX_BACKLOG.md` in separate tasks.
-3. For missing, unconfirmed-reference, and duplicate candidates in `generated/CANDY_CODE_ASSET_INVENTORY.md`, verify dynamic references and recovery methods before requesting target-specific deletion approval.
-4. For future GitHub synchronization tasks, freeze the target list and obtain explicit instruction before Commit and Push.
+1. For repository-wide SEO remediation, start from the priority order in `CANDY_REPOSITORY_SEO_AUDIT_2026-07-18.md`, reserve the exact files, and handle one approved root cause per task.
+2. Resolve category-specific blockers in `generated/CANDY_UPCOMING_PAGES.md`, then use the dedicated target gate to select an eligible production target.
+3. Handle issues explicitly selected by the owner from `generated/CANDY_SEO_STATUS.md` and `CANDY_FIX_BACKLOG.md` in separate tasks.
+4. For missing, unconfirmed-reference, and duplicate candidates in `generated/CANDY_CODE_ASSET_INVENTORY.md`, verify dynamic references and recovery methods before requesting target-specific deletion approval.
+5. For future GitHub synchronization tasks, freeze the target list and obtain explicit instruction before Commit and Push.
 
 ## 6. Update Rules
 
 - Store detailed execution results in `TASK_LOG.md`, specifications in the applicable specification, and inter-Codex requests in `CODEX_COMMUNICATION.md`.
+- Keep dated audit evidence in the dated audit report. Do not copy its volatile counts into stable specifications or generated current-state documents.
 - Do not duplicate current counts here. Regenerate the generated documents instead.
 - Do not append completed historical work in chronological order.

@@ -14,6 +14,7 @@
 
 | ID | Date | Recipient | Message | Scope | Status |
 |---|---|---|---|---|---|
+| COMM-20260718-016 | 2026-07-18 | All Codex tasks | Use `codex/project_management/CANDY_REPOSITORY_SEO_AUDIT_2026-07-18.md` as the dated repository-wide SEO remediation handoff. Its repository findings are implementation-verified for the audited commit, while production HTTP, Search Console, analytics, and Lighthouse remain unverified. Reserve exact files and address one approved root cause per task; do not bulk-fix all findings automatically. | Repository-wide SEO remediation | IN_PROGRESS |
 | COMM-20260716-001 | 2026-07-16 | All Codex tasks | Before work, check the target-file reservations in `codex/project_management/TASK_RESERVATIONS.md`. | Entire project | IN_PROGRESS |
 | COMM-20260716-003 | 2026-07-16 | All Codex tasks | The existing 76 deletion entries resulted from a relocation operation. Confirm the intended scope before including them in a Commit. | Git state | IN_PROGRESS |
 | COMM-20260716-004 | 2026-07-16 | All Codex tasks | When area images are missing, read `CANDY_AREA_IMAGE_CREATION_SPEC.md`. STOP production and publication if the storage, modification, commercial-publication, and attribution conditions for Google Maps or another source cannot be confirmed. | Area image production | IN_PROGRESS |
