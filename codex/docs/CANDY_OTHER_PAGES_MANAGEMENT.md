@@ -14,7 +14,7 @@ Primary classes:
 
 - top: `index.php`
 - girls: `girls.php`, `girls_list.php`, `schedule.php`, and related files
-- system/other: `contact.php`, `movie.php`, `movie_iframe.php`, `mypage.php`, `news.php`, `system.php`, and related files
+- system/other: `movie.php`, `movie_iframe.php`, `mypage.php`, `news.php`, `system.php`, and related files
 - special: `create.php`, `makeSitemap.php`, and scaffolds requiring purpose confirmation
 - public generated output: `sitemap.xml`
 
@@ -64,7 +64,6 @@ Important:
 | `movie.php` | Shop and girl movie index | `source/movie.html` + `dataset_movie.php`; shop/girl movies, device-specific display, and iframe links | `movie_iframe.php`, movie files, thumbnails, and zero-result display | Normal route exists |
 | `movie_iframe.php` | Movie playback iframe | `source/movie_iframe.html` + `dataset_movie_iframe.php`; selects a shop/girl movie from GET | Caller `movie.php`, movie formats, invalid GET, and direct access | Normal route exists. No direct common-navigation route |
 | `mypage.php` | Favorite-girl review | `source/mypage.html` + `dataset_mypage.php`; Cookie, girls, images, schedules, and my-page information | Favorite add/remove, absent/expired Cookie, and girl detail | Normal route exists. Primarily Cookie-based, not member-ID/password based |
-| `contact.php` | Current general-content entry point named contact | `source/contact.html` + small `dataset_contact.php`; no form submission processing | Source links, contact destination, title/H1, and navigation | Source retains placeholders and has no contact form. Do not report it complete |
 | `main.php` | Candidate post-age-verification main according to a dataset_base comment | A branch uses `dataset_index.php`, but `source/main.html` is absent | Relationship to `index.php`, external routes, and `sitemap.xml` | STOP on source existence in the repository structure |
 | `page.php` | Legacy generic-page scaffold candidate | `dataset_page.php` exists but `source/page.html` does not | External routes, `sitemap.xml`, and purpose confirmation | STOP on source existence in the repository structure |
 | `test.php` | Test scaffold candidate | `dataset_test.php` exists but `source/test.html` does not | Publication requirement, noindex, and deletion eligibility | STOP on source existence in the repository structure |
@@ -171,7 +170,6 @@ Show the affected scope before changing:
 
 - Actual files cannot establish the target page's responsibility, URL, or publication requirement.
 - `main.php`, `page.php`, or `test.php` would need to be treated as a normal page while source is absent.
-- `contact.php` would need to be published as complete with current placeholders.
 - Shared PHP, authentication, database, payment, external submission, or production `index.php` change lacks approval.
 - A common-navigation change cannot establish the complete source population and diff.
 - Sitemap deletion, URL retirement, or redirect is required without approval.

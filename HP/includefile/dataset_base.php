@@ -342,8 +342,20 @@ switch ($hdir) {
 		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-wakabacho.php');
 		break;
 
-	case 'contact.html':
-		include(INCLUDE_DIR . 'dataset_contact.php');
+	case 'kagoshima-deliveryhealth-area-kiirenakamyocho.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-kiirenakamyocho.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-oroshihonmachi.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-oroshihonmachi.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-hananohikarigaoka.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-hananohikarigaoka.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-kiireikkuracho.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-kiireikkuracho.php');
 		break;
 
 	case 'area.html':
@@ -1235,7 +1247,10 @@ $source = str_replace('kagoshima-deliveryhealth-area-nanatsujima.html', 'kagoshi
 $source = str_replace('kagoshima-deliveryhealth-area-jigenjicho.html', 'kagoshima-deliveryhealth-area-jigenjicho.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-area-jiyugaoka.html', 'kagoshima-deliveryhealth-area-jiyugaoka.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-area-wakabacho.html', 'kagoshima-deliveryhealth-area-wakabacho.php', $source);
-$source = str_replace('contact.html', 'contact.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-kiirenakamyocho.html', 'kagoshima-deliveryhealth-area-kiirenakamyocho.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-oroshihonmachi.html', 'kagoshima-deliveryhealth-area-oroshihonmachi.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-hananohikarigaoka.html', 'kagoshima-deliveryhealth-area-hananohikarigaoka.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-kiireikkuracho.html', 'kagoshima-deliveryhealth-area-kiireikkuracho.php', $source);
 $source = str_replace('area.html', 'area.php', $source);
 $source = str_replace('hotel.html', 'hotel.php', $source);
 $source = str_replace('blog.html', 'blog.php', $source);

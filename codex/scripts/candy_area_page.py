@@ -1099,13 +1099,13 @@ def update_dataset_base(source: str, slug: str) -> str:
     if case_count > 1:
         raise AreaToolError(f"dataset_base case重複: {case_count}")
     if case_count == 0:
-        source = replace_exact(source, r"(?m)^\tcase 'contact\.html':", case_block + "\tcase 'contact.html':", "dataset case insertion")
+        source = replace_exact(source, r"(?m)^\tcase 'area\.html':", case_block + "\tcase 'area.html':", "dataset case insertion")
     conversion = f"$source = str_replace('{html_name}', '{php_name}', $source);"
     conversion_count = source.count(conversion)
     if conversion_count > 1:
         raise AreaToolError(f"dataset_baseリンク変換重複: {conversion_count}")
     if conversion_count == 0:
-        source = replace_exact(source, r"(?m)^\$source = str_replace\('contact\.html'", conversion + "\n$source = str_replace('contact.html'", "dataset conversion insertion")
+        source = replace_exact(source, r"(?m)^\$source = str_replace\('area\.html'", conversion + "\n$source = str_replace('area.html'", "dataset conversion insertion")
     return source
 
 

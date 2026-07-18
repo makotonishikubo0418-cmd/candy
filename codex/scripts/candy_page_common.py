@@ -268,7 +268,7 @@ def update_dataset_base(source: str, category: str, slug: str) -> str:
         raise PageToolError(f"dataset_base case重複: {case_count}")
     if case_count == 0:
         block = f"\tcase '{html_name}':\n\t\tinclude(INCLUDE_DIR . '{dataset_name}');\n\t\tbreak;\n\n"
-        source = replace_one(source, r"(?m)^\tcase 'contact\.html':", block + "\tcase 'contact.html':", "dataset case")
+        source = replace_one(source, r"(?m)^\tcase 'area\.html':", block + "\tcase 'area.html':", "dataset case")
     conversion = f"$source = str_replace('{html_name}', '{php_name}', $source);"
     conversion_count = source.count(conversion)
     if conversion_count > 1:
@@ -276,8 +276,8 @@ def update_dataset_base(source: str, category: str, slug: str) -> str:
     if conversion_count == 0:
         source = replace_one(
             source,
-            r"(?m)^\$source = str_replace\('contact\.html'",
-            conversion + "\n$source = str_replace('contact.html'",
+            r"(?m)^\$source = str_replace\('area\.html'",
+            conversion + "\n$source = str_replace('area.html'",
             "dataset conversion",
         )
     return source

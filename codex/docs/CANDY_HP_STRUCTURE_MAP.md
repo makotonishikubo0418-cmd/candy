@@ -39,7 +39,7 @@ Public PHP is a thin entry point. Static body content, SEO, and layout are prima
 | blog index | `blog.php` / `source/blog.html` | Routes from staff articles to blog details | Actual files and the blog specification |
 | blog detail | `kagoshima-deliveryhealth-blog-<slug>.php` | Topic-specific articles, introductions, comments, FAQ, and summary | `Text_blog_data` and the blog specification |
 | girls | `girls*.php`, `schedule.php`, and related files | Database- and session-backed roster, detail, and schedule functions | Actual files and `CANDY_OTHER_PAGES_MANAGEMENT.md` |
-| system | `contact.php`, `confirm.php`, `mypage.php`, and related files | Dynamic input, confirmation, member, and related processing | Actual files and `CANDY_OTHER_PAGES_MANAGEMENT.md` |
+| system | `confirm.php`, `mypage.php`, and related files | Dynamic input, confirmation, member, and related processing | Actual files and `CANDY_OTHER_PAGES_MANAGEMENT.md` |
 | special | `create.php`, `makeSitemap.php`, and related files | Special generation and operational entry points | Explicit approval and actual files. Do not use for normal page production |
 | template | `source/template_*.html` | Skeleton for a new detail page | Category specification. Do not count as a public page |
 

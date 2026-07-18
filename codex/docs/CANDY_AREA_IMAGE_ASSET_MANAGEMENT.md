@@ -72,7 +72,6 @@ Comparison of preparation-image slugs against canonical slugs in `Text_area_data
 | `jonancho` | `jounancho` |
 | `kotsukicho` | `koutukicho` |
 | `koyo` | `kouyou` |
-| `oroshihommachi` | `oroshihonmachi` |
 | `seiryo` | `seiryou` |
 | `shinayashikicho` | `shinyashikicho` |
 | `tenpozancho` | `tempozancho` |

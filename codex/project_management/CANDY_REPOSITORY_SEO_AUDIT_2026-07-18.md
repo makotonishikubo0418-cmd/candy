@@ -16,11 +16,11 @@ The repository requires major SEO remediation. No repository evidence showed a s
 | Severity | Count |
 |---|---:|
 | Critical | 0 |
-| High | 4 |
+| High | 3 |
 | Medium | 5 |
 | Low | 3 |
 
-The first required action is to remove the 27 unresolved area pages from the indexable publication set or complete them with region-specific content and valid JSON-LD. The next actions are to complete `contact.php`, reconcile the category indexes and sitemap with existing files, and remove the external `group_test` rendering dependency from public wrappers.
+The first required action is to remove the 27 unresolved area pages from the indexable publication set or complete them with region-specific content and valid JSON-LD. The next actions are to reconcile the category indexes and sitemap with existing files and remove the external `group_test` rendering dependency from public wrappers.
 
 Production HTTP behavior remains UNVERIFIED because this audit did not access production, Search Console, analytics, or a browser performance laboratory.
 
@@ -67,7 +67,6 @@ Shared navigation, footer content, and the four shared shop cards were excluded 
 | ID | Severity | Category | Finding | Affected Scope | Code Evidence | Recommended Action |
 |---|---|---|---|---|---|---|
 | SEO-01 | High | Area duplication and structured data | Twenty-seven area sources retain unresolved `aaaaaaaa...` values. Their title, description, H1, lead, regional body, and venue blocks are identical, and both JSON-LD blocks per page are invalid. | 27 pages; 351 exact duplicate pairs; 54 invalid JSON-LD blocks | `HP/source/kagoshima-deliveryhealth-area-gionnosucho.html:7-18`, `:34`, `:60` and the 26 matching sources listed in section 5 | Keep these URLs out of the indexable publication set until content, images, internal links, and JSON-LD are complete. Use `noindex`, 404, or 410 according to the intended URL state. |
-| SEO-02 | High | Canonical and page content | `contact.php` is represented by a placeholder source, uses a nonexistent placeholder canonical, and is already present in the sitemap. | One public page | `HP/source/contact.html:7-18`, `:98-110`; `HP/sitemap.xml:97` | Replace the placeholder page with the approved contact content and set the canonical to `https://www.55810.com/contact.php`. |
 | SEO-03 | High | Internal links and sitemap | Manually maintained route inventories do not match actual public files. Static HTML contains 132 references to missing PHP targets, and 15 content pages have no incoming static link. The sitemap contains a missing `snews.php` URL and omits 14 non-placeholder indexable sources. | Three category pages, sitemap, 15 orphaned content pages | `HP/source/area.html:133`, `HP/source/blog.html:133-134`, `HP/source/hotel.html:155-171`, `HP/sitemap.xml:41`, `HP/makeSitemap.php:5-26` | Generate or validate category and sitemap inventories from one approved public-page ledger. Add appropriate incoming links to orphaned content. |
 | SEO-04 | High | Rendering and deployment traceability | Ninety-six of 113 direct rendering wrappers include an out-of-repository `group_test` dataset path. Thirteen wrappers have no local source HTML. Repository content therefore cannot prove the final output for most wrappers. | 96 wrappers, approximately 85% of direct render wrappers | `HP/kagoshima-deliveryhealth-area-arata.php:4`, `HP/create.php:70`, `HP/includefile/dataset_base.php:47-50` | Use one repository-controlled production include path and provide one traceable source for each public wrapper. Verify production output after migration. |
 | SEO-05 | Medium | Missing resources | Referenced images, JavaScript, and video files are absent from the repository. Two otherwise non-placeholder area pages have broken image references. `fav.js` is referenced by six pages but is absent. | Area pages, dynamic pages, and media features | `HP/source/kagoshima-deliveryhealth-area-inusakocho.html:178`, `HP/source/kagoshima-deliveryhealth-area-kenohikarigaoka.html:179`, `HP/source/girls.html:760`, `HP/source/index.html:497` | Correct filenames and paths, restore approved assets, and make asset-existence validation a publication gate. |
@@ -75,7 +74,7 @@ Shared navigation, footer content, and the four shared shop cards were excluded 
 | SEO-07 | Medium | Headings and head metadata | Seven source-rendered pages have no H1. `movie_iframe.html` also lacks title, meta description, canonical, and viewport. | `girls`, `girls_list`, `movie`, `movie_iframe`, `mypage`, `schedule`, and `system` | `HP/source/girls.html`, `HP/source/movie_iframe.html:1-15`, `HP/source/system.html` | Add one meaningful H1 to indexable pages. Prefer `noindex` over artificial SEO markup for iframe or helper output that should not rank independently. |
 | SEO-08 | Medium | Images and layout performance | Of 526 `img` tags, 256 lack either width or height. Forty-two lack an alt attribute and five have an empty alt. Area content accounts for 156 dimension omissions. | Multiple page categories | `HP/source/kagoshima-deliveryhealth-area-arata.html:178`, `HP/source/girls.html:312` | Add intrinsic dimensions in templates, preserve intentional decorative empty alt values, and provide descriptive alt text for content images. |
 | SEO-09 | Medium | Rendering performance | Eight pages load multiple scripts without `defer` or `async`. The common PHP renderer writes two debug log entries on every request. Repository `.htaccess` contains no cache or compression policy. | Top page, dynamic pages, and common PHP rendering | `HP/source/index.html:21-23`, `HP/source/girls.html:21-25`, `HP/includefile/dataset_base.php:1167-1169`, `HP/.htaccess` | Defer scripts after dependency testing, remove production debug logging, and verify server-level caching and compression before adding duplicate rules. |
-| SEO-10 | Low | HTML consistency | Basic parsing found duplicate IDs, an extra closing `div`, unescaped ampersands, and heading-level skips. | 11 source files; 16 parser events including the unused `source/create.html` event | `HP/source/girls.html:693-719`, `HP/source/kagoshima-deliveryhealth-area-arata.html:346`, `HP/source/index.html:1572`, `HP/source/contact.html:284` | Add an HTML validation check and correct unique IDs, tag balance, escaping, and heading order. |
+| SEO-10 | Low | HTML consistency | Basic parsing found duplicate IDs, unescaped ampersands, and heading-level skips in retained sources. | 10 retained source files; 15 parser events including the unused `source/create.html` event | `HP/source/girls.html:693-719`, `HP/source/kagoshima-deliveryhealth-area-arata.html:346`, `HP/source/index.html:1572` | Add an HTML validation check and correct unique IDs, escaping, and heading order. |
 | SEO-11 | Low | Structured-data completeness | `hanaomachi` declares an incomplete FAQPage microdata wrapper. The six editorial blog-detail pages use BreadcrumbList, FAQPage, and ItemList but no Article type. | One area page and six blog pages | `HP/source/kagoshima-deliveryhealth-area-hanaomachi.html:380`; six `HP/source/kagoshima-deliveryhealth-blog-*.html` sources | Remove or complete the isolated microdata declaration. Evaluate Article JSON-LD for the six editorial pages; its absence alone is not a validation failure. |
 | SEO-12 | Low | Asset maintenance | The repository audit reported 710 unreferenced candidates and 165 duplicate-hash groups. Two large JavaScript files, approximately 2.0 MB and 1.2 MB, have no static source reference. | Asset repository | `HP/js/candyKissDijest.js`, `HP/js/movieSum.js`; `candy-site-state audit` | Confirm dynamic and production references before any separate cleanup task. Do not delete based on static-reference absence alone. |
 
@@ -89,7 +88,7 @@ Shared navigation, footer content, and the four shared shop cards were excluded 
 - `movie_iframe.html` is the only source missing title, description, canonical, and viewport together.
 - The normal page body is present in server-rendered HTML. Area content does not require client-side JavaScript to become crawlable.
 - The former PC/mobile source split is disabled in `HP/includefile/dataset_base.php:54-75`. The repository uses one source with responsive classes, so no repository evidence showed separate PC and smartphone text bodies.
-- Basic HTML recovery parsing produced 16 actionable events in 11 sources after excluding expected HTML5-tag noise. These include duplicate IDs, one extra closing tag in `contact.html`, one event in the unused `source/create.html`, and unescaped ampersands.
+- After removal of the obsolete contact source, 15 previously identified actionable events remain in 10 retained sources. These include duplicate IDs, one event in the unused `source/create.html`, and unescaped ampersands.
 
 ### 4.2 Area Page Duplication
 
@@ -150,7 +149,6 @@ LocalBusiness is not required merely because an area page lists businesses. The 
 The repository contains 100 source files that are paired with rendering wrappers.
 
 - Static self-referencing canonical confirmed: 97.
-- Incorrect canonical: `contact.html` points to `https://www.55810.com/aaaaaaaaaaaaaaa.php`.
 - Missing canonical: `movie_iframe.html`.
 - Runtime canonical: `girls.html` uses `rep03010092eot`; its database-resolved value is UNVERIFIED.
 - All 78 area sources use absolute HTTPS, `www`, and self-referencing canonical URLs.
@@ -232,13 +230,12 @@ The unresolved group contains these 27 slugs:
 | Priority | Action | Target | Reason | Expected Effect |
 |---:|---|---|---|---|
 | 1 | Complete or exclude unresolved pages | 27 area pages | Large exact-duplicate group and invalid JSON-LD | Removes the largest low-quality indexable population |
-| 2 | Complete the contact page and correct its canonical | `contact.php` | Sitemap-listed placeholder with wrong canonical | Restores one key general-content route |
-| 3 | Reconcile category indexes, sitemap, and orphan links | `area.html`, `blog.html`, `hotel.html`, `sitemap.xml`, 15 orphan pages | 132 broken PHP references and weak discovery | Improves crawl paths and route accuracy |
-| 4 | Replace the `group_test` rendering dependency | 96 wrappers and 13 source gaps | Repository cannot prove most rendered output | Restores reproducible, auditable publication |
-| 5 | Repair missing image, JavaScript, and video targets | Area and dynamic pages | Broken local resources affect output and likely LCP candidates | Restores visible assets and page features |
-| 6 | Establish index and URL-normalization policy | `.htaccess`, `robots.txt`, helper pages | Redirect, 404, and exclusion policy is incomplete | Reduces duplicate and accidental helper-page indexing |
-| 7 | Correct H1, HTML, and minor schema defects | Seven no-H1 pages and validation findings | Improves semantics and validation stability | Improves document interpretation and maintainability |
-| 8 | Add image dimensions and optimize loading | Shared templates and assets | Static CLS and render-blocking risks | Improves performance potential |
+| 2 | Reconcile category indexes, sitemap, and orphan links | `area.html`, `blog.html`, `hotel.html`, `sitemap.xml`, 15 orphan pages | 132 broken PHP references and weak discovery | Improves crawl paths and route accuracy |
+| 3 | Replace the `group_test` rendering dependency | 96 wrappers and 13 source gaps | Repository cannot prove most rendered output | Restores reproducible, auditable publication |
+| 4 | Repair missing image, JavaScript, and video targets | Area and dynamic pages | Broken local resources affect output and likely LCP candidates | Restores visible assets and page features |
+| 5 | Establish index and URL-normalization policy | `.htaccess`, `robots.txt`, helper pages | Redirect, 404, and exclusion policy is incomplete | Reduces duplicate and accidental helper-page indexing |
+| 6 | Correct H1, HTML, and minor schema defects | Seven no-H1 pages and validation findings | Improves semantics and validation stability | Improves document interpretation and maintainability |
+| 7 | Add image dimensions and optimize loading | Shared templates and assets | Static CLS and render-blocking risks | Improves performance potential |
 
 ## 8. Unverified and External Checks
 

@@ -1091,12 +1091,12 @@ def update_dataset_base(source: str, slug: str) -> str:
     if source.count(f"case '{html_name}':") > 1:
         raise HotelToolError("dataset_base case重複")
     if f"case '{html_name}':" not in source:
-        source = common.replace_exact(source, r"(?m)^\tcase 'contact\.html':", case_block + "\tcase 'contact.html':", "dataset case")
+        source = common.replace_exact(source, r"(?m)^\tcase 'area\.html':", case_block + "\tcase 'area.html':", "dataset case")
     conversion = f"$source = str_replace('{html_name}', '{php_name}', $source);"
     if source.count(conversion) > 1:
         raise HotelToolError("dataset_baseリンク変換重複")
     if conversion not in source:
-        source = common.replace_exact(source, r"(?m)^\$source = str_replace\('contact\.html'", conversion + "\n$source = str_replace('contact.html'", "dataset link")
+        source = common.replace_exact(source, r"(?m)^\$source = str_replace\('area\.html'", conversion + "\n$source = str_replace('area.html'", "dataset link")
     return source
 
 

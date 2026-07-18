@@ -380,7 +380,7 @@ kasugacho, kibougaokacho, kiirecho, kiireikkuracho,
 kiirenakamyocho, kinkodai, kinseicho, koraicho,
 korimoto, korimotocho, koriyamacho, koriyamadakecho,
 kotsukicho, koutokujidai, koyamadacho, koyo,
-oroshihommachi, sakamotocho, sakanoue, sakuragaoka,
+oroshihonmachi, sakamotocho, sakanoue, sakuragaoka,
 sanwacho, shimofukumotocho, shimotatsuocho
 ```
 
@@ -395,7 +395,7 @@ izumicho, kajiyacho, kamoike, kamoikeshinmachi,
 kenohikarigaoka, kiirehitokuracho, kiireikemicho,
 kiireikkuracho, kiiremaenohamacho, kiirenakamyocho,
 kiiresesekushicho, obaracho, ogawacho, okanoharacho,
-ono, oroshihommachi, uearatacho, uenosonocho,
+ono, oroshihonmachi, uearatacho, uenosonocho,
 uomicho, usuki, yakushi, yasuicho
 ```
 
@@ -414,7 +414,7 @@ The actual filename `kiirenakamyoch` exists. Do not confuse it with `kiirenakamy
 
 ### 14.4 Other Findings
 
-- `oroshihommachi`: Source data exists under Completion, but source HTML retains placeholders.
+- `oroshihonmachi`: Source data exists under Completion, but source HTML retains placeholders.
 - `shimotacho`: Source data is direct, but source HTML is complete.
 - `arata` and `kinkocho`: Duplicate `id="button_1"`.
 - Complete-HTML missing-image candidates: `_1` and `_2` for `inusakocho` and `kenohikarigaoka`.
