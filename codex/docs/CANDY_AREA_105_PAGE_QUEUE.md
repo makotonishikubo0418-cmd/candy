@@ -50,7 +50,7 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 14 | 四元町 | `yotsumotocho` | IN_PROGRESS | Dedicated tool / 2026-07-15 / Three files, shared registration, and static validation complete / PHP CLI unverified |
 | 15 | 紫原 | `murasakibaru` | READY_CANDIDATE | |
 | 16 | 慈眼寺町 | `jigenjicho` | IN_PROGRESS | 専用ツール / 2026-07-18 / 3ファイル・共有登録・静的検査済み / PHP CLI未確認 |
-| 17 | 自由ヶ丘 | `jiyugaoka` | READY_CANDIDATE | |
+| 17 | 自由ヶ丘 | `jiyugaoka` | IN_PROGRESS | 専用ツール / 2026-07-18 / 3ファイル・共有登録・静的検査済み / PHP CLI未確認 |
 | 18 | 七ツ島 | `nanatsujima` | IN_PROGRESS | Dedicated tool / 2026-07-16 / Three files, shared registration, and static validation complete / PHP CLI unverified |
 | 19 | 若葉町 | `wakabacho` | READY_CANDIDATE | |
 | 20 | 住吉町 | `sumiyoshicho` | READY_CANDIDATE | |
