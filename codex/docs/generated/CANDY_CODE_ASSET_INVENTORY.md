@@ -2,13 +2,13 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-18T18:45:32+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-19T11:05:39+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 32a4114238576b3f41fe2f713c94d803fced6bdc
+> Commit: 99e2e9385cba6557a2148d6c47a803c27dca2cf0
 > Scope: Public PHP, source files, datasets, shared PHP, CSS, JavaScript, images, videos, and fonts
-> Population: Public PHP files: 115 / assets: 1068
+> Population: Public PHP files: 114 / assets: 1072
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: Missing references: 30 / duplicate hash groups: 165
+> Result: Missing references: 22 / duplicate hash groups: 165
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
 
 ## Public PHP and Structure Files
@@ -61,7 +61,6 @@
 | HP/kagoshima-deliveryhealth-area-kiireikemicho.php | HP/source/kagoshima-deliveryhealth-area-kiireikemicho.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-kiireikemicho.php | 0 | 0 |
 | HP/kagoshima-deliveryhealth-area-kiireikkuracho.php | HP/source/kagoshima-deliveryhealth-area-kiireikkuracho.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-kiireikkuracho.php | 1 | 1 |
 | HP/kagoshima-deliveryhealth-area-kiiremaenohamacho.php | HP/source/kagoshima-deliveryhealth-area-kiiremaenohamacho.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-kiiremaenohamacho.php | 0 | 0 |
-| HP/kagoshima-deliveryhealth-area-kiirenakamyoch.php | MISSING | HP/includefile/dataset_kagoshima-deliveryhealth-area-kiirenakamyoch.php | 0 | 0 |
 | HP/kagoshima-deliveryhealth-area-kiirenakamyocho.php | HP/source/kagoshima-deliveryhealth-area-kiirenakamyocho.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-kiirenakamyocho.php | 1 | 1 |
 | HP/kagoshima-deliveryhealth-area-kiiresesekushicho.php | HP/source/kagoshima-deliveryhealth-area-kiiresesekushicho.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-kiiresesekushicho.php | 0 | 0 |
 | HP/kagoshima-deliveryhealth-area-kinkocho.php | HP/source/kagoshima-deliveryhealth-area-kinkocho.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-kinkocho.php | 1 | 1 |
@@ -176,6 +175,7 @@ Only the external session and database configuration references in `dataset_base
 | HP/js/common.js | HP/source/area.html<br>HP/source/blog.html<br>HP/source/create.html<br>HP/source/girls.html<br>HP/source/girls_list.html<br>HP/source/hotel.html<br>HP/source/index.html<br>HP/source/kagoshima-deliveryhealth-area-arata.html<br>HP/source/kagoshima-deliveryhealth-area-ariyadacho.html<br>HP/source/kagoshima-deliveryhealth-area-chuokoshinmachi.html<br>HP/source/kagoshima-deliveryhealth-area-gionnosucho.html<br>HP/source/kagoshima-deliveryhealth-area-gofukucho.html<br>HP/source/kagoshima-deliveryhealth-area-gokabeppucho.html<br>HP/source/kagoshima-deliveryhealth-area-hananohikarigaoka.html<br>HP/source/kagoshima-deliveryhealth-area-hanaomachi.html<br>HP/source/kagoshima-deliveryhealth-area-harara.html<br>HP/source/kagoshima-deliveryhealth-area-hikariyama.html<br>HP/source/kagoshima-deliveryhealth-area-hiroki.html<br>HP/source/kagoshima-deliveryhealth-area-ikenouecho.html<br>HP/source/kagoshima-deliveryhealth-area-inaricho.html<br>HP/source/kagoshima-deliveryhealth-area-inusakocho.html<br>HP/source/kagoshima-deliveryhealth-area-irisacho.html<br>HP/source/kagoshima-deliveryhealth-area-ishidanicho.html<br>HP/source/kagoshima-deliveryhealth-area-ishiki.html<br>HP/source/kagoshima-deliveryhealth-area-ishikidai.html<br>HP/source/kagoshima-deliveryhealth-area-izumicho.html<br>HP/source/kagoshima-deliveryhealth-area-jigenjicho.html<br>HP/source/kagoshima-deliveryhealth-area-jiyugaoka.html<br>HP/source/kagoshima-deliveryhealth-area-kajiyacho.html<br>HP/source/kagoshima-deliveryhealth-area-kamoike.html<br>HP/source/kagoshima-deliveryhealth-area-kamoikeshinmachi.html<br>HP/source/kagoshima-deliveryhealth-area-kasugacho.html<br>HP/source/kagoshima-deliveryhealth-area-kenohikarigaoka.html<br>HP/source/kagoshima-deliveryhealth-area-kibougaokacho.html<br>HP/source/kagoshima-deliveryhealth-area-kiirecho.html<br>HP/source/kagoshima-deliveryhealth-area-kiirehitokuracho.html<br>HP/source/kagoshima-deliveryhealth-area-kiireikemicho.html<br>HP/source/kagoshima-deliveryhealth-area-kiireikkuracho.html<br>HP/source/kagoshima-deliveryhealth-area-kiiremaenohamacho.html<br>HP/source/kagoshima-deliveryhealth-area-kiirenakamyocho.html<br>HP/source/kagoshima-deliveryhealth-area-kiiresesekushicho.html<br>HP/source/kagoshima-deliveryhealth-area-kinkocho.html<br>HP/source/kagoshima-deliveryhealth-area-kinkodai.html<br>HP/source/kagoshima-deliveryhealth-area-kinseicho.html<br>HP/source/kagoshima-deliveryhealth-area-koraicho.html<br>HP/source/kagoshima-deliveryhealth-area-korimoto.html<br>HP/source/kagoshima-deliveryhealth-area-korimotocho.html<br>HP/source/kagoshima-deliveryhealth-area-koriyamacho.html<br>HP/source/kagoshima-deliveryhealth-area-koriyamadakecho.html<br>HP/source/kagoshima-deliveryhealth-area-kotsukicho.html<br>HP/source/kagoshima-deliveryhealth-area-koutokujidai.html<br>HP/source/kagoshima-deliveryhealth-area-koyamadacho.html<br>HP/source/kagoshima-deliveryhealth-area-koyo.html<br>HP/source/kagoshima-deliveryhealth-area-minayoshicho.html<br>HP/source/kagoshima-deliveryhealth-area-nagayoshi.html<br>HP/source/kagoshima-deliveryhealth-area-nanatsujima.html<br>HP/source/kagoshima-deliveryhealth-area-obaracho.html<br>HP/source/kagoshima-deliveryhealth-area-ogawacho.html<br>HP/source/kagoshima-deliveryhealth-area-okanoharacho.html<br>HP/source/kagoshima-deliveryhealth-area-ono.html<br>HP/source/kagoshima-deliveryhealth-area-oroshihonmachi.html<br>HP/source/kagoshima-deliveryhealth-area-sakamotocho.html<br>HP/source/kagoshima-deliveryhealth-area-sakanoue.html<br>HP/source/kagoshima-deliveryhealth-area-sakuragaoka.html<br>HP/source/kagoshima-deliveryhealth-area-sanwacho.html<br>HP/source/kagoshima-deliveryhealth-area-shimoarata.html<br>HP/source/kagoshima-deliveryhealth-area-shimofukumotocho.html<br>HP/source/kagoshima-deliveryhealth-area-shimoishiki.html<br>HP/source/kagoshima-deliveryhealth-area-shimoishikicho.html<br>HP/source/kagoshima-deliveryhealth-area-shimotacho.html<br>HP/source/kagoshima-deliveryhealth-area-shimotatsuocho.html<br>HP/source/kagoshima-deliveryhealth-area-tamazatocho.html<br>HP/source/kagoshima-deliveryhealth-area-tamazatodanchi.html<br>HP/source/kagoshima-deliveryhealth-area-uearatacho.html<br>HP/source/kagoshima-deliveryhealth-area-uenosonocho.html<br>HP/source/kagoshima-deliveryhealth-area-uomicho.html<br>HP/source/kagoshima-deliveryhealth-area-usuki.html<br>HP/source/kagoshima-deliveryhealth-area-wakabacho.html<br>HP/source/kagoshima-deliveryhealth-area-yakushi.html<br>HP/source/kagoshima-deliveryhealth-area-yamadacho.html<br>HP/source/kagoshima-deliveryhealth-area-yamanokuchicho.html<br>HP/source/kagoshima-deliveryhealth-area-yamashitacho.html<br>HP/source/kagoshima-deliveryhealth-area-yasuicho.html<br>HP/source/kagoshima-deliveryhealth-area-yoshino.html<br>HP/source/kagoshima-deliveryhealth-area-yoshinocho.html<br>HP/source/kagoshima-deliveryhealth-area-yotsumotocho.html<br>HP/source/kagoshima-deliveryhealth-blog-glamourgirl.html<br>HP/source/kagoshima-deliveryhealth-blog-petitegirl.html<br>HP/source/kagoshima-deliveryhealth-blog-poccharigirl.html<br>HP/source/kagoshima-deliveryhealth-blog-shiroutogirl.html<br>HP/source/kagoshima-deliveryhealth-blog-slendergirl.html<br>HP/source/kagoshima-deliveryhealth-blog-tallbeautygirl.html<br>HP/source/kagoshima-deliveryhealth-hotel-greenrichkagoshimatenmonkan.html<br>HP/source/kagoshima-deliveryhealth-hotel-hotelm.html<br>HP/source/kagoshima-deliveryhealth-hotel-villacosta500.html<br>HP/source/movie.html<br>HP/source/mypage.html<br>HP/source/news.html<br>HP/source/schedule.html<br>HP/source/system.html<br>HP/source/template_girls.html<br>HP/source/template_kagoshima-deliveryhealth-area.html<br>HP/source/template_kagoshima-deliveryhealth-blog.html<br>HP/source/template_kagoshima-deliveryhealth-hotel.html<br>HP/source/template_shop.html |
 | HP/js/commonLite.js | HP/source/index.html |
 | HP/js/diary.js | UNVERIFIED |
+| HP/js/fav.js | HP/source/girls.html<br>HP/source/girls_list.html<br>HP/source/movie.html<br>HP/source/mypage.html<br>HP/source/schedule.html<br>HP/source/system.html |
 | HP/js/fav_gen.js | UNVERIFIED |
 | HP/js/fav_ka.js | UNVERIFIED |
 | HP/js/jquery.colorbox-min.js | HP/source/girls.html<br>HP/source/mypage.html<br>HP/source/schedule.html<br>HP/source/system.html |
@@ -195,10 +195,12 @@ Only the external session and database configuration references in `dataset_base
 | .eot | 16 |
 | .gif | 10 |
 | .jpg | 838 |
-| .js | 16 |
+| .js | 17 |
+| .mp4 | 2 |
 | .png | 135 |
 | .svg | 2 |
 | .ttf | 16 |
+| .webm | 1 |
 | .webp | 3 |
 | .woff | 16 |
 | .woff2 | 1 |
@@ -224,7 +226,8 @@ Only the external session and database configuration references in `dataset_base
 | HP/imgHtml/pc/pc | 69 |
 | HP/imgHtml/pc/s | 87 |
 | HP/imgHtml/s | 86 |
-| HP/js | 16 |
+| HP/js | 17 |
+| HP/movie | 3 |
 | HP/source | 1 |
 
 ## Assets by Page
@@ -270,14 +273,13 @@ Only the external session and database configuration references in `dataset_base
 | area:kasugacho | 6 | NONE | OK |
 | area:kawadacho | 0 | NONE | UNVERIFIED |
 | area:kawakamicho | 0 | NONE | UNVERIFIED |
-| area:kenohikarigaoka | 6 | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-kenohikarigaoka.1.jpg<br>HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-kenohikarigaoka.2.jpg | ISSUE |
+| area:kenohikarigaoka | 6 | NONE | OK |
 | area:kibougaokacho | 6 | NONE | OK |
 | area:kiirecho | 6 | NONE | OK |
 | area:kiirehitokuracho | 6 | NONE | OK |
 | area:kiireikemicho | 6 | NONE | OK |
 | area:kiireikkuracho | 6 | NONE | OK |
 | area:kiiremaenohamacho | 6 | NONE | OK |
-| area:kiirenakamyoch | 0 | NONE | UNVERIFIED |
 | area:kiirenakamyocho | 6 | NONE | OK |
 | area:kiiresesekushicho | 6 | NONE | OK |
 | area:kinkocho | 6 | NONE | OK |
@@ -357,20 +359,12 @@ Only the external session and database configuration references in `dataset_base
 | HP/images/raster@2x.png | HP/css/YTPlayer.css |
 | HP/images/raster_dot.png | HP/css/YTPlayer.css |
 | HP/images/raster_dot@2x.png | HP/css/YTPlayer.css |
-| HP/img/dummy.gif | HP/css/default.css |
-| HP/imgHtml/cdBgGirl.png | HP/css/girls.css |
 | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-aaaaaaaaaaaaaaaaaaaa_1.jpg | HP/source/template_kagoshima-deliveryhealth-area.html |
 | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-aaaaaaaaaaaaaaaaaaaa_2.jpg | HP/source/template_kagoshima-deliveryhealth-area.html |
 | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-inusakocho_1.jpg | HP/source/kagoshima-deliveryhealth-area-inusakocho.html |
 | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-inusakocho_2.jpg | HP/source/kagoshima-deliveryhealth-area-inusakocho.html |
-| HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-kenohikarigaoka.1.jpg | HP/source/kagoshima-deliveryhealth-area-kenohikarigaoka.html |
-| HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-kenohikarigaoka.2.jpg | HP/source/kagoshima-deliveryhealth-area-kenohikarigaoka.html |
 | HP/imgHtml/new_202601/blog/aaaaaaaaaaaaaaaaaaaa.jpg | HP/source/template_kagoshima-deliveryhealth-blog.html |
 | HP/imgHtml/new_202601/hotel/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.jpg | HP/source/template_kagoshima-deliveryhealth-hotel.html |
-| HP/js/fav.js | HP/source/girls.html<br>HP/source/girls_list.html<br>HP/source/movie.html<br>HP/source/mypage.html<br>HP/source/schedule.html<br>HP/source/system.html |
-| HP/movie/candyStyle.mp4 | HP/source/index.html |
-| HP/movie/howToMyPage.mp4 | HP/source/mypage.html |
-| HP/movie/howToMyPage.webm | HP/source/mypage.html |
 | imgHtml/new_202601/candy_img1.jpg | HP/source/style.css |
 | imgHtml/new_202601/candy_img1_sp.jpg | HP/source/style.css |
 | imgHtml/new_202601/shop/candy.jpg | HP/source/style.css |
@@ -395,14 +389,14 @@ These candidates have no confirmed static HTML or CSS reference. They may be ref
 | HP/imgHtml | 76 | age_verification.jpg, age_verification_bk.jpg, banner.jpg, cdBgGirl.jpg, cdImgGirl.jpg |
 | HP/imgHtml/new_202601 | 3 | candy_img1.jpg, candy_img1_sp.jpg, placeholder_image_picture.gif |
 | HP/imgHtml/new_202601/adsite | 1 | heavennetlink_ohp_red01.png |
-| HP/imgHtml/new_202601/area | 207 | kagoshima-deliveryhealth-area-chuocho_1.jpg, kagoshima-deliveryhealth-area-chuocho_2.jpg, kagoshima-deliveryhealth-area-chuzan_1.jpg, kagoshima-deliveryhealth-area-chuzan_2.jpg, kagoshima-deliveryhealth-area-chuzancho_1.jpg |
+| HP/imgHtml/new_202601/area | 205 | kagoshima-deliveryhealth-area-chuocho_1.jpg, kagoshima-deliveryhealth-area-chuocho_2.jpg, kagoshima-deliveryhealth-area-chuzan_1.jpg, kagoshima-deliveryhealth-area-chuzan_2.jpg, kagoshima-deliveryhealth-area-chuzancho_1.jpg |
 | HP/imgHtml/new_202601/banner | 18 | cityheaven_2.png, girlsheaven_1.jpg, girlsheaven_2.png, girlsheaven_kagoshima.jpg, girlsheaven_kumamoto.jpg |
 | HP/imgHtml/new_202601/girl | 56 | alice_1_sp.jpg, ami_1_sp.jpg, ann_1_sp.jpg, anya_1_sp.jpg, aoba_1_sp.jpg |
 | HP/imgHtml/new_202601/shop | 11 | after5_sp.jpg, beloved_sp.jpg, candy_sp.jpg, danzuma_sp.jpg, hitozuma_sp.jpg |
 | HP/imgHtml/pc | 55 | banner.jpg, cdImgGirl.jpg, dot.gif, entranceBg.jpg, girls2Bg.jpg |
 | HP/imgHtml/pc/pc | 69 | banner.jpg, cdBgGirl.jpg, cdHr.png, cdImgGirl.jpg, cdTtlDiary.png |
 | HP/imgHtml/pc/s | 87 | banner_s.jpg, cdBgGirl.png, cdHr.png, cdImgGirl.jpg, cdTtlDiary.png |
-| HP/imgHtml/s | 73 | banner_s.jpg, cdBgGirl.png, cdHr.png, cdImgGirl.jpg, cdTtlDiary.png |
+| HP/imgHtml/s | 72 | banner_s.jpg, cdHr.png, cdImgGirl.jpg, cdTtlDiary.png, dot.gif |
 | HP/js | 8 | api.js, candyKissDijest.js, diary.js, fav_gen.js, fav_ka.js |
 
 ## Duplicate Hash Candidates
@@ -589,3 +583,4 @@ These candidates have no confirmed static HTML or CSS reference. They may be ref
 | HP/font/PlayfairDisplay-Bold.woff | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
 | HP/imgHtml/new_202601/placeholder_image_picture.gif | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
 | HP/js/api.txt | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
+| HP/robots.txt | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |

@@ -17,7 +17,7 @@ HP/<page>.php
   → emits HTML
 ```
 
-The local counterparts are under `HP/includefile/`. Some public PHP files still contain include strings for `/group_test/candy/`. Do not assume that local placement and server runtime paths are identical; compare the ledger and actual files for each page.
+The local counterparts are under `HP/includefile/`. Public rendering wrappers use the production `/group/candy/` include path; `/group_test/candy/` is reserved for the separate test environment. Compare the ledger and actual files when adding or changing a page.
 
 ### 2.2 Primary Files
 

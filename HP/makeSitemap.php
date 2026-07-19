@@ -13,7 +13,6 @@ $excludedPages = array(
     // Legacy duplicate slugs. Keep the approved current slugs in the sitemap.
     'kagoshima-deliveryhealth-area-kenohikarigaoka.php',
     'kagoshima-deliveryhealth-area-kiirehitokuracho.php',
-    'kagoshima-deliveryhealth-area-kiirenakamyoch.php',
 );
 
 $urls = array();

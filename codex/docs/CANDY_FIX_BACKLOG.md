@@ -8,7 +8,6 @@ This document manages only unresolved issues that require a specification, fix, 
 
 | ID | Target | Verified fact | Required decision or next action | Status |
 |---|---|---|---|---|
-| HP-RUNTIME-PATH | Public PHP and `includefile/dataset_base.php` | Public PHP include strings contain both `/group/` and `/group_test/`; local counterparts are under `HP/includefile/` | Confirm the correct production and test placement from the owner and actual server before deciding whether to standardize | `AWAITING_APPROVAL` |
 | HP-SPECIAL-PAGES | Public PHP without the normal source/dataset pairing | Some entries are `SPECIAL` or `PARTIAL` in the generated ledger and may be dynamic or operational entry points | The feature owner must decide whether each page has an intentional special structure or a missing component | `AWAITING_APPROVAL` |
 | HP-LEGACY-URL | `.htaccess` and legacy URL candidates | Example rewrites for HTTPS, www, and index removal are commented out | Decide redirect policy, canonical host, and legacy URL scope from production settings and access requirements | `AWAITING_APPROVAL` |
 | HP-SEO-CHANGE | Detected robots, canonical, and JSON-LD issues | `generated/CANDY_SEO_STATUS.md` lists issues in current actual files | Approve fix targets by category or URL, then change them in a separate task | `AWAITING_APPROVAL` |

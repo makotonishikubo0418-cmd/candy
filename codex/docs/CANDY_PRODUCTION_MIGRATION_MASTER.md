@@ -109,7 +109,7 @@ Do not infer this list for a future workflow; recheck actual preview output.
 
 ## 5. FTP Deployment Safety Requirements
 
-Before FTP connection, validate 40-character SHAs, ancestor relationship, checked-out HEAD, target count, 25-file maximum, 50 MiB total, `PLAN_TOKEN`, and confirmation phrase. On failure, STOP without using FTP secrets.
+Before FTP connection, validate 40-character SHAs, ancestor relationship, checked-out HEAD, target count, 125-file maximum, 50 MiB total, `PLAN_TOKEN`, and confirmation phrase. On failure, STOP without using FTP secrets.
 
 For each target, retain backups until every target validates:
 

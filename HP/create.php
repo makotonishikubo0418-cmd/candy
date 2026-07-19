@@ -67,7 +67,7 @@ if ($is_authenticated && isset($_POST['create_page']) && isset($_POST['page_name
             $php_content = "<?php\n";
             $php_content .= "error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED);\n";
             $php_content .= "//データセット基本ファイル読込\n";
-            $php_content .= "include(\"/home/firststar/public_html/group_test/candy/includefile/dataset_base.php\");\n";
+            $php_content .= "include(\"/home/firststar/public_html/group/candy/includefile/dataset_base.php\");\n";
             $php_content .= "\n\n";
             $php_content .= "?>\n";
             

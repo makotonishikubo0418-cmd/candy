@@ -261,7 +261,7 @@ The 71 existing area public entry PHP files share this base form. The Japanese c
 <?php
 error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED);
 //データセット基本ファイル読込
-include("/home/firststar/public_html/group_test/candy/includefile/dataset_base.php");
+include("/home/firststar/public_html/group/candy/includefile/dataset_base.php");
 
 
 ?>
@@ -401,16 +401,16 @@ uomicho, usuki, yakushi, yasuicho
 
 The same 31 entries also lack HTML-to-PHP link transformations.
 
-### 14.3 Public PHP and Dataset PHP Without Source HTML: 10
+### 14.3 Public PHP and Dataset PHP Without Source HTML: 9
 
 ```text
 hirakawacho, kamifukumotocho, kamihonmachi,
 kamitaniguchicho, kamitatsuocho, kawadacho,
-kawakamicho, kiirenakamyoch（誤記候補）,
+kawakamicho,
 komatsubara, shimizucho
 ```
 
-The actual filename `kiirenakamyoch` exists. Do not confuse it with `kiirenakamyocho`, delete it, or consolidate it without user approval.
+
 
 ### 14.4 Other Findings
 

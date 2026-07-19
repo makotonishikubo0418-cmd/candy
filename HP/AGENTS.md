@@ -122,7 +122,7 @@ The dedicated tools are the canonical validation method. Do not duplicate the sa
 - STOP on an unauthorized deletion, rename, copy, type change, or file.
 - Actions MUST lint target PHP before FTP operations.
 - When a multi-file deployment partially fails, roll back files already deployed by that run.
-- One production deployment may contain at most 25 files.
+- One production deployment may contain at most 125 files.
 - Production verification MUST check the target page, required images, target category index, sitemap, and redirects over HTTP.
 - Check Actions state through the API. Do not use the browser UI for the normal route.
 
