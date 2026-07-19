@@ -62,7 +62,7 @@ Important:
 | `news.php` | News index | `source/news.html` + `dataset_news.php`; displays `newstopics` | Date, images, zero-result display, and common navigation | Normal route exists |
 | `system.php` | Fees, system, and terms | `source/system.html` + `dataset_system.php`; includes hotel coupon display and an external payment form | Fees, terms, external endpoint, hidden values, and common navigation | Normal route exists. External submission and authentication values are gated |
 | `movie.php` | Shop and girl movie index | `source/movie.html` + `dataset_movie.php`; shop/girl movies, device-specific display, and iframe links | `movie_iframe.php`, movie files, thumbnails, and zero-result display | Normal route exists |
-| `movie_iframe.php` | Movie playback iframe | `source/movie_iframe.html` + `dataset_movie_iframe.php`; selects a shop/girl movie from GET | Caller `movie.php`, movie formats, invalid GET, and direct access | Normal route exists. No direct common-navigation route |
+| `movie_iframe.php` | Noindex movie-playback helper | `source/movie_iframe.html` + `dataset_movie_iframe.php`; selects a shop/girl movie from GET | Caller `movie.php`, movie formats, invalid GET, and direct access | Keep `noindex,nofollow`; exclude canonical, H1, OGP, JSON-LD, breadcrumb, sitemap, and orphan requirements; no direct common-navigation route |
 | `mypage.php` | Favorite-girl review | `source/mypage.html` + `dataset_mypage.php`; Cookie, girls, images, schedules, and my-page information | Favorite add/remove, absent/expired Cookie, and girl detail | Normal route exists. Primarily Cookie-based, not member-ID/password based |
 | `main.php` | Candidate post-age-verification main according to a dataset_base comment | A branch uses `dataset_index.php`, but `source/main.html` is absent | Relationship to `index.php`, external routes, and `sitemap.xml` | STOP on source existence in the repository structure |
 | `page.php` | Legacy generic-page scaffold candidate | `dataset_page.php` exists but `source/page.html` does not | External routes, `sitemap.xml`, and purpose confirmation | STOP on source existence in the repository structure |
@@ -127,7 +127,17 @@ Do not generate with `create.php`. For a new page outside a dedicated category t
 
 Limit changes to the target sections in `source/index.html` and `dataset_index.php`. Do not change production `index.php`, redirects, age verification, or the root URL without prior approval.
 
-### 6.5 Sitemap Change
+### 6.5 Noindex Movie-Playback Helper
+
+`movie_iframe.php` is an embedded playback helper for `movie.php`, not an independent search-entry page.
+
+- Keep its existing `noindex,nofollow` directive.
+- Do not add it to `sitemap.xml`.
+- Canonical, H1, OGP, JSON-LD, BreadcrumbList, and orphan-page requirements are `NOT_APPLICABLE`.
+- Validate playback from `movie.php`, valid and invalid GET handling, movie format behavior, and direct-access safety.
+- A future change from noindex to index requires a separate explicit decision and full SEO impact review.
+
+### 6.6 Sitemap Change
 
 Do not use `makeSitemap.php` output directly as `sitemap.xml`. Diff against the current sitemap, classify each URL as add, preserve, or delete, and verify HTTP, canonical, and index eligibility.
 

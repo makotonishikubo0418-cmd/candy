@@ -2,13 +2,13 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-20T07:42:27+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-20T08:08:03+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 5c3f5d4d68235027abbf4b409df4f9e69837524a
+> Commit: 129d3df30cb3fd5d8e8d4695dc13c74c767b45b7
 > Scope: Source HTML corresponding to public PHP files directly under HP
 > Population: Pages: 105
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: OK=97 / ISSUE=4 / UNVERIFIED=4
+> Result: OK=98 / ISSUE=3 / UNVERIFIED=4
 > Unverified scope: Production HTTP, search engine index state, redirects, and database-generated HTML
 
 Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are not corrected automatically.
@@ -113,7 +113,7 @@ Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are no
 | system:main | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | 0 | UNVERIFIED | UNVERIFIED | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | UNVERIFIED | UNVERIFIED | UNVERIFIED | NOT_APPLICABLE | UNVERIFIED | NONE |
 | system:makeSitemap | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | 0 | UNVERIFIED | UNVERIFIED | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | UNVERIFIED | UNVERIFIED | UNVERIFIED | NOT_APPLICABLE | UNVERIFIED | NONE |
 | other:movie | 鹿児島 デリヘル キャンディ \| 女の子動画一覧 | 鹿児島 デリヘル「キャンディ」の動画一覧。お店や女の子の雰囲気や魅力を動画でご紹介いたします。 | https://www.55810.com/movie.php | index | 鹿児島 デリヘル キャンディ 女の子動画一覧 | 1 | OK | OK | OK | NOT_APPLICABLE | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
-| other:movie_iframe | 動画再生｜鹿児島 デリヘル キャンディ | 鹿児島 デリヘル キャンディの動画再生用補助ページです。 | UNVERIFIED | noindex,nofollow | UNVERIFIED | 0 | ISSUE | ISSUE | ISSUE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | ISSUE | UNVERIFIED | OK | UNVERIFIED | ISSUE | ISSUE | canonical; h1; ogp; json_ld; breadcrumb; sitemap; orphan |
+| system:movie_iframe | 動画再生｜鹿児島 デリヘル キャンディ | 鹿児島 デリヘル キャンディの動画再生用補助ページです。 | UNVERIFIED | noindex,nofollow | UNVERIFIED | 0 | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | OK | NOT_APPLICABLE | NOT_APPLICABLE | OK | NONE |
 | system:mypage | 鹿児島 デリヘル キャンディ │ マイページ | 鹿児島 デリヘル「キャンディ」マイページ。お気に入り登録の女の子や出勤情報の確認、各種メニューへスムーズにアクセスできます。 | https://www.55810.com/mypage.php | index | 鹿児島 デリヘル キャンディ マイページ | 1 | OK | OK | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | other:news | 鹿児島 デリヘル キャンディ │ NEWS | 鹿児島の風俗店 デリヘル キャンディのオフィシャルサイト/新着情報ページです。 | https://www.55810.com/news.php | index | NEW S | 1 | OK | OK | OK | NOT_APPLICABLE | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | system:page | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | 0 | UNVERIFIED | UNVERIFIED | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | UNVERIFIED | UNVERIFIED | UNVERIFIED | NOT_APPLICABLE | UNVERIFIED | NONE |

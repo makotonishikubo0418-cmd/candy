@@ -67,8 +67,9 @@ ASSET_EXTENSIONS = {
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".svg", ".webp"}
 VIDEO_EXTENSIONS = {".mp4", ".webm", ".mov", ".avi"}
 FONT_EXTENSIONS = {".ttf", ".otf", ".woff", ".woff2", ".eot"}
-SPECIAL_STEMS = {"create", "girls", "main", "makeSitemap", "page", "test"}
+SPECIAL_STEMS = {"create", "girls", "main", "makeSitemap", "movie_iframe", "page", "test"}
 SYSTEM_STEMS = {"confirm", "contact", "login", "mypage", "system"}
+SEO_HELPER_STEMS = {"movie_iframe"}
 SOURCE_SCOPE = (
     "HP",
     "Text_area_data",
@@ -486,16 +487,17 @@ def collect() -> dict[str, object]:
         img_tags = re.findall(r"<img\b[^>]*>", source, re.I)
         img_alt_missing = sum(1 for tag in img_tags if not re.search(r'\balt=["\'][^"\']+["\']', tag, re.I))
         expected_path = "" if page["stem"] == "index" else f"/{page['stem']}.php"
+        seo_helper = page["stem"] in SEO_HELPER_STEMS
         canonical_path = urlparse(canonical).path.rstrip("/") if canonical else ""
         checks = {
             "title": "OK" if title else "ISSUE" if page["source"] else "UNVERIFIED",
             "description": "OK" if description else "ISSUE" if page["source"] else "UNVERIFIED",
-            "canonical": "OK" if canonical else "ISSUE" if page["source"] else "UNVERIFIED",
+            "canonical": "NOT_APPLICABLE" if seo_helper else "OK" if canonical else "ISSUE" if page["source"] else "UNVERIFIED",
             "robots": "OK" if robots else "ISSUE" if page["source"] else "UNVERIFIED",
-            "h1": "OK" if h1_count == 1 else "ISSUE" if page["source"] else "UNVERIFIED",
-            "ogp": "OK" if not og_missing and page["source"] else "ISSUE" if page["source"] else "UNVERIFIED",
-            "json_ld": "OK" if json_objects and not json_errors else "ISSUE" if page["source"] else "UNVERIFIED",
-            "breadcrumb": "OK" if breadcrumb_count else "NOT_APPLICABLE" if page["category"] in {"top", "system"} else "ISSUE",
+            "h1": "NOT_APPLICABLE" if seo_helper else "OK" if h1_count == 1 else "ISSUE" if page["source"] else "UNVERIFIED",
+            "ogp": "NOT_APPLICABLE" if seo_helper else "OK" if not og_missing and page["source"] else "ISSUE" if page["source"] else "UNVERIFIED",
+            "json_ld": "NOT_APPLICABLE" if seo_helper else "OK" if json_objects and not json_errors else "ISSUE" if page["source"] else "UNVERIFIED",
+            "breadcrumb": "NOT_APPLICABLE" if seo_helper else "OK" if breadcrumb_count else "NOT_APPLICABLE" if page["category"] in {"top", "system"} else "ISSUE",
             "faq": (
                 "OK"
                 if faq_schema_count and faq_body_count and faq_schema_items == faq_body_count
@@ -507,9 +509,9 @@ def collect() -> dict[str, object]:
             "internal_links": "ISSUE" if missing_internal else "OK" if internal_refs else "NOT_APPLICABLE",
             "image_alt": "ISSUE" if img_alt_missing else "OK" if img_tags else "NOT_APPLICABLE",
             "sitemap": "OK" if page["sitemap_count"] == 1 else "NOT_APPLICABLE" if page["stem"] in SPECIAL_STEMS else "ISSUE",
-            "url_canonical": "OK" if canonical and (canonical_path == expected_path or (page["stem"] == "girls" and canonical == "rep03010092eot")) else "ISSUE" if canonical else "UNVERIFIED",
+            "url_canonical": "NOT_APPLICABLE" if seo_helper else "OK" if canonical and (canonical_path == expected_path or (page["stem"] == "girls" and canonical == "rep03010092eot")) else "ISSUE" if canonical else "UNVERIFIED",
             "duplicate_title": "ISSUE" if title and title_counts[title] > 1 else "OK" if title else "UNVERIFIED",
-            "duplicate_canonical": "ISSUE" if canonical and canonical_counts[canonical] > 1 else "OK" if canonical else "UNVERIFIED",
+            "duplicate_canonical": "NOT_APPLICABLE" if seo_helper else "ISSUE" if canonical and canonical_counts[canonical] > 1 else "OK" if canonical else "UNVERIFIED",
             "orphan": "NOT_APPLICABLE" if page["stem"] == "index" or page["stem"] in SPECIAL_STEMS else "ISSUE" if page["incoming"] == 0 else "OK",
         }
         overall = "ISSUE" if "ISSUE" in checks.values() else "UNVERIFIED" if "UNVERIFIED" in checks.values() else "OK"

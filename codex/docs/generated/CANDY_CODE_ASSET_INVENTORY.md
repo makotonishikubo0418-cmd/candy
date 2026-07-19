@@ -2,9 +2,9 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-20T07:42:27+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-20T08:08:03+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 5c3f5d4d68235027abbf4b409df4f9e69837524a
+> Commit: 129d3df30cb3fd5d8e8d4695dc13c74c767b45b7
 > Scope: Public PHP, source files, datasets, shared PHP, CSS, JavaScript, images, videos, and fonts
 > Population: Public PHP files: 105 / assets: 1072
 > Generator: `codex/scripts/candy_site_state.py`
@@ -323,7 +323,7 @@ Only the external session and database configuration references in `dataset_base
 | system:main | 0 | NONE | UNVERIFIED |
 | system:makeSitemap | 0 | NONE | UNVERIFIED |
 | other:movie | 1 | NONE | OK |
-| other:movie_iframe | 0 | NONE | UNVERIFIED |
+| system:movie_iframe | 0 | NONE | UNVERIFIED |
 | system:mypage | 3 | NONE | OK |
 | other:news | 0 | NONE | UNVERIFIED |
 | system:page | 0 | NONE | UNVERIFIED |
