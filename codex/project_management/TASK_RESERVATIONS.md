@@ -2,7 +2,7 @@
 
 - Purpose: Prevent multiple Codex tasks from changing the same files concurrently.
 - Status: Canonical document
-- Last updated: 2026-07-18
+- Last updated: 2026-07-19
 
 ## 1. Reservation Rules
 
@@ -20,6 +20,7 @@ No active reservations.
 
 | Task ID | Codex | Period | Scope | Result | Status |
 |---|---|---|---|---|---|
+| TASK-20260719-CATEGORY-SITEMAP-GITHUB-SYNC-001 | current | 2026-07-19 | Area, blog, and hotel category indexes; sitemap and generator; generated current-state documents; related project-status and communication records; Git Commit; and Push | Corrected the three category indexes, synchronized the 96-URL sitemap with the local canonical/indexable public-PHP policy, regenerated and verified all four current-state documents, explicitly excluded the pre-existing `AGENTS.md` change, created implementation Commit `b54de46`, and pushed it to `origin/main`. | COMPLETE |
 | TASK-20260718-AREA-SEO-CONTACT-GITHUB-SYNC-010 | current | 2026-07-18 | Accumulated area content, image and slug corrections, obsolete-contact removal, related stable/generated documents, Git Commit, and Push | Consolidated the accumulated work into implementation Commit `03f7232`, aligned the current management record, passed source, related-link, generated-state, reference, and Git checks, and synchronized the implementation, management, and deployment-automation commits to `origin/main`; Production Run `29639394638` verified 94 uploads and 10 approved deletions, with HTTP 200 for both completed target pages and HTTP 404 for the removed contact route. | COMPLETE |
 | TASK-20260718-AREA-IMAGE-GITHUB-SYNC-009 | current | 2026-07-18 | Accumulated area-image pairs, image creation/storage specifications, related current-state and classification Markdown, generated documents, Git Commit, and Push | Reconciled the five completed area-image pairs with accepted/public storage rules, changed the live missing-image queue to zero, separated the retained classification snapshot from live image availability, updated current image counts to 352 files and 176 pairs, verified generated-document reproducibility, fixed the explicit Git scope, and prepared the validated unit for Commit and Push. | COMPLETE |
 | TASK-20260718-REMAINING-THREE-AREA-IMAGES-008 | current | 2026-07-18 | Dairyuucho, Tenpozancho, and Shouyoudaichou accepted/public image pairs, generated current-state documents, and this reservation record | Independently confirmed display names `DAIRYUCHO`, `TEMPOZANCHO`, and `SHOUYOUDAICHO` from readable same-area references; created six clean wide/rotated-close images; enforced renderer strings, character counts, and fixed centers; saved all pairs under accepted and public canonical paths; verified six unique contents and matching SHA-256 values; regenerated current-state documents; and passed target checks for all three slugs. Each future page remains blocked only by missing area-index registration. | COMPLETE |
