@@ -1,5 +1,6 @@
 <?php
 error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED);
+header('X-Robots-Tag: noindex, nofollow', true);
 
 // パスワード認証とページ作成処理
 $PASSWORD = '09013489867';

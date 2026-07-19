@@ -67,7 +67,7 @@ Important:
 | `main.php` | Candidate post-age-verification main according to a dataset_base comment | A branch uses `dataset_index.php`, but `source/main.html` is absent | Relationship to `index.php`, external routes, and `sitemap.xml` | STOP on source existence in the repository structure |
 | `page.php` | Legacy generic-page scaffold candidate | `dataset_page.php` exists but `source/page.html` does not | External routes, `sitemap.xml`, and purpose confirmation | STOP on source existence in the repository structure |
 | `test.php` | Test scaffold candidate | `dataset_test.php` exists but `source/test.html` does not | Publication requirement, noindex, and deletion eligibility | STOP on source existence in the repository structure |
-| `create.php` | Authenticated page-generation feature | Standalone; accepts a page name by POST, creates root PHP, dataset, and source, and appends a case and transformation to `dataset_base.php` | Authentication, three generated files, shared-PHP diff, rollback, and noindex | Prohibited for normal production. Do not copy authentication values into documents or logs |
+| `create.php` | Noindex authenticated page-generation feature | Standalone; accepts a page name by POST, creates root PHP, dataset, and source, and appends a case and transformation to `dataset_base.php` | Authentication, three generated files, shared-PHP diff, rollback, and noindex | Exclude from public-page SEO requirements; prohibited for normal production. Do not copy authentication values into documents or logs |
 | `makeSitemap.php` | Recursive site-link collection and XML response | Crawls links from the current host, dumps in test mode, and returns XML over HTTP normally | Seed, 404 behavior, external exclusion, infinite traversal, SSL, and output diff | Does not save `sitemap.xml`. Prohibited as the normal update method |
 | `sitemap.xml` | Public URL list for search engines | Static XML; use the generated ledger for current URLs | New/changed/removed URLs, canonical, HTTP state, and index eligibility | Confirm intent before addition, deletion, or redirect |
 
@@ -137,7 +137,17 @@ Limit changes to the target sections in `source/index.html` and `dataset_index.p
 - Validate playback from `movie.php`, valid and invalid GET handling, movie format behavior, and direct-access safety.
 - A future change from noindex to index requires a separate explicit decision and full SEO impact review.
 
-### 6.6 Sitemap Change
+### 6.6 Noindex Authenticated Page-Generation Feature
+
+`create.php` is an authenticated operational feature, not a public search-entry page.
+
+- Keep an `X-Robots-Tag: noindex, nofollow` response header on both authenticated and unauthenticated responses.
+- Keep it excluded from `sitemap.xml` and normal public navigation.
+- Public-page title, description, canonical, H1, OGP, JSON-LD, breadcrumb, internal-link, image-alt, sitemap, and orphan-page requirements are `NOT_APPLICABLE`.
+- Keep authentication and operational safety in scope; SEO exclusion MUST NOT be treated as exclusion from security or maintenance controls.
+- Do not use it for normal production. A future return to normal use requires a separate explicit decision and review of its generation behavior.
+
+### 6.7 Sitemap Change
 
 Do not use `makeSitemap.php` output directly as `sitemap.xml`. Diff against the current sitemap, classify each URL as add, preserve, or delete, and verify HTTP, canonical, and index eligibility.
 

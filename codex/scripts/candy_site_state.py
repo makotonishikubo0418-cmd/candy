@@ -69,7 +69,8 @@ VIDEO_EXTENSIONS = {".mp4", ".webm", ".mov", ".avi"}
 FONT_EXTENSIONS = {".ttf", ".otf", ".woff", ".woff2", ".eot"}
 SPECIAL_STEMS = {"create", "girls", "main", "makeSitemap", "movie_iframe", "page", "test"}
 SYSTEM_STEMS = {"confirm", "contact", "login", "mypage", "system"}
-SEO_HELPER_STEMS = {"movie_iframe"}
+SEO_HELPER_STEMS = {"create", "movie_iframe"}
+SEO_ADMIN_STEMS = {"create"}
 SOURCE_SCOPE = (
     "HP",
     "Text_area_data",
@@ -488,6 +489,7 @@ def collect() -> dict[str, object]:
         img_alt_missing = sum(1 for tag in img_tags if not re.search(r'\balt=["\'][^"\']+["\']', tag, re.I))
         expected_path = "" if page["stem"] == "index" else f"/{page['stem']}.php"
         seo_helper = page["stem"] in SEO_HELPER_STEMS
+        seo_admin = page["stem"] in SEO_ADMIN_STEMS
         canonical_path = urlparse(canonical).path.rstrip("/") if canonical else ""
         checks = {
             "title": "OK" if title else "ISSUE" if page["source"] else "UNVERIFIED",
@@ -506,7 +508,7 @@ def collect() -> dict[str, object]:
                 else "ISSUE"
             ),
             "item_list": "OK" if item_count else "NOT_APPLICABLE",
-            "internal_links": "ISSUE" if missing_internal else "OK" if internal_refs else "NOT_APPLICABLE",
+            "internal_links": "NOT_APPLICABLE" if seo_admin else "ISSUE" if missing_internal else "OK" if internal_refs else "NOT_APPLICABLE",
             "image_alt": "ISSUE" if img_alt_missing else "OK" if img_tags else "NOT_APPLICABLE",
             "sitemap": "OK" if page["sitemap_count"] == 1 else "NOT_APPLICABLE" if page["stem"] in SPECIAL_STEMS else "ISSUE",
             "url_canonical": "NOT_APPLICABLE" if seo_helper else "OK" if canonical and (canonical_path == expected_path or (page["stem"] == "girls" and canonical == "rep03010092eot")) else "ISSUE" if canonical else "UNVERIFIED",
@@ -521,7 +523,7 @@ def collect() -> dict[str, object]:
                 issues.append(key)
         if json_errors:
             issues.extend(json_errors)
-        if missing_internal:
+        if missing_internal and not seo_admin:
             issues.append("missing_links=" + ",".join(sorted(set(missing_internal))))
         seo_rows.append(
             {

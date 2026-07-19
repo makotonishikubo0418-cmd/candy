@@ -2,9 +2,9 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-20T08:08:03+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-20T08:21:23+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 129d3df30cb3fd5d8e8d4695dc13c74c767b45b7
+> Commit: 6e165f1a850c068d26c248cd492cdece231a3d73
 > Scope: Text_area_data, Text_hotel_data, Text_blog_data, and current pages, images, indexes, and sitemap entries
 > Population: Unique candidates: 234 / Text records: 235
 > Generator: `codex/scripts/candy_site_state.py`
