@@ -1,152 +1,145 @@
 <?php
 set_time_limit(0);
-$page=array();
-$seed=array();
-$domain=(empty($_SERVER["HTTPS"]) ? "http://" : "https://") . $_SERVER["HTTP_HOST"];//末尾の/は無し
-array_push($seed,$domain."/",$domain."/pc/pc_index.php",$domain."/s/sp_index.php");
 
-while(count($seed)>0){
-	$headerParams = @get_headers($seed[0]);
-	if($headerParams[0] === 'HTTP/1.1 404 Not Found') {
-		array_shift($seed);
-	} else {
-		$href=getHref($seed[0]);
+const CANONICAL_HOST = 'https://www.55810.com';
 
-		$href=array_values(array_diff($href,$page));
+$excludedPages = array(
+    'create.php',
+    'main.php',
+    'makeSitemap.php',
+    'movie_iframe.php',
+    'page.php',
+    'test.php',
+    // Legacy duplicate slugs. Keep the approved current slugs in the sitemap.
+    'kagoshima-deliveryhealth-area-kenohikarigaoka.php',
+    'kagoshima-deliveryhealth-area-kiirehitokuracho.php',
+    'kagoshima-deliveryhealth-area-kiirenakamyoch.php',
+);
 
-	
-		$href=array_values(array_diff($href,$seed));
+$urls = array();
+$sourceFiles = glob(__DIR__ . '/source/*.html');
 
-		$seed=array_merge($seed,$href);
-		$tmp=array_shift($seed);
-		if(strpos($tmp,'index') === false && strpos($tmp,'___') === false){
-			$page[]=$tmp;
-		}
-	}
-}
-sort($page);
-if($_GET['mode']=='test'){
-	echo $_SERVER['HTTP_HOST'];
-	test($page);
-}else{
-	header('Content-Type: application/xhtml+xml; charset=utf-8');
-	echo "<?xml version='1.0' encoding='UTF-8'?>\n";
-	echo "<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>\n";
-	for($i=0;$i<count($page);$i++){
-			echo "<url>\n";
-			echo "<loc>".htmlspecialchars($page[$i], ENT_QUOTES)."</loc>\n";
-			echo "</url>\n";
-	}
-	echo "</urlset>";
-}
-function test($t){
-	echo "<pre>";
-	var_dump($t);
-	echo "</pre>";
-	ob_flush();
-	flush();
-}
-
-
-if(!function_exists('my_file_get_contents')){
-    /**
-     * Read the contents of a file into a string.
-     *
-     * @param string $filename The path to the file to read.
-     * @return string|false Returns the file contents as a string on success, or false on failure.
-     */
-    function my_file_get_contents($filename)
-    {
-        $context = stream_context_create([
-            'ssl' => [
-                'verify_peer' => false,
-                'verify_peer_name' => false,
-            ]
-        ]);
-
-        return file_get_contents($filename, false, $context);
+foreach ($sourceFiles as $sourceFile) {
+    $sourceName = basename($sourceFile, '.html');
+    if (strpos($sourceName, 'template_') === 0) {
+        continue;
     }
+
+    $publicName = $sourceName . '.php';
+    if (in_array($publicName, $excludedPages, true)) {
+        continue;
+    }
+
+    if (!is_file(__DIR__ . '/' . $publicName)) {
+        continue;
+    }
+
+    $html = file_get_contents($sourceFile);
+    if ($html === false) {
+        continue;
+    }
+
+    $robots = getMetaContent($html, 'robots');
+    if (!isIndexableRobots($robots)) {
+        continue;
+    }
+
+    $canonical = getApprovedCanonical(getCanonicalUrl($html), $publicName);
+    if ($canonical === false) {
+        continue;
+    }
+
+    $urls[$canonical] = true;
 }
-function getHref($path){
-		
-	global $domain;
-	$ptn='/<a[^>]href\s?=\s?[\"\']([^\"\']+)[\"\'][^>]*>/i';
-    preg_match_all($ptn, preg_replace('/<!--[\s\S]*?-->/s', '', my_file_get_contents($path)), $m);
-	$m=$m[1];
-	//リンクで無いhrefを削除
-	if(count($m)>0){
-		$iMax=count($m);
-		for($i=0;$i<$iMax;$i++){
-			if(strncasecmp($m[$i],"tel:",4)==0) unset($m[$i]);
-			if(strncasecmp($m[$i],"mailto:",7)==0) unset($m[$i]);
-			if(strncasecmp($m[$i],"javascript:",11)==0) unset($m[$i]);
-			if(strncasecmp($m[$i],"#",1)==0) unset($m[$i]);
-		}
-	}
-	
-	$m=array_values($m);
-	//相対パスを絶対パスに変換
-	if(count($m)>0){
-		$iMax=count($m);
-		for($i=0;$i<$iMax;$i++){
-			if(strpos($m[$i],'://') === false){
-				$m[$i]=pathToUrl($m[$i],$path);
-			}
-			if(strpos($m[$i],'#') >0){
-				$m[$i]=explode("#",$m[$i]);
-				$m[$i]=$m[$i][0];
-			}
-			//外部サイトを削除
-			if(strncasecmp($m[$i],$domain,strlen($domain))!=0) unset($m[$i]);
-		}
-	}
-	
-	$m=array_unique($m);
-	
-	$m=array_values($m);
-    return $m;
+
+$urls = array_keys($urls);
+sort($urls, SORT_STRING);
+
+header('Content-Type: application/xml; charset=utf-8');
+echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+echo "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
+foreach ($urls as $url) {
+    echo "  <url>\n";
+    echo '    <loc>' . htmlspecialchars($url, ENT_QUOTES | ENT_XML1, 'UTF-8') . "</loc>\n";
+    echo "  </url>\n";
 }
-function pathToUrl($pPath, $pUrl)
+echo "</urlset>\n";
+
+function getMetaContent($html, $name)
 {
-    $path = trim($pPath);    // 変換対象パス
-    $url = trim($pUrl);      // 変換元URL
-
-    //-- 変換不要
-    if (stripos($path, 'http') === 0 ||
-        stripos($path, 'mailto:') === 0 ||
-        stripos($path, 'tel:') === 0) { return $path; }
-
-    //-- #anchor
-    if (strpos($path, '#') === 0) { return $url . $path; }
-
-    //-- 変換元URLのホームURL(scheme://host)
-    $tmpUrlAry = explode('/', $url);
-    if (empty($tmpUrlAry[2])) { return $url; }
-    $urlHome = $tmpUrlAry[0] . '//' . $tmpUrlAry[2];
-
-    //-- 変換元URLの path
-    if (!$tmpUrlAry = parse_url($url)) { return $url; }
-    $pathUrl = (isset($tmpUrlAry['path'])) ? $tmpUrlAry['path'] : '/';
-
-    //-- ?query
-    if (strpos($path, '?') === 0) { return $urlHome . $pathUrl . $path; }
-
-    //-- /path
-    if (strpos($path, '/') === 0) { return $urlHome . $path; }
-
-    //-- ./path or ../path
-    $pathUrlAry = array_filter(explode('/', $pathUrl), 'strlen');
-    if (strpos(end($pathUrlAry), '.') !== FALSE) { array_pop($pathUrlAry); }
-
-    foreach (explode('/', $path) as $pathElem) {
-        if ($pathElem === '.') { continue; }
-        if ($pathElem === '..') { array_pop($pathUrlAry); continue; }
-        if ($pathElem !== '') { $pathUrlAry[] = $pathElem; }
+    if (!preg_match_all('/<meta\b[^>]*>/i', $html, $tags)) {
+        return '';
     }
 
-    $urlBuild = $urlHome . '/' . implode('/', $pathUrlAry);
-    if (substr($path, -1) === '/') { $urlBuild .= '/'; }
+    foreach ($tags[0] as $tag) {
+        if (strcasecmp(getHtmlAttribute($tag, 'name'), $name) === 0) {
+            return getHtmlAttribute($tag, 'content');
+        }
+    }
 
-    return $urlBuild;
+    return '';
+}
+
+function getCanonicalUrl($html)
+{
+    if (!preg_match_all('/<link\b[^>]*>/i', $html, $tags)) {
+        return '';
+    }
+
+    foreach ($tags[0] as $tag) {
+        $rel = preg_split('/\s+/', strtolower(trim(getHtmlAttribute($tag, 'rel'))));
+        if (in_array('canonical', $rel, true)) {
+            return trim(getHtmlAttribute($tag, 'href'));
+        }
+    }
+
+    return '';
+}
+
+function getHtmlAttribute($tag, $attribute)
+{
+    $pattern = '/\b' . preg_quote($attribute, '/') . '\s*=\s*(["\'])(.*?)\1/i';
+    if (!preg_match($pattern, $tag, $match)) {
+        return '';
+    }
+
+    return html_entity_decode($match[2], ENT_QUOTES | ENT_HTML5, 'UTF-8');
+}
+
+function isIndexableRobots($robots)
+{
+    $tokens = array_map('trim', explode(',', strtolower($robots)));
+    return in_array('index', $tokens, true) && !in_array('noindex', $tokens, true);
+}
+
+function getApprovedCanonical($canonical, $publicName)
+{
+    if ($canonical === '') {
+        return false;
+    }
+
+    $parts = parse_url($canonical);
+    if ($parts === false || !isset($parts['scheme'], $parts['host'])) {
+        return false;
+    }
+
+    if (strtolower($parts['scheme']) !== 'https' || strtolower($parts['host']) !== 'www.55810.com') {
+        return false;
+    }
+
+    if (isset($parts['port']) || isset($parts['user']) || isset($parts['pass']) || isset($parts['query']) || isset($parts['fragment'])) {
+        return false;
+    }
+
+    $path = isset($parts['path']) ? $parts['path'] : '/';
+    if ($publicName === 'index.php') {
+        return $path === '/' ? CANONICAL_HOST . '/' : false;
+    }
+
+    if ($path !== '/' . $publicName) {
+        return false;
+    }
+
+    return CANONICAL_HOST . $path;
 }
 ?>

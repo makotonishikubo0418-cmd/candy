@@ -2,7 +2,7 @@
 
 - Purpose: Provide one location for the overall plan, current state, problems, and next work
 - Status: canonical document
-- Updated: 2026-07-18
+- Updated: 2026-07-19
 
 ## 1. Current State
 
@@ -48,7 +48,7 @@
 
 ## 5. Candidate Next Actions
 
-1. For further repository-wide SEO remediation, treat `CANDY_REPOSITORY_SEO_AUDIT_2026-07-18.md` as a dated snapshot, recheck each finding against the generated current state, and skip the completed area-placeholder and obsolete-contact work recorded in `TASK_LOG.md`.
+1. For further repository-wide SEO remediation, treat `CANDY_REPOSITORY_SEO_AUDIT_2026-07-18.md` as a dated snapshot, recheck each finding against the generated current state, and skip the completed area-placeholder, obsolete-contact, category-index, internal-link, and sitemap work recorded in `TASK_LOG.md`.
 2. Resolve category-specific blockers in `generated/CANDY_UPCOMING_PAGES.md`, then use the dedicated target gate to select an eligible production target.
 3. Handle issues explicitly selected by the owner from `generated/CANDY_SEO_STATUS.md` and `CANDY_FIX_BACKLOG.md` in separate tasks.
 4. For missing, unconfirmed-reference, and duplicate candidates in `generated/CANDY_CODE_ASSET_INVENTORY.md`, verify dynamic references and recovery methods before requesting target-specific deletion approval.
