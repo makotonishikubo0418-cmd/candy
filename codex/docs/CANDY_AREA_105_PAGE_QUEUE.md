@@ -1,6 +1,6 @@
 # CANDY AREA 105 PAGE QUEUE
 
-- Updated: 2026-07-13
+- Updated: 2026-07-20
 - Purpose: Control production order and prevent duplication for unbuilt area pages
 
 ## 1. Population Basis
@@ -11,12 +11,12 @@ The 167 canonical inputs under `Text_area_data`, excluding Backup, were reconcil
 |---|---:|
 | Excluded from new production because source HTML exists | 57 |
 | No source HTML; information file and two correctly named slug images exist | 105 |
-| └ Normal new candidate with all three page files absent | 96 |
-| └ Existing inconsistency with public PHP and dataset PHP present but source HTML absent | 9 |
+| └ Normal new candidate with all three page files absent | 105 |
+| └ Existing inconsistency with public PHP and dataset PHP present but source HTML absent | 0 |
 | No source HTML; information file exists but correctly named slug images are missing | 5 |
 | Total | 167 |
 
-The 105 candidates are not guaranteed to have complete input content. The 96 normal new candidates are `READY_CANDIDATE` inputs eligible for pre-production review. Keep the nine existing inconsistencies separate from normal new production; inspect their affected scope as existing-page repairs and act only after user approval. Read each text file in full for every batch and change the status to `BLOCKED` when required content is missing.
+The 105 candidates are not guaranteed to have complete input content. All 105 now have all three page files absent. Nine targets whose broken public PHP and dataset files were removed on 2026-07-20 remain `BLOCKED` because their area-index registrations are absent; review them through the normal new-production gate before future production. Read each text file in full for every batch and change the status to `BLOCKED` when required content is missing.
 
 ## 2. Operating Rules
 
@@ -55,13 +55,13 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 19 | 若葉町 | `wakabacho` | IN_PROGRESS | 専用ツール / 2026-07-18 / 3ファイル・共有登録・静的検査済み / PHP CLI未確認 |
 | 20 | 住吉町 | `sumiyoshicho` | READY_CANDIDATE | |
 | 21 | 春山町 | `haruyamacho` | READY_CANDIDATE | |
-| 22 | 小松原 | `komatsubara` | BLOCKED_EXISTING_PARTIAL | Public PHP and dataset exist; source HTML is missing |
+| 22 | 小松原 | `komatsubara` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
 | 23 | 松原町 | `matsubaracho` | READY_CANDIDATE | |
 | 24 | 照国町 | `terukunicho` | READY_CANDIDATE | |
-| 25 | 上谷口町 | `kamitaniguchicho` | BLOCKED_EXISTING_PARTIAL | Public PHP and dataset exist; source HTML is missing |
-| 26 | 上福元町 | `kamifukumotocho` | BLOCKED_EXISTING_PARTIAL | Public PHP and dataset exist; source HTML is missing |
-| 27 | 上本町 | `kamihonmachi` | BLOCKED_EXISTING_PARTIAL | Public PHP and dataset exist; source HTML is missing |
-| 28 | 上竜尾町 | `kamitatsuocho` | BLOCKED_EXISTING_PARTIAL | Public PHP and dataset exist; source HTML is missing |
+| 25 | 上谷口町 | `kamitaniguchicho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
+| 26 | 上福元町 | `kamifukumotocho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
+| 27 | 上本町 | `kamihonmachi` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
+| 28 | 上竜尾町 | `kamitatsuocho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
 | 29 | 城山 | `shiroyama` | READY_CANDIDATE | |
 | 30 | 城山町 | `shiroyamacho` | READY_CANDIDATE | |
 | 31 | 城西 | `josei` | READY_CANDIDATE | |
@@ -72,7 +72,7 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 36 | 真砂町 | `masagocho` | READY_CANDIDATE | |
 | 37 | 真砂本町 | `masagohonmachi` | READY_CANDIDATE | |
 | 38 | 星ヶ峯 | `hoshigamine` | READY_CANDIDATE | |
-| 39 | 清水町 | `shimizucho` | BLOCKED_EXISTING_PARTIAL | Public PHP and dataset exist; source HTML is missing |
+| 39 | 清水町 | `shimizucho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
 | 40 | 清和 | `seiwa` | READY_CANDIDATE | |
 | 41 | 西伊敷 | `nishiishiki` | READY_CANDIDATE | |
 | 42 | 西佐多町 | `nishisatacho` | READY_CANDIDATE | |
@@ -84,8 +84,8 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 48 | 西別府町 | `nishibeppucho` | READY_CANDIDATE | |
 | 49 | 西俣町 | `nishimatacho` | READY_CANDIDATE | |
 | 50 | 千日町 | `sennichicho` | READY_CANDIDATE | |
-| 51 | 川上町 | `kawakamicho` | BLOCKED_EXISTING_PARTIAL | Public PHP and dataset exist; source HTML is missing |
-| 52 | 川田町 | `kawadacho` | BLOCKED_EXISTING_PARTIAL | Public PHP and dataset exist; source HTML is missing |
+| 51 | 川上町 | `kawakamicho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
+| 52 | 川田町 | `kawadacho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
 | 53 | 船津町 | `funatsucho` | READY_CANDIDATE | |
 | 54 | 草牟田 | `soumuta` | READY_CANDIDATE | |
 | 55 | 草牟田町 | `soumutacho` | READY_CANDIDATE | |
@@ -122,7 +122,7 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 86 | 武 | `take` | READY_CANDIDATE | |
 | 87 | 武岡 | `takeoka` | READY_CANDIDATE | |
 | 88 | 福山町 | `fukuyamacho` | READY_CANDIDATE | |
-| 89 | 平川町 | `hirakawacho` | BLOCKED_EXISTING_PARTIAL | Public PHP and dataset exist; source HTML is missing |
+| 89 | 平川町 | `hirakawacho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
 | 90 | 平田町 | `hiratacho` | READY_CANDIDATE | |
 | 91 | 平之町 | `hiranocho` | READY_CANDIDATE | |
 | 92 | 堀江町 | `horiecho` | READY_CANDIDATE | |
@@ -149,14 +149,8 @@ images remain separate and MUST NOT be renamed or substituted automatically.
 Image availability alone does not make a candidate publishable. Continue to
 apply the area-index, page-structure, input, and publication gates.
 
-## 5. Blocked by Existing Inconsistencies: 9
+## 5. Blocked by Existing Inconsistencies: 0
 
-These candidates already have public PHP and page-specific dataset PHP, but source HTML is missing. Treat them as repairs of existing inconsistencies, not as normal new generation.
+The nine broken public PHP and page-specific dataset pairs were removed on 2026-07-20 together with their shared registrations and area-index links. They are no longer existing-page repairs.
 
-```text
-kamihonmachi, kamifukumotocho, kamitatsuocho,
-kamitaniguchicho, komatsubara, kawakamicho,
-kawadacho, hirakawacho, shimizucho
-```
-
-Do not overwrite existing PHP or datasets. Review content, dataset_base registration, the area index, sitemap, and legacy slug individually, then obtain user approval.
+Their source Text and accepted/public images remain available. Any future page creation must start through the normal new-production gate after the required area-index registration is resolved.

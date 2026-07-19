@@ -2,13 +2,13 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-19T11:05:39+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-20T07:01:38+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 99e2e9385cba6557a2148d6c47a803c27dca2cf0
+> Commit: 20370228e55b1efd1c98811dde5d1a2e3f3184f2
 > Scope: Source HTML corresponding to public PHP files directly under HP
-> Population: Pages: 114
+> Population: Pages: 105
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: OK=89 / ISSUE=21 / UNVERIFIED=4
+> Result: OK=89 / ISSUE=12 / UNVERIFIED=4
 > Unverified scope: Production HTTP, search engine index state, redirects, and database-generated HTML
 
 Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are not corrected automatically.
@@ -32,7 +32,6 @@ Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are no
 | area:hanaomachi | 鹿児島市花尾町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島「花尾町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-hanaomachi.php | index | 鹿児島市花尾町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:harara | 鹿児島市原良で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「原良」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-harara.php | index | 鹿児島市原良で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:hikariyama | 鹿児島市光山で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「光山」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-hikariyama.php | index | 鹿児島市光山で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
-| area:hirakawacho | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | 0 | UNVERIFIED | UNVERIFIED | ISSUE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | ISSUE | UNVERIFIED | UNVERIFIED | UNVERIFIED | OK | ISSUE | breadcrumb; sitemap |
 | area:hiroki | 鹿児島市広木で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「広木」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-hiroki.php | index | 鹿児島市広木で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:ikenouecho | 鹿児島市池之上町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「池之上町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-ikenouecho.php | index | 鹿児島市池之上町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:inaricho | 鹿児島市稲荷町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「稲荷町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-inaricho.php | index | 鹿児島「稲荷町」で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
@@ -45,15 +44,9 @@ Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are no
 | area:jigenjicho | 鹿児島市慈眼寺町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「慈眼寺町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-jigenjicho.php | index | 鹿児島市慈眼寺町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:jiyugaoka | 鹿児島市自由ヶ丘で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「自由ヶ丘」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-jiyugaoka.php | index | 鹿児島市自由ヶ丘で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:kajiyacho | 鹿児島市加治屋町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「加治屋町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kajiyacho.php | index | 鹿児島市「加治屋町」で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
-| area:kamifukumotocho | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | 0 | UNVERIFIED | UNVERIFIED | ISSUE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | ISSUE | UNVERIFIED | UNVERIFIED | UNVERIFIED | OK | ISSUE | breadcrumb; sitemap |
-| area:kamihonmachi | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | 0 | UNVERIFIED | UNVERIFIED | ISSUE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | ISSUE | UNVERIFIED | UNVERIFIED | UNVERIFIED | ISSUE | ISSUE | breadcrumb; sitemap; orphan |
-| area:kamitaniguchicho | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | 0 | UNVERIFIED | UNVERIFIED | ISSUE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | ISSUE | UNVERIFIED | UNVERIFIED | UNVERIFIED | OK | ISSUE | breadcrumb; sitemap |
-| area:kamitatsuocho | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | 0 | UNVERIFIED | UNVERIFIED | ISSUE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | ISSUE | UNVERIFIED | UNVERIFIED | UNVERIFIED | ISSUE | ISSUE | breadcrumb; sitemap; orphan |
 | area:kamoike | 鹿児島市鴨池で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「鴨池」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kamoike.php | index | 鹿児島市「鴨池」で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:kamoikeshinmachi | 鹿児島市鴨池新町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「鴨池新町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kamoikeshinmachi.php | index | 鹿児島市「鴨池新町」で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:kasugacho | 鹿児島市春日町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「春日町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kasugacho.php | index | 鹿児島市春日町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
-| area:kawadacho | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | 0 | UNVERIFIED | UNVERIFIED | ISSUE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | ISSUE | UNVERIFIED | UNVERIFIED | UNVERIFIED | ISSUE | ISSUE | breadcrumb; sitemap; orphan |
-| area:kawakamicho | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | 0 | UNVERIFIED | UNVERIFIED | ISSUE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | ISSUE | UNVERIFIED | UNVERIFIED | UNVERIFIED | OK | ISSUE | breadcrumb; sitemap |
 | area:kenohikarigaoka | 鹿児島市花野光ヶ丘で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「花野光ヶ丘」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kenohikarigaoka.php | index | 鹿児島市「花野光ヶ丘」で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | ISSUE | OK | OK | OK | OK | ISSUE | sitemap |
 | area:kibougaokacho | 鹿児島市希望ヶ丘町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「希望ヶ丘町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kibougaokacho.php | index | 鹿児島市希望ヶ丘町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:kiirecho | 鹿児島市喜入町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「喜入町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kiirecho.php | index | 鹿児島市喜入町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
@@ -66,7 +59,6 @@ Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are no
 | area:kinkocho | 鹿児島市錦江町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島「錦江町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kinkocho.php | index | 鹿児島市錦江町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:kinkodai | 鹿児島市錦江台で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「錦江台」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kinkodai.php | index | 鹿児島市錦江台で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:kinseicho | 鹿児島市金生町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「金生町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kinseicho.php | index | 鹿児島市金生町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
-| area:komatsubara | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | 0 | UNVERIFIED | UNVERIFIED | ISSUE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | ISSUE | UNVERIFIED | UNVERIFIED | UNVERIFIED | OK | ISSUE | breadcrumb; sitemap |
 | area:koraicho | 鹿児島市高麗町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「高麗町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-koraicho.php | index | 鹿児島市高麗町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:korimoto | 鹿児島市郡元で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「郡元」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-korimoto.php | index | 鹿児島市郡元で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:korimotocho | 鹿児島市郡元町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「郡元町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-korimotocho.php | index | 鹿児島市郡元町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
@@ -88,7 +80,6 @@ Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are no
 | area:sakanoue | 鹿児島市坂之上町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「坂之上町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-sakanoue.php | index | 鹿児島市坂之上で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:sakuragaoka | 鹿児島市桜ヶ丘で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「桜ヶ丘」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-sakuragaoka.php | index | 鹿児島市桜ヶ丘で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:sanwacho | 鹿児島市三和町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「三和町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-sanwacho.php | index | 鹿児島市三和町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
-| area:shimizucho | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | 0 | UNVERIFIED | UNVERIFIED | ISSUE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | ISSUE | UNVERIFIED | UNVERIFIED | UNVERIFIED | OK | ISSUE | breadcrumb; sitemap |
 | area:shimoarata | 鹿児島市下荒田で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「下荒田」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-shimoarata.php | index | 鹿児島市下荒田で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:shimofukumotocho | 鹿児島市下福元町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「下福元町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-shimofukumotocho.php | index | 鹿児島市下福元町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:shimoishiki | 鹿児島市下伊敷で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「下伊敷」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-shimoishiki.php | index | 鹿児島市下伊敷で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |

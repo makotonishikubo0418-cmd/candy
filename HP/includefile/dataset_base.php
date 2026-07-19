@@ -102,42 +102,6 @@ switch ($hdir) {
 	case 'test.html':
 		include(INCLUDE_DIR . 'dataset_test.php');
 		break;
-	case 'kagoshima-deliveryhealth-area-hirakawacho.html':
-		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-hirakawacho.php');
-		break;
-
-	case 'kagoshima-deliveryhealth-area-kawadacho.html':
-		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-kawadacho.php');
-		break;
-
-	case 'kagoshima-deliveryhealth-area-kawakamicho.html':
-		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-kawakamicho.php');
-		break;
-
-	case 'kagoshima-deliveryhealth-area-shimizucho.html':
-		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-shimizucho.php');
-		break;
-
-	case 'kagoshima-deliveryhealth-area-kamitatsuocho.html':
-		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-kamitatsuocho.php');
-		break;
-
-	case 'kagoshima-deliveryhealth-area-kamihonmachi.html':
-		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-kamihonmachi.php');
-		break;
-
-	case 'kagoshima-deliveryhealth-area-kamifukumotocho.html':
-		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-kamifukumotocho.php');
-		break;
-
-	case 'kagoshima-deliveryhealth-area-kamitaniguchicho.html':
-		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-kamitaniguchicho.php');
-		break;
-
-	case 'kagoshima-deliveryhealth-area-komatsubara.html':
-		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-komatsubara.php');
-		break;
-
 	case 'kagoshima-deliveryhealth-area-koyamadacho.html':
 		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-koyamadacho.php');
 		break;
@@ -1187,15 +1151,6 @@ error_log("Source file exists: " . (file_exists($source_file) ? 'YES' : 'NO'));
 // テンプレートファイルの読み込み
 
 //index置換
-$source = str_replace('kagoshima-deliveryhealth-area-hirakawacho.html', 'kagoshima-deliveryhealth-area-hirakawacho.php', $source);
-$source = str_replace('kagoshima-deliveryhealth-area-kawadacho.html', 'kagoshima-deliveryhealth-area-kawadacho.php', $source);
-$source = str_replace('kagoshima-deliveryhealth-area-kawakamicho.html', 'kagoshima-deliveryhealth-area-kawakamicho.php', $source);
-$source = str_replace('kagoshima-deliveryhealth-area-shimizucho.html', 'kagoshima-deliveryhealth-area-shimizucho.php', $source);
-$source = str_replace('kagoshima-deliveryhealth-area-kamitatsuocho.html', 'kagoshima-deliveryhealth-area-kamitatsuocho.php', $source);
-$source = str_replace('kagoshima-deliveryhealth-area-kamihonmachi.html', 'kagoshima-deliveryhealth-area-kamihonmachi.php', $source);
-$source = str_replace('kagoshima-deliveryhealth-area-kamifukumotocho.html', 'kagoshima-deliveryhealth-area-kamifukumotocho.php', $source);
-$source = str_replace('kagoshima-deliveryhealth-area-kamitaniguchicho.html', 'kagoshima-deliveryhealth-area-kamitaniguchicho.php', $source);
-$source = str_replace('kagoshima-deliveryhealth-area-komatsubara.html', 'kagoshima-deliveryhealth-area-komatsubara.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-area-koyamadacho.html', 'kagoshima-deliveryhealth-area-koyamadacho.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-area-kasugacho.html', 'kagoshima-deliveryhealth-area-kasugacho.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-area-sanwacho.html', 'kagoshima-deliveryhealth-area-sanwacho.php', $source);

@@ -2,11 +2,11 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-19T11:05:39+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-20T07:01:38+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 99e2e9385cba6557a2148d6c47a803c27dca2cf0
+> Commit: 20370228e55b1efd1c98811dde5d1a2e3f3184f2
 > Scope: Public PHP, source files, datasets, shared PHP, CSS, JavaScript, images, videos, and fonts
-> Population: Public PHP files: 114 / assets: 1072
+> Population: Public PHP files: 105 / assets: 1072
 > Generator: `codex/scripts/candy_site_state.py`
 > Result: Missing references: 22 / duplicate hash groups: 165
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -32,7 +32,6 @@
 | HP/kagoshima-deliveryhealth-area-hanaomachi.php | HP/source/kagoshima-deliveryhealth-area-hanaomachi.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-hanaomachi.php | 1 | 1 |
 | HP/kagoshima-deliveryhealth-area-harara.php | HP/source/kagoshima-deliveryhealth-area-harara.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-harara.php | 1 | 1 |
 | HP/kagoshima-deliveryhealth-area-hikariyama.php | HP/source/kagoshima-deliveryhealth-area-hikariyama.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-hikariyama.php | 1 | 1 |
-| HP/kagoshima-deliveryhealth-area-hirakawacho.php | MISSING | HP/includefile/dataset_kagoshima-deliveryhealth-area-hirakawacho.php | 1 | 1 |
 | HP/kagoshima-deliveryhealth-area-hiroki.php | HP/source/kagoshima-deliveryhealth-area-hiroki.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-hiroki.php | 1 | 1 |
 | HP/kagoshima-deliveryhealth-area-ikenouecho.php | HP/source/kagoshima-deliveryhealth-area-ikenouecho.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-ikenouecho.php | 0 | 0 |
 | HP/kagoshima-deliveryhealth-area-inaricho.php | HP/source/kagoshima-deliveryhealth-area-inaricho.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-inaricho.php | 0 | 0 |
@@ -45,15 +44,9 @@
 | HP/kagoshima-deliveryhealth-area-jigenjicho.php | HP/source/kagoshima-deliveryhealth-area-jigenjicho.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-jigenjicho.php | 1 | 1 |
 | HP/kagoshima-deliveryhealth-area-jiyugaoka.php | HP/source/kagoshima-deliveryhealth-area-jiyugaoka.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-jiyugaoka.php | 1 | 1 |
 | HP/kagoshima-deliveryhealth-area-kajiyacho.php | HP/source/kagoshima-deliveryhealth-area-kajiyacho.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-kajiyacho.php | 0 | 0 |
-| HP/kagoshima-deliveryhealth-area-kamifukumotocho.php | MISSING | HP/includefile/dataset_kagoshima-deliveryhealth-area-kamifukumotocho.php | 1 | 1 |
-| HP/kagoshima-deliveryhealth-area-kamihonmachi.php | MISSING | HP/includefile/dataset_kagoshima-deliveryhealth-area-kamihonmachi.php | 1 | 1 |
-| HP/kagoshima-deliveryhealth-area-kamitaniguchicho.php | MISSING | HP/includefile/dataset_kagoshima-deliveryhealth-area-kamitaniguchicho.php | 1 | 1 |
-| HP/kagoshima-deliveryhealth-area-kamitatsuocho.php | MISSING | HP/includefile/dataset_kagoshima-deliveryhealth-area-kamitatsuocho.php | 1 | 1 |
 | HP/kagoshima-deliveryhealth-area-kamoike.php | HP/source/kagoshima-deliveryhealth-area-kamoike.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-kamoike.php | 0 | 0 |
 | HP/kagoshima-deliveryhealth-area-kamoikeshinmachi.php | HP/source/kagoshima-deliveryhealth-area-kamoikeshinmachi.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-kamoikeshinmachi.php | 0 | 0 |
 | HP/kagoshima-deliveryhealth-area-kasugacho.php | HP/source/kagoshima-deliveryhealth-area-kasugacho.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-kasugacho.php | 1 | 1 |
-| HP/kagoshima-deliveryhealth-area-kawadacho.php | MISSING | HP/includefile/dataset_kagoshima-deliveryhealth-area-kawadacho.php | 1 | 1 |
-| HP/kagoshima-deliveryhealth-area-kawakamicho.php | MISSING | HP/includefile/dataset_kagoshima-deliveryhealth-area-kawakamicho.php | 1 | 1 |
 | HP/kagoshima-deliveryhealth-area-kenohikarigaoka.php | HP/source/kagoshima-deliveryhealth-area-kenohikarigaoka.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-kenohikarigaoka.php | 0 | 0 |
 | HP/kagoshima-deliveryhealth-area-kibougaokacho.php | HP/source/kagoshima-deliveryhealth-area-kibougaokacho.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-kibougaokacho.php | 1 | 1 |
 | HP/kagoshima-deliveryhealth-area-kiirecho.php | HP/source/kagoshima-deliveryhealth-area-kiirecho.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-kiirecho.php | 1 | 1 |
@@ -66,7 +59,6 @@
 | HP/kagoshima-deliveryhealth-area-kinkocho.php | HP/source/kagoshima-deliveryhealth-area-kinkocho.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-kinkocho.php | 1 | 1 |
 | HP/kagoshima-deliveryhealth-area-kinkodai.php | HP/source/kagoshima-deliveryhealth-area-kinkodai.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-kinkodai.php | 1 | 1 |
 | HP/kagoshima-deliveryhealth-area-kinseicho.php | HP/source/kagoshima-deliveryhealth-area-kinseicho.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-kinseicho.php | 1 | 1 |
-| HP/kagoshima-deliveryhealth-area-komatsubara.php | MISSING | HP/includefile/dataset_kagoshima-deliveryhealth-area-komatsubara.php | 1 | 1 |
 | HP/kagoshima-deliveryhealth-area-koraicho.php | HP/source/kagoshima-deliveryhealth-area-koraicho.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-koraicho.php | 1 | 1 |
 | HP/kagoshima-deliveryhealth-area-korimoto.php | HP/source/kagoshima-deliveryhealth-area-korimoto.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-korimoto.php | 1 | 1 |
 | HP/kagoshima-deliveryhealth-area-korimotocho.php | HP/source/kagoshima-deliveryhealth-area-korimotocho.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-korimotocho.php | 1 | 1 |
@@ -88,7 +80,6 @@
 | HP/kagoshima-deliveryhealth-area-sakanoue.php | HP/source/kagoshima-deliveryhealth-area-sakanoue.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-sakanoue.php | 1 | 1 |
 | HP/kagoshima-deliveryhealth-area-sakuragaoka.php | HP/source/kagoshima-deliveryhealth-area-sakuragaoka.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-sakuragaoka.php | 1 | 1 |
 | HP/kagoshima-deliveryhealth-area-sanwacho.php | HP/source/kagoshima-deliveryhealth-area-sanwacho.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-sanwacho.php | 1 | 1 |
-| HP/kagoshima-deliveryhealth-area-shimizucho.php | MISSING | HP/includefile/dataset_kagoshima-deliveryhealth-area-shimizucho.php | 1 | 1 |
 | HP/kagoshima-deliveryhealth-area-shimoarata.php | HP/source/kagoshima-deliveryhealth-area-shimoarata.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-shimoarata.php | 1 | 1 |
 | HP/kagoshima-deliveryhealth-area-shimofukumotocho.php | HP/source/kagoshima-deliveryhealth-area-shimofukumotocho.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-shimofukumotocho.php | 1 | 1 |
 | HP/kagoshima-deliveryhealth-area-shimoishiki.php | HP/source/kagoshima-deliveryhealth-area-shimoishiki.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-shimoishiki.php | 1 | 1 |
@@ -251,7 +242,6 @@ Only the external session and database configuration references in `dataset_base
 | area:hanaomachi | 6 | NONE | OK |
 | area:harara | 6 | NONE | OK |
 | area:hikariyama | 6 | NONE | OK |
-| area:hirakawacho | 0 | NONE | UNVERIFIED |
 | area:hiroki | 6 | NONE | OK |
 | area:ikenouecho | 6 | NONE | OK |
 | area:inaricho | 6 | NONE | OK |
@@ -264,15 +254,9 @@ Only the external session and database configuration references in `dataset_base
 | area:jigenjicho | 6 | NONE | OK |
 | area:jiyugaoka | 6 | NONE | OK |
 | area:kajiyacho | 6 | NONE | OK |
-| area:kamifukumotocho | 0 | NONE | UNVERIFIED |
-| area:kamihonmachi | 0 | NONE | UNVERIFIED |
-| area:kamitaniguchicho | 0 | NONE | UNVERIFIED |
-| area:kamitatsuocho | 0 | NONE | UNVERIFIED |
 | area:kamoike | 6 | NONE | OK |
 | area:kamoikeshinmachi | 6 | NONE | OK |
 | area:kasugacho | 6 | NONE | OK |
-| area:kawadacho | 0 | NONE | UNVERIFIED |
-| area:kawakamicho | 0 | NONE | UNVERIFIED |
 | area:kenohikarigaoka | 6 | NONE | OK |
 | area:kibougaokacho | 6 | NONE | OK |
 | area:kiirecho | 6 | NONE | OK |
@@ -285,7 +269,6 @@ Only the external session and database configuration references in `dataset_base
 | area:kinkocho | 6 | NONE | OK |
 | area:kinkodai | 6 | NONE | OK |
 | area:kinseicho | 6 | NONE | OK |
-| area:komatsubara | 0 | NONE | UNVERIFIED |
 | area:koraicho | 6 | NONE | OK |
 | area:korimoto | 6 | NONE | OK |
 | area:korimotocho | 6 | NONE | OK |
@@ -307,7 +290,6 @@ Only the external session and database configuration references in `dataset_base
 | area:sakanoue | 6 | NONE | OK |
 | area:sakuragaoka | 6 | NONE | OK |
 | area:sanwacho | 6 | NONE | OK |
-| area:shimizucho | 0 | NONE | UNVERIFIED |
 | area:shimoarata | 6 | NONE | OK |
 | area:shimofukumotocho | 6 | NONE | OK |
 | area:shimoishiki | 6 | NONE | OK |

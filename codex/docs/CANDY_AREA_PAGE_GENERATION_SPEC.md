@@ -401,14 +401,9 @@ uomicho, usuki, yakushi, yasuicho
 
 The same 31 entries also lack HTML-to-PHP link transformations.
 
-### 14.3 Public PHP and Dataset PHP Without Source HTML: 9
+### 14.3 Public PHP and Dataset PHP Without Source HTML: 0
 
-```text
-hirakawacho, kamifukumotocho, kamihonmachi,
-kamitaniguchicho, kamitatsuocho, kawadacho,
-kawakamicho,
-komatsubara, shimizucho
-```
+The nine broken partial page pairs were removed on 2026-07-20 together with their dataset-base registrations and area-index links. Source Text and image assets were retained for any future normal production.
 
 
 
