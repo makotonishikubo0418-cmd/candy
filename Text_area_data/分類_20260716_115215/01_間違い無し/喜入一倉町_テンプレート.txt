@@ -8,16 +8,16 @@ description
 鹿児島市「喜入一倉町」で呼べる人気デリヘル店舗情報！交通費・ホテル・地域情報も掲載中！
 -------------------------------------------------------------------
 canonical
-https://www.55810.com/kagoshima-deliveryhealth-area-kiireikkuracho.php
+https://www.55810.com/kagoshima-deliveryhealth-area-kiirehitokuracho.php
 -------------------------------------------------------------------
 image
-https://www.55810.com/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-kiireikkuracho_1.jpg
+https://www.55810.com/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-kiirehitokuracho_1.jpg
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 記事内容
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 img_1
-src : ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-kiireikkuracho_1.jpg
+src : ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-kiirehitokuracho_1.jpg
 -------------------------------------------------------------------
 page_title_h1 / パンくずリスト
 鹿児島市喜入一倉町で呼べるデリヘル
@@ -40,7 +40,7 @@ description_
 鹿児島「喜入一倉町」についての対応状況は、各店舗へ直接お問い合わせください。
 -------------------------------------------------------------------
 img_2
-src : ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-kiireikkuracho_2.jpg
+src : ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-kiirehitokuracho_2.jpg
 -------------------------------------------------------------------
 scene（h2）
 鹿児島市「喜入一倉町」について

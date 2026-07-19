@@ -10,9 +10,6 @@ $excludedPages = array(
     'movie_iframe.php',
     'page.php',
     'test.php',
-    // Legacy duplicate slugs. Keep the approved current slugs in the sitemap.
-    'kagoshima-deliveryhealth-area-kenohikarigaoka.php',
-    'kagoshima-deliveryhealth-area-kiirehitokuracho.php',
 );
 
 $urls = array();

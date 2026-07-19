@@ -8,16 +8,16 @@ description
 鹿児島市「花野光ヶ丘」で呼べる人気デリヘル店舗情報！交通費・地域情報も掲載中！
 -------------------------------------------------------------------
 canonical
-https://www.55810.com/kagoshima-deliveryhealth-area-hananohikarigaoka.php
+https://www.55810.com/kagoshima-deliveryhealth-area-kenohikarigaoka.php
 -------------------------------------------------------------------
 image
-https://www.55810.com/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-hananohikarigaoka_1.jpg
+https://www.55810.com/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-kenohikarigaoka_1.jpg
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 記事内容
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 img_1
-src : ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-hananohikarigaoka_1.jpg
+src : ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-kenohikarigaoka_1.jpg
 -------------------------------------------------------------------
 page_title_h1 / パンくずリスト
 鹿児島市花野光ヶ丘で呼べるデリヘル
@@ -40,7 +40,7 @@ description_
 鹿児島「花野光ヶ丘」についての対応状況は、各店舗へ直接お問い合わせください。
 -------------------------------------------------------------------
 img_2
-src : ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-hananohikarigaoka_2.jpg
+src : ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-kenohikarigaoka_2.jpg
 -------------------------------------------------------------------
 scene（h2）
 鹿児島市「花野光ヶ丘」について

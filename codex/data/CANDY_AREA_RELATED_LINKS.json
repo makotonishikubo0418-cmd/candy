@@ -77,12 +77,6 @@
       "latitude": 31.578253,
       "links": ["yamadacho", "yotsumotocho", "hiroki", "jiyugaoka"]
     },
-    "hananohikarigaoka": {
-      "region": "花野光ヶ丘",
-      "longitude": 130.529449,
-      "latitude": 31.650881,
-      "links": ["minayoshicho", "shimotacho", "yoshino", "shimoishikicho", "tamazatodanchi"]
-    },
     "hanaomachi": {
       "region": "花尾町",
       "longitude": 130.49115,
@@ -219,12 +213,6 @@
       "region": "喜入生見町",
       "longitude": 130.552109,
       "latitude": 31.309994,
-      "links": []
-    },
-    "kiireikkuracho": {
-      "region": "喜入一倉町",
-      "longitude": 130.513107,
-      "latitude": 31.353294,
       "links": []
     },
     "kiiremaenohamacho": {

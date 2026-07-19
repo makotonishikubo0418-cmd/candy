@@ -342,11 +342,6 @@ Hotels and spots are not fixed at three. Add or delete according to source data 
 
 Existing content may contain alternate slugs for the same region. During new production, verify canonical, filenames, existing links, and user instruction. Do not consolidate, delete, or rename automatically.
 
-Examples:
-
-- `hananohikarigaoka` and `kenohikarigaoka`
-- `kiireikkuracho` and `kiirehitokuracho`
-
 ### 13.3 Source-Data Location Does Not Equal Completion State
 
 - Source HTML may contain placeholders even when source data is under `Completion`.
@@ -372,11 +367,11 @@ Treat this as an existing-inconsistency fix, not new production. Keep it separat
 
 ## 14. Currently Verified Inconsistencies
 
-### 14.1 Source HTML with Remaining Placeholders: 27
+### 14.1 Source HTML with Remaining Placeholders: 25
 
 ```text
-gionnosucho, gofukucho, gokabeppucho, hananohikarigaoka,
-kasugacho, kibougaokacho, kiirecho, kiireikkuracho,
+gionnosucho, gofukucho, gokabeppucho, kasugacho,
+kibougaokacho, kiirecho,
 kiirenakamyocho, kinkodai, kinseicho, koraicho,
 korimoto, korimotocho, koriyamacho, koriyamadakecho,
 kotsukicho, koutokujidai, koyamadacho, koyo,
@@ -386,20 +381,19 @@ sanwacho, shimofukumotocho, shimotatsuocho
 
 Each page retains 79 primary placeholders and both JSON-LD blocks have invalid syntax.
 
-### 14.2 Source HTML Without dataset_base Registration: 31
+### 14.2 Source HTML Without dataset_base Registration: 27
 
 ```text
 ariyadacho, hananohikarigaoka, ikenouecho, inaricho,
 inusakocho, irisacho, ishidanicho, ishiki, ishikidai,
 izumicho, kajiyacho, kamoike, kamoikeshinmachi,
-kenohikarigaoka, kiirehitokuracho, kiireikemicho,
-kiireikkuracho, kiiremaenohamacho, kiirenakamyocho,
+kiireikemicho, kiiremaenohamacho, kiirenakamyocho,
 kiiresesekushicho, obaracho, ogawacho, okanoharacho,
 ono, oroshihonmachi, uearatacho, uenosonocho,
 uomicho, usuki, yakushi, yasuicho
 ```
 
-The same 31 entries also lack HTML-to-PHP link transformations.
+The same 27 entries also lack HTML-to-PHP link transformations.
 
 ### 14.3 Public PHP and Dataset PHP Without Source HTML: 0
 
@@ -412,7 +406,7 @@ The nine broken partial page pairs were removed on 2026-07-20 together with thei
 - `oroshihonmachi`: Source data exists under Completion, but source HTML retains placeholders.
 - `shimotacho`: Source data is direct, but source HTML is complete.
 - `arata` and `kinkocho`: Duplicate `id="button_1"`.
-- Complete-HTML missing-image candidates: `_1` and `_2` for `inusakocho` and `kenohikarigaoka`.
+- Complete-HTML missing-image candidate: `_1` and `_2` for `inusakocho`.
 
 These are verified existing conditions and were not fixed by the specification investigation.
 

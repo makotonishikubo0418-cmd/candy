@@ -2,13 +2,13 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-20T08:21:23+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-20T08:37:01+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 6e165f1a850c068d26c248cd492cdece231a3d73
+> Commit: e7206cb54cdae736725bc400347ca212fe7b1b3b
 > Scope: Source HTML corresponding to public PHP files directly under HP
-> Population: Pages: 105
+> Population: Pages: 103
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: OK=99 / ISSUE=2 / UNVERIFIED=4
+> Result: OK=99 / ISSUE=0 / UNVERIFIED=4
 > Unverified scope: Production HTTP, search engine index state, redirects, and database-generated HTML
 
 Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are not corrected automatically.
@@ -28,7 +28,6 @@ Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are no
 | area:gionnosucho | 鹿児島市祇園之洲町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「祇園之洲町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-gionnosucho.php | index | 鹿児島市祇園之洲町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:gofukucho | 鹿児島市呉服町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「呉服町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-gofukucho.php | index | 鹿児島市呉服町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:gokabeppucho | 鹿児島市五ヶ別府町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「五ヶ別府町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-gokabeppucho.php | index | 鹿児島市五ヶ別府町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
-| area:hananohikarigaoka | 鹿児島市花野光ヶ丘で呼べるデリヘル｜対応店舗・周辺情報 | 鹿児島市「花野光ヶ丘」で呼べる人気デリヘル店舗情報！交通費・地域情報も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-hananohikarigaoka.php | index | 鹿児島市花野光ヶ丘で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:hanaomachi | 鹿児島市花尾町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島「花尾町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-hanaomachi.php | index | 鹿児島市花尾町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:harara | 鹿児島市原良で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「原良」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-harara.php | index | 鹿児島市原良で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:hikariyama | 鹿児島市光山で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「光山」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-hikariyama.php | index | 鹿児島市光山で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
@@ -47,12 +46,11 @@ Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are no
 | area:kamoike | 鹿児島市鴨池で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「鴨池」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kamoike.php | index | 鹿児島市「鴨池」で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:kamoikeshinmachi | 鹿児島市鴨池新町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「鴨池新町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kamoikeshinmachi.php | index | 鹿児島市「鴨池新町」で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:kasugacho | 鹿児島市春日町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「春日町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kasugacho.php | index | 鹿児島市春日町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
-| area:kenohikarigaoka | 鹿児島市花野光ヶ丘で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「花野光ヶ丘」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kenohikarigaoka.php | index | 鹿児島市「花野光ヶ丘」で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | ISSUE | OK | OK | OK | OK | ISSUE | sitemap |
+| area:kenohikarigaoka | 鹿児島市花野光ヶ丘で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「花野光ヶ丘」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kenohikarigaoka.php | index | 鹿児島市「花野光ヶ丘」で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:kibougaokacho | 鹿児島市希望ヶ丘町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「希望ヶ丘町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kibougaokacho.php | index | 鹿児島市希望ヶ丘町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:kiirecho | 鹿児島市喜入町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「喜入町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kiirecho.php | index | 鹿児島市喜入町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
-| area:kiirehitokuracho | 鹿児島市喜入一倉町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「喜入一倉町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kiirehitokuracho.php | index | 鹿児島市「喜入一倉町」で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | ISSUE | OK | OK | OK | OK | ISSUE | sitemap |
+| area:kiirehitokuracho | 鹿児島市喜入一倉町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「喜入一倉町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kiirehitokuracho.php | index | 鹿児島市「喜入一倉町」で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:kiireikemicho | 鹿児島市喜入生見町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「喜入生見町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kiireikemicho.php | index | 鹿児島市「喜入生見町」で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
-| area:kiireikkuracho | 鹿児島市喜入一倉町のデリヘル情報｜グリーンファーム周辺対応 | 鹿児島市「喜入一倉町」で呼べる人気デリヘル店舗情報！交通費・ホテル・地域情報も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kiireikkuracho.php | index | 鹿児島市喜入一倉町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:kiiremaenohamacho | 鹿児島市喜入前之浜町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「喜入前之浜町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kiiremaenohamacho.php | index | 鹿児島市「喜入前之浜町」で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:kiirenakamyocho | 鹿児島市喜入中名町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「喜入中名町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kiirenakamyocho.php | index | 鹿児島市喜入中名町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:kiiresesekushicho | 鹿児島市喜入瀬々串町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「喜入瀬々串町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kiiresesekushicho.php | index | 鹿児島市「喜入瀬々串町」で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
