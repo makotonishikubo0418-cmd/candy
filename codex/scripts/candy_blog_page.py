@@ -364,7 +364,7 @@ def render_main(data: BlogData, girls: list[GirlTemplate]) -> str:
             parts.append(render_voices(block.value, scene))  # type: ignore[arg-type]
         elif block.kind == "faq":
             parts.append(render_faq(block.value, scene))  # type: ignore[arg-type]
-    parts.extend([common.related_links_html("bd"), '\t\t\t\t<div class="lm_40_0_75 center"><a href="./" class="bt-pk-xl">HOME</a></div>'])
+    parts.extend([common.related_links_html("blog", data.slug, "bd"), '\t\t\t\t<div class="lm_40_0_75 center"><a href="./" class="bt-pk-xl">HOME</a></div>'])
     if wrapper_open:
         parts.append("\t\t\t</div>")
     parts.append("\t\t</div>")

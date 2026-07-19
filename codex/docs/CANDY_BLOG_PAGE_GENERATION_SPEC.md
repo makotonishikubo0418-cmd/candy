@@ -103,6 +103,7 @@ Rules:
 - For customer comments under parent scene S, use `sceneS_1`, `subtitle_S_1`, and `description_S_1`.
 - For FAQ under parent scene S, use `subtitle_S_1` and `description_S_1`.
 - Duplicate IDs, numbering gaps, and scenes that exist only in the table of contents are prohibited.
+- Under `関連記事`, publish three distinct indexable blog-detail links and three distinct indexable area-detail links selected deterministically from current public files. Exclude the current page, duplicate destinations, placeholder text, and `href="#"`.
 
 ### 6.1 Coupled Blog Synchronization
 

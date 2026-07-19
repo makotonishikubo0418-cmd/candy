@@ -92,14 +92,12 @@ The Japanese labels below are exact website display concepts and are preserved.
         └ ボタン（詳細はコチラ）
     └ 情報変更に関する注記（元データにある場合）
 ├ 関連記事
-    ├ 関連記事リンク1
-    ├ 関連記事リンク2
-    ├ 関連記事リンク3
-    ├ 関連記事リンク4
-    ├ 関連記事リンク5
-    ├ 関連記事リンク6
-    ├ 関連記事リンク7
-    └ 関連記事リンク8
+    ├ 公開ブログリンク1
+    ├ 公開ブログリンク2
+    ├ 公開ブログリンク3
+    ├ 公開エリアリンク1
+    ├ 公開エリアリンク2
+    └ 公開エリアリンク3
 └ 表示外の構造化データ
     ├ BreadcrumbList（必須）
     ├ FAQPage（FAQが1件以上ある場合）
@@ -115,7 +113,7 @@ The Japanese labels below are exact website display concepts and are preserved.
 - Do not normally use `create.php` for Codex page generation.
 - Match shops, normal article scenes, FAQs, optional basic-information rows, fee rows, access entries, and nearby spots to complete source-data blocks. Do not set a fixed maximum.
 - Preserve input order for normal article scenes and known sections. STOP before generation on a partial block.
-- Preserve eight dummy entries under `関連記事` until actual links are configured.
+- Under `関連記事`, publish three distinct indexable blog-detail links and three distinct indexable area-detail links selected deterministically from current public files. Exclude the current page, duplicate destinations, placeholder text, and `href="#"`.
 - Match JSON-LD to visible content.
 
 Standard production and publication runs only:

@@ -788,19 +788,8 @@ def render_spots(data: HotelData, number: int) -> str:
     return "\n".join(lines)
 
 
-def render_related() -> str:
-    links = "<br>\n".join(
-        f"\t\t\t\t\t{common.RELATED_PLACEHOLDER_LINK}"
-        for _ in range(common.RELATED_PLACEHOLDER_COUNT)
-    )
-    return (
-        '\t\t\t\t<div class="lmt_20 lp_40 bd">\n'
-        '\t\t\t\t\t<h3 class="lpb_10 fs_l">関連記事</h3>\n'
-        '\t\t\t\t\t<div class="fs_md3">\n'
-        f"{links}\n"
-        "\t\t\t\t\t</div>\n"
-        "\t\t\t\t</div>"
-    )
+def render_related(slug: str) -> str:
+    return path_config.related_links_html("hotel", slug, "bd")
 
 
 def render_main(data: HotelData, resolved: list[common.ShopResolved], templates: dict[str, common.ShopTemplate]) -> str:
@@ -862,7 +851,7 @@ def render_main(data: HotelData, resolved: list[common.ShopResolved], templates:
                 inline.append(render_spots(data, number))
             else:
                 raise HotelToolError(f"未対応scene種別です: {token}")
-    inline.append(render_related())
+    inline.append(render_related(data.slug))
     flush_inline()
     content_html = "\n".join(content)
     return f'''<!-- メインコンテンツ START -->
@@ -911,39 +900,12 @@ def render_source(data: HotelData, resolved: list[common.ShopResolved], template
     return "\n".join(line.rstrip() for line in source.splitlines()).rstrip() + "\n"
 
 
-def related_validation(source: str) -> list[str]:
-    matches = list(re.finditer(common.RELATED_PLACEHOLDER_BLOCK_PATTERN, source))
-    if len(matches) != 1:
-        return [f"関連記事領域数不整合: {len(matches)}"]
-    errors: list[str] = []
-    match = matches[0]
-    links = match.group("links")
-    link_count = links.count(common.RELATED_PLACEHOLDER_LINK)
-    href_count = links.count('href="#"')
-    text_count = links.count(common.RELATED_PLACEHOLDER_TEXT)
-    if link_count or href_count or text_count:
-        remainder = re.sub(r"<br\s*/?>", "", links.replace(common.RELATED_PLACEHOLDER_LINK, "")).strip()
-        if (
-            link_count != common.RELATED_PLACEHOLDER_COUNT
-            or href_count != common.RELATED_PLACEHOLDER_COUNT
-            or text_count != common.RELATED_PLACEHOLDER_COUNT
-            or remainder
-        ):
-            errors.append(
-                "関連記事予約リンク不整合: "
-                f"expected={common.RELATED_PLACEHOLDER_COUNT} "
-                f"links={link_count} hrefs={href_count} texts={text_count}"
-            )
-    elif not re.findall(r'<a\s+[^>]*href="(?!#)[^"]+"[^>]*>.*?</a>', links, re.S):
-        errors.append("関連記事実リンクなし")
-    outside = source[: match.start()] + source[match.end() :]
-    if common.RELATED_PLACEHOLDER_TEXT in outside or 'href="#"' in outside:
-        errors.append("関連記事予約領域外にダミーリンク残存")
-    return errors
+def related_validation(source: str, canonical: str) -> list[str]:
+    return path_config.validate_related_links(source, canonical)
 
 
 def validate_rendered(data: HotelData, resolved: list[common.ShopResolved], source: str, hp_root: Path) -> list[str]:
-    errors: list[str] = related_validation(source)
+    errors: list[str] = related_validation(source, data.canonical)
     if PLACEHOLDER_RE.search(source) or "<改行>" in source:
         errors.append("placeholder残存")
     if '<meta name="robots" content="index">' not in source:
@@ -1286,10 +1248,10 @@ def run_self_test(_: argparse.Namespace) -> int:
         raise HotelToolError("self-test失敗:\n- " + "\n- ".join(errors))
     if (len(resolved), len(data.faqs), len(data.rates), len(data.spots)) != (4, 4, 2, 4):
         raise HotelToolError("self-test count mismatch")
-    if source.count(common.RELATED_PLACEHOLDER_LINK) != common.RELATED_PLACEHOLDER_COUNT:
-        raise HotelToolError("related placeholder self-test failed")
-    broken_related = source.replace(common.RELATED_PLACEHOLDER_LINK, "", 1)
-    if not related_validation(broken_related):
+    if len(path_config.related_link_targets(source)) != path_config.RELATED_COUNT:
+        raise HotelToolError("related link self-test failed")
+    broken_related = re.sub(r'<a href="\./kagoshima-deliveryhealth-(?:blog|area)-[^"]+" class="fade">.*?</a><br>\s*', "", source, count=1)
+    if not related_validation(broken_related, data.canonical):
         raise HotelToolError("related negative self-test failed")
     faqless = replace(data, faqs=[], scene_order=[token for token in data.scene_order if token != "faqs"])
     faqless_source = render_source(faqless, resolved, templates, hp_root / "source" / "template_kagoshima-deliveryhealth-hotel.html")
@@ -1498,8 +1460,8 @@ def run_self_test(_: argparse.Namespace) -> int:
         sparse_errors = validate_rendered(sparse_data, sparse_resolved, sparse_source, hp_root)
         if sparse_errors:
             raise HotelToolError("sparse count validation self-test failed: " + "; ".join(sparse_errors))
-        if sparse_source.count(common.RELATED_PLACEHOLDER_LINK) != common.RELATED_PLACEHOLDER_COUNT:
-            raise HotelToolError("sparse related placeholder self-test failed")
+        if len(path_config.related_link_targets(sparse_source)) != path_config.RELATED_COUNT:
+            raise HotelToolError("sparse related link self-test failed")
         sparse_hotel_list = update_hotel_list(read_utf8(hp_root / "source" / "hotel.html"), sparse_data)
         sparse_php_name = f"kagoshima-deliveryhealth-hotel-{sparse_data.slug}.php"
         sparse_entry = re.search(

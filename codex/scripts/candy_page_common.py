@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import html
+import hashlib
 import json
 import os
 import re
@@ -17,8 +18,27 @@ from urllib.parse import urlparse
 
 
 RELATED_TEXT = "ここにはリンク先のタイトルを表示します。"
-RELATED_LINK = f'<a href="#" class="fade">{RELATED_TEXT}</a>'
-RELATED_COUNT = 8
+RELATED_PER_CATEGORY = 3
+RELATED_COUNT = RELATED_PER_CATEGORY * 2
+RELATED_BLOG_SLUGS = (
+    "glamourgirl",
+    "petitegirl",
+    "poccharigirl",
+    "shiroutogirl",
+    "slendergirl",
+    "tallbeautygirl",
+)
+RELATED_AREA_SLUGS = (
+    "arata",
+    "jigenjicho",
+    "jiyugaoka",
+    "kasugacho",
+    "kinkocho",
+    "kinseicho",
+    "koraicho",
+    "korimoto",
+    "yoshino",
+)
 SEPARATOR_RE = re.compile(r"^(?:-{10,}|━{10,})\s*$")
 SCENE_RE = re.compile(r"^scene（h2(?: / [^)]+)?）\s*$")
 PLACEHOLDER_RE = re.compile(r"a{6,}|(?:未入力|未確定|TODO|TBD)", re.I)
@@ -223,8 +243,76 @@ def render_template_shell(
     return source.rstrip() + "\n"
 
 
-def related_links_html(border_class: str = "bd") -> str:
-    links = "<br>\n".join(f"\t\t\t\t\t{RELATED_LINK}" for _ in range(RELATED_COUNT))
+def _related_candidates(target_category: str, current_category: str, current_slug: str) -> list[tuple[str, str]]:
+    slugs = RELATED_BLOG_SLUGS if target_category == "blog" else RELATED_AREA_SLUGS
+    candidates: list[tuple[str, str]] = []
+    hp = hp_root()
+    for slug in slugs:
+        if target_category == current_category and slug == current_slug:
+            continue
+        filename = f"kagoshima-deliveryhealth-{target_category}-{slug}.php"
+        source_path = hp / "source" / filename.replace(".php", ".html")
+        if not (hp / filename).is_file() or not source_path.is_file():
+            continue
+        source = read_utf8(source_path)
+        canonical = f"https://www.55810.com/{filename}"
+        if '<meta name="robots" content="index">' not in source:
+            continue
+        if f'<link rel="canonical" href="{canonical}">' not in source:
+            continue
+        title_match = re.search(r"<title>(.*?)</title>", source, re.S | re.I)
+        if not title_match:
+            continue
+        title = html.unescape(re.sub(r"<[^>]+>", "", title_match.group(1))).strip()
+        if title:
+            candidates.append((filename, title))
+    candidates.sort(
+        key=lambda item: hashlib.sha256(
+            f"{current_category}:{current_slug}:{target_category}:{item[0]}".encode("utf-8")
+        ).hexdigest()
+    )
+    return candidates[:RELATED_PER_CATEGORY]
+
+
+def related_link_targets(source: str) -> list[str]:
+    return re.findall(
+        r'<a href="\./(kagoshima-deliveryhealth-(?:blog|area)-[a-z0-9-]+\.php)" class="fade">',
+        source,
+    )
+
+
+def validate_related_links(source: str, canonical: str) -> list[str]:
+    errors: list[str] = []
+    targets = related_link_targets(source)
+    if RELATED_TEXT in source or 'href="#"' in source:
+        errors.append("関連記事に仮リンクが残っています")
+    if len(targets) != RELATED_COUNT:
+        errors.append(f"関連記事数不整合: {len(targets)}")
+    if len(targets) != len(set(targets)):
+        errors.append("関連記事リンクが重複しています")
+    current_filename = urlparse(canonical).path.rsplit("/", 1)[-1]
+    if current_filename in targets:
+        errors.append("関連記事に自己リンクがあります")
+    if sum("-blog-" in target for target in targets) != RELATED_PER_CATEGORY:
+        errors.append("関連記事のブログ件数不整合")
+    if sum("-area-" in target for target in targets) != RELATED_PER_CATEGORY:
+        errors.append("関連記事のエリア件数不整合")
+    hp = hp_root()
+    for target in targets:
+        if not (hp / target).is_file():
+            errors.append(f"関連記事リンク先がありません: {target}")
+    return errors
+
+
+def related_links_html(current_category: str, current_slug: str, border_class: str = "bd") -> str:
+    candidates = _related_candidates("blog", current_category, current_slug)
+    candidates.extend(_related_candidates("area", current_category, current_slug))
+    if len(candidates) != RELATED_COUNT:
+        raise PageToolError(f"関連記事候補不足: {current_category}/{current_slug}={len(candidates)}")
+    links = "<br>\n".join(
+        f'\t\t\t\t\t<a href="./{hattr(filename)}" class="fade">{htext(title)}</a>'
+        for filename, title in candidates
+    )
     return (
         f'\t\t\t\t<div class="lmt_20 lp_40 {border_class}">\n'
         '\t\t\t\t<h3 class="lpb_10 fs_l">関連記事</h3>\n'
@@ -444,8 +532,7 @@ def validate_html_common(source: str, canonical: str, expected_images: list[str]
     duplicates = sorted({item for item in ids if ids.count(item) > 1})
     if duplicates:
         errors.append("ID重複: " + ",".join(duplicates))
-    if source.count(RELATED_LINK) != RELATED_COUNT:
-        errors.append(f"関連記事ダミーが{RELATED_COUNT}件ではありません")
+    errors.extend(validate_related_links(source, canonical))
     hp = hp_root()
     for image in expected_images:
         relative = image.removeprefix("./")
