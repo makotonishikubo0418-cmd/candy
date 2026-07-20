@@ -20,16 +20,16 @@ description
 鹿児島市「犬迫町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！
 -------------------------------------------------------------------
 canonical
-https://www.55810.com/kagoshima-deliveryhealth-area-inuzakocho.php
+https://www.55810.com/kagoshima-deliveryhealth-area-inusakocho.php
 -------------------------------------------------------------------
 image
-https://www.55810.com/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-inuzakocho_1.jpg
+https://www.55810.com/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-inusakocho_1.jpg
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 記事内容
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 img_1
-src : ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-inuzakocho_1.jpg
+src : ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-inusakocho_1.jpg
 -------------------------------------------------------------------
 page_title_h1 / パンくずリスト
 鹿児島市犬迫町で呼べるデリヘル
@@ -58,7 +58,7 @@ description_
 鹿児島「犬迫町」についての対応状況は、各店舗へ直接お問い合わせください。
 -------------------------------------------------------------------
 img_2
-src : ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-inuzakocho_2.jpg
+src : ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-inusakocho_2.jpg
 -------------------------------------------------------------------
 scene（h2）
 鹿児島市「犬迫町」について

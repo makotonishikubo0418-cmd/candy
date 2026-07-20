@@ -1,6 +1,6 @@
 # CANDY Area Image Asset Management
 
-- Updated: 2026-07-18
+- Updated: 2026-07-20
 - Target: Acceptance, reconciliation, public placement, and Git management of area-page images
 
 ## 1. Management Classes
@@ -23,10 +23,10 @@ C:\Codex\Candy\Text_area_data\画像データ
 
 | Item | Result |
 |---|---:|
-| Accepted JPG files | 352 |
-| Correctly named accepted images | 352 |
-| Accepted slugs | 176 |
-| Complete accepted `_1` and `_2` pairs | 176 |
+| Accepted JPG files | 354 |
+| Correctly named accepted images | 354 |
+| Accepted slugs | 177 |
+| Complete accepted `_1` and `_2` pairs | 177 |
 | Incomplete pairs | 0 |
 | Unreadable images | 0 |
 | Dimensions | Every JPG is 1000×750 |
@@ -34,7 +34,7 @@ C:\Codex\Candy\Text_area_data\画像データ
 | Accepted files missing from the canonical public source | 0 |
 | Accepted/public same-name hash mismatches | 0 |
 
-All 352 accepted images have SHA-256 values matching files with the same names
+All 354 accepted images have SHA-256 values matching files with the same names
 in the canonical public source `HP/imgHtml/new_202601/area`.
 
 The public source contains two complete canonical pairs that are not accepted
@@ -68,7 +68,6 @@ Comparison of preparation-image slugs against canonical slugs in `Text_area_data
 | Source Text | Preparation-image candidate |
 |---|---|
 | `dairyuucho` | `dairyucho` |
-| `inusakocho` | `inuzakocho` |
 | `jonancho` | `jounancho` |
 | `kotsukicho` | `koutukicho` |
 | `koyo` | `kouyou` |
@@ -88,7 +87,7 @@ shouyoudaicho
 
 It is unverified whether these represent another region, alternate spelling, legacy slug, or planned page. Do not consolidate, delete, rename, or reuse them without user confirmation.
 
-Canonical pairs now exist independently for `dairyuucho`, `jonancho`,
+Canonical pairs now exist independently for `dairyuucho`, `inusakocho`, `jonancho`,
 `shinayashikicho`, `tenpozancho`, and `shouyoudaichou`. Their legacy
 similar-slug candidates remain separate historical assets and are not the
 canonical pairs.

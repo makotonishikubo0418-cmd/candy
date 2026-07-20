@@ -2,13 +2,13 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-20T08:37:01+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-20T08:57:45+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: e7206cb54cdae736725bc400347ca212fe7b1b3b
+> Commit: fb73478f7036df2a1cf6d642dafb162dd26a32d6
 > Scope: Public PHP, source files, datasets, shared PHP, CSS, JavaScript, images, videos, and fonts
-> Population: Public PHP files: 103 / assets: 1068
+> Population: Public PHP files: 103 / assets: 1070
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: Missing references: 22 / duplicate hash groups: 165
+> Result: Missing references: 20 / duplicate hash groups: 167
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
 
 ## Public PHP and Structure Files
@@ -34,7 +34,7 @@
 | HP/kagoshima-deliveryhealth-area-hiroki.php | HP/source/kagoshima-deliveryhealth-area-hiroki.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-hiroki.php | 1 | 1 |
 | HP/kagoshima-deliveryhealth-area-ikenouecho.php | HP/source/kagoshima-deliveryhealth-area-ikenouecho.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-ikenouecho.php | 0 | 0 |
 | HP/kagoshima-deliveryhealth-area-inaricho.php | HP/source/kagoshima-deliveryhealth-area-inaricho.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-inaricho.php | 0 | 0 |
-| HP/kagoshima-deliveryhealth-area-inusakocho.php | HP/source/kagoshima-deliveryhealth-area-inusakocho.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-inusakocho.php | 0 | 0 |
+| HP/kagoshima-deliveryhealth-area-inusakocho.php | HP/source/kagoshima-deliveryhealth-area-inusakocho.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-inusakocho.php | 1 | 1 |
 | HP/kagoshima-deliveryhealth-area-irisacho.php | HP/source/kagoshima-deliveryhealth-area-irisacho.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-irisacho.php | 0 | 0 |
 | HP/kagoshima-deliveryhealth-area-ishidanicho.php | HP/source/kagoshima-deliveryhealth-area-ishidanicho.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-ishidanicho.php | 0 | 0 |
 | HP/kagoshima-deliveryhealth-area-ishiki.php | HP/source/kagoshima-deliveryhealth-area-ishiki.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-ishiki.php | 0 | 0 |
@@ -183,7 +183,7 @@ Only the external session and database configuration references in `dataset_base
 | .css | 15 |
 | .eot | 16 |
 | .gif | 10 |
-| .jpg | 834 |
+| .jpg | 836 |
 | .js | 17 |
 | .mp4 | 2 |
 | .png | 135 |
@@ -205,7 +205,7 @@ Only the external session and database configuration references in `dataset_base
 | HP/imgHtml | 91 |
 | HP/imgHtml/new_202601 | 7 |
 | HP/imgHtml/new_202601/adsite | 1 |
-| HP/imgHtml/new_202601/area | 357 |
+| HP/imgHtml/new_202601/area | 359 |
 | HP/imgHtml/new_202601/banner | 23 |
 | HP/imgHtml/new_202601/blog | 12 |
 | HP/imgHtml/new_202601/girl | 112 |
@@ -242,7 +242,7 @@ Only the external session and database configuration references in `dataset_base
 | area:hiroki | 6 | NONE | OK |
 | area:ikenouecho | 6 | NONE | OK |
 | area:inaricho | 6 | NONE | OK |
-| area:inusakocho | 6 | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-inusakocho_1.jpg<br>HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-inusakocho_2.jpg | ISSUE |
+| area:inusakocho | 6 | NONE | OK |
 | area:irisacho | 6 | NONE | OK |
 | area:ishidanicho | 6 | NONE | OK |
 | area:ishiki | 6 | NONE | OK |
@@ -339,8 +339,6 @@ Only the external session and database configuration references in `dataset_base
 | HP/images/raster_dot@2x.png | HP/css/YTPlayer.css |
 | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-aaaaaaaaaaaaaaaaaaaa_1.jpg | HP/source/template_kagoshima-deliveryhealth-area.html |
 | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-aaaaaaaaaaaaaaaaaaaa_2.jpg | HP/source/template_kagoshima-deliveryhealth-area.html |
-| HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-inusakocho_1.jpg | HP/source/kagoshima-deliveryhealth-area-inusakocho.html |
-| HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-inusakocho_2.jpg | HP/source/kagoshima-deliveryhealth-area-inusakocho.html |
 | HP/imgHtml/new_202601/blog/aaaaaaaaaaaaaaaaaaaa.jpg | HP/source/template_kagoshima-deliveryhealth-blog.html |
 | HP/imgHtml/new_202601/hotel/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.jpg | HP/source/template_kagoshima-deliveryhealth-hotel.html |
 | imgHtml/new_202601/candy_img1.jpg | HP/source/style.css |
@@ -423,6 +421,8 @@ These candidates have no confirmed static HTML or CSS reference. They may be ref
 | `0b2851eb65e1a0458835666fd447cbccb814305e96d0fb3934a440a9e3465055` | HP/imgHtml/mypageHeart.png<br>HP/imgHtml/pc/mypageHeart.png<br>HP/imgHtml/pc/pc/mypageHeart.png |
 | `556db699b5fa13722cc095bbe068fc75c1ab2a845fbf54db2d6225e521cf5470` | HP/imgHtml/mypagePc.png<br>HP/imgHtml/pc/mypagePc.png<br>HP/imgHtml/pc/pc/mypagePc.png |
 | `bf2002fd7b66844e00046c1eb703b32ea1d4e6c04adf45d9694761270f4d28db` | HP/imgHtml/new_202601/adsite/heavennetlink_ohp_red01.png<br>HP/imgHtml/new_202601/banner/cityheaven_2.png |
+| `2c28ea6f04fdea2114d53c6f29c66ea1883c2271fd1c2b226ee5a8a036c6b164` | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-inusakocho_1.jpg<br>HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-inuzakocho_1.jpg |
+| `aa1b4f677fce041e23d3235fe91b184bf476288a616cf8e08aae0ac06051d793` | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-inusakocho_2.jpg<br>HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-inuzakocho_2.jpg |
 | `0afdb82e56fb3a26e812a36fae58e0b2ff1009f828c0db988202e770ecdf7ba2` | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-ishikidai_1.jpg<br>HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-ishikidai_2.jpg<br>HP/imgHtml/new_202601/area/sample.jpg |
 | `cdccb1680e73e68a456243b0934dca90b7b6257d5091d303f378433fd1c9f37b` | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-seiryo_1.jpg<br>HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-seiryou_1.jpg |
 | `61c2a01f0763e6eeae68092cef19927e8a7639112bf4810e4cdcbd70a771ef6b` | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-seiryo_2.jpg<br>HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-seiryou_2.jpg |

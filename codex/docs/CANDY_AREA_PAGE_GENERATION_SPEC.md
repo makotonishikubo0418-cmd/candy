@@ -1,6 +1,6 @@
 # CANDY Area Page Generation Specification
 
-- Updated: 2026-07-18
+- Updated: 2026-07-20
 - Applies to: Normal new generation of CANDY area detail pages by Codex
 
 ## 1. Purpose
@@ -381,11 +381,11 @@ sanwacho, shimofukumotocho, shimotatsuocho
 
 Each page retains 79 primary placeholders and both JSON-LD blocks have invalid syntax.
 
-### 14.2 Source HTML Without dataset_base Registration: 27
+### 14.2 Source HTML Without dataset_base Registration: 26
 
 ```text
 ariyadacho, hananohikarigaoka, ikenouecho, inaricho,
-inusakocho, irisacho, ishidanicho, ishiki, ishikidai,
+irisacho, ishidanicho, ishiki, ishikidai,
 izumicho, kajiyacho, kamoike, kamoikeshinmachi,
 kiireikemicho, kiiremaenohamacho, kiirenakamyocho,
 kiiresesekushicho, obaracho, ogawacho, okanoharacho,
@@ -393,7 +393,7 @@ ono, oroshihonmachi, uearatacho, uenosonocho,
 uomicho, usuki, yakushi, yasuicho
 ```
 
-The same 27 entries also lack HTML-to-PHP link transformations.
+The same 26 entries also lack HTML-to-PHP link transformations.
 
 ### 14.3 Public PHP and Dataset PHP Without Source HTML: 0
 
@@ -406,7 +406,6 @@ The nine broken partial page pairs were removed on 2026-07-20 together with thei
 - `oroshihonmachi`: Source data exists under Completion, but source HTML retains placeholders.
 - `shimotacho`: Source data is direct, but source HTML is complete.
 - `arata` and `kinkocho`: Duplicate `id="button_1"`.
-- Complete-HTML missing-image candidate: `_1` and `_2` for `inusakocho`.
 
 These are verified existing conditions and were not fixed by the specification investigation.
 
