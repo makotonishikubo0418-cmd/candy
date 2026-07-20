@@ -1470,7 +1470,7 @@ if($cddata["status"] == "0"){
 	if($diarydata["dImg"] != ""){
 		$data1['01010280'] = $diarydata["dImg"];
 	}else{
-		$source = str_replace('class="diary-img"', 'class="diary-img"  style="display:none;"', $source);//
+		$source = str_replace('class="diary-img nolazy"', 'class="diary-img nolazy"  style="display:none;"', $source);//
 	}
 	
 	//love
