@@ -1148,10 +1148,6 @@ $data['code']['00040007'] = $data1['00040007']; //[ 本店] 7日目の日付
 //ファイル取得
 //$source_file = "index.html";
 
-// デバッグ情報（一時的に追加）
-error_log("Source file: " . $source_file);
-error_log("Source file exists: " . (file_exists($source_file) ? 'YES' : 'NO'));
-
 // テンプレートファイルの読み込み
 
 //index置換
