@@ -33,6 +33,14 @@ class FakeFTP:
         self.directory = self.ROOT
         self.fail_final_name = fail_final_name
         self.failed = False
+        self.directories = {self.ROOT}
+        for path in files:
+            directory = Path(path).parent.as_posix()
+            while directory.startswith(self.ROOT):
+                self.directories.add(directory)
+                if directory == self.ROOT:
+                    break
+                directory = Path(directory).parent.as_posix()
 
     def connect(self, *_args):
         return None
@@ -48,10 +56,32 @@ class FakeFTP:
 
     def nlst(self):
         prefix = self.directory.rstrip("/") + "/"
-        return [path[len(prefix):] for path in self.files if path.startswith(prefix) and "/" not in path[len(prefix):]]
+        names = {
+            path[len(prefix):]
+            for path in self.files
+            if path.startswith(prefix) and "/" not in path[len(prefix):]
+        }
+        names.update(
+            path[len(prefix):]
+            for path in self.directories
+            if path.startswith(prefix)
+            and path != self.directory
+            and "/" not in path[len(prefix):]
+        )
+        return sorted(names)
 
-    def mkd(self, _directory: str):
+    def mkd(self, directory: str):
+        path = directory if directory.startswith("/") else f"{self.directory}/{directory}"
+        self.directories.add(path.rstrip("/"))
         return None
+
+    def rmd(self, directory: str):
+        path = directory if directory.startswith("/") else f"{self.directory}/{directory}"
+        path = path.rstrip("/")
+        prefix = path + "/"
+        assert not any(name.startswith(prefix) for name in self.files)
+        assert not any(name.startswith(prefix) for name in self.directories if name != path)
+        self.directories.remove(path)
 
     def storbinary(self, command: str, handle):
         name = command.split(" ", 1)[1]
@@ -120,6 +150,38 @@ def assert_transactional_rollback() -> None:
         }
 
 
+def assert_deletion_only_and_empty_directory_cleanup() -> None:
+    module = load_deploy_module()
+    with tempfile.TemporaryDirectory() as temp_dir:
+        root = Path(temp_dir)
+        (root / "HP").mkdir()
+        remote = {f"{FakeFTP.ROOT}/obsolete/nested/old.png": b"old"}
+        fake = FakeFTP(remote)
+        original_factory = module.ftplib.FTP
+        original_cwd = Path.cwd()
+        original_env = os.environ.copy()
+        try:
+            module.ftplib.FTP = lambda **_kwargs: fake
+            os.chdir(root)
+            os.environ.update(
+                FTP_SERVER="example.invalid",
+                FTP_USERNAME="test",
+                FTP_PASSWORD="test",
+                GITHUB_RUN_ID="12346",
+                GITHUB_SHA="b" * 40,
+            )
+            module.deploy([], ["HP/obsolete/nested/old.png"])
+        finally:
+            module.ftplib.FTP = original_factory
+            os.chdir(original_cwd)
+            os.environ.clear()
+            os.environ.update(original_env)
+        assert remote == {}
+        assert f"{FakeFTP.ROOT}/obsolete/nested" not in fake.directories
+        assert f"{FakeFTP.ROOT}/obsolete" not in fake.directories
+        assert FakeFTP.ROOT in fake.directories
+
+
 def run(args: list[str], cwd: Path, *, succeeds: bool = True) -> subprocess.CompletedProcess[str]:
     result = subprocess.run(args, cwd=cwd, text=True, capture_output=True)
     if succeeds and result.returncode:
@@ -153,6 +215,21 @@ def make_repository(root: Path) -> tuple[str, str]:
     return before, after
 
 
+def make_deletion_repository(root: Path) -> tuple[str, str]:
+    (root / "HP").mkdir()
+    (root / ".github" / "scripts").mkdir(parents=True)
+    shutil.copy2(SCRIPT, root / ".github" / "scripts" / SCRIPT.name)
+    git(root, "init", "-q")
+    git(root, "config", "user.email", "test@example.invalid")
+    git(root, "config", "user.name", "Safety Test")
+    obsolete = root / "HP" / "obsolete.png"
+    obsolete.write_bytes(b"old\n")
+    before = commit(root, "base")
+    obsolete.unlink()
+    after = commit(root, "delete obsolete image")
+    return before, after
+
+
 def assert_workflow_contract() -> None:
     text = WORKFLOW.read_text(encoding="utf-8")
     required = (
@@ -167,6 +244,7 @@ def assert_workflow_contract() -> None:
         "github.event.before",
         "github.sha",
         "steps.plan.outputs.count",
+        "Deployment operation count:",
         "steps.plan.outputs.token",
         "--verify-approval",
         "--lint-php",
@@ -181,6 +259,7 @@ def assert_workflow_contract() -> None:
 def main() -> None:
     assert_workflow_contract()
     assert_transactional_rollback()
+    assert_deletion_only_and_empty_directory_cleanup()
     with tempfile.TemporaryDirectory() as temp_dir:
         root = Path(temp_dir)
         before, after = make_repository(root)
@@ -188,7 +267,7 @@ def main() -> None:
         base = [sys.executable, str(script), "--before", before, "--after", after]
 
         preview = run([*base, "--dry-run"], root)
-        assert "Deployable file count: 1" in preview.stdout
+        assert "Deployment operation count: 1" in preview.stdout
         assert "Deployable total bytes: 3" in preview.stdout
         token_match = re.search(r"PLAN_TOKEN: ([0-9a-f]{64})", preview.stdout)
         assert token_match
@@ -234,6 +313,34 @@ def main() -> None:
         mismatch = run([*base, "--dry-run"], root, succeeds=False)
         assert mismatch.returncode != 0
         assert "Checked-out HEAD" in mismatch.stderr
+
+
+    with tempfile.TemporaryDirectory() as temp_dir:
+        root = Path(temp_dir)
+        before, after = make_deletion_repository(root)
+        script = root / ".github" / "scripts" / SCRIPT.name
+        base = [sys.executable, str(script), "--before", before, "--after", after]
+
+        preview = run([*base, "--dry-run"], root)
+        assert "Deployment operation count: 1" in preview.stdout
+        assert "Upload file count: 0" in preview.stdout
+        assert "Delete file count: 1" in preview.stdout
+        token_match = re.search(r"PLAN_TOKEN: ([0-9a-f]{64})", preview.stdout)
+        assert token_match
+        approved = run(
+            [
+                *base,
+                "--verify-approval",
+                "--expected-file-count",
+                "1",
+                "--approved-plan-token",
+                token_match.group(1),
+                "--confirm-production",
+                CONFIRMATION,
+            ],
+            root,
+        )
+        assert "APPROVAL CHECK: passed" in approved.stdout
 
     with tempfile.TemporaryDirectory() as temp_dir:
         root = Path(temp_dir)

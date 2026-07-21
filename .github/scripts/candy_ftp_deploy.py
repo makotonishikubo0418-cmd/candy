@@ -284,12 +284,14 @@ def validate_deploy_approval(
     approved_plan_token: str | None,
     actual_plan_token: str,
     confirmation: str | None,
+    deleted: list[str] | None = None,
 ) -> None:
-    if not deployable:
-        raise RuntimeError("No deployable files were approved")
-    if len(deployable) > MAX_DEPLOY_FILES:
+    operation_count = len(deployable) + len(deleted or [])
+    if operation_count == 0:
+        raise RuntimeError("No deployment operations were approved")
+    if operation_count > MAX_DEPLOY_FILES:
         raise RuntimeError(
-            f"Deploy plan has {len(deployable)} files; maximum is {MAX_DEPLOY_FILES}. "
+            f"Deploy plan has {operation_count} operations; maximum is {MAX_DEPLOY_FILES}. "
             "Split the change into smaller reviewed batches."
         )
     total_bytes = sum(Path(path).stat().st_size for path in deployable)
@@ -298,10 +300,10 @@ def validate_deploy_approval(
             f"Deploy plan has {total_bytes} bytes; maximum is {MAX_DEPLOY_TOTAL_BYTES}. "
             "Split large assets into a separate reviewed batch."
         )
-    if expected_file_count != len(deployable):
+    if expected_file_count != operation_count:
         raise RuntimeError(
             f"Expected file count {expected_file_count!r} does not match "
-            f"actual count {len(deployable)}"
+            f"actual operation count {operation_count}"
         )
     if approved_plan_token != actual_plan_token:
         raise RuntimeError("Approved plan token does not match the current deploy plan")
@@ -351,7 +353,26 @@ def list_remote_names(ftp: ftplib.FTP, directory: str) -> set[str]:
         if str(exc).startswith("450"):
             return set()
         raise
-    return {entry.rstrip("/").split("/")[-1] for entry in entries}
+    return {
+        name
+        for entry in entries
+        if (name := entry.rstrip("/").split("/")[-1]) not in {"", ".", ".."}
+    }
+
+
+def remove_remote_directory_if_empty(ftp: ftplib.FTP, directory: str) -> bool:
+    root = REMOTE_ROOT.as_posix()
+    path = PurePosixPath(directory)
+    if path.as_posix() == root:
+        return False
+    prefix = root.rstrip("/") + "/"
+    if not path.as_posix().startswith(prefix):
+        raise RuntimeError(f"Remote directory escaped deployment root: {directory}")
+    if list_remote_names(ftp, directory):
+        return False
+    ftp.cwd(path.parent.as_posix())
+    ftp.rmd(path.name)
+    return True
 
 
 def remote_exists(ftp: ftplib.FTP, directory: str, name: str) -> bool:
@@ -614,6 +635,23 @@ def deploy(paths: list[str], deleted_paths: list[str] | None = None) -> None:
                 print(f"DELETED: {target.repository_path}", flush=True)
             except Exception as cleanup_exc:
                 cleanup_failures.append(f"{target.repository_path}: {cleanup_exc}")
+        empty_directory_candidates: set[str] = set()
+        root_path = REMOTE_ROOT
+        for target in staged_deletions:
+            directory = PurePosixPath(target.remote_directory)
+            while directory != root_path:
+                empty_directory_candidates.add(directory.as_posix())
+                directory = directory.parent
+        for directory in sorted(
+            empty_directory_candidates,
+            key=lambda value: len(PurePosixPath(value).parts),
+            reverse=True,
+        ):
+            try:
+                if remove_remote_directory_if_empty(ftp, directory):
+                    print(f"REMOVED EMPTY DIRECTORY: {directory}", flush=True)
+            except Exception as cleanup_exc:
+                cleanup_failures.append(f"{directory}: {cleanup_exc}")
         if cleanup_failures:
             raise RuntimeError(
                 "All files are deployed and verified, but retained backup cleanup failed: "
@@ -726,12 +764,15 @@ def main() -> int:
     print_plan(args.before, args.after, deployable, excluded, blocked)
     deleted = deletion_paths(blocked)
     actual_plan_token = plan_token(args.before, args.after, deployable, deleted)
-    print(f"Deployable file count: {len(deployable)}")
+    operation_count = len(deployable) + len(deleted)
+    print(f"Deployment operation count: {operation_count}")
+    print(f"Upload file count: {len(deployable)}")
+    print(f"Delete file count: {len(deleted)}")
     print(f"Deployable total bytes: {sum(Path(path).stat().st_size for path in deployable)}")
     print(f"PLAN_TOKEN: {actual_plan_token}")
 
-    if not deployable:
-        print("No deployable HP files changed.")
+    if operation_count == 0:
+        print("No deployable HP operations changed.")
         return 0
     if args.lint_php:
         lint_php_files(deployable)
@@ -747,6 +788,7 @@ def main() -> int:
             args.approved_plan_token,
             actual_plan_token,
             args.confirm_production,
+            deleted,
         )
         print("APPROVAL CHECK: passed; FTP connection was not performed.")
         return 0
@@ -757,6 +799,7 @@ def main() -> int:
         args.approved_plan_token,
         actual_plan_token,
         args.confirm_production,
+        deleted,
     )
     deploy(deployable, deleted)
     return 0

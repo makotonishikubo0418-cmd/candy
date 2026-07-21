@@ -65,13 +65,13 @@ Push-triggered Actions generates:
 - 40-character target commit SHA
 - Deploy and exclusion lists
 - Deletion and rename presence
-- Deploy-target count
+- Deployment-operation count, including uploads and approved deletions
 - `PLAN_TOKEN` containing SHA-256 for each target
 
 FTP connection is permitted only when the following exactly match the plan from the same Actions run:
 
 - Comparison-source and target SHAs
-- Target count
+- Deployment-operation count
 - `PLAN_TOKEN`
 - Automatic confirmation phrase `DEPLOY-CANDY-PRODUCTION`
 
@@ -79,10 +79,10 @@ Any mismatch fails before FTP connection. The normal route applies this safety g
 
 ### 4.3 Hard Limits and Prohibited Routes
 
-- One deploy is limited to 125 files and 50 MiB total. Approved deletions and rename-source removals require reversible server-side staging and rollback support.
-- A set of 26 or more files or more than 50 MiB may be previewed but not deployed; split it into small batches.
+- One deploy is limited to 125 upload-and-delete operations and 50 MiB of uploaded data. Approved deletions and rename-source removals require reversible server-side staging and rollback support.
+- After changing deployment automation, prove the behavior with a small real batch before using larger batches; every batch remains within the 125-operation and 50 MiB limits.
 - No full-deploy route exists.
-- Any Git deletion or rename stops the entire deploy.
+- A Git deletion or rename stops before FTP unless the exact removal is included in the plan token and the transactional deletion gate passes.
 - Do not delete files that exist only on the server.
 - Target SHA MUST exactly match checked-out HEAD.
 - Comparison-source SHA MUST be an ancestor of target SHA.
@@ -109,7 +109,7 @@ Do not infer this list for a future workflow; recheck actual preview output.
 
 ## 5. FTP Deployment Safety Requirements
 
-Before FTP connection, validate 40-character SHAs, ancestor relationship, checked-out HEAD, target count, 125-file maximum, 50 MiB total, `PLAN_TOKEN`, and confirmation phrase. On failure, STOP without using FTP secrets.
+Before FTP connection, validate 40-character SHAs, ancestor relationship, checked-out HEAD, deployment-operation count, 125-operation maximum, 50 MiB of uploaded data, `PLAN_TOKEN`, and confirmation phrase. On failure, STOP without using FTP secrets.
 
 For each target, retain backups until every target validates:
 
@@ -120,6 +120,8 @@ For each target, retain backups until every target validates:
 5. Download the final name and compare SHA-256 again.
 6. Delete backups only after every target final name and SHA-256 validates.
 7. Output `current-count/total-count` immediately.
+
+An approved deletion-only plan is valid. Each existing target is first renamed to a run-specific backup, every deletion is staged before any backup is removed, and failures restore staged targets. After successful backup removal, only directories emptied by those approved deletions are removed, deepest first; the production root is never removed.
 
 On failure:
 
@@ -197,7 +199,7 @@ Do not bulk-replace these before determining whether they are intended exception
 9. After Fetch, Push to `main` only if the remote has no leading update.
 10. Retrieve the Push-triggered Actions run through the GitHub API.
 11. Verify target SHA, lists, exclusions, deletion/rename, count, and `PLAN_TOKEN`.
-12. Verify no more than 125 files, no more than 50 MiB, and protected targets such as `index.php` are excluded. Oversize MUST stop before FTP. Deletion or rename MUST stop unless the exact plan is explicitly approved and the transactional rollback gate passes.
+12. Verify no more than 125 upload-and-delete operations, no more than 50 MiB of uploaded data, and protected targets such as `index.php` are excluded. Oversize MUST stop before FTP. Deletion or rename MUST stop unless the exact plan is explicitly approved and the transactional rollback gate passes.
 13. Proceed to FTP only after target PHP succeeds with `php -d short_open_tag=1 -l`.
 14. After Actions succeeds, verify target-page HTTP and production URLs.
 

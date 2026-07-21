@@ -35,7 +35,7 @@ on:
         required: true
         type: string
       expected_file_count:
-        description: "Exact deployable count printed by preview (deploy only)"
+        description: "Exact deployment-operation count printed by preview (deploy only)"
         required: true
         default: "0"
         type: string
@@ -121,7 +121,7 @@ jobs:
             --after "$AFTER_SHA" \
             --dry-run | tee deploy-plan.txt
           cat deploy-plan.txt >> "$GITHUB_STEP_SUMMARY"
-          count="$(sed -n 's/^Deployable file count: //p' deploy-plan.txt | tail -1)"
+          count="$(sed -n 's/^Deployment operation count: //p' deploy-plan.txt | tail -1)"
           token="$(sed -n 's/^PLAN_TOKEN: //p' deploy-plan.txt | tail -1)"
           test -n "$count"
           test -n "$token"
@@ -182,7 +182,7 @@ jobs:
             --verify-approval | tee deploy-approval.txt
           cat deploy-approval.txt >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Deploy only the approved files
+      - name: Apply only the approved deployment operations
         if: steps.plan.outputs.count != '0'
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}

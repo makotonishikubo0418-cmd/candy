@@ -14,7 +14,9 @@
 
 ## 2. Active Reservations
 
-No active reservations.
+| Task ID | Codex | Period | Scope | Status |
+|---|---|---|---|---|
+| TASK-20260721-HP-UNUSED-IMAGE-CLEANUP-001 | current | 2026-07-21 | Full `HP/` image-use reconciliation; deletion of images proven unused and directories emptied by those deletions; required generated current-state documents; deletion-only and empty-directory production-deployment support when necessary; target-limited Commit, Push, Actions, and production verification; and this reservation record | IN_PROGRESS |
 
 ## 3. Completed and Released Reservations
 
