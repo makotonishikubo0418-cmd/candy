@@ -2,13 +2,13 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-22T05:43:31+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-22T05:51:02+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 1554a7e1250d57f2554f94bdce61b493a68e00aa
+> Commit: b97dbb426428f88070272bdb6b7f7e717c0863c1
 > Scope: Public PHP, source files, datasets, shared PHP, CSS, JavaScript, images, videos, and fonts
-> Population: Public PHP files: 103 / assets: 567
+> Population: Public PHP files: 103 / assets: 490
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: Missing references: 20 / duplicate hash groups: 22
+> Result: Missing references: 20 / duplicate hash groups: 11
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
 
 ## Public PHP and Structure Files
@@ -183,10 +183,10 @@ Only the external session and database configuration references in `dataset_base
 | .css | 15 |
 | .eot | 16 |
 | .gif | 3 |
-| .jpg | 396 |
+| .jpg | 337 |
 | .js | 17 |
 | .mp4 | 2 |
-| .png | 82 |
+| .png | 64 |
 | .svg | 2 |
 | .ttf | 16 |
 | .webm | 1 |
@@ -201,7 +201,7 @@ Only the external session and database configuration references in `dataset_base
 | HP/font | 50 |
 | HP/imgCss/pc | 19 |
 | HP/imgCss/s | 22 |
-| HP/imgHtml | 56 |
+| HP/imgHtml | 19 |
 | HP/imgHtml/new_202601 | 6 |
 | HP/imgHtml/new_202601/area | 154 |
 | HP/imgHtml/new_202601/banner | 5 |
@@ -210,7 +210,7 @@ Only the external session and database configuration references in `dataset_base
 | HP/imgHtml/new_202601/hotel | 6 |
 | HP/imgHtml/new_202601/shop | 22 |
 | HP/imgHtml/pc | 14 |
-| HP/imgHtml/s | 54 |
+| HP/imgHtml/s | 14 |
 | HP/js | 17 |
 | HP/movie | 3 |
 | HP/source | 1 |
@@ -358,11 +358,10 @@ These candidates have no confirmed static HTML or CSS reference. They may be ref
 | HP/font | 6 | freightdispbold-webfont.eot, freightdispbold-webfont.ttf, freightdispbold-webfont.woff, PlayfairDisplay-Bold.eot, PlayfairDisplay-Bold.ttf |
 | HP/imgCss/pc | 18 | cdIcoLoveBtn.png, cdIcoLoveBtn_on.png, cdIcoPhoto.png, cssSprite_sp.png, entranceLogo.png |
 | HP/imgCss/s | 20 | cdIcoLoveBtn.png, cdIcoLoveBtn_on.png, cdIcoPhoto.png, entranceLogo.png, entranceR18.png |
-| HP/imgHtml | 41 | age_verification.jpg, entranceBg.jpg, scheduleIcon.jpg, schedulePhoto.jpg, system_bg01.jpg |
+| HP/imgHtml | 4 | age_verification.jpg, entranceBg.jpg, twitter.svg, unnamed.jpg |
 | HP/imgHtml/new_202601 | 2 | candy_img1.jpg, candy_img1_sp.jpg |
 | HP/imgHtml/new_202601/girl | 56 | alice_1_sp.jpg, ami_1_sp.jpg, ann_1_sp.jpg, anya_1_sp.jpg, aoba_1_sp.jpg |
 | HP/imgHtml/new_202601/shop | 11 | after5_sp.jpg, beloved_sp.jpg, candy_sp.jpg, danzuma_sp.jpg, hitozuma_sp.jpg |
-| HP/imgHtml/s | 40 | mypagePhoto.jpg, news.jpg, omo_39bg01.jpg, omo_39bg02.jpg, omo_39bg03.jpg |
 | HP/js | 11 | api.js, candyKissDijest.js, commonLite.js, diary.js, fav.js |
 
 ## Duplicate Hash Candidates
@@ -380,17 +379,6 @@ These candidates have no confirmed static HTML or CSS reference. They may be ref
 | `1adf420fbd88aaf88563e9833963a0116832d8c858315d50c3a182a5b5078691` | HP/imgHtml/cdTtlDiary.png<br>HP/imgHtml/pc/cdTtlDiary.png |
 | `2ea2ba07d7bb5df930c25231c4e1000bdba40ce0e4b9472ea39416992bbeb7ea` | HP/imgHtml/listShadow.png<br>HP/imgHtml/pc/listShadow.png |
 | `0afdb82e56fb3a26e812a36fae58e0b2ff1009f828c0db988202e770ecdf7ba2` | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-ishikidai_1.jpg<br>HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-ishikidai_2.jpg |
-| `6f3b9066789618faf5275b3e1c2e0a283ba2108d2e786199c9815eb3bdb78092` | HP/imgHtml/pc/system_bg01.jpg<br>HP/imgHtml/system_bg01.jpg |
-| `ef5d32b5054b79d9751bf2983cfeafee3927d907f3f384535bd475855d715375` | HP/imgHtml/pc/system_bg02.jpg<br>HP/imgHtml/system_bg02.jpg |
-| `21fb0d5590c22e8fafc3055b04dcfbd58b48e42002b5cde5d750fef4e11bd2de` | HP/imgHtml/pc/system_bg03.jpg<br>HP/imgHtml/system_bg03.jpg |
-| `e1282ba8aec04d8a06fb44b3eb2d75b628cf7b2c5b1d316aa41395bb8b8356d0` | HP/imgHtml/pc/system_bg04.jpg<br>HP/imgHtml/system_bg04.jpg |
-| `87670c4200bfd7ea9286c1b5ec78cab30958a74ff033bf752476ff4112d3feb6` | HP/imgHtml/pc/system_bg05.jpg<br>HP/imgHtml/system_bg05.jpg |
-| `348d936bec014f063c32d4a810fc608eececf5ee8577e32946e2d517c22d37cd` | HP/imgHtml/pc/system_bg06.jpg<br>HP/imgHtml/system_bg06.jpg |
-| `b58c5da6fd3f88a1cb86fbad5024bea463d8c2608a207915ceb7569ee0cbe64b` | HP/imgHtml/pc/topOtherBg.jpg<br>HP/imgHtml/topOtherBg.jpg |
-| `0aebf5b013a5aab1074db1c056f5266b34808ad038538dbf7f894731e489274d` | HP/imgHtml/pc/topOtherBg01.png<br>HP/imgHtml/topOtherBg01.png |
-| `fbd767eda43ab8a523a5b29b037b97a3d4de60cc4d7241312ef7fb4fd09c47b9` | HP/imgHtml/pc/topOtherBg02.png<br>HP/imgHtml/topOtherBg02.png |
-| `cf6d29603125b92cac244af5c3b9e8a04584a6377725017a34e7a831d9b03b2f` | HP/imgHtml/pc/topOtherBg03.png<br>HP/imgHtml/topOtherBg03.png |
-| `9c0e6bab9ef60905a548bf01e71328bf6ed7fa2a58d6f26030d0d90c31be819b` | HP/imgHtml/s/omo_detail.jpg<br>HP/imgHtml/s/omo_offer.jpg |
 
 ## Candidates That May Not Require Publication
 
