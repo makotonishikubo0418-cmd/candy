@@ -43,6 +43,7 @@
 
 	#girls div.wrap div.mainImg img {
 		width: 100%;
+		height: auto;
 		display: block;
 	}
 
@@ -241,6 +242,7 @@
 
 	#girls div.wrap div.mainImg img {
 		width: 100%;
+		height: auto;
 		display: block;
 	}
 
