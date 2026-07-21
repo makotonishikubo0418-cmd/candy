@@ -1190,6 +1190,10 @@ if($girldata["next_photo_update"][$gid] != ""){
 * 独自タグから表示枠ソースを取得
 */
 $source = file_get_contents($source_file);
+$source = str_replace('class="mainImg-image nolazy" alt="在籍女性のプロフィール画像">', 'class="mainImg-image nolazy" alt="在籍女性のプロフィール画像" width="1200" height="800">', $source);
+$source = str_replace('class="media-image nolazy" alt="在籍女性のプロフィール画像">', 'class="media-image nolazy" alt="在籍女性のプロフィール画像" width="800" height="1200">', $source);
+$source = str_replace('class="fade media-image nolazy" alt="在籍女性のプロフィール画像">', 'class="fade media-image nolazy" alt="在籍女性のプロフィール画像" width="800" height="1200">', $source);
+$source = str_replace('class="diary-img nolazy" src="rep01010280eot" alt="在籍女性のプロフィール画像">', 'class="diary-img nolazy" src="rep01010280eot" alt="在籍女性のプロフィール画像" width="560" height="560">', $source);
 
 
 

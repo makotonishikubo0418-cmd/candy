@@ -390,6 +390,8 @@ $data1['00010611'] = count($scheduledata[0]["girls_id"]);
 * 独自タグから表示枠ソースを取得
 */
 $source = file_get_contents($source_file);
+$source = str_replace('<img src="./imgHtml/dot.gif" alt="rep01010071eot">', '<img src="./imgHtml/dot.gif" alt="rep01010071eot" width="66" height="66">', $source);
+$source = str_replace('<img src="./imgHtml/dot.gif" alt="rep01010070eot">', '<img src="./imgHtml/dot.gif" alt="rep01010070eot" width="640" height="480">', $source);
 
 //FAV-COOKIE取得
 $favcast = array();

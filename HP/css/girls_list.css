@@ -1,5 +1,10 @@
 /* girls_listページ専用スタイル - ヘッダー・フッター以外のデザイン */
 
+#girlsL div.wrap div.list div.box div.photo img {
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+}
+
 /* PC版 */
 @media screen and (min-width: 769px) {
 	/* girls_list */
@@ -281,7 +286,6 @@
 		margin-bottom: 10px !important;
 	}
 }
-
 
 
 

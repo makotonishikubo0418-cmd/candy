@@ -75,8 +75,10 @@
 	text-align: center;
 }
 #newsPage .article .photo img {
+	width: auto;
 	max-width: 100%;
 	height: auto;
+	aspect-ratio: 1 / 1;
 	border-radius: 6px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -149,7 +151,6 @@
 		font-size: 16px;
 	}
 }
-
 
 
 

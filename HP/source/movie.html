@@ -57,7 +57,7 @@
 					$("body").prepend('<div id="spicabox"><div class="overlay"></div></div>')
 					// 画像分岐
 					if (url.match(/.jpg/) || url.match(/.png/) || url.match(/.gif/)) {
-						$("#spicabox").append('<div class="content content-photo"><img src="" class="photo" alt="在籍女性の動画サムネイル"></div>');
+						$("#spicabox").append('<div class="content content-photo"><img src="" class="photo" alt="在籍女性の動画サムネイル" width="1280" height="720"></div>');
 						$("#spicabox img.photo").attr("src", url);
 						// video分岐
 					} else if (url.match(/.mp4/) || url.match(/.ogv/) || url.match(/.webm/)) {

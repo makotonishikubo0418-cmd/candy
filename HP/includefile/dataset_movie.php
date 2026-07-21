@@ -85,6 +85,7 @@ if ($is_sp) {
 * 独自タグから表示枠ソースを取得
 */
 		$source = file_get_contents($source_file);
+		$source = str_replace('alt="rep01010070eot" class="photo">', 'alt="rep01010070eot" class="photo" width="1280" height="720">', $source);
 
 		/*
 * 枠1

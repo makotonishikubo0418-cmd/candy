@@ -1,5 +1,10 @@
 /* systemページ専用スタイル - ヘッダー・フッター以外のデザイン */
 
+#system div.wrap div.main div.hotel ul.list li div.thum img {
+	aspect-ratio: 19 / 12;
+	object-fit: cover;
+}
+
 /* PC版 */
 @media screen and (min-width: 769px) {
 	/* system */
@@ -904,4 +909,3 @@
 		line-height: 1.2 !important;
 	}
 }
-

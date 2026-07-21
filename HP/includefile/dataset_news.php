@@ -77,7 +77,7 @@ while($i < count($newsldata["id"])){
 		
 	}else{
 	
-		$waku1 = str_replace('<div class="photo"><img src="rep01010294eot" class="nolazy" alt="キャンディからのお知らせ画像"></div>', '', $waku1);
+		$waku1 = str_replace('<div class="photo"><img src="rep01010294eot" class="nolazy" alt="キャンディからのお知らせ画像" width="560" height="560"></div>', '', $waku1);
 	
 	}
 	
