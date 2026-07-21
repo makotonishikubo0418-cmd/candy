@@ -2,13 +2,13 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-21T15:15:21+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-22T05:13:46+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: b626ce51c2a7b3b5a5c59434b00c21278f2db56f
+> Commit: 706ea48cbb02bab270016d124a70ad8d08ce415f
 > Scope: Public PHP, source files, datasets, shared PHP, CSS, JavaScript, images, videos, and fonts
-> Population: Public PHP files: 103 / assets: 1070
+> Population: Public PHP files: 103 / assets: 1067
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: Missing references: 20 / duplicate hash groups: 167
+> Result: Missing references: 20 / duplicate hash groups: 166
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
 
 ## Public PHP and Structure Files
@@ -182,11 +182,11 @@ Only the external session and database configuration references in `dataset_base
 |---|---:|
 | .css | 15 |
 | .eot | 16 |
-| .gif | 10 |
-| .jpg | 836 |
+| .gif | 9 |
+| .jpg | 835 |
 | .js | 17 |
 | .mp4 | 2 |
-| .png | 135 |
+| .png | 134 |
 | .svg | 2 |
 | .ttf | 16 |
 | .webm | 1 |
@@ -203,9 +203,8 @@ Only the external session and database configuration references in `dataset_base
 | HP/imgCss/pc | 19 |
 | HP/imgCss/s | 22 |
 | HP/imgHtml | 91 |
-| HP/imgHtml/new_202601 | 7 |
-| HP/imgHtml/new_202601/adsite | 1 |
-| HP/imgHtml/new_202601/area | 359 |
+| HP/imgHtml/new_202601 | 6 |
+| HP/imgHtml/new_202601/area | 358 |
 | HP/imgHtml/new_202601/banner | 23 |
 | HP/imgHtml/new_202601/blog | 12 |
 | HP/imgHtml/new_202601/girl | 112 |
@@ -363,9 +362,8 @@ These candidates have no confirmed static HTML or CSS reference. They may be ref
 | HP/imgCss/pc | 18 | cdIcoLoveBtn.png, cdIcoLoveBtn_on.png, cdIcoPhoto.png, cssSprite_sp.png, entranceLogo.png |
 | HP/imgCss/s | 20 | cdIcoLoveBtn.png, cdIcoLoveBtn_on.png, cdIcoPhoto.png, entranceLogo.png, entranceR18.png |
 | HP/imgHtml | 76 | age_verification.jpg, age_verification_bk.jpg, banner.jpg, cdBgGirl.jpg, cdImgGirl.jpg |
-| HP/imgHtml/new_202601 | 3 | candy_img1.jpg, candy_img1_sp.jpg, placeholder_image_picture.gif |
-| HP/imgHtml/new_202601/adsite | 1 | heavennetlink_ohp_red01.png |
-| HP/imgHtml/new_202601/area | 205 | kagoshima-deliveryhealth-area-chuocho_1.jpg, kagoshima-deliveryhealth-area-chuocho_2.jpg, kagoshima-deliveryhealth-area-chuzan_1.jpg, kagoshima-deliveryhealth-area-chuzan_2.jpg, kagoshima-deliveryhealth-area-chuzancho_1.jpg |
+| HP/imgHtml/new_202601 | 2 | candy_img1.jpg, candy_img1_sp.jpg |
+| HP/imgHtml/new_202601/area | 204 | kagoshima-deliveryhealth-area-chuocho_1.jpg, kagoshima-deliveryhealth-area-chuocho_2.jpg, kagoshima-deliveryhealth-area-chuzan_1.jpg, kagoshima-deliveryhealth-area-chuzan_2.jpg, kagoshima-deliveryhealth-area-chuzancho_1.jpg |
 | HP/imgHtml/new_202601/banner | 18 | cityheaven_2.png, girlsheaven_1.jpg, girlsheaven_2.png, girlsheaven_kagoshima.jpg, girlsheaven_kumamoto.jpg |
 | HP/imgHtml/new_202601/girl | 56 | alice_1_sp.jpg, ami_1_sp.jpg, ann_1_sp.jpg, anya_1_sp.jpg, aoba_1_sp.jpg |
 | HP/imgHtml/new_202601/shop | 11 | after5_sp.jpg, beloved_sp.jpg, candy_sp.jpg, danzuma_sp.jpg, hitozuma_sp.jpg |
@@ -420,10 +418,9 @@ These candidates have no confirmed static HTML or CSS reference. They may be ref
 | `2ea2ba07d7bb5df930c25231c4e1000bdba40ce0e4b9472ea39416992bbeb7ea` | HP/imgHtml/listShadow.png<br>HP/imgHtml/pc/listShadow.png<br>HP/imgHtml/pc/pc/listShadow.png |
 | `0b2851eb65e1a0458835666fd447cbccb814305e96d0fb3934a440a9e3465055` | HP/imgHtml/mypageHeart.png<br>HP/imgHtml/pc/mypageHeart.png<br>HP/imgHtml/pc/pc/mypageHeart.png |
 | `556db699b5fa13722cc095bbe068fc75c1ab2a845fbf54db2d6225e521cf5470` | HP/imgHtml/mypagePc.png<br>HP/imgHtml/pc/mypagePc.png<br>HP/imgHtml/pc/pc/mypagePc.png |
-| `bf2002fd7b66844e00046c1eb703b32ea1d4e6c04adf45d9694761270f4d28db` | HP/imgHtml/new_202601/adsite/heavennetlink_ohp_red01.png<br>HP/imgHtml/new_202601/banner/cityheaven_2.png |
 | `2c28ea6f04fdea2114d53c6f29c66ea1883c2271fd1c2b226ee5a8a036c6b164` | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-inusakocho_1.jpg<br>HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-inuzakocho_1.jpg |
 | `aa1b4f677fce041e23d3235fe91b184bf476288a616cf8e08aae0ac06051d793` | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-inusakocho_2.jpg<br>HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-inuzakocho_2.jpg |
-| `0afdb82e56fb3a26e812a36fae58e0b2ff1009f828c0db988202e770ecdf7ba2` | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-ishikidai_1.jpg<br>HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-ishikidai_2.jpg<br>HP/imgHtml/new_202601/area/sample.jpg |
+| `0afdb82e56fb3a26e812a36fae58e0b2ff1009f828c0db988202e770ecdf7ba2` | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-ishikidai_1.jpg<br>HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-ishikidai_2.jpg |
 | `cdccb1680e73e68a456243b0934dca90b7b6257d5091d303f378433fd1c9f37b` | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-seiryo_1.jpg<br>HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-seiryou_1.jpg |
 | `61c2a01f0763e6eeae68092cef19927e8a7639112bf4810e4cdcbd70a771ef6b` | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-seiryo_2.jpg<br>HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-seiryou_2.jpg |
 | `923bccffddde729e40bee808993575fe57ee6a098592bef502bd24712db456b8` | HP/imgHtml/news.jpg<br>HP/imgHtml/pc/news.jpg<br>HP/imgHtml/pc/pc/news.jpg |
@@ -559,6 +556,5 @@ These candidates have no confirmed static HTML or CSS reference. They may be ref
 | HP/font/PlayfairDisplay-Bold.eot | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
 | HP/font/PlayfairDisplay-Bold.ttf | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
 | HP/font/PlayfairDisplay-Bold.woff | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
-| HP/imgHtml/new_202601/placeholder_image_picture.gif | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
 | HP/js/api.txt | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
 | HP/robots.txt | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
