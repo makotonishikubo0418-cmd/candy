@@ -2,7 +2,7 @@
 
 - Purpose: Prevent multiple Codex tasks from changing the same files concurrently.
 - Status: Canonical document
-- Last updated: 2026-07-20
+- Last updated: 2026-07-22
 
 ## 1. Reservation Rules
 
@@ -16,12 +16,12 @@
 
 | Task ID | Codex | Period | Scope | Status |
 |---|---|---|---|---|
-| TASK-20260721-HP-UNUSED-IMAGE-CLEANUP-001 | current | 2026-07-21 | Full `HP/` image-use reconciliation; deletion of images proven unused and directories emptied by those deletions; required generated current-state documents; deletion-only and empty-directory production-deployment support when necessary; target-limited Commit, Push, Actions, and production verification; and this reservation record | IN_PROGRESS |
 
 ## 3. Completed and Released Reservations
 
 | Task ID | Codex | Period | Scope | Result | Status |
 |---|---|---|---|---|---|
+| TASK-20260721-HP-UNUSED-IMAGE-CLEANUP-001 | current | 2026-07-21 to 2026-07-22 | Full `HP/` image-use reconciliation; deletion of images proven unused and directories emptied by those deletions; required generated current-state documents; deletion-only and empty-directory production-deployment support; target-limited Commit, Push, Actions, production verification, and task records | Proved 580 image files unused against the local source and a refreshed 401-URL production crawl, retained all 407 keep files and the accepted input copies required for future page production, deleted the 580 files in six production-verified batches, and removed the three directories emptied by those deletions. Added tested deletion-only and empty-directory deployment support, regenerated the four current-state documents after every batch, pushed all commits to `origin/main`, completed Actions Runs `29864896267`, `29865162916`, `29865607661`, `29866446421`, `29867012142`, `29867550499`, and `29868086534`, and confirmed the final production and Git state. | COMPLETE |
 | TASK-20260720-INUSAKOCHO-NORMALIZATION-001 | current | 2026-07-20 | 犬迫町 input classification, `inusakocho` dataset registration, accepted/public image pair, directly related area specifications, generated current-state documents, and this reservation record | Preserved the existing `inusakocho` public URL, added the matching accepted/public image pair from the verified `inuzakocho` source pair, aligned the source Text and classification inventory, added one dataset case and one link conversion, regenerated four current-state documents reproducibly, and passed PHP, image, target, global, Markdown-table, and Git-diff checks. Commit, Push, and production deployment were not performed. | COMPLETE |
 | TASK-20260720-ACCUMULATED-SEO-PRODUCTION-001 | current | 2026-07-20 | All accumulated authorized repository differences; related canonical and generated Markdown; Git Commit and Push; eligible HP production deployment; typo-slug deletion; and production HTTP verification | Reconciled and validated 99 paths, committed them as `e074934`, pushed `main`, and completed Actions Run `29705109113`. The run deployed 81 eligible HP paths and deleted the two approved `kiirenakamyoch` files while excluding protected `HP/index.php`, `HP/.htaccess`, and management-only `HP/AGENTS.md`. Production returned HTTP 200 for the official `kiirenakamyocho` page with `喜入中名町` and HTTP 404 for the removed typo URL. | COMPLETE |
 | TASK-20260719-PRODUCTION-RUNTIME-PATH-001 | current | 2026-07-19 to 2026-07-20 | Public rendering-wrapper dataset includes, `create.php` generation template, applicable stable/current Markdown, generated current-state documents, local validation, and production smoke test | Standardized all 113 direct rendering wrappers locally, passed PHP lint for all 114 affected-reference files, and verified all four regenerated current-state documents. Deployed four representative wrappers as `dc93b19`, then included the remaining accumulated runtime-path files in Commit `e074934` and successful Actions Run `29705109113`. | COMPLETE |
