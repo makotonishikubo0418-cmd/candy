@@ -20,9 +20,8 @@
     <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville|Roboto" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script type="text/javascript" src="./js/amadare_webapp2.4.php"></script>
-    <script type="text/javascript" src="./js/common.js"></script>
+    <script defer type="text/javascript" src="./js/common.js"></script>
     <script type="text/javascript" src="./js/jquery.fs.boxer.min.js"></script>
-    <script type="text/javascript" src="./js/jquery.colorbox-min.js"></script>
     <script type="text/javascript">
         window.onpageshow = function(event) {
             if (event.persisted) {
@@ -231,19 +230,10 @@
             });
         });
         
-        $(function() {
-            $(".newstwt").colorbox({
-                iframe:true,
-                width:"560px",
-                height:"650px",
-                opacity: 0.7
-            });
-        });
-
         window.onload = CookieWrite('gid', value, days);
         window.onload = CookieWrite('did', value, days);
     </script>
-    <script type="text/javascript" src="./js/love2.js"></script>
+    <script defer type="text/javascript" src="./js/love2.js"></script>
 <!-- Google tag (gtag.js) START -->
 	<script>
 	  document.addEventListener('DOMContentLoaded', function() {
@@ -796,7 +786,6 @@
 
     <iframe style="display:none;" id="iframe" src="https://can-diary.com/love.html"></iframe>
 
-    <script type="text/javascript" src="./js/fav.js"></script>
     <script type="text/javascript" src="./js/amadareWebApp2.6.js"></script>
     <script>
         // windowロードイベント
@@ -957,16 +946,11 @@
         }, false);
 
 
-        var favCount=parseInt(CookieRead("favCount"));
+        var favCount=parseInt(CookieRead("favCount"), 10) || 0;
         favTask();
-        function favTask(){
-        	if(favCount>0){
-        		document.getElementsByClassName("num")[0].innerHTML=favCount;
-        		document.getElementsByClassName("fav")[0].style.display="block";
-        	}
-        }
+        function favTask(){}
     </script>
-    <script type="text/javascript" src="./js/amadareAccess.1.0.js"></script>
+    <script defer type="text/javascript" src="./js/amadareAccess.1.0.js"></script>
 </body>
 
 </html>
