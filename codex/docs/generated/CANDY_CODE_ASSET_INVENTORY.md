@@ -2,13 +2,13 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-22T05:23:52+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-22T05:35:18+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 27deea8f4c7dfce74189ac102678619c245e6fb1
+> Commit: 865c0af1d898b9e815cbf859126fb1ff40091e84
 > Scope: Public PHP, source files, datasets, shared PHP, CSS, JavaScript, images, videos, and fonts
-> Population: Public PHP files: 103 / assets: 817
+> Population: Public PHP files: 103 / assets: 692
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: Missing references: 20 / duplicate hash groups: 162
+> Result: Missing references: 20 / duplicate hash groups: 112
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
 
 ## Public PHP and Structure Files
@@ -182,15 +182,14 @@ Only the external session and database configuration references in `dataset_base
 |---|---:|
 | .css | 15 |
 | .eot | 16 |
-| .gif | 9 |
-| .jpg | 594 |
+| .gif | 4 |
+| .jpg | 493 |
 | .js | 17 |
 | .mp4 | 2 |
-| .png | 126 |
+| .png | 109 |
 | .svg | 2 |
 | .ttf | 16 |
 | .webm | 1 |
-| .webp | 2 |
 | .woff | 16 |
 | .woff2 | 1 |
 
@@ -202,17 +201,16 @@ Only the external session and database configuration references in `dataset_base
 | HP/font | 50 |
 | HP/imgCss/pc | 19 |
 | HP/imgCss/s | 22 |
-| HP/imgHtml | 57 |
+| HP/imgHtml | 56 |
 | HP/imgHtml/new_202601 | 6 |
 | HP/imgHtml/new_202601/area | 154 |
-| HP/imgHtml/new_202601/banner | 11 |
+| HP/imgHtml/new_202601/banner | 5 |
 | HP/imgHtml/new_202601/blog | 12 |
 | HP/imgHtml/new_202601/girl | 112 |
 | HP/imgHtml/new_202601/hotel | 6 |
 | HP/imgHtml/new_202601/shop | 22 |
-| HP/imgHtml/pc | 69 |
-| HP/imgHtml/pc/pc | 69 |
-| HP/imgHtml/pc/s | 87 |
+| HP/imgHtml/pc | 38 |
+| HP/imgHtml/pc/s | 69 |
 | HP/imgHtml/s | 86 |
 | HP/js | 17 |
 | HP/movie | 3 |
@@ -361,14 +359,12 @@ These candidates have no confirmed static HTML or CSS reference. They may be ref
 | HP/font | 6 | freightdispbold-webfont.eot, freightdispbold-webfont.ttf, freightdispbold-webfont.woff, PlayfairDisplay-Bold.eot, PlayfairDisplay-Bold.ttf |
 | HP/imgCss/pc | 18 | cdIcoLoveBtn.png, cdIcoLoveBtn_on.png, cdIcoPhoto.png, cssSprite_sp.png, entranceLogo.png |
 | HP/imgCss/s | 20 | cdIcoLoveBtn.png, cdIcoLoveBtn_on.png, cdIcoPhoto.png, entranceLogo.png, entranceR18.png |
-| HP/imgHtml | 42 | age_verification.jpg, entranceBg.jpg, news.jpg, scheduleIcon.jpg, schedulePhoto.jpg |
+| HP/imgHtml | 41 | age_verification.jpg, entranceBg.jpg, scheduleIcon.jpg, schedulePhoto.jpg, system_bg01.jpg |
 | HP/imgHtml/new_202601 | 2 | candy_img1.jpg, candy_img1_sp.jpg |
-| HP/imgHtml/new_202601/banner | 6 | mensheaven_okinawa.jpg, purelovers_1.gif, purelovers_2.webp, purelovers_3.webp, purelovers_kagoshima.gif |
 | HP/imgHtml/new_202601/girl | 56 | alice_1_sp.jpg, ami_1_sp.jpg, ann_1_sp.jpg, anya_1_sp.jpg, aoba_1_sp.jpg |
 | HP/imgHtml/new_202601/shop | 11 | after5_sp.jpg, beloved_sp.jpg, candy_sp.jpg, danzuma_sp.jpg, hitozuma_sp.jpg |
-| HP/imgHtml/pc | 55 | banner.jpg, cdImgGirl.jpg, dot.gif, entranceBg.jpg, girls2Bg.jpg |
-| HP/imgHtml/pc/pc | 69 | banner.jpg, cdBgGirl.jpg, cdHr.png, cdImgGirl.jpg, cdTtlDiary.png |
-| HP/imgHtml/pc/s | 87 | banner_s.jpg, cdBgGirl.png, cdHr.png, cdImgGirl.jpg, cdTtlDiary.png |
+| HP/imgHtml/pc | 24 | systemBg01.jpg, systemBg01.png, systemBg02.jpg, systemBg02.png, systemBg03.jpg |
+| HP/imgHtml/pc/s | 69 | jobBg03.jpg, jobBg04.jpg, jobBg05.jpg, jobBg06.jpg, jobPhoto01.jpg |
 | HP/imgHtml/s | 72 | banner_s.jpg, cdHr.png, cdImgGirl.jpg, cdTtlDiary.png, dot.gif |
 | HP/js | 11 | api.js, candyKissDijest.js, commonLite.js, diary.js, fav.js |
 
@@ -383,94 +379,10 @@ These candidates have no confirmed static HTML or CSS reference. They may be ref
 | `def77e4996ed1e02ea4fca34174b04403b9be1fb9691c93dca2ef3c986e47852` | HP/imgCss/pc/topIconDiary.png<br>HP/imgCss/s/topIconDiary.png |
 | `8498750503a358e508b4db4d78c374f3df407a59fcde5ce318d42b72ee40cf2c` | HP/imgCss/pc/topIconFav.png<br>HP/imgCss/s/topIconFav.png |
 | `25fb3b0fe86614a438efdcca6022f4ded522c6df27c8a9e5ba4d9ceedfbe6686` | HP/imgCss/pc/topIconPhoto.png<br>HP/imgCss/s/topIconPhoto.png |
-| `11c401ffab12108eb3c491cfca8fd27c550e2b6ada1a09b952ea33109b536605` | HP/imgHtml/cdHr.png<br>HP/imgHtml/pc/cdHr.png<br>HP/imgHtml/pc/pc/cdHr.png |
-| `1adf420fbd88aaf88563e9833963a0116832d8c858315d50c3a182a5b5078691` | HP/imgHtml/cdTtlDiary.png<br>HP/imgHtml/pc/cdTtlDiary.png<br>HP/imgHtml/pc/pc/cdTtlDiary.png |
-| `ce5e2c6c58cefa89e9112282d4dec1e6a7b7fa992eccfad53042463df68e0307` | HP/imgHtml/dot.gif<br>HP/imgHtml/pc/dot.gif<br>HP/imgHtml/pc/pc/dot.gif |
-| `0fc30e1ad13c850e22cbd65cd7bdb4e0dd7b8029fef57936ddba7db462fcdefe` | HP/imgHtml/entranceBg.jpg<br>HP/imgHtml/pc/entranceBg.jpg<br>HP/imgHtml/pc/pc/entranceBg.jpg |
-| `2ea2ba07d7bb5df930c25231c4e1000bdba40ce0e4b9472ea39416992bbeb7ea` | HP/imgHtml/listShadow.png<br>HP/imgHtml/pc/listShadow.png<br>HP/imgHtml/pc/pc/listShadow.png |
-| `0b2851eb65e1a0458835666fd447cbccb814305e96d0fb3934a440a9e3465055` | HP/imgHtml/mypageHeart.png<br>HP/imgHtml/pc/mypageHeart.png<br>HP/imgHtml/pc/pc/mypageHeart.png |
-| `556db699b5fa13722cc095bbe068fc75c1ab2a845fbf54db2d6225e521cf5470` | HP/imgHtml/mypagePc.png<br>HP/imgHtml/pc/mypagePc.png<br>HP/imgHtml/pc/pc/mypagePc.png |
+| `11c401ffab12108eb3c491cfca8fd27c550e2b6ada1a09b952ea33109b536605` | HP/imgHtml/cdHr.png<br>HP/imgHtml/pc/cdHr.png |
+| `1adf420fbd88aaf88563e9833963a0116832d8c858315d50c3a182a5b5078691` | HP/imgHtml/cdTtlDiary.png<br>HP/imgHtml/pc/cdTtlDiary.png |
+| `2ea2ba07d7bb5df930c25231c4e1000bdba40ce0e4b9472ea39416992bbeb7ea` | HP/imgHtml/listShadow.png<br>HP/imgHtml/pc/listShadow.png |
 | `0afdb82e56fb3a26e812a36fae58e0b2ff1009f828c0db988202e770ecdf7ba2` | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-ishikidai_1.jpg<br>HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-ishikidai_2.jpg |
-| `923bccffddde729e40bee808993575fe57ee6a098592bef502bd24712db456b8` | HP/imgHtml/news.jpg<br>HP/imgHtml/pc/news.jpg<br>HP/imgHtml/pc/pc/news.jpg |
-| `94d39876d81a6d5dd2ed32afe1f87e20cfc108d341a2dfda160fef1a2738366b` | HP/imgHtml/pc/banner.jpg<br>HP/imgHtml/pc/pc/banner.jpg |
-| `52990e1ba32a737bfd4400aca455cfe980b3ae54915a6ad330c4835837f38202` | HP/imgHtml/pc/cdBgGirl.jpg<br>HP/imgHtml/pc/pc/cdBgGirl.jpg |
-| `45967f82d215ccd61b1828767eed1b9b14d57913697ea98af378eb56b4b859ca` | HP/imgHtml/pc/cdImgGirl.jpg<br>HP/imgHtml/pc/pc/cdImgGirl.jpg |
-| `6a57b1093506ee377099db2a27ee972590a8d9ce17942cefc41769ffa859729c` | HP/imgHtml/pc/girls2Bg.jpg<br>HP/imgHtml/pc/pc/girls2Bg.jpg |
-| `0f41ede115a7d1d1c1a00639bf3029402877cf79d869d6be9485b3244db24927` | HP/imgHtml/pc/girls2Photo.jpg<br>HP/imgHtml/pc/pc/girls2Photo.jpg |
-| `8c1b66d7ed6a66a117f3329ac80326e161fcc529bbe0dcf8453b7b76d80072dd` | HP/imgHtml/pc/girlsPhoto01.jpg<br>HP/imgHtml/pc/pc/girlsPhoto01.jpg |
-| `f5e780411a46f1003a351198f3e2e9add9a44661d14514078db222e28fbe307a` | HP/imgHtml/pc/girlsPhoto02.jpg<br>HP/imgHtml/pc/pc/girlsPhoto02.jpg |
-| `5e963aac983e954f30af5c4bb60166c2f43d499222787d4865f044627d187f95` | HP/imgHtml/pc/girlsPhoto03.jpg<br>HP/imgHtml/pc/pc/girlsPhoto03.jpg |
-| `12f52ed741486de6c0cdd521851b51db02b311c1df77e951c41720f803b7d469` | HP/imgHtml/pc/girlsPhoto04.jpg<br>HP/imgHtml/pc/pc/girlsPhoto04.jpg |
-| `7ef131d768181e14651d58f557e13950e2fe8eb04eddb8298d3f34b227a1326b` | HP/imgHtml/pc/jobBg01.jpg<br>HP/imgHtml/pc/pc/jobBg01.jpg |
-| `efa1ceeb8fba0e4e98121184ca9f3d8e4570bafa0c87bfeac8d67c64ebc9507b` | HP/imgHtml/pc/jobBg02.jpg<br>HP/imgHtml/pc/pc/jobBg02.jpg |
-| `700b05964279a11669d403ec150bcdc54f836cef817e928c3faedb8dff8de1a0` | HP/imgHtml/pc/jobBg03.jpg<br>HP/imgHtml/pc/pc/jobBg03.jpg |
-| `57e4bca14189197e579f9a2f0c3016df2795cc682aafc4ab67ffd1909cb769fd` | HP/imgHtml/pc/jobBg04.jpg<br>HP/imgHtml/pc/pc/jobBg04.jpg |
-| `11fecb87bf2cc923a5e852655399132b6ba884575c8c7263ae59e10ee262338d` | HP/imgHtml/pc/jobBg05.jpg<br>HP/imgHtml/pc/pc/jobBg05.jpg |
-| `f467b98a8c45485e5987438edc46160696efcc01515b651321a0d7044995cf11` | HP/imgHtml/pc/jobBg06.jpg<br>HP/imgHtml/pc/pc/jobBg06.jpg |
-| `2b6b56409b18cc154cba41f99aad6cf53fa3df17cc4828c1819fa0d7a4bc5ded` | HP/imgHtml/pc/jobPhoto01.jpg<br>HP/imgHtml/pc/pc/jobPhoto01.jpg |
-| `d93cfa60f75429aed47a13584405720db4e1c26d33fc544096b6b35041cc465e` | HP/imgHtml/pc/jobPhoto02.jpg<br>HP/imgHtml/pc/pc/jobPhoto02.jpg |
-| `1809ad17affab0211929fcbb93d239c3df3d6744127c2034e4fbd53c85b03fef` | HP/imgHtml/pc/jobPhoto03.jpg<br>HP/imgHtml/pc/pc/jobPhoto03.jpg |
-| `e04bb5ef24dd5fd8c78c17b371f5b2deda7296a729773d28079862a7f52e8d51` | HP/imgHtml/pc/jobPhoto04.jpg<br>HP/imgHtml/pc/pc/jobPhoto04.jpg |
-| `7533da30620f5f68f11cc22f2eb6c4d43f141f51e61a7cf314d7bf7881886635` | HP/imgHtml/pc/jobPhoto05.jpg<br>HP/imgHtml/pc/pc/jobPhoto05.jpg |
-| `cced743856b8817630feda690915f0af2dcb66c0ee66ebdee6a19915cb18da02` | HP/imgHtml/pc/jobPhoto06.jpg<br>HP/imgHtml/pc/pc/jobPhoto06.jpg |
-| `ee02dacbb5e6400022d9039c878d22b5a811ac4984535612ac6e6c803887ceb3` | HP/imgHtml/pc/jobPhoto07.jpg<br>HP/imgHtml/pc/pc/jobPhoto07.jpg |
-| `439aa33e53f547fe25fb76185a24dca12e1b27e7cf7bff10364d6337cb99102e` | HP/imgHtml/pc/jobPhoto08.jpg<br>HP/imgHtml/pc/pc/jobPhoto08.jpg |
-| `8935953733d57f5ef2f10a39b59c9fb1433ac3c18908e028df6ddade8c94295a` | HP/imgHtml/pc/listPhoto.jpg<br>HP/imgHtml/pc/pc/listPhoto.jpg |
-| `2a048ba05db1c77d880e040791fe45d6e2d3f19953f6206f84a3dd417d950198` | HP/imgHtml/pc/listPhoto_1280.jpg<br>HP/imgHtml/pc/pc/listPhoto_1280.jpg |
-| `feda81d04d267c5ed7179495f04e162be0adac59b950495d9047eb8a3f4f947b` | HP/imgHtml/pc/listPhoto_815.jpg<br>HP/imgHtml/pc/pc/listPhoto_815.jpg |
-| `454e9cdf4dd4651da74f18c4d7e9249f68abdc100f92ac24d155fa0361fe924e` | HP/imgHtml/pc/listPhoto_900.jpg<br>HP/imgHtml/pc/pc/listPhoto_900.jpg |
-| `6f3b9066789618faf5275b3e1c2e0a283ba2108d2e786199c9815eb3bdb78092` | HP/imgHtml/pc/pc/system_bg01.jpg<br>HP/imgHtml/pc/system_bg01.jpg<br>HP/imgHtml/system_bg01.jpg |
-| `ef5d32b5054b79d9751bf2983cfeafee3927d907f3f384535bd475855d715375` | HP/imgHtml/pc/pc/system_bg02.jpg<br>HP/imgHtml/pc/system_bg02.jpg<br>HP/imgHtml/system_bg02.jpg |
-| `21fb0d5590c22e8fafc3055b04dcfbd58b48e42002b5cde5d750fef4e11bd2de` | HP/imgHtml/pc/pc/system_bg03.jpg<br>HP/imgHtml/pc/system_bg03.jpg<br>HP/imgHtml/system_bg03.jpg |
-| `e1282ba8aec04d8a06fb44b3eb2d75b628cf7b2c5b1d316aa41395bb8b8356d0` | HP/imgHtml/pc/pc/system_bg04.jpg<br>HP/imgHtml/pc/system_bg04.jpg<br>HP/imgHtml/system_bg04.jpg |
-| `87670c4200bfd7ea9286c1b5ec78cab30958a74ff033bf752476ff4112d3feb6` | HP/imgHtml/pc/pc/system_bg05.jpg<br>HP/imgHtml/pc/system_bg05.jpg<br>HP/imgHtml/system_bg05.jpg |
-| `348d936bec014f063c32d4a810fc608eececf5ee8577e32946e2d517c22d37cd` | HP/imgHtml/pc/pc/system_bg06.jpg<br>HP/imgHtml/pc/system_bg06.jpg<br>HP/imgHtml/system_bg06.jpg |
-| `a71a2ce2afcecc19429747c75e59a55a247189e40c61be872c9c76f577ce1a56` | HP/imgHtml/pc/pc/systemBg01.jpg<br>HP/imgHtml/pc/systemBg01.jpg<br>HP/imgHtml/systemBg01.jpg |
-| `4addcf16b532762eb3ba785eefc270f4a4f4916139165d824685d60ba3e8f25d` | HP/imgHtml/pc/pc/systemBg01.png<br>HP/imgHtml/pc/systemBg01.png<br>HP/imgHtml/systemBg01.png |
-| `c24b4767353748f258ee98a4ab866c7edb31bff289797fa045af8f7aa9c8c6d8` | HP/imgHtml/pc/pc/systemBg02.jpg<br>HP/imgHtml/pc/systemBg02.jpg<br>HP/imgHtml/systemBg02.jpg |
-| `3c1389bf7ba00fb51139c90e7c53ed2b5e690fc703c9f628033facec22d91e43` | HP/imgHtml/pc/pc/systemBg02.png<br>HP/imgHtml/pc/systemBg02.png<br>HP/imgHtml/systemBg02.png |
-| `c912e957a134fb588c208dc0445649c5bb5c179e559b18153df82d14d90834a5` | HP/imgHtml/pc/pc/systemBg03.jpg<br>HP/imgHtml/pc/systemBg03.jpg<br>HP/imgHtml/systemBg03.jpg |
-| `08dce009a4d349cac9c13a6df434dc32e02ff1c356e39a6553e17c3f8f0f99e0` | HP/imgHtml/pc/pc/systemBg03.png<br>HP/imgHtml/pc/systemBg03.png<br>HP/imgHtml/systemBg03.png |
-| `0c720b54ef60e11a9c04a4a59e091d62f8b07bbda9615ca9ef6078944f539586` | HP/imgHtml/pc/pc/systemBg04.jpg<br>HP/imgHtml/pc/systemBg04.jpg<br>HP/imgHtml/systemBg04.jpg |
-| `ce97b2ac421886526085f594176914e9c9f78d87270d04818b88b3cad72b738f` | HP/imgHtml/pc/pc/systemBg04.png<br>HP/imgHtml/pc/systemBg04.png<br>HP/imgHtml/systemBg04.png |
-| `396ae1209051ce221f7c1fe4c5b57400d4f33a187f18f7afa05c9a373751cbd6` | HP/imgHtml/pc/pc/systemBg05.jpg<br>HP/imgHtml/pc/systemBg05.jpg<br>HP/imgHtml/systemBg05.jpg |
-| `271b6abcf18b9c173aa4a8ed48fabbcde00cfd3dc585efedd3c7f66d40a21510` | HP/imgHtml/pc/pc/systemBg06.jpg<br>HP/imgHtml/pc/systemBg06.jpg<br>HP/imgHtml/systemBg06.jpg |
-| `f7aa8e0dcbea7754dee940d1f1a713e2bf7c887c92ef2b61d375d21e0a3fea4c` | HP/imgHtml/pc/pc/systemHotel01.jpg<br>HP/imgHtml/pc/systemHotel01.jpg<br>HP/imgHtml/systemHotel01.jpg |
-| `a88b78adc691221b9bbd30c81af18f341ff6ced096d489d30fb5089422591d20` | HP/imgHtml/pc/pc/systemHotel02.jpg<br>HP/imgHtml/pc/systemHotel02.jpg<br>HP/imgHtml/systemHotel02.jpg |
-| `aae994b2f6b10f4a52ea0882bfa3ab13ff05c43b0641a83468131a273bfc28be` | HP/imgHtml/pc/pc/systemHotel03.jpg<br>HP/imgHtml/pc/systemHotel03.jpg<br>HP/imgHtml/systemHotel03.jpg |
-| `5e02a8a9f3722f2c2f8f34a189233f41c52eb203de65ab7ef262bd944ba76508` | HP/imgHtml/pc/pc/systemHotel04.jpg<br>HP/imgHtml/pc/systemHotel04.jpg<br>HP/imgHtml/systemHotel04.jpg |
-| `64826d7bcd03a470b53942e82960b09250913b87e55111ece2bd7c20798e2eaf` | HP/imgHtml/pc/pc/systemHotel05.jpg<br>HP/imgHtml/pc/systemHotel05.jpg<br>HP/imgHtml/systemHotel05.jpg |
-| `f7692148f6ba0adc5b9cdc995e7678e98dfa05caeeb7521196584a2d6d28b535` | HP/imgHtml/pc/pc/systemHotel06.jpg<br>HP/imgHtml/pc/systemHotel06.jpg<br>HP/imgHtml/systemHotel06.jpg |
-| `0e0f3f1bec38c76167c9bc1cb95dde9aa9205482c10e2b27cc38b16963b00558` | HP/imgHtml/pc/pc/systemHotel07.jpg<br>HP/imgHtml/pc/systemHotel07.jpg<br>HP/imgHtml/systemHotel07.jpg |
-| `2b94a5af73705bdf4aff5daa921bd52a1ae51ba0a096d118036669db484ec4d2` | HP/imgHtml/pc/pc/systemHotel08.jpg<br>HP/imgHtml/pc/systemHotel08.jpg<br>HP/imgHtml/systemHotel08.jpg |
-| `0199ee1cdf580d61b2f36ca18ecfc41f5a067379240cdc716249c0aa3e3a7d89` | HP/imgHtml/pc/pc/systemHotel09.jpg<br>HP/imgHtml/pc/systemHotel09.jpg<br>HP/imgHtml/systemHotel09.jpg |
-| `d3a558b92c3352a3fe54954f2fb48487cf8444664768ea7a8ecb8ca6caf57324` | HP/imgHtml/pc/pc/systemHotel10.jpg<br>HP/imgHtml/pc/systemHotel10.jpg<br>HP/imgHtml/systemHotel10.jpg |
-| `81fb3592ed8d1a026d5b3d7b942415f1f4a1d1d8fb969fdfcac13d0659725d78` | HP/imgHtml/pc/pc/systemHotel11.jpg<br>HP/imgHtml/pc/systemHotel11.jpg<br>HP/imgHtml/systemHotel11.jpg |
-| `60e7cf8c632891ec77621969b372d1cb611e23a1bc787ec99742ceb58bf07849` | HP/imgHtml/pc/pc/topListPhoto01.jpg<br>HP/imgHtml/pc/topListPhoto01.jpg<br>HP/imgHtml/topListPhoto01.jpg |
-| `b9a989673536d16ee8a6a78d4fbcd7043cc9015f982cd55eaaed28a0565517f6` | HP/imgHtml/pc/pc/topListPhoto02.jpg<br>HP/imgHtml/pc/topListPhoto02.jpg<br>HP/imgHtml/topListPhoto02.jpg |
-| `788eacdd2abb77a8463f7fb0861b2d580bcc17b69761e598b32d011f73b70839` | HP/imgHtml/pc/pc/topListPhoto03.jpg<br>HP/imgHtml/pc/topListPhoto03.jpg<br>HP/imgHtml/topListPhoto03.jpg |
-| `b58c5da6fd3f88a1cb86fbad5024bea463d8c2608a207915ceb7569ee0cbe64b` | HP/imgHtml/pc/pc/topOtherBg.jpg<br>HP/imgHtml/pc/topOtherBg.jpg<br>HP/imgHtml/topOtherBg.jpg |
-| `0aebf5b013a5aab1074db1c056f5266b34808ad038538dbf7f894731e489274d` | HP/imgHtml/pc/pc/topOtherBg01.png<br>HP/imgHtml/pc/topOtherBg01.png<br>HP/imgHtml/topOtherBg01.png |
-| `fbd767eda43ab8a523a5b29b037b97a3d4de60cc4d7241312ef7fb4fd09c47b9` | HP/imgHtml/pc/pc/topOtherBg02.png<br>HP/imgHtml/pc/topOtherBg02.png<br>HP/imgHtml/topOtherBg02.png |
-| `cf6d29603125b92cac244af5c3b9e8a04584a6377725017a34e7a831d9b03b2f` | HP/imgHtml/pc/pc/topOtherBg03.png<br>HP/imgHtml/pc/topOtherBg03.png<br>HP/imgHtml/topOtherBg03.png |
-| `a227c764529c783cb69edf77af5a8594a73643937a2b37d3dc92e8e3dd2a6e75` | HP/imgHtml/pc/s/banner_s.jpg<br>HP/imgHtml/s/banner_s.jpg |
-| `eb1aadfae573fa33f3915ec8ece8cf273c35a88cb719c3cc788909e0e4234b91` | HP/imgHtml/pc/s/cdBgGirl.png<br>HP/imgHtml/s/cdBgGirl.png |
-| `ef43851a80184cf6b8df42c23943df54b358051243b8c40d5585df674cdaac41` | HP/imgHtml/pc/s/cdHr.png<br>HP/imgHtml/s/cdHr.png |
-| `e999a166cf6eef095a8e96af112eab64633fa55c44d286ee869ab5d9bc7c83df` | HP/imgHtml/pc/s/cdImgGirl.jpg<br>HP/imgHtml/s/cdImgGirl.jpg |
-| `7ee77c6ecbea7dd3bb42e112197a7d3a056f1a53ce44fe56f0a507c5c90e00e3` | HP/imgHtml/pc/s/cdTtlDiary.png<br>HP/imgHtml/s/cdTtlDiary.png |
-| `1d7cb3505c990f08476f513728a6b5877cb3ceb73b3c09674ed7874d26399822` | HP/imgHtml/pc/s/dot.gif<br>HP/imgHtml/s/dot.gif |
-| `b3b60262e42cb64de23322415a6f85f98fb50b2faf3013bc96c68697644afe84` | HP/imgHtml/pc/s/entranceBg.jpg<br>HP/imgHtml/s/entranceBg.jpg |
-| `cde19619fe591f8c28beb28ba81a78dda0d1ae7e75a8f14f686a20b624d0a590` | HP/imgHtml/pc/s/girls2Bg.jpg<br>HP/imgHtml/s/girls2Bg.jpg |
-| `cd774a4cdba54ca30504fbc7c99997a4ff7ac0fd2f8ea6ec43cbd90bd4c4fa99` | HP/imgHtml/pc/s/girls2Photo.jpg<br>HP/imgHtml/s/girls2Photo.jpg |
-| `ba560be829a3a712b8713df9f8986cc301d97e67da70ea115ab5324b772ce0ec` | HP/imgHtml/pc/s/girlsPhoto01.jpg<br>HP/imgHtml/s/girlsPhoto01.jpg |
-| `4f6ce269f8d01440a926880cd91046e9a56df1bea713d51e639ebd12fc41d281` | HP/imgHtml/pc/s/girlsPhoto02.jpg<br>HP/imgHtml/s/girlsPhoto02.jpg |
-| `32cef657adb97cc3bfebd866c198da40659483dfdc086ef5d659fe20eca73e2c` | HP/imgHtml/pc/s/girlsPhoto02b.jpg<br>HP/imgHtml/s/girlsPhoto02b.jpg |
-| `7786df6139d6fd508059eb6f3e230fd6f79fc5e28524561c75d1511089ee9655` | HP/imgHtml/pc/s/girlsPhoto03.jpg<br>HP/imgHtml/s/girlsPhoto03.jpg |
-| `415b3f3183d2723f2df01e834d1adc73b44a5d0ef4b3ca43005be87f06f9d212` | HP/imgHtml/pc/s/girlsPhoto03b.jpg<br>HP/imgHtml/s/girlsPhoto03b.jpg |
-| `77b4291a816a5be465be2a57f52f1e9a0b87d80545561f800fbe800d45254d2a` | HP/imgHtml/pc/s/girlsPhoto04.jpg<br>HP/imgHtml/s/girlsPhoto04.jpg |
-| `8d746f0c1b5b55cec8f9b5c36d83d6f81e62a695282eced9e660bb456ea5c123` | HP/imgHtml/pc/s/girlsPhoto04b.jpg<br>HP/imgHtml/s/girlsPhoto04b.jpg |
-| `34893b5cd7dfb393b30ecdb394842c54434f190f7476ce30a79e8eacac68fa02` | HP/imgHtml/pc/s/jobBg01.jpg<br>HP/imgHtml/s/jobBg01.jpg |
-| `8424fc2a8d8865d57fcdbe3031231696d156c04847b20ad4cc6036b924e78624` | HP/imgHtml/pc/s/jobBg02.jpg<br>HP/imgHtml/s/jobBg02.jpg |
 | `e814edfe5abde79ccf99e895a1398425437eed9ee9408f2a9b283d137ed9f517` | HP/imgHtml/pc/s/jobBg03.jpg<br>HP/imgHtml/s/jobBg03.jpg |
 | `9c8e742f64545fb8b5efd13e700b7194f34ab2ae476d4597091bda547905a328` | HP/imgHtml/pc/s/jobBg04.jpg<br>HP/imgHtml/s/jobBg04.jpg |
 | `18df9d36f478e8cc0086d5cfd4aa9f76f975187823b63377e59cf97ae746920a` | HP/imgHtml/pc/s/jobBg05.jpg<br>HP/imgHtml/s/jobBg05.jpg |
@@ -538,6 +450,40 @@ These candidates have no confirmed static HTML or CSS reference. They may be ref
 | `432b9a62407c25e25713fa43fe3f925fbf7e03779129c77fde54febfb9a3f9e1` | HP/imgHtml/pc/s/topOtherBg01.png<br>HP/imgHtml/s/topOtherBg01.png |
 | `5eb66cfbfd7b6c1f5dc5015106d6d54506f146870345562216922cb5245c475b` | HP/imgHtml/pc/s/topOtherBg02.png<br>HP/imgHtml/s/topOtherBg02.png |
 | `270fee2ece07f63dd32bfd964b3c236f8994a37c1cf5b07b286ebb999e4aa792` | HP/imgHtml/pc/s/topOtherBg03.png<br>HP/imgHtml/s/topOtherBg03.png |
+| `6f3b9066789618faf5275b3e1c2e0a283ba2108d2e786199c9815eb3bdb78092` | HP/imgHtml/pc/system_bg01.jpg<br>HP/imgHtml/system_bg01.jpg |
+| `ef5d32b5054b79d9751bf2983cfeafee3927d907f3f384535bd475855d715375` | HP/imgHtml/pc/system_bg02.jpg<br>HP/imgHtml/system_bg02.jpg |
+| `21fb0d5590c22e8fafc3055b04dcfbd58b48e42002b5cde5d750fef4e11bd2de` | HP/imgHtml/pc/system_bg03.jpg<br>HP/imgHtml/system_bg03.jpg |
+| `e1282ba8aec04d8a06fb44b3eb2d75b628cf7b2c5b1d316aa41395bb8b8356d0` | HP/imgHtml/pc/system_bg04.jpg<br>HP/imgHtml/system_bg04.jpg |
+| `87670c4200bfd7ea9286c1b5ec78cab30958a74ff033bf752476ff4112d3feb6` | HP/imgHtml/pc/system_bg05.jpg<br>HP/imgHtml/system_bg05.jpg |
+| `348d936bec014f063c32d4a810fc608eececf5ee8577e32946e2d517c22d37cd` | HP/imgHtml/pc/system_bg06.jpg<br>HP/imgHtml/system_bg06.jpg |
+| `a71a2ce2afcecc19429747c75e59a55a247189e40c61be872c9c76f577ce1a56` | HP/imgHtml/pc/systemBg01.jpg<br>HP/imgHtml/systemBg01.jpg |
+| `4addcf16b532762eb3ba785eefc270f4a4f4916139165d824685d60ba3e8f25d` | HP/imgHtml/pc/systemBg01.png<br>HP/imgHtml/systemBg01.png |
+| `c24b4767353748f258ee98a4ab866c7edb31bff289797fa045af8f7aa9c8c6d8` | HP/imgHtml/pc/systemBg02.jpg<br>HP/imgHtml/systemBg02.jpg |
+| `3c1389bf7ba00fb51139c90e7c53ed2b5e690fc703c9f628033facec22d91e43` | HP/imgHtml/pc/systemBg02.png<br>HP/imgHtml/systemBg02.png |
+| `c912e957a134fb588c208dc0445649c5bb5c179e559b18153df82d14d90834a5` | HP/imgHtml/pc/systemBg03.jpg<br>HP/imgHtml/systemBg03.jpg |
+| `08dce009a4d349cac9c13a6df434dc32e02ff1c356e39a6553e17c3f8f0f99e0` | HP/imgHtml/pc/systemBg03.png<br>HP/imgHtml/systemBg03.png |
+| `0c720b54ef60e11a9c04a4a59e091d62f8b07bbda9615ca9ef6078944f539586` | HP/imgHtml/pc/systemBg04.jpg<br>HP/imgHtml/systemBg04.jpg |
+| `ce97b2ac421886526085f594176914e9c9f78d87270d04818b88b3cad72b738f` | HP/imgHtml/pc/systemBg04.png<br>HP/imgHtml/systemBg04.png |
+| `396ae1209051ce221f7c1fe4c5b57400d4f33a187f18f7afa05c9a373751cbd6` | HP/imgHtml/pc/systemBg05.jpg<br>HP/imgHtml/systemBg05.jpg |
+| `271b6abcf18b9c173aa4a8ed48fabbcde00cfd3dc585efedd3c7f66d40a21510` | HP/imgHtml/pc/systemBg06.jpg<br>HP/imgHtml/systemBg06.jpg |
+| `f7aa8e0dcbea7754dee940d1f1a713e2bf7c887c92ef2b61d375d21e0a3fea4c` | HP/imgHtml/pc/systemHotel01.jpg<br>HP/imgHtml/systemHotel01.jpg |
+| `a88b78adc691221b9bbd30c81af18f341ff6ced096d489d30fb5089422591d20` | HP/imgHtml/pc/systemHotel02.jpg<br>HP/imgHtml/systemHotel02.jpg |
+| `aae994b2f6b10f4a52ea0882bfa3ab13ff05c43b0641a83468131a273bfc28be` | HP/imgHtml/pc/systemHotel03.jpg<br>HP/imgHtml/systemHotel03.jpg |
+| `5e02a8a9f3722f2c2f8f34a189233f41c52eb203de65ab7ef262bd944ba76508` | HP/imgHtml/pc/systemHotel04.jpg<br>HP/imgHtml/systemHotel04.jpg |
+| `64826d7bcd03a470b53942e82960b09250913b87e55111ece2bd7c20798e2eaf` | HP/imgHtml/pc/systemHotel05.jpg<br>HP/imgHtml/systemHotel05.jpg |
+| `f7692148f6ba0adc5b9cdc995e7678e98dfa05caeeb7521196584a2d6d28b535` | HP/imgHtml/pc/systemHotel06.jpg<br>HP/imgHtml/systemHotel06.jpg |
+| `0e0f3f1bec38c76167c9bc1cb95dde9aa9205482c10e2b27cc38b16963b00558` | HP/imgHtml/pc/systemHotel07.jpg<br>HP/imgHtml/systemHotel07.jpg |
+| `2b94a5af73705bdf4aff5daa921bd52a1ae51ba0a096d118036669db484ec4d2` | HP/imgHtml/pc/systemHotel08.jpg<br>HP/imgHtml/systemHotel08.jpg |
+| `0199ee1cdf580d61b2f36ca18ecfc41f5a067379240cdc716249c0aa3e3a7d89` | HP/imgHtml/pc/systemHotel09.jpg<br>HP/imgHtml/systemHotel09.jpg |
+| `d3a558b92c3352a3fe54954f2fb48487cf8444664768ea7a8ecb8ca6caf57324` | HP/imgHtml/pc/systemHotel10.jpg<br>HP/imgHtml/systemHotel10.jpg |
+| `81fb3592ed8d1a026d5b3d7b942415f1f4a1d1d8fb969fdfcac13d0659725d78` | HP/imgHtml/pc/systemHotel11.jpg<br>HP/imgHtml/systemHotel11.jpg |
+| `60e7cf8c632891ec77621969b372d1cb611e23a1bc787ec99742ceb58bf07849` | HP/imgHtml/pc/topListPhoto01.jpg<br>HP/imgHtml/topListPhoto01.jpg |
+| `b9a989673536d16ee8a6a78d4fbcd7043cc9015f982cd55eaaed28a0565517f6` | HP/imgHtml/pc/topListPhoto02.jpg<br>HP/imgHtml/topListPhoto02.jpg |
+| `788eacdd2abb77a8463f7fb0861b2d580bcc17b69761e598b32d011f73b70839` | HP/imgHtml/pc/topListPhoto03.jpg<br>HP/imgHtml/topListPhoto03.jpg |
+| `b58c5da6fd3f88a1cb86fbad5024bea463d8c2608a207915ceb7569ee0cbe64b` | HP/imgHtml/pc/topOtherBg.jpg<br>HP/imgHtml/topOtherBg.jpg |
+| `0aebf5b013a5aab1074db1c056f5266b34808ad038538dbf7f894731e489274d` | HP/imgHtml/pc/topOtherBg01.png<br>HP/imgHtml/topOtherBg01.png |
+| `fbd767eda43ab8a523a5b29b037b97a3d4de60cc4d7241312ef7fb4fd09c47b9` | HP/imgHtml/pc/topOtherBg02.png<br>HP/imgHtml/topOtherBg02.png |
+| `cf6d29603125b92cac244af5c3b9e8a04584a6377725017a34e7a831d9b03b2f` | HP/imgHtml/pc/topOtherBg03.png<br>HP/imgHtml/topOtherBg03.png |
 
 ## Candidates That May Not Require Publication
 
