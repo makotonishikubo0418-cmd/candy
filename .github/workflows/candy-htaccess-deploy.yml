@@ -1,0 +1,142 @@
+name: CANDY Protected htaccess Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: "Preview first; deploy only with the approved preview values"
+        required: true
+        default: preview
+        type: choice
+        options:
+          - preview
+          - deploy
+      before_sha:
+        description: "40-character base commit SHA"
+        required: true
+        type: string
+      after_sha:
+        description: "40-character target commit SHA"
+        required: true
+        type: string
+      expected_file_count:
+        description: "Must be 1 for deploy"
+        required: true
+        default: "0"
+        type: string
+      approved_plan_token:
+        description: "Exact PLAN_TOKEN printed by preview"
+        required: false
+        default: ""
+        type: string
+      confirmation:
+        description: "For deploy, enter DEPLOY-CANDY-HTACCESS"
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: candy-production-deploy
+  cancel-in-progress: false
+
+jobs:
+  preview:
+    if: inputs.operation == 'preview'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check out the exact target commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.after_sha }}
+          fetch-depth: 0
+
+      - name: Validate protected deployment code
+        run: |
+          python3 -m py_compile .github/scripts/candy_ftp_deploy.py
+          python3 .github/scripts/candy_ftp_deploy.py --self-test
+          python3 .github/scripts/test_candy_ftp_deploy.py
+
+      - name: Preview the exact htaccess-only plan without FTP
+        env:
+          BEFORE_SHA: ${{ inputs.before_sha }}
+          AFTER_SHA: ${{ inputs.after_sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$AFTER_SHA"
+          python3 .github/scripts/candy_ftp_deploy.py \
+            --before "$BEFORE_SHA" \
+            --after "$AFTER_SHA" \
+            --allow-htaccess \
+            --dry-run | tee deploy-preview.txt
+          grep -Fx "Deployment operation count: 1" deploy-preview.txt
+          grep -Fx "Upload file count: 1" deploy-preview.txt
+          grep -F "HP/.htaccess -> /public_html/group/candy/.htaccess" deploy-preview.txt
+          cat deploy-preview.txt >> "$GITHUB_STEP_SUMMARY"
+
+  deploy:
+    if: inputs.operation == 'deploy'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: candy-production
+
+    steps:
+      - name: Check out the exact approved target commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.after_sha }}
+          fetch-depth: 0
+
+      - name: Validate protected deployment code
+        run: |
+          python3 -m py_compile .github/scripts/candy_ftp_deploy.py
+          python3 .github/scripts/candy_ftp_deploy.py --self-test
+          python3 .github/scripts/test_candy_ftp_deploy.py
+
+      - name: Validate the exact htaccess-only plan and approval
+        env:
+          BEFORE_SHA: ${{ inputs.before_sha }}
+          AFTER_SHA: ${{ inputs.after_sha }}
+          EXPECTED_FILE_COUNT: ${{ inputs.expected_file_count }}
+          APPROVED_PLAN_TOKEN: ${{ inputs.approved_plan_token }}
+          PRODUCTION_CONFIRMATION: ${{ inputs.confirmation }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$AFTER_SHA"
+          test "$EXPECTED_FILE_COUNT" = "1"
+          python3 .github/scripts/candy_ftp_deploy.py \
+            --before "$BEFORE_SHA" \
+            --after "$AFTER_SHA" \
+            --allow-htaccess \
+            --expected-file-count "$EXPECTED_FILE_COUNT" \
+            --approved-plan-token "$APPROVED_PLAN_TOKEN" \
+            --confirm-production "$PRODUCTION_CONFIRMATION" \
+            --verify-approval | tee deploy-approval.txt
+          grep -F "HP/.htaccess -> /public_html/group/candy/.htaccess" deploy-approval.txt
+          cat deploy-approval.txt >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Apply only the approved htaccess file
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          BEFORE_SHA: ${{ inputs.before_sha }}
+          AFTER_SHA: ${{ inputs.after_sha }}
+          EXPECTED_FILE_COUNT: ${{ inputs.expected_file_count }}
+          APPROVED_PLAN_TOKEN: ${{ inputs.approved_plan_token }}
+          PRODUCTION_CONFIRMATION: ${{ inputs.confirmation }}
+        run: |
+          set -euo pipefail
+          python3 .github/scripts/candy_ftp_deploy.py \
+            --before "$BEFORE_SHA" \
+            --after "$AFTER_SHA" \
+            --allow-htaccess \
+            --expected-file-count "$EXPECTED_FILE_COUNT" \
+            --approved-plan-token "$APPROVED_PLAN_TOKEN" \
+            --confirm-production "$PRODUCTION_CONFIRMATION" | tee deploy-result.txt
+          grep -Fx "SUCCESS: deployed and SHA256-verified 1 file(s); deleted 0 obsolete file(s)" deploy-result.txt
+          cat deploy-result.txt >> "$GITHUB_STEP_SUMMARY"

@@ -2,9 +2,9 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-22T08:46:09+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-22T08:49:22+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 48fdc6a993273df17bf42cebc3cbcf1f39c8d1fb
+> Commit: 2c0bbc1681e965c24d9efb50b9ddd904bfa39a44
 > Scope: Public PHP, source files, datasets, shared PHP, CSS, JavaScript, images, videos, and fonts
 > Population: Public PHP files: 103 / assets: 490
 > Generator: `codex/scripts/candy_site_state.py`

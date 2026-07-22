@@ -38,6 +38,7 @@ Workflow:
 
 ```text
 .github/workflows/candy-production-deploy.yml
+.github/workflows/candy-htaccess-deploy.yml
 ```
 
 Deploy script:
@@ -92,7 +93,7 @@ Any mismatch fails before FTP connection. The normal route applies this safety g
 Primary exclusions verified from actual workflow/script:
 
 - `HP/index.php`
-- `HP/.htaccess`
+- `HP/.htaccess` in every normal Push or general manual deployment
 - `HP/AGENTS.md`
 - `codex/`
 - `HP/log/`
@@ -106,6 +107,18 @@ Primary exclusions verified from actual workflow/script:
 - `.candy-backup-*` and `.candy-upload-*`
 
 Do not infer this list for a future workflow; recheck actual preview output.
+
+### 4.5 Protected `.htaccess` Exception
+
+`.github/workflows/candy-htaccess-deploy.yml` is the only approved exception for production `.htaccess` publication.
+
+- It runs only through `workflow_dispatch`; Push MUST NOT start it.
+- Preview MUST run before deploy and MUST use exact 40-character comparison SHAs.
+- The comparison MUST contain exactly one modified HP target: `HP/.htaccess`.
+- `HP/index.php` remains protected and MUST NOT be accepted by this exception.
+- Deploy requires operation count `1`, the exact preview `PLAN_TOKEN`, and confirmation `DEPLOY-CANDY-HTACCESS`.
+- The normal transactional upload, SHA-256 verification, backup, and automatic rollback procedure remains mandatory.
+- After deployment, verify HTTP, non-www, canonical HTTPS, explicit index removal, and preservation of the intentional top-page redirect.
 
 ## 5. FTP Deployment Safety Requirements
 

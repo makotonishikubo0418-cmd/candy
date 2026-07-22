@@ -7,6 +7,7 @@ ErrorDocument 404 /404.html
 
 RewriteEngine On
 
+# Keep detail-page URLs canonical while the top-page migration redirect remains separate.
 # Canonical scheme and host: https://www.55810.com
 RewriteCond %{HTTPS} !=on
 RewriteCond %{HTTP:X-Forwarded-Proto} !^https$ [NC]

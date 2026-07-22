@@ -13,7 +13,9 @@ from pathlib import Path
 GIT = shutil.which("git") or r"C:\Program Files\Git\cmd\git.exe"
 SCRIPT = Path(__file__).with_name("candy_ftp_deploy.py").resolve()
 WORKFLOW = SCRIPT.parent.parent / "workflows" / "candy-production-deploy.yml"
+HTACCESS_WORKFLOW = SCRIPT.parent.parent / "workflows" / "candy-htaccess-deploy.yml"
 CONFIRMATION = "DEPLOY-CANDY-PRODUCTION"
+HTACCESS_CONFIRMATION = "DEPLOY-CANDY-HTACCESS"
 
 
 def load_deploy_module():
@@ -215,6 +217,21 @@ def make_repository(root: Path) -> tuple[str, str]:
     return before, after
 
 
+def make_htaccess_repository(root: Path) -> tuple[str, str]:
+    (root / "HP").mkdir()
+    (root / ".github" / "scripts").mkdir(parents=True)
+    shutil.copy2(SCRIPT, root / ".github" / "scripts" / SCRIPT.name)
+    git(root, "init", "-q")
+    git(root, "config", "user.email", "test@example.invalid")
+    git(root, "config", "user.name", "Safety Test")
+    htaccess = root / "HP" / ".htaccess"
+    htaccess.write_bytes(b"RewriteEngine On\n")
+    before = commit(root, "base")
+    htaccess.write_bytes(b"RewriteEngine On\n# approved canonical redirects\n")
+    after = commit(root, "target")
+    return before, after
+
+
 def make_deletion_repository(root: Path) -> tuple[str, str]:
     (root / "HP").mkdir()
     (root / ".github" / "scripts").mkdir(parents=True)
@@ -256,8 +273,27 @@ def assert_workflow_contract() -> None:
     assert "--full-deploy" not in text
 
 
+def assert_htaccess_workflow_contract() -> None:
+    text = HTACCESS_WORKFLOW.read_text(encoding="utf-8")
+    required = (
+        "workflow_dispatch:",
+        "environment: candy-production",
+        "--allow-htaccess",
+        "DEPLOY-CANDY-HTACCESS",
+        "Deployment operation count: 1",
+        "Upload file count: 1",
+        "HP/.htaccess -> /public_html/group/candy/.htaccess",
+        "cancel-in-progress: false",
+    )
+    for marker in required:
+        assert marker in text, f"htaccess workflow contract is missing: {marker}"
+    assert "push:" not in text
+    assert "HP/index.php" not in text
+
+
 def main() -> None:
     assert_workflow_contract()
+    assert_htaccess_workflow_contract()
     assert_transactional_rollback()
     assert_deletion_only_and_empty_directory_cleanup()
     with tempfile.TemporaryDirectory() as temp_dir:
@@ -313,6 +349,74 @@ def main() -> None:
         mismatch = run([*base, "--dry-run"], root, succeeds=False)
         assert mismatch.returncode != 0
         assert "Checked-out HEAD" in mismatch.stderr
+
+    with tempfile.TemporaryDirectory() as temp_dir:
+        root = Path(temp_dir)
+        before, after = make_htaccess_repository(root)
+        script = root / ".github" / "scripts" / SCRIPT.name
+        base = [sys.executable, str(script), "--before", before, "--after", after]
+
+        default_preview = run([*base, "--dry-run"], root)
+        assert "Deployment operation count: 0" in default_preview.stdout
+        assert "HP/.htaccess" in default_preview.stdout
+
+        protected_base = [*base, "--allow-htaccess"]
+        protected_preview = run([*protected_base, "--dry-run"], root)
+        assert "Deployment operation count: 1" in protected_preview.stdout
+        assert "HP/.htaccess -> /public_html/group/candy/.htaccess" in protected_preview.stdout
+        token_match = re.search(r"PLAN_TOKEN: ([0-9a-f]{64})", protected_preview.stdout)
+        assert token_match
+
+        wrong_confirmation = run(
+            [
+                *protected_base,
+                "--verify-approval",
+                "--expected-file-count",
+                "1",
+                "--approved-plan-token",
+                token_match.group(1),
+                "--confirm-production",
+                CONFIRMATION,
+            ],
+            root,
+            succeeds=False,
+        )
+        assert wrong_confirmation.returncode != 0
+        assert "confirmation text" in wrong_confirmation.stderr
+
+        approved = run(
+            [
+                *protected_base,
+                "--verify-approval",
+                "--expected-file-count",
+                "1",
+                "--approved-plan-token",
+                token_match.group(1),
+                "--confirm-production",
+                HTACCESS_CONFIRMATION,
+            ],
+            root,
+        )
+        assert "APPROVAL CHECK: passed" in approved.stdout
+
+        (root / "HP" / "main.php").write_bytes(b"out of scope\n")
+        after_with_extra = commit(root, "out-of-scope HP change")
+        rejected = run(
+            [
+                sys.executable,
+                str(script),
+                "--before",
+                before,
+                "--after",
+                after_with_extra,
+                "--allow-htaccess",
+                "--dry-run",
+            ],
+            root,
+            succeeds=False,
+        )
+        assert rejected.returncode != 0
+        assert "exactly one modified HP/.htaccess" in rejected.stderr
 
 
     with tempfile.TemporaryDirectory() as temp_dir:

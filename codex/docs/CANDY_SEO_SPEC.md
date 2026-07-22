@@ -108,7 +108,8 @@ Current content pages use a structure containing `og:title`, `og:type`, `og:url`
 
 - Determine whether a public URL belongs in `sitemap.xml` according to the category specification.
 - Sitemap registration does not replace index and internal links.
-- Current `.htaccess` rules for HTTPS, www, and index removal are commented out. Do not treat them as an active redirect specification.
+- `HP/.htaccess` contains active rules that redirect HTTP, non-www, and explicit `index.php` or `index.html` URLs to the `https://www.55810.com` canonical form.
+- The normal Push-triggered production workflow keeps `.htaccess` protected. Production publication requires the dedicated manual `.htaccess` preview/deploy workflow, an exact one-file plan, and live redirect verification.
 - Creating or changing a legacy URL or redirect requires a separate task that verifies inbound traffic, canonical URLs, internal links, the sitemap, and production behavior.
 - Automated audits detect duplicate titles/canonicals, partial builds, different slugs, and same-content candidates. Do not infer the canonical URL.
 

@@ -21,12 +21,14 @@ ZERO_SHA = "0" * 40
 DEPLOYABLE_STATUSES = {"A", "M", "T"}
 BLOCKED_STATUSES = {"D", "R"}
 PROTECTED_PATHS = {"HP/index.php", "HP/.htaccess"}
+HTACCESS_PATH = "HP/.htaccess"
 BLOCKED_FILE_MARKERS = (".candy-backup-", ".candy-upload-")
 BLOCKED_FILE_NAMES = {".env"}
 BLOCKED_FILE_SUFFIXES = (".bak", ".backup", ".zip")
 MAX_DEPLOY_FILES = 125
 MAX_DEPLOY_TOTAL_BYTES = 50 * 1024 * 1024
 DEPLOY_CONFIRMATION = "DEPLOY-CANDY-PRODUCTION"
+HTACCESS_DEPLOY_CONFIRMATION = "DEPLOY-CANDY-HTACCESS"
 EXCLUDED_PREFIXES = (
     "HP/codex/",
     "HP/log/",
@@ -70,9 +72,9 @@ class DeleteTarget:
     staged: bool = False
 
 
-def is_excluded(path: str) -> bool:
+def is_excluded(path: str, *, allow_htaccess: bool = False) -> bool:
     if path in PROTECTED_PATHS:
-        return True
+        return not (allow_htaccess and path == HTACCESS_PATH)
     if path == "HP/AGENTS.md":
         return True
     lower_path = path.lower()
@@ -187,7 +189,9 @@ def collect_changes(before: str, after: str) -> list[Change]:
     return parse_diff_output(result.stdout)
 
 
-def classify_changes(changes: list[Change]) -> tuple[list[str], list[str], list[Change]]:
+def classify_changes(
+    changes: list[Change], *, allow_htaccess: bool = False
+) -> tuple[list[str], list[str], list[Change]]:
     deployable: list[str] = []
     excluded: list[str] = []
     blocked: list[Change] = []
@@ -197,13 +201,13 @@ def classify_changes(changes: list[Change]) -> tuple[list[str], list[str], list[
             validate_repository_path(change.old_path)
         if change.status == "R":
             blocked.append(change)
-            if not is_excluded(change.path):
+            if not is_excluded(change.path, allow_htaccess=allow_htaccess):
                 deployable.append(change.path)
             continue
         if change.status == "D":
             blocked.append(change)
             continue
-        if is_excluded(change.path):
+        if is_excluded(change.path, allow_htaccess=allow_htaccess):
             excluded.append(change.path)
             continue
         if change.status in DEPLOYABLE_STATUSES:
@@ -259,11 +263,11 @@ def current_head() -> str:
     return result.stdout.strip()
 
 
-def deletion_paths(blocked: list[Change]) -> list[str]:
+def deletion_paths(blocked: list[Change], *, allow_htaccess: bool = False) -> list[str]:
     paths: list[str] = []
     for change in blocked:
         path = change.old_path if change.status == "R" else change.path
-        if path is not None and not is_excluded(path):
+        if path is not None and not is_excluded(path, allow_htaccess=allow_htaccess):
             paths.append(path)
     return sorted(set(paths))
 
@@ -285,6 +289,7 @@ def validate_deploy_approval(
     actual_plan_token: str,
     confirmation: str | None,
     deleted: list[str] | None = None,
+    expected_confirmation: str = DEPLOY_CONFIRMATION,
 ) -> None:
     operation_count = len(deployable) + len(deleted or [])
     if operation_count == 0:
@@ -307,7 +312,7 @@ def validate_deploy_approval(
         )
     if approved_plan_token != actual_plan_token:
         raise RuntimeError("Approved plan token does not match the current deploy plan")
-    if confirmation != DEPLOY_CONFIRMATION:
+    if confirmation != expected_confirmation:
         raise RuntimeError("Production confirmation text is missing or incorrect")
 
 def sha256_bytes(data: bytes) -> str:
@@ -675,6 +680,8 @@ def deploy(paths: list[str], deleted_paths: list[str] | None = None) -> None:
 def self_test() -> None:
     assert is_excluded("HP/index.php")
     assert is_excluded("HP/.htaccess")
+    assert is_excluded("HP/index.php", allow_htaccess=True)
+    assert not is_excluded("HP/.htaccess", allow_htaccess=True)
     assert is_excluded("HP/img/.photo.jpg.candy-backup-123")
     assert is_excluded("HP/archive.zip")
     assert is_excluded("HP/.env")
@@ -702,6 +709,11 @@ def self_test() -> None:
     protected = parse_diff_output("M\tHP/index.php\nM\tHP/main.php\n")
     deployable, excluded, blocked = classify_changes(protected)
     assert deployable == ["HP/main.php"]
+    assert excluded == ["HP/index.php"]
+    assert blocked == []
+    htaccess = parse_diff_output("M\tHP/.htaccess\nM\tHP/index.php\n")
+    deployable, excluded, blocked = classify_changes(htaccess, allow_htaccess=True)
+    assert deployable == ["HP/.htaccess"]
     assert excluded == ["HP/index.php"]
     assert blocked == []
     unicode_path = parse_diff_output("M\tHP/Text_area_data/花尾町_テンプレート.txt\n")
@@ -749,6 +761,7 @@ def main() -> int:
     parser.add_argument("--confirm-production")
     parser.add_argument("--verify-approval", action="store_true")
     parser.add_argument("--lint-php", action="store_true")
+    parser.add_argument("--allow-htaccess", action="store_true")
     args = parser.parse_args()
 
     if args.self_test:
@@ -760,9 +773,25 @@ def main() -> int:
         raise RuntimeError("Checked-out HEAD does not match --after; refusing deployment")
 
     changes = collect_changes(args.before, args.after)
-    deployable, excluded, blocked = classify_changes(changes)
+    if args.allow_htaccess:
+        exact_change = [
+            change.status == "M"
+            and change.path == HTACCESS_PATH
+            and change.old_path is None
+            for change in changes
+        ]
+        if exact_change != [True]:
+            raise RuntimeError(
+                "The .htaccess exception requires exactly one modified HP/.htaccess file"
+            )
+    deployable, excluded, blocked = classify_changes(
+        changes, allow_htaccess=args.allow_htaccess
+    )
     print_plan(args.before, args.after, deployable, excluded, blocked)
-    deleted = deletion_paths(blocked)
+    deleted = deletion_paths(blocked, allow_htaccess=args.allow_htaccess)
+    expected_confirmation = (
+        HTACCESS_DEPLOY_CONFIRMATION if args.allow_htaccess else DEPLOY_CONFIRMATION
+    )
     actual_plan_token = plan_token(args.before, args.after, deployable, deleted)
     operation_count = len(deployable) + len(deleted)
     print(f"Deployment operation count: {operation_count}")
@@ -789,6 +818,7 @@ def main() -> int:
             actual_plan_token,
             args.confirm_production,
             deleted,
+            expected_confirmation,
         )
         print("APPROVAL CHECK: passed; FTP connection was not performed.")
         return 0
@@ -800,6 +830,7 @@ def main() -> int:
         actual_plan_token,
         args.confirm_production,
         deleted,
+        expected_confirmation,
     )
     deploy(deployable, deleted)
     return 0
