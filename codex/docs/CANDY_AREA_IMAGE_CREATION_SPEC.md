@@ -2,12 +2,16 @@
 
 - Purpose: Safely produce two regional images for an area page while matching the existing design
 - Status: conditional canonical document
-- Updated: 2026-07-16
+- Updated: 2026-07-22
 - Applies to: Image production for candy area pages
 
 ## 1. Priority and Rights Conditions
 
 This document defines composition, modification, naming, storage, and page integration. Follow `CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md` for image acceptance, slug reconciliation, duplication checks, and Git management.
+
+The project administrator's explicit instruction is the authority for a task-specific source, method, design exception, overwrite, integration, or publication decision within the instructed scope. When that decision has already been stated, do not stop or request the same decision again merely because this document contains a different default. Apply the instructed exception, record it in the work result, and update the canonical specification when the administrator has explicitly instructed a permanent rule change.
+
+External rights and license terms are not waived by project authority. A source requirement that can be satisfied, such as adding a required attribution line, MUST be implemented as part of the image instead of being treated as a blocker.
 
 Do not use generative AI. Use images that verify the actual region.
 
@@ -87,9 +91,9 @@ When using aerial or 3D display, adjust within the permitted usage conditions:
 - Direction
 - 3D tilt
 
-The final source capture MUST contain no place-name labels, road-name labels, route shields, facility or business labels, POI pins, category icons, selected-area boundaries, search-result outlines, search boxes, side panels, login controls, menus, layer controls, zoom controls, Street View controls, thumbnails, browser UI, or operating-system UI. Required logos, copyright notices, data-provider notices, and attribution MUST remain fully visible and readable.
+The final source capture MUST contain no place-name labels, road-name labels, route shields, facility or business labels, POI pins, category icons, selected-area boundaries, search-result outlines, search boxes, side panels, login controls, menus, layer controls, zoom controls, Street View controls, thumbnails, browser UI, or operating-system UI. Required logos, copyright notices, data-provider notices, and attribution MUST remain fully visible and readable. When a permitted source requires written attribution but does not render it in the clean capture, add the exact required attribution to the final image as compliance text under Section 8.
 
-Turn labels off through the source's supported controls. Frame out other prohibited UI before capture. Do not remove labels or UI through cloning, inpainting, blurring, generative editing, or a dark overlay. STOP when a clean capture cannot be obtained while preserving attribution.
+Turn labels off through the source's supported controls. Frame out other prohibited UI before capture. Do not remove labels or UI through cloning, inpainting, blurring, generative editing, or a dark overlay. STOP only when a clean capture cannot be obtained and the required attribution also cannot be preserved or added in the permitted compliance form.
 
 ## 5. First Image
 
@@ -131,7 +135,7 @@ Do not exclude:
 - Copyright notice
 - Aerial-imagery or map-data provider notice
 
-STOP when the existing design cannot be achieved while preserving required rights notices.
+STOP only when the existing design cannot be achieved while preserving embedded rights notices or adding the exact required compliance attribution under Section 8.
 
 ## 8. Fixed Text Template
 
@@ -179,7 +183,7 @@ for either image is prohibited. Before saving, record the exact renderer input
 and character count for both images and compare them byte for byte with the
 confirmed display value. Any one-character difference rejects the pair.
 
-Add only the white title and white subtitle. Do not add a black or translucent rectangle, dark band, gradient, vignette, background darkening, outline, stroke, halo, drop shadow, duplicated offset shadow text, glow, frame, badge, label, or text panel. When white text is not readable without one of these prohibited treatments, select a different clean source composition.
+Add only the white title and white subtitle as design copy. A legally or contractually required source-attribution line is compliance text and is expressly excluded from this design-copy restriction. When the source requires attribution that is not already embedded, add the smallest readable exact attribution in a corner, separate from the title and subtitle, without covering geographic content or changing the background. Do not add a black or translucent rectangle, dark band, gradient, vignette, background darkening, outline, stroke, halo, drop shadow, duplicated offset shadow text, glow, frame, badge, label, or text panel. When white title text is not readable without one of these prohibited treatments, select a different clean source composition.
 
 When a measured text template exists, prioritize it over visual matching.
 
@@ -243,7 +247,7 @@ For non-image page outputs and shared registrations, follow `CANDY_AREA_STAFF_PR
 ## 13. Completion Criteria
 
 - [ ] Storage, modification, and commercial-publication conditions for the image source are verified.
-- [ ] Required attribution is preserved.
+- [ ] Required attribution is preserved or added exactly as required by the permitted source.
 - [ ] The target region is correct.
 - [ ] The first image is a wider view.
 - [ ] The second image is slightly closer with a different angle or direction.
@@ -272,20 +276,22 @@ For non-image page outputs and shared registrations, follow `CANDY_AREA_STAFF_PR
 - The only proposed display spelling is derived from a slug, filename, URL, memory, or automatic transliteration.
 - Renderer title identity or character count cannot be verified.
 - Storage, modification, and commercial-publication conditions for the image source cannot be verified.
-- Required attribution cannot be preserved.
+- Required attribution cannot be preserved or added in the permitted compliance form.
 - Chrome cannot be operated.
 - Map, 3D, or aerial imagery cannot load.
 - A screenshot cannot be saved.
 - The image-modification tool cannot run.
 - Existing-image dimensions or text specification cannot be verified.
-- A clean label-free and control-free capture cannot be obtained while preserving attribution.
+- A clean label-free and control-free capture cannot be obtained and required attribution cannot be added separately in the permitted compliance form.
 - A second capture with both closer zoom and a clearly different heading or direction cannot be obtained.
 - White text requires a prohibited background or text effect to remain readable.
 - The fixed text coordinates cannot be met or cannot be verified numerically.
 - The destination cannot be confirmed.
 - Same-name overwrite eligibility cannot be decided.
 
-On STOP, report the stopped phase, verified items, unexecuted work, and required decision.
+Do not STOP solely because a permitted source requires an attribution line that is absent from its clean capture. Add the required compliance text under Section 8 and continue.
+
+Do not STOP or request duplicate approval for a task-specific decision that the project administrator has already stated explicitly. On a genuine unresolved STOP condition, report the stopped phase, verified items, unexecuted work, and exact decision still required.
 
 ## 15. Extension to Other Categories
 

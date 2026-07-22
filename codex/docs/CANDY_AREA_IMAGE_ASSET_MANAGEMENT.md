@@ -1,6 +1,6 @@
 # CANDY Area Image Asset Management
 
-- Updated: 2026-07-20
+- Updated: 2026-07-22
 - Target: Acceptance, reconciliation, public placement, and Git management of area-page images
 
 ## 1. Management Classes
@@ -92,16 +92,16 @@ Canonical pairs now exist independently for `dairyuucho`, `inusakocho`, `jonanch
 similar-slug candidates remain separate historical assets and are not the
 canonical pairs.
 
-## 5. Duplicate-Content Candidate
+## 5. Ishikidai Pair Status
 
-These two files have identical content:
+These two canonical files now contain distinct verified compositions:
 
 ```text
 kagoshima-deliveryhealth-area-ishikidai_1.jpg
 kagoshima-deliveryhealth-area-ishikidai_2.jpg
 ```
 
-It is unverified whether this duplication is intentional or the second image is missing. User confirmation is required before publishing a new page with the pair.
+The accepted-source pair and canonical public pair have matching same-name hashes. `_1` is the wider south-facing view and `_2` is the closer east-facing view. The pair is no longer a duplicate-content candidate.
 
 ## 6. Files Outside the Naming Standard
 
@@ -111,7 +111,9 @@ page image. Deletion or Git exclusion requires separate instruction.
 
 ## 7. Future Acceptance Procedure
 
-When a new area-page request lacks required `_1` and `_2` images, review `CANDY_AREA_IMAGE_CREATION_SPEC.md`. Produce images according to that specification only when storage, modification, commercial-publication, and required-attribution conditions for the source are verified. Otherwise STOP and request correctly named images or permission information from the user. Unauthorized reuse of existing images, dummy images, inferred image names, rights-unverified images, and publication without images are prohibited.
+When a new area-page request lacks required `_1` and `_2` images, review `CANDY_AREA_IMAGE_CREATION_SPEC.md`. Produce images when storage, modification, and commercial-publication conditions for the source are verified. Preserve embedded attribution or add the exact required attribution as compliance text when the permitted source requires it; a resolvable attribution requirement is not a STOP condition. STOP only when source rights remain unverified or prohibit the intended use. Unauthorized reuse of existing images, dummy images, inferred image names, rights-unverified images, and publication without images are prohibited.
+
+The project administrator's explicit task-specific decision authorizes the stated source, method, design exception, overwrite, integration, or publication scope. Do not request the same approval again or stop solely because a generic default differs from an already stated administrator decision.
 
 Do not report page production complete merely because images are available. When applying images to a new area page, follow `CANDY_AREA_PAGE_GENERATION_SPEC.md` and validate public PHP, source HTML, page-specific dataset PHP, case registration and link transformation in `dataset_base.php`, the area index and related internal links, and required `sitemap.xml` registration as one unit. If required links or registrations remain incomplete, do not report the page complete or publishable.
 

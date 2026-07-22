@@ -18,6 +18,10 @@ An image pair MUST NOT be shown to the user, installed, staged, committed, pushe
 
 There is no partial visual pass. One failed gate makes the pair `REJECTED`.
 
+The project administrator's explicit task-specific instruction controls source, method, design exceptions, overwrite, integration, and publication within the instructed scope. Do not stop or request duplicate approval for a decision the administrator has already stated. Generic defaults in this runbook are not an independent reason to block an administrator-approved exception.
+
+External rights and license terms still apply. Implement resolvable requirements, including a required attribution line, instead of stopping the task.
+
 ## 2. Required Inputs
 
 Confirm these values from current repository data or explicit user instruction:
@@ -99,7 +103,7 @@ MUST:
 - Search the full location in the form `鹿児島県鹿児島市<地域名>`.
 - Verify the displayed municipality and area name before capture.
 - Verify that visible geography matches the target area.
-- Preserve every legally required logo, copyright notice, provider notice, and attribution line.
+- Preserve every legally required logo, copyright notice, provider notice, and attribution line, or add the exact required attribution when the permitted source does not render it in the clean capture.
 
 MUST NOT:
 
@@ -108,7 +112,7 @@ MUST NOT:
 - Hide an incorrect location by cropping out location evidence.
 - remove, cover, crop, blur, or alter required attribution.
 
-If a permitted source cannot provide a clean view while preserving required attribution, STOP.
+If a permitted source provides a clean view but requires separate written attribution, add that attribution under Section 9 and continue. STOP only when the source use is prohibited or unverified, or when required attribution cannot be preserved or added in the permitted form.
 
 ## 5. Clean Map Mode Before Capture
 
@@ -121,7 +125,7 @@ Before each capture:
 3. Close or frame out the search panel and information panel.
 4. Frame out all map controls that are not legally required.
 5. Wait for all imagery tiles and buildings to finish rendering.
-6. Confirm that required attribution remains fully visible and readable.
+6. Confirm that required attribution remains fully visible and readable, or record the exact attribution that will be added as compliance text.
 
 The final background MUST NOT contain:
 
@@ -133,7 +137,7 @@ The final background MUST NOT contain:
 - Search boxes, side panels, login buttons, menus, layer buttons, zoom buttons, Street View controls, thumbnails, or other map UI.
 - Browser tabs, address bar, bookmarks bar, operating-system taskbar, notifications, or popups.
 
-Required source attribution is not a label or UI defect. It MUST remain visible.
+Required source attribution is not a label, design-copy addition, or UI defect. It MUST remain visible, whether embedded by the source or added as exact compliance text.
 
 If any prohibited label, marker, boundary, or control remains, the capture is `REJECTED`. Do not attempt to hide it with a dark overlay or text placement.
 
@@ -274,7 +278,7 @@ The title and subtitle MUST have:
 - No duplicated offset text used as a shadow.
 - No glow, frame, badge, label, or text panel.
 
-Only the white title and white subtitle may be added to the source image. The geographic background MUST remain unchanged except for permitted crop and resize.
+Only the white title and white subtitle may be added as design copy. A legally or contractually required source-attribution line is compliance text and MAY be added in the smallest readable form in a corner, separate from both fixed text lines. The geographic background MUST remain unchanged except for permitted crop and resize.
 
 If the white text is not readable without a forbidden treatment, choose a different clean capture with a more suitable center. Do not darken the image.
 
@@ -289,7 +293,7 @@ Every item MUST pass:
 | Correct area | Repository data and visible geography confirm the requested area |
 | Clean background | No place, road, facility, business, or POI labels |
 | No map clutter | No pins, icons, boundary outlines, search results, or map controls |
-| Attribution | Every required logo and attribution notice remains readable |
+| Attribution | Every required logo and attribution notice remains readable, including exact compliance text added when the source does not embed it |
 | Display-name authority | Exact authority is recorded and is not the slug alone |
 | Title identity | Both renderer inputs equal `EXPECTED_DISPLAY_NAME` byte for byte |
 | Title character count | Expected, `_1`, and `_2` ASCII character counts are identical |
@@ -399,7 +403,7 @@ STOP when:
 - Either rendered title string differs from `EXPECTED_DISPLAY_NAME` by one or more characters.
 - Source-image usage or attribution conditions are unverified.
 - A clean label-free and control-free source view cannot be captured.
-- Required attribution cannot be preserved.
+- Required attribution cannot be preserved or added in the permitted compliance form.
 - A second view with both closer zoom and different heading or direction cannot be captured.
 - White text cannot remain readable without a forbidden background or effect.
 - Same-name overwrite authorization is missing.
@@ -407,7 +411,9 @@ STOP when:
 - Unrelated changes are required.
 - Local validation, deployment, or production verification fails.
 
-Do not bypass a STOP condition by assumption, cropping, overlays, cloning, inpainting, or generative editing.
+Do not treat a resolvable attribution requirement as a STOP condition. Add the exact required compliance text and continue.
+
+Do not stop or request duplicate approval for a task-specific decision that the project administrator has already stated explicitly. Do not bypass a genuine STOP condition by assumption, cropping, overlays, cloning, inpainting, or generative editing.
 
 ## 16. Completion Report
 

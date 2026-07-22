@@ -2,13 +2,13 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-22T13:12:39+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-22T13:44:00+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 153a714c7c152c780592ce5b29a1a6afe749a7ca
+> Commit: 39008a2ce93fb7bbdd156961c9de6e0a7ea7835f
 > Scope: Public PHP, source files, datasets, shared PHP, CSS, JavaScript, images, videos, and fonts
 > Population: Public PHP files: 99 / assets: 490
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: Missing references: 20 / duplicate hash groups: 11
+> Result: Missing references: 20 / duplicate hash groups: 10
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
 
 ## Public PHP and Structure Files
@@ -369,7 +369,6 @@ These candidates have no confirmed static HTML or CSS reference. They may be ref
 | `11c401ffab12108eb3c491cfca8fd27c550e2b6ada1a09b952ea33109b536605` | HP/imgHtml/cdHr.png<br>HP/imgHtml/pc/cdHr.png |
 | `1adf420fbd88aaf88563e9833963a0116832d8c858315d50c3a182a5b5078691` | HP/imgHtml/cdTtlDiary.png<br>HP/imgHtml/pc/cdTtlDiary.png |
 | `2ea2ba07d7bb5df930c25231c4e1000bdba40ce0e4b9472ea39416992bbeb7ea` | HP/imgHtml/listShadow.png<br>HP/imgHtml/pc/listShadow.png |
-| `0afdb82e56fb3a26e812a36fae58e0b2ff1009f828c0db988202e770ecdf7ba2` | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-ishikidai_1.jpg<br>HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-ishikidai_2.jpg |
 
 ## Candidates That May Not Require Publication
 
