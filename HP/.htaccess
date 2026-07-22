@@ -9,13 +9,15 @@ RewriteEngine On
 
 # Keep detail-page URLs canonical while the top-page migration redirect remains separate.
 # Canonical scheme and host: https://www.55810.com
+RewriteCond %{HTTP_HOST} ^(?:www\.)?55810\.com$ [NC]
 RewriteCond %{HTTPS} !=on
 RewriteCond %{HTTP:X-Forwarded-Proto} !^https$ [NC]
 RewriteRule ^ https://www.55810.com%{REQUEST_URI} [R=301,L,NE]
 
-RewriteCond %{HTTP_HOST} !^www\.55810\.com$ [NC]
+RewriteCond %{HTTP_HOST} ^55810\.com$ [NC]
 RewriteRule ^ https://www.55810.com%{REQUEST_URI} [R=301,L,NE]
 
 # Remove an explicitly requested index.php/index.html from public URLs.
+RewriteCond %{HTTP_HOST} ^(?:www\.)?55810\.com$ [NC]
 RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.(?:php|html?)(?:[?\s]) [NC]
 RewriteRule ^(.*/)?index\.(?:php|html?)$ https://www.55810.com/$1 [R=301,L,NE]
