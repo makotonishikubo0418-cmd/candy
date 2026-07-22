@@ -1,9 +1,10 @@
 
 $(function () {
-	// ローディング
-	jQuery.event.add(window, "load", function () { // 全ての読み込み完了後に呼ばれる関数
-		$("#loading").fadeOut(600);
-	});
+	// 画像読み込みを開始してから、ページ本体をすぐ表示する
+	if (typeof WAimgLoadIni === "function") {
+		WAimgLoadIni();
+	}
+	$("#loading").hide();
 	const matchMedia = window.matchMedia('(max-width:768px)');
 
 	if (matchMedia.matches) {
@@ -196,6 +197,3 @@ $(function () {
 	}
 
 });
-
-// 画像読み込み
-addOnloadEvent(function () { WAimgLoadIni(); });
