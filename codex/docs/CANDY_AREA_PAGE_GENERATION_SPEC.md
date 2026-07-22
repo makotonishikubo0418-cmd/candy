@@ -381,19 +381,9 @@ sanwacho, shimofukumotocho, shimotatsuocho
 
 Each page retains 79 primary placeholders and both JSON-LD blocks have invalid syntax.
 
-### 14.2 Source HTML Without dataset_base Registration: 26
+### 14.2 Source HTML Without dataset_base Registration: 0
 
-```text
-ariyadacho, hananohikarigaoka, ikenouecho, inaricho,
-irisacho, ishidanicho, ishiki, ishikidai,
-izumicho, kajiyacho, kamoike, kamoikeshinmachi,
-kiireikemicho, kiiremaenohamacho, kiirenakamyocho,
-kiiresesekushicho, obaracho, ogawacho, okanoharacho,
-ono, oroshihonmachi, uearatacho, uenosonocho,
-uomicho, usuki, yakushi, yasuicho
-```
-
-The same 26 entries also lack HTML-to-PHP link transformations.
+All current area source HTML entries have one matching dataset-routing case and one HTML-to-PHP link transformation. Use the generated site-page ledger for the current population and exact per-page state.
 
 ### 14.3 Public PHP and Dataset PHP Without Source HTML: 0
 

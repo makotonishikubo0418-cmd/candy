@@ -16,6 +16,7 @@
 
 | Task ID | Codex | Period | Scope | Status |
 |---|---|---|---|---|
+| TASK-20260722-DATASET-BASE-REGISTRATION-001 | current | 2026-07-22 | Register the 24 area, six blog, and two hotel pages currently missing from `HP/includefile/dataset_base.php`; synchronize the directly affected category specifications and generated current-state documents; validate, Commit, Push, deploy through Actions, verify all 32 production URLs, and record completion | IN_PROGRESS |
 
 ## 3. Completed and Released Reservations
 

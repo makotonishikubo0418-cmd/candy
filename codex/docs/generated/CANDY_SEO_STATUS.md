@@ -2,9 +2,9 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-22T10:48:38+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-22T11:15:17+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: da893dea2feddf082bb9f2276e9d9b904efc773f
+> Commit: a66553e2b177f2231354fe3bed8e76eed9ff19d0
 > Scope: Source HTML corresponding to public PHP files directly under HP
 > Population: Pages: 99
 > Generator: `codex/scripts/candy_site_state.py`

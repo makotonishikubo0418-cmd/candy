@@ -326,6 +326,134 @@ switch ($hdir) {
 		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-inusakocho.php');
 		break;
 
+	case 'kagoshima-deliveryhealth-area-ariyadacho.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-ariyadacho.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-ikenouecho.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-ikenouecho.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-inaricho.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-inaricho.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-irisacho.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-irisacho.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-ishidanicho.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-ishidanicho.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-ishiki.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-ishiki.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-ishikidai.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-ishikidai.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-izumicho.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-izumicho.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-kajiyacho.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-kajiyacho.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-kamoike.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-kamoike.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-kamoikeshinmachi.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-kamoikeshinmachi.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-kiireikemicho.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-kiireikemicho.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-kiiremaenohamacho.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-kiiremaenohamacho.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-kiiresesekushicho.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-kiiresesekushicho.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-obaracho.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-obaracho.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-ogawacho.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-ogawacho.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-okanoharacho.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-okanoharacho.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-ono.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-ono.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-uearatacho.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-uearatacho.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-uenosonocho.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-uenosonocho.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-uomicho.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-uomicho.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-usuki.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-usuki.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-yakushi.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-yakushi.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-area-yasuicho.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-yasuicho.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-blog-glamourgirl.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-blog-glamourgirl.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-blog-petitegirl.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-blog-petitegirl.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-blog-poccharigirl.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-blog-poccharigirl.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-blog-shiroutogirl.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-blog-shiroutogirl.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-blog-slendergirl.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-blog-slendergirl.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-blog-tallbeautygirl.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-blog-tallbeautygirl.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-hotel-greenrichkagoshimatenmonkan.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-hotel-greenrichkagoshimatenmonkan.php');
+		break;
+
+	case 'kagoshima-deliveryhealth-hotel-hotelm.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-hotel-hotelm.php');
+		break;
+
 	case 'area.html':
 		include(INCLUDE_DIR . 'dataset_area.php');
 		break;
@@ -1197,6 +1325,38 @@ $source = str_replace('kagoshima-deliveryhealth-area-oroshihonmachi.html', 'kago
 $source = str_replace('kagoshima-deliveryhealth-area-kenohikarigaoka.html', 'kagoshima-deliveryhealth-area-kenohikarigaoka.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-area-kiirehitokuracho.html', 'kagoshima-deliveryhealth-area-kiirehitokuracho.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-area-inusakocho.html', 'kagoshima-deliveryhealth-area-inusakocho.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-ariyadacho.html', 'kagoshima-deliveryhealth-area-ariyadacho.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-ikenouecho.html', 'kagoshima-deliveryhealth-area-ikenouecho.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-inaricho.html', 'kagoshima-deliveryhealth-area-inaricho.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-irisacho.html', 'kagoshima-deliveryhealth-area-irisacho.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-ishidanicho.html', 'kagoshima-deliveryhealth-area-ishidanicho.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-ishiki.html', 'kagoshima-deliveryhealth-area-ishiki.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-ishikidai.html', 'kagoshima-deliveryhealth-area-ishikidai.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-izumicho.html', 'kagoshima-deliveryhealth-area-izumicho.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-kajiyacho.html', 'kagoshima-deliveryhealth-area-kajiyacho.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-kamoike.html', 'kagoshima-deliveryhealth-area-kamoike.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-kamoikeshinmachi.html', 'kagoshima-deliveryhealth-area-kamoikeshinmachi.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-kiireikemicho.html', 'kagoshima-deliveryhealth-area-kiireikemicho.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-kiiremaenohamacho.html', 'kagoshima-deliveryhealth-area-kiiremaenohamacho.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-kiiresesekushicho.html', 'kagoshima-deliveryhealth-area-kiiresesekushicho.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-obaracho.html', 'kagoshima-deliveryhealth-area-obaracho.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-ogawacho.html', 'kagoshima-deliveryhealth-area-ogawacho.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-okanoharacho.html', 'kagoshima-deliveryhealth-area-okanoharacho.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-ono.html', 'kagoshima-deliveryhealth-area-ono.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-uearatacho.html', 'kagoshima-deliveryhealth-area-uearatacho.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-uenosonocho.html', 'kagoshima-deliveryhealth-area-uenosonocho.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-uomicho.html', 'kagoshima-deliveryhealth-area-uomicho.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-usuki.html', 'kagoshima-deliveryhealth-area-usuki.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-yakushi.html', 'kagoshima-deliveryhealth-area-yakushi.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-area-yasuicho.html', 'kagoshima-deliveryhealth-area-yasuicho.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-blog-glamourgirl.html', 'kagoshima-deliveryhealth-blog-glamourgirl.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-blog-petitegirl.html', 'kagoshima-deliveryhealth-blog-petitegirl.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-blog-poccharigirl.html', 'kagoshima-deliveryhealth-blog-poccharigirl.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-blog-shiroutogirl.html', 'kagoshima-deliveryhealth-blog-shiroutogirl.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-blog-slendergirl.html', 'kagoshima-deliveryhealth-blog-slendergirl.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-blog-tallbeautygirl.html', 'kagoshima-deliveryhealth-blog-tallbeautygirl.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-hotel-greenrichkagoshimatenmonkan.html', 'kagoshima-deliveryhealth-hotel-greenrichkagoshimatenmonkan.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-hotel-hotelm.html', 'kagoshima-deliveryhealth-hotel-hotelm.php', $source);
 $source = str_replace('area.html', 'area.php', $source);
 $source = str_replace('hotel.html', 'hotel.php', $source);
 $source = str_replace('blog.html', 'blog.php', $source);

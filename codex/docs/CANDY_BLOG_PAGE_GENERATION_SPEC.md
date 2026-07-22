@@ -174,7 +174,7 @@ $source = str_replace(
 );
 ```
 
-Current `dataset_base.php` retains legacy-name cases and legacy dataset references without `blog-`, but none of the six current `kagoshima-deliveryhealth-blog-*` pages is registered. Default processing may display unregistered pages, but normal generation does not permit omitted registration.
+Current `dataset_base.php` retains legacy-name cases and legacy dataset references without `blog-`. Each of the six current `kagoshima-deliveryhealth-blog-*` pages also has one matching current-name case and link transformation. Normal generation does not permit omitted registration.
 
 ## 11. Generation Algorithm
 
@@ -203,7 +203,7 @@ Current `dataset_base.php` retains legacy-name cases and legacy dataset referenc
 - Do not fix FAQ, customer-comment, or normal-article counts to template defaults.
 - Use a complete page without source Text only as a structural reference.
 - Source Text under `Text_blog_data` refers to a nonexistent `Cursor用更新手順.txt`; that reference alone does not prove the procedure was reviewed.
-- None of the six current blog pages has current-name dataset_base registration.
+- All six current blog pages have current-name dataset_base case and link-transformation registration.
 - Only the slendergirl dataset PHP differs from the standard form.
 - Do not mix existing-exception fixes into new-page generation.
 - The `glamourgirl` summary heading retains a different topic name; do not copy its wording.

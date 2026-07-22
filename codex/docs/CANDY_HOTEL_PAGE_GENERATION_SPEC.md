@@ -141,8 +141,8 @@ Connection state of the three existing pages:
 
 | Slug | PHP | Source | Dataset | Two images | dataset_base | Hotel index | Sitemap | Notes |
 |---|---|---|---|---|---|---|---|---|
-| greenrichkagoshimatenmonkan | Present | Present | Present | Present | Unregistered | Unregistered | Registered | Handle in an existing-page fix task |
-| hotelm | Present | Present | Present | Present | Unregistered | Unregistered | Registered | Has legacy IDs. Keep separate from new production |
+| greenrichkagoshimatenmonkan | Present | Present | Present | Present | Registered | Registered | Registered | Existing registration is complete |
+| hotelm | Present | Present | Present | Present | Registered | Registered | Registered | Has legacy IDs. Keep separate from new production |
 | villacosta500 | Present | Present | Present | Present | Registered | Registered | Registered | Existing registration present |
 
 `HP/source/hotel.html` retains the placeholder link `kagoshima-deliveryhealth-hotel-aaaaaaaaaa.php`. Keep it separate from new production and handle it in an existing hotel-index fix task.
@@ -293,7 +293,7 @@ $source = str_replace(
 
 Register the target slug in the hotel index and sitemap.
 
-In current state, greenrich and hotelm have the three page files and sitemap entry but lack dataset_base and hotel-index registration. villacosta500 is registered. Keep these separate from new production and handle them in existing-page fix tasks.
+All three current hotel pages have the three page files plus dataset_base, hotel-index, and sitemap registration. Keep existing-page exceptions such as the Hotel M legacy IDs separate from new production.
 
 STOP new production when the target slug already exists in public PHP, source HTML, dataset PHP, dataset_base, the hotel index, or sitemap.
 
