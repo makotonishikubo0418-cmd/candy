@@ -39,6 +39,7 @@ Do not duplicate title, description, or H1 copy as fixed text in this document. 
 ## 5. Robots
 
 - Current representative top, area/hotel/blog index, and detail pages contain `<meta name="robots" content="index">`.
+- Direct verification URLs under `http://firststar.kir.jp/group/candy/` MUST remain accessible but MUST return `X-Robots-Tag: noindex`. The corresponding `https://www.55810.com/` public responses MUST NOT inherit this header.
 - Verify templates, special entry points, and dynamic pages individually.
 - Management scripts audit only the presence and value of robots; they do not rewrite it.
 - A change between index and noindex requires an impact statement for publication scope, canonical URLs, the sitemap, and internal links and requires explicit approval.
