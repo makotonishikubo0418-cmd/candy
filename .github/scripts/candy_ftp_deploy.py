@@ -722,7 +722,7 @@ def self_test() -> None:
     assert excluded == ["HP/Text_area_data/花尾町_テンプレート.txt"]
     assert blocked == []
     token = "a" * 64
-    validate_deploy_approval(["HP/main.php"], 1, token, token, DEPLOY_CONFIRMATION)
+    validate_deploy_approval(["HP/robots.txt"], 1, token, token, DEPLOY_CONFIRMATION)
     for invalid in (
         (None, token, DEPLOY_CONFIRMATION),
         (2, token, DEPLOY_CONFIRMATION),
@@ -730,7 +730,7 @@ def self_test() -> None:
         (1, token, "WRONG"),
     ):
         try:
-            validate_deploy_approval(["HP/main.php"], invalid[0], invalid[1], token, invalid[2])
+            validate_deploy_approval(["HP/robots.txt"], invalid[0], invalid[1], token, invalid[2])
         except RuntimeError:
             pass
         else:
