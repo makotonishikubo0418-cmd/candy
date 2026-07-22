@@ -7,6 +7,14 @@ ErrorDocument 404 /404.html
 
 RewriteEngine On
 
+# Keep the direct server URL available for verification without indexing it.
+RewriteCond %{HTTP_HOST} ^firststar\.kir\.jp(?::[0-9]+)?$ [NC]
+RewriteRule ^ - [E=CANDY_DIRECT_HOST:1]
+
+<IfModule mod_headers.c>
+    Header always set X-Robots-Tag "noindex" env=CANDY_DIRECT_HOST
+</IfModule>
+
 # Recover URLs cached from the temporary redirect that copied /group/candy/.
 RewriteCond %{HTTP_HOST} ^(?:www\.)?55810\.com$ [NC]
 RewriteRule ^group/candy/(.*)$ https://www.55810.com/$1 [R=301,L,NE]
