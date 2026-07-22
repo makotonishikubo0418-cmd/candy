@@ -112,7 +112,7 @@ page image. Deletion or Git exclusion requires separate instruction.
 
 ## 7. Future Acceptance Procedure
 
-When a new area-page request lacks required `_1` and `_2` images, review `CANDY_AREA_IMAGE_CREATION_SPEC.md`. Produce images when storage, modification, and commercial-publication conditions for the source are verified. Preserve embedded attribution or add the exact required attribution as compliance text when the permitted source requires it; a resolvable attribution requirement is not a STOP condition. STOP only when source rights remain unverified or prohibit the intended use. Unauthorized reuse of existing images, dummy images, inferred image names, rights-unverified images, and publication without images are prohibited.
+When a new area-page request lacks required `_1` and `_2` images, review `CANDY_AREA_IMAGE_CREATION_SPEC.md` and produce both images according to that specification. Reuse of unrelated existing images, dummy images, inferred image names, and publication without images are prohibited.
 
 The project administrator's explicit task-specific decision authorizes the stated source, method, design exception, overwrite, integration, or publication scope. Do not request the same approval again or stop solely because a generic default differs from an already stated administrator decision.
 

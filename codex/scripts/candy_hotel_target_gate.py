@@ -13,6 +13,7 @@ from datetime import datetime
 from pathlib import Path
 
 import candy_hotel_page
+import candy_hotel_text_migration
 import candy_page_common as common
 
 REPO_ROOT = common.REPO_ROOT
@@ -22,6 +23,7 @@ TEXT_ROOT = common.TEXT_HOTEL_DIR
 READY = "作成可能"
 IMAGE_MISSING = "画像なし"
 INPUT_ERROR = "入力不備"
+LEGACY_INPUT = "旧形式要変換"
 EXISTING = "作成済み/登録あり"
 INPUT_UNTRACKED = "入力未追跡"
 DUPLICATE_SLUG = "重複slug"
@@ -42,6 +44,7 @@ BLOCK_PARTIAL_BLOCK = "途中入力"
 BLOCK_BASIC_INFO = "基本情報不足"
 BLOCK_OTHER_INPUT = "その他入力不備"
 BLOCK_ADMIN = "管理用txt"
+BLOCK_LEGACY_FORMAT = "旧形式要変換"
 
 
 @dataclass(frozen=True)
@@ -180,6 +183,29 @@ def scan_inputs() -> list[Result]:
     for path in input_paths():
         if is_admin_doc(path):
             results.append(Result(path, ADMIN_DOC, ["hotel inputではない管理用txt"], [BLOCK_ADMIN]))
+            continue
+        text = read_text(path)
+        source_format = candy_hotel_text_migration.detect_source_format(text)
+        if candy_hotel_text_migration.is_legacy_format(source_format):
+            inspection = candy_hotel_text_migration.inspect_text(text, path)
+            reasons = [
+                f"legacy hotel Text format: {source_format}",
+                f'run legacy-check: candy-hotel.cmd legacy-check --input "{rel(path)}"',
+                *inspection.issues,
+            ]
+            blockers = [BLOCK_LEGACY_FORMAT]
+            for reason in inspection.issues:
+                blockers.extend(blockers_for_input_error(reason))
+            results.append(
+                Result(
+                    path,
+                    LEGACY_INPUT,
+                    reasons,
+                    sorted(set(blockers)),
+                    inspection.data.slug if inspection.data else "",
+                    inspection.data.hotel_name if inspection.data else "",
+                )
+            )
             continue
         try:
             parsed.append(candidate_from_path(path))
@@ -326,6 +352,43 @@ def command_check(args: argparse.Namespace) -> int:
     return 2
 
 
+def command_direct_check(args: argparse.Namespace) -> int:
+    path = (REPO_ROOT / args.input).resolve()
+    results = scan_inputs()
+    matches = [result for result in results if result.path.resolve() == path]
+    if not matches:
+        print("RESULT=STOP")
+        print("DIRECT_TEXT_STATUS=STOP")
+        print(f"REASON=input does not exist or is outside hotel inputs: {args.input}")
+        return 2
+    result = matches[0]
+    if result.category == READY:
+        print(f"DIRECT_TEXT_INPUT_OK={result.slug}")
+        print("DIRECT_TEXT_STATUS=READY_FOR_BUILD")
+        print(f"NEW_HOTEL_TARGET_OK={result.slug}")
+        print(f"HOTEL={result.hotel_name}")
+        print(f"INPUT={rel(result.path)}")
+        return 0
+    if result.category == IMAGE_MISSING and set(result.blockers) == {BLOCK_MISSING_IMAGE}:
+        print(f"DIRECT_TEXT_INPUT_OK={result.slug}")
+        print("DIRECT_TEXT_STATUS=READY_FOR_IMAGES")
+        print(f"HOTEL={result.hotel_name}")
+        print(f"INPUT={rel(result.path)}")
+        for reason in result.reasons:
+            print(f"IMAGE_REQUIREMENT={reason}")
+        return 0
+    print("RESULT=STOP")
+    print("DIRECT_TEXT_STATUS=STOP")
+    print(f"HOTEL={result.hotel_name}")
+    print(f"SLUG={result.slug}")
+    print(f"CATEGORY={result.category}")
+    for blocker in result.blockers:
+        print(f"BLOCKER={blocker}")
+    for reason in result.reasons:
+        print(f"REASON={reason}")
+    return 2
+
+
 def command_audit(args: argparse.Namespace) -> int:
     results = scan_inputs()
     print(f"TOTAL={len(results)}")
@@ -365,6 +428,8 @@ def main() -> int:
     sub.add_parser("target-next")
     check_parser = sub.add_parser("target-check")
     check_parser.add_argument("--input", required=True)
+    direct_check_parser = sub.add_parser("direct-check")
+    direct_check_parser.add_argument("--input", required=True)
     audit_parser = sub.add_parser("audit-inputs")
     audit_parser.add_argument("--write-report", action="store_true")
     sub.add_parser("audit-existing")
@@ -373,6 +438,8 @@ def main() -> int:
         return command_next(args)
     if args.command == "target-check":
         return command_check(args)
+    if args.command == "direct-check":
+        return command_direct_check(args)
     if args.command == "audit-inputs":
         return command_audit(args)
     if args.command == "audit-existing":

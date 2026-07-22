@@ -18,6 +18,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from urllib.parse import urlparse
 
+import candy_hotel_text_migration as hotel_text_migration
+
 from candy_page_common import (
     DOCS_DIR,
     HP_ROOT,
@@ -76,6 +78,7 @@ SOURCE_SCOPE = (
     "Text_area_data",
     "Text_blog_data",
     "Text_hotel_data",
+    "codex/scripts/candy_hotel_text_migration.py",
     "codex/scripts/candy_site_state.py",
 )
 STATE_FINGERPRINT_EXCLUDED_HP_PARTS = {
@@ -114,6 +117,7 @@ class TextRecord:
     slug: str
     required_missing: tuple[str, ...]
     image_refs: tuple[str, ...]
+    source_format: str
 
 
 def rel(path: Path) -> str:
@@ -180,7 +184,10 @@ def generation_base_head() -> tuple[str, str]:
 
 
 def state_fingerprint_paths() -> list[Path]:
-    paths: set[Path] = {Path(__file__).resolve()}
+    paths: set[Path] = {
+        Path(__file__).resolve(),
+        Path(hotel_text_migration.__file__).resolve(),
+    }
     for path in HP_ROOT.rglob("*"):
         if not path.is_file() or path.is_symlink():
             continue
@@ -249,6 +256,11 @@ def parse_text_records() -> list[TextRecord]:
             continue
         for path in sorted(root.rglob("*.txt"), key=lambda item: rel(item).casefold()):
             source = read_utf8(path)
+            source_format = (
+                hotel_text_migration.detect_source_format(source)
+                if category == "hotel"
+                else "NOT_APPLICABLE"
+            )
             canonical_match = CANONICAL_RE.search(source)
             canonical = canonical_match.group(0) if canonical_match else parse_labeled(source, "canonical")
             slug = ""
@@ -284,6 +296,7 @@ def parse_text_records() -> list[TextRecord]:
                     slug=slug,
                     required_missing=tuple(key for key, value in required.items() if not value),
                     image_refs=image_refs,
+                    source_format=source_format,
                 )
             )
     return records
@@ -642,6 +655,13 @@ def collect() -> dict[str, object]:
         slug = records[0].slug
         page = page_by_key.get((category, slug)) if slug else None
         duplicate = len(records) > 1
+        legacy_formats = sorted(
+            {
+                record.source_format
+                for record in records
+                if hotel_text_migration.is_legacy_format(record.source_format)
+            }
+        )
         missing = sorted(set(value for record in records for value in record.required_missing))
         referenced_images: set[str] = set()
         missing_images: set[str] = set()
@@ -672,6 +692,8 @@ def collect() -> dict[str, object]:
             blockers.append("Image status: " + image_state)
         if duplicate:
             blockers.append("Duplicate Text records for the same slug")
+        if legacy_formats:
+            blockers.append("Legacy hotel Text format: " + ",".join(legacy_formats))
         if page and page["structure"] in {"PARTIAL", "CONFLICT"}:
             blockers.append("Existing page structure: " + str(page["structure"]))
         if list_count and int(list_count) > 1:
@@ -686,7 +708,11 @@ def collect() -> dict[str, object]:
             next_action = "Resolve the duplicate or slug mapping"
         elif blockers:
             gate = "BLOCKED"
-            next_action = "Resolve missing data or the partial structure"
+            next_action = (
+                "Run legacy-check and resolve every migration issue"
+                if legacy_formats
+                else "Resolve missing data or the partial structure"
+            )
         else:
             gate = "READY"
             next_action = "Production may proceed under the category runbook"
@@ -825,7 +851,7 @@ def render_upcoming(data: dict[str, object]) -> str:
         "Text_area_data, Text_hotel_data, Text_blog_data, and current pages, images, indexes, and sitemap entries",
         f"Unique candidates: {len(rows)} / Text records: {len(data['texts'])}",
         " / ".join(f"{key}={gates[key]}" for key in ("READY", "BLOCKED", "EXISTING", "CONFLICT")),
-        "Text accuracy, image rights, Git tracking, and the owner's publication decision",
+        "Text accuracy, Git tracking, and the owner's publication decision",
     )
     lines += [
         "",

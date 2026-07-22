@@ -18,7 +18,7 @@ Apply it only to normal new-page generation. Do not apply it to development chan
 
 - Do not infer content absent from source data.
 - Do not force the template's block count onto the completed page.
-- Area pages render three to six verified nearby-area links from `codex/data/CANDY_AREA_RELATED_LINKS.json`, or omit the block when fewer than three suitable targets exist. Hotel pages continue to preserve eight template dummy links until their actual-link rules are configured.
+- Area pages render three to six verified nearby-area links from `codex/data/CANDY_AREA_RELATED_LINKS.json`, or omit the block when fewer than three suitable targets exist. Hotel pages render exactly three current indexable blog-detail links and three current indexable area-detail links selected deterministically by the generator.
 - Add or remove items, blocks, and sections according to available information.
 - After a structural change, synchronize IDs, table of contents, JSON-LD, links, and counts.
 - Treat public PHP, source HTML, dataset PHP, and dataset_base registration as one change unit.
@@ -209,7 +209,7 @@ Current area, blog, and hotel templates use `<meta name="robots" content="index"
 - Every generated target file exists.
 - Unauthorized placeholder count is zero.
 - The area nearby-link block exactly matches its canonical mapping, contains three to six links when present, and contains no dummy, self-link, duplicate, or incomplete target.
-- The hotel related-article region contains eight reserved dummy entries or actual links, and no reserved dummy is outside that region.
+- The hotel related-article region contains exactly three distinct blog-detail links and three distinct area-detail links, with no placeholder, self-link, duplicate, or missing public target.
 - No required item is empty.
 - Scene IDs have no duplicate or gap.
 - Subtitle and description IDs match parent scenes.

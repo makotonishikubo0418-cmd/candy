@@ -26,7 +26,7 @@ Do not duplicate title, description, or H1 copy as fixed text in this document. 
 - Each current public content page has one page-specific description.
 - A detail page prioritizes the source Text description. Do not add a service, region, price, or availability absent from the body.
 - An index description represents the index scope and content users can inspect; do not reuse one detail-page description.
-- Treat a duplicate, empty, placeholder, or body-inconsistent description as an issue in `CANDY_SEO_STATUS.md`. Do not fix it automatically.
+- Treat a duplicate, empty, placeholder, or body-inconsistent description as an issue in `generated/CANDY_SEO_STATUS.md`. Do not fix it automatically.
 
 ## 4. Canonical and URL
 
@@ -58,7 +58,7 @@ Current content pages use a structure containing `og:title`, `og:type`, `og:url`
 
 - `og:title` and `og:description` MUST match the meaning of title and description.
 - `og:url` MUST match the canonical URL.
-- `og:image` MUST be an absolute URL for an existing public image. Verify category-image naming, rights, and rendering.
+- `og:image` MUST be an absolute URL for an existing public image. Verify category-image naming and rendering.
 - Do not update OGP alone and leave the body, canonical URL, or image inconsistent.
 
 ## 8. JSON-LD

@@ -1,6 +1,6 @@
 # CANDY Hotel Page Generation Specification
 
-- Updated: 2026-07-16
+- Updated: 2026-07-23
 - Applies to: Normal new generation of CANDY hotel detail pages by Codex
 
 ## 1. Purpose and Scope
@@ -8,6 +8,15 @@
 This is the canonical specification for generating hotel pages from source Text without damage. Use it for normal new-page generation, not for bug fixes, existing-feature changes, common-processing changes, or refactoring.
 
 Apply `CANDY_PAGE_GENERATION_GOVERNANCE.md` first for common missing-input, variable-structure, and STOP rules.
+
+Select one source route before production:
+
+- `DIRECT_TEXT`: Staff already completed the production Text. Do not require Phase results. Start with `candy-hotel.cmd direct-check`, use the direct start in `CANDY_HOTEL_IMAGE_CREATION_SPEC.md` only when images are missing, and execute through `CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md`.
+- `PHASE_PREPARED`: Use `CANDY_HOTEL_CONTENT_PREPARATION_RUNBOOK.md` for Phases 1-3, `CANDY_HOTEL_IMAGE_CREATION_SPEC.md` for Phase 4, and `CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md` for Phase 5.
+
+Both routes converge on the same target Text, template, generator, target gate, validation, and publication implementation. Phase results are never page-content inputs.
+
+A legacy Text is not a third source route. It MUST pass `legacy-check` and the migration contract in `CANDY_HOTEL_TEXT_INPUT_CLASSIFICATION.md` before it can enter `DIRECT_TEXT`. Page generation accepts only the current Text format.
 
 ### 1.1 Responsibility and Page Structure
 
@@ -24,7 +33,7 @@ Apply `CANDY_PAGE_GENERATION_GOVERNANCE.md` first for common missing-input, vari
 - Hotel pages do not have a fixed scene count. Preserve source-data order for known sections and normal article blocks after the H1 introduction; number only visible H2 elements sequentially from scene1.
 - At least one shop is required. Normal articles, FAQs, fees, access, and nearby spots MAY have zero items; omit an optional section with zero items.
 - Display the legacy option zero or one time only when `option`, `option_subtitle`, and `option_description` are all complete. Do not include it in scene numbering.
-- Only the reserved related-article dummy entries have a fixed count of eight. Actual configured links MAY replace them with one or more links.
+- Related articles have one fixed generated count: three current indexable blog-detail links and three current indexable area-detail links.
 - Do not infer a value, image, URL, or hotel fact absent from source data. STOP on partial input instead of completing it.
 
 #### Page Structure
@@ -107,6 +116,7 @@ The Japanese labels below are exact website display concepts and are preserved.
 ## 2. Mandatory Rules
 
 - Use the target hotel text file under `Text_hotel_data` as source data.
+- Require the current Text format. STOP on `旧形式要変換`; do not normalize legacy labels or numbered blocks during page generation.
 - Use `HP/source/template_kagoshima-deliveryhealth-hotel.html` as the HTML template.
 - Treat public entry PHP, source HTML, page-specific dataset PHP, and `dataset_base.php` registration as one set.
 - Do not report completion after generating only HTML.
@@ -122,40 +132,28 @@ Standard production and publication runs only:
 codex\scripts\candy-hotel.cmd publish --input "Text_hotel_data/対象ホテル.txt"
 ```
 
-The dedicated tool runs generation, validation, target-limited staging, one Commit, one Push, Actions, production HTTP validation, and URL output in sequence.
-
-## 3. Current Hotel Actual-File Breakdown
-
-Hotel-related actual files were verified on 2026-07-16.
-
-| Target | Count | Notes |
-|---|---:|---|
-| Text files under `Text_hotel_data` | 74 | Includes one management text file |
-| Hotel source HTML | 3 | greenrich, hotelm, and villacosta500 |
-| Hotel public entry PHP | 3 | greenrich, hotelm, and villacosta500 |
-| Hotel page-specific dataset PHP | 3 | greenrich, hotelm, and villacosta500 |
-| Hotel images | 6 | Only for the three existing pages |
-| Eligible production inputs | 0 | Blocked by missing images, invalid input, existing state/registration, or untracked input |
-
-Connection state of the three existing pages:
-
-| Slug | PHP | Source | Dataset | Two images | dataset_base | Hotel index | Sitemap | Notes |
-|---|---|---|---|---|---|---|---|---|
-| greenrichkagoshimatenmonkan | Present | Present | Present | Present | Registered | Registered | Registered | Existing registration is complete |
-| hotelm | Present | Present | Present | Present | Registered | Registered | Registered | Has legacy IDs. Keep separate from new production |
-| villacosta500 | Present | Present | Present | Present | Registered | Registered | Registered | Existing registration present |
-
-`HP/source/hotel.html` retains the placeholder link `kagoshima-deliveryhealth-hotel-aaaaaaaaaa.php`. Keep it separate from new production and handle it in an existing hotel-index fix task.
-
-Recheck existing hotel connection state with:
+Direct staff-completed Text preflight:
 
 ```powershell
+codex\scripts\candy-hotel.cmd legacy-check --input "Text_hotel_data/対象ホテル.txt"
+codex\scripts\candy-hotel.cmd direct-check --input "Text_hotel_data/対象ホテル.txt"
+```
+
+Only `DIRECT_TEXT_STATUS=READY_FOR_IMAGES` may enter direct image creation. Only `DIRECT_TEXT_STATUS=READY_FOR_BUILD` may continue to the common target gate and page generation.
+
+The dedicated tool runs generation, validation, target-limited staging, one Commit, one Push, Actions, production HTTP validation, and URL output in sequence.
+
+## 3. Current-State Source
+
+Do not store hotel input, image, page, registration, or eligibility counts in this stable specification. Use actual files, `generated/CANDY_UPCOMING_PAGES.md`, and the dedicated commands:
+
+```powershell
+codex\scripts\candy-hotel.cmd audit-inputs
 codex\scripts\candy-hotel.cmd audit-existing
+codex\scripts\candy-hotel.cmd target-next
 ```
 
 Inspect input classification through `BLOCKER_COUNTS_JSON` and do not hide simultaneous blockers such as missing images and untracked input.
-
-This breakdown is not a fixed template for new hotel production. Complete blocks in the target text file are authoritative.
 
 ## 4. Required File Set
 
@@ -186,7 +184,7 @@ Determine the slug by reconciling canonical in source data, image names, hotel n
 | Fee information | Fee table and optional supplemental copy | Zero or more |
 | Access information | Map, map title, subtitle, and description | Zero or one |
 | Nearby spots | Multiple items and optional warning copy | Zero or more |
-| Related articles | Reserved dummies | Exactly eight |
+| Related articles | Deterministic public links | Exactly six: three blog details and three area details |
 
 Do not add unnecessary visible line breaks when source data does not specify them.
 
@@ -199,7 +197,7 @@ Required:
 - SEO, OGP, img_1, img_2, and H1 introduction
 - Hotel name, official URL, and address
 - At least one shop present in `template_shop.html`
-- Eight related-article dummies
+- Six deterministic related-article links: three blog details and three area details
 
 Optional:
 
@@ -323,18 +321,20 @@ hotelm has no FAQ, three fee rows, and three nearby spots. IDs are scene1, scene
 
 ### 13.2 Source Text Contains Placeholders
 
-The villacosta500 source Text retains placeholders for slug, images, URLs, and related values. Existing complete HTML is complete, but do not reuse the source Text directly for new generation.
+The villacosta500 source Text uses the legacy numbered structure and retains placeholders for slug, images, URLs, and related values. Existing complete HTML is complete, but do not reuse or convert the source Text until `legacy-check` reports no unresolved issue.
 
-### 13.3 Legacy Update-Procedure Text
+### 13.3 Retired Update-Procedure Text
 
-The former `Text_hotel_data/Cursor用更新手順.txt` is not an active canonical document and is absent from the current working tree. Do not restore or route work through it. This specification and the hotel staff runbook are authoritative; use complete blocks in the target Text for counts.
+The former `Text_hotel_data/Cursor用更新手順.txt` was retired from the production-input directory after its applicable rules were reconciled into the canonical hotel documents. Do not restore or route work through it. Use `CANDY_HOTEL_CONTENT_PREPARATION_RUNBOOK.md`, this specification, the hotel image specification, and the hotel staff runbook.
 
-### 13.4 Complete Page Without Source Text
+### 13.4 Legacy Hotel M Source Text
 
-hotelm has no source Text. It MAY be used as a structural reference, but not as the basis for generated content.
+`Text_hotel_data/Hotel M（旧レクサス）.txt` exists, but it uses legacy metadata, generic photo labels, and numbered scenes and contains unresolved required values and ambiguous image blocks. It is not current production input. Use `legacy-check` to identify exact shortages; do not fill them from the existing page automatically.
 
 ## 14. Completion Criteria
 
+- [ ] `SOURCE_ROUTE` is exactly `DIRECT_TEXT` or `PHASE_PREPARED`, and evidence from the other route was not required.
+- [ ] The source is current format; any legacy source passed conversion and current-parser validation before `direct-check`.
 - [ ] Source Text, hotel name, slug, and canonical are confirmed.
 - [ ] Missing-input handling is determined.
 - [ ] Rows, FAQs, and sections were added or removed according to information quantity.
@@ -344,7 +344,7 @@ hotelm has no source Text. It MAY be used as a structural reference, but not as 
 - [ ] Placeholder count is zero.
 - [ ] No heading or additional copy from a complete normal scene is missing.
 - [ ] Scene, FAQ, and nearby-spot numbering is correct.
-- [ ] Exactly eight reserved related-article dummies exist and none is outside the reserved region.
+- [ ] Exactly three distinct current indexable blog-detail links and three distinct current indexable area-detail links exist, with no placeholder, self-link, duplicate, or missing target.
 - [ ] Travel time and transportation fees prioritize Text and use map coordinates and nearby complete area pages only when Text omits them.
 - [ ] Visible FAQ matches FAQPage JSON-LD.
 - [ ] FAQPage JSON-LD is absent when no FAQ exists.

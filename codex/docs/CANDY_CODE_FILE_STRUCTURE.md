@@ -87,16 +87,26 @@ The `<script>` elements in source HTML are the canonical loading source. Before 
 | `HP/movie/` | Public movies and related assets. Deletion or replacement requires approval |
 | `HP/font/` and related locations | Fonts referenced from CSS |
 | `Text_area_data/画像データ/` | Git-managed accepted or candidate source assets before production. Do not treat them as public assets; public HTML uses the copied files under `HP/imgHtml/new_202601/area/` |
+| `Text_hotel_data/画像データ/` | Git-managed accepted hotel-image source pairs. Public HTML never references this folder; local/public page assets use matching copies under `HP/imgHtml/new_202601/hotel/` |
 
 For detail-page images, use the category specification's naming and required count, then synchronize source, OGP, JSON-LD, and alt values. The generated inventory identifies missing, unconfirmed-reference, and same-hash candidates, but machine evaluation alone MUST NOT trigger deletion or replacement.
 
-Before deletion or replacement, verify HTML, CSS, dynamic PHP/JavaScript references, database references, desktop/mobile display, OGP/JSON-LD, accepted-asset rights, and recovery methods.
+Hotel-image acceptance and public installation use `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`. Accepted and local-public same-name files have separate storage responsibilities and MUST have identical SHA-256 values after first installation. A public hotel pair without an accepted-source counterpart remains `LEGACY_PUBLIC_ONLY` and MUST NOT be backfilled or replaced automatically.
+
+Before deletion or replacement, verify HTML, CSS, dynamic PHP/JavaScript references, database references, desktop/mobile display, OGP/JSON-LD, and recovery methods.
 
 Existing public area-image replacements also pass `.github/scripts/candy_area_image_replacement_guard.py`. The guard compares the Git base and target, checks the accepted/public pair and hash-based content-version references, and is called automatically by the protected production deployment before its FTP plan.
 
 `codex/scripts/candy_area_image_replace.py`, routed through `codex\scripts\candy-area.cmd replace-images`, is the canonical one-command editor for an approved existing area-image pair. It updates the accepted pair, public pair, and every controlled hash-version reference as one rollback-capable transaction, then invokes the replacement guard.
 
 ## 6. Current State and Validation
+
+Hotel Text preparation tools:
+
+| Tool | Responsibility |
+|---|---|
+| `codex/scripts/candy_hotel_text_migration.py` | Detect legacy hotel Text formats, normalize only explicit source values, reject ambiguity or shortage, and validate the result with the current hotel parser before creating or replacing a Text |
+| `codex/scripts/candy_hotel_target_gate.py` | Classify current and legacy hotel inputs, aggregate blockers, and allow only eligible new-page targets into production |
 
 ```powershell
 codex\scripts\candy-site-state.cmd audit

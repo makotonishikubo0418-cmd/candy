@@ -1,6 +1,6 @@
 # CANDY Area Staff Production Runbook
 
-- Updated: 2026-07-14
+- Updated: 2026-07-22
 - Applies to: Normal production of one area page
 - Start condition: Explicit instruction to produce or publish an area page
 - Completion criteria: Dedicated validation succeeds and the authorized local or publication scope completes
@@ -26,7 +26,7 @@ codex\scripts\candy-area.cmd build --input "Text_area_data/対象.txt"
 codex\scripts\candy-area.cmd check --input "Text_area_data/対象.txt"
 ```
 
-When required images are absent, read `CANDY_AREA_IMAGE_CREATION_SPEC.md` before running these commands. Produce images only when storage, modification, commercial-publication, and attribution conditions for their source are verified. Otherwise STOP and do not proceed to page generation or publication.
+When required images are absent, read `CANDY_AREA_IMAGE_CREATION_SPEC.md` and create and validate both images before running these commands. Do not proceed to page generation or publication while either required image is missing.
 
 Run these commands only when investigating exceptions across the full input population:
 

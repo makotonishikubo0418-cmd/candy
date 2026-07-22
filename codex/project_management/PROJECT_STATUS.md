@@ -2,7 +2,7 @@
 
 - Purpose: Provide one location for the overall plan, current state, problems, and next work
 - Status: canonical document
-- Updated: 2026-07-19
+- Updated: 2026-07-23
 
 ## 1. Current State
 
@@ -17,6 +17,7 @@
 | Actual site | `HP/` | Public PHP, source, includefile, CSS, JavaScript, images, movies, and logs |
 | Production inputs | `Text_area_data/`, `Text_blog_data/`, and `Text_hotel_data/` | Source data not published directly to HP |
 | Accepted area images | `Text_area_data/画像データ/` | Git-managed local source assets used before public placement |
+| Accepted hotel images | `Text_hotel_data/画像データ/` | Git-managed accepted source pairs; the directory may remain absent until the first accepted pair |
 | NAS | `\\192.168.1.3\disk1\FSG_SEO\candy` | Storage-only for backups. Git operations are prohibited |
 
 ## 2. Completed Management Foundation
@@ -26,6 +27,7 @@
 - Current page, production-candidate, code/asset, and SEO state can be regenerated into four documents with `candy-site-state`.
 - `audit`, `preview`, `write`, `check`, and `check --target` are implemented as the standard entry points.
 - The pre-stage gate regenerates and validates the generated documents after area, hotel, and blog changes.
+- Hotel production now separates staff-completed Text from Phase-prepared Text, validates legacy formats before conversion, and manages accepted/public image pairs through one canonical lifecycle specification.
 - Legacy documents that no longer receive updates are physically isolated in NAS `Backup/` and removed from the normal work route.
 
 ## 3. Current Problems and Remaining Work
@@ -36,7 +38,7 @@
 | Machine-detected page-structure, Text-candidate, SEO, and asset issues | `codex/docs/generated/` | Regenerate after actual-file changes. Detection alone MUST NOT trigger automatic fixes or deletion |
 | Issues requiring specification or owner decisions | `codex/docs/CANDY_FIX_BACKLOG.md` | Handle in a separate task after an explicit decision for the target |
 | Area production order | `CANDY_AREA_105_PAGE_QUEUE.md` and generated upcoming pages | Handle only one target that passes the target gate |
-| Hotel input and production order | Hotel classification and generated upcoming pages | Resolve image, input, and existing-registration blockers first |
+| Hotel input and production order | Hotel classification, hotel content/image runbooks, and generated upcoming pages | Run `legacy-check` for a legacy Text, use `direct-check` for a staff-completed current Text, and keep Phase preparation independent; resolve the reported image, input, and existing-registration blockers before production |
 | Existing blog exceptions | Blog specification and generated ledger/SEO status | Keep separate from new production and use a dedicated fix task |
 
 ## 4. Git and Production
@@ -49,9 +51,9 @@
 ## 5. Candidate Next Actions
 
 1. For further repository-wide SEO remediation, treat `CANDY_REPOSITORY_SEO_AUDIT_2026-07-18.md` as a dated snapshot, recheck each finding against the generated current state, and skip the completed area-placeholder, obsolete-contact, category-index, internal-link, sitemap, and public-wrapper runtime-path work recorded in `TASK_LOG.md`.
-2. Resolve category-specific blockers in `generated/CANDY_UPCOMING_PAGES.md`, then use the dedicated target gate to select an eligible production target.
-3. Handle issues explicitly selected by the owner from `generated/CANDY_SEO_STATUS.md` and `CANDY_FIX_BACKLOG.md` in separate tasks.
-4. For missing, unconfirmed-reference, and duplicate candidates in `generated/CANDY_CODE_ASSET_INVENTORY.md`, verify dynamic references and recovery methods before requesting target-specific deletion approval.
+2. Resolve category-specific blockers in `codex/docs/generated/CANDY_UPCOMING_PAGES.md`, then use the dedicated target gate to select an eligible production target.
+3. Handle issues explicitly selected by the owner from `codex/docs/generated/CANDY_SEO_STATUS.md` and `CANDY_FIX_BACKLOG.md` in separate tasks.
+4. For missing, unconfirmed-reference, and duplicate candidates in `codex/docs/generated/CANDY_CODE_ASSET_INVENTORY.md`, verify dynamic references and recovery methods before requesting target-specific deletion approval.
 5. For future GitHub synchronization tasks, freeze the target list and obtain explicit instruction before Commit and Push.
 
 ## 6. Update Rules

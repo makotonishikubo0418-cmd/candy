@@ -112,6 +112,23 @@ Codex MUST read only the files required for the current task.
 
   Read the creation documents only when the replacement images still require creation, material editing, or pre-acceptance validation. Read `codex/docs/CANDY_PRODUCTION_MIGRATION_MASTER.md` only when a deployment exception, failure recovery, rollback, workflow change, deletion, rename, or manual server operation is required.
 
+- Legacy hotel Text inspection or conversion to the current input format:
+  `HP/AGENTS.md`
+  `codex/docs/CANDY_HOTEL_TEXT_INPUT_CLASSIFICATION.md`
+  The exact target Text under `Text_hotel_data/`
+
+- Production from a staff-completed hotel Text:
+  `HP/AGENTS.md`
+  `codex/docs/CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md`
+  The exact target Text under `Text_hotel_data/`
+
+  Read `codex/docs/CANDY_HOTEL_IMAGE_CREATION_SPEC.md` and `codex/docs/CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md` only when the direct-Text preflight returns `READY_FOR_IMAGES`.
+
+- Hotel identity research, access research, or Phase content preparation:
+  `HP/AGENTS.md`
+  `codex/docs/CANDY_HOTEL_CONTENT_PREPARATION_RUNBOOK.md`
+  The exact target Text under `Text_hotel_data/`
+
 - Normal hotel-page production or publication:
   `HP/AGENTS.md`
   `codex/docs/CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md`
@@ -130,11 +147,20 @@ Codex MUST read only the files required for the current task.
   `codex/docs/generated/CANDY_UPCOMING_PAGES.md`
   `codex/docs/CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md`
 
-- Hotel-image creation, modification, or validation:
+- Hotel-image creation, material modification, or pre-acceptance validation:
   `HP/AGENTS.md`
   `codex/docs/CANDY_HOTEL_IMAGE_CREATION_SPEC.md`
+  `codex/docs/CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`
   The target hotel input Text file
   The actual target hotel image files
+
+- Hotel-image acceptance, storage, local public installation, replacement, or publication-state management:
+  `HP/AGENTS.md`
+  `codex/docs/CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`
+  The target hotel input Text file
+  The exact accepted-source and local-public image files
+
+  Read `codex/docs/CANDY_HOTEL_IMAGE_CREATION_SPEC.md` only when creation, material modification, or visual pre-acceptance validation remains required. Read `codex/docs/CANDY_PRODUCTION_MIGRATION_MASTER.md` when existing same-name public bytes will be replaced or production deployment, recovery, or rollback is included.
 
 - Normal blog-page production:
   `HP/AGENTS.md`

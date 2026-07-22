@@ -37,7 +37,7 @@ At the start of work, run `git fetch origin` and `git status --short --branch`. 
 | `HP/` | The actual public site tree. `includefile`, `log`, and `movie` are also HP data |
 | `Text_area_data/` | Area-page production inputs. Accepted area images are stored in the Git-managed local `Text_area_data/画像データ/` directory |
 | `Text_blog_data/` | Blog-page production inputs |
-| `Text_hotel_data/` | Hotel-page production inputs |
+| `Text_hotel_data/` | Hotel-page production inputs. Accepted hotel-image source pairs are stored under the Git-managed local `Text_hotel_data/画像データ/` directory and are never referenced directly by public HTML |
 | NAS `Backup/` | Stores backups, isolated files, and legacy materials outside Git. Do not run Git operations on the NAS |
 
 ## 4. Canonical Document Index
@@ -65,6 +65,11 @@ At the start of work, run `git fetch origin` and `git status --short --branch`. 
 | Multi-Codex coordination | `AGENTS.md` → `codex/README.md` → `codex/project_management/TASK_RESERVATIONS.md` → `codex/project_management/CODEX_COMMUNICATION.md` |
 | Overall status review | `AGENTS.md` → `codex/README.md` → `codex/project_management/PROJECT_STATUS.md` |
 | HP page production | `AGENTS.md` → `codex/README.md` → `HP/AGENTS.md` → applicable runbook |
+| Legacy hotel Text inspection or conversion | `AGENTS.md` → `codex/README.md` → `HP/AGENTS.md` → `codex/docs/CANDY_HOTEL_TEXT_INPUT_CLASSIFICATION.md` → exact target Text |
+| Hotel production from a staff-completed Text | `AGENTS.md` → `codex/README.md` → `HP/AGENTS.md` → `codex/docs/CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md` → exact target Text → `CANDY_HOTEL_IMAGE_CREATION_SPEC.md` and `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md` only when `direct-check` returns `READY_FOR_IMAGES` |
+| Hotel identity, access, and content preparation through the Phase route | `AGENTS.md` → `codex/README.md` → `HP/AGENTS.md` → `codex/docs/CANDY_HOTEL_CONTENT_PREPARATION_RUNBOOK.md` → exact target Text |
+| Hotel-image creation and pre-acceptance validation | `AGENTS.md` → `HP/AGENTS.md` → `CANDY_HOTEL_IMAGE_CREATION_SPEC.md` → `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md` → exact target Text and image pair |
+| Hotel-image acceptance, storage, first local public installation, and publication-state management | `AGENTS.md` → `HP/AGENTS.md` → `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md` → exact target Text → accepted/public pair; use `CANDY_PRODUCTION_MIGRATION_MASTER.md` for existing same-name replacement or production recovery |
 | HP management-document update | `AGENTS.md` → `codex/README.md` → `HP/AGENTS.md` → `codex/docs/CANDY_MASTER_DOC_INDEX.md` |
 | Current site-wide state | `CANDY_MASTER_DOC_INDEX.md` → `generated/CANDY_SITE_PAGE_LEDGER.md` |
 | Unbuilt pages and production candidates | `CANDY_MASTER_DOC_INDEX.md` → `generated/CANDY_UPCOMING_PAGES.md` → category queue/classification |

@@ -29,10 +29,14 @@ Do not mix stable specifications with current state. Regenerate `generated/` to 
 | Area-image creation and pre-acceptance validation | `CANDY_AREA_IMAGE_CREATION_RUNBOOK.md` → `CANDY_AREA_IMAGE_CREATION_SPEC.md` → `CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md` |
 | Existing approved area-image replacement | `CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md`; use only the conditional exception routes named there |
 | Area production order | `CANDY_AREA_105_PAGE_QUEUE.md` and `generated/CANDY_UPCOMING_PAGES.md` |
+| Legacy hotel Text inspection or conversion | `CANDY_HOTEL_TEXT_INPUT_CLASSIFICATION.md` and the exact target Text |
+| Production from a staff-completed hotel Text | `CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md` and the exact target Text; use `CANDY_HOTEL_IMAGE_CREATION_SPEC.md` and `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md` only when `direct-check` returns `READY_FOR_IMAGES` |
+| Hotel identity, access, copy, FAQ, SEO-input, shop, and nearby-spot preparation through the Phase route | `CANDY_HOTEL_CONTENT_PREPARATION_RUNBOOK.md` and the exact target Text |
 | Normal hotel production and publication | `CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md` |
 | Hotel structure or unknown exception | `CANDY_PAGE_GENERATION_GOVERNANCE.md` and `CANDY_HOTEL_PAGE_GENERATION_SPEC.md` |
 | Hotel-input classification and production order | `CANDY_HOTEL_TEXT_INPUT_CLASSIFICATION.md` and `generated/CANDY_UPCOMING_PAGES.md` |
-| Hotel images | `CANDY_HOTEL_IMAGE_CREATION_SPEC.md` |
+| Hotel-image creation and pre-acceptance validation | `CANDY_HOTEL_IMAGE_CREATION_SPEC.md` → `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md` |
+| Hotel-image acceptance, accepted-source storage, first local public installation, replacement, and publication state | `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`; use `CANDY_PRODUCTION_MIGRATION_MASTER.md` for existing same-name replacement, production deployment exceptions, recovery, or rollback |
 | Normal blog production or unknown exception | `CANDY_PAGE_GENERATION_GOVERNANCE.md` and `CANDY_BLOG_PAGE_GENERATION_SPEC.md` |
 | Pages outside area, hotel, and blog | `CANDY_OTHER_PAGES_MANAGEMENT.md` and `CANDY_OPERATION_BASICS.md` |
 

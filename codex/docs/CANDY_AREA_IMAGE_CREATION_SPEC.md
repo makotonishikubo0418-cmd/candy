@@ -1,30 +1,17 @@
 # CANDY Area Image Creation Specification
 
 - Purpose: Safely produce two regional images for an area page while matching the existing design
-- Status: conditional canonical document
+- Status: canonical document
 - Updated: 2026-07-22
 - Applies to: Image production for candy area pages
 
-## 1. Priority and Rights Conditions
+## 1. Priority and Scope
 
 This document defines composition, modification, naming, storage, and first installation. Follow `CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md` for image acceptance, slug reconciliation, duplication checks, and Git management. After an approved pair is ready to replace existing same-name public images, leave this creation specification and use only `CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md` for the replacement phase.
 
 The project administrator's explicit instruction is the authority for a task-specific source, method, design exception, overwrite, integration, or publication decision within the instructed scope. When that decision has already been stated, do not stop or request the same decision again merely because this document contains a different default. Apply the instructed exception, record it in the work result, and update the canonical specification when the administrator has explicitly instructed a permanent rule change.
 
-External rights and license terms are not waived by project authority. A source requirement that can be satisfied, such as adding a required attribution line, MUST be implemented as part of the image instead of being treated as a blocker.
-
 Do not use generative AI. Use images that verify the actual region.
-
-Before using Google Maps, Google Earth, aerial photography, map tiles, or third-party photographs, verify that storage, modification, and commercial publication are permitted for the intended use. Do not remove, hide, or alter attribution, Google logos, copyright notices, or data-provider notices.
-
-Current Google guidance requires appropriate attribution when publishing Google Maps content and restricts commercial or promotional use of Google Maps satellite imagery on the web. Until individual permission or applicable usage terms are verified, do not create, save, integrate, or publish a Google Maps screenshot as a public image.
-
-Verification sources:
-
-- `https://about.google/brand-resource-center/products-and-services/geo-guidelines/`
-- `https://www.google.com/help/terms_maps/`
-
-When the user specifies an alternate image source with verified rights, apply this document's composition, modification, naming, storage, and integration procedure.
 
 ## 2. Deliverables
 
@@ -50,7 +37,7 @@ When producing page data and images in the same task, confirm first:
 - Romanized region name used for display
 - Authority for the exact displayed Romanization
 - Lowercase slug matching canonical
-- Image source and usage conditions
+- Image source
 - Public destination
 - Source HTML reference
 - Same-name file existence
@@ -77,13 +64,13 @@ preserved.
 
 Connect the Codex app and Chrome extension so Codex can operate the normal Chrome session. Do not include credentials, personal information, notifications, or other-tab content in the deliverable.
 
-Only when rights conditions for Google Maps use are verified, enter this exact search form:
+Enter this exact search form:
 
 `鹿児島県鹿児島市［地域名］`
 
 Verify that the result matches the target region. When the same name in another municipality appears, add the address required to identify it uniquely.
 
-When using aerial or 3D display, adjust within the permitted usage conditions:
+When using aerial or 3D display, adjust:
 
 - Zoom
 - Center
@@ -91,9 +78,9 @@ When using aerial or 3D display, adjust within the permitted usage conditions:
 - Direction
 - 3D tilt
 
-The final source capture MUST contain no place-name labels, road-name labels, route shields, facility or business labels, POI pins, category icons, selected-area boundaries, search-result outlines, search boxes, side panels, login controls, menus, layer controls, zoom controls, Street View controls, thumbnails, browser UI, or operating-system UI. Required logos, copyright notices, data-provider notices, and attribution MUST remain fully visible and readable. When a permitted source requires written attribution but does not render it in the clean capture, add the exact required attribution to the final image as compliance text under Section 8.
+The final source capture MUST contain no place-name labels, road-name labels, route shields, facility or business labels, POI pins, category icons, selected-area boundaries, search-result outlines, search boxes, side panels, login controls, menus, layer controls, zoom controls, Street View controls, thumbnails, browser UI, or operating-system UI.
 
-Turn labels off through the source's supported controls. Frame out other prohibited UI before capture. Do not remove labels or UI through cloning, inpainting, blurring, generative editing, or a dark overlay. STOP only when a clean capture cannot be obtained and the required attribution also cannot be preserved or added in the permitted compliance form.
+Turn labels off through the source's supported controls. Frame out other prohibited UI before capture. Do not remove labels or UI through cloning, inpainting, blurring, generative editing, or a dark overlay. STOP when a clean capture cannot be obtained.
 
 ## 5. First Image
 
@@ -105,7 +92,6 @@ Use a wider composition that identifies the target region:
 - Preserves central space for text
 - Does not leave a search panel or unnecessary UI in the main view
 - Is not dominated by unloaded or flat-color areas
-- Retains required attribution in readable form
 
 ## 6. Second Image
 
@@ -119,7 +105,7 @@ Do not move to another region. A same-heading enlargement, crop, or slight pan i
 
 ## 7. Cropping
 
-Crop the permitted image-display area to `1000×750`.
+Crop the image-display area to `1000×750`.
 
 Exclude:
 
@@ -127,15 +113,6 @@ Exclude:
 - Search panels and unnecessary controls
 - Operating-system taskbar
 - Notifications, popups, and unnecessary margins
-
-Do not exclude:
-
-- Required attribution for Google Maps or another source
-- Google logo
-- Copyright notice
-- Aerial-imagery or map-data provider notice
-
-STOP only when the existing design cannot be achieved while preserving embedded rights notices or adding the exact required compliance attribution under Section 8.
 
 ## 8. Fixed Text Template
 
@@ -183,7 +160,7 @@ for either image is prohibited. Before saving, record the exact renderer input
 and character count for both images and compare them byte for byte with the
 confirmed display value. Any one-character difference rejects the pair.
 
-Add only the white title and white subtitle as design copy. A legally or contractually required source-attribution line is compliance text and is expressly excluded from this design-copy restriction. When the source requires attribution that is not already embedded, add the smallest readable exact attribution in a corner, separate from the title and subtitle, without covering geographic content or changing the background. Do not add a black or translucent rectangle, dark band, gradient, vignette, background darkening, outline, stroke, halo, drop shadow, duplicated offset shadow text, glow, frame, badge, label, or text panel. When white title text is not readable without one of these prohibited treatments, select a different clean source composition.
+Add only the white title and white subtitle. Do not add a black or translucent rectangle, dark band, gradient, vignette, background darkening, outline, stroke, halo, drop shadow, duplicated offset shadow text, glow, frame, badge, label, or text panel. When white title text is not readable without one of these prohibited treatments, select a different clean source composition.
 
 When a measured text template exists, prioritize it over visual matching.
 
@@ -202,7 +179,6 @@ move or decorate the text.
 - Text position matches between both images.
 - Main-title and subtitle centers satisfy the fixed numeric template.
 - The background is not excessively dark.
-- Required attribution and added text do not overlap.
 - The result does not differ materially from existing images.
 - No map labels, POI markers, selected-area boundaries, or unnecessary controls remain.
 - No black or translucent text background, dark band, outline, halo, or shadow exists.
@@ -242,14 +218,12 @@ Place both images in the specified locations on the target area page. Verify:
 - OGP, `src`, and alt text
 - Absence of legacy image names
 - Desktop and mobile rendering
-- No clipping of text or attribution caused by cropping
+- No clipping of text caused by cropping
 
 For non-image page outputs and shared registrations, follow `CANDY_AREA_STAFF_PRODUCTION_RUNBOOK.md` and `CANDY_AREA_PAGE_GENERATION_SPEC.md`.
 
 ## 13. Completion Criteria
 
-- [ ] Storage, modification, and commercial-publication conditions for the image source are verified.
-- [ ] Required attribution is preserved or added exactly as required by the permitted source.
 - [ ] The target region is correct.
 - [ ] The first image is a wider view.
 - [ ] The second image is slightly closer with a different angle or direction.
@@ -277,21 +251,17 @@ For non-image page outputs and shared registrations, follow `CANDY_AREA_STAFF_PR
 - Official romanization or canonical slug cannot be confirmed.
 - The only proposed display spelling is derived from a slug, filename, URL, memory, or automatic transliteration.
 - Renderer title identity or character count cannot be verified.
-- Storage, modification, and commercial-publication conditions for the image source cannot be verified.
-- Required attribution cannot be preserved or added in the permitted compliance form.
 - Chrome cannot be operated.
 - Map, 3D, or aerial imagery cannot load.
 - A screenshot cannot be saved.
 - The image-modification tool cannot run.
 - Existing-image dimensions or text specification cannot be verified.
-- A clean label-free and control-free capture cannot be obtained and required attribution cannot be added separately in the permitted compliance form.
+- A clean label-free and control-free capture cannot be obtained.
 - A second capture with both closer zoom and a clearly different heading or direction cannot be obtained.
 - White text requires a prohibited background or text effect to remain readable.
 - The fixed text coordinates cannot be met or cannot be verified numerically.
 - The destination cannot be confirmed.
 - Same-name overwrite eligibility cannot be decided.
-
-Do not STOP solely because a permitted source requires an attribution line that is absent from its clean capture. Add the required compliance text under Section 8 and continue.
 
 Do not STOP or request duplicate approval for a task-specific decision that the project administrator has already stated explicitly. On a genuine unresolved STOP condition, report the stopped phase, verified items, unexecuted work, and exact decision still required.
 
@@ -299,4 +269,4 @@ Do not STOP or request duplicate approval for a task-specific decision that the 
 
 Do not copy area-specific elements directly to hotel, blog, or another project.
 
-Candidate common elements are image-source and rights checks, Chrome operation, cropping, attribution, overwrite prevention, and quality checks. Keep count, composition, text, fixed copy, naming, destination, and page integration in category-specific specifications.
+Candidate common elements are image-source selection, Chrome operation, cropping, overwrite prevention, and quality checks. Keep count, composition, text, fixed copy, naming, destination, and page integration in category-specific specifications.

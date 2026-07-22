@@ -1462,14 +1462,26 @@ def run_self_test(_: argparse.Namespace) -> int:
             raise HotelToolError("sparse count validation self-test failed: " + "; ".join(sparse_errors))
         if len(path_config.related_link_targets(sparse_source)) != path_config.RELATED_COUNT:
             raise HotelToolError("sparse related link self-test failed")
-        sparse_hotel_list = update_hotel_list(read_utf8(hp_root / "source" / "hotel.html"), sparse_data)
+        sparse_hotel_list_fixture = (
+            '<div class="lpt_15 bd_t"><a href="./kagoshima-deliveryhealth-hotel-aaaaaaaaaa.php" '
+            'class="fs_md1 fade">placeholder</a></div>\n'
+            '<div class="lp_10_0_15 f_xxs fc_g">placeholder</div>\n'
+            '<!-- 構造化データ（JSON-LD） END -->'
+        )
+        sparse_hotel_list = update_hotel_list(sparse_hotel_list_fixture, sparse_data)
         sparse_php_name = f"kagoshima-deliveryhealth-hotel-{sparse_data.slug}.php"
         sparse_entry = re.search(
             rf'(?s)<div class="lpt_15 bd_t"><a href="\./{re.escape(sparse_php_name)}".*?</div>\s*'
             r'<div class="lp_10_0_15 f_xxs fc_g">(.*?)</div>',
             sparse_hotel_list,
         )
-        if not sparse_entry or "［MAP］" in sparse_entry.group(1) or "料金目安" in sparse_entry.group(1):
+        if (
+            not sparse_entry
+            or common.htext(sparse_data.basic.address) not in sparse_entry.group(1)
+            or "［MAP］" in sparse_entry.group(1)
+            or "TEL " in sparse_entry.group(1)
+            or "料金目安" in sparse_entry.group(1)
+        ):
             raise HotelToolError("sparse hotel list self-test failed")
         if "priceRange" in hotel_schema(sparse_data):
             raise HotelToolError("sparse hotel schema self-test failed")
