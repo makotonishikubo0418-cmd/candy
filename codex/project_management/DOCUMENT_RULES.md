@@ -84,6 +84,8 @@ Japanese proper nouns and source data MAY remain inside an English document. Rep
 ### 3.6 Generated Documents
 
 - A generated document MUST identify that manual editing is prohibited, its generator, generation time, branch, commit, population, and unverified scope when those values apply.
+- Generated current-state documents MUST include a deterministic state fingerprint derived from their actual generator inputs. Normal drift checks MUST compare the fingerprint and generated content, not generated time or Git Commit metadata.
+- Generated time, Git Commit SHA, and per-row verification time/SHA are provenance metadata. Refresh or compare them only through an explicit strict-metadata operation; they MUST NOT make the normal content check fail by themselves.
 - Change generated labels, headings, and fixed wording in the generator, then regenerate the output. Do not edit generated output manually.
 - Run the generator twice and verify that the second run creates no difference.
 - Generated documents MUST remain current-state outputs and MUST NOT become manually maintained specifications or task histories.

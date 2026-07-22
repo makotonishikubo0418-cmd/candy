@@ -12,6 +12,7 @@ from pathlib import Path
 
 GIT = shutil.which("git") or r"C:\Program Files\Git\cmd\git.exe"
 SCRIPT = Path(__file__).with_name("candy_ftp_deploy.py").resolve()
+AREA_IMAGE_GUARD = Path(__file__).with_name("candy_area_image_replacement_guard.py").resolve()
 WORKFLOW = SCRIPT.parent.parent / "workflows" / "candy-production-deploy.yml"
 HTACCESS_WORKFLOW = SCRIPT.parent.parent / "workflows" / "candy-htaccess-deploy.yml"
 CONFIRMATION = "DEPLOY-CANDY-PRODUCTION"
@@ -207,6 +208,7 @@ def make_repository(root: Path) -> tuple[str, str]:
     (root / "HP").mkdir()
     (root / ".github" / "scripts").mkdir(parents=True)
     shutil.copy2(SCRIPT, root / ".github" / "scripts" / SCRIPT.name)
+    shutil.copy2(AREA_IMAGE_GUARD, root / ".github" / "scripts" / AREA_IMAGE_GUARD.name)
     git(root, "init", "-q")
     git(root, "config", "user.email", "test@example.invalid")
     git(root, "config", "user.name", "Safety Test")
@@ -221,6 +223,7 @@ def make_htaccess_repository(root: Path) -> tuple[str, str]:
     (root / "HP").mkdir()
     (root / ".github" / "scripts").mkdir(parents=True)
     shutil.copy2(SCRIPT, root / ".github" / "scripts" / SCRIPT.name)
+    shutil.copy2(AREA_IMAGE_GUARD, root / ".github" / "scripts" / AREA_IMAGE_GUARD.name)
     git(root, "init", "-q")
     git(root, "config", "user.email", "test@example.invalid")
     git(root, "config", "user.name", "Safety Test")
@@ -236,6 +239,7 @@ def make_deletion_repository(root: Path) -> tuple[str, str]:
     (root / "HP").mkdir()
     (root / ".github" / "scripts").mkdir(parents=True)
     shutil.copy2(SCRIPT, root / ".github" / "scripts" / SCRIPT.name)
+    shutil.copy2(AREA_IMAGE_GUARD, root / ".github" / "scripts" / AREA_IMAGE_GUARD.name)
     git(root, "init", "-q")
     git(root, "config", "user.email", "test@example.invalid")
     git(root, "config", "user.name", "Safety Test")
@@ -249,12 +253,21 @@ def make_deletion_repository(root: Path) -> tuple[str, str]:
 
 def assert_workflow_contract() -> None:
     text = WORKFLOW.read_text(encoding="utf-8")
+    deploy_text = SCRIPT.read_text(encoding="utf-8")
     required = (
         "push:",
         "workflow_dispatch:",
         'branches:\n      - main',
         '".github/workflows/candy-production-deploy.yml"',
         '".github/scripts/candy_release_check.py"',
+        '".github/scripts/candy_area_image_replacement_guard.py"',
+        '".github/scripts/test_candy_area_image_replacement_guard.py"',
+        '".github/scripts/test_candy_area_image_replace.py"',
+        '"codex/scripts/candy_area_image_replace.py"',
+        '"codex/scripts/candy-area.cmd"',
+        '".github/scripts/test_candy_site_state_metadata.py"',
+        '"codex/scripts/candy_site_state.py"',
+        '"codex/scripts/candy-site-state.cmd"',
         '"!HP/codex/**"',
         '"!HP/AGENTS.md"',
         '"!HP/Text_area_data/**"',
@@ -269,6 +282,7 @@ def assert_workflow_contract() -> None:
     )
     for marker in required:
         assert marker in text, f"workflow contract is missing: {marker}"
+    assert "validate_area_image_replacements(Path.cwd(), args.before, args.after)" in deploy_text
     assert "full_deploy" not in text
     assert "--full-deploy" not in text
 

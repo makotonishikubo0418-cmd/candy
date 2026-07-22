@@ -59,6 +59,7 @@ Do not create mechanical `.before` copies beside Git-tracked files. Use Git and 
 - Change only the authorized scope.
 - Do not overwrite existing changes.
 - Validate replacement tokens, datasets, includes, links, and image references together.
+- For an existing approved area-image pair replaced under the same canonical filenames, use `CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md` as the self-contained fast route. For another cacheable static-file replacement at the same public path, follow `CANDY_PRODUCTION_MIGRATION_MASTER.md`.
 - Do not set a fixed maximum file count.
 - For a common-processing change, check impact on out-of-scope pages.
 - Do not copy authentication values, database connection values, payment values, raw logs, or personal information.
@@ -91,6 +92,15 @@ Add as required:
 - HTTP responses
 
 Report every unexecuted check as unverified.
+
+### 6.1 Efficient Verification and Browser Fallback
+
+- Freeze the authorized files, behavior, and completion evidence before editing. Do not add an unrelated investigation, documentation change, cleanup, or improvement.
+- Assign one authoritative verification method to each requirement. Do not repeat a passed check through another tool unless a relevant file changed after the result or the first result was incomplete.
+- Group independent read-only or syntax checks into one bounded execution when this reduces tool startup and waiting time without hiding individual failures.
+- Use HTTP, source inspection, or deterministic tests for status codes, headers, URLs, file contents, and generated output. Use Chrome only for behavior or rendering that cannot be verified by those methods.
+- If browser control disconnects, do not repeat reconnection attempts. Retry once only when an unresolved screen-only requirement remains; otherwise switch to HTTP or deterministic checks and report the screen result as unverified.
+- Do not wait on or rerun a slow tool after it already returned a complete authoritative result. When a tool must continue, keep the wait bounded and report only a material delay or blocker.
 
 ## 7. Production and Test
 

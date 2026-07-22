@@ -7,7 +7,7 @@
 
 ## 1. Priority and Rights Conditions
 
-This document defines composition, modification, naming, storage, and page integration. Follow `CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md` for image acceptance, slug reconciliation, duplication checks, and Git management.
+This document defines composition, modification, naming, storage, and first installation. Follow `CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md` for image acceptance, slug reconciliation, duplication checks, and Git management. After an approved pair is ready to replace existing same-name public images, leave this creation specification and use only `CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md` for the replacement phase.
 
 The project administrator's explicit instruction is the authority for a task-specific source, method, design exception, overwrite, integration, or publication decision within the instructed scope. When that decision has already been stated, do not stop or request the same decision again merely because this document contains a different default. Apply the instructed exception, record it in the work result, and update the canonical specification when the administrator has explicitly instructed a permanent rule change.
 
@@ -227,6 +227,8 @@ kagoshima-deliveryhealth-area-<slug>_2.jpg
 Save to the canonical public source `HP/imgHtml/new_202601/area/`.
 
 Before saving, check for a same-name file. When present, compare hashes. Do not save when identical. When contents differ, do not overwrite; report the difference and required decision.
+
+Do not perform an existing same-name public replacement under this creation specification. After the pair passes every creation and acceptance gate, use `CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md`.
 
 Use JPG quality that preserves readable text and terrain without visible degradation and does not differ materially from existing images.
 

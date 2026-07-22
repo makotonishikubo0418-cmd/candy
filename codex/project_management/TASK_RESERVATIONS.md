@@ -16,6 +16,7 @@
 
 | Task ID | Codex | Period | Scope | Status |
 |---|---|---|---|---|
+| TASK-20260722-AREA-IMAGE-REPLACEMENT-AUTOMATION-001 | current | 2026-07-22 | Consolidate the accumulated existing-area-image replacement automation, deployment guard, deterministic generated-state metadata handling, directly related canonical documents and generated current-state documents; validate the fixed 28-file scope; Commit; Push; verify GitHub and Actions; and record completion | IN_PROGRESS |
 
 ## 3. Completed and Released Reservations
 

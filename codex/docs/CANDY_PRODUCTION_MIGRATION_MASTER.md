@@ -145,6 +145,36 @@ On failure:
 
 After changing workflow/script, run syntax and integration tests, Commit and Push, and verify the automatic GitHub run before reporting new behavior.
 
+### 5.1 Same-Path Static Asset Replacement and Client Cache Safety
+
+This section is the canonical production rule for replacing the bytes of an existing public image, CSS, JavaScript, font, movie, or other cacheable static asset while retaining its canonical public path.
+
+For a normal existing area-image pair replacement, `CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md` is the self-contained execution route. Do not require this full production-migration document unless that runbook routes the task here for a deployment exception, failure recovery, rollback, workflow change, deletion, rename, or manual server operation.
+
+The final production state MUST contain the new bytes at the existing canonical filename. The obsolete bytes MUST NOT remain as another live copy. Temporary upload and rollback files MAY exist only during the transactional deployment procedure in Section 5 and MUST be removed after successful verification.
+
+Before staging a same-path replacement:
+
+1. Compute the SHA-256 of the new canonical asset.
+2. Replace the local canonical asset at the same path; do not create a second live filename solely to perform the replacement.
+3. Find every controlled public reference to that asset, including HTML `src`, OGP, CSS, JavaScript, and template or generated-source references that produce the public URL.
+4. Replace any bare or previous content-version query with `?v=<content-version>`, where `<content-version>` is at least the first seven lowercase hexadecimal characters of the new SHA-256.
+5. Deploy the asset and every required reference update in the same authorized work unit.
+
+The query parameter does not create or preserve another asset file. It keeps the canonical filename and causes clients that cached the previous URL to request the new bytes through a changed URL.
+
+A previously nonexistent public path does not require a replacement version solely because it is new. When an existing public path changes bytes and a controlled reference cannot be updated in the same work unit, do not report immediate client-visible replacement as verified.
+
+For existing public area images matching `HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-<slug>_[12].jpg`, `.github/scripts/candy_area_image_replacement_guard.py` enforces the accepted/public SHA-256 match, pair difference, `1000 x 750` JPEG dimensions, current hash-based content versions, and removal of the previous content-version URL. `.github/scripts/candy_ftp_deploy.py` invokes this guard before producing any FTP plan, and the production workflow runs its integration tests. A guard failure stops before an FTP connection or production mutation.
+
+After deployment, verify all of the following:
+
+- The canonical production path has the same SHA-256 as the new local asset.
+- The production page or generated response contains the new content-version query.
+- The versioned URL returns the new asset.
+- Required desktop and mobile views render the new content rather than the obsolete cached content.
+- No obsolete live copy, temporary file, or rollback file remains.
+
 ## 6. Production Work Results on 2026-07-13
 
 ### 6.1 Automated Full Deploy: Failed and Deprecated
@@ -239,7 +269,7 @@ python .github/scripts/candy_release_check.py --sha <40-character-Commit-SHA> --
 3. Check for remaining temporary and backup files.
 4. Verify preservation of the production `index.php` redirect.
 5. Check target-PHP HTTP.
-6. Check CSS/JavaScript/images, internal links, and desktop/mobile browser rendering as required.
+6. Check CSS/JavaScript/images, internal links, and desktop/mobile browser rendering as required. For a same-path static-asset replacement, apply Section 5.1 and verify the new content-version reference and rendered content.
 7. Report local, GitHub, and production results separately.
 8. Include the GitHub Commit URL, Actions run URL, and every deployed production page URL in one report. Do not infer an unverified URL.
 

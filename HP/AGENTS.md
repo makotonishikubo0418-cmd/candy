@@ -4,6 +4,8 @@
 
 - Work under `HP/` is governed by root `AGENTS.md` and this file.
 - For normal area production, additionally read only `codex/docs/CANDY_AREA_STAFF_PRODUCTION_RUNBOOK.md`.
+- For area-image creation, material editing, or pre-acceptance validation, additionally read `codex/docs/CANDY_AREA_IMAGE_CREATION_RUNBOOK.md`.
+- For an existing approved area-image replacement under the same canonical filenames, read only `codex/docs/CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md` and the actual target files. Use the exception routes named in that runbook only when their conditions apply.
 - For normal hotel production, additionally read only `codex/docs/CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md`.
 - For normal blog production, additionally read only `codex/docs/CANDY_PAGE_GENERATION_GOVERNANCE.md` and `codex/docs/CANDY_BLOG_PAGE_GENERATION_SPEC.md`.
 - Use `codex/docs/CANDY_MASTER_DOC_INDEX.md` only for an unknown exception or another task type.

@@ -9,7 +9,15 @@ on:
       - ".github/workflows/candy-production-deploy.yml"
       - ".github/scripts/candy_ftp_deploy.py"
       - ".github/scripts/test_candy_ftp_deploy.py"
+      - ".github/scripts/candy_area_image_replacement_guard.py"
+      - ".github/scripts/test_candy_area_image_replacement_guard.py"
+      - ".github/scripts/test_candy_area_image_replace.py"
+      - ".github/scripts/test_candy_site_state_metadata.py"
       - ".github/scripts/candy_release_check.py"
+      - "codex/scripts/candy_area_image_replace.py"
+      - "codex/scripts/candy-area.cmd"
+      - "codex/scripts/candy_site_state.py"
+      - "codex/scripts/candy-site-state.cmd"
       - "!HP/codex/**"
       - "!HP/**/*.md"
       - "!HP/AGENTS.md"
@@ -72,8 +80,11 @@ jobs:
 
       - name: Validate deployment script
         run: |
-          python3 -m py_compile .github/scripts/candy_ftp_deploy.py .github/scripts/candy_release_check.py
+          python3 -m py_compile .github/scripts/candy_ftp_deploy.py .github/scripts/candy_area_image_replacement_guard.py codex/scripts/candy_area_image_replace.py codex/scripts/candy_site_state.py .github/scripts/candy_release_check.py
           python3 .github/scripts/candy_ftp_deploy.py --self-test
+          python3 .github/scripts/test_candy_area_image_replacement_guard.py
+          python3 .github/scripts/test_candy_area_image_replace.py
+          python3 .github/scripts/test_candy_site_state_metadata.py
           python3 .github/scripts/test_candy_ftp_deploy.py
 
       - name: Preview exact production plan without FTP
@@ -104,8 +115,11 @@ jobs:
 
       - name: Validate deployment script
         run: |
-          python3 -m py_compile .github/scripts/candy_ftp_deploy.py .github/scripts/candy_release_check.py
+          python3 -m py_compile .github/scripts/candy_ftp_deploy.py .github/scripts/candy_area_image_replacement_guard.py codex/scripts/candy_area_image_replace.py codex/scripts/candy_site_state.py .github/scripts/candy_release_check.py
           python3 .github/scripts/candy_ftp_deploy.py --self-test
+          python3 .github/scripts/test_candy_area_image_replacement_guard.py
+          python3 .github/scripts/test_candy_area_image_replace.py
+          python3 .github/scripts/test_candy_site_state_metadata.py
           python3 .github/scripts/test_candy_ftp_deploy.py
 
       - name: Build exact deployment plan without FTP

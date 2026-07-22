@@ -2,6 +2,7 @@
 
 - Updated: 2026-07-22
 - Target: Acceptance, reconciliation, public placement, and Git management of area-page images
+- Existing approved pair replacement: `CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md`
 
 ## 1. Management Classes
 
@@ -9,7 +10,7 @@
 |---|---|---|
 | Preparation and acceptance | `C:\Codex\Candy\Text_area_data\画像データ` | Git-managed local source for accepted area images |
 | Canonical public source | `HP/imgHtml/new_202601/area` | Actual images referenced by HTML |
-| HTML reference | `./imgHtml/new_202601/area/<filename>` | Reference format in area source HTML |
+| HTML reference | `./imgHtml/new_202601/area/<filename>` | Canonical file path in area source HTML |
 
 Do not reference accepted source assets under `Text_area_data/画像データ/` directly from HTML. Public pages reference `HP/imgHtml/new_202601/area` in the local Git working repository.
 
@@ -129,8 +130,8 @@ Do not report page production complete merely because images are available. When
 10. Check for a file with the same name in the canonical public source.
 11. When the same name exists, compare hashes.
 12. Do not copy a matching file.
-13. When contents differ, do not overwrite; report the difference and obtain approval.
-14. Only when the file is absent from the canonical public source, copy it after user approval.
+13. When contents differ and replacement is explicitly authorized, switch to `CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md`. Do not request the same target-limited authorization again or repeat this acceptance procedure during replacement.
+14. Only when the file is absent from the canonical public source, copy it after user approval as a first installation.
 15. Verify source HTML `src`, alt text, and OGP.
 16. Report local-image validation separately from production-image HTTP validation.
 

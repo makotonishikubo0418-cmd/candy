@@ -70,6 +70,8 @@ At the start of work, run `git fetch origin` and `git status --short --branch`. 
 | Unbuilt pages and production candidates | `CANDY_MASTER_DOC_INDEX.md` → `generated/CANDY_UPCOMING_PAGES.md` → category queue/classification |
 | PHP, source, and dataset structure | `CANDY_CODE_FILE_STRUCTURE.md` → `generated/CANDY_CODE_ASSET_INVENTORY.md` |
 | CSS, JavaScript, and image investigation | `CANDY_CODE_FILE_STRUCTURE.md` → `generated/CANDY_CODE_ASSET_INVENTORY.md` |
+| Replace an existing approved area-image pair under the same canonical filenames | `AGENTS.md` → `codex/README.md` → `HP/AGENTS.md` → `CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md` → actual target files |
+| Replace another existing public static asset at the same path | `AGENTS.md` → `codex/README.md` → `HP/AGENTS.md` → `CANDY_MASTER_DOC_INDEX.md` → `CANDY_OPERATION_BASICS.md` → `CANDY_PRODUCTION_MIGRATION_MASTER.md` |
 | SEO investigation or change | `CANDY_SEO_SPEC.md` → `generated/CANDY_SEO_STATUS.md` → category specification |
 | After a page addition or change | `codex\scripts\candy-site-state.cmd write` → `check` |
 | Deletion, movement, or bulk cleanup | `AGENTS.md` → `codex/README.md` → `codex/project_management/SAFETY_PROTOCOL.md` |

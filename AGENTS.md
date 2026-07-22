@@ -99,11 +99,18 @@ Codex MUST read only the files required for the current task.
   `codex/docs/generated/CANDY_UPCOMING_PAGES.md`
   `codex/docs/CANDY_AREA_STAFF_PRODUCTION_RUNBOOK.md`
 
-- Area-image creation, modification, validation, or installation:
+- Area-image creation, material editing, or pre-acceptance validation:
   `HP/AGENTS.md`
   `codex/docs/CANDY_AREA_IMAGE_CREATION_RUNBOOK.md`
   `codex/docs/CANDY_AREA_IMAGE_CREATION_SPEC.md`
   `codex/docs/CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md`
+
+- Existing approved area-image replacement under the same canonical filenames:
+  `HP/AGENTS.md`
+  `codex/docs/CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md`
+  The actual target accepted/public image pair and controlled page references
+
+  Read the creation documents only when the replacement images still require creation, material editing, or pre-acceptance validation. Read `codex/docs/CANDY_PRODUCTION_MIGRATION_MASTER.md` only when a deployment exception, failure recovery, rollback, workflow change, deletion, rename, or manual server operation is required.
 
 - Normal hotel-page production or publication:
   `HP/AGENTS.md`
@@ -204,6 +211,8 @@ Codex MUST read only the files required for the current task.
   `codex/docs/CANDY_OPERATION_BASICS.md`
   `codex/docs/CANDY_PRODUCTION_MIGRATION_MASTER.md`
 
+  Exception: a normal existing approved area-image replacement under unchanged canonical filenames uses `codex/docs/CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md` as the complete target-specific production route. Read `CANDY_PRODUCTION_MIGRATION_MASTER.md` only when that runbook's exception conditions apply.
+
   When deployment automation is involved:
   `.github/workflows/candy-production-deploy.yml`
   `.github/scripts/candy_ftp_deploy.py`
@@ -243,6 +252,8 @@ Codex MUST read only the files required for the current task.
 
 - Git, Commit, or Push work:
   `codex/project_management/DOCUMENT_RULES.md`
+
+  Exception: a normal existing approved area-image replacement under unchanged canonical filenames uses the Git procedure in `codex/docs/CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md`. Read `DOCUMENT_RULES.md` only when the task leaves that fixed target-specific route.
 
   When deletion, movement, renaming, bulk staging, cleanup, or Git recovery is involved:
   `codex/project_management/SAFETY_PROTOCOL.md`

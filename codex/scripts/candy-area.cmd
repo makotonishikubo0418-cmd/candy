@@ -17,6 +17,7 @@ if /I "%~1"=="publish-self-test" goto publish
 if /I "%~1"=="resume" goto publish
 if /I "%~1"=="target-next" goto targetgate
 if /I "%~1"=="target-check" goto targetgate
+if /I "%~1"=="replace-images" goto imagereplace
 "%PYTHON%" "%~dp0candy_area_page.py" %*
 exit /b %ERRORLEVEL%
 
@@ -24,6 +25,12 @@ exit /b %ERRORLEVEL%
 set "PYTHONUTF8=1"
 set "PYTHONIOENCODING=utf-8"
 "%PYTHON%" "%~dp0candy_area_target_gate.py" %*
+exit /b %ERRORLEVEL%
+
+:imagereplace
+set "PYTHONUTF8=1"
+set "PYTHONIOENCODING=utf-8"
+"%PYTHON%" "%~dp0candy_area_image_replace.py" %*
 exit /b %ERRORLEVEL%
 
 :publish

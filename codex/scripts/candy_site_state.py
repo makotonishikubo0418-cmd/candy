@@ -78,6 +78,30 @@ SOURCE_SCOPE = (
     "Text_hotel_data",
     "codex/scripts/candy_site_state.py",
 )
+STATE_FINGERPRINT_EXCLUDED_HP_PARTS = {
+    ".git",
+    ".github",
+    ".vscode",
+    "codex",
+    "log",
+}
+STATE_FINGERPRINT_EXCLUDED_HP_FILES = {"HP/AGENTS.md"}
+STATE_FINGERPRINT_TEXT_SUFFIXES = {
+    ".cmd",
+    ".css",
+    ".csv",
+    ".htm",
+    ".html",
+    ".inc",
+    ".js",
+    ".json",
+    ".php",
+    ".py",
+    ".svg",
+    ".tsv",
+    ".txt",
+    ".xml",
+}
 
 
 @dataclass(frozen=True)
@@ -153,6 +177,49 @@ def generation_base_head() -> tuple[str, str]:
     if not timestamp or timestamp == "UNVERIFIED":
         timestamp = "UNVERIFIED"
     return base, timestamp
+
+
+def state_fingerprint_paths() -> list[Path]:
+    paths: set[Path] = {Path(__file__).resolve()}
+    for path in HP_ROOT.rglob("*"):
+        if not path.is_file() or path.is_symlink():
+            continue
+        repository_path = rel(path)
+        relative_parts = path.relative_to(HP_ROOT).parts
+        if repository_path in STATE_FINGERPRINT_EXCLUDED_HP_FILES:
+            continue
+        if any(part.lower() in STATE_FINGERPRINT_EXCLUDED_HP_PARTS for part in relative_parts):
+            continue
+        paths.add(path.resolve())
+    for root in (TEXT_AREA_DIR, TEXT_BLOG_DIR, TEXT_HOTEL_DIR):
+        if not root.is_dir():
+            continue
+        paths.update(
+            path.resolve()
+            for path in root.rglob("*")
+            if path.is_file() and not path.is_symlink()
+        )
+    return sorted(paths, key=lambda path: rel(path).casefold())
+
+
+def fingerprint_for_paths(paths: list[Path], root: Path = REPO_ROOT) -> str:
+    digest = hashlib.sha256()
+    resolved_root = root.resolve()
+    for path in sorted(paths, key=lambda item: item.resolve().as_posix().casefold()):
+        resolved = path.resolve()
+        try:
+            repository_path = resolved.relative_to(resolved_root).as_posix()
+        except ValueError as exc:
+            raise RuntimeError(f"Fingerprint path is outside the repository: {path}") from exc
+        data = resolved.read_bytes()
+        if resolved.suffix.lower() in STATE_FINGERPRINT_TEXT_SUFFIXES:
+            data = data.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+        digest.update(repository_path.encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(len(data).to_bytes(8, "big"))
+        digest.update(data)
+        digest.update(b"\0")
+    return digest.hexdigest()
 
 
 def parse_labeled(source: str, label: str) -> str:
@@ -684,6 +751,7 @@ def collect() -> dict[str, object]:
         "head": generation_head,
         "current_head": git_value("rev-parse", "HEAD"),
         "generation_time": generation_time,
+        "state_fingerprint": fingerprint_for_paths(state_fingerprint_paths()),
     }
 
 
@@ -694,6 +762,7 @@ def header(data: dict[str, object], scope: str, population: str, result: str, un
         f"> Generated at: {data['generation_time']} (reproducible generation baseline)",
         f"> Branch: {data['branch']}",
         f"> Commit: {data['head']}",
+        f"> State fingerprint: sha256:{data['state_fingerprint']}",
         f"> Scope: {scope}",
         f"> Population: {population}",
         f"> Generator: `{SCRIPT_REL}`",
@@ -974,7 +1043,34 @@ def audit(data: dict[str, object]) -> int:
     return 0
 
 
-def preview(rendered: dict[str, str]) -> int:
+def content_comparison_view(value: str) -> str:
+    lines: list[str] = []
+    for line in value.splitlines():
+        if line.startswith("> Generated at: "):
+            lines.append("> Generated at: <metadata-only>")
+            continue
+        if line.startswith("> Commit: "):
+            lines.append("> Commit: <metadata-only>")
+            continue
+        lines.append(
+            re.sub(
+                r"\| (?:[0-9a-f]{40}|UNVERIFIED) / [^|]+ \|$",
+                "| <verification-metadata-only> |",
+                line,
+            )
+        )
+    return "\n".join(lines) + ("\n" if value.endswith("\n") else "")
+
+
+def document_differs(current: str | None, expected: str, strict_metadata: bool) -> bool:
+    if current is None:
+        return True
+    if strict_metadata:
+        return current != expected
+    return content_comparison_view(current) != content_comparison_view(expected)
+
+
+def preview(rendered: dict[str, str], strict_metadata: bool = False) -> int:
     for name, expected in rendered.items():
         # Keep the preview in a bounded in-memory temporary stream. This avoids
         # writing source or generated documents while still exercising UTF-8 I/O.
@@ -988,17 +1084,25 @@ def preview(rendered: dict[str, str]) -> int:
             stream.seek(0)
             preview_content = stream.read()
         target = GENERATED_DIR / name
-        current = read_utf8(target) if target.is_file() else ""
+        current = read_utf8(target) if target.is_file() else None
+        exact_current = current or ""
         diff = list(
             difflib.unified_diff(
-                current.splitlines(),
+                exact_current.splitlines(),
                 preview_content.splitlines(),
                 fromfile=rel(target),
                 tofile=f"preview/{name}",
                 lineterm="",
             )
         )
-        print(f"PREVIEW={name} changed={'yes' if diff else 'no'} diff_lines={len(diff)}")
+        content_changed = document_differs(current, expected, False)
+        metadata_only = bool(diff) and not content_changed
+        print(
+            f"PREVIEW={name} changed={'yes' if content_changed else 'no'} "
+            f"metadata_only={'yes' if metadata_only else 'no'} diff_lines={len(diff)}"
+        )
+        if metadata_only and not strict_metadata:
+            continue
         limit = 120
         for line in diff[:limit]:
             print(line)
@@ -1007,25 +1111,36 @@ def preview(rendered: dict[str, str]) -> int:
     return 0
 
 
-def write(rendered: dict[str, str]) -> int:
+def write(rendered: dict[str, str], strict_metadata: bool = False) -> int:
     changed = 0
+    metadata_ignored = 0
     for name, expected in rendered.items():
         target = GENERATED_DIR / name
         current = read_utf8(target) if target.is_file() else None
-        if current != expected:
+        if document_differs(current, expected, strict_metadata):
             atomic_write(target, expected)
             changed += 1
             print(f"WRITE={rel(target)}")
-    print(f"WRITE=OK changed={changed} unchanged={len(rendered) - changed}")
+        elif current != expected:
+            metadata_ignored += 1
+    print(
+        f"WRITE=OK changed={changed} unchanged={len(rendered) - changed} "
+        f"metadata_only_ignored={metadata_ignored}"
+    )
     return 0
 
 
-def check(data: dict[str, object], rendered: dict[str, str], target: str | None) -> int:
+def check(
+    data: dict[str, object],
+    rendered: dict[str, str],
+    target: str | None,
+    strict_metadata: bool = False,
+) -> int:
     drift: list[str] = []
     for name, expected in rendered.items():
         path = GENERATED_DIR / name
         current = read_utf8(path) if path.is_file() else None
-        if current != expected:
+        if document_differs(current, expected, strict_metadata):
             drift.append(rel(path))
     if target:
         matches = [page for page in data["pages"] if page["slug"] == target or page["stem"] == target]
@@ -1039,9 +1154,14 @@ def check(data: dict[str, object], rendered: dict[str, str], target: str | None)
             print("CHECK=FAIL target_not_found", file=sys.stderr)
             return 2
     if drift:
-        print("CHECK=FAIL drift=" + ",".join(drift), file=sys.stderr)
+        label = "metadata_or_content_drift" if strict_metadata else "content_drift"
+        print(f"CHECK=FAIL {label}=" + ",".join(drift), file=sys.stderr)
         return 1
-    print(f"CHECK=OK documents={len(rendered)}")
+    mode = "strict-metadata" if strict_metadata else "content"
+    print(
+        f"CHECK=OK documents={len(rendered)} mode={mode} "
+        f"state_fingerprint=sha256:{data['state_fingerprint']}"
+    )
     return 0
 
 
@@ -1049,18 +1169,25 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Audit and generate deterministic CANDY site-state documents")
     parser.add_argument("command", choices=("audit", "preview", "write", "check"))
     parser.add_argument("--target", help="during check, limit output to a slug or public PHP stem")
+    parser.add_argument(
+        "--strict-metadata",
+        action="store_true",
+        help="include generated timestamp, Commit SHA, and row verification metadata in comparison",
+    )
     args = parser.parse_args()
     if args.target and args.command != "check":
         parser.error("--target may be used only with check")
+    if args.strict_metadata and args.command == "audit":
+        parser.error("--strict-metadata may be used only with preview, write, or check")
     data = collect()
     if args.command == "audit":
         return audit(data)
     rendered = render_all(data)
     if args.command == "preview":
-        return preview(rendered)
+        return preview(rendered, args.strict_metadata)
     if args.command == "write":
-        return write(rendered)
-    return check(data, rendered, args.target)
+        return write(rendered, args.strict_metadata)
+    return check(data, rendered, args.target, args.strict_metadata)
 
 
 if __name__ == "__main__":

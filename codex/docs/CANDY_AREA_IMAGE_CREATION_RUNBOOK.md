@@ -4,6 +4,7 @@
 - Status: Canonical execution runbook
 - Applies to: Area-image creation, validation, integration, and optional publication
 - Governing documents: `CANDY_AREA_IMAGE_CREATION_SPEC.md` and `CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md`
+- Existing approved pair replacement: `CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md`
 
 ## 1. Non-Negotiable Result
 
@@ -352,11 +353,15 @@ Public reference:
 
 Before saving, check for same-name files and compare hashes. Do not overwrite without explicit authorization.
 
+Do not perform an existing same-name public replacement inside this creation route. After the replacement pair passes every creation and acceptance gate, switch to `CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md`; do not reread this creation runbook during the replacement phase.
+
 For a preview-only task, save outside the public image directory and state that the images are not installed.
 
 ## 12. Page Integration
 
-When integration is authorized:
+This section applies to first installation after image creation. An existing approved same-name replacement uses `CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md` instead.
+
+When first installation is authorized:
 
 1. Use `_1` first and `_2` second.
 2. Verify exact filename case and relative paths.

@@ -92,6 +92,10 @@ For detail-page images, use the category specification's naming and required cou
 
 Before deletion or replacement, verify HTML, CSS, dynamic PHP/JavaScript references, database references, desktop/mobile display, OGP/JSON-LD, accepted-asset rights, and recovery methods.
 
+Existing public area-image replacements also pass `.github/scripts/candy_area_image_replacement_guard.py`. The guard compares the Git base and target, checks the accepted/public pair and hash-based content-version references, and is called automatically by the protected production deployment before its FTP plan.
+
+`codex/scripts/candy_area_image_replace.py`, routed through `codex\scripts\candy-area.cmd replace-images`, is the canonical one-command editor for an approved existing area-image pair. It updates the accepted pair, public pair, and every controlled hash-version reference as one rollback-capable transaction, then invokes the replacement guard.
+
 ## 6. Current State and Validation
 
 ```powershell

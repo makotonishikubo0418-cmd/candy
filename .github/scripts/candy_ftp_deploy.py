@@ -14,6 +14,8 @@ from pathlib import Path, PurePosixPath
 import subprocess
 import sys
 
+from candy_area_image_replacement_guard import validate_area_image_replacements
+
 
 GIT = shutil.which("git") or "git"
 REMOTE_ROOT = PurePosixPath("/public_html/group/candy")
@@ -773,6 +775,7 @@ def main() -> int:
         raise RuntimeError("Checked-out HEAD does not match --after; refusing deployment")
 
     changes = collect_changes(args.before, args.after)
+    validate_area_image_replacements(Path.cwd(), args.before, args.after)
     if args.allow_htaccess:
         exact_change = [
             change.status == "M"
