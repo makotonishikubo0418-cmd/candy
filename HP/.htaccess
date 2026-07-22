@@ -7,6 +7,10 @@ ErrorDocument 404 /404.html
 
 RewriteEngine On
 
+# Recover URLs cached from the temporary redirect that copied /group/candy/.
+RewriteCond %{HTTP_HOST} ^(?:www\.)?55810\.com$ [NC]
+RewriteRule ^group/candy/(.*)$ https://www.55810.com/$1 [R=301,L,NE]
+
 # Keep detail-page URLs canonical while the top-page migration redirect remains separate.
 # Canonical scheme and host: https://www.55810.com
 RewriteCond %{HTTP_HOST} ^(?:www\.)?55810\.com$ [NC]
