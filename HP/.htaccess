@@ -5,6 +5,29 @@ ErrorDocument 404 /404.html
     Header set Access-Control-Allow-Origin "*"
 </IfModule>
 
+# Compress and briefly cache only static CSS and JavaScript assets.
+# Dynamic PHP responses, including amadare_webapp2.4.php, remain unaffected.
+<IfModule mod_filter.c>
+    <IfModule mod_deflate.c>
+        AddOutputFilterByType DEFLATE text/css
+        AddOutputFilterByType DEFLATE application/javascript
+        AddOutputFilterByType DEFLATE text/javascript
+    </IfModule>
+</IfModule>
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 day"
+    ExpiresByType application/javascript "access plus 1 day"
+    ExpiresByType text/javascript "access plus 1 day"
+</IfModule>
+
+<IfModule mod_headers.c>
+    <FilesMatch "\.(?:css|js)$">
+        Header set Cache-Control "public, max-age=86400"
+    </FilesMatch>
+</IfModule>
+
 RewriteEngine On
 
 # Keep the direct server URL available for verification without indexing it.
