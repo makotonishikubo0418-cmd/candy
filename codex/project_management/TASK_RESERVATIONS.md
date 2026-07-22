@@ -16,6 +16,7 @@
 
 | Task ID | Codex | Period | Scope | Status |
 |---|---|---|---|---|
+| TASK-20260722-SPECIAL-PAGE-RETIREMENT-001 | current | 2026-07-22 | Retire `HP/main.php`, `HP/test.php`, `HP/page.php`, and `HP/makeSitemap.php`; reconcile and delete production-only `HP/source/page.html`; remove page-only dataset and routing; preserve the `create.php`-required test scaffold with noindex on the remaining public operational page; synchronize directly related specifications, generator output, task records, GitHub, Actions, and production | IN_PROGRESS |
 
 ## 3. Completed and Released Reservations
 
