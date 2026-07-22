@@ -191,7 +191,7 @@ For a normal public page, determine:
 
 When the normal integrated hotel tool limits changes to the target, `dataset_base.php`, the hotel index, and sitemap are within an explicit hotel-production and publication instruction.
 
-`HP/makeSitemap.php` is an existing tool that crawls site links and emits XML, but it does not preserve `lastmod`, `changefreq`, `priority`, and related values in the current `sitemap.xml` format. Do not execute it or overwrite the sitemap automatically during normal Codex generation. Decide the sitemap-update method after user approval.
+Update `sitemap.xml` only through the applicable canonical category workflow after user approval. Preserve its current XML fields, diff the exact URL change, and do not replace it with an independently collected URL list.
 
 When only detail-page files are created and the index or sitemap is not registered, report file-generation completion separately from public-route integration completion.
 

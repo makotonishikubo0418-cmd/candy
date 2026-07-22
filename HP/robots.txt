@@ -1,7 +1,5 @@
 User-agent: *
 Allow: /
 Disallow: /create.php
-Disallow: /makeSitemap.php
-Disallow: /test.php
 
 Sitemap: https://www.55810.com/sitemap.xml

@@ -143,7 +143,7 @@ Show the affected scope before changing:
 - `includefile/dataset_*.php`
 - `source/system.html`
 - `css/default.css` and `js/common.js`
-- `makeSitemap.php` and `sitemap.xml`
+- `sitemap.xml`
 
 The normal area, hotel, and blog integrated tools may handle `dataset_base.php`, the category index, the applicable index-page category section, and the sitemap when the tool limits them to the explicitly authorized target.
 

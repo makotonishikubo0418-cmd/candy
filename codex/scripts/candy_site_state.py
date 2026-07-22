@@ -836,7 +836,6 @@ def render_assets(data: dict[str, object]) -> str:
         "HP/includefile/class.hpgcoder2.php": "Loaded by dataset_base. It assigns rep...eot placeholders to their functions.",
         "HP/includefile/funcs.php": "Loaded by dataset_base and the class file. It provides shared functions for database retrieval, HTML generation, headers, and related operations.",
         "HP/create.php": "Special entry point related to file generation. MUST NOT be used during ordinary production.",
-        "HP/makeSitemap.php": "Special entry point related to sitemap generation. MUST NOT be executed without explicit approval.",
     }
     lines += ["", "## Shared PHP", "", "| path | role and impact |", "|---|---|"]
     for path, role in common.items():

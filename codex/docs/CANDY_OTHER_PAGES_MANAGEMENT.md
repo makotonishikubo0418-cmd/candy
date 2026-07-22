@@ -15,7 +15,7 @@ Primary classes:
 - top: `index.php`
 - girls: `girls.php`, `girls_list.php`, `schedule.php`, and related files
 - system/other: `movie.php`, `movie_iframe.php`, `mypage.php`, `news.php`, `system.php`, and related files
-- special: `create.php`, `makeSitemap.php`, and scaffolds requiring purpose confirmation
+- special: `create.php` and its retained internal generation scaffold
 - public generated output: `sitemap.xml`
 
 Excluded:
@@ -49,7 +49,7 @@ Important:
 - Root PHP mostly loads `dataset_base.php`; visible content belongs in source and dataset.
 - `dataset_base.php` is common to all pages and can cause a site-wide failure even for an intended one-page change.
 - For an entry point without the normal source/dataset pair, inspect `SPECIAL/PARTIAL` in the ledger and do not infer intent.
-- `create.php` and `makeSitemap.php` do not use the normal route.
+- `create.php` does not use the normal route.
 
 ## 4. Page Management Table
 
@@ -64,11 +64,7 @@ Important:
 | `movie.php` | Shop and girl movie index | `source/movie.html` + `dataset_movie.php`; shop/girl movies, device-specific display, and iframe links | `movie_iframe.php`, movie files, thumbnails, and zero-result display | Normal route exists |
 | `movie_iframe.php` | Noindex movie-playback helper | `source/movie_iframe.html` + `dataset_movie_iframe.php`; selects a shop/girl movie from GET | Caller `movie.php`, movie formats, invalid GET, and direct access | Keep `noindex,nofollow`; exclude canonical, H1, OGP, JSON-LD, breadcrumb, sitemap, and orphan requirements; no direct common-navigation route |
 | `mypage.php` | Favorite-girl review | `source/mypage.html` + `dataset_mypage.php`; Cookie, girls, images, schedules, and my-page information | Favorite add/remove, absent/expired Cookie, and girl detail | Normal route exists. Primarily Cookie-based, not member-ID/password based |
-| `main.php` | Candidate post-age-verification main according to a dataset_base comment | A branch uses `dataset_index.php`, but `source/main.html` is absent | Relationship to `index.php`, external routes, and `sitemap.xml` | STOP on source existence in the repository structure |
-| `page.php` | Legacy generic-page scaffold candidate | `dataset_page.php` exists but `source/page.html` does not | External routes, `sitemap.xml`, and purpose confirmation | STOP on source existence in the repository structure |
-| `test.php` | Test scaffold candidate | `dataset_test.php` exists but `source/test.html` does not | Publication requirement, noindex, and deletion eligibility | STOP on source existence in the repository structure |
-| `create.php` | Noindex authenticated page-generation feature | Standalone; accepts a page name by POST, creates root PHP, dataset, and source, and appends a case and transformation to `dataset_base.php` | Authentication, three generated files, shared-PHP diff, rollback, and noindex | Exclude from public-page SEO requirements; prohibited for normal production. Do not copy authentication values into documents or logs |
-| `makeSitemap.php` | Recursive site-link collection and XML response | Crawls links from the current host, dumps in test mode, and returns XML over HTTP normally | Seed, 404 behavior, external exclusion, infinite traversal, SSL, and output diff | Does not save `sitemap.xml`. Prohibited as the normal update method |
+| `create.php` | Noindex authenticated page-generation feature | Standalone; accepts a page name by POST, creates root PHP, dataset, and source, and appends a case and transformation to `dataset_base.php`; retains `dataset_test.php` and the `test.html` case and link transformation as internal generation anchors | Authentication, three generated files, shared-PHP diff, rollback, and noindex | Exclude from public-page SEO requirements; prohibited for normal production. Do not copy authentication values into documents or logs |
 | `sitemap.xml` | Public URL list for search engines | Static XML; use the generated ledger for current URLs | New/changed/removed URLs, canonical, HTTP state, and index eligibility | Confirm intent before addition, deletion, or redirect |
 
 ## 5. Common-Navigation Impact
@@ -146,10 +142,11 @@ Limit changes to the target sections in `source/index.html` and `dataset_index.p
 - Public-page title, description, canonical, H1, OGP, JSON-LD, breadcrumb, internal-link, image-alt, sitemap, and orphan-page requirements are `NOT_APPLICABLE`.
 - Keep authentication and operational safety in scope; SEO exclusion MUST NOT be treated as exclusion from security or maintenance controls.
 - Do not use it for normal production. A future return to normal use requires a separate explicit decision and review of its generation behavior.
+- Keep `includefile/dataset_test.php`, the `test.html` case, and the `test.html` to `test.php` transformation as internal generation anchors while `create.php` remains. They are not a public test page and do not receive HTML robots metadata.
 
 ### 6.7 Sitemap Change
 
-Do not use `makeSitemap.php` output directly as `sitemap.xml`. Diff against the current sitemap, classify each URL as add, preserve, or delete, and verify HTTP, canonical, and index eligibility.
+Update `sitemap.xml` only through the applicable canonical category workflow. Diff against the current sitemap, classify each URL as add, preserve, or delete, and verify HTTP, canonical, and index eligibility.
 
 ## 7. Validation
 
@@ -184,12 +181,11 @@ Show the affected scope before changing:
 - Each `includefile/dataset_*.php`
 - `source/system.html`
 - `css/default.css` and `js/common.js`
-- `makeSitemap.php` and `sitemap.xml`
+- `sitemap.xml`
 
 ## 9. STOP Conditions
 
 - Actual files cannot establish the target page's responsibility, URL, or publication requirement.
-- `main.php`, `page.php`, or `test.php` would need to be treated as a normal page while source is absent.
 - Shared PHP, authentication, database, payment, external submission, or production `index.php` change lacks approval.
 - A common-navigation change cannot establish the complete source population and diff.
 - Sitemap deletion, URL retirement, or redirect is required without approval.

@@ -43,8 +43,7 @@ The local counterparts are under `HP/includefile/`. Public rendering wrappers us
 
 ### 2.4 Special Entry Points
 
-- `create.php` affects authentication and file generation. Do not use it for normal page production. Execution or modification requires separate explicit approval.
-- `makeSitemap.php` is a special sitemap-generation entry point. Do not execute it during a normal page change; freeze the affected scope and output, then obtain explicit approval.
+- `create.php` affects authentication and file generation. It retains `dataset_test.php` and the `test.html` routing anchors as internal generation scaffolding. Do not use it for normal page production. Execution or modification requires separate explicit approval.
 - Do not automatically classify a public PHP file without source or dataset as missing. Mark it `SPECIAL` in the ledger and confirm implementation intent.
 
 ## 3. CSS
