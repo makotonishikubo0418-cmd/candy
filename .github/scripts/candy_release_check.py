@@ -5,6 +5,8 @@ from __future__ import annotations
 
 import argparse
 import json
+import shutil
+import subprocess
 import time
 from urllib.parse import quote
 from urllib.request import Request, urlopen
@@ -16,6 +18,17 @@ USER_AGENT = "candy-release-check"
 
 
 def read_json(url: str) -> dict:
+    gh = shutil.which("gh")
+    if gh:
+        result = subprocess.run(
+            [gh, "api", url],
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+        )
+        if result.returncode == 0:
+            return json.loads(result.stdout)
     request = Request(
         url,
         headers={
