@@ -2,14 +2,14 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-23T13:48:24+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-23T15:42:49+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 049c451a389d7e4ed972b791f5db74dd829ffe9e
-> State fingerprint: sha256:c44b7c11e95ef296a1d333004e87ff82ce757756e43e7c0c9aec7f85c6eedc93
+> Commit: b475b56789e138a8d38ff12073af99181dbc2c33
+> State fingerprint: sha256:50f2eca8ffd5165cc74f25fde2c20736b909a9bc6c2f7650d19e500e78d070c3
 > Scope: Public PHP, source files, datasets, shared PHP, CSS, JavaScript, images, videos, and fonts
-> Population: Public PHP files: 99 / assets: 487
+> Population: Public PHP files: 99 / assets: 628
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: Missing references: 23 / duplicate hash groups: 10
+> Result: Missing references: 20 / duplicate hash groups: 10
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
 
 ## Public PHP and Structure Files
@@ -179,11 +179,13 @@ Only the external session and database configuration references in `dataset_base
 | .css | 15 |
 | .eot | 16 |
 | .gif | 3 |
-| .jpg | 337 |
+| .jpg | 475 |
 | .js | 17 |
+| .mp4 | 2 |
 | .png | 64 |
 | .svg | 2 |
 | .ttf | 16 |
+| .webm | 1 |
 | .woff | 16 |
 | .woff2 | 1 |
 
@@ -201,11 +203,12 @@ Only the external session and database configuration references in `dataset_base
 | HP/imgHtml/new_202601/banner | 5 |
 | HP/imgHtml/new_202601/blog | 12 |
 | HP/imgHtml/new_202601/girl | 112 |
-| HP/imgHtml/new_202601/hotel | 6 |
+| HP/imgHtml/new_202601/hotel | 144 |
 | HP/imgHtml/new_202601/shop | 22 |
 | HP/imgHtml/pc | 14 |
 | HP/imgHtml/s | 14 |
 | HP/js | 17 |
+| HP/movie | 3 |
 | HP/source | 1 |
 
 ## Assets by Page
@@ -326,9 +329,6 @@ Only the external session and database configuration references in `dataset_base
 | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-aaaaaaaaaaaaaaaaaaaa_2.jpg | HP/source/template_kagoshima-deliveryhealth-area.html |
 | HP/imgHtml/new_202601/blog/aaaaaaaaaaaaaaaaaaaa.jpg | HP/source/template_kagoshima-deliveryhealth-blog.html |
 | HP/imgHtml/new_202601/hotel/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.jpg | HP/source/template_kagoshima-deliveryhealth-hotel.html |
-| HP/movie/candyStyle.mp4 | HP/source/index.html |
-| HP/movie/howToMyPage.mp4 | HP/source/mypage.html |
-| HP/movie/howToMyPage.webm | HP/source/mypage.html |
 | imgHtml/new_202601/candy_img1.jpg | HP/source/style.css |
 | imgHtml/new_202601/candy_img1_sp.jpg | HP/source/style.css |
 | imgHtml/new_202601/shop/candy.jpg | HP/source/style.css |
@@ -353,6 +353,7 @@ These candidates have no confirmed static HTML or CSS reference. They may be ref
 | HP/imgHtml | 4 | age_verification.jpg, entranceBg.jpg, twitter.svg, unnamed.jpg |
 | HP/imgHtml/new_202601 | 2 | candy_img1.jpg, candy_img1_sp.jpg |
 | HP/imgHtml/new_202601/girl | 56 | alice_1_sp.jpg, ami_1_sp.jpg, ann_1_sp.jpg, anya_1_sp.jpg, aoba_1_sp.jpg |
+| HP/imgHtml/new_202601/hotel | 138 | aquagardenhotelfukumaru_1.jpg, aquagardenhotelfukumaru_2.jpg, arthotelkagoshima_1.jpg, arthotelkagoshima_2.jpg, bbparkhotelkagoshimaannex_1.jpg |
 | HP/imgHtml/new_202601/shop | 11 | after5_sp.jpg, beloved_sp.jpg, candy_sp.jpg, danzuma_sp.jpg, hitozuma_sp.jpg |
 | HP/js | 11 | api.js, candyKissDijest.js, commonLite.js, diary.js, fav.js |
 

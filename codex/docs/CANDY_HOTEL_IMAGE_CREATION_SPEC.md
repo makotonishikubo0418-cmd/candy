@@ -47,7 +47,7 @@ codex\scripts\candy-hotel.cmd image-plan `
   --source-route DIRECT_TEXT
 ```
 
-Keep one Google Earth and Google Maps browser session for consecutive targets. Disable labels once, reuse the same `1280 x 960` capture viewport, search each confirmed hotel name and address, and capture only after the target identity and required view are correct. The default crop is `x=140, y=100, width=1000, height=750`; pass `--earth-crop` or `--maps-crop` when the clean geographic frame differs.
+Keep one Google Earth browser session for consecutive targets. Disable labels once, reuse the same `1280 x 960` capture viewport, search each confirmed hotel name and address for `_1` and the confirmed address only for `_2`, and capture only after the target identity and required view are correct. The default crop is `x=140, y=100, width=1000, height=750`; pass `--earth-crop` or `--maps-crop` when the clean geographic frame differs. Until the compatibility parameter is renamed, pass the Google Earth top-down `_2` source through `--maps-source` and its crop through `--maps-crop`.
 
 Render both candidates and one evidence manifest in a single command:
 
@@ -144,14 +144,15 @@ The source view MUST:
 
 Image `_1` is the main page image and OGP image.
 
-### 3.2 Image `_2`: Google Maps Aerial
+### 3.2 Image `_2`: Google Earth Top-Down 2D
 
-Search with the same confirmed name and address, then switch to a two-dimensional aerial view.
+Search by the confirmed hotel address only, then keep Google Earth in a two-dimensional top-down aerial view.
 
 The source view MUST:
 
 - Show the hotel building or confirmed parcel clearly.
 - Show useful surrounding roads and blocks.
+- Use a straight top-down orientation without 3D tilt.
 - Use a composition materially different from `_1`.
 - Not be an enlargement, reduction, or crop of `_1`.
 - Avoid a zoom level at which the target cannot be identified.
@@ -289,7 +290,7 @@ STOP when:
 
 - The target hotel, address, approved English name, or canonical slug is unavailable or ambiguous.
 - For `PHASE_PREPARED`, the target Text hash no longer matches the Phase 3 handoff.
-- Google Earth or Google Maps cannot load the required source view.
+- Google Earth cannot load the required source view.
 - A clean capture cannot be obtained.
 - The hotel cannot remain identifiable in the required composition.
 - The text renderer, output destination, or numeric placement cannot be verified.
