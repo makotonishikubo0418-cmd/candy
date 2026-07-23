@@ -89,6 +89,12 @@
       "latitude": 31.59878,
       "links": ["nagayoshi", "shimoishiki", "tamazatocho", "yamashitacho", "yamanokuchicho", "tamazatodanchi"]
     },
+    "haruyamacho": {
+      "region": "春山町",
+      "longitude": 130.456924,
+      "latitude": 31.561895,
+      "links": ["yotsumotocho", "yamadacho", "jiyugaoka", "hiroki"]
+    },
     "hikariyama": {
       "region": "光山",
       "longitude": 130.509415,
@@ -311,6 +317,12 @@
       "latitude": 31.667522,
       "links": ["shimotacho", "yoshino", "shimoishikicho", "hanaomachi"]
     },
+    "murasakibaru": {
+      "region": "紫原",
+      "longitude": 130.540085,
+      "latitude": 31.559765,
+      "links": ["hiroki", "arata", "shimoarata", "chuokoshinmachi"]
+    },
     "nagayoshi": {
       "region": "永吉",
       "longitude": 130.535751,
@@ -412,6 +424,12 @@
       "longitude": 130.560333,
       "latitude": 31.605291,
       "links": ["yamashitacho", "tamazatocho", "yamanokuchicho", "harara", "tamazatodanchi", "shimoishikicho"]
+    },
+    "sumiyoshicho": {
+      "region": "住吉町",
+      "longitude": 130.561981,
+      "latitude": 31.590073,
+      "links": ["yamanokuchicho", "yamashitacho", "shimoarata", "kinkocho"]
     },
     "tamazatocho": {
       "region": "玉里町",

@@ -941,7 +941,7 @@ def render_source(
         raise AreaToolError(f"JSON-LDテンプレート数が2ではありません: {json_count}")
 
     source = replace_exact(source, r"<li><span>.*?</span></li>", f"<li><span>{htext(data.page_title)}</span></li>", "breadcrumb")
-    source = replace_exact(source, r'<img src="[^"]+" class="img_1 nolazy" alt="[^"]+">', f'<img src="{hattr(data.image1)}" class="img_1 nolazy" alt="{hattr(data.page_title)}">', "image1")
+    source = replace_exact(source, r'<img src="[^"]+" class="img_1 nolazy" alt="[^"]+"([^>]*)>', rf'<img src="{hattr(data.image1)}" class="img_1 nolazy" alt="{hattr(data.page_title)}"\g<1>>', "image1")
     h1_suffix = "呼べるデリヘル"
     if data.page_title.endswith(h1_suffix):
         h1_prefix = data.page_title[: -len(h1_suffix)]
@@ -961,7 +961,7 @@ def render_source(
     source = replace_exact(source, r'(<h2[^>]+id="scene1">).*?(</h2>)', rf"\g<1>{shop_h2}\g<2>", "shop heading", re.S)
     source = replace_exact(source, r'(<ul class="campaign-list" role="list">).*?(</ul>)', rf"\g<1>\n{render_shop_blocks(resolved, templates)}\n\t\t\t\t\g<2>", "shop blocks", re.S)
     source = replace_exact(source, r'(<div[^>]+id="description_1">).*?(</div>)', rf"\g<1>{htext(data.shop_description)}\g<2>", "shop description", re.S)
-    source = replace_exact(source, r'<img src="[^"]+" class="img_1 nolazy" loading="lazy" alt="[^"]+">', f'<img src="{hattr(data.image2)}" class="img_1 nolazy" loading="lazy" alt="鹿児島「{hattr(data.region)}」について">', "image2")
+    source = replace_exact(source, r'<img src="[^"]+" class="img_1 nolazy" loading="lazy" alt="[^"]+"([^>]*)>', rf'<img src="{hattr(data.image2)}" class="img_1 nolazy" loading="lazy" alt="鹿児島「{hattr(data.region)}」について"\g<1>>', "image2")
 
     number = 2
     dynamic_parts: list[str] = []

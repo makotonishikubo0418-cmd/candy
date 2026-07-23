@@ -48,13 +48,13 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 12 | 山田町 | `yamadacho` | IN_PROGRESS | Dedicated tool / 2026-07-14 / Three files, shared registration, and static validation complete / PHP CLI unverified |
 | 13 | 山之口町 | `yamanokuchicho` | IN_PROGRESS | Dedicated tool / 2026-07-14 / Three files, shared registration, and static validation complete / PHP CLI unverified |
 | 14 | 四元町 | `yotsumotocho` | IN_PROGRESS | Dedicated tool / 2026-07-15 / Three files, shared registration, and static validation complete / PHP CLI unverified |
-| 15 | 紫原 | `murasakibaru` | READY_CANDIDATE | |
+| 15 | 紫原 | `murasakibaru` | LOCAL_COMPLETE | 専用ツール / 2026-07-24 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
 | 16 | 慈眼寺町 | `jigenjicho` | IN_PROGRESS | 専用ツール / 2026-07-18 / 3ファイル・共有登録・静的検査済み / PHP CLI未確認 |
 | 17 | 自由ヶ丘 | `jiyugaoka` | IN_PROGRESS | 専用ツール / 2026-07-18 / 3ファイル・共有登録・静的検査済み / PHP CLI未確認 |
 | 18 | 七ツ島 | `nanatsujima` | IN_PROGRESS | Dedicated tool / 2026-07-16 / Three files, shared registration, and static validation complete / PHP CLI unverified |
 | 19 | 若葉町 | `wakabacho` | IN_PROGRESS | 専用ツール / 2026-07-18 / 3ファイル・共有登録・静的検査済み / PHP CLI未確認 |
-| 20 | 住吉町 | `sumiyoshicho` | READY_CANDIDATE | |
-| 21 | 春山町 | `haruyamacho` | READY_CANDIDATE | |
+| 20 | 住吉町 | `sumiyoshicho` | LOCAL_COMPLETE | 専用ツール / 2026-07-24 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
+| 21 | 春山町 | `haruyamacho` | LOCAL_COMPLETE | 専用ツール / 2026-07-24 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
 | 22 | 小松原 | `komatsubara` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
 | 23 | 松原町 | `matsubaracho` | READY_CANDIDATE | |
 | 24 | 照国町 | `terukunicho` | READY_CANDIDATE | |
