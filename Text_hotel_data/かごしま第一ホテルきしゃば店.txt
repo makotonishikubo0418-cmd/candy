@@ -141,7 +141,7 @@ subtitle_
 description_
 〒890-0056 鹿児島県鹿児島市下荒田3丁目22-10<改行>
 TEL 099-255-1954
-URL http://takezako-onsen.com/
+URL https://takezako-onsen.com/
 
 subtitle_
 松重(まつじゅう)

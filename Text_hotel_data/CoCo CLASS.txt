@@ -151,13 +151,6 @@ TEL 099-226-9220
 URL https://maps.app.goo.gl/4XrQmJN1NUhEeNeY7
 
 subtitle_
-Ｇrill Bar 山地
-description_
-〒892-0845 鹿児島県鹿児島市樋之口町5-6<改行>
-TEL 099-224-7707
-URL http://www.yukusas.com/pg/pshop.htm?sid=00516
-
-subtitle_
 麺屋 大雲
 description_
 〒892-0845 鹿児島県鹿児島市樋之口町10-39<改行>

@@ -34,6 +34,52 @@ Keep unaccepted working output outside the accepted-source and public-source fol
 
 Do not use generative AI to create, complete, remove, replace, or materially alter the hotel, roads, buildings, or geographic background.
 
+### 1.4 Optimized Candidate Route
+
+Use the dedicated helper to remove repeated manual cropping, font sizing, placement, JPEG encoding, hashing, and file checks. It does not replace the applicable `DIRECT_TEXT` or `PHASE_PREPARED` start gate and does not perform visual acceptance, accepted-source storage, public installation, Git, or publication.
+
+Plan one target before capture:
+
+```powershell
+codex\scripts\candy-hotel.cmd image-plan `
+  --input "Text_hotel_data/対象ホテル.txt" `
+  --hotel-name-en "Exact approved English name" `
+  --source-route DIRECT_TEXT
+```
+
+Keep one Google Earth and Google Maps browser session for consecutive targets. Disable labels once, reuse the same `1280 x 960` capture viewport, search each confirmed hotel name and address, and capture only after the target identity and required view are correct. The default crop is `x=140, y=100, width=1000, height=750`; pass `--earth-crop` or `--maps-crop` when the clean geographic frame differs.
+
+Render both candidates and one evidence manifest in a single command:
+
+```powershell
+codex\scripts\candy-hotel.cmd image-render `
+  --input "Text_hotel_data/対象ホテル.txt" `
+  --hotel-name-en "Exact approved English name" `
+  --source-route DIRECT_TEXT `
+  --earth-source "C:\path\earth-full.png" `
+  --maps-source "C:\path\maps-full.png"
+```
+
+The default candidate directory is `%TEMP%\candy-hotel-images\<CANONICAL_SLUG>`. The helper rejects candidate output inside the repository, prevents accidental candidate overwrite unless `--overwrite` is explicit, uses one stored `HOTEL_NAME_EN` value for both renders, and records font sizes, bounding boxes, measured centers, file properties, and SHA-256 values.
+
+Recheck an existing candidate manifest without rendering again:
+
+```powershell
+codex\scripts\candy-hotel.cmd image-check `
+  --input "Text_hotel_data/対象ホテル.txt" `
+  --hotel-name-en "Exact approved English name" `
+  --source-route DIRECT_TEXT `
+  --manifest "C:\candidate\<CANONICAL_SLUG>_image_manifest.json"
+```
+
+`DETERMINISTIC_FILE_GATES=PASS` covers only the measurable renderer and file requirements. `VISUAL_GATES=REQUIRED` means target identity, clean background, readability, and material composition difference still require inspection under Sections 3, 4, and 9. Do not accept or install a pair from the deterministic result alone.
+
+Validate the helper contract after changing its implementation:
+
+```powershell
+codex\scripts\candy-hotel.cmd image-self-test
+```
+
 ## 2. Deliverables
 
 A hotel page requires exactly two accepted-source images:

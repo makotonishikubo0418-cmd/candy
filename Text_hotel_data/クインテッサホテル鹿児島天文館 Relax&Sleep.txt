@@ -33,16 +33,16 @@ description
 鹿児島市呉服町でデリヘルが呼べるホテルクインテッサホテル鹿児島天文館 Relax&Sleep｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載
 -------------------------------------------------------------------
 canonical
-https://www.55810.com/kagoshima-deliveryhealth-hotel-quintessahotelkagoshimatenmonkanrelax&sleep.php
+https://www.55810.com/kagoshima-deliveryhealth-hotel-quintessahotelkagoshimatenmonkanrelaxsleep.php
 -------------------------------------------------------------------
 image
-https://www.55810.com/imgHtml/new_202601/hotel/quintessahotelkagoshimatenmonkanrelax&sleep_1.jpg
+https://www.55810.com/imgHtml/new_202601/hotel/quintessahotelkagoshimatenmonkanrelaxsleep_1.jpg
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 記事内容
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 img_1
-src : ./imgHtml/new_202601/hotel/quintessahotelkagoshimatenmonkanrelax&sleep_1.jpg
+src : ./imgHtml/new_202601/hotel/quintessahotelkagoshimatenmonkanrelaxsleep_1.jpg
 -------------------------------------------------------------------
 page_title_h1 / パンくずリスト
 鹿児島市でデリヘルが呼べるホテル  クインテッサホテル鹿児島天文館 Relax&Sleep
@@ -85,7 +85,7 @@ description_
 はい、きれいさを重視する方でも候補に入れやすいホテルです。2023年5月1日にオープンした比較的新しいホテルなので、新しさを感じやすく、全体としてすっきりした印象を持ちやすいです。しかも、ただ新しいだけではなく、温かな木目調とやさしい緑を取り入れた上品なデザインでまとめられているため、館内や客室にも落ち着いた雰囲気があります。見た目の整い方だけでなく、過ごしていて気持ちが落ち着きやすい空間なのも魅力です。天文館エリアで立地の便利さに加えて、きれいさや居心地のよさも重視したい方には、選びやすい一軒です。
 -------------------------------------------------------------------
 img_2
-src : ./imgHtml/new_202601/hotel/quintessahotelkagoshimatenmonkanrelax&sleep_2.jpg
+src : ./imgHtml/new_202601/hotel/quintessahotelkagoshimatenmonkanrelaxsleep_2.jpg
 -------------------------------------------------------------------
 scene（h2）
 基本情報
@@ -162,4 +162,4 @@ subtitle_
 description_
 〒892-0826 鹿児島県鹿児島市呉服町1-1<改行>
 TEL 099-239-1333
-URL http://www.festivalo.co.jp/
+URL https://www.festivalo.co.jp/

@@ -1,147 +1,159 @@
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-【重要】
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-【1】同フォルダ内「Cursor用更新手順.txt」確認の上、実行してください。
-【2】誤字脱字及び、情報未入力項目があった場合は、実行前にお知らせください。
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 基本情報
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 title
-aaaaaaaaaaaaaaaaaaaa｜鹿児島 デリヘルが呼べるホテル
+ヴィラコスタ500（Villa Costa 500）｜鹿児島 デリヘルが呼べるホテル
 -------------------------------------------------------------------
 description
-鹿児島市aaaaaaaaaaaaaaaaaaaaでデリヘルが呼べるホテルaaaaaaaaaaaaaaaaaaaa｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載
+鹿児島市錦江町でデリヘルが呼べるホテルヴィラコスタ500（Villa Costa 500）｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載
 -------------------------------------------------------------------
 canonical
-https://www.55810.com/kagoshima-deliveryhealth-hotel-aaaaaaaaaaaaaaaaaaaa.php
+https://www.55810.com/kagoshima-deliveryhealth-hotel-villacosta500.php
 -------------------------------------------------------------------
 image
-https://www.55810.com/imgHtml/new_202601/hotel/kagoshima-deliveryhealth-hotel-aaaaaaaaaaaaaaaaaaaa_1.jpg
-
+https://www.55810.com/imgHtml/new_202601/hotel/villacosta500_1.jpg
+-------------------------------------------------------------------
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 記事内容
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-写真
-src : ./imgHtml/new_202601/hotel/kagoshima-deliveryhealth-hotel-aaaaaaaaaaaaaaaaaaaa_1.jpg
+img_1
+src : ./imgHtml/new_202601/hotel/villacosta500_1.jpg
 -------------------------------------------------------------------
 page_title_h1 / パンくずリスト
-
-鹿児島市でデリヘルが呼べるホテルaaaaaaaaaaaaaaaaaaaa
-
+鹿児島市でデリヘルが呼べるホテル ヴィラコスタ500（Villa Costa 500）
+-------------------------------------------------------------------
 subtitle_h1
-aaaaaaaaaaaaaaaaaaaa
-
-description_h1（改行無し）
-aaaaaaaaaaaaaaaaaaaa
+こんにちは、アッキー店長です。
+鹿児島でデリヘルキャンディを呼ぶなら景色が最高な、ホテル ヴィラコスタ500（Villa Costa 500）は候補に入れて損がない一軒です。
+-------------------------------------------------------------------
+description_h1
+ホテル ヴィラコスタ500は立地が分かりやすく、行きやすいのに落ち着けるのが魅力です。鹿児島中央駅や天文館から車で行きやすい距離なのに、港側に入ると周りが少し静かになって、街中の慌ただしさが自然と離れます。到着した瞬間に「今日はゆっくりしよう」と気持ちを切り替えやすい場所です。さらに桜島が見える景色もあって気分までしっかりリセットできます。
 -------------------------------------------------------------------
 option
-aaaaaaaaaaaaaaaaaaaa
-
+露天風呂とサウナで整って、部屋で食事まで完結するホテル
+-------------------------------------------------------------------
 option_subtitle
-aaaaaaaaaaaaaaaaaaaa
-
+ホテル ヴィラコスタ500は、露天風呂付きのお部屋やサウナ、岩盤浴を楽しめるお部屋もあり、ただ休むだけでなく身体をほぐしてリフレッシュまでできるので、入ってから何をするかを自分のペースで組み立てやすいホテルです。
+-------------------------------------------------------------------
 option_description
-aaaaaaaaaaaaaaaaaaaa
+短時間の休憩でさっと利用するのも良い一方、少し時間に余裕を持って入浴して休憩し、当店の女の子をご利用いただいてから、もう一度お風呂に入る流れにすると、このホテルの心地よさがより分かりやすく感じられます。さらに外出せずに部屋の中で食事まで済ませられる点も助かり、プレートや定食、粉ものの軽食、麺類、イタリアン、アラカルト、スイーツ、モーニング、ドリンクまで幅広く揃っていて、その日の気分に合わせて選びやすく、テレビから注文できる案内もあるため部屋の流れを止めずに過ごせます。加えてメンバー特典も充実しており、宿泊利用ではウェルカムサービスがお得になり朝食も無料になるので朝までゆっくりしたい方の満足度が上がりやすく、朝食は選べる形式の予約制で申込みは深夜3時まで受け付けとされているため到着後に慌てないよう早めに手続きしておくと安心で、メンバー限定のWeb予約やメールマガジンで最新情報を受け取れる仕組みも用意されているので、よく利用する方ほど便利に使えます。
 -------------------------------------------------------------------
-scene1
-鹿児島市aaaaaaaaaaaaaaaaaaaaに呼べる「人気デリヘル店」情報
+scene（h2 / 「人気デリヘル店」情報）
+ヴィラコスタ500に呼べる「鹿児島の人気デリヘル店」
 
-【重要】template_shop.htmlから情報取得
-・CANDY（内容は同じ）
-・aaaaaaaaaaaaaaaaaaaa（移動時間 : 10分～15分前後 / 交通費 : 無料～1,500円）
-・aaaaaaaaaaaaaaaaaaaa（移動時間 : 10分～20分前後 / 交通費 : 無料～2,000円）
-・aaaaaaaaaaaaaaaaaaaa（移動時間 : 10分～30分前後 / 交通費 : 無料～2,000円）
+・CANDY（移動時間 : 10～15分前後 / 交通費 : 無料）
+・黒薔薇（移動時間 : 10分～20分前後 / 交通費 : 無料）
+・REBORN（移動時間 : 10分～25分前後 / 交通費 : 無料）
+・人妻エステ（移動時間 : 10分～30分前後 / 交通費 : 無料）
+
 -------------------------------------------------------------------
-scene2
+scene（h2 / よくあるご質問）
 よくあるご質問「FAQ」
 
-subtitle_2_1
-aaaaaaaaaaaaaaaaaaaa
-description_2_1
-aaaaaaaaaaaaaaaaaaaa
-description_2_1
+subtitle_
+到着までの目安時間はどのくらいですか？
+description_
+最短15分ほどで到着・派遣可能ですが、混雑状況や交通状況により前後いたしますので、目安時間はお問い合わせ時にスタッフにご確認ください。可能な限りスピーディーにご案内いたします。
 
-subtitle_2_2
-aaaaaaaaaaaaaaaaaaaa
-description_2_2
-aaaaaaaaaaaaaaaaaaaa
-description_2_2
+subtitle_
+お得な割引チケットの条件はどうなっていますか？
+description_
+お得な割引チケットは、メンバーカード・他割引との併用、ショートタイム、キュート・クリスタルタイプのお部屋でのご利用は不可となっております。
 
-subtitle_2_3
-aaaaaaaaaaaaaaaaaaaa
-description_2_3
-aaaaaaaaaaaaaaaaaaaa
-description_2_3
+subtitle_
+鹿児島中央駅から車でどのようにして行けますか？
+description_
+鹿児島中央駅からナポリ通りを錦江湾方面へまっすぐ進み、約7〜8分で旧中央市場交差点に着いたら右折して国道225号を指宿方面へ約1km進みます。橋を渡って約60m先で、LPオートガススタンド手前の路地を左に入り、道なりに直進して堤防に突き当たったら左折し、そこから約60m進んでください。
 
-subtitle_2_4
-aaaaaaaaaaaaaaaaaaaa
-description_2_4
-aaaaaaaaaaaaaaaaaaaa
-description_2_4
+subtitle_
+ホテルの設備は充実していますか？
+description_
+ジェットバス＆浴室テレビ、サウナに露天風呂など、かなり充実した設備となっております。
 
-【重要】HTMLを追加・削除して調整してください。
 -------------------------------------------------------------------
-写真
-src : ./imgHtml/new_202601/hotel/kagoshima-deliveryhealth-hotel-aaaaaaaaaaaaaaaaaaaa_2.jpg
+img_2
+src : ./imgHtml/new_202601/hotel/villacosta500_2.jpg
 -------------------------------------------------------------------
-scene3
+scene（h2）
 基本情報
 
 ホテル名
-aaaaaaaaaaaaaaaaaaaa
+ヴィラコスタ500（Villa Costa 500）
 
-住所（郵便番号迄）
-aaaaaaaaaaaaaaaaaaaa
+URL
+https://www.hotenavi.com/vc-500/
+
+住所
+〒892-0836 <改行>
+鹿児島県鹿児島市錦江町10-20
 
 電話番号
-aaaaaaaaaaaaaaaaaaaa
+099-805-3711
 
 部屋・駐車場
-aaaaaaaaaaaaaaaaaaaa（不明時は削除）
+全37室 / 42台
 
 支払方法
-aaaaaaaaaaaaaaaaaaaa（不明時は削除）
+現金・クレジットカード
+
 -------------------------------------------------------------------
-scene4
+scene（h2）
 料金情報
 
 休憩等
-aaaaaaaaaaaaaaaaaaaa（不明時は削除）
+6,000円～8,800円（税込）
 
 フリー
-aaaaaaaaaaaaaaaaaaaa（不明時は削除）
+8,500円～9,800円（税込）
 
 宿泊
-aaaaaaaaaaaaaaaaaaaa（不明時は削除）
+12,500円～18,700円（税込）
 
 延長
-aaaaaaaaaaaaaaaaaaaa（不明時は削除）
+1,300円～（税込）
+
 -------------------------------------------------------------------
-scene5
+scene（h2）
 アクセス情報
 
- 地図URL
-aaaaaaaaaaaaaaaaaaaa
+地図URL
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3399.066705861067!2d130.56651647656204!3d31.57721857418799!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x353e60a35d552ccb%3A0x79b4d74ec8fb9e5f!2z44CSODkyLTA4MzYg6bm_5YWQ5bO255yM6bm_5YWQ5bO25biC6Yym5rGf55S677yR77yQ4oiS77yS77yQ!5e0!3m2!1sja!2sjp!4v1769651684061!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
- 地図タイトル
-鹿児島市 aaaaaaaaaaaaaaaaaaaaの地図
+地図タイトル
+ヴィラコスタ500の地図
 
-subtitle_5
-aaaaaaaaaaaaaaaaaaaa
+subtitle_
+ホテル ヴィラコスタ500は鹿児島市錦江町にあり、市内中心部から無理なく移動できる立地です。天文館から車で向かう場合は、錦江湾側を目安に主要道路を進み、港湾エリア方面へ抜ける流れで到着しやすく、所要時間はおおむね約10分前後です。時間帯によっては市街地で混み合うこともありますが、ルート自体は分かりやすく、初めての方でも移動のイメージを持ちやすいかと思います。
 
-description_5
-aaaaaaaaaaaaaaaaaaaa
+description_
+鹿児島中央駅から車の場合も、市街地を南下して国道225号線方面へ進めば、同じく約10分ほどでホテル付近まで到達できますので、観光の合間やお仕事帰りの移動にも便利です。公共交通機関をご利用の際は、天文館から鹿児島市電または路線バスで新屋敷方面へ移動し、下車後は徒歩で向かうのが一般的です。電車と徒歩を組み合わせた所要時間の目安は15分から20分ほどで、荷物が少ない場合は特にスムーズです。鹿児島中央駅からも市電で新屋敷電停まで移動し、そこから徒歩でホテルへ向かえるため、乗り換えを抑えて移動したい方にも向いています。全体として、車でも公共交通でも比較的短時間でアクセスでき、昼間はもちろん夕方以降のご移動にも使いやすい環境です。
+
 -------------------------------------------------------------------
-scene6
-aaaaaaaaaaaaaaaaaaaa「周辺スポット」
+scene（h2）
+ホテル ヴィラコスタ500「周辺スポット」
 
-subtitle_6_1
-aaaaaaaaaaaaaaaaaaaa
-description_6_1
-aaaaaaaaaaaaaaaaaaaa
-099-259-1111
-URL : aaaaaaaaaaaaaaaaaaaa
+subtitle_
+奄美・沖縄フェリーターミナル
+description_
+鹿児島県鹿児島市城南町45-1<改行>
+TEL 099-226-4141<改行>
+URL https://maps.app.goo.gl/VCkG3SbDYJ5Wk8Ki8
 
-【重要】HTMLを追加・削除して調整してください。
+subtitle_
+オートバックス 鹿児島城南
+description_
+鹿児島県鹿児島市城南町4-10<改行>
+TEL 099-224-0030<改行>
+URL https://maps.app.goo.gl/7Jdmtvshc6ZuDeBc6
+
+subtitle_
+鹿児島港新港南防波堤灯台
+description_
+鹿児島県鹿児島市錦江町<改行>
+URL https://maps.app.goo.gl/F8ko1UUHLGFf9ALj7
+
+description_
+周辺スポット情報は変更されている場合がございますので、詳細は直接お問い合わせください。
+
+-------------------------------------------------------------------
 

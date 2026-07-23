@@ -141,7 +141,7 @@ subtitle_
 description_
 〒891-0114 鹿児島県鹿児島市小松原1丁目43-19<改行>
 TEL 099-266-2003
-URL http://yokomura.info/
+URL https://yokomura.info/
 
 subtitle_
 粋麺麦のはな
@@ -155,7 +155,7 @@ subtitle_
 description_
 〒891-0114 鹿児島県鹿児島市小松原1丁目11-18<改行>
 TEL 099-269-5913
-URL http://kagoshima-ohsho.jp/shops/sasanuki
+URL https://kagoshima-ohsho.jp/shops/sasanuki
 
 subtitle_
 油そば専門 BUTA GORIRA

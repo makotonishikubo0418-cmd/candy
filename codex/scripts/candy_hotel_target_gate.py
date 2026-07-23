@@ -83,7 +83,7 @@ def input_paths() -> list[Path]:
 
 
 def is_admin_doc(path: Path) -> bool:
-    return path.name.lower().startswith("cursor")
+    return path.name.lower().startswith("cursor") or path.name == "01_対応ホテル_テンプレート.txt"
 
 
 def git_tracked(path: Path) -> bool:

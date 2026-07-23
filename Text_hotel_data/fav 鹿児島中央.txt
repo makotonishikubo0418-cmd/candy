@@ -33,16 +33,16 @@ description
 鹿児島市加治屋町でデリヘルが呼べるホテルfav 鹿児島中央｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載
 -------------------------------------------------------------------
 canonical
-https://www.55810.com/kagoshima-deliveryhealth-hotel-favhotelKagoshimachuo.php
+https://www.55810.com/kagoshima-deliveryhealth-hotel-favhotelkagoshimachuo.php
 -------------------------------------------------------------------
 image
-https://www.55810.com/imgHtml/new_202601/hotel/favhotelKagoshimachuo_1.jpg
+https://www.55810.com/imgHtml/new_202601/hotel/favhotelkagoshimachuo_1.jpg
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 記事内容
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 img_1
-src : ./imgHtml/new_202601/hotel/favhotelKagoshimachuo_1.jpg
+src : ./imgHtml/new_202601/hotel/favhotelkagoshimachuo_1.jpg
 -------------------------------------------------------------------
 page_title_h1 / パンくずリスト
 鹿児島市でデリヘルが呼べるホテル  fav 鹿児島中央
@@ -86,7 +86,7 @@ description_
 
 -------------------------------------------------------------------
 img_2
-src : ./imgHtml/new_202601/hotel/favhotelKagoshimachuo_2.jpg
+src : ./imgHtml/new_202601/hotel/favhotelkagoshimachuo_2.jpg
 -------------------------------------------------------------------
 scene（h2）
 基本情報
@@ -163,4 +163,4 @@ subtitle_
 description_
 〒892-0846 鹿児島県鹿児島市加治屋町2-1 パークサイド加治屋町1-2<改行>
 TEL 099-802-4266
-URL http://www.k-kiwami.jp/
+URL https://www.k-kiwami.jp/

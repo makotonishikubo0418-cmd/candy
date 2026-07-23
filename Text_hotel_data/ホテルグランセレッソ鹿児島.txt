@@ -137,13 +137,6 @@ scene（h2）
 ホテル 「ホテル グランセレッソ鹿児島天文館」「周辺スポット」
 
 subtitle_
-NEWおだまLee男爵
-description_
-〒892-0831 鹿児島県鹿児島市船津町1-2 第一島津ビル 4階<改行>
-TEL 099-224-3456
-URL http://www.odamalee.info/
-
-subtitle_
 大衆酒場 升屋 ぶふ
 description_
 〒892-0831 鹿児島県鹿児島市船津町1-28 1F<改行>

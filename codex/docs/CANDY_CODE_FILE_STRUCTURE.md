@@ -107,6 +107,7 @@ Hotel Text preparation tools:
 |---|---|
 | `codex/scripts/candy_hotel_text_migration.py` | Detect legacy hotel Text formats, normalize only explicit source values, reject ambiguity or shortage, and validate the result with the current hotel parser before creating or replacing a Text |
 | `codex/scripts/candy_hotel_target_gate.py` | Classify current and legacy hotel inputs, aggregate blockers, and allow only eligible new-page targets into production |
+| `codex/scripts/candy_hotel_image.py` | Plan one confirmed hotel-image target, render the two deterministic external candidates from clean Earth and Maps captures, record numeric renderer evidence, and recheck candidate files without accepting, installing, or publishing them |
 
 ```powershell
 codex\scripts\candy-site-state.cmd audit

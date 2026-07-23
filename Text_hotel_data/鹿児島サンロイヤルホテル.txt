@@ -162,4 +162,4 @@ subtitle_
 description_
 〒890-0062 鹿児島県鹿児島市与次郎1丁目9-53<改行>
 TEL 099-255-8929
-URL http://www.nabeshima-jp.com/shop/kago-yojiro/
+URL https://www.nabeshima-jp.com/shop/kago-yojiro/

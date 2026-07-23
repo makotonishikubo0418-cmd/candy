@@ -49,10 +49,10 @@ page_title_h1 / パンくずリスト
 
 subtitle_h1
 こんにちは！アッキー店長です。
-aaaaaaaaaaaaaaaaaaaa
+ホテル サントリーニは、鹿児島市城南町にあり、天文館や鹿児島中央駅から車で移動しやすいホテルです。繁華街で食事や買い物を済ませたあとも市街地中心部から大きく離れずに向かえるため、その後の予定を組み立てやすい立地です。
 
 description_h1
-aaaaaaaaaaaaaaaaaaaa
+専用駐車場があり、車で利用する場合も動きやすく、周辺には飲食店やコンビニもあります。鹿児島新港にも近いため、城南町周辺で過ごしながら必要な用事を近場でまとめやすい点も実用的です。天文館のにぎわいを利用しつつ、城南町側へ少し移動して過ごしたい方にとって、候補に入れやすい一軒です。
 -------------------------------------------------------------------
 scene（h2 / 「人気デリヘル店」情報）
 ホテル サントリーニに呼べる「鹿児島の人気デリヘル店」
@@ -61,28 +61,6 @@ scene（h2 / 「人気デリヘル店」情報）
 ・REBORN（移動時間 : 5分～10分前後 / 交通費 : 無料～1,000円）
 ・黒薔薇（移動時間 : 5分～15分前後 / 交通費 : 無料～1,500円）
 ・CANDY BELOVED（移動時間 : 50分～60分前後 / 交通費 : 4,000円～要相談）
--------------------------------------------------------------------
-scene（h2 / よくあるご質問）
-
-subtitle_
-aaaaaaaaaaaaaaaaaaaa
-description_
-aaaaaaaaaaaaaaaaaaaa
-
-subtitle_
-aaaaaaaaaaaaaaaaaaaa
-description_
-aaaaaaaaaaaaaaaaaaaa
-
-subtitle_
-aaaaaaaaaaaaaaaaaaaa
-description_
-aaaaaaaaaaaaaaaaaaaa
-
-subtitle_
-aaaaaaaaaaaaaaaaaaaa
-description_
-aaaaaaaaaaaaaaaaaaaa
 -------------------------------------------------------------------
 img_2
 src : ./imgHtml/new_202601/hotel/hotelsantorini_2.jpg

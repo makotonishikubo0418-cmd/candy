@@ -33,16 +33,16 @@ description
 鹿児島市与次郎でデリヘルが呼べるホテル「ホテルウェルビューかごしま」｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載
 -------------------------------------------------------------------
 canonical
-https://www.55810.com/kagoshima-deliveryhealth-hotel-hotel welview kagoshima.php
+https://www.55810.com/kagoshima-deliveryhealth-hotel-hotelwelviewkagoshima.php
 -------------------------------------------------------------------
 image
-https://www.55810.com/imgHtml/new_202601/hotel/hotel welview kagoshima_1.jpg
+https://www.55810.com/imgHtml/new_202601/hotel/hotelwelviewkagoshima_1.jpg
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 記事内容
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 img_1
-src : ./imgHtml/new_202601/hotel/hotel welview kagoshima_1.jpg
+src : ./imgHtml/new_202601/hotel/hotelwelviewkagoshima_1.jpg
 -------------------------------------------------------------------
 page_title_h1 / パンくずリスト
 鹿児島市でデリヘルが呼べるホテル  「ホテルウェルビューかごしま」
@@ -54,37 +54,15 @@ description_h1
 だからこそ、ただ寝るだけで終わる感じになりにくいです。しかも、落ち着いているだけではなく、与次郎二丁目バス停から徒歩で向かいやすいため、天文館や鹿児島中央駅からの移動もしやすく、不便さが先に立つこともありません。周辺には鹿児島市立科学館やアクロスプラザ与次郎のように、ちょっとした立ち寄り場所もあり、少し気分を変えたいときにも使いやすい環境です。さらにホテルの中では天然温泉とサウナが使え、食事も館内で楽しめるため、外で動いたあとにそのまま気持ちを整えやすいのも魅力です。移動のしやすさは欲しいけれど、繁華街のど真ん中でずっと気を張っていたくないという方には、ちょうどいいホテルだと思います。桜島や錦江湾を眺めながら、ホテルでゆったりした時間を過ごしやすいのも、このホテルならではの良さです。ホテルウェルビューかごしまは、鹿児島の街なかを無理なく使いながら、景色と温泉でしっかり休む流れまで作りやすい、バランスのいい一軒だと思います。
 -------------------------------------------------------------------
 scene（h2 / 「人気デリヘル店」情報）
-「ホテルウェルビューかごしま」aに呼べる「鹿児島の人気デリヘル店」
+ホテルウェルビューかごしまに呼べる「鹿児島の人気デリヘル店」
 
 ・CANDY（内容は同じ）
 ・REBORN（移動時間 : 10分～15分前後 / 交通費 : 無料～2,000円）
 ・激情団地妻（移動時間 : 10分～18分前後 / 交通費 : 無料～2,000円）
 ・楊貴妃（移動時間 : 10分～20分前後 / 交通費 : 無料～2,000円）
 -------------------------------------------------------------------
-scene（h2 / よくあるご質問）
-
-subtitle_
-aaaaaaaaaaaaaaaaaaaa
-description_
-aaaaaaaaaaaaaaaaaaaa
-
-subtitle_
-aaaaaaaaaaaaaaaaaaaa
-description_
-aaaaaaaaaaaaaaaaaaaa
-
-subtitle_
-aaaaaaaaaaaaaaaaaaaa
-description_
-aaaaaaaaaaaaaaaaaaaa
-
-subtitle_
-aaaaaaaaaaaaaaaaaaaa
-description_
-aaaaaaaaaaaaaaaaaaaa
--------------------------------------------------------------------
 img_2
-src : ./imgHtml/new_202601/hotel/hotel welview kagoshima_2.jpg
+src : ./imgHtml/new_202601/hotel/hotelwelviewkagoshima_2.jpg
 -------------------------------------------------------------------
 scene（h2）
 基本情報

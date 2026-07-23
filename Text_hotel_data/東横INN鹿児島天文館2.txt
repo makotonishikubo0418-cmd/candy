@@ -33,16 +33,16 @@ description
 鹿児島市東千石町でデリヘルが呼べるホテル東横INN鹿児島天文館2｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載
 -------------------------------------------------------------------
 canonical
-https://www.55810.com/kagoshima-deliveryhealth-hotel-toyokoinnkagoshimatemmonkanno.2.php
+https://www.55810.com/kagoshima-deliveryhealth-hotel-toyokoinnkagoshimatemmonkanno2.php
 -------------------------------------------------------------------
 image
-https://www.55810.com/imgHtml/new_202601/hotel/toyokoinnkagoshimatemmonkanno.2_1.jpg
+https://www.55810.com/imgHtml/new_202601/hotel/toyokoinnkagoshimatemmonkanno2_1.jpg
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 記事内容
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 img_1
-src : ./imgHtml/new_202601/hotel/toyokoinnkagoshimatemmonkanno.2_1.jpg
+src : ./imgHtml/new_202601/hotel/toyokoinnkagoshimatemmonkanno2_1.jpg
 -------------------------------------------------------------------
 page_title_h1 / パンくずリスト
 鹿児島市でデリヘルが呼べるホテル  東横INN鹿児島天文館2
@@ -85,7 +85,7 @@ description_
 東横INN鹿児島天文館2を利用する際、チェックイン前の荷物預かりは当日の朝から相談できます。ただし、その日の混雑状況やフロントの対応状況によっては預けられない場合もあるため、早めにホテルへ確認しておくと安心です。チェックアウト後の荷物預かりはホテルごとに運用が異なるため、利用を考えている場合は事前確認がおすすめです。なお、貴重品や常温で保管できないものは預けられず、再度宿泊予定があってもチェックアウト日以外の預かりには対応していません。
 -------------------------------------------------------------------
 img_2
-src : ./imgHtml/new_202601/hotel/toyokoinnkagoshimatemmonkanno.2_2.jpg
+src : ./imgHtml/new_202601/hotel/toyokoinnkagoshimatemmonkanno2_2.jpg
 -------------------------------------------------------------------
 scene（h2）
 基本情報

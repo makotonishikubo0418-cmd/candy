@@ -33,16 +33,16 @@ description
 鹿児島市中央町でデリヘルが呼べるホテルＢ＆Ｂパークホテル鹿児島アネックス｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載
 -------------------------------------------------------------------
 canonical
-https://www.55810.com/kagoshima-deliveryhealth-hotel-b&bparkhotelkagoshimaannex.php
+https://www.55810.com/kagoshima-deliveryhealth-hotel-bbparkhotelkagoshimaannex.php
 -------------------------------------------------------------------
 image
-https://www.55810.com/imgHtml/new_202601/hotel/b&bparkhotelkagoshimaannex_1.jpg
+https://www.55810.com/imgHtml/new_202601/hotel/bbparkhotelkagoshimaannex_1.jpg
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 記事内容
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 img_1
-src : ./imgHtml/new_202601/hotel/b&bparkhotelkagoshimaannex_1.jpg
+src : ./imgHtml/new_202601/hotel/bbparkhotelkagoshimaannex_1.jpg
 -------------------------------------------------------------------
 page_title_h1 / パンくずリスト
 鹿児島市でデリヘルが呼べるホテル  Ｂ＆Ｂパークホテル鹿児島アネックス
@@ -86,7 +86,7 @@ description_
 Ｂ＆Ｂパークホテル鹿児島アネックスは、鹿児島中央駅周辺を目印にできるため、初めて鹿児島に来る方でも場所を把握しやすいホテルです。駅前エリアは交通機関や商業施設が集まっており、人の流れも多いため、到着後の動き方をイメージしやすいのが特徴です。タクシー利用時も行き先を伝えやすく、市電やバスを使う場合も鹿児島中央駅を基点に考えられます。観光や出張で土地勘がない方でも、比較的迷いにくく安心して利用しやすい立地です。
 -------------------------------------------------------------------
 img_2
-src : ./imgHtml/new_202601/hotel/b&bparkhotelkagoshimaannex_2.jpg
+src : ./imgHtml/new_202601/hotel/bbparkhotelkagoshimaannex_2.jpg
 -------------------------------------------------------------------
 scene（h2）
 基本情報

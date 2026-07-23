@@ -33,16 +33,16 @@ description
 鹿児島市中央町でデリヘルが呼べるホテル東横INN鹿児島中央駅東口｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載
 -------------------------------------------------------------------
 canonical
-https://www.55810.com/kagoshima-deliveryhealth-hotel-toyokoinnkagoshimachuoeki higashiguchi.php
+https://www.55810.com/kagoshima-deliveryhealth-hotel-toyokoinnkagoshimachuoekihigashiguchi.php
 -------------------------------------------------------------------
 image
-https://www.55810.com/imgHtml/new_202601/hotel/toyokoinnkagoshimachuoeki higashiguchi_1.jpg
+https://www.55810.com/imgHtml/new_202601/hotel/toyokoinnkagoshimachuoekihigashiguchi_1.jpg
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 記事内容
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 img_1
-src : ./imgHtml/new_202601/hotel/toyokoinnkagoshimachuoeki higashiguchi_1.jpg
+src : ./imgHtml/new_202601/hotel/toyokoinnkagoshimachuoekihigashiguchi_1.jpg
 -------------------------------------------------------------------
 page_title_h1 / パンくずリスト
 鹿児島市でデリヘルが呼べるホテル  東横INN鹿児島中央駅東口
@@ -85,7 +85,7 @@ description_
 はい、時期や店舗ごとに内容は変わりますが、初回向けの優待や期間限定のキャンペーン、指名やコースに関連した特典などが実施されることがあります。条件は対象時間帯や人数、併用可否などで変わりやすいので、予約の前に公式の案内を確認し、分からない点は電話で確認するのが確実です。最新の実施状況は各店舗へ直接お問い合わせくださいませ。
 -------------------------------------------------------------------
 img_2
-src : ./imgHtml/new_202601/hotel/toyokoinnkagoshimachuoeki higashiguchi_2.jpg
+src : ./imgHtml/new_202601/hotel/toyokoinnkagoshimachuoekihigashiguchi_2.jpg
 -------------------------------------------------------------------
 scene（h2）
 基本情報

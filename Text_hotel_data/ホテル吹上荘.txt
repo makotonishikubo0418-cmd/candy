@@ -154,7 +154,7 @@ subtitle_
 description_
 〒892-0841 鹿児島県鹿児島市照国町15-13<改行>
 TEL 099-210-7888
-URL http://kuromiso.com/
+URL https://kuromiso.com/
 
 subtitle_
 meri coffee

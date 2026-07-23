@@ -150,7 +150,7 @@ subtitle_
 description_
 〒890-0051 鹿児島県鹿児島市高麗町17-5<改行>
 TEL 099-285-2220
-URL http://tth-kagoshima.com/
+URL https://tth-kagoshima.com/
 
 subtitle_
 麺食堂 TaRa

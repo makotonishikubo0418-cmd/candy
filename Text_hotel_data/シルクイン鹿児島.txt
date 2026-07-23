@@ -149,7 +149,7 @@ subtitle_
 description_
 〒890-0052 鹿児島県鹿児島市上之園町27-13<改行>
 TEL 099-251-4141
-URL http://susumuya.com/
+URL https://susumuya.com/
 
 subtitle_
 Kurozu Farm

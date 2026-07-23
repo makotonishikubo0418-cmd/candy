@@ -162,4 +162,4 @@ subtitle_
 description_
 〒892-0844 鹿児島県鹿児島市山之口町9-41<改行>
 TEL 099-222-5857
-URL http://www.tontoro-ramen.com/
+URL https://www.tontoro-ramen.com/

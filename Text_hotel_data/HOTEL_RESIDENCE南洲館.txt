@@ -33,16 +33,16 @@ description
 鹿児島市東千石町でデリヘルが呼べるホテルHOTEL&RESIDENCE南洲館｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載
 -------------------------------------------------------------------
 canonical
-https://www.55810.com/kagoshima-deliveryhealth-hotel-hotel&residencenanshukan.php
+https://www.55810.com/kagoshima-deliveryhealth-hotel-hotelresidencenanshukan.php
 -------------------------------------------------------------------
 image
-https://www.55810.com/imgHtml/new_202601/hotel/hotel&residencenanshukan_1.jpg
+https://www.55810.com/imgHtml/new_202601/hotel/hotelresidencenanshukan_1.jpg
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 記事内容
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 img_1
-src : ./imgHtml/new_202601/hotel/hotel&residencenanshukan_1.jpg
+src : ./imgHtml/new_202601/hotel/hotelresidencenanshukan_1.jpg
 -------------------------------------------------------------------
 page_title_h1 / パンくずリスト
 鹿児島市でデリヘルが呼べるホテル  HOTEL&RESIDENCE南洲館
@@ -84,7 +84,7 @@ description_
 予約後の変更は、空き枠があれば対応できることがあります。反対に混雑している日は、時間を後ろにずらすのが難しかったり、指名が入っている場合は調整が利きにくいケースもあります。予定が読みづらい日は、最初から少し余裕を持った開始希望で予約し、確定したら早めに連絡する流れが安心です。最終的な可否はその時点の状況で変わりますので、店舗へお問い合わせくださいませ。
 -------------------------------------------------------------------
 img_2
-src : ./imgHtml/new_202601/hotel/hotel&residencenanshukan_2.jpg
+src : ./imgHtml/new_202601/hotel/hotelresidencenanshukan_2.jpg
 -------------------------------------------------------------------
 scene（h2）
 基本情報
@@ -140,7 +140,7 @@ subtitle_
 description_
 〒892-0842 鹿児島県鹿児島市東千石町6-29<改行>
 TEL 099-226-0525
-URL http://www.satumaji.co.jp/
+URL https://www.satumaji.co.jp/
 
 subtitle_
 魂稚喜笑（コンチキショウ）
@@ -148,17 +148,3 @@ description_
 〒892-0842 鹿児島県鹿児島市東千石町5-21 ヒルズ天文館 1F<改行>
 TEL 099-295-3416
 URL https://konchikisyo.com/
-
-subtitle_
-炊肉の店 牛ちゃん 本店
-description_
-〒892-0842 鹿児島県鹿児島市東千石町6-11<改行>
-TEL 099-223-6305
-URL http://www.gyuchan-honten.com/
-
-subtitle_
-しゃぶ禅 鹿児島店
-description_
-〒892-0842 鹿児島県鹿児島市東千石町5-12<改行>
-TEL 099-221-6333
-URL http://kagoshima.shabuzen.jp/

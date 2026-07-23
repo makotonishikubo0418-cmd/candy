@@ -162,4 +162,4 @@ subtitle_
 description_
 〒892-0843 鹿児島県鹿児島市千日町5-8<改行>
 TEL 099-222-6904
-URL http://www.mujyaki.co.jp/
+URL https://www.mujyaki.co.jp/

@@ -156,10 +156,3 @@ description_
 〒892-0846 鹿児島県鹿児島市加治屋町11-26<改行>
 TEL 099-225-0021
 URL https://maps.app.goo.gl/kcberWkuYt5wunr2A
-
-subtitle_
-うなぎのやまげん 加治屋店
-description_
-〒892-0846 鹿児島県鹿児島市加治屋町3-17<改行>
-TEL 099-239-4688
-URL http://unagino-yamagen.co.jp/

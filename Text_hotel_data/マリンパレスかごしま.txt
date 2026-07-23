@@ -137,13 +137,6 @@ scene（h2）
 ホテル マリンパレスかごしま「周辺スポット」
 
 subtitle_
-鴨池海づり公園
-description_
-〒890-0062 鹿児島県鹿児島市与次郎2丁目9-12<改行>
-TEL 099-252-1021
-URL http://www.umiduri-kouen.com/
-
-subtitle_
 鴨池公園
 description_
 〒890-0062 鹿児島県鹿児島市与次郎2丁目2-2<改行>

@@ -33,16 +33,16 @@ description
 鹿児島市呉服町でデリヘルが呼べるホテル「ホテルマイステイズ鹿児島天文館2番館」｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載
 -------------------------------------------------------------------
 canonical
-https://www.55810.com/kagoshima-deliveryhealth-hotel-hotelmystaysKagoshimatenmonkanannex.php
+https://www.55810.com/kagoshima-deliveryhealth-hotel-hotelmystayskagoshimatenmonkanannex.php
 -------------------------------------------------------------------
 image
-https://www.55810.com/imgHtml/new_202601/hotel/hotelmystaysKagoshimatenmonkanannex_1.jpg
+https://www.55810.com/imgHtml/new_202601/hotel/hotelmystayskagoshimatenmonkanannex_1.jpg
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 記事内容
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 img_1
-src : ./imgHtml/new_202601/hotel/hotelmystaysKagoshimatenmonkanannex_1.jpg
+src : ./imgHtml/new_202601/hotel/hotelmystayskagoshimatenmonkanannex_1.jpg
 -------------------------------------------------------------------
 page_title_h1 / パンくずリスト
 鹿児島市でデリヘルが呼べるホテル  「ホテルマイステイズ鹿児島天文館2番館」
@@ -85,7 +85,7 @@ description_
 店舗と派遣エリアによって扱いが異なります。コース料金に交通費が含まれている場合もあれば、エリアや距離に応じて別途必要になるケースもあります。特にホテル利用では、同じ市内でも場所によって金額が変わることがあるため、予約の段階で滞在先ホテル名を伝え、交通費の有無と金額を先に確認するのが確実です。総額の見込みを出してから予約すると安心です。詳細は各店舗へお問い合わせくださいませ。
 -------------------------------------------------------------------
 img_2
-src : ./imgHtml/new_202601/hotel/hotelmystaysKagoshimatenmonkanannex_2.jpg
+src : ./imgHtml/new_202601/hotel/hotelmystayskagoshimatenmonkanannex_2.jpg
 -------------------------------------------------------------------
 scene（h2）
 基本情報
@@ -141,7 +141,7 @@ subtitle_
 description_
 〒892-0826 鹿児島県鹿児島市呉服町5-1<改行>
 TEL 099-226-6317
-URL http://taku-an.com/
+URL https://taku-an.com/
 
 subtitle_
 セブン-イレブン 鹿児島呉服町店

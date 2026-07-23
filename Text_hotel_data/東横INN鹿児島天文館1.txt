@@ -33,16 +33,16 @@ description
 鹿児島市山之口町でデリヘルが呼べるホテル東横INN鹿児島天文館1｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載
 -------------------------------------------------------------------
 canonical
-https://www.55810.com/kagoshima-deliveryhealth-hotel-toyokoinnkagoshimatemmonkanno.1.php
+https://www.55810.com/kagoshima-deliveryhealth-hotel-toyokoinnkagoshimatemmonkanno1.php
 -------------------------------------------------------------------
 image
-https://www.55810.com/imgHtml/new_202601/hotel/toyokoinnkagoshimatemmonkanno.1_1.jpg
+https://www.55810.com/imgHtml/new_202601/hotel/toyokoinnkagoshimatemmonkanno1_1.jpg
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 記事内容
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 img_1
-src : ./imgHtml/new_202601/hotel/toyokoinnkagoshimatemmonkanno.1_1.jpg
+src : ./imgHtml/new_202601/hotel/toyokoinnkagoshimatemmonkanno1_1.jpg
 -------------------------------------------------------------------
 page_title_h1 / パンくずリスト
 鹿児島市でデリヘルが呼べるホテル  東横INN鹿児島天文館1
@@ -85,7 +85,7 @@ description_
 一般的には、女の子が到着してご挨拶をしたあとに、コース内容と料金の確認が取れてからお支払いとなる流れが多いです。先に総額の認識をそろえておくことで、当日の行き違いを防ぎやすくなります。延長や追加が発生した場合は、その分だけ後から精算になることもあります。店舗ごとに運用が異なるため、予約時点で支払いのタイミングと支払い方法を確認しておくと安心です。
 -------------------------------------------------------------------
 img_2
-src : ./imgHtml/new_202601/hotel/toyokoinnkagoshimatemmonkanno.1_2.jpg
+src : ./imgHtml/new_202601/hotel/toyokoinnkagoshimatemmonkanno1_2.jpg
 -------------------------------------------------------------------
 scene（h2）
 基本情報

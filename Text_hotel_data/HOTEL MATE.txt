@@ -149,7 +149,7 @@ VOUL(ボウル)
 description_
 〒892-0826 鹿児島県鹿児島市呉服町3-19 2F<改行>
 TEL 099-223-6555
-URL http://www.voulkagoshima.com/
+URL https://www.voulkagoshima.com/
 
 subtitle_
 セブン-イレブン 鹿児島呉服町店

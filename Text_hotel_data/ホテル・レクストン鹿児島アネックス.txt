@@ -148,7 +148,7 @@ subtitle_
 description_
 〒892-0844 鹿児島県鹿児島市山之口町3-6 1F<改行>
 TEL 099-239-9246
-URL http://www.kagoshima-kappousekian.com/
+URL https://www.kagoshima-kappousekian.com/
 
 subtitle_
 現金問屋あけぼの 二官橋通り店

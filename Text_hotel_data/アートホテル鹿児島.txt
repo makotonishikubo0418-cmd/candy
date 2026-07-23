@@ -93,7 +93,8 @@ scene（h2）
 ホテル名
 アートホテル鹿児島
 
-URLhttps://www.art-kagoshima.com/
+URL
+https://www.art-kagoshima.com/
 
 住所
 〒890-0064<改行>
