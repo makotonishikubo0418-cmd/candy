@@ -1,9 +1,5 @@
 /* girls_listページ専用スタイル - ヘッダー・フッター以外のデザイン */
 
-#girlsL div.wrap div.list div.box div.photo img {
-	aspect-ratio: 4 / 3;
-	object-fit: cover;
-}
 
 /* PC版 */
 @media screen and (min-width: 769px) {
@@ -80,7 +76,8 @@
 
 	#girlsL div.wrap div.list div.box div.photo img {
 		width: 100%;
-		height: auto;
+		height: 100%;
+		object-fit: cover;
 		display: block;
 	}
 
@@ -103,12 +100,20 @@
 		background: #000;
 		width: 100%;
 		height: 100%;
+		overflow: hidden;
 	}
 
 	#girlsL div.main div.list div.box div.photo img {
 		width: 100%;
-		height: auto;
+		height: 100%;
+		object-fit: cover;
 		display: block;
+	}
+
+	#girlsL div.main div.list div.box div.photo img[alt*="/dmy/"],
+	#girlsL div.main div.list div.box div.photo img[src*="/dmy/"],
+	#girlsL div.main div.list div.box div.photo img[title*="/dmy/"] {
+		visibility: hidden;
 	}
 
 	#girlsL div.main div.list div.box dl.data {
