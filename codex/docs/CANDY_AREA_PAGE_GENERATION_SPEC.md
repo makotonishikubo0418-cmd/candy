@@ -1,6 +1,6 @@
 # CANDY Area Page Generation Specification
 
-- Updated: 2026-07-20
+- Updated: 2026-07-24
 - Applies to: Normal new generation of CANDY area detail pages by Codex
 
 ## 1. Purpose
@@ -152,7 +152,14 @@ Do not determine a slug by inference alone. Reconcile canonical in source data, 
 
 Text classifications such as `間違い無し`, `画像無し`, and `情報足りない` describe input content only. They do not determine new-page eligibility.
 
-New production is eligible only after confirming that the canonical slug has no existing public PHP, source HTML, page-specific dataset PHP, `dataset_base.php` registration, or sitemap registration; that the area index has exactly one target-slug link; and that it has no different slug for the same region name. Do not select a target from a successful classification alone.
+New production is eligible only after confirming that the canonical slug has
+no existing public PHP, source HTML, page-specific dataset PHP,
+`dataset_base.php` registration, or sitemap registration and that the area
+index has no different slug for the same region name. A missing target-slug
+area-index link is normal generation input and MUST be added exactly once in
+the target change unit; it is not a candidate-selection blocker. Preserve one
+existing correct target-slug link. Do not select a target from a successful
+classification alone.
 
 ## 5. Source-Data to HTML Mapping
 
@@ -311,7 +318,10 @@ Case, source HTML, dataset PHP, and public PHP slugs MUST match exactly.
 ## 12. Generation Algorithm
 
 1. Verify Git branch, worktree, and remote state.
-2. Verify region name, slug, canonical, images, and every input item in the target text file.
+2. Verify region name, slug, canonical, images, and every input item in the
+   target text file. Treat a complete accepted pair as available; first-install
+   it into the canonical local-public directory before the final target gate
+   when the public pair is absent.
 3. Check for same-name public PHP, source HTML, dataset PHP, and dataset_base registration.
 4. Compare at least one complete same-category page.
 5. Copy the area template into new source HTML.
@@ -326,7 +336,10 @@ Case, source HTML, dataset PHP, and public PHP slugs MUST match exactly.
 14. Validate internal links, images, canonical, OGP, and slug.
 15. Check all placeholders, the exact nearby-area mapping, incomplete input, legacy slugs, and duplicate IDs.
 16. Validate PHP syntax, JSON syntax, `git diff --check`, and changed targets.
-17. Determine whether `source/area.html` index links and JSON-LD and `sitemap.xml` require registration.
+17. Add exactly one missing target-slug link to `source/area.html` as normal
+    generation output, preserve one correct existing link, and verify that no
+    same-region/different-slug conflict exists. Determine the corresponding
+    index JSON-LD and `sitemap.xml` updates.
 18. When browser validation was not performed, report browser rendering as unverified.
 19. Commit and Push only after user confirmation and explicit instruction.
 
@@ -350,9 +363,15 @@ Existing content may contain alternate slugs for the same region. During new pro
 
 ### 13.4 Missing Images
 
-Some complete HTML references missing images. During generation, verify actual `_1` and `_2` files.
+Some complete HTML references missing images. During generation, reconcile the
+accepted and local-public `_1` and `_2` pairs.
 
-When required images are absent for a new area-page request, STOP and request images using:
+When a complete accepted pair exists and both local-public files are absent,
+perform the target-limited first installation authorized by the page-production
+request and continue. This is not a missing-image STOP.
+
+When no complete accepted or local-public pair exists for a new area-page
+request, STOP and request images using:
 
 ```text
 kagoshima-deliveryhealth-area-<slug>_1.jpg

@@ -1,6 +1,6 @@
 # CANDY Page Generation Governance
 
-- Updated: 2026-07-18
+- Updated: 2026-07-24
 - Applies to: Normal new-page generation for area, blog, and hotel by Codex
 
 ## 1. Position
@@ -88,6 +88,13 @@ Required user decisions:
 
 When a required item is missing, a slug conflicts, a same-name file exists, or an unexplained image shortage exists, STOP and report before creating files.
 
+For area and hotel pages, distinguish a genuinely missing image from a pending
+first local installation. A complete category-approved accepted-source pair is
+available production input. When its same-name local-public pair is absent,
+the page-production request authorizes copying the exact accepted bytes to the
+canonical local-public directory before the final target gate. Do not report
+that state as missing images, and do not request duplicate approval.
+
 ## 5. Reference-Page Selection
 
 Select a reference by structural similarity, not name similarity.
@@ -111,7 +118,9 @@ Do not use only a legacy page, a page with remaining placeholders, a page withou
 | Repeated-item count is zero | Decide whether the entire section is required |
 | Repeated-item count is below the template count | Remove extra blocks |
 | Repeated-item count exceeds the template count | Add blocks with the same structure and reset numbering |
-| Image is missing | Do not use an inferred image; STOP or request an alternate policy |
+| Accepted and local-public image pairs are both absent | Do not use an inferred image; STOP or request the exact required pair |
+| Complete accepted pair exists and the local-public pair is absent | Perform the target-limited first installation through the category image-asset specification, then continue |
+| Accepted/public pair is partial or same-name hashes differ | STOP and use the category reconciliation or replacement route |
 | URL, telephone, address, or related value is unverified | Do not infer a value |
 | Source data contradicts an existing page | Do not change; request a user decision |
 
@@ -170,6 +179,11 @@ When only part of a same-name set exists, switch from new generation to an exist
 ### 10.1 Integration into Public Routes
 
 Even when page files are generated, publication integration is incomplete until the page is reachable from indexes, sitemap, and required related links.
+
+For a new area page, a missing target-slug link in the area index is a normal
+generation input state, not a target-selection blocker. Add exactly one target
+link in the same area change unit. A link for the same region under a
+different slug remains a conflict and MUST STOP the affected target.
 
 Check by category:
 

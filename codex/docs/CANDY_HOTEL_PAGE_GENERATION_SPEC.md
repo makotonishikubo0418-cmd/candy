@@ -1,6 +1,6 @@
 # CANDY Hotel Page Generation Specification
 
-- Updated: 2026-07-23
+- Updated: 2026-07-24
 - Applies to: Normal new generation of CANDY hotel detail pages by Codex
 
 ## 1. Purpose and Scope
@@ -11,7 +11,12 @@ Apply `CANDY_PAGE_GENERATION_GOVERNANCE.md` first for common missing-input, vari
 
 Select one source route before production:
 
-- `DIRECT_TEXT`: Staff already completed the production Text. Do not require Phase results. Start with `candy-hotel.cmd direct-check`, use the direct start in `CANDY_HOTEL_IMAGE_CREATION_SPEC.md` only when images are missing, and execute through `CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md`.
+- `DIRECT_TEXT`: Staff already completed the production Text. Do not require
+  Phase results. Reconcile the target's accepted and local-public image pairs,
+  first-install a complete accepted pair when required, then run
+  `candy-hotel.cmd direct-check`. Use the direct start in
+  `CANDY_HOTEL_IMAGE_CREATION_SPEC.md` only when no complete accepted or public
+  pair exists, and execute through `CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md`.
 - `PHASE_PREPARED`: Use `CANDY_HOTEL_CONTENT_PREPARATION_RUNBOOK.md` for Phases 1-3, `CANDY_HOTEL_IMAGE_CREATION_SPEC.md` for Phase 4, and `CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md` for Phase 5.
 
 Both routes converge on the same target Text, template, generator, target gate, validation, and publication implementation. Phase results are never page-content inputs.
@@ -139,7 +144,12 @@ codex\scripts\candy-hotel.cmd legacy-check --input "Text_hotel_data/対象ホテ
 codex\scripts\candy-hotel.cmd direct-check --input "Text_hotel_data/対象ホテル.txt"
 ```
 
-Only `DIRECT_TEXT_STATUS=READY_FOR_IMAGES` may enter direct image creation. Only `DIRECT_TEXT_STATUS=READY_FOR_BUILD` may continue to the common target gate and page generation.
+Only `DIRECT_TEXT_STATUS=READY_FOR_IMAGES` may enter direct image creation.
+When a complete accepted pair exists and only its local-public copy is absent,
+perform the page-authorized first installation instead of entering image
+creation or reporting a missing-image STOP. Only
+`DIRECT_TEXT_STATUS=READY_FOR_BUILD` may continue to the common target gate and
+page generation.
 
 The dedicated tool runs generation, validation, target-limited staging, one Commit, one Push, Actions, production HTTP validation, and URL output in sequence.
 
@@ -154,6 +164,11 @@ codex\scripts\candy-hotel.cmd target-next
 ```
 
 Inspect input classification through `BLOCKER_COUNTS_JSON` and do not hide simultaneous blockers such as missing images and untracked input.
+
+For automatic candidate discovery, treat a complete accepted-source pair as
+image availability. First-install the selected target's pair before the final
+target gate. `BLOCKER_COUNTS_JSON` may report missing images only when neither
+a complete accepted pair nor a complete local-public pair exists.
 
 ## 4. Required File Set
 
@@ -298,7 +313,10 @@ STOP new production when the target slug already exists in public PHP, source HT
 ## 12. Generation Algorithm
 
 1. Verify Git state and target scope.
-2. Verify required source-text items, canonical, slug, images, and placeholders.
+2. Verify required source-text items, canonical, slug, images, and
+   placeholders. Treat a complete accepted pair as available and
+   first-install it into the canonical local-public directory before the final
+   target gate when the public pair is absent.
 3. Check the same-name three-file set and shared registrations for duplication.
 4. Parse input blocks by type and record the entire order, including normal article scenes.
 5. Generate only complete blocks; omit optional sections with zero items.
@@ -350,6 +368,8 @@ The former `Text_hotel_data/Cursor用更新手順.txt` was retired from the prod
 - [ ] FAQPage JSON-LD is absent when no FAQ exists.
 - [ ] Hotel name, official URL, address, and map correspond correctly.
 - [ ] Images exist.
+- [ ] When the accepted pair existed without a local-public pair, the exact
+      accepted bytes were first-installed before the final target gate.
 - [ ] Canonical, OGP, and internal links are correct.
 - [ ] Robots agrees with publication policy.
 - [ ] Hotel-index and sitemap registration requirements were checked.

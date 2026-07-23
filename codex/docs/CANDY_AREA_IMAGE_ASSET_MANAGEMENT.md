@@ -1,6 +1,6 @@
 # CANDY Area Image Asset Management
 
-- Updated: 2026-07-22
+- Updated: 2026-07-24
 - Target: Acceptance, reconciliation, public placement, and Git management of area-page images
 - Existing approved pair replacement: `CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md`
 
@@ -114,6 +114,14 @@ page image. Deletion or Git exclusion requires separate instruction.
 
 When a new area-page request lacks required `_1` and `_2` images, review `CANDY_AREA_IMAGE_CREATION_SPEC.md` and produce both images according to that specification. Reuse of unrelated existing images, dummy images, inferred image names, and publication without images are prohibited.
 
+At the start of page production, reconcile the selected target's accepted and
+local-public pairs before the final target gate. A complete accepted pair with
+both local-public files absent is `PENDING_FIRST_INSTALL`, not
+`MISSING_IMAGES`. The page-production request authorizes copying the exact
+accepted bytes to the canonical local-public directory for that target. Do not
+ask for duplicate approval or end the page task after reporting the placement.
+Verify the copied hashes, then continue to the page target gate and generation.
+
 The project administrator's explicit task-specific decision authorizes the stated source, method, design exception, overwrite, integration, or publication scope. Do not request the same approval again or stop solely because a generic default differs from an already stated administrator decision.
 
 Do not report page production complete merely because images are available. When applying images to a new area page, follow `CANDY_AREA_PAGE_GENERATION_SPEC.md` and validate public PHP, source HTML, page-specific dataset PHP, case registration and link transformation in `dataset_base.php`, the area index and related internal links, and required `sitemap.xml` registration as one unit. If required links or registrations remain incomplete, do not report the page complete or publishable.
@@ -131,7 +139,10 @@ Do not report page production complete merely because images are available. When
 11. When the same name exists, compare hashes.
 12. Do not copy a matching file.
 13. When contents differ and replacement is explicitly authorized, switch to `CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md`. Do not request the same target-limited authorization again or repeat this acceptance procedure during replacement.
-14. Only when the file is absent from the canonical public source, copy it after user approval as a first installation.
+14. Only when both same-name files are absent from the canonical public source,
+    copy the complete accepted pair as a first installation. A page-production
+    request is the required authorization for its target; a standalone
+    acceptance-only request may end before installation.
 15. Verify source HTML `src`, alt text, and OGP.
 16. Report local-image validation separately from production-image HTTP validation.
 
@@ -156,6 +167,8 @@ Do not report page production complete merely because images are available. When
 - [ ] Duplication and identical pairs are checked.
 - [ ] Hashes were compared with the canonical public source.
 - [ ] Any overwrite has user approval.
+- [ ] A complete accepted pair was first-installed before the final page target
+      gate when the local-public pair was absent.
 - [ ] Source HTML `src`, alt text, and OGP agree.
 - [ ] Page-production validation covers public PHP, dataset, area index, internal links, and sitemap.
 - [ ] Any unverified production deployment is stated explicitly.

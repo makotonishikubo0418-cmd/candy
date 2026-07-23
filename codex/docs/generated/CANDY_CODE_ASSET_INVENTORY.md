@@ -2,14 +2,14 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-23T16:24:02+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-23T16:41:32+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 1ce38985f693fe67c2f6b6e01507aacb0bd6e25b
-> State fingerprint: sha256:604881e09ed1c1cc65e0b39ca8d524333371930749b3e2c3e6f46c19bc223786
+> Commit: 354b02f1facc5e94fbbd57040862272018cc0e55
+> State fingerprint: sha256:85cd26402b81685807cb071de19f4070f0fb42b16471b91e81344dc2ddfad19b
 > Scope: Public PHP, source files, datasets, shared PHP, CSS, JavaScript, images, videos, and fonts
-> Population: Public PHP files: 99 / assets: 625
+> Population: Public PHP files: 99 / assets: 628
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: Missing references: 23 / duplicate hash groups: 10
+> Result: Missing references: 20 / duplicate hash groups: 10
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
 
 ## Public PHP and Structure Files
@@ -181,9 +181,11 @@ Only the external session and database configuration references in `dataset_base
 | .gif | 3 |
 | .jpg | 475 |
 | .js | 17 |
+| .mp4 | 2 |
 | .png | 64 |
 | .svg | 2 |
 | .ttf | 16 |
+| .webm | 1 |
 | .woff | 16 |
 | .woff2 | 1 |
 
@@ -206,6 +208,7 @@ Only the external session and database configuration references in `dataset_base
 | HP/imgHtml/pc | 14 |
 | HP/imgHtml/s | 14 |
 | HP/js | 17 |
+| HP/movie | 3 |
 | HP/source | 1 |
 
 ## Assets by Page
@@ -326,9 +329,6 @@ Only the external session and database configuration references in `dataset_base
 | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-aaaaaaaaaaaaaaaaaaaa_2.jpg | HP/source/template_kagoshima-deliveryhealth-area.html |
 | HP/imgHtml/new_202601/blog/aaaaaaaaaaaaaaaaaaaa.jpg | HP/source/template_kagoshima-deliveryhealth-blog.html |
 | HP/imgHtml/new_202601/hotel/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.jpg | HP/source/template_kagoshima-deliveryhealth-hotel.html |
-| HP/movie/candyStyle.mp4 | HP/source/index.html |
-| HP/movie/howToMyPage.mp4 | HP/source/mypage.html |
-| HP/movie/howToMyPage.webm | HP/source/mypage.html |
 | imgHtml/new_202601/candy_img1.jpg | HP/source/style.css |
 | imgHtml/new_202601/candy_img1_sp.jpg | HP/source/style.css |
 | imgHtml/new_202601/shop/candy.jpg | HP/source/style.css |

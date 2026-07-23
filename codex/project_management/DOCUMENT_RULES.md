@@ -2,7 +2,7 @@
 
 - Purpose: Separate document responsibilities in the Markdown management system
 - Status: canonical document
-- Updated: 2026-07-23
+- Updated: 2026-07-24
 - Canonical scope: Management-document naming, language, responsibility, structure, and update rules
 - Update trigger: A management document, route, responsibility, naming rule, or generated-document contract changes
 
@@ -190,13 +190,31 @@ At minimum, verify:
 - The `間違い無し` classification does not mean a new page may be produced.
 - Before publish, use the canonical slug to check for an existing public PHP file, source HTML, dataset PHP file, dataset_base registration, area-index entry, and sitemap entry.
 - Do not select a candidate when the area index contains the same region name under a different slug.
-- One target-slug link in the area index is a requirement. Exclude only a conflicting different slug for the same region name.
-- Proceed with production only for a target that returns `NEW_PAGE_TARGET_OK`.
+- A missing target-slug area-index link is a normal generation input state.
+  Add exactly one link in the target's normal area change unit; do not exclude
+  the candidate for that absence alone. Preserve one correct existing link.
+- Treat a complete pair in `Text_area_data/画像データ/` as image availability.
+  After selecting the target, first-install exact accepted bytes in the
+  canonical local-public directory when both public files are absent.
+- A page-production request authorizes the target-limited first installation
+  and index addition. Do not request duplicate approval or report a STOP after
+  only identifying those preparation steps.
+- Proceed with production only for a target that returns `NEW_PAGE_TARGET_OK`
+  after the authorized image and index preparation.
 
 ## 11. Hotel Production-Target Management
 
-- Hotel production may proceed only for one target that returns `NEW_HOTEL_TARGET_OK` from `candy-hotel.cmd target-next` or `target-check`.
-- Exclude missing-image, invalid-input, already-built, untracked-input, and unregistered-shop candidates before production.
+- Hotel candidate discovery MUST treat a complete pair in
+  `Text_hotel_data/画像データ/` as image availability. After selecting the
+  target, first-install exact accepted bytes in the canonical local-public
+  directory when both public files are absent.
+- Hotel production may proceed only for one target that returns
+  `NEW_HOTEL_TARGET_OK` from `candy-hotel.cmd target-next` or `target-check`
+  after that authorized preparation.
+- Exclude genuinely missing-image, partial or conflicting image,
+  invalid-input, already-built, untracked-input, and unregistered-shop
+  candidates before production. Do not classify a pending first local
+  installation as missing images.
 - Use `candy-hotel.cmd publish-next` as the standard hotel-production entry point.
 - On STOP, inspect both `COUNTS_JSON` and `BLOCKER_COUNTS_JSON` and distinguish missing images from untracked input.
 - Do not proceed as a new hotel page when the target slug exists in `HP/source/hotel.html`, `dataset_base.php`, `sitemap.xml`, or any of the three page-specific files.

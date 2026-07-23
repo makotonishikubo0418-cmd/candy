@@ -1,6 +1,6 @@
 # CANDY Area Staff Production Runbook
 
-- Updated: 2026-07-22
+- Updated: 2026-07-24
 - Applies to: Normal production of one area page
 - Start condition: Explicit instruction to produce or publish an area page
 - Completion criteria: Dedicated validation succeeds and the authorized local or publication scope completes
@@ -26,7 +26,14 @@ codex\scripts\candy-area.cmd build --input "Text_area_data/対象.txt"
 codex\scripts\candy-area.cmd check --input "Text_area_data/対象.txt"
 ```
 
-When required images are absent, read `CANDY_AREA_IMAGE_CREATION_SPEC.md` and create and validate both images before running these commands. Do not proceed to page generation or publication while either required image is missing.
+Before target selection, treat a complete pair under
+`Text_area_data/画像データ/` as available production input. After selecting
+the target and before the final target gate, copy exact accepted bytes to
+`HP/imgHtml/new_202601/area/` when both same-name public files are absent. A
+page-production request authorizes this target-limited first installation; do
+not stop or ask again merely because the public copy is pending. When the
+accepted pair itself is absent, read `CANDY_AREA_IMAGE_CREATION_SPEC.md` and
+create and validate both images before page generation or publication.
 
 Run these commands only when investigating exceptions across the full input population:
 
@@ -39,13 +46,27 @@ For the normal path, do not add preliminary `build`, `check`, full-document rere
 
 ### 1.1 Production Order and New-Page Target Gate
 
-Do not select the target manually. Work through `READY_CANDIDATE` rows in `CANDY_AREA_105_PAGE_QUEUE.md` from the smallest queue number and use only the first row for which the dedicated gate returns `NEW_PAGE_TARGET_OK=<slug>`:
+Do not select the target manually. Work through `READY_CANDIDATE` rows in
+`CANDY_AREA_105_PAGE_QUEUE.md` from the smallest queue number. Candidate
+discovery MUST recognize preparation states that the same page-production
+workflow can resolve target-locally. Use the first row that passes the
+following ordered preparation and final-gate process:
 
 1. Resolve the queue row to exactly one tracked input, using a direct Text under `Text_area_data` or the latest `Text_area_data/分類_*/01_間違い無し`.
 2. Automatically exclude a slug with an existing public PHP file, source HTML, dataset PHP file, `dataset_base.php` registration, or sitemap registration.
-3. Require exactly one target-slug link in the area index. When the area index has the same region name under another slug, automatically exclude it as a same-region/different-slug candidate.
-4. Automatically exclude a slug without both required images.
-5. Produce only the first target that passes. Once production starts for that target, STOP on a later failure and do not substitute another slug.
+3. Exclude an area index entry for the same region under another slug. A
+   missing target-slug link is not a blocker; mark it for one target-limited
+   addition during generation. Preserve one existing correct target-slug link.
+4. Accept either a complete accepted-source pair or a complete local-public
+   pair as image availability. After target selection, first-install the
+   accepted pair when the local-public pair is absent. Exclude only a target
+   with no complete pair or with a partial, slug-conflicting, or same-name
+   hash-conflicting pair.
+5. Run the final target gate after image first installation and the planned
+   index addition are fixed for the target. Require
+   `NEW_PAGE_TARGET_OK=<slug>` at that point.
+6. Produce only the first target that passes. Once production starts for that
+   target, STOP on a later failure and do not substitute another slug.
 
 `01_間違い無し` classifies text-file content; it does not mean a new page is eligible for production.
 
@@ -61,20 +82,29 @@ Validate an explicit target:
 codex\scripts\candy-area.cmd target-check --input "Text_area_data/対象.txt"
 ```
 
-Do not run `publish` for a target that does not return `NEW_PAGE_TARGET_OK=<slug>`. If an existing file, existing registration, same-region/different-slug value, legacy slug, or similar slug appears, do not proceed; restart target selection.
+Do not run `publish` for a target that does not return
+`NEW_PAGE_TARGET_OK=<slug>` after the authorized preparation above. Do not
+interpret a pending first image installation or a missing target-slug index
+link as a final STOP. If an existing file, existing registration,
+same-region/different-slug value, legacy slug, similar slug, partial image
+pair, or same-name image hash conflict appears, do not proceed; restart target
+selection or use the applicable exception route.
 
 ## 2. Integrated Workflow
 
 `publish-next` runs:
 
-1. Select the first `READY_CANDIDATE` queue row that passes the same new-page target gate used by `target-next`.
-2. Validate Text, slug, images, existing files, shared registrations, Git, and remote.
-3. Generate the complete page set from templates.
-4. Run static validation and synchronize generated management documents with `candy-site-state write` and `check`.
-5. Verify the stage allowlist.
-6. Commit and Push only the target, once each.
-7. Verify Actions and production HTTP.
-8. Output the production URL, Commit URL, and Actions URL.
+1. Select the first `READY_CANDIDATE` queue row that can pass after the
+   target-limited preparation in Section 1.1.
+2. First-install a complete accepted image pair when required, and plan one
+   missing target-slug area-index link as normal generation output.
+3. Validate Text, slug, images, existing files, shared registrations, Git, and remote.
+4. Generate the complete page set from templates, including the target index link.
+5. Run static validation and synchronize generated management documents with `candy-site-state write` and `check`.
+6. Verify the stage allowlist.
+7. Commit and Push only the target, once each.
+8. Verify Actions and production HTTP.
+9. Output the production URL, Commit URL, and Actions URL.
 
 Do not update `.md` solely to record publication after the fact, create a management-document-only Commit, or Push a second time. GitHub, Actions, and production HTTP are the canonical publication evidence.
 
@@ -102,6 +132,7 @@ HP/source/area.html
 HP/sitemap.xml
 one target row in codex/docs/CANDY_AREA_105_PAGE_QUEUE.md
 one target entry in codex/data/CANDY_AREA_RELATED_LINKS.json
+the accepted/public image pair when first local installation is required
 ```
 
 After generation or a fix and before staging, run `codex\scripts\candy-site-state.cmd write` and `check`. Treat the queue update and generated-document update as the same work unit.
@@ -135,9 +166,14 @@ When local PHP CLI is absent, use `PHP_LINT=UNAVAILABLE`. Production publication
 
 - The branch is not `main`, the remote differs, fast-forward is impossible, or a conflict exists.
 - Existing changes to the target or a shared file cannot be preserved.
-- Input or images are missing, a slug differs, or a same-name file conflicts.
+- Input is incomplete, no complete accepted or public image pair exists, an
+  image pair is partial or same-name hashes conflict, a slug differs, or a
+  same-name page file conflicts. Public-image absence alone is not a STOP when
+  a complete accepted pair exists.
 - A legacy slug, similar slug, or typo would require automatic replacement.
-- A shop is unknown, a shared registration is duplicated, or the area index or sitemap is inconsistent.
+- A shop is unknown, a shared registration is duplicated, the area index
+  contains the same region under another slug, or another area-index or
+  sitemap inconsistency cannot be resolved within the target change unit.
 - PHP, JSON, stage allowlist, Actions, or production HTTP validation fails.
 - Deletion, rename, database access, a secret value, or production switchover of `index.php` is required.
 

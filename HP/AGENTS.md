@@ -30,6 +30,26 @@ Verify page-specific exceptions in actual files.
 
 Internal path migration under `codex/scripts/` and read-only dry runs are verified. Recheck target selection, input, images, Git, and safety gates in the applicable runbook. Publish includes Commit, Push, Actions, and production operations, so execute it only with explicit user instruction.
 
+For area and hotel production, image reconciliation is a required preparation
+step, not a reason to end the task:
+
+- Candidate selection MUST treat a complete canonical accepted-source pair as
+  available even when its same-name local-public pair has not yet been
+  installed.
+- After selecting the target and before the final target gate, copy the exact
+  accepted bytes to the category's canonical local-public directory when both
+  public files are absent. A page-production request authorizes this
+  target-limited first installation; do not ask for duplicate approval.
+- When both accepted and public pairs exist with matching same-name hashes, do
+  not rewrite them.
+- STOP only when the accepted pair is absent or partial, the public pair is
+  partial, the slug or filenames conflict, or same-name accepted/public bytes
+  differ.
+- For a new area page, absence of its target-slug link from the area index is a
+  normal generation input state. Add exactly one target link as part of the
+  normal area change unit. STOP only on a same-region/different-slug conflict
+  or another index inconsistency that cannot be resolved target-locally.
+
 Standard area entry point:
 
 ```powershell
@@ -165,7 +185,10 @@ The normal area, hotel, and blog integrated tools may handle `dataset_base.php`,
 ## 7. STOP Conditions
 
 - The branch is not `main`, the remote differs, fast-forward is impossible, or a conflict exists.
-- Input is incomplete, images are missing, a slug does not match, or an existing file conflicts.
+- Input is incomplete, both canonical image sources are genuinely unavailable,
+  an image pair is partial or conflicting, a slug does not match, or an
+  existing file conflicts. Absence only from the local-public directory is not
+  a missing-image STOP when a complete accepted pair exists.
 - A shared registration is duplicated, or an old slug or typo requires automatic replacement.
 - JSON, PHP, the stage allowlist, Actions, or production HTTP validation fails.
 - A STOP condition in root `AGENTS.md` applies.

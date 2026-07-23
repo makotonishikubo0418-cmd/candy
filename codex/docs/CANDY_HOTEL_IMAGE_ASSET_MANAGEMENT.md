@@ -1,6 +1,6 @@
 # CANDY Hotel Image Asset Management
 
-- Updated: 2026-07-23
+- Updated: 2026-07-24
 - Target: Acceptance, accepted-source storage, local public installation, replacement, Git management, and production publication of hotel-page image pairs
 - Status: Canonical specification
 - Creation and visual authority: `CANDY_HOTEL_IMAGE_CREATION_SPEC.md`
@@ -53,7 +53,7 @@ One hotel image unit contains exactly two files:
 | State | Meaning | Permitted next action |
 |---|---|---|
 | `CANDIDATE` | The pair has not passed every hard gate | Correct or reject it outside the accepted/public folders |
-| `ACCEPTED` | Both accepted-source files exist and passed the creation and acceptance gates | Perform an authorized first local public installation |
+| `ACCEPTED` | Both accepted-source files exist and passed the creation and acceptance gates | At page-production start, perform the target-limited first local public installation without duplicate approval |
 | `INSTALLED_LOCAL` | Accepted and public pairs exist under the same names and each same-name SHA-256 matches | Enter the local target/build route or the image-registration route |
 | `REGISTERED_GIT` | Both pairs are tracked and clean in the current `HEAD`, and that `HEAD` is synchronized with `origin/main` | Deploy and verify the public pair before page publication |
 | `DEPLOYED_ASSET` | Actions deployed the public pair and production bytes match; the hotel page may not yet exist | Enter the page-publication route |
@@ -101,14 +101,22 @@ If `_1` and `_2` have the same hash, the pair is `STOP` even when accepted/publi
 First installation applies only when both canonical public filenames are absent.
 
 1. Require `IMAGE RESULT: PASS` and a complete accepted pair.
-2. Confirm that the user-authorized page or image-preparation result includes local installation. A page-production request authorizes the first local installation required by its canonical workflow for that target; image acceptance alone may end at `ACCEPTED`.
+2. A page-production request authorizes the first local installation required
+   by its canonical workflow for that target. Perform it before the final page
+   target gate without another question. A standalone image-acceptance-only
+   request may end at `ACCEPTED`.
 3. Copy the accepted files without re-rendering, re-encoding, resizing, metadata editing, or renaming.
 4. Verify that each accepted/public same-name SHA-256 matches.
 5. Verify that the public pair remains two different hashes.
 6. Verify the target Text relative paths and OGP path again.
 7. Rerun `direct-check` for `DIRECT_TEXT`, or finish the Phase 4 gate for `PHASE_PREPARED`.
 
-Local installation does not mean that a page exists, a Commit was created, GitHub was updated, or production serves the image. The current hotel publication command requires public images to be tracked and clean dependencies, so a newly installed pair MUST complete Section 9 before page publication.
+Local installation does not mean that a page exists, a Commit was created,
+GitHub was updated, or production serves the image. It is nevertheless a
+required continuation step of an authorized page-production task, not a
+completion report or STOP point. The current hotel publication command
+requires public images to be tracked and clean dependencies, so a newly
+installed pair MUST complete Section 9 before page publication.
 
 ## 8. Existing Same-Name Replacement
 
@@ -134,7 +142,13 @@ No hotel-specific replacement automation or production guard is established by t
 - The public pair is the only deployable output of this image-asset unit. It may be deployed before the page exists, but that state is `DEPLOYED_ASSET`, not `PUBLISHED`.
 - Stage only the exact two accepted-source files, two local-public copies, and any generated current-state files required by the canonical state tool. `git add .` and `git add -A` are prohibited.
 - Commit and Push require explicit authority unless they are part of an explicitly requested canonical page-publication result.
-- When a user explicitly requests creation and publication of a hotel page whose images are absent, the required target-limited sequence is two separately reported Git units: first the image-asset Commit, Push, Actions deployment, and production-byte verification; then the page-production Commit, Push, Actions deployment, and page verification.
+- When a user explicitly requests creation and publication of a hotel page
+  whose complete accepted pair is not yet locally public, the required
+  target-limited sequence is two separately reported Git units: first the
+  image-asset Commit, Push, Actions deployment, and production-byte
+  verification; then the page-production Commit, Push, Actions deployment,
+  and page verification. Both units belong to the same authorized task; do not
+  stop between them for duplicate approval.
 - Do not move accepted images to the public folder. Copy exact bytes and retain both storage responsibilities.
 - Do not remove an accepted pair after publication merely because a public pair exists.
 
