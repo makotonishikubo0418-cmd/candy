@@ -30,8 +30,8 @@
 
 		gtag('config', 'G-0VBTBPHDD2');
 
-		if (matchMedia.matches) {
-			// 1000px以下で行う処理
+		if (window.matchMedia('(max-width: 768px)').matches) {
+			// 768px以下で行う処理
 			$(function () {
 				$("a.lightbox").click(function () {
 					url = $(this).attr("href");
@@ -50,7 +50,7 @@
 				});
 			});
 		} else {
-			// 1001px以上で行う処理
+			// 769px以上で行う処理
 			$(function () {
 				$("a.lightbox").click(function () {
 					url = $(this).attr("href");

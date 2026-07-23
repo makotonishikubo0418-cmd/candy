@@ -609,10 +609,10 @@
 	}
 
 	#schedule div.wrap ul.tab li.today {
-		height: 100px!important;
+		height: 50px !important;
 	}
 	#schedule div.wrap ul.tab li.today a {
-		height: 100%!important;
+		height: 100% !important;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -627,8 +627,15 @@
 	}
 
 	#schedule div.wrap ul.tab li a {
-		font-size: 12px !important;
-		padding: 0 2px !important;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+		font-size: 11px !important;
+		line-height: 1.2 !important;
+		letter-spacing: 0;
+		white-space: nowrap;
+		padding: 0 !important;
 	}
 
 	#schedule div.wrap ul.tab li.active {

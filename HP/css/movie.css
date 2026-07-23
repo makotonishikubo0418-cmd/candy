@@ -382,8 +382,10 @@
 	}
 
 	#spicabox .content-iframe iframe {
-		width: 640px;
-		height: 360px;
+		width: 90%;
+		height: auto;
+		aspect-ratio: 16 / 9;
+		border: 0;
 		overflow: hidden;
 	}
 

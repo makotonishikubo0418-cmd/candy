@@ -1,7 +1,8 @@
 /* ニュースページ専用スタイル（本文エリアのみ） */
 #newsPage .main {
 	max-width: 1200px;
-	margin: 0 auto;
+	margin-right: auto;
+	margin-left: auto;
 }
 #newsPage .newsContent {
 	max-width: 960px;

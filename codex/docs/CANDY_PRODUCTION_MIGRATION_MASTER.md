@@ -284,7 +284,6 @@ python .github/scripts/candy_release_check.py --sha <40-character-Commit-SHA> --
 
 - After changing the Push-triggered workflow, verify success of the automatic run for the target Commit.
 - Verify whether the GitHub `candy-production` environment has required protection rules.
-- Confirm intent for the two remaining test includes.
 - Perform complete hash reconciliation between production inventory and Git-tracked targets.
 - Decide fixes for missing internal links, images, and external URLs recorded in `CANDY_VERIFICATION_PLAN.md`.
 - Approve the final switchover date and standalone deployment procedure for latest `HP/index.php`.
