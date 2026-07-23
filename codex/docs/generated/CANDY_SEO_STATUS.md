@@ -2,14 +2,14 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-24T08:34:19+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-24T08:38:43+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: f00a2937db5c78892d3456bafbc809f646b1af47
-> State fingerprint: sha256:51385525d20dbc328c1e297ae503ce3524ea46aa1409edd15929e107ac0e0744
+> Commit: 7893bf816772036fecce9a1fd160ca3b84fd2ed6
+> State fingerprint: sha256:99688e456a7a6c333c318c5e60745b50ab0d6cc8f2d11d4473d145ad38116241
 > Scope: Source HTML corresponding to public PHP files directly under HP
-> Population: Pages: 104
+> Population: Pages: 105
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: OK=104 / ISSUE=0 / UNVERIFIED=0
+> Result: OK=105 / ISSUE=0 / UNVERIFIED=0
 > Unverified scope: Production HTTP, search engine index state, redirects, and database-generated HTML
 
 Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are not corrected automatically.
@@ -112,6 +112,7 @@ Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are no
 | hotel:cococlass | CoCo CLASS｜鹿児島市でデリヘルが呼べるホテル | 鹿児島市樋之口町でデリヘルが呼べるホテルCoCo CLASS｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-cococlass.php | index | 鹿児島市でデリヘルが呼べるホテル CoCo CLASS | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | hotel:favluxkagoshimatenmonkan | FAV LUX 鹿児島天文館｜鹿児島市でデリヘルが呼べるホテル | 鹿児島市山之口町でデリヘルが呼べるホテルFAV LUX 鹿児島天文館｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-favluxkagoshimatenmonkan.php | index | 鹿児島市でデリヘルが呼べるホテル FAV LUX 鹿児島天文館 | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | hotel:greenrichkagoshimatenmonkan | グリーンリッチホテル鹿児島天文館｜鹿児島市でデリヘルが呼べるホテル | 鹿児島市山之口町でデリヘルが呼べるホテル グリーンリッチホテル鹿児島天文館｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-greenrichkagoshimatenmonkan.php | index | 鹿児島市でデリヘルが呼べるホテル グリーンリッチホテル鹿児島天文館 | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
+| hotel:hotelazkagoshimakiireten | HOTEL AZ 鹿児島喜入店｜鹿児島市でデリヘルが呼べるホテル | 鹿児島市喜入中名町でデリヘルが呼べるホテル「HOTEL AZ 鹿児島喜入店」｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-hotelazkagoshimakiireten.php | index | 鹿児島市でデリヘルが呼べるホテル 「HOTEL AZ 鹿児島喜入店」 | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | hotel:hotelm | Hotel M（ホテルエム / 旧レクサス）｜鹿児島 デリヘルが呼べるホテル | 鹿児島市Hotel M（ホテルエム / 旧レクサス）でデリヘルが呼べるHotel M（ホテルエム / 旧レクサス）｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-hotelm.php | index | 鹿児島市でデリヘルが呼べるホテル Hotel M（ホテルエム / 旧レクサス） | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | hotel:villacosta500 | ヴィラコスタ500（Villa Costa 500）｜鹿児島 デリヘルが呼べるホテル | 鹿児島市錦江町でデリヘルが呼べるホテルヴィラコスタ500（Villa Costa 500）｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-villacosta500.php | index | 鹿児島市でデリヘルが呼べるホテル ヴィラコスタ500（Villa Costa 500） | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | other:movie | 鹿児島 デリヘル キャンディ \| 女の子動画一覧 | 鹿児島 デリヘル「キャンディ」の動画一覧。お店や女の子の雰囲気や魅力を動画でご紹介いたします。 | https://www.55810.com/movie.php | index | 鹿児島 デリヘル キャンディ 女の子動画一覧 | 1 | OK | OK | OK | NOT_APPLICABLE | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
