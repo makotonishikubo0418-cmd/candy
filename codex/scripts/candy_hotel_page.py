@@ -1112,10 +1112,10 @@ def update_hotel_list(source: str, data: HotelData) -> str:
         source = common.replace_exact(
             source,
             (
-                rf'(?ms)^[ \t]*<div class="lpt_15 bd_t"><a href="\./{re.escape(php_name)}".*?</div>'
+                rf'(?ms)(?:^[ \t]*\r?\n)*^[ \t]*<div class="lpt_15 bd_t"><a href="\./{re.escape(php_name)}".*?</div>'
                 r'\s*^[ \t]*<div class="lp_10_0_15 f_xxs fc_g">.*?</div>'
             ),
-            entry,
+            "\n" + entry,
             "hotel list existing entry",
         )
     else:
@@ -1127,7 +1127,7 @@ def update_hotel_list(source: str, data: HotelData) -> str:
                 r'(^[ \t]*</div>\r?\n^[ \t]*</div>\r?\n^[ \t]*\r?\n'
                 r'^[ \t]*</div>\r?\n^<!-- メインコンテンツ END -->)'
             ),
-            rf"\g<1>\n\t\t\t\t\t\n{entry}\n\g<2>",
+            rf"\g<1>\n\n{entry}\n\g<2>",
             "hotel list insertion point",
         )
     script = '<script type="application/ld+json">\n' + json.dumps(hotel_schema(data), ensure_ascii=False, indent=2) + "\n</script>\n"

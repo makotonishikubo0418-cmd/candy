@@ -16,6 +16,7 @@
 
 | Task ID | Codex | Period | Scope | Status |
 |---|---|---|---|---|
+| TASK-20260724-HOTEL-THREE-PAGE-PUBLISH-001 | current | 2026-07-24 | Publish the next three eligible hotel pages through the canonical hotel workflow, including target-scoped generator and verifier fixes required by observed failures, exact image-location checks, generated current-state synchronization, Commit, Push, Actions, production HTTP verification, and rollback of only reproducible uncommitted target outputs when a pre-Commit gate fails; no database operation, `HP/index.php` change, unrelated page change, image replacement, or source Text modification | ACTIVE |
 
 ## 3. Completed and Released Reservations
 
