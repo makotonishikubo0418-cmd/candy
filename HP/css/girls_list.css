@@ -110,11 +110,6 @@
 		display: block;
 	}
 
-	#girlsL div.main div.list div.box div.photo img[alt*="/dmy/"],
-	#girlsL div.main div.list div.box div.photo img[src*="/dmy/"],
-	#girlsL div.main div.list div.box div.photo img[title*="/dmy/"] {
-		visibility: hidden;
-	}
 
 	#girlsL div.main div.list div.box dl.data {
 		position: absolute;
