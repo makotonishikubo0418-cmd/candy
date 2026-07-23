@@ -319,6 +319,15 @@ Codex MUST read only the files required for the current task.
 - Codex MUST use `[Approval Request]` only when an operation is not authorized or exceeds the authorized scope.
 - This section does not override the STOP Conditions.
 
+### 4.1 External Storage and Transfer Destinations
+
+- Codex MUST NOT create, copy, move, upload, archive, synchronize, or otherwise write files or folders to any destination that the user has not explicitly authorized for the current task.
+- This prohibition includes NAS locations, network shares, mapped drives, cloud storage, backup directories, temporary transfer locations, another Codex workspace, and any local directory outside the authorized target.
+- The existence, accessibility, prior use, documented purpose, or technical writability of a destination does not constitute authorization to use it.
+- A request to prepare or hand off work authorizes only preparation within the currently authorized local workspace. It MUST NOT be interpreted as authorization for Codex to select or write to an external transfer destination.
+- Before any write to an external or additional destination, Codex MUST present the exact destination, the files or data to be written, the purpose, and the expected impact, and MUST obtain the user's explicit authorization.
+- If the destination or authorization cannot be verified, Codex MUST STOP the write operation. Codex MUST NOT substitute another destination on its own.
+
 When user action is required, Codex MUST place only the applicable request at the end of the response:
 
 [Test Request] Target to test, test location, test procedure, and expected result
