@@ -1108,9 +1108,14 @@ def update_hotel_list(source: str, data: HotelData) -> str:
         )
         source = common.replace_exact(
             source,
-            r'(?ms)^[ \t]*<div class="lpt_15 bd_t"><a href="\./kagoshima-deliveryhealth-hotel-aaaaaaaaaa\.php".*?</div>\s*^[ \t]*<div class="lp_10_0_15 f_xxs fc_g">.*?</div>',
-            entry,
-            "hotel list placeholder",
+            (
+                r'(?ms)(^[ \t]*<div class="lp_0_55_35 w_1050 lm_30_auto bg_f">.*?</div>)'
+                r'\r?\n(?:^[ \t]*\r?\n)*'
+                r'(^[ \t]*</div>\r?\n^[ \t]*</div>\r?\n^[ \t]*\r?\n'
+                r'^[ \t]*</div>\r?\n^<!-- メインコンテンツ END -->)'
+            ),
+            rf"\g<1>\n\t\t\t\t\t\n{entry}\n\g<2>",
+            "hotel list insertion point",
         )
     if data.canonical not in source:
         script = '<script type="application/ld+json">\n' + json.dumps(hotel_schema(data), ensure_ascii=False, indent=2) + "\n</script>\n"
@@ -1463,10 +1468,16 @@ def run_self_test(_: argparse.Namespace) -> int:
         if len(path_config.related_link_targets(sparse_source)) != path_config.RELATED_COUNT:
             raise HotelToolError("sparse related link self-test failed")
         sparse_hotel_list_fixture = (
-            '<div class="lpt_15 bd_t"><a href="./kagoshima-deliveryhealth-hotel-aaaaaaaaaa.php" '
-            'class="fs_md1 fade">placeholder</a></div>\n'
-            '<div class="lp_10_0_15 f_xxs fc_g">placeholder</div>\n'
-            '<!-- 構造化データ（JSON-LD） END -->'
+            '<!-- 構造化データ（JSON-LD） END -->\n'
+            '<!-- メインコンテンツ START -->\n'
+            '<div class="lp_0_7">\n'
+            '\t<div class="lp_0_55_35 w_1050 lm_30_auto bg_f">\n'
+            '\t\t<div class="lp_10_0 lm_0_auto w_130 center bg_p fs_xs fc_w">HOTEL INFO</div>\n'
+            '\t</div>\n'
+            '</div>\n'
+            '\n'
+            '</div>\n'
+            '<!-- メインコンテンツ END -->'
         )
         sparse_hotel_list = update_hotel_list(sparse_hotel_list_fixture, sparse_data)
         sparse_php_name = f"kagoshima-deliveryhealth-hotel-{sparse_data.slug}.php"
