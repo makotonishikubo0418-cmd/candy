@@ -359,7 +359,8 @@ def parse_hotel_text(path: Path) -> HotelData:
     spot_heading = ""
     spots: list[common.Place] = []
     spot_note = DEFAULT_SPOT_NOTE
-    basic_labels = ("ホテル名", "URL", "住所", "住所（郵便番号迄）", "電話番号", "部屋・駐車場", "支払方法")
+    room_parking_labels = ("部屋・駐車場", "部屋数・駐車場")
+    basic_labels = ("ホテル名", "URL", "住所", "住所（郵便番号迄）", "電話番号", *room_parking_labels, "支払方法")
     access_labels = ("地図URL", "地図タイトル")
     seen_sections: set[str] = set()
 
@@ -393,12 +394,13 @@ def parse_hotel_text(path: Path) -> HotelData:
             scene_order.append("basic")
             for label in basic_labels:
                 ensure_label_count(section, (label,), (0, 1), f"基本情報 {label}")
+            ensure_label_count(section, room_parking_labels, (0, 1), "基本情報 部屋数・駐車場")
             basic = BasicInfo(
                 hotel_name=field_value(section, ("ホテル名",), basic_labels),
                 official_url=field_value(section, ("URL",), basic_labels),
                 address=field_value(section, ("住所", "住所（郵便番号迄）"), basic_labels),
                 telephone=field_value(section, ("電話番号",), basic_labels) or None,
-                room_parking=field_value(section, ("部屋・駐車場",), basic_labels) or None,
+                room_parking=field_value(section, room_parking_labels, basic_labels) or None,
                 payment=field_value(section, ("支払方法",), basic_labels) or None,
             )
         elif heading == "料金情報":
@@ -1064,7 +1066,8 @@ def update_dataset_base(source: str, slug: str) -> str:
 
 def hotel_schema(data: HotelData) -> dict[str, object]:
     postal = re.search(r"〒?\s*(\d{3}-\d{4})", data.basic.address)
-    address_text = re.sub(r"〒?\s*\d{3}-\d{4}\s*", "", data.basic.address.replace("\n", " ")).strip()
+    normalized_address = data.basic.address.replace("<改行>", " ").replace("\n", " ")
+    address_text = re.sub(r"〒?\s*\d{3}-\d{4}\s*", "", normalized_address).strip()
     schema: dict[str, object] = {
         "@context": "https://schema.org",
         "@type": "Hotel",
@@ -1085,27 +1088,37 @@ def update_hotel_list(source: str, data: HotelData) -> str:
     php_name = f"kagoshima-deliveryhealth-hotel-{data.slug}.php"
     if source.count(f'./{php_name}') > 1 or source.count(data.canonical) > 1:
         raise HotelToolError("hotel一覧登録重複")
-    if f'./{php_name}' not in source:
-        address = common.htext(data.basic.address)
-        phone = f' <br class="spOnly">TEL {common.htext(data.basic.telephone)}' if data.basic.telephone else ""
-        rest = next((value for label, value in data.rates if label in {"休憩", "休憩等", "ショート", "フリー"}), None)
-        stay = next((value for label, value in data.rates if label == "宿泊"), None)
-        rate_lines = []
-        if rest:
-            rate_lines.append(f'<span class="lym_4">休憩料金目安 {common.htext(rest)}</span>')
-        if stay:
-            rate_lines.append(f'宿泊料金目安 {common.htext(stay)}')
-        rates = '<br class="spOnly">'.join(rate_lines)
-        map_link = (
-            f'<a href="{common.hattr(data.access.map_src)}" target="_blank" rel="noopener noreferrer" class="fade lmr_10 fc_g">［MAP］</a>'
-            if data.access
-            else ""
+    address = common.htext(data.basic.address)
+    phone = f' <br class="spOnly">TEL {common.htext(data.basic.telephone)}' if data.basic.telephone else ""
+    rest = next((value for label, value in data.rates if label in {"休憩", "休憩等", "ショート", "フリー"}), None)
+    stay = next((value for label, value in data.rates if label == "宿泊"), None)
+    rate_lines = []
+    if rest:
+        rate_lines.append(f'<span class="lym_4">休憩料金目安 {common.htext(rest)}</span>')
+    if stay:
+        rate_lines.append(f'宿泊料金目安 {common.htext(stay)}')
+    rates = '<br class="spOnly">'.join(rate_lines)
+    map_link = (
+        f'<a href="{common.hattr(data.access.map_src)}" target="_blank" rel="noopener noreferrer" class="fade lmr_10 fc_g">［MAP］</a>'
+        if data.access
+        else ""
+    )
+    rate_details = f'<br>\n\t\t\t\t\t\t{rates}' if rates else ""
+    entry = (
+        f'\t\t\t\t\t<div class="lpt_15 bd_t"><a href="./{php_name}" class="fs_md1 fade">{common.htext(data.hotel_name)}</a></div>\n'
+        f'\t\t\t\t\t<div class="lp_10_0_15 f_xxs fc_g">{address}{map_link}{phone}{rate_details}</div>'
+    )
+    if f'./{php_name}' in source:
+        source = common.replace_exact(
+            source,
+            (
+                rf'(?ms)^[ \t]*<div class="lpt_15 bd_t"><a href="\./{re.escape(php_name)}".*?</div>'
+                r'\s*^[ \t]*<div class="lp_10_0_15 f_xxs fc_g">.*?</div>'
+            ),
+            entry,
+            "hotel list existing entry",
         )
-        rate_details = f'<br>\n\t\t\t\t\t\t{rates}' if rates else ""
-        entry = (
-            f'\t\t\t\t\t<div class="lpt_15 bd_t"><a href="./{php_name}" class="fs_md1 fade">{common.htext(data.hotel_name)}</a></div>\n'
-            f'\t\t\t\t\t<div class="lp_10_0_15 f_xxs fc_g">{address}{map_link}{phone}{rate_details}</div>'
-        )
+    else:
         source = common.replace_exact(
             source,
             (
@@ -1117,9 +1130,22 @@ def update_hotel_list(source: str, data: HotelData) -> str:
             rf"\g<1>\n\t\t\t\t\t\n{entry}\n\g<2>",
             "hotel list insertion point",
         )
-    if data.canonical not in source:
-        script = '<script type="application/ld+json">\n' + json.dumps(hotel_schema(data), ensure_ascii=False, indent=2) + "\n</script>\n"
-        source = common.replace_exact(source, r"(?m)^<!-- 構造化データ（JSON-LD） END -->", script + "<!-- 構造化データ（JSON-LD） END -->", "hotel list JSON-LD")
+    script = '<script type="application/ld+json">\n' + json.dumps(hotel_schema(data), ensure_ascii=False, indent=2) + "\n</script>\n"
+    escaped_script = script.replace("\\", "\\\\")
+    if data.canonical in source:
+        source = common.replace_exact(
+            source,
+            (
+                r'(?ms)^<script type="application/ld\+json">\r?\n'
+                r'(?:(?!^</script>).)*?'
+                + re.escape(data.canonical)
+                + r'(?:(?!^</script>).)*?^</script>\r?\n?'
+            ),
+            escaped_script,
+            "hotel list existing JSON-LD",
+        )
+    else:
+        source = common.replace_exact(source, r"(?m)^<!-- 構造化データ（JSON-LD） END -->", escaped_script + "<!-- 構造化データ（JSON-LD） END -->", "hotel list JSON-LD")
     return source
 
 
@@ -1410,6 +1436,12 @@ def run_self_test(_: argparse.Namespace) -> int:
         ),
     }
     with tempfile.TemporaryDirectory() as directory:
+        room_label_path = Path(directory) / "room_count_label.txt"
+        room_label_path.write_text(base_text.replace("部屋・駐車場", "部屋数・駐車場", 1), encoding="utf-8")
+        room_label_data = parse_hotel_text(room_label_path)
+        if room_label_data.basic.room_parking != data.basic.room_parking:
+            raise HotelToolError("room count label self-test failed")
+
         pattern_path = Path(directory) / "information_patterns.txt"
         pattern_path.write_text(pattern_text, encoding="utf-8")
         pattern_data = parse_hotel_text(pattern_path)

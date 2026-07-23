@@ -263,7 +263,7 @@ def verify_production(data: candy_hotel_page.HotelData, commit: str) -> None:
         "canonical": f'<link rel="canonical" href="{data.canonical}">' in body,
         "h1": data.hotel_name in h1_text,
         "shops": body.count('class="campaign-item"') == len(data.shops),
-        "related": not candy_hotel_page.related_validation(body),
+        "related": not candy_hotel_page.related_validation(body, data.canonical),
         "json_ld": json_valid and len(json_values) == (3 if data.faqs else 2),
         "item_list": bool(
             item_json
