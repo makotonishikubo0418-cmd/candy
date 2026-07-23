@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/fav 鹿児島中央.txt",
+  "canonical_slug": "favhotelkagoshimachuo",
+  "hotel_name_ja": "fav 鹿児島中央",
+  "hotel_name_en": "fav KAGOSHIMA CHUO",
+  "hotel_name_en_characters": 18,
+  "hotel_name_en_sha256": "dd63934b98f195e68fd34e5249f05a7a20ac295eaf12e85cb7016dc6ff966420",
+  "address": "〒892-0846 鹿児島県鹿児島市加治屋町1-15",
+  "search_query": "fav 鹿児島中央 〒892-0846 鹿児島県鹿児島市加治屋町1-15",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\favhotelkagoshimachuo",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/favhotelkagoshimachuo_1.jpg",
+    "Text_hotel_data/画像データ/favhotelkagoshimachuo_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/favhotelkagoshimachuo_1.jpg",
+    "HP/imgHtml/new_202601/hotel/favhotelkagoshimachuo_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/favhotelkagoshimachuo_1.jpg",
+    "./imgHtml/new_202601/hotel/favhotelkagoshimachuo_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/favhotelkagoshimachuo_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\favhotelkagoshimachuo_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 537,
+      "title_bbox": [
+        232,
+        336,
+        769,
+        373
+      ],
+      "title_center": [
+        500.5,
+        354.5
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "c97e37b3e7d70e763b53e64dde82b0b1034e8dd48ad48a371444a80c27e661fb",
+      "bytes": 310030,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\favhotelkagoshimachuo\\favhotelkagoshimachuo_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\favhotelkagoshimachuo_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 468,
+      "title_bbox": [
+        266,
+        339,
+        734,
+        369
+      ],
+      "title_center": [
+        500.0,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "6763dfe8cc98e819f88844fca9a5be1698bdfebe4f06f14e0ec3456c2dee81f6",
+      "bytes": 231774,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\favhotelkagoshimachuo\\favhotelkagoshimachuo_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

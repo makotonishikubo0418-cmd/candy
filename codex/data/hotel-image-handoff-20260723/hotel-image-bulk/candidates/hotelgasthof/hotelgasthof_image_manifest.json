@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/ホテル ガストフ.txt",
+  "canonical_slug": "hotelgasthof",
+  "hotel_name_ja": "ホテル ガストフ",
+  "hotel_name_en": "Hotel Gasthof",
+  "hotel_name_en_characters": 13,
+  "hotel_name_en_sha256": "62072bbd3b582d7fef92713ebce135346c3cb6bc29a36c682f33450e75f9bd66",
+  "address": "〒890-0053 鹿児島県鹿児島市中央町7-1",
+  "search_query": "ホテル ガストフ 〒890-0053 鹿児島県鹿児島市中央町7-1",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelgasthof",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/hotelgasthof_1.jpg",
+    "Text_hotel_data/画像データ/hotelgasthof_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/hotelgasthof_1.jpg",
+    "HP/imgHtml/new_202601/hotel/hotelgasthof_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/hotelgasthof_1.jpg",
+    "./imgHtml/new_202601/hotel/hotelgasthof_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/hotelgasthof_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelgasthof_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 316,
+      "title_bbox": [
+        342,
+        336,
+        658,
+        373
+      ],
+      "title_center": [
+        500.0,
+        354.5
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "c27646c865d8a0379e457591598c6429bbe18d48fd3eb06342c186ce9ea1d6be",
+      "bytes": 317641,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelgasthof\\hotelgasthof_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelgasthof_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 278,
+      "title_bbox": [
+        361,
+        339,
+        639,
+        369
+      ],
+      "title_center": [
+        500.0,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "c5335679336611b81cf23350bbc531fd53bbd8e0a4f41b988f3ca61c4ca0391c",
+      "bytes": 313039,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelgasthof\\hotelgasthof_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

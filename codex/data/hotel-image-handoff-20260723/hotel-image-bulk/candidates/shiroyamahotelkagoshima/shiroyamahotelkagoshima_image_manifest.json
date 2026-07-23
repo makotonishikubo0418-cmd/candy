@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/SHIROYAMA HOTEL kagoshima(城山ホテル鹿児島).txt",
+  "canonical_slug": "shiroyamahotelkagoshima",
+  "hotel_name_ja": "SHIROYAMA HOTEL kagoshima",
+  "hotel_name_en": "SHIROYAMA HOTEL kagoshima",
+  "hotel_name_en_characters": 25,
+  "hotel_name_en_sha256": "3434532ef188c583611a09fa25905ec56881afdf462e29b0efebdccc36c176e7",
+  "address": "〒890-8586 鹿児島県鹿児島市新照院町41-1",
+  "search_query": "SHIROYAMA HOTEL kagoshima 〒890-8586 鹿児島県鹿児島市新照院町41-1",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\shiroyamahotelkagoshima",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/shiroyamahotelkagoshima_1.jpg",
+    "Text_hotel_data/画像データ/shiroyamahotelkagoshima_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/shiroyamahotelkagoshima_1.jpg",
+    "HP/imgHtml/new_202601/hotel/shiroyamahotelkagoshima_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/shiroyamahotelkagoshima_1.jpg",
+    "./imgHtml/new_202601/hotel/shiroyamahotelkagoshima_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/shiroyamahotelkagoshima_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\shiroyamahotelkagoshima_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 733,
+      "title_bbox": [
+        134,
+        331,
+        867,
+        377
+      ],
+      "title_center": [
+        500.5,
+        354.0
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "2632fe2b4ec94869a7584e6b2a0a2d91f8996b11a1086100143a4cb982e29421",
+      "bytes": 298766,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\shiroyamahotelkagoshima\\shiroyamahotelkagoshima_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\shiroyamahotelkagoshima_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 642,
+      "title_bbox": [
+        179,
+        335,
+        821,
+        373
+      ],
+      "title_center": [
+        500.0,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "1106ee959d4699f587f60bbf5d21d58e52fb9560e86c1bcc241a10c0b40ec8c1",
+      "bytes": 304211,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\shiroyamahotelkagoshima\\shiroyamahotelkagoshima_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

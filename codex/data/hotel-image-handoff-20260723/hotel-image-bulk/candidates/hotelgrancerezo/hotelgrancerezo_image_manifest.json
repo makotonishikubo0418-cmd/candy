@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/ホテルグランセレッソ鹿児島.txt",
+  "canonical_slug": "hotelgrancerezo",
+  "hotel_name_ja": "ホテル グランセレッソ鹿児島天文館",
+  "hotel_name_en": "Hotel Gran Cerezo Kagoshima",
+  "hotel_name_en_characters": 27,
+  "hotel_name_en_sha256": "e831547241ebb080f73122925f39918ccdc49de115d8b08ce5f4405bdc7c8d61",
+  "address": "〒892-0831 鹿児島県鹿児島市船津町5-22",
+  "search_query": "ホテル グランセレッソ鹿児島天文館 〒892-0831 鹿児島県鹿児島市船津町5-22",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelgrancerezo",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/hotelgrancerezo_1.jpg",
+    "Text_hotel_data/画像データ/hotelgrancerezo_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/hotelgrancerezo_1.jpg",
+    "HP/imgHtml/new_202601/hotel/hotelgrancerezo_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/hotelgrancerezo_1.jpg",
+    "./imgHtml/new_202601/hotel/hotelgrancerezo_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/hotelgrancerezo_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelgrancerezo_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 691,
+      "title_bbox": [
+        154,
+        331,
+        845,
+        377
+      ],
+      "title_center": [
+        499.5,
+        354.0
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "0b9fba9debd0f164a341e625421beeeb58429f2000af635031916c4b2ee82438",
+      "bytes": 339315,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelgrancerezo\\hotelgrancerezo_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelgrancerezo_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 604,
+      "title_bbox": [
+        198,
+        335,
+        802,
+        373
+      ],
+      "title_center": [
+        500.0,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "b8ea4d7e736f46eeab2337427e523eb819dd3a44beb53d91ec4009d58048328e",
+      "bytes": 323725,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelgrancerezo\\hotelgrancerezo_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

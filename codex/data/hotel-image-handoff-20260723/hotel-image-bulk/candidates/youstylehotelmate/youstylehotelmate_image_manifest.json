@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/HOTEL MATE.txt",
+  "canonical_slug": "youstylehotelmate",
+  "hotel_name_ja": "YOUSTYLE HOTEL MATE",
+  "hotel_name_en": "YOUSTYLE HOTEL MATE",
+  "hotel_name_en_characters": 19,
+  "hotel_name_en_sha256": "43a25bc1e4a1b8008e986a253dd2ce9e6635b902ee17d801f124d14abe1ece14",
+  "address": "〒892-0826 鹿児島県鹿児島市呉服町5-17",
+  "search_query": "YOUSTYLE HOTEL MATE 〒892-0826 鹿児島県鹿児島市呉服町5-17",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\youstylehotelmate",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/youstylehotelmate_1.jpg",
+    "Text_hotel_data/画像データ/youstylehotelmate_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/youstylehotelmate_1.jpg",
+    "HP/imgHtml/new_202601/hotel/youstylehotelmate_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/youstylehotelmate_1.jpg",
+    "./imgHtml/new_202601/hotel/youstylehotelmate_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/youstylehotelmate_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\youstylehotelmate_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 583,
+      "title_bbox": [
+        209,
+        336,
+        792,
+        373
+      ],
+      "title_center": [
+        500.5,
+        354.5
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "284cfc48fa3ee3d325862461cfc0ee23032238dfb40d60443030ad06bd6b2531",
+      "bytes": 335348,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\youstylehotelmate\\youstylehotelmate_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\youstylehotelmate_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 514,
+      "title_bbox": [
+        243,
+        339,
+        757,
+        369
+      ],
+      "title_center": [
+        500.0,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "470b910dabb314445ee9653b215d0fc5f679651d43a47d0ecf39a6ad04d2fd23",
+      "bytes": 349374,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\youstylehotelmate\\youstylehotelmate_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

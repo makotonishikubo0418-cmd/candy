@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/東横INN鹿児島中央駅西口.txt",
+  "canonical_slug": "toyokoinnkagoshimachuostationnishi",
+  "hotel_name_ja": "東横INN鹿児島中央駅西口",
+  "hotel_name_en": "Toyoko Inn Kagoshima Chuo-eki Nishi-guchi",
+  "hotel_name_en_characters": 41,
+  "hotel_name_en_sha256": "b497947db8ae617718d5e8f92f457653ed503050f2dd62b3b49a9c741a9dd29f",
+  "address": "〒890-0046 鹿児島県鹿児島市西田2-28-10",
+  "search_query": "東横INN鹿児島中央駅西口 〒890-0046 鹿児島県鹿児島市西田2-28-10",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\toyokoinnkagoshimachuostationnishi",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/toyokoinnkagoshimachuostationnishi_1.jpg",
+    "Text_hotel_data/画像データ/toyokoinnkagoshimachuostationnishi_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/toyokoinnkagoshimachuostationnishi_1.jpg",
+    "HP/imgHtml/new_202601/hotel/toyokoinnkagoshimachuostationnishi_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/toyokoinnkagoshimachuostationnishi_1.jpg",
+    "./imgHtml/new_202601/hotel/toyokoinnkagoshimachuostationnishi_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/toyokoinnkagoshimachuostationnishi_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\toyokoinnkagoshimachuostationnishi_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 38,
+      "title_width": 808,
+      "title_bbox": [
+        96,
+        336,
+        904,
+        371
+      ],
+      "title_center": [
+        500.0,
+        353.5
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "240d271dcef4e7b4a986c365efcf5ca91542f2bb395957bf4111ce69e2394ecb",
+      "bytes": 335799,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\toyokoinnkagoshimachuostationnishi\\toyokoinnkagoshimachuostationnishi_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\toyokoinnkagoshimachuostationnishi_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 34,
+      "title_width": 724,
+      "title_bbox": [
+        138,
+        338,
+        862,
+        370
+      ],
+      "title_center": [
+        500.0,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "ce3586870b3c05b95c626c3a646191b5e6219f0cb74e5fc134fd80f2ece77e8a",
+      "bytes": 332590,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\toyokoinnkagoshimachuostationnishi\\toyokoinnkagoshimachuostationnishi_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

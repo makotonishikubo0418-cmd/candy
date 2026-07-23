@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/ホテルニューニシノ.txt",
+  "canonical_slug": "hotelnewnishino",
+  "hotel_name_ja": "ホテルニューニシノ",
+  "hotel_name_en": "Hotel New Nishino",
+  "hotel_name_en_characters": 17,
+  "hotel_name_en_sha256": "bd26da977c28b870497df69a5e7d7c7e0d30941b4772720c802c52d494e71bff",
+  "address": "〒892-0843 鹿児島県鹿児島市千日町13-24",
+  "search_query": "ホテルニューニシノ 〒892-0843 鹿児島県鹿児島市千日町13-24",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelnewnishino",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/hotelnewnishino_1.jpg",
+    "Text_hotel_data/画像データ/hotelnewnishino_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/hotelnewnishino_1.jpg",
+    "HP/imgHtml/new_202601/hotel/hotelnewnishino_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/hotelnewnishino_1.jpg",
+    "./imgHtml/new_202601/hotel/hotelnewnishino_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/hotelnewnishino_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelnewnishino_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 420,
+      "title_bbox": [
+        290,
+        337,
+        710,
+        372
+      ],
+      "title_center": [
+        500.0,
+        354.5
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "f701a32b019fee846edd3e710e032e102965aefed90707bd386814ba4e754dc8",
+      "bytes": 333695,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelnewnishino\\hotelnewnishino_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelnewnishino_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 370,
+      "title_bbox": [
+        315,
+        339,
+        685,
+        369
+      ],
+      "title_center": [
+        500.0,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "f03ad2c8b9491c4ab62dec793c4ac663864de8e602517b6fd556e4fa9af326f1",
+      "bytes": 315762,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelnewnishino\\hotelnewnishino_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

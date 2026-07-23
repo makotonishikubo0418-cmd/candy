@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/ホテルリブマックスBUDGET鹿児島天文館.txt",
+  "canonical_slug": "hotellivemaxbudgetkagoshimatenmonkan",
+  "hotel_name_ja": "ホテルリブマックスBUDGET鹿児島天文館",
+  "hotel_name_en": "HOTEL LiVEMAX BUDGET Kagoshima Tenmonkan",
+  "hotel_name_en_characters": 40,
+  "hotel_name_en_sha256": "664c20b82d60a70fe0f7790118c6a44709548d3deff3b8f7e72d7017c9b77782",
+  "address": "〒892-0843 鹿児島県鹿児島市千日町12-3",
+  "search_query": "ホテルリブマックスBUDGET鹿児島天文館 〒892-0843 鹿児島県鹿児島市千日町12-3",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotellivemaxbudgetkagoshimatenmonkan",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/hotellivemaxbudgetkagoshimatenmonkan_1.jpg",
+    "Text_hotel_data/画像データ/hotellivemaxbudgetkagoshimatenmonkan_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/hotellivemaxbudgetkagoshimatenmonkan_1.jpg",
+    "HP/imgHtml/new_202601/hotel/hotellivemaxbudgetkagoshimatenmonkan_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/hotellivemaxbudgetkagoshimatenmonkan_1.jpg",
+    "./imgHtml/new_202601/hotel/hotellivemaxbudgetkagoshimatenmonkan_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/hotellivemaxbudgetkagoshimatenmonkan_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotellivemaxbudgetkagoshimatenmonkan_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 34,
+      "title_width": 825,
+      "title_bbox": [
+        88,
+        338,
+        913,
+        370
+      ],
+      "title_center": [
+        500.5,
+        354.0
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "05e53477fd3d8e23e71aae495f24bfa4fb2bbd107d3652fb6fd16465bb653bca",
+      "bytes": 308138,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotellivemaxbudgetkagoshimatenmonkan\\hotellivemaxbudgetkagoshimatenmonkan_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotellivemaxbudgetkagoshimatenmonkan_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 30,
+      "title_width": 723,
+      "title_bbox": [
+        138,
+        340,
+        861,
+        368
+      ],
+      "title_center": [
+        499.5,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "e7db9671886782e7d732f4bdf3b3264e232eace0216dda21b16d72f00dc09876",
+      "bytes": 331838,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotellivemaxbudgetkagoshimatenmonkan\\hotellivemaxbudgetkagoshimatenmonkan_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/HOTEL AZ 鹿児島喜入店.txt",
+  "canonical_slug": "hotelazkagoshimakiireten",
+  "hotel_name_ja": "HOTEL AZ 鹿児島喜入店",
+  "hotel_name_en": "HOTEL AZ Kagoshima Kiire",
+  "hotel_name_en_characters": 24,
+  "hotel_name_en_sha256": "a1c9274d9cdbe11ce4357abf38dbf825185ac01551950cf21ee3be316b783ea2",
+  "address": "〒891-0202 鹿児島県鹿児島市喜入中名町2936-3",
+  "search_query": "HOTEL AZ 鹿児島喜入店 〒891-0202 鹿児島県鹿児島市喜入中名町2936-3",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelazkagoshimakiireten",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/hotelazkagoshimakiireten_1.jpg",
+    "Text_hotel_data/画像データ/hotelazkagoshimakiireten_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/hotelazkagoshimakiireten_1.jpg",
+    "HP/imgHtml/new_202601/hotel/hotelazkagoshimakiireten_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/hotelazkagoshimakiireten_1.jpg",
+    "./imgHtml/new_202601/hotel/hotelazkagoshimakiireten_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/hotelazkagoshimakiireten_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelazkagoshimakiireten_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 631,
+      "title_bbox": [
+        184,
+        331,
+        815,
+        377
+      ],
+      "title_center": [
+        499.5,
+        354.0
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "f139a6082612af07695fec27ded0cfcef71dbcb73af297c53f15a3e840760ace",
+      "bytes": 302731,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelazkagoshimakiireten\\hotelazkagoshimakiireten_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelazkagoshimakiireten_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 554,
+      "title_bbox": [
+        223,
+        335,
+        777,
+        373
+      ],
+      "title_center": [
+        500.0,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "99d83d0d04afd7e85b64d77a64637c43905597d8be1b729edb5d95a888bc9b57",
+      "bytes": 278185,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelazkagoshimakiireten\\hotelazkagoshimakiireten_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

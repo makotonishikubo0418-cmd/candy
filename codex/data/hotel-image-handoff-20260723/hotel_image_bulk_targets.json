@@ -1,0 +1,623 @@
+[
+  {
+    "input": "Text_hotel_data/CoCo CLASS.txt",
+    "filename": "CoCo CLASS.txt",
+    "slug": "cococlass",
+    "name_ja": "CoCo CLASS",
+    "address": "〒892-0845<改行> 鹿児島県鹿児島市樋之口町7-30",
+    "query": "CoCo CLASS 〒892-0845<改行> 鹿児島県鹿児島市樋之口町7-30",
+    "official_url": "https://coco-stay.net/coco-class/"
+  },
+  {
+    "input": "Text_hotel_data/FAV LUX 鹿児島天文館.txt",
+    "filename": "FAV LUX 鹿児島天文館.txt",
+    "slug": "favluxkagoshimatenmonkan",
+    "name_ja": "FAV LUX 鹿児島天文館",
+    "address": "〒892-0844<改行> 鹿児島県鹿児島市山之口町7-30",
+    "query": "FAV LUX 鹿児島天文館 〒892-0844<改行> 鹿児島県鹿児島市山之口町7-30",
+    "official_url": "https://fav-hotels.com/hotels/lux/kagoshimatenmonkan/"
+  },
+  {
+    "input": "Text_hotel_data/HOTEL AZ 鹿児島喜入店.txt",
+    "filename": "HOTEL AZ 鹿児島喜入店.txt",
+    "slug": "hotelazkagoshimakiireten",
+    "name_ja": "HOTEL AZ 鹿児島喜入店",
+    "address": "〒891-0202<改行> 鹿児島県鹿児島市喜入中名町2936-3",
+    "query": "HOTEL AZ 鹿児島喜入店 〒891-0202<改行> 鹿児島県鹿児島市喜入中名町2936-3",
+    "official_url": "https://www.az-hotel.com/kiire/"
+  },
+  {
+    "input": "Text_hotel_data/HOTEL MATE.txt",
+    "filename": "HOTEL MATE.txt",
+    "slug": "youstylehotelmate",
+    "name_ja": "YOUSTYLE HOTEL MATE",
+    "address": "〒892-0826<改行> 鹿児島県鹿児島市呉服町5-17",
+    "query": "YOUSTYLE HOTEL MATE 〒892-0826<改行> 鹿児島県鹿児島市呉服町5-17",
+    "official_url": "https://youstyle-hotel.jp/hotelmate/"
+  },
+  {
+    "input": "Text_hotel_data/HOTEL SERA.txt",
+    "filename": "HOTEL SERA.txt",
+    "slug": "hotelsera",
+    "name_ja": "HOTEL SERA",
+    "address": "〒890-0062<改行> 鹿児島県鹿児島市与次郎1丁目2-32",
+    "query": "HOTEL SERA 〒890-0062<改行> 鹿児島県鹿児島市与次郎1丁目2-32",
+    "official_url": "https://sera-resort.com/"
+  },
+  {
+    "input": "Text_hotel_data/HOTEL_RESIDENCE南洲館.txt",
+    "filename": "HOTEL_RESIDENCE南洲館.txt",
+    "slug": "hotelresidencenanshukan",
+    "name_ja": "HOTEL&RESIDENCE南洲館",
+    "address": "〒892-0842<改行> 鹿児島県鹿児島市東千石町19-17",
+    "query": "HOTEL&RESIDENCE南洲館 〒892-0842<改行> 鹿児島県鹿児島市東千石町19-17",
+    "official_url": "https://nanshukan.co.jp/"
+  },
+  {
+    "input": "Text_hotel_data/Hotel クキタ.txt",
+    "filename": "Hotel クキタ.txt",
+    "slug": "hotelkukita",
+    "name_ja": "Ｈｏｔｅｌ クキタ",
+    "address": "〒891-0114<改行> 鹿児島県鹿児島市小松原1丁目11番2号",
+    "query": "Ｈｏｔｅｌ クキタ 〒891-0114<改行> 鹿児島県鹿児島市小松原1丁目11番2号",
+    "official_url": "https://hotelkukita.com/"
+  },
+  {
+    "input": "Text_hotel_data/JR九州ホテル鹿児島.txt",
+    "filename": "JR九州ホテル鹿児島.txt",
+    "slug": "jrkyushuhotelkagoshima",
+    "name_ja": "JR九州ホテル鹿児島",
+    "address": "〒890-0045<改行> 鹿児島県鹿児島市武1丁目1番2号",
+    "query": "JR九州ホテル鹿児島 〒890-0045<改行> 鹿児島県鹿児島市武1丁目1番2号",
+    "official_url": "https://www.jrk-hotels.co.jp/Kagoshima/"
+  },
+  {
+    "input": "Text_hotel_data/KOKO HOTEL 鹿児島天文館.txt",
+    "filename": "KOKO HOTEL 鹿児島天文館.txt",
+    "slug": "kokohotelkagoshimatenmonkan",
+    "name_ja": "KOKO HOTEL 鹿児島天文館",
+    "address": "〒892-0842 <改行> 鹿児島県鹿児島市東千石町4-24",
+    "query": "KOKO HOTEL 鹿児島天文館 〒892-0842 <改行> 鹿児島県鹿児島市東千石町4-24",
+    "official_url": "https://koko-hotels.com/kagoshima_tenmonkan/"
+  },
+  {
+    "input": "Text_hotel_data/SHIROYAMA HOTEL kagoshima(城山ホテル鹿児島).txt",
+    "filename": "SHIROYAMA HOTEL kagoshima(城山ホテル鹿児島).txt",
+    "slug": "shiroyamahotelkagoshima",
+    "name_ja": "SHIROYAMA HOTEL kagoshima",
+    "address": "〒890-8586<改行> 鹿児島県鹿児島市新照院町41-1",
+    "query": "SHIROYAMA HOTEL kagoshima 〒890-8586<改行> 鹿児島県鹿児島市新照院町41-1",
+    "official_url": "https://www.shiroyama-g.co.jp/"
+  },
+  {
+    "input": "Text_hotel_data/YOU STYLE HOTEL MARINE 鹿児島 天文館.txt",
+    "filename": "YOU STYLE HOTEL MARINE 鹿児島 天文館.txt",
+    "slug": "youstylehotelmarine",
+    "name_ja": "YOU STYLE HOTEL MARINE",
+    "address": "〒892-0831<改行> 鹿児島県鹿児島市船津町4-7",
+    "query": "YOU STYLE HOTEL MARINE 〒892-0831<改行> 鹿児島県鹿児島市船津町4-7",
+    "official_url": "https://youstyle-hotel.jp/hotelmarine/"
+  },
+  {
+    "input": "Text_hotel_data/fav 鹿児島中央.txt",
+    "filename": "fav 鹿児島中央.txt",
+    "slug": "favhotelkagoshimachuo",
+    "name_ja": "fav 鹿児島中央",
+    "address": "〒892-0846<改行> 鹿児島県鹿児島市加治屋町1-15",
+    "query": "fav 鹿児島中央 〒892-0846<改行> 鹿児島県鹿児島市加治屋町1-15",
+    "official_url": "https://fav-hotels.com/hotels/kagoshimachuo/"
+  },
+  {
+    "input": "Text_hotel_data/かごしまプラザホテル天文館.txt",
+    "filename": "かごしまプラザホテル天文館.txt",
+    "slug": "kagoshimaplazahoteltenmonkan",
+    "name_ja": "かごしまプラザホテル天文館",
+    "address": "〒892-0844<改行> 鹿児島県鹿児島市山之口町7-8",
+    "query": "かごしまプラザホテル天文館 〒892-0844<改行> 鹿児島県鹿児島市山之口町7-8",
+    "official_url": "https://www.kag-plaza.co.jp/"
+  },
+  {
+    "input": "Text_hotel_data/かごしま第一ホテルきしゃば店.txt",
+    "filename": "かごしま第一ホテルきしゃば店.txt",
+    "slug": "kagoshimadaiichihotelkishaba",
+    "name_ja": "かごしま第一ホテル きしゃば",
+    "address": "〒890-0056<改行> 鹿児島県鹿児島市下荒田4-48-39",
+    "query": "かごしま第一ホテル きしゃば 〒890-0056<改行> 鹿児島県鹿児島市下荒田4-48-39",
+    "official_url": "https://www.kagoshima-daiichi.jp/kishaba/"
+  },
+  {
+    "input": "Text_hotel_data/かごしま第一ホテル鴨池店.txt",
+    "filename": "かごしま第一ホテル鴨池店.txt",
+    "slug": "kagoshimadaiichihotelkamoike",
+    "name_ja": "かごしま第一ホテル鴨池店",
+    "address": "〒890-0064<改行> 鹿児島県鹿児島市鴨池新町18",
+    "query": "かごしま第一ホテル鴨池店 〒890-0064<改行> 鹿児島県鹿児島市鴨池新町18",
+    "official_url": "https://www.kagoshima-daiichi.jp/kamoike/"
+  },
+  {
+    "input": "Text_hotel_data/きしゃばホテル.txt",
+    "filename": "きしゃばホテル.txt",
+    "slug": "kisyabahotel",
+    "name_ja": "きしゃばホテル",
+    "address": "〒890-0054<改行> 鹿児島県鹿児島市荒田2-76-13",
+    "query": "きしゃばホテル 〒890-0054<改行> 鹿児島県鹿児島市荒田2-76-13",
+    "official_url": "https://travel.rakuten.co.jp/HOTEL/40385/40385.html（楽天トラベル）"
+  },
+  {
+    "input": "Text_hotel_data/アクアガーデン ホテル福丸.txt",
+    "filename": "アクアガーデン ホテル福丸.txt",
+    "slug": "aquagardenhotelfukumaru",
+    "name_ja": "アクアガーデン ホテル福丸",
+    "address": "〒892-0821<改行> 鹿児島県鹿児島市名山町11-8",
+    "query": "アクアガーデン ホテル福丸 〒892-0821<改行> 鹿児島県鹿児島市名山町11-8",
+    "official_url": "https://www.hotel-fukumaru.com/"
+  },
+  {
+    "input": "Text_hotel_data/アートホテル鹿児島.txt",
+    "filename": "アートホテル鹿児島.txt",
+    "slug": "arthotelkagoshima",
+    "name_ja": "アートホテル鹿児島",
+    "address": "〒890-0064<改行> 鹿児島県鹿児島市鴨池新町22-1",
+    "query": "アートホテル鹿児島 〒890-0064<改行> 鹿児島県鹿児島市鴨池新町22-1",
+    "official_url": "https://www.art-kagoshima.com/"
+  },
+  {
+    "input": "Text_hotel_data/クインテッサホテル鹿児島天文館 Relax&Sleep.txt",
+    "filename": "クインテッサホテル鹿児島天文館 Relax&Sleep.txt",
+    "slug": "quintessahotelkagoshimatenmonkanrelaxsleep",
+    "name_ja": "クインテッサホテル鹿児島天文館 Relax&Sleep",
+    "address": "〒892-0826 <改行> 鹿児島県鹿児島市呉服町1-3",
+    "query": "クインテッサホテル鹿児島天文館 Relax&Sleep 〒892-0826 <改行> 鹿児島県鹿児島市呉服町1-3",
+    "official_url": "https://quintessahotels.com/kagoshima/"
+  },
+  {
+    "input": "Text_hotel_data/グランドベース鹿児島中央.txt",
+    "filename": "グランドベース鹿児島中央.txt",
+    "slug": "grandbasekagoshimachuo",
+    "name_ja": "グランドベース鹿児島中央",
+    "address": "〒890-0046<改行> 鹿児島県鹿児島市西田2-12-25",
+    "query": "グランドベース鹿児島中央 〒890-0046<改行> 鹿児島県鹿児島市西田2-12-25",
+    "official_url": "https://grand-base.jp/hotel/gb-kagoshima-chuo/"
+  },
+  {
+    "input": "Text_hotel_data/コンフォートイン鹿児島谷山.txt",
+    "filename": "コンフォートイン鹿児島谷山.txt",
+    "slug": "comfortinnkagoshimataniyama",
+    "name_ja": "コンフォートイン鹿児島谷山",
+    "address": "〒891-0122<改行> 鹿児島県鹿児島市南栄5-10-1",
+    "query": "コンフォートイン鹿児島谷山 〒891-0122<改行> 鹿児島県鹿児島市南栄5-10-1",
+    "official_url": "https://www.choice-hotels.jp/inn/kagoshimataniyama/"
+  },
+  {
+    "input": "Text_hotel_data/サントリーニ.txt",
+    "filename": "サントリーニ.txt",
+    "slug": "hotelsantorini",
+    "name_ja": "ホテル サントリーニ",
+    "address": "〒892-0835<改行> 鹿児島県鹿児島市城南町7-4",
+    "query": "ホテル サントリーニ 〒892-0835<改行> 鹿児島県鹿児島市城南町7-4",
+    "official_url": "https://www.santori-ni.com/"
+  },
+  {
+    "input": "Text_hotel_data/シェラトン鹿児島.txt",
+    "filename": "シェラトン鹿児島.txt",
+    "slug": "sheratonkagoshima",
+    "name_ja": "シェラトン鹿児島",
+    "address": "〒890-0051<改行> 鹿児島県鹿児島市高麗町43-15",
+    "query": "シェラトン鹿児島 〒890-0051<改行> 鹿児島県鹿児島市高麗町43-15",
+    "official_url": "https://www.marriott.com/ja/hotels/kojsi-sheraton-kagoshima/overview/"
+  },
+  {
+    "input": "Text_hotel_data/シルクイン鹿児島.txt",
+    "filename": "シルクイン鹿児島.txt",
+    "slug": "silkinnkagoshima",
+    "name_ja": "シルクイン鹿児島",
+    "address": "〒890-0052<改行> 鹿児島県鹿児島市上之園町19-30",
+    "query": "シルクイン鹿児島 〒890-0052<改行> 鹿児島県鹿児島市上之園町19-30",
+    "official_url": "https://www.silk-inn.jp/"
+  },
+  {
+    "input": "Text_hotel_data/ソラリア西鉄ホテル 鹿児島.txt",
+    "filename": "ソラリア西鉄ホテル 鹿児島.txt",
+    "slug": "solarianishitetsuhotelkagoshima",
+    "name_ja": "ソラリア西鉄ホテル鹿児島",
+    "address": "〒890-0053<改行> 鹿児島県鹿児島市中央町11番地",
+    "query": "ソラリア西鉄ホテル鹿児島 〒890-0053<改行> 鹿児島県鹿児島市中央町11番地",
+    "official_url": "https://solaria-kagoshima.nnr-h.com/"
+  },
+  {
+    "input": "Text_hotel_data/ダイワロイネットホテル鹿児島天文館 PREMIER.txt",
+    "filename": "ダイワロイネットホテル鹿児島天文館 PREMIER.txt",
+    "slug": "daiwaroynethotelkagoshimatenmonkanpremier",
+    "name_ja": "ダイワロイネットホテル鹿児島天文館 PREMIER",
+    "address": "〒892-0843<改行> 鹿児島県鹿児島市千日町1番1号",
+    "query": "ダイワロイネットホテル鹿児島天文館 PREMIER 〒892-0843<改行> 鹿児島県鹿児島市千日町1番1号",
+    "official_url": "https://www.daiwaroynet.jp/kagoshima-tenmonkan/"
+  },
+  {
+    "input": "Text_hotel_data/ビジネスホテル　アトリエ.txt",
+    "filename": "ビジネスホテル　アトリエ.txt",
+    "slug": "businesshotelatelier",
+    "name_ja": "ビジネスホテル アトリエ",
+    "address": "〒892-0843<改行> 鹿児島県鹿児島市千日町12-3",
+    "query": "ビジネスホテル アトリエ 〒892-0843<改行> 鹿児島県鹿児島市千日町12-3",
+    "official_url": "https://www.hotel-atelier.net/"
+  },
+  {
+    "input": "Text_hotel_data/ビジネスホテル　オリエンタルいづろ.txt",
+    "filename": "ビジネスホテル　オリエンタルいづろ.txt",
+    "slug": "businesshotelorientalizuro",
+    "name_ja": "ビジネスホテル オリエンタルいづろ",
+    "address": "〒892-0825<改行> 鹿児島県鹿児島市大黒町1-9",
+    "query": "ビジネスホテル オリエンタルいづろ 〒892-0825<改行> 鹿児島県鹿児島市大黒町1-9",
+    "official_url": "https://travel.rakuten.co.jp/HOTEL/9046/9046.html"
+  },
+  {
+    "input": "Text_hotel_data/ビジネスホテル天文館.txt",
+    "filename": "ビジネスホテル天文館.txt",
+    "slug": "businesshoteltenmonkan",
+    "name_ja": "ビジネスホテル天文館",
+    "address": "〒892-0831<改行> 鹿児島県鹿児島市船津町2-2",
+    "query": "ビジネスホテル天文館 〒892-0831<改行> 鹿児島県鹿児島市船津町2-2",
+    "official_url": "https://bijiten.com/"
+  },
+  {
+    "input": "Text_hotel_data/ホテル ウォーターゲート.txt",
+    "filename": "ホテル ウォーターゲート.txt",
+    "slug": "hotelwatergatekagoshima",
+    "name_ja": "ホテル ウォーターゲート 鹿児島",
+    "address": "〒892-0836<改行> 鹿児島県鹿児島市錦江町10-22",
+    "query": "ホテル ウォーターゲート 鹿児島 〒892-0836<改行> 鹿児島県鹿児島市錦江町10-22",
+    "official_url": "https://kagoshima-hotel-watergate.com/"
+  },
+  {
+    "input": "Text_hotel_data/ホテル ガストフ.txt",
+    "filename": "ホテル ガストフ.txt",
+    "slug": "hotelgasthof",
+    "name_ja": "ホテル ガストフ",
+    "address": "〒890-0053<改行> 鹿児島県鹿児島市中央町7-1",
+    "query": "ホテル ガストフ 〒890-0053<改行> 鹿児島県鹿児島市中央町7-1",
+    "official_url": "https://gasthof.jp/"
+  },
+  {
+    "input": "Text_hotel_data/ホテル ココナッツリゾート マリーナ 鹿児島.txt",
+    "filename": "ホテル ココナッツリゾート マリーナ 鹿児島.txt",
+    "slug": "hotelcoconutsresortmarinakagoshima",
+    "name_ja": "ホテル ココナッツリゾート マリーナ 鹿児島",
+    "address": "〒891-0133<改行> 鹿児島県鹿児島市平川町1790-2",
+    "query": "ホテル ココナッツリゾート マリーナ 鹿児島 〒891-0133<改行> 鹿児島県鹿児島市平川町1790-2",
+    "official_url": "https://www.chapel-hotel.co.jp/kagoshima/h068/"
+  },
+  {
+    "input": "Text_hotel_data/ホテル タイセイアネックス.txt",
+    "filename": "ホテル タイセイアネックス.txt",
+    "slug": "hoteltaiseiannex",
+    "name_ja": "ホテルタイセイアネックス",
+    "address": "〒890-0053<改行> 鹿児島県鹿児島市中央町4-32",
+    "query": "ホテルタイセイアネックス 〒890-0053<改行> 鹿児島県鹿児島市中央町4-32",
+    "official_url": "https://www.hotel-taisei-annex.jp/"
+  },
+  {
+    "input": "Text_hotel_data/ホテル パルクス.txt",
+    "filename": "ホテル パルクス.txt",
+    "slug": "hotelparcs",
+    "name_ja": "ホテル パルクス",
+    "address": "〒892-0853<改行> 鹿児島県鹿児島市城山町2-19",
+    "query": "ホテル パルクス 〒892-0853<改行> 鹿児島県鹿児島市城山町2-19",
+    "official_url": "https://happyhotel.jp/hotels/6300419"
+  },
+  {
+    "input": "Text_hotel_data/ホテル パームス天文館.txt",
+    "filename": "ホテル パームス天文館.txt",
+    "slug": "hotelpalmstenmonkan",
+    "name_ja": "ホテル パームス天文館",
+    "address": "〒892-0832<改行> 鹿児島県鹿児島市新町1-23",
+    "query": "ホテル パームス天文館 〒892-0832<改行> 鹿児島県鹿児島市新町1-23",
+    "official_url": "https://hotel-palms.com/"
+  },
+  {
+    "input": "Text_hotel_data/ホテル　ゲートイン鹿児島.txt",
+    "filename": "ホテル　ゲートイン鹿児島.txt",
+    "slug": "hotelgateinkagoshima",
+    "name_ja": "ホテルゲートイン鹿児島",
+    "address": "〒892-0831<改行> 鹿児島県鹿児島市船津町5-20",
+    "query": "ホテルゲートイン鹿児島 〒892-0831<改行> 鹿児島県鹿児島市船津町5-20",
+    "official_url": "https://www.gatein.jp/"
+  },
+  {
+    "input": "Text_hotel_data/ホテル　サンフレックス鹿児島.txt",
+    "filename": "ホテル　サンフレックス鹿児島.txt",
+    "slug": "hotelsunflexkagoshima",
+    "name_ja": "ホテルサンフレックス鹿児島",
+    "address": "〒892-0824<改行> 鹿児島県鹿児島市堀江町19-14",
+    "query": "ホテルサンフレックス鹿児島 〒892-0824<改行> 鹿児島県鹿児島市堀江町19-14",
+    "official_url": "https://www.rtg.jp/hotels/trusty/s_kago/"
+  },
+  {
+    "input": "Text_hotel_data/ホテルアービック鹿児島.txt",
+    "filename": "ホテルアービック鹿児島.txt",
+    "slug": "hotelurbickagoshima",
+    "name_ja": "ホテルアービック鹿児島",
+    "address": "〒890-0045<改行> 鹿児島県鹿児島市武1丁目3番1号",
+    "query": "ホテルアービック鹿児島 〒890-0045<改行> 鹿児島県鹿児島市武1丁目3番1号",
+    "official_url": "https://www.urbic.jp/"
+  },
+  {
+    "input": "Text_hotel_data/ホテルウェルビューかごしま.txt",
+    "filename": "ホテルウェルビューかごしま.txt",
+    "slug": "hotelwelviewkagoshima",
+    "name_ja": "ホテルウェルビューかごしま",
+    "address": "〒890-0062<改行> 鹿児島県鹿児島市与次郎2-4-25",
+    "query": "ホテルウェルビューかごしま 〒890-0062<改行> 鹿児島県鹿児島市与次郎2-4-25",
+    "official_url": "https://www.welview.com/"
+  },
+  {
+    "input": "Text_hotel_data/ホテルオリエンタルエクスプレス鹿児島天文館.txt",
+    "filename": "ホテルオリエンタルエクスプレス鹿児島天文館.txt",
+    "slug": "hotelorientalexpresskagoshimatenmonkan",
+    "name_ja": "ホテルオリエンタルエクスプレス鹿児島天文館",
+    "address": "〒892-0844<改行> 鹿児島県鹿児島市山之口町2-1",
+    "query": "ホテルオリエンタルエクスプレス鹿児島天文館 〒892-0844<改行> 鹿児島県鹿児島市山之口町2-1",
+    "official_url": "https://tenmonkan.hotelorientalexpress.com/"
+  },
+  {
+    "input": "Text_hotel_data/ホテルグランセレッソ鹿児島.txt",
+    "filename": "ホテルグランセレッソ鹿児島.txt",
+    "slug": "hotelgrancerezo",
+    "name_ja": "ホテル グランセレッソ鹿児島天文館",
+    "address": "〒892-0831<改行> 鹿児島県鹿児島市船津町5-22",
+    "query": "ホテル グランセレッソ鹿児島天文館 〒892-0831<改行> 鹿児島県鹿児島市船津町5-22",
+    "official_url": "https://grancerezo.com/"
+  },
+  {
+    "input": "Text_hotel_data/ホテルサンデイズ鹿児島.txt",
+    "filename": "ホテルサンデイズ鹿児島.txt",
+    "slug": "hotelsundayskagoshima",
+    "name_ja": "ホテルサンデイズ鹿児島",
+    "address": "〒892-0844<改行> 鹿児島県鹿児島市山之口町9-8",
+    "query": "ホテルサンデイズ鹿児島 〒892-0844<改行> 鹿児島県鹿児島市山之口町9-8",
+    "official_url": "https://www.hotelsundays.com/kagoshima/"
+  },
+  {
+    "input": "Text_hotel_data/ホテルタイセイ.txt",
+    "filename": "ホテルタイセイ.txt",
+    "slug": "hoteltaisei",
+    "name_ja": "ホテルタイセイ",
+    "address": "〒890-0046 <改行> 鹿児島県鹿児島市西田1-4-23",
+    "query": "ホテルタイセイ 〒890-0046 <改行> 鹿児島県鹿児島市西田1-4-23",
+    "official_url": "https://www.taisei-grp.co.jp/"
+  },
+  {
+    "input": "Text_hotel_data/ホテルニューニシノ.txt",
+    "filename": "ホテルニューニシノ.txt",
+    "slug": "hotelnewnishino",
+    "name_ja": "ホテルニューニシノ",
+    "address": "〒892-0843<改行> 鹿児島県鹿児島市千日町13-24",
+    "query": "ホテルニューニシノ 〒892-0843<改行> 鹿児島県鹿児島市千日町13-24",
+    "official_url": "https://new-nishino.co.jp/"
+  },
+  {
+    "input": "Text_hotel_data/ホテルマイステイズ鹿児島天文館.txt",
+    "filename": "ホテルマイステイズ鹿児島天文館.txt",
+    "slug": "hotelmystayskagoshimatenmonkan",
+    "name_ja": "ホテルマイステイズ鹿児島天文館",
+    "address": "〒892-0844<改行> 鹿児島県鹿児島市山之口町2-7",
+    "query": "ホテルマイステイズ鹿児島天文館 〒892-0844<改行> 鹿児島県鹿児島市山之口町2-7",
+    "official_url": "https://iconia.co.jp/hotel-mystays-kagoshima-tenmonkan-kagoshima/"
+  },
+  {
+    "input": "Text_hotel_data/ホテルマイステイズ鹿児島天文館2番館.txt",
+    "filename": "ホテルマイステイズ鹿児島天文館2番館.txt",
+    "slug": "hotelmystayskagoshimatenmonkanannex",
+    "name_ja": "ホテルマイステイズ鹿児島天文館2番館",
+    "address": "〒892-0826<改行> 鹿児島県鹿児島市呉服町1-20",
+    "query": "ホテルマイステイズ鹿児島天文館2番館 〒892-0826<改行> 鹿児島県鹿児島市呉服町1-20",
+    "official_url": "https://iconia.co.jp/hotel-mystays-kagoshima-tenmonkan-annex-kagoshima"
+  },
+  {
+    "input": "Text_hotel_data/ホテルユニオン.txt",
+    "filename": "ホテルユニオン.txt",
+    "slug": "hotelunion",
+    "name_ja": "ホテルユニオン",
+    "address": "〒890-0046<改行> 鹿児島県鹿児島市西田2-12-34",
+    "query": "ホテルユニオン 〒890-0046<改行> 鹿児島県鹿児島市西田2-12-34",
+    "official_url": "https://www.union-h.co.jp/"
+  },
+  {
+    "input": "Text_hotel_data/ホテルリブマックスBUDGET鹿児島.txt",
+    "filename": "ホテルリブマックスBUDGET鹿児島.txt",
+    "slug": "hotellivemaxbudgetkagoshima",
+    "name_ja": "ホテルリブマックスBUDGET鹿児島",
+    "address": "〒892-0817<改行> 鹿児島県鹿児島市小川町15-1",
+    "query": "ホテルリブマックスBUDGET鹿児島 〒892-0817<改行> 鹿児島県鹿児島市小川町15-1",
+    "official_url": "https://www.hotel-livemax.com/kagoshima/kagoshima/"
+  },
+  {
+    "input": "Text_hotel_data/ホテルリブマックスBUDGET鹿児島天文館.txt",
+    "filename": "ホテルリブマックスBUDGET鹿児島天文館.txt",
+    "slug": "hotellivemaxbudgetkagoshimatenmonkan",
+    "name_ja": "ホテルリブマックスBUDGET鹿児島天文館",
+    "address": "〒892-0843<改行> 鹿児島県鹿児島市千日町12-3",
+    "query": "ホテルリブマックスBUDGET鹿児島天文館 〒892-0843<改行> 鹿児島県鹿児島市千日町12-3",
+    "official_url": "https://www.hotel-livemax.com/kagoshima/tenmonkan/"
+  },
+  {
+    "input": "Text_hotel_data/ホテル・レクストン鹿児島.txt",
+    "filename": "ホテル・レクストン鹿児島.txt",
+    "slug": "hotellextonkagoshima",
+    "name_ja": "ホテル・レクストン鹿児島",
+    "address": "〒892-0844<改行> 鹿児島県鹿児島市山之口町4-20",
+    "query": "ホテル・レクストン鹿児島 〒892-0844<改行> 鹿児島県鹿児島市山之口町4-20",
+    "official_url": "https://nisikawa.net/lexton/"
+  },
+  {
+    "input": "Text_hotel_data/ホテル・レクストン鹿児島アネックス.txt",
+    "filename": "ホテル・レクストン鹿児島アネックス.txt",
+    "slug": "hotellextonkagoshimaannex",
+    "name_ja": "ホテル・レクストン鹿児島アネックス",
+    "address": "〒892-0844<改行> 鹿児島県鹿児島市山之口町3-6",
+    "query": "ホテル・レクストン鹿児島アネックス 〒892-0844<改行> 鹿児島県鹿児島市山之口町3-6",
+    "official_url": "https://kagoshima-a-lexton.nisikawa.net/"
+  },
+  {
+    "input": "Text_hotel_data/ホテル吹上荘.txt",
+    "filename": "ホテル吹上荘.txt",
+    "slug": "hotelfukiageso",
+    "name_ja": "ホテル吹上荘",
+    "address": "〒892-0841<改行> 鹿児島県鹿児島市照国町18-15",
+    "query": "ホテル吹上荘 〒892-0841<改行> 鹿児島県鹿児島市照国町18-15",
+    "official_url": "https://www.fukiagesou.jp/"
+  },
+  {
+    "input": "Text_hotel_data/ホテル法華クラブ鹿児島.txt",
+    "filename": "ホテル法華クラブ鹿児島.txt",
+    "slug": "hotelhokkeclubkagoshima",
+    "name_ja": "ホテル法華クラブ鹿児島",
+    "address": "〒892-0846<改行> 鹿児島県鹿児島市加治屋町13-6",
+    "query": "ホテル法華クラブ鹿児島 〒892-0846<改行> 鹿児島県鹿児島市加治屋町13-6",
+    "official_url": "https://www.hokke.co.jp/kagoshima/"
+  },
+  {
+    "input": "Text_hotel_data/ホテル鴨池プラザ.txt",
+    "filename": "ホテル鴨池プラザ.txt",
+    "slug": "hotelkamoikeplaza",
+    "name_ja": "ビジネスホテル鴨池プラザ",
+    "address": "〒890-0063<改行> 鹿児島県鹿児島市鴨池1-53-2",
+    "query": "ビジネスホテル鴨池プラザ 〒890-0063<改行> 鹿児島県鹿児島市鴨池1-53-2",
+    "official_url": "https://www.kamoike.com/"
+  },
+  {
+    "input": "Text_hotel_data/ホテル鹿児島ヒルズ.txt",
+    "filename": "ホテル鹿児島ヒルズ.txt",
+    "slug": "hotelkagoshimahills",
+    "name_ja": "ホテル鹿児島ヒルズ",
+    "address": "〒891-0114<改行> 鹿児島県鹿児島市小松原2-43-23",
+    "query": "ホテル鹿児島ヒルズ 〒891-0114<改行> 鹿児島県鹿児島市小松原2-43-23",
+    "official_url": "https://breezbay-group.com/kagoshima-hills/"
+  },
+  {
+    "input": "Text_hotel_data/マリンパレスかごしま.txt",
+    "filename": "マリンパレスかごしま.txt",
+    "slug": "marinepalacekagoshima",
+    "name_ja": "マリンパレスかごしま",
+    "address": "〒890-0062<改行>  鹿児島県鹿児島市与次郎2丁目8-8",
+    "query": "マリンパレスかごしま 〒890-0062<改行>  鹿児島県鹿児島市与次郎2丁目8-8",
+    "official_url": "https://www.maripala.com"
+  },
+  {
+    "input": "Text_hotel_data/リッチモンドホテル鹿児島天文館.txt",
+    "filename": "リッチモンドホテル鹿児島天文館.txt",
+    "slug": "richmondhotelkagoshimatenmonkan",
+    "name_ja": "リッチモンドホテル鹿児島天文館",
+    "address": "〒892-0843<改行> 鹿児島県鹿児島市千日町14-28",
+    "query": "リッチモンドホテル鹿児島天文館 〒892-0843<改行> 鹿児島県鹿児島市千日町14-28",
+    "official_url": "https://richmondhotel.jp/kagoshima-tenmonkan/"
+  },
+  {
+    "input": "Text_hotel_data/リッチモンドホテル鹿児島金生町.txt",
+    "filename": "リッチモンドホテル鹿児島金生町.txt",
+    "slug": "richmondhotelkagoshimakinseicho",
+    "name_ja": "リッチモンドホテル鹿児島金生町",
+    "address": "〒892-0828<改行> 鹿児島県鹿児島市金生町5-3",
+    "query": "リッチモンドホテル鹿児島金生町 〒892-0828<改行> 鹿児島県鹿児島市金生町5-3",
+    "official_url": "https://richmondhotel.jp/kagoshima/"
+  },
+  {
+    "input": "Text_hotel_data/レム鹿児島.txt",
+    "filename": "レム鹿児島.txt",
+    "slug": "remmkagoshima",
+    "name_ja": "レム鹿児島",
+    "address": "〒892-0842<改行> 鹿児島県鹿児島市東千石町1番32号",
+    "query": "レム鹿児島 〒892-0842<改行> 鹿児島県鹿児島市東千石町1番32号",
+    "official_url": "https://www.hankyu-hotel.com/hotel/remm/kagoshima"
+  },
+  {
+    "input": "Text_hotel_data/変なホテルプレミア鹿児島 天文館.txt",
+    "filename": "変なホテルプレミア鹿児島 天文館.txt",
+    "slug": "hennnahotelpremierkagoshimatenmonkan",
+    "name_ja": "変なホテルプレミア鹿児島 天文館",
+    "address": "〒892-0842<改行> 鹿児島県鹿児島市東千石町1-31",
+    "query": "変なホテルプレミア鹿児島 天文館 〒892-0842<改行> 鹿児島県鹿児島市東千石町1-31",
+    "official_url": "https://www.hennnahotel.com/kagoshima/"
+  },
+  {
+    "input": "Text_hotel_data/天然温泉 霧桜の湯 ドーミーイン鹿児島.txt",
+    "filename": "天然温泉 霧桜の湯 ドーミーイン鹿児島.txt",
+    "slug": "dormyinnkagoshima",
+    "name_ja": "天然温泉 霧桜の湯 ドーミーイン鹿児島",
+    "address": "〒892-0847<改行> 鹿児島県鹿児島市西千石町17番30号",
+    "query": "天然温泉 霧桜の湯 ドーミーイン鹿児島 〒892-0847<改行> 鹿児島県鹿児島市西千石町17番30号",
+    "official_url": "https://dormy-hotels.com/dormyinn/hotels/kagoshima/"
+  },
+  {
+    "input": "Text_hotel_data/天然温泉　ホテル自治会館（市町村自治会館）.txt",
+    "filename": "天然温泉　ホテル自治会館（市町村自治会館）.txt",
+    "slug": "naturalhotspringhoteljichikaikan",
+    "name_ja": "天然温泉 ホテル自治会館（市町村自治会館）",
+    "address": "〒890-0064<改行> 鹿児島県鹿児島市鴨池新町7-4",
+    "query": "天然温泉 ホテル自治会館（市町村自治会館） 〒890-0064<改行> 鹿児島県鹿児島市鴨池新町7-4",
+    "official_url": "https://j-kaikan.net/"
+  },
+  {
+    "input": "Text_hotel_data/東横INN鹿児島中央駅東口.txt",
+    "filename": "東横INN鹿児島中央駅東口.txt",
+    "slug": "toyokoinnkagoshimachuoekihigashiguchi",
+    "name_ja": "東横INN鹿児島中央駅東口",
+    "address": "〒890-0053<改行> 鹿児島県鹿児島市中央町26-25",
+    "query": "東横INN鹿児島中央駅東口 〒890-0053<改行> 鹿児島県鹿児島市中央町26-25",
+    "official_url": "https://www.toyoko-inn.com/search/detail/00202/"
+  },
+  {
+    "input": "Text_hotel_data/東横INN鹿児島中央駅西口.txt",
+    "filename": "東横INN鹿児島中央駅西口.txt",
+    "slug": "toyokoinnkagoshimachuostationnishi",
+    "name_ja": "東横INN鹿児島中央駅西口",
+    "address": "〒890-0046<改行> 鹿児島県鹿児島市西田2-28-10",
+    "query": "東横INN鹿児島中央駅西口 〒890-0046<改行> 鹿児島県鹿児島市西田2-28-10",
+    "official_url": "https://www.toyoko-inn.com/search/detail/00220/"
+  },
+  {
+    "input": "Text_hotel_data/東横INN鹿児島天文館1.txt",
+    "filename": "東横INN鹿児島天文館1.txt",
+    "slug": "toyokoinnkagoshimatemmonkanno1",
+    "name_ja": "東横INN鹿児島天文館1",
+    "address": "〒892-0844<改行> 鹿児島県鹿児島市山之口町3-6",
+    "query": "東横INN鹿児島天文館1 〒892-0844<改行> 鹿児島県鹿児島市山之口町3-6",
+    "official_url": "https://www.toyoko-inn.com/search/detail/00065/"
+  },
+  {
+    "input": "Text_hotel_data/東横INN鹿児島天文館2.txt",
+    "filename": "東横INN鹿児島天文館2.txt",
+    "slug": "toyokoinnkagoshimatemmonkanno2",
+    "name_ja": "東横INN鹿児島天文館2",
+    "address": "〒892-0842<改行> 鹿児島県鹿児島市東千石町1-43",
+    "query": "東横INN鹿児島天文館2 〒892-0842<改行> 鹿児島県鹿児島市東千石町1-43",
+    "official_url": "https://www.toyoko-inn.com/search/detail/00089"
+  },
+  {
+    "input": "Text_hotel_data/鹿児島アイネ.txt",
+    "filename": "鹿児島アイネ.txt",
+    "slug": "kagoshimaaine",
+    "name_ja": "鹿児島アイネ",
+    "address": "〒892-0835<改行> 鹿児島県鹿児島市城南町8-13",
+    "query": "鹿児島アイネ 〒892-0835<改行> 鹿児島県鹿児島市城南町8-13",
+    "official_url": "https://kagoshima-hotel.com/aine/"
+  },
+  {
+    "input": "Text_hotel_data/鹿児島サンロイヤルホテル.txt",
+    "filename": "鹿児島サンロイヤルホテル.txt",
+    "slug": "kagoshimasunroyalhotel",
+    "name_ja": "鹿児島サンロイヤルホテル",
+    "address": "〒890-0062<改行> 鹿児島県鹿児島市与次郎1-8-10",
+    "query": "鹿児島サンロイヤルホテル 〒890-0062<改行> 鹿児島県鹿児島市与次郎1-8-10",
+    "official_url": "https://www.sunroyal.co.jp/"
+  },
+  {
+    "input": "Text_hotel_data/Ｂ＆Ｂパークホテル鹿児島アネックス.txt",
+    "filename": "Ｂ＆Ｂパークホテル鹿児島アネックス.txt",
+    "slug": "bbparkhotelkagoshimaannex",
+    "name_ja": "Ｂ＆Ｂパークホテル鹿児島アネックス",
+    "address": "〒890-0053<改行> 鹿児島県鹿児島市中央町13-2",
+    "query": "Ｂ＆Ｂパークホテル鹿児島アネックス 〒890-0053<改行> 鹿児島県鹿児島市中央町13-2",
+    "official_url": "https://www.parkhotelkagoshima.jp/about/detail/detailG000000008_3.html"
+  }
+]

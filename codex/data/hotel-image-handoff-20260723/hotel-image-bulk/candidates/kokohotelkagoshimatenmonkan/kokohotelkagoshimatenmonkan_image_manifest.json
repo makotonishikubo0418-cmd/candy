@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/KOKO HOTEL 鹿児島天文館.txt",
+  "canonical_slug": "kokohotelkagoshimatenmonkan",
+  "hotel_name_ja": "KOKO HOTEL 鹿児島天文館",
+  "hotel_name_en": "KOKO HOTEL Kagoshima Tenmonkan",
+  "hotel_name_en_characters": 30,
+  "hotel_name_en_sha256": "254a979eea479af3ba730348eaddf8e09c0c194904042830b6f9ff7484b177af",
+  "address": "〒892-0842 鹿児島県鹿児島市東千石町4-24",
+  "search_query": "KOKO HOTEL 鹿児島天文館 〒892-0842 鹿児島県鹿児島市東千石町4-24",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\kokohotelkagoshimatenmonkan",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/kokohotelkagoshimatenmonkan_1.jpg",
+    "Text_hotel_data/画像データ/kokohotelkagoshimatenmonkan_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/kokohotelkagoshimatenmonkan_1.jpg",
+    "HP/imgHtml/new_202601/hotel/kokohotelkagoshimatenmonkan_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/kokohotelkagoshimatenmonkan_1.jpg",
+    "./imgHtml/new_202601/hotel/kokohotelkagoshimatenmonkan_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/kokohotelkagoshimatenmonkan_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\kokohotelkagoshimatenmonkan_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 44,
+      "title_width": 799,
+      "title_bbox": [
+        100,
+        334,
+        899,
+        375
+      ],
+      "title_center": [
+        499.5,
+        354.5
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "3bc210ee43ff63d4bbf17ad85898f7e3138dae087b87a480552f6b4eb7820564",
+      "bytes": 320619,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\kokohotelkagoshimatenmonkan\\kokohotelkagoshimatenmonkan_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\kokohotelkagoshimatenmonkan_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 40,
+      "title_width": 724,
+      "title_bbox": [
+        138,
+        336,
+        862,
+        373
+      ],
+      "title_center": [
+        500.0,
+        354.5
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "76beb071e1577725c628eda23546120fc89a849743be2995bddd3a204105d04c",
+      "bytes": 327137,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\kokohotelkagoshimatenmonkan\\kokohotelkagoshimatenmonkan_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/HOTEL_RESIDENCE南洲館.txt",
+  "canonical_slug": "hotelresidencenanshukan",
+  "hotel_name_ja": "HOTEL&RESIDENCE南洲館",
+  "hotel_name_en": "HOTEL & RESIDENCE Nanshukan",
+  "hotel_name_en_characters": 27,
+  "hotel_name_en_sha256": "95e051dae0485a7232f53718918edae69973c70d94c2dc54ab22b9049e145924",
+  "address": "〒892-0842 鹿児島県鹿児島市東千石町19-17",
+  "search_query": "HOTEL&RESIDENCE南洲館 〒892-0842 鹿児島県鹿児島市東千石町19-17",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelresidencenanshukan",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/hotelresidencenanshukan_1.jpg",
+    "Text_hotel_data/画像データ/hotelresidencenanshukan_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/hotelresidencenanshukan_1.jpg",
+    "HP/imgHtml/new_202601/hotel/hotelresidencenanshukan_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/hotelresidencenanshukan_1.jpg",
+    "./imgHtml/new_202601/hotel/hotelresidencenanshukan_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/hotelresidencenanshukan_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelresidencenanshukan_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 776,
+      "title_bbox": [
+        112,
+        336,
+        888,
+        373
+      ],
+      "title_center": [
+        500.0,
+        354.5
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "5e90631910548b0a1aa8128c69d24ec358c7747e8c246ed19aa9f0dd682a70b2",
+      "bytes": 331940,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelresidencenanshukan\\hotelresidencenanshukan_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelresidencenanshukan_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 679,
+      "title_bbox": [
+        160,
+        339,
+        839,
+        369
+      ],
+      "title_center": [
+        499.5,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "062b78c08a13f9ab9ab7477df963653b4b89816208f1aa5b55a831b33790f9ac",
+      "bytes": 264044,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelresidencenanshukan\\hotelresidencenanshukan_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

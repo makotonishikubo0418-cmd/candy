@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/ホテル ウォーターゲート.txt",
+  "canonical_slug": "hotelwatergatekagoshima",
+  "hotel_name_ja": "ホテル ウォーターゲート 鹿児島",
+  "hotel_name_en": "HOTEL WATER GATE Kagoshima",
+  "hotel_name_en_characters": 26,
+  "hotel_name_en_sha256": "0c86d1530848fa12d9b6f7e96aa884ad5d84eeb9aab66db4340c7834e4a9db9a",
+  "address": "〒892-0836 鹿児島県鹿児島市錦江町10-22",
+  "search_query": "ホテル ウォーターゲート 鹿児島 〒892-0836 鹿児島県鹿児島市錦江町10-22",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelwatergatekagoshima",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/hotelwatergatekagoshima_1.jpg",
+    "Text_hotel_data/画像データ/hotelwatergatekagoshima_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/hotelwatergatekagoshima_1.jpg",
+    "HP/imgHtml/new_202601/hotel/hotelwatergatekagoshima_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/hotelwatergatekagoshima_1.jpg",
+    "./imgHtml/new_202601/hotel/hotelwatergatekagoshima_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/hotelwatergatekagoshima_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelwatergatekagoshima_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 769,
+      "title_bbox": [
+        116,
+        331,
+        885,
+        377
+      ],
+      "title_center": [
+        500.5,
+        354.0
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "4227ac27f54e1af6364715ced7034981c2b20c64773cca97357dea6730af4233",
+      "bytes": 222601,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelwatergatekagoshima\\hotelwatergatekagoshima_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelwatergatekagoshima_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 676,
+      "title_bbox": [
+        162,
+        335,
+        838,
+        373
+      ],
+      "title_center": [
+        500.0,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "95ab5862659b2cf8f716dab27de32a8872244922afdb36e3e54c4c325d532d2c",
+      "bytes": 164126,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelwatergatekagoshima\\hotelwatergatekagoshima_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

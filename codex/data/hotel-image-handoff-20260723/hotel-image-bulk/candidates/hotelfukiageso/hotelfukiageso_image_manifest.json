@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/ホテル吹上荘.txt",
+  "canonical_slug": "hotelfukiageso",
+  "hotel_name_ja": "ホテル吹上荘",
+  "hotel_name_en": "Hotel Fukiageso",
+  "hotel_name_en_characters": 15,
+  "hotel_name_en_sha256": "b1918b3b52c1123e4bea163b167116cdd7d737e718ba7a7703bf07444414364e",
+  "address": "〒892-0841 鹿児島県鹿児島市照国町18-15",
+  "search_query": "ホテル吹上荘 〒892-0841 鹿児島県鹿児島市照国町18-15",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelfukiageso",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/hotelfukiageso_1.jpg",
+    "Text_hotel_data/画像データ/hotelfukiageso_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/hotelfukiageso_1.jpg",
+    "HP/imgHtml/new_202601/hotel/hotelfukiageso_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/hotelfukiageso_1.jpg",
+    "./imgHtml/new_202601/hotel/hotelfukiageso_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/hotelfukiageso_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelfukiageso_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 370,
+      "title_bbox": [
+        315,
+        331,
+        685,
+        376
+      ],
+      "title_center": [
+        500.0,
+        353.5
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "2793aec50002f55cab94f5df8023b400084010af929b51b836a3e11108b05169",
+      "bytes": 327362,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelfukiageso\\hotelfukiageso_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelfukiageso_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 325,
+      "title_bbox": [
+        338,
+        335,
+        663,
+        373
+      ],
+      "title_center": [
+        500.5,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "b18b53beb7e81a8cbe0deb1e12fe70b29290d012dc0b58ad42c49fbab760ed47",
+      "bytes": 243582,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelfukiageso\\hotelfukiageso_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

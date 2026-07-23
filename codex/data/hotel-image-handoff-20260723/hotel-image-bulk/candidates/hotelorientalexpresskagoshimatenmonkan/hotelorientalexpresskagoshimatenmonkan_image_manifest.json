@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/ホテルオリエンタルエクスプレス鹿児島天文館.txt",
+  "canonical_slug": "hotelorientalexpresskagoshimatenmonkan",
+  "hotel_name_ja": "ホテルオリエンタルエクスプレス鹿児島天文館",
+  "hotel_name_en": "Hotel Oriental Express Kagoshima Tenmonkan",
+  "hotel_name_en_characters": 42,
+  "hotel_name_en_sha256": "ef3f70b42cdd55a1578f79b32963accbd5856f79b776ee2e8cc4efff3f1809b9",
+  "address": "〒892-0844 鹿児島県鹿児島市山之口町2-1",
+  "search_query": "ホテルオリエンタルエクスプレス鹿児島天文館 〒892-0844 鹿児島県鹿児島市山之口町2-1",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelorientalexpresskagoshimatenmonkan",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/hotelorientalexpresskagoshimatenmonkan_1.jpg",
+    "Text_hotel_data/画像データ/hotelorientalexpresskagoshimatenmonkan_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/hotelorientalexpresskagoshimatenmonkan_1.jpg",
+    "HP/imgHtml/new_202601/hotel/hotelorientalexpresskagoshimatenmonkan_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/hotelorientalexpresskagoshimatenmonkan_1.jpg",
+    "./imgHtml/new_202601/hotel/hotelorientalexpresskagoshimatenmonkan_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/hotelorientalexpresskagoshimatenmonkan_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelorientalexpresskagoshimatenmonkan_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 36,
+      "title_width": 802,
+      "title_bbox": [
+        99,
+        337,
+        901,
+        370
+      ],
+      "title_center": [
+        500.0,
+        353.5
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "fdd259216c6423b4956f63fe7d03666c35a064e4cec45ca4ec40b306b4f731ad",
+      "bytes": 330047,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelorientalexpresskagoshimatenmonkan\\hotelorientalexpresskagoshimatenmonkan_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelorientalexpresskagoshimatenmonkan_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 34,
+      "title_width": 757,
+      "title_bbox": [
+        122,
+        338,
+        879,
+        370
+      ],
+      "title_center": [
+        500.5,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "46a8d465e54a207e20324884b92dd733057657e15b000e0ee6c7b15723db60a1",
+      "bytes": 252929,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelorientalexpresskagoshimatenmonkan\\hotelorientalexpresskagoshimatenmonkan_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

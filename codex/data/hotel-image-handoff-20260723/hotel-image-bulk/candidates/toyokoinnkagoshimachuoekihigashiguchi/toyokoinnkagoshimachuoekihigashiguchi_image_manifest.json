@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/東横INN鹿児島中央駅東口.txt",
+  "canonical_slug": "toyokoinnkagoshimachuoekihigashiguchi",
+  "hotel_name_ja": "東横INN鹿児島中央駅東口",
+  "hotel_name_en": "Toyoko Inn Kagoshima Chuo-eki Higashi-guchi",
+  "hotel_name_en_characters": 43,
+  "hotel_name_en_sha256": "c6ea7f17ca22a8c6e58ae8dde16ae57109427f02688f9bb1efbfe70176444032",
+  "address": "〒890-0053 鹿児島県鹿児島市中央町26-25",
+  "search_query": "東横INN鹿児島中央駅東口 〒890-0053 鹿児島県鹿児島市中央町26-25",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\toyokoinnkagoshimachuoekihigashiguchi",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/toyokoinnkagoshimachuoekihigashiguchi_1.jpg",
+    "Text_hotel_data/画像データ/toyokoinnkagoshimachuoekihigashiguchi_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/toyokoinnkagoshimachuoekihigashiguchi_1.jpg",
+    "HP/imgHtml/new_202601/hotel/toyokoinnkagoshimachuoekihigashiguchi_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/toyokoinnkagoshimachuoekihigashiguchi_1.jpg",
+    "./imgHtml/new_202601/hotel/toyokoinnkagoshimachuoekihigashiguchi_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/toyokoinnkagoshimachuoekihigashiguchi_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\toyokoinnkagoshimachuoekihigashiguchi_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 36,
+      "title_width": 808,
+      "title_bbox": [
+        96,
+        337,
+        904,
+        370
+      ],
+      "title_center": [
+        500.0,
+        353.5
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "0dc62c3d3c239e875e174bd1b8371079651fe8d3d07d80390a2d1b116e110b61",
+      "bytes": 309162,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\toyokoinnkagoshimachuoekihigashiguchi\\toyokoinnkagoshimachuoekihigashiguchi_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\toyokoinnkagoshimachuoekihigashiguchi_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 32,
+      "title_width": 729,
+      "title_bbox": [
+        136,
+        340,
+        865,
+        369
+      ],
+      "title_center": [
+        500.5,
+        354.5
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "f67aacde5d355d556718be453bacf5868c99d378762a2a2ce73b6ab3c16ceac7",
+      "bytes": 215406,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\toyokoinnkagoshimachuoekihigashiguchi\\toyokoinnkagoshimachuoekihigashiguchi_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

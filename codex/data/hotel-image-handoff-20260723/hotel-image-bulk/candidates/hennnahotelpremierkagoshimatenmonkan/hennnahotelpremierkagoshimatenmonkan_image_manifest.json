@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/変なホテルプレミア鹿児島 天文館.txt",
+  "canonical_slug": "hennnahotelpremierkagoshimatenmonkan",
+  "hotel_name_ja": "変なホテルプレミア鹿児島 天文館",
+  "hotel_name_en": "Henn na Hotel Premier Kagoshima Tenmonkan",
+  "hotel_name_en_characters": 41,
+  "hotel_name_en_sha256": "e690e19a820748f6776161c3c0b701817c7c5d48f21342d4a77bcb055a70a2d6",
+  "address": "〒892-0842 鹿児島県鹿児島市東千石町1-31",
+  "search_query": "変なホテルプレミア鹿児島 天文館 〒892-0842 鹿児島県鹿児島市東千石町1-31",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hennnahotelpremierkagoshimatenmonkan",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/hennnahotelpremierkagoshimatenmonkan_1.jpg",
+    "Text_hotel_data/画像データ/hennnahotelpremierkagoshimatenmonkan_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/hennnahotelpremierkagoshimatenmonkan_1.jpg",
+    "HP/imgHtml/new_202601/hotel/hennnahotelpremierkagoshimatenmonkan_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/hennnahotelpremierkagoshimatenmonkan_1.jpg",
+    "./imgHtml/new_202601/hotel/hennnahotelpremierkagoshimatenmonkan_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/hennnahotelpremierkagoshimatenmonkan_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hennnahotelpremierkagoshimatenmonkan_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 36,
+      "title_width": 802,
+      "title_bbox": [
+        99,
+        337,
+        901,
+        370
+      ],
+      "title_center": [
+        500.0,
+        353.5
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "f77dcb9497b964109d95d123053231d4a2968ede8f5f9173c6302e1c2a8bc0d7",
+      "bytes": 345630,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hennnahotelpremierkagoshimatenmonkan\\hennnahotelpremierkagoshimatenmonkan_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hennnahotelpremierkagoshimatenmonkan_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 34,
+      "title_width": 758,
+      "title_bbox": [
+        121,
+        338,
+        879,
+        370
+      ],
+      "title_center": [
+        500.0,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "eaa35fab0cf883f0707437a4d2a1e40bb358cd657626ebf03bcea8d952e3789a",
+      "bytes": 254912,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hennnahotelpremierkagoshimatenmonkan\\hennnahotelpremierkagoshimatenmonkan_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

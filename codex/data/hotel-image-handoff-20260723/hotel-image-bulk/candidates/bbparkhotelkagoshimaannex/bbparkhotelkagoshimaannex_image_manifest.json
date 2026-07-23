@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/Ｂ＆Ｂパークホテル鹿児島アネックス.txt",
+  "canonical_slug": "bbparkhotelkagoshimaannex",
+  "hotel_name_ja": "Ｂ＆Ｂパークホテル鹿児島アネックス",
+  "hotel_name_en": "B&B Park Hotel Kagoshima Annex",
+  "hotel_name_en_characters": 30,
+  "hotel_name_en_sha256": "6efbc8190dbcb250ab9dabdd2615074d3178aeb5c12994b3415e5f2e3b8f91e2",
+  "address": "〒890-0053 鹿児島県鹿児島市中央町13-2",
+  "search_query": "Ｂ＆Ｂパークホテル鹿児島アネックス 〒890-0053 鹿児島県鹿児島市中央町13-2",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\bbparkhotelkagoshimaannex",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/bbparkhotelkagoshimaannex_1.jpg",
+    "Text_hotel_data/画像データ/bbparkhotelkagoshimaannex_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/bbparkhotelkagoshimaannex_1.jpg",
+    "HP/imgHtml/new_202601/hotel/bbparkhotelkagoshimaannex_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/bbparkhotelkagoshimaannex_1.jpg",
+    "./imgHtml/new_202601/hotel/bbparkhotelkagoshimaannex_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/bbparkhotelkagoshimaannex_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\bbparkhotelkagoshimaannex_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 788,
+      "title_bbox": [
+        106,
+        331,
+        894,
+        376
+      ],
+      "title_center": [
+        500.0,
+        353.5
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "2f688eb892ad44b75565f8f91f54d3c0360d0796e77a1988dcbb0467d4cd7c29",
+      "bytes": 313871,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\bbparkhotelkagoshimaannex\\bbparkhotelkagoshimaannex_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\bbparkhotelkagoshimaannex_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 687,
+      "title_bbox": [
+        156,
+        335,
+        843,
+        373
+      ],
+      "title_center": [
+        499.5,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "7bd1097ddd6e6b7262e86db72d7a60a4ae30327f207b11f193d7932a5a6fabf7",
+      "bytes": 241067,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\bbparkhotelkagoshimaannex\\bbparkhotelkagoshimaannex_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

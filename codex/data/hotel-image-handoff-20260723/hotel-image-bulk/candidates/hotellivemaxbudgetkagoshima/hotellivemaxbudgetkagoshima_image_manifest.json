@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/ホテルリブマックスBUDGET鹿児島.txt",
+  "canonical_slug": "hotellivemaxbudgetkagoshima",
+  "hotel_name_ja": "ホテルリブマックスBUDGET鹿児島",
+  "hotel_name_en": "HOTEL LiVEMAX BUDGET Kagoshima",
+  "hotel_name_en_characters": 30,
+  "hotel_name_en_sha256": "669d97097e15c58b58b9bc53154cdab56de803542e4eef34f5e12d176f4cd409",
+  "address": "〒892-0817 鹿児島県鹿児島市小川町15-1",
+  "search_query": "ホテルリブマックスBUDGET鹿児島 〒892-0817 鹿児島県鹿児島市小川町15-1",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotellivemaxbudgetkagoshima",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/hotellivemaxbudgetkagoshima_1.jpg",
+    "Text_hotel_data/画像データ/hotellivemaxbudgetkagoshima_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/hotellivemaxbudgetkagoshima_1.jpg",
+    "HP/imgHtml/new_202601/hotel/hotellivemaxbudgetkagoshima_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/hotellivemaxbudgetkagoshima_1.jpg",
+    "./imgHtml/new_202601/hotel/hotellivemaxbudgetkagoshima_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/hotellivemaxbudgetkagoshima_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotellivemaxbudgetkagoshima_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 44,
+      "title_width": 802,
+      "title_bbox": [
+        99,
+        334,
+        901,
+        375
+      ],
+      "title_center": [
+        500.0,
+        354.5
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "0f80444364e6611b059d2545dca26604e77b04f38b3bb304acb17e6ba2a8acd2",
+      "bytes": 308672,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotellivemaxbudgetkagoshima\\hotellivemaxbudgetkagoshima_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotellivemaxbudgetkagoshima_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 40,
+      "title_width": 729,
+      "title_bbox": [
+        136,
+        336,
+        865,
+        373
+      ],
+      "title_center": [
+        500.5,
+        354.5
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "5ebd7cd068f774f5a862aa080d4794946b60328b89db1d631f5b54b78de1a776",
+      "bytes": 242931,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotellivemaxbudgetkagoshima\\hotellivemaxbudgetkagoshima_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

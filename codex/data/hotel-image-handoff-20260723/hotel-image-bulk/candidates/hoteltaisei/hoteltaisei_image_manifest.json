@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/ホテルタイセイ.txt",
+  "canonical_slug": "hoteltaisei",
+  "hotel_name_ja": "ホテルタイセイ",
+  "hotel_name_en": "Hotel Taisei",
+  "hotel_name_en_characters": 12,
+  "hotel_name_en_sha256": "61858601e8df1842f7a86e0190be0d9da410e4099500cc1b94c865ce12a86cdb",
+  "address": "〒890-0046 鹿児島県鹿児島市西田1-4-23",
+  "search_query": "ホテルタイセイ 〒890-0046 鹿児島県鹿児島市西田1-4-23",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hoteltaisei",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/hoteltaisei_1.jpg",
+    "Text_hotel_data/画像データ/hoteltaisei_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/hoteltaisei_1.jpg",
+    "HP/imgHtml/new_202601/hotel/hoteltaisei_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/hoteltaisei_1.jpg",
+    "./imgHtml/new_202601/hotel/hoteltaisei_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/hoteltaisei_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hoteltaisei_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 269,
+      "title_bbox": [
+        366,
+        337,
+        635,
+        372
+      ],
+      "title_center": [
+        500.5,
+        354.5
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "41b0d7cff59813cf91a8534ec8702962c866fd4d9830abadb0cd6c3acf050ad4",
+      "bytes": 329193,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hoteltaisei\\hoteltaisei_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hoteltaisei_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 236,
+      "title_bbox": [
+        382,
+        339,
+        618,
+        369
+      ],
+      "title_center": [
+        500.0,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "2b81e4066ae115fc5a4820ebf54bad252bd53c9a5a9fc6177045293f27833b71",
+      "bytes": 242794,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hoteltaisei\\hoteltaisei_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

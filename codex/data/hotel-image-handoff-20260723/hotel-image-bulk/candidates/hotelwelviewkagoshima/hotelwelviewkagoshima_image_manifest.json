@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/ホテルウェルビューかごしま.txt",
+  "canonical_slug": "hotelwelviewkagoshima",
+  "hotel_name_ja": "ホテルウェルビューかごしま",
+  "hotel_name_en": "Hotel Welview Kagoshima",
+  "hotel_name_en_characters": 23,
+  "hotel_name_en_sha256": "b46e1dd577e2ec5ffbddb2f889c4abd8944550b3f6bd15d1d8577eb88bc04d93",
+  "address": "〒890-0062 鹿児島県鹿児島市与次郎2-4-25",
+  "search_query": "ホテルウェルビューかごしま 〒890-0062 鹿児島県鹿児島市与次郎2-4-25",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelwelviewkagoshima",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/hotelwelviewkagoshima_1.jpg",
+    "Text_hotel_data/画像データ/hotelwelviewkagoshima_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/hotelwelviewkagoshima_1.jpg",
+    "HP/imgHtml/new_202601/hotel/hotelwelviewkagoshima_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/hotelwelviewkagoshima_1.jpg",
+    "./imgHtml/new_202601/hotel/hotelwelviewkagoshima_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/hotelwelviewkagoshima_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelwelviewkagoshima_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 594,
+      "title_bbox": [
+        203,
+        331,
+        797,
+        376
+      ],
+      "title_center": [
+        500.0,
+        353.5
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "fae62dcf1f9e566112acd847fcb7fae40b81d9d8e92137f3b15b74ffdec56978",
+      "bytes": 227383,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelwelviewkagoshima\\hotelwelviewkagoshima_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelwelviewkagoshima_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 521,
+      "title_bbox": [
+        240,
+        335,
+        761,
+        373
+      ],
+      "title_center": [
+        500.5,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "7394b10b7113db0a948464874f8bf2498a3cc35f3f08ad70c18ad6601eed6897",
+      "bytes": 166884,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelwelviewkagoshima\\hotelwelviewkagoshima_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

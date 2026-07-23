@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/ホテルマイステイズ鹿児島天文館2番館.txt",
+  "canonical_slug": "hotelmystayskagoshimatenmonkanannex",
+  "hotel_name_ja": "ホテルマイステイズ鹿児島天文館2番館",
+  "hotel_name_en": "HOTEL MYSTAYS Kagoshima Tenmonkan Annex",
+  "hotel_name_en_characters": 39,
+  "hotel_name_en_sha256": "269567930741921a8215ff28d6c07081e5b527f1aae80e4297522dac2f68ffa7",
+  "address": "〒892-0826 鹿児島県鹿児島市呉服町1-20",
+  "search_query": "ホテルマイステイズ鹿児島天文館2番館 〒892-0826 鹿児島県鹿児島市呉服町1-20",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelmystayskagoshimatenmonkanannex",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/hotelmystayskagoshimatenmonkanannex_1.jpg",
+    "Text_hotel_data/画像データ/hotelmystayskagoshimatenmonkanannex_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/hotelmystayskagoshimatenmonkanannex_1.jpg",
+    "HP/imgHtml/new_202601/hotel/hotelmystayskagoshimatenmonkanannex_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/hotelmystayskagoshimatenmonkanannex_1.jpg",
+    "./imgHtml/new_202601/hotel/hotelmystayskagoshimatenmonkanannex_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/hotelmystayskagoshimatenmonkanannex_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelmystayskagoshimatenmonkanannex_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 34,
+      "title_width": 799,
+      "title_bbox": [
+        100,
+        338,
+        899,
+        370
+      ],
+      "title_center": [
+        499.5,
+        354.0
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "c341ea0fd2fcb49407a031c397cdf09141835aded96cc32531f981e92c9ac5fc",
+      "bytes": 305398,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelmystayskagoshimatenmonkanannex\\hotelmystayskagoshimatenmonkanannex_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelmystayskagoshimatenmonkanannex_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 32,
+      "title_width": 754,
+      "title_bbox": [
+        123,
+        340,
+        877,
+        369
+      ],
+      "title_center": [
+        500.0,
+        354.5
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "ecddf82814bb4244116a9c4fea9b9db199e8e8827193d594ab71399acb165fb0",
+      "bytes": 244943,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelmystayskagoshimatenmonkanannex\\hotelmystayskagoshimatenmonkanannex_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

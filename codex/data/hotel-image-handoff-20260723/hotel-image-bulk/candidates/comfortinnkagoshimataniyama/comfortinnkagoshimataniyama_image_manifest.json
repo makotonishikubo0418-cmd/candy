@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/コンフォートイン鹿児島谷山.txt",
+  "canonical_slug": "comfortinnkagoshimataniyama",
+  "hotel_name_ja": "コンフォートイン鹿児島谷山",
+  "hotel_name_en": "Comfort Inn Kagoshima Taniyama",
+  "hotel_name_en_characters": 30,
+  "hotel_name_en_sha256": "81045dab94bf7a73461f34092ddcf6b44687b6fe77828bf4875f642619bd7f63",
+  "address": "〒891-0122 鹿児島県鹿児島市南栄5-10-1",
+  "search_query": "コンフォートイン鹿児島谷山 〒891-0122 鹿児島県鹿児島市南栄5-10-1",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\comfortinnkagoshimataniyama",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/comfortinnkagoshimataniyama_1.jpg",
+    "Text_hotel_data/画像データ/comfortinnkagoshimataniyama_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/comfortinnkagoshimataniyama_1.jpg",
+    "HP/imgHtml/new_202601/hotel/comfortinnkagoshimataniyama_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/comfortinnkagoshimataniyama_1.jpg",
+    "./imgHtml/new_202601/hotel/comfortinnkagoshimataniyama_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/comfortinnkagoshimataniyama_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\comfortinnkagoshimataniyama_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 778,
+      "title_bbox": [
+        111,
+        331,
+        889,
+        377
+      ],
+      "title_center": [
+        500.0,
+        354.0
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "d8941a77185304fcc6f2f156a5b215c5544a1fee2b92c731b461f372ad21d5f5",
+      "bytes": 259456,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\comfortinnkagoshimataniyama\\comfortinnkagoshimataniyama_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\comfortinnkagoshimataniyama_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 682,
+      "title_bbox": [
+        159,
+        335,
+        841,
+        373
+      ],
+      "title_center": [
+        500.0,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "773c0ec4b86cbbdc87e9ad28c0a3063ca98dc3e17f47368f93f798dda3cecd34",
+      "bytes": 273048,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\comfortinnkagoshimataniyama\\comfortinnkagoshimataniyama_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

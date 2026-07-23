@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/ホテル鴨池プラザ.txt",
+  "canonical_slug": "hotelkamoikeplaza",
+  "hotel_name_ja": "ビジネスホテル鴨池プラザ",
+  "hotel_name_en": "Business Hotel Kamoike Plaza",
+  "hotel_name_en_characters": 28,
+  "hotel_name_en_sha256": "13dedd9f3971eb90b729bc57f64db6b4bf2e5b9405a333d234e487e17c4f07a1",
+  "address": "〒890-0063 鹿児島県鹿児島市鴨池1-53-2",
+  "search_query": "ビジネスホテル鴨池プラザ 〒890-0063 鹿児島県鹿児島市鴨池1-53-2",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelkamoikeplaza",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/hotelkamoikeplaza_1.jpg",
+    "Text_hotel_data/画像データ/hotelkamoikeplaza_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/hotelkamoikeplaza_1.jpg",
+    "HP/imgHtml/new_202601/hotel/hotelkamoikeplaza_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/hotelkamoikeplaza_1.jpg",
+    "./imgHtml/new_202601/hotel/hotelkamoikeplaza_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/hotelkamoikeplaza_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelkamoikeplaza_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 697,
+      "title_bbox": [
+        152,
+        337,
+        849,
+        372
+      ],
+      "title_center": [
+        500.5,
+        354.5
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "195da6edc7ec4e65a65cd9cb71290567ad7dc03307b3bff3240a0a986a29463e",
+      "bytes": 338835,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelkamoikeplaza\\hotelkamoikeplaza_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelkamoikeplaza_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 608,
+      "title_bbox": [
+        196,
+        339,
+        804,
+        369
+      ],
+      "title_center": [
+        500.0,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "b70404ff03af56e776958be01c1fcac6c7ad5abfe81717cfc518bf3abbc9ed6e",
+      "bytes": 237088,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelkamoikeplaza\\hotelkamoikeplaza_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

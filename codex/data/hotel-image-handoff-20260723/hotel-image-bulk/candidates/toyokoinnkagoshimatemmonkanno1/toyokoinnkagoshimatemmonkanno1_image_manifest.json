@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/東横INN鹿児島天文館1.txt",
+  "canonical_slug": "toyokoinnkagoshimatemmonkanno1",
+  "hotel_name_ja": "東横INN鹿児島天文館1",
+  "hotel_name_en": "Toyoko Inn Kagoshima Tenmonkan No.1",
+  "hotel_name_en_characters": 35,
+  "hotel_name_en_sha256": "032ba5fe080262969761ea0ac69570da863307a66c383be1194fb07270e34d0e",
+  "address": "〒892-0844 鹿児島県鹿児島市山之口町3-6",
+  "search_query": "東横INN鹿児島天文館1 〒892-0844 鹿児島県鹿児島市山之口町3-6",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\toyokoinnkagoshimatemmonkanno1",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/toyokoinnkagoshimatemmonkanno1_1.jpg",
+    "Text_hotel_data/画像データ/toyokoinnkagoshimatemmonkanno1_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/toyokoinnkagoshimatemmonkanno1_1.jpg",
+    "HP/imgHtml/new_202601/hotel/toyokoinnkagoshimatemmonkanno1_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/toyokoinnkagoshimatemmonkanno1_1.jpg",
+    "./imgHtml/new_202601/hotel/toyokoinnkagoshimatemmonkanno1_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/toyokoinnkagoshimatemmonkanno1_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\toyokoinnkagoshimatemmonkanno1_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 815,
+      "title_bbox": [
+        92,
+        335,
+        907,
+        373
+      ],
+      "title_center": [
+        499.5,
+        354.0
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "4ce04aa819f860165907ff5818675f1ea01c2d05f084f69e59bf206c3813afca",
+      "bytes": 332377,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\toyokoinnkagoshimatemmonkanno1\\toyokoinnkagoshimatemmonkanno1_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\toyokoinnkagoshimatemmonkanno1_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 38,
+      "title_width": 733,
+      "title_bbox": [
+        134,
+        336,
+        867,
+        371
+      ],
+      "title_center": [
+        500.5,
+        353.5
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "0bee65c9960be4185185dd526e832b7c55d80246ab2e662766147fcf86161893",
+      "bytes": 340966,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\toyokoinnkagoshimatemmonkanno1\\toyokoinnkagoshimatemmonkanno1_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

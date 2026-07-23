@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/サントリーニ.txt",
+  "canonical_slug": "hotelsantorini",
+  "hotel_name_ja": "ホテル サントリーニ",
+  "hotel_name_en": "Hotel Santorini",
+  "hotel_name_en_characters": 15,
+  "hotel_name_en_sha256": "56bb3009a28eccc977e3f5677257f23aa2512c27e1c2de05550361f7b04ddf57",
+  "address": "〒892-0835 鹿児島県鹿児島市城南町7-4",
+  "search_query": "ホテル サントリーニ 〒892-0835 鹿児島県鹿児島市城南町7-4",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelsantorini",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/hotelsantorini_1.jpg",
+    "Text_hotel_data/画像データ/hotelsantorini_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/hotelsantorini_1.jpg",
+    "HP/imgHtml/new_202601/hotel/hotelsantorini_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/hotelsantorini_1.jpg",
+    "./imgHtml/new_202601/hotel/hotelsantorini_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/hotelsantorini_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelsantorini_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 340,
+      "title_bbox": [
+        330,
+        336,
+        670,
+        373
+      ],
+      "title_center": [
+        500.0,
+        354.5
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "6c0abdbbae14a411445e195c7d8bad648f200dd750f1f7f03c793c73a825c4dd",
+      "bytes": 296994,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelsantorini\\hotelsantorini_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelsantorini_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 300,
+      "title_bbox": [
+        350,
+        339,
+        650,
+        369
+      ],
+      "title_center": [
+        500.0,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "a78accc98f485599bfae5dd849767269ef31e7f86ead28c4f20b097548902569",
+      "bytes": 218142,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelsantorini\\hotelsantorini_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

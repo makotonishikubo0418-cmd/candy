@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/ホテル・レクストン鹿児島.txt",
+  "canonical_slug": "hotellextonkagoshima",
+  "hotel_name_ja": "ホテル・レクストン鹿児島",
+  "hotel_name_en": "Hotel Lexton Kagoshima",
+  "hotel_name_en_characters": 22,
+  "hotel_name_en_sha256": "1dd8e0dd895244cec2e92925c9413d9041b19dc6c29875a9ae54bc2b808f414c",
+  "address": "〒892-0844 鹿児島県鹿児島市山之口町4-20",
+  "search_query": "ホテル・レクストン鹿児島 〒892-0844 鹿児島県鹿児島市山之口町4-20",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotellextonkagoshima",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/hotellextonkagoshima_1.jpg",
+    "Text_hotel_data/画像データ/hotellextonkagoshima_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/hotellextonkagoshima_1.jpg",
+    "HP/imgHtml/new_202601/hotel/hotellextonkagoshima_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/hotellextonkagoshima_1.jpg",
+    "./imgHtml/new_202601/hotel/hotellextonkagoshima_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/hotellextonkagoshima_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotellextonkagoshima_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 562,
+      "title_bbox": [
+        219,
+        331,
+        781,
+        376
+      ],
+      "title_center": [
+        500.0,
+        353.5
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "910dbd04374fdd3a3430f9b6a9dced4f1ff535ea9ff13ecfe0de19ef93eb8155",
+      "bytes": 339746,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotellextonkagoshima\\hotellextonkagoshima_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotellextonkagoshima_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 493,
+      "title_bbox": [
+        254,
+        335,
+        747,
+        373
+      ],
+      "title_center": [
+        500.5,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "07946d4d1cd6aeabfe04707fc3d32ddc2b1e645db19c33ea81914695d41a9bd0",
+      "bytes": 267189,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotellextonkagoshima\\hotellextonkagoshima_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

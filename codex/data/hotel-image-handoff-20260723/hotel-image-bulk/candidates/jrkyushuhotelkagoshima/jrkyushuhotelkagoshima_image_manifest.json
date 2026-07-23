@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/JR九州ホテル鹿児島.txt",
+  "canonical_slug": "jrkyushuhotelkagoshima",
+  "hotel_name_ja": "JR九州ホテル鹿児島",
+  "hotel_name_en": "JR KYUSHU HOTEL Kagoshima",
+  "hotel_name_en_characters": 25,
+  "hotel_name_en_sha256": "7ca34999ac5478337b66042dd3fce8644e8f76c1f20ba9c437ed5f89e9bb0878",
+  "address": "〒890-0045 鹿児島県鹿児島市武1丁目1番2号",
+  "search_query": "JR九州ホテル鹿児島 〒890-0045 鹿児島県鹿児島市武1丁目1番2号",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\jrkyushuhotelkagoshima",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/jrkyushuhotelkagoshima_1.jpg",
+    "Text_hotel_data/画像データ/jrkyushuhotelkagoshima_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/jrkyushuhotelkagoshima_1.jpg",
+    "HP/imgHtml/new_202601/hotel/jrkyushuhotelkagoshima_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/jrkyushuhotelkagoshima_1.jpg",
+    "./imgHtml/new_202601/hotel/jrkyushuhotelkagoshima_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/jrkyushuhotelkagoshima_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\jrkyushuhotelkagoshima_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 726,
+      "title_bbox": [
+        137,
+        331,
+        863,
+        377
+      ],
+      "title_center": [
+        500.0,
+        354.0
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "53192c7bf258dffb33a5444f119dcb9a86906a45277499c435a222ea44a776fc",
+      "bytes": 334073,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\jrkyushuhotelkagoshima\\jrkyushuhotelkagoshima_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\jrkyushuhotelkagoshima_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 634,
+      "title_bbox": [
+        183,
+        335,
+        817,
+        373
+      ],
+      "title_center": [
+        500.0,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "b878255e83b15cd74c49704f8090666c0bbcec18cd0b96056bc7bb070b9a230b",
+      "bytes": 295122,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\jrkyushuhotelkagoshima\\jrkyushuhotelkagoshima_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

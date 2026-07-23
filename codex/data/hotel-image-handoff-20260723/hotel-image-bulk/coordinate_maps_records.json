@@ -1,0 +1,761 @@
+[
+  {
+    "slug": "cococlass",
+    "lat": "31.5862053",
+    "lng": "130.5556068",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5862053,130.5556068,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "favluxkagoshimatenmonkan",
+    "lat": "31.5877045",
+    "lng": "130.5551093",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5877045,130.5551093,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotelazkagoshimakiireten",
+    "lat": "31.3858598",
+    "lng": "130.5377721",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.3858598,130.5377721,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "youstylehotelmate",
+    "lat": "31.5898027",
+    "lng": "130.557618",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5898027,130.557618,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotelsera",
+    "lat": "31.5704631",
+    "lng": "130.5599712",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5704631,130.5599712,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotelresidencenanshukan",
+    "lat": "31.5933483",
+    "lng": "130.5545188",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5933483,130.5545188,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotelkukita",
+    "lat": "31.5384227",
+    "lng": "130.5349609",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5384227,130.5349609,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "jrkyushuhotelkagoshima",
+    "lat": "31.5846342",
+    "lng": "130.5415227",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5846342,130.5415227,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "kokohotelkagoshimatenmonkan",
+    "lat": "31.5917749",
+    "lng": "130.5523289",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5917749,130.5523289,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "shiroyamahotelkagoshima",
+    "lat": "31.5947489",
+    "lng": "130.547266",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5947489,130.547266,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "youstylehotelmarine",
+    "lat": "31.5887811",
+    "lng": "130.5583525",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5887811,130.5583525,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "favhotelkagoshimachuo",
+    "lat": "31.5867125",
+    "lng": "130.5479682",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5867125,130.5479682,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "kagoshimaplazahoteltenmonkan",
+    "lat": "31.5878367",
+    "lng": "130.554537",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5878367,130.554537,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "kagoshimadaiichihotelkishaba",
+    "lat": "31.5658701",
+    "lng": "130.5553129",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5658701,130.5553129,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "kagoshimadaiichihotelkamoike",
+    "lat": "31.558332",
+    "lng": "130.5600213",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.558332,130.5600213,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "kisyabahotel",
+    "lat": "31.5686579",
+    "lng": "130.5514276",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5686579,130.5514276,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "aquagardenhotelfukumaru",
+    "lat": "31.5953188",
+    "lng": "130.559874",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5953188,130.559874,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "arthotelkagoshima",
+    "lat": "31.555508",
+    "lng": "130.560086",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.555508,130.560086,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "quintessahotelkagoshimatenmonkanrelaxsleep",
+    "lat": "31.5908319",
+    "lng": "130.5561811",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5908319,130.5561811,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "grandbasekagoshimachuo",
+    "lat": "31.5877405",
+    "lng": "130.5417582",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5877405,130.5417582,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "comfortinnkagoshimataniyama",
+    "lat": "31.5102067",
+    "lng": "130.5196696",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5102067,130.5196696,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotelsantorini",
+    "lat": "31.5834067",
+    "lng": "130.5632323",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5834067,130.5632323,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "sheratonkagoshima",
+    "lat": "31.5791889",
+    "lng": "130.5535912",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5791889,130.5535912,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "silkinnkagoshima",
+    "lat": "31.5816253",
+    "lng": "130.5456637",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5816253,130.5456637,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "solarianishitetsuhotelkagoshima",
+    "lat": "31.58344209",
+    "lng": "130.5442356",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.58344209,130.5442356,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "daiwaroynethotelkagoshimatenmonkanpremier",
+    "lat": "31.5900399",
+    "lng": "130.5542813",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5900399,130.5542813,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "businesshotelatelier",
+    "lat": "31.5884173",
+    "lng": "130.5569951",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5884173,130.5569951,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "businesshotelorientalizuro",
+    "lat": "31.591104",
+    "lng": "130.557799",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.591104,130.557799,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "businesshoteltenmonkan",
+    "lat": "31.58859189",
+    "lng": "130.55738815",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.58859189,130.55738815,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotelwatergatekagoshima",
+    "lat": "31.5768299",
+    "lng": "130.5694274",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5768299,130.5694274,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotelgasthof",
+    "lat": "31.5848016",
+    "lng": "130.5458538",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5848016,130.5458538,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotelcoconutsresortmarinakagoshima",
+    "lat": "31.4679917",
+    "lng": "130.5127883",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.4679917,130.5127883,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hoteltaiseiannex",
+    "lat": "31.5861028",
+    "lng": "130.5448083",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5861028,130.5448083,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotelparcs",
+    "lat": "31.5951222",
+    "lng": "130.5530619",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5951222,130.5530619,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotelpalmstenmonkan",
+    "lat": "31.589301",
+    "lng": "130.558291",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.589301,130.558291,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotelgateinkagoshima",
+    "lat": "31.589509",
+    "lng": "130.5576361",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.589509,130.5576361,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotelsunflexkagoshima",
+    "lat": "31.5920619",
+    "lng": "130.5596683",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5920619,130.5596683,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotelurbickagoshima",
+    "lat": "31.584371",
+    "lng": "130.5403227",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.584371,130.5403227,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotelwelviewkagoshima",
+    "lat": "31.56187315",
+    "lng": "130.5632072",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.56187315,130.5632072,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotelorientalexpresskagoshimatenmonkan",
+    "lat": "31.588254",
+    "lng": "130.5515339",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.588254,130.5515339,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotelgrancerezo",
+    "lat": "31.5893403",
+    "lng": "130.5577353",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5893403,130.5577353,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotelsundayskagoshima",
+    "lat": "31.588608",
+    "lng": "130.553813",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.588608,130.553813,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hoteltaisei",
+    "lat": "31.5866977",
+    "lng": "130.5445959",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5866977,130.5445959,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotelnewnishino",
+    "lat": "31.5890294",
+    "lng": "130.5566979",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5890294,130.5566979,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotelmystayskagoshimatenmonkan",
+    "lat": "31.589631",
+    "lng": "130.5542195",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.589631,130.5542195,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotelmystayskagoshimatenmonkanannex",
+    "lat": "31.589631",
+    "lng": "130.5542195",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.589631,130.5542195,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotelunion",
+    "lat": "31.58691875",
+    "lng": "130.5416148",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.58691875,130.5416148,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotellivemaxbudgetkagoshima",
+    "lat": "31.5986886",
+    "lng": "130.5608529",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5986886,130.5608529,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotellivemaxbudgetkagoshimatenmonkan",
+    "lat": "31.5986886",
+    "lng": "130.5608529",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5986886,130.5608529,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotellextonkagoshima",
+    "lat": "31.587517",
+    "lng": "130.55307185",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.587517,130.55307185,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotellextonkagoshimaannex",
+    "lat": "31.5879955",
+    "lng": "130.5525201",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5879955,130.5525201,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotelfukiageso",
+    "lat": "31.5937654",
+    "lng": "130.5513534",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5937654,130.5513534,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotelhokkeclubkagoshima",
+    "lat": "31.5882386",
+    "lng": "130.5506391",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5882386,130.5506391,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotelkamoikeplaza",
+    "lat": "31.5649944",
+    "lng": "130.5500331",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5649944,130.5500331,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hotelkagoshimahills",
+    "lat": "31.5266148",
+    "lng": "130.5266625",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5266148,130.5266625,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "marinepalacekagoshima",
+    "lat": "31.5587826",
+    "lng": "130.5619332",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5587826,130.5619332,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "richmondhotelkagoshimatenmonkan",
+    "lat": "31.59202605",
+    "lng": "130.5567615",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.59202605,130.5567615,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "richmondhotelkagoshimakinseicho",
+    "lat": "31.5940677",
+    "lng": "130.5575852",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5940677,130.5575852,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "remmkagoshima",
+    "lat": "31.5901938",
+    "lng": "130.5530639",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5901938,130.5530639,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "hennnahotelpremierkagoshimatenmonkan",
+    "lat": "31.5901473",
+    "lng": "130.5533806",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5901473,130.5533806,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "dormyinnkagoshima",
+    "lat": "31.589217",
+    "lng": "130.551538",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.589217,130.551538,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "naturalhotspringhoteljichikaikan",
+    "lat": "31.5588884",
+    "lng": "130.5565471",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5588884,130.5565471,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "toyokoinnkagoshimachuoekihigashiguchi",
+    "lat": "31.5836533",
+    "lng": "130.5426218",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5836533,130.5426218,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "toyokoinnkagoshimachuostationnishi",
+    "lat": "31.5853186",
+    "lng": "130.5417486",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5853186,130.5417486,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "toyokoinnkagoshimatemmonkanno1",
+    "lat": "31.5879299",
+    "lng": "130.5522453",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5879299,130.5522453,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "toyokoinnkagoshimatemmonkanno2",
+    "lat": "31.58976358",
+    "lng": "130.55232526",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.58976358,130.55232526,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "kagoshimaaine",
+    "lat": "31.583713",
+    "lng": "130.563568",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.583713,130.563568,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "kagoshimasunroyalhotel",
+    "lat": "31.5683204",
+    "lng": "130.56351225",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5683204,130.56351225,18z/data=!3m1!1e3?entry=ttu"
+  },
+  {
+    "slug": "bbparkhotelkagoshimaannex",
+    "lat": "31.5836828",
+    "lng": "130.5455746",
+    "maps": "CAPTURED",
+    "size": [
+      1280,
+      960
+    ],
+    "url": "https://www.google.com/maps/@31.5836828,130.5455746,18z/data=!3m1!1e3?entry=ttu"
+  }
+]

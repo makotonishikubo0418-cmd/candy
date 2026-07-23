@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/ビジネスホテル天文館.txt",
+  "canonical_slug": "businesshoteltenmonkan",
+  "hotel_name_ja": "ビジネスホテル天文館",
+  "hotel_name_en": "Business Hotel Tenmonkan",
+  "hotel_name_en_characters": 24,
+  "hotel_name_en_sha256": "61e6848c8a78d92f91411e936c3d2260052038982d6904837e4a2d8bb5a8f5a6",
+  "address": "〒892-0831 鹿児島県鹿児島市船津町2-2",
+  "search_query": "ビジネスホテル天文館 〒892-0831 鹿児島県鹿児島市船津町2-2",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\businesshoteltenmonkan",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/businesshoteltenmonkan_1.jpg",
+    "Text_hotel_data/画像データ/businesshoteltenmonkan_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/businesshoteltenmonkan_1.jpg",
+    "HP/imgHtml/new_202601/hotel/businesshoteltenmonkan_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/businesshoteltenmonkan_1.jpg",
+    "./imgHtml/new_202601/hotel/businesshoteltenmonkan_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/businesshoteltenmonkan_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\businesshoteltenmonkan_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 629,
+      "title_bbox": [
+        186,
+        337,
+        815,
+        372
+      ],
+      "title_center": [
+        500.5,
+        354.5
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "2669b4789627ceae783bd0f742c809905c5cd5cbdc7a3755e5cc532492865b85",
+      "bytes": 346479,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\businesshoteltenmonkan\\businesshoteltenmonkan_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\businesshoteltenmonkan_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 551,
+      "title_bbox": [
+        224,
+        339,
+        775,
+        369
+      ],
+      "title_center": [
+        499.5,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "85af423a748de9e27ec34d60105ca162567c2cbe1c408890bba9b0575067e333",
+      "bytes": 255148,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\businesshoteltenmonkan\\businesshoteltenmonkan_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

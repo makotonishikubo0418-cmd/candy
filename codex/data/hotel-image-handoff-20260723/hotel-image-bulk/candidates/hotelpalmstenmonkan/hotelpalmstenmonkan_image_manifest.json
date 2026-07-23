@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/ホテル パームス天文館.txt",
+  "canonical_slug": "hotelpalmstenmonkan",
+  "hotel_name_ja": "ホテル パームス天文館",
+  "hotel_name_en": "Hotel Palms Tenmonkan",
+  "hotel_name_en_characters": 21,
+  "hotel_name_en_sha256": "bcf5b7e0acadb90fe1b04dd97b9c2944e2921d3ae57ac25153b06d4920041326",
+  "address": "〒892-0832 鹿児島県鹿児島市新町1-23",
+  "search_query": "ホテル パームス天文館 〒892-0832 鹿児島県鹿児島市新町1-23",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelpalmstenmonkan",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/hotelpalmstenmonkan_1.jpg",
+    "Text_hotel_data/画像データ/hotelpalmstenmonkan_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/hotelpalmstenmonkan_1.jpg",
+    "HP/imgHtml/new_202601/hotel/hotelpalmstenmonkan_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/hotelpalmstenmonkan_1.jpg",
+    "./imgHtml/new_202601/hotel/hotelpalmstenmonkan_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/hotelpalmstenmonkan_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelpalmstenmonkan_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 557,
+      "title_bbox": [
+        222,
+        337,
+        779,
+        372
+      ],
+      "title_center": [
+        500.5,
+        354.5
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "b269127fe3539ceb677b964df62305544f9ae2d89b6a0eeb31a73e0e3818dc4e",
+      "bytes": 338631,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelpalmstenmonkan\\hotelpalmstenmonkan_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelpalmstenmonkan_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 488,
+      "title_bbox": [
+        256,
+        339,
+        744,
+        369
+      ],
+      "title_center": [
+        500.0,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "8160619f063ad8c4ac03bb3af0f98f1342c40a92f6005474058b0358116129ce",
+      "bytes": 259526,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelpalmstenmonkan\\hotelpalmstenmonkan_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

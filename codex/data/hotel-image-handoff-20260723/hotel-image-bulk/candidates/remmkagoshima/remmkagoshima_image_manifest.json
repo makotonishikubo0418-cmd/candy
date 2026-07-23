@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/レム鹿児島.txt",
+  "canonical_slug": "remmkagoshima",
+  "hotel_name_ja": "レム鹿児島",
+  "hotel_name_en": "remm Kagoshima",
+  "hotel_name_en_characters": 14,
+  "hotel_name_en_sha256": "0c9d6538bc63d0c75be22b40cd92cf5817ba6c2f1ad1eb73a032c9d5eff321ed",
+  "address": "〒892-0842 鹿児島県鹿児島市東千石町1番32号",
+  "search_query": "レム鹿児島 〒892-0842 鹿児島県鹿児島市東千石町1番32号",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\remmkagoshima",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/remmkagoshima_1.jpg",
+    "Text_hotel_data/画像データ/remmkagoshima_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/remmkagoshima_1.jpg",
+    "HP/imgHtml/new_202601/hotel/remmkagoshima_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/remmkagoshima_1.jpg",
+    "./imgHtml/new_202601/hotel/remmkagoshima_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/remmkagoshima_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\remmkagoshima_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 404,
+      "title_bbox": [
+        298,
+        331,
+        702,
+        376
+      ],
+      "title_center": [
+        500.0,
+        353.5
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "f2df38eec34089bcd854687a8f9fe7cb126a7bc09d002fbe2005cb1e9d68f467",
+      "bytes": 342970,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\remmkagoshima\\remmkagoshima_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\remmkagoshima_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 351,
+      "title_bbox": [
+        324,
+        335,
+        675,
+        373
+      ],
+      "title_center": [
+        499.5,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "a9206a76a5a6cfc84c604f0d3f6bd800a12d6ad2c1205f4650d8cb1fa7cd61f6",
+      "bytes": 248441,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\remmkagoshima\\remmkagoshima_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/ホテルサンデイズ鹿児島.txt",
+  "canonical_slug": "hotelsundayskagoshima",
+  "hotel_name_ja": "ホテルサンデイズ鹿児島",
+  "hotel_name_en": "HOTEL SUN DAYS Kagoshima",
+  "hotel_name_en_characters": 24,
+  "hotel_name_en_sha256": "8db77901cf18f6329e0f9fb627d081b539eb1cb976f57e2676aa98d37265bae6",
+  "address": "〒892-0844 鹿児島県鹿児島市山之口町9-8",
+  "search_query": "ホテルサンデイズ鹿児島 〒892-0844 鹿児島県鹿児島市山之口町9-8",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelsundayskagoshima",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/hotelsundayskagoshima_1.jpg",
+    "Text_hotel_data/画像データ/hotelsundayskagoshima_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/hotelsundayskagoshima_1.jpg",
+    "HP/imgHtml/new_202601/hotel/hotelsundayskagoshima_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/hotelsundayskagoshima_1.jpg",
+    "./imgHtml/new_202601/hotel/hotelsundayskagoshima_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/hotelsundayskagoshima_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelsundayskagoshima_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 696,
+      "title_bbox": [
+        152,
+        331,
+        848,
+        377
+      ],
+      "title_center": [
+        500.0,
+        354.0
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "5fc6b74116c47771d7d39ce8f55b2c232af365bd5dde6ae52e80213efe91708a",
+      "bytes": 333118,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelsundayskagoshima\\hotelsundayskagoshima_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelsundayskagoshima_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 609,
+      "title_bbox": [
+        196,
+        335,
+        805,
+        373
+      ],
+      "title_center": [
+        500.5,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "378cba487eb6b0a43a17744c18ca6dbcefc173a6e35c197f3decea9192e954d8",
+      "bytes": 327701,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelsundayskagoshima\\hotelsundayskagoshima_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

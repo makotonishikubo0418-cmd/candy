@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/Hotel クキタ.txt",
+  "canonical_slug": "hotelkukita",
+  "hotel_name_ja": "Ｈｏｔｅｌ クキタ",
+  "hotel_name_en": "Hotel Kukita",
+  "hotel_name_en_characters": 12,
+  "hotel_name_en_sha256": "e4f1a932b19838249e5ca41b3c3b1c5672022838b1d6d91e6ba385659870d549",
+  "address": "〒891-0114 鹿児島県鹿児島市小松原1丁目11番2号",
+  "search_query": "Ｈｏｔｅｌ クキタ 〒891-0114 鹿児島県鹿児島市小松原1丁目11番2号",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelkukita",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/hotelkukita_1.jpg",
+    "Text_hotel_data/画像データ/hotelkukita_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/hotelkukita_1.jpg",
+    "HP/imgHtml/new_202601/hotel/hotelkukita_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/hotelkukita_1.jpg",
+    "./imgHtml/new_202601/hotel/hotelkukita_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/hotelkukita_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelkukita_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 280,
+      "title_bbox": [
+        360,
+        337,
+        640,
+        372
+      ],
+      "title_center": [
+        500.0,
+        354.5
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "acbc0abf07c81eb78f06a3822d4da6ba33ba4df4932ddf0a774b92c156beedf7",
+      "bytes": 311991,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelkukita\\hotelkukita_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelkukita_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 245,
+      "title_bbox": [
+        378,
+        339,
+        623,
+        369
+      ],
+      "title_center": [
+        500.5,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "52e3b1106aaab6a5044d377fc05b4e5577da040bdc1d5366d7316cee3dab718c",
+      "bytes": 291365,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelkukita\\hotelkukita_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

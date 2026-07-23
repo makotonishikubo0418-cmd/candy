@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/リッチモンドホテル鹿児島天文館.txt",
+  "canonical_slug": "richmondhotelkagoshimatenmonkan",
+  "hotel_name_ja": "リッチモンドホテル鹿児島天文館",
+  "hotel_name_en": "Richmond Hotel Kagoshima Tenmonkan",
+  "hotel_name_en_characters": 34,
+  "hotel_name_en_sha256": "972c2e72d8c5738e28ef4bc27141a8f8cff96317cd413235afca6ef8251def67",
+  "address": "〒892-0843 鹿児島県鹿児島市千日町14-28",
+  "search_query": "リッチモンドホテル鹿児島天文館 〒892-0843 鹿児島県鹿児島市千日町14-28",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\richmondhotelkagoshimatenmonkan",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/richmondhotelkagoshimatenmonkan_1.jpg",
+    "Text_hotel_data/画像データ/richmondhotelkagoshimatenmonkan_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/richmondhotelkagoshimatenmonkan_1.jpg",
+    "HP/imgHtml/new_202601/hotel/richmondhotelkagoshimatenmonkan_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/richmondhotelkagoshimatenmonkan_1.jpg",
+    "./imgHtml/new_202601/hotel/richmondhotelkagoshimatenmonkan_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/richmondhotelkagoshimatenmonkan_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\richmondhotelkagoshimatenmonkan_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 809,
+      "title_bbox": [
+        96,
+        335,
+        905,
+        373
+      ],
+      "title_center": [
+        500.5,
+        354.0
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "15f2813db06378de47098e2c6552f6860ea618f9ae3c575bef77b90367dc4c09",
+      "bytes": 348329,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\richmondhotelkagoshimatenmonkan\\richmondhotelkagoshimatenmonkan_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\richmondhotelkagoshimatenmonkan_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 38,
+      "title_width": 729,
+      "title_bbox": [
+        136,
+        336,
+        865,
+        371
+      ],
+      "title_center": [
+        500.5,
+        353.5
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "e837ac7857b65211958a01f4115ca11ea58dbb9081570f4fd423c58decc3dabb",
+      "bytes": 335719,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\richmondhotelkagoshimatenmonkan\\richmondhotelkagoshimatenmonkan_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

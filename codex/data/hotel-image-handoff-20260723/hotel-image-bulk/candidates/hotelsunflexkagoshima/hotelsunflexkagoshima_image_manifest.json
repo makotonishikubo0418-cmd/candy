@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/ホテル　サンフレックス鹿児島.txt",
+  "canonical_slug": "hotelsunflexkagoshima",
+  "hotel_name_ja": "ホテルサンフレックス鹿児島",
+  "hotel_name_en": "Hotel Sunflex Kagoshima",
+  "hotel_name_en_characters": 23,
+  "hotel_name_en_sha256": "b1c0740a92b70f06e3ab1af31e83b65f1f3682f800e96cac0ded97a8eae0493b",
+  "address": "〒892-0824 鹿児島県鹿児島市堀江町19-14",
+  "search_query": "ホテルサンフレックス鹿児島 〒892-0824 鹿児島県鹿児島市堀江町19-14",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelsunflexkagoshima",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/hotelsunflexkagoshima_1.jpg",
+    "Text_hotel_data/画像データ/hotelsunflexkagoshima_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/hotelsunflexkagoshima_1.jpg",
+    "HP/imgHtml/new_202601/hotel/hotelsunflexkagoshima_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/hotelsunflexkagoshima_1.jpg",
+    "./imgHtml/new_202601/hotel/hotelsunflexkagoshima_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/hotelsunflexkagoshima_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelsunflexkagoshima_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 578,
+      "title_bbox": [
+        211,
+        331,
+        789,
+        377
+      ],
+      "title_center": [
+        500.0,
+        354.0
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "47331f86d1fd85d72a47b9a33ccd882e185b82001bef0ff7678b320b41206a83",
+      "bytes": 324738,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelsunflexkagoshima\\hotelsunflexkagoshima_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelsunflexkagoshima_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 507,
+      "title_bbox": [
+        246,
+        335,
+        753,
+        373
+      ],
+      "title_center": [
+        499.5,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "56672e5dc101d0f26e57b359b9234777129fd9e1e849e587b37dd629aac93ed3",
+      "bytes": 249185,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelsunflexkagoshima\\hotelsunflexkagoshima_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

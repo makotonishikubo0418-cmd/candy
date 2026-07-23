@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/グランドベース鹿児島中央.txt",
+  "canonical_slug": "grandbasekagoshimachuo",
+  "hotel_name_ja": "グランドベース鹿児島中央",
+  "hotel_name_en": "GRAND BASE Kagoshima Chuo",
+  "hotel_name_en_characters": 25,
+  "hotel_name_en_sha256": "784d95c3f0bd090e0f0c98c7f04758bf6561d32296fa23aaceeb5712fe43fd7b",
+  "address": "〒890-0046 鹿児島県鹿児島市西田2-12-25",
+  "search_query": "グランドベース鹿児島中央 〒890-0046 鹿児島県鹿児島市西田2-12-25",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\grandbasekagoshimachuo",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/grandbasekagoshimachuo_1.jpg",
+    "Text_hotel_data/画像データ/grandbasekagoshimachuo_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/grandbasekagoshimachuo_1.jpg",
+    "HP/imgHtml/new_202601/hotel/grandbasekagoshimachuo_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/grandbasekagoshimachuo_1.jpg",
+    "./imgHtml/new_202601/hotel/grandbasekagoshimachuo_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/grandbasekagoshimachuo_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\grandbasekagoshimachuo_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 731,
+      "title_bbox": [
+        134,
+        331,
+        865,
+        377
+      ],
+      "title_center": [
+        499.5,
+        354.0
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "847c7a26ec02b2d4ca0ec564c4b9f5b9c39b7b9d72b38a94fadcc1c5096d0cf5",
+      "bytes": 346004,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\grandbasekagoshimachuo\\grandbasekagoshimachuo_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\grandbasekagoshimachuo_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 639,
+      "title_bbox": [
+        180,
+        335,
+        819,
+        373
+      ],
+      "title_center": [
+        499.5,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "11d911f2daecb8ea7fc242a7b52958b6f483fc768825b0d911092a52e94912f6",
+      "bytes": 244382,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\grandbasekagoshimachuo\\grandbasekagoshimachuo_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

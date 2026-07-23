@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/ホテル　ゲートイン鹿児島.txt",
+  "canonical_slug": "hotelgateinkagoshima",
+  "hotel_name_ja": "ホテルゲートイン鹿児島",
+  "hotel_name_en": "Hotel Gate In Kagoshima",
+  "hotel_name_en_characters": 23,
+  "hotel_name_en_sha256": "ff06342e60ff7d0a81773d5f7df56618372215a9b1717124191042e9a016dedd",
+  "address": "〒892-0831 鹿児島県鹿児島市船津町5-20",
+  "search_query": "ホテルゲートイン鹿児島 〒892-0831 鹿児島県鹿児島市船津町5-20",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelgateinkagoshima",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/hotelgateinkagoshima_1.jpg",
+    "Text_hotel_data/画像データ/hotelgateinkagoshima_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/hotelgateinkagoshima_1.jpg",
+    "HP/imgHtml/new_202601/hotel/hotelgateinkagoshima_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/hotelgateinkagoshima_1.jpg",
+    "./imgHtml/new_202601/hotel/hotelgateinkagoshima_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/hotelgateinkagoshima_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelgateinkagoshima_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 567,
+      "title_bbox": [
+        216,
+        331,
+        783,
+        377
+      ],
+      "title_center": [
+        499.5,
+        354.0
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "4158773b21996f272fc9b2fc4fa722c2c666d6babbd842110d029fd8b9640bdd",
+      "bytes": 340543,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelgateinkagoshima\\hotelgateinkagoshima_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\hotelgateinkagoshima_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 498,
+      "title_bbox": [
+        251,
+        335,
+        749,
+        373
+      ],
+      "title_center": [
+        500.0,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "127cde83f4e46963afb1784d7e6fb3cb5301b33bb46babf944103280b0873b2e",
+      "bytes": 286875,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\hotelgateinkagoshima\\hotelgateinkagoshima_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/ビジネスホテル　オリエンタルいづろ.txt",
+  "canonical_slug": "businesshotelorientalizuro",
+  "hotel_name_ja": "ビジネスホテル オリエンタルいづろ",
+  "hotel_name_en": "Business Hotel Oriental Izuro",
+  "hotel_name_en_characters": 29,
+  "hotel_name_en_sha256": "7586b49aaa92978cbb68e24116a07cb052e0f2c6c9f2126b67703d62947adb89",
+  "address": "〒892-0825 鹿児島県鹿児島市大黒町1-9",
+  "search_query": "ビジネスホテル オリエンタルいづろ 〒892-0825 鹿児島県鹿児島市大黒町1-9",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\businesshotelorientalizuro",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/businesshotelorientalizuro_1.jpg",
+    "Text_hotel_data/画像データ/businesshotelorientalizuro_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/businesshotelorientalizuro_1.jpg",
+    "HP/imgHtml/new_202601/hotel/businesshotelorientalizuro_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/businesshotelorientalizuro_1.jpg",
+    "./imgHtml/new_202601/hotel/businesshotelorientalizuro_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/businesshotelorientalizuro_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\businesshotelorientalizuro_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 668,
+      "title_bbox": [
+        166,
+        336,
+        834,
+        373
+      ],
+      "title_center": [
+        500.0,
+        354.5
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "70d8ffa70a55afb800b0aa1767418663ac5e00d6799621a9469f9bc70282780d",
+      "bytes": 342425,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\businesshotelorientalizuro\\businesshotelorientalizuro_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\businesshotelorientalizuro_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 587,
+      "title_bbox": [
+        206,
+        339,
+        793,
+        369
+      ],
+      "title_center": [
+        499.5,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "a971c949eb475a931b1d19b82c62b3b696d5e096fd1acabcaf9934709f40dfb7",
+      "bytes": 261708,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\businesshotelorientalizuro\\businesshotelorientalizuro_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}

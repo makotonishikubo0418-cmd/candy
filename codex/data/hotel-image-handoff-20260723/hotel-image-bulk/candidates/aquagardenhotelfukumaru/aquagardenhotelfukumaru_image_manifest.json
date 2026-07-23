@@ -1,0 +1,136 @@
+{
+  "schema": "candy-hotel-image-candidate-v1",
+  "source_route": "DIRECT_TEXT",
+  "target_text": "Text_hotel_data/アクアガーデン ホテル福丸.txt",
+  "canonical_slug": "aquagardenhotelfukumaru",
+  "hotel_name_ja": "アクアガーデン ホテル福丸",
+  "hotel_name_en": "Aqua Garden Hotel Fukumaru",
+  "hotel_name_en_characters": 26,
+  "hotel_name_en_sha256": "852d24f7aaa2724ba4344128831c0fbbbe3a64ad6e1b4d6b3f040f43a8b2f65d",
+  "address": "〒892-0821 鹿児島県鹿児島市名山町11-8",
+  "search_query": "アクアガーデン ホテル福丸 〒892-0821 鹿児島県鹿児島市名山町11-8",
+  "subtitle": "Kagoshima Hotel Information",
+  "font_path": "C:\\Windows\\Fonts\\arialbd.ttf",
+  "font_name": "Arial Bold",
+  "title_target_center": [
+    500,
+    354
+  ],
+  "subtitle_target_center": [
+    500,
+    407
+  ],
+  "candidate_output_directory": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\aquagardenhotelfukumaru",
+  "expected_accepted_paths": [
+    "Text_hotel_data/画像データ/aquagardenhotelfukumaru_1.jpg",
+    "Text_hotel_data/画像データ/aquagardenhotelfukumaru_2.jpg"
+  ],
+  "expected_public_paths": [
+    "HP/imgHtml/new_202601/hotel/aquagardenhotelfukumaru_1.jpg",
+    "HP/imgHtml/new_202601/hotel/aquagardenhotelfukumaru_2.jpg"
+  ],
+  "target_text_image_paths": [
+    "./imgHtml/new_202601/hotel/aquagardenhotelfukumaru_1.jpg",
+    "./imgHtml/new_202601/hotel/aquagardenhotelfukumaru_2.jpg"
+  ],
+  "target_text_og_image": "https://www.55810.com/imgHtml/new_202601/hotel/aquagardenhotelfukumaru_1.jpg",
+  "images": [
+    {
+      "image_number": 1,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\aquagardenhotelfukumaru_earth.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        100,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 48,
+      "title_width": 679,
+      "title_bbox": [
+        160,
+        331,
+        839,
+        377
+      ],
+      "title_center": [
+        499.5,
+        354.0
+      ],
+      "subtitle_size": 32,
+      "subtitle_bbox": [
+        274,
+        392,
+        725,
+        421
+      ],
+      "subtitle_center": [
+        499.5,
+        406.5
+      ],
+      "sha256": "fdb88aedb58eefa07aaa3e81236b81aa6feb822ffc308b6d261d91cd921a57d4",
+      "bytes": 320729,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\aquagardenhotelfukumaru\\aquagardenhotelfukumaru_1.jpg"
+    },
+    {
+      "image_number": 2,
+      "source_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\sources\\aquagardenhotelfukumaru_maps.jpg",
+      "source_format": "JPEG",
+      "source_size": [
+        1280,
+        960
+      ],
+      "crop": [
+        140,
+        150,
+        1000,
+        750
+      ],
+      "output_size": [
+        1000,
+        750
+      ],
+      "output_format": "JPEG",
+      "output_mode": "RGB",
+      "jpeg_quality": 92,
+      "title_size": 42,
+      "title_width": 596,
+      "title_bbox": [
+        202,
+        335,
+        798,
+        373
+      ],
+      "title_center": [
+        500.0,
+        354.0
+      ],
+      "subtitle_size": 28,
+      "subtitle_bbox": [
+        304,
+        394,
+        696,
+        420
+      ],
+      "subtitle_center": [
+        500.0,
+        407.0
+      ],
+      "sha256": "c0297b96dd1c046fb1b3e78829652025857153287513fcf840c14611bd23d786",
+      "bytes": 247205,
+      "output_path": "C:\\Users\\nishi\\.codex\\visualizations\\2026\\07\\22\\019f8817-22da-7582-82ed-ebcdcbb622aa\\hotel-image-bulk\\candidates\\aquagardenhotelfukumaru\\aquagardenhotelfukumaru_2.jpg"
+    }
+  ],
+  "visual_gates": "REQUIRED"
+}
