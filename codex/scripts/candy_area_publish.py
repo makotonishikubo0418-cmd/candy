@@ -487,12 +487,12 @@ def verify_production(data: candy_area_page.AreaData, commit: str) -> None:
     checks["sitemap"] = (
         sitemap_status == 200 and sitemap_final == sitemap_url and data.canonical in sitemap_body
     )
-    for label, redirect_url in (
-        ("root_redirect", "https://www.55810.com/"),
-        ("index_redirect", "https://www.55810.com/index.php"),
+    for label, redirect_url, expected_location in (
+        ("root_redirect", "https://www.55810.com/", EXPECTED_REDIRECT),
+        ("index_redirect", "https://www.55810.com/index.php", "https://www.55810.com/"),
     ):
         redirect_status, _redirect_final, redirect_headers, _redirect_body = http_fetch(redirect_url)
-        checks[label] = redirect_status == 301 and redirect_headers.get("Location") == EXPECTED_REDIRECT
+        checks[label] = redirect_status == 301 and redirect_headers.get("Location") == expected_location
     if not all(checks.values()):
         failed = ", ".join(name for name, passed in checks.items() if not passed)
         raise PublishError(f"production verification failed: {failed}")
