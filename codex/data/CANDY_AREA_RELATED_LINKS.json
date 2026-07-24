@@ -433,6 +433,14 @@
       "latitude": 31.605291,
       "links": ["yamashitacho", "tamazatocho", "yamanokuchicho", "harara", "tamazatodanchi", "shimoishikicho"]
     },
+    "shineicho": {
+      "region": "新栄町",
+      "longitude": 130.54673127646623,
+      "latitude": 31.5482263957638,
+      "index_group": "さ",
+      "index_before": "jigenjicho",
+      "links": ["chuokoshinmachi", "hiroki", "arata", "jiyugaoka"]
+    },
     "shiroyama": {
       "region": "城山",
       "longitude": 130.5407504687672,
