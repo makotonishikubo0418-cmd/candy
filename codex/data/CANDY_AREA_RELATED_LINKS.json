@@ -311,6 +311,14 @@
       "latitude": 31.559378,
       "links": ["hiroki", "yamadacho", "jiyugaoka", "arata"]
     },
+    "matsubaracho": {
+      "region": "松原町",
+      "longitude": 130.55769991757143,
+      "latitude": 31.587286378824903,
+      "index_group": "ま",
+      "index_before": "minayoshicho",
+      "links": ["yamanokuchicho", "shimoarata", "yamashitacho", "arata"]
+    },
     "minayoshicho": {
       "region": "皆与志町",
       "longitude": 130.521149,
@@ -425,6 +433,14 @@
       "latitude": 31.605291,
       "links": ["yamashitacho", "tamazatocho", "yamanokuchicho", "harara", "tamazatodanchi", "shimoishikicho"]
     },
+    "shiroyama": {
+      "region": "城山",
+      "longitude": 130.5407504687672,
+      "latitude": 31.6052717462699,
+      "index_group": "さ",
+      "index_before": "jigenjicho",
+      "links": ["nagayoshi", "harara", "tamazatocho", "shimoishiki"]
+    },
     "sumiyoshicho": {
       "region": "住吉町",
       "longitude": 130.561981,
@@ -442,6 +458,13 @@
       "longitude": 130.543167,
       "latitude": 31.619595,
       "links": ["tamazatocho", "shimoishiki", "shimoishikicho", "shimotacho", "nagayoshi", "harara"]
+    },
+    "terukunicho": {
+      "region": "照国町",
+      "longitude": 130.54793107571422,
+      "latitude": 31.59337732418065,
+      "index_group": "た",
+      "links": ["yamanokuchicho", "yamashitacho", "harara", "nagayoshi"]
     },
     "uearatacho": {
       "region": "上荒田町",

@@ -1126,6 +1126,66 @@ def update_sitemap(source: str, canonical: str) -> str:
     return replace_exact(source, r"(?m)^</urlset>", entry + "</urlset>", "sitemap insertion")
 
 
+def update_area_index(source: str, data: AreaData, config: dict) -> str:
+    link = f"./kagoshima-deliveryhealth-area-{data.slug}.php"
+    count = source.count(link)
+    if count > 1:
+        raise AreaToolError(f"area一覧リンク重複: {data.slug}={count}")
+    region_slugs = sorted(
+        set(
+            re.findall(
+                rf'href="\./kagoshima-deliveryhealth-area-([^"]+)\.php"[^>]*>{re.escape(data.region)}</a>',
+                source,
+            )
+        )
+    )
+    mismatches = [slug for slug in region_slugs if slug != data.slug]
+    if mismatches:
+        raise AreaToolError(
+            f"area一覧同一地域slug不一致: canonical={data.slug} existing={','.join(mismatches)}"
+        )
+    if count == 1:
+        return source
+
+    page = config["pages"].get(data.slug)
+    if not isinstance(page, dict):
+        raise AreaToolError(f"area一覧追加設定がありません: {data.slug}")
+    group = page.get("index_group")
+    if group not in {"あ", "か", "さ", "た", "な", "は", "ま", "や", "ら", "わ"}:
+        raise AreaToolError(f"area一覧行設定が不正です: {data.slug}={group!r}")
+    section_pattern = re.compile(
+        rf'(?s)(?P<section>'
+        rf'<div class="lp_0_55_35 w_1050 lm_30_auto bg_f">\s*'
+        rf'<div class="lp_5 lm_0_auto w_130 center bg_p fs_xs fc_w">鹿児島 - {group}行</div>'
+        rf'.*?)(?P<close>\n\s*</div>)'
+    )
+    sections = list(section_pattern.finditer(source))
+    if len(sections) != 1:
+        raise AreaToolError(f"area一覧行の対象数が1件ではありません: {group}行={len(sections)}")
+    section = sections[0]
+    row = (
+        f'\t\t\t\t\t\t<div class="lp_10_0 fs_md3 bd_t">'
+        f'<a href="{link}" class="fade">{data.region}</a></div>'
+    )
+    before = page.get("index_before")
+    if before is not None:
+        if not isinstance(before, str) or not re.fullmatch(r"[a-z0-9-]+", before):
+            raise AreaToolError(f"area一覧挿入位置設定が不正です: {data.slug}={before!r}")
+        anchor_pattern = re.compile(
+            rf'(?m)^(?P<anchor>[ \t]*<div class="lp_10_0 fs_md3(?: bd_t)?">'
+            rf'<a href="\./kagoshima-deliveryhealth-area-{re.escape(before)}\.php" '
+            rf'class="fade">.*?</a></div>)$'
+        )
+        anchors = list(anchor_pattern.finditer(section.group("section")))
+        if len(anchors) != 1:
+            raise AreaToolError(
+                f"area一覧挿入位置の対象数が1件ではありません: {data.slug} before={before} count={len(anchors)}"
+            )
+        absolute = section.start("section") + anchors[0].start("anchor")
+        return source[:absolute] + row + "\n" + source[absolute:]
+    return source[: section.start("close")] + "\n" + row + source[section.start("close") :]
+
+
 def update_queue(source: str, data: AreaData, php_status: str) -> str:
     lines = source.splitlines()
     matches = 0
@@ -1207,7 +1267,8 @@ def run_build(args: argparse.Namespace) -> int:
     if not input_path.is_absolute():
         input_path = root / input_path
     data = parse_area_text(input_path)
-    if related_links_for(load_related_config(), data.slug) is None:
+    related_config = load_related_config()
+    if related_links_for(related_config, data.slug) is None:
         raise AreaToolError(f"周辺エリア設定がありません。生成前にリンク先を確定してください: {data.slug}")
     parsed_at = time.perf_counter()
     templates = load_shop_templates(hp_root / "source" / "template_shop.html")
@@ -1227,16 +1288,7 @@ def run_build(args: argparse.Namespace) -> int:
     area_path = hp_root / "source" / "area.html"
     queue_path = path_config.DOCS_DIR / "CANDY_AREA_105_PAGE_QUEUE.md"
     area_source = read_utf8(area_path)
-    area_link = f'./kagoshima-deliveryhealth-area-{data.slug}.php'
-    if area_source.count(area_link) != 1:
-        region_links = re.findall(
-            rf'href="\./kagoshima-deliveryhealth-area-([^"]+)\.php"[^>]*>{re.escape(data.region)}</a>',
-            area_source,
-        )
-        detail = f" existing_region_slugs={','.join(region_links)}" if region_links else " existing_region_slugs=none"
-        raise AreaToolError(
-            f"area一覧slug不一致: canonical={data.slug}{detail}。自動置換せず停止します"
-        )
+    new_area = update_area_index(area_source, data, related_config)
     new_base = update_dataset_base(read_utf8(base_path), data.slug)
     new_sitemap = update_sitemap(read_utf8(sitemap_path), data.canonical)
 
@@ -1253,6 +1305,7 @@ def run_build(args: argparse.Namespace) -> int:
     atomic_write(source_path, source_html)
     atomic_write(dataset_path, dataset_content())
     atomic_write(base_path, new_base)
+    atomic_write(area_path, new_area)
     atomic_write(sitemap_path, new_sitemap)
     written_at = time.perf_counter()
 

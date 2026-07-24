@@ -8,6 +8,7 @@ import hashlib
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -152,7 +153,7 @@ def next_ready_input(_queue_text: str) -> Path:
     raise PublishError(f"no READY_CANDIDATE passed the new-page target gate{suffix}")
 
 
-def paths_for(data: candy_area_page.AreaData) -> list[Path]:
+def paths_for(data: candy_area_page.AreaData, image_outputs: list[Path] | None = None) -> list[Path]:
     hp = path_config.HP_ROOT
     return [
         hp / f"kagoshima-deliveryhealth-area-{data.slug}.php",
@@ -163,11 +164,74 @@ def paths_for(data: candy_area_page.AreaData) -> list[Path]:
         hp / "sitemap.xml",
         queue_path(),
         candy_area_page.RELATED_LINKS_PATH,
-    ] + path_config.site_state_output_paths()
+    ] + (image_outputs or []) + path_config.site_state_output_paths()
 
 
 def relative(paths: list[Path]) -> list[str]:
     return [path.relative_to(root()).as_posix() for path in paths]
+
+
+def image_install_plan(data: candy_area_page.AreaData) -> list[tuple[Path, Path]]:
+    public = candy_area_target_gate.image_paths(data.slug)
+    accepted = candy_area_target_gate.accepted_image_paths(data.slug)
+    referenced = [
+        path_config.HP_ROOT / data.image1.removeprefix("./").split("?", 1)[0],
+        path_config.HP_ROOT / data.image2.removeprefix("./").split("?", 1)[0],
+    ]
+    if referenced != public:
+        raise PublishError(
+            "input image paths do not match canonical target filenames: "
+            + ", ".join(relative(referenced))
+        )
+    accepted_exists = [path.is_file() for path in accepted]
+    public_exists = [path.is_file() for path in public]
+    if any(accepted_exists) and not all(accepted_exists):
+        raise PublishError("accepted image pair is partial")
+    if any(public_exists) and not all(public_exists):
+        raise PublishError("public image pair is partial")
+    if all(public_exists):
+        if all(accepted_exists):
+            for source, destination in zip(accepted, public):
+                if hashlib.sha256(source.read_bytes()).digest() != hashlib.sha256(destination.read_bytes()).digest():
+                    raise PublishError(
+                        "accepted/public image hash mismatch: "
+                        + " != ".join(relative([source, destination]))
+                    )
+        return []
+    if not all(accepted_exists):
+        raise PublishError("no complete accepted or public image pair")
+    return list(zip(accepted, public))
+
+
+def install_accepted_images(plan: list[tuple[Path, Path]]) -> None:
+    for source, destination in plan:
+        source_hash = hashlib.sha256(source.read_bytes()).digest()
+        if destination.exists():
+            if not destination.is_file() or hashlib.sha256(destination.read_bytes()).digest() != source_hash:
+                raise PublishError(f"public image first-install conflict: {destination.relative_to(root())}")
+            print(f"IMAGE_FIRST_INSTALL_ALREADY_OK={destination.relative_to(root())}")
+            continue
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        handle, temporary = tempfile.mkstemp(
+            prefix=f".{destination.name}.",
+            suffix=".tmp",
+            dir=destination.parent,
+        )
+        os.close(handle)
+        try:
+            shutil.copyfile(source, temporary)
+            if hashlib.sha256(Path(temporary).read_bytes()).digest() != source_hash:
+                raise PublishError(f"temporary image hash mismatch: {destination.relative_to(root())}")
+            os.replace(temporary, destination)
+        except Exception:
+            try:
+                os.unlink(temporary)
+            except FileNotFoundError:
+                pass
+            raise
+        if hashlib.sha256(destination.read_bytes()).digest() != source_hash:
+            raise PublishError(f"installed image hash mismatch: {destination.relative_to(root())}")
+        print(f"IMAGE_FIRST_INSTALL_OK={destination.relative_to(root())}")
 
 
 def state_path(slug: str) -> Path:
@@ -206,21 +270,28 @@ def load_state(slug: str) -> dict[str, str]:
 def dependency_paths(
     input_path: Path,
     data: candy_area_page.AreaData,
+    image_dependencies: list[Path] | None = None,
 ) -> list[Path]:
     hp = path_config.HP_ROOT
     dependencies = {
         input_path,
-        hp / data.image1.removeprefix("./"),
-        hp / data.image2.removeprefix("./"),
         hp / "source" / "template_shop.html",
         hp / "source" / "template_kagoshima-deliveryhealth-area.html",
         path_config.SCRIPTS_DIR / "candy_area_page.py",
         path_config.SCRIPTS_DIR / "candy_area_publish.py",
+        path_config.SCRIPTS_DIR / "candy_area_target_gate.py",
         path_config.SCRIPTS_DIR / "candy_site_state.py",
         root() / ".github" / "scripts" / "candy_ftp_deploy.py",
         root() / ".github" / "scripts" / "candy_release_check.py",
         root() / ".github" / "workflows" / "candy-production-deploy.yml",
     }
+    dependencies.update(
+        image_dependencies
+        or [
+            hp / data.image1.removeprefix("./").split("?", 1)[0],
+            hp / data.image2.removeprefix("./").split("?", 1)[0],
+        ]
+    )
     area_sources = list((hp / "source").glob("kagoshima-deliveryhealth-area-*.html"))
     if not data.shops or any(
         not request.time_text or not request.fee_text or candy_area_page.suspicious_fee(request.fee_text)
@@ -450,34 +521,54 @@ def publish(
         if not gate_ok:
             raise PublishError("target gate rejected the input:\n- " + "\n- ".join(gate_reasons))
         print(f"NEW_PAGE_TARGET_OK={data.slug}")
-    allowed = paths_for(data)
+        install_plan = image_install_plan(data)
+        image_outputs = [destination for _source, destination in install_plan]
+    else:
+        saved_outputs = [value for value in resume_state.get("installed_images", "").split("|") if value]
+        image_outputs = [root() / value for value in saved_outputs]
+        expected_public = set(candy_area_target_gate.image_paths(data.slug))
+        if any(path not in expected_public for path in image_outputs):
+            raise PublishError("resume state contains an unexpected image output")
+        accepted_by_name = {
+            path.name: path for path in candy_area_target_gate.accepted_image_paths(data.slug)
+        }
+        install_plan = [(accepted_by_name[path.name], path) for path in image_outputs]
+    allowed = paths_for(data, image_outputs)
     path_arguments = relative(allowed)
     page_paths = relative(allowed[:3])
+    image_paths = set(relative(image_outputs))
     page_allowed = {
         **{path: "A" for path in page_paths},
         **{path: "M" for path in path_arguments[3:]},
+        **{path: "A" for path in image_paths},
     }
     generated_paths = set(relative(path_config.site_state_output_paths()))
-    page_required = set(page_paths) | generated_paths
+    shared_required = set(relative(allowed[3:7]))
+    page_required = set(page_paths) | shared_required | image_paths | generated_paths
     page_tool = path_config.SCRIPTS_DIR / "candy_area_page.py"
     relative_input = input_path.relative_to(root()).as_posix()
 
     if dry_run:
         assert_preflight(data, allowed, check_remote=False)
-        assert_dependencies_clean(dependency_paths(input_path, data))
+        image_dependencies = [source for source, _destination in install_plan] or None
+        assert_dependencies_clean(dependency_paths(input_path, data, image_dependencies))
+        if install_plan:
+            raise PublishError("dry-run cannot simulate pending accepted-image first installation")
         run([sys.executable, str(page_tool), "build", "--input", relative_input, "--dry-run"])
         print(f"RESULT=DRY_RUN_OK region={data.region} slug={data.slug}")
         return 0
 
     if resume_state is None:
         before = assert_preflight(data, allowed, check_remote=True)
-        assert_dependencies_clean(dependency_paths(input_path, data))
+        image_dependencies = [source for source, _destination in install_plan] or None
+        assert_dependencies_clean(dependency_paths(input_path, data, image_dependencies))
         state = {
             "slug": data.slug,
             "region": data.region,
             "input": relative_input,
             "before": before,
             "remote_state": before,
+            "installed_images": "|".join(relative(image_outputs)),
         }
         save_state(state, "PREFLIGHT")
     else:
@@ -490,6 +581,7 @@ def publish(
 
     phase = state["phase"]
     if phase == "PREFLIGHT":
+        install_accepted_images(install_plan)
         print("STEP=build", flush=True)
         command = [sys.executable, str(page_tool), "build", "--input", relative_input]
         if resume_state is not None:
@@ -611,6 +703,24 @@ def self_test() -> int:
         f"PRODUCTION_URL={data.canonical}\n"
     )
     assert values.actions_url.endswith("12345") and values.production_url == data.canonical
+    index_source = (
+        '<div class="lp_0_55_35 w_1050 lm_30_auto bg_f">\n'
+        '\t<div class="lp_5 lm_0_auto w_130 center bg_p fs_xs fc_w">鹿児島 - ま行</div>\n'
+        '\t<div class="lp_10_0 fs_md3"><a href="./kagoshima-deliveryhealth-area-minayoshicho.php" '
+        'class="fade">皆与志町</a></div>\n'
+        '</div>\n'
+    )
+    index_config = {
+        "pages": {
+            data.slug: {
+                "index_group": "ま",
+                "index_before": "minayoshicho",
+            }
+        }
+    }
+    indexed = candy_area_page.update_area_index(index_source, data, index_config)
+    assert indexed.count(f"./kagoshima-deliveryhealth-area-{data.slug}.php") == 1
+    assert candy_area_page.update_area_index(indexed, data, index_config) == indexed
     assert_exact_changes("A\tHP/new.php\nM\tHP/shared.php", {"HP/new.php": "A", "HP/shared.php": "M"}, {"HP/new.php"}, "test")
     for unsafe in ("D\tHP/new.php", "R100\tHP/a.php\tHP/b.php", "T\tHP/new.php"):
         try:

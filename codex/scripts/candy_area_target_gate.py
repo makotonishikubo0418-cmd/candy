@@ -7,6 +7,7 @@ This gate separates text quality from new-page eligibility.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import re
 import subprocess
 from dataclasses import dataclass
@@ -84,6 +85,13 @@ def image_paths(slug: str) -> list[Path]:
     ]
 
 
+def accepted_image_paths(slug: str) -> list[Path]:
+    return [
+        TEXT_ROOT / "画像データ" / f"kagoshima-deliveryhealth-area-{slug}_1.jpg",
+        TEXT_ROOT / "画像データ" / f"kagoshima-deliveryhealth-area-{slug}_2.jpg",
+    ]
+
+
 def area_list_reasons(candidate: Candidate) -> list[str]:
     path = area_path()
     if not path.exists():
@@ -92,9 +100,7 @@ def area_list_reasons(candidate: Candidate) -> list[str]:
     link = f'./kagoshima-deliveryhealth-area-{candidate.slug}.php'
     count = source.count(link)
     reasons: list[str] = []
-    if count == 0:
-        reasons.append(f"area list missing target link: {link}")
-    elif count > 1:
+    if count > 1:
         reasons.append(f"area list duplicate target link: {link} count={count}")
     pattern = re.compile(
         rf'href="\./kagoshima-deliveryhealth-area-([^"]+)\.php"[^>]*>{re.escape(candidate.region)}</a>'
@@ -105,6 +111,38 @@ def area_list_reasons(candidate: Candidate) -> list[str]:
         reasons.append(
             f"area list same-region slug mismatch: canonical={candidate.slug} existing_region_slugs={','.join(mismatches)}"
         )
+    return reasons
+
+
+def image_pair_reasons(candidate: Candidate) -> list[str]:
+    accepted = accepted_image_paths(candidate.slug)
+    public = image_paths(candidate.slug)
+    accepted_exists = [path.is_file() for path in accepted]
+    public_exists = [path.is_file() for path in public]
+    reasons: list[str] = []
+    if any(accepted_exists) and not all(accepted_exists):
+        reasons.append(
+            "accepted image pair is partial: "
+            + ", ".join(rel(path) for path, exists in zip(accepted, accepted_exists) if not exists)
+        )
+    if any(public_exists) and not all(public_exists):
+        reasons.append(
+            "public image pair is partial: "
+            + ", ".join(rel(path) for path, exists in zip(public, public_exists) if not exists)
+        )
+    if reasons:
+        return reasons
+    if not all(accepted_exists) and not all(public_exists):
+        return [
+            "no complete accepted or public image pair: "
+            + ", ".join(rel(path) for path in accepted + public)
+        ]
+    if all(accepted_exists) and all(public_exists):
+        for accepted_path, public_path in zip(accepted, public):
+            if hashlib.sha256(accepted_path.read_bytes()).digest() != hashlib.sha256(public_path.read_bytes()).digest():
+                reasons.append(
+                    f"accepted/public image hash mismatch: {rel(accepted_path)} != {rel(public_path)}"
+                )
     return reasons
 
 
@@ -124,9 +162,7 @@ def check_candidate(candidate: Candidate) -> tuple[bool, list[str]]:
     for path in blocking_shared_paths():
         if path.exists() and needle in read_text(path):
             reasons.append(f"existing shared registration: {rel(path)}")
-    for path in image_paths(candidate.slug):
-        if not path.exists():
-            reasons.append(f"missing image: {rel(path)}")
+    reasons.extend(image_pair_reasons(candidate))
     return not reasons, reasons
 
 
