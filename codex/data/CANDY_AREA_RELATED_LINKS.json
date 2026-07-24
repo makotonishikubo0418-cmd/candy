@@ -441,6 +441,14 @@
       "index_before": "jigenjicho",
       "links": ["chuokoshinmachi", "hiroki", "arata", "jiyugaoka"]
     },
+    "shinshoincho": {
+      "region": "新照院町",
+      "longitude": 130.5419296764674,
+      "latitude": 31.59577684341115,
+      "index_group": "さ",
+      "index_before": "jigenjicho",
+      "links": ["harara", "nagayoshi", "yamanokuchicho", "yamashitacho"]
+    },
     "shiroyama": {
       "region": "城山",
       "longitude": 130.5407504687672,
