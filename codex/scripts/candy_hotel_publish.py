@@ -220,6 +220,10 @@ def assert_preflight(data: candy_hotel_page.HotelData, allowed: list[Path], *, c
     return head
 
 
+def expected_title_tag(title: str) -> str:
+    return f"<title>{candy_hotel_page.common.htext(title)}</title>"
+
+
 def verify_production(data: candy_hotel_page.HotelData, commit: str) -> None:
     page_url = shared.cache_bust(data.canonical, commit)
     status, final_url, _headers, page_bytes = shared.http_fetch(page_url)
@@ -259,7 +263,7 @@ def verify_production(data: candy_hotel_page.HotelData, commit: str) -> None:
     expected_faqs = [(item.title, item.description.replace("\n", " ")) for item in data.faqs]
     checks: dict[str, bool] = {
         "page_direct_http": status == 200 and final_url == page_url,
-        "title": f"<title>{data.title}</title>" in body,
+        "title": expected_title_tag(data.title) in body,
         "canonical": f'<link rel="canonical" href="{data.canonical}">' in body,
         "h1": data.hotel_name in h1_text,
         "shops": body.count('class="campaign-item"') == len(data.shops),
@@ -488,6 +492,7 @@ def self_test() -> int:
     canonical = "https://www.55810.com/kagoshima-deliveryhealth-hotel-selftest.php"
     values = shared.release_values(f"ACTIONS_URL={actions_url}\nPRODUCTION_URL={canonical}\n")
     assert values.actions_url == actions_url and values.production_url == canonical
+    assert expected_title_tag("HOTEL&RESIDENCE南洲館") == "<title>HOTEL&amp;RESIDENCE南洲館</title>"
     shared.assert_exact_changes(
         "A\tHP/new.php\nM\tHP/shared.php",
         {"HP/new.php": "A", "HP/shared.php": "M"},
