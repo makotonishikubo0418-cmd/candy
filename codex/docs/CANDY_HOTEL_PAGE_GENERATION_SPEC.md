@@ -38,7 +38,7 @@ A legacy Text is not a third source route. It MUST pass `legacy-check` and the m
 - Hotel pages do not have a fixed scene count. Preserve source-data order for known sections and normal article blocks after the H1 introduction; number only visible H2 elements sequentially from scene1.
 - At least one shop is required. Normal articles, FAQs, fees, access, and nearby spots MAY have zero items; omit an optional section with zero items.
 - Display the legacy option zero or one time only when `option`, `option_subtitle`, and `option_description` are all complete. Do not include it in scene numbering.
-- Related articles have one fixed generated count: three current indexable blog-detail links and three current indexable area-detail links.
+- Related articles have one fixed generated count: three current indexable blog-detail links and three current indexable area-detail links. The related-article container MUST be followed immediately by the final `対応デリヘル店一覧` CTA defined below; the CTA is the final visible child before the page-content wrapper closes.
 - Do not infer a value, image, URL, or hotel fact absent from source data. STOP on partial input instead of completing it.
 
 #### Page Structure
@@ -111,7 +111,8 @@ The Japanese labels below are exact website display concepts and are preserved.
     ├ 公開ブログリンク3
     ├ 公開エリアリンク1
     ├ 公開エリアリンク2
-    └ 公開エリアリンク3
+    ├ 公開エリアリンク3
+    └ ボタン（対応デリヘル店一覧／button_3／上40px・下75px）
 └ 表示外の構造化データ
     ├ BreadcrumbList（必須）
     ├ FAQPage（FAQが1件以上ある場合）
@@ -128,7 +129,7 @@ The Japanese labels below are exact website display concepts and are preserved.
 - Do not normally use `create.php` for Codex page generation.
 - Match shops, normal article scenes, FAQs, optional basic-information rows, fee rows, access entries, and nearby spots to complete source-data blocks. Do not set a fixed maximum.
 - Preserve input order for normal article scenes and known sections. STOP before generation on a partial block.
-- Under `関連記事`, publish three distinct indexable blog-detail links and three distinct indexable area-detail links selected deterministically from current public files. Exclude the current page, duplicate destinations, placeholder text, and `href="#"`.
+- Under `関連記事`, publish three distinct indexable blog-detail links and three distinct indexable area-detail links selected deterministically from current public files. Exclude the current page, duplicate destinations, placeholder text, and `href="#"`. Immediately after that container, output exactly one `<div class="lm_40_0_75 center" id="button_3"><a href="./#shopinfo" class="bt-pk-xl">対応デリヘル店一覧</a></div>` and output no visible block between this CTA and the closing page-content wrapper.
 - Match JSON-LD to visible content.
 
 Standard production and publication runs only:
@@ -199,7 +200,7 @@ Determine the slug by reconciling canonical in source data, image names, hotel n
 | Fee information | Fee table and optional supplemental copy | Zero or more |
 | Access information | Map, map title, subtitle, and description | Zero or one |
 | Nearby spots | Multiple items and optional warning copy | Zero or more |
-| Related articles | Deterministic public links | Exactly six: three blog details and three area details |
+| Related articles and terminal CTA | Deterministic public links followed by the final shop-list CTA | Exactly six links plus one `button_3` CTA with `lm_40_0_75` |
 
 Do not add unnecessary visible line breaks when source data does not specify them.
 
@@ -212,7 +213,7 @@ Required:
 - SEO, OGP, img_1, img_2, and H1 introduction
 - Hotel name, official URL, and address
 - At least one shop present in `template_shop.html`
-- Six deterministic related-article links: three blog details and three area details
+- Six deterministic related-article links followed immediately by one terminal `button_3` shop-list CTA with `lm_40_0_75`: three blog details and three area details
 
 Optional:
 
@@ -327,7 +328,7 @@ STOP new production when the target slug already exists in public PHP, source HT
 10. Renumber scenes, subtitles, and descriptions in visible order.
 11. Synchronize FAQPage and ItemList to visible presence, count, and order.
 12. Generate public entry PHP, source HTML, dataset PHP, shared registrations, hotel index, and sitemap for the target only.
-13. Check placeholders, empty containers, duplicate IDs, gaps, and missing body content.
+13. Check placeholders, empty containers, duplicate IDs, gaps, missing body content, and exactly one canonical terminal CTA immediately after related articles.
 14. Check canonical, images, official URL, map, internal links, PHP, JSON, and diff.
 15. For an explicitly authorized publish, run target-limited Commit, Push to main, Actions, and production HTTP validation.
 
@@ -363,6 +364,7 @@ The former `Text_hotel_data/Cursor用更新手順.txt` was retired from the prod
 - [ ] No heading or additional copy from a complete normal scene is missing.
 - [ ] Scene, FAQ, and nearby-spot numbering is correct.
 - [ ] Exactly three distinct current indexable blog-detail links and three distinct current indexable area-detail links exist, with no placeholder, self-link, duplicate, or missing target.
+- [ ] Exactly one canonical `button_3` CTA follows the related-article container, links to `./#shopinfo`, uses `lm_40_0_75`, and is the final visible block before the page-content wrapper closes.
 - [ ] Travel time and transportation fees prioritize Text and use map coordinates and nearby complete area pages only when Text omits them.
 - [ ] Visible FAQ matches FAQPage JSON-LD.
 - [ ] FAQPage JSON-LD is absent when no FAQ exists.

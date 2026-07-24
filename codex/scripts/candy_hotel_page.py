@@ -794,6 +794,13 @@ def render_related(slug: str) -> str:
     return path_config.related_links_html("hotel", slug, "bd")
 
 
+def render_terminal_shop_cta() -> str:
+    return (
+        '\t\t\t\t<div class="lm_40_0_75 center" id="button_3">'
+        '<a href="./#shopinfo" class="bt-pk-xl">対応デリヘル店一覧</a></div>'
+    )
+
+
 def render_main(data: HotelData, resolved: list[common.ShopResolved], templates: dict[str, common.ShopTemplate]) -> str:
     numbers = {token: index for index, token in enumerate(data.scene_order, 1)}
     articles = {f"article:{index}": item for index, item in enumerate(data.article_scenes)}
@@ -853,7 +860,7 @@ def render_main(data: HotelData, resolved: list[common.ShopResolved], templates:
                 inline.append(render_spots(data, number))
             else:
                 raise HotelToolError(f"未対応scene種別です: {token}")
-    inline.append(render_related(data.slug))
+    inline.extend((render_related(data.slug), render_terminal_shop_cta()))
     flush_inline()
     content_html = "\n".join(content)
     return f'''<!-- メインコンテンツ START -->
@@ -906,8 +913,16 @@ def related_validation(source: str, canonical: str) -> list[str]:
     return path_config.validate_related_links(source, canonical)
 
 
+def terminal_shop_cta_validation(source: str) -> list[str]:
+    expected = render_terminal_shop_cta()
+    if source.count(expected) != 1:
+        return ["関連記事後の対応デリヘル店一覧ボタンまたは終端余白が不整合"]
+    return []
+
+
 def validate_rendered(data: HotelData, resolved: list[common.ShopResolved], source: str, hp_root: Path) -> list[str]:
     errors: list[str] = related_validation(source, data.canonical)
+    errors.extend(terminal_shop_cta_validation(source))
     if PLACEHOLDER_RE.search(source) or "<改行>" in source:
         errors.append("placeholder残存")
     if '<meta name="robots" content="index">' not in source:
@@ -1284,6 +1299,9 @@ def run_self_test(_: argparse.Namespace) -> int:
     broken_related = re.sub(r'<a href="\./kagoshima-deliveryhealth-(?:blog|area)-[^"]+" class="fade">.*?</a><br>\s*', "", source, count=1)
     if not related_validation(broken_related, data.canonical):
         raise HotelToolError("related negative self-test failed")
+    broken_terminal_cta = source.replace(render_terminal_shop_cta(), "", 1)
+    if not terminal_shop_cta_validation(broken_terminal_cta):
+        raise HotelToolError("terminal shop CTA negative self-test failed")
     faqless = replace(data, faqs=[], scene_order=[token for token in data.scene_order if token != "faqs"])
     faqless_source = render_source(faqless, resolved, templates, hp_root / "source" / "template_kagoshima-deliveryhealth-hotel.html")
     faqless_errors = validate_rendered(faqless, resolved, faqless_source, hp_root)

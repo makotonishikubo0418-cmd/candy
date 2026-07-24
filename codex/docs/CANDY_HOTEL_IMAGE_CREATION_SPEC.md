@@ -1,6 +1,6 @@
 # CANDY Hotel Image Creation Specification
 
-- Updated: 2026-07-23
+- Updated: 2026-07-24
 - Target: Two images for one hotel page
 - Status: Canonical specification
 - Route: Direct staff-completed Text image preparation or Phase 4
@@ -47,7 +47,7 @@ codex\scripts\candy-hotel.cmd image-plan `
   --source-route DIRECT_TEXT
 ```
 
-Keep one Google Earth browser session for consecutive targets. Disable labels once, reuse the same `1280 x 960` capture viewport, search each confirmed hotel name and address for `_1` and the confirmed address only for `_2`, and capture only after the target identity and required view are correct. The default crop is `x=140, y=100, width=1000, height=750`; pass `--earth-crop` or `--maps-crop` when the clean geographic frame differs. Until the compatibility parameter is renamed, pass the Google Earth top-down `_2` source through `--maps-source` and its crop through `--maps-crop`.
+Keep one Google Earth browser session for consecutive targets. Disable labels once, reuse the same `1280 x 960` capture viewport, search each confirmed hotel name and address for `_1` and the confirmed address only for `_2`, and capture only after the `_1` target-building measurements and unambiguous-subject test in Section 3.1 pass. The default crop is `x=140, y=100, width=1000, height=750`; pass `--earth-crop` or `--maps-crop` whenever that crop would fail a Section 3 composition gate. Until the compatibility parameter is renamed, pass the Google Earth top-down `_2` source through `--maps-source` and its crop through `--maps-crop`.
 
 Render both candidates and one evidence manifest in a single command:
 
@@ -135,9 +135,12 @@ Confirm the name, address, building position, exterior form, and surrounding roa
 The source view MUST:
 
 - Use 3D display.
-- Show the hotel exterior and height.
-- Include enough surrounding streets and buildings to identify its setting.
-- Keep the hotel visually important and not excessively small.
+- Make the confirmed hotel the single unmistakable primary subject in the final clean `1000 x 750` crop before text is rendered. A wide city, district, or rural panorama with the hotel as one small building is prohibited.
+- Measure the smallest axis-aligned rectangle enclosing the visible confirmed hotel building in that final crop. Its width MUST be at least `220 px`, its height MUST be at least `180 px`, and its rectangle area MUST be at least `120000 px²` (`16%` of the canvas). Record `x`, `y`, `width`, `height`, area, and canvas percentage; estimated descriptions such as “large enough” are not evidence.
+- Pass an unlabeled three-second identification test: while viewing only the clean crop and the confirmed exterior reference, the reviewer MUST be able to point to the hotel within three seconds without using an address, map position, neighboring landmark, or hidden pin to infer which building it is.
+- Reject a view when another building is equally or more visually dominant, when two or more buildings are plausible targets, or when the hotel can be identified only from its surroundings.
+- Show enough surrounding streets and buildings to confirm the setting without weakening the hotel-subject thresholds above.
+- Show the hotel exterior and height clearly enough to distinguish its building form.
 - Avoid a flat top-down composition.
 - Avoid a direction where another building materially hides the hotel.
 - Contain no major unloaded tile or malformed 3D geometry.
@@ -269,14 +272,15 @@ Every item MUST pass:
 
 | Gate | Required evidence |
 |---|---|
-| Target identity | Name, address, building, and map position agree with the selected route's confirmed target Text evidence |
+| Target identity | Name, address, building, and map position agree with the selected route's confirmed target Text evidence; surrounding landmarks alone are not accepted as building identity |
 | View type | `_1` is 3D; `_2` is 2D aerial |
 | Clean background | No prohibited label, pin, result, control, browser UI, or OS UI |
 | Title identity | Both renderer inputs equal `HOTEL_NAME_EN` byte for byte |
 | Fixed text | Exact `Kagoshima Hotel Information` on both images |
 | Numeric placement | All four measured centers meet Section 5 |
 | Text appearance | Exact font family, approved size rule, white color, and no prohibited effect |
-| Composition | Hotel remains identifiable and `_1` and `_2` are materially different |
+| `_1` subject scale | The recorded hotel rectangle is at least `220 x 180 px`, has an area of at least `120000 px²` (`16%`), and the hotel is the single visually dominant plausible target |
+| Composition | The unlabeled `_1` crop passes the three-second identification test, the hotel is not identified by surrounding landmarks alone, and `_1` and `_2` are materially different |
 | File | Both are readable `1000 x 750` RGB JPG files at quality `92` |
 | Naming | Filenames and all target Text image paths match `CANONICAL_SLUG` |
 | OGP | Absolute OGP URL matches `_1` |
@@ -292,12 +296,14 @@ STOP when:
 - For `PHASE_PREPARED`, the target Text hash no longer matches the Phase 3 handoff.
 - Google Earth cannot load the required source view.
 - A clean capture cannot be obtained.
+- The `_1` hotel rectangle fails any minimum width, height, or area threshold in Section 3.1.
+- The unlabeled `_1` crop fails the three-second identification test, contains another equally or more dominant building, presents multiple plausible targets, or requires surrounding landmarks to infer the hotel.
 - The hotel cannot remain identifiable in the required composition.
 - The text renderer, output destination, or numeric placement cannot be verified.
 - The two required views cannot be produced.
 - A same-name file belongs to another hotel.
 
-Use `REVIEW` when a same-name file has different content or when a composition needs a human choice but the target identity remains confirmed.
+Use `REVIEW` only when a same-name file has different content or when choosing between multiple compositions that each already pass every Section 3.1 identity, subject-scale, and prominence gate. A failed identity, subject-scale, prominence, or three-second gate is `STOP`, not `REVIEW`.
 
 Do not proceed to local page build unless both images pass every hard gate and the asset-management state is at least `INSTALLED_LOCAL`. For `DIRECT_TEXT`, rerun `direct-check` and require `DIRECT_TEXT_STATUS=READY_FOR_BUILD`. For `PHASE_PREPARED`, proceed only when the Phase 4 result is ready for Phase 5. Page publication additionally requires a newly accepted pair to reach `DEPLOYED_ASSET` through `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`; image creation alone never proves publication readiness.
 
@@ -319,6 +325,9 @@ Public image 1 path and SHA-256:
 Public image 2 path and SHA-256:
 Accepted/public hash agreement:
 Image 1 renderer size and measured centers:
+Image 1 confirmed-hotel rectangle (x, y, width, height, area, canvas percentage):
+Image 1 three-second identification gate:
+Image 1 competing-building/prominence gate:
 Image 2 renderer size and measured centers:
 Dimensions, format, color, and quality:
 Clean-capture gate:
