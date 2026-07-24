@@ -441,6 +441,14 @@
       "index_before": "jigenjicho",
       "links": ["nagayoshi", "harara", "tamazatocho", "shimoishiki"]
     },
+    "shiroyamacho": {
+      "region": "城山町",
+      "longitude": 130.549077992258,
+      "latitude": 31.597179128391677,
+      "index_group": "さ",
+      "index_before": "jigenjicho",
+      "links": ["yamashitacho", "harara", "yamanokuchicho", "nagayoshi"]
+    },
     "sumiyoshicho": {
       "region": "住吉町",
       "longitude": 130.561981,
