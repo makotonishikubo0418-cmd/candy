@@ -2,14 +2,14 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-24T17:34:33+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-25T07:54:38+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 53e59f575f1c5cc9546d312be1f2a2d640d1155a
-> State fingerprint: sha256:76fa9476175b3533db2235f0a27fffef1bf335f90e376db69ba76aa7227509d8
+> Commit: faacf4687b62197153849ed5fc70382db99c0f24
+> State fingerprint: sha256:052870016207e29ba429cd8858c4bfc06c898458201685a1b5131ea03696ef09
 > Scope: Source HTML corresponding to public PHP files directly under HP
-> Population: Pages: 112
+> Population: Pages: 113
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: OK=112 / ISSUE=0 / UNVERIFIED=0
+> Result: OK=113 / ISSUE=0 / UNVERIFIED=0
 > Unverified scope: Production HTTP, search engine index state, redirects, and database-generated HTML
 
 Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are not corrected automatically.
@@ -44,6 +44,7 @@ Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are no
 | area:izumicho | 鹿児島市泉町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「泉町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-izumicho.php | index | 鹿児島市泉町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:jigenjicho | 鹿児島市慈眼寺町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「慈眼寺町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-jigenjicho.php | index | 鹿児島市慈眼寺町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:jiyugaoka | 鹿児島市自由ヶ丘で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「自由ヶ丘」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-jiyugaoka.php | index | 鹿児島市自由ヶ丘で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
+| area:josei | 鹿児島市城西で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「城西」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-josei.php | index | 鹿児島市城西で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:kajiyacho | 鹿児島市加治屋町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「加治屋町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kajiyacho.php | index | 鹿児島市「加治屋町」で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:kamoike | 鹿児島市鴨池で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「鴨池」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kamoike.php | index | 鹿児島市「鴨池」で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:kamoikeshinmachi | 鹿児島市鴨池新町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「鴨池新町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-kamoikeshinmachi.php | index | 鹿児島市「鴨池新町」で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |

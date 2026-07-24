@@ -449,6 +449,14 @@
       "index_before": "jigenjicho",
       "links": ["yamashitacho", "harara", "yamanokuchicho", "nagayoshi"]
     },
+    "josei": {
+      "region": "城西",
+      "longitude": 130.5359395764673,
+      "latitude": 31.5955436434226,
+      "index_group": "さ",
+      "index_before": "jigenjicho",
+      "links": ["harara", "nagayoshi", "yamanokuchicho", "shimoishiki"]
+    },
     "sumiyoshicho": {
       "region": "住吉町",
       "longitude": 130.561981,

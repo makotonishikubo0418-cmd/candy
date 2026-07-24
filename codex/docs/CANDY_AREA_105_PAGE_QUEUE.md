@@ -64,7 +64,7 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 28 | 上竜尾町 | `kamitatsuocho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
 | 29 | 城山 | `shiroyama` | LOCAL_COMPLETE | 専用ツール / 2026-07-24 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
 | 30 | 城山町 | `shiroyamacho` | LOCAL_COMPLETE | 専用ツール / 2026-07-25 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
-| 31 | 城西 | `josei` | READY_CANDIDATE | |
+| 31 | 城西 | `josei` | LOCAL_COMPLETE | 専用ツール / 2026-07-25 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
 | 32 | 常盤 | `tokiwa` | READY_CANDIDATE | |
 | 33 | 新栄町 | `shineicho` | READY_CANDIDATE | |
 | 34 | 新照院町 | `shinshoincho` | READY_CANDIDATE | |
