@@ -19,7 +19,7 @@
 
 ## 2. Canonical Management Locations
 
-The canonical Codex management source is `C:\Codex\candy\codex`. Use `codex/project_management/` for project-management documents, `codex/docs/` for HP production specifications, and `codex/scripts/` for work tools.
+The canonical Codex management source is `C:\Codex\Candy\codex`. Use `codex/project_management/` for project-management documents, `codex/docs/` for HP production specifications, and `codex/scripts/` for work tools.
 
 Keep only the common entry point `AGENTS.md` and files required for Git management at the local repository root. Do not duplicate management documents there. `HP/` is exclusively for the actual site tree and MUST NOT contain canonical management documents. Accepted area images belong in the Git-managed local `Text_area_data/画像データ/` directory, and accepted hotel images belong in `Text_hotel_data/画像データ/`. Neither accepted-source directory is a public HTML path. The NAS is storage-only for `Backup/`; it MUST NOT contain a canonical management source or be used for Git operations.
 
@@ -159,7 +159,7 @@ At minimum, verify:
 
 ## 8. Git Start and Synchronization Rules
 
-- Run Git operations only in the local working repository `C:\Codex\candy`; never on the NAS.
+- Run Git operations only in the local working repository `C:\Codex\Candy`; never on the NAS.
 - At the start of work, run `git fetch origin`, followed by `git status --short --branch`.
 - Verify that the branch is `main`, the upstream is `origin/main`, and the remote is correct.
 - If `main` is behind `origin/main`, pull before editing. When existing changes, conflicts, or divergence prevent a safe pull, STOP instead of pulling automatically.
@@ -175,7 +175,7 @@ At minimum, verify:
 | Item | Required verification |
 |---|---|
 | Fixed scope | Stage, Commit, and Push contain only authorized targets |
-| Work location | Git operations ran only in `C:\Codex\candy`, never on the NAS |
+| Work location | Git operations ran only in `C:\Codex\Candy`, never on the NAS |
 | Start synchronization | `git fetch origin` and `git status --short --branch` confirmed ahead/behind state |
 | Behind handling | A behind branch was pulled before editing; conflicts, divergence, or overlapping existing changes caused a STOP |
 | Pre-Commit check | `git diff --cached --check` succeeded |
@@ -274,18 +274,18 @@ STOP:
 
 ## 13. Canonical Codex Management Rules
 
-- The canonical Codex management source is `C:\Codex\candy\codex`.
+- The canonical Codex management source is `C:\Codex\Candy\codex`.
 - Separate project-management documents under `codex/project_management/`, HP production specifications under `codex/docs/`, and work tools under `codex/scripts/`.
 - Keep only the common entry point `AGENTS.md` at the local repository root; do not duplicate management documents there.
 - `HP/` is exclusively for the actual site tree and MUST NOT contain management documents or `Text_*_data`.
 - Use `HP/AGENTS.md` as the HP work route. Do not create `HP/README.md`.
-- Keep the Git working repository and `.git` at `C:\Codex\candy`. Store accepted area images under local `Text_area_data/画像データ/` and accepted hotel images under local `Text_hotel_data/画像データ/`; use GitHub as the synchronization hub, and use the NAS only for `Backup/`.
+- Keep the Git working repository and `.git` at `C:\Codex\Candy`. Store accepted area images under local `Text_area_data/画像データ/` and accepted hotel images under local `Text_hotel_data/画像データ/`; use GitHub as the synchronization hub, and use the NAS only for `Backup/`.
 
 ## 14. HP Hierarchy Rules
 
 - Do not create `HP/HP/`.
 - Keep only actual site-tree contents directly under `HP/`.
-- The Git working repository is `C:\Codex\candy`; do not run Git operations on the NAS.
+- The Git working repository is `C:\Codex\Candy`; do not run Git operations on the NAS.
 - Address HP work targets as `HP/...` from the local repository root.
 
 ## 15. Safety Rules for Deletion, Movement, and Bulk Operations

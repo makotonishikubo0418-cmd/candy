@@ -2,10 +2,10 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-24T08:44:47+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-24T09:52:27+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 3abd1ceae78ed7a10b0aa8fb2566c4cadf1d69b4
-> State fingerprint: sha256:cf0cf80ca4591f2b13340bcd13c827ea1a2188f53e3c80b5143e55e5f01a83ca
+> Commit: b1ec56b5712ad1827cb65c6d84e6417d5f444390
+> State fingerprint: sha256:fa677cb024902c2aca783ba8c07ede05c9c188adb16794456943b58d1a1398f7
 > Scope: Source HTML corresponding to public PHP files directly under HP
 > Population: Pages: 105
 > Generator: `codex/scripts/candy_site_state.py`

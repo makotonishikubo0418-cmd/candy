@@ -2,7 +2,7 @@
 
 - Purpose: Prevent damage to the working repository during deletion, movement, bulk cleanup, or Git recovery
 - Status: canonical document
-- Updated: 2026-07-17
+- Updated: 2026-07-24
 
 ## 1. Scope
 
@@ -65,7 +65,7 @@ Before deletion, movement, or bulk cleanup, classify every target as follows:
 
 Before execution, verify at minimum:
 
-1. The Git working repository is `C:\Codex\candy`. The NAS is storage-only; do not run Git operations there.
+1. The Git working repository is `C:\Codex\Candy`. The NAS is storage-only; do not run Git operations there.
 2. Evidence has been provided for reading `AGENTS.md`, `codex/README.md`, and the required management document.
 3. The target is reserved in `codex/project_management/TASK_RESERVATIONS.md`.
 4. `git fetch origin` and `git status --short --branch` have confirmed Git state. Pull before editing when behind.
@@ -75,7 +75,7 @@ Before execution, verify at minimum:
 
 ## 6. Git Rules
 
-- Run Git operations only in `C:\Codex\candy`; never on the NAS.
+- Run Git operations only in `C:\Codex\Candy`; never on the NAS.
 - Specify every staging target explicitly.
 - Use `git add -u -- <target>` and `git add -- <target>` according to target state.
 - After staging, use `git diff --cached --name-status` to verify that no out-of-scope target is included.

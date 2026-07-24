@@ -36,13 +36,13 @@ canonical
 https://www.55810.com/kagoshima-deliveryhealth-hotel-hotelkagoshimahills.php
 -------------------------------------------------------------------
 image
-https://www.55810.com/imgHtml/new_202601/hotel/hotelkagoshimahills_1.jpg
+https://www.55810.com/imgHtml/new_202601/hotel/hotelkagoshimahills_1.jpg?v=0bfe8fe
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 記事内容
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 img_1
-src : ./imgHtml/new_202601/hotel/hotelkagoshimahills_1.jpg
+src : ./imgHtml/new_202601/hotel/hotelkagoshimahills_1.jpg?v=0bfe8fe
 -------------------------------------------------------------------
 page_title_h1 / パンくずリスト
 鹿児島市でデリヘルが呼べるホテル  「ホテル鹿児島ヒルズ」

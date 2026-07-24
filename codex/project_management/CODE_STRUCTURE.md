@@ -2,18 +2,18 @@
 
 - Purpose: Define the major work areas, each folder's responsibility, and the current canonical sources
 - Status: canonical document
-- Updated: 2026-07-17
+- Updated: 2026-07-24
 
 ## 1. Canonical Sources and Work Locations
 
 | Type | Path | Responsibility |
 |---|---|---|
-| Local Git working repository | `C:\Codex\candy` | The only working repository root synchronized with GitHub |
+| Local Git working repository | `C:\Codex\Candy` | The only working repository root synchronized with GitHub |
 | GitHub synchronization hub | `makotonishikubo0418-cmd/candy` | Shares commits between Codex tasks. Push only with explicit user instruction |
-| Common-rule entry point | `C:\Codex\candy\AGENTS.md` | Short entry point read first for every task |
-| Canonical Codex management source | `C:\Codex\candy\codex` | Contains the README, management documents, HP specifications, and scripts |
-| Project management | `C:\Codex\candy\codex\project_management` | Contains rules, current state, reservations, history, and safety procedures |
-| Actual HP site tree | `C:\Codex\candy\HP` | Contains public PHP, source, includefile, images, logs, and movies |
+| Common-rule entry point | `C:\Codex\Candy\AGENTS.md` | Short entry point read first for every task |
+| Canonical Codex management source | `C:\Codex\Candy\codex` | Contains the README, management documents, HP specifications, and scripts |
+| Project management | `C:\Codex\Candy\codex\project_management` | Contains rules, current state, reservations, history, and safety procedures |
+| Actual HP site tree | `C:\Codex\Candy\HP` | Contains public PHP, source, includefile, images, logs, and movies |
 | Production inputs | Root-level `Text_area_data`, `Text_blog_data`, and `Text_hotel_data` | Non-public source data for page production |
 | NAS storage | `\\192.168.1.3\disk1\FSG_SEO\candy` | Storage-only location for `Backup/`. Git operations are prohibited |
 

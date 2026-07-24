@@ -1,16 +1,16 @@
 # candy Management Entry Point
 
-This README is the entry point for the management documents under `C:\Codex\candy\codex`.
+This README is the entry point for the management documents under `C:\Codex\Candy\codex`.
 
 ## 1. Canonical Sources and Work Locations
 
 | Type | Location | Responsibility |
 |---|---|---|
-| Local Git working repository | `C:\Codex\candy` | The only working repository root synchronized with GitHub |
+| Local Git working repository | `C:\Codex\Candy` | The only working repository root synchronized with GitHub |
 | GitHub synchronization hub | `makotonishikubo0418-cmd/candy` | Shares commits between Codex tasks. Push only with explicit user instruction |
-| Canonical Codex management source | `C:\Codex\candy\codex` | Contains the management entry point, management documents, HP production specifications, and work tools |
-| Project management | `C:\Codex\candy\codex\project_management` | Canonical source for rules, current state, reservations, history, and safety procedures |
-| Actual site tree | `C:\Codex\candy\HP` | Contains HP data such as PHP, source, includefile, images, logs, and movies |
+| Canonical Codex management source | `C:\Codex\Candy\codex` | Contains the management entry point, management documents, HP production specifications, and work tools |
+| Project management | `C:\Codex\Candy\codex\project_management` | Canonical source for rules, current state, reservations, history, and safety procedures |
+| Actual site tree | `C:\Codex\Candy\HP` | Contains HP data such as PHP, source, includefile, images, logs, and movies |
 | Production inputs | Root-level `Text_area_data`, `Text_blog_data`, and `Text_hotel_data` | Source data for page production that is not published directly to HP |
 | NAS storage | `\\192.168.1.3\disk1\FSG_SEO\candy` | Storage-only location for `Backup/`. Git operations are prohibited |
 

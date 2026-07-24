@@ -2,13 +2,13 @@
 
 - Purpose: Provide one location for the overall plan, current state, problems, and next work
 - Status: canonical document
-- Updated: 2026-07-23
+- Updated: 2026-07-24
 
 ## 1. Current State
 
 | Type | Canonical source or work location | Status |
 |---|---|---|
-| Local Git working repository | `C:\Codex\candy` | The only working repository synchronized with GitHub. Run Git operations only here |
+| Local Git working repository | `C:\Codex\Candy` | The only working repository synchronized with GitHub. Run Git operations only here |
 | GitHub synchronization hub | `makotonishikubo0418-cmd/candy` | Commit and Push require explicit instruction |
 | Canonical Codex management source | `codex/` | README, project management, HP specifications, and scripts |
 | Project management | `codex/project_management/` | Rules, current state, reservations, history, safety, and handoff |
@@ -17,7 +17,7 @@
 | Actual site | `HP/` | Public PHP, source, includefile, CSS, JavaScript, images, movies, and logs |
 | Production inputs | `Text_area_data/`, `Text_blog_data/`, and `Text_hotel_data/` | Source data not published directly to HP |
 | Accepted area images | `Text_area_data/画像データ/` | Git-managed local source assets used before public placement |
-| Accepted hotel images | `Text_hotel_data/画像データ/` | Git-managed accepted source pairs; the directory may remain absent until the first accepted pair |
+| Accepted hotel images | `Text_hotel_data/画像データ/` | Git-managed accepted source pairs used before exact public installation |
 | NAS | `\\192.168.1.3\disk1\FSG_SEO\candy` | Storage-only for backups. Git operations are prohibited |
 
 ## 2. Completed Management Foundation

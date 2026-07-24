@@ -4,8 +4,8 @@
 - Document responsibility: Overview of the management system goals and design principles
 - Detailed canonical sources: The management documents listed in `codex/README.md`
 - Status: canonical document for the candy management-system overview
-- Canonical location: `C:\Codex\candy\codex`
-- Updated: 2026-07-17
+- Canonical location: `C:\Codex\Candy\codex`
+- Updated: 2026-07-24
 
 ## 1. Intended Outcome
 

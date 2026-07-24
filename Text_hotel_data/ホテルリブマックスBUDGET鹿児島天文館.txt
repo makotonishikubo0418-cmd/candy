@@ -36,13 +36,13 @@ canonical
 https://www.55810.com/kagoshima-deliveryhealth-hotel-hotellivemaxbudgetkagoshimatenmonkan.php
 -------------------------------------------------------------------
 image
-https://www.55810.com/imgHtml/new_202601/hotel/hotellivemaxbudgetkagoshimatenmonkan_1.jpg
+https://www.55810.com/imgHtml/new_202601/hotel/hotellivemaxbudgetkagoshimatenmonkan_1.jpg?v=96ab1cd
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 記事内容
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 img_1
-src : ./imgHtml/new_202601/hotel/hotellivemaxbudgetkagoshimatenmonkan_1.jpg
+src : ./imgHtml/new_202601/hotel/hotellivemaxbudgetkagoshimatenmonkan_1.jpg?v=96ab1cd
 -------------------------------------------------------------------
 page_title_h1 / パンくずリスト
 鹿児島市でデリヘルが呼べるホテル  「ホテルリブマックスBUDGET鹿児島天文館」

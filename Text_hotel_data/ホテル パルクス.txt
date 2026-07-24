@@ -36,13 +36,13 @@ canonical
 https://www.55810.com/kagoshima-deliveryhealth-hotel-hotelparcs.php
 -------------------------------------------------------------------
 image
-https://www.55810.com/imgHtml/new_202601/hotel/hotelparcs_1.jpg
+https://www.55810.com/imgHtml/new_202601/hotel/hotelparcs_1.jpg?v=093c5d7
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 記事内容
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 img_1
-src : ./imgHtml/new_202601/hotel/hotelparcs_1.jpg
+src : ./imgHtml/new_202601/hotel/hotelparcs_1.jpg?v=093c5d7
 -------------------------------------------------------------------
 page_title_h1 / パンくずリスト
 鹿児島市でデリヘルが呼べるホテル  ホテル パルクス

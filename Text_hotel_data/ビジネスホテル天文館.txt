@@ -36,13 +36,13 @@ canonical
 https://www.55810.com/kagoshima-deliveryhealth-hotel-businesshoteltenmonkan.php
 -------------------------------------------------------------------
 image
-https://www.55810.com/imgHtml/new_202601/hotel/businesshoteltenmonkan_1.jpg
+https://www.55810.com/imgHtml/new_202601/hotel/businesshoteltenmonkan_1.jpg?v=042feee
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 記事内容
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 img_1
-src : ./imgHtml/new_202601/hotel/businesshoteltenmonkan_1.jpg
+src : ./imgHtml/new_202601/hotel/businesshoteltenmonkan_1.jpg?v=042feee
 -------------------------------------------------------------------
 page_title_h1 / パンくずリスト
 鹿児島市でデリヘルが呼べるホテル  ビジネスホテル天文館

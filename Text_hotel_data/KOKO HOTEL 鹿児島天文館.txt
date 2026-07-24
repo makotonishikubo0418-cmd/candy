@@ -36,13 +36,13 @@ canonical
 https://www.55810.com/kagoshima-deliveryhealth-hotel-kokohotelkagoshimatenmonkan.php
 -------------------------------------------------------------------
 image
-https://www.55810.com/imgHtml/new_202601/hotel/kokohotelkagoshimatenmonkan_1.jpg
+https://www.55810.com/imgHtml/new_202601/hotel/kokohotelkagoshimatenmonkan_1.jpg?v=008c0e3
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 記事内容
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 img_1
-src : ./imgHtml/new_202601/hotel/kokohotelkagoshimatenmonkan_1.jpg
+src : ./imgHtml/new_202601/hotel/kokohotelkagoshimatenmonkan_1.jpg?v=008c0e3
 -------------------------------------------------------------------
 page_title_h1 / パンくずリスト
 鹿児島市でデリヘルが呼べるホテル  KOKO HOTEL 鹿児島天文館

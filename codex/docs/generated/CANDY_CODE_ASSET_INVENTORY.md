@@ -2,12 +2,12 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-24T08:44:47+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-24T09:52:27+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 3abd1ceae78ed7a10b0aa8fb2566c4cadf1d69b4
-> State fingerprint: sha256:cf0cf80ca4591f2b13340bcd13c827ea1a2188f53e3c80b5143e55e5f01a83ca
+> Commit: b1ec56b5712ad1827cb65c6d84e6417d5f444390
+> State fingerprint: sha256:fa677cb024902c2aca783ba8c07ede05c9c188adb16794456943b58d1a1398f7
 > Scope: Public PHP, source files, datasets, shared PHP, CSS, JavaScript, images, videos, and fonts
-> Population: Public PHP files: 105 / assets: 634
+> Population: Public PHP files: 105 / assets: 632
 > Generator: `codex/scripts/candy_site_state.py`
 > Result: Missing references: 20 / duplicate hash groups: 10
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -185,7 +185,7 @@ Only the external session and database configuration references in `dataset_base
 | .css | 15 |
 | .eot | 16 |
 | .gif | 3 |
-| .jpg | 481 |
+| .jpg | 479 |
 | .js | 17 |
 | .mp4 | 2 |
 | .png | 64 |
@@ -209,7 +209,7 @@ Only the external session and database configuration references in `dataset_base
 | HP/imgHtml/new_202601/banner | 5 |
 | HP/imgHtml/new_202601/blog | 12 |
 | HP/imgHtml/new_202601/girl | 112 |
-| HP/imgHtml/new_202601/hotel | 144 |
+| HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
 | HP/imgHtml/pc | 14 |
 | HP/imgHtml/s | 14 |
@@ -365,7 +365,7 @@ These candidates have no confirmed static HTML or CSS reference. They may be ref
 | HP/imgHtml | 4 | age_verification.jpg, entranceBg.jpg, twitter.svg, unnamed.jpg |
 | HP/imgHtml/new_202601 | 2 | candy_img1.jpg, candy_img1_sp.jpg |
 | HP/imgHtml/new_202601/girl | 56 | alice_1_sp.jpg, ami_1_sp.jpg, ann_1_sp.jpg, anya_1_sp.jpg, aoba_1_sp.jpg |
-| HP/imgHtml/new_202601/hotel | 132 | aquagardenhotelfukumaru_1.jpg, aquagardenhotelfukumaru_2.jpg, arthotelkagoshima_1.jpg, arthotelkagoshima_2.jpg, bbparkhotelkagoshimaannex_1.jpg |
+| HP/imgHtml/new_202601/hotel | 130 | aquagardenhotelfukumaru_1.jpg, aquagardenhotelfukumaru_2.jpg, arthotelkagoshima_1.jpg, arthotelkagoshima_2.jpg, businesshotelatelier_1.jpg |
 | HP/imgHtml/new_202601/shop | 11 | after5_sp.jpg, beloved_sp.jpg, candy_sp.jpg, danzuma_sp.jpg, hitozuma_sp.jpg |
 | HP/js | 11 | api.js, candyKissDijest.js, commonLite.js, diary.js, fav.js |
 

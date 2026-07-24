@@ -165,8 +165,8 @@ def dependency_paths(input_path: Path, data: candy_hotel_page.HotelData) -> list
     hp = path_config.HP_ROOT
     paths = {
         input_path,
-        hp / data.image1.removeprefix("./"),
-        hp / data.image2.removeprefix("./"),
+        hp / data.image1.removeprefix("./").split("?", 1)[0],
+        hp / data.image2.removeprefix("./").split("?", 1)[0],
         hp / "source" / "template_shop.html",
         hp / "source" / "template_kagoshima-deliveryhealth-hotel.html",
         path_config.SCRIPTS_DIR / "candy_area_page.py",
@@ -277,8 +277,8 @@ def verify_production(data: candy_hotel_page.HotelData, commit: str) -> None:
         image_url = urljoin(data.canonical, image.removeprefix("./"))
         requested = shared.cache_bust(image_url, commit)
         image_status, image_final, image_headers, image_bytes = shared.http_fetch(requested)
-        local_image = hp / image.removeprefix("./")
-        checks[f"image:{Path(image).name}"] = (
+        local_image = hp / image.removeprefix("./").split("?", 1)[0]
+        checks[f"image:{Path(image.split('?', 1)[0]).name}"] = (
             image_status == 200
             and image_final == requested
             and str(image_headers.get("Content-Type", "")).lower().startswith("image/")

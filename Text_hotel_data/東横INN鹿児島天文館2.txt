@@ -36,13 +36,13 @@ canonical
 https://www.55810.com/kagoshima-deliveryhealth-hotel-toyokoinnkagoshimatemmonkanno2.php
 -------------------------------------------------------------------
 image
-https://www.55810.com/imgHtml/new_202601/hotel/toyokoinnkagoshimatemmonkanno2_1.jpg
+https://www.55810.com/imgHtml/new_202601/hotel/toyokoinnkagoshimatemmonkanno2_1.jpg?v=c1b31b4
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 記事内容
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 img_1
-src : ./imgHtml/new_202601/hotel/toyokoinnkagoshimatemmonkanno2_1.jpg
+src : ./imgHtml/new_202601/hotel/toyokoinnkagoshimatemmonkanno2_1.jpg?v=c1b31b4
 -------------------------------------------------------------------
 page_title_h1 / パンくずリスト
 鹿児島市でデリヘルが呼べるホテル  東横INN鹿児島天文館2

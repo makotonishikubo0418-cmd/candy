@@ -36,13 +36,13 @@ canonical
 https://www.55810.com/kagoshima-deliveryhealth-hotel-hotelazkagoshimakiireten.php
 -------------------------------------------------------------------
 image
-https://www.55810.com/imgHtml/new_202601/hotel/hotelazkagoshimakiireten_1.jpg
+https://www.55810.com/imgHtml/new_202601/hotel/hotelazkagoshimakiireten_1.jpg?v=96d2cae
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 記事内容
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 img_1
-src : ./imgHtml/new_202601/hotel/hotelazkagoshimakiireten_1.jpg
+src : ./imgHtml/new_202601/hotel/hotelazkagoshimakiireten_1.jpg?v=96d2cae
 -------------------------------------------------------------------
 page_title_h1 / パンくずリスト
 鹿児島市でデリヘルが呼べるホテル  「HOTEL AZ 鹿児島喜入店」

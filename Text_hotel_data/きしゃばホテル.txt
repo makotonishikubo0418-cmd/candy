@@ -36,13 +36,13 @@ canonical
 https://www.55810.com/kagoshima-deliveryhealth-hotel-kisyabahotel.php
 -------------------------------------------------------------------
 image
-https://www.55810.com/imgHtml/new_202601/hotel/kisyabahotel_1.jpg
+https://www.55810.com/imgHtml/new_202601/hotel/kisyabahotel_1.jpg?v=8e38453
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 記事内容
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 img_1
-src : ./imgHtml/new_202601/hotel/kisyabahotel_1.jpg
+src : ./imgHtml/new_202601/hotel/kisyabahotel_1.jpg?v=8e38453
 -------------------------------------------------------------------
 page_title_h1 / パンくずリスト
 鹿児島市でデリヘルが呼べるホテル  きしゃばホテル

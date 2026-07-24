@@ -113,7 +113,8 @@ def shared_paths() -> list[Path]:
 
 
 def image_file(relative_image: str) -> Path:
-    return HP_ROOT / relative_image.removeprefix("./")
+    asset_path = relative_image.removeprefix("./").split("?", 1)[0]
+    return HP_ROOT / asset_path
 
 
 def candidate_from_path(path: Path) -> Candidate:
@@ -290,7 +291,10 @@ def existing_hotel_rows() -> list[dict[str, object]]:
                 "source": source.exists(),
                 "dataset": dataset.exists(),
                 "images": len(images),
-                "images_exist": all((HP_ROOT / image.removeprefix("./")).exists() for image in images),
+                "images_exist": all(
+                    (HP_ROOT / image.removeprefix("./").split("?", 1)[0]).exists()
+                    for image in images
+                ),
                 "dataset_base": f"kagoshima-deliveryhealth-hotel-{slug}.html" in base
                 and f"dataset_kagoshima-deliveryhealth-hotel-{slug}.php" in base,
                 "hotel_list": canonical in hotel_list or f"./kagoshima-deliveryhealth-hotel-{slug}.php" in hotel_list,

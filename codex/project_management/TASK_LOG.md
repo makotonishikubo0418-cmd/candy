@@ -2,7 +2,7 @@
 
 - Purpose: Record the results, verified facts, and unverified items for individual tasks.
 - Status: Canonical document
-- Last updated: 2026-07-23
+- Last updated: 2026-07-24
 
 ## 1. Recording Rules
 
@@ -54,5 +54,5 @@
 
 | Target | Basis | Handling |
 |---|---|---|
-| 86 relocated items / 76 deletion entries | User instruction: "`\\192.168.1.3\disk1\FSG_SEO\candy\除外リスト` 作成した 実行しろ" | Relocated locally. Inclusion in a Commit requires separate confirmation. |
+| 86 relocated items / 76 deletion entries | User instruction: "`\\192.168.1.3\disk1\FSG_SEO\candy\除外リスト` 作成した 実行しろ" | Relocated locally, then included in the canonical-structure synchronization recorded as `TASK-20260717-GITHUB-SYNC-001` and Commit `7d23c91`. |
 | Three area input files | Input Text corrections after the user instruction: "間違いは今修正しろ" | Corrected locally. Page generation and production deployment are separate tasks. |

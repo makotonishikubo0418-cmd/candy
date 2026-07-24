@@ -323,7 +323,12 @@ def parse_hotel_text(path: Path) -> HotelData:
         raise HotelToolError("必須項目不足: " + ", ".join(missing))
 
     slug = canonical_match.group(1)
-    image_pattern = re.compile(rf"^\./imgHtml/[A-Za-z0-9_/-]*/hotel/{re.escape(slug)}_([12])\.(?:jpe?g|png|webp)$", re.I)
+    image_pattern = re.compile(
+        rf"^\./imgHtml/[A-Za-z0-9_/-]*/hotel/"
+        rf"{re.escape(slug)}_([12])\.(?:jpe?g|png|webp)"
+        rf"(?:\?v=(?-i:[0-9a-f]{{7,64}}))?$",
+        re.I,
+    )
     image1_match = image_pattern.fullmatch(image1)
     image2_match = image_pattern.fullmatch(image2)
     if not image1_match or image1_match.group(1) != "1":
@@ -1032,7 +1037,8 @@ def validate_rendered(data: HotelData, resolved: list[common.ShopResolved], sour
         if travel != (item.time_text, item.fee_text):
             errors.append(f"店舗交通費不整合: {item.name}")
     for relative in (data.image1, data.image2):
-        if not (hp_root / relative.removeprefix("./")).is_file():
+        asset_path = relative.removeprefix("./").split("?", 1)[0]
+        if not (hp_root / asset_path).is_file():
             errors.append(f"画像なし: {relative}")
     if data.hotel_name not in common.strip_tags(source):
         errors.append("ホテル名なし")
@@ -1454,6 +1460,15 @@ def run_self_test(_: argparse.Namespace) -> int:
         ),
     }
     with tempfile.TemporaryDirectory() as directory:
+        versioned_path = Path(directory) / "versioned_image.txt"
+        versioned_image1 = f"{data.image1}?v=abcdef0"
+        versioned_text = base_text.replace(data.image1, versioned_image1, 1)
+        versioned_text = versioned_text.replace(data.og_image, f"{data.og_image}?v=abcdef0", 1)
+        versioned_path.write_text(versioned_text, encoding="utf-8")
+        versioned_data = parse_hotel_text(versioned_path)
+        if versioned_data.image1 != versioned_image1 or versioned_data.og_image != f"{data.og_image}?v=abcdef0":
+            raise HotelToolError("versioned hotel image self-test failed")
+
         room_label_path = Path(directory) / "room_count_label.txt"
         room_label_path.write_text(base_text.replace("部屋・駐車場", "部屋数・駐車場", 1), encoding="utf-8")
         room_label_data = parse_hotel_text(room_label_path)

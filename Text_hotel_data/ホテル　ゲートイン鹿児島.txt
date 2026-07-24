@@ -36,13 +36,13 @@ canonical
 https://www.55810.com/kagoshima-deliveryhealth-hotel-hotelgateinkagoshima.php
 -------------------------------------------------------------------
 image
-https://www.55810.com/imgHtml/new_202601/hotel/hotelgateinkagoshima_1.jpg
+https://www.55810.com/imgHtml/new_202601/hotel/hotelgateinkagoshima_1.jpg?v=919705c
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 記事内容
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 img_1
-src : ./imgHtml/new_202601/hotel/hotelgateinkagoshima_1.jpg
+src : ./imgHtml/new_202601/hotel/hotelgateinkagoshima_1.jpg?v=919705c
 -------------------------------------------------------------------
 page_title_h1 / パンくずリスト
 鹿児島市でデリヘルが呼べるホテル  「ホテルゲートイン鹿児島」
