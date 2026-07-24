@@ -2,14 +2,14 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-25T08:08:45+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-25T08:15:36+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 9365ac54fa6015c07d2448d7f0d85764e0dec350
-> State fingerprint: sha256:e883bf0f8307b86e639501720487caa1f07b6b83e0d5a2d7f2917c0018ab69af
+> Commit: 31573c741127d90939406a41038dccbd4f76916c
+> State fingerprint: sha256:79bad071ce9eca85ed869aca40689ea50f144de1232dde0f15a2d39204c4c80b
 > Scope: Source HTML corresponding to public PHP files directly under HP
-> Population: Pages: 117
+> Population: Pages: 118
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: OK=117 / ISSUE=0 / UNVERIFIED=0
+> Result: OK=118 / ISSUE=0 / UNVERIFIED=0
 > Unverified scope: Production HTTP, search engine index state, redirects, and database-generated HTML
 
 Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are not corrected automatically.
@@ -125,6 +125,7 @@ Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are no
 | hotel:hotelm | Hotel M（ホテルエム / 旧レクサス）｜鹿児島 デリヘルが呼べるホテル | 鹿児島市Hotel M（ホテルエム / 旧レクサス）でデリヘルが呼べるHotel M（ホテルエム / 旧レクサス）｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-hotelm.php | index | 鹿児島市でデリヘルが呼べるホテル Hotel M（ホテルエム / 旧レクサス） | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | hotel:hotelresidencenanshukan | HOTEL&RESIDENCE南洲館｜鹿児島市でデリヘルが呼べるホテル | 鹿児島市東千石町でデリヘルが呼べるホテルHOTEL&RESIDENCE南洲館｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-hotelresidencenanshukan.php | index | 鹿児島市でデリヘルが呼べるホテル HOTEL&RESIDENCE南洲館 | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | hotel:hotelsera | HOTEL SERA｜鹿児島市でデリヘルが呼べるホテル | 鹿児島市与次郎でデリヘルが呼べるホテル「HOTEL SERA」｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-hotelsera.php | index | 鹿児島市でデリヘルが呼べるホテル 「HOTEL SERA」 | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
+| hotel:jrkyushuhotelkagoshima | JR九州ホテル鹿児島｜鹿児島市でデリヘルが呼べるホテル | 鹿児島市武でデリヘルが呼べるホテルJR九州ホテル鹿児島｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-jrkyushuhotelkagoshima.php | index | 鹿児島市でデリヘルが呼べるホテル JR九州ホテル鹿児島 | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | hotel:villacosta500 | ヴィラコスタ500（Villa Costa 500）｜鹿児島 デリヘルが呼べるホテル | 鹿児島市錦江町でデリヘルが呼べるホテルヴィラコスタ500（Villa Costa 500）｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-villacosta500.php | index | 鹿児島市でデリヘルが呼べるホテル ヴィラコスタ500（Villa Costa 500） | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | hotel:youstylehotelmate | YOUSTYLE HOTEL MATE｜鹿児島市でデリヘルが呼べるホテル | 鹿児島市呉服町でデリヘルが呼べるホテルYOUSTYLE HOTEL MATE｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-youstylehotelmate.php | index | 鹿児島市でデリヘルが呼べるホテル YOUSTYLE HOTEL MATE | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | other:movie | 鹿児島 デリヘル キャンディ \| 女の子動画一覧 | 鹿児島 デリヘル「キャンディ」の動画一覧。お店や女の子の雰囲気や魅力を動画でご紹介いたします。 | https://www.55810.com/movie.php | index | 鹿児島 デリヘル キャンディ 女の子動画一覧 | 1 | OK | OK | OK | NOT_APPLICABLE | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
