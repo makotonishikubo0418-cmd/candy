@@ -2,14 +2,14 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-24T09:52:27+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-24T15:54:30+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: b1ec56b5712ad1827cb65c6d84e6417d5f444390
-> State fingerprint: sha256:fa677cb024902c2aca783ba8c07ede05c9c188adb16794456943b58d1a1398f7
+> Commit: 5d2f22d10fd16f4d1e0be064ae7d57e4b5726678
+> State fingerprint: sha256:e7bc00300fde2b681382fcbfd34cc1d87115955eb72e27e3ef508f5f7606daa9
 > Scope: Text_area_data, Text_hotel_data, Text_blog_data, and current pages, images, indexes, and sitemap entries
 > Population: Unique candidates: 233 / Text records: 233
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: READY=65 / BLOCKED=97 / EXISTING=71 / CONFLICT=0
+> Result: READY=64 / BLOCKED=97 / EXISTING=72 / CONFLICT=0
 > Unverified scope: Text accuracy, Git tracking, and the owner's publication decision
 
 This is the current cross-category state. It does not replace the task history in the existing queue or classification documents.
@@ -248,4 +248,4 @@ This is the current cross-category state. It does not replace the task history i
 | hotel | Text_hotel_data/東横INN鹿児島天文館2.txt | 鹿児島市でデリヘルが呼べるホテル  東横INN鹿児島天文館2 subtitle_h1 こんにちは！アッキー店長です。 東横INN鹿児島天文館2は、天文館の便利さをしっかり取り込みながら、移動や待ち合わせの負担を軽くしやすいホテルです。すぐ隣にコンビニがあるため、飲み物や日用品の買い足し、ちょっとした夜食の確保などにも対応しやすく、滞在中に感じやすい小さな不便さを減らしてくれます。 description_h1 さらに周辺には飲食店も多く、鹿児島らしい食事を楽しみたい方にも、気軽に食事を済ませたい方にも使いやすい環境が整っています。また、市電の利用もしやすく、主要な通りへのつながりも分かりやすいため、初めて鹿児島市内を訪れる方でも動きやすい立地です。観光で市内を回る場合はもちろん、出張や短期滞在でも予定を組み立てやすく、街なかでの行動がスムーズにつながりやすいのが魅力です。にぎわいのある天文館エリアに近く、大通りに面していることで場所の把握もしやすいため、移動のたびに迷いにくい安心感もあります。便利さだけでなく、滞在の流れを崩しにくい使いやすさがあり、鹿児島市内で拠点を探している方にとって頼りになる一軒です。 | toyokoinnkagoshimatemmonkanno2 | COMPLETE | OK (2/2) | NOT_STARTED | 0 | 0 | READY | NONE | Production may proceed under the category runbook | CANDY_HOTEL_TEXT_INPUT_CLASSIFICATION.md |
 | hotel | Text_hotel_data/ヴィラコスタ500.txt | 鹿児島市でデリヘルが呼べるホテル ヴィラコスタ500（Villa Costa 500） | villacosta500 | COMPLETE | OK (2/2) | COMPLETE | 1 | 1 | EXISTING | NONE | Use the category specification when changing the existing page | CANDY_HOTEL_TEXT_INPUT_CLASSIFICATION.md |
 | hotel | Text_hotel_data/YOU STYLE HOTEL MARINE 鹿児島 天文館.txt | 鹿児島市でデリヘルが呼べるホテル  YOU STYLE HOTEL MARINE subtitle_h1 こんにちは！アッキー店長です。 HOTEL MARINEは、鹿児島の中心地を存分に楽しみたい方にかなり相性のいいホテルです。天文館のすぐ近くにあるため、食事や買い物、ちょっとした街歩きへ出やすく、しかも港側の動線にもつながりやすいので、観光の幅が狭くなりません。こういう立地のホテルは便利さだけで語られがちですが、実際はそれだけではなく、滞在の気分まで左右します。 description_h1 天文館周辺は鹿児島らしいにぎわいがありながら、少し通りをずらすと空気がやわらぎ、歩く速度まで自然に落ち着いてくるんです。だから、夜まで動いたあとでもゆっくり休むことができます。周辺では天文館むじゃき本店のような定番スポットにすぐ行くことができ、少し気分を変えたければ名山堀のようなレトロなエリアにも行きやすいです。さらに桜島フェリーや水族館方面にもそんなに遠くないので、鹿児島の街を点ではなく面で楽しみやすいのがいいところです。派手な言葉を足さなくても、泊まったあとの動きや過ごし方が想像しやすいホテルだと思います。街なかで便利、でも便利だけで終わらない。そのちょうどよさが、HOTEL MARINEのいちばんの魅力だと思います。 | youstylehotelmarine | COMPLETE | OK (2/2) | NOT_STARTED | 0 | 0 | READY | NONE | Production may proceed under the category runbook | CANDY_HOTEL_TEXT_INPUT_CLASSIFICATION.md |
-| hotel | Text_hotel_data/HOTEL MATE.txt | 鹿児島市でデリヘルが呼べるホテル  YOUSTYLE HOTEL MATE subtitle_h1 こんにちは！アッキー店長です<改行> HOTEL MATEは、天文館の便利さを活かしながら、少し落ち着いて過ごしたい方におすすめのホテルです。鹿児島市中心部の中でも動きやすい位置にあり、天文館で食事や買い物をしたあとも戻りやすく、鹿児島中央駅の方から来る方にとっても移動の流れをつかみやすいのが魅力です。街中にありながら大通りに面していないため、周辺の便利さをしっかり使える一方で、ホテルに戻ったあとは気持ちを切り替えやすく、外のにぎわいを引きずりにくい空気があります。このバランスのよさは、実際に泊まってみると想像以上に助かる部分だと思います。 description_h1 周辺には飲食店やコンビニもそろっているので、到着が遅くなった日でも食事や買い足しに困りにくく、滞在中の動きが窮屈になりにくいのも強みです。しっかり食事をしたい日なのか、軽く済ませて早めに休みたい日なのか、そのときの気分で動きやすいのは中心部のホテルならではの良さですね。しかも、ホテルの周辺は必要以上に騒がしすぎないため、便利な場所に泊まりたいけれど、夜はなるべく静かに過ごしたいという方にも合いやすいです。観光で鹿児島の中心部を楽しみたい方にとっては、移動のしやすさと街歩きのしやすさの両方を感じやすく、出張で効率よく動きたい方にとっても無駄な移動を増やしにくい立地です。派手に目立つタイプのホテルではなくても、泊まってみると立地のちょうどよさや周辺環境の便利さがじわっと効いてくるので、使い勝手のよさが印象に残りやすい一軒だと思います。 | youstylehotelmate | COMPLETE | OK (2/2) | NOT_STARTED | 0 | 0 | READY | NONE | Production may proceed under the category runbook | CANDY_HOTEL_TEXT_INPUT_CLASSIFICATION.md |
+| hotel | Text_hotel_data/HOTEL MATE.txt | 鹿児島市でデリヘルが呼べるホテル  YOUSTYLE HOTEL MATE subtitle_h1 こんにちは！アッキー店長です<改行> HOTEL MATEは、天文館の便利さを活かしながら、少し落ち着いて過ごしたい方におすすめのホテルです。鹿児島市中心部の中でも動きやすい位置にあり、天文館で食事や買い物をしたあとも戻りやすく、鹿児島中央駅の方から来る方にとっても移動の流れをつかみやすいのが魅力です。街中にありながら大通りに面していないため、周辺の便利さをしっかり使える一方で、ホテルに戻ったあとは気持ちを切り替えやすく、外のにぎわいを引きずりにくい空気があります。このバランスのよさは、実際に泊まってみると想像以上に助かる部分だと思います。 description_h1 周辺には飲食店やコンビニもそろっているので、到着が遅くなった日でも食事や買い足しに困りにくく、滞在中の動きが窮屈になりにくいのも強みです。しっかり食事をしたい日なのか、軽く済ませて早めに休みたい日なのか、そのときの気分で動きやすいのは中心部のホテルならではの良さですね。しかも、ホテルの周辺は必要以上に騒がしすぎないため、便利な場所に泊まりたいけれど、夜はなるべく静かに過ごしたいという方にも合いやすいです。観光で鹿児島の中心部を楽しみたい方にとっては、移動のしやすさと街歩きのしやすさの両方を感じやすく、出張で効率よく動きたい方にとっても無駄な移動を増やしにくい立地です。派手に目立つタイプのホテルではなくても、泊まってみると立地のちょうどよさや周辺環境の便利さがじわっと効いてくるので、使い勝手のよさが印象に残りやすい一軒だと思います。 | youstylehotelmate | COMPLETE | OK (2/2) | COMPLETE | 1 | 1 | EXISTING | NONE | Use the category specification when changing the existing page | CANDY_HOTEL_TEXT_INPUT_CLASSIFICATION.md |
