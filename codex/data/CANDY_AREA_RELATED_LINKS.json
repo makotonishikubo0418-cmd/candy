@@ -482,6 +482,13 @@
       "index_group": "た",
       "links": ["yamanokuchicho", "yamashitacho", "harara", "nagayoshi"]
     },
+    "tokiwa": {
+      "region": "常盤",
+      "longitude": 130.5246765957961,
+      "latitude": 31.589160335855027,
+      "index_group": "た",
+      "links": ["harara", "nagayoshi", "yamanokuchicho", "shimoishiki"]
+    },
     "uearatacho": {
       "region": "上荒田町",
       "longitude": 130.542038,

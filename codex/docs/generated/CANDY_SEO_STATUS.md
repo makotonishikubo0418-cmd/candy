@@ -2,14 +2,14 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-25T07:54:38+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-25T07:58:29+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: faacf4687b62197153849ed5fc70382db99c0f24
-> State fingerprint: sha256:052870016207e29ba429cd8858c4bfc06c898458201685a1b5131ea03696ef09
+> Commit: 9dff1841c172b0fb841b03fd6bcabb6527018d87
+> State fingerprint: sha256:57c61937783c7746d6c9c2c7f3dc55b4a2b194ba7a394e2b1b8fb30c9ff9228c
 > Scope: Source HTML corresponding to public PHP files directly under HP
-> Population: Pages: 113
+> Population: Pages: 114
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: OK=113 / ISSUE=0 / UNVERIFIED=0
+> Result: OK=114 / ISSUE=0 / UNVERIFIED=0
 > Unverified scope: Production HTTP, search engine index state, redirects, and database-generated HTML
 
 Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are not corrected automatically.
@@ -95,6 +95,7 @@ Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are no
 | area:tamazatocho | 鹿児島市玉里町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「玉里町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-tamazatocho.php | index | 鹿児島市玉里町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:tamazatodanchi | 鹿児島市玉里団地で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「玉里団地」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-tamazatodanchi.php | index | 鹿児島市玉里団地で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:terukunicho | 鹿児島市照国町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「照国町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-terukunicho.php | index | 鹿児島市照国町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
+| area:tokiwa | 鹿児島市常盤で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「常盤」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-tokiwa.php | index | 鹿児島市常盤で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:uearatacho | 鹿児島市上荒田町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「上荒田町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-uearatacho.php | index | 鹿児島市上荒田町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:uenosonocho | 鹿児島市上之園町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「上之園町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-uenosonocho.php | index | 鹿児島市上之園町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:uomicho | 鹿児島市魚見町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「魚見町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-uomicho.php | index | 鹿児島市魚見町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
