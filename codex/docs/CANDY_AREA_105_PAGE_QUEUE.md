@@ -56,7 +56,7 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 20 | 住吉町 | `sumiyoshicho` | LOCAL_COMPLETE | 専用ツール / 2026-07-24 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
 | 21 | 春山町 | `haruyamacho` | LOCAL_COMPLETE | 専用ツール / 2026-07-24 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
 | 22 | 小松原 | `komatsubara` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
-| 23 | 松原町 | `matsubaracho` | READY_CANDIDATE | |
+| 23 | 松原町 | `matsubaracho` | LOCAL_COMPLETE | 専用ツール / 2026-07-24 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
 | 24 | 照国町 | `terukunicho` | READY_CANDIDATE | |
 | 25 | 上谷口町 | `kamitaniguchicho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
 | 26 | 上福元町 | `kamifukumotocho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
