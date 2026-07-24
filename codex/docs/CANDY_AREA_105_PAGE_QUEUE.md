@@ -62,7 +62,7 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 26 | 上福元町 | `kamifukumotocho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
 | 27 | 上本町 | `kamihonmachi` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
 | 28 | 上竜尾町 | `kamitatsuocho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
-| 29 | 城山 | `shiroyama` | READY_CANDIDATE | |
+| 29 | 城山 | `shiroyama` | LOCAL_COMPLETE | 専用ツール / 2026-07-24 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
 | 30 | 城山町 | `shiroyamacho` | READY_CANDIDATE | |
 | 31 | 城西 | `josei` | READY_CANDIDATE | |
 | 32 | 常盤 | `tokiwa` | READY_CANDIDATE | |

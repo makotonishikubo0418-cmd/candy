@@ -2,14 +2,14 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-24T17:29:34+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-24T17:31:46+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 80280805c96caf4296ef6fc85df87b187b0a0a57
-> State fingerprint: sha256:8a1998ef41c6a4788c1aee835e8e398acbe9adb27d1f398e8b592f35753e2627
+> Commit: ad38490219838f622bcf3735df25cca5d68434a2
+> State fingerprint: sha256:071643237a267d3d1b575efd1fe49fe12431e299e237bbd4c6d860a49bebb851
 > Scope: Source HTML corresponding to public PHP files directly under HP
-> Population: Pages: 110
+> Population: Pages: 111
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: OK=110 / ISSUE=0 / UNVERIFIED=0
+> Result: OK=111 / ISSUE=0 / UNVERIFIED=0
 > Unverified scope: Production HTTP, search engine index state, redirects, and database-generated HTML
 
 Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are not corrected automatically.
@@ -88,6 +88,7 @@ Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are no
 | area:shimoishikicho | 鹿児島市下伊敷町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「下伊敷町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-shimoishikicho.php | index | 鹿児島市下伊敷町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:shimotacho | 鹿児島市下田町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「下田町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-shimotacho.php | index | 鹿児島市下田町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:shimotatsuocho | 鹿児島市下竜尾町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「下竜尾町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-shimotatsuocho.php | index | 鹿児島市下竜尾町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
+| area:shiroyama | 鹿児島市城山で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「城山」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-shiroyama.php | index | 鹿児島市城山で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:sumiyoshicho | 鹿児島市住吉町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「住吉町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-sumiyoshicho.php | index | 鹿児島市住吉町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:tamazatocho | 鹿児島市玉里町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「玉里町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-tamazatocho.php | index | 鹿児島市玉里町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:tamazatodanchi | 鹿児島市玉里団地で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「玉里団地」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-tamazatodanchi.php | index | 鹿児島市玉里団地で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
