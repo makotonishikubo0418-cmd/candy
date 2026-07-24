@@ -2,14 +2,14 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-25T08:20:22+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-25T08:22:49+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 3ec86ccdbdc30d097f65343fdc2edf162dcbcc2c
-> State fingerprint: sha256:32eab41db65856497a507e730812335bf2ea5e73ba717d177ea8d7b689d549d8
+> Commit: d48eae86ceb3bfef33d1d0e7626cff5d4b2ec74e
+> State fingerprint: sha256:dcbe50867ba59b5d6f4cf50141824d915dcf934e391b9749e9f7fad03d36273a
 > Scope: Source HTML corresponding to public PHP files directly under HP
-> Population: Pages: 120
+> Population: Pages: 121
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: OK=120 / ISSUE=0 / UNVERIFIED=0
+> Result: OK=121 / ISSUE=0 / UNVERIFIED=0
 > Unverified scope: Production HTTP, search engine index state, redirects, and database-generated HTML
 
 Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are not corrected automatically.
@@ -129,6 +129,7 @@ Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are no
 | hotel:kokohotelkagoshimatenmonkan | KOKO HOTEL 鹿児島天文館｜鹿児島市でデリヘルが呼べるホテル | 鹿児島市東千石町でデリヘルが呼べるホテルKOKO HOTEL 鹿児島天文館｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-kokohotelkagoshimatenmonkan.php | index | 鹿児島市でデリヘルが呼べるホテル KOKO HOTEL 鹿児島天文館 | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | hotel:shiroyamahotelkagoshima | SHIROYAMA HOTEL kagoshima｜鹿児島市でデリヘルが呼べるホテル | 鹿児島市新照院町でデリヘルが呼べるホテルSHIROYAMA HOTEL kagoshima｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-shiroyamahotelkagoshima.php | index | 鹿児島市でデリヘルが呼べるホテル SHIROYAMA HOTEL kagoshima | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | hotel:villacosta500 | ヴィラコスタ500（Villa Costa 500）｜鹿児島 デリヘルが呼べるホテル | 鹿児島市錦江町でデリヘルが呼べるホテルヴィラコスタ500（Villa Costa 500）｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-villacosta500.php | index | 鹿児島市でデリヘルが呼べるホテル ヴィラコスタ500（Villa Costa 500） | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
+| hotel:youstylehotelmarine | YOU STYLE HOTEL MARINE｜鹿児島市でデリヘルが呼べるホテル | 鹿児島市船津町でデリヘルが呼べるホテルYOU STYLE HOTEL MARINE｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-youstylehotelmarine.php | index | 鹿児島市でデリヘルが呼べるホテル YOU STYLE HOTEL MARINE | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | hotel:youstylehotelmate | YOUSTYLE HOTEL MATE｜鹿児島市でデリヘルが呼べるホテル | 鹿児島市呉服町でデリヘルが呼べるホテルYOUSTYLE HOTEL MATE｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-youstylehotelmate.php | index | 鹿児島市でデリヘルが呼べるホテル YOUSTYLE HOTEL MATE | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | other:movie | 鹿児島 デリヘル キャンディ \| 女の子動画一覧 | 鹿児島 デリヘル「キャンディ」の動画一覧。お店や女の子の雰囲気や魅力を動画でご紹介いたします。 | https://www.55810.com/movie.php | index | 鹿児島 デリヘル キャンディ 女の子動画一覧 | 1 | OK | OK | OK | NOT_APPLICABLE | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | system:movie_iframe | 動画再生｜鹿児島 デリヘル キャンディ | 鹿児島 デリヘル キャンディの動画再生用補助ページです。 | UNVERIFIED | noindex,nofollow | UNVERIFIED | 0 | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | OK | NOT_APPLICABLE | NOT_APPLICABLE | OK | NONE |
