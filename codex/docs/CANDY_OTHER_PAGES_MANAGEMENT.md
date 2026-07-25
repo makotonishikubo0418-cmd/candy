@@ -199,7 +199,7 @@ Show the affected scope before changing:
 4. Inspect target PHP, source, dataset, `dataset_base.php` case, incoming references, and sitemap.
 5. Determine responsibility and change unit from the page table.
 6. Change only the target and execute the validation table.
-7. Synchronize generated documents with `candy-site-state write` and `check`.
+7. Synchronize sitemap dates and generated documents with `candy-site-state preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`.
 8. Only when upload is explicitly authorized, run target-limited Commit, Push to main, Actions, and production HTTP validation.
 
 ## 11. User Report

@@ -79,4 +79,4 @@ Do not append each existing page that differs from the common structure to this 
 | Current PHP, CSS, JavaScript, and image state | `generated/CANDY_CODE_ASSET_INVENTORY.md` |
 | Per-page SEO state | `generated/CANDY_SEO_STATUS.md` |
 
-Update generated documents with `codex\scripts\candy-site-state.cmd write` and use `check` to verify agreement with actual files.
+Synchronize sitemap dates with `codex\scripts\candy-site-state.cmd preview-sitemap-lastmod` and `sync-sitemap-lastmod`, then update generated documents with `write` and use `check` to verify agreement with actual files.

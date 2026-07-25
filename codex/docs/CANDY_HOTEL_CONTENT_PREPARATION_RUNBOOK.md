@@ -365,6 +365,11 @@ Visible FAQ and FAQPage are generated from the same target Text pairs and MUST m
 
 Nearby-spot count is zero or more. Select only current facilities that materially help a guest or identify the hotel location. Confirm formal name, address, current operation, URL, relative position, and optional telephone number.
 
+Use the maintained official website when one exists and responds normally. If
+the facility has no maintained official website, use the verified exact Google
+Maps place URL after matching the formal name and available address or telephone
+evidence. Do not retain a dead official, menu, or reservation URL.
+
 Do not add a facility only to reach a count.
 
 ### 6.6 Shops

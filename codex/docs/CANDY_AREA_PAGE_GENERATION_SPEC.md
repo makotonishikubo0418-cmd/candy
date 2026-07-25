@@ -183,6 +183,10 @@ classification alone.
 | Nearby supported areas | Render the exact target order from `codex/data/CANDY_AREA_RELATED_LINKS.json`; link text is `鹿児島市{リンク先地域名}で呼べるデリヘル` |
 | Page-wide information | Two JSON-LD blocks |
 
+The OGP `image` value MUST equal the absolute `https://www.55810.com/...`
+public URL for `img_1`, including any query string. Do not derive it by
+removing a path segment or by using a separate filename.
+
 Do not add line breaks to body copy except where explicitly present in source data. Distinguish line breaks required by HTML markup from visible line breaks in copy.
 
 ## 6. Scene, Subtitle, and Description Numbering

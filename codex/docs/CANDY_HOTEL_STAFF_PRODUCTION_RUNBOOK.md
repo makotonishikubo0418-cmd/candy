@@ -1,6 +1,6 @@
 # CANDY Hotel Staff Production Runbook
 
-- Updated: 2026-07-24
+- Updated: 2026-07-25
 - Applies to: Normal production of one hotel page from either staff-completed Text or Phase-prepared Text
 - Start condition: Explicit instruction to produce or publish a hotel page
 - Completion criteria: Dedicated validation succeeds and the authorized local or publication scope completes
@@ -211,14 +211,14 @@ Do not run manual HTML creation or a separate FTP upload before or after these c
 4. Generate the complete page set from the hotel template and `template_shop.html`. Only for travel time and transportation fees absent from Text, use map coordinates and the nearest complete area page for each shop.
 5. Validate the order and count of every input block, three deterministic blog links, three deterministic area links, scenes, JSON-LD, and images.
 6. Register only the target in `dataset_base.php`, the hotel index, and sitemap, then freeze hashes for the six output files.
-7. Synchronize generated management documents with `candy-site-state write` and `check`.
+7. Synchronize sitemap dates and generated management documents with `candy-site-state preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`.
 8. Verify the stage allowlist, then Commit and Push only the target once each. When execution stops immediately after Commit, verify content equality and reuse the existing Commit.
 9. Track pre-FTP PHP lint and deployment in Actions through the API.
 10. Verify the production page, H1, JSON-LD, images, hotel index, sitemap, and redirects over HTTP, then output URLs.
 
 Do not create a post-publication record Commit, Push a second time, or move the input Text.
 
-After generation or a fix and before staging, run `codex\scripts\candy-site-state.cmd write` and `check`. Treat required input-classification updates and generated-document updates as the same work unit.
+After generation or a fix and before staging, run `codex\scripts\candy-site-state.cmd preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`. Treat required input-classification updates and generated-document updates as the same work unit.
 
 ## 4. Input and Generation Unit
 

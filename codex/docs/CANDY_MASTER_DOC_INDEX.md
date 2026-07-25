@@ -70,19 +70,21 @@ Standard entry points:
 
 ```powershell
 codex\scripts\candy-site-state.cmd audit
+codex\scripts\candy-site-state.cmd preview-sitemap-lastmod
+codex\scripts\candy-site-state.cmd sync-sitemap-lastmod
 codex\scripts\candy-site-state.cmd preview
 codex\scripts\candy-site-state.cmd write
 codex\scripts\candy-site-state.cmd check
 codex\scripts\candy-site-state.cmd check --target "<slug>"
 ```
 
-Normal `preview`, `write`, and `check` use the deterministic state fingerprint and generated content. Generated time, Git Commit SHA, and per-row verification time/SHA are informational metadata and do not create normal drift. Use `--strict-metadata` only when those metadata values themselves must be refreshed or audited.
+Normal `preview`, `write`, and `check` use the deterministic state fingerprint and generated content. `preview-sitemap-lastmod` is read-only, while `sync-sitemap-lastmod` modifies only stale or missing `HP/sitemap.xml` `lastmod` values. Generated time, Git Commit SHA, and per-row verification time/SHA are informational metadata and do not create normal drift. Use `--strict-metadata` only when those metadata values themselves must be refreshed or audited.
 
 ## 6. Completion Gate for Page Additions and Fixes
 
 1. Before the change, run `check --target "<slug>"` to verify agreement with the ledger.
 2. Change and validate only the target according to the category runbook/specification.
-3. Before staging, run `write` and `check`.
+3. Before staging, run `preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`.
 4. Include required category queue/classification updates and generated documents in the same work unit.
 5. Do not report completion or make the work a Commit candidate while `check` fails.
 

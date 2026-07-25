@@ -109,6 +109,21 @@ Current content pages use a structure containing `og:title`, `og:type`, `og:url`
 
 - Determine whether a public URL belongs in `sitemap.xml` according to the category specification.
 - Sitemap registration does not replace index and internal links.
+- Each sitemap URL with a matching `HP/source/<stem>.html` MUST use the latest
+  Git change date of that source file as `lastmod`. The site root maps to
+  `HP/source/index.html`.
+- A source file with staged, unstaged, or untracked changes uses the current
+  local date until committed. Filesystem modification times MUST NOT be used
+  because copying or checking out files can change them without a content
+  change.
+- Run `candy-site-state preview-sitemap-lastmod` before synchronization and
+  `candy-site-state sync-sitemap-lastmod` to update only stale or missing
+  `lastmod` values. Duplicate URLs, unmappable URLs, missing source files, and
+  unverified Git dates are STOP conditions.
+- `candy-site-state check` MUST fail when sitemap membership is invalid or a
+  `lastmod` value differs from its matching source date.
+- Database-generated content changes that do not modify the matching source
+  file remain outside this static-date calculation and MUST NOT be inferred.
 - `HP/.htaccess` contains active rules that redirect HTTP, non-www, and explicit `index.php` or `index.html` URLs to the `https://www.55810.com` canonical form.
 - The normal Push-triggered production workflow keeps `.htaccess` protected. Production publication requires the dedicated manual `.htaccess` preview/deploy workflow, an exact one-file plan, and live redirect verification.
 - Creating or changing a legacy URL or redirect requires a separate task that verifies inbound traffic, canonical URLs, internal links, the sitemap, and production behavior.
@@ -129,6 +144,6 @@ After a change, validate the category runbook requirements and:
 - Image existence and alt text
 - Sitemap and public URL
 - Duplicate title/canonical, legacy URL, and different slug
-- Successful `check` after `candy-site-state write`
+- Zero unresolved sitemap-date drift after `preview-sitemap-lastmod` and `sync-sitemap-lastmod`, followed by a successful `check` after `candy-site-state write`
 
 Use `generated/CANDY_SEO_STATUS.md` for current findings, each area/hotel/blog specification for category-specific generation exceptions, and `CANDY_FIX_BACKLOG.md` for issues requiring fixes or owner decisions.

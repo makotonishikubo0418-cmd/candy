@@ -1,6 +1,6 @@
 # CANDY Blog Page Generation Specification
 
-- Updated: 2026-07-12
+- Updated: 2026-07-25
 - Applies to: Normal new generation of CANDY blog detail pages by Codex
 
 ## 1. Purpose and Scope
@@ -193,7 +193,7 @@ Current `dataset_base.php` retains legacy-name cases and legacy dataset referenc
 13. Check canonical, images, internal links, and girl numbers.
 14. Determine whether `source/blog.html` index links and JSON-LD and `sitemap.xml` require registration.
 15. Validate PHP syntax, JSON syntax, and the diff.
-16. Synchronize generated management documents with `candy-site-state write` and `check`.
+16. Synchronize sitemap dates and generated management documents with `candy-site-state preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`.
 17. State when browser validation is unverified.
 18. Commit and Push only with explicit instruction.
 
@@ -227,7 +227,7 @@ Current `dataset_base.php` retains legacy-name cases and legacy dataset referenc
 - [ ] Blog-index and sitemap registration requirements were checked.
 - [ ] No duplicate ID exists.
 - [ ] PHP syntax, JSON syntax, and `git diff --check` were validated.
-- [ ] Before staging, `codex\scripts\candy-site-state.cmd write` and `check` succeeded.
+- [ ] Before staging, `codex\scripts\candy-site-state.cmd preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check` succeeded.
 
 ## 14. Unchanged Scope
 

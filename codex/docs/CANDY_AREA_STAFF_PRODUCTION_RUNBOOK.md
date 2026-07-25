@@ -1,6 +1,6 @@
 # CANDY Area Staff Production Runbook
 
-- Updated: 2026-07-24
+- Updated: 2026-07-25
 - Applies to: Normal production of one area page
 - Start condition: Explicit instruction to produce or publish an area page
 - Completion criteria: Dedicated validation succeeds and the authorized local or publication scope completes
@@ -100,7 +100,7 @@ selection or use the applicable exception route.
    missing target-slug area-index link as normal generation output.
 3. Validate Text, slug, images, existing files, shared registrations, Git, and remote.
 4. Generate the complete page set from templates, including the target index link.
-5. Run static validation and synchronize generated management documents with `candy-site-state write` and `check`.
+5. Run static validation and synchronize sitemap dates and generated management documents with `candy-site-state preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`.
 6. Verify the stage allowlist.
 7. Commit and Push only the target, once each.
 8. Verify Actions and production HTTP.
@@ -135,7 +135,7 @@ one target entry in codex/data/CANDY_AREA_RELATED_LINKS.json
 the accepted/public image pair when first local installation is required
 ```
 
-After generation or a fix and before staging, run `codex\scripts\candy-site-state.cmd write` and `check`. Treat the queue update and generated-document update as the same work unit.
+After generation or a fix and before staging, run `codex\scripts\candy-site-state.cmd preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`. Treat the queue update and generated-document update as the same work unit.
 
 ## 4. Validation
 

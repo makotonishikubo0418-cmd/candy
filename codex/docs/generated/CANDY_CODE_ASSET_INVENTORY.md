@@ -2,10 +2,10 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-25T09:04:52+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-25T09:44:55+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: a9a135fcd69e981d45097236f0761b55fa15c6ed
-> State fingerprint: sha256:a3a3d8000d0c456d396ac5644e6e2932d60195c66a69ff80558537c9ed71f162
+> Commit: 2716afcf17cbeb9187b99353db38d5491d6aa4dd
+> State fingerprint: sha256:970ef45661beefd28023aa19a2c89e6059b357b85ff346f9cd7db76b5c8604e3
 > Scope: Public PHP, source files, datasets, shared PHP, CSS, JavaScript, images, videos, and fonts
 > Population: Public PHP files: 121 / assets: 648
 > Generator: `codex/scripts/candy_site_state.py`

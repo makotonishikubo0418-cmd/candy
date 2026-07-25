@@ -2,14 +2,14 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-25T09:04:52+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-25T09:44:55+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: a9a135fcd69e981d45097236f0761b55fa15c6ed
-> State fingerprint: sha256:a3a3d8000d0c456d396ac5644e6e2932d60195c66a69ff80558537c9ed71f162
+> Commit: 2716afcf17cbeb9187b99353db38d5491d6aa4dd
+> State fingerprint: sha256:970ef45661beefd28023aa19a2c89e6059b357b85ff346f9cd7db76b5c8604e3
 > Scope: Source HTML corresponding to public PHP files directly under HP
 > Population: Pages: 121
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: OK=121 / ISSUE=0 / UNVERIFIED=0
+> Result: OK=120 / ISSUE=1 / UNVERIFIED=0
 > Unverified scope: Production HTTP, search engine index state, redirects, and database-generated HTML
 
 Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are not corrected automatically.
@@ -112,7 +112,7 @@ Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are no
 | area:yoshinocho | 鹿児島市吉野町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「吉野町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-yoshinocho.php | index | 鹿児島市吉野町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:yotsumotocho | 鹿児島市四元町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「四元町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-yotsumotocho.php | index | 鹿児島市四元町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | blog:glamourgirl | 鹿児島のデリヘルでグラマー美女の魅力を体感「キャンディ」 | 鹿児島のデリヘルでグラマー美女の魅力を体感するなら「キャンディ」 | https://www.55810.com/kagoshima-deliveryhealth-blog-glamourgirl.php | index | 鹿児島のデリヘルでグラマー美女の魅力を体感するなら「キャンディ」 | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
-| blog:petitegirl | 鹿児島デリヘルの小柄な女の子の魅力「キャンディ」 | 鹿児島県鹿児島市デリヘルの小柄な女の子の魅力についてご紹介「キャンディ」 | https://www.55810.com/kagoshima-deliveryhealth-blog-petitegirl.php | index | 鹿児島デリヘルの小柄な女の子の魅力「キャンディ」！ | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
+| blog:petitegirl | 鹿児島デリヘルの小柄な女の子の魅力「キャンディ」 | 鹿児島県鹿児島市デリヘルの小柄な女の子の魅力についてご紹介「キャンディ」 | https://www.55810.com/kagoshima-deliveryhealth-blog-petitegirl.php | index | 鹿児島デリヘルの小柄な女の子の魅力「キャンディ」！ | 1 | ISSUE | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | ISSUE | ogp; og_image_missing=/imgHtml/new_202601/info_kagoshima_petitegirl_1.jpg |
 | blog:poccharigirl | 鹿児島デリヘルのぽっちゃり美女なら「キャンディ」 | 鹿児島でぽっちゃり美女とゆったり癒されたい方へ。キャンディは体型や雰囲気の幅が広く、希望に合わせてご提案。選び方のコツや店長おすすめも紹介。 | https://www.55810.com/kagoshima-deliveryhealth-blog-poccharigirl.php | index | 鹿児島デリヘルのぽっちゃり美女なら「キャンディ」 | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | blog:shiroutogirl | 鹿児島デリヘルで「素人っぽい」女の子と出会える「キャンディ」 | 鹿児島デリヘルで「素人っぽい」女の子と出会える「キャンディ」素人や業界未経験の女の子が人気を集めている理由解説 | https://www.55810.com/kagoshima-deliveryhealth-blog-shiroutogirl.php | index | 鹿児島デリヘルで「素人っぽい」女の子と出会える「キャンディ」 | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | blog:slendergirl | 鹿児島デリヘルでスレンダーな女の子と出会うなら「キャンディ」 | 鹿児島県鹿児島市のデリヘルでスレンダーな女の子と出会うなら「キャンディ」 | https://www.55810.com/kagoshima-deliveryhealth-blog-slendergirl.php | index | 鹿児島デリヘルでスレンダーな女の子と出会うなら「キャンディ」 | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |

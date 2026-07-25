@@ -15,6 +15,7 @@ import sys
 import tempfile
 from collections import Counter, defaultdict
 from dataclasses import dataclass
+from datetime import date
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -105,6 +106,10 @@ STATE_FINGERPRINT_TEXT_SUFFIXES = {
     ".txt",
     ".xml",
 }
+SITEMAP_BLOCK_RE = re.compile(r"<url>\s*.*?</url>", re.I | re.S)
+SITEMAP_DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
+SITEMAP_HOSTS = {"55810.com", "www.55810.com"}
+GIT_DATE_MARKER = "__CANDY_COMMIT_DATE__"
 
 
 @dataclass(frozen=True)
@@ -118,6 +123,12 @@ class TextRecord:
     required_missing: tuple[str, ...]
     image_refs: tuple[str, ...]
     source_format: str
+
+
+@dataclass(frozen=True)
+class SitemapEntry:
+    url: str
+    lastmod: str
 
 
 def rel(path: Path) -> str:
@@ -153,6 +164,209 @@ def git_value(*args: str) -> str:
         return result.stdout.strip()
     except (OSError, subprocess.CalledProcessError):
         return "UNVERIFIED"
+
+
+def git_output(repo_root: Path, *args: str) -> str | None:
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(repo_root), *args],
+            check=True,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+        )
+        return result.stdout
+    except (OSError, subprocess.CalledProcessError):
+        return None
+
+
+def sitemap_entries(source: str) -> list[SitemapEntry]:
+    entries: list[SitemapEntry] = []
+    for block in SITEMAP_BLOCK_RE.findall(source):
+        loc_match = re.search(r"<loc>\s*([^<]+?)\s*</loc>", block, re.I | re.S)
+        if not loc_match:
+            entries.append(SitemapEntry("", ""))
+            continue
+        lastmod_match = re.search(r"<lastmod>\s*([^<]+?)\s*</lastmod>", block, re.I | re.S)
+        entries.append(
+            SitemapEntry(
+                html.unescape(loc_match.group(1)).strip(),
+                lastmod_match.group(1).strip() if lastmod_match else "",
+            )
+        )
+    return entries
+
+
+def sitemap_source_rel(url: str) -> str | None:
+    parsed = urlparse(url)
+    if parsed.scheme.lower() != "https" or parsed.netloc.lower() not in SITEMAP_HOSTS:
+        return None
+    path = parsed.path.rstrip("/")
+    if not path:
+        stem = "index"
+    else:
+        if path.count("/") != 1 or Path(path).suffix.lower() != ".php":
+            return None
+        stem = Path(path).stem
+    return f"HP/source/{stem}.html"
+
+
+def source_lastmod_dates(
+    source_rels: set[str],
+    repo_root: Path = REPO_ROOT,
+    today: str | None = None,
+) -> dict[str, str]:
+    if not source_rels:
+        return {}
+    ordered = sorted(source_rels)
+    history = git_output(
+        repo_root,
+        "log",
+        f"--format={GIT_DATE_MARKER}%cs",
+        "--name-only",
+        "--",
+        *ordered,
+    )
+    if history is None:
+        return {path: "UNVERIFIED" for path in ordered}
+
+    dates: dict[str, str] = {}
+    commit_date = ""
+    for raw_line in history.splitlines():
+        line = raw_line.strip()
+        if line.startswith(GIT_DATE_MARKER):
+            commit_date = line.removeprefix(GIT_DATE_MARKER)
+        elif line in source_rels and line not in dates and SITEMAP_DATE_RE.fullmatch(commit_date):
+            dates[line] = commit_date
+
+    dirty: set[str] = set()
+    commands = (
+        ("diff", "--name-only", "--no-renames", "--", *ordered),
+        ("diff", "--cached", "--name-only", "--no-renames", "--", *ordered),
+        ("ls-files", "--others", "--exclude-standard", "--", *ordered),
+    )
+    for command in commands:
+        output = git_output(repo_root, *command)
+        if output is None:
+            return {path: "UNVERIFIED" for path in ordered}
+        dirty.update(line.strip() for line in output.splitlines() if line.strip() in source_rels)
+
+    dirty_date = today or date.today().isoformat()
+    for path in dirty:
+        dates[path] = dirty_date
+    return {path: dates.get(path, "UNVERIFIED") for path in ordered}
+
+
+def sitemap_lastmod_expectations(
+    source: str,
+    hp_root: Path = HP_ROOT,
+    repo_root: Path = REPO_ROOT,
+    today: str | None = None,
+) -> tuple[dict[str, str], list[str]]:
+    entries = sitemap_entries(source)
+    errors: list[str] = []
+    url_counts = Counter(entry.url for entry in entries)
+    for url, count in sorted(url_counts.items()):
+        if not url:
+            errors.append("sitemap loc missing")
+        elif count != 1:
+            errors.append(f"sitemap URL duplicate: {url}={count}")
+
+    source_by_url: dict[str, str] = {}
+    for entry in entries:
+        source_rel = sitemap_source_rel(entry.url)
+        if source_rel is None:
+            errors.append(f"sitemap URL cannot map to source: {entry.url or 'EMPTY'}")
+            continue
+        if not (hp_root.parent / source_rel).is_file():
+            errors.append(f"sitemap source missing: {entry.url} -> {source_rel}")
+            continue
+        source_by_url[entry.url] = source_rel
+
+    dates = source_lastmod_dates(set(source_by_url.values()), repo_root, today)
+    expectations: dict[str, str] = {}
+    for url, source_rel in source_by_url.items():
+        expected = dates.get(source_rel, "UNVERIFIED")
+        if not SITEMAP_DATE_RE.fullmatch(expected):
+            errors.append(f"sitemap source date unverified: {url} -> {source_rel}")
+            continue
+        expectations[url] = expected
+    return expectations, sorted(set(errors))
+
+
+def render_sitemap_lastmods(
+    source: str,
+    expectations: dict[str, str],
+) -> tuple[str, list[tuple[str, str, str]]]:
+    invalid_dates = [
+        f"{url}={value}"
+        for url, value in expectations.items()
+        if not SITEMAP_DATE_RE.fullmatch(value)
+    ]
+    if invalid_dates:
+        raise ValueError("invalid sitemap lastmod expectation: " + ",".join(sorted(invalid_dates)))
+    applied: Counter[str] = Counter()
+    changes: list[tuple[str, str, str]] = []
+
+    def replace_block(match: re.Match[str]) -> str:
+        block = match.group(0)
+        loc_match = re.search(r"<loc>\s*([^<]+?)\s*</loc>", block, re.I | re.S)
+        if not loc_match:
+            return block
+        url = html.unescape(loc_match.group(1)).strip()
+        expected = expectations.get(url)
+        if expected is None:
+            return block
+        applied[url] += 1
+        lastmod_match = re.search(r"<lastmod>\s*([^<]+?)\s*</lastmod>", block, re.I | re.S)
+        actual = lastmod_match.group(1).strip() if lastmod_match else ""
+        if actual == expected:
+            return block
+        changes.append((url, actual or "MISSING", expected))
+        if lastmod_match:
+            return (
+                block[: lastmod_match.start(1)]
+                + expected
+                + block[lastmod_match.end(1) :]
+            )
+        return re.sub(
+            r"(</loc>)",
+            rf"\1\n    <lastmod>{expected}</lastmod>",
+            block,
+            count=1,
+            flags=re.I,
+        )
+
+    rendered = SITEMAP_BLOCK_RE.sub(replace_block, source)
+    invalid = [url for url in expectations if applied[url] != 1]
+    if invalid:
+        raise ValueError("sitemap expectation match count invalid: " + ",".join(sorted(invalid)))
+    return rendered, changes
+
+
+def sitemap_lastmod_command(write_changes: bool) -> int:
+    sitemap_path = HP_ROOT / "sitemap.xml"
+    source = read_utf8(sitemap_path)
+    expectations, errors = sitemap_lastmod_expectations(source)
+    if errors:
+        for error in errors:
+            print(f"SITEMAP_LASTMOD_ERROR={error}", file=sys.stderr)
+        print(f"SITEMAP_LASTMOD=FAIL errors={len(errors)}", file=sys.stderr)
+        return 1
+    try:
+        rendered, changes = render_sitemap_lastmods(source, expectations)
+    except ValueError as exc:
+        print(f"SITEMAP_LASTMOD=FAIL error={exc}", file=sys.stderr)
+        return 1
+    mode = "SYNC" if write_changes else "PREVIEW"
+    if write_changes and changes:
+        atomic_write(sitemap_path, rendered)
+    print(
+        f"SITEMAP_LASTMOD={mode}_OK urls={len(expectations)} "
+        f"changed={len(changes)} unchanged={len(expectations) - len(changes)}"
+    )
+    return 0
 
 
 def generation_base_head() -> tuple[str, str]:
@@ -325,6 +539,57 @@ def normalize_asset_ref(
     return (base.parent / cleaned).resolve()
 
 
+def meta_property_values(source: str, property_name: str) -> list[str]:
+    values: list[str] = []
+    for tag in re.findall(r"<meta\b[^>]*>", source, re.I):
+        property_match = re.search(
+            r'\bproperty\s*=\s*(["\'])(.*?)\1',
+            tag,
+            re.I | re.S,
+        )
+        if not property_match or property_match.group(2).strip().lower() != property_name.lower():
+            continue
+        content_match = re.search(
+            r'\bcontent\s*=\s*(["\'])(.*?)\1',
+            tag,
+            re.I | re.S,
+        )
+        values.append(html.unescape(content_match.group(2)).strip() if content_match else "")
+    return values
+
+
+def ogp_validation_issues(source: str, hp_root: Path = HP_ROOT) -> list[str]:
+    required = ("og:title", "og:url", "og:image", "og:description")
+    values = {name: meta_property_values(source, name) for name in required}
+    missing = [name for name, items in values.items() if not items or not items[0]]
+    issues = ["ogp_missing=" + ",".join(missing)] if missing else []
+
+    image_values = values["og:image"]
+    if len(image_values) > 1:
+        issues.append(f"og_image_count={len(image_values)}")
+    if not image_values or not image_values[0]:
+        return issues
+    if re.fullmatch(r"rep\d+eot", image_values[0]):
+        return issues
+
+    parsed = urlparse(image_values[0])
+    if parsed.scheme.lower() != "https" or not parsed.netloc:
+        issues.append("og_image_not_absolute_https")
+        return issues
+    if parsed.netloc.lower() not in {"55810.com", "www.55810.com"}:
+        return issues
+
+    target = (hp_root / parsed.path.lstrip("/")).resolve()
+    try:
+        target.relative_to(hp_root.resolve())
+    except ValueError:
+        issues.append("og_image_path_outside_hp")
+    else:
+        if not target.is_file():
+            issues.append(f"og_image_missing={parsed.path}")
+    return issues
+
+
 def asset_references() -> tuple[dict[Path, set[Path]], dict[Path, set[Path]]]:
     referenced_by: dict[Path, set[Path]] = defaultdict(set)
     missing_by: dict[Path, set[Path]] = defaultdict(set)
@@ -438,7 +703,8 @@ def collect() -> dict[str, object]:
     dataset_base = read_utf8(base_path) if base_path.is_file() else ""
     sitemap_path = HP_ROOT / "sitemap.xml"
     sitemap = read_utf8(sitemap_path) if sitemap_path.is_file() else ""
-    sitemap_urls = set(re.findall(r"<loc>\s*([^<]+)\s*</loc>", sitemap, re.I))
+    sitemap_records = sitemap_entries(sitemap)
+    sitemap_expectations, sitemap_errors = sitemap_lastmod_expectations(sitemap)
     text_records = parse_text_records()
     texts_by_key: dict[tuple[str, str], list[TextRecord]] = defaultdict(list)
     for record in text_records:
@@ -483,7 +749,22 @@ def collect() -> dict[str, object]:
                 if list_path.is_file()
                 else 0
             )
-        sitemap_count = sum(1 for url in sitemap_urls if urlparse(url).path.rstrip("/") in {f"/{stem}.php", "" if stem == "index" else "__none__"})
+        expected_sitemap_paths = {
+            f"/{stem}.php",
+            "" if stem == "index" else "__none__",
+        }
+        matching_sitemap = [
+            entry
+            for entry in sitemap_records
+            if urlparse(entry.url).path.rstrip("/") in expected_sitemap_paths
+        ]
+        sitemap_count = len(matching_sitemap)
+        sitemap_lastmod = matching_sitemap[0].lastmod if sitemap_count == 1 else "UNVERIFIED"
+        expected_sitemap_lastmod = (
+            sitemap_expectations.get(matching_sitemap[0].url, "UNVERIFIED")
+            if sitemap_count == 1
+            else "UNVERIFIED"
+        )
         image_status, images, missing_images = source_image_state(source_path if source_exists else None)
         text_matches = texts_by_key.get((category, slug), []) if detail else []
         special = stem in SPECIAL_STEMS or not source_exists
@@ -516,6 +797,8 @@ def collect() -> dict[str, object]:
                 "template": HP_ROOT / "source" / f"template_kagoshima-deliveryhealth-{category}.html" if detail else None,
                 "list_count": list_count,
                 "sitemap_count": sitemap_count,
+                "sitemap_lastmod": sitemap_lastmod,
+                "expected_sitemap_lastmod": expected_sitemap_lastmod,
                 "incoming": incoming[stem],
                 "image_status": image_status,
                 "images": images,
@@ -536,8 +819,7 @@ def collect() -> dict[str, object]:
         robots = first_match(source, r'<meta\s+name=["\']robots["\'][^>]+content=["\']([^"\']*)', re.I)
         canonical = str(page["canonical"])
         h1_count = len(page["h1_values"])
-        og_required = ("og:title", "og:url", "og:image", "og:description")
-        og_missing = [name for name in og_required if not re.search(rf'<meta\s+property=["\']{re.escape(name)}["\']', source, re.I)]
+        ogp_issues = ogp_validation_issues(source)
         json_objects, json_errors = extract_json(source)
         breadcrumb_count = sum(json_type_count(obj, "BreadcrumbList") for obj in json_objects)
         faq_schema_count = sum(json_type_count(obj, "FAQPage") for obj in json_objects)
@@ -571,13 +853,29 @@ def collect() -> dict[str, object]:
         seo_helper = page["stem"] in SEO_HELPER_STEMS
         seo_admin = page["stem"] in SEO_ADMIN_STEMS
         canonical_path = urlparse(canonical).path.rstrip("/") if canonical else ""
+        if page["sitemap_count"] == 1:
+            if page["expected_sitemap_lastmod"] == "UNVERIFIED":
+                sitemap_status = "UNVERIFIED"
+            elif (
+                SITEMAP_DATE_RE.fullmatch(str(page["sitemap_lastmod"]))
+                and page["sitemap_lastmod"] == page["expected_sitemap_lastmod"]
+            ):
+                sitemap_status = "OK"
+            else:
+                sitemap_status = "ISSUE"
+        else:
+            sitemap_status = (
+                "NOT_APPLICABLE"
+                if page["stem"] in SPECIAL_STEMS and page["sitemap_count"] == 0
+                else "ISSUE"
+            )
         checks = {
             "title": "OK" if title else "ISSUE" if page["source"] else "UNVERIFIED",
             "description": "OK" if description else "ISSUE" if page["source"] else "UNVERIFIED",
             "canonical": "NOT_APPLICABLE" if seo_helper else "OK" if canonical else "ISSUE" if page["source"] else "UNVERIFIED",
             "robots": "OK" if robots else "ISSUE" if page["source"] else "UNVERIFIED",
             "h1": "NOT_APPLICABLE" if seo_helper else "OK" if h1_count == 1 else "ISSUE" if page["source"] else "UNVERIFIED",
-            "ogp": "NOT_APPLICABLE" if seo_helper else "OK" if not og_missing and page["source"] else "ISSUE" if page["source"] else "UNVERIFIED",
+            "ogp": "NOT_APPLICABLE" if seo_helper else "OK" if not ogp_issues and page["source"] else "ISSUE" if page["source"] else "UNVERIFIED",
             "json_ld": "NOT_APPLICABLE" if seo_helper else "OK" if json_objects and not json_errors else "ISSUE" if page["source"] else "UNVERIFIED",
             "breadcrumb": "NOT_APPLICABLE" if seo_helper else "OK" if breadcrumb_count else "NOT_APPLICABLE" if page["category"] in {"top", "system"} else "ISSUE",
             "faq": (
@@ -590,7 +888,7 @@ def collect() -> dict[str, object]:
             "item_list": "OK" if item_count else "NOT_APPLICABLE",
             "internal_links": "NOT_APPLICABLE" if seo_admin else "ISSUE" if missing_internal else "OK" if internal_refs else "NOT_APPLICABLE",
             "image_alt": "ISSUE" if img_alt_missing else "OK" if img_tags else "NOT_APPLICABLE",
-            "sitemap": "OK" if page["sitemap_count"] == 1 else "NOT_APPLICABLE" if page["stem"] in SPECIAL_STEMS else "ISSUE",
+            "sitemap": sitemap_status,
             "url_canonical": "NOT_APPLICABLE" if seo_helper else "OK" if canonical and (canonical_path == expected_path or (page["stem"] == "girls" and canonical == "rep03010092eot")) else "ISSUE" if canonical else "UNVERIFIED",
             "duplicate_title": "ISSUE" if title and title_counts[title] > 1 else "OK" if title else "UNVERIFIED",
             "duplicate_canonical": "NOT_APPLICABLE" if seo_helper else "ISSUE" if canonical and canonical_counts[canonical] > 1 else "OK" if canonical else "UNVERIFIED",
@@ -605,6 +903,17 @@ def collect() -> dict[str, object]:
             issues.extend(json_errors)
         if missing_internal and not seo_admin:
             issues.append("missing_links=" + ",".join(sorted(set(missing_internal))))
+        if (
+            sitemap_status == "ISSUE"
+            and page["sitemap_count"] == 1
+            and page["expected_sitemap_lastmod"] != "UNVERIFIED"
+        ):
+            issues.append(
+                "sitemap_lastmod="
+                f"{page['sitemap_lastmod']}->{page['expected_sitemap_lastmod']}"
+            )
+        if not seo_helper:
+            issues.extend(ogp_issues)
         seo_rows.append(
             {
                 "page_id": page["page_id"],
@@ -773,6 +1082,7 @@ def collect() -> dict[str, object]:
         "duplicate_groups": duplicate_groups,
         "public_candidates": public_candidates,
         "dataset_base": dataset_base,
+        "sitemap_errors": sitemap_errors,
         "branch": git_value("branch", "--show-current"),
         "head": generation_head,
         "current_head": git_value("rev-parse", "HEAD"),
@@ -1168,6 +1478,12 @@ def check(
         current = read_utf8(path) if path.is_file() else None
         if document_differs(current, expected, strict_metadata):
             drift.append(rel(path))
+    sitemap_failures = [
+        str(row["page_id"])
+        for row in data.get("seo", [])
+        if row.get("sitemap") == "ISSUE"
+    ]
+    sitemap_errors = [str(error) for error in data.get("sitemap_errors", [])]
     if target:
         matches = [page for page in data["pages"] if page["slug"] == target or page["stem"] == target]
         candidates = [row for row in data["upcoming"] if row["slug"] == target]
@@ -1179,6 +1495,13 @@ def check(
         if not matches and not candidates:
             print("CHECK=FAIL target_not_found", file=sys.stderr)
             return 2
+    if sitemap_errors or sitemap_failures:
+        details = sitemap_errors + [f"page={page_id}" for page_id in sitemap_failures]
+        print(
+            "CHECK=FAIL sitemap_lastmod_or_structure=" + ",".join(details),
+            file=sys.stderr,
+        )
+        return 1
     if drift:
         label = "metadata_or_content_drift" if strict_metadata else "content_drift"
         print(f"CHECK=FAIL {label}=" + ",".join(drift), file=sys.stderr)
@@ -1193,7 +1516,17 @@ def check(
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Audit and generate deterministic CANDY site-state documents")
-    parser.add_argument("command", choices=("audit", "preview", "write", "check"))
+    parser.add_argument(
+        "command",
+        choices=(
+            "audit",
+            "preview",
+            "write",
+            "check",
+            "preview-sitemap-lastmod",
+            "sync-sitemap-lastmod",
+        ),
+    )
     parser.add_argument("--target", help="during check, limit output to a slug or public PHP stem")
     parser.add_argument(
         "--strict-metadata",
@@ -1203,8 +1536,12 @@ def main() -> int:
     args = parser.parse_args()
     if args.target and args.command != "check":
         parser.error("--target may be used only with check")
-    if args.strict_metadata and args.command == "audit":
+    if args.strict_metadata and args.command not in {"preview", "write", "check"}:
         parser.error("--strict-metadata may be used only with preview, write, or check")
+    if args.command == "preview-sitemap-lastmod":
+        return sitemap_lastmod_command(False)
+    if args.command == "sync-sitemap-lastmod":
+        return sitemap_lastmod_command(True)
     data = collect()
     if args.command == "audit":
         return audit(data)

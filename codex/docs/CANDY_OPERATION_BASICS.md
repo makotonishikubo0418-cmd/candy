@@ -69,9 +69,16 @@ Do not create mechanical `.before` copies beside Git-tracked files. Use Git and 
 After changing an HP page, PHP, source, dataset, CSS, JavaScript, image, or SEO, update the generated documents and verify agreement before staging.
 
 ```powershell
+codex\scripts\candy-site-state.cmd preview-sitemap-lastmod
+codex\scripts\candy-site-state.cmd sync-sitemap-lastmod
 codex\scripts\candy-site-state.cmd write
 codex\scripts\candy-site-state.cmd check
 ```
+
+Sitemap synchronization changes only `lastmod` values whose matching
+`HP/source/<stem>.html` Git change date differs. Review the sitemap diff before
+staging. A source mapping, duplicate URL, or Git-date failure is a STOP
+condition.
 
 Then run at minimum:
 

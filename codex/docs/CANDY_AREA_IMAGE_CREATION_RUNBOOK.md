@@ -362,6 +362,8 @@ When first installation is authorized:
 For integrated work:
 
 ```powershell
+codex\scripts\candy-site-state.cmd preview-sitemap-lastmod
+codex\scripts\candy-site-state.cmd sync-sitemap-lastmod
 codex\scripts\candy-site-state.cmd write
 codex\scripts\candy-site-state.cmd check --target "<slug>"
 ```

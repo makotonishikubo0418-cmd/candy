@@ -381,6 +381,27 @@ def value_after_prefix(value: str, prefix: str) -> str:
     return match.group(1).strip() if match else value.strip()
 
 
+def expected_og_image_url(image1: str) -> str:
+    parsed = urlparse(image1.strip())
+    if parsed.scheme or parsed.netloc or parsed.fragment:
+        raise AreaToolError(f"img_1はサイト内の相対画像パスで指定してください: {image1}")
+    relative = parsed.path.removeprefix("./").lstrip("/")
+    if not relative or re.search(r"(?:^|/)\.\.(?:/|$)", relative):
+        raise AreaToolError(f"img_1の画像パスが不正です: {image1}")
+    query = f"?{parsed.query}" if parsed.query else ""
+    return f"https://www.55810.com/{relative}{query}"
+
+
+def ensure_og_image_matches(og_image: str, image1: str) -> str:
+    expected = expected_og_image_url(image1)
+    if og_image != expected:
+        raise AreaToolError(
+            "imageとimg_1の公開URLが一致しません: "
+            f"expected={expected} actual={og_image}"
+        )
+    return expected
+
+
 def split_scenes(lines: list[str]) -> list[list[str]]:
     starts = [index for index, value in enumerate(lines) if SCENE_RE.fullmatch(value.strip())]
     if not starts:
@@ -492,6 +513,7 @@ def parse_area_text(path: Path) -> AreaData:
         errors.append("地域名")
     if errors:
         raise AreaToolError("必須項目不足: " + ", ".join(errors))
+    ensure_og_image_matches(og_image, image1)
 
     shops: list[ShopRequest] = []
     shop_heading = ""
@@ -1058,6 +1080,13 @@ def validate_rendered(
         image_path = hp_root / relative.removeprefix("./")
         if not image_path.is_file():
             errors.append(f"画像なし: {relative}")
+    try:
+        expected_og_image = expected_og_image_url(data.image1)
+    except AreaToolError as exc:
+        errors.append(str(exc))
+    else:
+        if f'<meta property="og:image" content="{hattr(expected_og_image)}">' not in source:
+            errors.append("og:image不整合")
     if f'<link rel="canonical" href="{hattr(data.canonical)}">' not in source:
         errors.append("canonical不整合")
     if f"<title>{htext(data.title)}</title>" not in source:

@@ -44,6 +44,6 @@
 - The NAS is storage-only for `Backup/`. Do not run Git operations there.
 - NAS `Backup/` is for reference and MUST NOT be used as the basis for a current specification.
 - Internal path migration under `codex/scripts/` and read-only dry runs are verified. Page generation and publish operations remain subject to the applicable runbook and explicit authority.
-- After an HP change, include generated-document synchronization in the same work unit by running `candy-site-state write` and `check`.
+- After an HP change, include sitemap-date and generated-document synchronization in the same work unit by running `candy-site-state preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`.
 - Do not create `HP/HP/`.
 - Do not treat generation, publication, input, management documents, and backups as the same responsibility.

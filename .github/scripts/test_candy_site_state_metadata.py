@@ -12,6 +12,7 @@ if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 
 import candy_site_state as site_state
+import candy_area_page as area_page
 
 
 FINGERPRINT = "a" * 64
@@ -107,10 +108,111 @@ def assert_check_preview_and_write_modes() -> None:
             site_state.GENERATED_DIR = original_generated
 
 
+def assert_area_og_image_pair_is_enforced() -> None:
+    image1 = "./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-test_1.jpg"
+    expected = "https://www.55810.com/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-test_1.jpg"
+    assert area_page.ensure_og_image_matches(expected, image1) == expected
+    try:
+        area_page.ensure_og_image_matches(
+            "https://www.55810.com/imgHtml/new_202601/kagoshima-deliveryhealth-area-test_1.jpg",
+            image1,
+        )
+    except area_page.AreaToolError as exc:
+        assert "imageとimg_1の公開URLが一致しません" in str(exc)
+    else:
+        raise AssertionError("area OGP mismatch was accepted")
+
+
+def assert_site_state_checks_og_image_target() -> None:
+    def source(image: str) -> str:
+        return (
+            '<meta property="og:title" content="test">\n'
+            '<meta property="og:url" content="https://www.55810.com/test.php">\n'
+            f'<meta property="og:image" content="{image}">\n'
+            '<meta property="og:description" content="test">\n'
+        )
+
+    with tempfile.TemporaryDirectory() as temp_dir:
+        hp_root = Path(temp_dir)
+        image = hp_root / "imgHtml" / "new_202601" / "area" / "test.jpg"
+        image.parent.mkdir(parents=True)
+        image.write_bytes(b"jpeg")
+        valid = "https://www.55810.com/imgHtml/new_202601/area/test.jpg"
+        missing = "https://www.55810.com/imgHtml/new_202601/test.jpg"
+        assert site_state.ogp_validation_issues(source(valid), hp_root) == []
+        assert site_state.ogp_validation_issues(source(missing), hp_root) == [
+            "og_image_missing=/imgHtml/new_202601/test.jpg"
+        ]
+        assert site_state.ogp_validation_issues(source("./imgHtml/new_202601/area/test.jpg"), hp_root) == [
+            "og_image_not_absolute_https"
+        ]
+        assert site_state.ogp_validation_issues(source("rep01010007eot"), hp_root) == []
+
+
+def assert_sitemap_lastmod_rendering_is_exact() -> None:
+    root_url = "https://www.55810.com"
+    area_url = "https://www.55810.com/area.php"
+    source = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        "  <url>\n"
+        f"    <loc>{root_url}</loc>\n"
+        "    <lastmod>2026-03-03</lastmod>\n"
+        "    <changefreq>weekly</changefreq>\n"
+        "  </url>\n"
+        "  <url>\n"
+        f"    <loc>{area_url}</loc>\n"
+        "    <lastmod>2026-07-25</lastmod>\n"
+        "    <changefreq>weekly</changefreq>\n"
+        "  </url>\n"
+        "</urlset>\n"
+    )
+    rendered, changes = site_state.render_sitemap_lastmods(
+        source,
+        {
+            root_url: "2026-07-25",
+            area_url: "2026-07-25",
+        },
+    )
+    assert changes == [(root_url, "2026-03-03", "2026-07-25")]
+    assert rendered.count("<lastmod>2026-07-25</lastmod>") == 2
+    assert "<changefreq>weekly</changefreq>" in rendered
+    assert site_state.sitemap_source_rel(root_url) == "HP/source/index.html"
+    assert site_state.sitemap_source_rel(area_url) == "HP/source/area.html"
+    assert site_state.sitemap_source_rel("http://www.55810.com/area.php") is None
+
+
+def assert_sitemap_lastmod_rejects_ambiguous_or_invalid_input() -> None:
+    url = "https://www.55810.com/area.php"
+    duplicate = (
+        "<urlset>\n"
+        f"<url><loc>{url}</loc><lastmod>2026-03-03</lastmod></url>\n"
+        f"<url><loc>{url}</loc><lastmod>2026-03-03</lastmod></url>\n"
+        "</urlset>\n"
+    )
+    try:
+        site_state.render_sitemap_lastmods(duplicate, {url: "2026-07-25"})
+    except ValueError as exc:
+        assert "match count invalid" in str(exc)
+    else:
+        raise AssertionError("duplicate sitemap URL was accepted")
+
+    try:
+        site_state.render_sitemap_lastmods(duplicate, {url: "2026/07/25"})
+    except ValueError as exc:
+        assert "invalid sitemap lastmod expectation" in str(exc)
+    else:
+        raise AssertionError("invalid sitemap lastmod date was accepted")
+
+
 def main() -> None:
     assert_metadata_is_not_content_drift()
     assert_fingerprint_is_deterministic()
     assert_check_preview_and_write_modes()
+    assert_area_og_image_pair_is_enforced()
+    assert_site_state_checks_og_image_target()
+    assert_sitemap_lastmod_rendering_is_exact()
+    assert_sitemap_lastmod_rejects_ambiguous_or_invalid_input()
     print("SITE_STATE_METADATA_TESTS: passed")
 
 

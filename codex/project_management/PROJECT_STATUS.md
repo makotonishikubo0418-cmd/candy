@@ -2,7 +2,7 @@
 
 - Purpose: Provide one location for the overall plan, current state, problems, and next work
 - Status: canonical document
-- Updated: 2026-07-24
+- Updated: 2026-07-25
 
 ## 1. Current State
 
@@ -25,8 +25,8 @@
 - Root `AGENTS.md` and `codex/README.md` are the entry points. HP work routes from `HP/AGENTS.md` to the category runbook.
 - Page structure, code and asset structure, and the common SEO specification are separated into stable canonical documents.
 - Current page, production-candidate, code/asset, and SEO state can be regenerated into four documents with `candy-site-state`.
-- `audit`, `preview`, `write`, `check`, and `check --target` are implemented as the standard entry points.
-- The pre-stage gate regenerates and validates the generated documents after area, hotel, and blog changes.
+- `audit`, `preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `preview`, `write`, `check`, and `check --target` are implemented as the standard entry points.
+- The pre-stage gate synchronizes sitemap `lastmod`, regenerates the generated documents, and validates both after area, hotel, and blog changes.
 - Hotel production now separates staff-completed Text from Phase-prepared Text, validates legacy formats before conversion, and manages accepted/public image pairs through one canonical lifecycle specification.
 - Legacy documents that no longer receive updates are physically isolated in NAS `Backup/` and removed from the normal work route.
 
@@ -46,7 +46,7 @@
 - At the start of work, run `git fetch origin` and `git status --short --branch`. When behind, pull safely before editing.
 - Dirty state, HEAD, Actions, HTTP, database, and browser results are volatile and MUST NOT be stored as fixed values in this document.
 - Commit, Push, Actions, production, and database operations require explicit user instruction.
-- Before staging an HP change, run generated-document `write` and `check`, then treat the page changes and required management documents as one commit candidate.
+- Before staging an HP change, run `preview-sitemap-lastmod`, `sync-sitemap-lastmod`, generated-document `write`, and `check`, then treat the page changes and required management documents as one commit candidate.
 
 ## 5. Candidate Next Actions
 

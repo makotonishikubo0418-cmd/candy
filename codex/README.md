@@ -78,14 +78,14 @@ At the start of work, run `git fetch origin` and `git status --short --branch`. 
 | Replace an existing approved area-image pair under the same canonical filenames | `AGENTS.md` → `codex/README.md` → `HP/AGENTS.md` → `CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md` → actual target files |
 | Replace another existing public static asset at the same path | `AGENTS.md` → `codex/README.md` → `HP/AGENTS.md` → `CANDY_MASTER_DOC_INDEX.md` → `CANDY_OPERATION_BASICS.md` → `CANDY_PRODUCTION_MIGRATION_MASTER.md` |
 | SEO investigation or change | `CANDY_SEO_SPEC.md` → `generated/CANDY_SEO_STATUS.md` → category specification |
-| After a page addition or change | `codex\scripts\candy-site-state.cmd write` → `check` |
+| After a page addition or change | `codex\scripts\candy-site-state.cmd preview-sitemap-lastmod` → `sync-sitemap-lastmod` → `write` → `check` |
 | Deletion, movement, or bulk cleanup | `AGENTS.md` → `codex/README.md` → `codex/project_management/SAFETY_PROTOCOL.md` |
 
 ## 6. Current Execution Restrictions
 
 - Internal path migration under `codex/scripts/` and read-only validation for area, hotel, and blog are complete. Verify content and authority separately before actual page generation or publish operations.
-- `audit`, `preview`, and `check` in `candy-site-state` are read-only. `write` modifies only the four documents under `codex/docs/generated/`.
-- A task that changes an HP page, PHP, source, dataset, CSS, JavaScript, image, or SEO MUST run `write` and `check` before staging.
+- `audit`, `preview`, `preview-sitemap-lastmod`, and `check` in `candy-site-state` are read-only. `sync-sitemap-lastmod` modifies only `HP/sitemap.xml` `lastmod` values, and `write` modifies only the four documents under `codex/docs/generated/`.
+- A task that changes an HP page, PHP, source, dataset, CSS, JavaScript, image, or SEO MUST run `preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check` before staging.
 - Publish, Commit, Push, Actions, production, and database operations still require explicit instruction. Permission to update management documents does not authorize those operations.
 
 ## 7. Duplicate-Source Prohibitions

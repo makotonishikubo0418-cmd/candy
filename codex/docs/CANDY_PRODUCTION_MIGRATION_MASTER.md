@@ -54,7 +54,7 @@ Deploy script:
 - After Push, the same job generates a plan without FTP, determines automatic approval values, validates them before FTP, and deploys to production.
 - Manual `workflow_dispatch` preview/deploy remains an exception route for incident investigation and reruns.
 - The deploy job uses the `candy-production` environment.
-- Preview times out after five minutes; deploy after ten minutes.
+- Preview times out after five minutes; deploy after 30 minutes.
 - Concurrency prohibits simultaneous deploys.
 - Use the GitHub API as the normal Actions start and monitoring route; do not depend on browser UI or an expired GitHub CLI session.
 
