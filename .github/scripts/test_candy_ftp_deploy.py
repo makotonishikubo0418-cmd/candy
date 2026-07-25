@@ -269,7 +269,6 @@ def assert_workflow_contract() -> None:
         '"codex/scripts/candy_site_state.py"',
         '"codex/scripts/candy-site-state.cmd"',
         '"!HP/codex/**"',
-        '"!HP/AGENTS.md"',
         '"!HP/Text_area_data/**"',
         "github.event.before",
         "github.sha",

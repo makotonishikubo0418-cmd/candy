@@ -11,7 +11,6 @@ For a normal existing area-image replacement, read only:
 
 ```text
 AGENTS.md
-  -> HP/AGENTS.md
   -> CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md
   -> actual target image pair and controlled page references
 ```

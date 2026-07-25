@@ -2,7 +2,7 @@
 
 - Purpose: Prevent damage to the working repository during deletion, movement, bulk cleanup, or Git recovery
 - Status: canonical document
-- Updated: 2026-07-24
+- Updated: 2026-07-25
 
 ## 1. Scope
 
@@ -42,7 +42,6 @@ Unless explicitly included in the authorized target list, the following targets 
 | `codex/project_management/` | Canonical project-management source |
 | `codex/docs/` | Canonical HP production specifications |
 | `codex/scripts/` | Generation, validation, and publishing tools |
-| `HP/AGENTS.md` | HP work route |
 | `HP/index.php` | Actual site entry point |
 | `Text_area_data/`, `Text_blog_data/`, and `Text_hotel_data/` | Page-production inputs |
 | NAS `Backup/` | Verification location for legacy and isolated data. It is not a Git working repository |
@@ -66,7 +65,7 @@ Before deletion, movement, or bulk cleanup, classify every target as follows:
 Before execution, verify at minimum:
 
 1. The Git working repository is `C:\Codex\Candy`. The NAS is storage-only; do not run Git operations there.
-2. Evidence has been provided for reading `AGENTS.md`, `codex/README.md`, and the required management document.
+2. Evidence has been provided for reading `AGENTS.md` and the required management documents named by its applicable Section 2 route.
 3. The target is reserved in `codex/project_management/TASK_RESERVATIONS.md`.
 4. `git fetch origin` and `git status --short --branch` have confirmed Git state. Pull before editing when behind.
 5. The target list is fixed.
@@ -81,7 +80,7 @@ Before execution, verify at minimum:
 - After staging, use `git diff --cached --name-status` to verify that no out-of-scope target is included.
 - Before Commit, `git diff --cached --check` MUST succeed.
 - Before Commit, review remaining changes with `git status --porcelain=v1 -uall`.
-- Before Push, verify the existence of `.git/HEAD`, `.git/config`, `.git/index`, `AGENTS.md`, `codex/README.md`, `HP/AGENTS.md`, and `HP/index.php`.
+- Before Push, verify the existence of `.git/HEAD`, `.git/config`, `.git/index`, root `AGENTS.md`, `codex/README.md`, and `HP/index.php`.
 - After Push, verify the GitHub commit with `git ls-remote origin refs/heads/main`.
 
 ## 7. Git Damage STOP Conditions
@@ -94,7 +93,7 @@ STOP when any of the following occurs:
 - `git status` reports `not a git repository`.
 - HEAD is unknown.
 - The branch unexpectedly becomes `master`.
-- Any of `AGENTS.md`, `codex/README.md`, `HP/AGENTS.md`, or `HP/index.php` is missing.
+- Any of root `AGENTS.md`, `codex/README.md`, or `HP/index.php` is missing.
 
 After stopping, report the affected scope, latest GitHub commit, available isolated copy, and recovery proposal. Do not perform recovery without explicit approval.
 

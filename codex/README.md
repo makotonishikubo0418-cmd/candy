@@ -16,13 +16,16 @@ This README is the entry point for the management documents under `C:\Codex\Cand
 
 At the start of work, run `git fetch origin` and `git status --short --branch`. If `main` is behind `origin/main`, pull before editing. Push only with explicit user instruction.
 
-## 2. Required Start
+## 2. Required Reading When Routed Here
 
-1. Root `AGENTS.md`
-2. This `codex/README.md`
-3. `codex/project_management/TASK_RESERVATIONS.md`
-4. Only the management document or HP runbook required for the current task
-5. `HP/AGENTS.md` for HP work
+Root `AGENTS.md` Section 2 is the sole authority for selecting the management
+documents required for a task. When that table routes work through this README:
+
+1. Read root `AGENTS.md`.
+2. Read this `codex/README.md`.
+3. Read only the additional documents named by the applicable `AGENTS.md` route.
+4. Before modification, deletion, staging, or coordination, check
+   `codex/project_management/TASK_RESERVATIONS.md` and reserve the exact scope.
 
 ## 3. Folder Responsibilities
 
@@ -57,29 +60,33 @@ At the start of work, run `git fetch origin` and `git status --short --branch`. 
 | Stable HP structure | `codex/docs/CANDY_HP_STRUCTURE_MAP.md`, `CANDY_CODE_FILE_STRUCTURE.md`, and `CANDY_SEO_SPEC.md` |
 | Current HP state | The four documents under `codex/docs/generated/` |
 
-## 5. Task Routes
+## 5. Operational Route Summary
+
+`AGENTS.md` Section 2 determines required reading. This table summarizes the
+next operational document after this README and does not add to or override
+that required-reading route.
 
 | Task | Required route |
 |---|---|
 | Management architecture change | `AGENTS.md` → `codex/README.md` → `codex/MANAGEMENT_SYSTEM_OVERVIEW.md` → `codex/project_management/DOCUMENT_RULES.md` |
-| Multi-Codex coordination | `AGENTS.md` → `codex/README.md` → `codex/project_management/TASK_RESERVATIONS.md` → `codex/project_management/CODEX_COMMUNICATION.md` |
-| Overall status review | `AGENTS.md` → `codex/README.md` → `codex/project_management/PROJECT_STATUS.md` |
-| HP page production | `AGENTS.md` → `codex/README.md` → `HP/AGENTS.md` → applicable runbook |
-| Legacy hotel Text inspection or conversion | `AGENTS.md` → `codex/README.md` → `HP/AGENTS.md` → `codex/docs/CANDY_HOTEL_TEXT_INPUT_CLASSIFICATION.md` → exact target Text |
-| Hotel production from a staff-completed Text | `AGENTS.md` → `codex/README.md` → `HP/AGENTS.md` → `codex/docs/CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md` → exact target Text → `CANDY_HOTEL_IMAGE_CREATION_SPEC.md` and `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md` only when `direct-check` returns `READY_FOR_IMAGES` |
-| Hotel identity, access, and content preparation through the Phase route | `AGENTS.md` → `codex/README.md` → `HP/AGENTS.md` → `codex/docs/CANDY_HOTEL_CONTENT_PREPARATION_RUNBOOK.md` → exact target Text |
-| Hotel-image creation and pre-acceptance validation | `AGENTS.md` → `HP/AGENTS.md` → `CANDY_HOTEL_IMAGE_CREATION_SPEC.md` → `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md` → exact target Text and image pair |
-| Hotel-image acceptance, storage, first local public installation, and publication-state management | `AGENTS.md` → `HP/AGENTS.md` → `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md` → exact target Text → accepted/public pair; use `CANDY_PRODUCTION_MIGRATION_MASTER.md` for existing same-name replacement or production recovery |
-| HP management-document update | `AGENTS.md` → `codex/README.md` → `HP/AGENTS.md` → `codex/docs/CANDY_MASTER_DOC_INDEX.md` |
+| Multi-Codex coordination | `AGENTS.md` → `codex/project_management/TASK_RESERVATIONS.md` → `codex/project_management/CODEX_COMMUNICATION.md` |
+| Overall status review | `AGENTS.md` → `codex/project_management/PROJECT_STATUS.md` |
+| HP page production | `AGENTS.md` → applicable runbook |
+| Legacy hotel Text inspection or conversion | `AGENTS.md` → `codex/docs/CANDY_HOTEL_TEXT_INPUT_CLASSIFICATION.md` → exact target Text |
+| Hotel production from a staff-completed Text | `AGENTS.md` → `codex/docs/CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md` → exact target Text → `CANDY_HOTEL_IMAGE_CREATION_SPEC.md` and `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md` only when `direct-check` returns `READY_FOR_IMAGES` |
+| Hotel identity, access, and content preparation through the Phase route | `AGENTS.md` → `codex/docs/CANDY_HOTEL_CONTENT_PREPARATION_RUNBOOK.md` → exact target Text |
+| Hotel-image creation and pre-acceptance validation | `AGENTS.md` → `CANDY_HOTEL_IMAGE_CREATION_SPEC.md` → `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md` → exact target Text and image pair |
+| Hotel-image acceptance, storage, first local public installation, and publication-state management | `AGENTS.md` → `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md` → exact target Text → accepted/public pair; use `CANDY_PRODUCTION_MIGRATION_MASTER.md` for existing same-name replacement or production recovery |
+| Management document or specification update | `AGENTS.md` → `codex/README.md` → `codex/MANAGEMENT_SYSTEM_OVERVIEW.md` → `codex/project_management/DOCUMENT_RULES.md` → canonical document being changed |
 | Current site-wide state | `CANDY_MASTER_DOC_INDEX.md` → `generated/CANDY_SITE_PAGE_LEDGER.md` |
 | Unbuilt pages and production candidates | `CANDY_MASTER_DOC_INDEX.md` → `generated/CANDY_UPCOMING_PAGES.md` → category queue/classification |
 | PHP, source, and dataset structure | `CANDY_CODE_FILE_STRUCTURE.md` → `generated/CANDY_CODE_ASSET_INVENTORY.md` |
 | CSS, JavaScript, and image investigation | `CANDY_CODE_FILE_STRUCTURE.md` → `generated/CANDY_CODE_ASSET_INVENTORY.md` |
-| Replace an existing approved area-image pair under the same canonical filenames | `AGENTS.md` → `codex/README.md` → `HP/AGENTS.md` → `CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md` → actual target files |
-| Replace another existing public static asset at the same path | `AGENTS.md` → `codex/README.md` → `HP/AGENTS.md` → `CANDY_MASTER_DOC_INDEX.md` → `CANDY_OPERATION_BASICS.md` → `CANDY_PRODUCTION_MIGRATION_MASTER.md` |
+| Replace an existing approved area-image pair under the same canonical filenames | `AGENTS.md` → `CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md` → actual target files |
+| Replace another existing public static asset at the same path | `AGENTS.md` → `CANDY_MASTER_DOC_INDEX.md` → `CANDY_OPERATION_BASICS.md` → `CANDY_PRODUCTION_MIGRATION_MASTER.md` |
 | SEO investigation or change | `CANDY_SEO_SPEC.md` → `generated/CANDY_SEO_STATUS.md` → category specification |
 | After a page addition or change | `codex\scripts\candy-site-state.cmd preview-sitemap-lastmod` → `sync-sitemap-lastmod` → `write` → `check` |
-| Deletion, movement, or bulk cleanup | `AGENTS.md` → `codex/README.md` → `codex/project_management/SAFETY_PROTOCOL.md` |
+| Deletion, movement, or bulk cleanup | `AGENTS.md` → `codex/project_management/SAFETY_PROTOCOL.md` → `codex/project_management/TASK_RESERVATIONS.md` |
 
 ## 6. Current Execution Restrictions
 
@@ -92,6 +99,6 @@ At the start of work, run `git fetch origin` and `git status --short --branch`. 
 
 - Do not duplicate a canonical management source at the local repository root, under `HP/`, or on the NAS.
 - Do not create `HP/HP/`.
-- Do not create `HP/README.md`. HP routing is centralized in `HP/AGENTS.md`.
+- Do not create `HP/README.md` or another `AGENTS.md` below the repository root. Root `AGENTS.md` routes HP work directly to the applicable canonical document under `codex/docs/`; read this README only when the applicable `AGENTS.md` route names it.
 - Do not use legacy documents in NAS `Backup/` as current specifications. Reconcile them with the local canonical source before use.
 - Do not mix specifications, current state, task history, and reports in one document.

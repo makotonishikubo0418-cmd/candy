@@ -81,7 +81,7 @@ acceptance, saving, installation, and presentation MUST NOT proceed.
 
 Before creating images:
 
-1. Read root `AGENTS.md`, `codex/README.md`, and `HP/AGENTS.md`.
+1. Read root `AGENTS.md`.
 2. Read this runbook, `CANDY_AREA_IMAGE_CREATION_SPEC.md`, and `CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md`.
 3. Run `git fetch origin` and `git status --short --branch`.
 4. Check `codex/project_management/TASK_RESERVATIONS.md`.

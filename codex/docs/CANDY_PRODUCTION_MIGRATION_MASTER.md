@@ -94,7 +94,6 @@ Primary exclusions verified from actual workflow/script:
 
 - `HP/index.php`
 - `HP/.htaccess` in every normal Push or general manual deployment
-- `HP/AGENTS.md`
 - `codex/`
 - `HP/log/`
 - `Text_area_data/`
@@ -231,7 +230,7 @@ Do not bulk-replace these before determining whether they are intended exception
 
 ## 8. Required Pre-Deployment Procedure
 
-1. Review root and HP `AGENTS.md`.
+1. Review root `AGENTS.md` and only the management documents named by its applicable Section 2 route.
 2. Verify branch, remote, status, HEAD, and `origin/main`.
 3. Check overlap between target and existing changes.
 4. Reconcile the planned work with related `.md` records.

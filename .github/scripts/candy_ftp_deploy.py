@@ -77,8 +77,6 @@ class DeleteTarget:
 def is_excluded(path: str, *, allow_htaccess: bool = False) -> bool:
     if path in PROTECTED_PATHS:
         return not (allow_htaccess and path == HTACCESS_PATH)
-    if path == "HP/AGENTS.md":
-        return True
     lower_path = path.lower()
     name = PurePosixPath(path).name.lower()
     if lower_path.endswith(".md"):
@@ -687,7 +685,6 @@ def self_test() -> None:
     assert is_excluded("HP/img/.photo.jpg.candy-backup-123")
     assert is_excluded("HP/archive.zip")
     assert is_excluded("HP/.env")
-    assert is_excluded("HP/AGENTS.md")
     assert is_excluded("HP/codex/example.txt")
     assert is_excluded("HP/log/example.log")
     assert is_excluded("HP/example.md")

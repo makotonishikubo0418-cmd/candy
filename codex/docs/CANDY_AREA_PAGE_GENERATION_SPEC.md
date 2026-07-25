@@ -7,7 +7,7 @@
 
 This is the canonical specification for generating area pages without damage and with a consistent structure.
 
-Use it for normal new-page generation. Development changes such as bug fixes, existing-feature changes, common-processing changes, and refactoring are out of scope and follow `AGENTS.md` and `HP/AGENTS.md`.
+Use it for normal new-page generation. Development changes such as bug fixes, existing-feature changes, common-processing changes, and refactoring are out of scope and follow root `AGENTS.md` and the task-specific canonical documents named by its Section 2 route.
 
 Apply `CANDY_PAGE_GENERATION_GOVERNANCE.md` first for common missing-input, variable-structure, and STOP rules.
 

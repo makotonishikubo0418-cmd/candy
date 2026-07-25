@@ -22,7 +22,7 @@
 
 ## 2. Completed Management Foundation
 
-- Root `AGENTS.md` and `codex/README.md` are the entry points. HP work routes from `HP/AGENTS.md` to the category runbook.
+- Root `AGENTS.md` Section 2 is the required-document routing authority. When that route names `codex/README.md`, the README supplies canonical management locations and the next operational document; HP work then proceeds directly to the applicable runbook or canonical document under `codex/docs/`.
 - Page structure, code and asset structure, and the common SEO specification are separated into stable canonical documents.
 - Current page, production-candidate, code/asset, and SEO state can be regenerated into four documents with `candy-site-state`.
 - `audit`, `preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `preview`, `write`, `check`, and `check --target` are implemented as the standard entry points.

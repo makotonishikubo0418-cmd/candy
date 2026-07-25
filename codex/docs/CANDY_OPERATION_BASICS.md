@@ -6,7 +6,7 @@ This is the short common procedure for investigating, fixing, and validating the
 
 ## 2. Preflight
 
-1. Read root `AGENTS.md` and `HP/AGENTS.md`.
+1. Read root `AGENTS.md` and only the management documents named by its applicable Section 2 route.
 2. Use `CANDY_MASTER_DOC_INDEX.md` to select the canonical document for the task.
 3. Verify the Git root, branch, remote, and status.
 4. Check overlap between target files and existing changes.

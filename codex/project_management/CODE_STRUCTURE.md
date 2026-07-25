@@ -2,7 +2,7 @@
 
 - Purpose: Define the major work areas, each folder's responsibility, and the current canonical sources
 - Status: canonical document
-- Updated: 2026-07-24
+- Updated: 2026-07-25
 
 ## 1. Canonical Sources and Work Locations
 
@@ -21,7 +21,7 @@
 
 | Area | Contents | Entry point |
 |---|---|---|
-| Management entry point | Canonical document index and required reading order | `codex/README.md` |
+| Management source index | Canonical management locations and operational route summaries | `codex/README.md` |
 | Project management | Document rules, state, communication, tasks, and safety | `codex/project_management/` |
 | HP production specifications | Area, hotel, and blog runbooks and generation specifications | `codex/docs/CANDY_MASTER_DOC_INDEX.md` |
 | Stable HP specifications | Page structure, code and asset structure, and SEO specifications | `codex/docs/CANDY_HP_STRUCTURE_MAP.md` and related documents |

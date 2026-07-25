@@ -20,7 +20,6 @@ on:
       - "codex/scripts/candy-site-state.cmd"
       - "!HP/codex/**"
       - "!HP/**/*.md"
-      - "!HP/AGENTS.md"
       - "!HP/Text_area_data/**"
       - "!HP/Text_blog_data/**"
       - "!HP/Text_hotel_data/**"

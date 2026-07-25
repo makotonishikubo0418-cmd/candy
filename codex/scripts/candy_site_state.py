@@ -89,7 +89,6 @@ STATE_FINGERPRINT_EXCLUDED_HP_PARTS = {
     "codex",
     "log",
 }
-STATE_FINGERPRINT_EXCLUDED_HP_FILES = {"HP/AGENTS.md"}
 STATE_FINGERPRINT_TEXT_SUFFIXES = {
     ".cmd",
     ".css",
@@ -405,10 +404,7 @@ def state_fingerprint_paths() -> list[Path]:
     for path in HP_ROOT.rglob("*"):
         if not path.is_file() or path.is_symlink():
             continue
-        repository_path = rel(path)
         relative_parts = path.relative_to(HP_ROOT).parts
-        if repository_path in STATE_FINGERPRINT_EXCLUDED_HP_FILES:
-            continue
         if any(part.lower() in STATE_FINGERPRINT_EXCLUDED_HP_PARTS for part in relative_parts):
             continue
         paths.add(path.resolve())

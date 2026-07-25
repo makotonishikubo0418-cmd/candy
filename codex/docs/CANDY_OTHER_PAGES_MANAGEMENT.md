@@ -193,7 +193,7 @@ Show the affected scope before changing:
 
 ## 10. Procedure
 
-1. Read root `AGENTS.md` and `HP/AGENTS.md`.
+1. Read root `AGENTS.md` and only the management documents named by its applicable Section 2 route.
 2. Route here from `CANDY_MASTER_DOC_INDEX.md`.
 3. Verify Git branch, remote, and status.
 4. Inspect target PHP, source, dataset, `dataset_base.php` case, incoming references, and sitemap.

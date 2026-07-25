@@ -238,7 +238,7 @@ Include only mandatory rules, short preflight, task routes, STOP conditions, com
 ### 12.2 Separate Root and HP Responsibilities
 
 - Root `AGENTS.md`: Repository-wide mandatory rules, Git, production authority, and task routing.
-- `HP/AGENTS.md`: HP-specific generation routes, categories, images, production index, risky files, and validation routing.
+- The former HP-specific router covered generation routes, categories, images, production index, risky files, and validation routing; current work uses root `AGENTS.md` and the task-specific canonical documents named by its Section 2 route.
 - Store detail in one canonical document and link to it.
 
 ### 12.3 Make "All" and "100%" Verifiable
@@ -274,8 +274,8 @@ Include only mandatory rules, short preflight, task routes, STOP conditions, com
 ## 13. Shortest Next-Task Start
 
 1. Read root `AGENTS.md`.
-2. For HP work, read `HP/AGENTS.md`.
-3. Use `CANDY_MASTER_DOC_INDEX.md` to select only the task document.
+2. Use `AGENTS.md` Section 2 to select only the management documents required for the task.
+3. Read `codex/README.md` or `CANDY_MASTER_DOC_INDEX.md` only when the applicable route names it.
 4. Inspect `git status --short --branch` and target actual files.
 5. For production, inspect `CANDY_PRODUCTION_MIGRATION_MASTER.md` and actual workflow/script.
 6. State included work, excluded work, and completion evidence.

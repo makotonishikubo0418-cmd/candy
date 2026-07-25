@@ -5,7 +5,7 @@
 - Detailed canonical sources: The management documents listed in `codex/README.md`
 - Status: canonical document for the candy management-system overview
 - Canonical location: `C:\Codex\Candy\codex`
-- Updated: 2026-07-24
+- Updated: 2026-07-25
 
 ## 1. Intended Outcome
 
@@ -28,14 +28,15 @@ Here, "shortest route" does not mean rushed or incomplete work. It means complet
 
 ## 2. Core Architecture
 
-Do not place every rule in one large `AGENTS.md`. Keep the entry point short and read only the instructions and documents required for the current task.
+Do not place every detailed procedure in `AGENTS.md`. Keep it focused on common
+rules and mandatory task-to-document routing, then read only the documents
+named by the applicable route.
 
 ```text
 AGENTS.md
   ↓
-codex/README.md
-  ↓
-management document or HP runbook required for the current task
+management documents named by AGENTS.md
+(`codex/README.md` only when the route names it)
   ↓
 target code, specification, asset, or environment
 ```
@@ -46,13 +47,17 @@ This route avoids broad document reading for simple work while preserving every 
 
 Maintain separate canonical documents for common rules, the overall plan, specifications, code structure, inter-Codex communication, and individual task history.
 
-Maintain the canonical document index and file routes only in `codex/README.md`. Do not duplicate that index in this overview.
+Maintain required-document routing only in `AGENTS.md` Section 2. Maintain
+canonical management locations and operational route summaries in
+`codex/README.md`. Do not create another competing index in this overview.
 
 ## 4. Work Sequence
 
 1. Review the common rules in `AGENTS.md`.
-2. Use `codex/README.md` to select the canonical document required for the task.
-3. Check active reservations, related in-progress tasks, assigned handoffs, and existing changes to target files.
+2. Use `AGENTS.md` Section 2 to select the required documents, reading
+   `codex/README.md` only when the applicable route names it.
+3. Before modification or coordination, check active reservations, related
+   in-progress tasks, assigned handoffs, and existing changes to target files.
 4. When work overlaps or depends on another task, determine target separation, ordering, or handoff.
 5. Reserve the task and target files.
 6. Confirm the existing canonical source, dependencies, and prohibited-change scope.
@@ -92,4 +97,7 @@ Maintain these four qualities:
 
 This document is the overview of the candy management system.
 
-Use `AGENTS.md`, `codex/README.md`, and each canonical management document for actual work decisions. When a detailed operating rule changes, update its canonical document; do not change only this overview.
+Use `AGENTS.md` and the canonical management documents named by its applicable
+route for actual work decisions. Use `codex/README.md` when that route names it.
+When a detailed operating rule changes, update its canonical document; do not
+change only this overview.

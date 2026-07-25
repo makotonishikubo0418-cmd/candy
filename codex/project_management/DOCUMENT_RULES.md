@@ -2,7 +2,7 @@
 
 - Purpose: Separate document responsibilities in the Markdown management system
 - Status: canonical document
-- Updated: 2026-07-24
+- Updated: 2026-07-25
 - Canonical scope: Management-document naming, language, responsibility, structure, and update rules
 - Update trigger: A management document, route, responsibility, naming rule, or generated-document contract changes
 
@@ -11,6 +11,9 @@
 - One subject MUST have one canonical document.
 - Do not duplicate the same explanation across documents.
 - Entry points are limited to root `AGENTS.md` and `codex/README.md`.
+- Root `AGENTS.md` Section 2 is the sole authority for required-document
+  routing. `codex/README.md` maintains canonical management locations and
+  operational route summaries only when that route names the README.
 - Store detailed procedures in the canonical document for the task type.
 - Do not mix reports or history into specifications.
 - Canonical management information belongs under `codex/`; project-management documents belong under `codex/project_management/`.
@@ -113,8 +116,8 @@ Japanese proper nouns and source data MAY remain inside an English document. Rep
 
 | Document type or path | Responsibility |
 |---|---|
-| `AGENTS.md` | Common rules and routes |
-| `codex/README.md` | Canonical document index and required reading order |
+| `AGENTS.md` | Common rules and required-document routing |
+| `codex/README.md` | Canonical management locations and operational route summaries |
 | `codex/MANAGEMENT_SYSTEM_OVERVIEW.md` | Management-system purpose and design principles |
 | Specifications | Confirmed requirements |
 | `PROJECT_STATUS.md` | Plan, current problems, remaining work, and next actions |
@@ -278,7 +281,7 @@ STOP:
 - Separate project-management documents under `codex/project_management/`, HP production specifications under `codex/docs/`, and work tools under `codex/scripts/`.
 - Keep only the common entry point `AGENTS.md` at the local repository root; do not duplicate management documents there.
 - `HP/` is exclusively for the actual site tree and MUST NOT contain management documents or `Text_*_data`.
-- Use `HP/AGENTS.md` as the HP work route. Do not create `HP/README.md`.
+- Route HP work from root `AGENTS.md` directly to the applicable canonical document under `codex/docs/`. Read `codex/README.md` only when the applicable `AGENTS.md` route names it. Do not create another `AGENTS.md` or `HP/README.md` below the repository root.
 - Keep the Git working repository and `.git` at `C:\Codex\Candy`. Store accepted area images under local `Text_area_data/画像データ/` and accepted hotel images under local `Text_hotel_data/画像データ/`; use GitHub as the synchronization hub, and use the NAS only for `Backup/`.
 
 ## 14. HP Hierarchy Rules
@@ -292,6 +295,6 @@ STOP:
 
 - `SAFETY_PROTOCOL.md` is the canonical source for deletion, movement, bulk cleanup, and Git recovery.
 - Do not execute based only on vague labels such as "junk" or "unorganized." Classify targets as approved for deletion, remove from Git tracking, relocated, register in Git, recovery, or `AWAITING_APPROVAL`.
-- Treat `.git/`, `AGENTS.md`, `codex/README.md`, `codex/project_management/`, `HP/AGENTS.md`, and `HP/index.php` as protected targets.
+- Treat `.git/`, root `AGENTS.md`, `codex/README.md`, `codex/project_management/`, and `HP/index.php` as protected targets.
 - Report physical deletion, removal from Git tracking, Stage, Commit, and Push as separate operations.
 - When Git damage is detected, STOP before recovery, report the affected scope and recovery options, and wait for explicit approval.

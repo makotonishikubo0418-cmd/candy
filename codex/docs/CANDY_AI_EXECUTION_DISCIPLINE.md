@@ -7,7 +7,7 @@ Purpose: prevent GPT-specific waste in CANDY production work.
 The required design is:
 
 - `AGENTS.md` must contain only basic rules.
-- `HP/AGENTS.md` must contain only the HP table of contents, routing, and work entry points.
+- Root `AGENTS.md` routes HP work directly to the task-specific canonical document; `codex/README.md` supplies canonical management locations only when the applicable route names it.
 - All other detailed rules must be separated into markdown files according to the user's instruction and the task type.
 - Do not force every task through broad document reading.
 - Route by task type, then read only the minimum required document.

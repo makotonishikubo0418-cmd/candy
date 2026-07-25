@@ -2,7 +2,7 @@
 
 ## 1. Purpose
 
-Use this entry point to select only the canonical document required for HP work. Priority order is root `AGENTS.md`, `HP/AGENTS.md`, this router, the target specification/runbook, and target actual files.
+Use this entry point to select only the canonical document required for HP work. Priority order is root `AGENTS.md`, the management documents named by its Section 2 route, this router when named, the target specification/runbook, and target actual files.
 
 Do not mix stable specifications with current state. Regenerate `generated/` to verify counts, structural state, SEO state, and asset references.
 
