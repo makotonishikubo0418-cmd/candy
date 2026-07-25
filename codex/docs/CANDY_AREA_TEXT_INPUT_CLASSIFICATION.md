@@ -1,8 +1,14 @@
 # CANDY Area Text Input Classification
 
-Updated: 2026-07-20
+Updated: 2026-07-25
+Status: Retained classification snapshot from 2026-07-20
 
-## 1. Source of Truth
+## 1. Snapshot Scope
+
+This document records the 2026-07-20 input-classification result. It does not
+define current page eligibility, current image availability, current file
+counts, or an answer format. Recheck those facts from actual files and the
+generated current-state documents selected by root `AGENTS.md`.
 
 - Active Text root: `Text_area_data/分類_20260716_115215/`
 - Full file-level inventory: `Text_area_data/分類_20260716_115215/分類結果.tsv`
@@ -11,9 +17,7 @@ Updated: 2026-07-20
 - `.txt` files under `Text_area_data/Completion/`: **0**
 - The TSV inventories 156 Text files exactly once. Two additionally retained inputs, `喜入一倉町_テンプレート.txt` and `花野光ヶ丘_テンプレート.txt`, remain outside the TSV inventory and are excluded from the classification counts below.
 
-Do not count the NAS backup as active Text input. The NAS is storage-only and is not a second management source of truth.
-
-## 2. Active Classification Summary
+## 2. Classification Summary
 
 These are the exact domain values and counts in the 156-row TSV inventory.
 
@@ -37,11 +41,12 @@ image gate.
 
 Categories `01` through `08` are the fixed combinations of the three input issues: image missing, information missing, and incorrect information. `03`, `04`, and `05` are intentionally shown as zero so the numbering is not mistaken for an omission; physical folders are not created for empty categories. `09_作成済み` is an operational status and takes priority over an `01`-`08` input-issue category once the page bundle is complete. Its TSV `issues` field continues to preserve any input issue details.
 
-As of 2026-07-18, all five inputs physically retained under `02_画像無し`
+At the 2026-07-18 observation captured by this snapshot, all five inputs
+physically retained under `02_画像無し`
 have complete canonical accepted and public image pairs. Their folder placement
 and TSV issue text remain the original classification record; changing that
-classification requires a separately authorized file-movement and inventory
-update task.
+classification belongs to a separate file-movement and inventory task selected
+by the cumulative root route.
 
 The exact `09_作成済み` gate is all of the following: the public PHP exists, the source HTML exists, the dataset PHP exists, and `HP/includefile/dataset_base.php` contains exactly one case registration and exactly one conversion registration for the slug. Area-list and sitemap status are tracked separately and do not change whether the page itself is classified as created. A partial page artifact does not qualify.
 
@@ -90,7 +95,11 @@ All 354 retained JPEG files are readable. `kagoshima-deliveryhealth-area-ishikid
 | `08_複合_画像無し_情報足りない_間違い` | 10 | 0 | 10 | 0 | 0 |
 | `09_作成済み` | 41 | 41 | 0 | 39 | 2 |
 
-The folder category is the current operational classification. Runtime parser and pre-render results are tracked separately. The two pre-render stops under `09_作成済み` are `向陽_テンプレート.txt` and `甲突町_テンプレート.txt`: their page bundles are complete, while their source image shortages remain recorded in the TSV.
+The folder category was the operational classification at the snapshot time.
+Runtime parser and pre-render results were tracked separately. The two
+pre-render stops under `09_作成済み` were `向陽_テンプレート.txt` and
+`甲突町_テンプレート.txt`; their source image shortages remained recorded in
+the TSV at that time.
 
 ## 5. Files Outside `01_間違い無し`
 
@@ -102,25 +111,6 @@ The folder category is the current operational classification. Runtime parser an
 | `08_複合_画像無し_情報足りない_間違い` | `伊敷.txt`, `伊敷台_テンプレート.txt`, `宇宿_テンプレート.txt`, `小原町_テンプレート.txt`, `小川町_テンプレート.txt`, `小野_テンプレート.txt`, `岡野原町_テンプレート.txt`, `易居町_テンプレート.txt`, `有屋田町_テンプレート.txt`, `薬師_テンプレート.txt` |
 | `09_作成済み` | `三和町_テンプレート.txt`, `下伊敷町_テンプレート.txt`, `下田町_テンプレート.txt`, `下福元町_テンプレート.txt`, `下竜尾町.txt`, `五ヶ別府町_テンプレート.txt`, `光山_テンプレート.txt`, `原良_テンプレート.txt`, `吉野_テンプレート.txt`, `吉野町_テンプレート.txt`, `呉服町_テンプレート.txt`, `喜入町_テンプレート.txt`, `坂之上_テンプレート.txt`, `坂元町_テンプレート.txt`, `小山田町_テンプレート.txt`, `山下町_テンプレート.txt`, `山之口町_テンプレート.txt`, `山田町_テンプレート.txt`, `希望ヶ丘町_テンプレート.txt`, `広木_テンプレート.txt`, `春日町_テンプレート.txt`, `桜ヶ丘_テンプレート.txt`, `玉里団地_テンプレート.txt`, `玉里町_テンプレート.txt`, `皆与志町_テンプレート.txt`, `皇徳寺台_テンプレート.txt`, `祇園之洲町_テンプレート.txt`, `花尾町_テンプレート.txt`, `郡元_テンプレート.txt`, `郡元町_テンプレート.txt`, `郡山岳町_テンプレート.txt`, `郡山町_テンプレート.txt`, `金生町_テンプレート.txt`, `錦江台_テンプレート.txt`, `高麗町_テンプレート.txt`, `向陽_テンプレート.txt`, `甲突町_テンプレート.txt`, `犬迫町_テンプレート.txt`, `荒田.txt`, `慈眼寺町_テンプレート.txt`, `自由ヶ丘_テンプレート.txt` |
 
-Use `分類結果.tsv` for all 156 file names, slugs, parser states, and issue details.
-
-## 6. Immediate Count Answer
-
-When asked for the Text total and breakdown, answer:
-
-```text
-Classified Text total: 156
-01_間違い無し: 97
-02_画像無し: 5
-03_情報足りない: 0
-04_間違い: 0
-05_複合_画像無し_情報足りない: 0
-06_複合_画像無し_間違い: 2
-07_複合_情報足りない_間違い: 1
-08_複合_画像無し_情報足りない_間違い: 10
-09_作成済み: 41
-Retained Text outside the TSV inventory: 2
-Unnecessary Text remaining inside Text_area_data: 0
-```
-
-The physical file total under `Text_area_data/` is 513: 158 `.txt`, 354 `.jpg`, and one `.tsv`. The `.tsv` is the active classification inventory; images are not part of the Text count.
+Use `分類結果.tsv` for the 156 snapshot rows, filenames, slugs, parser states,
+and issue details. Do not reuse these counts as a current answer without
+recounting actual files.

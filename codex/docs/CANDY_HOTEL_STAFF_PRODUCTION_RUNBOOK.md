@@ -45,8 +45,8 @@ codex\scripts\candy-hotel.cmd direct-check --input "Text_hotel_data/対象ホテ
   `CANDY_HOTEL_IMAGE_CREATION_SPEC.md`, accept and install it through
   `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`, then rerun `direct-check`. When a
   complete accepted pair already exists and only the local-public pair is
-  absent, first-install it automatically as page-production preparation; do
-  not report `READY_FOR_IMAGES` or ask the user again.
+  absent, treat it as pending first installation rather than missing images
+  when installation is included by the cumulative authorized routes.
 - `DIRECT_TEXT_STATUS=READY_FOR_BUILD` means that the completed Text and both locally installed public images are ready for the normal target gate and local build. For publication, a newly accepted pair must first reach `DEPLOYED_ASSET` through `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`; an unchanged legacy public-only pair must already be tracked and clean.
 - `DIRECT_TEXT_STATUS=STOP` means that the Text is incomplete, untracked, duplicated, already registered, or otherwise ineligible. Do not invoke a Phase solely to bypass that blocker.
 
@@ -81,9 +81,8 @@ The production route MUST NOT copy a reference HTML file, edit HTML manually fro
 Candidate discovery MUST recognize a complete accepted-source pair as image
 availability. After selecting the target and before the final target gate,
 copy exact accepted bytes to `HP/imgHtml/new_202601/hotel/` when both
-same-name public files are absent. A page-production request authorizes this
-target-limited first installation. Continue the same task after hash
-verification.
+same-name public files are absent and first installation is included by the
+cumulative authorized routes. Continue after hash verification.
 
 Validation covers:
 
@@ -123,7 +122,9 @@ codex\scripts\candy-hotel.cmd build --input "Text_hotel_data/対象ホテル.txt
 codex\scripts\candy-hotel.cmd check --input "Text_hotel_data/対象ホテル.txt"
 ```
 
-For the normal path, do not add preliminary `build`, `check`, full-document rereading, or intermediate questions.
+For the normal path, do not add redundant preliminary `build` or `check`
+commands when the publish command already performs the same authoritative
+gates.
 
 Do not run the final image-dependent target gate before reconciling the
 selected target's accepted and local-public image pairs. Public absence alone
@@ -207,16 +208,15 @@ Do not run manual HTML creation or a separate FTP upload before or after these c
 2. Select the target using either its complete accepted pair or complete
    local-public pair, first-install exact accepted bytes when required, and
    verify same-name hashes before the final target gate.
-3. Validate the three existing page files, shared registrations, Git identity, remote, and Push dry run, then freeze dependency hashes.
+3. Validate the three existing page files and shared registrations, then freeze dependency hashes.
 4. Generate the complete page set from the hotel template and `template_shop.html`. Only for travel time and transportation fees absent from Text, use map coordinates and the nearest complete area page for each shop.
 5. Validate the order and count of every input block, three deterministic blog links, three deterministic area links, scenes, JSON-LD, and images.
 6. Register only the target in `dataset_base.php`, the hotel index, and sitemap, then freeze hashes for the six output files.
 7. Synchronize sitemap dates and generated management documents with `candy-site-state preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`.
-8. Verify the stage allowlist, then Commit and Push only the target once each. When execution stops immediately after Commit, verify content equality and reuse the existing Commit.
-9. Track pre-FTP PHP lint and deployment in Actions through the API.
-10. Verify the production page, H1, JSON-LD, images, hotel index, sitemap, and redirects over HTTP, then output URLs.
-
-Do not create a post-publication record Commit, Push a second time, or move the input Text.
+8. When publication is included, continue through the cumulative Git and
+   production routes.
+9. Track pre-FTP PHP lint and deployment in Actions.
+10. Verify the production page, H1, JSON-LD, images, hotel index, sitemap, and redirects over HTTP.
 
 After generation or a fix and before staging, run `codex\scripts\candy-site-state.cmd preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`. Treat required input-classification updates and generated-document updates as the same work unit.
 
@@ -260,22 +260,19 @@ HP/imgHtml/new_202601/hotel/<slug>_1.jpg
 HP/imgHtml/new_202601/hotel/<slug>_2.jpg
 ```
 
-When either source route created or first-installed a new image pair, complete
-the target-limited image-asset Commit, Push, Actions deployment, and
-production-byte verification in `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md` before
-invoking page publication. An explicit page-publication request authorizes
-this required image unit and the following page unit; execute both
-sequentially without ending the task for another approval. The current hotel
-publication tool treats public images as tracked, clean dependencies and does
-not stage new image files. Do not include new or modified image files in the
-later page Commit, and do not re-edit them during page generation.
+When either source route created or first-installed a new image pair and the
+cumulative authorized routes include publication, complete the image-asset
+registration, Actions deployment, and production-byte verification in
+`CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md` before invoking page publication. The
+current hotel publication tool treats public images as tracked, clean
+dependencies and does not stage new image files; do not re-edit them during
+page generation.
 
 Existing public images without accepted-source counterparts are `LEGACY_PUBLIC_ONLY`. Preserve them and do not create accepted copies by assumption. A same-name byte replacement follows the explicit replacement route in `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`; it is not a normal new-page first installation.
 
 ## 5. STOP Conditions
 
-- The branch is not `main`, the remote differs, fast-forward is impossible, or a conflict exists.
-- Git identity or Push dry run fails, or another hotel publication process is running.
+- Another hotel publication process overlaps the target.
 - Required input is missing; an unconverted legacy format, placeholder, unsafe
   URL, no complete accepted or public image pair, a partial or conflicting
   image pair, slug mismatch, duplicate, partial input block, or existing-file
@@ -284,18 +281,19 @@ Existing public images without accepted-source counterparts are `LEGACY_PUBLIC_O
 - `target-next` does not return `NEW_HOTEL_TARGET_OK`.
 - A shop is unknown, or travel time/transportation fees are unspecified and cannot be derived from hotel coordinates or a nearby complete area page.
 - A target registration is duplicated in dataset_base, the hotel index, or sitemap, or the hotel index has no reserved slot.
-- An unauthorized file, deployment of more than 125 files, deployment over 50 MiB, or deletion/rename without explicit approval and rollback protection is required.
-- Dependency/output hash, PHP, JSON, stage allowlist, Actions, or production HTTP validation fails.
+- Dependency/output hash, PHP, JSON, Actions, or production HTTP validation fails.
 - For `PHASE_PREPARED`, a Phase 1-4 result is not `PASS`, the target Text hash chain is broken, or a Phase 4 image hash differs.
 - The production route would require reference-HTML copying, direct HTML editing, an independent upload method, or an unverified public path.
 
-On STOP, report the stopped phase, completed state, unexecuted state, and emitted `RECOVERY_COMMAND`.
+On STOP, add the stopped phase, completed state, unexecuted state, and emitted
+`RECOVERY_COMMAND` to the response required by root `AGENTS.md`.
 
 ## 6. User Report
 
+In addition to the common response structure in root `AGENTS.md`, report these
+hotel-production facts:
+
 ```text
-要約:
-結論:
 SOURCE_ROUTE: DIRECT_TEXT / PHASE_PREPARED
 PRODUCTION: PASS / REVIEW / STOP
 PHASE 5 (PHASE_PREPARED only): PASS / REVIEW / STOP / NOT_APPLICABLE
@@ -319,4 +317,5 @@ PC表示・モバイル表示:
 未確認・未解決:
 ```
 
-If browser rendering was not inspected, state that it is unverified. The five-minute target applies only when the target Text and every dependency, including the required image lifecycle, are already publication-ready. Research, image creation, acceptance, first image-asset deployment, and human review are preparation work outside that five-minute page-publication target.
+If browser rendering was not inspected, include that page-specific fact in the
+unverified field.

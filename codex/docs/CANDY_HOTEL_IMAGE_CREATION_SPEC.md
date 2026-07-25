@@ -1,10 +1,10 @@
 # CANDY Hotel Image Creation Specification
 
-- Updated: 2026-07-24
+- Updated: 2026-07-25
 - Target: Two images for one hotel page
 - Status: Canonical specification
 - Route: Direct staff-completed Text image preparation or Phase 4
-- Lifecycle authority: `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`
+- Lifecycle source: `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`
 
 ## 1. Position and Start Conditions
 
@@ -26,11 +26,13 @@ Use this route after Phases 1-3. Start only when Phase 1 and Phase 3 are `PASS`,
 
 ### 1.3 Common Start Conditions
 
-For either route, `HOTEL_NAME_JA`, `HOTEL_NAME_EN`, hotel address, and `CANONICAL_SLUG` MUST be confirmed; `img_1`, `img_2`, and OGP image paths MUST use that slug; and the approved reference images MUST be inspectable.
+For either route, `HOTEL_NAME_JA`, `HOTEL_NAME_EN`, hotel address, and
+`CANONICAL_SLUG` MUST be confirmed and the approved reference images MUST be
+inspectable.
 
-There is no separate image slug. The filename slug MUST equal `CANONICAL_SLUG`.
-
-Keep unaccepted working output outside the accepted-source and public-source folders. After the pair passes this specification, use `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md` for acceptance, storage, first installation, replacement review, Git scope, and publication state.
+This specification owns only candidate creation and visual acceptance.
+Filenames, accepted/public paths, lifecycle states, replacement, Git, and
+publication belong to `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`.
 
 Do not use generative AI to create, complete, remove, replace, or materially alter the hotel, roads, buildings, or geographic background.
 
@@ -72,7 +74,11 @@ codex\scripts\candy-hotel.cmd image-check `
   --manifest "C:\candidate\<CANONICAL_SLUG>_image_manifest.json"
 ```
 
-`DETERMINISTIC_FILE_GATES=PASS` covers only the measurable renderer and file requirements. `VISUAL_GATES=REQUIRED` means target identity, clean background, readability, and material composition difference still require inspection under Sections 3, 4, and 9. Do not accept or install a pair from the deterministic result alone.
+`DETERMINISTIC_FILE_GATES=PASS` covers only the measurable renderer and file
+requirements. `VISUAL_GATES=REQUIRED` means target identity, clean background,
+readability, and material composition difference still require inspection
+under Sections 3, 4, and 7. Do not accept or install a pair from the
+deterministic result alone.
 
 Validate the helper contract after changing its implementation:
 
@@ -82,32 +88,8 @@ codex\scripts\candy-hotel.cmd image-self-test
 
 ## 2. Deliverables
 
-A hotel page requires exactly two accepted-source images:
-
-```text
-Text_hotel_data/画像データ/<CANONICAL_SLUG>_1.jpg
-Text_hotel_data/画像データ/<CANONICAL_SLUG>_2.jpg
-```
-
-After acceptance, the asset-management procedure may install the exact same bytes under the canonical local public paths:
-
-```text
-HP/imgHtml/new_202601/hotel/<CANONICAL_SLUG>_1.jpg
-HP/imgHtml/new_202601/hotel/<CANONICAL_SLUG>_2.jpg
-```
-
-`img_1` and `img_2` in the input text file use:
-
-```text
-./imgHtml/new_202601/hotel/<CANONICAL_SLUG>_1.jpg
-./imgHtml/new_202601/hotel/<CANONICAL_SLUG>_2.jpg
-```
-
-The OGP image MUST be:
-
-```text
-https://www.55810.com/imgHtml/new_202601/hotel/<CANONICAL_SLUG>_1.jpg
-```
+A hotel candidate unit contains exactly two images: `_1` and `_2`, both tied to
+the same confirmed `CANONICAL_SLUG`.
 
 Common output requirements:
 
@@ -241,32 +223,7 @@ Prohibited:
 - Non-proportional stretching
 - Darkening the background to make text readable
 
-## 7. Filename and Overwrite Gate
-
-Before acceptance, inspect all four exact accepted-source and local-public destination names through `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`.
-
-- Keep candidate output outside both canonical folders until every hard gate passes.
-- Save a passing new pair to the accepted-source folder first.
-- Copy exact accepted bytes to absent public filenames only through the first-installation procedure.
-- Same accepted/public filenames with matching SHA-256 are reused without rewrite.
-- Different SHA-256 for the same accepted or public filename is `REVIEW`; do not overwrite without explicit target-specific replacement authority.
-- A public file without an accepted-source counterpart is `LEGACY_PUBLIC_ONLY`; do not backfill it automatically.
-- An image belonging to another hotel is `STOP`.
-
-The two final images MUST have different SHA-256 values and materially different compositions.
-
-## 8. Alt and Input Values
-
-Use these exact generated alt responsibilities:
-
-```text
-MAIN_IMAGE_1_ALT = <HOTEL_NAME_JA>
-MAIN_IMAGE_2_ALT = <HOTEL_NAME_JA>基本情報
-```
-
-Verify that the target Text contains the exact relative image paths and absolute OGP path from Section 2. Phase 4 MUST NOT edit HTML, PHP, dataset PHP, shared registrations, or production. Local accepted-source storage and first public installation remain separate lifecycle states and follow the asset-management document.
-
-## 9. Acceptance Gates
+## 7. Visual Acceptance Gates
 
 Every item MUST pass:
 
@@ -282,13 +239,11 @@ Every item MUST pass:
 | `_1` subject scale | The recorded hotel rectangle is at least `220 x 180 px`, has an area of at least `120000 px²` (`16%`), and the hotel is the single visually dominant plausible target |
 | Composition | The unlabeled `_1` crop passes the three-second identification test, the hotel is not identified by surrounding landmarks alone, and `_1` and `_2` are materially different |
 | File | Both are readable `1000 x 750` RGB JPG files at quality `92` |
-| Naming | Filenames and all target Text image paths match `CANONICAL_SLUG` |
-| OGP | Absolute OGP URL matches `_1` |
 | Duplication | Pair hashes differ and neither image belongs to another hotel |
 
 There is no partial visual pass. A failed hard gate rejects the affected image pair.
 
-## 10. STOP and Review Conditions
+## 8. Visual STOP and Review Conditions
 
 STOP when:
 
@@ -299,31 +254,27 @@ STOP when:
 - The `_1` hotel rectangle fails any minimum width, height, or area threshold in Section 3.1.
 - The unlabeled `_1` crop fails the three-second identification test, contains another equally or more dominant building, presents multiple plausible targets, or requires surrounding landmarks to infer the hotel.
 - The hotel cannot remain identifiable in the required composition.
-- The text renderer, output destination, or numeric placement cannot be verified.
+- The text renderer or numeric placement cannot be verified.
 - The two required views cannot be produced.
-- A same-name file belongs to another hotel.
 
-Use `REVIEW` only when a same-name file has different content or when choosing between multiple compositions that each already pass every Section 3.1 identity, subject-scale, and prominence gate. A failed identity, subject-scale, prominence, or three-second gate is `STOP`, not `REVIEW`.
+Use `REVIEW` only when choosing between multiple compositions that each already
+pass every Section 3.1 identity, subject-scale, and prominence gate. A failed
+identity, subject-scale, prominence, or three-second gate is `STOP`, not
+`REVIEW`.
 
-Do not proceed to local page build unless both images pass every hard gate and the asset-management state is at least `INSTALLED_LOCAL`. For `DIRECT_TEXT`, rerun `direct-check` and require `DIRECT_TEXT_STATUS=READY_FOR_BUILD`. For `PHASE_PREPARED`, proceed only when the Phase 4 result is ready for Phase 5. Page publication additionally requires a newly accepted pair to reach `DEPLOYED_ASSET` through `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`; image creation alone never proves publication readiness.
-
-## 11. Image Result
+## 9. Image Evidence Record
 
 Record:
 
 ```text
 SOURCE_ROUTE: DIRECT_TEXT / PHASE_PREPARED
 IMAGE RESULT: PASS / REVIEW / STOP
-IMAGE LIFECYCLE: CANDIDATE / ACCEPTED / INSTALLED_LOCAL / REVIEW / STOP
 PHASE 4 (PHASE_PREPARED only): PASS / REVIEW / STOP / NOT_APPLICABLE
 Target hotel:
 HOTEL_NAME_EN:
 CANONICAL_SLUG:
-Accepted image 1 path and SHA-256:
-Accepted image 2 path and SHA-256:
-Public image 1 path and SHA-256:
-Public image 2 path and SHA-256:
-Accepted/public hash agreement:
+Candidate image 1 path and SHA-256:
+Candidate image 2 path and SHA-256:
 Image 1 renderer size and measured centers:
 Image 1 confirmed-hotel rectangle (x, y, width, height, area, canvas percentage):
 Image 1 three-second identification gate:
@@ -332,12 +283,6 @@ Image 2 renderer size and measured centers:
 Dimensions, format, color, and quality:
 Clean-capture gate:
 Composition gate:
-Same-name file state:
-Target Text image-path agreement:
-READY_FOR_LOCAL_PAGE_BUILD: YES / NO
-READY_FOR_PAGE_PUBLICATION: YES / NO
 READY_FOR_PHASE_5 (PHASE_PREPARED only): YES / NO / NOT_APPLICABLE
 Human decision required:
 ```
-
-Report local image acceptance separately from page generation, Commit, Push, Actions, and production-image HTTP verification.

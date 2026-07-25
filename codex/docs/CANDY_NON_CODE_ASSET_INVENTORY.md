@@ -1,3 +1,5 @@
 # CANDY Non-Code Asset Inventory
 
-This deprecated entry point is retained only to route old references. A fixed-count asset list is not a current canonical document. Use `generated/CANDY_CODE_ASSET_INVENTORY.md` for current public assets, references, missing files, and duplicate candidates. Machine evaluation alone MUST NOT trigger deletion.
+This deprecated compatibility stub is retained only to explain old references.
+It contains no active instruction or fixed asset inventory. Current work uses
+only the documents selected by root `AGENTS.md`.

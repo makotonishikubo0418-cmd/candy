@@ -5,7 +5,9 @@
 
 ## 1. Position
 
-This document contains common execution rules above the category generation specifications.
+This document owns common generation rules below root `AGENTS.md` and above the
+category generation specifications. It does not define document routing,
+operation authority, Git procedure, production procedure, or response format.
 
 - Common rules: this document
 - Area detail: `CANDY_AREA_PAGE_GENERATION_SPEC.md`
@@ -90,10 +92,10 @@ When a required item is missing, a slug conflicts, a same-name file exists, or a
 
 For area and hotel pages, distinguish a genuinely missing image from a pending
 first local installation. A complete category-approved accepted-source pair is
-available production input. When its same-name local-public pair is absent,
-the page-production request authorizes copying the exact accepted bytes to the
-canonical local-public directory before the final target gate. Do not report
-that state as missing images, and do not request duplicate approval.
+available production input. When the cumulative authorized routes include
+first installation and its same-name local-public pair is absent, copy the
+exact accepted bytes to the canonical local-public directory before the final
+target gate.
 
 ## 5. Reference-Page Selection
 
@@ -201,11 +203,10 @@ For a normal public page, determine:
 - Whether related pages require internal links
 - Whether the index count or order requires an update
 
-`sitemap.xml` requires approval. Present the target and added URL before changing it and obtain user approval.
-
-When the normal integrated hotel tool limits changes to the target, `dataset_base.php`, the hotel index, and sitemap are within an explicit hotel-production and publication instruction.
-
-Update `sitemap.xml` only through the applicable canonical category workflow after user approval. Preserve its current XML fields, diff the exact URL change, and do not replace it with an independently collected URL list.
+When URL integration is inside the authorized scope, update `sitemap.xml` only
+through the applicable canonical category workflow. Preserve its current XML
+fields, diff the exact URL change, and do not replace it with an independently
+collected URL list.
 
 When only detail-page files are created and the index or sitemap is not registered, report file-generation completion separately from public-route integration completion.
 
@@ -215,7 +216,7 @@ Current area, blog, and hotel templates use `<meta name="robots" content="index"
 
 - Do not change it to noindex.
 - Do not omit robots.
-- Obtain user instruction when a pre-publication draft requires noindex.
+- Treat a pre-publication draft requiring noindex as a separate behavior change.
 - Keep robots, canonical, and sitemap policies consistent.
 
 ## 11. Post-Generation Machine Validation
@@ -238,8 +239,6 @@ Current area, blog, and hotel templates use `<meta name="robots" content="index"
 - Category-index registration requirements were checked.
 - Sitemap registration requirements were checked.
 - PHP syntax is valid.
-- `git diff --check` succeeds.
-- No out-of-scope file changed.
 
 ### 11.1 File Format
 
@@ -251,24 +250,9 @@ Current area, blog, and hotel templates use `<meta name="robots" content="index"
 
 ### 11.2 Source Text Handling
 
-- Do not delete, move, or rename the source text file after generation without explicit instruction.
+- Source Text deletion, movement, or rename is outside normal generation.
 - Do not automatically move an area input to `Completion` based only on generation completion.
-- Before moving to a completion folder, show validation results and obtain user instruction.
 - Do not create a completion folder for blog or hotel when none exists.
-
-### 11.3 Local Completion and Production Deployment
-
-Report these as separate completion states:
-
-- Local file generation
-- Local image placement
-- Git Commit and Push
-- Server deployment
-- Production-page HTTP validation
-- Production-image HTTP validation
-- Actual browser rendering validation
-
-The presence of local files or images does not mean production deployment is complete.
 
 ## 12. Required Human Review
 
@@ -299,9 +283,8 @@ Codex MUST NOT decide and complete the page automatically when:
 
 ## 14. Completion Report
 
-Use the explicit authority rules in root `AGENTS.md` and the publication procedure in `CANDY_PRODUCTION_MIGRATION_MASTER.md`. Check Actions through the GitHub API; browser UI interaction is not the normal route.
-
-Report only:
+In addition to the common response structure in root `AGENTS.md`, report these
+page-generation facts:
 
 ```text
 作成ページ:
@@ -310,14 +293,13 @@ Report only:
 省略した項目:
 確認済み:
 未確認:
-Commit・Push:
-確認用URL:
 ```
-
-After Push, include the GitHub Commit URL; after Actions, include the run URL; after production publication, include every created page's production URL. For local-only production, report `確認用URL: 未取得（本番未反映）`. Do not infer an unverified URL.
 
 ## 15. Separation from Existing Inconsistencies
 
-Existing pages may have missing registrations, legacy structures, placeholders, absent source data, or duplicate IDs. Do not reproduce these in new generation; review the category specification's current inconsistency list.
+Existing pages may have missing registrations, legacy structures, placeholders,
+absent source data, or duplicate IDs. Do not reproduce these in new generation;
+obtain the current condition from actual files and the applicable generated
+current-state document.
 
 Handle an existing inconsistency as a separately authorized development or existing-feature fix, not normal generation.

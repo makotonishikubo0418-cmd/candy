@@ -50,7 +50,6 @@ Deploy script:
 ### 4.1 Trigger
 
 - A Push to `main` containing deploy targets starts production processing automatically.
-- Use the explicit authority rules in root `AGENTS.md`; do not infer upload authority from another instruction.
 - After Push, the same job generates a plan without FTP, determines automatic approval values, validates them before FTP, and deploys to production.
 - Manual `workflow_dispatch` preview/deploy remains an exception route for incident investigation and reruns.
 - The deploy job uses the `candy-production` environment.
@@ -142,7 +141,9 @@ On failure:
 - Report failure position, target, and rollback result.
 - Verify on the actual server that no temporary or backup file remains.
 
-After changing workflow/script, run syntax and integration tests, Commit and Push, and verify the automatic GitHub run before reporting new behavior.
+After changing workflow/script, run syntax and integration tests, then verify
+the automatic GitHub run if the cumulative Git and production routes authorize
+publication.
 
 ### 5.1 Same-Path Static Asset Replacement and Client Cache Safety
 
@@ -174,76 +175,25 @@ After deployment, verify all of the following:
 - Required desktop and mobile views render the new content rather than the obsolete cached content.
 - No obsolete live copy, temporary file, or rollback file remains.
 
-## 6. Production Work Results on 2026-07-13
+## 6. Historical Evidence Boundary
 
-### 6.1 Automated Full Deploy: Failed and Deprecated
+The failed 2026-07-13 bulk deployment, cleanup counts, HTTP snapshot, and local
+migration snapshot are retained only in
+`CANDY_20260713_CONTEXT_AND_IMPROVEMENT.md`. They are not current production
+state or current procedure.
 
-- The legacy bulk method ran for an excessive time.
-- Many backup and temporary files remained, and actual progress differed from reports.
-- Controlled completion could not be verified; the user manually deployed root PHP through WinSCP.
-- Therefore, do not use that Actions run as evidence of successful full deployment.
+## 7. Production-Specific Pre-Deployment Procedure
 
-### 6.2 Cleanup
+The cumulative Git route in root `AGENTS.md` owns branch, remote, staging,
+Commit, and Push checks. This document adds only the production-specific gates:
 
-After the user's manual deployment, these confirmed unnecessary production targets were deleted:
-
-| Target | Count |
-|---|---:|
-| `.candy-backup-*` | 319 |
-| Server `.gitignore` | 1 |
-| FTP smoke test | 1 |
-| Total | 321 |
-
-After deletion:
-
-- Production root PHP: 100
-- Production `index.php`: redirect preserved
-- Production inventory: 1,428 files and 29 directories
-
-This is not a record that verifies SHA-256 equality for every inventory file. Reacquire when required.
-
-### 6.3 HTTP
-
-- 99 of 100 public PHP files returned `200`.
-- `index.php` returned the intended `301`.
-- Unexpected PHP statuses: 0.
-
-This is a 2026-07-13 snapshot and requires revalidation for current state.
-
-## 7. Local Migration State on 2026-07-13
-
-At record time:
-
-| Target | State |
-|---|---|
-| PHP directly under HP | 100 |
-| Production `group/candy` include references | 97 |
-| Test `group_test/candy` include references | 2 |
-| PHP without dataset include | `makeSitemap.php` |
-
-Entry points retaining test references:
-
-- `HP/kagoshima-deliveryhealth-petitegirl.php`
-- `HP/kagoshima-deliveryhealth-slendergirl.php`
-
-Do not bulk-replace these before determining whether they are intended exceptions or incomplete migration. Recheck absolute paths, session, control, and source transformation in actual `dataset_base.php` and related files.
-
-## 8. Required Pre-Deployment Procedure
-
-1. Review root `AGENTS.md` and only the management documents named by its applicable Section 2 route.
-2. Verify branch, remote, status, HEAD, and `origin/main`.
-3. Check overlap between target and existing changes.
-4. Reconcile the planned work with related `.md` records.
-5. Compare staged `name-status` to the allowlist and exclude out-of-scope changes, deletions, renames, copies, and type changes.
-6. Run workflow/deploy-script syntax, self-test, and `test_candy_ftp_deploy.py` integration tests.
-7. Verify a Push trigger exists and no full-deploy route exists.
-8. On explicit upload instruction, stage and Commit only current targets.
-9. After Fetch, Push to `main` only if the remote has no leading update.
-10. Retrieve the Push-triggered Actions run through the GitHub API.
-11. Verify target SHA, lists, exclusions, deletion/rename, count, and `PLAN_TOKEN`.
-12. Verify no more than 125 upload-and-delete operations, no more than 50 MiB of uploaded data, and protected targets such as `index.php` are excluded. Oversize MUST stop before FTP. Deletion or rename MUST stop unless the exact plan is explicitly approved and the transactional rollback gate passes.
-13. Proceed to FTP only after target PHP succeeds with `php -d short_open_tag=1 -l`.
-14. After Actions succeeds, verify target-page HTTP and production URLs.
+1. Inspect the exact workflow and deploy script used by the operation.
+2. Run their syntax, self-test, and integration checks.
+3. Confirm the expected trigger and absence of a full-deploy route.
+4. Verify target SHA, lists, exclusions, deletion/rename state, operation count,
+   uploaded size, and `PLAN_TOKEN`.
+5. Require target PHP to pass `php -d short_open_tag=1 -l` before FTP.
+6. After Actions succeeds, verify target-page HTTP and production URLs.
 
 Normal tracking command:
 
@@ -251,17 +201,14 @@ Normal tracking command:
 python .github/scripts/candy_release_check.py --sha <40-character-Commit-SHA> --url <production-URL> --expect-text <target-page-specific-text>
 ```
 
-## 9. During Deployment
+## 8. During Deployment
 
 - Record Actions run number and commit SHA.
 - Record and report the Actions run URL with progress.
 - Normally query state through the GitHub API; do not search and operate the browser UI.
 - Check actual log `DEPLOYED current/total`, failing target, and exit code.
-- Do not report unsupported remaining time. Estimate only from measured rate and remaining count.
-- When the user orders a stop, verify both the stop operation and actual stopped state.
-- Do not report monitoring while only watching a GUI.
 
-## 10. After Deployment
+## 9. After Deployment
 
 1. Verify the final Actions result.
 2. Verify production target existence and SHA-256 equality.
@@ -269,22 +216,19 @@ python .github/scripts/candy_release_check.py --sha <40-character-Commit-SHA> --
 4. Verify preservation of the production `index.php` redirect.
 5. Check target-PHP HTTP.
 6. Check CSS/JavaScript/images, internal links, and desktop/mobile browser rendering as required. For a same-path static-asset replacement, apply Section 5.1 and verify the new content-version reference and rendered content.
-7. Report local, GitHub, and production results separately.
-8. Include the GitHub Commit URL, Actions run URL, and every deployed production page URL in one report. Do not infer an unverified URL.
+7. Add the target SHA, Actions run, deployed targets, production hashes, HTTP
+   results, and rendering results to the response required by root `AGENTS.md`.
 
-## 11. Rollback
+## 10. Rollback
 
 - A single-target failure during deploy rolls back the failing target and every target already deployed in that run in reverse order. Do not delete backups before every target validates.
 - After Actions completes, rollback is separate work requiring verification of the commit/file to restore, server path, index impact, and database/external dependencies.
 - Do not bulk-delete server files or overwrite from a legacy snapshot without evidence.
 - `Backup/HP_旧データ` is a production comparison snapshot from its acquisition time and is not assumed identical to current production.
 
-## 12. Current Remaining Work
+## 11. Current-State Boundary
 
-- After changing the Push-triggered workflow, verify success of the automatic run for the target Commit.
-- Verify whether the GitHub `candy-production` environment has required protection rules.
-- Perform complete hash reconciliation between production inventory and Git-tracked targets.
-- Decide fixes for missing internal links, images, and external URLs recorded in `CANDY_VERIFICATION_PLAN.md`.
-- Approve the final switchover date and standalone deployment procedure for latest `HP/index.php`.
-
-Do not report production migration 100% complete while any item remains.
+This document does not store current remaining work, deployment history, current
+server inventory, or unresolved website defects. Obtain those from actual
+workflow runs, production evidence, `PROJECT_STATUS.md`, and the applicable
+generated current-state documents selected by root `AGENTS.md`.

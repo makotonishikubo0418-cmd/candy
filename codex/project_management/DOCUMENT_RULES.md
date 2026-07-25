@@ -3,28 +3,24 @@
 - Purpose: Separate document responsibilities in the Markdown management system
 - Status: canonical document
 - Updated: 2026-07-25
-- Canonical scope: Management-document naming, language, responsibility, structure, and update rules
+- Canonical scope: Management-document naming, language, responsibility, structure, update rules, and Git synchronization procedure
 - Update trigger: A management document, route, responsibility, naming rule, or generated-document contract changes
 
 ## 1. Principles
 
 - One subject MUST have one canonical document.
 - Do not duplicate the same explanation across documents.
-- Entry points are limited to root `AGENTS.md` and `codex/README.md`.
-- Root `AGENTS.md` Section 2 is the sole authority for required-document
-  routing. `codex/README.md` maintains canonical management locations and
-  operational route summaries only when that route names the README.
 - Store detailed procedures in the canonical document for the task type.
 - Do not mix reports or history into specifications.
 - Canonical management information belongs under `codex/`; project-management documents belong under `codex/project_management/`.
 - Do not convert unverified information into confirmed information.
 - Keep stable specifications, current state, generated facts, and task history separate.
 
-## 2. Canonical Management Locations
+## 2. Location-Rule Boundary
 
-The canonical Codex management source is `C:\Codex\Candy\codex`. Use `codex/project_management/` for project-management documents, `codex/docs/` for HP production specifications, and `codex/scripts/` for work tools.
-
-Keep only the common entry point `AGENTS.md` and files required for Git management at the local repository root. Do not duplicate management documents there. `HP/` is exclusively for the actual site tree and MUST NOT contain canonical management documents. Accepted area images belong in the Git-managed local `Text_area_data/画像データ/` directory, and accepted hotel images belong in `Text_hotel_data/画像データ/`. Neither accepted-source directory is a public HTML path. The NAS is storage-only for `Backup/`; it MUST NOT contain a canonical management source or be used for Git operations.
+Canonical management, project, HP, input, accepted-asset, and NAS locations are
+defined only in `codex/README.md`. This document applies naming, structure,
+update, and Git rules to those locations without copying or redefining them.
 
 ## 3. Markdown Naming and Language Standard
 
@@ -112,24 +108,7 @@ Japanese proper nouns and source data MAY remain inside an English document. Rep
 - Do not merge competing canonical documents automatically. STOP and request resolution.
 - Renaming does not authorize document deletion, folder reorganization, specification changes, or status changes without verification.
 
-## 4. Document Responsibilities
-
-| Document type or path | Responsibility |
-|---|---|
-| `AGENTS.md` | Common rules and required-document routing |
-| `codex/README.md` | Canonical management locations and operational route summaries |
-| `codex/MANAGEMENT_SYSTEM_OVERVIEW.md` | Management-system purpose and design principles |
-| Specifications | Confirmed requirements |
-| `PROJECT_STATUS.md` | Plan, current problems, remaining work, and next actions |
-| `CODEX_COMMUNICATION.md` | Handoffs, requests, and active warnings |
-| `TASK_LOG.md` | Per-task results, verified items, and unverified items |
-| `TASK_RESERVATIONS.md` | Concurrent-edit prevention |
-| `CODE_STRUCTURE.md` | Folder and work-target structure |
-| `SAFETY_PROTOCOL.md` | Safety rules for deletion, movement, bulk operations, and Git recovery |
-| Stable specifications under `codex/docs/` | Non-volatile page, code, and SEO specifications. Do not store current counts |
-| `codex/docs/generated/` | Current state regenerated from actual files. Manual editing is prohibited |
-
-## 5. Prohibited Document Updates
+## 4. Prohibited Document Updates
 
 - Do not append unstructured content to the end of a document.
 - Do not place unverified information in a confirmed specification.
@@ -139,7 +118,7 @@ Japanese proper nouns and source data MAY remain inside an English document. Rep
 - Do not edit a generated document manually. Use actual files as the source and update it with `candy-site-state write`.
 - Do not store page counts, file counts, Git state, HTTP state, Actions state, or other volatile values in a stable specification.
 
-## 6. Information-State Labels
+## 5. Information-State Labels
 
 When a document contains uncertain information, label it with one of:
 
@@ -149,18 +128,18 @@ When a document contains uncertain information, label it with one of:
 - `UNVERIFIED`
 - `AWAITING_APPROVAL`
 
-## 7. Validation After a Document Change
+## 6. Validation After a Document Change
 
 At minimum, verify:
 
 - No duplicate canonical source was introduced.
-- README routes are intact.
+- README location and responsibility entries are intact.
 - Specifications and history remain separate.
 - Unverified work was not reported as complete.
 - Canonical management documents remain under local `codex/` and were not duplicated at the repository root, under HP, or on the NAS.
 - `candy-site-state check` succeeds and generated documents agree with actual files.
 
-## 8. Git Start and Synchronization Rules
+## 7. Git Start and Synchronization Rules
 
 - Run Git operations only in the local working repository `C:\Codex\Candy`; never on the NAS.
 - At the start of work, run `git fetch origin`, followed by `git status --short --branch`.
@@ -171,7 +150,7 @@ At minimum, verify:
 - Before Commit, verify that only target files are staged, `git diff --cached --check` succeeds, and the commit content matches the authorized scope.
 - Push only in a task where the user explicitly authorized Push, upload, or Commit and Push.
 
-## 9. Git Commit and Push Audit
+## 8. Git Commit and Push Audit
 
 `git diff --check` alone is insufficient for a Git Commit or Push audit. Verify:
 
@@ -188,113 +167,14 @@ At minimum, verify:
 | Authority | Commit and Push authorization does not conflict with a higher-level AGENTS rule |
 | GitHub verification | Only the verification method selected at task start was used |
 
-## 10. Area Production-Target Management
+## 9. Responsibility Boundaries
 
-- The `間違い無し` classification does not mean a new page may be produced.
-- Before publish, use the canonical slug to check for an existing public PHP file, source HTML, dataset PHP file, dataset_base registration, area-index entry, and sitemap entry.
-- Do not select a candidate when the area index contains the same region name under a different slug.
-- A missing target-slug area-index link is a normal generation input state.
-  Add exactly one link in the target's normal area change unit; do not exclude
-  the candidate for that absence alone. Preserve one correct existing link.
-- Treat a complete pair in `Text_area_data/画像データ/` as image availability.
-  After selecting the target, first-install exact accepted bytes in the
-  canonical local-public directory when both public files are absent.
-- A page-production request authorizes the target-limited first installation
-  and index addition. Do not request duplicate approval or report a STOP after
-  only identifying those preparation steps.
-- Proceed with production only for a target that returns `NEW_PAGE_TARGET_OK`
-  after the authorized image and index preparation.
-
-## 11. Hotel Production-Target Management
-
-- Hotel candidate discovery MUST treat a complete pair in
-  `Text_hotel_data/画像データ/` as image availability. After selecting the
-  target, first-install exact accepted bytes in the canonical local-public
-  directory when both public files are absent.
-- Hotel production may proceed only for one target that returns
-  `NEW_HOTEL_TARGET_OK` from `candy-hotel.cmd target-next` or `target-check`
-  after that authorized preparation.
-- Exclude genuinely missing-image, partial or conflicting image,
-  invalid-input, already-built, untracked-input, and unregistered-shop
-  candidates before production. Do not classify a pending first local
-  installation as missing images.
-- Use `candy-hotel.cmd publish-next` as the standard hotel-production entry point.
-- On STOP, inspect both `COUNTS_JSON` and `BLOCKER_COUNTS_JSON` and distinguish missing images from untracked input.
-- Do not proceed as a new hotel page when the target slug exists in `HP/source/hotel.html`, `dataset_base.php`, `sitemap.xml`, or any of the three page-specific files.
-
-## 12. User-Facing Explanations
-
-- Lead with the conclusion.
-- When a technical term is required, explain only the meaning needed by the user.
-- Do not report only that something is missing. State what is missing, how many items are affected, and which files contain the shortage.
-- Do not shorten the explanation until the cause, target, and next action become unclear.
-- Every final report MUST include `要約:`.
-
-### 12.1 Purpose of the Required Summary Field
-
-`要約:` is not a repetition of the conclusion. It MUST allow the user to identify the target, result, problem, remaining work, and next action without rereading the full report.
-
-Include at least:
-
-1. The objective and target scope.
-2. What completed and which checks ran.
-3. What remains incomplete and whether a blocker exists.
-4. The affected files, pages, slugs, and counts.
-5. Who must do what next to resume or complete the work.
-
-Even when no problem remains, identify the changed scope and validation result. When multiple problems exist, order them by impact or execution sequence.
-
-### 12.2 Reporting by State
-
-- `COMPLETE`: State the target, result, validation, and whether anything remains.
-- Partial completion: State the completed scope, incomplete scope, reason, affected targets, and resume action.
-- `BLOCKED`: State the stopping point, reason, missing or incorrect input, affected file/page/slug/count, unblock condition, and rerun action.
-- Investigation only: State the investigated scope, verified facts, unverified scope, confirmation that no change was made, and the next decision input.
-
-### 12.3 Prohibited Examples
-
-Do not use a summary that reports only a state:
-
-```text
-要約: 完了しました。
-要約: 不足があります。
-要約: 管理書は未更新です。
-```
-
-### 12.4 Examples
-
-Normal completion:
-
-```text
-要約: area生成仕様のページ内構成節を更新し、対象1ファイルの差分とUTF-8表示を確認した。ページ本体と生成ツールは変更していない。未実施作業はなく、この仕様を次回のarea制作時から参照できる。
-```
-
-STOP:
-
-```text
-要約: hotel入力73件を確認したが、画像不足35件、入力不備37件、既存登録1件のため新規作成可能な対象は0件だった。ページ生成は開始しておらず、対象ファイルの変更もない。再開には画像不足または入力不備を解消し、target-nextでNEW_HOTEL_TARGET_OKが出る1件を用意する必要がある。
-```
-
-## 13. Canonical Codex Management Rules
-
-- The canonical Codex management source is `C:\Codex\Candy\codex`.
-- Separate project-management documents under `codex/project_management/`, HP production specifications under `codex/docs/`, and work tools under `codex/scripts/`.
-- Keep only the common entry point `AGENTS.md` at the local repository root; do not duplicate management documents there.
-- `HP/` is exclusively for the actual site tree and MUST NOT contain management documents or `Text_*_data`.
-- Route HP work from root `AGENTS.md` directly to the applicable canonical document under `codex/docs/`. Read `codex/README.md` only when the applicable `AGENTS.md` route names it. Do not create another `AGENTS.md` or `HP/README.md` below the repository root.
-- Keep the Git working repository and `.git` at `C:\Codex\Candy`. Store accepted area images under local `Text_area_data/画像データ/` and accepted hotel images under local `Text_hotel_data/画像データ/`; use GitHub as the synchronization hub, and use the NAS only for `Backup/`.
-
-## 14. HP Hierarchy Rules
-
-- Do not create `HP/HP/`.
-- Keep only actual site-tree contents directly under `HP/`.
-- The Git working repository is `C:\Codex\Candy`; do not run Git operations on the NAS.
-- Address HP work targets as `HP/...` from the local repository root.
-
-## 15. Safety Rules for Deletion, Movement, and Bulk Operations
-
-- `SAFETY_PROTOCOL.md` is the canonical source for deletion, movement, bulk cleanup, and Git recovery.
-- Do not execute based only on vague labels such as "junk" or "unorganized." Classify targets as approved for deletion, remove from Git tracking, relocated, register in Git, recovery, or `AWAITING_APPROVAL`.
-- Treat `.git/`, root `AGENTS.md`, `codex/README.md`, `codex/project_management/`, and `HP/index.php` as protected targets.
-- Report physical deletion, removal from Git tracking, Stage, Commit, and Push as separate operations.
-- When Git damage is detected, STOP before recovery, report the affected scope and recovery options, and wait for explicit approval.
+- Common authority, required-document routing, and user-response structure are defined only in root `AGENTS.md`.
+- Canonical management locations and management-document responsibilities are
+  defined only in `codex/README.md`; category documents may define only their
+  own target-specific implementation and asset paths.
+- Area production rules belong only in the routed area specification or runbook.
+- Hotel production rules belong only in the routed hotel specification or runbook.
+- Production deployment rules belong only in `codex/docs/CANDY_PRODUCTION_MIGRATION_MASTER.md` and the exact workflow or script.
+- Deletion, movement, bulk cleanup, and Git recovery rules belong only in `SAFETY_PROTOCOL.md`.
+- This document MUST NOT copy rules from those sources. When a document change affects another responsibility, update that responsibility's canonical source in the same authorized task instead of appending an override here.

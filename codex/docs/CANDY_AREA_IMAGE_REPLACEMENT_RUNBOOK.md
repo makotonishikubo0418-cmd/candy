@@ -5,28 +5,21 @@
 - Applies to: Approved replacement images that retain the existing canonical `_1` and `_2` filenames
 - Does not apply to: Creating or materially editing the replacement images
 
-## 1. Shortest Required Route
+## 1. Responsibility Boundary
 
-For a normal existing area-image replacement, read only:
-
-```text
-AGENTS.md
-  -> CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md
-  -> actual target image pair and controlled page references
-```
-
-Do not read the area-image creation specification, asset inventory, or full production-migration document for a normal replacement when all of these conditions hold:
+This runbook owns the normal same-name replacement sequence only when all of
+these conditions hold:
 
 - The replacement pair is already approved and requires no further image creation or editing.
 - The canonical slug and existing filenames do not change.
 - The normal protected Push-triggered deployment is used.
 - No deletion, rename, rollback, workflow change, manual FTP, or server exception is required.
 
-Read `CANDY_AREA_IMAGE_CREATION_RUNBOOK.md` and `CANDY_AREA_IMAGE_CREATION_SPEC.md` only when the replacement images must still be created, edited, or revalidated against visual gates. Read `CANDY_PRODUCTION_MIGRATION_MASTER.md` only for a deployment exception, failure recovery, rollback, workflow change, deletion, rename, or manual server operation.
+Image creation, asset ownership ambiguity, deployment exceptions, Git, and
+production authority remain in the documents selected cumulatively by root
+`AGENTS.md`; this runbook does not add or override those routes.
 
-## 2. Replacement Authority and Preconditions
-
-An explicit instruction to recreate, correct, or replace the exact target images authorizes replacement of those target filenames. Do not request the same authorization again.
+## 2. Replacement Preconditions
 
 Before changing files, verify:
 
@@ -35,7 +28,7 @@ Before changing files, verify:
 3. The replacement pair is readable JPG, exactly `1000 x 750`, visually approved, and has different hashes and compositions.
 4. The accepted-source and canonical-public destinations.
 5. Every controlled reference to either public image.
-6. The Git root is `C:\Codex\Candy`, the branch is `main`, the remote is `origin`, and no existing change or active reservation overlaps the target files.
+6. No existing change or active reservation overlaps the target files.
 
 If any replacement image still requires production or material editing, leave this route, complete the image-creation route, and return here only after the pair passes its acceptance gates.
 
@@ -92,28 +85,18 @@ codex\scripts\candy-site-state.cmd preview-sitemap-lastmod
 codex\scripts\candy-site-state.cmd sync-sitemap-lastmod
 codex\scripts\candy-site-state.cmd write
 codex\scripts\candy-site-state.cmd check --target "<slug>"
-git status --short
-git diff --stat
-git diff --check
 ```
 
 3. Review the exact target-file diff. Do not repeat the same validation through multiple tools when one authoritative result already passed.
 
 For diagnosis or an explicit guard rerun, use `python .github\scripts\candy_area_image_replacement_guard.py --before HEAD --worktree`. The integrated write command already invokes this gate automatically.
 
-## 6. Commit, Push, and Production
+## 6. Publication-Specific Verification
 
-Commit, Push, and production require the authority defined in root `AGENTS.md`. When authorized, use one target-limited Commit, one Push, and the normal Push-triggered protected deployment. Do not split the asset and its references into separate deployments.
+When publication is included by the cumulative Git and production routes, keep
+the asset and every controlled reference in one deployment unit.
 
 The normal production deployment invokes the same area-image replacement guard before it creates the FTP plan. A failed guard exits the Actions run before any FTP connection or production change.
-
-Before Commit and Push:
-
-1. Run `git fetch origin` and confirm `HEAD...origin/main` is `0 0`.
-2. Stage every target path explicitly. Do not use `git add .` or `git add -A`.
-3. Confirm that staged paths contain only the replacement work unit.
-4. Run `git diff --cached --check`.
-5. Commit once and Push `main` once.
 
 After Actions succeeds, verify:
 
@@ -127,11 +110,11 @@ After Actions succeeds, verify:
 
 Use exact image locators or DOM references for below-fold images. Do not use repeated freehand scrolling when a direct locator can bring the image into view.
 
-## 7. Exception Routes and STOP Conditions
+## 7. Responsibility Transfers and STOP Conditions
 
-Leave this fast route and read the named document only when required:
+These conditions leave the responsibility of this runbook:
 
-| Condition | Required route |
+| Condition | Responsibility source selected by the root route |
 |---|---|
 | Replacement images must be created or edited | `CANDY_AREA_IMAGE_CREATION_RUNBOOK.md` and `CANDY_AREA_IMAGE_CREATION_SPEC.md` |
 | Slug, filename, accepted/public ownership, or duplication is ambiguous | `CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md` |
@@ -149,5 +132,3 @@ STOP only the affected operation when the replacement target, authority, new ima
 - [ ] The asset and references belong to one target-limited work unit.
 - [ ] Required generated-state and Git checks passed.
 - [ ] When publication was authorized, one deployment completed and desktop/mobile showed the new images.
-
-Do not report completion when any applicable item remains unchecked.

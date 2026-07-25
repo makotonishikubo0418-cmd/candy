@@ -9,13 +9,11 @@ This is the canonical specification for generating area pages without damage and
 
 Use it for normal new-page generation. Development changes such as bug fixes, existing-feature changes, common-processing changes, and refactoring are out of scope and follow root `AGENTS.md` and the task-specific canonical documents named by its Section 2 route.
 
-Apply `CANDY_PAGE_GENERATION_GOVERNANCE.md` first for common missing-input, variable-structure, and STOP rules.
-
-Review `CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md` for area-image acceptance, slug reconciliation, placement in the canonical public source, and Git management.
-
-For distributed staff production of unbuilt area pages, also review `CANDY_AREA_STAFF_PRODUCTION_RUNBOOK.md` and `CANDY_AREA_105_PAGE_QUEUE.md`.
-
-Legacy area-production history and investigation snapshots are not current canonical sources. Normal generation uses this specification, the common governance document, and generated ledgers.
+This document owns only area-specific page structure, input mapping, output
+shape, and validation requirements. Common generation rules, image-asset
+lifecycle, staff execution order, Git, production, and document routing remain
+in the documents selected cumulatively by root `AGENTS.md`; this specification
+does not add or redefine those routes.
 
 ### 1.1 Responsibility and Page Structure
 
@@ -104,29 +102,13 @@ The Japanese labels below are exact website display concepts and are preserved.
 
 - Use the target-region text under `Text_area_data` as source data.
 - Use `HP/source/template_kagoshima-deliveryhealth-area.html` as the HTML template.
-- Treat public entry PHP, source HTML, page-specific dataset PHP, and `dataset_base.php` registration as one set.
-- Do not report completion after generating only HTML.
-- Do not normally use `HP/create.php` for Codex page generation.
-- When any same-name file exists, do not overwrite it; verify the existing three-file set and registrations.
-- `dataset_base.php` is a high-impact common file. Present the target and diff first, then change it minimally only after user instruction or approval.
+- Keep the area-specific public entry PHP, source HTML, page-specific dataset
+  PHP, `dataset_base.php` registration, area-index entry, and sitemap entry
+  internally consistent for the same canonical slug.
+- Apply the common collision, incomplete-input, change-boundary, and completion
+  gates from `CANDY_PAGE_GENERATION_GOVERNANCE.md`.
 
-## 3. Verified Population and Counts
-
-All actual files were read on 2026-07-12 and yielded:
-
-| Target | Count | Notes |
-|---|---:|---|
-| Text files under `Text_area_data` | 169 | 135 direct, 32 under Completion, and 2 under Backup |
-| Text files with a page URL | 168 | Excludes one update-procedure text file |
-| Area public-candidate source HTML | 61 | 34 complete and 27 with remaining placeholders |
-| Area public entry PHP | 71 | Includes 10 without source |
-| Area page-specific dataset PHP | 71 | Includes 10 without source |
-| Area cases in `dataset_base.php` | 39 | 31 of 61 source files are unregistered |
-| Area link transformations in `dataset_base.php` | 39 | 31 of 61 source files are unregistered |
-
-Counts may change; recalculate them for new production.
-
-## 4. File Pairing
+## 3. File Pairing
 
 For page identifier `<slug>`, the required structure is:
 
@@ -148,7 +130,7 @@ HP/includefile/dataset_base.php
 
 Do not determine a slug by inference alone. Reconcile canonical in source data, the filename, and existing page names. When one region has a legacy slug or alternate spelling, obtain user confirmation.
 
-### 4.1 Separation of Text Classification and New-Production Eligibility
+### 3.1 Separation of Text Classification and New-Production Eligibility
 
 Text classifications such as `間違い無し`, `画像無し`, and `情報足りない` describe input content only. They do not determine new-page eligibility.
 
@@ -161,7 +143,7 @@ the target change unit; it is not a candidate-selection blocker. Preserve one
 existing correct target-slug link. Do not select a target from a successful
 classification alone.
 
-## 5. Source-Data to HTML Mapping
+## 4. Source-Data to HTML Mapping
 
 | Source-data item | HTML target |
 |---|---|
@@ -189,7 +171,7 @@ removing a path segment or by using a separate filename.
 
 Do not add line breaks to body copy except where explicitly present in source data. Distinguish line breaks required by HTML markup from visible line breaks in copy.
 
-## 6. Scene, Subtitle, and Description Numbering
+## 5. Scene, Subtitle, and Description Numbering
 
 Verified complete pages have five base scenes:
 
@@ -226,7 +208,7 @@ subtitle_5_2 / description_5_2
 
 All 34 verified complete pages have five scenes. FAQ counts were five on two pages, six on 31 pages, and seven on one page, so FAQ count is variable.
 
-## 7. Shop Blocks
+## 6. Shop Blocks
 
 - Base shop information on the matching block in `HP/source/template_shop.html`.
 - Include only shops specified by source data.
@@ -234,7 +216,7 @@ All 34 verified complete pages have five scenes. FAQ counts were five on two pag
 - Do not change common shop-block structure, links, or measurement elements without cause.
 - Do not infer a shop absent from source data.
 
-### 7.1 Nearby Supported Areas
+### 6.1 Nearby Supported Areas
 
 - The canonical mapping is `codex/data/CANDY_AREA_RELATED_LINKS.json`. Do not maintain another page-by-page mapping.
 - Use the heading `周辺の対応エリア` and the link text `鹿児島市{リンク先地域名}で呼べるデリヘル`.
@@ -245,7 +227,7 @@ All 34 verified complete pages have five scenes. FAQ counts were five on two pag
 - When fewer than three eligible nearby targets exist, omit the entire block; do not render an empty heading or container.
 - The area template contains only the `AREA_RELATED_LINKS` generation marker. A generated public source HTML must not retain the marker.
 
-## 8. JSON-LD
+## 7. JSON-LD
 
 The area template and every area source HTML contain two JSON-LD blocks:
 
@@ -262,11 +244,10 @@ Validation:
 - Match breadcrumb hierarchy and URLs to the visible breadcrumb.
 - Match shop count to ItemList element count.
 
-The 34 currently complete pages parse successfully. Both JSON-LD blocks are incomplete on the 27 pages with remaining placeholders.
+## 8. Public Entry PHP
 
-## 9. Public Entry PHP
-
-The 71 existing area public entry PHP files share this base form. The Japanese code comment is preserved as an exact code value.
+Use the current same-category public entry form below. The Japanese code
+comment is preserved as an exact code value.
 
 ```php
 <?php
@@ -280,9 +261,9 @@ include("/home/firststar/public_html/group/candy/includefile/dataset_base.php");
 
 For new generation, recheck a current complete page in the same category and use the same form. Do not infer a server-path change.
 
-## 10. Page-Specific Dataset PHP
+## 9. Page-Specific Dataset PHP
 
-The 71 existing area dataset PHP files share this base form:
+Use the current same-category dataset form:
 
 ```php
 <?
@@ -293,11 +274,11 @@ $source = str_replace($waku0, $waku_html, $source);
 
 Use a current complete same-category page as the reference. Do not mix development changes such as replacing short opening tags with normal tags into new-page generation.
 
-## 11. Required dataset_base.php Registration
+## 10. Required dataset_base.php Registration
 
 Normal new-page generation registers two locations.
 
-### 11.1 Dataset Routing
+### 10.1 Dataset Routing
 
 ```php
 case 'kagoshima-deliveryhealth-area-<slug>.html':
@@ -305,7 +286,7 @@ case 'kagoshima-deliveryhealth-area-<slug>.html':
     break;
 ```
 
-### 11.2 HTML-to-PHP Link Transformation
+### 10.2 HTML-to-PHP Link Transformation
 
 ```php
 $source = str_replace(
@@ -319,110 +300,67 @@ Case, source HTML, dataset PHP, and public PHP slugs MUST match exactly.
 
 `dataset_default.php` may load source HTML when registration is absent, but normal generation does not permit omitted registration.
 
-## 12. Generation Algorithm
+## 11. Area-Specific Generation Sequence
 
-1. Verify Git branch, worktree, and remote state.
-2. Verify region name, slug, canonical, images, and every input item in the
+The common generation gates remain in
+`CANDY_PAGE_GENERATION_GOVERNANCE.md`. Within those gates:
+
+1. Verify region name, slug, canonical, images, and every input item in the
    target text file. Treat a complete accepted pair as available; first-install
    it into the canonical local-public directory before the final target gate
    when the public pair is absent.
-3. Check for same-name public PHP, source HTML, dataset PHP, and dataset_base registration.
-4. Compare at least one complete same-category page.
-5. Copy the area template into new source HTML.
-6. Apply SEO, OGP, breadcrumb, H1, images, body, map, and basic information.
-7. Apply specified shop blocks from `template_shop.html`.
-8. Add or remove FAQ blocks according to hotel and spot counts.
-9. Renumber scenes, subtitles, and descriptions from the top.
-10. Match the two JSON-LD blocks to body content.
-11. Generate public entry PHP.
-12. Generate page-specific dataset PHP.
-13. Register both locations in `dataset_base.php`.
-14. Validate internal links, images, canonical, OGP, and slug.
-15. Check all placeholders, the exact nearby-area mapping, incomplete input, legacy slugs, and duplicate IDs.
-16. Validate PHP syntax, JSON syntax, `git diff --check`, and changed targets.
-17. Add exactly one missing target-slug link to `source/area.html` as normal
+2. Check for same-name public PHP, source HTML, dataset PHP, and dataset-base registration.
+3. Compare at least one complete same-category page.
+4. Copy the area template into new source HTML.
+5. Apply SEO, OGP, breadcrumb, H1, images, body, map, and basic information.
+6. Apply specified shop blocks from `template_shop.html`.
+7. Add or remove FAQ blocks according to hotel and spot counts.
+8. Renumber scenes, subtitles, and descriptions from the top.
+9. Match the two JSON-LD blocks to body content.
+10. Generate public entry PHP and page-specific dataset PHP.
+11. Register both locations in `dataset_base.php`.
+12. Validate internal links, images, canonical, OGP, slug, placeholders,
+    nearby-area mapping, legacy slugs, duplicate IDs, PHP syntax, and JSON syntax.
+13. Add exactly one missing target-slug link to `source/area.html` as normal
     generation output, preserve one correct existing link, and verify that no
     same-region/different-slug conflict exists. Determine the corresponding
     index JSON-LD and `sitemap.xml` updates.
-18. When browser validation was not performed, report browser rendering as unverified.
-19. Commit and Push only after user confirmation and explicit instruction.
 
-## 13. Exceptions
+## 12. Exceptions
 
 Do not force area source-data quantity into template fixed counts. Match hotel, spot, and shop counts to source data and synchronize IDs, final FAQ classes, and JSON-LD ItemList after additions or deletions.
 
-### 13.1 Variable FAQ Count
+### 12.1 Variable FAQ Count
 
 Hotels and spots are not fixed at three. Add or delete according to source data and set only the final FAQ in each section to `bd_tb`.
 
-### 13.2 Multiple Slugs for One Region
+### 12.2 Multiple Slugs for One Region
 
 Existing content may contain alternate slugs for the same region. During new production, verify canonical, filenames, existing links, and user instruction. Do not consolidate, delete, or rename automatically.
 
-### 13.3 Source-Data Location Does Not Equal Completion State
+### 12.3 Source-Data Location Does Not Equal Completion State
 
 - Source HTML may contain placeholders even when source data is under `Completion`.
 - Complete source HTML may exist for direct source data.
 - Do not determine completion from the folder name alone.
 
-### 13.4 Missing Images
+### 12.4 Missing Images
 
-Some complete HTML references missing images. During generation, reconcile the
-accepted and local-public `_1` and `_2` pairs.
-
-When a complete accepted pair exists and both local-public files are absent,
-perform the target-limited first installation authorized by the page-production
-request and continue. This is not a missing-image STOP.
-
-When no complete accepted or local-public pair exists for a new area-page
-request, STOP and request images using:
+An area page requires this pair:
 
 ```text
 kagoshima-deliveryhealth-area-<slug>_1.jpg
 kagoshima-deliveryhealth-area-<slug>_2.jpg
 ```
 
-Without user approval, do not reuse an existing image, use a dummy image, infer an image name, or publish without images. After receipt, verify format, dimensions, slug, both-file completeness, and duplication before use.
+Acceptance, first installation, replacement, and missing-image STOP decisions
+belong to the cumulative image-asset route selected by root `AGENTS.md`.
 
-### 13.5 Partial Existing Three-File Set or Registration
+### 12.5 Partial Existing Three-File Set or Registration
 
 Treat this as an existing-inconsistency fix, not new production. Keep it separate and obtain approval after presenting the affected scope.
 
-## 14. Currently Verified Inconsistencies
-
-### 14.1 Source HTML with Remaining Placeholders: 25
-
-```text
-gionnosucho, gofukucho, gokabeppucho, kasugacho,
-kibougaokacho, kiirecho,
-kiirenakamyocho, kinkodai, kinseicho, koraicho,
-korimoto, korimotocho, koriyamacho, koriyamadakecho,
-kotsukicho, koutokujidai, koyamadacho, koyo,
-oroshihonmachi, sakamotocho, sakanoue, sakuragaoka,
-sanwacho, shimofukumotocho, shimotatsuocho
-```
-
-Each page retains 79 primary placeholders and both JSON-LD blocks have invalid syntax.
-
-### 14.2 Source HTML Without dataset_base Registration: 0
-
-All current area source HTML entries have one matching dataset-routing case and one HTML-to-PHP link transformation. Use the generated site-page ledger for the current population and exact per-page state.
-
-### 14.3 Public PHP and Dataset PHP Without Source HTML: 0
-
-The nine broken partial page pairs were removed on 2026-07-20 together with their dataset-base registrations and area-index links. Source Text and image assets were retained for any future normal production.
-
-
-
-### 14.4 Other Findings
-
-- `oroshihonmachi`: Source data exists under Completion, but source HTML retains placeholders.
-- `shimotacho`: Source data is direct, but source HTML is complete.
-- `arata` and `kinkocho`: Duplicate `id="button_1"`.
-
-These are verified existing conditions and were not fixed by the specification investigation.
-
-## 15. Completion Criteria
+## 13. Area-Specific Completion Criteria
 
 - [ ] Every required source-data item is complete.
 - [ ] Region name and slug are confirmed.
@@ -444,12 +382,11 @@ These are verified existing conditions and were not fixed by the specification i
 - [ ] Robots agrees with publication policy.
 - [ ] Area-index and sitemap registration requirements were checked.
 - [ ] PHP syntax is verified.
-- [ ] `git diff --check` succeeds.
-- [ ] No out-of-scope file changed.
-- [ ] Missing browser validation is reported.
 - [ ] Source text was not moved or deleted without instruction.
-- [ ] Local completion and production deployment are reported separately.
 
-## 16. Unchanged Scope
+## 14. Specification Boundary
 
-This specification investigation did not change public PHP, source HTML, dataset PHP, `dataset_base.php`, images, or source Text.
+Current page counts, individual defects, queue state, Git state, and production
+state are intentionally not stored in this specification. Obtain them from the
+actual files and the generated current-state documents selected by root
+`AGENTS.md`.

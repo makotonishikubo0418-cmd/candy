@@ -5,19 +5,20 @@
 
 ## 1. Purpose and Scope
 
-This is the canonical structural and output specification for generating hotel pages from source Text without damage. Use it for normal new-page generation and as the output contract for target-scoped existing-page structural fixes. Use `CANDY_OPERATION_BASICS.md` for the existing-page investigation and fix procedure, and treat common-processing changes or refactoring as separate development work.
-
-Apply `CANDY_PAGE_GENERATION_GOVERNANCE.md` first for common missing-input, variable-structure, and STOP rules.
+This is the canonical structural and output specification for generating hotel
+pages from source Text without damage. It owns hotel-specific page structure,
+source-route semantics, output shape, and validation requirements. Common
+generation rules, Git, publication, and routing remain in the documents
+selected cumulatively by root `AGENTS.md`.
 
 Select one source route before production:
 
-- `DIRECT_TEXT`: Staff already completed the production Text. Do not require
-  Phase results. Reconcile the target's accepted and local-public image pairs,
+- `DIRECT_TEXT`: Staff already completed the production Text. Phase results are
+  not required. Reconcile the target's accepted and local-public image pairs,
   first-install a complete accepted pair when required, then run
-  `candy-hotel.cmd direct-check`. Use the direct start in
-  `CANDY_HOTEL_IMAGE_CREATION_SPEC.md` only when no complete accepted or public
-  pair exists, and execute through `CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md`.
-- `PHASE_PREPARED`: Use `CANDY_HOTEL_CONTENT_PREPARATION_RUNBOOK.md` for Phases 1-3, `CANDY_HOTEL_IMAGE_CREATION_SPEC.md` for Phase 4, and `CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md` for Phase 5.
+  `candy-hotel.cmd direct-check`.
+- `PHASE_PREPARED`: Phases 1-4 prepared the production Text and images before
+  page generation.
 
 Both routes converge on the same target Text, template, generator, target gate, validation, and publication implementation. Phase results are never page-content inputs.
 
@@ -125,13 +126,12 @@ The Japanese labels below are exact website display concepts and are preserved.
 - Use the target hotel text file under `Text_hotel_data` as source data.
 - Require the current Text format. STOP on `旧形式要変換`; do not normalize legacy labels or numbered blocks during page generation.
 - Use `HP/source/template_kagoshima-deliveryhealth-hotel.html` as the HTML template.
-- Treat public entry PHP, source HTML, page-specific dataset PHP, and `dataset_base.php` registration as one set.
-- Do not report completion after generating only HTML.
-- Do not normally use `create.php` for Codex page generation.
 - Match shops, normal article scenes, FAQs, optional basic-information rows, fee rows, access entries, and nearby spots to complete source-data blocks. Do not set a fixed maximum.
 - Preserve input order for normal article scenes and known sections. STOP before generation on a partial block.
 - Under `関連記事`, publish three distinct indexable blog-detail links and three distinct indexable area-detail links selected deterministically from current public files. Exclude the current page, duplicate destinations, placeholder text, and `href="#"`. Immediately after that container, output exactly one `<div class="lm_40_0_75 center" id="button_3"><a href="./#shopinfo" class="bt-pk-xl">対応デリヘル店一覧</a></div>` and output no visible block between this CTA and the closing page-content wrapper.
 - Match JSON-LD to visible content.
+- Apply the common collision, incomplete-input, change-boundary, and completion
+  gates from `CANDY_PAGE_GENERATION_GOVERNANCE.md`.
 
 Standard production and publication runs only:
 
@@ -148,12 +148,14 @@ codex\scripts\candy-hotel.cmd direct-check --input "Text_hotel_data/対象ホテ
 
 Only `DIRECT_TEXT_STATUS=READY_FOR_IMAGES` may enter direct image creation.
 When a complete accepted pair exists and only its local-public copy is absent,
-perform the page-authorized first installation instead of entering image
-creation or reporting a missing-image STOP. Only
+perform first installation when it is included by the cumulative authorized
+routes instead of reporting a missing-image STOP. Only
 `DIRECT_TEXT_STATUS=READY_FOR_BUILD` may continue to the common target gate and
 page generation.
 
-The dedicated tool runs generation, validation, target-limited staging, one Commit, one Push, Actions, production HTTP validation, and URL output in sequence.
+The dedicated tool always performs generation and validation. It performs
+staging, Commit, Push, Actions, production HTTP validation, and URL output only
+when those operations are included by the cumulative authorized routes.
 
 ## 3. Current-State Source
 
@@ -312,26 +314,26 @@ Every existing hotel detail page MUST have the three page files plus dataset_bas
 
 STOP new production when the target slug already exists in public PHP, source HTML, dataset PHP, dataset_base, the hotel index, or sitemap.
 
-## 12. Generation Algorithm
+## 12. Hotel-Specific Generation Sequence
 
-1. Verify Git state and target scope.
-2. Verify required source-text items, canonical, slug, images, and
+The common generation gates remain in
+`CANDY_PAGE_GENERATION_GOVERNANCE.md`. Within those gates:
+
+1. Verify required source-text items, canonical, slug, images, and
    placeholders. Treat a complete accepted pair as available and
    first-install it into the canonical local-public directory before the final
    target gate when the public pair is absent.
-3. Check the same-name three-file set and shared registrations for duplication.
-4. Parse input blocks by type and record the entire order, including normal article scenes.
-5. Generate only complete blocks; omit optional sections with zero items.
-6. Apply every specified shop from `template_shop.html`.
-7. Only for Text-omitted travel time and transportation fees, derive values from hotel coordinates and nearby complete area pages.
-8. Display a complete legacy option independently and do not mix it into normal scenes.
-9. Generate FAQs, optional basic-information rows, fees, access, and nearby spots according to input count.
-10. Renumber scenes, subtitles, and descriptions in visible order.
-11. Synchronize FAQPage and ItemList to visible presence, count, and order.
-12. Generate public entry PHP, source HTML, dataset PHP, shared registrations, hotel index, and sitemap for the target only.
-13. Check placeholders, empty containers, duplicate IDs, gaps, missing body content, and exactly one canonical terminal CTA immediately after related articles.
-14. Check canonical, images, official URL, map, internal links, PHP, JSON, and diff.
-15. For an explicitly authorized publish, run target-limited Commit, Push to main, Actions, and production HTTP validation.
+2. Check the same-name three-file set and shared registrations for duplication.
+3. Parse input blocks by type and record the entire order, including normal article scenes.
+4. Generate only complete blocks; omit optional sections with zero items.
+5. Apply every specified shop from `template_shop.html`.
+6. Only for Text-omitted travel time and transportation fees, derive values from hotel coordinates and nearby complete area pages.
+7. Display a complete legacy option independently and do not mix it into normal scenes.
+8. Generate FAQs, optional basic-information rows, fees, access, and nearby spots according to input count.
+9. Renumber scenes, subtitles, and descriptions in visible order.
+10. Synchronize FAQPage and ItemList to visible presence, count, and order.
+11. Generate public entry PHP, source HTML, dataset PHP, shared registrations, hotel index, and sitemap for the target only.
+12. Check placeholders, empty containers, duplicate IDs, gaps, missing body content, the terminal CTA, canonical, images, official URL, map, internal links, PHP, and JSON.
 
 ## 13. Exceptions and Cautions
 
@@ -341,9 +343,11 @@ hotelm has no FAQ, three fee rows, and three nearby spots. IDs are scene1, scene
 
 ### 13.2 Retired Update-Procedure Text
 
-The former `Text_hotel_data/Cursor用更新手順.txt` was retired from the production-input directory after its applicable rules were reconciled into the canonical hotel documents. Do not restore or route work through it. Use `CANDY_HOTEL_CONTENT_PREPARATION_RUNBOOK.md`, this specification, the hotel image specification, and the hotel staff runbook.
+The former `Text_hotel_data/Cursor用更新手順.txt` was retired from the
+production-input directory after its applicable rules were reconciled into the
+canonical hotel documents. It is not a current route or instruction source.
 
-## 14. Completion Criteria
+## 14. Hotel-Specific Completion Criteria
 
 - [ ] `SOURCE_ROUTE` is exactly `DIRECT_TEXT` or `PHASE_PREPARED`, and evidence from the other route was not required.
 - [ ] The source is current format; any legacy source passed conversion and current-parser validation before `direct-check`.
@@ -351,9 +355,6 @@ The former `Text_hotel_data/Cursor用更新手順.txt` was retired from the prod
 - [ ] Missing-input handling is determined.
 - [ ] Rows, FAQs, and sections were added or removed according to information quantity.
 - [ ] No HTML, ID, or JSON-LD remains for an omitted section.
-- [ ] Public PHP, source HTML, and dataset PHP exist.
-- [ ] dataset_base case and link transformation exist.
-- [ ] Placeholder count is zero.
 - [ ] The H1 contains exactly one `<span class="fc_p">` around the exact hotel name; all base text and surrounding quotation marks remain outside it.
 - [ ] No heading or additional copy from a complete normal scene is missing.
 - [ ] Scene, FAQ, and nearby-spot numbering is correct.
@@ -363,11 +364,7 @@ The former `Text_hotel_data/Cursor用更新手順.txt` was retired from the prod
 - [ ] Visible FAQ matches FAQPage JSON-LD.
 - [ ] FAQPage JSON-LD is absent when no FAQ exists.
 - [ ] Hotel name, official URL, address, and map correspond correctly.
-- [ ] Images exist.
 - [ ] When the accepted pair existed without a local-public pair, the exact
       accepted bytes were first-installed before the final target gate.
-- [ ] Canonical, OGP, and internal links are correct.
-- [ ] Robots agrees with publication policy.
 - [ ] Hotel-index and sitemap registration requirements were checked.
 - [ ] No duplicate ID exists.
-- [ ] PHP syntax, JSON syntax, and `git diff --check` were validated.

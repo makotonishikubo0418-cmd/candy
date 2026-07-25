@@ -2,9 +2,9 @@
 
 - Purpose: Research and prepare one hotel input through three independently validated phases
 - Status: Canonical execution runbook
-- Updated: 2026-07-23
+- Updated: 2026-07-25
 - Applies to: Hotel identity and business research, access research, page copy, FAQ, SEO input, shop selection, and nearby-spot preparation
-- Output authority: `Text_hotel_data/<hotel-name>.txt`
+- Production output: `Text_hotel_data/<hotel-name>.txt`
 
 ## 1. Position and Scope
 
@@ -20,12 +20,9 @@ The three phases remain separate because their evidence, failure causes, and val
 
 Phase result Markdown is evidence and handoff material. It is not a production source. The only production input is the exact target file under `Text_hotel_data/`.
 
-This runbook MUST be used with:
-
-- `CANDY_PAGE_GENERATION_GOVERNANCE.md`
-- `CANDY_HOTEL_PAGE_GENERATION_SPEC.md`
-- `CANDY_HOTEL_IMAGE_CREATION_SPEC.md` and `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md` for Phase 4 acceptance and local public installation
-- `CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md` for Phase 5
+This runbook owns only Phases 1-3. Image preparation, page generation,
+publication, Git, production, and reporting remain in the documents selected
+cumulatively by root `AGENTS.md`.
 
 Phases 1-3 MUST NOT edit HTML, PHP, dataset PHP, shared registrations, CSS, JavaScript, images, or production data.
 
@@ -48,7 +45,9 @@ FAQ_REFERENCE_PATH: optional staff-provided reference
 
 `TARGET_TEXT_PATH` MUST be inside `Text_hotel_data/` and MUST identify one target. Do not select another hotel automatically.
 
-Phase-result files MUST be stored at a user-specified location outside the repository unless the user explicitly authorizes a different durable record. Do not create temporary research reports inside the repository.
+`PHASE_RESULT_ROOT` MUST be an already selected durable evidence location.
+STOP before writing phase-result files when that location is missing or outside
+the authorized task scope.
 
 ### 2.2 Canonical Identifier
 
@@ -439,8 +438,6 @@ After every phase:
 3. Verify no placeholder, Source ID, Markdown heading, or research annotation entered a production field.
 4. Verify every adopted phase value has an evidence record.
 5. Verify the current target Text hash equals the recorded output hash.
-6. Run `git diff --check` for repository changes.
-7. Run `git status --short` and report every changed path in the authorized phase scope.
 
 Do not run `publish` during Phases 1-3.
 
@@ -450,22 +447,21 @@ STOP the affected phase when:
 
 - The target hotel or target Text cannot be identified uniquely.
 - The target Text is outside `Text_hotel_data/`.
-- A canonical slug conflicts or is inferred without authority.
+- A canonical slug conflicts or lacks a confirmed source.
 - The operating hotel, address, or map location cannot be confirmed.
 - A required earlier phase is not `PASS`.
 - An earlier target Text hash does not match the current file.
 - Required source data conflicts and the affected public value cannot be selected.
 - The phase would require HTML, PHP, dataset, image, shared-registration, Commit, Push, or production work.
-- The authorized change cannot be limited to the target Text and external phase record.
+- The phase change cannot be limited to the target Text and external phase record.
 
 On STOP, preserve completed evidence and report the stopped phase, exact unresolved field, affected target, unexecuted work, and decision required.
 
-## 9. Phase Report
+## 9. Phase Evidence Record
 
-Use this concise report after each phase:
+Store these phase-specific evidence fields:
 
 ```text
-結論:
 PHASE:
 対象ホテル:
 TARGET_TEXT_PATH:
@@ -479,5 +475,3 @@ Text更新項目:
 検証結果:
 人間確認が必要な項目:
 ```
-
-Report research completion separately from image creation, page generation, Git publication, and production verification.

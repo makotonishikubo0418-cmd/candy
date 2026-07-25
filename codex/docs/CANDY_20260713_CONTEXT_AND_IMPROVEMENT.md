@@ -4,11 +4,15 @@
 
 Preserve the requirements, actions, failures, unresolved items, and prevention measures established during CANDY work on 2026-07-13.
 
-This is a dated work record, not the canonical current state. Recheck current actual files, Git, GitHub, and production. Repeated conversation content was consolidated, but requirements and facts affecting decisions were retained. Do not store credentials, passwords, raw logs, or personal information.
+This is a dated, non-executable work record, not a current instruction or
+current-state source. All imperative language below describes the rule or
+decision in force on the stated date only. Current work follows root
+`AGENTS.md`, its cumulative routes, actual files, and the current canonical
+documents.
 
 References in this historical record to prior `AGENTS.md` section numbers describe the rule in force at that time. Current authority is root `AGENTS.md` and the current routed runbook.
 
-## 2. User-Requested Final Operation
+## 2. Historical User-Requested Final Operation
 
 1. Codex reviews actual files and management documents.
 2. Codex fixes or creates HP content.
@@ -229,75 +233,31 @@ Local changes, GitHub, Actions, production, HTTP, and browser were mixed. Eviden
 
 Each omission added detail to AGENTS and made it harder to read. Exception ownership and update responsibility were undefined.
 
-## 12. Permanent Improvement Policy
+## 12. Historical Improvement Decisions
 
-### 12.1 Limit AGENTS.md to an Entry Point
+The incident review identified five design corrections: shorten the root
+instruction entry point, remove volatile counts from instruction files, assign
+each responsibility to one canonical source, distinguish verification states,
+and keep dated exceptions outside current specifications. These findings
+explain the later management redesign; they do not add a second instruction
+layer.
 
-Include only mandatory rules, short preflight, task routes, STOP conditions, completion-state definitions, and minimal report shape. Exclude volatile counts, dated findings, long file lists, production history, every page exception, and duplicate Git procedures.
+## 13. Current-Work Boundary
 
-### 12.2 Separate Root and HP Responsibilities
+No task may use this incident record as a startup checklist, reporting format,
+Git rule, production rule, or permission source. Root `AGENTS.md` and the
+documents selected by its cumulative task routes are the only current route.
 
-- Root `AGENTS.md`: Repository-wide mandatory rules, Git, production authority, and task routing.
-- The former HP-specific router covered generation routes, categories, images, production index, risky files, and validation routing; current work uses root `AGENTS.md` and the task-specific canonical documents named by its Section 2 route.
-- Store detail in one canonical document and link to it.
+## 14. Historical Reporting Lesson
 
-### 12.3 Make "All" and "100%" Verifiable
+The incident showed that broad claims such as “complete,” “monitoring,” and
+“100%” were unreliable without population and state evidence. Current response
+requirements are defined only by root `AGENTS.md`.
 
-1. Enumerate the population by command.
-2. Record the count.
-3. State exclusions.
-4. Record each result mechanically.
-5. Aggregate success, failure, unverified, and restricted.
-6. Never report 100% when one item is unverified.
-7. Never report full verification without population and evidence.
+## 15. Record Maintenance
 
-### 12.4 Keep Production Work Small and Verifiable
-
-- Prepare preview and target list.
-- Verify actual time, authority, and rendering with a small first batch.
-- Emit file-level progress.
-- Estimate time only from measured speed.
-- Complete temporary and backup lifecycle per target.
-- Enumerate remaining temporary files after partial failure.
-- Do not report monitoring from merely starting a long process; inspect the process, exit code, and current progress.
-- On a user stop instruction, verify process termination.
-
-### 12.5 Protect a Dirty Worktree
-
-- Do not STOP solely because dirty or untracked files exist.
-- Check overlap with current targets.
-- When there is no overlap, change only the target.
-- When overlap cannot be understood or preserved, STOP.
-- Never run `reset --hard`, `clean`, or force push.
-- Limit Stage, Commit, and Push to explicitly authorized files.
-
-## 13. Shortest Next-Task Start
-
-1. Read root `AGENTS.md`.
-2. Use `AGENTS.md` Section 2 to select only the management documents required for the task.
-3. Read `codex/README.md` or `CANDY_MASTER_DOC_INDEX.md` only when the applicable route names it.
-4. Inspect `git status --short --branch` and target actual files.
-5. For production, inspect `CANDY_PRODUCTION_MIGRATION_MASTER.md` and actual workflow/script.
-6. State included work, excluded work, and completion evidence.
-7. Report local, Git, Actions, production, HTTP, and browser separately.
-
-## 14. Prohibited Reporting and Required Replacement
-
-| Prohibited | Required replacement |
-|---|---|
-| "It is written in the management document" | Show the result of rechecking the target section and actual file |
-| "I checked it generally" | Show population, count, success, failure, and unverified |
-| "Complete" | Show what completed and what remains by state |
-| "Monitoring" | Show running process, latest time, progress, and completion condition |
-| "It will finish if we wait" | Without measured speed and remaining count, identify it as an estimate |
-| "100%" | Show population and evidence of zero unverified items |
-
-## 15. Update Conditions
-
-- Do not rewrite the historical record itself; corrections retain date and reason.
-- Put new current state in its canonical document or a new dated record.
-- Do not add credentials, passwords, raw logs, or personal information.
-- Do not duplicate one rule across documents; select one canonical source and link to it.
+Corrections to this historical record retain the original date and explain the
+correction. Current state and current rules belong in their canonical sources.
 
 ## 16. Chronological Instruction and Decision Ledger for 2026-07-13
 
@@ -407,17 +367,13 @@ It was deprecated because it made upload appear to mean Push only, increased man
 
 Codex had misread upload as GitHub Push only, created unnecessary waits by separating four actions, and selected manual Actions/browser work while GitHub CLI authentication was expired.
 
-### 18.2 Mandatory Operation
+### 18.2 Historical Operation Defined on 2026-07-14
 
-1. Current upload authority follows root `AGENTS.md`.
-2. On the normal path, execute to completion without intermediate questions or extra approval.
-3. A deploy-target Push to `main` starts Actions automatically.
-4. Actions validates SHA, count, `PLAN_TOKEN`, 25-file/50-MiB limits, deletion/rename prohibition, and protected exclusions before FTP.
-5. Use the GitHub API, not browser UI, for Actions.
-6. Production checks cover HTTP, title, canonical, primary body, and images as required.
-7. Final report leads with production URL and also includes Commit and Actions URLs.
-8. The operational target was five minutes from instruction to production URL for a next-page request or post-production upload instruction.
-9. Deletion, databases, noindex/index, `HP/index.php` switchover, and conflict resolution are excluded from integrated authority.
+The design introduced a deploy-target Push trigger, automatic Actions
+validation, GitHub-API monitoring, and production content checks. At that time
+the workflow still used a 25-file/50-MiB gate and aimed for a five-minute
+instruction-to-production cycle. Those limits, reporting details, and authority
+boundaries are historical and MUST NOT be used for current work.
 
 ### 18.3 Immediate Evidence
 

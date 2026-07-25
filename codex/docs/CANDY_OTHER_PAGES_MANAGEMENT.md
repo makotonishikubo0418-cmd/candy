@@ -4,7 +4,8 @@
 
 Centralize responsibility, internal structure, coupled-change scope, validation, and STOP conditions for pages outside area, hotel, and blog.
 
-This is not a fixed current-state ledger. Recheck target actual files, counts, and Git state at task start.
+This is not a fixed current-state ledger. Recheck target actual files and
+counts for each task.
 
 ## 2. Scope
 
@@ -55,7 +56,7 @@ Important:
 
 | Page | Responsibility | Internal structure and input | Coupled checks | Change gate or special caution |
 |---|---|---|---|---|
-| `index.php` | Top and entry point to all primary routes and categories | `source/index.html` + `dataset_index.php`; generates girls, schedules, banners, movies, and shops from the database | Area/blog/hotel sections, common navigation, images, JSON-LD, and `sitemap.xml` | Normal route exists. Production deployment of `index.php` requires prior approval |
+| `index.php` | Top and entry point to all primary routes and categories | `source/index.html` + `dataset_index.php`; generates girls, schedules, banners, movies, and shops from the database | Area/blog/hotel sections, common navigation, images, JSON-LD, and `sitemap.xml` | Normal route exists. Production deployment of `index.php` is a separate final-switchover operation |
 | `girls_list.php` | Girl index | `source/girls_list.html` + `dataset_girls_list.php`; girls, images, schedules, order, and Cookie favorites | `girls.php?no=...`, images, schedules, and common navigation | Normal route exists |
 | `girls.php` | Girl profile | `source/girls.html` + `dataset_girls.php`; GET girl number, girl, images, movie, schedule, and Cookie favorites | Return routes to indexes/schedules/movies, canonical and structured data, images/movies | Normal route exists. Validate GET and zero-result behavior |
 | `schedule.php` | Daily and weekly schedules | `source/schedule.html` + `dataset_schedule.php`; girls, images, schedule, date switching, and Cookie favorites | Girl detail, date tabs, zero-result display, and common navigation | Normal route exists |
@@ -154,7 +155,7 @@ Run only checks required for the target and do not duplicate them.
 
 | Type | Required validation |
 |---|---|
-| Every change | Target-limited diff, `git diff --check`, and no deletion, rename, or unauthorized file |
+| Every change | Target-limited changed-file and reference review |
 | PHP | Lint changed PHP, include target, undefined variables, zero-result and invalid-input behavior |
 | Source | Title, H1, canonical, robots, internal links, images, and desktop/mobile |
 | Dataset | Matching case, placeholder count, database zero results, ordering, escaping, Cookie/GET |
@@ -193,16 +194,19 @@ Show the affected scope before changing:
 
 ## 10. Procedure
 
-1. Read root `AGENTS.md` and only the management documents named by its applicable Section 2 route.
-2. Route here from `CANDY_MASTER_DOC_INDEX.md`.
-3. Verify Git branch, remote, and status.
-4. Inspect target PHP, source, dataset, `dataset_base.php` case, incoming references, and sitemap.
-5. Determine responsibility and change unit from the page table.
-6. Change only the target and execute the validation table.
-7. Synchronize sitemap dates and generated documents with `candy-site-state preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`.
-8. Only when upload is explicitly authorized, run target-limited Commit, Push to main, Actions, and production HTTP validation.
+1. Inspect target PHP, source, dataset, `dataset_base.php` case, incoming references, and sitemap.
+2. Determine responsibility and change unit from the page table.
+3. Change the target and execute the validation table.
+4. Synchronize sitemap dates and generated documents with
+   `candy-site-state preview-sitemap-lastmod`,
+   `sync-sitemap-lastmod`, `write`, and `check`.
+5. When publication is included, continue through the cumulative Git and
+   production routes selected by root `AGENTS.md`.
 
 ## 11. User Report
+
+In addition to the common response structure in root `AGENTS.md`, report these
+target-page facts:
 
 ```text
 対象ページ:
@@ -216,5 +220,3 @@ Actions:
 本番URL:
 未確認・未実施:
 ```
-
-Do not report unexecuted Commit, Push, Actions, or production checks as completed.

@@ -1,3 +1,5 @@
 # CANDY Existing Document Inventory
 
-This deprecated entry point is retained only to route old references. Do not maintain a fixed management-document list here. Use `CANDY_MASTER_DOC_INDEX.md` for active task-specific canonical documents and generated documents.
+This deprecated compatibility stub is retained only to explain old references.
+It contains no active document list, instruction, or route. Current work uses
+only the documents selected by root `AGENTS.md`.

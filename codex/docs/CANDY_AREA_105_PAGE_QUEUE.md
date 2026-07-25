@@ -1,11 +1,14 @@
 # CANDY AREA 105 PAGE QUEUE
 
-- Updated: 2026-07-20
-- Purpose: Control production order and prevent duplication for unbuilt area pages
+- Updated: 2026-07-25
+- Purpose: Preserve the fixed 105-target cohort and its production order
 
-## 1. Population Basis
+## 1. Cohort Provenance
 
-The 167 canonical inputs under `Text_area_data`, excluding Backup, were reconciled with actual files and public images.
+This queue was selected from the 167-input snapshot reconciled on 2026-07-20.
+The numbers below explain only how this fixed 105-target cohort was formed.
+They are not the current `Text_area_data` population, image inventory, page
+population, or eligibility result.
 
 | Classification | Count |
 |---|---:|
@@ -16,7 +19,9 @@ The 167 canonical inputs under `Text_area_data`, excluding Backup, were reconcil
 | No source HTML; information file exists but correctly named slug images are missing | 5 |
 | Total | 167 |
 
-The 105 candidates are not guaranteed to have complete input content. All 105 now have all three page files absent. Nine targets whose broken public PHP and dataset files were removed on 2026-07-20 remain `BLOCKED` because their area-index registrations are absent; review them through the normal new-production gate before future production. Read each text file in full for every batch and change the status to `BLOCKED` when required content is missing.
+Membership in this cohort does not prove current eligibility. For each target,
+the current gate and generated current-state documents selected by root
+`AGENTS.md` determine whether production may proceed.
 
 ## 2. Operating Rules
 
@@ -24,9 +29,6 @@ The 105 candidates are not guaranteed to have complete input content. All 105 no
 - Work from the top. The dedicated gate skips an ineligible `READY_CANDIDATE` during selection and chooses the first row that returns `NEW_PAGE_TARGET_OK=<slug>`; record any explicit user-directed order change.
 - Use one row per slug and do not create a separate history table.
 - After build, set the target row to `LOCAL_COMPLETE` or `IN_PROGRESS`.
-- Do not create a later Commit or Push solely to record publication results.
-- Verify publication state through the GitHub Commit, Actions, and production HTTP.
-- Do not process separate batches concurrently across multiple Codex tasks.
 
 Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUSHED / PUBLISHED / BLOCKED`
 
@@ -140,17 +142,7 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 104 | 和田 | `wada` | READY_CANDIDATE | |
 | 105 | 皷川町 | `tsuzugawacho` | READY_CANDIDATE | |
 
-## 4. Blocked by Missing Images: 0
-
-Current accepted and public files contain complete canonical `_1` and `_2`
-pairs for every candidate previously listed in this section. Similar-slug legacy
-images remain separate and MUST NOT be renamed or substituted automatically.
-
-Image availability alone does not make a candidate publishable. Continue to
-apply the area-index, page-structure, input, and publication gates.
-
-## 5. Blocked by Existing Inconsistencies: 0
-
-The nine broken public PHP and page-specific dataset pairs were removed on 2026-07-20 together with their shared registrations and area-index links. They are no longer existing-page repairs.
-
-Their source Text and accepted/public images remain available. Any future page creation must start through the normal new-production gate after the required area-index registration is resolved.
+Current image availability, artifact consistency, and eligibility are not
+stored as queue-wide counts here. Use each row's status as workflow state, then
+revalidate the selected target against actual files and the generated
+current-state documents before production.

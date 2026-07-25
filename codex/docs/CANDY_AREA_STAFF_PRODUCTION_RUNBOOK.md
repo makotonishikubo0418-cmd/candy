@@ -30,10 +30,10 @@ Before target selection, treat a complete pair under
 `Text_area_data/画像データ/` as available production input. After selecting
 the target and before the final target gate, copy exact accepted bytes to
 `HP/imgHtml/new_202601/area/` when both same-name public files are absent. A
-page-production request authorizes this target-limited first installation; do
-not stop or ask again merely because the public copy is pending. When the
-accepted pair itself is absent, read `CANDY_AREA_IMAGE_CREATION_SPEC.md` and
-create and validate both images before page generation or publication.
+pending first installation is not a missing-image failure when the cumulative
+authorized routes include installation. When the accepted pair itself is
+absent, image creation and acceptance belong to the cumulative image route
+selected by root `AGENTS.md`.
 
 Run these commands only when investigating exceptions across the full input population:
 
@@ -42,7 +42,8 @@ codex\scripts\candy-area.cmd audit-inputs
 codex\scripts\candy-area.cmd audit-inputs --render
 ```
 
-For the normal path, do not add preliminary `build`, `check`, full-document rereading, or intermediate questions.
+For the normal path, do not add redundant preliminary `build` or `check`
+commands when `publish-next` already performs the same authoritative gates.
 
 ### 1.1 Production Order and New-Page Target Gate
 
@@ -98,15 +99,11 @@ selection or use the applicable exception route.
    target-limited preparation in Section 1.1.
 2. First-install a complete accepted image pair when required, and plan one
    missing target-slug area-index link as normal generation output.
-3. Validate Text, slug, images, existing files, shared registrations, Git, and remote.
+3. Validate Text, slug, images, existing files, and shared registrations.
 4. Generate the complete page set from templates, including the target index link.
 5. Run static validation and synchronize sitemap dates and generated management documents with `candy-site-state preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`.
-6. Verify the stage allowlist.
-7. Commit and Push only the target, once each.
-8. Verify Actions and production HTTP.
-9. Output the production URL, Commit URL, and Actions URL.
-
-Do not update `.md` solely to record publication after the fact, create a management-document-only Commit, or Push a second time. GitHub, Actions, and production HTTP are the canonical publication evidence.
+6. When publication is included, continue through the cumulative Git and
+   production routes and verify Actions and production HTTP.
 
 ## 3. Generation Rules
 
@@ -148,8 +145,7 @@ The dedicated tool validates the following. Do not repeat successful checks manu
 - Exact nearby-area links from the canonical mapping, with no dummy, self-link, duplicate, missing target, or unapproved link text
 - Area index, sitemap, and internal links
 - PHP lint, JSON, images, and diff
-- Stage targets, deletion, rename, and unauthorized changes
-- Remote, Push, Actions, production page and images, index, sitemap, and redirects
+- Production page and images, index, sitemap, and redirects when publication is included
 
 When local PHP CLI is absent, use `PHP_LINT=UNAVAILABLE`. Production publication requires successful pre-FTP PHP lint in Actions.
 
@@ -160,11 +156,9 @@ When local PHP CLI is absent, use `PHP_LINT=UNAVAILABLE`. Production publication
 - `publish-next` selects only `READY_CANDIDATE`.
 - After build, set the target row to `LOCAL_COMPLETE` or `IN_PROGRESS`.
 - Do not add publication results to the queue after publication.
-- Verify actual publication state through Commit, Actions, and production HTTP.
 
 ## 6. STOP Conditions
 
-- The branch is not `main`, the remote differs, fast-forward is impossible, or a conflict exists.
 - Existing changes to the target or a shared file cannot be preserved.
 - Input is incomplete, no complete accepted or public image pair exists, an
   image pair is partial or same-name hashes conflict, a slug differs, or a
@@ -174,17 +168,16 @@ When local PHP CLI is absent, use `PHP_LINT=UNAVAILABLE`. Production publication
 - A shop is unknown, a shared registration is duplicated, the area index
   contains the same region under another slug, or another area-index or
   sitemap inconsistency cannot be resolved within the target change unit.
-- PHP, JSON, stage allowlist, Actions, or production HTTP validation fails.
-- Deletion, rename, database access, a secret value, or production switchover of `index.php` is required.
+- PHP, JSON, Actions, or production HTTP validation fails.
 
-On STOP, output the stopping point, completed state, unexecuted state, and rerun command. Do not replace with another slug automatically.
+On STOP, add the stopping point, completed state, unexecuted state, and rerun command to the response required by root `AGENTS.md`. Do not replace with another slug automatically.
 
 ## 7. User Report
 
-On success, report only:
+In addition to the common response structure in root `AGENTS.md`, report these
+area-publication facts:
 
 ```text
-結論: 本番反映済み
 作成ページ:
 本番URL:
 Commit URL:
@@ -192,4 +185,5 @@ Actions URL:
 未確認:
 ```
 
-If browser rendering was not performed, state that it is unverified. The target for one normal page is no more than five minutes from instruction to production-URL report.
+If browser rendering was not performed, include that page-specific fact in the
+unverified field.

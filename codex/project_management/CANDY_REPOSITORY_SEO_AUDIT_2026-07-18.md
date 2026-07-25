@@ -9,6 +9,11 @@
 - Scope: repository-wide technical SEO, duplicate area content, internal links, structured data, canonical URLs, index control, and performance-related static assets
 - Excluded operations: file remediation, Commit, Push, deployment, production HTTP checks, Search Console, analytics, and Lighthouse
 
+This is a non-executable evidence snapshot. Its priorities, counts, and
+recommended actions describe 2026-07-18 only and do not override root
+`AGENTS.md`, current generated state, or the currently routed SEO
+specification.
+
 ## 1. Conclusion
 
 The repository requires major SEO remediation. No repository evidence showed a site-wide `noindex`, a global canonical to the wrong domain, or another confirmed Critical condition. Four High findings affect large page groups or route discovery, five Medium findings affect resource delivery, index governance, page semantics, and performance, and three Low findings concern HTML consistency, optional structured-data improvements, and asset maintenance.

@@ -12,7 +12,7 @@ This document MUST be applied to:
 - Removal from Git tracking
 - File movement, renaming, and folder cleanup
 - Recursive operations such as `Get-ChildItem -Recurse`
-- `git add`, `git rm`, Commit, and Push
+- Git staging, Commit, or Push that includes deletion, movement, cleanup, or recovery
 - `.git` damage and Git working-repository recovery
 - Bulk cleanup of generated files, logs, caches, or untracked files
 
@@ -22,7 +22,7 @@ The following operations are prohibited:
 
 - Deletion, movement, staging, Commit, or Push before the target list is fixed
 - Execution while targets are described only with vague labels such as "junk" or "unorganized"
-- `git add .`, `git add -A`, `git clean`, or `git reset --hard`
+- `git clean` or `git reset --hard`
 - Including `.git` contents in deletion candidates
 - Piping recursive search results directly into `Remove-Item`
 - Treating a target as safe only because it is under the repository root
@@ -64,24 +64,17 @@ Before deletion, movement, or bulk cleanup, classify every target as follows:
 
 Before execution, verify at minimum:
 
-1. The Git working repository is `C:\Codex\Candy`. The NAS is storage-only; do not run Git operations there.
-2. Evidence has been provided for reading `AGENTS.md` and the required management documents named by its applicable Section 2 route.
-3. The target is reserved in `codex/project_management/TASK_RESERVATIONS.md`.
-4. `git fetch origin` and `git status --short --branch` have confirmed Git state. Pull before editing when behind.
-5. The target list is fixed.
-6. The target list does not include an unauthorized protected target.
-7. Deletion, movement, Commit, Push, and production operations have explicit user authorization.
+1. The cumulative `AGENTS.md` routes for the operation are satisfied.
+2. The target list is fixed.
+3. Every target has one classification from Section 4.
+4. The target list does not include an unauthorized protected target.
+5. Existing changes and recovery evidence are understood.
 
-## 6. Git Rules
+## 6. Deletion-Specific Git Checks
 
-- Run Git operations only in `C:\Codex\Candy`; never on the NAS.
-- Specify every staging target explicitly.
-- Use `git add -u -- <target>` and `git add -- <target>` according to target state.
+- Follow the Git procedure in `DOCUMENT_RULES.md`; this section adds only deletion-specific checks.
 - After staging, use `git diff --cached --name-status` to verify that no out-of-scope target is included.
-- Before Commit, `git diff --cached --check` MUST succeed.
-- Before Commit, review remaining changes with `git status --porcelain=v1 -uall`.
 - Before Push, verify the existence of `.git/HEAD`, `.git/config`, `.git/index`, root `AGENTS.md`, `codex/README.md`, and `HP/index.php`.
-- After Push, verify the GitHub commit with `git ls-remote origin refs/heads/main`.
 
 ## 7. Git Damage STOP Conditions
 
@@ -95,39 +88,28 @@ STOP when any of the following occurs:
 - The branch unexpectedly becomes `master`.
 - Any of root `AGENTS.md`, `codex/README.md`, or `HP/index.php` is missing.
 
-After stopping, report the affected scope, latest GitHub commit, available isolated copy, and recovery proposal. Do not perform recovery without explicit approval.
+After stopping, report the affected scope, latest GitHub commit, available
+isolated copy, and recovery proposal. Recovery proceeds only through the
+cumulative root route.
 
 ## 8. Git Recovery Procedure
 
-Perform Git recovery only after explicit approval:
+Perform Git recovery only when it is included by the cumulative root route:
 
 1. Stop writes to the damaged local working repository and inspect uncommitted and untracked files without modifying them.
 2. Confirm the latest `origin/main` commit and any local-only changes required for recovery.
 3. Prepare a recovery plan that clones GitHub into a separate empty directory without deleting, overwriting, or moving the damaged working repository.
-4. After explicit approval, clone from GitHub into the local directory and verify the branch, upstream, remote, and `core.autocrlf`.
+4. Clone from GitHub into the selected local directory and verify the branch,
+   upstream, remote, and `core.autocrlf`.
 5. Restore only required local-only changes to the new clone. Do not copy the old `.git` directory into the new clone.
 6. Verify `git status --short --branch`, HEAD against `origin/main`, and the protected targets.
 7. Do not use an isolated NAS `.git` directory as a recovery source or Git working repository.
 8. Report the recovery result, restored targets, and unresolved targets.
 
-## 9. User Reporting Rules
-
-Do not report only technical status codes to the user.
-
-- `D`: tracked by GitHub but currently treated as deleted in the working repository
-- `??`: not registered in GitHub
-- `M`: modified
-- Stage: prepared for inclusion in the next Commit
-- Commit: recorded in local Git
-- Push: synchronized to GitHub
-
-Every problem report MUST state what is affected, how many items are affected, where they are, and the next required action.
-
-## 10. Fixed Lessons from the Incident
+## 9. Deletion-Specific Lessons
 
 - When instructed to delete "junk," classify targets first.
 - Always exclude `.git` from deletion-candidate searches.
 - Do not print an uncontrolled deletion list. Report the count and representative examples, and save the list only when required.
 - Never treat "under the repository root" as sufficient evidence of safety.
-- Distinguish physical deletion, removal from Git tracking, Stage, Commit, and Push.
-- When the correct action is unclear, do not execute; answer the user's question and request the required decision.
+- Distinguish physical deletion from removal from Git tracking.

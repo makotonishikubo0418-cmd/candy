@@ -1,8 +1,12 @@
 # CANDY Full-Population Verification Plan
 
-- Updated: 2026-07-14
+- Updated: 2026-07-25
 - Applies to: `HP`, generation source data, test, and production
-- Position: Canonical procedure for links, images, external URLs, placeholders, and HTTP state
+- Position: Canonical method for full-population evidence classification
+
+This plan owns population enumeration, evidence fields, result
+classifications, and revalidation. It does not define routing, authority, Git,
+deployment limits, workflow behavior, or current defect counts.
 
 ## 1. Definition of Full-Population Verification
 
@@ -146,27 +150,20 @@ A template-only value is not a current public failure. A value remaining in gene
 
 ### 3.8 Production Deployment Route
 
-Validate workflow and deploy script together. Local reproduction commands are:
+When production deployment is inside the verified scope, validate the exact
+workflow and deploy script selected by the cumulative production route in root
+`AGENTS.md`. This plan requires only that the following evidence states remain
+separate:
 
-```powershell
-python .github/scripts/candy_ftp_deploy.py --self-test
-python .github/scripts/test_candy_ftp_deploy.py
-```
+- local workflow/script checks
+- GitHub workflow syntax
+- Actions plan and deployment
+- production SHA-256
+- HTTP
+- browser rendering
 
-Actions also runs both before preview/deploy. Verify:
-
-1. The workflow has a `push` trigger limited to deploy-target changes on `main`, with management documents and source Text excluded by paths.
-2. No full-deploy route exists.
-3. Push plan and manual preview do not receive FTP secrets or connect to FTP.
-4. Deploy generates and compares 40-character SHAs, ancestor, checked-out HEAD, target count, `PLAN_TOKEN`, and confirmation phrase in the same run before FTP.
-5. One deploy is limited to 125 files and 50 MiB. Explicitly approved deletions and rename-source removals require transactional rollback verification.
-6. `index.php`, `.htaccess`, management documents, source Text, secret candidates, and backups are excluded.
-7. Any deletion or rename stops the entire deploy.
-8. Each file follows upload, temporary SHA-256, backup, promote, and final SHA-256; backups remain until all targets validate. A partial failure rolls back every already-deployed target in reverse order and deletes backups only after complete success.
-9. Preview times out after five minutes and deploy after ten.
-10. Upload authority follows root `AGENTS.md`, and the normal successful route does not request intermediate reapproval.
-
-Record local checks, GitHub workflow syntax, Actions preview, Actions deploy, production SHA-256, HTTP, and browser as separate results. A local diff alone is not production safety completion.
+The production migration document and actual workflow/scripts own their
+constraints. This verification plan must not duplicate them.
 
 ## 4. Result Classifications
 
@@ -209,8 +206,6 @@ Do not infer an unverified field.
 5. Future links in source data
 6. References only in unused CSS or templates
 
-An investigation instruction does not authorize changes. Deletion, replacement, Commit, Push, and production deployment require explicit approval. An explicit upload instruction authorizes only the scope defined by root `AGENTS.md`; do not request intermediate reapproval on the normal route.
-
 ## 7. Post-Fix Revalidation
 
 - Target-page HTTP response
@@ -235,39 +230,6 @@ Do not report a local fix as a production fix.
 - Every fix was revalidated.
 - Unexecuted browser, database, and external-service checks are not reported complete.
 
-When pending decisions remain, report that the full population was scanned but unverified items remain. Do not report everything normal until unverified count is zero.
-
-## 9. Full-Population Investigation Record for 2026-07-13
-
-Scope: Production `/public_html/group/candy/`, local `HP`, and three generation-source folders.
-
-Verified:
-
-- Production public entry PHP: 100; 99 returned 200, `index.php` returned intended 301, and unexpected HTTP count was 0.
-- Production inventory: 1,428 files and 29 folders.
-- Generated internal references: 752 unique.
-- In-page anchors: 767 references and 0 missing.
-- External URLs in public code and generated output: 623 unique.
-- Generation source: 1,229 unique URLs from 173 of 175 files containing URLs.
-
-Requires action:
-
-- Missing generated internal references after excluding false positives: 155 unique.
-- Area public PHP from `area.php`: 137 of 194 absent.
-- Images on public area pages: 14 absent files.
-- `shopinfo.php`: absent but referenced from area, blog, contact, and hotel.
-- Public-output placeholders: 27 area pages and an incomplete hotel-index row.
-- Missing active-CSS assets: `img/dummy.gif` and `imgHtml/cdBgGirl.png`.
-- Missing inactive `YTPlayer.css` assets: two fonts and four raster images.
-- References returning HTTP 4xx in public pages/code: 26 unique. A payment form action returning GET 400 is not classified as broken.
-- Verified public-output external 404s: FC2 SNS, legacy diary, 神之川温泉, ローソン, and パークホテル鹿児島.
-- `www.55810.com` 404s: 20 unique, including placeholders, canonical, OGP, and images.
-- Generation-source `www.55810.com` URLs: 228 normal and 118 404 among 346 unique; 102 PHP and 16 images are 404.
-
-Pending:
-
-- Among 883 unique generation-source external URLs: 430 normal, 450 restricted, and 3 unreachable.
-- Of the 450 restricted URLs, 439 are primarily Google Maps shortened URLs returning 429.
-- Do not classify restricted or unreachable results as 404; manually revalidate during generation.
-
-This is an investigation record, not a fix record. As of 2026-07-13, file fixes, production fixes, Commit, and Push were not performed.
+When pending decisions remain, report that the full population was scanned but
+unverified items remain. Do not report everything normal until the unverified
+count is zero.

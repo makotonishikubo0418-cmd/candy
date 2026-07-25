@@ -2,14 +2,16 @@
 
 - Purpose: Safely produce two regional images for an area page while matching the existing design
 - Status: canonical document
-- Updated: 2026-07-22
+- Updated: 2026-07-25
 - Applies to: Image production for candy area pages
 
-## 1. Priority and Scope
+## 1. Responsibility and Scope
 
-This document defines composition, modification, naming, storage, and first installation. Follow `CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md` for image acceptance, slug reconciliation, duplication checks, and Git management. After an approved pair is ready to replace existing same-name public images, leave this creation specification and use only `CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md` for the replacement phase.
-
-The project administrator's explicit instruction is the authority for a task-specific source, method, design exception, overwrite, integration, or publication decision within the instructed scope. When that decision has already been stated, do not stop or request the same decision again merely because this document contains a different default. Apply the instructed exception, record it in the work result, and update the canonical specification when the administrator has explicitly instructed a permanent rule change.
+This document owns only the area-image visual deliverable: source-view
+requirements, two-image composition, crop, title treatment, legibility, and
+visual acceptance. Naming, storage, asset lifecycle, first installation,
+replacement, Git, and publication belong to the other documents selected
+cumulatively by root `AGENTS.md`.
 
 Do not use generative AI. Use images that verify the actual region.
 
@@ -26,8 +28,6 @@ Standard:
 
 - Dimensions: `1000×750`
 - Format: JPG
-- Public destination: `HP/imgHtml/new_202601/area/`
-- HTML reference: `./imgHtml/new_202601/area/<filename>`
 
 ## 3. Required Decisions Before Production
 
@@ -38,9 +38,6 @@ When producing page data and images in the same task, confirm first:
 - Authority for the exact displayed Romanization
 - Lowercase slug matching canonical
 - Image source
-- Public destination
-- Source HTML reference
-- Same-name file existence
 - Existing area image used as the design reference
 
 Reconcile the displayed Romanization and slug separately. The slug controls
@@ -184,45 +181,7 @@ move or decorate the text.
 - No black or translucent text background, dark band, outline, halo, or shadow exists.
 - The second image uses both a closer zoom and a clearly different heading or camera direction.
 
-## 10. Filenames
-
-```text
-kagoshima-deliveryhealth-area-<slug>_1.jpg
-kagoshima-deliveryhealth-area-<slug>_2.jpg
-```
-
-- Prefix: `kagoshima-deliveryhealth-area-`
-- Slug: exact canonical value from the target text file
-- Lowercase with no spaces
-- Same slug for both images of one region
-- Distinguish only with `_1` and `_2`
-- Extension: `.jpg`
-
-## 11. Storage and Overwrite Prevention
-
-Save to the canonical public source `HP/imgHtml/new_202601/area/`.
-
-Before saving, check for a same-name file. When present, compare hashes. Do not save when identical. When contents differ, do not overwrite; report the difference and required decision.
-
-Do not perform an existing same-name public replacement under this creation specification. After the pair passes every creation and acceptance gate, use `CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md`.
-
-Use JPG quality that preserves readable text and terrain without visible degradation and does not differ materially from existing images.
-
-## 12. Page Integration
-
-Place both images in the specified locations on the target area page. Verify:
-
-- `_1` and `_2` order
-- Filename case
-- Destination and source HTML reference
-- OGP, `src`, and alt text
-- Absence of legacy image names
-- Desktop and mobile rendering
-- No clipping of text caused by cropping
-
-For non-image page outputs and shared registrations, follow `CANDY_AREA_STAFF_PRODUCTION_RUNBOOK.md` and `CANDY_AREA_PAGE_GENERATION_SPEC.md`.
-
-## 13. Completion Criteria
+## 10. Visual Completion Criteria
 
 - [ ] The target region is correct.
 - [ ] The first image is a wider view.
@@ -241,11 +200,8 @@ For non-image page outputs and shared registrations, follow `CANDY_AREA_STAFF_PR
 - [ ] The four measured text centers satisfy the fixed coordinate tolerances.
 - [ ] Corresponding `_1` and `_2` text centers differ by no more than `2 px` per axis.
 - [ ] Both images are 1000×750 JPG files.
-- [ ] Filenames, destination, and HTML references agree.
-- [ ] Desktop and mobile rendering are correct.
-- [ ] No broken link or existing-layout damage exists.
 
-## 14. STOP Conditions
+## 11. Visual STOP Conditions
 
 - The target region cannot be uniquely identified.
 - Official romanization or canonical slug cannot be confirmed.
@@ -260,13 +216,11 @@ For non-image page outputs and shared registrations, follow `CANDY_AREA_STAFF_PR
 - A second capture with both closer zoom and a clearly different heading or direction cannot be obtained.
 - White text requires a prohibited background or text effect to remain readable.
 - The fixed text coordinates cannot be met or cannot be verified numerically.
-- The destination cannot be confirmed.
-- Same-name overwrite eligibility cannot be decided.
 
-Do not STOP or request duplicate approval for a task-specific decision that the project administrator has already stated explicitly. On a genuine unresolved STOP condition, report the stopped phase, verified items, unexecuted work, and exact decision still required.
-
-## 15. Extension to Other Categories
+## 12. Extension to Other Categories
 
 Do not copy area-specific elements directly to hotel, blog, or another project.
 
-Candidate common elements are image-source selection, Chrome operation, cropping, overwrite prevention, and quality checks. Keep count, composition, text, fixed copy, naming, destination, and page integration in category-specific specifications.
+Candidate common elements are image-source selection, Chrome operation,
+cropping, and quality checks. Keep count, composition, text, and fixed copy in
+category-specific visual specifications.

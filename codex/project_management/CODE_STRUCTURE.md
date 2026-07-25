@@ -1,49 +1,10 @@
 # Code and Folder Structure
 
-- Purpose: Define the major work areas, each folder's responsibility, and the current canonical sources
-- Status: canonical document
-- Updated: 2026-07-25
+This deprecated compatibility entry point contains no active instruction.
 
-## 1. Canonical Sources and Work Locations
+- Canonical management locations and folder responsibilities: `codex/README.md`
+- Stable HP code and asset structure: `codex/docs/CANDY_CODE_FILE_STRUCTURE.md`
+- Current HP code and asset inventory: `codex/docs/generated/CANDY_CODE_ASSET_INVENTORY.md`
 
-| Type | Path | Responsibility |
-|---|---|---|
-| Local Git working repository | `C:\Codex\Candy` | The only working repository root synchronized with GitHub |
-| GitHub synchronization hub | `makotonishikubo0418-cmd/candy` | Shares commits between Codex tasks. Push only with explicit user instruction |
-| Common-rule entry point | `C:\Codex\Candy\AGENTS.md` | Short entry point read first for every task |
-| Canonical Codex management source | `C:\Codex\Candy\codex` | Contains the README, management documents, HP specifications, and scripts |
-| Project management | `C:\Codex\Candy\codex\project_management` | Contains rules, current state, reservations, history, and safety procedures |
-| Actual HP site tree | `C:\Codex\Candy\HP` | Contains public PHP, source, includefile, images, logs, and movies |
-| Production inputs | Root-level `Text_area_data`, `Text_blog_data`, and `Text_hotel_data` | Non-public source data for page production |
-| NAS storage | `\\192.168.1.3\disk1\FSG_SEO\candy` | Storage-only location for `Backup/`. Git operations are prohibited |
-
-## 2. Primary Areas
-
-| Area | Contents | Entry point |
-|---|---|---|
-| Management source index | Canonical management locations and operational route summaries | `codex/README.md` |
-| Project management | Document rules, state, communication, tasks, and safety | `codex/project_management/` |
-| HP production specifications | Area, hotel, and blog runbooks and generation specifications | `codex/docs/CANDY_MASTER_DOC_INDEX.md` |
-| Stable HP specifications | Page structure, code and asset structure, and SEO specifications | `codex/docs/CANDY_HP_STRUCTURE_MAP.md` and related documents |
-| Generated HP current state | Automatically generated page, production-candidate, code/asset, and SEO inventories | `codex/docs/generated/` |
-| HP generation tools | Area, hotel, and blog generation, validation, and publishing scripts | `codex/scripts/` |
-| Public HP files | PHP, source, dataset, images, logs, and movies | `HP/` |
-| Area input | Regional text files and classification results | `Text_area_data/` |
-| Accepted area images | Git-managed source assets used before area-page production | `Text_area_data/画像データ/` |
-| Blog input | Article text files | `Text_blog_data/` |
-| Hotel input | Hotel text files and classification results | `Text_hotel_data/` |
-| Backups | Legacy data, excluded data, and historical materials outside Git | NAS `Backup/` |
-
-## 3. Current Constraints
-
-- `HP/` is exclusively for actual site data. Do not place Codex management documents or production inputs there.
-- Canonical management sources belong under `codex/`; project-management documents belong under `codex/project_management/`.
-- `Text_*_data/` is not published directly to HP.
-- At the start of work, run `git fetch origin` and `git status --short --branch`. Pull first when the branch is behind.
-- Accepted area images are stored and versioned under local `Text_area_data/画像データ/`.
-- The NAS is storage-only for `Backup/`. Do not run Git operations there.
-- NAS `Backup/` is for reference and MUST NOT be used as the basis for a current specification.
-- Internal path migration under `codex/scripts/` and read-only dry runs are verified. Page generation and publish operations remain subject to the applicable runbook and explicit authority.
-- After an HP change, include sitemap-date and generated-document synchronization in the same work unit by running `candy-site-state preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`.
-- Do not create `HP/HP/`.
-- Do not treat generation, publication, input, management documents, and backups as the same responsibility.
+Do not use this file as an additional source for Git, synchronization,
+generation, publication, or storage rules.

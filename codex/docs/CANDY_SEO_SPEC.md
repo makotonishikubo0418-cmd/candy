@@ -1,10 +1,12 @@
 # CANDY Common SEO Specification
 
-## 1. Responsibility and Change Gate
+## 1. Responsibility
 
 This is the canonical common SEO specification verified from current CANDY source HTML and category specifications. Per-page current state and inconsistencies belong in `generated/CANDY_SEO_STATUS.md`.
 
-This specification describes current behavior. Management-document maintenance alone does not authorize configuration changes. Changes to robots index/noindex, canonical URLs, public URLs, redirects, or structured-data types require a separate task that identifies the affected scope and explicit user instruction.
+This specification owns SEO behavior only. It does not define operation
+authority, task scope, Git, deployment, or response rules. Those remain in the
+documents selected cumulatively by root `AGENTS.md`.
 
 ## 2. Page-Type Fundamentals
 
@@ -42,7 +44,8 @@ Do not duplicate title, description, or H1 copy as fixed text in this document. 
 - Direct verification URLs under `http://firststar.kir.jp/group/candy/` MUST remain accessible but MUST return `X-Robots-Tag: noindex`. The corresponding `https://www.55810.com/` public responses MUST NOT inherit this header.
 - Verify templates, special entry points, and dynamic pages individually.
 - Management scripts audit only the presence and value of robots; they do not rewrite it.
-- A change between index and noindex requires an impact statement for publication scope, canonical URLs, the sitemap, and internal links and requires explicit approval.
+- Treat a change between index and noindex as a behavior change whose SEO impact
+  includes publication scope, canonical URLs, the sitemap, and internal links.
 
 ## 6. Headings
 
@@ -125,7 +128,9 @@ Current content pages use a structure containing `og:title`, `og:type`, `og:url`
 - Database-generated content changes that do not modify the matching source
   file remain outside this static-date calculation and MUST NOT be inferred.
 - `HP/.htaccess` contains active rules that redirect HTTP, non-www, and explicit `index.php` or `index.html` URLs to the `https://www.55810.com` canonical form.
-- The normal Push-triggered production workflow keeps `.htaccess` protected. Production publication requires the dedicated manual `.htaccess` preview/deploy workflow, an exact one-file plan, and live redirect verification.
+- `.htaccess` production handling belongs to the cumulative production route
+  and its exact workflow; this specification owns only the required redirect
+  and live-SEO verification outcome.
 - Creating or changing a legacy URL or redirect requires a separate task that verifies inbound traffic, canonical URLs, internal links, the sitemap, and production behavior.
 - Automated audits detect duplicate titles/canonicals, partial builds, different slugs, and same-content candidates. Do not infer the canonical URL.
 

@@ -2,25 +2,18 @@
 
 ## 1. Responsibility
 
-This is the short common procedure for investigating, fixing, and validating the existing HP site. For new-page generation, prioritize `CANDY_PAGE_GENERATION_GOVERNANCE.md`; for production work, prioritize `CANDY_PRODUCTION_MIGRATION_MASTER.md`.
+This document owns the short common procedure for investigating, fixing, and
+validating the existing HP site. It does not define instruction priority,
+document routing, Git authority, production limits, or response format.
 
-## 2. Preflight
+## 2. Target-State Preflight
 
-1. Read root `AGENTS.md` and only the management documents named by its applicable Section 2 route.
-2. Use `CANDY_MASTER_DOC_INDEX.md` to select the canonical document for the task.
-3. Verify the Git root, branch, remote, and status.
-4. Check overlap between target files and existing changes.
-5. State the included work, excluded work, and completion evidence briefly.
-6. When a target page exists, verify agreement between the generated ledger and actual files.
+When a target page exists, verify agreement between the generated ledger and
+actual files before treating the page state as known.
 
 ```powershell
-git remote -v
-git branch --show-current
-git status --short --branch
 codex\scripts\candy-site-state.cmd check --target "<slug>"
 ```
-
-Run Fetch or Pull only when the worktree and history make it safe. Commit and Push are not automatic end-of-task steps; run them only with explicit user instruction.
 
 ## 3. Investigation Unit
 
@@ -39,16 +32,12 @@ File and reference counts change. Count actual files instead of using fixed valu
 
 ## 4. Before a Change
 
-Confirm:
+Determine the target-specific facts:
 
-- Conclusion and reason for the change
-- Changed and unchanged files
 - Affected pages, desktop/mobile, and common processing
 - Impact on databases, production, secrets, logs, and payments
 - Validation method
 - Unverified items and required user decisions
-
-Obtain approval when an `AGENTS.md` change gate applies.
 
 When `check --target` fails because of drift, identify the cause of the existing inconsistency first. Do not mix an existing inconsistency fix with separate new production or a feature change.
 
@@ -56,13 +45,10 @@ Do not create mechanical `.before` copies beside Git-tracked files. Use Git and 
 
 ## 5. During a Change
 
-- Change only the authorized scope.
-- Do not overwrite existing changes.
 - Validate replacement tokens, datasets, includes, links, and image references together.
 - For an existing approved area-image pair replaced under the same canonical filenames, use `CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md` as the self-contained fast route. For another cacheable static-file replacement at the same public path, follow `CANDY_PRODUCTION_MIGRATION_MASTER.md`.
 - Do not set a fixed maximum file count.
 - For a common-processing change, check impact on out-of-scope pages.
-- Do not copy authentication values, database connection values, payment values, raw logs, or personal information.
 
 ## 6. After a Change
 
@@ -80,14 +66,6 @@ Sitemap synchronization changes only `lastmod` values whose matching
 staging. A source mapping, duplicate URL, or Git-date failure is a STOP
 condition.
 
-Then run at minimum:
-
-```powershell
-git status --short
-git diff --stat
-git diff --check
-```
-
 Add as required:
 
 - PHP, HTML, or JavaScript syntax validation
@@ -98,16 +76,15 @@ Add as required:
 - Database, session, and external service behavior
 - HTTP responses
 
-Report every unexecuted check as unverified.
-
 ### 6.1 Efficient Verification and Browser Fallback
 
-- Freeze the authorized files, behavior, and completion evidence before editing. Do not add an unrelated investigation, documentation change, cleanup, or improvement.
 - Assign one authoritative verification method to each requirement. Do not repeat a passed check through another tool unless a relevant file changed after the result or the first result was incomplete.
 - Group independent read-only or syntax checks into one bounded execution when this reduces tool startup and waiting time without hiding individual failures.
 - Use HTTP, source inspection, or deterministic tests for status codes, headers, URLs, file contents, and generated output. Use Chrome only for behavior or rendering that cannot be verified by those methods.
 - If browser control disconnects, do not repeat reconnection attempts. Retry once only when an unresolved screen-only requirement remains; otherwise switch to HTTP or deterministic checks and report the screen result as unverified.
-- Do not wait on or rerun a slow tool after it already returned a complete authoritative result. When a tool must continue, keep the wait bounded and report only a material delay or blocker.
+- Do not wait on or rerun a slow tool after it already returned a complete
+  authoritative result. When a tool must continue, keep the wait bounded and
+  surface a material delay or blocker.
 
 ## 7. Production and Test
 
@@ -116,36 +93,14 @@ Report every unexecuted check as unverified.
 | Production | `/public_html/group/candy/` |
 | Test | `/public_html/group_test/candy/` |
 
-- The test environment is verified to exist.
-- During phased migration, production `index.php` retains the 301 redirect to シティヘブン.
-- Deploying the latest `HP/index.php` to production is the final public switchover and requires explicit approval.
-- Use the explicit authority rules in root `AGENTS.md` and the publication procedure in `CANDY_PRODUCTION_MIGRATION_MASTER.md`. Do not infer upload authority from another instruction.
-- A Push to `main` that contains deploy targets starts production Actions automatically. Actions generates the target SHA, target list, count, and `PLAN_TOKEN`, then verifies the same values before FTP connection.
-- One deployment may contain at most 125 files and 50 MiB. Full deployment remains prohibited. Deletion and rename-source removal are permitted only inside an explicitly approved plan and MUST use reversible server-side staging with rollback before final cleanup.
-- Do not infer included or excluded targets without inspecting the actual workflow and deploy script.
-- Start and inspect normal Actions through Push and the GitHub API; do not require browser interaction. Manual preview/deploy is an exception route for incidents.
-- Every operation excluded by root `AGENTS.md` requires separate explicit instruction.
-
-See `CANDY_PRODUCTION_MIGRATION_MASTER.md` for details.
+Environment behavior, protection targets, workflow triggers, limits, rollback,
+and production verification are owned by
+`CANDY_PRODUCTION_MIGRATION_MASTER.md` and the exact workflow/scripts selected
+by the cumulative production route in root `AGENTS.md`.
 
 ## 8. Unverified Scope
 
-Treat the production PHP version, web-server type, actual database, and external-service settings as unverified until rechecked. Do not treat path candidates or values from old documents as current values. For information close to secrets, report only its location and not the value.
-
-## 9. Completion Report
-
-Separate only the applicable states:
-
-- Local changes
-- Syntax and static validation
-- Commit
-- Push
-- Actions
-- Production files
-- HTTP
-- Browser rendering
-- Verification URLs
-
-Do not report only "complete." State targets, counts, failures, unverified items, and unexecuted work.
-
-Separate verification URLs by state. After Push, include the GitHub Commit URL; after Actions, include the run URL; after production deployment, include every target production URL in the same report. For multiple pages, list every target URL. When a URL is unavailable or unverified, do not infer it; report that state explicitly.
+Treat the production PHP version, web-server type, actual database, and
+external-service settings as unverified until rechecked. Do not treat path
+candidates or values from old documents as current values. For information
+close to secrets, record its location without copying the value.

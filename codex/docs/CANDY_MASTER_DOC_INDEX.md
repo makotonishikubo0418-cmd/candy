@@ -1,14 +1,17 @@
-# CANDY Master Document Router
+# CANDY Canonical Responsibility Index
 
 ## 1. Purpose
 
-Use this entry point to select only the canonical document required for HP work. Priority order is root `AGENTS.md`, the management documents named by its Section 2 route, this router when named, the target specification/runbook, and target actual files.
+Root `AGENTS.md` Section 2 is the sole routing authority. This file is a
+non-authoritative ownership lookup used only when that route names it. It
+identifies which HP document owns a topic but cannot add mandatory reading,
+change priority, grant authority, or define an execution sequence.
 
 Do not mix stable specifications with current state. Regenerate `generated/` to verify counts, structural state, SEO state, and asset references.
 
-## 2. Shortest Routes
+## 2. HP Responsibility Lookup
 
-| Task | Required route |
+| Topic | Canonical sources |
 |---|---|
 | Review all site pages | `CANDY_HP_STRUCTURE_MAP.md` → `generated/CANDY_SITE_PAGE_LEDGER.md` |
 | Review page-structure files | `CANDY_CODE_FILE_STRUCTURE.md` → `generated/CANDY_SITE_PAGE_LEDGER.md` |
@@ -20,7 +23,7 @@ Do not mix stable specifications with current state. Regenerate `generated/` to 
 | Check management-document drift | `codex\scripts\candy-site-state.cmd check` |
 | Fix an existing page | `CANDY_OPERATION_BASICS.md` → target category specification → ledger/SEO status |
 
-## 3. Category Routes
+## 3. Category Responsibility Lookup
 
 | Task | Canonical source |
 |---|---|
@@ -66,40 +69,14 @@ Do not use fixed-count examples in a category specification as current state. Co
 | `generated/CANDY_CODE_ASSET_INVENTORY.md` | PHP, CSS, JavaScript, images, movies, fonts, references, missing files, and duplicate candidates |
 | `generated/CANDY_SEO_STATUS.md` | Measured per-page SEO state and issues |
 
-Standard entry points:
+Generation, checking, sitemap synchronization, metadata behavior, and
+completion gates are owned by `CANDY_OPERATION_BASICS.md` and the generator
+itself; they are not redefined here.
 
-```powershell
-codex\scripts\candy-site-state.cmd audit
-codex\scripts\candy-site-state.cmd preview-sitemap-lastmod
-codex\scripts\candy-site-state.cmd sync-sitemap-lastmod
-codex\scripts\candy-site-state.cmd preview
-codex\scripts\candy-site-state.cmd write
-codex\scripts\candy-site-state.cmd check
-codex\scripts\candy-site-state.cmd check --target "<slug>"
-```
-
-Normal `preview`, `write`, and `check` use the deterministic state fingerprint and generated content. `preview-sitemap-lastmod` is read-only, while `sync-sitemap-lastmod` modifies only stale or missing `HP/sitemap.xml` `lastmod` values. Generated time, Git Commit SHA, and per-row verification time/SHA are informational metadata and do not create normal drift. Use `--strict-metadata` only when those metadata values themselves must be refreshed or audited.
-
-## 6. Completion Gate for Page Additions and Fixes
-
-1. Before the change, run `check --target "<slug>"` to verify agreement with the ledger.
-2. Change and validate only the target according to the category runbook/specification.
-3. Before staging, run `preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`.
-4. Include required category queue/classification updates and generated documents in the same work unit.
-5. Do not report completion or make the work a Commit candidate while `check` fails.
-
-## 7. Excluded from the Normal Route
+## 6. Non-Current Sources
 
 - NAS `\\192.168.1.3\disk1\FSG_SEO\candy\Backup/` is storage-only and MUST NOT be used as the basis for a current specification.
 - Do not use `.git-backups/` or legacy investigation snapshots for current decisions.
 - Historical counts in `CANDY_PAGE_SPEC_INDEX.md`, `CANDY_PAGE_CATEGORY_STRUCTURE.md`, and legacy inventory documents are not current values.
-- Normal work routes through legacy management documents are deprecated. Use generated documents for current state and the canonical stable documents routed here for specifications.
-
-## 8. Update Principles
-
-- Do not duplicate the same specification across documents.
-- Do not store page counts, file counts, or Git/HTTP results in a stable document.
-- Do not store task history, body copy, or owner decisions in a generated document.
-- Do not duplicate machine-detectable issues in the backlog.
-- Apply a specification change to its existing canonical document and include it in the same work unit as the page change.
-- Commit, Push, and production operations require explicit user instruction.
+- Legacy management documents and dated investigation snapshots are not current
+  specification or current-state sources.

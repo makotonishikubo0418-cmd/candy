@@ -48,37 +48,35 @@ This route avoids broad document reading for simple work while preserving every 
 Maintain separate canonical documents for common rules, the overall plan, specifications, code structure, inter-Codex communication, and individual task history.
 
 Maintain required-document routing only in `AGENTS.md` Section 2. Maintain
-canonical management locations and operational route summaries in
+canonical management locations and document-responsibility lookup in
 `codex/README.md`. Do not create another competing index in this overview.
 
-## 4. Work Sequence
+## 4. Instruction Hierarchy
 
-1. Review the common rules in `AGENTS.md`.
-2. Use `AGENTS.md` Section 2 to select the required documents, reading
-   `codex/README.md` only when the applicable route names it.
-3. Before modification or coordination, check active reservations, related
-   in-progress tasks, assigned handoffs, and existing changes to target files.
-4. When work overlaps or depends on another task, determine target separation, ordering, or handoff.
-5. Reserve the task and target files.
-6. Confirm the existing canonical source, dependencies, and prohibited-change scope.
-7. Make a small, consistent change to the existing canonical source.
-8. Validate the diff, syntax, quality gates, and required rendered output.
-9. For HP changes, regenerate the generated documents and verify agreement with actual files.
-10. Report the actual diff, verified items, unverified items, remaining work, and handoff target.
-11. Release the reservation and proceed to Commit, Push, or deploy only when separately authorized.
+The hierarchy is:
+
+```text
+AGENTS.md
+  > routed common management document
+  > routed category-specific document
+```
+
+Each lower level contains only rules unique to its responsibility. It links to
+the higher-level source for shared authority, routing, communication, safety,
+Git, or verification rules instead of copying them. Actual work follows the
+cumulative routes selected by `AGENTS.md`; this overview never adds an
+execution step.
 
 ## 5. Problems Prevented by This System
 
 | Problem to prevent | Management control |
 |---|---|
 | A long AGENTS document slows simple work | Keep `AGENTS.md` focused on routing |
-| Multiple Codex tasks change the same location | Prevent concurrent edits with task IDs and file reservations |
 | The overall current state becomes unclear | Centralize current state, issues, and next work in `PROJECT_STATUS.md` |
 | Reports become scattered and cannot be handed off | Separate responsibilities between `CODEX_COMMUNICATION.md` and `TASK_LOG.md` |
 | Repeated changes degrade the code | Enforce one responsibility per canonical source, integration into existing routes, and no appended override blocks |
 | Specifications differ between documents | Assign one canonical document to each subject and prohibit duplicate specifications |
 | Unverified work is reported as complete | Distinguish canonical, user-reported, implementation-verified, and unverified information |
-| Excessive communication interrupts work | Limit updates to required start, material change or blocker, and completion reports |
 
 ## 6. Target State
 

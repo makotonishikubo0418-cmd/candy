@@ -10,6 +10,9 @@
 - Do not perform work outside the user-approved scope, even when additional work appears necessary or a related issue is discovered. Report the reason, impact, and required action, and execute it only after receiving user approval.
 - Do not perform unnecessary, unrelated, excessive, or duplicative reading, investigation, verification, modification, or other work.
 - Maintain exactly one canonical source for each responsibility. Modify the existing canonical source instead of creating duplicate implementations, documents, settings, storage paths, state-management paths, or fallback paths.
+- Instruction priority is `AGENTS.md` first, the routed common management document second, and the routed category-specific document third. A lower-level document MAY add only details specific to its own responsibility; it MUST NOT repeat, redefine, weaken, broaden, or override a higher-level rule.
+- Common authority, required-document routing, user-response structure, and project-wide prohibitions belong only in this file. Lower-level documents MUST refer to these rules instead of restating them.
+- When a lower-level document conflicts with or duplicates a higher-level rule, follow the higher-level rule, STOP before the affected operation, and report the exact conflict. Do not select the lower-level wording merely because it is more detailed.
 - Do not Commit, Push, Merge, Rebase, rewrite Git history, deploy to production, or perform database operations without explicit user authorization.
 
 ## 2. Management Document Index
@@ -17,6 +20,8 @@
 Use this section as the sole routing authority for determining which management documents to read. Read only the documents applicable to the current task. Do not expand the reading scope to unrelated specifications, histories, reports, or past materials.
 
 If a required document does not exist, the canonical source is unclear, or documents conflict, do not proceed by assumption. Report the missing document, ambiguity, or conflict before continuing.
+
+Task routes are cumulative. When one task includes more than one operation type, such as page publication plus Git and production work, combine the applicable rows from this table. A lower-level document cannot add another mandatory reading route.
 
 ### Reading Order
 

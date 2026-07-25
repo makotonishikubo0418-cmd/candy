@@ -1,3 +1,5 @@
 # CANDY Phase Recheck
 
-This deprecated entry point is retained only to route old references. Fixed counts and states from historical phases are not current specifications. Use `codex/project_management/PROJECT_STATUS.md` for current state and `codex/project_management/TASK_LOG.md` for execution history.
+This deprecated compatibility stub is retained only to explain old references.
+It contains no active instruction, route, or current state. Current work uses
+only the documents selected by root `AGENTS.md`.
