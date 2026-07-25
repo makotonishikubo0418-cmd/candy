@@ -806,18 +806,26 @@ def render_terminal_shop_cta() -> str:
     )
 
 
+def render_page_title_h1(data: HotelData) -> str:
+    if data.page_title.count(data.hotel_name) != 1:
+        raise HotelToolError("page_title_h1内のホテル名は正確に1件必要です")
+    prefix, hotel_name, suffix = data.page_title.partition(data.hotel_name)
+    separator = " " if prefix and prefix[-1].isspace() else ""
+    return (
+        f'{common.htext(prefix)}'
+        f'{separator}'
+        f'<span class="fc_p">{common.htext(hotel_name)}</span>'
+        f'{common.htext(suffix)}'
+    )
+
+
 def render_main(data: HotelData, resolved: list[common.ShopResolved], templates: dict[str, common.ShopTemplate]) -> str:
     numbers = {token: index for index, token in enumerate(data.scene_order, 1)}
     articles = {f"article:{index}": item for index, item in enumerate(data.article_scenes)}
     shop_index = data.scene_order.index("shops")
     leading_tokens = data.scene_order[:shop_index]
     remaining_tokens = data.scene_order[shop_index:]
-    title_prefix = data.page_title[: -len(data.hotel_name)].rstrip() if data.page_title.endswith(data.hotel_name) else ""
-    h1 = (
-        f'{common.htext(title_prefix)} <span class="fc_p">{common.htext(data.hotel_name)}</span>'
-        if title_prefix
-        else common.htext(data.page_title)
-    )
+    h1 = render_page_title_h1(data)
     intro_parts: list[str] = []
     if data.legacy_option:
         intro_parts.append(render_legacy_option(data.legacy_option))
@@ -940,6 +948,8 @@ def validate_rendered(data: HotelData, resolved: list[common.ShopResolved], sour
     h1_text = common.strip_tags(h1_match.group(1)) if h1_match else ""
     if data.hotel_name not in h1_text:
         errors.append("h1ホテル名不整合")
+    if not h1_match or h1_match.group(1) != render_page_title_h1(data):
+        errors.append("h1ホテル名ピンク表示不整合")
     ids = re.findall(r'\bid="([^"]+)"', source)
     duplicates = [value for value, count in Counter(ids).items() if count > 1]
     if duplicates:
@@ -1298,6 +1308,34 @@ def run_self_test(_: argparse.Namespace) -> int:
     errors = validate_rendered(data, resolved, source, hp_root)
     if errors:
         raise HotelToolError("self-test失敗:\n- " + "\n- ".join(errors))
+    quoted_data = replace(
+        data,
+        page_title=f"鹿児島市でデリヘルが呼べるホテル  「{data.hotel_name}」",
+    )
+    quoted_source = render_source(
+        quoted_data,
+        resolved,
+        templates,
+        hp_root / "source" / "template_kagoshima-deliveryhealth-hotel.html",
+    )
+    quoted_errors = validate_rendered(quoted_data, resolved, quoted_source, hp_root)
+    if quoted_errors:
+        raise HotelToolError("quoted H1 self-test failed: " + "; ".join(quoted_errors))
+    expected_quoted_h1 = render_page_title_h1(quoted_data)
+    if f'id="page_title_h1">{expected_quoted_h1}</h1>' not in quoted_source:
+        raise HotelToolError("quoted H1 markup self-test failed")
+    broken_h1 = quoted_source.replace(
+        expected_quoted_h1,
+        common.htext(quoted_data.page_title),
+        1,
+    )
+    if "h1ホテル名ピンク表示不整合" not in validate_rendered(
+        quoted_data,
+        resolved,
+        broken_h1,
+        hp_root,
+    ):
+        raise HotelToolError("quoted H1 negative self-test failed")
     if (len(resolved), len(data.faqs), len(data.rates), len(data.spots)) != (4, 4, 2, 4):
         raise HotelToolError("self-test count mismatch")
     if len(path_config.related_link_targets(source)) != path_config.RELATED_COUNT:

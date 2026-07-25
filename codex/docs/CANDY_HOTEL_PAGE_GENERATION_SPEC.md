@@ -1,11 +1,11 @@
 # CANDY Hotel Page Generation Specification
 
-- Updated: 2026-07-24
-- Applies to: Normal new generation of CANDY hotel detail pages by Codex
+- Updated: 2026-07-25
+- Applies to: The stable structure, generation, and validation contract for CANDY hotel detail pages
 
 ## 1. Purpose and Scope
 
-This is the canonical specification for generating hotel pages from source Text without damage. Use it for normal new-page generation, not for bug fixes, existing-feature changes, common-processing changes, or refactoring.
+This is the canonical structural and output specification for generating hotel pages from source Text without damage. Use it for normal new-page generation and as the output contract for target-scoped existing-page structural fixes. Use `CANDY_OPERATION_BASICS.md` for the existing-page investigation and fix procedure, and treat common-processing changes or refactoring as separate development work.
 
 Apply `CANDY_PAGE_GENERATION_GOVERNANCE.md` first for common missing-input, variable-structure, and STOP rules.
 
@@ -38,6 +38,7 @@ A legacy Text is not a third source route. It MUST pass `legacy-check` and the m
 - Hotel pages do not have a fixed scene count. Preserve source-data order for known sections and normal article blocks after the H1 introduction; number only visible H2 elements sequentially from scene1.
 - At least one shop is required. Normal articles, FAQs, fees, access, and nearby spots MAY have zero items; omit an optional section with zero items.
 - Display the legacy option zero or one time only when `option`, `option_subtitle`, and `option_description` are all complete. Do not include it in scene numbering.
+- The H1 base text and punctuation MUST retain the inherited black color. Wrap exactly the hotel-name substring, and only that substring, once in `<span class="fc_p">`; keep surrounding Japanese quotation marks outside the span. The generator and validator MUST locate the exact hotel-name occurrence instead of relying on whether the title ends with the hotel name.
 - Related articles have one fixed generated count: three current indexable blog-detail links and three current indexable area-detail links. The related-article container MUST be followed immediately by the final `対応デリヘル店一覧` CTA defined below; the CTA is the final visible child before the page-content wrapper closes.
 - Do not infer a value, image, URL, or hotel fact absent from source data. STOP on partial input instead of completing it.
 
@@ -276,7 +277,7 @@ Do not fix the number of blocks.
 
 Public entry PHP uses the same base form as area and blog and loads `dataset_base.php`.
 
-The three hotel dataset PHP files use:
+Hotel dataset PHP files use:
 
 ```php
 <?
@@ -307,7 +308,7 @@ $source = str_replace(
 
 Register the target slug in the hotel index and sitemap.
 
-All three current hotel pages have the three page files plus dataset_base, hotel-index, and sitemap registration. Keep existing-page exceptions such as the Hotel M legacy IDs separate from new production.
+Every existing hotel detail page MUST have the three page files plus dataset_base, hotel-index, and sitemap registration. Keep existing-page exceptions such as the Hotel M legacy IDs separate from new production.
 
 STOP new production when the target slug already exists in public PHP, source HTML, dataset PHP, dataset_base, the hotel index, or sitemap.
 
@@ -338,17 +339,9 @@ STOP new production when the target slug already exists in public PHP, source HT
 
 hotelm has no FAQ, three fee rows, and three nearby spots. IDs are scene1, scene2, scene3, scene4, and scene6, leaving a gap. Treat the available information as a valid pattern, but do not copy legacy IDs; number remaining scenes sequentially on a new page.
 
-### 13.2 Source Text Contains Placeholders
-
-The villacosta500 source Text uses the legacy numbered structure and retains placeholders for slug, images, URLs, and related values. Existing complete HTML is complete, but do not reuse or convert the source Text until `legacy-check` reports no unresolved issue.
-
-### 13.3 Retired Update-Procedure Text
+### 13.2 Retired Update-Procedure Text
 
 The former `Text_hotel_data/Cursor用更新手順.txt` was retired from the production-input directory after its applicable rules were reconciled into the canonical hotel documents. Do not restore or route work through it. Use `CANDY_HOTEL_CONTENT_PREPARATION_RUNBOOK.md`, this specification, the hotel image specification, and the hotel staff runbook.
-
-### 13.4 Legacy Hotel M Source Text
-
-`Text_hotel_data/Hotel M（旧レクサス）.txt` exists, but it uses legacy metadata, generic photo labels, and numbered scenes and contains unresolved required values and ambiguous image blocks. It is not current production input. Use `legacy-check` to identify exact shortages; do not fill them from the existing page automatically.
 
 ## 14. Completion Criteria
 
@@ -361,6 +354,7 @@ The former `Text_hotel_data/Cursor用更新手順.txt` was retired from the prod
 - [ ] Public PHP, source HTML, and dataset PHP exist.
 - [ ] dataset_base case and link transformation exist.
 - [ ] Placeholder count is zero.
+- [ ] The H1 contains exactly one `<span class="fc_p">` around the exact hotel name; all base text and surrounding quotation marks remain outside it.
 - [ ] No heading or additional copy from a complete normal scene is missing.
 - [ ] Scene, FAQ, and nearby-spot numbering is correct.
 - [ ] Exactly three distinct current indexable blog-detail links and three distinct current indexable area-detail links exist, with no placeholder, self-link, duplicate, or missing target.
@@ -377,7 +371,3 @@ The former `Text_hotel_data/Cursor用更新手順.txt` was retired from the prod
 - [ ] Hotel-index and sitemap registration requirements were checked.
 - [ ] No duplicate ID exists.
 - [ ] PHP syntax, JSON syntax, and `git diff --check` were validated.
-
-## 15. Unchanged Scope
-
-This investigation did not change existing hotel pages, PHP, dataset PHP, `dataset_base.php`, images, or source Text.
