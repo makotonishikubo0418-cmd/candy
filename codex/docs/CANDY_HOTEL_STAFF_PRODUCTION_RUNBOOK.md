@@ -1,6 +1,6 @@
 # CANDY Hotel Staff Production Runbook
 
-- Updated: 2026-07-25
+- Updated: 2026-07-26
 - Applies to: Normal production of one hotel page from either staff-completed Text or Phase-prepared Text
 - Start condition: Explicit instruction to produce or publish a hotel page
 - Completion criteria: Dedicated validation succeeds and the authorized local or publication scope completes
@@ -86,7 +86,7 @@ cumulative authorized routes. Continue after hash verification.
 
 Validation covers:
 
-- The six-file hotel change unit in Section 4
+- The seven-file hotel change unit in Section 4
 - The two route-approved accepted-source images and their two same-hash local-public copies when the pair was created under the current lifecycle
 - The target input Text and required classification update
 - The four generated current-state documents
@@ -95,6 +95,11 @@ Validation covers:
 ## 2. Standard Execution
 
 For the exact user request to create the next page from the available staff-completed Text population, upload it, and report the production URL, run only the following. `publish-next` is the automatic `DIRECT_TEXT` selection route: it applies the target gate internally and publishes only one target that returns `NEW_HOTEL_TARGET_OK`. It does not select or validate Phase evidence.
+
+Before running any build or publication command, confirm that the dedicated
+workflow plans and validates the top-page hotel-section update required by
+Section 10.1 of `CANDY_PAGE_GENERATION_GOVERNANCE.md`. If it does not, STOP
+before generation.
 
 ```powershell
 codex\scripts\candy-hotel.cmd publish-next
@@ -161,7 +166,9 @@ Do not select the target manually. In this order, use only the first target for 
    already-built pages, existing shared registrations, untracked input, and
    duplicate slugs. A complete accepted pair is not missing merely because its
    local-public copy is pending.
-3. Exclude a slug with an existing public PHP file, source HTML, dataset PHP file, `dataset_base.php` registration, hotel-index registration, or sitemap registration.
+3. Exclude a slug with an existing public PHP file, source HTML, dataset PHP
+   file, `dataset_base.php` registration, hotel-index registration, top-page
+   hotel-section registration, or sitemap registration.
 4. Accept either a complete accepted pair or a complete local-public pair.
    After selection, first-install the accepted pair when the local-public pair
    is absent. Exclude only a target with neither complete pair or with a
@@ -211,12 +218,15 @@ Do not run manual HTML creation or a separate FTP upload before or after these c
 3. Validate the three existing page files and shared registrations, then freeze dependency hashes.
 4. Generate the complete page set from the hotel template and `template_shop.html`. Only for travel time and transportation fees absent from Text, use map coordinates and the nearest complete area page for each shop.
 5. Validate the order and count of every input block, three deterministic blog links, three deterministic area links, scenes, JSON-LD, and images.
-6. Register only the target in `dataset_base.php`, the hotel index, and sitemap, then freeze hashes for the six output files.
+6. Register only the target in `dataset_base.php`, the hotel index, the
+   top-page hotel section, and sitemap, then freeze hashes for the seven output
+   files.
 7. Synchronize sitemap dates and generated management documents with `candy-site-state preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`.
 8. When publication is included, continue through the cumulative Git and
    production routes.
 9. Track pre-FTP PHP lint and deployment in Actions.
-10. Verify the production page, H1, JSON-LD, images, hotel index, sitemap, and redirects over HTTP.
+10. Verify the production page, H1, JSON-LD, images, hotel index, top-page
+    hotel section, sitemap, and redirects over HTTP.
 
 After generation or a fix and before staging, run `codex\scripts\candy-site-state.cmd preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`. Treat required input-classification updates and generated-document updates as the same work unit.
 
@@ -248,6 +258,7 @@ HP/source/kagoshima-deliveryhealth-hotel-<slug>.html
 HP/includefile/dataset_kagoshima-deliveryhealth-hotel-<slug>.php
 HP/includefile/dataset_base.php
 HP/source/hotel.html
+HP/source/index.html
 HP/sitemap.xml
 ```
 
@@ -280,7 +291,8 @@ Existing public images without accepted-source counterparts are `LEGACY_PUBLIC_O
   accepted pair exists.
 - `target-next` does not return `NEW_HOTEL_TARGET_OK`.
 - A shop is unknown, or travel time/transportation fees are unspecified and cannot be derived from hotel coordinates or a nearby complete area page.
-- A target registration is duplicated in dataset_base, the hotel index, or sitemap, or the hotel index has no reserved slot.
+- A target registration is duplicated in dataset_base, the hotel index, the
+  top-page hotel section, or sitemap, or the hotel index has no reserved slot.
 - Dependency/output hash, PHP, JSON, Actions, or production HTTP validation fails.
 - For `PHASE_PREPARED`, a Phase 1-4 result is not `PASS`, the target Text hash chain is broken, or a Phase 4 image hash differs.
 - The production route would require reference-HTML copying, direct HTML editing, an independent upload method, or an unverified public path.
@@ -300,7 +312,7 @@ PHASE 5 (PHASE_PREPARED only): PASS / REVIEW / STOP / NOT_APPLICABLE
 対象ホテル:
 TARGET_TEXT_PATH:
 CANONICAL_SLUG:
-生成・検査した6ファイル:
+生成・検査した7ファイル:
 検査した画像2枚:
 画像ライフサイクル: ACCEPTED / INSTALLED_LOCAL / REGISTERED_GIT / DEPLOYED_ASSET / PUBLISHED / LEGACY_PUBLIC_ONLY / REVIEW / STOP
 受入原本・公開用コピーの同名ハッシュ一致: PASS / FAIL / NOT_APPLICABLE

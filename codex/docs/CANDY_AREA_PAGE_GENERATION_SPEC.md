@@ -1,6 +1,6 @@
 # CANDY Area Page Generation Specification
 
-- Updated: 2026-07-24
+- Updated: 2026-07-26
 - Applies to: Normal new generation of CANDY area detail pages by Codex
 
 ## 1. Purpose
@@ -103,8 +103,8 @@ The Japanese labels below are exact website display concepts and are preserved.
 - Use the target-region text under `Text_area_data` as source data.
 - Use `HP/source/template_kagoshima-deliveryhealth-area.html` as the HTML template.
 - Keep the area-specific public entry PHP, source HTML, page-specific dataset
-  PHP, `dataset_base.php` registration, area-index entry, and sitemap entry
-  internally consistent for the same canonical slug.
+  PHP, `dataset_base.php` registration, area-index entry, top-page area entry,
+  and sitemap entry internally consistent for the same canonical slug.
 - Apply the common collision, incomplete-input, change-boundary, and completion
   gates from `CANDY_PAGE_GENERATION_GOVERNANCE.md`.
 
@@ -173,7 +173,7 @@ Do not add line breaks to body copy except where explicitly present in source da
 
 ## 5. Scene, Subtitle, and Description Numbering
 
-Verified complete pages have five base scenes:
+The standard area structure uses five base scenes:
 
 1. `scene1`: Popular delivery-health shop information
 2. `scene2`: Regional introduction
@@ -206,7 +206,7 @@ subtitle_5_2 / description_5_2
 - Add or remove FAQ blocks according to hotel and spot counts.
 - Only the final item in each FAQ section uses `class="faq-item bd_tb"`; other items use `class="faq-item bd_t"`.
 
-All 34 verified complete pages have five scenes. FAQ counts were five on two pages, six on 31 pages, and seven on one page, so FAQ count is variable.
+FAQ item counts are variable and MUST follow the complete source data for the target area.
 
 ## 6. Shop Blocks
 
@@ -325,6 +325,8 @@ The common generation gates remain in
     generation output, preserve one correct existing link, and verify that no
     same-region/different-slug conflict exists. Determine the corresponding
     index JSON-LD and `sitemap.xml` updates.
+14. Synchronize the matching service-area name in the top-page area section
+    under Section 10.1 of `CANDY_PAGE_GENERATION_GOVERNANCE.md`.
 
 ## 12. Exceptions
 
@@ -380,7 +382,8 @@ Treat this as an existing-inconsistency fix, not new production. Keep it separat
 - [ ] No existing, dummy, or inferred image was used to bypass missing images.
 - [ ] Internal links point to public PHP.
 - [ ] Robots agrees with publication policy.
-- [ ] Area-index and sitemap registration requirements were checked.
+- [ ] Area-index, top-page area-section, and sitemap registration requirements
+      satisfy the common public-route synchronization contract.
 - [ ] PHP syntax is verified.
 - [ ] Source text was not moved or deleted without instruction.
 

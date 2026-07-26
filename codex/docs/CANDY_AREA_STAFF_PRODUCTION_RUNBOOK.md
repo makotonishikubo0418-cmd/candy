@@ -1,6 +1,6 @@
 # CANDY Area Staff Production Runbook
 
-- Updated: 2026-07-25
+- Updated: 2026-07-26
 - Applies to: Normal production of one area page
 - Start condition: Explicit instruction to produce or publish an area page
 - Completion criteria: Dedicated validation succeeds and the authorized local or publication scope completes
@@ -8,6 +8,11 @@
 ## 1. Standard Execution
 
 For the exact user request to create the next page, upload it, and report the production URL, run only:
+
+Before running any build or publication command, confirm that the dedicated
+workflow plans and validates the top-page area-section update required by
+Section 10.1 of `CANDY_PAGE_GENERATION_GOVERNANCE.md`. If it does not, STOP
+before generation.
 
 ```powershell
 codex\scripts\candy-area.cmd publish-next
@@ -56,15 +61,17 @@ following ordered preparation and final-gate process:
 1. Resolve the queue row to exactly one tracked input, using a direct Text under `Text_area_data` or the latest `Text_area_data/分類_*/01_間違い無し`.
 2. Automatically exclude a slug with an existing public PHP file, source HTML, dataset PHP file, `dataset_base.php` registration, or sitemap registration.
 3. Exclude an area index entry for the same region under another slug. A
-   missing target-slug link is not a blocker; mark it for one target-limited
-   addition during generation. Preserve one existing correct target-slug link.
+   missing target-slug link in either the area index or the matching top-page
+   service-area name is not a blocker; mark both for one target-limited
+   addition during generation. Preserve one existing correct target-slug link
+   in each location.
 4. Accept either a complete accepted-source pair or a complete local-public
    pair as image availability. After target selection, first-install the
    accepted pair when the local-public pair is absent. Exclude only a target
    with no complete pair or with a partial, slug-conflicting, or same-name
    hash-conflicting pair.
 5. Run the final target gate after image first installation and the planned
-   index addition are fixed for the target. Require
+   category-index and top-page additions are fixed for the target. Require
    `NEW_PAGE_TARGET_OK=<slug>` at that point.
 6. Produce only the first target that passes. Once production starts for that
    target, STOP on a later failure and do not substitute another slug.
@@ -98,9 +105,11 @@ selection or use the applicable exception route.
 1. Select the first `READY_CANDIDATE` queue row that can pass after the
    target-limited preparation in Section 1.1.
 2. First-install a complete accepted image pair when required, and plan one
-   missing target-slug area-index link as normal generation output.
+   missing target-slug area-index link plus the matching top-page area link as
+   normal generation output.
 3. Validate Text, slug, images, existing files, and shared registrations.
-4. Generate the complete page set from templates, including the target index link.
+4. Generate the complete page set from templates, including the category-index
+   and top-page links.
 5. Run static validation and synchronize sitemap dates and generated management documents with `candy-site-state preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`.
 6. When publication is included, continue through the cumulative Git and
    production routes and verify Actions and production HTTP.
@@ -126,6 +135,7 @@ HP/source/kagoshima-deliveryhealth-area-<slug>.html
 HP/includefile/dataset_kagoshima-deliveryhealth-area-<slug>.php
 HP/includefile/dataset_base.php
 HP/source/area.html
+HP/source/index.html
 HP/sitemap.xml
 one target row in codex/docs/CANDY_AREA_105_PAGE_QUEUE.md
 one target entry in codex/data/CANDY_AREA_RELATED_LINKS.json
@@ -143,9 +153,11 @@ The dedicated tool validates the following. Do not repeat successful checks manu
 - Shop order, travel times, and transportation fees
 - Scenes, IDs, FAQ, and JSON-LD
 - Exact nearby-area links from the canonical mapping, with no dummy, self-link, duplicate, missing target, or unapproved link text
-- Area index, sitemap, and internal links
+- Area index, top-page area section, sitemap, and internal links under the
+  common public-route synchronization contract
 - PHP lint, JSON, images, and diff
-- Production page and images, index, sitemap, and redirects when publication is included
+- Production page and images, area index, top page, sitemap, and redirects when
+  publication is included
 
 When local PHP CLI is absent, use `PHP_LINT=UNAVAILABLE`. Production publication requires successful pre-FTP PHP lint in Actions.
 
@@ -166,8 +178,9 @@ When local PHP CLI is absent, use `PHP_LINT=UNAVAILABLE`. Production publication
   a complete accepted pair exists.
 - A legacy slug, similar slug, or typo would require automatic replacement.
 - A shop is unknown, a shared registration is duplicated, the area index
-  contains the same region under another slug, or another area-index or
-  sitemap inconsistency cannot be resolved within the target change unit.
+  or top-page area section contains the same region under another slug, or
+  another area-index, top-page, or sitemap inconsistency cannot be resolved
+  within the target change unit.
 - PHP, JSON, Actions, or production HTTP validation fails.
 
 On STOP, add the stopping point, completed state, unexecuted state, and rerun command to the response required by root `AGENTS.md`. Do not replace with another slug automatically.

@@ -56,7 +56,7 @@ Important:
 
 | Page | Responsibility | Internal structure and input | Coupled checks | Change gate or special caution |
 |---|---|---|---|---|
-| `index.php` | Top and entry point to all primary routes and categories | `source/index.html` + `dataset_index.php`; generates girls, schedules, banners, movies, and shops from the database | Area/blog/hotel sections, common navigation, images, JSON-LD, and `sitemap.xml` | Normal route exists. Production deployment of `index.php` is a separate final-switchover operation |
+| `index.php` | Top and entry point to all primary routes and categories | `source/index.html` + `dataset_index.php`; generates girls, schedules, banners, movies, and shops from the database | Area/blog/hotel sections follow the canonical synchronization contract in `CANDY_PAGE_GENERATION_GOVERNANCE.md`; also check common navigation, images, JSON-LD, and `sitemap.xml` | Normal route exists. Production deployment of `index.php` is a separate final-switchover operation |
 | `girls_list.php` | Girl index | `source/girls_list.html` + `dataset_girls_list.php`; girls, images, schedules, order, and Cookie favorites | `girls.php?no=...`, images, schedules, and common navigation | Normal route exists |
 | `girls.php` | Girl profile | `source/girls.html` + `dataset_girls.php`; GET girl number, girl, images, movie, schedule, and Cookie favorites | Return routes to indexes/schedules/movies, canonical and structured data, images/movies | Normal route exists. Validate GET and zero-result behavior |
 | `schedule.php` | Daily and weekly schedules | `source/schedule.html` + `dataset_schedule.php`; girls, images, schedule, date switching, and Cookie favorites | Girl detail, date tabs, zero-result display, and common navigation | Normal route exists |
@@ -122,7 +122,14 @@ Do not generate with `create.php`. For a new page outside a dedicated category t
 
 ### 6.4 Top Change
 
-Limit changes to the target sections in `source/index.html` and `dataset_index.php`. Do not change production `index.php`, redirects, age verification, or the root URL without prior approval.
+The area, blog, and hotel sections are public-route integrations, not
+independently maintained summaries. Apply the category-index/top-page
+synchronization contract in Section 10.1 of
+`CANDY_PAGE_GENERATION_GOVERNANCE.md`.
+
+Limit changes to the target sections in `source/index.html` and
+`dataset_index.php`. Do not change production `index.php`, redirects, age
+verification, or the root URL without prior approval.
 
 ### 6.5 Noindex Movie-Playback Helper
 

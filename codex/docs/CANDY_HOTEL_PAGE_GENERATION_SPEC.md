@@ -1,6 +1,6 @@
 # CANDY Hotel Page Generation Specification
 
-- Updated: 2026-07-25
+- Updated: 2026-07-26
 - Applies to: The stable structure, generation, and validation contract for CANDY hotel detail pages
 
 ## 1. Purpose and Scope
@@ -290,7 +290,7 @@ $source = str_replace($waku0, $waku_html, $source);
 
 Use this form for new generation. Separate existing-PHP structural changes as development work.
 
-## 11. Registration in dataset_base.php, Hotel Index, and Sitemap
+## 11. Registration in dataset_base.php and Public Routes
 
 Register one target at a time:
 
@@ -308,11 +308,18 @@ $source = str_replace(
 );
 ```
 
-Register the target slug in the hotel index and sitemap.
+Register the target slug in the hotel index, the top-page hotel section, and
+sitemap under Section 10.1 of
+`CANDY_PAGE_GENERATION_GOVERNANCE.md`.
 
-Every existing hotel detail page MUST have the three page files plus dataset_base, hotel-index, and sitemap registration. Keep existing-page exceptions such as the Hotel M legacy IDs separate from new production.
+Every existing hotel detail page MUST have the three page files plus
+dataset_base, hotel-index, top-page, and sitemap registration. Keep
+existing-page exceptions such as the Hotel M legacy IDs separate from new
+production.
 
-STOP new production when the target slug already exists in public PHP, source HTML, dataset PHP, dataset_base, the hotel index, or sitemap.
+STOP new production when the target slug already exists in public PHP, source
+HTML, dataset PHP, dataset_base, the hotel index, the top-page hotel section,
+or sitemap.
 
 ## 12. Hotel-Specific Generation Sequence
 
@@ -332,7 +339,9 @@ The common generation gates remain in
 8. Generate FAQs, optional basic-information rows, fees, access, and nearby spots according to input count.
 9. Renumber scenes, subtitles, and descriptions in visible order.
 10. Synchronize FAQPage and ItemList to visible presence, count, and order.
-11. Generate public entry PHP, source HTML, dataset PHP, shared registrations, hotel index, and sitemap for the target only.
+11. Generate public entry PHP, source HTML, dataset PHP, shared registrations,
+    hotel index, top-page hotel-section integration, and sitemap for the target
+    only.
 12. Check placeholders, empty containers, duplicate IDs, gaps, missing body content, the terminal CTA, canonical, images, official URL, map, internal links, PHP, and JSON.
 
 ## 13. Exceptions and Cautions
@@ -366,5 +375,6 @@ canonical hotel documents. It is not a current route or instruction source.
 - [ ] Hotel name, official URL, address, and map correspond correctly.
 - [ ] When the accepted pair existed without a local-public pair, the exact
       accepted bytes were first-installed before the final target gate.
-- [ ] Hotel-index and sitemap registration requirements were checked.
+- [ ] Hotel-index, top-page hotel-section, and sitemap registration
+      requirements satisfy the common public-route synchronization contract.
 - [ ] No duplicate ID exists.

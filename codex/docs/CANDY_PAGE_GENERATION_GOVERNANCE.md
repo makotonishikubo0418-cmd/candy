@@ -1,7 +1,8 @@
 # CANDY Page Generation Governance
 
-- Updated: 2026-07-24
-- Applies to: Normal new-page generation for area, blog, and hotel by Codex
+- Updated: 2026-07-26
+- Applies to: Normal new-page generation for area, blog, and hotel by Codex;
+  Section 10.1 also governs direct changes to their top-page sections
 
 ## 1. Position
 
@@ -14,7 +15,10 @@ operation authority, Git procedure, production procedure, or response format.
 - Blog detail: `CANDY_BLOG_PAGE_GENERATION_SPEC.md`
 - Hotel detail: `CANDY_HOTEL_PAGE_GENERATION_SPEC.md`
 
-Apply it only to normal new-page generation. Do not apply it to development changes, bug fixes, common-structure changes, or refactoring.
+Except for Section 10.1 when root `AGENTS.md` routes a direct top-page category
+section task here, apply this document only to normal new-page generation. Do
+not apply its other sections to development changes, bug fixes,
+common-structure changes, or refactoring.
 
 ## 2. Primary Principles
 
@@ -180,35 +184,76 @@ When only part of a same-name set exists, switch from new generation to an exist
 
 ### 10.1 Integration into Public Routes
 
-Even when page files are generated, publication integration is incomplete until the page is reachable from indexes, sitemap, and required related links.
+This section is the single canonical contract for synchronizing generated
+detail pages with the category indexes and the three category sections in
+`HP/source/index.html`. Category specifications and runbooks add only their
+own file sets, sequence, and validation references; they MUST NOT redefine
+this relationship.
+
+Even when page files are generated, publication integration is incomplete
+until the page is represented consistently in the category index, the
+corresponding top-page section, `sitemap.xml`, and required related links.
+
+The public-route sources are:
+
+| Category | Category index | Top-page section |
+|---|---|---|
+| Area | `HP/source/area.html` | `キャンディグループ対応エリア情報` in `HP/source/index.html` |
+| Blog | `HP/source/blog.html` | `鹿児島デリヘル「キャンディ」スタッフブログ` in `HP/source/index.html` |
+| Hotel | `HP/source/hotel.html` | `鹿児島のデリヘルが呼べる「ホテル情報」` in `HP/source/index.html` |
+
+For blog and hotel, the category index and top-page section MUST contain the
+same public detail-page URL set exactly once, with the same visible name for
+each URL. A smaller top-page selection is allowed only when a
+category-specific canonical specification defines a deterministic selection
+policy; an undocumented hand-selected subset is prohibited.
+
+The area top-page section remains the complete service-area name list. Every
+area detail URL in the area index MUST appear exactly once as a link on the
+same visible area name in that list. A service area without a published detail
+page MAY remain plain text, but it MUST NOT link to a missing or unregistered
+detail page.
+
+In all three sections, the heading, lead text, badge, item labels, and
+category-index button MUST describe the correct category and agree with the
+actual entries. Text copied from another category and stale names or URLs are
+prohibited.
 
 For a new area page, a missing target-slug link in the area index is a normal
 generation input state, not a target-selection blocker. Add exactly one target
 link in the same area change unit. A link for the same region under a
 different slug remains a conflict and MUST STOP the affected target.
 
-Check by category:
-
-- Area: `HP/source/area.html`
-- Blog: `HP/source/blog.html`
-- Hotel: `HP/source/hotel.html`
-- Common: `HP/sitemap.xml`
-- Related-page links and JSON-LD ItemList when required
-
 For a normal public page, determine:
 
 - Whether the category index requires a link, name, description, or related entry
+- Whether the corresponding top-page section requires a link, name, text, or
+  button update
 - Whether the category-index JSON-LD requires an entry
 - Whether the sitemap requires the URL
 - Whether related pages require internal links
 - Whether the index count or order requires an update
+
+Before generating files, compare the category index with its top-page section.
+If a pre-existing missing, stale, duplicate, differently named, or
+wrong-category entry exists, classify it as an existing inconsistency and STOP
+normal generation. Do not silently repair the wider inconsistency inside a
+one-page generation task.
+
+The category workflow MUST plan the top-page update in the same atomic change
+unit and MUST validate the complete relationship above, not only the newly
+generated URL. If the workflow cannot update and validate
+`HP/source/index.html`, STOP before running build or publication commands.
 
 When URL integration is inside the authorized scope, update `sitemap.xml` only
 through the applicable canonical category workflow. Preserve its current XML
 fields, diff the exact URL change, and do not replace it with an independently
 collected URL list.
 
-When only detail-page files are created and the index or sitemap is not registered, report file-generation completion separately from public-route integration completion.
+When only detail-page files are created and any required category-index,
+top-page, sitemap, or related-link integration is absent, report
+file-generation completion separately. Do not report public-route integration
+or the page-generation task as complete.
 
 ### 10.2 Robots
 

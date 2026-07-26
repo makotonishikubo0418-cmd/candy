@@ -1,6 +1,6 @@
 # CANDY Blog Page Generation Specification
 
-- Updated: 2026-07-25
+- Updated: 2026-07-26
 - Applies to: Normal new generation of CANDY blog detail pages by Codex
 
 ## 1. Purpose and Scope
@@ -20,7 +20,7 @@ and routing remain in the documents selected cumulatively by root `AGENTS.md`.
 - Apply the common collision, incomplete-input, change-boundary, and completion
   gates from `CANDY_PAGE_GENERATION_GOVERNANCE.md`.
 
-## 3. Required File Set
+## 3. Required File and Public-Route Change Unit
 
 ```text
 Text_blog_data/<対象記事>.txt
@@ -30,6 +30,9 @@ HP/kagoshima-deliveryhealth-blog-<slug>.php
 HP/source/kagoshima-deliveryhealth-blog-<slug>.html
 HP/includefile/dataset_kagoshima-deliveryhealth-blog-<slug>.php
 HP/includefile/dataset_base.php
+HP/source/blog.html
+HP/source/index.html
+HP/sitemap.xml
 ```
 
 Determine the slug by reconciling canonical in source Text, image names, and filenames.
@@ -167,7 +170,9 @@ The common generation gates remain in
 8. Register the `dataset_base.php` case and link transformation.
 9. Check placeholders, duplicate IDs, numbering gaps, table-of-contents
    mismatches, canonical, images, internal links, and girl numbers.
-10. Determine the blog-index JSON-LD and `sitemap.xml` updates.
+10. Synchronize the blog index, its JSON-LD, the top-page blog section, and
+    `sitemap.xml` under Section 10.1 of
+    `CANDY_PAGE_GENERATION_GOVERNANCE.md`.
 
 ## 11. Exceptions and Cautions
 
@@ -187,7 +192,8 @@ The common generation gates remain in
 - [ ] Visible and JSON-LD counts agree for customer comments, FAQs, and girl introductions.
 - [ ] Visible FAQ matches FAQPage JSON-LD.
 - [ ] Visible girl content matches ItemList JSON-LD.
-- [ ] Blog-index and sitemap registration requirements were checked.
+- [ ] Blog-index, top-page blog-section, and sitemap registration requirements
+      satisfy the common public-route synchronization contract.
 - [ ] No duplicate ID exists.
 
 ## 13. Specification Boundary
