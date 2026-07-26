@@ -809,12 +809,18 @@ def render_terminal_shop_cta() -> str:
 def render_page_title_h1(data: HotelData) -> str:
     if data.page_title.count(data.hotel_name) != 1:
         raise HotelToolError("page_title_h1内のホテル名は正確に1件必要です")
-    prefix, hotel_name, suffix = data.page_title.partition(data.hotel_name)
+    quoted_hotel_name = f"「{data.hotel_name}」"
+    highlighted_name = (
+        quoted_hotel_name
+        if data.page_title.count(quoted_hotel_name) == 1
+        else data.hotel_name
+    )
+    prefix, highlighted_name, suffix = data.page_title.partition(highlighted_name)
     separator = " " if prefix and prefix[-1].isspace() else ""
     return (
         f'{common.htext(prefix)}'
         f'{separator}'
-        f'<span class="fc_p">{common.htext(hotel_name)}</span>'
+        f'<span class="fc_p">{common.htext(highlighted_name)}</span>'
         f'{common.htext(suffix)}'
     )
 
@@ -1308,9 +1314,10 @@ def run_self_test(_: argparse.Namespace) -> int:
     errors = validate_rendered(data, resolved, source, hp_root)
     if errors:
         raise HotelToolError("self-test失敗:\n- " + "\n- ".join(errors))
+    quoted_prefix = "鹿児島市でデリヘルが呼べるホテル  "
     quoted_data = replace(
         data,
-        page_title=f"鹿児島市でデリヘルが呼べるホテル  「{data.hotel_name}」",
+        page_title=f"{quoted_prefix}「{data.hotel_name}」",
     )
     quoted_source = render_source(
         quoted_data,
@@ -1321,7 +1328,13 @@ def run_self_test(_: argparse.Namespace) -> int:
     quoted_errors = validate_rendered(quoted_data, resolved, quoted_source, hp_root)
     if quoted_errors:
         raise HotelToolError("quoted H1 self-test failed: " + "; ".join(quoted_errors))
-    expected_quoted_h1 = render_page_title_h1(quoted_data)
+    expected_quoted_h1 = (
+        f'{common.htext(quoted_prefix)}'
+        ' '
+        f'<span class="fc_p">「{common.htext(data.hotel_name)}」</span>'
+    )
+    if render_page_title_h1(quoted_data) != expected_quoted_h1:
+        raise HotelToolError("quoted H1 render self-test failed")
     if f'id="page_title_h1">{expected_quoted_h1}</h1>' not in quoted_source:
         raise HotelToolError("quoted H1 markup self-test failed")
     broken_h1 = quoted_source.replace(

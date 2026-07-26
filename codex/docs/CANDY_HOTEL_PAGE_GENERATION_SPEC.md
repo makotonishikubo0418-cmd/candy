@@ -39,7 +39,7 @@ A legacy Text is not a third source route. It MUST pass `legacy-check` and the m
 - Hotel pages do not have a fixed scene count. Preserve source-data order for known sections and normal article blocks after the H1 introduction; number only visible H2 elements sequentially from scene1.
 - At least one shop is required. Normal articles, FAQs, fees, access, and nearby spots MAY have zero items; omit an optional section with zero items.
 - Display the legacy option zero or one time only when `option`, `option_subtitle`, and `option_description` are all complete. Do not include it in scene numbering.
-- The H1 base text before the quoted hotel-name segment MUST retain the inherited black color. Wrap exactly one complete `「ホテル名」` segment, including both Japanese quotation marks, in a single `<span class="fc_p">`. Do not leave either quotation mark outside the span or wrap only the hotel name. The generator and validator MUST locate the exact quoted hotel-name occurrence instead of relying on whether the title ends with the hotel name.
+- The H1 base text before the hotel-name segment MUST retain the inherited black color. When the page title contains one exact `「ホテル名」` segment, wrap that complete segment, including both Japanese quotation marks, in a single `<span class="fc_p">`; do not leave either quotation mark outside the span or wrap only the hotel name. When the page title contains the hotel name without those quotation marks, wrap exactly the hotel-name substring. The generator and validator MUST locate the exact occurrence instead of relying on whether the title ends with the hotel name.
 - Related articles have one fixed generated count: three current indexable blog-detail links and three current indexable area-detail links. The related-article container MUST be followed immediately by the final `対応デリヘル店一覧` CTA defined below; the CTA is the final visible child before the page-content wrapper closes.
 - Do not infer a value, image, URL, or hotel fact absent from source data. STOP on partial input instead of completing it.
 
@@ -364,7 +364,7 @@ canonical hotel documents. It is not a current route or instruction source.
 - [ ] Missing-input handling is determined.
 - [ ] Rows, FAQs, and sections were added or removed according to information quantity.
 - [ ] No HTML, ID, or JSON-LD remains for an omitted section.
-- [ ] The H1 contains exactly one `<span class="fc_p">` around the complete `「ホテル名」` segment; both Japanese quotation marks and the hotel name are inside the span, while the preceding base text remains outside it.
+- [ ] The H1 contains exactly one `<span class="fc_p">`; it wraps the complete `「ホテル名」` segment when the page title contains that quoted segment, otherwise it wraps exactly the hotel-name substring, while the preceding base text remains outside it.
 - [ ] No heading or additional copy from a complete normal scene is missing.
 - [ ] Scene, FAQ, and nearby-spot numbering is correct.
 - [ ] Exactly three distinct current indexable blog-detail links and three distinct current indexable area-detail links exist, with no placeholder, self-link, duplicate, or missing target.
