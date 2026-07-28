@@ -396,6 +396,8 @@ def publish(input_path: Path, *, dry_run: bool, resume_state: dict[str, str] | N
         shared.run(command)
         shared.run([sys.executable, str(page_tool), "check", "--input", relative_input])
         site_state_tool = path_config.SCRIPTS_DIR / "candy_site_state.py"
+        shared.run([sys.executable, str(site_state_tool), "preview-sitemap-lastmod"])
+        shared.run([sys.executable, str(site_state_tool), "sync-sitemap-lastmod"])
         shared.run([sys.executable, str(site_state_tool), "write"])
         shared.run([sys.executable, str(site_state_tool), "check", "--target", data.slug])
         save_state(state, "BUILT", output_snapshot=file_snapshot(allowed))
