@@ -157,6 +157,7 @@ def paths_for(data: candy_hotel_page.HotelData) -> list[Path]:
         hp / "includefile" / f"dataset_kagoshima-deliveryhealth-hotel-{data.slug}.php",
         hp / "includefile" / "dataset_base.php",
         hp / "source" / "hotel.html",
+        hp / "source" / "index.html",
         hp / "sitemap.xml",
     ] + path_config.site_state_output_paths()
 
@@ -291,15 +292,28 @@ def verify_production(data: candy_hotel_page.HotelData, commit: str) -> None:
         )
     hotel_url = shared.cache_bust("https://www.55810.com/hotel.php", commit)
     hotel_status, hotel_final, _hotel_headers, hotel_bytes = shared.http_fetch(hotel_url)
+    top_source_url = shared.cache_bust("https://www.55810.com/source/", commit)
+    top_status, top_final, _top_headers, top_bytes = shared.http_fetch(top_source_url)
     sitemap_url = shared.cache_bust("https://www.55810.com/sitemap.xml", commit)
     sitemap_status, sitemap_final, _sitemap_headers, sitemap_bytes = shared.http_fetch(sitemap_url)
     hotel_body = hotel_bytes.decode("utf-8", errors="replace")
+    top_body = top_bytes.decode("utf-8", errors="replace")
     sitemap_body = sitemap_bytes.decode("utf-8", errors="replace")
     checks["hotel"] = (
         hotel_status == 200
         and hotel_final == hotel_url
         and f'./kagoshima-deliveryhealth-hotel-{data.slug}.php' in hotel_body
         and data.hotel_name in hotel_body
+    )
+    checks["top_hotel"] = (
+        top_status == 200
+        and top_final == top_source_url
+        and f'./kagoshima-deliveryhealth-hotel-{data.slug}.php' in top_body
+        and data.hotel_name in top_body
+    )
+    checks["hotel_top_alignment"] = not candy_hotel_page.hotel_registry_alignment_errors(
+        hotel_body,
+        top_body,
     )
     checks["sitemap"] = (
         sitemap_status == 200

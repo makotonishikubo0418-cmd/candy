@@ -108,6 +108,7 @@ def shared_paths() -> list[Path]:
     return [
         HP_ROOT / "includefile" / "dataset_base.php",
         HP_ROOT / "source" / "hotel.html",
+        HP_ROOT / "source" / "index.html",
         HP_ROOT / "sitemap.xml",
     ]
 
@@ -275,6 +276,7 @@ def write_report(results: list[Result]) -> tuple[Path, Path]:
 def existing_hotel_rows() -> list[dict[str, object]]:
     base = read_text(HP_ROOT / "includefile" / "dataset_base.php")
     hotel_list = read_text(HP_ROOT / "source" / "hotel.html")
+    top_page = read_text(HP_ROOT / "source" / "index.html")
     sitemap = read_text(HP_ROOT / "sitemap.xml")
     rows: list[dict[str, object]] = []
     for php in sorted(HP_ROOT.glob("kagoshima-deliveryhealth-hotel-*.php"), key=lambda path: path.name):
@@ -298,6 +300,7 @@ def existing_hotel_rows() -> list[dict[str, object]]:
                 "dataset_base": f"kagoshima-deliveryhealth-hotel-{slug}.html" in base
                 and f"dataset_kagoshima-deliveryhealth-hotel-{slug}.php" in base,
                 "hotel_list": canonical in hotel_list or f"./kagoshima-deliveryhealth-hotel-{slug}.php" in hotel_list,
+                "top_page": f"./kagoshima-deliveryhealth-hotel-{slug}.php" in top_page,
                 "sitemap": canonical in sitemap,
             }
         )
