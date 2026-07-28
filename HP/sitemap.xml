@@ -4,7 +4,7 @@
   <!-- トップ・主要ページ -->
   <url>
     <loc>https://www.55810.com/</loc>
-    <lastmod>2026-07-26</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -18,7 +18,7 @@
 
   <url>
     <loc>https://www.55810.com/hotel.php</loc>
-    <lastmod>2026-07-25</lastmod>
+    <lastmod>2026-07-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -827,6 +827,13 @@
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-hotel-youstylehotelmarine.php</loc>
     <lastmod>2026-07-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.55810.com/kagoshima-deliveryhealth-hotel-favhotelkagoshimachuo.php</loc>
+    <lastmod>2026-07-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

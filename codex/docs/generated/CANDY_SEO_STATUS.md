@@ -2,14 +2,14 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-26T11:17:31+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-28T11:10:12+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 0a178c11d98da1efc9b10292e219bbf011560584
-> State fingerprint: sha256:1b1c445b7260987deb261d705877266f49d15e2231c326d9d4aa44988c37c1c4
+> Commit: f1d6be9d86ac3c1bdae299df199f455a18815afe
+> State fingerprint: sha256:22fa2244aa69bedd2f114e20bbfd11a056f1d7202b0a660d1664674153ed1a17
 > Scope: Source HTML corresponding to public PHP files directly under HP
-> Population: Pages: 121
+> Population: Pages: 122
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: OK=120 / ISSUE=1 / UNVERIFIED=0
+> Result: OK=121 / ISSUE=1 / UNVERIFIED=0
 > Unverified scope: Production HTTP, search engine index state, redirects, and database-generated HTML
 
 Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are not corrected automatically.
@@ -118,6 +118,7 @@ Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are no
 | blog:slendergirl | 鹿児島デリヘルでスレンダーな女の子と出会うなら「キャンディ」 | 鹿児島県鹿児島市のデリヘルでスレンダーな女の子と出会うなら「キャンディ」 | https://www.55810.com/kagoshima-deliveryhealth-blog-slendergirl.php | index | 鹿児島デリヘルでスレンダーな女の子と出会うなら「キャンディ」 | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | blog:tallbeautygirl | 鹿児島デリヘルの長身美女と出会うならキャンディ！ | 鹿児島デリヘルの長身美女と出会うならキャンディ「入った瞬間から空気が変わる、非日常のスタイル体験」アッキー店長がその日の気分に合う長身美女をご案内します。 | https://www.55810.com/kagoshima-deliveryhealth-blog-tallbeautygirl.php | index | 鹿児島デリヘルの長身美女と出会うならキャンディ！ | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | hotel:cococlass | CoCo CLASS｜鹿児島市でデリヘルが呼べるホテル | 鹿児島市樋之口町でデリヘルが呼べるホテルCoCo CLASS｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-cococlass.php | index | 鹿児島市でデリヘルが呼べるホテル CoCo CLASS | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
+| hotel:favhotelkagoshimachuo | fav 鹿児島中央｜鹿児島市でデリヘルが呼べるホテル | 鹿児島市加治屋町でデリヘルが呼べるホテルfav 鹿児島中央｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-favhotelkagoshimachuo.php | index | 鹿児島市でデリヘルが呼べるホテル fav 鹿児島中央 | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | hotel:favluxkagoshimatenmonkan | FAV LUX 鹿児島天文館｜鹿児島市でデリヘルが呼べるホテル | 鹿児島市山之口町でデリヘルが呼べるホテルFAV LUX 鹿児島天文館｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-favluxkagoshimatenmonkan.php | index | 鹿児島市でデリヘルが呼べるホテル FAV LUX 鹿児島天文館 | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | hotel:greenrichkagoshimatenmonkan | グリーンリッチホテル鹿児島天文館｜鹿児島市でデリヘルが呼べるホテル | 鹿児島市山之口町でデリヘルが呼べるホテル グリーンリッチホテル鹿児島天文館｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-greenrichkagoshimatenmonkan.php | index | 鹿児島市でデリヘルが呼べるホテル グリーンリッチホテル鹿児島天文館 | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | hotel:hotelazkagoshimakiireten | HOTEL AZ 鹿児島喜入店｜鹿児島市でデリヘルが呼べるホテル | 鹿児島市喜入中名町でデリヘルが呼べるホテル「HOTEL AZ 鹿児島喜入店」｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-hotelazkagoshimakiireten.php | index | 鹿児島市でデリヘルが呼べるホテル 「HOTEL AZ 鹿児島喜入店」 | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
