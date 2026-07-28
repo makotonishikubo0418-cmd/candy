@@ -412,6 +412,13 @@
       "latitude": 31.550079,
       "links": ["chuokoshinmachi", "arata", "shimoarata", "kinkocho", "hiroki"]
     },
+    "seiwa": {
+      "region": "清和",
+      "longitude": 130.506321,
+      "latitude": 31.53574,
+      "index_group": "さ",
+      "links": ["jiyugaoka", "jigenjicho", "yamadacho", "hiroki"]
+    },
     "shimoarata": {
       "region": "下荒田",
       "longitude": 130.557098,
