@@ -2,14 +2,14 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-28T12:39:16+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-28T12:41:34+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 823bfda82d702c1e574a9a9b2710723a01dc10c9
-> State fingerprint: sha256:bd308dbcb0ee77665dd1cb70818c441deedee70e50a7ed9252bd95e5d36e60a5
+> Commit: e4d24ee3987e1b328f2da8f9240f8f8301087d1c
+> State fingerprint: sha256:9be17c01a20007db330164dee7f2d8c29898985e9b94337ac7df6582de032c99
 > Scope: Source HTML corresponding to public PHP files directly under HP
-> Population: Pages: 126
+> Population: Pages: 127
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: OK=125 / ISSUE=1 / UNVERIFIED=0
+> Result: OK=126 / ISSUE=1 / UNVERIFIED=0
 > Unverified scope: Production HTTP, search engine index state, redirects, and database-generated HTML
 
 Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are not corrected automatically.
@@ -34,6 +34,7 @@ Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are no
 | area:haruyamacho | 鹿児島市春山町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「春山町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-haruyamacho.php | index | 鹿児島市春山町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:hikariyama | 鹿児島市光山で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「光山」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-hikariyama.php | index | 鹿児島市光山で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:hiroki | 鹿児島市広木で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「広木」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-hiroki.php | index | 鹿児島市広木で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
+| area:hoshigamine | 鹿児島市星ヶ峯で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「星ヶ峯」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-hoshigamine.php | index | 鹿児島市星ヶ峯で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:ikenouecho | 鹿児島市池之上町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「池之上町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-ikenouecho.php | index | 鹿児島市池之上町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:inaricho | 鹿児島市稲荷町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「稲荷町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-inaricho.php | index | 鹿児島「稲荷町」で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:inusakocho | 鹿児島市犬迫町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「犬迫町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-inusakocho.php | index | 鹿児島市犬迫町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |

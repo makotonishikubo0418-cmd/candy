@@ -73,7 +73,7 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 35 | 新町 | `shimmachi` | LOCAL_COMPLETE | 専用ツール / 2026-07-28 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
 | 36 | 真砂町 | `masagocho` | LOCAL_COMPLETE | 専用ツール / 2026-07-28 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
 | 37 | 真砂本町 | `masagohonmachi` | READY_CANDIDATE | |
-| 38 | 星ヶ峯 | `hoshigamine` | READY_CANDIDATE | |
+| 38 | 星ヶ峯 | `hoshigamine` | LOCAL_COMPLETE | 専用ツール / 2026-07-28 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
 | 39 | 清水町 | `shimizucho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
 | 40 | 清和 | `seiwa` | READY_CANDIDATE | |
 | 41 | 西伊敷 | `nishiishiki` | READY_CANDIDATE | |

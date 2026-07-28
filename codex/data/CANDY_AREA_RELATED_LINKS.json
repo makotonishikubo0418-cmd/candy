@@ -107,6 +107,13 @@
       "latitude": 31.564325,
       "links": ["yamadacho", "jiyugaoka", "arata", "shimoarata", "yamanokuchicho"]
     },
+    "hoshigamine": {
+      "region": "星ヶ峯",
+      "longitude": 130.494185,
+      "latitude": 31.575906,
+      "index_group": "は",
+      "links": ["yamadacho", "hiroki", "jiyugaoka", "yotsumotocho"]
+    },
     "ikenouecho": {
       "region": "池之上町",
       "longitude": 130.561447,
