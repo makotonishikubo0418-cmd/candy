@@ -142,9 +142,11 @@ At minimum, verify:
 ## 7. Git Start and Synchronization Rules
 
 - Run Git operations only in the local working repository `C:\Codex\Candy`; never on the NAS.
-- At the start of work, run `git fetch origin`, followed by `git status --short --branch`.
-- Verify that the branch is `main`, the upstream is `origin/main`, and the remote is correct.
-- If `main` is behind `origin/main`, pull before editing. When existing changes, conflicts, or divergence prevent a safe pull, STOP instead of pulling automatically.
+- Perform task-start Git verification only as defined in root `AGENTS.md`
+  Section 2. This document does not add, repeat, or alter that preflight.
+- If task-start verification reports local-versus-remote divergence, follow the
+  reporting and STOP requirements in root `AGENTS.md` Section 2. This document
+  does not authorize Pull.
 - Freeze the target-file list and exclude out-of-scope changes, deletions, and untracked files from Stage and Commit.
 - `git add .` and `git add -A` are prohibited. Specify every staged file.
 - Before Commit, verify that only target files are staged, `git diff --cached --check` succeeds, and the commit content matches the authorized scope.
@@ -158,8 +160,8 @@ At minimum, verify:
 |---|---|
 | Fixed scope | Stage, Commit, and Push contain only authorized targets |
 | Work location | Git operations ran only in `C:\Codex\Candy`, never on the NAS |
-| Start synchronization | `git fetch origin` and `git status --short --branch` confirmed ahead/behind state |
-| Behind handling | A behind branch was pulled before editing; conflicts, divergence, or overlapping existing changes caused a STOP |
+| Task-start Git verification | Completed and reported exactly once under root `AGENTS.md` Section 2; no additional preflight command or synchronization action was added |
+| Divergence handling | No editing or Pull proceeded contrary to the reporting and STOP requirements in root `AGENTS.md` Section 2 |
 | Pre-Commit check | `git diff --cached --check` succeeded |
 | Markdown tables | Header and row column counts match |
 | Placement | Task history, communication, and current state are in the correct sections |

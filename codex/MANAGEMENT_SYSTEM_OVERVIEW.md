@@ -47,7 +47,7 @@ This route avoids broad document reading for simple work while preserving every 
 
 Maintain separate canonical documents for common rules, the overall plan, specifications, code structure, inter-Codex communication, and individual task history.
 
-Maintain required-document routing only in `AGENTS.md` Section 2. Maintain
+Maintain required-document routing only in `AGENTS.md` Section 5.2. Maintain
 canonical management locations and document-responsibility lookup in
 `codex/README.md`. Do not create another competing index in this overview.
 
@@ -64,7 +64,7 @@ AGENTS.md
 Each lower level contains only rules unique to its responsibility. It links to
 the higher-level source for shared authority, routing, communication, safety,
 Git, or verification rules instead of copying them. Actual work follows the
-cumulative routes selected by `AGENTS.md`; this overview never adds an
+applicable routes selected from `AGENTS.md` Section 5.2; this overview never adds an
 execution step.
 
 ## 5. Problems Prevented by This System

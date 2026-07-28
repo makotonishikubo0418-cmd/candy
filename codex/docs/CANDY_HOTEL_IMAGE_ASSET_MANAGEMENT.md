@@ -18,7 +18,7 @@ It does not redefine image composition, capture, renderer, dimensions, title, or
 
 It does not define routing, operation authority, Git procedure, deployment
 procedure, or response format. Those remain in the documents selected
-cumulatively by root `AGENTS.md`.
+from the applicable routes in root `AGENTS.md` Section 5.2.
 
 ## 2. Storage Classes
 
@@ -81,7 +81,7 @@ One hotel image unit contains exactly two files:
 6. Verify `_1` and `_2` have different SHA-256 values and materially different compositions.
 7. Check complete-hash duplication against other hotel images. A match to
    another hotel is `STOP`; reuse is a separate target operation selected by
-   the cumulative route.
+   an applicable route in root `AGENTS.md` Section 5.2.
 8. Verify the target Text relative paths and OGP absolute path.
 9. Inspect both exact accepted-source and public-source names before writing either location.
 10. Apply the reconciliation matrix in Section 6.
@@ -96,9 +96,9 @@ A partial pair is never accepted. Do not place one accepted file while the other
 | Accepted source | Local public source | Hash relationship | State and action |
 |---|---|---|---|
 | Absent pair | Absent pair | Not applicable | New acceptance may create the accepted pair; first installation is a separate next state |
-| Complete pair | Absent pair | Not applicable | `ACCEPTED`; copy exact accepted bytes only when the cumulative route includes first installation |
+| Complete pair | Absent pair | Not applicable | `ACCEPTED`; copy exact accepted bytes only when an applicable route selected from root `AGENTS.md` Section 5.2 includes first installation |
 | Complete pair | Complete pair | Each same-name hash matches | `INSTALLED_LOCAL`; do not rewrite either pair |
-| Complete pair | Complete pair | Any same-name hash differs | `REVIEW`; do not overwrite. Use the cumulative replacement route |
+| Complete pair | Complete pair | Any same-name hash differs | `REVIEW`; do not overwrite. Use the applicable replacement route selected from root `AGENTS.md` Section 5.2 |
 | Absent pair | Complete pair | Not applicable | `LEGACY_PUBLIC_ONLY`; preserve the public pair and do not create an accepted copy by assumption |
 | Partial pair | Any state | Any state | `STOP`; identify the missing or extra file and recovery method |
 | Any state | Partial pair | Any state | `STOP`; do not publish or repair by inference |
@@ -110,8 +110,9 @@ If `_1` and `_2` have the same hash, the pair is `STOP` even when accepted/publi
 First installation applies only when both canonical public filenames are absent.
 
 1. Require `IMAGE RESULT: PASS` and a complete accepted pair.
-2. When the cumulative routes include first local installation for the target,
-   perform it before the final page target gate. An acceptance-only task may end
+2. When the applicable routes selected from root `AGENTS.md` Section 5.2
+   include first local installation for the target, perform it before the final
+   page target gate. An acceptance-only task may end
    at `ACCEPTED`.
 3. Copy the accepted files without re-rendering, re-encoding, resizing, metadata editing, or renaming.
 4. Verify that each accepted/public same-name SHA-256 matches.
@@ -131,7 +132,7 @@ installed pair MUST complete Section 9 before page publication.
 An existing public filename with different proposed bytes is not a first installation.
 
 - Treat replacement or overwrite as a separate target operation under the
-  cumulative replacement route.
+  applicable replacement route selected from root `AGENTS.md` Section 5.2.
 - Treat the hotel pair as one inspection and rollback unit. Inspect both accepted and public files even when only one file's bytes change.
 - Validate the proposed pair through `CANDY_HOTEL_IMAGE_CREATION_SPEC.md` before acceptance.
 - Do not create an accepted-source copy of a legacy public file merely to make the hashes agree.
@@ -150,8 +151,9 @@ No hotel-specific replacement automation or production guard is established by t
 - The current `candy_hotel_publish.py` treats the public pair as tracked, clean dependencies and does not stage new image files. Do not include untracked or modified image files in the later page Commit.
 - The accepted pair is management/source evidence and MUST NOT be deployed as a public target.
 - The public pair is the only deployable output of this image-asset unit. It may be deployed before the page exists, but that state is `DEPLOYED_ASSET`, not `PUBLISHED`.
-- When the cumulative authorized routes include creation and publication of a
-  hotel page whose complete accepted pair is not yet locally public, preserve
+- When the applicable authorized routes selected from root `AGENTS.md`
+  Section 5.2 include creation and publication of a hotel page whose complete
+  accepted pair is not yet locally public, preserve
   two distinct units: first image-asset registration, deployment, and
   production-byte verification; then page registration, deployment, and page
   verification.
@@ -166,8 +168,8 @@ local public hashes.
 
 A newly created pair MUST have reached `DEPLOYED_ASSET`; an unchanged legacy
 public-only pair MUST already be tracked and clean. Publication follows the
-cumulative page, Git, and production routes and does not create a separate
-image-specific authority path.
+applicable page, Git, and production routes selected from root `AGENTS.md`
+Section 5.2 and does not create a separate image-specific authority path.
 
 Before staging:
 
@@ -245,8 +247,8 @@ HUMAN_DECISION_REQUIRED:
 - [ ] Same-name accepted/public states were reconciled without inference.
 - [ ] Any local public installation copied exact accepted bytes.
 - [ ] Target Text paths and OGP agree.
-- [ ] Any replacement followed the cumulative replacement route with cache
-      handling and rollback.
+- [ ] Any replacement followed the applicable replacement route selected from
+      root `AGENTS.md` Section 5.2 with cache handling and rollback.
 - [ ] A newly accepted pair reached `REGISTERED_GIT` and `DEPLOYED_ASSET` before page publication.
 - [ ] Local acceptance, local installation, image-asset Git/Actions, page
       Git/Actions, production bytes, page references, and rendering were

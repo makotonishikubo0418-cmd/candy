@@ -46,7 +46,8 @@ The local counterparts are under `HP/includefile/`. Public rendering wrappers us
 - `create.php` affects authentication and file generation. It retains
   `dataset_test.php` and the `test.html` routing anchors as internal generation
   scaffolding. It is outside normal page production; execution or modification
-  is a separate operation selected by the cumulative root route.
+  is a separate operation selected by an applicable route in root `AGENTS.md`
+  Section 5.2.
 - Do not automatically classify a public PHP file without source or dataset as missing. Mark it `SPECIAL` in the ledger and confirm implementation intent.
 
 ## 3. CSS
@@ -87,7 +88,7 @@ The `<script>` elements in source HTML are the canonical loading source. Before 
 |---|---|
 | `HP/imgHtml/` | Public images referenced from HTML. Category assets are stored under locations such as `new_202601/area`, `hotel`, and `blog` |
 | `HP/imgCss/` and images adjacent to CSS | Assets referenced by CSS, including backgrounds |
-| `HP/movie/` | Public movies and related assets. Deletion or replacement belongs to the cumulative asset/safety route |
+| `HP/movie/` | Public movies and related assets. Deletion or replacement belongs to the applicable asset and safety routes selected from root `AGENTS.md` Section 5.2 |
 | `HP/font/` and related locations | Fonts referenced from CSS |
 | `Text_area_data/画像データ/` | Git-managed accepted or candidate source assets before production. Do not treat them as public assets; public HTML uses the copied files under `HP/imgHtml/new_202601/area/` |
 | `Text_hotel_data/画像データ/` | Git-managed accepted hotel-image source pairs. Public HTML never references this folder; local/public page assets use matching copies under `HP/imgHtml/new_202601/hotel/` |

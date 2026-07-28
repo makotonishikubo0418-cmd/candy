@@ -64,7 +64,8 @@ Before deletion, movement, or bulk cleanup, classify every target as follows:
 
 Before execution, verify at minimum:
 
-1. The cumulative `AGENTS.md` routes for the operation are satisfied.
+1. The applicable routes selected from root `AGENTS.md` Section 5.2 for the
+   operation are satisfied.
 2. The target list is fixed.
 3. Every target has one classification from Section 4.
 4. The target list does not include an unauthorized protected target.
@@ -90,11 +91,12 @@ STOP when any of the following occurs:
 
 After stopping, report the affected scope, latest GitHub commit, available
 isolated copy, and recovery proposal. Recovery proceeds only through the
-cumulative root route.
+applicable route selected from root `AGENTS.md` Section 5.2.
 
 ## 8. Git Recovery Procedure
 
-Perform Git recovery only when it is included by the cumulative root route:
+Perform Git recovery only when it is included by an applicable route selected
+from root `AGENTS.md` Section 5.2:
 
 1. Stop writes to the damaged local working repository and inspect uncommitted and untracked files without modifying them.
 2. Confirm the latest `origin/main` commit and any local-only changes required for recovery.

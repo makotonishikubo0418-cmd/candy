@@ -9,7 +9,8 @@ This is the canonical specification for generating blog pages from source Text w
 
 This document owns only blog-specific page structure, source mapping, variable
 blocks, and validation requirements. Common generation rules, Git, publication,
-and routing remain in the documents selected cumulatively by root `AGENTS.md`.
+and routing remain in the applicable documents selected from root `AGENTS.md`
+Section 5.2.
 
 ## 2. Mandatory Rules
 

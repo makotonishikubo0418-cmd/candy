@@ -142,8 +142,8 @@ On failure:
 - Verify on the actual server that no temporary or backup file remains.
 
 After changing workflow/script, run syntax and integration tests, then verify
-the automatic GitHub run if the cumulative Git and production routes authorize
-publication.
+the automatic GitHub run if the applicable Git and production routes selected
+from root `AGENTS.md` Section 5.2 authorize publication.
 
 ### 5.1 Same-Path Static Asset Replacement and Client Cache Safety
 
@@ -184,8 +184,9 @@ state or current procedure.
 
 ## 7. Production-Specific Pre-Deployment Procedure
 
-The cumulative Git route in root `AGENTS.md` owns branch, remote, staging,
-Commit, and Push checks. This document adds only the production-specific gates:
+The applicable Git route in root `AGENTS.md` Section 5.2 owns branch, remote,
+staging, Commit, and Push checks. This document adds only the
+production-specific gates:
 
 1. Inspect the exact workflow and deploy script used by the operation.
 2. Run their syntax, self-test, and integration checks.

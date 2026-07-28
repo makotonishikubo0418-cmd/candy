@@ -151,8 +151,9 @@ A template-only value is not a current public failure. A value remaining in gene
 ### 3.8 Production Deployment Route
 
 When production deployment is inside the verified scope, validate the exact
-workflow and deploy script selected by the cumulative production route in root
-`AGENTS.md`. This plan requires only that the following evidence states remain
+workflow and deploy script selected by the applicable production route in root
+`AGENTS.md` Section 5.2. This plan requires only that the following evidence
+states remain
 separate:
 
 - local workflow/script checks

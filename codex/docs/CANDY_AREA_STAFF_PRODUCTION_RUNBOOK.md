@@ -35,10 +35,11 @@ Before target selection, treat a complete pair under
 `Text_area_data/画像データ/` as available production input. After selecting
 the target and before the final target gate, copy exact accepted bytes to
 `HP/imgHtml/new_202601/area/` when both same-name public files are absent. A
-pending first installation is not a missing-image failure when the cumulative
-authorized routes include installation. When the accepted pair itself is
-absent, image creation and acceptance belong to the cumulative image route
-selected by root `AGENTS.md`.
+pending first installation is not a missing-image failure when the applicable
+authorized routes selected from root `AGENTS.md` Section 5.2 include
+installation. When the accepted pair itself is absent, image creation and
+acceptance belong to the applicable image route selected from root `AGENTS.md`
+Section 5.2.
 
 Run these commands only when investigating exceptions across the full input population:
 
@@ -111,8 +112,9 @@ selection or use the applicable exception route.
 4. Generate the complete page set from templates, including the category-index
    and top-page links.
 5. Run static validation and synchronize sitemap dates and generated management documents with `candy-site-state preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`.
-6. When publication is included, continue through the cumulative Git and
-   production routes and verify Actions and production HTTP.
+6. When publication is included, continue through the applicable Git and
+   production routes selected from root `AGENTS.md` Section 5.2 and verify
+   Actions and production HTTP.
 
 ## 3. Generation Rules
 

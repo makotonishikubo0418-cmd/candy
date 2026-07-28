@@ -11,7 +11,7 @@ This document owns only the area-image visual deliverable: source-view
 requirements, two-image composition, crop, title treatment, legibility, and
 visual acceptance. Naming, storage, asset lifecycle, first installation,
 replacement, Git, and publication belong to the other documents selected
-cumulatively by root `AGENTS.md`.
+from the applicable routes in root `AGENTS.md` Section 5.2.
 
 Do not use generative AI. Use images that verify the actual region.
 

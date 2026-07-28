@@ -1,19 +1,23 @@
 # CANDY Area Page Generation Specification
 
 - Updated: 2026-07-26
-- Applies to: Normal new generation of CANDY area detail pages by Codex
+- Applies to: Area-page structure changes, defect fixes, and exceptions that the standard procedure cannot resolve
 
 ## 1. Purpose
 
-This is the canonical specification for generating area pages without damage and with a consistent structure.
+This is the canonical structural and output specification for area pages.
 
-Use it for normal new-page generation. Development changes such as bug fixes, existing-feature changes, common-processing changes, and refactoring are out of scope and follow root `AGENTS.md` and the task-specific canonical documents named by its Section 2 route.
+Normal one-page generation follows `CANDY_PAGE_GENERATION_GOVERNANCE.md` and
+`CANDY_AREA_STAFF_PRODUCTION_RUNBOOK.md`; the dedicated workflow enforces the
+applicable area structure and validation requirements. Read this specification
+directly when changing area-page structure, fixing area-specific behavior, or
+handling an exception that the standard procedure cannot resolve.
 
 This document owns only area-specific page structure, input mapping, output
 shape, and validation requirements. Common generation rules, image-asset
 lifecycle, staff execution order, Git, production, and document routing remain
-in the documents selected cumulatively by root `AGENTS.md`; this specification
-does not add or redefine those routes.
+in the applicable documents selected from root `AGENTS.md` Section 5.2; this
+specification does not add or redefine those routes.
 
 ### 1.1 Responsibility and Page Structure
 
@@ -356,7 +360,8 @@ kagoshima-deliveryhealth-area-<slug>_2.jpg
 ```
 
 Acceptance, first installation, replacement, and missing-image STOP decisions
-belong to the cumulative image-asset route selected by root `AGENTS.md`.
+belong to the applicable image-asset route selected from root `AGENTS.md`
+Section 5.2.
 
 ### 12.5 Partial Existing Three-File Set or Registration
 

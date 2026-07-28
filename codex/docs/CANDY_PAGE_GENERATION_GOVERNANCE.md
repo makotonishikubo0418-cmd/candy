@@ -96,8 +96,9 @@ When a required item is missing, a slug conflicts, a same-name file exists, or a
 
 For area and hotel pages, distinguish a genuinely missing image from a pending
 first local installation. A complete category-approved accepted-source pair is
-available production input. When the cumulative authorized routes include
-first installation and its same-name local-public pair is absent, copy the
+available production input. When the applicable authorized routes selected
+from root `AGENTS.md` Section 5.2 include first installation and its same-name
+local-public pair is absent, copy the
 exact accepted bytes to the canonical local-public directory before the final
 target gate.
 

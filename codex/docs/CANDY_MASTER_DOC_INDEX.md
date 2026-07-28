@@ -2,7 +2,7 @@
 
 ## 1. Purpose
 
-Root `AGENTS.md` Section 2 is the sole routing authority. This file is a
+Root `AGENTS.md` Section 5.2 is the sole routing authority. This file is a
 non-authoritative ownership lookup used only when that route names it. It
 identifies which HP document owns a topic but cannot add mandatory reading,
 change priority, grant authority, or define an execution sequence.

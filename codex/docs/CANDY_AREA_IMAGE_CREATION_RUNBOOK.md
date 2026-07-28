@@ -50,9 +50,9 @@ the other.
 9. Pass the accepted pair to `CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md` for
    filename, storage, collision, first-installation, replacement, and Git
    lifecycle handling.
-10. When page integration or publication is included, apply the cumulative
-    `AGENTS.md` routes for the area page, Git, verification, and production
-    portions of that work.
+10. When page integration or publication is included, apply the applicable
+    routes selected from root `AGENTS.md` Section 5.2 for the area page, Git,
+    verification, and production portions of that work.
 
 ## 4. Validation Record
 
@@ -86,8 +86,8 @@ STOP when:
 - Any specification acceptance gate fails.
 - Same-name handling cannot follow the asset-lifecycle document within the
   authorized scope.
-- A cumulative `AGENTS.md` route identifies a conflict, missing authority, or
-  failed verification.
+- An applicable route selected from root `AGENTS.md` Section 5.2 identifies a
+  conflict, missing authority, or failed verification.
 
 Do not replace a STOP with inferred spelling, unrelated imagery, a second live
 filename, hidden edits, or a lower-level exception.

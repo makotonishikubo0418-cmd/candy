@@ -46,7 +46,8 @@ codex\scripts\candy-hotel.cmd direct-check --input "Text_hotel_data/対象ホテ
   `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`, then rerun `direct-check`. When a
   complete accepted pair already exists and only the local-public pair is
   absent, treat it as pending first installation rather than missing images
-  when installation is included by the cumulative authorized routes.
+  when installation is included by the applicable authorized routes selected
+  from root `AGENTS.md` Section 5.2.
 - `DIRECT_TEXT_STATUS=READY_FOR_BUILD` means that the completed Text and both locally installed public images are ready for the normal target gate and local build. For publication, a newly accepted pair must first reach `DEPLOYED_ASSET` through `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`; an unchanged legacy public-only pair must already be tracked and clean.
 - `DIRECT_TEXT_STATUS=STOP` means that the Text is incomplete, untracked, duplicated, already registered, or otherwise ineligible. Do not invoke a Phase solely to bypass that blocker.
 
@@ -82,7 +83,8 @@ Candidate discovery MUST recognize a complete accepted-source pair as image
 availability. After selecting the target and before the final target gate,
 copy exact accepted bytes to `HP/imgHtml/new_202601/hotel/` when both
 same-name public files are absent and first installation is included by the
-cumulative authorized routes. Continue after hash verification.
+applicable authorized routes selected from root `AGENTS.md` Section 5.2.
+Continue after hash verification.
 
 Validation covers:
 
@@ -222,8 +224,8 @@ Do not run manual HTML creation or a separate FTP upload before or after these c
    top-page hotel section, and sitemap, then freeze hashes for the seven output
    files.
 7. Synchronize sitemap dates and generated management documents with `candy-site-state preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`.
-8. When publication is included, continue through the cumulative Git and
-   production routes.
+8. When publication is included, continue through the applicable Git and
+   production routes selected from root `AGENTS.md` Section 5.2.
 9. Track pre-FTP PHP lint and deployment in Actions.
 10. Verify the production page, H1, JSON-LD, images, hotel index, top-page
     hotel section, sitemap, and redirects over HTTP.
@@ -272,8 +274,9 @@ HP/imgHtml/new_202601/hotel/<slug>_2.jpg
 ```
 
 When either source route created or first-installed a new image pair and the
-cumulative authorized routes include publication, complete the image-asset
-registration, Actions deployment, and production-byte verification in
+applicable authorized routes selected from root `AGENTS.md` Section 5.2 include
+publication, complete the image-asset registration, Actions deployment, and
+production-byte verification in
 `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md` before invoking page publication. The
 current hotel publication tool treats public images as tracked, clean
 dependencies and does not stage new image files; do not re-edit them during

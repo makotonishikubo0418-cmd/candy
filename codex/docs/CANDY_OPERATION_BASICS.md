@@ -96,7 +96,7 @@ Add as required:
 Environment behavior, protection targets, workflow triggers, limits, rollback,
 and production verification are owned by
 `CANDY_PRODUCTION_MIGRATION_MASTER.md` and the exact workflow/scripts selected
-by the cumulative production route in root `AGENTS.md`.
+by the applicable production route in root `AGENTS.md` Section 5.2.
 
 ## 8. Unverified Scope
 

@@ -207,8 +207,8 @@ Show the affected scope before changing:
 4. Synchronize sitemap dates and generated documents with
    `candy-site-state preview-sitemap-lastmod`,
    `sync-sitemap-lastmod`, `write`, and `check`.
-5. When publication is included, continue through the cumulative Git and
-   production routes selected by root `AGENTS.md`.
+5. When publication is included, continue through the applicable Git and
+   production routes selected from root `AGENTS.md` Section 5.2.
 
 ## 11. User Report
 

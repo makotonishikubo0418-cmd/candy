@@ -1,15 +1,20 @@
 # CANDY Hotel Page Generation Specification
 
 - Updated: 2026-07-26
-- Applies to: The stable structure, generation, and validation contract for CANDY hotel detail pages
+- Applies to: Hotel-page structure changes, defect fixes, and exceptions that the standard procedure cannot resolve
 
 ## 1. Purpose and Scope
 
-This is the canonical structural and output specification for generating hotel
-pages from source Text without damage. It owns hotel-specific page structure,
-source-route semantics, output shape, and validation requirements. Common
-generation rules, Git, publication, and routing remain in the documents
-selected cumulatively by root `AGENTS.md`.
+This is the canonical structural and output specification for hotel pages.
+Normal one-page generation follows `CANDY_PAGE_GENERATION_GOVERNANCE.md` and
+`CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md`; the dedicated workflow enforces the
+applicable hotel structure and validation requirements. Read this specification
+directly when changing hotel-page structure, fixing hotel-specific behavior, or
+handling an exception that the standard procedure cannot resolve. It owns
+hotel-specific page structure, source-route semantics, output shape, and
+validation requirements. Common generation rules, Git, publication, and
+routing remain in the applicable documents selected from root `AGENTS.md`
+Section 5.2.
 
 Select one source route before production:
 
@@ -148,14 +153,16 @@ codex\scripts\candy-hotel.cmd direct-check --input "Text_hotel_data/対象ホテ
 
 Only `DIRECT_TEXT_STATUS=READY_FOR_IMAGES` may enter direct image creation.
 When a complete accepted pair exists and only its local-public copy is absent,
-perform first installation when it is included by the cumulative authorized
-routes instead of reporting a missing-image STOP. Only
+perform first installation when it is included by the applicable authorized
+routes selected from root `AGENTS.md` Section 5.2 instead of reporting a
+missing-image STOP. Only
 `DIRECT_TEXT_STATUS=READY_FOR_BUILD` may continue to the common target gate and
 page generation.
 
 The dedicated tool always performs generation and validation. It performs
 staging, Commit, Push, Actions, production HTTP validation, and URL output only
-when those operations are included by the cumulative authorized routes.
+when those operations are included by the applicable authorized routes selected
+from root `AGENTS.md` Section 5.2.
 
 ## 3. Current-State Source
 

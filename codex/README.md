@@ -16,7 +16,7 @@ This README is the entry point for the management documents under `C:\Codex\Cand
 
 ## 2. Responsibility Boundary
 
-Root `AGENTS.md` Section 2 is the sole authority for selecting the management
+Root `AGENTS.md` Section 5.2 is the sole authority for selecting the management
 documents required for a task. This README defines locations and document
 responsibilities only. It does not add authority, preflight, Git, reservation,
 reporting, reading, or execution rules.
@@ -50,7 +50,7 @@ reporting, reading, or execution rules.
 | Safety procedure for deletion, movement, and bulk operations | `codex/project_management/SAFETY_PROTOCOL.md` |
 | HP production and generation specifications | `codex/docs/CANDY_MASTER_DOC_INDEX.md` |
 | Area nearby-link mapping | `codex/data/CANDY_AREA_RELATED_LINKS.json` |
-| Stable HP structure | `codex/docs/CANDY_HP_STRUCTURE_MAP.md`, `CANDY_CODE_FILE_STRUCTURE.md`, and `CANDY_SEO_SPEC.md` |
+| Stable HP structure | `codex/docs/CANDY_HP_STRUCTURE_MAP.md`, `codex/docs/CANDY_CODE_FILE_STRUCTURE.md`, and `codex/docs/CANDY_SEO_SPEC.md` |
 | Current HP state | The four documents under `codex/docs/generated/` |
 
 ## 5. Duplicate-Source Prohibitions

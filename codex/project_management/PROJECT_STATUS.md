@@ -13,7 +13,7 @@
 
 ## 2. Completed Management Foundation
 
-- Root `AGENTS.md` Section 2 is the required-document routing authority.
+- Root `AGENTS.md` Section 5.2 is the required-document routing authority.
   `codex/README.md` owns canonical management locations and document
   responsibilities only; it no longer adds a second operational route.
 - Page structure, code and asset structure, and the common SEO specification are separated into stable canonical documents.
@@ -25,7 +25,7 @@
 
 ## 3. Current Problems and Remaining Work
 
-| Type | Canonical source | Handling |
+| Type | Reference or evidence source | Handling |
 |---|---|---|
 | Dated repository-wide SEO audit | `CANDY_REPOSITORY_SEO_AUDIT_2026-07-18.md` | Use this as the 2026-07-18 repository evidence snapshot and remediation handoff. Reverify volatile repository and production state before implementing a finding |
 | Machine-detected page-structure, Text-candidate, SEO, and asset issues | `codex/docs/generated/` | Regenerate after actual-file changes. Detection alone MUST NOT trigger automatic fixes or deletion |

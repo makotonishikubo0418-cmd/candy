@@ -61,7 +61,7 @@ specification.
 When a complete accepted pair exists and both local-public names are absent,
 the state is `PENDING_FIRST_INSTALL`, not missing images. The target-limited
 installation step may copy the exact accepted bytes only when it is included
-by the cumulative authorized routes.
+by the applicable authorized routes selected from root `AGENTS.md` Section 5.2.
 
 After copying:
 
@@ -84,10 +84,11 @@ After copying:
 
 For page integration, verify the target source references, alt values, OGP
 value, page files, shared registration, index, links, and sitemap through the
-applicable cumulative `AGENTS.md` routes.
+applicable routes selected from root `AGENTS.md` Section 5.2.
 
-For Git or production work, use the cumulative Git and production routes from
-root `AGENTS.md`. This document grants no Commit, Push, or deployment authority.
+For Git or production work, use the applicable Git and production routes
+selected from root `AGENTS.md` Section 5.2. This document grants no Commit,
+Push, or deployment authority.
 
 ## 8. Completion Record
 
