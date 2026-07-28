@@ -2,14 +2,14 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-28T11:21:17+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-28T12:31:25+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 3af39f018d557c3347b12d3e89256083bb79fdad
-> State fingerprint: sha256:4dd53d558da9b6c33b1b558ccc6801d18c244d2c4f1d7ca36cede90b99386656
+> Commit: 3e6bfd4ce7a63f804a272a2c752686380b7b581c
+> State fingerprint: sha256:7b4fa336dbb99b5c5fc5f621bac97988da8bf569b8f0fb03e6cfd34134869fa4
 > Scope: Source HTML corresponding to public PHP files directly under HP
-> Population: Pages: 124
+> Population: Pages: 125
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: OK=123 / ISSUE=1 / UNVERIFIED=0
+> Result: OK=124 / ISSUE=1 / UNVERIFIED=0
 > Unverified scope: Production HTTP, search engine index state, redirects, and database-generated HTML
 
 Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are not corrected automatically.
@@ -83,6 +83,7 @@ Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are no
 | area:sakanoue | 鹿児島市坂之上町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「坂之上町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-sakanoue.php | index | 鹿児島市坂之上で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:sakuragaoka | 鹿児島市桜ヶ丘で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「桜ヶ丘」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-sakuragaoka.php | index | 鹿児島市桜ヶ丘で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:sanwacho | 鹿児島市三和町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「三和町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-sanwacho.php | index | 鹿児島市三和町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
+| area:shimmachi | 鹿児島市新町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「新町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-shimmachi.php | index | 鹿児島市新町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:shimoarata | 鹿児島市下荒田で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「下荒田」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-shimoarata.php | index | 鹿児島市下荒田で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:shimofukumotocho | 鹿児島市下福元町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「下福元町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-shimofukumotocho.php | index | 鹿児島市下福元町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:shimoishiki | 鹿児島市下伊敷で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「下伊敷」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-shimoishiki.php | index | 鹿児島市下伊敷で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |

@@ -441,6 +441,14 @@
       "index_before": "jigenjicho",
       "links": ["chuokoshinmachi", "hiroki", "arata", "jiyugaoka"]
     },
+    "shimmachi": {
+      "region": "新町",
+      "longitude": 130.556504,
+      "latitude": 31.589291,
+      "index_group": "さ",
+      "index_before": "jigenjicho",
+      "links": ["yamanokuchicho", "yamashitacho", "shimoarata", "arata"]
+    },
     "shinshoincho": {
       "region": "新照院町",
       "longitude": 130.5419296764674,

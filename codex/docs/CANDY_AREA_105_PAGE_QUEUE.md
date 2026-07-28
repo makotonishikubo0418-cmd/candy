@@ -70,7 +70,7 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 32 | 常盤 | `tokiwa` | LOCAL_COMPLETE | 専用ツール / 2026-07-25 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
 | 33 | 新栄町 | `shineicho` | LOCAL_COMPLETE | 専用ツール / 2026-07-25 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
 | 34 | 新照院町 | `shinshoincho` | LOCAL_COMPLETE | 専用ツール / 2026-07-25 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
-| 35 | 新町 | `shimmachi` | READY_CANDIDATE | |
+| 35 | 新町 | `shimmachi` | LOCAL_COMPLETE | 専用ツール / 2026-07-28 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
 | 36 | 真砂町 | `masagocho` | READY_CANDIDATE | |
 | 37 | 真砂本町 | `masagohonmachi` | READY_CANDIDATE | |
 | 38 | 星ヶ峯 | `hoshigamine` | READY_CANDIDATE | |
