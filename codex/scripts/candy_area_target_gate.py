@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import html
 import re
 import subprocess
 from dataclasses import dataclass
@@ -78,6 +79,10 @@ def area_path() -> Path:
     return HP_ROOT / "source" / "area.html"
 
 
+def top_area_path() -> Path:
+    return HP_ROOT / "source" / "index.html"
+
+
 def image_paths(slug: str) -> list[Path]:
     return [
         HP_ROOT / "imgHtml" / "new_202601" / "area" / f"kagoshima-deliveryhealth-area-{slug}_1.jpg",
@@ -111,6 +116,43 @@ def area_list_reasons(candidate: Candidate) -> list[str]:
         reasons.append(
             f"area list same-region slug mismatch: canonical={candidate.slug} existing_region_slugs={','.join(mismatches)}"
         )
+    return reasons
+
+
+def top_area_reasons(candidate: Candidate) -> list[str]:
+    path = top_area_path()
+    if not path.exists():
+        return ["top page missing: " + rel(path)]
+    source = read_text(path)
+    start = source.find("<!-- 対応エリア情報 START -->")
+    end = source.find("<!-- 対応エリア情報 END -->", start)
+    if start < 0 or end < 0:
+        return ["top page area section markers are missing"]
+    block = source[start:end]
+    link = f'./kagoshima-deliveryhealth-area-{candidate.slug}.php'
+    count = block.count(link)
+    reasons: list[str] = []
+    if count > 1:
+        reasons.append(f"top page duplicate target link: {link} count={count}")
+    escaped_region = html.escape(candidate.region)
+    pattern = re.compile(
+        rf'href="\./kagoshima-deliveryhealth-area-([^"]+)\.php"[^>]*>{re.escape(escaped_region)}</a>'
+    )
+    slugs = sorted(set(match.group(1) for match in pattern.finditer(block)))
+    mismatches = [slug for slug in slugs if slug != candidate.slug]
+    if mismatches:
+        reasons.append(
+            f"top page same-region slug mismatch: canonical={candidate.slug} existing_region_slugs={','.join(mismatches)}"
+        )
+    if count == 0 and not mismatches:
+        plain_pattern = re.compile(
+            rf'(?:>| \| ){re.escape(escaped_region)}(?= \| |</div>)'
+        )
+        plain_count = len(list(plain_pattern.finditer(block)))
+        if plain_count != 1:
+            reasons.append(
+                f"top page plain target name count is not 1: {candidate.region} count={plain_count}"
+            )
     return reasons
 
 
@@ -158,6 +200,7 @@ def check_candidate(candidate: Candidate) -> tuple[bool, list[str]]:
         if path.exists():
             reasons.append(f"existing page artifact: {rel(path)}")
     reasons.extend(area_list_reasons(candidate))
+    reasons.extend(top_area_reasons(candidate))
     needle = f"kagoshima-deliveryhealth-area-{candidate.slug}"
     for path in blocking_shared_paths():
         if path.exists() and needle in read_text(path):

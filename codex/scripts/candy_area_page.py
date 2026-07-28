@@ -1215,6 +1215,95 @@ def update_area_index(source: str, data: AreaData, config: dict) -> str:
     return source[: section.start("close")] + "\n" + row + source[section.start("close") :]
 
 
+def area_registry_links(source: str, *, top_page: bool) -> list[tuple[str, str]]:
+    if top_page:
+        start = source.find("<!-- 対応エリア情報 START -->")
+        end = source.find("<!-- 対応エリア情報 END -->", start)
+        if start < 0 or end < 0:
+            raise AreaToolError("index対応エリア領域がありません")
+        source = source[start:end]
+    entries = re.findall(
+        r'<a href="\./(kagoshima-deliveryhealth-area-[a-z0-9-]+\.php)"[^>]*>(.*?)</a>',
+        source,
+        re.S,
+    )
+    return [(href, strip_tags(label).strip()) for href, label in entries]
+
+
+def area_registry_alignment_errors(area_source: str, index_source: str) -> list[str]:
+    area_entries = area_registry_links(area_source, top_page=False)
+    index_entries = area_registry_links(index_source, top_page=True)
+    errors: list[str] = []
+    area_counts = Counter(href for href, _name in area_entries)
+    index_counts = Counter(href for href, _name in index_entries)
+    area_duplicates = sorted(href for href, count in area_counts.items() if count != 1)
+    index_duplicates = sorted(href for href, count in index_counts.items() if count != 1)
+    if area_duplicates:
+        errors.append("area一覧URL重複: " + ",".join(area_duplicates))
+    if index_duplicates:
+        errors.append("indexエリアURL重複: " + ",".join(index_duplicates))
+    area_names = dict(area_entries)
+    index_names = dict(index_entries)
+    missing_from_index = sorted(set(area_names) - set(index_names))
+    extra_in_index = sorted(set(index_names) - set(area_names))
+    if missing_from_index:
+        errors.append("indexエリアリンク不足: " + ",".join(missing_from_index))
+    if extra_in_index:
+        errors.append("indexエリア余分リンク: " + ",".join(extra_in_index))
+    mismatched_names = sorted(
+        href
+        for href in set(area_names) & set(index_names)
+        if area_names[href] != index_names[href]
+    )
+    if mismatched_names:
+        errors.append("area一覧とindexの表示名不一致: " + ",".join(mismatched_names))
+    return errors
+
+
+def update_area_top_index(source: str, data: AreaData) -> str:
+    php_name = f"kagoshima-deliveryhealth-area-{data.slug}.php"
+    href = f"./{php_name}"
+    start = source.find("<!-- 対応エリア情報 START -->")
+    end = source.find("<!-- 対応エリア情報 END -->", start)
+    if start < 0 or end < 0:
+        raise AreaToolError("index対応エリア領域がありません")
+    block = source[start:end]
+    if block.count(href) > 1:
+        raise AreaToolError("indexエリア登録重複")
+    escaped_region = html.escape(data.region)
+    region_slugs = sorted(
+        set(
+            re.findall(
+                rf'href="\./kagoshima-deliveryhealth-area-([^"]+)\.php"[^>]*>{re.escape(escaped_region)}</a>',
+                block,
+            )
+        )
+    )
+    mismatches = [slug for slug in region_slugs if slug != data.slug]
+    if mismatches:
+        raise AreaToolError(
+            f"indexエリア同一地域slug不一致: canonical={data.slug} existing={','.join(mismatches)}"
+        )
+    if href in block:
+        return source
+    plain_pattern = re.compile(
+        rf'(?P<prefix>>| \| )(?P<region>{re.escape(escaped_region)})(?P<suffix> \| |</div>)'
+    )
+    matches = list(plain_pattern.finditer(block))
+    if len(matches) != 1:
+        raise AreaToolError(
+            f"indexエリア町名の対象数が1件ではありません: {data.region}={len(matches)}"
+        )
+    match = matches[0]
+    replacement = (
+        match.group("prefix")
+        + f'<a href="{href}" class="fade">{escaped_region}</a>'
+        + match.group("suffix")
+    )
+    block = block[: match.start()] + replacement + block[match.end() :]
+    return source[:start] + block + source[end:]
+
+
 def update_queue(source: str, data: AreaData, php_status: str) -> str:
     lines = source.splitlines()
     matches = 0
@@ -1285,6 +1374,10 @@ def shared_validation(data: AreaData, hp_root: Path) -> list[str]:
     area_source = read_utf8(hp_root / "source" / "area.html")
     if area_source.count(f'./{php_name}') != 1:
         errors.append("area一覧リンクが1件ではありません")
+    index_source = read_utf8(hp_root / "source" / "index.html")
+    if index_source.count(f'./{php_name}') != 1:
+        errors.append("indexエリアリンクが1件ではありません")
+    errors.extend(area_registry_alignment_errors(area_source, index_source))
     return errors
 
 
@@ -1315,9 +1408,18 @@ def run_build(args: argparse.Namespace) -> int:
     base_path = hp_root / "includefile" / "dataset_base.php"
     sitemap_path = hp_root / "sitemap.xml"
     area_path = hp_root / "source" / "area.html"
+    index_path = hp_root / "source" / "index.html"
     queue_path = path_config.DOCS_DIR / "CANDY_AREA_105_PAGE_QUEUE.md"
     area_source = read_utf8(area_path)
+    index_source = read_utf8(index_path)
+    alignment_errors = area_registry_alignment_errors(area_source, index_source)
+    if alignment_errors:
+        raise AreaToolError("生成前公開経路検証失敗:\n- " + "\n- ".join(alignment_errors))
     new_area = update_area_index(area_source, data, related_config)
+    new_index = update_area_top_index(index_source, data)
+    alignment_errors = area_registry_alignment_errors(new_area, new_index)
+    if alignment_errors:
+        raise AreaToolError("生成後公開経路検証失敗:\n- " + "\n- ".join(alignment_errors))
     new_base = update_dataset_base(read_utf8(base_path), data.slug)
     new_sitemap = update_sitemap(read_utf8(sitemap_path), data.canonical)
 
@@ -1335,6 +1437,7 @@ def run_build(args: argparse.Namespace) -> int:
     atomic_write(dataset_path, dataset_content())
     atomic_write(base_path, new_base)
     atomic_write(area_path, new_area)
+    atomic_write(index_path, new_index)
     atomic_write(sitemap_path, new_sitemap)
     written_at = time.perf_counter()
 

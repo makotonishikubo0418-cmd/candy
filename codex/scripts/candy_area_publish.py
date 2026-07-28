@@ -161,6 +161,7 @@ def paths_for(data: candy_area_page.AreaData, image_outputs: list[Path] | None =
         hp / "includefile" / f"dataset_kagoshima-deliveryhealth-area-{data.slug}.php",
         hp / "includefile" / "dataset_base.php",
         hp / "source" / "area.html",
+        hp / "source" / "index.html",
         hp / "sitemap.xml",
         queue_path(),
         candy_area_page.RELATED_LINKS_PATH,
@@ -475,14 +476,22 @@ def verify_production(data: candy_area_page.AreaData, commit: str) -> None:
         )
     area_url = cache_bust("https://www.55810.com/area.php", commit)
     area_status, area_final, _area_headers, area_bytes = http_fetch(area_url)
+    top_source_url = cache_bust("https://www.55810.com/source/", commit)
+    top_status, top_final, _top_headers, top_bytes = http_fetch(top_source_url)
     sitemap_url = cache_bust("https://www.55810.com/sitemap.xml", commit)
     sitemap_status, sitemap_final, _sitemap_headers, sitemap_bytes = http_fetch(sitemap_url)
     area_body = area_bytes.decode("utf-8", errors="replace")
+    top_body = top_bytes.decode("utf-8", errors="replace")
     sitemap_body = sitemap_bytes.decode("utf-8", errors="replace")
     checks["area"] = (
         area_status == 200
         and area_final == area_url
         and f"kagoshima-deliveryhealth-area-{data.slug}.php" in area_body
+    )
+    checks["top_source"] = (
+        top_status == 200
+        and top_final == top_source_url
+        and f'./kagoshima-deliveryhealth-area-{data.slug}.php' in top_body
     )
     checks["sitemap"] = (
         sitemap_status == 200 and sitemap_final == sitemap_url and data.canonical in sitemap_body
@@ -543,7 +552,11 @@ def publish(
         **{path: "A" for path in image_paths},
     }
     generated_paths = set(relative(path_config.site_state_output_paths()))
-    shared_required = set(relative(allowed[3:7]))
+    shared_required = set(relative([allowed[3], allowed[6], allowed[7]]))
+    target_link = f"./kagoshima-deliveryhealth-area-{data.slug}.php"
+    for registry_path in (allowed[4], allowed[5]):
+        if target_link not in registry_path.read_text(encoding="utf-8"):
+            shared_required.add(relative([registry_path])[0])
     page_required = set(page_paths) | shared_required | image_paths | generated_paths
     page_tool = path_config.SCRIPTS_DIR / "candy_area_page.py"
     relative_input = input_path.relative_to(root()).as_posix()
@@ -721,6 +734,18 @@ def self_test() -> int:
     indexed = candy_area_page.update_area_index(index_source, data, index_config)
     assert indexed.count(f"./kagoshima-deliveryhealth-area-{data.slug}.php") == 1
     assert candy_area_page.update_area_index(indexed, data, index_config) == indexed
+    top_source = (
+        "<!-- 対応エリア情報 START -->\n"
+        '<div class="lp_14_0 fs_sm2 bd_t">松原町 | '
+        '<a href="./kagoshima-deliveryhealth-area-minayoshicho.php" class="fade">皆与志町</a> | '
+        '吉野町</div>\n'
+        '<div class="center"><a href="./area.php" class="bt-pk-xl">エリア情報一覧</a></div>\n'
+        "<!-- 対応エリア情報 END -->"
+    )
+    topped = candy_area_page.update_area_top_index(top_source, data)
+    assert topped.count(f"./kagoshima-deliveryhealth-area-{data.slug}.php") == 1
+    assert candy_area_page.update_area_top_index(topped, data) == topped
+    assert not candy_area_page.area_registry_alignment_errors(indexed, topped)
     assert_exact_changes("A\tHP/new.php\nM\tHP/shared.php", {"HP/new.php": "A", "HP/shared.php": "M"}, {"HP/new.php"}, "test")
     for unsafe in ("D\tHP/new.php", "R100\tHP/a.php\tHP/b.php", "T\tHP/new.php"):
         try:
