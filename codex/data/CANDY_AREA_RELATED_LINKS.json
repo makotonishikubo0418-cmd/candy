@@ -311,6 +311,14 @@
       "latitude": 31.559378,
       "links": ["hiroki", "yamadacho", "jiyugaoka", "arata"]
     },
+    "masagocho": {
+      "region": "真砂町",
+      "longitude": 130.546795,
+      "latitude": 31.560155,
+      "index_group": "ま",
+      "index_before": "matsubaracho",
+      "links": ["arata", "shimoarata", "hiroki", "kinkocho"]
+    },
     "matsubaracho": {
       "region": "松原町",
       "longitude": 130.55769991757143,
