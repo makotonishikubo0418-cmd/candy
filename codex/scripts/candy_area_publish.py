@@ -602,6 +602,8 @@ def publish(
         run(command)
         run([sys.executable, str(page_tool), "check", "--input", relative_input])
         site_state_tool = path_config.SCRIPTS_DIR / "candy_site_state.py"
+        run([sys.executable, str(site_state_tool), "preview-sitemap-lastmod"])
+        run([sys.executable, str(site_state_tool), "sync-sitemap-lastmod"])
         run([sys.executable, str(site_state_tool), "write"])
         run([sys.executable, str(site_state_tool), "check", "--target", data.slug])
         save_state(state, "BUILT")
