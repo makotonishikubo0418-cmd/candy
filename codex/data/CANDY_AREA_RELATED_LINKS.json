@@ -358,6 +358,13 @@
       "latitude": 31.475677,
       "links": ["hikariyama", "jigenjicho", "jiyugaoka", "chuokoshinmachi"]
     },
+    "nishiishiki": {
+      "region": "西伊敷",
+      "longitude": 130.522698,
+      "latitude": 31.641252,
+      "index_group": "な",
+      "links": ["shimotacho", "wakabacho", "minayoshicho", "tamazatodanchi"]
+    },
     "obaracho": {
       "region": "小原町",
       "longitude": 130.524704,

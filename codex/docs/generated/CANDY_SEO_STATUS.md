@@ -2,14 +2,14 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-28T12:45:21+09:00 (reproducible generation baseline)
+> Generated at: 2026-07-28T12:48:43+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: b45f6981d5671ad0cc85ab5211be0f4b2d64d9e0
-> State fingerprint: sha256:77cb43a33757fc14bfd52a7f8f3c4a7c7dee0e5f5f9e442bb1972e0012e64d92
+> Commit: f43920e039506f7a8fef552a975994aa6183247e
+> State fingerprint: sha256:654bb15b5557eeec7b1192060223644edefd99687e62c67bd02c0b02436ffbaf
 > Scope: Source HTML corresponding to public PHP files directly under HP
-> Population: Pages: 128
+> Population: Pages: 129
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: OK=127 / ISSUE=1 / UNVERIFIED=0
+> Result: OK=128 / ISSUE=1 / UNVERIFIED=0
 > Unverified scope: Production HTTP, search engine index state, redirects, and database-generated HTML
 
 Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are not corrected automatically.
@@ -76,6 +76,7 @@ Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are no
 | area:murasakibaru | 鹿児島市紫原で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「紫原」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-murasakibaru.php | index | 鹿児島市紫原で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:nagayoshi | 鹿児島市永吉で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「永吉」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-nagayoshi.php | index | 鹿児島市永吉で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:nanatsujima | 鹿児島市七ツ島で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「七ツ島」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-nanatsujima.php | index | 鹿児島市七ツ島で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
+| area:nishiishiki | 鹿児島市西伊敷で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「西伊敷」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-nishiishiki.php | index | 鹿児島市西伊敷で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:obaracho | 鹿児島市小原町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「小原町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-obaracho.php | index | 鹿児島市小原町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:ogawacho | 鹿児島市小川町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「小川町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-ogawacho.php | index | 鹿児島市小川町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:okanoharacho | 鹿児島市岡之原町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「岡之原町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-okanoharacho.php | index | 鹿児島市岡之原町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
