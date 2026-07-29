@@ -365,6 +365,13 @@
       "index_group": "な",
       "links": ["shimotacho", "wakabacho", "minayoshicho", "tamazatodanchi"]
     },
+    "nishisatacho": {
+      "region": "西佐多町",
+      "longitude": 130.4119,
+      "latitude": 31.741012,
+      "index_group": "な",
+      "links": ["hanaomachi", "minayoshicho", "shimotacho"]
+    },
     "obaracho": {
       "region": "小原町",
       "longitude": 130.524704,
