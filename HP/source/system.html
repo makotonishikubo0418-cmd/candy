@@ -15,6 +15,24 @@
 	<meta property="og:image" content="https://www.55810.com/imgHtml/new_202601/sample.jpg">
 	<meta property="og:description" content="鹿児島 デリヘル「キャンディ」の料金・システム案内。コース料金やご利用の流れ、交通費・指名料など各種料金をまとめて確認できます。">
 	<meta property="og:site_name" content="鹿児島 デリヘル キャンディ">
+	<script>
+		(function () {
+			var preload = document.createElement('link');
+			preload.rel = 'preload';
+			preload.as = 'image';
+
+			if (window.matchMedia('(min-width: 769px)').matches) {
+				preload.href = './imgHtml/pc/system_bg01.webp';
+				preload.type = 'image/webp';
+			} else {
+				preload.href = './imgHtml/s/systemBg01.jpg';
+				preload.type = 'image/jpeg';
+			}
+
+			document.head.appendChild(preload);
+			document.documentElement.classList.add('system-bg-lazy-enabled');
+		})();
+	</script>
 	<link href="./css/default.css" rel="stylesheet" type="text/css">
 	<link href="./css/colorbox.css" rel="stylesheet" type="text/css" />
 	<link href="./css/system.css" rel="stylesheet" type="text/css">
@@ -117,7 +135,7 @@
 						<p class="arrow spOnly"><img src="./imgHtml/s/system_arrow.png" class="nolazy" alt="料金案内の続き" width="68" height="68"></p>
 					</div>
 				</div>
-				<div class="price price01 box clear">
+				<div class="price price01 box clear system-bg-lazy">
 					<div class="width">
 						<h3 class="main_h3 spOnly">System</h3>
 						<div class="sy_time">
@@ -133,7 +151,7 @@
 						</dl>
 					</div>
 				</div>
-				<div class="price price02 box clear">
+				<div class="price price02 box clear system-bg-lazy">
 					<div class="width">
 						<div class="sy_time">
 							<p class="sy_big">90</p>
@@ -148,7 +166,7 @@
 						</dl>
 					</div>
 				</div>
-				<div class="price price03 box clear">
+				<div class="price price03 box clear system-bg-lazy">
 					<div class="width">
 						<div class="sy_time">
 							<p class="sy_big">120</p>
@@ -163,7 +181,7 @@
 						</dl>
 					</div>
 				</div>
-				<div class="price price04 box clear">
+				<div class="price price04 box clear system-bg-lazy">
 					<div class="width">
 						<div class="sy_time">
 							<p class="sy_big">180</p>
@@ -178,7 +196,7 @@
 						</dl>
 					</div>
 				</div>
-				<div class="option box clear">
+				<div class="option box clear system-bg-lazy">
 					<div class="width">
 						<div class="text">
 							<h3>【オプション料金】</h3>
@@ -248,7 +266,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="kagoderi spOnly">
+				<div class="kagoderi spOnly system-bg-lazy">
 					<a href="http://kd-g.org/" class="more">詳しく見る</a>
 					<a href="http://kd-g.org/login.html" class="login">→ログイン</a>
 				</div>
@@ -314,6 +332,58 @@
 <!-- フッター END -->
 		</div>
 	</div>
+	<script>
+		(function () {
+			var root = document.documentElement;
+			var targets = document.querySelectorAll('#system .system-bg-lazy');
+
+			if (!('IntersectionObserver' in window)) {
+				root.classList.remove('system-bg-lazy-enabled');
+				return;
+			}
+
+			var started = false;
+
+			function startObserver() {
+				if (started) {
+					return;
+				}
+
+				started = true;
+
+				try {
+					var observer = new IntersectionObserver(function (entries) {
+						for (var i = 0; i < entries.length; i++) {
+							if (!entries[i].isIntersecting) {
+								continue;
+							}
+
+							entries[i].target.classList.add('system-bg-loaded');
+							observer.unobserve(entries[i].target);
+						}
+					}, {
+						rootMargin: '200px 0px',
+						threshold: 0.01
+					});
+
+					for (var i = 0; i < targets.length; i++) {
+						observer.observe(targets[i]);
+					}
+				} catch (error) {
+					root.classList.remove('system-bg-lazy-enabled');
+				}
+			}
+
+			if (window.pageYOffset > 0) {
+				startObserver();
+			} else {
+				window.addEventListener('scroll', startObserver, {
+					once: true,
+					passive: true
+				});
+			}
+		})();
+	</script>
 	<script defer type="text/javascript" src="./js/amadareAccess.1.0.js"></script>
 </body>
 

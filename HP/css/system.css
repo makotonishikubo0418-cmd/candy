@@ -10,33 +10,64 @@
 	/* system */
 
 	#system div.main>div.box {
-		background: url(../imgHtml/pc/system_bg01.jpg) no-repeat center center;
+		background-image: url(../imgHtml/pc/system_bg01.jpg);
+		background-image: image-set(
+			url(../imgHtml/pc/system_bg01.webp) type("image/webp"),
+			url(../imgHtml/pc/system_bg01.jpg) type("image/jpeg")
+		);
+		background-repeat: no-repeat;
+		background-position: center center;
 		position: relative;
 	}
 
 	#system div.main div.price01 {
 		height: 600px;
-		background-image: url(../imgHtml/pc/system_bg02.jpg);
+		--system-bg-image: url(../imgHtml/pc/system_bg02.jpg);
+		--system-bg-image: image-set(
+			url(../imgHtml/pc/system_bg02.webp) type("image/webp"),
+			url(../imgHtml/pc/system_bg02.jpg) type("image/jpeg")
+		);
+		background-image: var(--system-bg-image);
 	}
 
 	#system div.main div.price02 {
 		height: 650px;
-		background-image: url(../imgHtml/pc/system_bg03.jpg);
+		--system-bg-image: url(../imgHtml/pc/system_bg03.jpg);
+		--system-bg-image: image-set(
+			url(../imgHtml/pc/system_bg03.webp) type("image/webp"),
+			url(../imgHtml/pc/system_bg03.jpg) type("image/jpeg")
+		);
+		background-image: var(--system-bg-image);
 	}
 
 	#system div.main div.price03 {
 		height: 960px;
-		background-image: url(../imgHtml/pc/system_bg04.jpg);
+		--system-bg-image: url(../imgHtml/pc/system_bg04.jpg);
+		--system-bg-image: image-set(
+			url(../imgHtml/pc/system_bg04.webp) type("image/webp"),
+			url(../imgHtml/pc/system_bg04.jpg) type("image/jpeg")
+		);
+		background-image: var(--system-bg-image);
 	}
 
 	#system div.main div.price04 {
 		height: 800px;
-		background-image: url(../imgHtml/pc/system_bg05.jpg);
+		--system-bg-image: url(../imgHtml/pc/system_bg05.jpg);
+		--system-bg-image: image-set(
+			url(../imgHtml/pc/system_bg05.webp) type("image/webp"),
+			url(../imgHtml/pc/system_bg05.jpg) type("image/jpeg")
+		);
+		background-image: var(--system-bg-image);
 	}
 
 	#system div.main div.option {
 		height: 1583px;
-		background-image: url(../imgHtml/pc/system_bg06.jpg);
+		--system-bg-image: url(../imgHtml/pc/system_bg06.jpg);
+		--system-bg-image: image-set(
+			url(../imgHtml/pc/system_bg06.webp) type("image/webp"),
+			url(../imgHtml/pc/system_bg06.jpg) type("image/jpeg")
+		);
+		background-image: var(--system-bg-image);
 	}
 
 	#system div.main>div.box div.width {
@@ -395,23 +426,28 @@
 	}
 
 	#system div.main div.price01 {
-		background-image: url(../imgHtml/s/systemBg02.jpg);
+		--system-bg-image: url(../imgHtml/s/systemBg02.jpg);
+		background-image: var(--system-bg-image);
 	}
 
 	#system div.main div.price02 {
-		background-image: url(../imgHtml/s/systemBg03.jpg);
+		--system-bg-image: url(../imgHtml/s/systemBg03.jpg);
+		background-image: var(--system-bg-image);
 	}
 
 	#system div.main div.price03 {
-		background-image: url(../imgHtml/s/systemBg04.jpg);
+		--system-bg-image: url(../imgHtml/s/systemBg04.jpg);
+		background-image: var(--system-bg-image);
 	}
 
 	#system div.main div.price04 {
-		background-image: url(../imgHtml/s/systemBg05.jpg);
+		--system-bg-image: url(../imgHtml/s/systemBg05.jpg);
+		background-image: var(--system-bg-image);
 	}
 
 	#system div.main div.option {
-		background-image: url(../imgHtml/s/systemBg06.jpg);
+		--system-bg-image: url(../imgHtml/s/systemBg06.jpg);
+		background-image: var(--system-bg-image);
 	}
 
 	#system div.main>div.box div.width {
@@ -870,7 +906,8 @@
 	}
 
 	#system div.wrap div.main div.kagoderi {
-		background: url(../imgHtml/s/systemKd.jpg) center top;
+		--system-bg-image: url(../imgHtml/s/systemKd.jpg);
+		background: var(--system-bg-image) center top;
 		background-size: 100% auto;
 		height: 520px;
 		position: relative;
@@ -908,4 +945,12 @@
 		font-size: 32px !important;
 		line-height: 1.2 !important;
 	}
+}
+
+html.system-bg-lazy-enabled #system div.wrap div.main .system-bg-lazy {
+	background-image: none;
+}
+
+html.system-bg-lazy-enabled #system div.wrap div.main .system-bg-lazy.system-bg-loaded {
+	background-image: var(--system-bg-image);
 }

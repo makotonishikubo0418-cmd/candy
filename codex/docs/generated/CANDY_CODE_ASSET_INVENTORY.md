@@ -2,12 +2,12 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-08-04T18:43:35+09:00 (reproducible generation baseline)
+> Generated at: 2026-08-04T22:53:09+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 08991281051f159953967b564176ac66dae5fb97
-> State fingerprint: sha256:199a01a1944c2be6eb75b15af9fd8f5ff0b1b40ff4f8cdfec3a44c9997188a96
+> Commit: 3e4fe8dc28538c88559e137066c35659a6c29226
+> State fingerprint: sha256:bc95faa8abe430e5008209e19498db291173144b0d96bece7a429c477c0fc613
 > Scope: Public PHP, source files, datasets, shared PHP, CSS, JavaScript, images, videos, and fonts
-> Population: Public PHP files: 130 / assets: 683
+> Population: Public PHP files: 130 / assets: 689
 > Generator: `codex/scripts/candy_site_state.py`
 > Result: Missing references: 20 / duplicate hash groups: 10
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -218,7 +218,7 @@ Only the external session and database configuration references in `dataset_base
 | .svg | 2 |
 | .ttf | 16 |
 | .webm | 1 |
-| .webp | 3 |
+| .webp | 9 |
 | .woff | 16 |
 | .woff2 | 1 |
 
@@ -238,7 +238,7 @@ Only the external session and database configuration references in `dataset_base
 | HP/imgHtml/new_202601/girl | 112 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
-| HP/imgHtml/pc | 14 |
+| HP/imgHtml/pc | 20 |
 | HP/imgHtml/s | 14 |
 | HP/js | 17 |
 | HP/movie | 3 |
