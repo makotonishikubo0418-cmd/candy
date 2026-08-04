@@ -3,7 +3,7 @@
 - Purpose: Separate document responsibilities in the Markdown management system
 - Status: canonical document
 - Updated: 2026-07-25
-- Canonical scope: Management-document naming, language, responsibility, structure, update rules, and Git synchronization procedure
+- Canonical scope: Management-document naming, language, responsibility, structure, update rules, and document-change Git audit
 - Update trigger: A management document, route, responsibility, naming rule, or generated-document contract changes
 
 ## 1. Principles
@@ -12,15 +12,16 @@
 - Do not duplicate the same explanation across documents.
 - Store detailed procedures in the canonical document for the task type.
 - Do not mix reports or history into specifications.
-- Canonical management information belongs under `codex/`; project-management documents belong under `codex/project_management/`.
+- Canonical management information belongs under `codex/`, except for the common rule files under `docs/rules/` that root `AGENTS.md` explicitly requires; project-management documents belong under `codex/project_management/`.
 - Do not convert unverified information into confirmed information.
 - Keep stable specifications, current state, generated facts, and task history separate.
 
 ## 2. Location-Rule Boundary
 
-Canonical management, project, HP, input, accepted-asset, and NAS locations are
-defined only in `codex/README.md`. This document applies naming, structure,
-update, and Git rules to those locations without copying or redefining them.
+Canonical management, common-rule, project, HP, input, accepted-asset, and NAS
+locations are defined only in `codex/README.md`. This document applies naming,
+structure, update, and document-change Git rules to those locations without
+copying or redefining them.
 
 ## 3. Markdown Naming and Language Standard
 
@@ -29,7 +30,7 @@ update, and Git rules to those locations without copying or redefining them.
 - Active management folder names MUST use English ASCII `lowercase_snake_case`.
 - Preserve an existing compliant folder name. Do not rename it only to use a different English synonym.
 - Preserve the current authoritative separation between `codex/project_management/`, `codex/docs/`, `codex/docs/generated/`, and `codex/scripts/`.
-- Do not create generic top-level duplicates such as `rules/`, `specs/`, `runbooks/`, `state/`, `records/`, or `decisions/`.
+- Do not create generic top-level duplicates such as `rules/`, `specs/`, `runbooks/`, `state/`, `records/`, or `decisions/`. The `docs/rules/` directory explicitly required by root `AGENTS.md` is the only current exception.
 
 ### 3.2 Markdown Filenames
 
@@ -136,17 +137,15 @@ At minimum, verify:
 - README location and responsibility entries are intact.
 - Specifications and history remain separate.
 - Unverified work was not reported as complete.
-- Canonical management documents remain under local `codex/` and were not duplicated at the repository root, under HP, or on the NAS.
+- Canonical management documents remain under local `codex/` or the explicitly authorized `docs/rules/` common-rule directory and were not duplicated at the repository root, under HP, or on the NAS.
 - `candy-site-state check` succeeds and generated documents agree with actual files.
 
-## 7. Git Start and Synchronization Rules
+## 7. Document-Change Git Rules
 
+- Common repository discovery, branch selection, live GitHub verification,
+  reporting, mismatch handling, and management-branch publication belong only
+  in `docs/rules/GIT_RULES.md`.
 - Run Git operations only in the local working repository `C:\Codex\Candy`; never on the NAS.
-- Perform task-start Git verification only as defined in root `AGENTS.md`
-  Section 2. This document does not add, repeat, or alter that preflight.
-- If task-start verification reports local-versus-remote divergence, follow the
-  reporting and STOP requirements in root `AGENTS.md` Section 2. This document
-  does not authorize Pull.
 - Freeze the target-file list and exclude out-of-scope changes, deletions, and untracked files from Stage and Commit.
 - `git add .` and `git add -A` are prohibited. Specify every staged file.
 - Before Commit, verify that only target files are staged, `git diff --cached --check` succeeds, and the commit content matches the authorized scope.
@@ -160,18 +159,18 @@ At minimum, verify:
 |---|---|
 | Fixed scope | Stage, Commit, and Push contain only authorized targets |
 | Work location | Git operations ran only in `C:\Codex\Candy`, never on the NAS |
-| Task-start Git verification | Completed and reported exactly once under root `AGENTS.md` Section 2; no additional preflight command or synchronization action was added |
-| Divergence handling | No editing or Pull proceeded contrary to the reporting and STOP requirements in root `AGENTS.md` Section 2 |
+| Task-start Git verification | Completed and reported exactly once under `docs/rules/GIT_RULES.md`; no additional preflight command or synchronization action was added |
+| Divergence handling | No editing or Git-state change proceeded contrary to the reporting and STOP requirements in `docs/rules/GIT_RULES.md` |
 | Pre-Commit check | `git diff --cached --check` succeeded |
 | Markdown tables | Header and row column counts match |
 | Placement | Task history, communication, and current state are in the correct sections |
 | Status | Status values agree with document placement |
 | Authority | Commit and Push authorization does not conflict with a higher-level AGENTS rule |
-| GitHub verification | Only the verification method selected at task start was used |
+| GitHub verification | Only the live verification method authorized by `docs/rules/GIT_RULES.md` was used |
 
 ## 9. Responsibility Boundaries
 
-- Common authority, required-document routing, and user-response structure are defined only in root `AGENTS.md`.
+- Highest authority and user-response structure are defined only in root `AGENTS.md`; common Git rules belong only in `docs/rules/GIT_RULES.md`, and required-document routing belongs only in `docs/rules/WORK_ROUTING.md`.
 - Canonical management locations and management-document responsibilities are
   defined only in `codex/README.md`; category documents may define only their
   own target-specific implementation and asset paths.

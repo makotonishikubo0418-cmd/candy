@@ -28,17 +28,17 @@ Here, "shortest route" does not mean rushed or incomplete work. It means complet
 
 ## 2. Core Architecture
 
-Do not place every detailed procedure in `AGENTS.md`. Keep it focused on common
-rules and mandatory task-to-document routing, then read only the documents
-named by the applicable route.
+Do not place every detailed procedure in `AGENTS.md`. Keep it focused on
+highest-level authority and route common Git verification and task-specific
+document selection to their dedicated rule documents.
 
 ```text
 AGENTS.md
-  ↓
-management documents named by AGENTS.md
-(`codex/README.md` only when the route names it)
-  ↓
-target code, specification, asset, or environment
+  ├─ docs/rules/GIT_RULES.md
+  │    └─ pre-work Git verification and branch rules
+  └─ docs/rules/WORK_ROUTING.md
+       └─ routed management document
+            └─ target code, specification, asset, or environment
 ```
 
 This route avoids broad document reading for simple work while preserving every required rule.
@@ -47,9 +47,10 @@ This route avoids broad document reading for simple work while preserving every 
 
 Maintain separate canonical documents for common rules, the overall plan, specifications, code structure, inter-Codex communication, and individual task history.
 
-Maintain required-document routing only in `AGENTS.md` Section 5.2. Maintain
-canonical management locations and document-responsibility lookup in
-`codex/README.md`. Do not create another competing index in this overview.
+Maintain required-document routing only in `docs/rules/WORK_ROUTING.md` and
+common Git procedure only in `docs/rules/GIT_RULES.md`. Maintain canonical
+management locations and document-responsibility lookup in `codex/README.md`.
+Do not create another competing index in this overview.
 
 ## 4. Instruction Hierarchy
 
@@ -57,6 +58,7 @@ The hierarchy is:
 
 ```text
 AGENTS.md
+  > GIT_RULES.md and WORK_ROUTING.md
   > routed common management document
   > routed category-specific document
 ```
@@ -64,14 +66,14 @@ AGENTS.md
 Each lower level contains only rules unique to its responsibility. It links to
 the higher-level source for shared authority, routing, communication, safety,
 Git, or verification rules instead of copying them. Actual work follows the
-applicable routes selected from `AGENTS.md` Section 5.2; this overview never adds an
-execution step.
+common Git procedure and applicable route selected by root `AGENTS.md`; this
+overview never adds an execution step.
 
 ## 5. Problems Prevented by This System
 
 | Problem to prevent | Management control |
 |---|---|
-| A long AGENTS document slows simple work | Keep `AGENTS.md` focused on routing |
+| A long AGENTS document slows simple work | Keep `AGENTS.md` focused on highest-level authority and direct rule entry points |
 | The overall current state becomes unclear | Centralize current state, issues, and next work in `PROJECT_STATUS.md` |
 | Reports become scattered and cannot be handed off | Separate responsibilities between `CODEX_COMMUNICATION.md` and `TASK_LOG.md` |
 | Repeated changes degrade the code | Enforce one responsibility per canonical source, integration into existing routes, and no appended override blocks |
@@ -95,7 +97,9 @@ Maintain these four qualities:
 
 This document is the overview of the candy management system.
 
-Use `AGENTS.md` and the canonical management documents named by its applicable
-route for actual work decisions. Use `codex/README.md` when that route names it.
+Use `AGENTS.md`, `docs/rules/GIT_RULES.md`,
+`docs/rules/WORK_ROUTING.md`, and the canonical management documents named by
+the applicable route for actual work decisions. Use `codex/README.md` when
+that route names it.
 When a detailed operating rule changes, update its canonical document; do not
 change only this overview.

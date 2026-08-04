@@ -2,6 +2,12 @@
 !/.github/
 !/.gitignore
 !/AGENTS.md
+!/docs/
+/docs/*
+!/docs/rules/
+/docs/rules/*
+!/docs/rules/WORK_ROUTING.md
+!/docs/rules/GIT_RULES.md
 !/HP/
 !/codex/
 !/Text_area_data/
