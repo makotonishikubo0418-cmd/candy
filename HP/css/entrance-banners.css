@@ -1,0 +1,169 @@
+/* Index age-verification link banners. */
+#entrance {
+	overflow-x: hidden;
+	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
+}
+
+#entrance .entranceLinkBanners {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 960px;
+	margin: 20px auto 0;
+	padding: 0 10px 40px;
+}
+
+#entrance .entranceLinkBanners a,
+#entrance .entranceLinkBanners img {
+	display: block;
+}
+
+#entrance .entranceLinkBanners img {
+	max-width: 100%;
+	height: auto;
+	border: 0;
+}
+
+#entrance .entranceYoasobiBanner {
+	width: 468px;
+	max-width: 100%;
+	margin: 3px auto 0;
+}
+
+#entrance .entrancePureloversBanners {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 468px));
+	justify-content: center;
+	gap: 4px;
+	width: 100%;
+	max-width: 940px;
+	margin: 10px auto 0;
+}
+
+#entrance .entrancePureloversBanner:last-child {
+	grid-column: 1 / -1;
+	justify-self: center;
+	width: 468px;
+	max-width: 100%;
+}
+
+@media screen and (min-width: 769px) {
+	#entrance .entranceHeavenLayout {
+		display: flex;
+		justify-content: center;
+		align-items: flex-start;
+		gap: 8px;
+		width: 585px;
+		max-width: 100%;
+		margin: 0 auto;
+	}
+
+	#entrance .entrancePortalGroups,
+	#entrance .entranceStoreBanners {
+		display: flex;
+		flex-direction: column;
+	}
+
+	#entrance .entrancePortalGroup {
+		display: flex;
+		align-items: center;
+		height: 40px;
+	}
+
+	#entrance .entrancePortalMain img {
+		width: auto;
+		height: 40px;
+	}
+
+	#entrance .entrancePortalRegions {
+		display: grid;
+		grid-template-columns: repeat(2, auto);
+		grid-template-rows: repeat(2, 20px);
+	}
+
+	#entrance .entrancePortalRegion img {
+		width: auto;
+		height: 20px;
+	}
+
+	#entrance .entranceStoreBanners {
+		gap: 3px;
+		width: 300px;
+	}
+
+	#entrance .entranceStoreBanner img {
+		width: 300px;
+		height: auto;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	#entrance div.wrap {
+		box-sizing: border-box;
+		height: auto;
+		min-height: 100%;
+		padding: 24px 0 40px;
+	}
+
+	#entrance .vCenter {
+		top: 0;
+		transform: none;
+		-webkit-transform: none;
+		-moz-transform: none;
+	}
+
+	#entrance .entranceLinkBanners {
+		max-width: 640px;
+		padding: 0 8px 20px;
+	}
+
+	#entrance .entranceHeavenLayout {
+		display: grid;
+		grid-template-columns: repeat(6, minmax(0, 1fr));
+		gap: 4px;
+		width: 100%;
+		max-width: 488px;
+		margin: 0 auto;
+	}
+
+	#entrance .entrancePortalGroups,
+	#entrance .entrancePortalGroup,
+	#entrance .entrancePortalRegions,
+	#entrance .entranceStoreBanners {
+		display: contents;
+	}
+
+	#entrance .entranceHeavenLayout a {
+		order: var(--banner-order);
+	}
+
+	#entrance .entrancePortalMain {
+		grid-column: span 2;
+	}
+
+	#entrance .entrancePortalRegion {
+		grid-column: span 1;
+	}
+
+	#entrance .entranceStoreBanner {
+		grid-column: span 3;
+	}
+
+	#entrance .entranceHeavenLayout img {
+		width: 100%;
+		height: auto;
+	}
+
+	#entrance .entranceYoasobiBanner {
+		width: 306px;
+	}
+
+	#entrance .entrancePureloversBanners {
+		grid-template-columns: repeat(2, minmax(0, 306px));
+		max-width: 616px;
+	}
+
+	#entrance .entrancePureloversBanner:last-child {
+		width: calc((100% - 4px) / 2);
+	}
+}

@@ -2,12 +2,12 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-08-04T18:19:40+09:00 (reproducible generation baseline)
+> Generated at: 2026-08-04T18:43:35+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 7fd711fa4546c443b6bdec0c315b9fc35a9d1550
-> State fingerprint: sha256:18d5807d9b28e805bec994b5d6c5c798c50d28c2e15ecb745f718b782ae914b5
+> Commit: 08991281051f159953967b564176ac66dae5fb97
+> State fingerprint: sha256:199a01a1944c2be6eb75b15af9fd8f5ff0b1b40ff4f8cdfec3a44c9997188a96
 > Scope: Public PHP, source files, datasets, shared PHP, CSS, JavaScript, images, videos, and fonts
-> Population: Public PHP files: 130 / assets: 664
+> Population: Public PHP files: 130 / assets: 683
 > Generator: `codex/scripts/candy_site_state.py`
 > Result: Missing references: 20 / duplicate hash groups: 10
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -164,6 +164,7 @@ Only the external session and database configuration references in `dataset_base
 |---|---|
 | HP/css/colorbox.css | HP/source/movie.html<br>HP/source/mypage.html<br>HP/source/schedule.html<br>HP/source/system.html |
 | HP/css/default.css | HP/source/area.html<br>HP/source/blog.html<br>HP/source/create.html<br>HP/source/girls.html<br>HP/source/girls_list.html<br>HP/source/hotel.html<br>HP/source/index.html<br>HP/source/kagoshima-deliveryhealth-area-arata.html<br>HP/source/kagoshima-deliveryhealth-area-ariyadacho.html<br>HP/source/kagoshima-deliveryhealth-area-chuokoshinmachi.html<br>HP/source/kagoshima-deliveryhealth-area-gionnosucho.html<br>HP/source/kagoshima-deliveryhealth-area-gofukucho.html<br>HP/source/kagoshima-deliveryhealth-area-gokabeppucho.html<br>HP/source/kagoshima-deliveryhealth-area-hanaomachi.html<br>HP/source/kagoshima-deliveryhealth-area-harara.html<br>HP/source/kagoshima-deliveryhealth-area-haruyamacho.html<br>HP/source/kagoshima-deliveryhealth-area-hikariyama.html<br>HP/source/kagoshima-deliveryhealth-area-hiroki.html<br>HP/source/kagoshima-deliveryhealth-area-hoshigamine.html<br>HP/source/kagoshima-deliveryhealth-area-ikenouecho.html<br>HP/source/kagoshima-deliveryhealth-area-inaricho.html<br>HP/source/kagoshima-deliveryhealth-area-inusakocho.html<br>HP/source/kagoshima-deliveryhealth-area-irisacho.html<br>HP/source/kagoshima-deliveryhealth-area-ishidanicho.html<br>HP/source/kagoshima-deliveryhealth-area-ishiki.html<br>HP/source/kagoshima-deliveryhealth-area-ishikidai.html<br>HP/source/kagoshima-deliveryhealth-area-izumicho.html<br>HP/source/kagoshima-deliveryhealth-area-jigenjicho.html<br>HP/source/kagoshima-deliveryhealth-area-jiyugaoka.html<br>HP/source/kagoshima-deliveryhealth-area-josei.html<br>HP/source/kagoshima-deliveryhealth-area-kajiyacho.html<br>HP/source/kagoshima-deliveryhealth-area-kamoike.html<br>HP/source/kagoshima-deliveryhealth-area-kamoikeshinmachi.html<br>HP/source/kagoshima-deliveryhealth-area-kasugacho.html<br>HP/source/kagoshima-deliveryhealth-area-kenohikarigaoka.html<br>HP/source/kagoshima-deliveryhealth-area-kibougaokacho.html<br>HP/source/kagoshima-deliveryhealth-area-kiirecho.html<br>HP/source/kagoshima-deliveryhealth-area-kiirehitokuracho.html<br>HP/source/kagoshima-deliveryhealth-area-kiireikemicho.html<br>HP/source/kagoshima-deliveryhealth-area-kiiremaenohamacho.html<br>HP/source/kagoshima-deliveryhealth-area-kiirenakamyocho.html<br>HP/source/kagoshima-deliveryhealth-area-kiiresesekushicho.html<br>HP/source/kagoshima-deliveryhealth-area-kinkocho.html<br>HP/source/kagoshima-deliveryhealth-area-kinkodai.html<br>HP/source/kagoshima-deliveryhealth-area-kinseicho.html<br>HP/source/kagoshima-deliveryhealth-area-koraicho.html<br>HP/source/kagoshima-deliveryhealth-area-korimoto.html<br>HP/source/kagoshima-deliveryhealth-area-korimotocho.html<br>HP/source/kagoshima-deliveryhealth-area-koriyamacho.html<br>HP/source/kagoshima-deliveryhealth-area-koriyamadakecho.html<br>HP/source/kagoshima-deliveryhealth-area-kotsukicho.html<br>HP/source/kagoshima-deliveryhealth-area-koutokujidai.html<br>HP/source/kagoshima-deliveryhealth-area-koyamadacho.html<br>HP/source/kagoshima-deliveryhealth-area-koyo.html<br>HP/source/kagoshima-deliveryhealth-area-masagocho.html<br>HP/source/kagoshima-deliveryhealth-area-matsubaracho.html<br>HP/source/kagoshima-deliveryhealth-area-minayoshicho.html<br>HP/source/kagoshima-deliveryhealth-area-murasakibaru.html<br>HP/source/kagoshima-deliveryhealth-area-nagayoshi.html<br>HP/source/kagoshima-deliveryhealth-area-nanatsujima.html<br>HP/source/kagoshima-deliveryhealth-area-nishiishiki.html<br>HP/source/kagoshima-deliveryhealth-area-nishisatacho.html<br>HP/source/kagoshima-deliveryhealth-area-obaracho.html<br>HP/source/kagoshima-deliveryhealth-area-ogawacho.html<br>HP/source/kagoshima-deliveryhealth-area-okanoharacho.html<br>HP/source/kagoshima-deliveryhealth-area-ono.html<br>HP/source/kagoshima-deliveryhealth-area-oroshihonmachi.html<br>HP/source/kagoshima-deliveryhealth-area-sakamotocho.html<br>HP/source/kagoshima-deliveryhealth-area-sakanoue.html<br>HP/source/kagoshima-deliveryhealth-area-sakuragaoka.html<br>HP/source/kagoshima-deliveryhealth-area-sanwacho.html<br>HP/source/kagoshima-deliveryhealth-area-seiwa.html<br>HP/source/kagoshima-deliveryhealth-area-shimmachi.html<br>HP/source/kagoshima-deliveryhealth-area-shimoarata.html<br>HP/source/kagoshima-deliveryhealth-area-shimofukumotocho.html<br>HP/source/kagoshima-deliveryhealth-area-shimoishiki.html<br>HP/source/kagoshima-deliveryhealth-area-shimoishikicho.html<br>HP/source/kagoshima-deliveryhealth-area-shimotacho.html<br>HP/source/kagoshima-deliveryhealth-area-shimotatsuocho.html<br>HP/source/kagoshima-deliveryhealth-area-shineicho.html<br>HP/source/kagoshima-deliveryhealth-area-shinshoincho.html<br>HP/source/kagoshima-deliveryhealth-area-shiroyama.html<br>HP/source/kagoshima-deliveryhealth-area-shiroyamacho.html<br>HP/source/kagoshima-deliveryhealth-area-sumiyoshicho.html<br>HP/source/kagoshima-deliveryhealth-area-tamazatocho.html<br>HP/source/kagoshima-deliveryhealth-area-tamazatodanchi.html<br>HP/source/kagoshima-deliveryhealth-area-terukunicho.html<br>HP/source/kagoshima-deliveryhealth-area-tokiwa.html<br>HP/source/kagoshima-deliveryhealth-area-uearatacho.html<br>HP/source/kagoshima-deliveryhealth-area-uenosonocho.html<br>HP/source/kagoshima-deliveryhealth-area-uomicho.html<br>HP/source/kagoshima-deliveryhealth-area-usuki.html<br>HP/source/kagoshima-deliveryhealth-area-wakabacho.html<br>HP/source/kagoshima-deliveryhealth-area-yakushi.html<br>HP/source/kagoshima-deliveryhealth-area-yamadacho.html<br>HP/source/kagoshima-deliveryhealth-area-yamanokuchicho.html<br>HP/source/kagoshima-deliveryhealth-area-yamashitacho.html<br>HP/source/kagoshima-deliveryhealth-area-yasuicho.html<br>HP/source/kagoshima-deliveryhealth-area-yoshino.html<br>HP/source/kagoshima-deliveryhealth-area-yoshinocho.html<br>HP/source/kagoshima-deliveryhealth-area-yotsumotocho.html<br>HP/source/kagoshima-deliveryhealth-blog-glamourgirl.html<br>HP/source/kagoshima-deliveryhealth-blog-petitegirl.html<br>HP/source/kagoshima-deliveryhealth-blog-poccharigirl.html<br>HP/source/kagoshima-deliveryhealth-blog-shiroutogirl.html<br>HP/source/kagoshima-deliveryhealth-blog-slendergirl.html<br>HP/source/kagoshima-deliveryhealth-blog-tallbeautygirl.html<br>HP/source/kagoshima-deliveryhealth-hotel-cococlass.html<br>HP/source/kagoshima-deliveryhealth-hotel-favhotelkagoshimachuo.html<br>HP/source/kagoshima-deliveryhealth-hotel-favluxkagoshimatenmonkan.html<br>HP/source/kagoshima-deliveryhealth-hotel-greenrichkagoshimatenmonkan.html<br>HP/source/kagoshima-deliveryhealth-hotel-hotelazkagoshimakiireten.html<br>HP/source/kagoshima-deliveryhealth-hotel-hotelkukita.html<br>HP/source/kagoshima-deliveryhealth-hotel-hotelm.html<br>HP/source/kagoshima-deliveryhealth-hotel-hotelresidencenanshukan.html<br>HP/source/kagoshima-deliveryhealth-hotel-hotelsera.html<br>HP/source/kagoshima-deliveryhealth-hotel-jrkyushuhotelkagoshima.html<br>HP/source/kagoshima-deliveryhealth-hotel-kagoshimadaiichihotelkishaba.html<br>HP/source/kagoshima-deliveryhealth-hotel-kagoshimaplazahoteltenmonkan.html<br>HP/source/kagoshima-deliveryhealth-hotel-kokohotelkagoshimatenmonkan.html<br>HP/source/kagoshima-deliveryhealth-hotel-shiroyamahotelkagoshima.html<br>HP/source/kagoshima-deliveryhealth-hotel-villacosta500.html<br>HP/source/kagoshima-deliveryhealth-hotel-youstylehotelmarine.html<br>HP/source/kagoshima-deliveryhealth-hotel-youstylehotelmate.html<br>HP/source/movie.html<br>HP/source/mypage.html<br>HP/source/news.html<br>HP/source/schedule.html<br>HP/source/system.html<br>HP/source/template_girls.html<br>HP/source/template_kagoshima-deliveryhealth-area.html<br>HP/source/template_kagoshima-deliveryhealth-blog.html<br>HP/source/template_kagoshima-deliveryhealth-hotel.html<br>HP/source/template_shop.html |
+| HP/css/entrance-banners.css | HP/source/index.html |
 | HP/css/girls.css | HP/source/girls.html |
 | HP/css/girls_list.css | HP/source/girls_list.html |
 | HP/css/job.css | UNVERIFIED |
@@ -207,16 +208,17 @@ Only the external session and database configuration references in `dataset_base
 
 | extension | count |
 |---|---:|
-| .css | 15 |
+| .css | 16 |
 | .eot | 16 |
-| .gif | 3 |
-| .jpg | 511 |
+| .gif | 5 |
+| .jpg | 522 |
 | .js | 17 |
 | .mp4 | 2 |
-| .png | 64 |
+| .png | 66 |
 | .svg | 2 |
 | .ttf | 16 |
 | .webm | 1 |
+| .webp | 3 |
 | .woff | 16 |
 | .woff2 | 1 |
 
@@ -224,14 +226,14 @@ Only the external session and database configuration references in `dataset_base
 
 | folder | count |
 |---|---:|
-| HP/css | 14 |
+| HP/css | 15 |
 | HP/font | 50 |
 | HP/imgCss/pc | 19 |
 | HP/imgCss/s | 22 |
 | HP/imgHtml | 19 |
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 188 |
-| HP/imgHtml/new_202601/banner | 5 |
+| HP/imgHtml/new_202601/banner | 23 |
 | HP/imgHtml/new_202601/blog | 12 |
 | HP/imgHtml/new_202601/girl | 112 |
 | HP/imgHtml/new_202601/hotel | 142 |
@@ -252,7 +254,7 @@ Only the external session and database configuration references in `dataset_base
 | girls:girls | 0 | NONE | UNVERIFIED |
 | girls:girls_list | 1 | NONE | OK |
 | hotel:hotel | 0 | NONE | UNVERIFIED |
-| top:index | 33 | NONE | OK |
+| top:index | 51 | NONE | OK |
 | area:arata | 6 | NONE | OK |
 | area:ariyadacho | 6 | NONE | OK |
 | area:chuokoshinmachi | 6 | NONE | OK |
