@@ -418,6 +418,11 @@
 	width: 1000px;
 	height: auto;
 }
+.index-section-banner {
+	display: block;
+	width: 100%;
+	height: auto;
+}
 .img_ad1 {
 	width: 468px;
 }
