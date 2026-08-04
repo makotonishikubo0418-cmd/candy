@@ -3,8 +3,8 @@
 - Purpose: Define local branch selection, management-branch handling, pre-work Git verification, required reporting, and STOP conditions.
 - Status: canonical rule document
 - Canonical scope: Git repository discovery, branch selection, live GitHub branch verification, management-document publication through Git, and unverifiable-state handling
-- Higher authority: root `AGENTS.md`
-- Work routing: `docs/rules/WORK_ROUTING.md`
+- Higher authority: `C:\Codex\FSG\AGENTS.md`
+- Work routing: `WORK_ROUTING.md`
 
 ## Work Branch Selection
 

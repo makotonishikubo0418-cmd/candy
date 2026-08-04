@@ -1,18 +1,20 @@
 ## 5. Work Execution Method
+- Scope: all work under `C:\Codex\FSG\Candy`.
+- Higher authority: `C:\Codex\FSG\AGENTS.md`.
+- Before any Candy work, review `docs/rules/GIT_RULES.md`, perform its `Pre-Work Git Verification` exactly once, and report the required results.
 - `### 5.1 Management Document Structure` and `### 5.2 Work Routing` together constitute the sole `Management Document Index` used to route and perform work.
-- Read information in the following order: `AGENTS.md > the management documents specified by ### 5.2 Work Routing > the target implementation, data, configuration, and environment`.
+- Read information in the following order: `C:\Codex\FSG\AGENTS.md > WORK_ROUTING.md > the management documents specified by ### 5.2 Work Routing > the target implementation, data, configuration, and environment`.
 - When performing work, do not expand the reading scope to unrelated management documents, historical materials, records, reports, or reference materials. Review only the relevant portions of the management documents that apply to the task, comply with them, and proceed accordingly.
 - If no management document applies to the instructed work, the applicable document is unknown, or conflicting content prevents the required action from being determined, do not proceed based on assumptions. Perform the work only after obtaining the user’s approval.
 - Add, consolidate, relocate, rename, or retire a management document only after the user individually approves the change. After execution, always update `### 5.1 Management Document Structure` and `### 5.2 Work Routing` to reflect the current state.
 
 ### 5.1 Management Document Structure
 
-.
-├─ AGENTS.md
+C:\Codex\FSG\Candy
+├─ WORK_ROUTING.md
 ├─ docs/
 │  └─ rules/
-│     ├─ GIT_RULES.md
-│     └─ WORK_ROUTING.md
+│     └─ GIT_RULES.md
 └─ codex/
    ├─ README.md
    ├─ MANAGEMENT_SYSTEM_OVERVIEW.md

@@ -2,12 +2,12 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-07-28T14:37:39+09:00 (reproducible generation baseline)
+> Generated at: 2026-08-04T15:25:01+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: ea1b7996c7c64b396aee6131cf03bea80b5ec1ac
-> State fingerprint: sha256:45fd0d027ce661fac038aee6de641df324a6a883eaa3d69ab6fd71cead5bad78
+> Commit: 9f86eba4098a1921230cf9cfcc7af2d89f7ea3a5
+> State fingerprint: sha256:ea2848f20fc90d6c72cfcd59bafcd372c2b103879235f0f50afd2d94a28ea18f
 > Scope: Public PHP, source files, datasets, shared PHP, CSS, JavaScript, images, videos, and fonts
-> Population: Public PHP files: 130 / assets: 660
+> Population: Public PHP files: 130 / assets: 664
 > Generator: `codex/scripts/candy_site_state.py`
 > Result: Missing references: 20 / duplicate hash groups: 10
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -210,7 +210,7 @@ Only the external session and database configuration references in `dataset_base
 | .css | 15 |
 | .eot | 16 |
 | .gif | 3 |
-| .jpg | 507 |
+| .jpg | 511 |
 | .js | 17 |
 | .mp4 | 2 |
 | .png | 64 |
@@ -229,7 +229,7 @@ Only the external session and database configuration references in `dataset_base
 | HP/imgCss/pc | 19 |
 | HP/imgCss/s | 22 |
 | HP/imgHtml | 19 |
-| HP/imgHtml/new_202601 | 6 |
+| HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 188 |
 | HP/imgHtml/new_202601/banner | 5 |
 | HP/imgHtml/new_202601/blog | 12 |
@@ -252,7 +252,7 @@ Only the external session and database configuration references in `dataset_base
 | girls:girls | 0 | NONE | UNVERIFIED |
 | girls:girls_list | 1 | NONE | OK |
 | hotel:hotel | 0 | NONE | UNVERIFIED |
-| top:index | 31 | NONE | OK |
+| top:index | 33 | NONE | OK |
 | area:arata | 6 | NONE | OK |
 | area:ariyadacho | 6 | NONE | OK |
 | area:chuokoshinmachi | 6 | NONE | OK |
@@ -413,7 +413,7 @@ These candidates have no confirmed static HTML or CSS reference. They may be ref
 | HP/imgCss/pc | 18 | cdIcoLoveBtn.png, cdIcoLoveBtn_on.png, cdIcoPhoto.png, cssSprite_sp.png, entranceLogo.png |
 | HP/imgCss/s | 20 | cdIcoLoveBtn.png, cdIcoLoveBtn_on.png, cdIcoPhoto.png, entranceLogo.png, entranceR18.png |
 | HP/imgHtml | 4 | age_verification.jpg, entranceBg.jpg, twitter.svg, unnamed.jpg |
-| HP/imgHtml/new_202601 | 2 | candy_img1.jpg, candy_img1_sp.jpg |
+| HP/imgHtml/new_202601 | 4 | candy_discount_information_sp.jpg, candy_img1.jpg, candy_img1_sp.jpg, candy_manager_recommendation_sp.jpg |
 | HP/imgHtml/new_202601/girl | 56 | alice_1_sp.jpg, ami_1_sp.jpg, ann_1_sp.jpg, anya_1_sp.jpg, aoba_1_sp.jpg |
 | HP/imgHtml/new_202601/hotel | 108 | aquagardenhotelfukumaru_1.jpg, aquagardenhotelfukumaru_2.jpg, arthotelkagoshima_1.jpg, arthotelkagoshima_2.jpg, businesshotelatelier_1.jpg |
 | HP/imgHtml/new_202601/shop | 11 | after5_sp.jpg, beloved_sp.jpg, candy_sp.jpg, danzuma_sp.jpg, hitozuma_sp.jpg |

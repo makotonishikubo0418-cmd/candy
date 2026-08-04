@@ -12,7 +12,7 @@
 - Do not duplicate the same explanation across documents.
 - Store detailed procedures in the canonical document for the task type.
 - Do not mix reports or history into specifications.
-- Canonical management information belongs under `codex/`, except for the common rule files under `docs/rules/` that root `AGENTS.md` explicitly requires; project-management documents belong under `codex/project_management/`.
+- Canonical management information belongs under `codex/`, except for repository-root `WORK_ROUTING.md` and `docs/rules/GIT_RULES.md` that `C:\Codex\FSG\AGENTS.md` explicitly selects; project-management documents belong under `codex/project_management/`.
 - Do not convert unverified information into confirmed information.
 - Keep stable specifications, current state, generated facts, and task history separate.
 
@@ -137,7 +137,7 @@ At minimum, verify:
 - README location and responsibility entries are intact.
 - Specifications and history remain separate.
 - Unverified work was not reported as complete.
-- Canonical management documents remain under local `codex/` or the explicitly authorized `docs/rules/` common-rule directory and were not duplicated at the repository root, under HP, or on the NAS.
+- Canonical management documents remain under local `codex/`, repository-root `WORK_ROUTING.md`, or the explicitly authorized `docs/rules/GIT_RULES.md` location and were not duplicated elsewhere at the repository root, under HP, or on the NAS.
 - `candy-site-state check` succeeds and generated documents agree with actual files.
 
 ## 7. Document-Change Git Rules
@@ -145,7 +145,7 @@ At minimum, verify:
 - Common repository discovery, branch selection, live GitHub verification,
   reporting, mismatch handling, and management-branch publication belong only
   in `docs/rules/GIT_RULES.md`.
-- Run Git operations only in the local working repository `C:\Codex\Candy`; never on the NAS.
+- Run Git operations only in the local working repository `C:\Codex\FSG\Candy`; never on the NAS.
 - Freeze the target-file list and exclude out-of-scope changes, deletions, and untracked files from Stage and Commit.
 - `git add .` and `git add -A` are prohibited. Specify every staged file.
 - Before Commit, verify that only target files are staged, `git diff --cached --check` succeeds, and the commit content matches the authorized scope.
@@ -158,7 +158,7 @@ At minimum, verify:
 | Item | Required verification |
 |---|---|
 | Fixed scope | Stage, Commit, and Push contain only authorized targets |
-| Work location | Git operations ran only in `C:\Codex\Candy`, never on the NAS |
+| Work location | Git operations ran only in `C:\Codex\FSG\Candy`, never on the NAS |
 | Task-start Git verification | Completed and reported exactly once under `docs/rules/GIT_RULES.md`; no additional preflight command or synchronization action was added |
 | Divergence handling | No editing or Git-state change proceeded contrary to the reporting and STOP requirements in `docs/rules/GIT_RULES.md` |
 | Pre-Commit check | `git diff --cached --check` succeeded |
@@ -170,7 +170,7 @@ At minimum, verify:
 
 ## 9. Responsibility Boundaries
 
-- Highest authority and user-response structure are defined only in root `AGENTS.md`; common Git rules belong only in `docs/rules/GIT_RULES.md`, and required-document routing belongs only in `docs/rules/WORK_ROUTING.md`.
+- Highest authority and user-response structure are defined only in `C:\Codex\FSG\AGENTS.md`; Candy Git rules belong only in `docs/rules/GIT_RULES.md`, and Candy required-document routing belongs only in repository-root `WORK_ROUTING.md`.
 - Canonical management locations and management-document responsibilities are
   defined only in `codex/README.md`; category documents may define only their
   own target-specific implementation and asset paths.
