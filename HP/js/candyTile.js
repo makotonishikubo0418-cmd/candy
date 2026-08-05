@@ -4,7 +4,7 @@ var gBoxAtr=new Array();
 // 女の子写真を早く表示するため、window "load" ではなく DOM 準備完了時点でタイル表示（6～8秒遅れ対策）
 function runTileInit(){
 	var el = getObj("tile");
-	if(!el || typeof gBox === "undefined"){ return false; }
+	if(!el || typeof gBox === "undefined" || typeof tmplate === "undefined"){ return false; }
 	if(!gBox.length){ return false; }
 	var w=parseInt(document.body.clientWidth);
 	if(w<=967){ w=967; }
@@ -26,7 +26,6 @@ function scheduleTileInit(){
 		if(!runTileInit()){ jQuery(window).on("load", runTileInit); }
 	}
 }
-scheduleTileInit();
 	
 	
 function firstTile(){
@@ -343,3 +342,5 @@ function getXBoxCount(){
 		return Math.floor((w+8)/318);
 	}
 }
+
+scheduleTileInit();
