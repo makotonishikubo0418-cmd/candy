@@ -25,6 +25,14 @@ on:
       - "!HP/Text_hotel_data/**"
   workflow_dispatch:
     inputs:
+      target_mode:
+        description: "normal deploy or the final index.php-only switchover"
+        required: true
+        default: normal
+        type: choice
+        options:
+          - normal
+          - index
       operation:
         description: "preview first; deploy only with the approved preview values"
         required: true
@@ -52,7 +60,7 @@ on:
         default: ""
         type: string
       confirmation:
-        description: "For deploy, enter DEPLOY-CANDY-PRODUCTION"
+        description: "For deploy, enter DEPLOY-CANDY-PRODUCTION or DEPLOY-CANDY-INDEX"
         required: false
         default: ""
         type: string
@@ -90,13 +98,24 @@ jobs:
         env:
           BEFORE_SHA: ${{ inputs.before_sha }}
           AFTER_SHA: ${{ inputs.after_sha }}
+          TARGET_MODE: ${{ inputs.target_mode }}
         run: |
           set -o pipefail
           test "$(git rev-parse HEAD)" = "$AFTER_SHA"
+          mode_args=()
+          if [ "$TARGET_MODE" = "index" ]; then
+            test "$BEFORE_SHA" = "$AFTER_SHA"
+            mode_args+=(--deploy-index)
+          fi
           python3 .github/scripts/candy_ftp_deploy.py \
             --before "$BEFORE_SHA" \
             --after "$AFTER_SHA" \
+            "${mode_args[@]}" \
             --dry-run | tee deploy-preview.txt
+          if [ "$TARGET_MODE" = "index" ]; then
+            grep -Fx "Deployment operation count: 1" deploy-preview.txt
+            grep -F "HP/index.php -> /public_html/group/candy/index.php" deploy-preview.txt
+          fi
           cat deploy-preview.txt >> "$GITHUB_STEP_SUMMARY"
 
   deploy:
@@ -126,12 +145,19 @@ jobs:
         env:
           BEFORE_SHA: ${{ github.event_name == 'push' && github.event.before || inputs.before_sha }}
           AFTER_SHA: ${{ github.event_name == 'push' && github.sha || inputs.after_sha }}
+          TARGET_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.target_mode || 'normal' }}
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$AFTER_SHA"
+          mode_args=()
+          if [ "$TARGET_MODE" = "index" ]; then
+            test "$BEFORE_SHA" = "$AFTER_SHA"
+            mode_args+=(--deploy-index)
+          fi
           python3 .github/scripts/candy_ftp_deploy.py \
             --before "$BEFORE_SHA" \
             --after "$AFTER_SHA" \
+            "${mode_args[@]}" \
             --dry-run | tee deploy-plan.txt
           cat deploy-plan.txt >> "$GITHUB_STEP_SUMMARY"
           count="$(sed -n 's/^Deployment operation count: //p' deploy-plan.txt | tail -1)"
@@ -167,12 +193,19 @@ jobs:
         env:
           BEFORE_SHA: ${{ github.event_name == 'push' && github.event.before || inputs.before_sha }}
           AFTER_SHA: ${{ github.event_name == 'push' && github.sha || inputs.after_sha }}
+          TARGET_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.target_mode || 'normal' }}
         run: |
           set -euo pipefail
           command -v php
+          mode_args=()
+          if [ "$TARGET_MODE" = "index" ]; then
+            test "$BEFORE_SHA" = "$AFTER_SHA"
+            mode_args+=(--deploy-index)
+          fi
           python3 .github/scripts/candy_ftp_deploy.py \
             --before "$BEFORE_SHA" \
             --after "$AFTER_SHA" \
+            "${mode_args[@]}" \
             --lint-php
 
       - name: Validate count, limits, and plan token without FTP
@@ -183,12 +216,19 @@ jobs:
           EXPECTED_FILE_COUNT: ${{ steps.approval.outputs.count }}
           APPROVED_PLAN_TOKEN: ${{ steps.approval.outputs.token }}
           PRODUCTION_CONFIRMATION: ${{ steps.approval.outputs.confirmation }}
+          TARGET_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.target_mode || 'normal' }}
         run: |
           set -o pipefail
           test "$(git rev-parse HEAD)" = "$AFTER_SHA"
+          mode_args=()
+          if [ "$TARGET_MODE" = "index" ]; then
+            test "$BEFORE_SHA" = "$AFTER_SHA"
+            mode_args+=(--deploy-index)
+          fi
           python3 .github/scripts/candy_ftp_deploy.py \
             --before "$BEFORE_SHA" \
             --after "$AFTER_SHA" \
+            "${mode_args[@]}" \
             --expected-file-count "$EXPECTED_FILE_COUNT" \
             --approved-plan-token "$APPROVED_PLAN_TOKEN" \
             --confirm-production "$PRODUCTION_CONFIRMATION" \
@@ -206,11 +246,18 @@ jobs:
           EXPECTED_FILE_COUNT: ${{ steps.approval.outputs.count }}
           APPROVED_PLAN_TOKEN: ${{ steps.approval.outputs.token }}
           PRODUCTION_CONFIRMATION: ${{ steps.approval.outputs.confirmation }}
+          TARGET_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.target_mode || 'normal' }}
         run: |
           set -o pipefail
+          mode_args=()
+          if [ "$TARGET_MODE" = "index" ]; then
+            test "$BEFORE_SHA" = "$AFTER_SHA"
+            mode_args+=(--deploy-index)
+          fi
           python3 .github/scripts/candy_ftp_deploy.py \
             --before "$BEFORE_SHA" \
             --after "$AFTER_SHA" \
+            "${mode_args[@]}" \
             --expected-file-count "$EXPECTED_FILE_COUNT" \
             --approved-plan-token "$APPROVED_PLAN_TOKEN" \
             --confirm-production "$PRODUCTION_CONFIRMATION" | tee deploy-result.txt

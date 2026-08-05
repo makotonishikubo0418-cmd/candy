@@ -16,6 +16,7 @@ AREA_IMAGE_GUARD = Path(__file__).with_name("candy_area_image_replacement_guard.
 WORKFLOW = SCRIPT.parent.parent / "workflows" / "candy-production-deploy.yml"
 HTACCESS_WORKFLOW = SCRIPT.parent.parent / "workflows" / "candy-htaccess-deploy.yml"
 CONFIRMATION = "DEPLOY-CANDY-PRODUCTION"
+INDEX_CONFIRMATION = "DEPLOY-CANDY-INDEX"
 HTACCESS_CONFIRMATION = "DEPLOY-CANDY-HTACCESS"
 
 
@@ -213,6 +214,7 @@ def make_repository(root: Path) -> tuple[str, str]:
     git(root, "config", "user.email", "test@example.invalid")
     git(root, "config", "user.name", "Safety Test")
     (root / "HP" / "main.php").write_bytes(b"v1\n")
+    (root / "HP" / "index.php").write_bytes(b"<?php echo 'index';\n")
     before = commit(root, "base")
     (root / "HP" / "main.php").write_bytes(b"v2\n")
     after = commit(root, "target")
@@ -277,6 +279,9 @@ def assert_workflow_contract() -> None:
         "steps.plan.outputs.token",
         "--verify-approval",
         "--lint-php",
+        "target_mode:",
+        "--deploy-index",
+        "DEPLOY-CANDY-INDEX",
         "cancel-in-progress: false",
     )
     for marker in required:
@@ -357,6 +362,66 @@ def main() -> None:
             root,
         )
         assert "APPROVAL CHECK: passed" in approved.stdout
+
+        index_base = [
+            sys.executable,
+            str(script),
+            "--before",
+            after,
+            "--after",
+            after,
+            "--deploy-index",
+        ]
+        index_preview = run([*index_base, "--dry-run"], root)
+        assert "Deployment operation count: 1" in index_preview.stdout
+        assert "HP/index.php -> /public_html/group/candy/index.php" in index_preview.stdout
+        index_token_match = re.search(r"PLAN_TOKEN: ([0-9a-f]{64})", index_preview.stdout)
+        assert index_token_match
+        wrong_index_confirmation = run(
+            [
+                *index_base,
+                "--verify-approval",
+                "--expected-file-count",
+                "1",
+                "--approved-plan-token",
+                index_token_match.group(1),
+                "--confirm-production",
+                CONFIRMATION,
+            ],
+            root,
+            succeeds=False,
+        )
+        assert wrong_index_confirmation.returncode != 0
+        assert "confirmation text" in wrong_index_confirmation.stderr
+        approved_index = run(
+            [
+                *index_base,
+                "--verify-approval",
+                "--expected-file-count",
+                "1",
+                "--approved-plan-token",
+                index_token_match.group(1),
+                "--confirm-production",
+                INDEX_CONFIRMATION,
+            ],
+            root,
+        )
+        assert "APPROVAL CHECK: passed" in approved_index.stdout
+        mismatched_index_range = run(
+            [
+                sys.executable,
+                str(script),
+                "--before",
+                before,
+                "--after",
+                after,
+                "--deploy-index",
+                "--dry-run",
+            ],
+            root,
+            succeeds=False,
+        )
+        assert "identical --before and --after" in mismatched_index_range.stderr
 
         git(root, "checkout", "-q", before)
         mismatch = run([*base, "--dry-run"], root, succeeds=False)

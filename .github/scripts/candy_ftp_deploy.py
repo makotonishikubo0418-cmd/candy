@@ -23,6 +23,7 @@ ZERO_SHA = "0" * 40
 DEPLOYABLE_STATUSES = {"A", "M", "T"}
 BLOCKED_STATUSES = {"D", "R"}
 PROTECTED_PATHS = {"HP/index.php", "HP/.htaccess"}
+INDEX_PATH = "HP/index.php"
 HTACCESS_PATH = "HP/.htaccess"
 BLOCKED_FILE_MARKERS = (".candy-backup-", ".candy-upload-")
 BLOCKED_FILE_NAMES = {".env"}
@@ -30,6 +31,7 @@ BLOCKED_FILE_SUFFIXES = (".bak", ".backup", ".zip")
 MAX_DEPLOY_FILES = 125
 MAX_DEPLOY_TOTAL_BYTES = 50 * 1024 * 1024
 DEPLOY_CONFIRMATION = "DEPLOY-CANDY-PRODUCTION"
+INDEX_DEPLOY_CONFIRMATION = "DEPLOY-CANDY-INDEX"
 HTACCESS_DEPLOY_CONFIRMATION = "DEPLOY-CANDY-HTACCESS"
 EXCLUDED_PREFIXES = (
     "HP/codex/",
@@ -187,6 +189,28 @@ def collect_changes(before: str, after: str) -> list[Change]:
     if result.returncode != 0:
         raise RuntimeError(f"git diff failed: {result.stderr.strip()}")
     return parse_diff_output(result.stdout)
+
+
+def validate_exact_index_target(before: str, after: str) -> None:
+    validate_full_commit_sha(before, "Index deployment base")
+    validate_full_commit_sha(after, "Index deployment target")
+    if before == ZERO_SHA or after == ZERO_SHA:
+        raise RuntimeError("Index deployment SHA must not be all zeros")
+    if before != after:
+        raise RuntimeError("Index deployment requires identical --before and --after SHAs")
+    if not commit_exists(after):
+        raise RuntimeError("Index deployment target commit is unavailable")
+    index_path = Path(INDEX_PATH)
+    if index_path.is_symlink() or not index_path.is_file():
+        raise RuntimeError("Index deployment target is not a regular HP/index.php file")
+    result = subprocess.run(
+        [GIT, "diff", "--quiet", after, "--", INDEX_PATH],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    if result.returncode != 0:
+        raise RuntimeError("HP/index.php differs from the exact target commit")
 
 
 def classify_changes(
@@ -682,6 +706,7 @@ def self_test() -> None:
     assert is_excluded("HP/.htaccess")
     assert is_excluded("HP/index.php", allow_htaccess=True)
     assert not is_excluded("HP/.htaccess", allow_htaccess=True)
+    assert INDEX_PATH in PROTECTED_PATHS
     assert is_excluded("HP/img/.photo.jpg.candy-backup-123")
     assert is_excluded("HP/archive.zip")
     assert is_excluded("HP/.env")
@@ -761,6 +786,7 @@ def main() -> int:
     parser.add_argument("--verify-approval", action="store_true")
     parser.add_argument("--lint-php", action="store_true")
     parser.add_argument("--allow-htaccess", action="store_true")
+    parser.add_argument("--deploy-index", action="store_true")
     args = parser.parse_args()
 
     if args.self_test:
@@ -771,8 +797,19 @@ def main() -> int:
     if current_head() != args.after:
         raise RuntimeError("Checked-out HEAD does not match --after; refusing deployment")
 
-    changes = collect_changes(args.before, args.after)
-    validate_area_image_replacements(Path.cwd(), args.before, args.after)
+    if args.deploy_index and args.allow_htaccess:
+        raise RuntimeError("Index and .htaccess exception modes cannot be combined")
+    if args.deploy_index:
+        validate_exact_index_target(args.before, args.after)
+        deployable = [INDEX_PATH]
+        excluded: list[str] = []
+        blocked: list[Change] = []
+    else:
+        changes = collect_changes(args.before, args.after)
+        validate_area_image_replacements(Path.cwd(), args.before, args.after)
+        deployable, excluded, blocked = classify_changes(
+            changes, allow_htaccess=args.allow_htaccess
+        )
     if args.allow_htaccess:
         exact_change = [
             change.status == "M"
@@ -784,13 +821,14 @@ def main() -> int:
             raise RuntimeError(
                 "The .htaccess exception requires exactly one modified HP/.htaccess file"
             )
-    deployable, excluded, blocked = classify_changes(
-        changes, allow_htaccess=args.allow_htaccess
-    )
     print_plan(args.before, args.after, deployable, excluded, blocked)
     deleted = deletion_paths(blocked, allow_htaccess=args.allow_htaccess)
     expected_confirmation = (
-        HTACCESS_DEPLOY_CONFIRMATION if args.allow_htaccess else DEPLOY_CONFIRMATION
+        INDEX_DEPLOY_CONFIRMATION
+        if args.deploy_index
+        else HTACCESS_DEPLOY_CONFIRMATION
+        if args.allow_htaccess
+        else DEPLOY_CONFIRMATION
     )
     actual_plan_token = plan_token(args.before, args.after, deployable, deleted)
     operation_count = len(deployable) + len(deleted)
