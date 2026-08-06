@@ -386,6 +386,13 @@
       "index_group": "な",
       "links": ["hiroki", "jiyugaoka", "shimoarata", "chuokoshinmachi"]
     },
+    "nishisengokucho": {
+      "region": "西千石町",
+      "longitude": 130.543513096114,
+      "latitude": 31.5887579967308,
+      "index_group": "な",
+      "links": ["yamanokuchicho", "arata", "yamashitacho", "kinkocho"]
+    },
     "obaracho": {
       "region": "小原町",
       "longitude": 130.524704,
