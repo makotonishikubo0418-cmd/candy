@@ -393,6 +393,13 @@
       "index_group": "な",
       "links": ["yamanokuchicho", "arata", "yamashitacho", "kinkocho"]
     },
+    "nishitaniyama": {
+      "region": "西谷山",
+      "longitude": 130.494500017033,
+      "latitude": 31.5215796374119,
+      "index_group": "な",
+      "links": ["jigenjicho", "jiyugaoka", "hikariyama", "hiroki"]
+    },
     "obaracho": {
       "region": "小原町",
       "longitude": 130.524704,

@@ -81,7 +81,7 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 43 | 西坂元町 | `nishisakamotocho` | LOCAL_COMPLETE | 専用ツール / 2026-08-06 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
 | 44 | 西紫原町 | `nishimurasakibarucho` | LOCAL_COMPLETE | 専用ツール / 2026-08-06 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
 | 45 | 西千石町 | `nishisengokucho` | LOCAL_COMPLETE | 専用ツール / 2026-08-06 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
-| 46 | 西谷山 | `nishitaniyama` | READY_CANDIDATE | |
+| 46 | 西谷山 | `nishitaniyama` | LOCAL_COMPLETE | 専用ツール / 2026-08-06 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
 | 47 | 西田 | `nishida` | READY_CANDIDATE | |
 | 48 | 西別府町 | `nishibeppucho` | READY_CANDIDATE | |
 | 49 | 西俣町 | `nishimatacho` | READY_CANDIDATE | |

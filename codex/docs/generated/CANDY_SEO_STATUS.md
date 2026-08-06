@@ -2,14 +2,14 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-08-06T10:08:09+09:00 (reproducible generation baseline)
+> Generated at: 2026-08-06T10:11:42+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 91462c5cfdf9a49538036ab3e008736500a63c7e
-> State fingerprint: sha256:77a68a707b1f1c7acab37397997df7af78a5de4f10626171c946290b8e2c9df3
+> Commit: 88e29419d24b0da2add15f7627abe5273bbf316b
+> State fingerprint: sha256:a67597d0e1768fd2017c7e652d355ef4d810fca2d268f184fe99a6496d20cc8b
 > Scope: Source HTML corresponding to public PHP files directly under HP
-> Population: Pages: 133
+> Population: Pages: 134
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: OK=132 / ISSUE=1 / UNVERIFIED=0
+> Result: OK=133 / ISSUE=1 / UNVERIFIED=0
 > Unverified scope: Production HTTP, search engine index state, redirects, and database-generated HTML
 
 Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are not corrected automatically.
@@ -81,6 +81,7 @@ Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are no
 | area:nishisakamotocho | 鹿児島市西坂元町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「西坂元町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-nishisakamotocho.php | index | 鹿児島市西坂元町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:nishisatacho | 鹿児島市西佐多町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「西佐多町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-nishisatacho.php | index | 鹿児島市西佐多町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:nishisengokucho | 鹿児島市西千石町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「西千石町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-nishisengokucho.php | index | 鹿児島市西千石町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
+| area:nishitaniyama | 鹿児島市西谷山で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「西谷山」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-nishitaniyama.php | index | 鹿児島市西谷山で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:obaracho | 鹿児島市小原町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「小原町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-obaracho.php | index | 鹿児島市小原町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:ogawacho | 鹿児島市小川町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「小川町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-ogawacho.php | index | 鹿児島市小川町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | area:okanoharacho | 鹿児島市岡之原町で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島市「岡之原町」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-okanoharacho.php | index | 鹿児島市岡之原町で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
