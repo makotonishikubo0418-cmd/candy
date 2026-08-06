@@ -379,6 +379,13 @@
       "index_group": "な",
       "links": ["tamazatocho", "tamazatodanchi", "shimoishiki", "wakabacho"]
     },
+    "nishimurasakibarucho": {
+      "region": "西紫原町",
+      "longitude": 130.52631097620048,
+      "latitude": 31.556053424197536,
+      "index_group": "な",
+      "links": ["hiroki", "jiyugaoka", "shimoarata", "chuokoshinmachi"]
+    },
     "obaracho": {
       "region": "小原町",
       "longitude": 130.524704,
