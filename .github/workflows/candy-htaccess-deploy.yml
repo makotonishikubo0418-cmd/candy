@@ -57,9 +57,10 @@ jobs:
 
       - name: Validate protected deployment code
         run: |
-          python3 -m py_compile .github/scripts/candy_ftp_deploy.py
+          python3 -m py_compile .github/scripts/candy_ftp_deploy.py .github/scripts/candy_release_check.py
           python3 .github/scripts/candy_ftp_deploy.py --self-test
           python3 .github/scripts/test_candy_ftp_deploy.py
+          python3 .github/scripts/test_candy_release_check.py
 
       - name: Preview the exact htaccess-only plan without FTP
         env:
@@ -93,9 +94,10 @@ jobs:
 
       - name: Validate protected deployment code
         run: |
-          python3 -m py_compile .github/scripts/candy_ftp_deploy.py
+          python3 -m py_compile .github/scripts/candy_ftp_deploy.py .github/scripts/candy_release_check.py
           python3 .github/scripts/candy_ftp_deploy.py --self-test
           python3 .github/scripts/test_candy_ftp_deploy.py
+          python3 .github/scripts/test_candy_release_check.py
 
       - name: Validate the exact htaccess-only plan and approval
         env:
@@ -140,3 +142,6 @@ jobs:
             --confirm-production "$PRODUCTION_CONFIRMATION" | tee deploy-result.txt
           grep -Fx "SUCCESS: deployed and SHA256-verified 1 file(s); deleted 0 obsolete file(s)" deploy-result.txt
           cat deploy-result.txt >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Verify the production entry contract
+        run: python3 .github/scripts/candy_release_check.py --entry-only

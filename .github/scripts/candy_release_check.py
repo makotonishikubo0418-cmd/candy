@@ -4,17 +4,31 @@
 from __future__ import annotations
 
 import argparse
+import html
 import json
+import re
 import shutil
 import subprocess
 import time
+from collections.abc import Callable
+from urllib.error import HTTPError
 from urllib.parse import quote
-from urllib.request import Request, urlopen
+from urllib.request import HTTPRedirectHandler, Request, build_opener, urlopen
 
 
 REPOSITORY = "makotonishikubo0418-cmd/candy"
 WORKFLOW = "candy-production-deploy.yml"
 USER_AGENT = "candy-release-check"
+PUBLIC_ROOT = "https://www.55810.com/"
+PUBLIC_INDEX = "https://www.55810.com/index.php"
+CANONICAL_ROOT = "https://www.55810.com"
+DIRECT_ROOT = "http://firststar.kir.jp/group/candy/"
+TOP_TEXT = "鹿児島 デリヘル キャンディ"
+
+
+class NoRedirect(HTTPRedirectHandler):
+    def redirect_request(self, request, file_pointer, code, message, headers, new_url):
+        return None
 
 
 def read_json(url: str) -> dict:
@@ -83,13 +97,89 @@ def verify_url(url: str, expected_text: list[str]) -> None:
     print(f"HTTP_STATUS={status}")
 
 
+def http_fetch(url: str) -> tuple[int, str, object, bytes]:
+    request = Request(
+        url,
+        headers={"User-Agent": USER_AGENT, "Cache-Control": "no-cache"},
+    )
+    opener = build_opener(NoRedirect)
+    try:
+        with opener.open(request, timeout=30) as response:
+            return response.status, response.geturl(), response.headers, response.read()
+    except HTTPError as exc:
+        return exc.code, exc.geturl(), exc.headers, exc.read()
+
+
+def normalized_element_text(body: str, tag: str) -> str:
+    match = re.search(
+        rf"<{tag}\b[^>]*>(.*?)</{tag}>",
+        body,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    if not match:
+        return ""
+    value = re.sub(r"<[^>]+>", "", match.group(1))
+    return re.sub(r"\s+", " ", html.unescape(value)).strip()
+
+
+def verify_entry_contract(
+    fetch: Callable[[str], tuple[int, str, object, bytes]] | None = None,
+) -> None:
+    fetcher = fetch or http_fetch
+    checks: dict[str, bool] = {}
+
+    root_status, root_final, root_headers, root_bytes = fetcher(PUBLIC_ROOT)
+    root_body = root_bytes.decode("utf-8", errors="replace")
+    checks["root_200"] = root_status == 200 and root_final == PUBLIC_ROOT
+    checks["title"] = normalized_element_text(root_body, "title") == TOP_TEXT
+    checks["canonical"] = bool(
+        re.search(
+            rf"<link\b[^>]*\brel=[\"']canonical[\"'][^>]*\bhref=[\"']{re.escape(CANONICAL_ROOT)}/?[\"']",
+            root_body,
+            flags=re.IGNORECASE,
+        )
+    )
+    checks["h1"] = normalized_element_text(root_body, "h1") == TOP_TEXT
+    checks["public_indexable"] = "noindex" not in str(root_headers.get("X-Robots-Tag", "")).lower()
+
+    redirect_expectations = (
+        ("index_redirect", PUBLIC_INDEX, PUBLIC_ROOT),
+        ("http_www_redirect", "http://www.55810.com/", PUBLIC_ROOT),
+        ("https_non_www_redirect", "https://55810.com/", PUBLIC_ROOT),
+        ("http_non_www_redirect", "http://55810.com/", PUBLIC_ROOT),
+    )
+    for label, url, location in redirect_expectations:
+        status, _final, headers, _body = fetcher(url)
+        checks[label] = status == 301 and headers.get("Location") == location
+
+    direct_status, direct_final, direct_headers, _direct_bytes = fetcher(DIRECT_ROOT)
+    checks["direct_host_noindex"] = (
+        direct_status == 200
+        and direct_final == DIRECT_ROOT
+        and "noindex" in str(direct_headers.get("X-Robots-Tag", "")).lower()
+    )
+
+    if not all(checks.values()):
+        failed = ", ".join(name for name, passed in checks.items() if not passed)
+        raise RuntimeError(f"production entry contract failed: {failed}")
+    print("ENTRY_CONTRACT_OK=" + ",".join(checks))
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--sha", required=True)
+    parser.add_argument("--sha")
     parser.add_argument("--url")
     parser.add_argument("--expect-text", action="append", default=[])
     parser.add_argument("--timeout", type=int, default=300)
+    parser.add_argument("--entry-only", action="store_true")
     args = parser.parse_args()
+    if args.entry_only:
+        if args.sha or args.url or args.expect_text:
+            parser.error("--entry-only cannot be combined with --sha, --url, or --expect-text")
+        verify_entry_contract()
+        return 0
+    if not args.sha:
+        parser.error("--sha is required unless --entry-only is used")
     if len(args.sha) != 40 or any(character not in "0123456789abcdef" for character in args.sha):
         parser.error("--sha must be a lowercase 40-character commit SHA")
     if args.timeout < 30 or args.timeout > 600:

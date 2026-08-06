@@ -42,7 +42,7 @@ RewriteRule ^ - [E=CANDY_DIRECT_HOST:1]
 RewriteCond %{HTTP_HOST} ^(?:www\.)?55810\.com$ [NC]
 RewriteRule ^group/candy/(.*)$ https://www.55810.com/$1 [R=301,L,NE]
 
-# Keep detail-page URLs canonical while the top-page migration redirect remains separate.
+# Keep every public URL on the current canonical scheme and host.
 # Canonical scheme and host: https://www.55810.com
 RewriteCond %{HTTP_HOST} ^(?:www\.)?55810\.com$ [NC]
 RewriteCond %{HTTPS} !=on

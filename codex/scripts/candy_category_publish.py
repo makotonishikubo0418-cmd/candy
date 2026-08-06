@@ -20,7 +20,6 @@ import candy_page_common as common
 
 GITHUB_BASE = "https://github.com/makotonishikubo0418-cmd/candy"
 EXPECTED_ORIGIN = GITHUB_BASE
-EXPECTED_REDIRECT = "https://www.cityheaven.net/kagoshima/A4601/A460102/newcandy/"
 ACTIVE_STATE: dict[str, str] = {}
 
 
@@ -161,6 +160,7 @@ def assert_preflight(category: str, data, allowed: list[Path], *, check_remote: 
 
 
 def verify_production(category: str, data, commit: str) -> None:
+    release.verify_entry_contract()
     page_url = release.cache_bust(data.canonical, commit)
     status, final_url, _headers, body_bytes = release.http_fetch(page_url)
     body = body_bytes.decode("utf-8", errors="replace")
@@ -190,9 +190,6 @@ def verify_production(category: str, data, commit: str) -> None:
     sitemap_url = release.cache_bust("https://www.55810.com/sitemap.xml", commit)
     sitemap_status, sitemap_final, _sitemap_headers, sitemap_bytes = release.http_fetch(sitemap_url)
     checks["sitemap"] = sitemap_status == 200 and sitemap_final == sitemap_url and data.canonical in sitemap_bytes.decode("utf-8", errors="replace")
-    for label, url in (("root_redirect", "https://www.55810.com/"), ("index_redirect", "https://www.55810.com/index.php")):
-        redirect_status, _final, redirect_headers, _body = release.http_fetch(url)
-        checks[label] = redirect_status == 301 and redirect_headers.get("Location") == EXPECTED_REDIRECT
     if not all(checks.values()):
         raise CategoryPublishError("production verification failed: " + ", ".join(name for name, passed in checks.items() if not passed))
     print("PRODUCTION_CHECK_OK=" + ",".join(checks))

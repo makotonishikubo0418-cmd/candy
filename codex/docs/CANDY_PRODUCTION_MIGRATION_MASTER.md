@@ -1,36 +1,52 @@
-# CANDY Production Migration and Automated Deployment
+# CANDY Production Deployment and Migration Control
 
 ## 1. Purpose
 
-Deploy the latest `HP/` to KAGOYA production in phases while preventing rendering damage, broken links, unintended redirect removal, and obsolete-file retention.
+Control current `HP/` deployment, protected-entry publication, recovery, and
+the remaining migration-history boundary while preventing rendering damage,
+broken links, unintended redirect changes, and obsolete-file retention.
 
-This document contains production-migration decision criteria. See `CANDY_20260713_CONTEXT_AND_IMPROVEMENT.md` for detailed 2026-07-13 context and incident history and `CANDY_VERIFICATION_PLAN.md` for full-population validation.
+This document contains current production-deployment decision criteria. See
+`CANDY_20260713_CONTEXT_AND_IMPROVEMENT.md` only for detailed 2026-07-13
+incident history and `CANDY_VERIFICATION_PLAN.md` for full-population
+validation.
 
 ## 2. Environments
 
 | Purpose | Path or location | Handling |
 |---|---|---|
-| Latest local | `HP/` | Development and production data for future deployment |
-| Production snapshot | `Backup/HP_旧データ/` | Legacy data downloaded again from production by the user at the acquisition time |
+| Latest local | `HP/` | Current development and production-deployment source |
+| Historical production snapshot | `Backup/HP_旧データ/` | Legacy comparison data from its acquisition time; not current production state |
 | Production server | `/public_html/group/candy/` | Actual public destination |
 | Test server | `/public_html/group_test/candy/` | Test version created by the user during production |
 
 Local paths vary by computer. Use the current Git root. Do not confuse production and test.
 
-## 3. Primary Publication-Switchover Rules
+## 3. Production Entry Contract
 
-### 3.1 Production index.php
+### 3.1 Public root and protected index.php
 
-- Production-snapshot `index.php` sends a `301` redirect to シティヘブン.
-- Latest `HP/index.php` is the new-site entry point and has a different responsibility.
-- Preserve the production redirecting `index.php` during phased migration.
-- Exclude latest `HP/index.php` from Push, preview, and deploy.
-- Deploy latest `HP/index.php` alone only after all preparation completes and the user explicitly instructs final publication switchover.
-- After deployment, verify that the top redirect ended, HTTP, rendering, desktop/mobile, and primary routes.
+- `https://www.55810.com/` MUST return `200` and serve the current CANDY top page.
+- `https://www.55810.com/index.php` MUST return `301` to `https://www.55810.com/`.
+- HTTP and non-www requests MUST return `301` to `https://www.55810.com/`.
+- Direct verification through `http://firststar.kir.jp/group/candy/` MUST remain
+  accessible and return `X-Robots-Tag: noindex`; the public canonical response
+  MUST NOT inherit that header.
+- `HP/index.php` is the current site entry point and remains excluded from every
+  normal Push deployment.
+- Publish or recover `HP/index.php` only through the protected manual `index`
+  mode, using the exact target Commit, one-operation plan, plan token, and
+  `DEPLOY-CANDY-INDEX` confirmation. The equal before/after SHA pins the exact
+  committed snapshot being deployed; it is not a pending publication
+  switchover.
+- After any production deployment, run the common entry-contract check and the
+  target-specific HTTP and rendering checks required by the operation.
 
-### 3.2 Targets Other Than index
+### 3.2 Normal deployment targets
 
-PHP, include, source, CSS, JavaScript, images, and movies may be deployed before the final switchover while preserving the redirecting index. Verify redirect preservation separately from other-page correctness.
+Normal PHP, include, source, CSS, JavaScript, image, and movie deployment MUST
+leave protected `HP/index.php` and `HP/.htaccess` unchanged. Verify the common
+entry contract separately from target-page correctness.
 
 ## 4. Current GitHub Actions Design
 
@@ -116,7 +132,9 @@ Do not infer this list for a future workflow; recheck actual preview output.
 - `HP/index.php` remains protected and MUST NOT be accepted by this exception.
 - Deploy requires operation count `1`, the exact preview `PLAN_TOKEN`, and confirmation `DEPLOY-CANDY-HTACCESS`.
 - The normal transactional upload, SHA-256 verification, backup, and automatic rollback procedure remains mandatory.
-- After deployment, verify HTTP, non-www, canonical HTTPS, explicit index removal, and preservation of the intentional top-page redirect.
+- After deployment, run the common entry-contract check for root `200`, HTTP
+  and non-www canonical redirects, explicit index removal, public indexability,
+  and direct-host noindex.
 
 ## 5. FTP Deployment Safety Requirements
 
@@ -194,12 +212,19 @@ production-specific gates:
 4. Verify target SHA, lists, exclusions, deletion/rename state, operation count,
    uploaded size, and `PLAN_TOKEN`.
 5. Require target PHP to pass `php -d short_open_tag=1 -l` before FTP.
-6. After Actions succeeds, verify target-page HTTP and production URLs.
+6. After Actions succeeds, verify the common production entry contract,
+   target-page HTTP, and production URLs.
 
 Normal tracking command:
 
 ```powershell
 python .github/scripts/candy_release_check.py --sha <40-character-Commit-SHA> --url <production-URL> --expect-text <target-page-specific-text>
+```
+
+Protected or manual deployment routes run the entry check directly:
+
+```powershell
+python .github/scripts/candy_release_check.py --entry-only
 ```
 
 ## 8. During Deployment
@@ -214,7 +239,8 @@ python .github/scripts/candy_release_check.py --sha <40-character-Commit-SHA> --
 1. Verify the final Actions result.
 2. Verify production target existence and SHA-256 equality.
 3. Check for remaining temporary and backup files.
-4. Verify preservation of the production `index.php` redirect.
+4. Verify root `200`, `index.php` to root, canonical host and scheme redirects,
+   public indexability, and direct-host noindex through the common entry check.
 5. Check target-PHP HTTP.
 6. Check CSS/JavaScript/images, internal links, and desktop/mobile browser rendering as required. For a same-path static-asset replacement, apply Section 5.1 and verify the new content-version reference and rendered content.
 7. Add the target SHA, Actions run, deployed targets, production hashes, HTTP

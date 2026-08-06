@@ -92,7 +92,10 @@ Check every public entry PHP over HTTP:
 - 500 or higher: Runtime error or transient failure.
 - Refused connection, DNS, TLS, timeout: `UNVERIFIED`.
 
-Record the intended シティヘブン redirect from `index.php` separately from 200 results for other pages.
+Record the public root `200` separately from the intended `index.php` to root,
+HTTP to HTTPS, and non-www to www redirects. Also record that the direct
+verification host returns `200` with `X-Robots-Tag: noindex` while the public
+canonical response remains indexable.
 
 ### 3.3 Generated HTML
 

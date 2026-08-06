@@ -27,7 +27,6 @@ REPOSITORY = "makotonishikubo0418-cmd/candy"
 ORIGIN_URL_SUFFIX = f"{REPOSITORY}.git"
 GITHUB_BASE = f"https://github.com/{REPOSITORY}"
 USER_AGENT = "candy-area-publish"
-EXPECTED_REDIRECT = "https://www.cityheaven.net/kagoshima/A4601/A460102/newcandy/"
 ACTIONS_PATTERN = re.compile(
     rf"^https://github\.com/{re.escape(REPOSITORY)}/actions/runs/(?P<run_id>\d+)$"
 )
@@ -448,7 +447,13 @@ def http_fetch(url: str, *, no_redirect: bool = True) -> tuple[int, str, object,
         return exc.code, exc.geturl(), exc.headers, exc.read()
 
 
+def verify_entry_contract() -> None:
+    release_script = root() / ".github" / "scripts" / "candy_release_check.py"
+    run([sys.executable, str(release_script), "--entry-only"], stream=True)
+
+
 def verify_production(data: candy_area_page.AreaData, commit: str) -> None:
+    verify_entry_contract()
     page_url = cache_bust(data.canonical, commit)
     status, final_url, _headers, page_bytes = http_fetch(page_url)
     body = page_bytes.decode("utf-8", errors="replace")
@@ -496,12 +501,6 @@ def verify_production(data: candy_area_page.AreaData, commit: str) -> None:
     checks["sitemap"] = (
         sitemap_status == 200 and sitemap_final == sitemap_url and data.canonical in sitemap_body
     )
-    for label, redirect_url, expected_location in (
-        ("root_redirect", "https://www.55810.com/", EXPECTED_REDIRECT),
-        ("index_redirect", "https://www.55810.com/index.php", "https://www.55810.com/"),
-    ):
-        redirect_status, _redirect_final, redirect_headers, _redirect_body = http_fetch(redirect_url)
-        checks[label] = redirect_status == 301 and redirect_headers.get("Location") == expected_location
     if not all(checks.values()):
         failed = ", ".join(name for name, passed in checks.items() if not passed)
         raise PublishError(f"production verification failed: {failed}")

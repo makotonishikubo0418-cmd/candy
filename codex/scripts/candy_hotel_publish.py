@@ -226,6 +226,7 @@ def expected_title_tag(title: str) -> str:
 
 
 def verify_production(data: candy_hotel_page.HotelData, commit: str) -> None:
+    shared.verify_entry_contract()
     page_url = shared.cache_bust(data.canonical, commit)
     status, final_url, _headers, page_bytes = shared.http_fetch(page_url)
     body = page_bytes.decode("utf-8", errors="replace")
@@ -320,12 +321,6 @@ def verify_production(data: candy_hotel_page.HotelData, commit: str) -> None:
         and sitemap_final == sitemap_url
         and f"<loc>{data.canonical}</loc>" in sitemap_body
     )
-    for label, redirect_url, expected_location in (
-        ("root_redirect", "https://www.55810.com/", shared.EXPECTED_REDIRECT),
-        ("index_redirect", "https://www.55810.com/index.php", "https://www.55810.com/"),
-    ):
-        redirect_status, _redirect_final, redirect_headers, _redirect_body = shared.http_fetch(redirect_url)
-        checks[label] = redirect_status == 301 and redirect_headers.get("Location") == expected_location
     if not all(checks.values()):
         failed = ", ".join(name for name, passed in checks.items() if not passed)
         raise PublishError(f"production verification failed: {failed}")

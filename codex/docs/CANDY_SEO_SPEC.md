@@ -33,6 +33,12 @@ Do not duplicate title, description, or H1 copy as fixed text in this document. 
 ## 4. Canonical and URL
 
 - Current canonical URLs use the absolute `https://www.55810.com/...` form.
+- `https://www.55810.com/` MUST return `200` and serve the CANDY top page; it
+  MUST NOT redirect to an external portal.
+- An explicit `https://www.55810.com/index.php` request MUST return `301` to
+  `https://www.55810.com/`.
+- HTTP and non-www requests MUST return `301` to the equivalent
+  `https://www.55810.com/...` canonical URL.
 - A detail page MUST match category and slug to the public PHP filename.
 - Validate the OGP URL, final breadcrumb item, JSON-LD URL, index links, internal links, and sitemap together with the canonical URL.
 - The current top-page structure uses the site-root canonical. Do not infer a change based on the presence or absence of `index.php`.
@@ -127,7 +133,8 @@ Current content pages use a structure containing `og:title`, `og:type`, `og:url`
   `lastmod` value differs from its matching source date.
 - Database-generated content changes that do not modify the matching source
   file remain outside this static-date calculation and MUST NOT be inferred.
-- `HP/.htaccess` contains active rules that redirect HTTP, non-www, and explicit `index.php` or `index.html` URLs to the `https://www.55810.com` canonical form.
+- `HP/.htaccess` implements the public-root and canonical-redirect contract in
+  Section 4, including explicit `index.php` and `index.html` removal.
 - `.htaccess` production handling belongs to the applicable production route
   selected from root `AGENTS.md` Section 5.2 and its exact workflow; this
   specification owns only the required redirect
