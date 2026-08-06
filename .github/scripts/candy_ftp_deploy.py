@@ -16,6 +16,19 @@ import sys
 
 from candy_area_image_replacement_guard import validate_area_image_replacements
 
+CODEX_SCRIPTS_DIR = Path(__file__).resolve().parents[2] / "codex" / "scripts"
+if str(CODEX_SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(CODEX_SCRIPTS_DIR))
+
+from candy_page_common import (  # noqa: E402
+    CATEGORY_INDEX_NAMES,
+    CATEGORY_INDEX_TERMINAL_CTA,
+    MAIN_CONTENT_END_MARKER,
+    category_index_terminal_cta_errors,
+    read_utf8,
+    require_category_index_terminal_cta,
+)
+
 
 GIT = shutil.which("git") or "git"
 REMOTE_ROOT = PurePosixPath("/public_html/group/candy")
@@ -44,6 +57,11 @@ EXCLUDED_PREFIXES = (
     "HP/.github/",
     "HP/.vscode/",
 )
+CATEGORY_INDEX_PATHS = {
+    "area": "HP/source/area.html",
+    "blog": "HP/source/blog.html",
+    "hotel": "HP/source/hotel.html",
+}
 
 
 @dataclass
@@ -239,6 +257,19 @@ def classify_changes(
             continue
         raise RuntimeError(f"Unsupported Git status {change.status}: {change.path}")
     return sorted(set(deployable)), sorted(set(excluded)), blocked
+
+
+def validate_changed_category_index_ctas(repository_root: Path, deployable: list[str]) -> None:
+    checked: list[str] = []
+    for category, repository_path in CATEGORY_INDEX_PATHS.items():
+        if repository_path not in deployable:
+            continue
+        local_path = repository_root / Path(*PurePosixPath(repository_path).parts)
+        if local_path.is_symlink() or not local_path.is_file():
+            raise RuntimeError(f"Category index is not a regular file: {repository_path}")
+        require_category_index_terminal_cta(category, read_utf8(local_path))
+        checked.append(repository_path)
+    print(f"CATEGORY_INDEX_TERMINAL_CTA_CHECK: passed changed={len(checked)}")
 
 
 def print_plan(
@@ -771,6 +802,31 @@ def self_test() -> None:
         pass
     else:
         raise AssertionError("Oversized deploy plan was accepted")
+    valid_category_index = (
+        '<div class="page">\n'
+        + CATEGORY_INDEX_TERMINAL_CTA
+        + "\n</div>\n"
+        + MAIN_CONTENT_END_MARKER
+    )
+    for category in CATEGORY_INDEX_NAMES:
+        assert category_index_terminal_cta_errors(category, valid_category_index) == []
+        assert category_index_terminal_cta_errors(
+            category,
+            valid_category_index.replace(CATEGORY_INDEX_TERMINAL_CTA, ""),
+        )
+        assert category_index_terminal_cta_errors(
+            category,
+            valid_category_index.replace(
+                CATEGORY_INDEX_TERMINAL_CTA,
+                CATEGORY_INDEX_TERMINAL_CTA
+                + '\n<div class="unexpected">unexpected</div>',
+            ),
+        )
+    assert sorted(CATEGORY_INDEX_PATHS.values()) == [
+        "HP/source/area.html",
+        "HP/source/blog.html",
+        "HP/source/hotel.html",
+    ]
     print("SELF-TEST: passed")
 
 
@@ -810,6 +866,7 @@ def main() -> int:
         deployable, excluded, blocked = classify_changes(
             changes, allow_htaccess=args.allow_htaccess
         )
+    validate_changed_category_index_ctas(Path.cwd(), deployable)
     if args.allow_htaccess:
         exact_change = [
             change.status == "M"

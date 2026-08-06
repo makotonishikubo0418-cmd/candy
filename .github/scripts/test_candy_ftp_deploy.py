@@ -13,6 +13,7 @@ from pathlib import Path
 GIT = shutil.which("git") or r"C:\Program Files\Git\cmd\git.exe"
 SCRIPT = Path(__file__).with_name("candy_ftp_deploy.py").resolve()
 AREA_IMAGE_GUARD = Path(__file__).with_name("candy_area_image_replacement_guard.py").resolve()
+PAGE_COMMON = SCRIPT.parents[2] / "codex" / "scripts" / "candy_page_common.py"
 WORKFLOW = SCRIPT.parent.parent / "workflows" / "candy-production-deploy.yml"
 HTACCESS_WORKFLOW = SCRIPT.parent.parent / "workflows" / "candy-htaccess-deploy.yml"
 CONFIRMATION = "DEPLOY-CANDY-PRODUCTION"
@@ -205,11 +206,19 @@ def commit(root: Path, message: str) -> str:
     return git(root, "rev-parse", "HEAD").stdout.strip()
 
 
+def copy_deploy_sources(root: Path) -> None:
+    github_scripts = root / ".github" / "scripts"
+    codex_scripts = root / "codex" / "scripts"
+    github_scripts.mkdir(parents=True)
+    codex_scripts.mkdir(parents=True)
+    shutil.copy2(SCRIPT, github_scripts / SCRIPT.name)
+    shutil.copy2(AREA_IMAGE_GUARD, github_scripts / AREA_IMAGE_GUARD.name)
+    shutil.copy2(PAGE_COMMON, codex_scripts / PAGE_COMMON.name)
+
+
 def make_repository(root: Path) -> tuple[str, str]:
     (root / "HP").mkdir()
-    (root / ".github" / "scripts").mkdir(parents=True)
-    shutil.copy2(SCRIPT, root / ".github" / "scripts" / SCRIPT.name)
-    shutil.copy2(AREA_IMAGE_GUARD, root / ".github" / "scripts" / AREA_IMAGE_GUARD.name)
+    copy_deploy_sources(root)
     git(root, "init", "-q")
     git(root, "config", "user.email", "test@example.invalid")
     git(root, "config", "user.name", "Safety Test")
@@ -223,9 +232,7 @@ def make_repository(root: Path) -> tuple[str, str]:
 
 def make_htaccess_repository(root: Path) -> tuple[str, str]:
     (root / "HP").mkdir()
-    (root / ".github" / "scripts").mkdir(parents=True)
-    shutil.copy2(SCRIPT, root / ".github" / "scripts" / SCRIPT.name)
-    shutil.copy2(AREA_IMAGE_GUARD, root / ".github" / "scripts" / AREA_IMAGE_GUARD.name)
+    copy_deploy_sources(root)
     git(root, "init", "-q")
     git(root, "config", "user.email", "test@example.invalid")
     git(root, "config", "user.name", "Safety Test")
@@ -239,9 +246,7 @@ def make_htaccess_repository(root: Path) -> tuple[str, str]:
 
 def make_deletion_repository(root: Path) -> tuple[str, str]:
     (root / "HP").mkdir()
-    (root / ".github" / "scripts").mkdir(parents=True)
-    shutil.copy2(SCRIPT, root / ".github" / "scripts" / SCRIPT.name)
-    shutil.copy2(AREA_IMAGE_GUARD, root / ".github" / "scripts" / AREA_IMAGE_GUARD.name)
+    copy_deploy_sources(root)
     git(root, "init", "-q")
     git(root, "config", "user.email", "test@example.invalid")
     git(root, "config", "user.name", "Safety Test")
@@ -270,6 +275,7 @@ def assert_workflow_contract() -> None:
         '".github/scripts/test_candy_site_state_metadata.py"',
         '"codex/scripts/candy_site_state.py"',
         '"codex/scripts/candy-site-state.cmd"',
+        '"codex/scripts/candy_page_common.py"',
         '"!HP/codex/**"',
         '"!HP/Text_area_data/**"',
         "github.event.before",

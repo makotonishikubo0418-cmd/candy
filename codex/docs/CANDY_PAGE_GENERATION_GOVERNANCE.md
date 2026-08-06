@@ -220,6 +220,20 @@ category-index button MUST describe the correct category and agree with the
 actual entries. Text copied from another category and stale names or URLs are
 prohibited.
 
+Each of the three category indexes MUST end with exactly one common contact
+CTA inside the page-content wrapper and before `<!-- メインコンテンツ END -->`:
+
+```html
+<div class="lp_40_0_75 center" id="button_4"><a href="./#shopinfo" class="bt-pk-xl">お問い合わせはコチラ</a></div>
+```
+
+This CTA MUST be the final visible block in the wrapper. Its
+`lp_40_0_75` class preserves 40 pixels above and 75 pixels below the button so
+the main background does not meet the footer without separation. Area, blog,
+and hotel generation checks and any production deployment plan that changes
+one of these category index sources MUST STOP if the CTA is missing,
+duplicated, altered, or followed by another visible block.
+
 For a new area page, a missing target-slug link in the area index is a normal
 generation input state, not a target-selection blocker. Add exactly one target
 link in the same area change unit. A link for the same region under a

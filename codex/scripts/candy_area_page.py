@@ -1156,6 +1156,7 @@ def update_sitemap(source: str, canonical: str) -> str:
 
 
 def update_area_index(source: str, data: AreaData, config: dict) -> str:
+    path_config.require_category_index_terminal_cta("area", source)
     link = f"./kagoshima-deliveryhealth-area-{data.slug}.php"
     count = source.count(link)
     if count > 1:
@@ -1372,6 +1373,7 @@ def shared_validation(data: AreaData, hp_root: Path) -> list[str]:
     if sitemap.count(f"<loc>{data.canonical}</loc>") != 1:
         errors.append("sitemap登録が1件ではありません")
     area_source = read_utf8(hp_root / "source" / "area.html")
+    errors.extend(path_config.category_index_terminal_cta_errors("area", area_source))
     if area_source.count(f'./{php_name}') != 1:
         errors.append("area一覧リンクが1件ではありません")
     index_source = read_utf8(hp_root / "source" / "index.html")

@@ -1122,6 +1122,7 @@ def hotel_schema(data: HotelData) -> dict[str, object]:
 
 
 def update_hotel_list(source: str, data: HotelData) -> str:
+    path_config.require_category_index_terminal_cta("hotel", source)
     php_name = f"kagoshima-deliveryhealth-hotel-{data.slug}.php"
     if source.count(f'./{php_name}') > 1 or source.count(data.canonical) > 1:
         raise HotelToolError("hotel一覧登録重複")
@@ -1161,7 +1162,9 @@ def update_hotel_list(source: str, data: HotelData) -> str:
             (
                 r'(?ms)(^[ \t]*<div class="lp_0_55_35 w_1050 lm_30_auto bg_f">.*?</div>)'
                 r'\r?\n(?:^[ \t]*\r?\n)*'
-                r'(^[ \t]*</div>\r?\n^[ \t]*</div>\r?\n^[ \t]*\r?\n'
+                r'(^[ \t]*</div>\r?\n^[ \t]*'
+                + re.escape(path_config.CATEGORY_INDEX_TERMINAL_CTA)
+                + r'\r?\n^[ \t]*</div>\r?\n^[ \t]*\r?\n'
                 r'^[ \t]*</div>\r?\n^<!-- メインコンテンツ END -->)'
             ),
             rf"\g<1>\n\n{entry}\n\g<2>",
@@ -1271,6 +1274,7 @@ def shared_validation(data: HotelData, hp_root: Path) -> list[str]:
     if base.count(conversion) != 1:
         errors.append("dataset_baseリンク変換が1件ではありません")
     hotel_list = read_utf8(hp_root / "source" / "hotel.html")
+    errors.extend(path_config.category_index_terminal_cta_errors("hotel", hotel_list))
     if hotel_list.count(f'./{php_name}') != 1:
         errors.append("hotel一覧リンクが1件ではありません")
     if hotel_list.count(data.canonical) != 1:
@@ -1679,6 +1683,7 @@ def run_self_test(_: argparse.Namespace) -> int:
             '\t<div class="lp_0_55_35 w_1050 lm_30_auto bg_f">\n'
             '\t\t<div class="lp_10_0 lm_0_auto w_130 center bg_p fs_xs fc_w">HOTEL INFO</div>\n'
             '\t</div>\n'
+            f'\t{path_config.CATEGORY_INDEX_TERMINAL_CTA}\n'
             '</div>\n'
             '\n'
             '</div>\n'

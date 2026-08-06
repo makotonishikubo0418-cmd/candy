@@ -19,6 +19,7 @@ on:
       - "codex/scripts/candy-area.cmd"
       - "codex/scripts/candy_site_state.py"
       - "codex/scripts/candy-site-state.cmd"
+      - "codex/scripts/candy_page_common.py"
       - "!HP/codex/**"
       - "!HP/**/*.md"
       - "!HP/Text_area_data/**"
@@ -88,7 +89,7 @@ jobs:
 
       - name: Validate deployment script
         run: |
-          python3 -m py_compile .github/scripts/candy_ftp_deploy.py .github/scripts/candy_area_image_replacement_guard.py codex/scripts/candy_area_image_replace.py codex/scripts/candy_site_state.py .github/scripts/candy_release_check.py
+          python3 -m py_compile .github/scripts/candy_ftp_deploy.py .github/scripts/candy_area_image_replacement_guard.py codex/scripts/candy_area_image_replace.py codex/scripts/candy_site_state.py codex/scripts/candy_page_common.py .github/scripts/candy_release_check.py
           python3 .github/scripts/candy_ftp_deploy.py --self-test
           python3 .github/scripts/test_candy_area_image_replacement_guard.py
           python3 .github/scripts/test_candy_area_image_replace.py
@@ -135,7 +136,7 @@ jobs:
 
       - name: Validate deployment script
         run: |
-          python3 -m py_compile .github/scripts/candy_ftp_deploy.py .github/scripts/candy_area_image_replacement_guard.py codex/scripts/candy_area_image_replace.py codex/scripts/candy_site_state.py .github/scripts/candy_release_check.py
+          python3 -m py_compile .github/scripts/candy_ftp_deploy.py .github/scripts/candy_area_image_replacement_guard.py codex/scripts/candy_area_image_replace.py codex/scripts/candy_site_state.py codex/scripts/candy_page_common.py .github/scripts/candy_release_check.py
           python3 .github/scripts/candy_ftp_deploy.py --self-test
           python3 .github/scripts/test_candy_area_image_replacement_guard.py
           python3 .github/scripts/test_candy_area_image_replace.py

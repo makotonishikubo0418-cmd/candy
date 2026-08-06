@@ -42,6 +42,12 @@ RELATED_AREA_SLUGS = (
 SEPARATOR_RE = re.compile(r"^(?:-{10,}|━{10,})\s*$")
 SCENE_RE = re.compile(r"^scene（h2(?: / [^)]+)?）\s*$")
 PLACEHOLDER_RE = re.compile(r"a{6,}|(?:未入力|未確定|TODO|TBD)", re.I)
+CATEGORY_INDEX_NAMES = ("area", "blog", "hotel")
+CATEGORY_INDEX_TERMINAL_CTA = (
+    '<div class="lp_40_0_75 center" id="button_4">'
+    '<a href="./#shopinfo" class="bt-pk-xl">お問い合わせはコチラ</a></div>'
+)
+MAIN_CONTENT_END_MARKER = "<!-- メインコンテンツ END -->"
 
 
 class PageToolError(RuntimeError):
@@ -93,6 +99,47 @@ def read_utf8(path: Path) -> str:
         return path.read_text(encoding="utf-8-sig").replace("\r\n", "\n")
     except UnicodeDecodeError as exc:
         raise PageToolError(f"UTF-8で読めません: {path}") from exc
+
+
+def category_index_terminal_cta_errors(category: str, source: str) -> list[str]:
+    if category not in CATEGORY_INDEX_NAMES:
+        return [f"未対応カテゴリです: {category}"]
+    errors: list[str] = []
+    exact_count = source.count(CATEGORY_INDEX_TERMINAL_CTA)
+    button_id_count = source.count('id="button_4"')
+    if exact_count != 1:
+        errors.append(f"{category}一覧の末尾CTA完全一致数が1件ではありません: {exact_count}")
+    if button_id_count != 1:
+        errors.append(f"{category}一覧のbutton_4件数が1件ではありません: {button_id_count}")
+    marker_count = source.count(MAIN_CONTENT_END_MARKER)
+    if marker_count != 1:
+        errors.append(f"{category}一覧のメインコンテンツ終端が1件ではありません: {marker_count}")
+    if exact_count == 1 and marker_count == 1:
+        cta_end = source.index(CATEGORY_INDEX_TERMINAL_CTA) + len(CATEGORY_INDEX_TERMINAL_CTA)
+        marker_start = source.index(MAIN_CONTENT_END_MARKER)
+        if cta_end >= marker_start:
+            errors.append(f"{category}一覧の末尾CTAがメインコンテンツ内にありません")
+        elif not re.fullmatch(r"(?:\s*</div>)*\s*", source[cta_end:marker_start]):
+            errors.append(f"{category}一覧の末尾CTA後に別の表示要素があります")
+    return errors
+
+
+def require_category_index_terminal_cta(category: str, source: str) -> None:
+    errors = category_index_terminal_cta_errors(category, source)
+    if errors:
+        raise PageToolError("カテゴリ一覧末尾CTA検証失敗:\n- " + "\n- ".join(errors))
+
+
+def require_all_category_index_terminal_ctas(repository_root: Path) -> None:
+    errors: list[str] = []
+    for category in CATEGORY_INDEX_NAMES:
+        path = repository_root / "HP" / "source" / f"{category}.html"
+        if path.is_symlink() or not path.is_file():
+            errors.append(f"{category}一覧ソースが通常ファイルではありません: {path}")
+            continue
+        errors.extend(category_index_terminal_cta_errors(category, read_utf8(path)))
+    if errors:
+        raise PageToolError("カテゴリ一覧末尾CTA一括検証失敗:\n- " + "\n- ".join(errors))
 
 
 def is_separator(value: str) -> bool:
@@ -400,12 +447,16 @@ def insert_before_button(block: str, entry: str) -> str:
 def update_blog_registries(blog_source: str, index_source: str, slug: str, title: str) -> tuple[str, str]:
     php_name = f"kagoshima-deliveryhealth-blog-{slug}.php"
     href = f"./{php_name}"
+    require_category_index_terminal_cta("blog", blog_source)
     for label, source in (("blog一覧", blog_source), ("indexブログ", index_source)):
         if source.count(href) > 1:
             raise PageToolError(f"{label}リンク重複")
     if href not in blog_source:
         entry = f'\t\t\t\t<div class="lp_20_0 fs_md3 bd_t"><a href="{href}" class="fade">{html.escape(title)}</a></div>'
-        pattern = r'(<div class="lp_5 [^>]*>BLOG INFO</div>)(.*?)(\n\s*</div>\n\s*<div[^>]+id="button_)'
+        pattern = (
+            r'(<div class="lp_5 [^>]*>BLOG INFO</div>)(.*?)'
+            r'(\n\s*</div>\n\s*' + re.escape(CATEGORY_INDEX_TERMINAL_CTA) + r')'
+        )
         match = re.search(pattern, blog_source, re.S)
         if not match:
             raise PageToolError("blog一覧挿入位置がありません")
@@ -438,6 +489,7 @@ def update_hotel_registries(
 ) -> tuple[str, str]:
     php_name = f"kagoshima-deliveryhealth-hotel-{slug}.php"
     href = f"./{php_name}"
+    require_category_index_terminal_cta("hotel", hotel_source)
     if hotel_source.count(href) > 1 or index_source.count(href) > 1:
         raise PageToolError("hotel一覧リンク重複")
     if href not in hotel_source:
@@ -561,8 +613,10 @@ def shared_validation(category: str, slug: str, canonical: str) -> list[str]:
         errors.append("dataset_baseリンク変換が1件ではありません")
     if read_utf8(hp / "sitemap.xml").count(f"<loc>{canonical}</loc>") != 1:
         errors.append("sitemap登録が1件ではありません")
+    category_source = read_utf8(hp / "source" / f"{category}.html")
+    errors.extend(category_index_terminal_cta_errors(category, category_source))
     for name in (category, "index"):
-        source = read_utf8(hp / "source" / f"{name}.html")
+        source = category_source if name == category else read_utf8(hp / "source" / f"{name}.html")
         if source.count(f"./{php_name}") != 1:
             errors.append(f"{name}一覧リンクが1件ではありません")
     return errors
