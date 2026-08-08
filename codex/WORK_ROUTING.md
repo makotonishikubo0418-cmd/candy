@@ -71,7 +71,7 @@ C:\Codex\FSG\Candy
 | Create or modify the management structure, instructions, specifications, or management documents | `codex/README.md`, `codex/MANAGEMENT_SYSTEM_OVERVIEW.md`, `codex/project_management/DOCUMENT_RULES.md`, and the canonical document being changed |
 | Confirm current status, issues, decisions, priorities, or next work | `codex/project_management/PROJECT_STATUS.md`; read `codex/project_management/CODEX_COMMUNICATION.md` only when required |
 | Coordinate ownership, reservations, conflict prevention, or handoff among multiple Codex agents | `codex/project_management/TASK_RESERVATIONS.md` and `codex/project_management/CODEX_COMMUNICATION.md` |
-| Record task history | `codex/project_management/TASK_LOG.md` and `codex/project_management/TASK_RESERVATIONS.md` |
+| Record task history | `codex/project_management/TASK_LOG.md` |
 | Perform Git operations, select or change a branch, Commit, or Push | `docs/rules/GIT_RULES.md` |
 | Stage, Commit, or Push management-document changes | `docs/rules/GIT_RULES.md` and `codex/project_management/DOCUMENT_RULES.md` |
 | Delete, move, rename, reorganize in bulk, or restore through Git | `codex/project_management/SAFETY_PROTOCOL.md` and `codex/project_management/TASK_RESERVATIONS.md` |
