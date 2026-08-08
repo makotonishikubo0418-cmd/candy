@@ -1,6 +1,6 @@
 # CANDY AREA 105 PAGE QUEUE
 
-- Updated: 2026-07-25
+- Updated: 2026-08-08
 - Purpose: Preserve the fixed 105-target cohort and its production order
 
 ## 1. Cohort Provenance
@@ -21,7 +21,7 @@ population, or eligibility result.
 
 Membership in this cohort does not prove current eligibility. For each target,
 the current gate and generated current-state documents selected by root
-`AGENTS.md` determine whether production may proceed.
+`AGENTS.md` through `codex/WORK_ROUTING.md` determine whether production may proceed.
 
 ## 2. Operating Rules
 
@@ -40,7 +40,7 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 2 | 皆与志町 | `minayoshicho` | PUBLISHED | Codex / 2026-07-14 / Commit `f1ba7fd` / Actions `29294348852` / Production HTTP verified |
 | 3 | 吉野 | `yoshino` | PUBLISHED | Codex / 2026-07-14 / Commit `f1ba7fd` / Actions `29294348852` / Production HTTP verified |
 | 4 | 吉野町 | `yoshinocho` | PUBLISHED | Codex / 2026-07-14 / Commit `98b009d` / Actions `29295020132` / Production HTTP verified |
-| 5 | 宮之浦町 | `miyanouracho` | BLOCKED_SLUG_CONFLICT | The area index uses `miyanouramachi`; Text canonical is `miyanouracho`. Awaiting a decision without automatic replacement |
+| 5 | 宮之浦町 | `miyanouracho` | BLOCKED | Slug conflict: the area index uses `miyanouramachi`; Text canonical is `miyanouracho`. Awaiting a decision without automatic replacement |
 | 6 | 玉里団地 | `tamazatodanchi` | PUBLISHED | Codex / 2026-07-14 / Commit `60fa1ab` / Actions `29300812695` / Production HTTP verified |
 | 7 | 玉里町 | `tamazatocho` | PUBLISHED | Codex / 2026-07-14 / Commit `80eb495` / Actions `29301384229` / Production HTTP verified |
 | 8 | 原良 | `harara` | PUBLISHED | Codex / 2026-07-14 / Commit `edc27df` / Actions `29301447744` / Production HTTP verified |
@@ -50,38 +50,38 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 12 | 山田町 | `yamadacho` | IN_PROGRESS | Dedicated tool / 2026-07-14 / Three files, shared registration, and static validation complete / PHP CLI unverified |
 | 13 | 山之口町 | `yamanokuchicho` | IN_PROGRESS | Dedicated tool / 2026-07-14 / Three files, shared registration, and static validation complete / PHP CLI unverified |
 | 14 | 四元町 | `yotsumotocho` | IN_PROGRESS | Dedicated tool / 2026-07-15 / Three files, shared registration, and static validation complete / PHP CLI unverified |
-| 15 | 紫原 | `murasakibaru` | LOCAL_COMPLETE | 専用ツール / 2026-07-24 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
-| 16 | 慈眼寺町 | `jigenjicho` | IN_PROGRESS | 専用ツール / 2026-07-18 / 3ファイル・共有登録・静的検査済み / PHP CLI未確認 |
-| 17 | 自由ヶ丘 | `jiyugaoka` | IN_PROGRESS | 専用ツール / 2026-07-18 / 3ファイル・共有登録・静的検査済み / PHP CLI未確認 |
+| 15 | 紫原 | `murasakibaru` | LOCAL_COMPLETE | Dedicated tool / 2026-07-24 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 16 | 慈眼寺町 | `jigenjicho` | IN_PROGRESS | Dedicated tool / 2026-07-18 / Three files, shared registration, and static validation complete / PHP CLI unverified |
+| 17 | 自由ヶ丘 | `jiyugaoka` | IN_PROGRESS | Dedicated tool / 2026-07-18 / Three files, shared registration, and static validation complete / PHP CLI unverified |
 | 18 | 七ツ島 | `nanatsujima` | IN_PROGRESS | Dedicated tool / 2026-07-16 / Three files, shared registration, and static validation complete / PHP CLI unverified |
-| 19 | 若葉町 | `wakabacho` | IN_PROGRESS | 専用ツール / 2026-07-18 / 3ファイル・共有登録・静的検査済み / PHP CLI未確認 |
-| 20 | 住吉町 | `sumiyoshicho` | LOCAL_COMPLETE | 専用ツール / 2026-07-24 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
-| 21 | 春山町 | `haruyamacho` | LOCAL_COMPLETE | 専用ツール / 2026-07-24 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
+| 19 | 若葉町 | `wakabacho` | IN_PROGRESS | Dedicated tool / 2026-07-18 / Three files, shared registration, and static validation complete / PHP CLI unverified |
+| 20 | 住吉町 | `sumiyoshicho` | LOCAL_COMPLETE | Dedicated tool / 2026-07-24 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 21 | 春山町 | `haruyamacho` | LOCAL_COMPLETE | Dedicated tool / 2026-07-24 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 22 | 小松原 | `komatsubara` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
-| 23 | 松原町 | `matsubaracho` | LOCAL_COMPLETE | 専用ツール / 2026-07-24 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
-| 24 | 照国町 | `terukunicho` | LOCAL_COMPLETE | 専用ツール / 2026-07-24 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
+| 23 | 松原町 | `matsubaracho` | LOCAL_COMPLETE | Dedicated tool / 2026-07-24 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 24 | 照国町 | `terukunicho` | LOCAL_COMPLETE | Dedicated tool / 2026-07-24 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 25 | 上谷口町 | `kamitaniguchicho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
 | 26 | 上福元町 | `kamifukumotocho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
 | 27 | 上本町 | `kamihonmachi` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
 | 28 | 上竜尾町 | `kamitatsuocho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
-| 29 | 城山 | `shiroyama` | LOCAL_COMPLETE | 専用ツール / 2026-07-24 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
-| 30 | 城山町 | `shiroyamacho` | LOCAL_COMPLETE | 専用ツール / 2026-07-25 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
-| 31 | 城西 | `josei` | LOCAL_COMPLETE | 専用ツール / 2026-07-25 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
-| 32 | 常盤 | `tokiwa` | LOCAL_COMPLETE | 専用ツール / 2026-07-25 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
-| 33 | 新栄町 | `shineicho` | LOCAL_COMPLETE | 専用ツール / 2026-07-25 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
-| 34 | 新照院町 | `shinshoincho` | LOCAL_COMPLETE | 専用ツール / 2026-07-25 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
-| 35 | 新町 | `shimmachi` | LOCAL_COMPLETE | 専用ツール / 2026-07-28 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
-| 36 | 真砂町 | `masagocho` | LOCAL_COMPLETE | 専用ツール / 2026-07-28 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
+| 29 | 城山 | `shiroyama` | LOCAL_COMPLETE | Dedicated tool / 2026-07-24 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 30 | 城山町 | `shiroyamacho` | LOCAL_COMPLETE | Dedicated tool / 2026-07-25 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 31 | 城西 | `josei` | LOCAL_COMPLETE | Dedicated tool / 2026-07-25 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 32 | 常盤 | `tokiwa` | LOCAL_COMPLETE | Dedicated tool / 2026-07-25 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 33 | 新栄町 | `shineicho` | LOCAL_COMPLETE | Dedicated tool / 2026-07-25 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 34 | 新照院町 | `shinshoincho` | LOCAL_COMPLETE | Dedicated tool / 2026-07-25 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 35 | 新町 | `shimmachi` | LOCAL_COMPLETE | Dedicated tool / 2026-07-28 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 36 | 真砂町 | `masagocho` | LOCAL_COMPLETE | Dedicated tool / 2026-07-28 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 37 | 真砂本町 | `masagohonmachi` | READY_CANDIDATE | |
-| 38 | 星ヶ峯 | `hoshigamine` | LOCAL_COMPLETE | 専用ツール / 2026-07-28 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
+| 38 | 星ヶ峯 | `hoshigamine` | LOCAL_COMPLETE | Dedicated tool / 2026-07-28 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 39 | 清水町 | `shimizucho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
-| 40 | 清和 | `seiwa` | LOCAL_COMPLETE | 専用ツール / 2026-07-28 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
-| 41 | 西伊敷 | `nishiishiki` | LOCAL_COMPLETE | 専用ツール / 2026-07-28 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
-| 42 | 西佐多町 | `nishisatacho` | LOCAL_COMPLETE | 専用ツール / 2026-07-29 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
-| 43 | 西坂元町 | `nishisakamotocho` | LOCAL_COMPLETE | 専用ツール / 2026-08-06 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
-| 44 | 西紫原町 | `nishimurasakibarucho` | LOCAL_COMPLETE | 専用ツール / 2026-08-06 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
-| 45 | 西千石町 | `nishisengokucho` | LOCAL_COMPLETE | 専用ツール / 2026-08-06 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
-| 46 | 西谷山 | `nishitaniyama` | LOCAL_COMPLETE | 専用ツール / 2026-08-06 / 3ファイル・共有登録・静的検査済み / PHP構文確認済み |
+| 40 | 清和 | `seiwa` | LOCAL_COMPLETE | Dedicated tool / 2026-07-28 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 41 | 西伊敷 | `nishiishiki` | LOCAL_COMPLETE | Dedicated tool / 2026-07-28 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 42 | 西佐多町 | `nishisatacho` | LOCAL_COMPLETE | Dedicated tool / 2026-07-29 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 43 | 西坂元町 | `nishisakamotocho` | LOCAL_COMPLETE | Dedicated tool / 2026-08-06 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 44 | 西紫原町 | `nishimurasakibarucho` | LOCAL_COMPLETE | Dedicated tool / 2026-08-06 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 45 | 西千石町 | `nishisengokucho` | LOCAL_COMPLETE | Dedicated tool / 2026-08-06 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 46 | 西谷山 | `nishitaniyama` | LOCAL_COMPLETE | Dedicated tool / 2026-08-06 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 47 | 西田 | `nishida` | READY_CANDIDATE | |
 | 48 | 西別府町 | `nishibeppucho` | READY_CANDIDATE | |
 | 49 | 西俣町 | `nishimatacho` | READY_CANDIDATE | |

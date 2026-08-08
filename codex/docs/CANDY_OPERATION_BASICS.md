@@ -98,7 +98,38 @@ and production verification are owned by
 `CANDY_PRODUCTION_MIGRATION_MASTER.md` and the exact workflow/scripts selected
 by the applicable production route in `codex/WORK_ROUTING.md` Section 5.2.
 
-## 8. Unverified Scope
+## 8. Database and Read-Only Access Boundary
+
+Candy loads production session and database configuration from external
+Control files that are not stored in this repository:
+
+```text
+/home/firststar/public_html/group/control/includefile/setting_session_vv.php
+/home/firststar/public_html/group/control/includefile/incfiles_vv.php
+```
+
+`HP/includefile/dataset_base.php` consumes those files. Local static inspection
+therefore proves the dependency path but does not prove the current database
+name, schema, credentials, connectivity, or application-to-database behavior.
+
+The approved read-only entry point for the `firststar_55810` database candidate
+is:
+
+```powershell
+cmd.exe /c '"C:\Codex\FSG\scripts\Invoke-Firststar55810DbRead.cmd" status'
+```
+
+The wrapper connects to `firststar@o4042s-134.kagoya.net` with the read-only key
+at `%USERPROFILE%\.ssh\fsg_remaining_codex_db_ro`. Never copy the key,
+passwords, connection values, or external configuration contents into this
+repository, a management document, a command argument, or a report.
+
+- Run the wrapper only for an explicitly authorized read-only database investigation.
+- Run `status` first. After a successful result, use only the wrapper-supported bounded modes required by the request: `tables`, `schema <table>`, `create <table>`, `indexes <table>`, or `count <table>`. Do not guess an argument format that the current wrapper has not confirmed.
+- Do not use raw SSH, a MySQL client, raw SQL, phpMyAdmin, or a write test.
+- Treat the mapping between Candy and `firststar_55810` as `UNVERIFIED` until the authorized live check and relevant schema evidence establish it. A successful wrapper status alone does not prove Candy application behavior.
+
+## 9. Unverified Scope
 
 Treat the production PHP version, web-server type, actual database, and
 external-service settings as unverified until rechecked. Do not treat path

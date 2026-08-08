@@ -1309,7 +1309,7 @@ def update_queue(source: str, data: AreaData, php_status: str) -> str:
     lines = source.splitlines()
     matches = 0
     status = "LOCAL_COMPLETE" if php_status == "PASSED" else "IN_PROGRESS"
-    php_note = "PHP構文確認済み" if php_status == "PASSED" else "PHP CLI未確認"
+    php_note = "PHP syntax verified" if php_status == "PASSED" else "PHP CLI unverified"
     for index, line in enumerate(lines):
         parts = line.split("|")
         if len(parts) < 7 or not parts[1].strip().isdigit():
@@ -1317,7 +1317,7 @@ def update_queue(source: str, data: AreaData, php_status: str) -> str:
         if parts[3].strip() != f"`{data.slug}`":
             continue
         parts[4] = f" {status} "
-        parts[5] = f" 専用ツール / {date.today().isoformat()} / 3ファイル・共有登録・静的検査済み / {php_note} "
+        parts[5] = f" Dedicated tool / {date.today().isoformat()} / Three files, shared registration, and static validation complete / {php_note} "
         lines[index] = "|".join(parts)
         matches += 1
     if matches != 1:

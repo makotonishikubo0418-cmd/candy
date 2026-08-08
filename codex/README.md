@@ -24,6 +24,19 @@ This README is the entry point for the management documents under `C:\Codex\FSG\
 - The configured GitHub repository is `makotonishikubo0418-cmd/candy`. Verify its live branches through `docs/rules/GIT_RULES.md`; do not treat local remote-tracking references as live GitHub evidence.
 - The NAS storage location is not a Candy working repository. Do not include it in local Candy Git operations.
 
+### 1.2 Stable Site and Access Entry Points
+
+| Item | Canonical entry |
+|---|---|
+| Public canonical URL | `https://www.55810.com/` |
+| Direct server verification URL | `http://firststar.kir.jp/group/candy/` |
+| Production server path | `/public_html/group/candy/` |
+| Test server path | `/public_html/group_test/candy/` |
+| GitHub repository | `makotonishikubo0418-cmd/candy` |
+| Production deployment | Push-triggered GitHub Actions for eligible `HP/` targets; management-only Markdown changes are excluded from deployment |
+| External runtime configuration | `/home/firststar/public_html/group/control/includefile/setting_session_vv.php` and `/home/firststar/public_html/group/control/includefile/incfiles_vv.php` |
+| Read-only database entry | `codex/docs/CANDY_OPERATION_BASICS.md` Section 8; the live Candy-to-database mapping remains `UNVERIFIED` until checked through the approved wrapper |
+
 ## 2. Responsibility Boundary
 
 `C:\Codex\FSG\Candy\AGENTS.md` is the highest authority. `docs/rules/GIT_RULES.md` owns the

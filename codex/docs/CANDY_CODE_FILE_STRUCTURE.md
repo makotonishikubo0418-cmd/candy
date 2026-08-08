@@ -46,7 +46,7 @@ The local counterparts are under `HP/includefile/`. Public rendering wrappers us
 - `create.php` affects authentication and file generation. It retains
   `dataset_test.php` and the `test.html` routing anchors as internal generation
   scaffolding. It is outside normal page production; execution or modification
-  is a separate operation selected by an applicable route in root `AGENTS.md`
+  is a separate operation selected by an applicable route in `codex/WORK_ROUTING.md`
   Section 5.2.
 - Do not automatically classify a public PHP file without source or dataset as missing. Mark it `SPECIAL` in the ledger and confirm implementation intent.
 

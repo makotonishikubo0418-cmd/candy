@@ -27,7 +27,8 @@
 
 ## Pre-Work Git Verification
 
-- Perform this procedure exactly once at the beginning of each task before investigation or modification.
+- For each directly involved repository, perform this procedure exactly once on the first repository-related work of the day before investigation or modification.
+- Do not repeat it for the same repository during the same day. Perform another initial verification only when another repository becomes directly involved, the user explicitly requests it, or an applicable management document requires a separate verification before a specific operation.
 - Use read-only commands that do not update the working tree, local branches, commit history, index, remote-tracking references, or `.git/FETCH_HEAD`.
 - A post-change diff or status check is completion validation and does not repeat this pre-work procedure.
 
@@ -37,7 +38,8 @@
 2. For every local repository, obtain the current branch, working-tree state, current `HEAD`, every local branch name and SHA, and configured remotes.
 3. For every GitHub remote, obtain every live branch name and SHA without updating local remote-tracking references.
 4. Compare branches with the same name by their verified SHAs. Treat a missing same-name branch or different SHA as a difference; do not infer ahead, behind, or divergence direction without complete evidence.
-5. Identify the proposed work branch by applying `Work Branch Selection`.
+5. Report ahead and behind as `0 / 0` when the local and live same-name branch SHAs are identical. When they differ, report counts only when both verified commit objects are available and a complete graph comparison succeeds; otherwise report the counts as `UNVERIFIED`.
+6. Identify the proposed work branch by applying `Work Branch Selection`.
 
 Use the following read-only Git commands as applicable:
 
@@ -57,6 +59,7 @@ Report the following verified facts before work begins:
 
 - Total local repository count and every repository root
 - Current branch, current `HEAD`, and whether uncommitted changes exist for each repository
+- Current branch upstream ahead and behind counts, or `UNVERIFIED` with the exact reason when complete graph evidence is unavailable
 - Every local branch name and SHA
 - Every GitHub remote URL and every live GitHub branch name and SHA
 - The selected work branch and the evidence used to select it

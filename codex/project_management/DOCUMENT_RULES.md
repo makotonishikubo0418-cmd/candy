@@ -2,7 +2,7 @@
 
 - Purpose: Separate document responsibilities in the Markdown management system
 - Status: canonical document
-- Updated: 2026-07-25
+- Updated: 2026-08-08
 - Canonical scope: Management-document naming, language, responsibility, structure, update rules, and document-change Git audit
 - Update trigger: A management document, route, responsibility, naming rule, or generated-document contract changes
 
@@ -170,7 +170,7 @@ At minimum, verify:
 |---|---|
 | Fixed scope | Stage, Commit, and Push contain only authorized targets |
 | Work location | Git operations ran only in `C:\Codex\FSG\Candy`, never on the NAS |
-| Task-start Git verification | Completed and reported exactly once under `docs/rules/GIT_RULES.md`; no additional preflight command or synchronization action was added |
+| Daily initial Git verification | Completed and reported at the timing defined by root `AGENTS.md` and `docs/rules/GIT_RULES.md`; no duplicate preflight or synchronization action was added |
 | Divergence handling | No editing or Git-state change proceeded contrary to the reporting and STOP requirements in `docs/rules/GIT_RULES.md` |
 | Pre-Commit check | `git diff --cached --check` succeeded |
 | Markdown tables | Header and row column counts match |

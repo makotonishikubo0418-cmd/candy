@@ -22,15 +22,6 @@
 
 - Do not repeat the initial Git verification for the same repository during the same day, even if a new chat is created, the active chat is switched, or additional instructions, corrections, retries, or follow-up actions are received within this project. Perform an additional verification only if another repository becomes directly involved, the user explicitly requests it, or an applicable management document requires a separate verification before a specific operation.
 
-  1. Inspect the target folders and determine the exact scope of work required by the user's instruction.
-  2. Review `docs/rules/WORK_ROUTING.md` and use it as the sole authoritative source for identifying the management documents applicable to that scope.
-  3. Based on `WORK_ROUTING.md`, identify every management document applicable to the scope.
-  4. Review, without omission, all portions of every identified management document that are required for the work.
-  5. Based on the reviewed content, analyze and determine all applicable rules, constraints, and execution methods.
-  6. Perform the actual work while fully applying all determined rules, constraints, and execution methods.
-
-Do not begin editing, modifying files, executing commands, or performing any other actual work until Steps 1 through 5 have been completed.
-
 ## 3. Highest-Priority Principles and Prohibitions
 
 - Determine the exact objective, scope, and completion criteria, and identify only the processing steps and verification required to satisfy them accurately. Among the methods that meet the required accuracy and completion criteria, select the method that minimizes execution time and token consumption while avoiding unnecessary reading, investigation, verification, trial and error, and rework. Do not select any method for which failure or rework is foreseeable.
@@ -47,7 +38,7 @@ Do not begin editing, modifying files, executing commands, or performing any oth
 
 - If work beyond the objective or scope specified by the user is required, or if a related problem is discovered, report the reason, impact, and required action. Do not perform that work until the user approves it. Unrelated, excessive, or duplicated reading, investigation, and verification are prohibited.
 
-- Without the user’s specific permission, do not perform any Git operation that changes the working tree, index, current branch, commit history, or remote repository, and do not perform any database operation. The Git verification procedure expressly required by Section 2 and specified in `docs/rules/WORK_ROUTING.md` is authorized only for that verification.
+- Without the user’s specific permission, do not perform any Git operation that changes the working tree, index, current branch, commit history, or remote repository, and do not perform any database operation. The Git verification procedure expressly required by Section 2 and specified in `docs/rules/GIT_RULES.md` as selected by `codex/WORK_ROUTING.md` is authorized only for that verification.
 
 - Broad or abstract instructions, prior statements, conversational context, or inference must never be treated as specific permission for a restricted operation.
 
