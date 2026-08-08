@@ -6,7 +6,7 @@ This is the canonical common SEO specification verified from current CANDY sourc
 
 This specification owns SEO behavior only. It does not define operation
 authority, task scope, Git, deployment, or response rules. Those remain in the
-applicable documents selected from root `AGENTS.md` Section 5.2.
+applicable documents selected from `codex/WORK_ROUTING.md` Section 5.2.
 
 ## 2. Page-Type Fundamentals
 
@@ -136,7 +136,7 @@ Current content pages use a structure containing `og:title`, `og:type`, `og:url`
 - `HP/.htaccess` implements the public-root and canonical-redirect contract in
   Section 4, including explicit `index.php` and `index.html` removal.
 - `.htaccess` production handling belongs to the applicable production route
-  selected from root `AGENTS.md` Section 5.2 and its exact workflow; this
+  selected from `codex/WORK_ROUTING.md` Section 5.2 and its exact workflow; this
   specification owns only the required redirect
   and live-SEO verification outcome.
 - Creating or changing a legacy URL or redirect requires a separate task that verifies inbound traffic, canonical URLs, internal links, the sitemap, and production behavior.

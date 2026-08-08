@@ -51,7 +51,7 @@ the other.
    filename, storage, collision, first-installation, replacement, and Git
    lifecycle handling.
 10. When page integration or publication is included, apply the applicable
-    routes selected from root `AGENTS.md` Section 5.2 for the area page, Git,
+    routes selected from `codex/WORK_ROUTING.md` Section 5.2 for the area page, Git,
     verification, and production portions of that work.
 
 ## 4. Validation Record
@@ -86,7 +86,7 @@ STOP when:
 - Any specification acceptance gate fails.
 - Same-name handling cannot follow the asset-lifecycle document within the
   authorized scope.
-- An applicable route selected from root `AGENTS.md` Section 5.2 identifies a
+- An applicable route selected from `codex/WORK_ROUTING.md` Section 5.2 identifies a
   conflict, missing authority, or failed verification.
 
 Do not replace a STOP with inferred spelling, unrelated imagery, a second live

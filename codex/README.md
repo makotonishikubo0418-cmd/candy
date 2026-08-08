@@ -8,8 +8,8 @@ This README is the entry point for the management documents under `C:\Codex\FSG\
 |---|---|---|
 | Local Git working repository | `C:\Codex\FSG\Candy` | The only working repository root synchronized with GitHub |
 | GitHub synchronization hub | `makotonishikubo0418-cmd/candy` | Shares commits between Codex tasks |
-| Parent management authority | `C:\Codex\FSG\AGENTS.md` | Highest-authority rules shared by the folders under `C:\Codex\FSG` |
-| Candy work routing | `C:\Codex\FSG\Candy\WORK_ROUTING.md` | Selects the management documents and execution method required for Candy work |
+| Candy management authority | `C:\Codex\FSG\Candy\AGENTS.md` | Highest-authority rules for this Candy project |
+| Candy work routing | `C:\Codex\FSG\Candy\codex\WORK_ROUTING.md` | Selects the management documents and execution method required for Candy work |
 | Candy Git rules | `C:\Codex\FSG\Candy\docs\rules\GIT_RULES.md` | Contains Candy repository verification, branch, and publication rules |
 | Canonical Codex management source | `C:\Codex\FSG\Candy\codex` | Contains the management entry point, management documents, HP production specifications, and work tools |
 | Project management | `C:\Codex\FSG\Candy\codex\project_management` | Canonical source for rules, current state, reservations, history, and safety procedures |
@@ -26,8 +26,8 @@ This README is the entry point for the management documents under `C:\Codex\FSG\
 
 ## 2. Responsibility Boundary
 
-`C:\Codex\FSG\AGENTS.md` is the highest authority. `docs/rules/GIT_RULES.md` owns the
-common pre-work Git procedure, and `WORK_ROUTING.md` owns selection
+`C:\Codex\FSG\Candy\AGENTS.md` is the highest authority. `docs/rules/GIT_RULES.md` owns the
+common pre-work Git procedure, and `codex/WORK_ROUTING.md` owns selection
 of the management documents required for a task. This README defines locations and document
 responsibilities only. It does not add authority, preflight, Git, reservation,
 reporting, reading, or execution rules.
@@ -36,9 +36,9 @@ reporting, reading, or execution rules.
 
 | Folder | Responsibility |
 |---|---|
-| `WORK_ROUTING.md` | Candy work routing and required-document selection referenced by `C:\Codex\FSG\AGENTS.md` |
-| `docs/rules/` | Candy Git rules selected by `WORK_ROUTING.md` |
-| `codex/` | Codex management documents, production specifications, and scripts. Only active canonical management sources belong on the normal route |
+| `AGENTS.md` | Highest-authority Candy project entry point |
+| `docs/rules/` | Candy Git rules selected by `codex/WORK_ROUTING.md` |
+| `codex/` | Candy work routing, Codex management documents, production specifications, and scripts. Only active canonical management sources belong on the normal route |
 | `codex/project_management/` | Management rules, structure, progress, communication, task reservations, history, and safety procedures |
 | `codex/docs/` | Active HP production runbooks and specifications for area, hotel, blog, and other categories |
 | `codex/docs/generated/` | Current page, production-candidate, code/asset, and SEO state generated from actual files. Manual editing is prohibited |
@@ -54,7 +54,7 @@ reporting, reading, or execution rules.
 
 | Purpose | Canonical document |
 |---|---|
-| Work routing and required-document selection | `WORK_ROUTING.md` |
+| Work routing and required-document selection | `codex/WORK_ROUTING.md` |
 | Git branch selection, verification, reporting, and management-branch publication | `docs/rules/GIT_RULES.md` |
 | Management architecture overview | `codex/MANAGEMENT_SYSTEM_OVERVIEW.md` |
 | Document separation and update rules | `codex/project_management/DOCUMENT_RULES.md` |
@@ -70,7 +70,7 @@ reporting, reading, or execution rules.
 
 ## 5. Duplicate-Source Prohibitions
 
-- Do not duplicate a canonical management source at the local repository root, under `HP/`, or on the NAS. Repository-root `WORK_ROUTING.md` and `docs/rules/GIT_RULES.md`, explicitly selected by `C:\Codex\FSG\AGENTS.md`, are the only current exceptions.
+- Do not duplicate a canonical management source at the local repository root, under `HP/`, or on the NAS. Repository-root `AGENTS.md` and `docs/rules/GIT_RULES.md`, explicitly selected by the Candy authority and routing documents, are the only current exceptions.
 - Do not create `HP/HP/`.
 - Do not use legacy documents in NAS `Backup/` as current specifications. Reconcile them with the local canonical source before use.
 - Do not mix specifications, current state, task history, and reports in one document.

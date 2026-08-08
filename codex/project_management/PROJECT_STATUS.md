@@ -13,7 +13,7 @@
 
 ## 2. Completed Management Foundation
 
-- Root `AGENTS.md` Section 5.2 is the required-document routing authority.
+- `codex/WORK_ROUTING.md` Section 5.2 is the required-document routing authority.
   `codex/README.md` owns canonical management locations and document
   responsibilities only; it no longer adds a second operational route.
 - Page structure, code and asset structure, and the common SEO specification are separated into stable canonical documents.

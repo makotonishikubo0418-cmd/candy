@@ -8,7 +8,7 @@ Status: Retained classification snapshot from 2026-07-20
 This document records the 2026-07-20 input-classification result. It does not
 define current page eligibility, current image availability, current file
 counts, or an answer format. Recheck those facts from actual files and the
-generated current-state documents selected by root `AGENTS.md`.
+generated current-state documents selected by `codex/WORK_ROUTING.md`.
 
 - Active Text root: `Text_area_data/分類_20260716_115215/`
 - Full file-level inventory: `Text_area_data/分類_20260716_115215/分類結果.tsv`

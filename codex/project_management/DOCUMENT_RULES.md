@@ -12,7 +12,7 @@
 - Do not duplicate the same explanation across documents.
 - Store detailed procedures in the canonical document for the task type.
 - Do not mix reports or history into specifications.
-- Canonical management information belongs under `codex/`, except for repository-root `WORK_ROUTING.md` and `docs/rules/GIT_RULES.md` that `C:\Codex\FSG\AGENTS.md` explicitly selects; project-management documents belong under `codex/project_management/`.
+- Canonical management information belongs under `codex/`, except for repository-root `AGENTS.md` and `docs/rules/GIT_RULES.md` that the Candy authority and routing documents explicitly select; project-management documents belong under `codex/project_management/`.
 - Do not convert unverified information into confirmed information.
 - Keep stable specifications, current state, generated facts, and task history separate.
 
@@ -30,7 +30,7 @@ copying or redefining them.
 - Active management folder names MUST use English ASCII `lowercase_snake_case`.
 - Preserve an existing compliant folder name. Do not rename it only to use a different English synonym.
 - Preserve the current authoritative separation between `codex/project_management/`, `codex/docs/`, `codex/docs/generated/`, and `codex/scripts/`.
-- Do not create generic top-level duplicates such as `rules/`, `specs/`, `runbooks/`, `state/`, `records/`, or `decisions/`. The `docs/rules/` directory explicitly required by root `AGENTS.md` is the only current exception.
+- Do not create generic top-level duplicates such as `rules/`, `specs/`, `runbooks/`, `state/`, `records/`, or `decisions/`. The `docs/rules/` directory explicitly required by `codex/WORK_ROUTING.md` is the only current exception.
 
 ### 3.2 Markdown Filenames
 
@@ -109,6 +109,16 @@ Japanese proper nouns and source data MAY remain inside an English document. Rep
 - Do not merge competing canonical documents automatically. STOP and request resolution.
 - Renaming does not authorize document deletion, folder reorganization, specification changes, or status changes without verification.
 
+### 3.9 Bounded Retrieval for Large Management and Generated Documents
+
+- Before retrieving management or generated-document content, determine its byte size and line count and identify the exact section, category, target, or fields required by the routed task.
+- When the possible output size is unknown or may exceed the tool limit, first obtain bounded metadata such as match count, section boundaries, and maximum matching-line length. The first content-retrieval command MUST then be limited to a precomputed output bound.
+- Prefer a canonical target-specific command over direct reading of its generated output. Do not print a complete generated document when a script can select or validate the required target directly.
+- For a required contiguous section, retrieve non-overlapping contiguous ranges with explicit first and last line numbers. For a table query, return only the required columns and include the total match count so completeness can be verified without printing large free-text fields.
+- In PowerShell, collect `foreach` or conditional statement output in an intermediate variable before piping it to formatting or filtering commands. Do not place a pipeline directly after a statement block when that form has not already been validated.
+- A command with a syntax error, omitted content, or truncated output supplies no evidence. Its single retry MUST use a smaller, pre-bounded method that removes the observed failure cause; repeating or broadening the failed extraction is prohibited.
+- Validate a bounded retrieval by checking its expected count and explicit boundaries. If complete retrieval still fails after the permitted retry, apply the higher-authority `AGENTS.md` information-retrieval STOP rule.
+
 ## 4. Prohibited Document Updates
 
 - Do not append unstructured content to the end of a document.
@@ -137,7 +147,8 @@ At minimum, verify:
 - README location and responsibility entries are intact.
 - Specifications and history remain separate.
 - Unverified work was not reported as complete.
-- Canonical management documents remain under local `codex/`, repository-root `WORK_ROUTING.md`, or the explicitly authorized `docs/rules/GIT_RULES.md` location and were not duplicated elsewhere at the repository root, under HP, or on the NAS.
+- Large management or generated documents have a bounded target-specific retrieval route, and integrated runbooks do not require full-document output for an internal automated step.
+- Canonical management documents remain under local `codex/`, repository-root `AGENTS.md`, or the explicitly authorized `docs/rules/GIT_RULES.md` location and were not duplicated elsewhere at the repository root, under HP, or on the NAS.
 - `candy-site-state check` succeeds and generated documents agree with actual files.
 
 ## 7. Document-Change Git Rules
@@ -170,7 +181,7 @@ At minimum, verify:
 
 ## 9. Responsibility Boundaries
 
-- Highest authority and user-response structure are defined only in `C:\Codex\FSG\AGENTS.md`; Candy Git rules belong only in `docs/rules/GIT_RULES.md`, and Candy required-document routing belongs only in repository-root `WORK_ROUTING.md`.
+- Highest authority and user-response structure are defined only in `C:\Codex\FSG\Candy\AGENTS.md`; Candy Git rules belong only in `docs/rules/GIT_RULES.md`, and Candy required-document routing belongs only in `codex/WORK_ROUTING.md`.
 - Canonical management locations and management-document responsibilities are
   defined only in `codex/README.md`; category documents may define only their
   own target-specific implementation and asset paths.

@@ -15,7 +15,7 @@ operation authority, Git procedure, production procedure, or response format.
 - Blog detail: `CANDY_BLOG_PAGE_GENERATION_SPEC.md`
 - Hotel detail: `CANDY_HOTEL_PAGE_GENERATION_SPEC.md`
 
-Except for Section 10.1 when root `AGENTS.md` routes a direct top-page category
+Except for Section 10.1 when `codex/WORK_ROUTING.md` routes a direct top-page category
 section task here, apply this document only to normal new-page generation. Do
 not apply its other sections to development changes, bug fixes,
 common-structure changes, or refactoring.
@@ -97,7 +97,7 @@ When a required item is missing, a slug conflicts, a same-name file exists, or a
 For area and hotel pages, distinguish a genuinely missing image from a pending
 first local installation. A complete category-approved accepted-source pair is
 available production input. When the applicable authorized routes selected
-from root `AGENTS.md` Section 5.2 include first installation and its same-name
+from `codex/WORK_ROUTING.md` Section 5.2 include first installation and its same-name
 local-public pair is absent, copy the
 exact accepted bytes to the canonical local-public directory before the final
 target gate.

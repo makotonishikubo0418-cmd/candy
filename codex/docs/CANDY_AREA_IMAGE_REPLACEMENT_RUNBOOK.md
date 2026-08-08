@@ -17,7 +17,7 @@ these conditions hold:
 
 Image creation, asset ownership ambiguity, deployment exceptions, Git, and
 production authority remain in the applicable documents selected from root
-`AGENTS.md` Section 5.2; this runbook does not add or override those routes.
+`codex/WORK_ROUTING.md` Section 5.2; this runbook does not add or override those routes.
 
 ## 2. Replacement Preconditions
 
@@ -94,7 +94,7 @@ For diagnosis or an explicit guard rerun, use `python .github\scripts\candy_area
 ## 6. Publication-Specific Verification
 
 When publication is included by the applicable Git and production routes
-selected from root `AGENTS.md` Section 5.2, keep the asset and every controlled
+selected from `codex/WORK_ROUTING.md` Section 5.2, keep the asset and every controlled
 reference in one deployment unit.
 
 The normal production deployment invokes the same area-image replacement guard before it creates the FTP plan. A failed guard exits the Actions run before any FTP connection or production change.

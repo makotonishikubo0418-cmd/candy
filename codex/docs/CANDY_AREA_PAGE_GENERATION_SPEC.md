@@ -16,7 +16,7 @@ handling an exception that the standard procedure cannot resolve.
 This document owns only area-specific page structure, input mapping, output
 shape, and validation requirements. Common generation rules, image-asset
 lifecycle, staff execution order, Git, production, and document routing remain
-in the applicable documents selected from root `AGENTS.md` Section 5.2; this
+in the applicable documents selected from `codex/WORK_ROUTING.md` Section 5.2; this
 specification does not add or redefine those routes.
 
 ### 1.1 Responsibility and Page Structure
@@ -360,7 +360,7 @@ kagoshima-deliveryhealth-area-<slug>_2.jpg
 ```
 
 Acceptance, first installation, replacement, and missing-image STOP decisions
-belong to the applicable image-asset route selected from root `AGENTS.md`
+belong to the applicable image-asset route selected from `codex/WORK_ROUTING.md`
 Section 5.2.
 
 ### 12.5 Partial Existing Three-File Set or Registration

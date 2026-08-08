@@ -13,7 +13,7 @@ directly when changing hotel-page structure, fixing hotel-specific behavior, or
 handling an exception that the standard procedure cannot resolve. It owns
 hotel-specific page structure, source-route semantics, output shape, and
 validation requirements. Common generation rules, Git, publication, and
-routing remain in the applicable documents selected from root `AGENTS.md`
+routing remain in the applicable documents selected from `codex/WORK_ROUTING.md`
 Section 5.2.
 
 Select one source route before production:
@@ -154,7 +154,7 @@ codex\scripts\candy-hotel.cmd direct-check --input "Text_hotel_data/対象ホテ
 Only `DIRECT_TEXT_STATUS=READY_FOR_IMAGES` may enter direct image creation.
 When a complete accepted pair exists and only its local-public copy is absent,
 perform first installation when it is included by the applicable authorized
-routes selected from root `AGENTS.md` Section 5.2 instead of reporting a
+routes selected from `codex/WORK_ROUTING.md` Section 5.2 instead of reporting a
 missing-image STOP. Only
 `DIRECT_TEXT_STATUS=READY_FOR_BUILD` may continue to the common target gate and
 page generation.
@@ -162,7 +162,7 @@ page generation.
 The dedicated tool always performs generation and validation. It performs
 staging, Commit, Push, Actions, production HTTP validation, and URL output only
 when those operations are included by the applicable authorized routes selected
-from root `AGENTS.md` Section 5.2.
+from `codex/WORK_ROUTING.md` Section 5.2.
 
 ## 3. Current-State Source
 

@@ -18,6 +18,15 @@ before generation.
 codex\scripts\candy-area.cmd publish-next
 ```
 
+`publish-next` is the complete normal target-selection route. Its dedicated
+gate reads `READY_CANDIDATE` rows from `CANDY_AREA_105_PAGE_QUEUE.md` and checks
+the actual target files and registrations. Do not read, print, or extract the
+full `generated/CANDY_UPCOMING_PAGES.md` to choose the normal target, and do not
+activate the separate candidate-reporting route merely because `publish-next`
+selects a target internally. Use the generated current-state document only
+when the user explicitly requests a candidate report or a verified exception
+requires it.
+
 Explicit target:
 
 ```powershell
@@ -36,9 +45,9 @@ Before target selection, treat a complete pair under
 the target and before the final target gate, copy exact accepted bytes to
 `HP/imgHtml/new_202601/area/` when both same-name public files are absent. A
 pending first installation is not a missing-image failure when the applicable
-authorized routes selected from root `AGENTS.md` Section 5.2 include
+authorized routes selected from `codex/WORK_ROUTING.md` Section 5.2 include
 installation. When the accepted pair itself is absent, image creation and
-acceptance belong to the applicable image route selected from root `AGENTS.md`
+acceptance belong to the applicable image route selected from `codex/WORK_ROUTING.md`
 Section 5.2.
 
 Run these commands only when investigating exceptions across the full input population:
@@ -83,6 +92,11 @@ following ordered preparation and final-gate process:
 codex\scripts\candy-area.cmd target-next
 ```
 
+Use the bounded `target-next` output as the authoritative normal candidate
+result. If it stops, investigate only the reported queue row, slug, source,
+and reasons. Do not replace that bounded result with a full generated-document
+dump.
+
 Keep a classified input at its tracked source path. `publish-next` passes that source directly to the publisher; do not restore or copy it to the Text root before publication.
 
 Validate an explicit target:
@@ -113,7 +127,7 @@ selection or use the applicable exception route.
    and top-page links.
 5. Run static validation and synchronize sitemap dates and generated management documents with `candy-site-state preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`.
 6. When publication is included, continue through the applicable Git and
-   production routes selected from root `AGENTS.md` Section 5.2 and verify
+   production routes selected from `codex/WORK_ROUTING.md` Section 5.2 and verify
    Actions and production HTTP.
 
 ## 3. Generation Rules

@@ -1,21 +1,26 @@
+# Candy Work Routing
+
 ## 5. Work Execution Method
 - Scope: all work under `C:\Codex\FSG\Candy`.
-- Higher authority: `C:\Codex\FSG\AGENTS.md`.
+- Higher authority: `C:\Codex\FSG\Candy\AGENTS.md`.
 - Before any Candy work, review `docs/rules/GIT_RULES.md`, perform its `Pre-Work Git Verification` exactly once, and report the required results.
 - `### 5.1 Management Document Structure` and `### 5.2 Work Routing` together constitute the sole `Management Document Index` used to route and perform work.
-- Read information in the following order: `C:\Codex\FSG\AGENTS.md > WORK_ROUTING.md > the management documents specified by ### 5.2 Work Routing > the target implementation, data, configuration, and environment`.
+- Read information in the following order: `C:\Codex\FSG\Candy\AGENTS.md > codex/WORK_ROUTING.md > the management documents specified by ### 5.2 Work Routing > the target implementation, data, configuration, and environment`.
 - When performing work, do not expand the reading scope to unrelated management documents, historical materials, records, reports, or reference materials. Review only the relevant portions of the management documents that apply to the task, comply with them, and proceed accordingly.
+- Select routing rows from the user's objective, not from every internal step performed by an integrated runbook. When a routed runbook explicitly owns target selection, validation, generation, or another internal step, that step does not activate a separate confirmation or investigation route unless the user requested it as a separate objective or the runbook explicitly routes an exception there.
+- When a canonical script provides a bounded command for selecting or checking one target, use that command instead of printing or reviewing a full generated current-state document. Open the generated document only when the selected route or a verified exception requires its contents.
 - If no management document applies to the instructed work, the applicable document is unknown, or conflicting content prevents the required action from being determined, do not proceed based on assumptions. Perform the work only after obtaining the user’s approval.
 - Add, consolidate, relocate, rename, or retire a management document only after the user individually approves the change. After execution, always update `### 5.1 Management Document Structure` and `### 5.2 Work Routing` to reflect the current state.
 
 ### 5.1 Management Document Structure
 
 C:\Codex\FSG\Candy
-├─ WORK_ROUTING.md
+├─ AGENTS.md
 ├─ docs/
 │  └─ rules/
 │     └─ GIT_RULES.md
 └─ codex/
+   ├─ WORK_ROUTING.md
    ├─ README.md
    ├─ MANAGEMENT_SYSTEM_OVERVIEW.md
    ├─ project_management/
@@ -75,7 +80,7 @@ C:\Codex\FSG\Candy
 | Add a new feature, modify shared processing, or change the structure | `codex/docs/CANDY_MASTER_DOC_INDEX.md`, `codex/docs/CANDY_OPERATION_BASICS.md`, `codex/docs/CANDY_CODE_FILE_STRUCTURE.md`, and the applicable category specification |
 | Produce and publish a standard area page | `codex/docs/CANDY_PAGE_GENERATION_GOVERNANCE.md` and `codex/docs/CANDY_AREA_STAFF_PRODUCTION_RUNBOOK.md` |
 | Change the structure of an area page or handle an exception that the standard procedure cannot resolve | `codex/docs/CANDY_PAGE_GENERATION_GOVERNANCE.md` and `codex/docs/CANDY_AREA_PAGE_GENERATION_SPEC.md`; also read `codex/docs/CANDY_AREA_STAFF_PRODUCTION_RUNBOOK.md` when publication is included |
-| Confirm the area-page production order or candidate pages | `codex/docs/CANDY_AREA_105_PAGE_QUEUE.md`, `codex/docs/generated/CANDY_UPCOMING_PAGES.md`, and `codex/docs/CANDY_AREA_STAFF_PRODUCTION_RUNBOOK.md` |
+| Explicitly list, compare, or explain the area-page production order or candidate pages | `codex/docs/CANDY_AREA_105_PAGE_QUEUE.md`, `codex/docs/generated/CANDY_UPCOMING_PAGES.md`, and `codex/docs/CANDY_AREA_STAFF_PRODUCTION_RUNBOOK.md`; normal automated target selection inside `publish-next` remains under the standard area-page production route and does not activate this row |
 | Create an area image, edit image assets, or perform pre-adoption review | `codex/docs/CANDY_AREA_IMAGE_CREATION_RUNBOOK.md`, `codex/docs/CANDY_AREA_IMAGE_CREATION_SPEC.md`, and `codex/docs/CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md` |
 | Replace an approved area image while preserving the existing filename | `codex/docs/CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md`, the target image, and the target page reference; read `codex/docs/CANDY_PRODUCTION_MIGRATION_MASTER.md` only when an exception, recovery, or rollback is involved |
 | Review, classify, or convert hotel text into the current format | `codex/docs/CANDY_HOTEL_TEXT_INPUT_CLASSIFICATION.md` and the applicable files under `Text_hotel_data/` |

@@ -22,7 +22,7 @@ Phase result Markdown is evidence and handoff material. It is not a production s
 
 This runbook owns only Phases 1-3. Image preparation, page generation,
 publication, Git, production, and reporting remain in the documents selected
-from the applicable routes in root `AGENTS.md` Section 5.2.
+from the applicable routes in `codex/WORK_ROUTING.md` Section 5.2.
 
 Phases 1-3 MUST NOT edit HTML, PHP, dataset PHP, shared registrations, CSS, JavaScript, images, or production data.
 

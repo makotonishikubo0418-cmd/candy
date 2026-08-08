@@ -208,7 +208,7 @@ Show the affected scope before changing:
    `candy-site-state preview-sitemap-lastmod`,
    `sync-sitemap-lastmod`, `write`, and `check`.
 5. When publication is included, continue through the applicable Git and
-   production routes selected from root `AGENTS.md` Section 5.2.
+   production routes selected from `codex/WORK_ROUTING.md` Section 5.2.
 
 ## 11. User Report
 

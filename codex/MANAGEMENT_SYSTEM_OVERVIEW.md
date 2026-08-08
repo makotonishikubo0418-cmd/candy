@@ -33,8 +33,8 @@ highest-level authority and route common Git verification and task-specific
 document selection to their dedicated rule documents.
 
 ```text
-C:\Codex\FSG\AGENTS.md
-  └─ Candy/WORK_ROUTING.md
+C:\Codex\FSG\Candy\AGENTS.md
+  └─ codex/WORK_ROUTING.md
        ├─ docs/rules/GIT_RULES.md
        │    └─ pre-work Git verification and branch rules
        └─ routed management document
@@ -47,7 +47,7 @@ This route avoids broad document reading for simple work while preserving every 
 
 Maintain separate canonical documents for common rules, the overall plan, specifications, code structure, inter-Codex communication, and individual task history.
 
-Maintain required-document routing only in `WORK_ROUTING.md` and
+Maintain required-document routing only in `codex/WORK_ROUTING.md` and
 common Git procedure only in `docs/rules/GIT_RULES.md`. Maintain canonical
 management locations and document-responsibility lookup in `codex/README.md`.
 Do not create another competing index in this overview.
@@ -57,8 +57,8 @@ Do not create another competing index in this overview.
 The hierarchy is:
 
 ```text
-C:\Codex\FSG\AGENTS.md
-  > Candy/WORK_ROUTING.md and Candy/docs/rules/GIT_RULES.md
+C:\Codex\FSG\Candy\AGENTS.md
+  > codex/WORK_ROUTING.md and docs/rules/GIT_RULES.md
   > routed common management document
   > routed category-specific document
 ```
@@ -66,7 +66,7 @@ C:\Codex\FSG\AGENTS.md
 Each lower level contains only rules unique to its responsibility. It links to
 the higher-level source for shared authority, routing, communication, safety,
 Git, or verification rules instead of copying them. Actual work follows the
-common Git procedure and applicable route selected by root `AGENTS.md`; this
+common Git procedure and applicable route selected by `codex/WORK_ROUTING.md`; this
 overview never adds an execution step.
 
 ## 5. Problems Prevented by This System
@@ -97,8 +97,8 @@ Maintain these four qualities:
 
 This document is the overview of the candy management system.
 
-Use `C:\Codex\FSG\AGENTS.md`, `docs/rules/GIT_RULES.md`,
-`WORK_ROUTING.md`, and the canonical management documents named by
+Use `C:\Codex\FSG\Candy\AGENTS.md`, `docs/rules/GIT_RULES.md`,
+`codex/WORK_ROUTING.md`, and the canonical management documents named by
 the applicable route for actual work decisions. Use `codex/README.md` when
 that route names it.
 When a detailed operating rule changes, update its canonical document; do not
