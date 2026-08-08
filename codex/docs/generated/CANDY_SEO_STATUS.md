@@ -2,14 +2,14 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-08-08T18:36:37+09:00 (reproducible generation baseline)
+> Generated at: 2026-08-09T08:06:39+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 65f11537abda46f76e1b0536d85d021d53a15b58
-> State fingerprint: sha256:d04993a094b86bc39305ee236376b35581d4830d9643840a8252caaa23fcfd45
+> Commit: f9051f98a6ed41c93e25ae10bed940d558ff9f72
+> State fingerprint: sha256:0e433ac28f3cf48a44bf62f5764e1c18e7ba8aebfaa7d71aa686b10edd464382
 > Scope: Source HTML corresponding to public PHP files directly under HP
-> Population: Pages: 138
+> Population: Pages: 139
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: OK=137 / ISSUE=1 / UNVERIFIED=0
+> Result: OK=138 / ISSUE=1 / UNVERIFIED=0
 > Unverified scope: Production HTTP, search engine index state, redirects, and database-generated HTML
 
 Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are not corrected automatically.
@@ -144,6 +144,7 @@ Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are no
 | hotel:kagoshimaplazahoteltenmonkan | かごしまプラザホテル天文館｜鹿児島市でデリヘルが呼べるホテル | 鹿児島市山之口町でデリヘルが呼べるホテルかごしまプラザホテル天文館｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-kagoshimaplazahoteltenmonkan.php | index | 鹿児島市でデリヘルが呼べるホテル かごしまプラザホテル天文館 | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | hotel:kisyabahotel | きしゃばホテル｜鹿児島市でデリヘルが呼べるホテル | 鹿児島市荒田でデリヘルが呼べるホテルきしゃばホテル｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-kisyabahotel.php | index | 鹿児島市でデリヘルが呼べるホテル きしゃばホテル | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | hotel:kokohotelkagoshimatenmonkan | KOKO HOTEL 鹿児島天文館｜鹿児島市でデリヘルが呼べるホテル | 鹿児島市東千石町でデリヘルが呼べるホテルKOKO HOTEL 鹿児島天文館｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-kokohotelkagoshimatenmonkan.php | index | 鹿児島市でデリヘルが呼べるホテル KOKO HOTEL 鹿児島天文館 | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
+| hotel:quintessahotelkagoshimatenmonkanrelaxsleep | クインテッサホテル鹿児島天文館 Relax&Sleep｜鹿児島市でデリヘルが呼べるホテル | 鹿児島市呉服町でデリヘルが呼べるホテルクインテッサホテル鹿児島天文館 Relax&Sleep｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-quintessahotelkagoshimatenmonkanrelaxsleep.php | index | 鹿児島市でデリヘルが呼べるホテル クインテッサホテル鹿児島天文館 Relax&Sleep | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | hotel:shiroyamahotelkagoshima | SHIROYAMA HOTEL kagoshima｜鹿児島市でデリヘルが呼べるホテル | 鹿児島市新照院町でデリヘルが呼べるホテルSHIROYAMA HOTEL kagoshima｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-shiroyamahotelkagoshima.php | index | 鹿児島市でデリヘルが呼べるホテル SHIROYAMA HOTEL kagoshima | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | hotel:villacosta500 | ヴィラコスタ500（Villa Costa 500）｜鹿児島 デリヘルが呼べるホテル | 鹿児島市錦江町でデリヘルが呼べるホテルヴィラコスタ500（Villa Costa 500）｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-villacosta500.php | index | 鹿児島市でデリヘルが呼べるホテル ヴィラコスタ500（Villa Costa 500） | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | hotel:youstylehotelmarine | YOU STYLE HOTEL MARINE｜鹿児島市でデリヘルが呼べるホテル | 鹿児島市船津町でデリヘルが呼べるホテルYOU STYLE HOTEL MARINE｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-youstylehotelmarine.php | index | 鹿児島市でデリヘルが呼べるホテル YOU STYLE HOTEL MARINE | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
