@@ -4,7 +4,7 @@
   <!-- トップ・主要ページ -->
   <url>
     <loc>https://www.55810.com/</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -18,7 +18,7 @@
 
   <url>
     <loc>https://www.55810.com/hotel.php</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-08-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -939,6 +939,13 @@
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-hotel-aquagardenhotelfukumaru.php</loc>
     <lastmod>2026-08-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.55810.com/kagoshima-deliveryhealth-hotel-arthotelkagoshima.php</loc>
+    <lastmod>2026-08-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
