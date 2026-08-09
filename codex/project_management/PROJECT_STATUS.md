@@ -2,7 +2,7 @@
 
 - Purpose: Provide one location for the overall plan, current state, problems, and next work
 - Status: canonical document
-- Updated: 2026-07-25
+- Updated: 2026-08-09
 
 ## 1. Current State
 
@@ -32,6 +32,7 @@
 | Issues requiring specification or owner decisions | `codex/docs/CANDY_FIX_BACKLOG.md` | Handle in a separate task after an explicit decision for the target |
 | Area production order | `CANDY_AREA_105_PAGE_QUEUE.md` and generated upcoming pages | Handle only one target that passes the target gate |
 | Hotel input and production order | Hotel classification, hotel content/image runbooks, and generated upcoming pages | Run `legacy-check` for a legacy Text, use `direct-check` for a staff-completed current Text, and keep Phase preparation independent; resolve the reported image, input, and existing-registration blockers before production |
+| Hotel accepted-source-only publication gap | `CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md`, `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`, and `codex/docs/CANDY_FIX_BACKLOG.md` item `HOTEL-ACCEPTED-IMAGE-PATH` | The current automatic `publish-next` route does not complete first local installation, same-name hash verification, image-asset registration and deployment, production-byte verification, and subsequent page publication from an accepted-source-only pair. Accepted-source-only automatic publication remains unavailable until the backlog item is `COMPLETE` |
 | Existing blog exceptions | Blog specification and generated ledger/SEO status | Keep separate from new production and use a dedicated fix task |
 
 ## 4. Candidate Next Actions

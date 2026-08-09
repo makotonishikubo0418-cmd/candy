@@ -1,9 +1,9 @@
 # CANDY Hotel Staff Production Runbook
 
-- Updated: 2026-07-26
-- Applies to: Normal production of one hotel page from either staff-completed Text or Phase-prepared Text
-- Start condition: Explicit instruction to produce or publish a hotel page
-- Completion criteria: Dedicated validation succeeds and the authorized local or publication scope completes
+- Updated: 2026-08-09
+- Applies to: Normal production of one or more standard hotel pages from either staff-completed Text or Phase-prepared Text
+- Start condition: Explicit instruction to produce or publish one or more hotel pages
+- Completion criteria: Every requested target completes its dedicated validation and authorized local or publication scope; otherwise the run stops with completed, failed, and unexecuted targets distinguished
 
 ## 1. Independent Source Routes
 
@@ -45,9 +45,9 @@ codex\scripts\candy-hotel.cmd direct-check --input "Text_hotel_data/対象ホテ
   `CANDY_HOTEL_IMAGE_CREATION_SPEC.md`, accept and install it through
   `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`, then rerun `direct-check`. When a
   complete accepted pair already exists and only the local-public pair is
-  absent, treat it as pending first installation rather than missing images
-  when installation is included by the applicable authorized routes selected
-  from `codex/WORK_ROUTING.md` Section 5.2.
+  absent, treat it as upstream input for the separate image-asset route, not
+  as page-publication readiness. Complete first installation and the required
+  image lifecycle before invoking automatic page publication.
 - `DIRECT_TEXT_STATUS=READY_FOR_BUILD` means that the completed Text and both locally installed public images are ready for the normal target gate and local build. For publication, a newly accepted pair must first reach `DEPLOYED_ASSET` through `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`; an unchanged legacy public-only pair must already be tracked and clean.
 - `DIRECT_TEXT_STATUS=STOP` means that the Text is incomplete, untracked, duplicated, already registered, or otherwise ineligible. Do not invoke a Phase solely to bypass that blocker.
 
@@ -79,12 +79,12 @@ The target Text is the only page-content input. Phase result files are evidence 
 
 The production route MUST NOT copy a reference HTML file, edit HTML manually from a Phase result, guess a public path, or upload individual files by an independent method.
 
-Candidate discovery MUST recognize a complete accepted-source pair as image
-availability. After selecting the target and before the final target gate,
-copy exact accepted bytes to `HP/imgHtml/new_202601/hotel/` when both
-same-name public files are absent and first installation is included by the
-applicable authorized routes selected from `codex/WORK_ROUTING.md` Section 5.2.
-Continue after hash verification.
+A complete accepted-source pair is valid upstream image input, but it is not
+page-publication readiness by itself. Before automatic page publication,
+complete the canonical image lifecycle in this order: `ACCEPTED` →
+`INSTALLED_LOCAL` → `REGISTERED_GIT` → `DEPLOYED_ASSET`, including same-name
+hash and production-byte verification. The page publication transaction MUST
+NOT perform or bypass those image-asset operations.
 
 Validation covers:
 
@@ -92,11 +92,11 @@ Validation covers:
 - The two route-approved accepted-source images and their two same-hash local-public copies when the pair was created under the current lifecycle
 - The target input Text and required classification update
 - The four generated current-state documents
-- Visible content, SEO, OGP, JSON-LD, links, map, desktop/mobile rendering, and production HTTP state when publication is authorized
+- Visible content, SEO, OGP, JSON-LD, links, map, and production HTTP state when publication is authorized; desktop/mobile rendering when inspected, otherwise `NOT_EXECUTED`
 
 ## 2. Standard Execution
 
-For the exact user request to create the next page from the available staff-completed Text population, upload it, and report the production URL, run only the following. `publish-next` is the automatic `DIRECT_TEXT` selection route: it applies the target gate internally and publishes only one target that returns `NEW_HOTEL_TARGET_OK`. It does not select or validate Phase evidence.
+For an exact request to create the next eligible page from the available staff-completed Text population, upload it, and report the production URL, run only the following. `publish-next` is the automatic `DIRECT_TEXT` selection route. It scans, classifies, selects, checks, and publishes one target by default; it does not select or validate Phase evidence.
 
 Before running any build or publication command, confirm that the dedicated
 workflow plans and validates the top-page hotel-section update required by
@@ -106,6 +106,22 @@ before generation.
 ```powershell
 codex\scripts\candy-hotel.cmd publish-next
 ```
+
+For an exact request to publish multiple next eligible pages, specify the count. The count must be from 1 through 20.
+
+```powershell
+codex\scripts\candy-hotel.cmd publish-next --count 3
+```
+
+Do not run `target-next`, `build`, or `check` before this normal automatic route. `publish-next` owns those internal decisions and checks. Use `--verbose-candidates` only when candidate-level skip details are explicitly required.
+
+Each selected page remains an independent transaction. When publication is included, complete its build, checks, Commit, Push, Actions, and production verification before beginning the next page. Never combine multiple pages into one Commit, Push, or Actions run.
+
+Scan and classify the input population once, select `READY` candidates in filename order, and acquire one publication lock around the whole batch. Invalid, legacy, missing-image, already-built, registered, untracked, duplicate-slug, and management candidates may be skipped only before selection. Normal output reports aggregate classification and blocker counts plus the selected targets.
+
+When fewer eligible targets exist than the requested count, STOP before the first publication. Once a selected target enters preflight, any build, check, shared-file, generated-state, snapshot, Git, Commit, Push, Actions, or production-verification failure stops every remaining selected target. Without a verified rollback and clean-state mechanism, do not continue the batch after that failure.
+
+Report the completed target count, failed target, and unexecuted target count separately. A previously completed page remains completed when a later page fails.
 
 Preflight an explicit staff-completed Text target before image creation or build:
 
@@ -134,57 +150,47 @@ commands when the publish command already performs the same authoritative
 gates.
 
 Do not run the final image-dependent target gate before reconciling the
-selected target's accepted and local-public image pairs. Public absence alone
-is preparation work when a complete accepted pair exists.
+selected target's accepted and local-public image pairs. When only a complete
+accepted pair exists, finish the separate image-asset route before invoking
+`publish-next`.
 
-### 2.1 Shortage Check for an Automatic `DIRECT_TEXT` Production Request
+### 2.1 Automatic Selection and Shortage Handling
 
-When the user requests a hotel page, one hotel page, or publication through upload, check for missing requirements before page generation or publish:
+`publish-next` performs the authoritative automatic candidate scan. It MUST complete the full population classification once before beginning the first selected target.
 
-```powershell
-codex\scripts\candy-hotel.cmd target-next
-```
+- Treat an accepted-source-only pair as pending image-asset work, not as `READY` for automatic page publication.
+- Select only `READY` candidates in filename order.
+- When fewer `READY` candidates exist than the requested count, publish no page and return `BATCH_RESULT=STOP`.
+- Report aggregate classification counts, aggregate blocker counts, and the selected targets. Do not print every skipped candidate unless `--verbose-candidates` was specified.
+- Do not ask for confirmation after discovering a shortage; report the shortage and STOP.
 
-Run candidate discovery with complete accepted-source pairs treated as
-available. First-install the selected target's pair when required, then run
-the final target gate. Only when `NEW_HOTEL_TARGET_OK` remains absent after
-that preparation, do not proceed. First report:
-
-- Eligible production count
-- Missing-image count
-- Invalid-input count
-- Untracked-input count
-- Whether an existing page or shared registration exists
-- The first blocked candidate and its missing requirements
-
-Do not execute first and ask the user afterward when a required item is missing. Report the shortage and STOP before execution.
+Use `target-next` only for a separate, explicit request to inspect the next candidate. It is not a prerequisite for `publish-next` and MUST NOT be added to the normal automatic production route.
 
 ### 2.2 `DIRECT_TEXT` Production Order and New-Page Target Gate
 
-Do not select the target manually. In this order, use only the first target for which the dedicated gate returns `NEW_HOTEL_TARGET_OK=<slug>`:
+Do not select an automatic target manually. `publish-next` MUST apply the following order to the candidate count established by Section 2.1:
 
 1. Review direct text files under `Text_hotel_data` in filename order.
-2. Exclude management text files, invalid input, genuinely missing image pairs,
-   already-built pages, existing shared registrations, untracked input, and
-   duplicate slugs. A complete accepted pair is not missing merely because its
-   local-public copy is pending.
+2. Exclude management text files, invalid input, targets whose image lifecycle
+   is not ready for the requested page-publication scope, already-built pages,
+   existing shared registrations, untracked input, and duplicate slugs.
 3. Exclude a slug with an existing public PHP file, source HTML, dataset PHP
    file, `dataset_base.php` registration, hotel-index registration, top-page
    hotel-section registration, or sitemap registration.
-4. Accept either a complete accepted pair or a complete local-public pair.
-   After selection, first-install the accepted pair when the local-public pair
-   is absent. Exclude only a target with neither complete pair or with a
-   partial, slug-conflicting, or same-name hash-conflicting pair.
+4. For automatic publication, require the accepted/public relationship and
+   image lifecycle required by Section 1.3 to be complete before selection.
+   Exclude an accepted-source-only, partial, slug-conflicting, or same-name
+   hash-conflicting pair from page publication.
 5. Exclude an input text file absent from Git HEAD.
 6. Check blockers through `BLOCKER_COUNTS_JSON`, not only the primary classification. Do not hide simultaneous blockers such as missing images and untracked input.
-7. Produce only the first target that passes.
+7. Freeze only the required number of passing targets in filename order, then process them independently and sequentially.
 
 Do not run `publish` for a target that does not return
 `NEW_HOTEL_TARGET_OK=<slug>` after the authorized preparation above. When the
 accepted pair itself is missing, input is invalid, a registration exists,
-input is untracked, an image pair is partial or conflicting, or a shop is
-unregistered, do not proceed; restart candidate preparation. Do not stop only
-because a complete accepted pair still requires first local installation.
+input is untracked, an image pair is partial or conflicting, the required
+image lifecycle is incomplete, or a shop is unregistered, do not proceed;
+complete the applicable preparation route first.
 
 ### 2.3 Explicit Target Execution
 
@@ -211,24 +217,31 @@ Do not run manual HTML creation or a separate FTP upload before or after these c
 
 ## 3. Integrated Workflow
 
-1. Acquire the single-run lock and validate required fields, URLs, slugs,
-   accepted/public image states, duplicates, and incomplete fields under
-   `Text_hotel_data`.
-2. Select the target using either its complete accepted pair or complete
-   local-public pair, first-install exact accepted bytes when required, and
-   verify same-name hashes before the final target gate.
-3. Validate the three existing page files and shared registrations, then freeze dependency hashes.
-4. Generate the complete page set from the hotel template and `template_shop.html`. Only for travel time and transportation fees absent from Text, use map coordinates and the nearest complete area page for each shop.
-5. Validate the order and count of every input block, three deterministic blog links, three deterministic area links, scenes, JSON-LD, and images.
-6. Register only the target in `dataset_base.php`, the hotel index, the
-   top-page hotel section, and sitemap, then freeze hashes for the seven output
-   files.
-7. Synchronize sitemap dates and generated management documents with `candy-site-state preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`.
-8. When publication is included, continue through the applicable Git and
-   production routes selected from `codex/WORK_ROUTING.md` Section 5.2.
-9. Track pre-FTP PHP lint and deployment in Actions.
-10. Verify the production page, H1, JSON-LD, images, hotel index, top-page
-    hotel section, sitemap, and redirects over HTTP.
+### 3.1 Batch Plan
+
+1. Acquire one publication lock for the complete command.
+2. Scan and classify the input population once.
+3. Select the requested number of `READY` targets in filename order. If the count is insufficient, STOP before changing any page.
+4. Freeze the selected order and clear per-target active state before each target begins.
+
+### 3.2 Independent Page Transaction
+
+For each selected target, complete the following transaction before beginning the next target:
+
+1. Re-run the target-specific branch, remote, working-file, dependency, existing-file, and shared-registration preflight against the state left by the previously completed target.
+2. Verify that the separate image-asset route already completed the accepted/public reconciliation, required lifecycle, and same-name hash checks. Do not install, register, deploy, or replace images inside the page transaction.
+3. Freeze dependency hashes, generate the complete page set from the hotel template and `template_shop.html`, and validate all input blocks, related links, scenes, JSON-LD, and images.
+4. Register only the target in `dataset_base.php`, the hotel index, the top-page hotel section, and sitemap as the seven-file page change unit.
+5. Synchronize sitemap dates and the four generated current-state documents with `candy-site-state preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`, then freeze hashes for the complete authorized output set.
+6. When publication is included, create the target's own Commit, Push it, wait for its own Actions run, and complete its production verification before beginning the next target. Never combine targets into one Commit, Push, or Actions run.
+7. Verify the production page, H1, JSON-LD, images, sitemap, and redirects. In both the hotel index and the top-page hotel region, require the target URL exactly once, require its visible link name to equal the hotel name exactly, and require the complete URL/name registries to align.
+8. Mark the target completed only after all required checks pass.
+
+### 3.3 Batch Completion Boundary
+
+- Begin the next selected target only after the current target is marked completed.
+- On any failure after an independent page transaction begins, record the completed targets, failed target, and unexecuted targets, then STOP.
+- Report `BATCH_RESULT=COMPLETED` only when every requested target is completed. Otherwise report `BATCH_RESULT=STOP`.
 
 After generation or a fix and before staging, run `codex\scripts\candy-site-state.cmd preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`. Treat required input-classification updates and generated-document updates as the same work unit.
 
@@ -239,10 +252,10 @@ After generation or a fix and before staging, run `codex\scripts\candy-site-stat
 - Shops: `HP/source/template_shop.html`
 - Give source Text highest priority. Do not infer a missing value, image, URL, or hotel fact.
 - When no complete accepted or local-public image pair exists, review
-  `CANDY_HOTEL_IMAGE_CREATION_SPEC.md`, then accept and locally install both
-  required images through `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`. When the
-  accepted pair already exists, first-install its exact bytes automatically
-  before the final target gate.
+  `CANDY_HOTEL_IMAGE_CREATION_SPEC.md`, then accept both required images
+  through `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`. When only the accepted pair
+  exists, complete its separate first-installation, registration, deployment,
+  and production-byte verification route before page publication.
 - `CANDY_HOTEL_TEXT_INPUT_CLASSIFICATION.md` is the canonical input classification.
 - Only when travel time or transportation fees are absent from Text, use hotel-map coordinates and the nearest complete area page for each shop. Include the reference source in dependency hashes.
 - Preserve normal article scenes and known sections in input order. Treat a legacy option as an independent block.
@@ -287,26 +300,57 @@ Existing public images without accepted-source counterparts are `LEGACY_PUBLIC_O
 ## 5. STOP Conditions
 
 - Another hotel publication process overlaps the target.
+- The requested automatic count is outside 1 through 20, or fewer `READY` candidates exist than the requested count. STOP before beginning the first target.
 - Required input is missing; an unconverted legacy format, placeholder, unsafe
   URL, no complete accepted or public image pair, a partial or conflicting
   image pair, slug mismatch, duplicate, partial input block, or existing-file
-  conflict exists. Public-image absence alone is not a STOP when a complete
-  accepted pair exists.
-- `target-next` does not return `NEW_HOTEL_TARGET_OK`.
+  conflict exists. For page publication, public-image absence remains a STOP
+  until the accepted-source pair completes the separate image-asset route.
+- An explicit `target-check` does not return `NEW_HOTEL_TARGET_OK=<slug>` for the selected target.
 - A shop is unknown, or travel time/transportation fees are unspecified and cannot be derived from hotel coordinates or a nearby complete area page.
 - A target registration is duplicated in dataset_base, the hotel index, the
   top-page hotel section, or sitemap, or the hotel index has no reserved slot.
+- The target URL is absent, duplicated, or paired with a different visible name in the hotel index or top-page hotel region, or the complete hotel registries do not align.
 - Dependency/output hash, PHP, JSON, Actions, or production HTTP validation fails.
 - For `PHASE_PREPARED`, a Phase 1-4 result is not `PASS`, the target Text hash chain is broken, or a Phase 4 image hash differs.
 - The production route would require reference-HTML copying, direct HTML editing, an independent upload method, or an unverified public path.
+- After a selected target begins its independent transaction, any preflight, build, check, shared-registration, generated-state, snapshot, Commit, Push, Actions, or production-verification failure stops every remaining selected target. Do not continue without a verified rollback and clean-state proof.
 
 On STOP, add the stopped phase, completed state, unexecuted state, and emitted
 `RECOVERY_COMMAND` to the response required by root `AGENTS.md`.
 
+Recovery output MUST classify the next action as one of `RESUME_ALLOWED`, `CAUSE_MUST_BE_RESOLVED`, `RESTART_REQUIRED`, or `MANUAL_REVIEW`. A deterministic production mismatch is `CAUSE_MUST_BE_RESOLVED` with `RECOVERY_COMMAND=NONE`; do not repeat the same resume command without resolving the cause. Resume is permitted only for a specifically classified transient communication failure whose saved state and snapshots remain valid. When safe continuation cannot be proven, use `MANUAL_REVIEW` and do not provide a generic resume command.
+
 ## 6. User Report
 
 In addition to the common response structure in root `AGENTS.md`, report these
-hotel-production facts:
+batch facts whenever `publish-next` is used, including its default one-target form:
+
+```text
+BATCH_REQUESTED=<requested count>
+BATCH_SELECTED=<selected count>
+BATCH_COMPLETED=<completed count>
+BATCH_FAILED_TARGET=<failed slug or NONE>
+BATCH_UNEXECUTED=<unexecuted count>
+BATCH_RESULT=COMPLETED / STOP
+```
+
+For every completed target, report:
+
+```text
+BATCH_ITEM_INDEX=<1-based selected order>
+BATCH_ITEM_RESULT=PUBLISHED / DRY_RUN_OK
+HOTEL=<hotel name>
+SLUG=<slug>
+PRODUCTION_URL=<URL or NOT_EXECUTED>
+COMMIT_URL=<URL or NOT_EXECUTED>
+ACTIONS_URL=<URL or NOT_EXECUTED>
+DESKTOP_MOBILE_RENDERING=NOT_EXECUTED
+```
+
+Do not report a failed or unexecuted target as completed. A later failure MUST NOT change an earlier completed target to failed.
+
+For an explicit target or for each completed automatic target, report these hotel-production facts:
 
 ```text
 SOURCE_ROUTE: DIRECT_TEXT / PHASE_PREPARED
@@ -333,4 +377,6 @@ PC表示・モバイル表示:
 ```
 
 If browser rendering was not inspected, include that page-specific fact in the
-unverified field.
+unverified field and report `PC表示・モバイル表示: NOT_EXECUTED`. This is not by itself a publication failure, but do not report the image lifecycle as `PUBLISHED`; report only the highest state established by the completed checks.
+
+This runbook is the source for the operating procedure, the publication program implements it, and the offline self-tests prove their alignment. A change is incomplete when any of those three disagree.

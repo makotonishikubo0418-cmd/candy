@@ -82,7 +82,36 @@ def wait_for_run(sha: str, timeout_seconds: int) -> str:
     raise TimeoutError(f"automatic production deployment was not completed in {timeout_seconds}s")
 
 
-def verify_url(url: str, expected_text: list[str]) -> None:
+def visible_text(body: str) -> str:
+    without_hidden = re.sub(
+        r"<(script|style|noscript|template)\b[^>]*>.*?</\1\s*>",
+        " ",
+        body,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    without_tags = re.sub(r"<[^>]+>", " ", without_hidden)
+    return re.sub(r"\s+", " ", html.unescape(without_tags)).strip()
+
+
+def verify_body_text(
+    body: str,
+    expected_text: list[str],
+    expected_visible_text: list[str],
+) -> None:
+    for marker in expected_text:
+        if marker not in body:
+            raise RuntimeError(f"production URL is missing expected text: {marker}")
+    rendered_text = visible_text(body)
+    for marker in expected_visible_text:
+        if marker not in rendered_text:
+            raise RuntimeError(f"production URL is missing expected visible text: {marker}")
+
+
+def verify_url(
+    url: str,
+    expected_text: list[str],
+    expected_visible_text: list[str] | None = None,
+) -> None:
     request = Request(url, headers={"User-Agent": USER_AGENT})
     with urlopen(request, timeout=30) as response:
         body = response.read().decode("utf-8", errors="replace")
@@ -90,11 +119,27 @@ def verify_url(url: str, expected_text: list[str]) -> None:
         final_url = response.geturl()
     if status != 200:
         raise RuntimeError(f"production URL returned HTTP {status}: {final_url}")
-    for marker in expected_text:
-        if marker not in body:
-            raise RuntimeError(f"production URL is missing expected text: {marker}")
+    verify_body_text(body, expected_text, expected_visible_text or [])
     print(f"PRODUCTION_URL={final_url}")
     print(f"HTTP_STATUS={status}")
+
+
+def self_test() -> int:
+    verify_body_text("<p>Relax&amp;Sleep</p>", [], ["Relax&Sleep"])
+    verify_body_text("<p>鹿児島ホテル</p>", [], ["鹿児島ホテル"])
+    for body in (
+        '<script type="application/ld+json">{"name":"Relax&Sleep"}</script>',
+        "<script>const hotel = 'Relax&Sleep';</script>",
+    ):
+        try:
+            verify_body_text(body, [], ["Relax&Sleep"])
+        except RuntimeError:
+            pass
+        else:
+            raise AssertionError("hidden script text was accepted as visible text")
+    verify_body_text("<script>marker</script><p>marker</p>", ["marker"], [])
+    print("RELEASE_CHECK_SELF_TEST=passed")
+    return 0
 
 
 def http_fetch(url: str) -> tuple[int, str, object, bytes]:
@@ -170,12 +215,20 @@ def main() -> int:
     parser.add_argument("--sha")
     parser.add_argument("--url")
     parser.add_argument("--expect-text", action="append", default=[])
+    parser.add_argument("--expect-visible-text", action="append", default=[])
     parser.add_argument("--timeout", type=int, default=300)
     parser.add_argument("--entry-only", action="store_true")
+    parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
+    if args.self_test:
+        if args.sha or args.url or args.expect_text or args.expect_visible_text or args.entry_only:
+            parser.error("--self-test cannot be combined with network-check options")
+        return self_test()
     if args.entry_only:
-        if args.sha or args.url or args.expect_text:
-            parser.error("--entry-only cannot be combined with --sha, --url, or --expect-text")
+        if args.sha or args.url or args.expect_text or args.expect_visible_text:
+            parser.error(
+                "--entry-only cannot be combined with --sha, --url, --expect-text, or --expect-visible-text"
+            )
         verify_entry_contract()
         return 0
     if not args.sha:
@@ -186,7 +239,7 @@ def main() -> int:
         parser.error("--timeout must be between 30 and 600 seconds")
     wait_for_run(args.sha, args.timeout)
     if args.url:
-        verify_url(args.url, args.expect_text)
+        verify_url(args.url, args.expect_text, args.expect_visible_text)
     return 0
 
 

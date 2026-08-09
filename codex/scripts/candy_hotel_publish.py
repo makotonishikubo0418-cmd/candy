@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import contextlib
 import hashlib
+import io
 import json
 import os
 import re
@@ -25,6 +26,8 @@ PublishError = shared.PublishError
 GITHUB_BASE = shared.GITHUB_BASE
 ACTIVE_STATE: dict[str, str] = {}
 VALID_PHASES = {"PREFLIGHT", "BUILT", "PAGE_COMMITTED", "PAGE_PUSHED", "ACTIONS_SUCCESS", "PRODUCTION_VERIFIED", "COMPLETED"}
+MAX_SEQUENTIAL_PUBLISH_COUNT = 20
+DEFAULT_BATCH_COUNT = 1
 
 
 def root() -> Path:
@@ -137,16 +140,64 @@ def input_paths() -> list[Path]:
     return sorted(path_config.TEXT_HOTEL_DIR.glob("*.txt"))
 
 
-def next_ready_input() -> Path:
-    results = candy_hotel_target_gate.scan_inputs()
-    for result in results:
-        if result.category == candy_hotel_target_gate.READY:
-            print(f"CANDIDATE_SELECTED={result.path.name}|{result.slug}")
-            return result.path
-        if result.category != candy_hotel_target_gate.ADMIN_DOC:
+def validate_batch_count(count: int) -> None:
+    if count < 1 or count > MAX_SEQUENTIAL_PUBLISH_COUNT:
+        raise PublishError(f"count must be between 1 and {MAX_SEQUENTIAL_PUBLISH_COUNT}")
+
+
+def select_ready_inputs(
+    results: list[candy_hotel_target_gate.Result],
+    count: int,
+    *,
+    verbose: bool,
+) -> list[candy_hotel_target_gate.Result]:
+    validate_batch_count(count)
+    print("CANDIDATE_COUNTS_JSON=" + json.dumps(candy_hotel_target_gate.counts(results), ensure_ascii=False))
+    print(
+        "BLOCKER_COUNTS_JSON="
+        + json.dumps(candy_hotel_target_gate.blocker_counts(results), ensure_ascii=False)
+    )
+    selected = [result for result in results if result.category == candy_hotel_target_gate.READY][
+        :count
+    ]
+    for result in selected:
+        print(f"CANDIDATE_SELECTED={result.path.name}|{result.slug}")
+    if verbose:
+        for result in results:
+            if result.category in (candy_hotel_target_gate.READY, candy_hotel_target_gate.ADMIN_DOC):
+                continue
             reason = " / ".join(result.reasons)
             print(f"CANDIDATE_SKIP={result.path.name}|{result.category}|{reason}")
+    return selected
+
+
+def next_ready_input() -> Path:
+    selected = select_ready_inputs(candy_hotel_target_gate.scan_inputs(), 1, verbose=False)
+    if selected:
+        return selected[0].path
     raise PublishError("no eligible new hotel page target; run codex\\scripts\\candy-hotel.cmd audit-inputs")
+
+
+def registry_target_checks(
+    hotel_source: str,
+    top_source: str,
+    *,
+    slug: str,
+    hotel_name: str,
+) -> dict[str, bool]:
+    target_href = f"kagoshima-deliveryhealth-hotel-{slug}.php"
+    hotel_entries = candy_hotel_page.hotel_registry_links(hotel_source, top_page=False)
+    top_entries = candy_hotel_page.hotel_registry_links(top_source, top_page=True)
+    hotel_matches = [name for href, name in hotel_entries if href == target_href]
+    top_matches = [name for href, name in top_entries if href == target_href]
+    return {
+        "hotel_registry_target": hotel_matches == [hotel_name],
+        "top_registry_target": top_matches == [hotel_name],
+        "hotel_top_alignment": not candy_hotel_page.hotel_registry_alignment_errors(
+            hotel_source,
+            top_source,
+        ),
+    }
 
 
 def paths_for(data: candy_hotel_page.HotelData) -> list[Path]:
@@ -300,22 +351,19 @@ def verify_production(data: candy_hotel_page.HotelData, commit: str) -> None:
     hotel_body = hotel_bytes.decode("utf-8", errors="replace")
     top_body = top_bytes.decode("utf-8", errors="replace")
     sitemap_body = sitemap_bytes.decode("utf-8", errors="replace")
-    checks["hotel"] = (
-        hotel_status == 200
-        and hotel_final == hotel_url
-        and f'./kagoshima-deliveryhealth-hotel-{data.slug}.php' in hotel_body
-        and data.hotel_name in hotel_body
-    )
-    checks["top_hotel"] = (
-        top_status == 200
-        and top_final == top_source_url
-        and f'./kagoshima-deliveryhealth-hotel-{data.slug}.php' in top_body
-        and data.hotel_name in top_body
-    )
-    checks["hotel_top_alignment"] = not candy_hotel_page.hotel_registry_alignment_errors(
+    registry_checks = registry_target_checks(
         hotel_body,
         top_body,
+        slug=data.slug,
+        hotel_name=data.hotel_name,
     )
+    checks["hotel_registry_target"] = (
+        hotel_status == 200 and hotel_final == hotel_url and registry_checks["hotel_registry_target"]
+    )
+    checks["top_registry_target"] = (
+        top_status == 200 and top_final == top_source_url and registry_checks["top_registry_target"]
+    )
+    checks["hotel_top_alignment"] = registry_checks["hotel_top_alignment"]
     checks["sitemap"] = (
         sitemap_status == 200
         and sitemap_final == sitemap_url
@@ -327,7 +375,13 @@ def verify_production(data: candy_hotel_page.HotelData, commit: str) -> None:
     print("PRODUCTION_CHECK_OK=" + ",".join(checks))
 
 
-def publish(input_path: Path, *, dry_run: bool, resume_state: dict[str, str] | None = None) -> int:
+def publish(
+    input_path: Path,
+    *,
+    dry_run: bool,
+    resume_state: dict[str, str] | None = None,
+    batch_item: bool = False,
+) -> int:
     if input_path.is_symlink():
         raise PublishError(f"input file is a symlink: {input_path}")
     input_path = input_path.resolve()
@@ -349,7 +403,8 @@ def publish(input_path: Path, *, dry_run: bool, resume_state: dict[str, str] | N
         assert_preflight(data, allowed, check_remote=False)
         shared.assert_dependencies_clean(dependencies)
         shared.run([sys.executable, str(page_tool), "build", "--input", relative_input, "--dry-run"])
-        print(f"RESULT=DRY_RUN_OK hotel={data.hotel_name} slug={data.slug}")
+        result_key = "BATCH_ITEM_RESULT" if batch_item else "RESULT"
+        print(f"{result_key}=DRY_RUN_OK hotel={data.hotel_name} slug={data.slug}")
         return 0
 
     if resume_state is None:
@@ -456,7 +511,7 @@ def publish(input_path: Path, *, dry_run: bool, resume_state: dict[str, str] | N
                 page_commit,
                 "--url",
                 data.canonical,
-                "--expect-text",
+                "--expect-visible-text",
                 data.hotel_name,
             ],
             stream=True,
@@ -489,7 +544,7 @@ def publish(input_path: Path, *, dry_run: bool, resume_state: dict[str, str] | N
 
     if phase != "COMPLETED":
         raise PublishError(f"unsupported resume phase: {phase}")
-    print("RESULT=PUBLISHED")
+    print(("BATCH_ITEM_RESULT" if batch_item else "RESULT") + "=PUBLISHED")
     print(f"HOTEL={data.hotel_name}")
     print(f"SLUG={data.slug}")
     print(f"PRODUCTION_URL={data.canonical}")
@@ -498,12 +553,162 @@ def publish(input_path: Path, *, dry_run: bool, resume_state: dict[str, str] | N
     return 0
 
 
+def emit_batch_item(
+    index: int,
+    result: candy_hotel_target_gate.Result,
+    *,
+    dry_run: bool,
+) -> None:
+    production_url = ACTIVE_STATE.get("production_url", "NOT_EXECUTED")
+    page_commit = ACTIVE_STATE.get("page_commit")
+    commit_url = f"{GITHUB_BASE}/commit/{page_commit}" if page_commit else "NOT_EXECUTED"
+    actions_url = ACTIVE_STATE.get("actions_url", "NOT_EXECUTED")
+    if dry_run:
+        production_url = commit_url = actions_url = "NOT_EXECUTED"
+    print(f"BATCH_ITEM_INDEX={index}")
+    print(f"HOTEL={result.hotel_name}")
+    print(f"SLUG={result.slug}")
+    print(f"PRODUCTION_URL={production_url}")
+    print(f"COMMIT_URL={commit_url}")
+    print(f"ACTIONS_URL={actions_url}")
+    print("DESKTOP_MOBILE_RENDERING=NOT_EXECUTED")
+
+
+def publish_next_batch(count: int, *, dry_run: bool, verbose_candidates: bool) -> int:
+    validate_batch_count(count)
+    results = candy_hotel_target_gate.scan_inputs()
+    selected = select_ready_inputs(results, count, verbose=verbose_candidates)
+    print(f"BATCH_REQUESTED={count}")
+    print(f"BATCH_SELECTED={len(selected)}")
+    if len(selected) < count:
+        print("BATCH_COMPLETED=0")
+        print("BATCH_FAILED_TARGET=NONE")
+        print(f"BATCH_UNEXECUTED={count}")
+        print("BATCH_RESULT=STOP")
+        raise PublishError(
+            f"only {len(selected)} eligible hotel targets are available; {count} were requested"
+        )
+
+    completed = 0
+    for index, result in enumerate(selected, start=1):
+        ACTIVE_STATE.clear()
+        try:
+            return_code = publish(result.path, dry_run=dry_run, batch_item=True)
+            if return_code != 0:
+                raise PublishError(f"hotel publisher returned {return_code}")
+        except Exception:
+            print(f"BATCH_COMPLETED={completed}")
+            print(f"BATCH_FAILED_TARGET={result.slug or result.path.name}")
+            print(f"BATCH_UNEXECUTED={count - completed - 1}")
+            print("BATCH_RESULT=STOP")
+            raise
+        completed += 1
+        emit_batch_item(index, result, dry_run=dry_run)
+
+    print(f"BATCH_COMPLETED={completed}")
+    print("BATCH_FAILED_TARGET=NONE")
+    print("BATCH_UNEXECUTED=0")
+    print("BATCH_RESULT=COMPLETED")
+    return 0
+
+
+def recovery_details(exc: Exception, phase: str, slug: str) -> tuple[str, str, str]:
+    message = str(exc).lower()
+    deterministic_production_failure = (
+        "production verification failed" in message
+        or "production url mismatch" in message
+        or "saved production url does not match" in message
+    )
+    transient_communication_failure = any(
+        marker in message
+        for marker in (
+            "timed out",
+            "timeout",
+            "temporary failure",
+            "connection reset",
+            "remote end closed",
+            "name resolution",
+        )
+    )
+    if deterministic_production_failure:
+        return (
+            "CAUSE_MUST_BE_RESOLVED",
+            "NONE",
+            "The production verifier or actual production state must be corrected before retry.",
+        )
+    if phase in {"PAGE_PUSHED", "ACTIONS_SUCCESS"} and transient_communication_failure and slug != "UNKNOWN":
+        return (
+            "RESUME_ALLOWED",
+            f"codex\\scripts\\candy-hotel.cmd resume --slug {slug}",
+            "A transient communication failure may be retried only while saved snapshots remain unchanged.",
+        )
+    if phase in {"NOT_STARTED", "PREFLIGHT"}:
+        return "RESTART_REQUIRED", "NONE", "Correct the reported cause and restart from a clean target."
+    return "MANUAL_REVIEW", "NONE", "Safe automatic continuation cannot be proven for this saved state."
+
+
 def self_test() -> int:
     actions_url = f"{GITHUB_BASE}/actions/runs/12345"
     canonical = "https://www.55810.com/kagoshima-deliveryhealth-hotel-selftest.php"
     values = shared.release_values(f"ACTIONS_URL={actions_url}\nPRODUCTION_URL={canonical}\n")
     assert values.actions_url == actions_url and values.production_url == canonical
     assert expected_title_tag("HOTEL&RESIDENCE南洲館") == "<title>HOTEL&amp;RESIDENCE南洲館</title>"
+
+    def registry_source(entries: list[tuple[str, str]], *, top_page: bool, extra: str = "") -> str:
+        links = "".join(f'<a href="./{href}">{name}</a>' for href, name in entries)
+        if top_page:
+            return f"<!-- 対応ホテル情報 START -->{links}<!-- 対応ホテル情報 END -->{extra}"
+        return links + extra
+
+    target_href = "kagoshima-deliveryhealth-hotel-relax.php"
+    amp_hotel = registry_source([(target_href, "Relax&amp;Sleep")], top_page=False)
+    amp_top = registry_source([(target_href, "Relax&amp;Sleep")], top_page=True)
+    assert all(registry_target_checks(amp_hotel, amp_top, slug="relax", hotel_name="Relax&Sleep").values())
+    wrong_with_json = registry_source(
+        [(target_href, "Wrong Hotel")],
+        top_page=False,
+        extra='<script type="application/ld+json">{"name":"Relax&Sleep"}</script>',
+    )
+    assert not registry_target_checks(
+        wrong_with_json,
+        amp_top,
+        slug="relax",
+        hotel_name="Relax&Sleep",
+    )["hotel_registry_target"]
+    duplicate = registry_source(
+        [(target_href, "Relax&amp;Sleep"), (target_href, "Relax&amp;Sleep")],
+        top_page=False,
+    )
+    assert not registry_target_checks(
+        duplicate,
+        amp_top,
+        slug="relax",
+        hotel_name="Relax&Sleep",
+    )["hotel_registry_target"]
+    wrong_top = registry_source([(target_href, "Wrong Hotel")], top_page=True)
+    wrong_top_checks = registry_target_checks(
+        amp_hotel,
+        wrong_top,
+        slug="relax",
+        hotel_name="Relax&Sleep",
+    )
+    assert not wrong_top_checks["top_registry_target"]
+    assert not wrong_top_checks["hotel_top_alignment"]
+    different_names = registry_target_checks(
+        registry_source([(target_href, "Hotel A")], top_page=False),
+        registry_source([(target_href, "Hotel B")], top_page=True),
+        slug="relax",
+        hotel_name="Hotel A",
+    )
+    assert different_names["hotel_registry_target"]
+    assert not different_names["top_registry_target"]
+    assert not different_names["hotel_top_alignment"]
+    jp_href = "kagoshima-deliveryhealth-hotel-kagoshima.php"
+    jp_hotel = registry_source([(jp_href, "鹿児島ホテル")], top_page=False)
+    jp_top = registry_source([(jp_href, "鹿児島ホテル")], top_page=True)
+    assert all(
+        registry_target_checks(jp_hotel, jp_top, slug="kagoshima", hotel_name="鹿児島ホテル").values()
+    )
     shared.assert_exact_changes(
         "A\tHP/new.php\nM\tHP/shared.php",
         {"HP/new.php": "A", "HP/shared.php": "M"},
@@ -520,6 +725,7 @@ def self_test() -> int:
     original_state_path = globals()["state_path"]
     original_lock_path = globals()["lock_path"]
     original_scan_inputs = candy_hotel_target_gate.scan_inputs
+    original_publish = globals()["publish"]
     try:
         with tempfile.TemporaryDirectory() as directory:
             globals()["state_path"] = lambda slug: Path(directory) / f"{slug}.json"
@@ -537,13 +743,17 @@ def self_test() -> int:
                 path=Path(directory) / "blocked.txt",
                 category=candy_hotel_target_gate.INPUT_ERROR,
                 reasons=("test blocker",),
+                blockers=("test blocker",),
                 slug="blocked",
+                hotel_name="blocked",
             )
             ready = argparse.Namespace(
                 path=Path(directory) / "ready.txt",
                 category=candy_hotel_target_gate.READY,
                 reasons=(),
+                blockers=(),
                 slug="ready",
+                hotel_name="ready",
             )
             candy_hotel_target_gate.scan_inputs = lambda: [blocked, ready]
             assert next_ready_input() == ready.path
@@ -554,27 +764,184 @@ def self_test() -> int:
                 assert "no eligible new hotel page target" in str(exc)
             else:
                 raise AssertionError("candidate selection accepted an all-blocked input set")
+
+            def result(number: int, category: str = candy_hotel_target_gate.READY):
+                return argparse.Namespace(
+                    path=Path(directory) / f"{number:02d}.txt",
+                    category=category,
+                    reasons=("test blocker",) if category != candy_hotel_target_gate.READY else (),
+                    blockers=("test blocker",) if category != candy_hotel_target_gate.READY else (),
+                    slug=f"hotel-{number}",
+                    hotel_name=f"ホテル{number}",
+                )
+
+            ready_results = [result(number) for number in range(1, 5)]
+            assert DEFAULT_BATCH_COUNT == 1
+            assert len(select_ready_inputs(ready_results, DEFAULT_BATCH_COUNT, verbose=False)) == 1
+            assert [item.slug for item in select_ready_inputs(ready_results, 3, verbose=False)] == [
+                "hotel-1",
+                "hotel-2",
+                "hotel-3",
+            ]
+            invalid_results = [
+                result(number, candy_hotel_target_gate.INPUT_ERROR) for number in range(1, 38)
+            ] + [result(number) for number in range(38, 41)]
+            normal_output = io.StringIO()
+            with contextlib.redirect_stdout(normal_output):
+                select_ready_inputs(invalid_results, 1, verbose=False)
+            assert "CANDIDATE_SKIP=" not in normal_output.getvalue()
+            verbose_output = io.StringIO()
+            with contextlib.redirect_stdout(verbose_output):
+                select_ready_inputs(invalid_results, 1, verbose=True)
+            assert verbose_output.getvalue().count("CANDIDATE_SKIP=") == 37
+            for invalid_count in (0, MAX_SEQUENTIAL_PUBLISH_COUNT + 1):
+                try:
+                    validate_batch_count(invalid_count)
+                except PublishError:
+                    pass
+                else:
+                    raise AssertionError(f"invalid batch count was accepted: {invalid_count}")
+            with contextlib.redirect_stderr(io.StringIO()):
+                try:
+                    argument_parser().parse_args(["publish-next", "--count", "abc"])
+                except SystemExit as exc:
+                    assert exc.code == 2
+                else:
+                    raise AssertionError("non-integer batch count was accepted")
+
+            calls: list[str] = []
+
+            def successful_publish(
+                path: Path,
+                *,
+                dry_run: bool,
+                resume_state=None,
+                batch_item: bool = False,
+            ) -> int:
+                assert not ACTIVE_STATE
+                assert batch_item
+                slug = path.stem.replace("00", "")
+                calls.append(path.name)
+                ACTIVE_STATE.update(
+                    {
+                        "page_commit": str(len(calls)) * 40,
+                        "actions_url": f"{GITHUB_BASE}/actions/runs/{len(calls)}",
+                        "production_url": f"https://www.55810.com/{path.stem}.php",
+                    }
+                )
+                return 0
+
+            candy_hotel_target_gate.scan_inputs = lambda: ready_results[:3]
+            globals()["publish"] = successful_publish
+            batch_output = io.StringIO()
+            with contextlib.redirect_stdout(batch_output):
+                assert publish_next_batch(3, dry_run=False, verbose_candidates=False) == 0
+            assert calls == ["01.txt", "02.txt", "03.txt"]
+            assert "BATCH_RESULT=COMPLETED" in batch_output.getvalue()
+
+            calls.clear()
+            dry_run_output = io.StringIO()
+            with contextlib.redirect_stdout(dry_run_output):
+                assert publish_next_batch(3, dry_run=True, verbose_candidates=False) == 0
+            assert calls == ["01.txt", "02.txt", "03.txt"]
+            assert dry_run_output.getvalue().count("DESKTOP_MOBILE_RENDERING=NOT_EXECUTED") == 3
+
+            calls.clear()
+
+            def fail_second(
+                path: Path,
+                *,
+                dry_run: bool,
+                resume_state=None,
+                batch_item: bool = False,
+            ) -> int:
+                assert not ACTIVE_STATE
+                assert batch_item
+                calls.append(path.name)
+                if len(calls) == 2:
+                    raise PublishError("production verification failed: hotel_registry_target")
+                ACTIVE_STATE.update(
+                    {
+                        "page_commit": "a" * 40,
+                        "actions_url": f"{GITHUB_BASE}/actions/runs/1",
+                        "production_url": "https://www.55810.com/first.php",
+                    }
+                )
+                return 0
+
+            globals()["publish"] = fail_second
+            stopped_output = io.StringIO()
+            try:
+                with contextlib.redirect_stdout(stopped_output):
+                    publish_next_batch(3, dry_run=False, verbose_candidates=False)
+            except PublishError:
+                pass
+            else:
+                raise AssertionError("batch continued after the second selected target failed")
+            assert calls == ["01.txt", "02.txt"]
+            assert "BATCH_ITEM_INDEX=1" in stopped_output.getvalue()
+            assert "BATCH_COMPLETED=1" in stopped_output.getvalue()
+            assert "BATCH_UNEXECUTED=1" in stopped_output.getvalue()
+
+            publish_called = False
+
+            def forbidden_publish(
+                path: Path,
+                *,
+                dry_run: bool,
+                resume_state=None,
+                batch_item: bool = False,
+            ) -> int:
+                nonlocal publish_called
+                publish_called = True
+                raise AssertionError("publish was called despite an insufficient ready count")
+
+            globals()["publish"] = forbidden_publish
+            candy_hotel_target_gate.scan_inputs = lambda: ready_results[:2]
+            try:
+                with contextlib.redirect_stdout(io.StringIO()):
+                    publish_next_batch(3, dry_run=False, verbose_candidates=False)
+            except PublishError:
+                pass
+            else:
+                raise AssertionError("insufficient batch count was accepted")
+            assert not publish_called
+
+            mode, command, reason = recovery_details(
+                PublishError("production verification failed: hotel_registry_target"),
+                "ACTIONS_SUCCESS",
+                "hotel-1",
+            )
+            assert mode == "CAUSE_MUST_BE_RESOLVED" and command == "NONE" and reason
     finally:
         globals()["state_path"] = original_state_path
         globals()["lock_path"] = original_lock_path
         candy_hotel_target_gate.scan_inputs = original_scan_inputs
+        globals()["publish"] = original_publish
         ACTIVE_STATE.clear()
     print("PUBLISH_SELF_TEST=passed")
     return 0
 
 
-def main() -> int:
-    shared.configure_output()
-    parser = argparse.ArgumentParser(description="Create and publish one CANDY hotel page")
+def argument_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(description="Create and publish CANDY hotel pages")
     commands = parser.add_subparsers(dest="command", required=True)
     publish_next = commands.add_parser("publish-next")
     publish_next.add_argument("--dry-run", action="store_true")
+    publish_next.add_argument("--count", type=int, default=DEFAULT_BATCH_COUNT)
+    publish_next.add_argument("--verbose-candidates", action="store_true")
     publish_input = commands.add_parser("publish")
     publish_input.add_argument("--input", required=True)
     publish_input.add_argument("--dry-run", action="store_true")
     resume = commands.add_parser("resume")
     resume.add_argument("--slug", required=True)
     commands.add_parser("publish-self-test")
+    return parser
+
+
+def main() -> int:
+    shared.configure_output()
+    parser = argument_parser()
     args = parser.parse_args()
     try:
         if args.command == "publish-self-test":
@@ -584,7 +951,12 @@ def main() -> int:
                 state = load_state(args.slug)
                 return publish(root() / state["input"], dry_run=False, resume_state=state)
         if args.command == "publish-next":
-            input_path = next_ready_input()
+            with publish_lock():
+                return publish_next_batch(
+                    args.count,
+                    dry_run=args.dry_run,
+                    verbose_candidates=args.verbose_candidates,
+                )
         else:
             input_path = Path(args.input)
             if not input_path.is_absolute():
@@ -598,14 +970,11 @@ def main() -> int:
         page_commit = ACTIVE_STATE.get("page_commit", "NONE")
         remote_state = ACTIVE_STATE.get("remote_state", "UNVERIFIED")
         slug = ACTIVE_STATE.get("slug", "UNKNOWN")
-        recovery = (
-            f"codex\\scripts\\candy-hotel.cmd resume --slug {slug}"
-            if slug != "UNKNOWN"
-            else "Fix the reported preflight error, then rerun the original command"
-        )
+        recovery_mode, recovery, recovery_reason = recovery_details(exc, phase, slug)
         print(
             f"RESULT=STOP\nREASON={exc}\nPHASE={phase}\nPAGE_COMMIT={page_commit}"
-            f"\nREMOTE_STATE={remote_state}\nRECOVERY_COMMAND={recovery}",
+            f"\nREMOTE_STATE={remote_state}\nRECOVERY_MODE={recovery_mode}"
+            f"\nRECOVERY_COMMAND={recovery}\nRECOVERY_REASON={recovery_reason}",
             file=sys.stderr,
         )
         return 2
