@@ -358,12 +358,33 @@
       "latitude": 31.475677,
       "links": ["hikariyama", "jigenjicho", "jiyugaoka", "chuokoshinmachi"]
     },
+    "nishibeppucho": {
+      "region": "西別府町",
+      "longitude": 130.44780476410943,
+      "latitude": 31.598014889461076,
+      "index_group": "な",
+      "links": ["yotsumotocho", "yamadacho", "hiroki", "nagayoshi"]
+    },
+    "nishida": {
+      "region": "西田",
+      "longitude": 130.53013896706875,
+      "latitude": 31.58674403693565,
+      "index_group": "な",
+      "links": ["harara", "nagayoshi", "yamanokuchicho", "arata"]
+    },
     "nishiishiki": {
       "region": "西伊敷",
       "longitude": 130.522698,
       "latitude": 31.641252,
       "index_group": "な",
       "links": ["shimotacho", "wakabacho", "minayoshicho", "tamazatodanchi"]
+    },
+    "nishimatacho": {
+      "region": "西俣町",
+      "longitude": 130.4103761148984,
+      "latitude": 31.687488629062678,
+      "index_group": "な",
+      "links": []
     },
     "nishisatacho": {
       "region": "西佐多町",

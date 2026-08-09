@@ -82,9 +82,9 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 44 | 西紫原町 | `nishimurasakibarucho` | LOCAL_COMPLETE | Dedicated tool / 2026-08-06 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 45 | 西千石町 | `nishisengokucho` | LOCAL_COMPLETE | Dedicated tool / 2026-08-06 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 46 | 西谷山 | `nishitaniyama` | LOCAL_COMPLETE | Dedicated tool / 2026-08-06 / Three files, shared registration, and static validation complete / PHP syntax verified |
-| 47 | 西田 | `nishida` | READY_CANDIDATE | |
-| 48 | 西別府町 | `nishibeppucho` | READY_CANDIDATE | |
-| 49 | 西俣町 | `nishimatacho` | READY_CANDIDATE | |
+| 47 | 西田 | `nishida` | LOCAL_COMPLETE | Dedicated tool / 2026-08-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 48 | 西別府町 | `nishibeppucho` | LOCAL_COMPLETE | Dedicated tool / 2026-08-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 49 | 西俣町 | `nishimatacho` | LOCAL_COMPLETE | Dedicated tool / 2026-08-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 50 | 千日町 | `sennichicho` | READY_CANDIDATE | |
 | 51 | 川上町 | `kawakamicho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
 | 52 | 川田町 | `kawadacho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
