@@ -1,0 +1,1206 @@
+/* 既存マイページ（#mypage）内の会員ログイン・登録フォーム */
+
+#mypage .member-login,
+#mypage .member-register {
+	text-align: center;
+	width: 960px;
+	max-width: 100%;
+	margin: 0 auto;
+	padding: 40px 16px 60px;
+	box-sizing: border-box;
+}
+
+#mypage .member-login dl.title,
+#mypage .member-register dl.title {
+	padding: 0 0 30px;
+	text-align: center;
+	position: relative;
+}
+
+#mypage .member-login dl.title dt h3,
+#mypage .member-register dl.title dt h3 {
+	margin: 0;
+	font-family: 'freightdispbooksc', serif;
+	font-size: 36px;
+	line-height: 1;
+	font-weight: normal;
+}
+
+#mypage .member-login dl.title dt span,
+#mypage .member-register dl.title dt span {
+	font-family: 'freightdispbookitalic', serif;
+}
+
+#mypage .member-login dl.title dd,
+#mypage .member-register dl.title dd {
+	font-size: 14px;
+	line-height: 1.4;
+	padding-top: 16px;
+	margin: 0;
+}
+
+#mypage .member-login dl.title dd:after,
+#mypage .member-register dl.title dd:after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	bottom: 0;
+	margin-left: -30px;
+	width: 60px;
+	height: 1px;
+	border-top: 1px solid #000;
+}
+
+#mypage .member-msg {
+	max-width: 420px;
+	margin: 0 auto 16px;
+	padding: 10px 14px;
+	font-size: 13px;
+	line-height: 1.5;
+	border-radius: 4px;
+	display: none;
+}
+
+#mypage .member-msg.error {
+	display: block;
+	color: #a40000;
+	background: #ffecec;
+	border: 1px solid #f5bcbc;
+}
+
+#mypage .member-msg.info {
+	display: block;
+	color: #0d4f7c;
+	background: #ecf7ff;
+	border: 1px solid #b8ddf5;
+}
+
+#mypage .member-msg.success {
+	display: block;
+	color: #1a5c2e;
+	background: #ecfff1;
+	border: 1px solid #b8e5c4;
+}
+
+#mypage .member-login-form,
+#mypage .member-register-form {
+	max-width: 420px;
+	margin: 0 auto;
+	text-align: left;
+}
+
+/* キャンディブランドカラー（schedule.css 等と同系） */
+#mypage {
+	--member-pink: #e95283;
+	--member-pink-dark: #e5006e;
+	--member-pink-light: #fdf0f5;
+}
+
+#mypage .member-field {
+	margin-bottom: 24px;
+}
+
+#mypage .member-field label {
+	display: block;
+	margin-bottom: 8px;
+	font-size: 13px;
+}
+
+#mypage .member-field input {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 12px 14px;
+	font-size: 16px;
+	border: 1px solid #000;
+	background: #fff;
+}
+
+#mypage .member-check {
+	margin: 8px 0 24px;
+	font-size: 13px;
+}
+
+#mypage .member-field .member-check-inline {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin: 0;
+	cursor: pointer;
+}
+
+#mypage .member-field .member-check-inline input[type="checkbox"] {
+	margin: 0;
+	flex-shrink: 0;
+	width: 18px;
+	height: 18px;
+	vertical-align: middle;
+}
+
+#mypage .member-field .member-check-inline span {
+	line-height: 1.5;
+}
+
+#mypage .member-check input {
+	margin-right: 6px;
+	vertical-align: middle;
+}
+
+#mypage .member-site-btn,
+#mypage .member-login-btn {
+	display: block;
+	width: 100%;
+	max-width: 420px;
+	margin: 12px auto 0;
+	padding: 14px 20px;
+	font-size: 16px;
+	color: #fff;
+	background: var(--member-pink);
+	border: 1px solid var(--member-pink);
+	border-radius: 2px;
+	cursor: pointer;
+	box-sizing: border-box;
+}
+
+#mypage .member-site-btn:hover,
+#mypage .member-login-btn:hover {
+	background: var(--member-pink-dark);
+	border-color: var(--member-pink-dark);
+	opacity: 1;
+}
+
+#mypage .member-step {
+	display: none;
+}
+
+#mypage .member-step.active {
+	display: block;
+}
+
+#mypage .member-register-form .member-site-btn,
+#mypage .member-login-form .member-site-btn {
+	margin-top: 16px;
+}
+
+#mypage .member-mock-code {
+	font-size: 12px;
+	color: #666;
+	margin-top: 14px;
+	margin-bottom: 4px;
+	text-align: left;
+}
+
+#mypage .member-check a {
+	color: #000;
+	text-decoration: underline;
+}
+
+#mypage .member-login-actions {
+	margin-top: 28px;
+	font-size: 14px;
+	line-height: 2;
+}
+
+#mypage .member-login-register {
+	display: inline-block;
+	min-width: 220px;
+	margin-bottom: 8px;
+	padding: 12px 24px;
+	color: var(--member-pink-dark);
+	text-decoration: none;
+	border: 1px solid var(--member-pink);
+}
+
+#mypage .member-login-forgot {
+	display: block;
+	color: #000;
+	text-decoration: underline;
+}
+
+@media screen and (max-width: 768px) {
+	#mypage .member-login,
+	#mypage .member-register {
+		width: auto;
+		padding: 30px 20px 40px;
+	}
+
+	#mypage .member-login dl.title dt h3,
+	#mypage .member-register dl.title dt h3 {
+		font-size: 28px;
+	}
+}
+
+/* 会員マイページ本体（明るい既存サイト調） */
+
+#mypage .member-mypage-body {
+	width: 960px;
+	max-width: 100%;
+	margin: 0 auto;
+	padding: 20px 16px 60px;
+	box-sizing: border-box;
+	text-align: left;
+}
+
+#mypage .member-msg-wide {
+	max-width: 100%;
+}
+
+#mypage .member-section {
+	margin-top: 48px;
+	padding-top: 32px;
+	border-top: 1px solid #000;
+}
+
+#mypage .member-section dl.title {
+	padding: 0 0 24px;
+	text-align: center;
+	position: relative;
+	margin: 0;
+}
+
+#mypage .member-section dl.title dt h3 {
+	margin: 0;
+	font-family: 'freightdispbooksc', serif;
+	font-size: 32px;
+	line-height: 1;
+	font-weight: normal;
+}
+
+#mypage .member-section dl.title dt span {
+	font-family: 'freightdispbookitalic', serif;
+}
+
+#mypage .member-section dl.title dd {
+	font-size: 14px;
+	line-height: 1.4;
+	padding-top: 14px;
+	margin: 0;
+}
+
+#mypage .member-section dl.title dd:after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	bottom: 20px;
+	margin-left: -30px;
+	width: 60px;
+	height: 1px;
+	border-top: 1px solid #000;
+}
+
+#mypage #memberInfoSection {
+	margin-top: 0;
+	padding-top: 0;
+	border-top: none;
+}
+
+#mypage .member-info dl {
+	margin: 0;
+	max-width: 480px;
+}
+
+#mypage .member-info dt {
+	font-size: 12px;
+	color: #666;
+	margin-top: 14px;
+}
+
+#mypage .member-info dd {
+	margin: 4px 0 0;
+	font-size: 16px;
+}
+
+#mypage .member-inline-form {
+	max-width: 480px;
+	margin-top: 20px;
+}
+
+#mypage .member-notify-form {
+	margin-top: 24px;
+}
+
+#mypage .member-email-code-field {
+	margin-top: 16px;
+}
+
+#mypage .member-email-confirm-btn {
+	margin-top: 12px;
+}
+
+#mypage .member-field textarea {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 12px 14px;
+	font-size: 14px;
+	border: 1px solid #000;
+	background: #fff;
+	min-height: 80px;
+	resize: vertical;
+}
+
+#mypage .member-site-btn-secondary,
+#mypage .member-btn {
+	display: block;
+	width: 100%;
+	max-width: 100%;
+	margin-top: 14px;
+	margin-right: 0;
+	padding: 12px 20px;
+	font-size: 14px;
+	color: #fff;
+	background: var(--member-pink);
+	border: 1px solid var(--member-pink);
+	border-radius: 2px;
+	cursor: pointer;
+	text-decoration: none;
+	box-sizing: border-box;
+	text-align: center;
+}
+
+#mypage .member-site-btn-secondary:hover,
+#mypage .member-btn:hover {
+	background: var(--member-pink-dark);
+	border-color: var(--member-pink-dark);
+	opacity: 1;
+}
+
+#mypage .member-site-btn-secondary.member-btn-muted {
+	color: var(--member-pink-dark);
+	background: #fff;
+	border-color: var(--member-pink);
+}
+
+#mypage .member-site-btn-secondary.member-btn-muted:hover {
+	color: #fff;
+	background: var(--member-pink);
+}
+
+#mypage .member-btn-secondary {
+	margin-top: 8px;
+}
+
+#mypage .member-note {
+	font-size: 13px;
+	color: #666;
+	margin: 0 0 16px;
+}
+
+#mypage .member-section-title {
+	margin: 0 0 12px;
+	font-size: 18px;
+}
+
+#mypage .member-history-list,
+#mypage .member-info-list,
+#mypage .member-fav-list {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+#mypage .member-history-item,
+#mypage .member-info-item,
+#mypage .member-fav-item {
+	background: #fff;
+	border: 1px solid #000;
+	padding: 10px 12px;
+}
+
+#mypage .member-history-item-head {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+}
+
+#mypage .member-history-item-main {
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+#mypage .member-info-item {
+	cursor: pointer;
+}
+
+#mypage .member-info-item.unread {
+	border-width: 2px;
+}
+
+#mypage .member-info-item.unread .member-info-item-title::before {
+	content: '● ';
+	color: #000;
+	font-size: 10px;
+}
+
+#mypage .member-info-item-title {
+	font-size: 15px;
+	font-weight: bold;
+	margin-bottom: 6px;
+}
+
+#mypage .member-info-cat {
+	display: inline-block;
+	font-size: 11px;
+	font-weight: normal;
+	padding: 2px 8px;
+	margin-left: 8px;
+	border: 1px solid #000;
+}
+
+#mypage .member-info-item-excerpt {
+	font-size: 13px;
+	color: #333;
+	line-height: 1.6;
+}
+
+#mypage .member-info-item-date {
+	font-size: 11px;
+	color: #666;
+	margin-top: 8px;
+}
+
+#mypage .member-info-detail {
+	margin-top: 16px;
+	padding: 20px;
+	border: 1px solid #000;
+	background: #fff;
+}
+
+#mypage .member-info-detail-title {
+	margin: 0 0 8px;
+	font-size: 18px;
+}
+
+#mypage .member-info-detail-meta {
+	font-size: 12px;
+	color: #666;
+	margin: 0 0 16px;
+}
+
+#mypage .member-info-detail-body {
+	font-size: 14px;
+	line-height: 1.8;
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+#mypage .member-info-badge {
+	display: inline-block;
+	font-size: 11px;
+	padding: 2px 8px;
+	border-radius: 10px;
+	background: #000;
+	color: #fff;
+	vertical-align: middle;
+	margin-left: 6px;
+}
+
+#mypage .member-fav-notice-list {
+	margin: 0 0 16px;
+	padding: 12px 14px;
+	background: #f7f7f7;
+	border: 1px solid #e5e5e5;
+}
+
+#mypage .member-fav-notice-head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	margin-bottom: 10px;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+#mypage .member-fav-notice-item {
+	padding: 8px 0;
+	border-top: 1px solid #e8e8e8;
+}
+
+#mypage .member-fav-notice-item:first-of-type {
+	border-top: 0;
+	padding-top: 0;
+}
+
+#mypage .member-fav-notice-name {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+#mypage .member-fav-notice-meta {
+	font-size: 12px;
+	color: #666;
+	margin-top: 2px;
+}
+
+#mypage .member-history-meta {
+	font-size: 12px;
+	color: #666;
+	margin-bottom: 4px;
+}
+
+#mypage .member-history-name {
+	font-size: 15px;
+	font-weight: bold;
+	margin-bottom: 2px;
+}
+
+#mypage .member-history-course {
+	font-size: 12px;
+	color: #333;
+}
+
+#mypage .member-history-badge.reserved,
+#mypage .member-history-badge.evaluated {
+	display: inline-block;
+	font-size: 11px;
+	padding: 2px 8px;
+	border: 1px solid #000;
+	margin-left: 8px;
+}
+
+#mypage .member-history-visit {
+	font-size: 13px;
+	color: #666;
+	margin-bottom: 10px;
+}
+
+#mypage .member-fav-item-inmodal {
+	border: none;
+	padding: 0;
+	background: transparent;
+}
+
+#mypage .member-fav-item-inmodal .member-fav-remove {
+	display: none;
+}
+
+#mypage .member-history-detail-btn {
+	flex: 0 0 auto;
+	padding: 5px 10px;
+	border: 1px solid #000;
+	background: #fff;
+	cursor: pointer;
+	font-size: 11px;
+	line-height: 1.3;
+	white-space: nowrap;
+}
+
+#mypage .member-modal {
+	position: fixed;
+	inset: 0;
+	z-index: 10000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+}
+
+#mypage .member-modal[hidden] {
+	display: none;
+}
+
+#mypage .member-modal-overlay {
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.5);
+}
+
+#mypage .member-modal-panel {
+	position: relative;
+	z-index: 1;
+	width: 100%;
+	max-width: 520px;
+	max-height: 90vh;
+	overflow-y: auto;
+	background: #fff;
+	border: 1px solid #000;
+	padding: 24px 20px 20px;
+}
+
+#mypage .member-modal-close {
+	position: absolute;
+	top: 8px;
+	right: 12px;
+	border: none;
+	background: transparent;
+	font-size: 24px;
+	line-height: 1;
+	cursor: pointer;
+}
+
+#mypage .member-modal-title {
+	margin: 0 0 16px;
+	font-size: 18px;
+}
+
+#mypage .member-modal-subtitle {
+	margin: 16px 0 8px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+#mypage .member-history-modal-visit {
+	font-size: 14px;
+	margin-bottom: 16px;
+	padding-bottom: 12px;
+	border-bottom: 1px solid #ccc;
+}
+
+#mypage .member-history-detail-list {
+	display: grid;
+	grid-template-columns: 80px 1fr;
+	gap: 8px 12px;
+	font-size: 13px;
+	margin: 16px 0;
+}
+
+#mypage .member-history-detail-list dt {
+	font-weight: bold;
+	margin: 0;
+}
+
+#mypage .member-history-detail-list dd {
+	margin: 0;
+}
+
+#mypage .member-eval-comment {
+	margin: 8px 0 0;
+	font-size: 13px;
+	line-height: 1.6;
+}
+
+#mypage .member-fav-thumb-empty {
+	display: block;
+}
+
+#mypage .member-info-media {
+	margin: 12px 0;
+}
+#mypage .member-info-media img,
+#mypage .member-info-media video {
+	max-width: 100%;
+	height: auto;
+	display: block;
+}
+#mypage .member-info-html {
+	margin-top: 12px;
+	padding-top: 12px;
+	border-top: 1px solid #ddd;
+	font-size: 13px;
+	line-height: 1.7;
+}
+.member-confirm-list {
+	display: grid;
+	grid-template-columns: 7em 1fr;
+	gap: 8px 12px;
+	margin: 12px 0 16px;
+	font-size: 14px;
+}
+.member-confirm-list dt { color: #666; margin: 0; }
+.member-confirm-list dd { margin: 0; font-weight: 600; }
+
+#mypage .member-eval-field {
+	margin-bottom: 10px;
+}
+
+#mypage .member-eval-field select {
+	width: 100%;
+	padding: 8px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 13px;
+	box-sizing: border-box;
+}
+
+#mypage .member-eval-summary {
+	display: grid;
+	grid-template-columns: 9em 1fr;
+	gap: 6px 10px;
+	margin: 8px 0;
+	font-size: 13px;
+}
+
+#mypage .member-eval-summary dt {
+	color: #666;
+	margin: 0;
+}
+
+#mypage .member-eval-summary dd {
+	margin: 0;
+	font-weight: 600;
+}
+
+#mypage .member-history-item-actions {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	align-items: stretch;
+	flex-shrink: 0;
+}
+
+#mypage .member-history-eval-btn,
+#mypage .member-history-eval-status {
+	font-size: 12px;
+	padding: 6px 10px;
+	text-align: center;
+}
+
+#mypage .member-history-eval-status {
+	color: #666;
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+
+#mypage .member-history-breakdown {
+	margin: 12px 0;
+	padding: 10px 12px;
+	background: #f7f7f7;
+	border-radius: 4px;
+	font-size: 13px;
+}
+
+#mypage .member-history-breakdown ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+#mypage .member-history-breakdown li {
+	padding: 2px 0;
+}
+
+#mypage .member-history-breakdown-total {
+	margin-top: 6px;
+	padding-top: 6px;
+	border-top: 1px solid #ddd;
+	font-weight: 700;
+}
+
+#mypage .member-stars {
+	display: flex;
+	gap: 4px;
+	margin-bottom: 8px;
+}
+
+#mypage .member-star-btn {
+	background: none;
+	border: none;
+	font-size: 24px;
+	cursor: pointer;
+	color: #ccc;
+	padding: 0 2px;
+}
+
+#mypage .member-star-btn.active,
+#mypage .member-star-btn:hover {
+	color: #000;
+}
+
+#mypage .member-eval-done {
+	font-size: 13px;
+	color: #333;
+	margin-top: 8px;
+}
+
+#mypage .member-fav-item {
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+}
+
+#mypage .member-fav-thumb {
+	width: 72px;
+	height: 96px;
+	object-fit: cover;
+	background: #eee;
+	border: 1px solid #000;
+	flex-shrink: 0;
+}
+
+#mypage .member-fav-body {
+	flex: 1;
+	min-width: 0;
+}
+
+#mypage .member-fav-name {
+	font-size: 15px;
+	font-weight: bold;
+	margin-bottom: 4px;
+}
+
+#mypage .member-fav-name a {
+	color: #000;
+	text-decoration: underline;
+}
+
+#mypage .member-fav-enroll {
+	display: inline-block;
+	font-size: 11px;
+	font-weight: normal;
+	margin-left: 8px;
+	padding: 1px 6px;
+	border: 1px solid #000;
+}
+
+#mypage .member-fav-kana,
+#mypage .member-fav-romaji {
+	font-size: 12px;
+	color: #444;
+	line-height: 1.4;
+}
+
+#mypage .member-fav-size {
+	font-size: 12px;
+	color: #333;
+	margin-top: 4px;
+	letter-spacing: 0.02em;
+}
+
+#mypage .member-fav-status,
+#mypage .member-fav-next {
+	font-size: 12px;
+	margin-top: 6px;
+	line-height: 1.5;
+}
+
+#mypage .member-fav-sched-label {
+	font-weight: bold;
+	margin-right: 4px;
+}
+
+#mypage .member-fav-status.is-working {
+	color: #000;
+}
+
+#mypage .member-fav-status.is-tel,
+#mypage .member-fav-status.is-closed,
+#mypage .member-fav-status.is-off {
+	color: #666;
+}
+
+#mypage .member-fav-next {
+	color: #333;
+}
+
+#mypage .member-fav-remove,
+#mypage .member-fav-add-btn {
+	padding: 8px 12px;
+	border: 1px solid #000;
+	background: #fff;
+	color: #000;
+	font-size: 12px;
+	cursor: pointer;
+	flex-shrink: 0;
+}
+
+#mypage .member-fav-add-btn.active {
+	background: #000;
+	color: #fff;
+}
+
+#mypage .member-pager {
+	display: flex;
+	justify-content: center;
+	gap: 12px;
+	margin-top: 20px;
+}
+
+#mypage .member-pager button {
+	padding: 8px 16px;
+	border: 1px solid #000;
+	background: #fff;
+	color: #000;
+	cursor: pointer;
+	font-size: 13px;
+}
+
+#mypage .member-pager button:disabled {
+	opacity: 0.4;
+	cursor: not-allowed;
+}
+
+#mypage .member-mypage-actions {
+	margin-top: 48px;
+	padding-top: 32px;
+	border-top: 1px solid #000;
+	text-align: center;
+}
+
+#mypage .member-delete-section {
+	border-top-color: #ccc;
+}
+
+#mypage .member-delete-warning {
+	font-size: 13px;
+	line-height: 1.7;
+	color: #a40000;
+	margin: 0 0 20px;
+	max-width: 520px;
+}
+
+#mypage .member-delete-btn {
+	color: #a40000;
+	background: #fff;
+	border-color: #a40000;
+	margin-top: 4px;
+}
+
+#mypage .member-delete-btn:hover {
+	color: #fff;
+	background: #a40000;
+	border-color: #a40000;
+}
+
+#mypage .member-field-error {
+	color: #a40000;
+	font-size: 12px;
+	margin: 6px 0 0;
+	min-height: 1em;
+}
+
+#mypage .member-phone-list {
+	margin-bottom: 12px;
+}
+
+#mypage .member-phone-count-note {
+	margin: 0 0 10px;
+	font-size: 12px;
+	color: #666;
+}
+
+#mypage .member-phone-subheading {
+	margin: 0;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+#mypage .member-phone-row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	gap: 8px;
+	padding: 10px 0;
+	border-bottom: 1px solid #ccc;
+}
+
+#mypage .member-phone-number {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 6px;
+	flex: 1 1 auto;
+	min-width: 0;
+}
+
+#mypage .member-phone-masked {
+	font-size: 15px;
+	letter-spacing: 0.05em;
+}
+
+#mypage .member-phone-main-badge {
+	display: inline-block;
+	font-size: 10px;
+	font-weight: bold;
+	padding: 2px 6px;
+	background: #000;
+	color: #fff;
+	line-height: 1.3;
+}
+
+#mypage .member-phone-sms-actions {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	width: 100%;
+}
+
+#mypage .member-phone-sms-actions .member-site-btn-secondary {
+	margin-top: 0;
+	width: 100%;
+}
+
+#mypage .member-phone-actions {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 6px;
+	flex: 0 0 auto;
+}
+
+#mypage .member-phone-actions .member-site-btn-secondary {
+	display: inline-block;
+	width: auto;
+	margin: 0;
+	padding: 5px 8px;
+	font-size: 11px;
+	line-height: 1.3;
+	white-space: nowrap;
+}
+
+#mypage .member-password-display {
+	font-size: 18px;
+	letter-spacing: 2px;
+	margin: 0;
+}
+
+#mypage .member-settings-block {
+	max-width: 520px;
+	margin: 0 auto 28px;
+	padding: 24px 20px;
+	border: 1px solid #ccc;
+	background: #fafafa;
+	box-sizing: border-box;
+	text-align: left;
+}
+
+#mypage .member-settings-block:last-child {
+	margin-bottom: 0;
+}
+
+#mypage .member-settings-heading {
+	margin: 0 0 8px;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 1.4;
+}
+
+#mypage .member-settings-note {
+	margin: 0 0 20px;
+	font-size: 12px;
+	line-height: 1.6;
+	color: #666;
+}
+
+#mypage .member-settings-block .member-field {
+	margin-bottom: 22px;
+}
+
+#mypage .member-settings-block .member-field:last-of-type {
+	margin-bottom: 0;
+}
+
+#mypage .member-settings-block > .member-site-btn,
+#mypage .member-settings-block > .member-site-btn-secondary {
+	margin-top: 20px;
+}
+
+#mypage .member-phone-manage > label {
+	display: block;
+	margin-bottom: 8px;
+	font-size: 13px;
+}
+
+#mypage .member-profile-form {
+	max-width: 520px;
+	margin: 0 auto;
+}
+
+#mypage .member-profile-form .member-field {
+	margin-bottom: 28px;
+}
+
+#mypage .member-profile-form .member-field > label + input,
+#mypage .member-profile-form .member-field > label + .member-note {
+	margin-top: 0;
+}
+
+#mypage .member-profile-form .member-field input[type="email"],
+#mypage .member-profile-form .member-field input[type="tel"],
+#mypage .member-profile-form .member-field input[type="text"],
+#mypage .member-profile-form .member-field input[type="password"],
+#mypage .member-profile-form .member-field input[type="date"] {
+	margin-bottom: 4px;
+}
+
+#mypage .member-profile-form > .member-site-btn[type="submit"] {
+	margin-top: 36px;
+	width: 100%;
+}
+
+#mypage .member-profile-form .member-field .member-site-btn-secondary {
+	margin-top: 14px;
+}
+
+#mypage .member-email-field-actions .member-site-btn-secondary:first-of-type {
+	margin-top: 14px;
+}
+
+#mypage .member-phone-manage {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	margin-top: 16px;
+	padding-top: 16px;
+	border-top: 1px dashed #999;
+}
+
+#mypage .member-phone-manage input[type="tel"] {
+	width: 100%;
+	max-width: 100%;
+	margin-bottom: 0;
+	box-sizing: border-box;
+	padding: 12px 14px;
+	font-size: 16px;
+	border: 1px solid #000;
+	background: #fff;
+}
+
+#mypage .member-phone-add {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	gap: 12px;
+	margin-top: 0;
+	padding-top: 0;
+	border-top: none;
+}
+
+#mypage .member-phone-add .member-site-btn-secondary,
+#mypage .member-phone-manage > .member-site-btn-secondary,
+#mypage .member-phone-manage #memberPhoneConfirm {
+	margin-top: 0;
+	width: 100%;
+}
+
+#mypage .member-phone-manage #memberPhoneCodeField {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+#mypage .member-email-code-field {
+	margin-top: 16px;
+	margin-bottom: 0;
+}
+
+#mypage .member-email-confirm-btn {
+	margin-top: 14px;
+}
+
+#mypage .member-password-change {
+	margin-top: 0;
+	padding-top: 0;
+	border-top: none;
+}
+
+#mypage .member-password-change .member-field {
+	margin-bottom: 22px;
+}
+
+#mypage .member-password-change .member-site-btn-secondary {
+	margin-top: 8px;
+}
+
+@media screen and (max-width: 768px) {
+	#mypage .member-mypage-body {
+		width: auto;
+		padding: 10px 20px 40px;
+	}
+
+	#mypage .member-section dl.title dt h3 {
+		font-size: 26px;
+	}
+}

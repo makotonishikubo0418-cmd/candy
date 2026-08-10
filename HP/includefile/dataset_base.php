@@ -717,6 +717,21 @@ switch ($hdir) {
 		include(INCLUDE_DIR . 'dataset_mypage.php');
 		break;
 
+	//会員ログイン（既存マイページレイアウト）
+	case 'member_login.html':
+		include(INCLUDE_DIR . 'dataset_member_login.php');
+		break;
+
+	//会員登録（既存マイページレイアウト）
+	case 'member_register.html':
+		include(INCLUDE_DIR . 'dataset_member_register.php');
+		break;
+
+	//会員マイページ（既存サイトレイアウト）
+	case 'member_mypage.html':
+		include(INCLUDE_DIR . 'dataset_member_mypage.php');
+		break;
+
 	//MOVIE IFRAME TEST
 	case 'movie_iframe.html':
 		include(INCLUDE_DIR . 'dataset_movie_iframe.php');
@@ -1599,6 +1614,9 @@ $source = str_replace('girls_list.html', 'girls_list.php', $source);
 $source = str_replace('schedule.html', 'schedule.php', $source);
 $source = str_replace('system.html', 'system.php', $source);
 $source = str_replace('mypage.html', 'mypage.php', $source);
+$source = str_replace('member_login.html', 'member_login.php', $source);
+$source = str_replace('member_register.html', 'member_register.php', $source);
+$source = str_replace('member_mypage.html', 'member_mypage.php', $source);
 $source = str_replace('job.html', 'job.php', $source);
 $source = str_replace('diary.html', 'diary.php', $source);
 //$source = str_replace('="./"', '="./pc_index.php"', $source);
@@ -1670,7 +1688,25 @@ if(count($favcast) > 0){
 	}
 }
 
-
+// 会員マイページ: MEMBER_SITE_INTEGRATION_ENABLED=true のときのみ既存ナビ・プロフィールお気に入りを差し替え
+if (!defined('MEMBER_SITE_INTEGRATION_ENABLED')) {
+	$memberCfg = __DIR__ . '/member/config.php';
+	if (is_file($memberCfg)) {
+		require_once $memberCfg;
+	}
+}
+if (defined('MEMBER_SITE_INTEGRATION_ENABLED') && MEMBER_SITE_INTEGRATION_ENABLED) {
+	$HpgCoder->Converted = preg_replace(
+		'/<li><a href="\.\/mypage\.php"([^>]*)>マイページ<\/a><\/li>/u',
+		'<li><a href="./member_login.php"$1>ログイン</a></li><li><a href="./member_mypage.php"$1>マイページ</a></li>',
+		$HpgCoder->Converted
+	);
+	if (($hdir === 'girls.html' || $hdir === 'pc/girls.html' || $hdir === 's/girls.html') && isset($gid) && (int)$gid > 0) {
+		$favBridge = '<script>window.MEMBER_FAVORITE_GIRLS_ID=' . (int)$gid . ';</script>'
+			. '<script src="./js/member_favorite.js" defer></script>';
+		$HpgCoder->Converted = str_replace('</body>', $favBridge . '</body>', $HpgCoder->Converted);
+	}
+}
 
 //変換&表示
 if(isset($_GET['no']) && strval($_GET['no']) === '1241'){
