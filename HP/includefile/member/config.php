@@ -74,7 +74,7 @@ define('CANDY_NEW_ROOT', dirname(dirname(__DIR__)));
 define('MEMBER_MAIL_LOG_DIR', CANDY_NEW_ROOT . '/log/member_mail');
 
 // false=既存サイト（ナビ・Cookieお気に入り）に手を入れない。true=ログイン/マイページ差し替え＋プロフィールお気に入りAPI連携。
-define('MEMBER_SITE_INTEGRATION_ENABLED', true);
+define('MEMBER_SITE_INTEGRATION_ENABLED', false);
 
 // 本番 CTI DB（cti/flat/config.php と同値）
 
