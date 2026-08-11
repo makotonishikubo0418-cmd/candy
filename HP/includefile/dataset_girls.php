@@ -9,6 +9,9 @@
 
 //-----  変数取得・設定  -----//
 
+define('CANDY_GIRLS_PAGE_CONTENT_FRONT', true);
+require_once dirname(__FILE__) . '/candy_girls_page_content.php';
+
 // 画像表示制限の定数
 define('MAX_HORIZONTAL_IMAGES', 1);  // 横向き画像最大枚数（mainImgでのみ使用）
 define('MIN_VERTICAL_IMAGES', 2);    // 縦向き画像最小枚数
@@ -1516,6 +1519,33 @@ if($cddata["status"] == "0"){
 }else{
 	$source = str_replace("window.onload = CookieWrite('gid', value, days);", '', $source);//
 $source = str_replace("window.onload = CookieWrite('did', value, days);", '', $source);//
+}
+
+// Candy女の子ページ追加コンテンツ（公開済みの追加項目がある場合だけ表示）
+$candyGirlsPageData = candyGirlsPageLoadContent(isset($Database->Conn) ? $Database->Conn : null, (int)$gid, 1);
+$candyGirlsScheduleRows = candyGirlsPageBuildScheduleRows($yyy, $mmm, $ddd, $www, $scheduledata, (int)$gid);
+$candyGirlsMovie = array('sources' => array(), 'poster' => '');
+$candyGirlsMovieTypes = array(
+	'v1' => 'video/mp4', 'v2' => 'video/mp4', 'v3' => 'video/mp4', 'v4' => 'video/mp4',
+	1 => 'video/mp4', 2 => 'video/ogg', 3 => 'video/webm'
+);
+$candyGirlsMovieSeen = array();
+foreach($candyGirlsMovieTypes as $candyGirlsFileType => $candyGirlsMimeType){
+	if(isset($filedata['filename'][$candyGirlsFileType]) && trim((string)$filedata['filename'][$candyGirlsFileType]) !== ''){
+		$candyGirlsMovieUrl = buildMovieUrl(CLUBID, $filedata['filename'][$candyGirlsFileType]);
+		if($candyGirlsMovieUrl !== '' && !isset($candyGirlsMovieSeen[$candyGirlsMovieUrl])){
+			$candyGirlsMovie['sources'][] = array('src' => $candyGirlsMovieUrl, 'type' => $candyGirlsMimeType);
+			$candyGirlsMovieSeen[$candyGirlsMovieUrl] = true;
+		}
+	}
+}
+if(isset($filedata['filename'][4]) && trim((string)$filedata['filename'][4]) !== ''){
+	$candyGirlsMovie['poster'] = buildMovieUrl(CLUBID, $filedata['filename'][4]);
+}
+$candyGirlsPageHtml = candyGirlsPageRender($candyGirlsPageData, $candyGirlsScheduleRows, $candyGirlsMovie);
+$source = str_replace('rep09000001eot', $candyGirlsPageHtml, $source);
+if($candyGirlsPageHtml !== ''){
+	$source = str_replace('</head>', '<link href="./css/girls_page_content.css?v=20260812" rel="stylesheet" type="text/css">' . "\n" . '</head>', $source);
 }
 
 // デバッグ: 最終的な$sourceの一部をファイルに出力（空の横向きスロット削除処理の確認用）

@@ -17,7 +17,8 @@
 }
 
 .girls-test-section { scroll-margin-top: 16px; padding: 66px 58px; }
-.girls-test-section:nth-of-type(even) { background: var(--girls-test-soft); }
+.girls-test-section.is-tone-white { background: #fff; }
+.girls-test-section.is-tone-gray { background: var(--girls-test-soft); }
 
 .girls-test-heading { position: relative; margin-bottom: 34px; padding-left: 24px; }
 .girls-test-heading::before {
@@ -170,8 +171,8 @@
 
 @media screen and (min-width: 917px) {
 	.girls-test-content { width: 900px; margin: 0 auto; }
-	.girls-test-section:nth-of-type(even) { position: relative; z-index: 0; background: transparent; }
-	.girls-test-section:nth-of-type(even)::before {
+	.girls-test-section.is-tone-gray { position: relative; z-index: 0; background: transparent; }
+	.girls-test-section.is-tone-gray::before {
 		content: "";
 		position: absolute;
 		top: 0;
@@ -198,8 +199,8 @@
 		transform: translateX(-50%);
 		background: #fff;
 	}
-	.girls-test-section:nth-of-type(even) { background: transparent; }
-	.girls-test-section:nth-of-type(even)::before { background: var(--girls-test-soft); }
+	.girls-test-section.is-tone-gray { background: transparent; }
+	.girls-test-section.is-tone-gray::before { background: var(--girls-test-soft); }
 	.girls-test-heading { margin-bottom: 25px; padding-left: 17px; }
 	.girls-test-heading h2 { font-size: 21px; letter-spacing: .07em; }
 	.girls-test-heading > p:last-child { font-size: 13px; line-height: 1.8; }

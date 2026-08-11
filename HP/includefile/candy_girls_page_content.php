@@ -244,11 +244,16 @@ function candyGirlsPageRender($pageData, $scheduleRows, $movie)
 	}
 	$managerVisible = (isset($content['manager_comment_title']) && trim((string)$content['manager_comment_title']) !== '') || (isset($content['manager_comment_body']) && trim((string)$content['manager_comment_body']) !== '');
 	$salesVisible = (isset($content['sales_point_title']) && trim((string)$content['sales_point_title']) !== '') || (isset($content['sales_point_body']) && trim((string)$content['sales_point_body']) !== '');
+	$hasPublishedExtendedContent = $managerVisible || count($qa) > 0 || count($profileRows) > 0 || $salesVisible;
+	if (!$hasPublishedExtendedContent) {
+		return '';
+	}
+	$sectionToneIndex = 0;
 
 	ob_start();
 ?>
 <div class="girls-test-content girls-page-content" data-page-purpose="girls-profile-detail-content">
-	<section class="girls-test-section" id="girls-test-schedule" aria-labelledby="girls-test-schedule-title">
+	<section class="girls-test-section<?php echo ($sectionToneIndex++ % 2 === 0) ? ' is-tone-white' : ' is-tone-gray'; ?>" id="girls-test-schedule" aria-labelledby="girls-test-schedule-title">
 		<div class="girls-test-heading">
 			<p class="girls-test-heading-en">WEEKLY SCHEDULE</p>
 			<h2 id="girls-test-schedule-title">週間出勤スケジュール</h2>
@@ -261,7 +266,7 @@ function candyGirlsPageRender($pageData, $scheduleRows, $movie)
 		</ol>
 	</section>
 <?php if (count($movieSources) > 0) { ?>
-	<section class="girls-test-section girls-test-movie-section" id="girls-test-movie" aria-labelledby="girls-test-movie-title">
+	<section class="girls-test-section girls-test-movie-section<?php echo ($sectionToneIndex++ % 2 === 0) ? ' is-tone-white' : ' is-tone-gray'; ?>" id="girls-test-movie" aria-labelledby="girls-test-movie-title">
 		<div class="girls-test-heading">
 			<p class="girls-test-heading-en">PROFILE MOVIE</p>
 			<h2 id="girls-test-movie-title">プロフィール動画</h2>
@@ -278,7 +283,7 @@ function candyGirlsPageRender($pageData, $scheduleRows, $movie)
 	</section>
 <?php } ?>
 <?php if ($managerVisible) { ?>
-	<section class="girls-test-section" id="girls-test-manager" aria-labelledby="girls-test-manager-title">
+	<section class="girls-test-section<?php echo ($sectionToneIndex++ % 2 === 0) ? ' is-tone-white' : ' is-tone-gray'; ?>" id="girls-test-manager" aria-labelledby="girls-test-manager-title">
 		<div class="girls-test-heading"><p class="girls-test-heading-en">MANAGER'S VOICE</p><h2 id="girls-test-manager-title">店長紹介コメント</h2></div>
 		<div class="girls-test-text-card">
 <?php if (!empty($content['manager_comment_title'])) { ?><p class="girls-test-text-catch"><?php echo candyGirlsPageEscape($content['manager_comment_title']); ?></p><?php } ?>
@@ -287,7 +292,7 @@ function candyGirlsPageRender($pageData, $scheduleRows, $movie)
 	</section>
 <?php } ?>
 <?php if (count($qa) > 0) { ?>
-	<section class="girls-test-section" id="girls-test-qa" aria-labelledby="girls-test-qa-title">
+	<section class="girls-test-section<?php echo ($sectionToneIndex++ % 2 === 0) ? ' is-tone-white' : ' is-tone-gray'; ?>" id="girls-test-qa" aria-labelledby="girls-test-qa-title">
 		<div class="girls-test-heading"><p class="girls-test-heading-en">PERSONAL Q&amp;A</p><h2 id="girls-test-qa-title">本人Q&amp;A</h2><p>彼女の人柄がもう少し分かる、本人へのショートインタビューです。</p></div>
 		<div class="girls-test-qa-list">
 <?php foreach ($qa as $index => $row) { ?>
@@ -297,7 +302,7 @@ function candyGirlsPageRender($pageData, $scheduleRows, $movie)
 	</section>
 <?php } ?>
 <?php if (count($profileRows) > 0) { ?>
-	<section class="girls-test-section" id="girls-test-profile" aria-labelledby="girls-test-profile-title">
+	<section class="girls-test-section<?php echo ($sectionToneIndex++ % 2 === 0) ? ' is-tone-white' : ' is-tone-gray'; ?>" id="girls-test-profile" aria-labelledby="girls-test-profile-title">
 		<div class="girls-test-heading"><p class="girls-test-heading-en">MORE PROFILE</p><h2 id="girls-test-profile-title">プロフィール詳細</h2><p>趣味や好みなど、基本プロフィール以外の情報をご紹介します。</p></div>
 		<dl class="girls-test-profile-list">
 <?php foreach ($profileRows as $row) { ?><div><dt><?php echo candyGirlsPageEscape($row['label']); ?></dt><dd><?php echo candyGirlsPageEscape($row['value']); ?></dd></div><?php } ?>
@@ -305,7 +310,7 @@ function candyGirlsPageRender($pageData, $scheduleRows, $movie)
 	</section>
 <?php } ?>
 <?php if ($salesVisible) { ?>
-	<section class="girls-test-section" id="girls-test-points" aria-labelledby="girls-test-points-title">
+	<section class="girls-test-section<?php echo ($sectionToneIndex++ % 2 === 0) ? ' is-tone-white' : ' is-tone-gray'; ?>" id="girls-test-points" aria-labelledby="girls-test-points-title">
 		<div class="girls-test-heading"><p class="girls-test-heading-en">CHARM POINTS</p><h2 id="girls-test-points-title">セールスポイント</h2></div>
 		<div class="girls-test-text-card">
 <?php if (!empty($content['sales_point_title'])) { ?><p class="girls-test-text-catch"><?php echo candyGirlsPageEscape($content['sales_point_title']); ?></p><?php } ?>
