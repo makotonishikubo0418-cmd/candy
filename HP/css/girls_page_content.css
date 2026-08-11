@@ -1,0 +1,231 @@
+/* Candy girl profile: schedule, movie and extended content */
+.girls-test-content,
+.girls-test-content * { box-sizing: border-box; }
+
+.girls-test-content {
+	--girls-test-ink: #24252f;
+	--girls-test-muted: #626262;
+	--girls-test-line: #e8e8e8;
+	--girls-test-soft: #f7f7f7;
+	--girls-test-pink: #e5006e;
+	--girls-test-pink-light: #f961a6;
+	--girls-test-pink-text: #b80058;
+	background: #fff;
+	color: var(--girls-test-ink);
+	font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, sans-serif;
+	letter-spacing: .03em;
+}
+
+.girls-test-section { scroll-margin-top: 16px; padding: 66px 58px; }
+.girls-test-section:nth-of-type(even) { background: var(--girls-test-soft); }
+
+.girls-test-heading { position: relative; margin-bottom: 34px; padding-left: 24px; }
+.girls-test-heading::before {
+	content: "";
+	position: absolute;
+	top: 2px;
+	bottom: 2px;
+	left: 0;
+	width: 3px;
+	background: linear-gradient(var(--girls-test-pink), var(--girls-test-pink-light));
+}
+.girls-test-heading-en {
+	margin: 0;
+	color: var(--girls-test-pink-text);
+	font-family: Georgia, serif;
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: .22em;
+	line-height: 1.4;
+}
+.girls-test-heading h2 {
+	margin: 7px 0 9px;
+	font-family: "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", "ＭＳ Ｐ明朝", serif;
+	font-size: 27px;
+	font-weight: 600;
+	letter-spacing: .1em;
+	line-height: 1.5;
+}
+.girls-test-heading > p:last-child { color: var(--girls-test-muted); font-size: 14px; line-height: 1.9; }
+
+.girls-test-schedule {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	gap: 7px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.girls-test-schedule li {
+	min-width: 0;
+	padding: 18px 7px 16px;
+	background: #fff;
+	border: 1px solid var(--girls-test-line);
+	border-top: 3px solid var(--girls-test-pink-light);
+	text-align: center;
+}
+.girls-test-schedule li.is-off { background: #f1f1f1; border-top-color: #a0a0a0; color: #777; }
+.girls-test-day {
+	display: block;
+	margin-bottom: 13px;
+	color: var(--girls-test-pink);
+	font-family: Georgia, serif;
+	font-size: 12px;
+	letter-spacing: .12em;
+}
+.girls-test-day.is-saturday { color: #375fa8; }
+.girls-test-day.is-sunday { color: #c94055; }
+.girls-test-date {
+	display: block;
+	margin-top: 6px;
+	color: var(--girls-test-muted);
+	font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", Meiryo, sans-serif;
+	font-size: 11px;
+	font-weight: 400;
+	letter-spacing: .04em;
+	line-height: 1;
+}
+.girls-test-schedule strong { display: block; font-size: 13px; line-height: 1.5; white-space: nowrap; }
+.girls-test-schedule small { display: block; margin-top: 9px; color: var(--girls-test-muted); font-size: 11px; line-height: 1.5; }
+
+.girls-test-movie-frame {
+	position: relative;
+	overflow: hidden;
+	background: #131318;
+	border: 8px solid #fff;
+	box-shadow: 0 10px 35px rgba(36, 37, 47, .14);
+}
+.girls-test-movie-frame::before {
+	content: "PROFILE MOVIE";
+	position: absolute;
+	top: 15px;
+	left: 18px;
+	z-index: 1;
+	color: rgba(255, 255, 255, .72);
+	font-family: Georgia, serif;
+	font-size: 10px;
+	letter-spacing: .2em;
+	pointer-events: none;
+}
+.girls-test-movie-frame video {
+	display: block;
+	width: 100%;
+	height: auto;
+	max-height: 520px;
+	aspect-ratio: 16 / 9;
+	background: #131318;
+	object-fit: contain;
+}
+
+.girls-test-text-card { padding: 36px 40px; background: #fff; border: 1px solid var(--girls-test-line); }
+.girls-test-text-catch {
+	margin: 0 0 16px;
+	color: var(--girls-test-pink);
+	font-family: "ヒラギノ明朝 ProN W6", "HiraMinProN-W6", serif;
+	font-size: 19px;
+	font-weight: 600;
+	line-height: 1.8;
+}
+.girls-test-text-card p:not(.girls-test-text-catch) { margin: 0; color: var(--girls-test-muted); font-size: 14px; line-height: 2; }
+
+.girls-test-qa-list { border-top: 1px solid var(--girls-test-line); }
+.girls-test-qa-list details { background: #fff; border-right: 1px solid var(--girls-test-line); border-bottom: 1px solid var(--girls-test-line); border-left: 1px solid var(--girls-test-line); }
+.girls-test-qa-list summary {
+	display: flex;
+	gap: 14px;
+	align-items: center;
+	position: relative;
+	padding: 22px 54px 22px 24px;
+	cursor: pointer;
+	font-size: 15px;
+	font-weight: 600;
+	line-height: 1.7;
+	list-style: none;
+}
+.girls-test-qa-list summary::-webkit-details-marker { display: none; }
+.girls-test-qa-list summary::before,
+.girls-test-qa-list summary::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	right: 24px;
+	width: 13px;
+	height: 1px;
+	background: var(--girls-test-pink);
+}
+.girls-test-qa-list summary::after { transform: rotate(90deg); transition: transform .2s ease; }
+.girls-test-qa-list details[open] summary::after { transform: rotate(0deg); }
+.girls-test-qa-list summary span,
+.girls-test-qa-list details > div > span { flex: 0 0 auto; color: var(--girls-test-pink); font-family: Georgia, serif; font-size: 20px; font-style: italic; }
+.girls-test-qa-list details > div { display: flex; gap: 14px; margin: 0 24px; padding: 21px 0 24px; border-top: 1px dashed #ddd; }
+.girls-test-qa-list details > div > span { color: var(--girls-test-ink); }
+.girls-test-qa-list details > div p { margin: 0; color: var(--girls-test-muted); font-size: 14px; line-height: 1.9; }
+
+.girls-test-profile-list { display: grid; grid-template-columns: repeat(2, 1fr); margin: 0; background: #fff; border-top: 1px solid var(--girls-test-line); border-left: 1px solid var(--girls-test-line); }
+.girls-test-profile-list > div { display: grid; grid-template-columns: 132px 1fr; min-width: 0; border-right: 1px solid var(--girls-test-line); border-bottom: 1px solid var(--girls-test-line); }
+.girls-test-profile-list dt,
+.girls-test-profile-list dd { margin: 0; padding: 19px 18px; font-size: 13px; line-height: 1.7; }
+.girls-test-profile-list dt { background: #fff4f9; color: #000; font-weight: 600; }
+.girls-test-profile-list dd { color: var(--girls-test-muted); }
+
+@media screen and (min-width: 917px) {
+	.girls-test-content { width: 900px; margin: 0 auto; }
+	.girls-test-section:nth-of-type(even) { position: relative; z-index: 0; background: transparent; }
+	.girls-test-section:nth-of-type(even)::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 50%;
+		z-index: -1;
+		width: 100vw;
+		transform: translateX(-50%);
+		background: var(--girls-test-soft);
+	}
+}
+
+@media screen and (max-width: 916px) {
+	.girls-test-content { width: calc(100% - 16px); margin: 0 8px; background: transparent; }
+	.girls-test-section { position: relative; z-index: 0; padding: 43px 20px; background: transparent; }
+	.girls-test-section::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 50%;
+		z-index: -1;
+		width: 100vw;
+		transform: translateX(-50%);
+		background: #fff;
+	}
+	.girls-test-section:nth-of-type(even) { background: transparent; }
+	.girls-test-section:nth-of-type(even)::before { background: var(--girls-test-soft); }
+	.girls-test-heading { margin-bottom: 25px; padding-left: 17px; }
+	.girls-test-heading h2 { font-size: 21px; letter-spacing: .07em; }
+	.girls-test-heading > p:last-child { font-size: 13px; line-height: 1.8; }
+	.girls-test-schedule { grid-template-columns: 1fr; gap: 8px; }
+	.girls-test-schedule li { display: grid; grid-template-columns: 52px minmax(88px, 1fr) minmax(0, 1fr); gap: 8px; align-items: center; padding: 14px 13px 13px; text-align: left; }
+	.girls-test-day { margin-bottom: 0; text-align: left; }
+	.girls-test-date { margin-top: 4px; }
+	.girls-test-schedule strong { font-size: 12px; text-align: center; }
+	.girls-test-schedule small { margin-top: 0; text-align: right; }
+	.girls-test-movie-frame { border-width: 4px; }
+	.girls-test-movie-frame video { max-height: none; }
+	.girls-test-text-card { padding: 28px 22px; }
+	.girls-test-text-catch { font-size: 17px; }
+	.girls-test-qa-list summary { gap: 10px; padding: 18px 43px 18px 16px; font-size: 13px; }
+	.girls-test-qa-list summary::before,
+	.girls-test-qa-list summary::after { right: 17px; }
+	.girls-test-qa-list details > div { gap: 10px; margin: 0 16px; padding: 17px 0 20px; }
+	.girls-test-qa-list details > div p { font-size: 13px; }
+	.girls-test-profile-list { grid-template-columns: 1fr; }
+	.girls-test-profile-list > div { grid-template-columns: 112px 1fr; }
+	.girls-test-profile-list dt,
+	.girls-test-profile-list dd { padding: 15px 12px; font-size: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.girls-test-content *,
+	.girls-test-content *::before,
+	.girls-test-content *::after { scroll-behavior: auto !important; transition: none !important; }
+}

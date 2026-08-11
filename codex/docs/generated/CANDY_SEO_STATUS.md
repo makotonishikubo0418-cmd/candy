@@ -2,14 +2,14 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-08-09T10:29:20+09:00 (reproducible generation baseline)
+> Generated at: 2026-08-10T15:07:44+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 45b3262480b65dd9d1d1414a0d67955c45bbe28a
-> State fingerprint: sha256:7bb8f080fe947d19fc6a84c3877c06e218d1eb3de7722af06130cfe3407424e4
+> Commit: 5c7b6954e9e86883c4a6e15a477481591f57437d
+> State fingerprint: sha256:c2ed0c87a275b907188974dc2e74d9f8f8f06cf5d2e644c88b1c78bd72f73dbd
 > Scope: Source HTML corresponding to public PHP files directly under HP
-> Population: Pages: 143
+> Population: Pages: 150
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: OK=142 / ISSUE=1 / UNVERIFIED=0
+> Result: OK=141 / ISSUE=8 / UNVERIFIED=1
 > Unverified scope: Production HTTP, search engine index state, redirects, and database-generated HTML
 
 Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are not corrected automatically.
@@ -21,6 +21,7 @@ Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are no
 | system:create | aaaaaaaaaaaaaaa｜キャンディ | aaaaaaaaaaaaaaa！創業1999年！鹿児島トップクラスの女の子在籍数「099-226-6956」鹿児島グループ情報も掲載中 | https://www.55810.com/aaaaaaaaaaaaaaa.php | noindex,nofollow | aaaaaaaaaaaaaaa | 1 | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | OK | NOT_APPLICABLE | NOT_APPLICABLE | OK | NOT_APPLICABLE | NOT_APPLICABLE | OK | NOT_APPLICABLE | NOT_APPLICABLE | OK | NONE |
 | girls:girls | rep00010320eot｜プロフィール｜鹿児島 デリヘル キャンディ | 鹿児島 デリヘル「キャンディ」rep00010320eotのプロフィールページ | rep03010092eot | index | rep00010320eotのプロフィール | 1 | OK | OK | OK | NOT_APPLICABLE | NOT_APPLICABLE | OK | OK | NOT_APPLICABLE | OK | OK | OK | NOT_APPLICABLE | OK | NONE |
 | girls:girls_list | 鹿児島 デリヘル キャンディ \| 女の子一覧 | 鹿児島 デリヘル「キャンディ」の女の子一覧。出勤中・本日OK・新人など条件で探せて、写真・プロフィール・料金もまとめて確認。ご希望に合わせてご相談くださいませ。 | https://www.55810.com/girls_list.php | index | 鹿児島 デリヘル キャンディ 女の子一覧 | 1 | OK | OK | OK | NOT_APPLICABLE | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
+| girls:girls_test | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | 0 | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | UNVERIFIED | NOT_APPLICABLE | NOT_APPLICABLE | UNVERIFIED | NONE |
 | hotel:hotel | 鹿児島でデリヘルが呼べるホテル一覧 \| 料金目安・派遣可否 | 鹿児島でデリヘルを呼べるホテルを一覧で掲載。ホテル名・住所・電話・料金目安に加え、呼べる／呼べないの可否や派遣実績も確認できます。鹿児島市内中心部〜霧島方面まで掲載中。 | https://www.55810.com/hotel.php | index | 鹿児島でデリヘルが呼べる ホテル一覧 （料金目安・派遣可否） | 1 | OK | OK | OK | NOT_APPLICABLE | NOT_APPLICABLE | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | NONE |
 | top:index | 鹿児島 デリヘル キャンディ | 鹿児島 デリヘルならキャンディ公式。トップクラスの在籍数で選びやすく、出勤・料金もすぐ確認。ホテル/ご自宅へ出張対応、当日予約もご相談くださいませ。 | https://www.55810.com | index | 鹿児島 デリヘル キャンディ | 1 | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | NOT_APPLICABLE | OK | NONE |
 | area:arata | 鹿児島市荒田で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島「荒田」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-arata.php | index | 鹿児島市荒田で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
@@ -153,10 +154,16 @@ Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are no
 | hotel:villacosta500 | ヴィラコスタ500（Villa Costa 500）｜鹿児島 デリヘルが呼べるホテル | 鹿児島市錦江町でデリヘルが呼べるホテルヴィラコスタ500（Villa Costa 500）｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-villacosta500.php | index | 鹿児島市でデリヘルが呼べるホテル ヴィラコスタ500（Villa Costa 500） | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | hotel:youstylehotelmarine | YOU STYLE HOTEL MARINE｜鹿児島市でデリヘルが呼べるホテル | 鹿児島市船津町でデリヘルが呼べるホテルYOU STYLE HOTEL MARINE｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-youstylehotelmarine.php | index | 鹿児島市でデリヘルが呼べるホテル YOU STYLE HOTEL MARINE | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | hotel:youstylehotelmate | YOUSTYLE HOTEL MATE｜鹿児島市でデリヘルが呼べるホテル | 鹿児島市呉服町でデリヘルが呼べるホテルYOUSTYLE HOTEL MATE｜人気のデリヘル店到着目安や料金・周辺スポット情報も掲載 | https://www.55810.com/kagoshima-deliveryhealth-hotel-youstylehotelmate.php | index | 鹿児島市でデリヘルが呼べるホテル YOUSTYLE HOTEL MATE | 1 | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
+| other:member_login | 鹿児島 デリヘル キャンディ │ 会員ログイン | 鹿児島 デリヘル「キャンディ」マイページ。お気に入り登録の女の子や出勤情報の確認、各種メニューへスムーズにアクセスできます。 | https://www.55810.com/mypage.php | noindex | UNVERIFIED | 0 | OK | ISSUE | ISSUE | NOT_APPLICABLE | NOT_APPLICABLE | OK | ISSUE | ISSUE | ISSUE | OK | ISSUE | OK | ISSUE | h1; json_ld; breadcrumb; image_alt; sitemap; url_canonical; duplicate_canonical |
+| other:member_logout | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | 0 | UNVERIFIED | UNVERIFIED | ISSUE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | ISSUE | UNVERIFIED | UNVERIFIED | UNVERIFIED | OK | ISSUE | breadcrumb; sitemap; ogp_missing=og:title,og:url,og:image,og:description |
+| other:member_mypage | 鹿児島 デリヘル キャンディ │ 会員マイページ | 鹿児島 デリヘル「キャンディ」マイページ。お気に入り登録の女の子や出勤情報の確認、各種メニューへスムーズにアクセスできます。 | https://www.55810.com/mypage.php | noindex | UNVERIFIED | 0 | OK | ISSUE | ISSUE | NOT_APPLICABLE | NOT_APPLICABLE | OK | ISSUE | ISSUE | ISSUE | OK | ISSUE | ISSUE | ISSUE | h1; json_ld; breadcrumb; image_alt; sitemap; url_canonical; duplicate_canonical; orphan |
+| other:member_password_reset | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | 0 | UNVERIFIED | UNVERIFIED | ISSUE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | ISSUE | UNVERIFIED | UNVERIFIED | UNVERIFIED | OK | ISSUE | breadcrumb; sitemap; ogp_missing=og:title,og:url,og:image,og:description |
+| other:member_register | 鹿児島 デリヘル キャンディ │ 会員登録 | 鹿児島 デリヘル「キャンディ」マイページ。お気に入り登録の女の子や出勤情報の確認、各種メニューへスムーズにアクセスできます。 | https://www.55810.com/mypage.php | noindex | UNVERIFIED | 0 | OK | ISSUE | ISSUE | NOT_APPLICABLE | NOT_APPLICABLE | ISSUE | ISSUE | ISSUE | ISSUE | OK | ISSUE | OK | ISSUE | h1; json_ld; breadcrumb; internal_links; image_alt; sitemap; url_canonical; duplicate_canonical; missing_links=terms.php |
 | other:movie | 鹿児島 デリヘル キャンディ \| 女の子動画一覧 | 鹿児島 デリヘル「キャンディ」の動画一覧。お店や女の子の雰囲気や魅力を動画でご紹介いたします。 | https://www.55810.com/movie.php | index | 鹿児島 デリヘル キャンディ 女の子動画一覧 | 1 | OK | OK | OK | NOT_APPLICABLE | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | system:movie_iframe | 動画再生｜鹿児島 デリヘル キャンディ | 鹿児島 デリヘル キャンディの動画再生用補助ページです。 | UNVERIFIED | noindex,nofollow | UNVERIFIED | 0 | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | OK | NOT_APPLICABLE | NOT_APPLICABLE | OK | NONE |
-| system:mypage | 鹿児島 デリヘル キャンディ │ マイページ | 鹿児島 デリヘル「キャンディ」マイページ。お気に入り登録の女の子や出勤情報の確認、各種メニューへスムーズにアクセスできます。 | https://www.55810.com/mypage.php | index | 鹿児島 デリヘル キャンディ マイページ | 1 | OK | OK | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
+| system:mypage | 鹿児島 デリヘル キャンディ │ マイページ | 鹿児島 デリヘル「キャンディ」マイページ。お気に入り登録の女の子や出勤情報の確認、各種メニューへスムーズにアクセスできます。 | https://www.55810.com/mypage.php | index | 鹿児島 デリヘル キャンディ マイページ | 1 | OK | OK | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | OK | OK | OK | OK | OK | ISSUE | OK | ISSUE | duplicate_canonical |
 | other:news | 鹿児島 デリヘル キャンディ │ NEWS | 鹿児島の風俗店 デリヘル キャンディのオフィシャルサイト/新着情報ページです。 | https://www.55810.com/news.php | index | NEW S | 1 | OK | OK | OK | NOT_APPLICABLE | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
+| other:privacy | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | 0 | UNVERIFIED | UNVERIFIED | ISSUE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | ISSUE | UNVERIFIED | UNVERIFIED | UNVERIFIED | OK | ISSUE | breadcrumb; sitemap; ogp_missing=og:title,og:url,og:image,og:description |
 | girls:schedule | 鹿児島 デリヘル キャンディ｜本日・週間出勤スケジュール | 鹿児島 デリヘル「キャンディ」の本日・週間出勤スケジュール。出勤中の女の子をすぐ確認できます！ | https://www.55810.com/schedule.php | index | 鹿児島 デリヘル キャンディ 出勤スケジュール | 1 | OK | OK | OK | NOT_APPLICABLE | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 | system:system | 鹿児島 デリヘル キャンディ │ システム・料金案内 | 鹿児島 デリヘル「キャンディ」の料金・システム案内。コース料金やご利用の流れ、交通費・指名料など各種料金をまとめて確認できます。 | https://www.55810.com/system.php | index | 鹿児島 デリヘル キャンディ システム・料金案内 | 1 | OK | OK | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
 

@@ -70,9 +70,9 @@ ASSET_EXTENSIONS = {
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".svg", ".webp"}
 VIDEO_EXTENSIONS = {".mp4", ".webm", ".mov", ".avi"}
 FONT_EXTENSIONS = {".ttf", ".otf", ".woff", ".woff2", ".eot"}
-SPECIAL_STEMS = {"create", "girls", "main", "makeSitemap", "movie_iframe", "page", "test"}
+SPECIAL_STEMS = {"create", "girls", "girls_test", "main", "makeSitemap", "movie_iframe", "page", "test"}
 SYSTEM_STEMS = {"confirm", "contact", "login", "mypage", "system"}
-SEO_HELPER_STEMS = {"create", "movie_iframe"}
+SEO_HELPER_STEMS = {"create", "girls_test", "movie_iframe"}
 SEO_ADMIN_STEMS = {"create"}
 SOURCE_SCOPE = (
     "HP",
