@@ -244,8 +244,15 @@ function candyGirlsPageRender($pageData, $scheduleRows, $movie)
 	}
 	$managerVisible = (isset($content['manager_comment_title']) && trim((string)$content['manager_comment_title']) !== '') || (isset($content['manager_comment_body']) && trim((string)$content['manager_comment_body']) !== '');
 	$salesVisible = (isset($content['sales_point_title']) && trim((string)$content['sales_point_title']) !== '') || (isset($content['sales_point_body']) && trim((string)$content['sales_point_body']) !== '');
-	$hasPublishedExtendedContent = $managerVisible || count($qa) > 0 || count($profileRows) > 0 || $salesVisible;
-	if (!$hasPublishedExtendedContent) {
+	$scheduleVisible = false;
+	foreach ($scheduleRows as $scheduleRow) {
+		if (isset($scheduleRow['off']) && $scheduleRow['off'] === false) {
+			$scheduleVisible = true;
+			break;
+		}
+	}
+	$hasVisibleContent = $scheduleVisible || $managerVisible || count($qa) > 0 || count($profileRows) > 0 || $salesVisible;
+	if (!$hasVisibleContent) {
 		return '';
 	}
 	$sectionToneIndex = 0;
@@ -253,6 +260,7 @@ function candyGirlsPageRender($pageData, $scheduleRows, $movie)
 	ob_start();
 ?>
 <div class="girls-test-content girls-page-content" data-page-purpose="girls-profile-detail-content">
+	<?php if ($scheduleVisible) { ?>
 	<section class="girls-test-section<?php echo ($sectionToneIndex++ % 2 === 0) ? ' is-tone-white' : ' is-tone-gray'; ?>" id="girls-test-schedule" aria-labelledby="girls-test-schedule-title">
 		<div class="girls-test-heading">
 			<p class="girls-test-heading-en">WEEKLY SCHEDULE</p>
@@ -265,6 +273,7 @@ function candyGirlsPageRender($pageData, $scheduleRows, $movie)
 <?php } ?>
 		</ol>
 	</section>
+	<?php } ?>
 <?php if (count($movieSources) > 0) { ?>
 	<section class="girls-test-section girls-test-movie-section<?php echo ($sectionToneIndex++ % 2 === 0) ? ' is-tone-white' : ' is-tone-gray'; ?>" id="girls-test-movie" aria-labelledby="girls-test-movie-title">
 		<div class="girls-test-heading">

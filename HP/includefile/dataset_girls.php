@@ -1521,7 +1521,7 @@ if($cddata["status"] == "0"){
 $source = str_replace("window.onload = CookieWrite('did', value, days);", '', $source);//
 }
 
-// Candy女の子ページ追加コンテンツ（公開済みの追加項目がある場合だけ表示）
+// Candy女の子ページ追加コンテンツ（7日以内の出勤または公開済みの追加項目がある場合だけ表示）
 $candyGirlsPageData = candyGirlsPageLoadContent(isset($Database->Conn) ? $Database->Conn : null, (int)$gid, 1);
 $candyGirlsScheduleRows = candyGirlsPageBuildScheduleRows($yyy, $mmm, $ddd, $www, $scheduledata, (int)$gid);
 $candyGirlsMovie = array('sources' => array(), 'poster' => '');
