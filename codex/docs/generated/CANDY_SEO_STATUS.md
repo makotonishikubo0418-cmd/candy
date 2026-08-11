@@ -2,14 +2,14 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-08-12T05:20:26+09:00 (reproducible generation baseline)
+> Generated at: 2026-08-12T05:38:36+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 0e4b8e84c50c7302d62eba2487d24bece9c694fd
-> State fingerprint: sha256:589f1535258612c30b6c5f5808d519c0ba77c4900fb487917b206121a25ec759
+> Commit: 90f496bbfe09df9f5b2a743717bc16509d4190aa
+> State fingerprint: sha256:482a36c17ba2a6a4829f656be9b63896e42271b6954eaca6d1e03dbe93037ff0
 > Scope: Source HTML corresponding to public PHP files directly under HP
-> Population: Pages: 150
+> Population: Pages: 149
 > Generator: `codex/scripts/candy_site_state.py`
-> Result: OK=141 / ISSUE=8 / UNVERIFIED=1
+> Result: OK=141 / ISSUE=8 / UNVERIFIED=0
 > Unverified scope: Production HTTP, search engine index state, redirects, and database-generated HTML
 
 Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are not corrected automatically.
@@ -21,7 +21,6 @@ Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are no
 | system:create | aaaaaaaaaaaaaaa｜キャンディ | aaaaaaaaaaaaaaa！創業1999年！鹿児島トップクラスの女の子在籍数「099-226-6956」鹿児島グループ情報も掲載中 | https://www.55810.com/aaaaaaaaaaaaaaa.php | noindex,nofollow | aaaaaaaaaaaaaaa | 1 | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | OK | NOT_APPLICABLE | NOT_APPLICABLE | OK | NOT_APPLICABLE | NOT_APPLICABLE | OK | NOT_APPLICABLE | NOT_APPLICABLE | OK | NONE |
 | girls:girls | rep00010320eot｜プロフィール｜鹿児島 デリヘル キャンディ | 鹿児島 デリヘル「キャンディ」rep00010320eotのプロフィールページ | rep03010092eot | index | rep00010320eotのプロフィール | 1 | OK | OK | OK | NOT_APPLICABLE | NOT_APPLICABLE | OK | OK | NOT_APPLICABLE | OK | OK | OK | NOT_APPLICABLE | OK | NONE |
 | girls:girls_list | 鹿児島 デリヘル キャンディ \| 女の子一覧 | 鹿児島 デリヘル「キャンディ」の女の子一覧。出勤中・本日OK・新人など条件で探せて、写真・プロフィール・料金もまとめて確認。ご希望に合わせてご相談くださいませ。 | https://www.55810.com/girls_list.php | index | 鹿児島 デリヘル キャンディ 女の子一覧 | 1 | OK | OK | OK | NOT_APPLICABLE | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | NONE |
-| girls:girls_test | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | UNVERIFIED | 0 | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | NOT_APPLICABLE | UNVERIFIED | NOT_APPLICABLE | NOT_APPLICABLE | UNVERIFIED | NONE |
 | hotel:hotel | 鹿児島でデリヘルが呼べるホテル一覧 \| 料金目安・派遣可否 | 鹿児島でデリヘルを呼べるホテルを一覧で掲載。ホテル名・住所・電話・料金目安に加え、呼べる／呼べないの可否や派遣実績も確認できます。鹿児島市内中心部〜霧島方面まで掲載中。 | https://www.55810.com/hotel.php | index | 鹿児島でデリヘルが呼べる ホテル一覧 （料金目安・派遣可否） | 1 | OK | OK | OK | NOT_APPLICABLE | NOT_APPLICABLE | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | NONE |
 | top:index | 鹿児島 デリヘル キャンディ | 鹿児島 デリヘルならキャンディ公式。トップクラスの在籍数で選びやすく、出勤・料金もすぐ確認。ホテル/ご自宅へ出張対応、当日予約もご相談くださいませ。 | https://www.55810.com | index | 鹿児島 デリヘル キャンディ | 1 | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | NOT_APPLICABLE | OK | NONE |
 | area:arata | 鹿児島市荒田で呼べるデリヘル｜対応店舗・ホテル情報 | 鹿児島「荒田」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！ | https://www.55810.com/kagoshima-deliveryhealth-area-arata.php | index | 鹿児島市荒田で 呼べるデリヘル | 1 | OK | OK | OK | NOT_APPLICABLE | OK | OK | OK | OK | OK | OK | OK | OK | OK | NONE |

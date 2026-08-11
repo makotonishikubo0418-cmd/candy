@@ -205,11 +205,6 @@ def assert_sitemap_lastmod_rejects_ambiguous_or_invalid_input() -> None:
         raise AssertionError("invalid sitemap lastmod date was accepted")
 
 
-def assert_noindex_test_page_is_sitemap_excluded() -> None:
-    assert "girls_test" in site_state.SPECIAL_STEMS
-    assert "girls_test" in site_state.SEO_HELPER_STEMS
-
-
 def main() -> None:
     assert_metadata_is_not_content_drift()
     assert_fingerprint_is_deterministic()
@@ -218,7 +213,6 @@ def main() -> None:
     assert_site_state_checks_og_image_target()
     assert_sitemap_lastmod_rendering_is_exact()
     assert_sitemap_lastmod_rejects_ambiguous_or_invalid_input()
-    assert_noindex_test_page_is_sitemap_excluded()
     print("SITE_STATE_METADATA_TESTS: passed")
 
 

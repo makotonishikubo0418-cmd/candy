@@ -2,10 +2,10 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-08-12T05:20:26+09:00 (reproducible generation baseline)
+> Generated at: 2026-08-12T05:38:36+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 0e4b8e84c50c7302d62eba2487d24bece9c694fd
-> State fingerprint: sha256:589f1535258612c30b6c5f5808d519c0ba77c4900fb487917b206121a25ec759
+> Commit: 90f496bbfe09df9f5b2a743717bc16509d4190aa
+> State fingerprint: sha256:482a36c17ba2a6a4829f656be9b63896e42271b6954eaca6d1e03dbe93037ff0
 > Scope: Text_area_data, Text_hotel_data, Text_blog_data, and current pages, images, indexes, and sitemap entries
 > Population: Unique candidates: 233 / Text records: 233
 > Generator: `codex/scripts/candy_site_state.py`

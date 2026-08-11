@@ -2,12 +2,12 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-08-12T05:20:26+09:00 (reproducible generation baseline)
+> Generated at: 2026-08-12T05:38:36+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 0e4b8e84c50c7302d62eba2487d24bece9c694fd
-> State fingerprint: sha256:589f1535258612c30b6c5f5808d519c0ba77c4900fb487917b206121a25ec759
+> Commit: 90f496bbfe09df9f5b2a743717bc16509d4190aa
+> State fingerprint: sha256:482a36c17ba2a6a4829f656be9b63896e42271b6954eaca6d1e03dbe93037ff0
 > Scope: Public PHP, source files, datasets, shared PHP, CSS, JavaScript, images, videos, and fonts
-> Population: Public PHP files: 150 / assets: 710
+> Population: Public PHP files: 149 / assets: 708
 > Generator: `codex/scripts/candy_site_state.py`
 > Result: Missing references: 20 / duplicate hash groups: 10
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -21,7 +21,6 @@
 | HP/create.php | HP/source/create.html | HP/includefile/dataset_create.php | 1 | 1 |
 | HP/girls.php | HP/source/girls.html | HP/includefile/dataset_girls.php | 1 | 1 |
 | HP/girls_list.php | HP/source/girls_list.html | HP/includefile/dataset_girls_list.php | 1 | 1 |
-| HP/girls_test.php | MISSING | MISSING | 0 | 0 |
 | HP/hotel.php | HP/source/hotel.html | HP/includefile/dataset_hotel.php | 1 | 1 |
 | HP/index.php | HP/source/index.html | HP/includefile/dataset_index.php | 1 | 1 |
 | HP/kagoshima-deliveryhealth-area-arata.php | HP/source/kagoshima-deliveryhealth-area-arata.html | HP/includefile/dataset_kagoshima-deliveryhealth-area-arata.php | 1 | 1 |
@@ -188,7 +187,6 @@ Only the external session and database configuration references in `dataset_base
 | HP/css/girls.css | HP/source/girls.html |
 | HP/css/girls_list.css | HP/source/girls_list.html |
 | HP/css/girls_page_content.css | UNVERIFIED |
-| HP/css/girls_test.css | UNVERIFIED |
 | HP/css/job.css | UNVERIFIED |
 | HP/css/jquery.fs.boxer.css | HP/source/girls.html |
 | HP/css/member.css | UNVERIFIED |
@@ -234,12 +232,12 @@ Only the external session and database configuration references in `dataset_base
 
 | extension | count |
 |---|---:|
-| .css | 20 |
+| .css | 19 |
 | .eot | 16 |
 | .gif | 5 |
 | .jpg | 536 |
 | .js | 19 |
-| .mp4 | 3 |
+| .mp4 | 2 |
 | .png | 66 |
 | .svg | 2 |
 | .ttf | 16 |
@@ -252,7 +250,7 @@ Only the external session and database configuration references in `dataset_base
 
 | folder | count |
 |---|---:|
-| HP/css | 19 |
+| HP/css | 18 |
 | HP/font | 50 |
 | HP/imgCss/pc | 19 |
 | HP/imgCss/s | 22 |
@@ -267,7 +265,7 @@ Only the external session and database configuration references in `dataset_base
 | HP/imgHtml/pc | 20 |
 | HP/imgHtml/s | 14 |
 | HP/js | 19 |
-| HP/movie | 4 |
+| HP/movie | 3 |
 | HP/source | 1 |
 
 ## Assets by Page
@@ -279,7 +277,6 @@ Only the external session and database configuration references in `dataset_base
 | system:create | 1 | NONE | OK |
 | girls:girls | 0 | NONE | UNVERIFIED |
 | girls:girls_list | 1 | NONE | OK |
-| girls:girls_test | 0 | NONE | UNVERIFIED |
 | hotel:hotel | 0 | NONE | UNVERIFIED |
 | top:index | 51 | NONE | OK |
 | area:arata | 6 | NONE | OK |
@@ -456,7 +453,7 @@ These candidates have no confirmed static HTML or CSS reference. They may be ref
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/css | 7 | girls_page_content.css, girls_test.css, job.css, member.css, new_main.css |
+| HP/css | 6 | girls_page_content.css, job.css, member.css, new_main.css, new_page.css |
 | HP/font | 6 | freightdispbold-webfont.eot, freightdispbold-webfont.ttf, freightdispbold-webfont.woff, PlayfairDisplay-Bold.eot, PlayfairDisplay-Bold.ttf |
 | HP/imgCss/pc | 18 | cdIcoLoveBtn.png, cdIcoLoveBtn_on.png, cdIcoPhoto.png, cssSprite_sp.png, entranceLogo.png |
 | HP/imgCss/s | 20 | cdIcoLoveBtn.png, cdIcoLoveBtn_on.png, cdIcoPhoto.png, entranceLogo.png, entranceR18.png |
@@ -466,7 +463,6 @@ These candidates have no confirmed static HTML or CSS reference. They may be ref
 | HP/imgHtml/new_202601/hotel | 96 | businesshotelatelier_1.jpg, businesshotelatelier_2.jpg, businesshotelorientalizuro_1.jpg, businesshotelorientalizuro_2.jpg, businesshoteltenmonkan_1.jpg |
 | HP/imgHtml/new_202601/shop | 11 | after5_sp.jpg, beloved_sp.jpg, candy_sp.jpg, danzuma_sp.jpg, hitozuma_sp.jpg |
 | HP/js | 10 | api.js, candyKissDijest.js, commonLite.js, diary.js, fav_gen.js |
-| HP/movie | 1 | grmov0041571692_pc.mp4 |
 
 ## Duplicate Hash Candidates
 
