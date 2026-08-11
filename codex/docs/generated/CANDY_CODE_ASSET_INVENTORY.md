@@ -2,10 +2,10 @@
 
 > **Automatically generated. Manual editing is prohibited.**
 >
-> Generated at: 2026-08-10T15:07:44+09:00 (reproducible generation baseline)
+> Generated at: 2026-08-12T04:09:55+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 5c7b6954e9e86883c4a6e15a477481591f57437d
-> State fingerprint: sha256:c2ed0c87a275b907188974dc2e74d9f8f8f06cf5d2e644c88b1c78bd72f73dbd
+> Commit: 6667c0b1bf1cf642809893a7acc8279a83760f70
+> State fingerprint: sha256:633a186058e9d1dbd92dc108e2ef5502400ea7cb53cc638b7958e0a5986e7149
 > Scope: Public PHP, source files, datasets, shared PHP, CSS, JavaScript, images, videos, and fonts
 > Population: Public PHP files: 150 / assets: 710
 > Generator: `codex/scripts/candy_site_state.py`
@@ -187,7 +187,7 @@ Only the external session and database configuration references in `dataset_base
 | HP/css/entrance-banners.css | HP/source/index.html |
 | HP/css/girls.css | HP/source/girls.html |
 | HP/css/girls_list.css | HP/source/girls_list.html |
-| HP/css/girls_page_content.css | HP/source/girls.html |
+| HP/css/girls_page_content.css | UNVERIFIED |
 | HP/css/girls_test.css | UNVERIFIED |
 | HP/css/job.css | UNVERIFIED |
 | HP/css/jquery.fs.boxer.css | HP/source/girls.html |
@@ -456,7 +456,7 @@ These candidates have no confirmed static HTML or CSS reference. They may be ref
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/css | 6 | girls_test.css, job.css, member.css, new_main.css, new_page.css |
+| HP/css | 7 | girls_page_content.css, girls_test.css, job.css, member.css, new_main.css |
 | HP/font | 6 | freightdispbold-webfont.eot, freightdispbold-webfont.ttf, freightdispbold-webfont.woff, PlayfairDisplay-Bold.eot, PlayfairDisplay-Bold.ttf |
 | HP/imgCss/pc | 18 | cdIcoLoveBtn.png, cdIcoLoveBtn_on.png, cdIcoPhoto.png, cssSprite_sp.png, entranceLogo.png |
 | HP/imgCss/s | 20 | cdIcoLoveBtn.png, cdIcoLoveBtn_on.png, cdIcoPhoto.png, entranceLogo.png, entranceR18.png |
