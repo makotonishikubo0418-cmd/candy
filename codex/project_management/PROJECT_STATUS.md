@@ -1,23 +1,31 @@
 # Project Status
+- Parent / Owner: `codex/README.md`
+- Scope: Cross-case project current state, blockers, priorities, and next work
+- Lifecycle: Active
+- Source of Truth Responsibility: Sole canonical project-level current-state source
+- Related Documents: `CASE_REGISTRY.md` for all cases and generated current-state documents for machine-derived HP facts
+- Related Implementation Files: None; target implementation is owned by each case
 
 - Purpose: Provide one location for the overall plan, current state, problems, and next work
 - Status: canonical document
-- Updated: 2026-08-09
+- Updated: 2026-08-12
 
 ## 1. Current State
 
 - Management locations and document responsibilities are defined in `codex/README.md`.
-- Current page, candidate, code/asset, and SEO facts are defined by the four generated documents under `codex/docs/generated/`.
+- Current page, candidate, code/asset, and SEO facts are defined by the generated Markdown parents and deterministic detail children under `codex/docs/generated/`.
 - This document contains only current project-level problems, remaining work, and next actions that cannot be derived from those generated documents.
 - Git, production, authority, and execution procedures are not defined here.
 
 ## 2. Completed Management Foundation
 
+- Central case tracking, non-atomic case parents, lifecycle, direct-open identity, capacity limits, parent-child links, and responsibility-based document splitting are governed by `DOCUMENT_RULES.md` and indexed by `CASE_REGISTRY.md`.
+- The formal management tree contains every retained active, completed, historical, deprecated, and generated Markdown document; `audit_candy_management_docs.py` verifies population, ownership, links, lifecycle, cases, implementation relationships, capacity, and tree agreement.
 - `codex/WORK_ROUTING.md` Section 5.2 is the required-document routing authority.
   `codex/README.md` owns canonical management locations and document
   responsibilities only; it no longer adds a second operational route.
 - Page structure, code and asset structure, and the common SEO specification are separated into stable canonical documents.
-- Current page, production-candidate, code/asset, and SEO state can be regenerated into four documents with `candy-site-state`.
+- Current page, production-candidate, code/asset, and SEO state can be regenerated as one ten-file output set with `candy-site-state`.
 - `audit`, `preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `preview`, `write`, `check`, and `check --target` are implemented as the standard entry points.
 - The pre-stage gate synchronizes sitemap `lastmod`, regenerates the generated documents, and validates both after area, hotel, and blog changes.
 - Hotel production now separates staff-completed Text from Phase-prepared Text, validates legacy formats before conversion, and manages accepted/public image pairs through one canonical lifecycle specification.

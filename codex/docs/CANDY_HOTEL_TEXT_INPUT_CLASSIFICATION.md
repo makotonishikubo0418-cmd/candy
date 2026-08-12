@@ -1,4 +1,10 @@
 # CANDY Hotel Text Input Classification
+- Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
+- Scope: Current hotel input-format and text-quality classification rules
+- Lifecycle: Active
+- Source of Truth Responsibility: Canonical hotel-input classification specification
+- Related Documents: `CANDY_HOTEL_CONTENT_PREPARATION_RUNBOOK.md` and `generated/CANDY_UPCOMING_PAGES.md`
+- Related Implementation Files: `Text_hotel_data/*.txt` and the hotel text migration/classification tooling
 
 - Updated: 2026-07-23
 - Target: `Text_hotel_data/*.txt`

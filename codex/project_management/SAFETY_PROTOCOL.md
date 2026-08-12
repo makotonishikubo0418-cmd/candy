@@ -1,4 +1,10 @@
 # Safety Protocol for Deletion, Movement, and Bulk Operations
+- Parent / Owner: `codex/README.md`
+- Scope: Deletion, movement, bulk cleanup, and Git recovery safety
+- Lifecycle: Active
+- Source of Truth Responsibility: Sole canonical safety procedure for destructive or bulk file operations
+- Related Documents: `DOCUMENT_RULES.md`, `TASK_RESERVATIONS.md`, and `docs/rules/GIT_RULES.md`
+- Related Implementation Files: The exact targets approved for each operation
 
 - Purpose: Prevent damage to the working repository during deletion, movement, bulk cleanup, or Git recovery
 - Status: canonical document

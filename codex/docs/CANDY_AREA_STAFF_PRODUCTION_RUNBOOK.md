@@ -1,4 +1,11 @@
 # CANDY Area Staff Production Runbook
+- Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
+- Scope: Normal production and publication sequence for one area page
+- Lifecycle: Active
+- Source of Truth Responsibility: Canonical normal area-page execution runbook
+- Related Documents: `CANDY_PAGE_GENERATION_GOVERNANCE.md`, `CANDY_AREA_105_PAGE_QUEUE.md`, and area image documents
+- Related Implementation Files: Area production wrapper, generator, validator, target Text/images, HP page, indexes, and sitemap
+- Purpose: Define the normal production and publication sequence for one area page
 
 - Updated: 2026-07-26
 - Applies to: Normal production of one area page

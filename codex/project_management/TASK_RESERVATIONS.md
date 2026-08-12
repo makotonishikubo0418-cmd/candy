@@ -1,4 +1,10 @@
 # Task and File Reservations
+- Parent / Owner: `codex/README.md`
+- Scope: Concurrent task ownership, reserved files, period, and reservation lifecycle only
+- Lifecycle: Active
+- Source of Truth Responsibility: Sole canonical reservation ledger
+- Related Documents: `CASE_REGISTRY.md`, `CODEX_COMMUNICATION.md`, and `TASK_LOG.md`
+- Related Implementation Files: Reserved targets recorded per row
 
 - Purpose: Prevent multiple Codex tasks from changing the same files concurrently.
 - Status: Canonical document
@@ -23,6 +29,7 @@
 
 | Task ID | Codex | Period | Scope | Status |
 |---|---|---|---|---|
+| TASK-20260812-CANDY-MANAGEMENT-SYSTEM-REBUILD-001 | current | 2026-08-12 | Rebuild the Candy management-document system by adding central case tracking and case-parent lifecycle rules; align the existing management Markdown tree, ownership, links, lifecycle, capacity, task history, generated documents, and their exact generators/tests; exclude HP runtime files, database, Control, deployment, and production changes | COMPLETE |
 | TASK-20260808-MANAGEMENT-RESPONSIBILITY-REMEDIATION-001 | current | 2026-08-08 | `codex/WORK_ROUTING.md`, `codex/project_management/TASK_RESERVATIONS.md`, and `codex/project_management/TASK_LOG.md` | COMPLETE |
 | TASK-20260806-AREA-4PAGE-PUBLICATION-001 | current | 2026-08-06 | Resume and verify `nishisakamotocho`; produce and publish queue rows 44 `nishimurasakibarucho`, 45 `nishisengokucho`, and 46 `nishitaniyama`; update only their page/image outputs, required shared registrations, target related-link entries, queue rows, generated documents, and task records; preserve all unrelated dirty files | COMPLETE |
 | TASK-20260806-RENEWAL-ENTRY-CONTRACT-001 | current | 2026-08-06 | Five canonical management documents, three page publishers, shared release checker, two deployment workflows, `HP/.htaccess`, one new release-check regression test, four generated current-state documents, `TASK_LOG.md`, and this reservation | COMPLETE |

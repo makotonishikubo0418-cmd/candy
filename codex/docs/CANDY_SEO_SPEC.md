@@ -1,4 +1,11 @@
 # CANDY Common SEO Specification
+- Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
+- Scope: Common stable SEO behavior across Candy page categories
+- Lifecycle: Active
+- Source of Truth Responsibility: Canonical common SEO specification
+- Related Documents: `generated/CANDY_SEO_STATUS.md` and category specifications
+- Related Implementation Files: Source HTML, public URLs, indexes, sitemap, structured data, internal links, and image alternatives
+- Purpose: Define common stable SEO behavior across Candy page categories
 
 ## 1. Responsibility
 

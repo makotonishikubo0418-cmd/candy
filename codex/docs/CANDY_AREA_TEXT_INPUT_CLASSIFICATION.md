@@ -1,4 +1,11 @@
 # CANDY Area Text Input Classification
+- Parent / Owner: [`CASE_REGISTRY.md`](../project_management/CASE_REGISTRY.md), case `CANDY-AREA-CLASS-20260720`
+- Scope: Area input-classification snapshot dated 2026-07-20
+- Lifecycle: Historical Evidence
+- Source of Truth Responsibility: Historical parent for the registered classification snapshot; not current eligibility
+- Related Documents: Current area specifications, queue, and generated upcoming-page state
+- Related Implementation Files: Input files represented by the dated snapshot
+- Purpose: Preserve the dated 2026-07-20 area input-classification result as historical evidence
 
 Updated: 2026-07-25
 Status: Retained classification snapshot from 2026-07-20

@@ -1,11 +1,16 @@
 # candy Markdown Management System Overview
 
 - Purpose: Summarize the management system requested by the user and its design intent
+- Parent / Owner: `codex/README.md`
+- Scope: High-level management-system architecture and design intent
 - Document responsibility: Overview of the management system goals and design principles
 - Detailed canonical sources: The management documents listed in `codex/README.md`
-- Status: canonical document for the candy management-system overview
+- Related Documents: `codex/README.md`, `codex/WORK_ROUTING.md`, and `codex/project_management/DOCUMENT_RULES.md`
+- Status / Lifecycle: Canonical / Active
+- Source of Truth Responsibility: High-level design intent only; no detailed rule, route, case state, or task history
+- Related Implementation Files: None
 - Canonical location: `C:\Codex\FSG\Candy\codex`
-- Updated: 2026-07-25
+- Updated: 2026-08-12
 
 ## 1. Intended Outcome
 
@@ -37,8 +42,11 @@ C:\Codex\FSG\Candy\AGENTS.md
   └─ codex/WORK_ROUTING.md
        ├─ docs/rules/GIT_RULES.md
        │    └─ pre-work Git verification and branch rules
-       └─ routed management document
-            └─ target code, specification, asset, or environment
+       └─ codex/project_management/DOCUMENT_RULES.md
+            ├─ codex/project_management/CASE_REGISTRY.md
+            │    └─ registered case parent when required
+            └─ routed canonical document
+                 └─ target code, specification, asset, or environment
 ```
 
 This route avoids broad document reading for simple work while preserving every required rule.
@@ -76,6 +84,9 @@ overview never adds an execution step.
 | A long AGENTS document slows simple work | Keep `AGENTS.md` focused on highest-level authority and direct rule entry points |
 | The overall current state becomes unclear | Centralize current state, issues, and next work in `PROJECT_STATUS.md` |
 | Reports become scattered and cannot be handed off | Separate responsibilities between `CODEX_COMMUNICATION.md` and `TASK_LOG.md` |
+| One-off analysis documents remain isolated | Register the case, use one parent, and classify every retained child by lifecycle |
+| Case phases and implementation cannot be traced | Route registry → case parent → specification → implementation → verification → completion |
+| A document grows beyond a usable size | Split by responsibility, data class, time period, or lifecycle under one parent |
 | Repeated changes degrade the code | Enforce one responsibility per canonical source, integration into existing routes, and no appended override blocks |
 | Specifications differ between documents | Assign one canonical document to each subject and prohibit duplicate specifications |
 | Unverified work is reported as complete | Distinguish canonical, user-reported, implementation-verified, and unverified information |

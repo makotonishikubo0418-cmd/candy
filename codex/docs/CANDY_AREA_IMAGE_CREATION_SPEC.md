@@ -1,4 +1,10 @@
 # CANDY Area Image Creation Specification
+- Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
+- Scope: Visual and acceptance requirements for one area-image pair
+- Lifecycle: Active
+- Source of Truth Responsibility: Canonical area-image visual specification
+- Related Documents: `CANDY_AREA_IMAGE_CREATION_RUNBOOK.md` and `CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md`
+- Related Implementation Files: Target source image and two area-image deliverables
 
 - Purpose: Safely produce two regional images for an area page while matching the existing design
 - Status: canonical document

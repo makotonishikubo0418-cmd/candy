@@ -1,4 +1,11 @@
 # CANDY Fix and Decision Backlog
+- Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
+- Scope: Unresolved HP issues requiring a specification, fix, or owner decision
+- Lifecycle: Active
+- Source of Truth Responsibility: Canonical owner-decision backlog, not machine-derived current state
+- Related Documents: Generated current-state parents and applicable specifications
+- Related Implementation Files: Target implementation is identified per backlog row
+- Purpose: Track unresolved HP issues that require a specification, fix, or owner decision
 
 ## 1. Responsibility
 

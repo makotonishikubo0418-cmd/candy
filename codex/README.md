@@ -2,6 +2,15 @@
 
 This README is the entry point for the management documents under `C:\Codex\FSG\Candy\codex`.
 
+- Purpose: Define canonical locations, folder responsibilities, document responsibilities, and the actual formal management-document tree
+- Parent / Owner: Repository-root `AGENTS.md`
+- Scope: Management locations and ownership lookup; not task routing or execution procedure
+- Status / Lifecycle: Canonical / Active
+- Source of Truth Responsibility: Sole source for Candy management locations and responsibility ownership
+- Related Documents: `WORK_ROUTING.md`, `MANAGEMENT_SYSTEM_OVERVIEW.md`, and `project_management/DOCUMENT_RULES.md`
+- Related Implementation Files: None
+- Updated: 2026-08-12
+
 ## 1. Canonical Sources and Work Locations
 
 | Type | Location | Responsibility |
@@ -12,7 +21,7 @@ This README is the entry point for the management documents under `C:\Codex\FSG\
 | Candy work routing | `C:\Codex\FSG\Candy\codex\WORK_ROUTING.md` | Selects the management documents and execution method required for Candy work |
 | Candy Git rules | `C:\Codex\FSG\Candy\docs\rules\GIT_RULES.md` | Contains Candy repository verification, branch, and publication rules |
 | Canonical Codex management source | `C:\Codex\FSG\Candy\codex` | Contains the management entry point, management documents, HP production specifications, and work tools |
-| Project management | `C:\Codex\FSG\Candy\codex\project_management` | Canonical source for rules, current state, reservations, history, and safety procedures |
+| Project management | `C:\Codex\FSG\Candy\codex\project_management` | Canonical source for rules, current state, central cases, case parents, reservations, history, communication, and safety procedures |
 | Actual site tree | `C:\Codex\FSG\Candy\HP` | Contains HP data such as PHP, source, includefile, images, logs, and movies |
 | Production inputs | Root-level `Text_area_data`, `Text_blog_data`, and `Text_hotel_data` | Source data for page production that is not published directly to HP |
 | NAS storage | `\\192.168.1.3\disk1\FSG_SEO\candy` | Storage-only location for `Backup/`. Git operations are prohibited |
@@ -53,6 +62,8 @@ reporting, reading, or execution rules.
 | `docs/rules/` | Candy Git rules selected by `codex/WORK_ROUTING.md` |
 | `codex/` | Candy work routing, Codex management documents, production specifications, and scripts. Only active canonical management sources belong on the normal route |
 | `codex/project_management/` | Management rules, structure, progress, communication, task reservations, history, and safety procedures |
+| `codex/project_management/cases/` | Parent documents for non-atomic active and completed cases; creation is governed only by `DOCUMENT_RULES.md` |
+| `codex/project_management/task_history/` | Time-bounded historical task-log children owned by `TASK_LOG.md` |
 | `codex/docs/` | Active HP production runbooks and specifications for area, hotel, blog, and other categories |
 | `codex/docs/generated/` | Current page, production-candidate, code/asset, and SEO state generated from actual files. Manual editing is prohibited |
 | `codex/data/` | Canonical operational mapping data consumed by production tooling, including the approved area nearby-link graph |
@@ -72,16 +83,63 @@ reporting, reading, or execution rules.
 | Management architecture overview | `codex/MANAGEMENT_SYSTEM_OVERVIEW.md` |
 | Document separation and update rules | `codex/project_management/DOCUMENT_RULES.md` |
 | Overall plan, current state, and issues | `codex/project_management/PROJECT_STATUS.md` |
+| All-case list and case-parent mapping | `codex/project_management/CASE_REGISTRY.md` |
+| One non-atomic case's analysis, phases, implementation, verification, and completion | Its registered parent under `codex/project_management/cases/` or its registered historical parent |
 | Inter-Codex communication and handoff | `codex/project_management/CODEX_COMMUNICATION.md` |
 | Task and file reservations | `codex/project_management/TASK_RESERVATIONS.md` |
-| Individual task history | `codex/project_management/TASK_LOG.md` |
+| Completed task execution history | `codex/project_management/TASK_LOG.md` and its children under `codex/project_management/task_history/` |
 | Safety procedure for deletion, movement, and bulk operations | `codex/project_management/SAFETY_PROTOCOL.md` |
 | HP production and generation specifications | `codex/docs/CANDY_MASTER_DOC_INDEX.md` |
 | Area nearby-link mapping | `codex/data/CANDY_AREA_RELATED_LINKS.json` |
 | Stable HP structure | `codex/docs/CANDY_HP_STRUCTURE_MAP.md`, `codex/docs/CANDY_CODE_FILE_STRUCTURE.md`, and `codex/docs/CANDY_SEO_SPEC.md` |
-| Current HP state | The four documents under `codex/docs/generated/` |
+| Current HP state | The generated Markdown parents, Markdown child, and deterministic tabular sidecars under `codex/docs/generated/` |
 
-## 5. Duplicate-Source Prohibitions
+## 5. Formal Management-Document Tree
+
+This tree describes actual ownership and lifecycle. It is not a second task-routing source; select required documents only through `WORK_ROUTING.md`. Deprecated and historical documents appear so no retained Markdown is orphaned.
+
+```text
+AGENTS.md [Authority / Active]
+├─ docs/rules/GIT_RULES.md [Rule / Active]
+└─ codex/
+   ├─ WORK_ROUTING.md [Router / Active]
+   ├─ README.md [Location and responsibility owner / Active]
+   ├─ MANAGEMENT_SYSTEM_OVERVIEW.md [Overview / Active]
+   ├─ project_management/
+   │  ├─ DOCUMENT_RULES.md [Document-rule SOT / Active]
+   │  ├─ PROJECT_STATUS.md [Project current-state SOT / Active]
+   │  ├─ CASE_REGISTRY.md [All-case SOT / Active]
+   │  ├─ cases/
+   │  │  └─ CANDY_MANAGEMENT_SYSTEM_REBUILD.md [Case parent / Completed]
+   │  ├─ TASK_RESERVATIONS.md [Reservation SOT / Active]
+   │  ├─ CODEX_COMMUNICATION.md [Communication SOT / Active]
+   │  ├─ TASK_LOG.md [Task-history parent / Historical Evidence]
+   │  ├─ task_history/
+   │  │  ├─ TASK_LOG_2026_07_01_20.md [Task history / Historical Evidence]
+   │  │  ├─ TASK_LOG_2026_07_21_31.md [Task history / Historical Evidence]
+   │  │  └─ TASK_LOG_2026_08.md [Task history / Historical Evidence]
+   │  ├─ SAFETY_PROTOCOL.md [Safety rule / Active]
+   │  ├─ CODE_STRUCTURE.md [Compatibility entry / Deprecated Compatibility]
+   │  └─ CANDY_REPOSITORY_SEO_AUDIT_2026-07-18.md [Registered case parent / Historical Evidence]
+   ├─ docs/
+   │  ├─ CANDY_MASTER_DOC_INDEX.md [HP responsibility lookup / Active]
+   │  ├─ CANDY_OPERATION_BASICS.md [Common HP operation / Active]
+   │  ├─ active specifications, runbooks, queues, state, and incident record listed in WORK_ROUTING.md
+   │  ├─ CANDY_AREA_TEXT_INPUT_CLASSIFICATION.md [Registered case parent / Historical Evidence]
+   │  ├─ ten compatibility entries listed in WORK_ROUTING.md [Deprecated Compatibility]
+   │  └─ generated/ [Generated Current State / Active]
+   │     ├─ CANDY_SITE_PAGE_LEDGER.md → CANDY_SITE_PAGE_LEDGER.tsv
+   │     ├─ CANDY_UPCOMING_PAGES.md → three category TSV sidecars
+   │     ├─ CANDY_CODE_ASSET_INVENTORY.md → CANDY_CODE_REFERENCE_INVENTORY.md
+   │     └─ CANDY_SEO_STATUS.md → CANDY_SEO_STATUS.tsv
+   ├─ data/hotel-image-handoff-20260723/
+   │  └─ HANDOFF_README.md [Registered case parent / Completed]
+   └─ 指示書監査.md [Registered case parent / Historical Evidence]
+```
+
+The complete filename-level tree is maintained in `WORK_ROUTING.md` Section 5.1 and MUST match this ownership tree and the filesystem.
+
+## 6. Duplicate-Source Prohibitions
 
 - Do not duplicate a canonical management source at the local repository root, under `HP/`, or on the NAS. Repository-root `AGENTS.md` and `docs/rules/GIT_RULES.md`, explicitly selected by the Candy authority and routing documents, are the only current exceptions.
 - Do not create `HP/HP/`.

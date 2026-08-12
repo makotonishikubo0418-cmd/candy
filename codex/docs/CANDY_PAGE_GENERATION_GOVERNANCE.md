@@ -1,4 +1,11 @@
 # CANDY Page Generation Governance
+- Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
+- Scope: Common page-generation governance for area, hotel, and blog
+- Lifecycle: Active
+- Source of Truth Responsibility: Canonical cross-category generation governance
+- Related Documents: Area, hotel, and blog generation specifications and runbooks
+- Related Implementation Files: Page generators and shared top/index registrations named in the body
+- Purpose: Define common page-generation governance for area, hotel, and blog categories
 
 - Updated: 2026-07-26
 - Applies to: Normal new-page generation for area, blog, and hotel by Codex;

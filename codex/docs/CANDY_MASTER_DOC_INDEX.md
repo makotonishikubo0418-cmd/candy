@@ -1,6 +1,12 @@
 # CANDY Canonical Responsibility Index
 
 ## 1. Purpose
+- Parent / Owner: `codex/README.md`
+- Scope: HP subject-to-canonical-document ownership lookup; not task routing
+- Lifecycle: Active
+- Source of Truth Responsibility: Sole HP responsibility lookup selected by `WORK_ROUTING.md`
+- Related Documents: `codex/WORK_ROUTING.md`, `CANDY_OPERATION_BASICS.md`, and the listed category documents
+- Related Implementation Files: None directly; each listed canonical document owns its target files
 
 `codex/WORK_ROUTING.md` Section 5.2 is the sole routing authority. This file is a
 non-authoritative ownership lookup used only when that route names it. It
@@ -60,14 +66,15 @@ Do not use fixed-count examples in a category specification as current state. Co
 
 ## 5. Generated Current State
 
-`codex/docs/generated/` contains only output from `candy_site_state.py`. Manual editing is prohibited.
+`codex/docs/generated/` contains only output from `candy_site_state.py` and its renderer. Manual editing is prohibited. Markdown parents own scope and summary; Markdown or TSV children preserve responsibility-specific detail.
 
 | Document | Contents |
 |---|---|
-| `generated/CANDY_SITE_PAGE_LEDGER.md` | Public-page pairing with PHP, source, dataset, Text, indexes, and sitemap |
-| `generated/CANDY_UPCOMING_PAGES.md` | Text candidates, input, images, existing pages, gates, and blockers |
-| `generated/CANDY_CODE_ASSET_INVENTORY.md` | PHP, CSS, JavaScript, images, movies, fonts, references, missing files, and duplicate candidates |
-| `generated/CANDY_SEO_STATUS.md` | Measured per-page SEO state and issues |
+| `generated/CANDY_SITE_PAGE_LEDGER.md` | Public-page structure summary and owner of `CANDY_SITE_PAGE_LEDGER.tsv` row detail |
+| `generated/CANDY_UPCOMING_PAGES.md` | Cross-category candidate summary and owner of the area, hotel, and blog TSV detail children |
+| `generated/CANDY_CODE_ASSET_INVENTORY.md` | Asset summary, missing references, unconfirmed referrers, duplicate hashes, and publication candidates |
+| `generated/CANDY_CODE_REFERENCE_INVENTORY.md` | Child of the code/asset parent for detailed public PHP, shared PHP, CSS, and JavaScript relationships |
+| `generated/CANDY_SEO_STATUS.md` | SEO summary and owner of `CANDY_SEO_STATUS.tsv` per-page detail |
 
 Generation, checking, sitemap synchronization, metadata behavior, and
 completion gates are owned by `CANDY_OPERATION_BASICS.md` and the generator

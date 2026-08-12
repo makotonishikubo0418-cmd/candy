@@ -1,4 +1,10 @@
 # CANDY Area Image Asset Management
+- Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
+- Scope: Accepted and public area-image lifecycle and storage
+- Lifecycle: Active
+- Source of Truth Responsibility: Canonical area-image lifecycle source
+- Related Documents: Area image creation and replacement documents
+- Related Implementation Files: `Text_area_data/画像データ/` and public area-image paths
 
 - Purpose: Define the lifecycle of accepted and public area-image pairs
 - Creation requirements: `CANDY_AREA_IMAGE_CREATION_SPEC.md`

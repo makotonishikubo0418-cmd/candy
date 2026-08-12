@@ -20,6 +20,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 import candy_hotel_text_migration as hotel_text_migration
+import candy_site_state_render as state_render
 
 from candy_page_common import (
     DOCS_DIR,
@@ -81,6 +82,7 @@ SOURCE_SCOPE = (
     "Text_hotel_data",
     "codex/scripts/candy_hotel_text_migration.py",
     "codex/scripts/candy_site_state.py",
+    "codex/scripts/candy_site_state_render.py",
 )
 STATE_FINGERPRINT_EXCLUDED_HP_PARTS = {
     ".git",
@@ -400,6 +402,7 @@ def state_fingerprint_paths() -> list[Path]:
     paths: set[Path] = {
         Path(__file__).resolve(),
         Path(hotel_text_migration.__file__).resolve(),
+        Path(state_render.__file__).resolve(),
     }
     for path in HP_ROOT.rglob("*"):
         if not path.is_file() or path.is_symlink():
@@ -1087,279 +1090,7 @@ def collect() -> dict[str, object]:
     }
 
 
-def header(data: dict[str, object], scope: str, population: str, result: str, unverified: str) -> list[str]:
-    return [
-        "> **Automatically generated. Manual editing is prohibited.**",
-        ">",
-        f"> Generated at: {data['generation_time']} (reproducible generation baseline)",
-        f"> Branch: {data['branch']}",
-        f"> Commit: {data['head']}",
-        f"> State fingerprint: sha256:{data['state_fingerprint']}",
-        f"> Scope: {scope}",
-        f"> Population: {population}",
-        f"> Generator: `{SCRIPT_REL}`",
-        f"> Result: {result}",
-        f"> Unverified scope: {unverified}",
-    ]
-
-
-def render_ledger(data: dict[str, object]) -> str:
-    pages = data["pages"]
-    lines = ["# CANDY SITE PAGE LEDGER", ""]
-    lines += header(data, "Public PHP files directly under HP and the corresponding source, dataset, Text, index, and sitemap entries", f"Public PHP files: {len(pages)}", "OK", "Production HTTP, database state, and external include targets")
-    lines += [
-        "",
-        "This structural ledger records one page per row. It records locations and automated checks without duplicating page copy.",
-        "",
-        "| page ID | category | page name | slug | role | public PHP | source HTML | dataset PHP | dataset_base | source Text | template | index registrations | sitemap entries | SEO | images | structure | issues | verification source |",
-        "|---|---|---|---|---|---|---|---|---|---|---|---:|---:|---|---|---|---|---|",
-    ]
-    for page in pages:
-        registrations = f"case {page['case_count']} / conversions {page['conversion_count']}"
-        texts = "<br>".join(rel(record.path) for record in page["texts"]) or "NOT_APPLICABLE"
-        template = rel(page["template"]) if page["template"] and page["template"].is_file() else "NOT_APPLICABLE"
-        lines.append(
-            "| "
-            + " | ".join(
-                md(value)
-                for value in (
-                    page["page_id"],
-                    page["category"],
-                    page["page_name"],
-                    page["slug"],
-                    page["role"],
-                    rel(page["public"]),
-                    rel(page["source"]) if page["source"] else "MISSING",
-                    rel(page["dataset"]) if page["dataset"] else "MISSING",
-                    registrations,
-                    texts,
-                    template,
-                    page["list_count"] if page["list_count"] is not None else "NOT_APPLICABLE",
-                    page["sitemap_count"],
-                    page["seo"],
-                    page["image_status"],
-                    page["structure"],
-                    "; ".join(page["issues"]) or "NONE",
-                    f"{data['head']} / {data['generation_time']}",
-                )
-            )
-            + " |"
-        )
-    return "\n".join(lines) + "\n"
-
-
-def render_upcoming(data: dict[str, object]) -> str:
-    rows = data["upcoming"]
-    gates = Counter(row["gate"] for row in rows)
-    lines = ["# CANDY UPCOMING PAGES", ""]
-    lines += header(
-        data,
-        "Text_area_data, Text_hotel_data, Text_blog_data, and current pages, images, indexes, and sitemap entries",
-        f"Unique candidates: {len(rows)} / Text records: {len(data['texts'])}",
-        " / ".join(f"{key}={gates[key]}" for key in ("READY", "BLOCKED", "EXISTING", "CONFLICT")),
-        "Text accuracy, Git tracking, and the owner's publication decision",
-    )
-    lines += [
-        "",
-        "This is the current cross-category state. It does not replace the task history in the existing queue or classification documents.",
-        "",
-        "| category | source Text | page name | slug | input status | image status | existing page | index registrations | sitemap entries | target gate | blocker | next action | operational source |",
-        "|---|---|---|---|---|---|---|---:|---:|---|---|---|---|",
-    ]
-    for row in rows:
-        lines.append(
-            "| "
-            + " | ".join(
-                md(value)
-                for value in (
-                    row["category"],
-                    "<br>".join(rel(record.path) for record in row["texts"]),
-                    row["page_name"],
-                    row["slug"],
-                    row["input"],
-                    row["image"],
-                    row["existing"],
-                    row["list"],
-                    row["sitemap"],
-                    row["gate"],
-                    row["blocker"],
-                    row["next"],
-                    row["source"],
-                )
-            )
-            + " |"
-        )
-    return "\n".join(lines) + "\n"
-
-
-def refs_for_extension(data: dict[str, object], extension: str) -> list[tuple[Path, list[str]]]:
-    rows: list[tuple[Path, list[str]]] = []
-    referenced_by = data["referenced_by"]
-    paths = list(HP_ROOT.rglob(f"*{extension}"))
-    if extension == ".js":
-        paths.extend(
-            path
-            for path in referenced_by
-            if path.suffix.lower() == ".php" and path.parent == (HP_ROOT / "js").resolve()
-        )
-    for path in sorted(set(paths), key=lambda item: rel(item).casefold()):
-        rows.append((path, sorted(rel(item) for item in referenced_by.get(path.resolve(), set()))))
-    return rows
-
-
-def render_assets(data: dict[str, object]) -> str:
-    pages = data["pages"]
-    assets: list[Path] = data["assets"]
-    extensions = Counter(path.suffix.lower() for path in assets)
-    folders = Counter(rel(path.parent) for path in assets)
-    lines = ["# CANDY CODE ASSET INVENTORY", ""]
-    lines += header(
-        data,
-        "Public PHP, source files, datasets, shared PHP, CSS, JavaScript, images, videos, and fonts",
-        f"Public PHP files: {len(pages)} / assets: {len(assets)}",
-        f"Missing references: {len(data['missing_by'])} / duplicate hash groups: {len(data['duplicate_groups'])}",
-        "Runtime-generated references, database-derived references, external URLs, and log contents",
-    )
-    lines += [
-        "",
-        "## Public PHP and Structure Files",
-        "",
-        "| public PHP | source | dataset | case | link conversions |",
-        "|---|---|---|---:|---:|",
-    ]
-    for page in pages:
-        lines.append(
-            f"| {md(rel(page['public']))} | {md(rel(page['source']) if page['source'] else 'MISSING')} | "
-            f"{md(rel(page['dataset']) if page['dataset'] else 'MISSING')} | {page['case_count']} | {page['conversion_count']} |"
-        )
-    common = {
-        "HP/includefile/dataset_base.php": "Included by public PHP files. This is the common entry point for source selection, external session and database settings, dataset branching, and HTML link conversion.",
-        "HP/includefile/class.hpgcoder2.php": "Loaded by dataset_base. It assigns rep...eot placeholders to their functions.",
-        "HP/includefile/funcs.php": "Loaded by dataset_base and the class file. It provides shared functions for database retrieval, HTML generation, headers, and related operations.",
-        "HP/create.php": "Special entry point related to file generation. MUST NOT be used during ordinary production.",
-    }
-    lines += ["", "## Shared PHP", "", "| path | role and impact |", "|---|---|"]
-    for path, role in common.items():
-        state = "OK" if (REPO_ROOT / path).is_file() else "UNVERIFIED"
-        lines.append(f"| `{path}` | {role} Status={state} |")
-    lines += ["", "Only the external session and database configuration references in `dataset_base.php` are checked. Secret values are neither collected nor output.", ""]
-    for label, extension in (("CSS", ".css"), ("JavaScript", ".js")):
-        lines += [f"## {label} Files and Referrers", "", "| file | referrers |", "|---|---|"]
-        for path, referrers in refs_for_extension(data, extension):
-            lines.append(f"| {md(rel(path))} | {md('<br>'.join(referrers) if referrers else 'UNVERIFIED')} |")
-        lines.append("")
-    lines += ["## Asset Summary", "", "### By Extension", "", "| extension | count |", "|---|---:|"]
-    for extension, count in sorted(extensions.items()):
-        lines.append(f"| {md(extension)} | {count} |")
-    lines += ["", "### By Folder", "", "| folder | count |", "|---|---:|"]
-    for folder, count in sorted(folders.items()):
-        lines.append(f"| {md(folder)} | {count} |")
-    lines += ["", "## Assets by Page", "", "| page ID | referenced images | missing | status |", "|---|---:|---|---|"]
-    for page in pages:
-        lines.append(f"| {md(page['page_id'])} | {len(page['images'])} | {md('<br>'.join(page['missing_images']) or 'NONE')} | {page['image_status']} |")
-    lines += ["", "## Missing Reference Targets", "", "| target | referrers |", "|---|---|"]
-    if not data["missing_by"]:
-        lines.append("| NONE | - |")
-    else:
-        for path, referrers in sorted(data["missing_by"].items(), key=lambda item: rel(item[0]).casefold()):
-            lines.append(f"| {md(rel(path))} | {md('<br>'.join(sorted(rel(item) for item in referrers)))} |")
-    by_folder = defaultdict(list)
-    for path in data["unreferenced"]:
-        by_folder[rel(path.parent)].append(path)
-    lines += [
-        "",
-        "## Assets Without a Confirmed Referrer",
-        "",
-        "These candidates have no confirmed static HTML or CSS reference. They may be referenced dynamically by the database, JavaScript, or PHP, so this is not a deletion decision.",
-        "",
-        "| folder | count | examples (first five) |",
-        "|---|---:|---|",
-    ]
-    for folder, paths in sorted(by_folder.items()):
-        lines.append(f"| {md(folder)} | {len(paths)} | {md(', '.join(path.name for path in paths[:5]))} |")
-    lines += ["", "## Duplicate Hash Candidates", "", "| SHA-256 | files |", "|---|---|"]
-    if not data["duplicate_groups"]:
-        lines.append("| NONE | - |")
-    else:
-        for paths in sorted(data["duplicate_groups"], key=lambda group: rel(group[0]).casefold()):
-            digest = hashlib.sha256(paths[0].read_bytes()).hexdigest()
-            lines.append(f"| `{digest}` | {md('<br>'.join(rel(path) for path in paths))} |")
-    lines += ["", "## Candidates That May Not Require Publication", "", "| path | assessment |", "|---|---|"]
-    if not data["public_candidates"]:
-        lines.append("| NONE | No automatic assessment |")
-    else:
-        for path in sorted(data["public_candidates"], key=lambda item: rel(item).casefold()):
-            lines.append(f"| {md(rel(path))} | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |")
-    return "\n".join(lines) + "\n"
-
-
-def render_seo(data: dict[str, object]) -> str:
-    rows = data["seo"]
-    overall = Counter(row["overall"] for row in rows)
-    lines = ["# CANDY SEO STATUS", ""]
-    lines += header(
-        data,
-        "Source HTML corresponding to public PHP files directly under HP",
-        f"Pages: {len(rows)}",
-        " / ".join(f"{key}={overall[key]}" for key in ("OK", "ISSUE", "UNVERIFIED")),
-        "Production HTTP, search engine index state, redirects, and database-generated HTML",
-    )
-    lines += [
-        "",
-        "Only `OK / ISSUE / UNVERIFIED / NOT_APPLICABLE` are used. Detected issues are not corrected automatically.",
-        "",
-        "| page ID | title | description | canonical | robots | H1 | H1 count | OGP | JSON-LD | BreadcrumbList | FAQPage match | ItemList | internal links | image alt | sitemap | URL=canonical | duplicate title | duplicate canonical | orphan candidate | SEO | issues |",
-        "|---|---|---|---|---|---|---:|---|---|---|---|---|---|---|---|---|---|---|---|---|---|",
-    ]
-    for row in rows:
-        lines.append(
-            "| "
-            + " | ".join(
-                md(value)
-                for value in (
-                    row["page_id"],
-                    row["title"],
-                    row["description"],
-                    row["canonical"],
-                    row["robots"],
-                    row["h1"],
-                    row["h1_count"],
-                    row["ogp"],
-                    row["json_ld"],
-                    row["breadcrumb"],
-                    row["faq"],
-                    row["item_list"],
-                    row["internal_links"],
-                    row["image_alt"],
-                    row["sitemap"],
-                    row["url_canonical"],
-                    row["duplicate_title"],
-                    row["duplicate_canonical"],
-                    row["orphan"],
-                    row["overall"],
-                    "; ".join(row["issues"]) or "NONE",
-                )
-            )
-            + " |"
-        )
-    lines += [
-        "",
-        "## Assessment Boundaries",
-        "",
-        "- FAQ matching compares the number of static `.faq-item` elements with the number of FAQPage `mainEntity` entries. Semantic equivalence is UNVERIFIED.",
-        "- Orphan candidates are based on inbound static PHP and HTML links in source HTML. Links generated by the database or JavaScript are UNVERIFIED.",
-        "- index/noindex, canonical, URL, and structured data values are not changed automatically.",
-    ]
-    return "\n".join(lines) + "\n"
-
-
-def render_all(data: dict[str, object]) -> dict[str, str]:
-    return {
-        "CANDY_SITE_PAGE_LEDGER.md": render_ledger(data),
-        "CANDY_UPCOMING_PAGES.md": render_upcoming(data),
-        "CANDY_CODE_ASSET_INVENTORY.md": render_assets(data),
-        "CANDY_SEO_STATUS.md": render_seo(data),
-    }
+render_all = state_render.render_all
 
 
 def audit(data: dict[str, object]) -> int:

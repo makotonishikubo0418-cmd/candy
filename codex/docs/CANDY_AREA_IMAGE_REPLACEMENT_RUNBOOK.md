@@ -1,4 +1,10 @@
 # CANDY Existing Area-Image Replacement Runbook
+- Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
+- Scope: Approved same-name replacement of one existing public area-image pair
+- Lifecycle: Active
+- Source of Truth Responsibility: Canonical existing area-image replacement sequence
+- Related Documents: `CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md` and `CANDY_PRODUCTION_MIGRATION_MASTER.md` when applicable
+- Related Implementation Files: Approved source pair and exact existing public `_1` / `_2` targets
 
 - Purpose: Replace an existing public area-image pair quickly, once, and without retaining obsolete live content
 - Status: Canonical execution runbook for existing area-image replacement

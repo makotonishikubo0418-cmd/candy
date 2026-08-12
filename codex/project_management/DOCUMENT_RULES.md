@@ -2,8 +2,13 @@
 
 - Purpose: Separate document responsibilities in the Markdown management system
 - Status: canonical document
-- Updated: 2026-08-08
-- Canonical scope: Management-document naming, language, responsibility, structure, update rules, and document-change Git audit
+- Lifecycle: Active
+- Parent / Owner: `codex/README.md`
+- Updated: 2026-08-12
+- Canonical scope: Sole source for management-document creation, placement, naming, composition, capacity, splitting, merging, parent-child relationships, links, lifecycle, and document-change validation
+- Source of Truth Responsibility: Rules for creating and maintaining every persistent Candy management document
+- Related documents: `codex/WORK_ROUTING.md`, `codex/project_management/CASE_REGISTRY.md`, and `codex/project_management/SAFETY_PROTOCOL.md`
+- Related Implementation Files: `codex/scripts/audit_candy_management_docs.py` validates these rules; target document generators remain owned by their routed specifications
 - Update trigger: A management document, route, responsibility, naming rule, or generated-document contract changes
 
 ## 1. Principles
@@ -15,6 +20,8 @@
 - Canonical management information belongs under `codex/`, except for repository-root `AGENTS.md` and `docs/rules/GIT_RULES.md` that the Candy authority and routing documents explicitly select; project-management documents belong under `codex/project_management/`.
 - Do not convert unverified information into confirmed information.
 - Keep stable specifications, current state, generated facts, and task history separate.
+- Every persistent management document MUST belong to the formal structure shown in both `codex/README.md` and `codex/WORK_ROUTING.md`.
+- A Markdown file created for analysis, planning, phases, implementation, verification, or completion MUST belong to a registered case before it is treated as persistent.
 
 ## 2. Location-Rule Boundary
 
@@ -119,6 +126,91 @@ Japanese proper nouns and source data MAY remain inside an English document. Rep
 - A command with a syntax error, omitted content, or truncated output supplies no evidence. Its single retry MUST use a smaller, pre-bounded method that removes the observed failure cause; repeating or broadening the failed extraction is prohibited.
 - Validate a bounded retrieval by checking its expected count and explicit boundaries. If complete retrieval still fails after the permitted retry, apply the higher-authority `AGENTS.md` information-retrieval STOP rule.
 
+### 3.10 Central Case Registration
+
+`CASE_REGISTRY.md` is the canonical list of all change and investigation cases. Register a case before creating a persistent case document or changing implementation. The registry owns only the case ID, type, title, parent location, lifecycle, current phase, implementation relationship, and next action.
+
+Cases include defect investigation, bug fixes, modifications, new features, new pages, new systems, refactoring, specification changes, migrations, production changes, audits, and other work that must remain traceable after the task ends.
+
+- A small atomic case MAY use its registry row as the case parent. Record the completed result in the applicable task-history file.
+- A multi-phase case, a case with multiple persistent child documents, or a case whose analysis and decisions must remain available MUST have one parent document under `codex/project_management/cases/`.
+- Do not create a separate parent document merely because a case has a phase number.
+- Historical evidence that already identifies one completed event MAY serve as its own case parent after it is registered; do not create an empty wrapper.
+- The central registry MUST link to the parent. A separate parent MUST link back to the registry.
+
+### 3.11 Case Parent and Child Responsibilities
+
+A case parent is the one entry point for case-specific facts. It owns the objective, scope and exclusions, analysis, verified and unverified facts, decisions, phase plan, current phase, related canonical specifications, implementation files, child documents, verification, completion result, and remaining work.
+
+A child document is permitted only when it owns a distinct responsibility or is required by the capacity rule. It MUST link to its case parent, and the parent MUST link to it. A child MUST NOT restate a permanent specification or runbook. Permanent behavior remains in the applicable canonical specification; the case parent records only the case-specific decision and links to that source.
+
+### 3.12 Required Direct-Open Identification
+
+Every persistent management Markdown file MUST allow a reader who opens it directly to determine:
+
+- Purpose
+- Parent / Owner
+- Scope
+- Status / Lifecycle
+- Source of Truth Responsibility
+- Related Documents
+- Related Implementation Files, or `None` when the document is management-only
+
+These facts MAY be stated in existing introductory prose or a concise metadata block. Do not paste empty headings or a meaningless uniform template. Generated Markdown MUST emit equivalent facts from its generator.
+
+### 3.13 Lifecycle
+
+Use one of these lifecycle values:
+
+| Lifecycle | Meaning |
+|---|---|
+| `Active` | Current rule, specification, state, queue, registry, or active case |
+| `Completed` | Completed case or handoff retained in the formal hierarchy |
+| `Archived` | Inactive material retained for reference and excluded from current work routes |
+| `Deprecated Compatibility` | Compatibility entry retained only for old references; never a current instruction |
+| `Historical Evidence` | Dated evidence, audit, snapshot, incident record, or completed task history; never a current specification |
+
+Do not delete a completed case merely because it is complete. Separate active and completed populations when their combined size impairs use, while preserving the parent and registry route.
+
+### 3.14 Phase Management
+
+When phases are required, the case parent MUST record each phase's purpose, order, start condition, completion condition, status, deliverables, and transition condition. The parent is the phase-wide entry point. Create a phase child only when the phase owns an independently useful responsibility or cannot fit within the capacity rule.
+
+### 3.15 Persistent-Document Creation Decision
+
+Before creating a Markdown file, perform this decision in order:
+
+1. Identify the registered case and applicable canonical responsibility.
+2. Confirm that no existing canonical document owns the required information.
+3. Prefer adding the case-specific information to the existing case parent.
+4. Create a child only for a distinct responsibility or capacity split.
+5. Select the location and filename from Sections 3.1 and 3.2.
+6. Add parent-child links, direct-open identification, lifecycle, and implementation relationships.
+7. Update the actual trees in `codex/README.md` and `codex/WORK_ROUTING.md` in the same task.
+8. Run the validation in Section 6.
+
+### 3.16 Capacity and Responsibility-Based Splitting
+
+Capacity applies to every formal management Markdown file, including generated Markdown:
+
+| Size | Rule |
+|---|---|
+| `0-60,000 bytes` | Normal target range |
+| `60,001-70,000 bytes` | Allowed only when one cohesive responsibility would be damaged by splitting |
+| `over 70,000 bytes` | Prohibited; split before completion |
+
+- Never remove required information merely to meet the size limit.
+- Split by responsibility, data class, time period, or lifecycle, not by arbitrary `PART1` / `PART2` numbering.
+- A split parent MUST remain the entry point and describe every child. Every child MUST return to the parent.
+- Large tabular generated detail MAY be stored in deterministic TSV or CSV sidecars when a generated Markdown parent explains scope, ownership, and retrieval.
+- A generator that approaches the limit MUST be divided by implementation responsibility rather than compressed into unreadable code.
+
+### 3.17 Temporary Material and Existing-Document Adoption
+
+At task completion, every temporary analysis or audit file MUST be either incorporated into an existing canonical document, registered as a case parent or child, classified as `Historical Evidence` or `Archived`, or removed under the applicable safety rule. An unexplained standalone Markdown file is prohibited.
+
+Existing documents adopted into this structure MUST be classified by actual responsibility. Deprecated compatibility files may remain at their old paths, but the formal tree and their own metadata MUST explain why they exist, their parent, that they are excluded from current work, and their lifecycle.
+
 ## 4. Prohibited Document Updates
 
 - Do not append unstructured content to the end of a document.
@@ -128,6 +220,8 @@ Japanese proper nouns and source data MAY remain inside an English document. Rep
 - Do not store substantive management history in root `AGENTS.md`.
 - Do not edit a generated document manually. Use actual files as the source and update it with `candy-site-state write`.
 - Do not store page counts, file counts, Git state, HTTP state, Actions state, or other volatile values in a stable specification.
+- Do not create a persistent Markdown file outside the formal tree or without a case or canonical owner.
+- Do not create duplicate case parents, disconnected phase files, arbitrary size chunks, or a second work-routing index.
 
 ## 5. Information-State Labels
 
@@ -150,6 +244,11 @@ At minimum, verify:
 - Large management or generated documents have a bounded target-specific retrieval route, and integrated runbooks do not require full-document output for an internal automated step.
 - Canonical management documents remain under local `codex/`, repository-root `AGENTS.md`, or the explicitly authorized `docs/rules/GIT_RULES.md` location and were not duplicated elsewhere at the repository root, under HP, or on the NAS.
 - `candy-site-state check` succeeds and generated documents agree with actual files.
+- Every formal Markdown file is present in the actual tree, has a determinable purpose, parent, scope, lifecycle, source-of-truth responsibility, and related document or implementation relationship, and is reachable from a formal entry point.
+- Parent-child links are bidirectional; registered cases resolve to their parent; case children resolve back to the parent and registry.
+- No broken relative Markdown links, duplicate canonical responsibility, orphan Markdown, or file over 70,000 bytes remains.
+- The Markdown count, capacity bands, lifecycle classification, formal trees, and actual filesystem agree.
+- Generated Markdown and deterministic sidecars pass a second no-change generation.
 
 ## 7. Document-Change Git Rules
 
@@ -190,3 +289,16 @@ At minimum, verify:
 - Production deployment rules belong only in `codex/docs/CANDY_PRODUCTION_MIGRATION_MASTER.md` and the exact workflow or script.
 - Deletion, movement, bulk cleanup, and Git recovery rules belong only in `SAFETY_PROTOCOL.md`.
 - This document MUST NOT copy rules from those sources. When a document change affects another responsibility, update that responsibility's canonical source in the same authorized task instead of appending an override here.
+
+## 10. Project-Management Responsibility Matrix
+
+| Information | Sole canonical owner |
+|---|---|
+| Overall project current state, cross-case blockers, priorities, and next work | `PROJECT_STATUS.md` |
+| All case IDs, case types, lifecycle, parent locations, current phases, and next actions | `CASE_REGISTRY.md` |
+| Detailed facts, decisions, phases, files, verification, and completion for one non-atomic case | Its case parent under `cases/` or its registered historical parent |
+| Concurrent task ownership and file reservation | `TASK_RESERVATIONS.md` |
+| Inter-task request, caution, handoff, and response | `CODEX_COMMUNICATION.md` |
+| Completed task execution results and verified or unverified evidence | `TASK_LOG.md` and its history children |
+
+Do not permanently maintain the same information in two owners. A document may link to another owner's record and summarize only what is necessary for navigation.

@@ -1,4 +1,10 @@
 # Hotel Image Bulk Handoff — Completed Snapshot
+- Parent / Owner: [`CASE_REGISTRY.md`](../../project_management/CASE_REGISTRY.md), case `CANDY-HOTEL-HANDOFF-20260723`
+- Scope: Completed 2026-07-23 hotel-image normalization handoff evidence
+- Lifecycle: Completed
+- Source of Truth Responsibility: Completed parent for the registered handoff; not an active queue or instruction
+- Related Documents: Current hotel image creation and asset-lifecycle documents
+- Related Implementation Files: Evidence files retained in this directory
 
 - Snapshot date: 2026-07-23
 - Status: `COMPLETE`

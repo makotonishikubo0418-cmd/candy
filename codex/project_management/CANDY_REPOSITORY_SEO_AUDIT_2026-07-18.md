@@ -1,4 +1,11 @@
 # CANDY Repository SEO Audit
+- Parent / Owner: [`CASE_REGISTRY.md`](CASE_REGISTRY.md), case `CANDY-SEO-AUDIT-20260718`
+- Scope: Dated repository SEO audit for the recorded commit
+- Lifecycle: Historical Evidence
+- Source of Truth Responsibility: Historical parent for the registered SEO audit; not current repository or production state
+- Related Documents: Current `codex/docs/CANDY_SEO_SPEC.md` and generated SEO state
+- Related Implementation Files: Repository population and commit recorded in this audit
+- Purpose: Preserve the dated repository SEO audit as registered historical evidence
 
 - Document type: dated audit report
 - Status: IMPLEMENTATION_VERIFIED for repository facts; UNVERIFIED for production behavior

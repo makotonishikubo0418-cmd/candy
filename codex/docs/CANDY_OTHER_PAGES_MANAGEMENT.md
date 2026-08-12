@@ -1,4 +1,10 @@
 # CANDY Other Pages Management
+- Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
+- Scope: Pages and entry points outside area, hotel, and blog
+- Lifecycle: Active
+- Source of Truth Responsibility: Canonical structure and change-impact source for other pages
+- Related Documents: `CANDY_OPERATION_BASICS.md` and generated current-state parents
+- Related Implementation Files: Applicable public, dynamic, authentication, contact, system, and sitemap files named in the body
 
 ## 1. Purpose
 

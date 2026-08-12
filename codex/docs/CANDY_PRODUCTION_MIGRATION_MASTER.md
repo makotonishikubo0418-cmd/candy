@@ -1,6 +1,12 @@
 # CANDY Production Deployment and Migration Control
 
 ## 1. Purpose
+- Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
+- Scope: Production deployment, protected-entry publication, recovery, rollback, and migration boundary
+- Lifecycle: Active
+- Source of Truth Responsibility: Canonical production deployment and migration control
+- Related Documents: `CANDY_OPERATION_BASICS.md`, `CANDY_VERIFICATION_PLAN.md`, and exact workflows
+- Related Implementation Files: Eligible `HP/` targets and the exact `.github/workflows/` and `.github/scripts/` deployment files
 
 Control current `HP/` deployment, protected-entry publication, recovery, and
 the remaining migration-history boundary while preventing rendering damage,

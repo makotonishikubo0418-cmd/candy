@@ -1,4 +1,10 @@
 # CANDY Hotel Page Generation Specification
+- Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
+- Scope: Hotel-page structure changes, defect fixes, and nonstandard exceptions
+- Lifecycle: Active
+- Source of Truth Responsibility: Canonical hotel-page structural and output specification
+- Related Documents: `CANDY_PAGE_GENERATION_GOVERNANCE.md` and `CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md`
+- Related Implementation Files: Hotel PHP, source HTML, dataset, indexes, sitemap, Text, and hotel generator
 
 - Updated: 2026-07-26
 - Applies to: Hotel-page structure changes, defect fixes, and exceptions that the standard procedure cannot resolve

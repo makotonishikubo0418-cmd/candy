@@ -1,4 +1,11 @@
 # CANDY Operation Basics
+- Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
+- Scope: Short common investigation, change, and validation procedure for existing HP
+- Lifecycle: Active
+- Source of Truth Responsibility: Canonical common HP operation procedure
+- Related Documents: The applicable category specification and generated current-state parent
+- Related Implementation Files: `HP/` target PHP, source, dataset, assets, and applicable checks
+- Purpose: Define the short common procedure for investigating, changing, and validating existing HP targets
 
 ## 1. Responsibility
 

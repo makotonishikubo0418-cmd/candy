@@ -1,4 +1,10 @@
 # CANDY Area Page Generation Specification
+- Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
+- Scope: Area-page structure changes, defect fixes, and nonstandard exceptions
+- Lifecycle: Active
+- Source of Truth Responsibility: Canonical area-page structural and output specification
+- Related Documents: `CANDY_PAGE_GENERATION_GOVERNANCE.md` and `CANDY_AREA_STAFF_PRODUCTION_RUNBOOK.md`
+- Related Implementation Files: Area PHP, source HTML, dataset, indexes, sitemap, Text, and area generator
 
 - Updated: 2026-07-26
 - Applies to: Area-page structure changes, defect fixes, and exceptions that the standard procedure cannot resolve

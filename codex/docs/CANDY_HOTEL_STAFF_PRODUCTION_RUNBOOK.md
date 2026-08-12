@@ -1,4 +1,11 @@
 # CANDY Hotel Staff Production Runbook
+- Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
+- Scope: Normal production and publication sequence for standard hotel pages
+- Lifecycle: Active
+- Source of Truth Responsibility: Canonical normal hotel-page execution runbook
+- Related Documents: Hotel input, image, page specification, and common generation governance
+- Related Implementation Files: Hotel production wrapper, generator, validator, target Text/images, HP pages, indexes, and sitemap
+- Purpose: Define the normal production and publication sequence for standard hotel pages
 
 - Updated: 2026-08-09
 - Applies to: Normal production of one or more standard hotel pages from either staff-completed Text or Phase-prepared Text
@@ -91,7 +98,7 @@ Validation covers:
 - The seven-file hotel change unit in Section 4
 - The two route-approved accepted-source images and their two same-hash local-public copies when the pair was created under the current lifecycle
 - The target input Text and required classification update
-- The four generated current-state documents
+- The complete generated current-state output set
 - Visible content, SEO, OGP, JSON-LD, links, map, and production HTTP state when publication is authorized; desktop/mobile rendering when inspected, otherwise `NOT_EXECUTED`
 
 ## 2. Standard Execution
@@ -232,7 +239,7 @@ For each selected target, complete the following transaction before beginning th
 2. Verify that the separate image-asset route already completed the accepted/public reconciliation, required lifecycle, and same-name hash checks. Do not install, register, deploy, or replace images inside the page transaction.
 3. Freeze dependency hashes, generate the complete page set from the hotel template and `template_shop.html`, and validate all input blocks, related links, scenes, JSON-LD, and images.
 4. Register only the target in `dataset_base.php`, the hotel index, the top-page hotel section, and sitemap as the seven-file page change unit.
-5. Synchronize sitemap dates and the four generated current-state documents with `candy-site-state preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`, then freeze hashes for the complete authorized output set.
+5. Synchronize sitemap dates and the complete generated current-state output set with `candy-site-state preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`, then freeze hashes for the complete authorized output set.
 6. When publication is included, create the target's own Commit, Push it, wait for its own Actions run, and complete its production verification before beginning the next target. Never combine targets into one Commit, Push, or Actions run.
 7. Verify the production page, H1, JSON-LD, images, sitemap, and redirects. In both the hotel index and the top-page hotel region, require the target URL exactly once, require its visible link name to equal the hotel name exactly, and require the complete URL/name registries to align.
 8. Mark the target completed only after all required checks pass.

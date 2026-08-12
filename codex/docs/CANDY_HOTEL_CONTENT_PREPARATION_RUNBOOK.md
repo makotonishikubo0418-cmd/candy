@@ -1,4 +1,10 @@
 # CANDY Hotel Content Preparation Runbook
+- Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
+- Scope: Research and preparation of one hotel input through content phases
+- Lifecycle: Active
+- Source of Truth Responsibility: Canonical hotel content-preparation runbook
+- Related Documents: Hotel text classification, image creation, and production documents
+- Related Implementation Files: One target under `Text_hotel_data/` and its cited research sources
 
 - Purpose: Research and prepare one hotel input through three independently validated phases
 - Status: Canonical execution runbook

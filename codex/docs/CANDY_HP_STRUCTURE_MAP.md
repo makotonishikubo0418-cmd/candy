@@ -1,4 +1,11 @@
 # CANDY HP Structure Map
+- Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
+- Scope: Stable public-page categories, pairings, and structural relationships
+- Lifecycle: Active
+- Source of Truth Responsibility: Canonical stable HP page-structure map
+- Related Documents: `generated/CANDY_SITE_PAGE_LEDGER.md` and category specifications
+- Related Implementation Files: Public `HP/*.php`, `HP/source/`, datasets, indexes, and sitemap
+- Purpose: Define stable public-page categories, pairings, and structural relationships
 
 ## 1. Responsibility
 

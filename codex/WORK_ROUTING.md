@@ -1,5 +1,14 @@
 # Candy Work Routing
 
+- Purpose: Select the exact management documents required from the user's work objective
+- Parent / Owner: Repository-root `AGENTS.md`
+- Scope: Required-document routing only
+- Status / Lifecycle: Canonical / Active
+- Source of Truth Responsibility: Sole canonical work-routing table and complete filename-level management-document tree
+- Related Documents: `codex/README.md` and `codex/project_management/DOCUMENT_RULES.md`
+- Related Implementation Files: None
+- Updated: 2026-08-12
+
 ## 5. Work Execution Method
 - Scope: all work under `C:\Codex\FSG\Candy`.
 - Higher authority: `C:\Codex\FSG\Candy\AGENTS.md`.
@@ -11,6 +20,8 @@
 - When a canonical script provides a bounded command for selecting or checking one target, use that command instead of printing or reviewing a full generated current-state document. Open the generated document only when the selected route or a verified exception requires its contents.
 - If no management document applies to the instructed work, the applicable document is unknown, or conflicting content prevents the required action from being determined, do not proceed based on assumptions. Perform the work only after obtaining the user’s approval.
 - Add, consolidate, relocate, rename, or retire a management document only after the user individually approves the change. After execution, always update `### 5.1 Management Document Structure` and `### 5.2 Work Routing` to reflect the current state.
+- Before creating, splitting, merging, moving, renaming, restructuring, archiving, deprecating, retiring, or creating a parent or child for any persistent management document, MUST review `codex/project_management/DOCUMENT_RULES.md` and apply it. The route is `AGENTS.md` → `WORK_ROUTING.md` → `DOCUMENT_RULES.md` → determine case, parent, location, lifecycle, and canonical responsibility → create or change the document.
+- Before persistent documentation or implementation begins for a bug fix, modification, new feature, new page, new system, investigation, refactoring, specification change, migration, production change, or other traceable case, MUST review `codex/project_management/CASE_REGISTRY.md` and register or identify the case under the rules in `DOCUMENT_RULES.md`.
 
 ### 5.1 Management Document Structure
 
@@ -26,41 +37,70 @@ C:\Codex\FSG\Candy
    ├─ project_management/
    │  ├─ DOCUMENT_RULES.md
    │  ├─ PROJECT_STATUS.md
+   │  ├─ CASE_REGISTRY.md
+   │  ├─ cases/
+   │  │  └─ CANDY_MANAGEMENT_SYSTEM_REBUILD.md
    │  ├─ SAFETY_PROTOCOL.md
    │  ├─ TASK_RESERVATIONS.md
    │  ├─ CODEX_COMMUNICATION.md
-   │  └─ TASK_LOG.md
-   └─ docs/
-      ├─ CANDY_MASTER_DOC_INDEX.md
-      ├─ CANDY_OPERATION_BASICS.md
-      ├─ CANDY_CODE_FILE_STRUCTURE.md
-      ├─ CANDY_HP_STRUCTURE_MAP.md
-      ├─ CANDY_PAGE_GENERATION_GOVERNANCE.md
-      ├─ CANDY_AREA_PAGE_GENERATION_SPEC.md
-      ├─ CANDY_AREA_STAFF_PRODUCTION_RUNBOOK.md
-      ├─ CANDY_AREA_105_PAGE_QUEUE.md
-      ├─ CANDY_AREA_IMAGE_CREATION_RUNBOOK.md
-      ├─ CANDY_AREA_IMAGE_CREATION_SPEC.md
-      ├─ CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md
-      ├─ CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md
-      ├─ CANDY_HOTEL_PAGE_GENERATION_SPEC.md
-      ├─ CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md
-      ├─ CANDY_HOTEL_TEXT_INPUT_CLASSIFICATION.md
-      ├─ CANDY_HOTEL_CONTENT_PREPARATION_RUNBOOK.md
-      ├─ CANDY_HOTEL_IMAGE_CREATION_SPEC.md
-      ├─ CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md
-      ├─ CANDY_BLOG_PAGE_GENERATION_SPEC.md
-      ├─ CANDY_OTHER_PAGES_MANAGEMENT.md
-      ├─ CANDY_SEO_SPEC.md
-      ├─ CANDY_VERIFICATION_PLAN.md
-      ├─ CANDY_PRODUCTION_MIGRATION_MASTER.md
-      ├─ CANDY_FIX_BACKLOG.md
-      ├─ CANDY_20260713_CONTEXT_AND_IMPROVEMENT.md
-      └─ generated/
-         ├─ CANDY_SITE_PAGE_LEDGER.md
-         ├─ CANDY_UPCOMING_PAGES.md
-         ├─ CANDY_CODE_ASSET_INVENTORY.md
-         └─ CANDY_SEO_STATUS.md
+   │  ├─ TASK_LOG.md
+   │  ├─ task_history/
+   │  │  ├─ TASK_LOG_2026_07_01_20.md
+   │  │  ├─ TASK_LOG_2026_07_21_31.md
+   │  │  └─ TASK_LOG_2026_08.md
+   │  ├─ CODE_STRUCTURE.md [Deprecated Compatibility]
+   │  └─ CANDY_REPOSITORY_SEO_AUDIT_2026-07-18.md [Historical Evidence]
+   ├─ docs/
+   │  ├─ CANDY_MASTER_DOC_INDEX.md
+   │  ├─ CANDY_OPERATION_BASICS.md
+   │  ├─ CANDY_CODE_FILE_STRUCTURE.md
+   │  ├─ CANDY_HP_STRUCTURE_MAP.md
+   │  ├─ CANDY_PAGE_GENERATION_GOVERNANCE.md
+   │  ├─ CANDY_AREA_PAGE_GENERATION_SPEC.md
+   │  ├─ CANDY_AREA_STAFF_PRODUCTION_RUNBOOK.md
+   │  ├─ CANDY_AREA_105_PAGE_QUEUE.md
+   │  ├─ CANDY_AREA_IMAGE_CREATION_RUNBOOK.md
+   │  ├─ CANDY_AREA_IMAGE_CREATION_SPEC.md
+   │  ├─ CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md
+   │  ├─ CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md
+   │  ├─ CANDY_HOTEL_PAGE_GENERATION_SPEC.md
+   │  ├─ CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md
+   │  ├─ CANDY_HOTEL_TEXT_INPUT_CLASSIFICATION.md
+   │  ├─ CANDY_HOTEL_CONTENT_PREPARATION_RUNBOOK.md
+   │  ├─ CANDY_HOTEL_IMAGE_CREATION_SPEC.md
+   │  ├─ CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md
+   │  ├─ CANDY_BLOG_PAGE_GENERATION_SPEC.md
+   │  ├─ CANDY_OTHER_PAGES_MANAGEMENT.md
+   │  ├─ CANDY_SEO_SPEC.md
+   │  ├─ CANDY_VERIFICATION_PLAN.md
+   │  ├─ CANDY_PRODUCTION_MIGRATION_MASTER.md
+   │  ├─ CANDY_FIX_BACKLOG.md
+   │  ├─ CANDY_20260713_CONTEXT_AND_IMPROVEMENT.md
+   │  ├─ CANDY_AREA_TEXT_INPUT_CLASSIFICATION.md [Historical Evidence]
+   │  ├─ CANDY_AI_EXECUTION_DISCIPLINE.md [Deprecated Compatibility]
+   │  ├─ CANDY_CODEX_BACKUP_REMARKS.md [Deprecated Compatibility]
+   │  ├─ CANDY_EXISTING_DOCS_INVENTORY.md [Deprecated Compatibility]
+   │  ├─ CANDY_FOLDER_ROLE_MAP.md [Deprecated Compatibility]
+   │  ├─ CANDY_FULL_FILE_CODE_INVENTORY.md [Deprecated Compatibility]
+   │  ├─ CANDY_NON_CODE_ASSET_INVENTORY.md [Deprecated Compatibility]
+   │  ├─ CANDY_PAGE_CATEGORY_STRUCTURE.md [Deprecated Compatibility]
+   │  ├─ CANDY_PAGE_SPEC_INDEX.md [Deprecated Compatibility]
+   │  ├─ CANDY_PHASE_RECHECK.md [Deprecated Compatibility]
+   │  └─ generated/
+   │     ├─ CANDY_SITE_PAGE_LEDGER.md
+   │     ├─ CANDY_SITE_PAGE_LEDGER.tsv
+   │     ├─ CANDY_UPCOMING_PAGES.md
+   │     ├─ CANDY_UPCOMING_AREA_PAGES.tsv
+   │     ├─ CANDY_UPCOMING_HOTEL_PAGES.tsv
+   │     ├─ CANDY_UPCOMING_BLOG_PAGES.tsv
+   │     ├─ CANDY_CODE_ASSET_INVENTORY.md
+   │     ├─ CANDY_CODE_REFERENCE_INVENTORY.md
+   │     ├─ CANDY_SEO_STATUS.md
+   │     └─ CANDY_SEO_STATUS.tsv
+   ├─ data/
+   │  └─ hotel-image-handoff-20260723/
+   │     └─ HANDOFF_README.md [Completed]
+   └─ 指示書監査.md [Historical Evidence]
 
 ### 5.2 Work Routing
 
@@ -69,9 +109,10 @@ C:\Codex\FSG\Candy
 | Select management documents or perform general website or implementation investigation | `codex/README.md`, `codex/docs/CANDY_MASTER_DOC_INDEX.md`, and `codex/docs/CANDY_OPERATION_BASICS.md` |
 | Audit management-document structure, routing, responsibilities, consistency, or drift | `codex/README.md`, `codex/MANAGEMENT_SYSTEM_OVERVIEW.md`, `codex/project_management/DOCUMENT_RULES.md`, `codex/docs/CANDY_MASTER_DOC_INDEX.md`, `codex/docs/CANDY_OPERATION_BASICS.md`, and the management documents being audited |
 | Create or modify the management structure, instructions, specifications, or management documents | `codex/README.md`, `codex/MANAGEMENT_SYSTEM_OVERVIEW.md`, `codex/project_management/DOCUMENT_RULES.md`, and the canonical document being changed |
+| Register, plan, phase, document, complete, archive, or review a change or investigation case | `codex/project_management/DOCUMENT_RULES.md`, `codex/project_management/CASE_REGISTRY.md`, and the registered case parent when one exists |
 | Confirm current status, issues, decisions, priorities, or next work | `codex/project_management/PROJECT_STATUS.md`; read `codex/project_management/CODEX_COMMUNICATION.md` only when required |
 | Coordinate ownership, reservations, conflict prevention, or handoff among multiple Codex agents | `codex/project_management/TASK_RESERVATIONS.md` and `codex/project_management/CODEX_COMMUNICATION.md` |
-| Record task history | `codex/project_management/TASK_LOG.md` |
+| Record or review task history | `codex/project_management/TASK_LOG.md` and the time-bounded child selected by its index |
 | Perform Git operations, select or change a branch, Commit, or Push | `docs/rules/GIT_RULES.md` |
 | Stage, Commit, or Push management-document changes | `docs/rules/GIT_RULES.md` and `codex/project_management/DOCUMENT_RULES.md` |
 | Delete, move, rename, reorganize in bulk, or restore through Git | `codex/project_management/SAFETY_PROTOCOL.md` and `codex/project_management/TASK_RESERVATIONS.md` |
@@ -105,6 +146,6 @@ C:\Codex\FSG\Candy
 | Perform target-specific verification, behavior checks, or completion assessment | The applicable category specification and runbook, the target implementation, and only the generated current-state documents required for verification |
 | Perform full-population verification of HP, generation source data, links, assets, test, or production | `codex/docs/CANDY_VERIFICATION_PLAN.md`, the target population, implementation, or environment, and only the generated current-state documents required for verification |
 
-Files under `codex/docs/generated/` are current-state documents generated from actual project files. Do not edit them manually.
+Files under `codex/docs/generated/` are current-state documents and deterministic detail sidecars generated from actual project files. Do not edit them manually.
 
 `codex/project_management/TASK_LOG.md`, `codex/project_management/CODEX_COMMUNICATION.md`, `codex/docs/CANDY_FIX_BACKLOG.md`, and `codex/docs/CANDY_20260713_CONTEXT_AND_IMPROVEMENT.md` contain history or supporting information. Do not use any of them alone as the canonical source for determining the current specification, state, or implementation.

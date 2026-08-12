@@ -1,4 +1,11 @@
 # CANDY Hotel Image Creation Specification
+- Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
+- Scope: Creation and visual acceptance of one hotel-image pair
+- Lifecycle: Active
+- Source of Truth Responsibility: Canonical hotel-image visual specification
+- Related Documents: `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md` and hotel production runbook
+- Related Implementation Files: Target source images and two hotel-image deliverables
+- Purpose: Define creation and visual acceptance requirements for one hotel-image pair
 
 - Updated: 2026-07-25
 - Target: Two images for one hotel page
