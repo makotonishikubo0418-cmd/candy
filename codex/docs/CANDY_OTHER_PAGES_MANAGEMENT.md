@@ -1,9 +1,9 @@
 # CANDY Other Pages Management
 - Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
-- Scope: Pages and entry points outside area, hotel, and blog
+- Scope: Pages, member-system references, APIs, and entry points outside area, hotel, and blog
 - Lifecycle: Active
 - Source of Truth Responsibility: Canonical structure and change-impact source for other pages
-- Related Documents: `CANDY_OPERATION_BASICS.md` and generated current-state parents
+- Related Documents: `CANDY_OPERATION_BASICS.md`, generated current-state parents, and the member implementation-reference parent [`HP/docs/MEMBER_ARCHITECTURE.md`](../../HP/docs/MEMBER_ARCHITECTURE.md)
 - Related Implementation Files: Applicable public, dynamic, authentication, contact, system, and sitemap files named in the body
 
 ## 1. Purpose
@@ -22,6 +22,7 @@ Primary classes:
 - top: `index.php`
 - girls: `girls.php`, `girls_list.php`, `schedule.php`, and related files
 - system/other: `movie.php`, `movie_iframe.php`, `mypage.php`, `news.php`, `system.php`, and related files
+- member: `member_login.php`, `member_register.php`, `member_mypage.php`, `member_password_reset.php`, `member_logout.php`, `member/api.php`, member cron entry points, and their implementation references under `HP/docs/`
 - special: `create.php` and its retained internal generation scaffold
 - public generated output: `sitemap.xml`
 
@@ -70,7 +71,11 @@ Important:
 | `system.php` | Fees, system, and terms | `source/system.html` + `dataset_system.php`; includes hotel coupon display and an external payment form | Fees, terms, external endpoint, hidden values, and common navigation | Normal route exists. External submission and authentication values are gated |
 | `movie.php` | Shop and girl movie index | `source/movie.html` + `dataset_movie.php`; shop/girl movies, device-specific display, and iframe links | `movie_iframe.php`, movie files, thumbnails, and zero-result display | Normal route exists |
 | `movie_iframe.php` | Noindex movie-playback helper | `source/movie_iframe.html` + `dataset_movie_iframe.php`; selects a shop/girl movie from GET | Caller `movie.php`, movie formats, invalid GET, and direct access | Keep `noindex,nofollow`; exclude canonical, H1, OGP, JSON-LD, breadcrumb, sitemap, and orphan requirements; no direct common-navigation route |
-| `mypage.php` | Favorite-girl review | `source/mypage.html` + `dataset_mypage.php`; Cookie, girls, images, schedules, and my-page information | Favorite add/remove, absent/expired Cookie, and girl detail | Normal route exists. Primarily Cookie-based, not member-ID/password based |
+| `mypage.php` | Compatibility entry to the member mypage | Standalone redirect through `includefile/member/bootstrap.php`; sends an authenticated member to `member_mypage.php` and another visitor to `member_login.php` | Member bootstrap, session authentication, redirect result, and legacy incoming links | Static inspection confirms the redirect implementation. Live database, session, and production behavior remain `UNVERIFIED` |
+| `member_login.php`, `member_register.php`, `member_mypage.php` | Member authentication and account UI | Member source/dataset pairs plus `includefile/member/`, `js/member.js`, and member CSS | Session, Cookie, database, SMS, email, CTI, legal text, and zero/failure paths | Authentication and database operations require their routed scope and permission; implementation references do not prove live state |
+| `member_password_reset.php`, `member_logout.php` | Member password-reset and logout entry points | Standalone member bootstrap and authentication logic | Token/session invalidation, redirect, SMS, and failure behavior | Generated structure may classify these as `SPECIAL`; verify the implementation directly |
+| `member/api.php` | JSON member API entry | `includefile/member/bootstrap.php` and `MemberApi.php` dispatch by `fno` | Authentication, validation, database writes, CTI reads, SMS, email, and error serialization | Do not invoke write-capable API operations during a read-only investigation |
+| `member/cron_notify_info.php`, `member/cron_notify_favorite_schedule.php` | Member notification batch entry points | Member configuration, mail, notification, favorite, schedule, and database classes | Scheduler, duplicate prevention, mail mode, database state, logs, and deployment environment | Schedule and live execution state remain `UNVERIFIED` until checked in the authorized environment |
 | `create.php` | Noindex authenticated page-generation feature | Standalone; accepts a page name by POST, creates root PHP, dataset, and source, and appends a case and transformation to `dataset_base.php`; retains `dataset_test.php` and the `test.html` case and link transformation as internal generation anchors | Authentication, three generated files, shared-PHP diff, rollback, and noindex | Exclude from public-page SEO requirements; prohibited for normal production. Do not copy authentication values into documents or logs |
 | `sitemap.xml` | Public URL list for search engines | Static XML; use the generated ledger for current URLs | New/changed/removed URLs, canonical, HTTP state, and index eligibility | Confirm intent before addition, deletion, or redirect |
 
@@ -162,6 +167,17 @@ verification, or the root URL without prior approval.
 
 Update `sitemap.xml` only through the applicable canonical category workflow. Diff against the current sitemap, classify each URL as add, preserve, or delete, and verify HTTP, canonical, and index eligibility.
 
+### 6.8 Member-System Implementation References
+
+The existing member reference set is retained under `HP/docs/` as implementation references owned by this canonical document. The set is not a case record and does not prove live environment state:
+
+- [`MEMBER_ARCHITECTURE.md`](../../HP/docs/MEMBER_ARCHITECTURE.md) is the implementation-reference parent.
+- [`PHASE1_API.md`](../../HP/docs/PHASE1_API.md) through [`PHASE6_API.md`](../../HP/docs/PHASE6_API.md) are phase-specific children.
+
+These files describe intended implementation contracts and provide navigation to the related code and SQL. They are not a second canonical management source and MUST NOT be used alone to establish the live database schema, executed migrations, credentials, scheduler, SMS or mail mode, enabled integration state, deployment state, or production behavior. For each task, compare the applicable reference with the exact implementation and use the database or production route when live evidence is required.
+
+Do not create another phase document solely because work is described as a new phase. Update an existing reference only when it owns that implementation responsibility; otherwise register the case and update the canonical specification or actual implementation selected by `WORK_ROUTING.md`.
+
 ## 7. Validation
 
 Run only checks required for the target and do not duplicate them.
@@ -172,6 +188,7 @@ Run only checks required for the target and do not duplicate them.
 | PHP | Lint changed PHP, include target, undefined variables, zero-result and invalid-input behavior |
 | Source | Title, H1, canonical, robots, internal links, images, and desktop/mobile |
 | Dataset | Matching case, placeholder count, database zero results, ordering, escaping, Cookie/GET |
+| Member system | Applicable `HP/docs/` reference versus actual API dispatch, member classes, source/dataset, SQL, integration flag, and authorized live database or environment evidence; keep unverified state explicit |
 | Index/detail | Index-to-detail and detail-to-index routes, nonexistent IDs, and missing images/movies |
 | External submission | Action, submitted fields, no exposed authentication values, and failure display; submission tests require separate approval |
 | Sitemap | Valid XML, no duplicate URLs, target HTTP, canonical, and no unintended management URL |

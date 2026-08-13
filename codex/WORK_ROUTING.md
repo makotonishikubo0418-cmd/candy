@@ -7,7 +7,7 @@
 - Source of Truth Responsibility: Sole canonical work-routing table and complete filename-level management-document tree
 - Related Documents: `codex/README.md` and `codex/project_management/DOCUMENT_RULES.md`
 - Related Implementation Files: None
-- Updated: 2026-08-12
+- Updated: 2026-08-14
 
 ## 5. Work Execution Method
 - Scope: all work under `C:\Codex\FSG\Candy`.
@@ -18,10 +18,26 @@
 - When performing work, do not expand the reading scope to unrelated management documents, historical materials, records, reports, or reference materials. Review only the relevant portions of the management documents that apply to the task, comply with them, and proceed accordingly.
 - Select routing rows from the user's objective, not from every internal step performed by an integrated runbook. When a routed runbook explicitly owns target selection, validation, generation, or another internal step, that step does not activate a separate confirmation or investigation route unless the user requested it as a separate objective or the runbook explicitly routes an exception there.
 - When a canonical script provides a bounded command for selecting or checking one target, use that command instead of printing or reviewing a full generated current-state document. Open the generated document only when the selected route or a verified exception requires its contents.
-- If no management document applies to the instructed work, the applicable document is unknown, or conflicting content prevents the required action from being determined, do not proceed based on assumptions. Perform the work only after obtaining the user’s approval.
+- If no management document applies or an applicable management document does not exist, skip only the unavailable management-document step and continue under the user's instruction and root `AGENTS.md`. Do not invent a substitute document. If the applicable route remains genuinely unknown or a conflict remains after applying the authority hierarchy, identify the exact missing decision and request it only when accurate execution is impossible without it.
 - Add, consolidate, relocate, rename, or retire a management document only after the user individually approves the change. After execution, always update `### 5.1 Management Document Structure` and `### 5.2 Work Routing` to reflect the current state.
 - Before creating, splitting, merging, moving, renaming, restructuring, archiving, deprecating, retiring, or creating a parent or child for any persistent management document, MUST review `codex/project_management/DOCUMENT_RULES.md` and apply it. The route is `AGENTS.md` → `WORK_ROUTING.md` → `DOCUMENT_RULES.md` → determine case, parent, location, lifecycle, and canonical responsibility → create or change the document.
 - Before persistent documentation or implementation begins for a bug fix, modification, new feature, new page, new system, investigation, refactoring, specification change, migration, production change, or other traceable case, MUST review `codex/project_management/CASE_REGISTRY.md` and register or identify the case under the rules in `DOCUMENT_RULES.md`.
+
+### 5.0 Logical Management Classification
+
+This classification is the logical route for existing and future information. It does not replace the physical tree in Section 5.1 or create a second source of truth.
+
+| Logical category | Existing canonical owner and handling |
+|---|---|
+| Highest authority | Repository-root `AGENTS.md`; read and apply it, but do not modify it without the exact authorization required there |
+| Existing management documents, formal specifications, runbooks, ledgers, and other canonical sources | `codex/README.md` owns locations and responsibilities; `codex/docs/CANDY_MASTER_DOC_INDEX.md` owns HP subject lookup; routed specifications and runbooks own stable requirements; `codex/docs/generated/` owns generated current state |
+| Management-document creation rules | `codex/project_management/DOCUMENT_RULES.md` owns creation, placement, naming, capacity, splitting, parent-child relationships, links, lifecycle, adoption, and validation |
+| Consultation history | A consultation remains in the conversation unless an adopted decision or unresolved issue must persist. Persistent consultation outcomes belong to `CASE_REGISTRY.md` and its case parent when required; completed execution evidence belongs to `TASK_LOG.md` |
+| Defect and response history | Unresolved owner decisions belong to `CANDY_FIX_BACKLOG.md`; case-specific analysis and decisions belong to `CASE_REGISTRY.md` and the case parent; cross-case current blockers belong to `PROJECT_STATUS.md`; completed execution belongs to `TASK_LOG.md` |
+| Modifications, additions, and new creation | `CASE_REGISTRY.md` and the case parent own the traceable case; the applicable canonical specification or runbook owns permanent behavior; `TASK_LOG.md` owns completed execution results |
+| System and operational information | `codex/README.md` owns repository, URL, and location identity; `docs/rules/GIT_RULES.md` owns Git and GitHub procedure; `CANDY_OPERATION_BASICS.md` owns database and external-configuration boundaries; `CANDY_OTHER_PAGES_MANAGEMENT.md` owns session, Cookie, authentication, API, and member-page impact; `CANDY_PRODUCTION_MIGRATION_MASTER.md` owns server, deployment, runtime-placement, recovery, DNS, and TLS operation boundaries; `CANDY_SEO_SPEC.md` owns canonical-host requirements. Actual configuration or external-service state remains the live source and MUST be labelled `UNVERIFIED` until checked |
+
+Do not create category-wide duplicates such as a second consultation ledger, bug history, change history, or system-information book. Route each item to the existing owner above, and create a case child only when `DOCUMENT_RULES.md` requires one.
 
 ### 5.1 Management Document Structure
 
@@ -30,6 +46,15 @@ C:\Codex\FSG\Candy
 ├─ docs/
 │  └─ rules/
 │     └─ GIT_RULES.md
+├─ HP/
+│  └─ docs/
+│     ├─ MEMBER_ARCHITECTURE.md [Implementation Reference / Active]
+│     ├─ PHASE1_API.md [Implementation Reference / Active]
+│     ├─ PHASE2_API.md [Implementation Reference / Active]
+│     ├─ PHASE3_API.md [Implementation Reference / Active]
+│     ├─ PHASE4_API.md [Implementation Reference / Active]
+│     ├─ PHASE5_API.md [Implementation Reference / Active]
+│     └─ PHASE6_API.md [Implementation Reference / Active]
 └─ codex/
    ├─ WORK_ROUTING.md
    ├─ README.md
@@ -39,7 +64,8 @@ C:\Codex\FSG\Candy
    │  ├─ PROJECT_STATUS.md
    │  ├─ CASE_REGISTRY.md
    │  ├─ cases/
-   │  │  └─ CANDY_MANAGEMENT_SYSTEM_REBUILD.md
+   │  │  ├─ CANDY_MANAGEMENT_SYSTEM_REBUILD.md
+   │  │  └─ CANDY_MANAGEMENT_SYSTEM_REPAIR.md
    │  ├─ SAFETY_PROTOCOL.md
    │  ├─ TASK_RESERVATIONS.md
    │  ├─ CODEX_COMMUNICATION.md
@@ -110,6 +136,10 @@ C:\Codex\FSG\Candy
 | Audit management-document structure, routing, responsibilities, consistency, or drift | `codex/README.md`, `codex/MANAGEMENT_SYSTEM_OVERVIEW.md`, `codex/project_management/DOCUMENT_RULES.md`, `codex/docs/CANDY_MASTER_DOC_INDEX.md`, `codex/docs/CANDY_OPERATION_BASICS.md`, and the management documents being audited |
 | Create or modify the management structure, instructions, specifications, or management documents | `codex/README.md`, `codex/MANAGEMENT_SYSTEM_OVERVIEW.md`, `codex/project_management/DOCUMENT_RULES.md`, and the canonical document being changed |
 | Register, plan, phase, document, complete, archive, or review a change or investigation case | `codex/project_management/DOCUMENT_RULES.md`, `codex/project_management/CASE_REGISTRY.md`, and the registered case parent when one exists |
+| Record or review a persistent user consultation, adopted decision, or unresolved requirement | `codex/project_management/DOCUMENT_RULES.md`, `codex/project_management/CASE_REGISTRY.md`, and the registered case parent when one exists; do not create a persistent record for a transient answered consultation |
+| Record or review defect and response history | `codex/docs/CANDY_FIX_BACKLOG.md` for unresolved owner decisions, `codex/project_management/CASE_REGISTRY.md` and the case parent for individual detail, `codex/project_management/PROJECT_STATUS.md` for current cross-case blockers, and the time-bounded `TASK_LOG.md` child for completed execution |
+| Record or review modification, addition, or new-creation history | `codex/project_management/CASE_REGISTRY.md`, the case parent when required, the applicable canonical specification or runbook for permanent behavior, and the time-bounded `TASK_LOG.md` child for completed execution |
+| Review or update system and operational information | `codex/README.md` for repository, URL, and location identity, then only the responsible source named in Section 5.0: `docs/rules/GIT_RULES.md`, `CANDY_OPERATION_BASICS.md`, `CANDY_OTHER_PAGES_MANAGEMENT.md`, `CANDY_PRODUCTION_MIGRATION_MASTER.md`, or `CANDY_SEO_SPEC.md`, plus the exact implementation, configuration, or external environment required by the request |
 | Confirm current status, issues, decisions, priorities, or next work | `codex/project_management/PROJECT_STATUS.md`; read `codex/project_management/CODEX_COMMUNICATION.md` only when required |
 | Coordinate ownership, reservations, conflict prevention, or handoff among multiple Codex agents | `codex/project_management/TASK_RESERVATIONS.md` and `codex/project_management/CODEX_COMMUNICATION.md` |
 | Record or review task history | `codex/project_management/TASK_LOG.md` and the time-bounded child selected by its index |
@@ -133,6 +163,7 @@ C:\Codex\FSG\Candy
 | Adopt, save, install, replace, or manage the publication status of hotel images | `codex/docs/CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`, the target text, the adopted source image, and the published image; also read `codex/docs/CANDY_PRODUCTION_MIGRATION_MASTER.md` when replacing an existing published image under the same filename or performing production work |
 | Produce a blog page | `codex/docs/CANDY_PAGE_GENERATION_GOVERNANCE.md` and `codex/docs/CANDY_BLOG_PAGE_GENERATION_SPEC.md` |
 | Investigate or modify a page that is not an area, hotel, or blog page | `codex/docs/CANDY_OTHER_PAGES_MANAGEMENT.md`, `codex/docs/CANDY_OPERATION_BASICS.md`, and the applicable generated current-state document; when the target is an area, blog, or hotel section in `HP/source/index.html`, also read `codex/docs/CANDY_PAGE_GENERATION_GOVERNANCE.md` |
+| Investigate or modify the member mypage, member API, authentication, notification, or related SQL | `codex/docs/CANDY_OTHER_PAGES_MANAGEMENT.md`, `codex/docs/CANDY_OPERATION_BASICS.md`, `HP/docs/MEMBER_ARCHITECTURE.md`, the applicable `HP/docs/PHASE*_API.md` implementation reference, and the exact implementation; database or production operations activate their separate routes and permissions |
 | Investigate or modify SEO | `codex/docs/CANDY_SEO_SPEC.md`, `codex/docs/generated/CANDY_SEO_STATUS.md`, the applicable category specification, and the affected pages, indexes, sitemaps, internal links, and images; also read `codex/docs/CANDY_OPERATION_BASICS.md` before making changes |
 | Confirm the page structure of the entire website | `codex/docs/CANDY_HP_STRUCTURE_MAP.md` and `codex/docs/generated/CANDY_SITE_PAGE_LEDGER.md` |
 | Confirm PHP files, source code, datasets, CSS, JavaScript, images, or reference relationships | `codex/docs/CANDY_CODE_FILE_STRUCTURE.md` and `codex/docs/generated/CANDY_CODE_ASSET_INVENTORY.md` |

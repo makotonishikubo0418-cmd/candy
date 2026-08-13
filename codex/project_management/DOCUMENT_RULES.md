@@ -4,7 +4,7 @@
 - Status: canonical document
 - Lifecycle: Active
 - Parent / Owner: `codex/README.md`
-- Updated: 2026-08-12
+- Updated: 2026-08-14
 - Canonical scope: Sole source for management-document creation, placement, naming, composition, capacity, splitting, merging, parent-child relationships, links, lifecycle, and document-change validation
 - Source of Truth Responsibility: Rules for creating and maintaining every persistent Candy management document
 - Related documents: `codex/WORK_ROUTING.md`, `codex/project_management/CASE_REGISTRY.md`, and `codex/project_management/SAFETY_PROTOCOL.md`
@@ -20,7 +20,7 @@
 - Canonical management information belongs under `codex/`, except for repository-root `AGENTS.md` and `docs/rules/GIT_RULES.md` that the Candy authority and routing documents explicitly select; project-management documents belong under `codex/project_management/`.
 - Do not convert unverified information into confirmed information.
 - Keep stable specifications, current state, generated facts, and task history separate.
-- Every persistent management document MUST belong to the formal structure shown in both `codex/README.md` and `codex/WORK_ROUTING.md`.
+- Every persistent management document and retained implementation-reference Markdown file MUST belong to the formal structure shown in both `codex/README.md` and `codex/WORK_ROUTING.md`.
 - A Markdown file created for analysis, planning, phases, implementation, verification, or completion MUST belong to a registered case before it is treated as persistent.
 
 ## 2. Location-Rule Boundary
@@ -29,6 +29,8 @@ Canonical management, common-rule, project, HP, input, accepted-asset, and NAS
 locations are defined only in `codex/README.md`. This document applies naming,
 structure, update, and document-change Git rules to those locations without
 copying or redefining them.
+
+Existing implementation-reference Markdown MAY remain beside its implementation only under Section 3.19. It is subordinate to a canonical owner under `codex/`, is not a second management authority, and MUST NOT be used as proof of live database, server, authentication, DNS, TLS, or production state.
 
 ## 3. Markdown Naming and Language Standard
 
@@ -211,6 +213,38 @@ At task completion, every temporary analysis or audit file MUST be either incorp
 
 Existing documents adopted into this structure MUST be classified by actual responsibility. Deprecated compatibility files may remain at their old paths, but the formal tree and their own metadata MUST explain why they exist, their parent, that they are excluded from current work, and their lifecycle.
 
+### 3.18 Daily Information Classification
+
+Classify new information by responsibility before deciding whether to write a persistent document:
+
+| Information | Required owner and handling |
+|---|---|
+| Transient question, consultation, or explanation | Keep it in the conversation. Do not create a persistent file merely because a conversation occurred |
+| Adopted decision, consultation outcome, or unresolved requirement that must persist | Register or identify the case in `CASE_REGISTRY.md`; store case-specific detail in the case parent only when the registry row is insufficient; update a stable specification only when permanent behavior changed |
+| Unresolved defect requiring an owner decision | `CANDY_FIX_BACKLOG.md`, with case detail in the registered case parent when required |
+| Current cross-case blocker, priority, or next action | `PROJECT_STATUS.md` |
+| Modification, addition, new creation, investigation, or migration | `CASE_REGISTRY.md` and its case parent when required; permanent behavior remains in the applicable specification or runbook |
+| Completed execution result | The time-bounded child selected by `TASK_LOG.md` |
+| Inter-task request, caution, handoff, or response | `CODEX_COMMUNICATION.md` |
+| System and operational information | Use the field-specific owner in `codex/README.md` and `codex/WORK_ROUTING.md`; verify volatile external state from the actual configuration, provider, server, or service and label it `UNVERIFIED` until checked |
+
+Do not create one file per chat, consultation, date, defect, or phase when an existing canonical document, registry row, case parent, backlog, status document, or task-history child can hold the information without mixing responsibilities. Do not create generic parallel sources such as `CONSULTATION_HISTORY.md`, `BUG_HISTORY.md`, `CHANGE_HISTORY.md`, or `SYSTEM_INFORMATION.md`.
+
+### 3.19 Existing Implementation-Reference Markdown
+
+An existing implementation-reference Markdown file outside `codex/` MAY be retained in place only when all of the following are true:
+
+- Moving or duplicating it is not required to satisfy the user's objective.
+- A canonical owner under `codex/` is identified and links to the reference.
+- The reference links back to its canonical owner and, when case-specific, to `CASE_REGISTRY.md` or its case parent.
+- Its purpose, parent, scope, lifecycle, source-of-truth responsibility, related documents, and related implementation files are directly identifiable.
+- It explicitly distinguishes intended implementation behavior from verified live database, server, authentication, DNS, TLS, deployment, and production state.
+- It is listed in both formal trees and included in the repository-wide management audit.
+
+Such a file is an `Implementation Reference`, not a canonical management source. Actual implementation is the source for code behavior; current external state requires live evidence. Existing source language MAY be preserved when wholesale translation is outside the task, but new management metadata and rules MUST follow Section 3.3.
+
+Do not create a new implementation-reference Markdown file outside `codex/` without specific approval and a verified technical reason that the canonical structure cannot satisfy.
+
 ## 4. Prohibited Document Updates
 
 - Do not append unstructured content to the end of a document.
@@ -222,6 +256,7 @@ Existing documents adopted into this structure MUST be classified by actual resp
 - Do not store page counts, file counts, Git state, HTTP state, Actions state, or other volatile values in a stable specification.
 - Do not create a persistent Markdown file outside the formal tree or without a case or canonical owner.
 - Do not create duplicate case parents, disconnected phase files, arbitrary size chunks, or a second work-routing index.
+- Do not create a persistent file solely to mirror a conversation, consultation, defect label, change type, or operational category already owned by Section 3.18.
 
 ## 5. Information-State Labels
 
@@ -243,8 +278,8 @@ At minimum, verify:
 - Unverified work was not reported as complete.
 - Large management or generated documents have a bounded target-specific retrieval route, and integrated runbooks do not require full-document output for an internal automated step.
 - Canonical management documents remain under local `codex/`, repository-root `AGENTS.md`, or the explicitly authorized `docs/rules/GIT_RULES.md` location and were not duplicated elsewhere at the repository root, under HP, or on the NAS.
-- `candy-site-state check` succeeds and generated documents agree with actual files.
-- Every formal Markdown file is present in the actual tree, has a determinable purpose, parent, scope, lifecycle, source-of-truth responsibility, and related document or implementation relationship, and is reachable from a formal entry point.
+- When a management-document change affects HP or generated current state, the applicable target or full `candy-site-state check` MUST succeed and generated documents MUST agree with actual files. For a management-only change, run the full check as a drift observation when required, but do not expand scope to repair preexisting unrelated HP findings; record the exact findings separately and do not report them as fixed.
+- Every repository Markdown file is either a formal management document or a formally owned implementation reference, is present in the actual tree, has a determinable purpose, parent, scope, lifecycle, source-of-truth responsibility, and related document or implementation relationship, and is reachable from a formal entry point.
 - Parent-child links are bidirectional; registered cases resolve to their parent; case children resolve back to the parent and registry.
 - No broken relative Markdown links, duplicate canonical responsibility, orphan Markdown, or file over 70,000 bytes remains.
 - The Markdown count, capacity bands, lifecycle classification, formal trees, and actual filesystem agree.
@@ -300,5 +335,8 @@ At minimum, verify:
 | Concurrent task ownership and file reservation | `TASK_RESERVATIONS.md` |
 | Inter-task request, caution, handoff, and response | `CODEX_COMMUNICATION.md` |
 | Completed task execution results and verified or unverified evidence | `TASK_LOG.md` and its history children |
+| Persistent consultation outcomes and adopted case-specific decisions | `CASE_REGISTRY.md` and the registered case parent when required |
+| Unresolved defects requiring owner decisions | `codex/docs/CANDY_FIX_BACKLOG.md` |
+| Repository, GitHub, database, server, authentication, domain, DNS, TLS, placement, and other system or operational information | The field-specific owner in `codex/README.md` and `codex/WORK_ROUTING.md`, plus verified live evidence for volatile external state |
 
 Do not permanently maintain the same information in two owners. A document may link to another owner's record and summarize only what is necessary for navigation.

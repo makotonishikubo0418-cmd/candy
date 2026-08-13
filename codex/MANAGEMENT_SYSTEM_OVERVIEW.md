@@ -10,7 +10,7 @@
 - Source of Truth Responsibility: High-level design intent only; no detailed rule, route, case state, or task history
 - Related Implementation Files: None
 - Canonical location: `C:\Codex\FSG\Candy\codex`
-- Updated: 2026-08-12
+- Updated: 2026-08-14
 
 ## 1. Intended Outcome
 
@@ -28,6 +28,7 @@ The intended state is:
 - Separate stable specifications from current state that can be regenerated from actual files.
 - Maintain necessary communication and never report unverified work as complete.
 - Preserve a structure that remains maintainable when expanded across categories.
+- Classify daily consultations, defects, changes, and system or operational information into their existing owners without creating parallel category-wide ledgers.
 
 Here, "shortest route" does not mean rushed or incomplete work. It means completing every required step and omitting only unnecessary steps.
 
@@ -87,6 +88,8 @@ overview never adds an execution step.
 | One-off analysis documents remain isolated | Register the case, use one parent, and classify every retained child by lifecycle |
 | Case phases and implementation cannot be traced | Route registry → case parent → specification → implementation → verification → completion |
 | A document grows beyond a usable size | Split by responsibility, data class, time period, or lifecycle under one parent |
+| Daily consultations, defects, changes, or operational facts create scattered files | Use the logical classification in `WORK_ROUTING.md` and the persistence decision in `DOCUMENT_RULES.md` |
+| Implementation-adjacent reference documents become isolated | Give each retained reference a canonical owner, bidirectional links, an explicit unverified-state boundary, and repository-wide audit coverage |
 | Repeated changes degrade the code | Enforce one responsibility per canonical source, integration into existing routes, and no appended override blocks |
 | Specifications differ between documents | Assign one canonical document to each subject and prohibit duplicate specifications |
 | Unverified work is reported as complete | Distinguish canonical, user-reported, implementation-verified, and unverified information |

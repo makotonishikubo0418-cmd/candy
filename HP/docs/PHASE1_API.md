@@ -1,5 +1,14 @@
 # 会員マイページ Phase1 — API 一覧（店舗横展開共通）
 
+- Purpose: Preserve the Phase 1 member registration, login, account, legal-text, and CTI-linking implementation contract
+- Parent / Owner: [`MEMBER_ARCHITECTURE.md`](MEMBER_ARCHITECTURE.md)
+- Scope: Phase 1 API and implementation reference only
+- Status / Lifecycle: Implementation Reference / Active
+- Source of Truth Responsibility: Phase 1 intended API implementation reference; actual code and verified environment take precedence
+- Related Documents: [`CANDY_OTHER_PAGES_MANAGEMENT.md`](../../codex/docs/CANDY_OTHER_PAGES_MANAGEMENT.md) and [`MEMBER_ARCHITECTURE.md`](MEMBER_ARCHITECTURE.md)
+- Related Implementation Files: `HP/member/api.php`, `HP/includefile/member/`, member entry PHP, member source and dataset files, `HP/js/member.js`, member CSS, and Phase 1 SQL under `HP/sql/`
+- Verification boundary: Live database schema, executed migrations, credentials, CTI connection, SMS delivery, deployment, and production behavior are `UNVERIFIED` until checked through the applicable routed operation
+
 初回実装: `candy_new`（`MEMBER_CLUB_ID = 2`）  
 店舗DB: `fsg_db`（`customers_*` テーブル）  
 CTI DB: 本番 `cti`（参照のみ）

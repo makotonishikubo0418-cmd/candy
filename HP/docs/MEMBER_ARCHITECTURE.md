@@ -1,5 +1,17 @@
 # 会員マイページ — 横展開アーキテクチャ
 
+- Purpose: Preserve the implementation-reference architecture for the existing Candy member mypage and its cross-shop design
+- Parent / Owner: [`CANDY_OTHER_PAGES_MANAGEMENT.md`](../../codex/docs/CANDY_OTHER_PAGES_MANAGEMENT.md)
+- Scope: Member implementation structure, phase relationships, and intended cross-shop boundaries
+- Status / Lifecycle: Implementation Reference / Active
+- Source of Truth Responsibility: Navigation parent for the Phase 1 through Phase 6 implementation references; not a case record or canonical live-environment source
+- Related Documents: [`CANDY_OTHER_PAGES_MANAGEMENT.md`](../../codex/docs/CANDY_OTHER_PAGES_MANAGEMENT.md), [`PHASE1_API.md`](PHASE1_API.md), [`PHASE2_API.md`](PHASE2_API.md), [`PHASE3_API.md`](PHASE3_API.md), [`PHASE4_API.md`](PHASE4_API.md), [`PHASE5_API.md`](PHASE5_API.md), and [`PHASE6_API.md`](PHASE6_API.md)
+- Related Implementation Files: `HP/includefile/member/`, `HP/member/`, member entry PHP, member source and dataset files, `HP/js/member*.js`, `HP/css/member*.css`, and `HP/sql/`
+
+## Verification boundary
+
+This file records intended implementation structure. Actual code and SQL files are the source for static implementation behavior. Database migrations, live schemas, credentials, enabled integration state, scheduler state, server placement, and production behavior remain `UNVERIFIED` until checked through the applicable route in `codex/WORK_ROUTING.md`. Do not execute database, cron, deployment, or external-service operations from this reference alone.
+
 ## 方針
 
 | 項目 | 内容 |
@@ -51,7 +63,7 @@ define('MEMBER_COOKIE_PREFIX', 'candy'); // Cookie名: candy_member_session 等
 3. `customers_legal_documents` に当店舗の規約・PP を INSERT
 4. control に当店舗用お知らめ管理（Phase4、`club_id` フィルタ）
 5. ヘッダーにログイン・マイページリンク
-6. **DBマイグレーション不要**（共通テーブル済み）
+6. この設計では共通テーブルを前提とする。対象環境でマイグレーションが不要かどうかは、実行前にライブスキーマと適用履歴を確認する
 
 ## Cookie / セッション
 

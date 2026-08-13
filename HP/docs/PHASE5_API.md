@@ -1,5 +1,14 @@
 # Phase5 API（メール・通知）
 
+- Purpose: Preserve the Phase 5 member email and notification implementation contract
+- Parent / Owner: [`MEMBER_ARCHITECTURE.md`](MEMBER_ARCHITECTURE.md)
+- Scope: Phase 5 API, batch, and implementation reference only
+- Status / Lifecycle: Implementation Reference / Active
+- Source of Truth Responsibility: Phase 5 intended API and notification implementation reference; actual code and verified environment take precedence
+- Related Documents: [`CANDY_OTHER_PAGES_MANAGEMENT.md`](../../codex/docs/CANDY_OTHER_PAGES_MANAGEMENT.md) and [`MEMBER_ARCHITECTURE.md`](MEMBER_ARCHITECTURE.md)
+- Related Implementation Files: `HP/member/api.php`, `HP/member/cron_notify_info.php`, `HP/includefile/member/MemberMail.php`, `HP/includefile/member/MemberNotification.php`, and Phase 5 SQL under `HP/sql/`
+- Verification boundary: Live mail mode, scheduler, sendmail, database state, deployment, and production behavior are `UNVERIFIED` until checked through the applicable routed operation
+
 ## 前提
 
 - `sql/005_phase5_member.sql` を Phase1 後に実行

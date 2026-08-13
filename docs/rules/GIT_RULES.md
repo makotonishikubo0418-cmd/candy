@@ -75,7 +75,7 @@ Report the following verified facts before work begins:
 ### Mismatch and Unverifiable Conditions
 
 - If a required result is incomplete, omitted, or returned with an error, discard that result and retry the complete operation once.
-- If complete, error-free information still cannot be obtained, write exactly `情報取得エラー`, identify the affected repository, branch, command or service, and exact cause, then STOP.
-- If a same-name local and GitHub branch has a different SHA, a required branch is missing, the work branch cannot be selected unambiguously, or an overlapping uncommitted change cannot be preserved safely, report the facts and STOP.
-- If network access, authentication, remote configuration, or repository validity prevents live verification, do not substitute a local remote-tracking reference or memory for the missing live result.
-- Work may proceed under an unverified or mismatched condition only after the user explicitly approves that condition. The final report must identify every action and judgment affected by it.
+- If complete, error-free GitHub information still cannot be obtained, write exactly `情報取得エラー`, identify the affected repository, branch, command or service, and exact cause, and omit only the unavailable GitHub comparison as required by root `AGENTS.md`. Do not substitute a local remote-tracking reference or memory for the missing live result.
+- Continue instructed non-Git work when only the live GitHub comparison is unavailable. If the requested operation would change Git state and its safe target cannot be established without the missing live result, STOP only that Git-state-changing operation and request the information or permission required to resolve it.
+- If a same-name local and GitHub branch has a different SHA or a required branch is missing, report the specific difference. STOP before a Git-state-changing operation when the work branch cannot be selected unambiguously or when an overlapping uncommitted change cannot be preserved safely; otherwise preserve the difference and continue only the instructed safe scope.
+- The final report must identify every unverified or mismatched item and every action or judgment affected by it.

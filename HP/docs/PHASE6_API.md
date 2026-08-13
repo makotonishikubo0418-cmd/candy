@@ -1,5 +1,14 @@
 # Phase6 API（会員情報仕様拡張）
 
+- Purpose: Preserve the Phase 6 member-profile extension implementation contract
+- Parent / Owner: [`MEMBER_ARCHITECTURE.md`](MEMBER_ARCHITECTURE.md)
+- Scope: Phase 6 API, profile-schema, and implementation reference only
+- Status / Lifecycle: Implementation Reference / Active
+- Source of Truth Responsibility: Phase 6 intended API and profile implementation reference; actual code and verified environment take precedence
+- Related Documents: [`CANDY_OTHER_PAGES_MANAGEMENT.md`](../../codex/docs/CANDY_OTHER_PAGES_MANAGEMENT.md) and [`MEMBER_ARCHITECTURE.md`](MEMBER_ARCHITECTURE.md)
+- Related Implementation Files: `HP/member/api.php`, `HP/includefile/member/MemberProfile.php`, `HP/includefile/member/MemberPhones.php`, member UI files, and Phase 6 SQL under `HP/sql/`
+- Verification boundary: Live database migration state, AI-project integration, deployment, and production behavior are `UNVERIFIED` until checked through the applicable routed operation
+
 ## 前提
 
 - `sql/006_phase6_member_profile.sql` を Phase1〜5 投入後に実行すること

@@ -8,7 +8,7 @@
 
 - Purpose: Provide one location for the overall plan, current state, problems, and next work
 - Status: canonical document
-- Updated: 2026-08-12
+- Updated: 2026-08-14
 
 ## 1. Current State
 
@@ -20,7 +20,8 @@
 ## 2. Completed Management Foundation
 
 - Central case tracking, non-atomic case parents, lifecycle, direct-open identity, capacity limits, parent-child links, and responsibility-based document splitting are governed by `DOCUMENT_RULES.md` and indexed by `CASE_REGISTRY.md`.
-- The formal management tree contains every retained active, completed, historical, deprecated, and generated Markdown document; `audit_candy_management_docs.py` verifies population, ownership, links, lifecycle, cases, implementation relationships, capacity, and tree agreement.
+- The formal trees contain every retained active, completed, historical, deprecated, generated, and implementation-reference Markdown file. `audit_candy_management_docs.py` compares both filename-level trees with the repository-wide Markdown and generated-sidecar population; checks required identity, relative links, tables, lifecycle classification, repeated source-of-truth declaration text, every declared parent, every registered case parent, implementation-reference verification boundaries, and capacity; and reports each failure class separately. Semantic responsibility and whether two differently worded documents overlap still require the classification review defined by `DOCUMENT_RULES.md`.
+- `WORK_ROUTING.md` Section 5.0 classifies existing sources, management-document rules, consultations, defects, changes, and system or operational information without creating parallel category-wide ledgers.
 - `codex/WORK_ROUTING.md` Section 5.2 is the required-document routing authority.
   `codex/README.md` owns canonical management locations and document
   responsibilities only; it no longer adds a second operational route.
@@ -42,6 +43,7 @@
 | Hotel input and production order | Hotel classification, hotel content/image runbooks, and generated upcoming pages | Run `legacy-check` for a legacy Text, use `direct-check` for a staff-completed current Text, and keep Phase preparation independent; resolve the reported image, input, and existing-registration blockers before production |
 | Hotel accepted-source-only publication gap | `CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md`, `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`, and `codex/docs/CANDY_FIX_BACKLOG.md` item `HOTEL-ACCEPTED-IMAGE-PATH` | The current automatic `publish-next` route does not complete first local installation, same-name hash verification, image-asset registration and deployment, production-byte verification, and subsequent page publication from an accepted-source-only pair. Accepted-source-only automatic publication remains unavailable until the backlog item is `COMPLETE` |
 | Existing blog exceptions | Blog specification and generated ledger/SEO status | Keep separate from new production and use a dedicated fix task |
+| Member-system live state | `CANDY_OTHER_PAGES_MANAGEMENT.md`, its owned implementation references under `HP/docs/`, and the actual implementation | Implementation and reference files are present, but database migrations, runtime enablement, scheduler, deployment, and production behavior remain `UNVERIFIED`; use the routed member investigation before an operational change |
 
 ## 4. Candidate Next Actions
 

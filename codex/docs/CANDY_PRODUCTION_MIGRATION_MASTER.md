@@ -2,9 +2,9 @@
 
 ## 1. Purpose
 - Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
-- Scope: Production deployment, protected-entry publication, recovery, rollback, and migration boundary
+- Scope: Production deployment, protected-entry publication, server placement, domain transport, recovery, rollback, and migration boundary
 - Lifecycle: Active
-- Source of Truth Responsibility: Canonical production deployment and migration control
+- Source of Truth Responsibility: Canonical production deployment, server-placement, domain-transport verification, and migration control
 - Related Documents: `CANDY_OPERATION_BASICS.md`, `CANDY_VERIFICATION_PLAN.md`, and exact workflows
 - Related Implementation Files: Eligible `HP/` targets and the exact `.github/workflows/` and `.github/scripts/` deployment files
 
@@ -27,6 +27,14 @@ validation.
 | Test server | `/public_html/group_test/candy/` | Test version created by the user during production |
 
 Local paths vary by computer. Use the current Git root. Do not confuse production and test.
+
+### 2.1 Domain, DNS, and TLS Boundary
+
+- The canonical public host and URL requirement belongs to `CANDY_SEO_SPEC.md` and the production entry contract in Section 3.
+- Current DNS records, authoritative DNS provider state, TLS certificate identity and expiry, and TLS termination configuration are volatile external state. The live provider or server is the evidence source; repository text alone does not verify them.
+- Treat each current DNS or TLS value as `UNVERIFIED` until the exact host, record or certificate, evidence time, and verification method are checked through an authorized read-only route.
+- Do not copy provider credentials, private keys, certificate private material, FTP secrets, or external configuration values into this repository or a report.
+- A DNS, certificate, TLS termination, host redirect, or server-placement change is production or external-service work. It requires explicit target authorization, a verified rollback method, and post-change DNS, TLS, HTTP, canonical-host, and direct-host checks.
 
 ## 3. Production Entry Contract
 

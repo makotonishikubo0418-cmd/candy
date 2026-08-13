@@ -1,5 +1,14 @@
 # Phase2 API（利用履歴・女の子評価）
 
+- Purpose: Preserve the Phase 2 member history and girl-evaluation implementation contract
+- Parent / Owner: [`MEMBER_ARCHITECTURE.md`](MEMBER_ARCHITECTURE.md)
+- Scope: Phase 2 API and implementation reference only
+- Status / Lifecycle: Implementation Reference / Active
+- Source of Truth Responsibility: Phase 2 intended API implementation reference; actual code and verified environment take precedence
+- Related Documents: [`CANDY_OTHER_PAGES_MANAGEMENT.md`](../../codex/docs/CANDY_OTHER_PAGES_MANAGEMENT.md) and [`MEMBER_ARCHITECTURE.md`](MEMBER_ARCHITECTURE.md)
+- Related Implementation Files: `HP/member/api.php`, `HP/includefile/member/MemberHistory.php`, `HP/includefile/member/MemberEvaluation.php`, and Phase 2 SQL under `HP/sql/`
+- Verification boundary: Live CTI data, database schema, executed migrations, deployment, and production behavior are `UNVERIFIED` until checked through the applicable routed operation
+
 Phase1 の認証（セッション Cookie）が必要です。
 
 ## 前提

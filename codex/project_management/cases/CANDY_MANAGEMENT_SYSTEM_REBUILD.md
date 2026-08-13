@@ -10,6 +10,7 @@
 - Related Documents: [`DOCUMENT_RULES.md`](../DOCUMENT_RULES.md), [`codex/WORK_ROUTING.md`](../../WORK_ROUTING.md), [`codex/README.md`](../../README.md), and [`TASK_LOG.md`](../TASK_LOG.md)
 - Related Implementation Files: `codex/scripts/candy_site_state.py`, `codex/scripts/candy_site_state_render.py`, `codex/scripts/candy_page_common.py`, and `codex/scripts/audit_candy_management_docs.py`
 - Updated: 2026-08-12
+- Corrected: 2026-08-14 to distinguish the then-defined formal population from the repository-wide Markdown population
 
 ## 1. Verified Starting State
 
@@ -18,6 +19,7 @@
 - The 13 outside the core tree consisted of 10 deprecated compatibility entries, two dated evidence documents, and one one-time audit.
 - `TASK_LOG.md` and three generated Markdown files exceeded 70,000 bytes.
 - No central case registry, generic case-parent location, universal lifecycle, or formal parent-child metadata rule existed.
+- The audit population used by this case did not include the seven tracked member implementation references under `HP/docs/`. They were identified and formally adopted by `CANDY-MGMT-REPAIR-20260814`; therefore the counts below describe the formal population defined on 2026-08-12, not every repository Markdown file that existed then.
 
 ## 2. Decisions
 
@@ -52,7 +54,7 @@ No case-specific child document is currently required. `TASK_LOG.md` history chi
 
 ## 6. Verification and Completion
 
-Completed on 2026-08-12 with these verified results:
+Completed on 2026-08-12 with these verified results for the then-defined formal population:
 
 - Full management audit: `PASS`; 60 Markdown files, five deterministic TSV sidecars, and 65 formal-tree files agreed exactly.
 - Direct-open identity, parent, scope, lifecycle, source-of-truth responsibility, related documents, and implementation relationship: missing 0.
@@ -61,5 +63,7 @@ Completed on 2026-08-12 with these verified results:
 - Existing task history: all 84 preexisting rows preserved exactly after the time-responsibility split; sorted-row SHA-256 `AC0C3DB0F73AE5EDB4362C168EEB05B107EAF983173CFFF5555FE6FF643F7277` before and after.
 - Generated state: ten-file output set written; second write changed zero files.
 - Scope protection: tracked `HP/` diff count was zero. No database, Control, deployment, production, Commit, or Push operation was performed.
+
+On 2026-08-14, case `CANDY-MGMT-REPAIR-20260814` expanded the audit to the repository-wide Markdown population and adopted the seven preexisting `HP/docs/` member references without moving, renaming, or treating their live-environment claims as verified. The original 2026-08-12 counts remain historical evidence and MUST NOT be reported as the current repository-wide count.
 
 The global site-state health check continues to report six preexisting member/privacy sitemap-or-structure findings. They are outside this management-only case and were not changed or reported as fixed.
