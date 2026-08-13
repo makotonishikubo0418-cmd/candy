@@ -7,20 +7,26 @@
  *********************************************************************/
 
 //-----  SESSION設定  -----//
-require_once("/home/firststar/public_html/group/control/includefile/setting_session_vv.php"); //SESSION設定ファイル
+$__candySiteRoot = str_replace('\\', '/', dirname(__DIR__));
+$__useGroupTest = (strpos($__candySiteRoot, '/group_test/') !== false);
+$__sessionFile = $__useGroupTest
+	? "/home/firststar/public_html/group_test/control/includefile/setting_session_vv.php"
+	: "/home/firststar/public_html/group/control/includefile/setting_session_vv.php";
+require_once($__sessionFile); //SESSION設定ファイル
 //ini_set( 'display_errors', 'on' );
 //error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED);
 
 //-----  設定読込  -----//
 // テスト環境でも本番環境のデータベースを使用するため、本番環境の設定ファイルを読み込む
 require_once("/home/firststar/public_html/group/control/includefile/incfiles_vv.php"); //設定ファイル（本番環境のデータベース接続を使用）
-require_once("/home/firststar/public_html/group/candy/includefile/class.hpgcoder2.php"); //変換クラス2
-require_once("/home/firststar/public_html/group/candy/includefile/funcs.php");           //関数ファイル
+require_once(__DIR__ . "/class.hpgcoder2.php"); //変換クラス2
+require_once(__DIR__ . "/funcs.php");           //関数ファイル
 
 
 //-----  変数取得・設定  -----//
 define("CLUBID", 2);
-define("INCLUDE_DIR", '/home/firststar/public_html/group/candy/includefile/');
+define("INCLUDE_DIR", __DIR__ . '/');
+define("CANDY_SITE_ROOT", $__candySiteRoot);
 $trs     = 9;   //
 
 //
@@ -45,9 +51,13 @@ $Database = new Database($DSN);
 
 //設置ディレクトリ確認
 $path = $_SERVER['SCRIPT_FILENAME'];
-
-//テンプレートhtml取得
-$path = str_replace('/group/candy/', '/group/candy/source/', $path);
+$siteRoot = str_replace('\\', '/', CANDY_SITE_ROOT);
+$path = str_replace('\\', '/', $path);
+$sourcePrefix = $siteRoot . '/source/';
+// source/ を二重に付けない（Linux では DIRECTORY_SEPARATOR と / の2回置換で source/source になる）
+if (strpos($path, $sourcePrefix) !== 0 && strpos($path, $siteRoot . '/') === 0) {
+	$path = $sourcePrefix . substr($path, strlen($siteRoot) + 1);
+}
 $siteTransNum = 11;
 
 //$path = str_replace('/site2/', '/source2/', $path);
