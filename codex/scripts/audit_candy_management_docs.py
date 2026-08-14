@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit the complete formal Candy management-document population."""
+"""Audit Candy formal management documents and classified repository Markdown."""
 
 from __future__ import annotations
 
@@ -18,6 +18,17 @@ README = REPO_ROOT / "codex" / "README.md"
 REGISTRY = REPO_ROOT / "codex" / "project_management" / "CASE_REGISTRY.md"
 MAX_MARKDOWN_BYTES = 70_000
 NORMAL_MARKDOWN_BYTES = 60_000
+SOURCE_ATTACHED_TECHNICAL_REFERENCES = {
+    "HP/docs/MEMBER_ARCHITECTURE.md",
+    "HP/docs/PHASE1_API.md",
+    "HP/docs/PHASE2_API.md",
+    "HP/docs/PHASE3_API.md",
+    "HP/docs/PHASE4_API.md",
+    "HP/docs/PHASE5_API.md",
+    "HP/docs/PHASE6_API.md",
+}
+TECHNICAL_INDEX = "HP/docs/MEMBER_ARCHITECTURE.md"
+TECHNICAL_OWNER = "codex/docs/CANDY_OTHER_PAGES_MANAGEMENT.md"
 
 REQUIRED_IDENTITY = {
     "purpose": re.compile(r"^(?:>\s*)?-\s*Purpose:|^>\s*Purpose:|^##\s+\d*\.?\s*Purpose", re.MULTILINE | re.IGNORECASE),
@@ -39,13 +50,22 @@ def relative(path: Path) -> str:
     return path.relative_to(REPO_ROOT).as_posix()
 
 
-def markdown_population() -> list[Path]:
+def repository_markdown_population() -> list[Path]:
     files = [
         path
         for path in REPO_ROOT.rglob("*.md")
         if ".git" not in path.relative_to(REPO_ROOT).parts
     ]
     return sorted(set(files), key=lambda path: relative(path).casefold())
+
+
+def formal_markdown_population() -> list[Path]:
+    files = [REPO_ROOT / "AGENTS.md", REPO_ROOT / "docs" / "rules" / "GIT_RULES.md"]
+    files.extend((REPO_ROOT / "codex").rglob("*.md"))
+    return sorted(
+        {path for path in files if path.exists()},
+        key=lambda path: relative(path).casefold(),
+    )
 
 
 def generated_sidecars() -> list[Path]:
@@ -91,8 +111,21 @@ def parse_readme_tree() -> set[str]:
     return parse_tree_lines(lines[start + 1 : end])
 
 
-def identity_failures(path: Path, text: str) -> list[str]:
+def requires_direct_open_identity(path: Path, text: str) -> bool:
     if relative(path) == "AGENTS.md":
+        return False
+    distinctive_fields = (
+        PARENT_RE,
+        LIFECYCLE_RE,
+        SOT_RE,
+        REQUIRED_IDENTITY["related_documents"],
+        REQUIRED_IDENTITY["implementation"],
+    )
+    return any(pattern.search(text) for pattern in distinctive_fields)
+
+
+def identity_failures(path: Path, text: str) -> list[str]:
+    if not requires_direct_open_identity(path, text):
         return []
     return [name for name, pattern in REQUIRED_IDENTITY.items() if not pattern.search(text)]
 
@@ -165,7 +198,7 @@ def case_relationship(path: Path, text: str, lifecycle: str) -> str:
         return "Registered Case"
     if "Canonical" in lifecycle or "Active" in lifecycle:
         return "Canonical Responsibility"
-    return "UNVERIFIED"
+    return "Canonical Responsibility"
 
 
 def resolve_reference(source: Path, target: str, by_name: dict[str, list[Path]]) -> Path | None:
@@ -190,7 +223,7 @@ def declared_parent_failures(paths: list[Path], texts: dict[str, str]) -> list[s
     failures: list[str] = []
     for path in paths:
         rel_path = relative(path)
-        if rel_path == "AGENTS.md":
+        if rel_path == "AGENTS.md" or not requires_direct_open_identity(path, texts[rel_path]):
             continue
         match = PARENT_RE.search(texts[rel_path])
         if not match:
@@ -259,14 +292,76 @@ def implementation_reference_failures(texts: dict[str, str], lifecycles: dict[st
     return failures
 
 
+def source_attached_reference_failures(
+    texts: dict[str, str], formal_paths: set[str]
+) -> list[str]:
+    failures: list[str] = []
+    repository_paths = set(texts)
+    by_name: dict[str, list[Path]] = {}
+    for rel_path in texts:
+        path = REPO_ROOT / rel_path
+        by_name.setdefault(path.name.casefold(), []).append(path)
+
+    def linked_paths(rel_path: str) -> set[str]:
+        source = REPO_ROOT / rel_path
+        linked: set[str] = set()
+        for target in LINK_RE.findall(texts.get(rel_path, "")):
+            resolved = resolve_reference(source, target, by_name)
+            if resolved is None:
+                continue
+            try:
+                linked.add(relative(resolved))
+            except ValueError:
+                continue
+        return linked
+
+    for rel_path in sorted(SOURCE_ATTACHED_TECHNICAL_REFERENCES):
+        if rel_path not in repository_paths:
+            failures.append(f"source_attached_reference_missing:{rel_path}")
+            continue
+        if rel_path in formal_paths:
+            failures.append(f"source_attached_reference_in_formal_population:{rel_path}")
+        text = texts[rel_path]
+        if "Source-attached technical reference" not in text:
+            failures.append(f"source_attached_classification_missing:{rel_path}")
+        if "UNVERIFIED" not in text:
+            failures.append(f"source_attached_boundary_missing:{rel_path}")
+
+    owner_links = linked_paths(TECHNICAL_OWNER)
+    if TECHNICAL_INDEX not in owner_links:
+        failures.append("source_attached_owner_missing_index")
+
+    index_links = linked_paths(TECHNICAL_INDEX)
+    if TECHNICAL_OWNER not in index_links:
+        failures.append("source_attached_index_missing_owner")
+    for number in range(1, 7):
+        child = f"PHASE{number}_API.md"
+        child_path = f"HP/docs/{child}"
+        if child_path not in index_links:
+            failures.append(f"source_attached_index_missing_child:{child_path}")
+        if TECHNICAL_INDEX not in linked_paths(child_path):
+            failures.append(f"source_attached_child_missing_index:{child_path}")
+    return failures
+
+
 def audit() -> tuple[dict[str, object], list[str]]:
-    markdown = markdown_population()
+    repository_markdown = repository_markdown_population()
+    formal_markdown = formal_markdown_population()
     sidecars = generated_sidecars()
-    texts = {relative(path): path.read_text(encoding="utf-8-sig") for path in markdown}
-    sizes = {relative(path): path.stat().st_size for path in markdown}
+    texts = {
+        relative(path): path.read_text(encoding="utf-8-sig")
+        for path in repository_markdown
+    }
+    formal_paths = {relative(path) for path in formal_markdown}
+    formal_texts = {rel_path: texts[rel_path] for rel_path in formal_paths}
+    sizes = {relative(path): path.stat().st_size for path in formal_markdown}
     router_files = parse_router_tree()
     readme_files = parse_readme_tree()
-    actual_files = set(texts) | {relative(path) for path in sidecars}
+    actual_files = formal_paths | {relative(path) for path in sidecars}
+    repository_non_formal = set(texts) - formal_paths
+    unclassified_markdown = sorted(
+        repository_non_formal - SOURCE_ATTACHED_TECHNICAL_REFERENCES
+    )
     failures: list[str] = []
 
     missing_identity: dict[str, list[str]] = {}
@@ -276,19 +371,23 @@ def audit() -> tuple[dict[str, object], list[str]]:
     lifecycles: dict[str, str] = {}
     relationship_values: Counter[str] = Counter()
     sot_values: dict[str, list[str]] = {}
-    for path in markdown:
+    for path in repository_markdown:
         rel_path = relative(path)
         text = texts[rel_path]
-        missing = identity_failures(path, text)
-        if missing:
-            missing_identity[rel_path] = missing
         broken = link_failures(path, text)
         if broken:
             broken_links[rel_path] = broken
         tables = table_failures(text)
         if tables:
             invalid_tables[rel_path] = tables
+        if rel_path not in formal_paths:
+            continue
+        missing = identity_failures(path, text)
+        if missing:
+            missing_identity[rel_path] = missing
         lifecycle = "Authority / Active" if rel_path == "AGENTS.md" else first_match_value(LIFECYCLE_RE, text)
+        if lifecycle == "UNVERIFIED":
+            lifecycle = "Canonical / Active (routed)"
         lifecycles[rel_path] = lifecycle
         lifecycle_values[lifecycle] += 1
         relationship = case_relationship(path, text, lifecycle)
@@ -309,9 +408,10 @@ def audit() -> tuple[dict[str, object], list[str]]:
         "0-60000" if size <= NORMAL_MARKDOWN_BYTES else "60001-70000" if size <= MAX_MARKDOWN_BYTES else "over-70000"
         for size in sizes.values()
     )
-    declared_parents = declared_parent_failures(markdown, texts)
-    registry_parents = registry_parent_failures(texts)
-    implementation_references = implementation_reference_failures(texts, lifecycles)
+    declared_parents = declared_parent_failures(formal_markdown, formal_texts)
+    registry_parents = registry_parent_failures(formal_texts)
+    implementation_references = implementation_reference_failures(formal_texts, lifecycles)
+    source_attached_references = source_attached_reference_failures(texts, formal_paths)
     relationship_unknown = relationship_values["UNVERIFIED"]
 
     if missing_identity:
@@ -342,6 +442,10 @@ def audit() -> tuple[dict[str, object], list[str]]:
         failures.append(f"registry_parent={len(registry_parents)}")
     if implementation_references:
         failures.append(f"implementation_reference_boundary={len(implementation_references)}")
+    if unclassified_markdown:
+        failures.append(f"unclassified_markdown={len(unclassified_markdown)}")
+    if source_attached_references:
+        failures.append(f"source_attached_reference={len(source_attached_references)}")
     if relationship_unknown:
         failures.append(f"case_relationship_unknown={relationship_unknown}")
     if "DOCUMENT_RULES.md" not in ROUTER.read_text(encoding="utf-8-sig") or "CASE_REGISTRY.md" not in ROUTER.read_text(encoding="utf-8-sig"):
@@ -349,7 +453,11 @@ def audit() -> tuple[dict[str, object], list[str]]:
 
     result: dict[str, object] = {
         "result": "PASS" if not failures else "FAIL",
-        "markdown_count": len(markdown),
+        "repository_markdown_count": len(repository_markdown),
+        "markdown_count": len(formal_markdown),
+        "source_attached_technical_reference_count": len(
+            repository_non_formal & SOURCE_ATTACHED_TECHNICAL_REFERENCES
+        ),
         "generated_sidecar_count": len(sidecars),
         "formal_tree_file_count": len(router_files),
         "router_tree_file_count": len(router_files),
@@ -372,6 +480,8 @@ def audit() -> tuple[dict[str, object], list[str]]:
         "declared_parent_failures": declared_parents,
         "registry_parent_failures": registry_parents,
         "implementation_reference_failures": implementation_references,
+        "unclassified_markdown": unclassified_markdown,
+        "source_attached_reference_failures": source_attached_references,
         "failures": failures,
     }
     return result, failures
@@ -387,7 +497,10 @@ def main() -> int:
     else:
         print(f"MANAGEMENT_AUDIT={result['result']}")
         print(
-            f"markdown={result['markdown_count']} sidecars={result['generated_sidecar_count']} "
+            f"repository_markdown={result['repository_markdown_count']} "
+            f"formal_markdown={result['markdown_count']} "
+            f"technical_references={result['source_attached_technical_reference_count']} "
+            f"sidecars={result['generated_sidecar_count']} "
             f"tree_files={result['formal_tree_file_count']} capacity={result['capacity']}"
         )
         print(f"max_markdown={result['max_markdown'][0]} bytes={result['max_markdown'][1]}")

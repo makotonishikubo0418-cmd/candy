@@ -1,14 +1,5 @@
 # Candy Work Routing
 
-- Purpose: Select the exact management documents required from the user's work objective
-- Parent / Owner: Repository-root `AGENTS.md`
-- Scope: Required-document routing only
-- Status / Lifecycle: Canonical / Active
-- Source of Truth Responsibility: Sole canonical work-routing table and complete filename-level management-document tree
-- Related Documents: `codex/README.md` and `codex/project_management/DOCUMENT_RULES.md`
-- Related Implementation Files: None
-- Updated: 2026-08-14
-
 ## 5. Work Execution Method
 - Scope: all work under `C:\Codex\FSG\Candy`.
 - Higher authority: `C:\Codex\FSG\Candy\AGENTS.md`.
@@ -46,15 +37,6 @@ C:\Codex\FSG\Candy
 ├─ docs/
 │  └─ rules/
 │     └─ GIT_RULES.md
-├─ HP/
-│  └─ docs/
-│     ├─ MEMBER_ARCHITECTURE.md [Implementation Reference / Active]
-│     ├─ PHASE1_API.md [Implementation Reference / Active]
-│     ├─ PHASE2_API.md [Implementation Reference / Active]
-│     ├─ PHASE3_API.md [Implementation Reference / Active]
-│     ├─ PHASE4_API.md [Implementation Reference / Active]
-│     ├─ PHASE5_API.md [Implementation Reference / Active]
-│     └─ PHASE6_API.md [Implementation Reference / Active]
 └─ codex/
    ├─ WORK_ROUTING.md
    ├─ README.md
@@ -163,7 +145,7 @@ C:\Codex\FSG\Candy
 | Adopt, save, install, replace, or manage the publication status of hotel images | `codex/docs/CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`, the target text, the adopted source image, and the published image; also read `codex/docs/CANDY_PRODUCTION_MIGRATION_MASTER.md` when replacing an existing published image under the same filename or performing production work |
 | Produce a blog page | `codex/docs/CANDY_PAGE_GENERATION_GOVERNANCE.md` and `codex/docs/CANDY_BLOG_PAGE_GENERATION_SPEC.md` |
 | Investigate or modify a page that is not an area, hotel, or blog page | `codex/docs/CANDY_OTHER_PAGES_MANAGEMENT.md`, `codex/docs/CANDY_OPERATION_BASICS.md`, and the applicable generated current-state document; when the target is an area, blog, or hotel section in `HP/source/index.html`, also read `codex/docs/CANDY_PAGE_GENERATION_GOVERNANCE.md` |
-| Investigate or modify the member mypage, member API, authentication, notification, or related SQL | `codex/docs/CANDY_OTHER_PAGES_MANAGEMENT.md`, `codex/docs/CANDY_OPERATION_BASICS.md`, `HP/docs/MEMBER_ARCHITECTURE.md`, the applicable `HP/docs/PHASE*_API.md` implementation reference, and the exact implementation; database or production operations activate their separate routes and permissions |
+| Investigate or modify the member mypage, member API, authentication, notification, or related SQL | `codex/docs/CANDY_OTHER_PAGES_MANAGEMENT.md` and `codex/docs/CANDY_OPERATION_BASICS.md`; then inspect the non-management source-attached technical index `HP/docs/MEMBER_ARCHITECTURE.md`, its applicable `HP/docs/PHASE*_API.md` child, and the exact implementation. Database or production operations activate their separate routes and permissions |
 | Investigate or modify SEO | `codex/docs/CANDY_SEO_SPEC.md`, `codex/docs/generated/CANDY_SEO_STATUS.md`, the applicable category specification, and the affected pages, indexes, sitemaps, internal links, and images; also read `codex/docs/CANDY_OPERATION_BASICS.md` before making changes |
 | Confirm the page structure of the entire website | `codex/docs/CANDY_HP_STRUCTURE_MAP.md` and `codex/docs/generated/CANDY_SITE_PAGE_LEDGER.md` |
 | Confirm PHP files, source code, datasets, CSS, JavaScript, images, or reference relationships | `codex/docs/CANDY_CODE_FILE_STRUCTURE.md` and `codex/docs/generated/CANDY_CODE_ASSET_INVENTORY.md` |

@@ -1,11 +1,4 @@
 # CANDY Code and Asset Structure
-- Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
-- Scope: Stable HP code and public-asset structure, dependencies, and change impact
-- Lifecycle: Active
-- Source of Truth Responsibility: Canonical stable code and asset structure
-- Related Documents: `generated/CANDY_CODE_ASSET_INVENTORY.md` and `CANDY_HP_STRUCTURE_MAP.md`
-- Related Implementation Files: `HP/*.php`, `HP/source/`, `HP/includefile/`, `HP/css/`, `HP/js/`, images, movies, and fonts
-- Purpose: Define stable HP code and public-asset structure, dependencies, and change impact
 
 ## 1. Responsibility
 

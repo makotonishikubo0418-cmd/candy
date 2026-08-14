@@ -1,10 +1,4 @@
 # Codex Communication
-- Parent / Owner: `codex/README.md`
-- Scope: Inter-task requests, cautions, handoffs, and responses only
-- Lifecycle: Active
-- Source of Truth Responsibility: Sole canonical inter-task communication ledger
-- Related Documents: `CASE_REGISTRY.md`, `TASK_RESERVATIONS.md`, and `TASK_LOG.md`
-- Related Implementation Files: Target paths recorded in each communication
 
 - Purpose: Record handoffs, requests, and cautions between Codex tasks.
 - Status: Canonical document

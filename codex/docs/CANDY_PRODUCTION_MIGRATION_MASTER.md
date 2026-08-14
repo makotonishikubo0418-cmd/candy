@@ -1,13 +1,6 @@
 # CANDY Production Deployment and Migration Control
 
 ## 1. Purpose
-- Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
-- Scope: Production deployment, protected-entry publication, server placement, domain transport, recovery, rollback, and migration boundary
-- Lifecycle: Active
-- Source of Truth Responsibility: Canonical production deployment, server-placement, domain-transport verification, and migration control
-- Related Documents: `CANDY_OPERATION_BASICS.md`, `CANDY_VERIFICATION_PLAN.md`, and exact workflows
-- Related Implementation Files: Eligible `HP/` targets and the exact `.github/workflows/` and `.github/scripts/` deployment files
-
 Control current `HP/` deployment, protected-entry publication, recovery, and
 the remaining migration-history boundary while preventing rendering damage,
 broken links, unintended redirect changes, and obsolete-file retention.
@@ -213,6 +206,8 @@ The failed 2026-07-13 bulk deployment, cleanup counts, HTTP snapshot, and local
 migration snapshot are retained only in
 `CANDY_20260713_CONTEXT_AND_IMPROVEMENT.md`. They are not current production
 state or current procedure.
+
+The tracked [`CANDY_PRODUCTION_MIGRATION_INVENTORY.csv`](CANDY_PRODUCTION_MIGRATION_INVENTORY.csv) is a 2026-07-18 historical comparison artifact, not a current migration ledger or deployment plan. Its 1,764 data rows all remain `ServerVerified=False` and `ReviewStatus=NOT_REVIEWED`, and their `Notes` fields are empty. Its generator is `codex/tools/Build-CandyProductionMigrationInventory.ps1`; the old-data source paths checked for this review were absent, so do not regenerate or operationalize the CSV without separately verifying the source snapshot and obtaining the applicable authorization.
 
 ## 7. Production-Specific Pre-Deployment Procedure
 

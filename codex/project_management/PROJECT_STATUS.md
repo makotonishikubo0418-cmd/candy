@@ -1,10 +1,4 @@
 # Project Status
-- Parent / Owner: `codex/README.md`
-- Scope: Cross-case project current state, blockers, priorities, and next work
-- Lifecycle: Active
-- Source of Truth Responsibility: Sole canonical project-level current-state source
-- Related Documents: `CASE_REGISTRY.md` for all cases and generated current-state documents for machine-derived HP facts
-- Related Implementation Files: None; target implementation is owned by each case
 
 - Purpose: Provide one location for the overall plan, current state, problems, and next work
 - Status: canonical document
@@ -19,8 +13,8 @@
 
 ## 2. Completed Management Foundation
 
-- Central case tracking, non-atomic case parents, lifecycle, direct-open identity, capacity limits, parent-child links, and responsibility-based document splitting are governed by `DOCUMENT_RULES.md` and indexed by `CASE_REGISTRY.md`.
-- The formal trees contain every retained active, completed, historical, deprecated, generated, and implementation-reference Markdown file. `audit_candy_management_docs.py` compares both filename-level trees with the repository-wide Markdown and generated-sidecar population; checks required identity, relative links, tables, lifecycle classification, repeated source-of-truth declaration text, every declared parent, every registered case parent, implementation-reference verification boundaries, and capacity; and reports each failure class separately. Semantic responsibility and whether two differently worded documents overlap still require the classification review defined by `DOCUMENT_RULES.md`.
+- Central case tracking, non-atomic case parents, capacity limits, parent-child links, and responsibility-based document splitting are governed by `DOCUMENT_RULES.md` and indexed by `CASE_REGISTRY.md`. Direct-open metadata and lifecycle labels are required for new or newly adopted material when needed, not retrofitted uniformly into normal preexisting canonical documents.
+- The formal trees classify retained active, completed, historical, deprecated, and generated management material. Source-attached technical Markdown is classified separately outside the formal tree. `audit_candy_management_docs.py` validates the formal population under the current direct-open rule, validates the separate technical-reference hierarchy and warning boundary, and reports any other repository Markdown outside the formal tree as unclassified.
 - `WORK_ROUTING.md` Section 5.0 classifies existing sources, management-document rules, consultations, defects, changes, and system or operational information without creating parallel category-wide ledgers.
 - `codex/WORK_ROUTING.md` Section 5.2 is the required-document routing authority.
   `codex/README.md` owns canonical management locations and document
@@ -43,7 +37,7 @@
 | Hotel input and production order | Hotel classification, hotel content/image runbooks, and generated upcoming pages | Run `legacy-check` for a legacy Text, use `direct-check` for a staff-completed current Text, and keep Phase preparation independent; resolve the reported image, input, and existing-registration blockers before production |
 | Hotel accepted-source-only publication gap | `CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md`, `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`, and `codex/docs/CANDY_FIX_BACKLOG.md` item `HOTEL-ACCEPTED-IMAGE-PATH` | The current automatic `publish-next` route does not complete first local installation, same-name hash verification, image-asset registration and deployment, production-byte verification, and subsequent page publication from an accepted-source-only pair. Accepted-source-only automatic publication remains unavailable until the backlog item is `COMPLETE` |
 | Existing blog exceptions | Blog specification and generated ledger/SEO status | Keep separate from new production and use a dedicated fix task |
-| Member-system live state | `CANDY_OTHER_PAGES_MANAGEMENT.md`, its owned implementation references under `HP/docs/`, and the actual implementation | Implementation and reference files are present, but database migrations, runtime enablement, scheduler, deployment, and production behavior remain `UNVERIFIED`; use the routed member investigation before an operational change |
+| Member-system live state | `CANDY_OTHER_PAGES_MANAGEMENT.md`, the non-management source-attached technical references under `HP/docs/`, and the actual implementation | Implementation and technical-reference files are present, but database migrations, runtime enablement, scheduler, deployment, and production behavior remain `UNVERIFIED`; use the routed member investigation before an operational change |
 
 ## 4. Candidate Next Actions
 

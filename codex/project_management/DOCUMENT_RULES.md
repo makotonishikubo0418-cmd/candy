@@ -2,13 +2,8 @@
 
 - Purpose: Separate document responsibilities in the Markdown management system
 - Status: canonical document
-- Lifecycle: Active
-- Parent / Owner: `codex/README.md`
 - Updated: 2026-08-14
 - Canonical scope: Sole source for management-document creation, placement, naming, composition, capacity, splitting, merging, parent-child relationships, links, lifecycle, and document-change validation
-- Source of Truth Responsibility: Rules for creating and maintaining every persistent Candy management document
-- Related documents: `codex/WORK_ROUTING.md`, `codex/project_management/CASE_REGISTRY.md`, and `codex/project_management/SAFETY_PROTOCOL.md`
-- Related Implementation Files: `codex/scripts/audit_candy_management_docs.py` validates these rules; target document generators remain owned by their routed specifications
 - Update trigger: A management document, route, responsibility, naming rule, or generated-document contract changes
 
 ## 1. Principles
@@ -20,8 +15,8 @@
 - Canonical management information belongs under `codex/`, except for repository-root `AGENTS.md` and `docs/rules/GIT_RULES.md` that the Candy authority and routing documents explicitly select; project-management documents belong under `codex/project_management/`.
 - Do not convert unverified information into confirmed information.
 - Keep stable specifications, current state, generated facts, and task history separate.
-- Every persistent management document and retained implementation-reference Markdown file MUST belong to the formal structure shown in both `codex/README.md` and `codex/WORK_ROUTING.md`.
-- A Markdown file created for analysis, planning, phases, implementation, verification, or completion MUST belong to a registered case before it is treated as persistent.
+- Every persistent management document MUST belong to the formal structure shown in both `codex/README.md` and `codex/WORK_ROUTING.md`.
+- A Markdown file created for management analysis, planning, phases, implementation, verification, or completion MUST belong to a registered case before it is treated as a persistent management document. Existing source-attached technical references classified under Section 3.19 remain outside the formal management structure.
 
 ## 2. Location-Rule Boundary
 
@@ -30,7 +25,7 @@ locations are defined only in `codex/README.md`. This document applies naming,
 structure, update, and document-change Git rules to those locations without
 copying or redefining them.
 
-Existing implementation-reference Markdown MAY remain beside its implementation only under Section 3.19. It is subordinate to a canonical owner under `codex/`, is not a second management authority, and MUST NOT be used as proof of live database, server, authentication, DNS, TLS, or production state.
+Existing source-attached technical Markdown MAY remain beside its implementation only under Section 3.19. It is non-management reference material linked from a canonical owner under `codex/`, is not a second management authority, and MUST NOT be used as proof of live database, server, authentication, DNS, TLS, deployment, or production state.
 
 ## 3. Markdown Naming and Language Standard
 
@@ -148,7 +143,7 @@ A child document is permitted only when it owns a distinct responsibility or is 
 
 ### 3.12 Required Direct-Open Identification
 
-Every persistent management Markdown file MUST allow a reader who opens it directly to determine:
+A newly created persistent management Markdown file, a newly adopted orphan or ambiguous management document, and a new case parent or child MUST allow a reader who opens it directly to determine:
 
 - Purpose
 - Parent / Owner
@@ -158,7 +153,7 @@ Every persistent management Markdown file MUST allow a reader who opens it direc
 - Related Documents
 - Related Implementation Files, or `None` when the document is management-only
 
-These facts MAY be stated in existing introductory prose or a concise metadata block. Do not paste empty headings or a meaningless uniform template. Generated Markdown MUST emit equivalent facts from its generator.
+These facts MAY be stated in existing introductory prose or a concise metadata block. A normal preexisting management document that was already reachable from the formal route and whose role and canonical responsibility are clear from its existing title, introduction, parent index, or routing entry MUST NOT receive a uniform metadata block or a lifecycle line merely for standardization. Do not paste empty headings or a meaningless uniform template. Generated Markdown MUST emit equivalent facts from its generator when its generator contract requires them.
 
 ### 3.13 Lifecycle
 
@@ -174,6 +169,8 @@ Use one of these lifecycle values:
 
 Do not delete a completed case merely because it is complete. Separate active and completed populations when their combined size impairs use, while preserving the parent and registry route.
 
+Do not retrofit a lifecycle line into a normal preexisting canonical specification, runbook, rule, queue, or ledger solely to make its header match other documents. Use lifecycle labels for new case records, generated or split children, and retained historical, compatibility, completed, or newly adopted material when the classification is necessary.
+
 ### 3.14 Phase Management
 
 When phases are required, the case parent MUST record each phase's purpose, order, start condition, completion condition, status, deliverables, and transition condition. The parent is the phase-wide entry point. Create a phase child only when the phase owns an independently useful responsibility or cannot fit within the capacity rule.
@@ -187,7 +184,7 @@ Before creating a Markdown file, perform this decision in order:
 3. Prefer adding the case-specific information to the existing case parent.
 4. Create a child only for a distinct responsibility or capacity split.
 5. Select the location and filename from Sections 3.1 and 3.2.
-6. Add parent-child links, direct-open identification, lifecycle, and implementation relationships.
+6. For a new child or newly adopted orphan, add the necessary parent-child links, direct-open identification, lifecycle, and implementation relationships; do not retrofit a uniform block into an already clear normal document.
 7. Update the actual trees in `codex/README.md` and `codex/WORK_ROUTING.md` in the same task.
 8. Run the validation in Section 6.
 
@@ -230,20 +227,20 @@ Classify new information by responsibility before deciding whether to write a pe
 
 Do not create one file per chat, consultation, date, defect, or phase when an existing canonical document, registry row, case parent, backlog, status document, or task-history child can hold the information without mixing responsibilities. Do not create generic parallel sources such as `CONSULTATION_HISTORY.md`, `BUG_HISTORY.md`, `CHANGE_HISTORY.md`, or `SYSTEM_INFORMATION.md`.
 
-### 3.19 Existing Implementation-Reference Markdown
+### 3.19 Existing Source-Attached Technical Markdown
 
-An existing implementation-reference Markdown file outside `codex/` MAY be retained in place only when all of the following are true:
+An existing technical Markdown file outside `codex/` MAY remain beside its implementation as non-management reference material only when all of the following are true:
 
 - Moving or duplicating it is not required to satisfy the user's objective.
-- A canonical owner under `codex/` is identified and links to the reference.
-- The reference links back to its canonical owner and, when case-specific, to `CASE_REGISTRY.md` or its case parent.
-- Its purpose, parent, scope, lifecycle, source-of-truth responsibility, related documents, and related implementation files are directly identifiable.
-- It explicitly distinguishes intended implementation behavior from verified live database, server, authentication, DNS, TLS, deployment, and production state.
-- It is listed in both formal trees and included in the repository-wide management audit.
+- A canonical management owner under `codex/` is identified and links to one technical index rather than duplicating the technical content.
+- The technical index links to its technical children, and each child links back to that technical index.
+- Each file states that it is a source-attached technical reference outside the formal management-document tree.
+- Each file distinguishes intended or static implementation behavior from verified live database, server, authentication, DNS, TLS, deployment, and production state.
+- The repository-wide audit classifies it separately from the formal management population, validates its required hierarchy and warning boundary, and reports any other Markdown outside the formal tree as unclassified.
 
-Such a file is an `Implementation Reference`, not a canonical management source. Actual implementation is the source for code behavior; current external state requires live evidence. Existing source language MAY be preserved when wholesale translation is outside the task, but new management metadata and rules MUST follow Section 3.3.
+Such a file is not a management document, case record, canonical specification, or proof of live state. Actual implementation is the source for code behavior; current external state requires live evidence. Preserve useful technical content and warning boundaries without adding management Parent, Lifecycle, Source-of-Truth, case, or formal-tree metadata.
 
-Do not create a new implementation-reference Markdown file outside `codex/` without specific approval and a verified technical reason that the canonical structure cannot satisfy.
+Do not create a new source-attached technical Markdown file outside `codex/` without specific approval and a verified technical reason that the canonical structure cannot satisfy.
 
 ## 4. Prohibited Document Updates
 
@@ -279,10 +276,11 @@ At minimum, verify:
 - Large management or generated documents have a bounded target-specific retrieval route, and integrated runbooks do not require full-document output for an internal automated step.
 - Canonical management documents remain under local `codex/`, repository-root `AGENTS.md`, or the explicitly authorized `docs/rules/GIT_RULES.md` location and were not duplicated elsewhere at the repository root, under HP, or on the NAS.
 - When a management-document change affects HP or generated current state, the applicable target or full `candy-site-state check` MUST succeed and generated documents MUST agree with actual files. For a management-only change, run the full check as a drift observation when required, but do not expand scope to repair preexisting unrelated HP findings; record the exact findings separately and do not report them as fixed.
-- Every repository Markdown file is either a formal management document or a formally owned implementation reference, is present in the actual tree, has a determinable purpose, parent, scope, lifecycle, source-of-truth responsibility, and related document or implementation relationship, and is reachable from a formal entry point.
+- Enumerate repository Markdown and distinguish formal management documents and formally retained implementation references from generated output, historical or compatibility material, source-attached technical documentation, and other non-management Markdown. Do not promote a file into the management hierarchy merely because its extension is `.md`.
+- Every formal management document is reachable from the formal entry point and has a determinable purpose and canonical responsibility through its existing content, parent index, or routing entry. Apply the direct-open identification block only where Section 3.12 requires it.
 - Parent-child links are bidirectional; registered cases resolve to their parent; case children resolve back to the parent and registry.
-- No broken relative Markdown links, duplicate canonical responsibility, orphan Markdown, or file over 70,000 bytes remains.
-- The Markdown count, capacity bands, lifecycle classification, formal trees, and actual filesystem agree.
+- No broken relative Markdown links, duplicate canonical responsibility, orphan management document, or formal management Markdown file over 70,000 bytes remains.
+- The formal management-document count, capacity bands, required classifications, formal trees, and actual formal-file population agree; separately identified non-management Markdown is not forced into the formal tree.
 - Generated Markdown and deterministic sidecars pass a second no-change generation.
 
 ## 7. Document-Change Git Rules

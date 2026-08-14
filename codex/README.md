@@ -2,15 +2,6 @@
 
 This README is the entry point for the management documents under `C:\Codex\FSG\Candy\codex`.
 
-- Purpose: Define canonical locations, folder responsibilities, document responsibilities, and the actual formal management-document tree
-- Parent / Owner: Repository-root `AGENTS.md`
-- Scope: Management locations and ownership lookup; not task routing or execution procedure
-- Status / Lifecycle: Canonical / Active
-- Source of Truth Responsibility: Sole source for Candy management locations and responsibility ownership
-- Related Documents: `WORK_ROUTING.md`, `MANAGEMENT_SYSTEM_OVERVIEW.md`, and `project_management/DOCUMENT_RULES.md`
-- Related Implementation Files: None
-- Updated: 2026-08-14
-
 ## 1. Canonical Sources and Work Locations
 
 | Type | Location | Responsibility |
@@ -69,7 +60,7 @@ reporting, reading, or execution rules.
 | `codex/data/` | Canonical operational mapping data consumed by production tooling, including the approved area nearby-link graph |
 | `codex/scripts/` | Page generation, validation, and publishing scripts |
 | `HP/` | The actual public site tree. `includefile`, `log`, and `movie` are also HP data |
-| `HP/docs/` | Existing member-system implementation references retained beside the implementation. They are subordinate to `codex/docs/CANDY_OTHER_PAGES_MANAGEMENT.md`, are not a second management authority, and do not prove live database or production state |
+| `HP/docs/` | Source-attached member-system technical references outside the formal management-document tree. `MEMBER_ARCHITECTURE.md` is their technical index; `codex/docs/CANDY_OTHER_PAGES_MANAGEMENT.md` remains the canonical management owner |
 | `Text_area_data/` | Area-page production inputs. Accepted area images are stored in the Git-managed local `Text_area_data/画像データ/` directory |
 | `Text_blog_data/` | Blog-page production inputs |
 | `Text_hotel_data/` | Hotel-page production inputs. Accepted hotel-image source pairs are stored under the Git-managed local `Text_hotel_data/画像データ/` directory and are never referenced directly by public HTML |
@@ -91,7 +82,7 @@ reporting, reading, or execution rules.
 | Completed task execution history | `codex/project_management/TASK_LOG.md` and its children under `codex/project_management/task_history/` |
 | Safety procedure for deletion, movement, and bulk operations | `codex/project_management/SAFETY_PROTOCOL.md` |
 | HP production and generation specifications | `codex/docs/CANDY_MASTER_DOC_INDEX.md` |
-| Member mypage, API, authentication, and notification management | `codex/docs/CANDY_OTHER_PAGES_MANAGEMENT.md`; existing implementation references are under `HP/docs/` and actual behavior remains in the implementation and verified environment |
+| Member mypage, API, authentication, and notification management | `codex/docs/CANDY_OTHER_PAGES_MANAGEMENT.md`; the non-management technical index is `HP/docs/MEMBER_ARCHITECTURE.md`, and actual behavior remains in the implementation and verified environment |
 | Area nearby-link mapping | `codex/data/CANDY_AREA_RELATED_LINKS.json` |
 | Stable HP structure | `codex/docs/CANDY_HP_STRUCTURE_MAP.md`, `codex/docs/CANDY_CODE_FILE_STRUCTURE.md`, and `codex/docs/CANDY_SEO_SPEC.md` |
 | Current HP state | The generated Markdown parents, Markdown child, and deterministic tabular sidecars under `codex/docs/generated/` |
@@ -105,7 +96,7 @@ This table identifies the existing owner for each operational information class.
 | GitHub repository identity and local repository location | This README |
 | Git branch, live GitHub comparison, staging, Commit, and Push procedure | `docs/rules/GIT_RULES.md` |
 | Database dependency, external configuration, and approved read-only connection boundary | `codex/docs/CANDY_OPERATION_BASICS.md`, then the actual configuration and approved live evidence |
-| Session, Cookie, authentication, member API, and external-integration impact | `codex/docs/CANDY_OTHER_PAGES_MANAGEMENT.md`, the routed member references under `HP/docs/`, and the actual implementation |
+| Session, Cookie, authentication, member API, and external-integration impact | `codex/docs/CANDY_OTHER_PAGES_MANAGEMENT.md`, the source-attached technical index under `HP/docs/`, and the actual implementation |
 | Production and test server paths, GitHub Actions, FTP, placement, recovery, and rollback | `codex/docs/CANDY_PRODUCTION_MIGRATION_MASTER.md` and the exact workflow or script |
 | Canonical public host and URL requirements | `codex/docs/CANDY_SEO_SPEC.md` and the production entry contract in `codex/docs/CANDY_PRODUCTION_MIGRATION_MASTER.md` |
 | DNS records, TLS certificate, and TLS termination state | The live external provider or server is the evidence source; `codex/docs/CANDY_PRODUCTION_MIGRATION_MASTER.md` owns the verification and change boundary. Treat the current value as `UNVERIFIED` until checked |
@@ -120,15 +111,6 @@ C:\Codex\FSG\Candy
 ├─ docs/
 │  └─ rules/
 │     └─ GIT_RULES.md
-├─ HP/
-│  └─ docs/
-│     ├─ MEMBER_ARCHITECTURE.md [Implementation Reference / Active]
-│     ├─ PHASE1_API.md [Implementation Reference / Active]
-│     ├─ PHASE2_API.md [Implementation Reference / Active]
-│     ├─ PHASE3_API.md [Implementation Reference / Active]
-│     ├─ PHASE4_API.md [Implementation Reference / Active]
-│     ├─ PHASE5_API.md [Implementation Reference / Active]
-│     └─ PHASE6_API.md [Implementation Reference / Active]
 └─ codex/
    ├─ WORK_ROUTING.md
    ├─ README.md
@@ -208,7 +190,7 @@ The complete filename-level tree is maintained in `WORK_ROUTING.md` Section 5.1 
 ## 6. Duplicate-Source Prohibitions
 
 - Do not duplicate a canonical management source at the local repository root, under `HP/`, or on the NAS. Repository-root `AGENTS.md` and `docs/rules/GIT_RULES.md`, explicitly selected by the Candy authority and routing documents, are the only current exceptions.
-- The seven existing files under `HP/docs/` are implementation references owned by `CANDY_OTHER_PAGES_MANAGEMENT.md`, not additional canonical management sources or proof of live database, server, or production state. Do not create another `HP/docs/` management file without a routed owner and explicit approval.
+- The seven existing files under `HP/docs/` are non-management source-attached technical references. `CANDY_OTHER_PAGES_MANAGEMENT.md` is the canonical management owner and links to the single technical index `MEMBER_ARCHITECTURE.md`; the technical index links to its six Phase children. None of the seven proves live database, server, authentication, deployment, or production state. Do not create another `HP/docs/` Markdown file without a routed owner and explicit approval.
 - Do not create `HP/HP/`.
 - Do not use legacy documents in NAS `Backup/` as current specifications. Reconcile them with the local canonical source before use.
 - Do not mix specifications, current state, task history, and reports in one document.

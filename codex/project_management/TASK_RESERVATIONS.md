@@ -1,10 +1,4 @@
 # Task and File Reservations
-- Parent / Owner: `codex/README.md`
-- Scope: Concurrent task ownership, reserved files, period, and reservation lifecycle only
-- Lifecycle: Active
-- Source of Truth Responsibility: Sole canonical reservation ledger
-- Related Documents: `CASE_REGISTRY.md`, `CODEX_COMMUNICATION.md`, and `TASK_LOG.md`
-- Related Implementation Files: Reserved targets recorded per row
 
 - Purpose: Prevent multiple Codex tasks from changing the same files concurrently.
 - Status: Canonical document

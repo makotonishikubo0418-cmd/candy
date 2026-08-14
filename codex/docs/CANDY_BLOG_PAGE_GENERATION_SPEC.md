@@ -1,10 +1,4 @@
 # CANDY Blog Page Generation Specification
-- Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
-- Scope: Normal generation of CANDY blog detail pages
-- Lifecycle: Active
-- Source of Truth Responsibility: Canonical blog-page generation specification
-- Related Documents: `CANDY_PAGE_GENERATION_GOVERNANCE.md` and generated current state
-- Related Implementation Files: Blog Text, generator, PHP, source HTML, dataset, indexes, images, and sitemap
 
 - Updated: 2026-07-26
 - Applies to: Normal new generation of CANDY blog detail pages by Codex

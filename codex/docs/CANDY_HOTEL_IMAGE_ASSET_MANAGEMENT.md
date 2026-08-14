@@ -1,11 +1,4 @@
 # CANDY Hotel Image Asset Management
-- Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
-- Scope: Accepted-source storage, installation, replacement, and publication state for hotel-image pairs
-- Lifecycle: Active
-- Source of Truth Responsibility: Canonical hotel-image lifecycle source
-- Related Documents: Hotel image creation, production, and deployment documents
-- Related Implementation Files: `Text_hotel_data/画像データ/` and public hotel-image paths
-- Purpose: Define accepted-source storage, installation, replacement, and publication-state handling for hotel-image pairs
 
 - Updated: 2026-07-25
 - Target: Acceptance, accepted-source storage, local public installation, replacement-unit boundaries, and publication-state verification of hotel-page image pairs

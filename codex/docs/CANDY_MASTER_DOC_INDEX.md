@@ -1,12 +1,6 @@
 # CANDY Canonical Responsibility Index
 
 ## 1. Purpose
-- Parent / Owner: `codex/README.md`
-- Scope: HP subject-to-canonical-document ownership lookup; not task routing
-- Lifecycle: Active
-- Source of Truth Responsibility: Sole HP responsibility lookup selected by `WORK_ROUTING.md`
-- Related Documents: `codex/WORK_ROUTING.md`, `CANDY_OPERATION_BASICS.md`, and the listed category documents
-- Related Implementation Files: None directly; each listed canonical document owns its target files
 
 `codex/WORK_ROUTING.md` Section 5.2 is the sole routing authority. This file is a
 non-authoritative ownership lookup used only when that route names it. It
@@ -48,7 +42,7 @@ Do not mix stable specifications with current state. Regenerate `generated/` to 
 | Hotel-image acceptance, accepted-source storage, first local public installation, replacement, and publication state | `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`; use `CANDY_PRODUCTION_MIGRATION_MASTER.md` for existing same-name replacement, production deployment exceptions, recovery, or rollback |
 | Normal blog production or unknown exception | `CANDY_PAGE_GENERATION_GOVERNANCE.md` and `CANDY_BLOG_PAGE_GENERATION_SPEC.md` |
 | Pages outside area, hotel, and blog | `CANDY_OTHER_PAGES_MANAGEMENT.md` and `CANDY_OPERATION_BASICS.md` |
-| Member mypage, API, authentication, notification, and related SQL | `CANDY_OTHER_PAGES_MANAGEMENT.md` and `CANDY_OPERATION_BASICS.md` → `../../HP/docs/MEMBER_ARCHITECTURE.md` → applicable `../../HP/docs/PHASE*_API.md` implementation reference → actual implementation and verified environment |
+| Member mypage, API, authentication, notification, and related SQL | `CANDY_OTHER_PAGES_MANAGEMENT.md` and `CANDY_OPERATION_BASICS.md` → non-management source-attached technical index `../../HP/docs/MEMBER_ARCHITECTURE.md` → applicable `../../HP/docs/PHASE*_API.md` child → actual implementation and verified environment |
 
 Do not use fixed-count examples in a category specification as current state. Compare the target Text's complete blocks, actual files, and generated documents.
 

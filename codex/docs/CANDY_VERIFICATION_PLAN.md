@@ -1,11 +1,4 @@
 # CANDY Full-Population Verification Plan
-- Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
-- Scope: Full-population evidence classification and verification method
-- Lifecycle: Active
-- Source of Truth Responsibility: Canonical full-population verification plan
-- Related Documents: Applicable category specifications, runbooks, and generated current-state parents
-- Related Implementation Files: The explicitly selected HP, input, test, or production population
-- Purpose: Define full-population evidence classification and verification method
 
 - Updated: 2026-07-25
 - Applies to: `HP`, generation source data, test, and production

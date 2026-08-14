@@ -1,14 +1,10 @@
 # CANDY 2026-07-13 Work Context, Incident Record, and Improvement Policy
-- Parent / Owner: [`CASE_REGISTRY.md`](../project_management/CASE_REGISTRY.md), case `CANDY-INCIDENT-20260713`
-- Scope: Dated 2026-07-13 incident context, actions, failures, and prevention evidence
-- Lifecycle: Historical Evidence
-- Source of Truth Responsibility: Historical parent for the registered incident; not a current instruction
-- Related Documents: Current rules and runbooks linked in the body
-- Related Implementation Files: Historical targets named in this dated record
 
 ## 1. Purpose
 
 Preserve the requirements, actions, failures, unresolved items, and prevention measures established during CANDY work on 2026-07-13.
+
+Registered historical case: [`CANDY-INCIDENT-20260713`](../project_management/CASE_REGISTRY.md).
 
 This is a dated, non-executable work record, not a current instruction or
 current-state source. All imperative language below describes the rule or

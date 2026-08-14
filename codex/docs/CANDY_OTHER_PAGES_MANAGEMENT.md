@@ -1,10 +1,4 @@
 # CANDY Other Pages Management
-- Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
-- Scope: Pages, member-system references, APIs, and entry points outside area, hotel, and blog
-- Lifecycle: Active
-- Source of Truth Responsibility: Canonical structure and change-impact source for other pages
-- Related Documents: `CANDY_OPERATION_BASICS.md`, generated current-state parents, and the member implementation-reference parent [`HP/docs/MEMBER_ARCHITECTURE.md`](../../HP/docs/MEMBER_ARCHITECTURE.md)
-- Related Implementation Files: Applicable public, dynamic, authentication, contact, system, and sitemap files named in the body
 
 ## 1. Purpose
 
@@ -22,7 +16,7 @@ Primary classes:
 - top: `index.php`
 - girls: `girls.php`, `girls_list.php`, `schedule.php`, and related files
 - system/other: `movie.php`, `movie_iframe.php`, `mypage.php`, `news.php`, `system.php`, and related files
-- member: `member_login.php`, `member_register.php`, `member_mypage.php`, `member_password_reset.php`, `member_logout.php`, `member/api.php`, member cron entry points, and their implementation references under `HP/docs/`
+- member: `member_login.php`, `member_register.php`, `member_mypage.php`, `member_password_reset.php`, `member_logout.php`, `member/api.php`, member cron entry points, and their source-attached technical references under `HP/docs/`
 - special: `create.php` and its retained internal generation scaffold
 - public generated output: `sitemap.xml`
 
@@ -167,14 +161,11 @@ verification, or the root URL without prior approval.
 
 Update `sitemap.xml` only through the applicable canonical category workflow. Diff against the current sitemap, classify each URL as add, preserve, or delete, and verify HTTP, canonical, and index eligibility.
 
-### 6.8 Member-System Implementation References
+### 6.8 Member-System Source-Attached Technical References
 
-The existing member reference set is retained under `HP/docs/` as implementation references owned by this canonical document. The set is not a case record and does not prove live environment state:
+The existing member technical set remains under `HP/docs/` as non-management source-attached reference material. This canonical document links only to [`MEMBER_ARCHITECTURE.md`](../../HP/docs/MEMBER_ARCHITECTURE.md), which is the technical index and links to the six Phase children. The set is outside the formal management-document tree, is not a case record or canonical specification, and does not prove live environment state.
 
-- [`MEMBER_ARCHITECTURE.md`](../../HP/docs/MEMBER_ARCHITECTURE.md) is the implementation-reference parent.
-- [`PHASE1_API.md`](../../HP/docs/PHASE1_API.md) through [`PHASE6_API.md`](../../HP/docs/PHASE6_API.md) are phase-specific children.
-
-These files describe intended implementation contracts and provide navigation to the related code and SQL. They are not a second canonical management source and MUST NOT be used alone to establish the live database schema, executed migrations, credentials, scheduler, SMS or mail mode, enabled integration state, deployment state, or production behavior. For each task, compare the applicable reference with the exact implementation and use the database or production route when live evidence is required.
+The technical files describe intended implementation contracts and provide navigation to related code and SQL. They MUST NOT be used alone to establish the live database schema, executed migrations, credentials, scheduler, SMS or mail mode, enabled integration state, deployment state, or production behavior. For each task, compare the applicable technical reference with the exact implementation and use the database or production route when live evidence is required.
 
 Do not create another phase document solely because work is described as a new phase. Update an existing reference only when it owns that implementation responsibility; otherwise register the case and update the canonical specification or actual implementation selected by `WORK_ROUTING.md`.
 
@@ -188,7 +179,7 @@ Run only checks required for the target and do not duplicate them.
 | PHP | Lint changed PHP, include target, undefined variables, zero-result and invalid-input behavior |
 | Source | Title, H1, canonical, robots, internal links, images, and desktop/mobile |
 | Dataset | Matching case, placeholder count, database zero results, ordering, escaping, Cookie/GET |
-| Member system | Applicable `HP/docs/` reference versus actual API dispatch, member classes, source/dataset, SQL, integration flag, and authorized live database or environment evidence; keep unverified state explicit |
+| Member system | Applicable source-attached `HP/docs/` technical reference versus actual API dispatch, member classes, source/dataset, SQL, integration flag, and authorized live database or environment evidence; keep unverified state explicit |
 | Index/detail | Index-to-detail and detail-to-index routes, nonexistent IDs, and missing images/movies |
 | External submission | Action, submitted fields, no exposed authentication values, and failure display; submission tests require separate approval |
 | Sitemap | Valid XML, no duplicate URLs, target HTTP, canonical, and no unintended management URL |

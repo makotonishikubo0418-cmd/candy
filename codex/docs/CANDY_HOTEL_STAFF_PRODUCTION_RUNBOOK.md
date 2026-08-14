@@ -1,11 +1,4 @@
 # CANDY Hotel Staff Production Runbook
-- Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
-- Scope: Normal production and publication sequence for standard hotel pages
-- Lifecycle: Active
-- Source of Truth Responsibility: Canonical normal hotel-page execution runbook
-- Related Documents: Hotel input, image, page specification, and common generation governance
-- Related Implementation Files: Hotel production wrapper, generator, validator, target Text/images, HP pages, indexes, and sitemap
-- Purpose: Define the normal production and publication sequence for standard hotel pages
 
 - Updated: 2026-08-09
 - Applies to: Normal production of one or more standard hotel pages from either staff-completed Text or Phase-prepared Text

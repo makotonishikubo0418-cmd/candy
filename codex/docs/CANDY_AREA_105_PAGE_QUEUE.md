@@ -1,10 +1,4 @@
 # CANDY AREA 105 PAGE QUEUE
-- Parent / Owner: `CANDY_AREA_STAFF_PRODUCTION_RUNBOOK.md`
-- Scope: Fixed 105-target area cohort and production order
-- Lifecycle: Active
-- Source of Truth Responsibility: Canonical fixed area queue order; not current eligibility
-- Related Documents: `generated/CANDY_UPCOMING_PAGES.md` and the area production runbook
-- Related Implementation Files: `Text_area_data/` targets identified by the queue
 
 - Updated: 2026-08-08
 - Purpose: Preserve the fixed 105-target cohort and its production order

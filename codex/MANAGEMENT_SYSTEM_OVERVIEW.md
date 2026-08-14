@@ -1,14 +1,9 @@
 # candy Markdown Management System Overview
 
 - Purpose: Summarize the management system requested by the user and its design intent
-- Parent / Owner: `codex/README.md`
-- Scope: High-level management-system architecture and design intent
 - Document responsibility: Overview of the management system goals and design principles
 - Detailed canonical sources: The management documents listed in `codex/README.md`
-- Related Documents: `codex/README.md`, `codex/WORK_ROUTING.md`, and `codex/project_management/DOCUMENT_RULES.md`
-- Status / Lifecycle: Canonical / Active
-- Source of Truth Responsibility: High-level design intent only; no detailed rule, route, case state, or task history
-- Related Implementation Files: None
+- Status: canonical document for the candy management-system overview
 - Canonical location: `C:\Codex\FSG\Candy\codex`
 - Updated: 2026-08-14
 
@@ -89,7 +84,7 @@ overview never adds an execution step.
 | Case phases and implementation cannot be traced | Route registry → case parent → specification → implementation → verification → completion |
 | A document grows beyond a usable size | Split by responsibility, data class, time period, or lifecycle under one parent |
 | Daily consultations, defects, changes, or operational facts create scattered files | Use the logical classification in `WORK_ROUTING.md` and the persistence decision in `DOCUMENT_RULES.md` |
-| Implementation-adjacent reference documents become isolated | Give each retained reference a canonical owner, bidirectional links, an explicit unverified-state boundary, and repository-wide audit coverage |
+| Source-attached technical Markdown becomes isolated or a competing authority | Classify it outside the formal management tree, link canonical owner → one technical index → technical children, preserve the unverified-state boundary, and audit it as a separate non-management population |
 | Repeated changes degrade the code | Enforce one responsibility per canonical source, integration into existing routes, and no appended override blocks |
 | Specifications differ between documents | Assign one canonical document to each subject and prohibit duplicate specifications |
 | Unverified work is reported as complete | Distinguish canonical, user-reported, implementation-verified, and unverified information |

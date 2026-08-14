@@ -1,13 +1,6 @@
 # Phase4 API（お知らせ）
 
-- Purpose: Preserve the Phase 4 member-mypage information implementation contract
-- Parent / Owner: [`MEMBER_ARCHITECTURE.md`](MEMBER_ARCHITECTURE.md)
-- Scope: Phase 4 API and implementation reference only
-- Status / Lifecycle: Implementation Reference / Active
-- Source of Truth Responsibility: Phase 4 intended API implementation reference; actual code and verified environment take precedence
-- Related Documents: [`CANDY_OTHER_PAGES_MANAGEMENT.md`](../../codex/docs/CANDY_OTHER_PAGES_MANAGEMENT.md) and [`MEMBER_ARCHITECTURE.md`](MEMBER_ARCHITECTURE.md)
-- Related Implementation Files: `HP/member/api.php`, `HP/includefile/member/MemberMypageInfo.php`, member UI files, and Phase 4 SQL under `HP/sql/`; external Control implementation is outside this repository
-- Verification boundary: Live database state, Control behavior, permissions, deployment, and production behavior are `UNVERIFIED` until checked through the applicable routed operation
+> Source-attached technical reference. Parent technical index: [`MEMBER_ARCHITECTURE.md`](MEMBER_ARCHITECTURE.md). This file is outside the formal management-document tree. Actual code and SQL take precedence; live database state, Control behavior, permissions, deployment, and production behavior remain `UNVERIFIED` until checked through the applicable routed operation.
 
 Phase1 の認証（セッション Cookie）が必要です。
 

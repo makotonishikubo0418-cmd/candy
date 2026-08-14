@@ -1,10 +1,4 @@
 # CANDY Area Image Creation Runbook
-- Parent / Owner: `CANDY_MASTER_DOC_INDEX.md`
-- Scope: Execution sequence for creating one area-image pair
-- Lifecycle: Active
-- Source of Truth Responsibility: Canonical area-image creation sequence
-- Related Documents: `CANDY_AREA_IMAGE_CREATION_SPEC.md` and `CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md`
-- Related Implementation Files: Target source image and area-image editing outputs
 
 - Purpose: Define the execution order for creating one area-image pair
 - Requirement source: `CANDY_AREA_IMAGE_CREATION_SPEC.md`

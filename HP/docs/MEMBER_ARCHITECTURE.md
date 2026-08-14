@@ -1,16 +1,8 @@
 # 会員マイページ — 横展開アーキテクチャ
 
-- Purpose: Preserve the implementation-reference architecture for the existing Candy member mypage and its cross-shop design
-- Parent / Owner: [`CANDY_OTHER_PAGES_MANAGEMENT.md`](../../codex/docs/CANDY_OTHER_PAGES_MANAGEMENT.md)
-- Scope: Member implementation structure, phase relationships, and intended cross-shop boundaries
-- Status / Lifecycle: Implementation Reference / Active
-- Source of Truth Responsibility: Navigation parent for the Phase 1 through Phase 6 implementation references; not a case record or canonical live-environment source
-- Related Documents: [`CANDY_OTHER_PAGES_MANAGEMENT.md`](../../codex/docs/CANDY_OTHER_PAGES_MANAGEMENT.md), [`PHASE1_API.md`](PHASE1_API.md), [`PHASE2_API.md`](PHASE2_API.md), [`PHASE3_API.md`](PHASE3_API.md), [`PHASE4_API.md`](PHASE4_API.md), [`PHASE5_API.md`](PHASE5_API.md), and [`PHASE6_API.md`](PHASE6_API.md)
-- Related Implementation Files: `HP/includefile/member/`, `HP/member/`, member entry PHP, member source and dataset files, `HP/js/member*.js`, `HP/css/member*.css`, and `HP/sql/`
-
-## Verification boundary
-
-This file records intended implementation structure. Actual code and SQL files are the source for static implementation behavior. Database migrations, live schemas, credentials, enabled integration state, scheduler state, server placement, and production behavior remain `UNVERIFIED` until checked through the applicable route in `codex/WORK_ROUTING.md`. Do not execute database, cron, deployment, or external-service operations from this reference alone.
+> Source-attached technical reference. The canonical management owner is [`CANDY_OTHER_PAGES_MANAGEMENT.md`](../../codex/docs/CANDY_OTHER_PAGES_MANAGEMENT.md). This file is the technical index for [`PHASE1_API.md`](PHASE1_API.md), [`PHASE2_API.md`](PHASE2_API.md), [`PHASE3_API.md`](PHASE3_API.md), [`PHASE4_API.md`](PHASE4_API.md), [`PHASE5_API.md`](PHASE5_API.md), and [`PHASE6_API.md`](PHASE6_API.md), and is outside the formal management-document tree.
+>
+> Actual code and SQL files are the source for static implementation behavior. Database migrations, live schemas, credentials, enabled integration state, scheduler state, server placement, and production behavior remain `UNVERIFIED` until checked through the applicable route in `codex/WORK_ROUTING.md`. Do not execute database, cron, deployment, or external-service operations from this reference alone.
 
 ## 方針
 

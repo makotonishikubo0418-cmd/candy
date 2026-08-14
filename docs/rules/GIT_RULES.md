@@ -1,10 +1,4 @@
 # Git Rules
-- Parent / Owner: Repository-root `AGENTS.md` through `codex/WORK_ROUTING.md`
-- Scope: Candy Git repository discovery, verification, branch selection, publication, and STOP handling
-- Lifecycle: Active
-- Source of Truth Responsibility: Sole canonical Candy Git rule source
-- Related Documents: `codex/WORK_ROUTING.md` and `codex/project_management/DOCUMENT_RULES.md`
-- Related Implementation Files: `.git`, the configured GitHub repository, and Git commands governed by this document
 
 - Purpose: Define local branch selection, management-branch handling, pre-work Git verification, required reporting, and STOP conditions.
 - Status: canonical rule document
