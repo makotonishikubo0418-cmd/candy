@@ -561,6 +561,16 @@ if(isset($_GET['no']) && strval($_GET['no']) === '1241'){
 }
 // このページの正規URL（絶対URL・canonical/og:url用）
 $data1['03010092'] = 'https://www.55810.com/girls.php?no=' . $girldata["no"][$gid];
+$candyGirlsBreadcrumbLabel = $girldata["name"][$gid] . 'のプロフィール・出勤情報';
+$candyGirlsBreadcrumbLabelHtml = candyGirlsPageEscape($candyGirlsBreadcrumbLabel);
+$candyGirlsBreadcrumbLabelJsonEncoded = json_encode(
+	$candyGirlsBreadcrumbLabel,
+	JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE
+);
+if($candyGirlsBreadcrumbLabelJsonEncoded === false){
+	$candyGirlsBreadcrumbLabelJsonEncoded = '""';
+}
+$candyGirlsBreadcrumbLabelJson = substr($candyGirlsBreadcrumbLabelJsonEncoded, 1, -1);
 
 // デバイス判定（PC版かSP版かを判定）
 $isSP = (strpos($_SERVER['HTTP_USER_AGENT'], 'Mobile') !== false || 
@@ -1193,6 +1203,8 @@ if($girldata["next_photo_update"][$gid] != ""){
 * 独自タグから表示枠ソースを取得
 */
 $source = file_get_contents($source_file);
+$source = str_replace('rep09000002eot', $candyGirlsBreadcrumbLabelHtml, $source);
+$source = str_replace('rep09000003eot', $candyGirlsBreadcrumbLabelJson, $source);
 $source = str_replace('class="mainImg-image nolazy" alt="在籍女性のプロフィール画像">', 'class="mainImg-image nolazy" alt="在籍女性のプロフィール画像" width="1200" height="800">', $source);
 $source = str_replace('class="media-image nolazy" alt="在籍女性のプロフィール画像">', 'class="media-image nolazy" alt="在籍女性のプロフィール画像" width="800" height="1200">', $source);
 $source = str_replace('class="fade media-image nolazy" alt="在籍女性のプロフィール画像">', 'class="fade media-image nolazy" alt="在籍女性のプロフィール画像" width="800" height="1200">', $source);

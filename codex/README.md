@@ -120,6 +120,7 @@ C:\Codex\FSG\Candy
    │  ├─ PROJECT_STATUS.md
    │  ├─ CASE_REGISTRY.md
    │  ├─ cases/
+   │  │  ├─ CANDY_GIRLS_PROFILE_SEO_REMEDIATION.md
    │  │  ├─ CANDY_MANAGEMENT_SYSTEM_REBUILD.md
    │  │  └─ CANDY_MANAGEMENT_SYSTEM_REPAIR.md
    │  ├─ SAFETY_PROTOCOL.md
