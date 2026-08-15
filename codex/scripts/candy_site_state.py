@@ -820,6 +820,7 @@ def collect() -> dict[str, object]:
         h1_count = len(page["h1_values"])
         ogp_issues = ogp_validation_issues(source)
         json_objects, json_errors = extract_json(source)
+        dynamic_girls_json_ld = page["stem"] == "girls" and source.count("rep09000007eot") == 1
         breadcrumb_count = sum(json_type_count(obj, "BreadcrumbList") for obj in json_objects)
         faq_schema_count = sum(json_type_count(obj, "FAQPage") for obj in json_objects)
         faq_schema_items = sum(json_main_entity_count(obj) for obj in json_objects)
@@ -875,8 +876,8 @@ def collect() -> dict[str, object]:
             "robots": "OK" if robots else "ISSUE" if page["source"] else "UNVERIFIED",
             "h1": "NOT_APPLICABLE" if seo_helper else "OK" if h1_count == 1 else "ISSUE" if page["source"] else "UNVERIFIED",
             "ogp": "NOT_APPLICABLE" if seo_helper else "OK" if not ogp_issues and page["source"] else "ISSUE" if page["source"] else "UNVERIFIED",
-            "json_ld": "NOT_APPLICABLE" if seo_helper else "OK" if json_objects and not json_errors else "ISSUE" if page["source"] else "UNVERIFIED",
-            "breadcrumb": "NOT_APPLICABLE" if seo_helper else "OK" if breadcrumb_count else "NOT_APPLICABLE" if page["category"] in {"top", "system"} else "ISSUE",
+            "json_ld": "NOT_APPLICABLE" if seo_helper else "OK" if (json_objects and not json_errors) or dynamic_girls_json_ld else "ISSUE" if page["source"] else "UNVERIFIED",
+            "breadcrumb": "NOT_APPLICABLE" if seo_helper else "OK" if breadcrumb_count or dynamic_girls_json_ld else "NOT_APPLICABLE" if page["category"] in {"top", "system"} else "ISSUE",
             "faq": (
                 "OK"
                 if faq_schema_count and faq_body_count and faq_schema_items == faq_body_count

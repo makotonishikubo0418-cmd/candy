@@ -9,10 +9,10 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: Category queue/classification documents and the three TSV children listed below
 > Related Implementation Files: `codex/scripts/candy_site_state.py`, `codex/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-08-14T11:52:19+09:00 (reproducible generation baseline)
+> Generated at: 2026-08-15T18:39:36+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: b25bd53050f57255576ad992627565e5a3b4c319
-> State fingerprint: sha256:f4b25ce0113bbd9ad7673d1147f006569b593b6f5a0b2df6ac36ce0dd6154193
+> Commit: 15f9dc3b4860b973ea5289bfa2930a5d4e31794e
+> State fingerprint: sha256:707b868e73f85d9f59f75ec39fb7153a545bce44a88f746e53e8b960e13a78b1
 > Population: Unique candidates: 233 / Text records: 233
 > Generator: `codex/scripts/candy_site_state.py` with `codex/scripts/candy_site_state_render.py`
 > Result: READY=48 / BLOCKED=76 / EXISTING=109 / CONFLICT=0

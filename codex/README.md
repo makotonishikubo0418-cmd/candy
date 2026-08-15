@@ -54,6 +54,7 @@ reporting, reading, or execution rules.
 | `codex/` | Candy work routing, Codex management documents, production specifications, and scripts. Only active canonical management sources belong on the normal route |
 | `codex/project_management/` | Management rules, structure, progress, communication, task reservations, history, and safety procedures |
 | `codex/project_management/cases/` | Parent documents for non-atomic active and completed cases; creation is governed only by `DOCUMENT_RULES.md` |
+| `codex/project_management/records/` | Single three-category history route for consultations, defect responses, and modifications/additions/new creation; category indexes link to canonical individual details without duplicating them |
 | `codex/project_management/task_history/` | Time-bounded historical task-log children owned by `TASK_LOG.md` |
 | `codex/docs/` | Active HP production runbooks and specifications for area, hotel, blog, and other categories |
 | `codex/docs/generated/` | Current page, production-candidate, code/asset, and SEO state generated from actual files. Manual editing is prohibited |
@@ -76,6 +77,10 @@ reporting, reading, or execution rules.
 | Document separation and update rules | `codex/project_management/DOCUMENT_RULES.md` |
 | Overall plan, current state, and issues | `codex/project_management/PROJECT_STATUS.md` |
 | All-case list and case-parent mapping | `codex/project_management/CASE_REGISTRY.md` |
+| Three-category management and record-history entrypoint | `codex/project_management/records/CASE_HISTORY.md` |
+| Consultation History (相談履歴) routing | `codex/project_management/records/CONSULTATION_HISTORY.md` |
+| Defect and Response History (不具合・対応履歴) routing | `codex/project_management/records/DEFECT_RESPONSE_HISTORY.md` |
+| Modification, Addition, and New-Creation History (改修・追加・新規作成等) routing | `codex/project_management/records/CHANGE_HISTORY.md` |
 | One non-atomic case's analysis, phases, implementation, verification, and completion | Its registered parent under `codex/project_management/cases/` or its registered historical parent |
 | Inter-Codex communication and handoff | `codex/project_management/CODEX_COMMUNICATION.md` |
 | Task and file reservations | `codex/project_management/TASK_RESERVATIONS.md` |
@@ -119,10 +124,17 @@ C:\Codex\FSG\Candy
    │  ├─ DOCUMENT_RULES.md
    │  ├─ PROJECT_STATUS.md
    │  ├─ CASE_REGISTRY.md
+   │  ├─ records/
+   │  │  ├─ CASE_HISTORY.md
+   │  │  ├─ CONSULTATION_HISTORY.md
+   │  │  ├─ DEFECT_RESPONSE_HISTORY.md
+   │  │  └─ CHANGE_HISTORY.md
    │  ├─ cases/
+   │  │  ├─ CANDY_GIRLS_INVALID_NO_BEHAVIOR.md
    │  │  ├─ CANDY_GIRLS_PROFILE_SEO_REMEDIATION.md
    │  │  ├─ CANDY_MANAGEMENT_SYSTEM_REBUILD.md
-   │  │  └─ CANDY_MANAGEMENT_SYSTEM_REPAIR.md
+   │  │  ├─ CANDY_MANAGEMENT_SYSTEM_REPAIR.md
+   │  │  └─ CANDY_RECORD_HISTORY_STRUCTURE.md
    │  ├─ SAFETY_PROTOCOL.md
    │  ├─ TASK_RESERVATIONS.md
    │  ├─ CODEX_COMMUNICATION.md

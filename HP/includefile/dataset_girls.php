@@ -561,16 +561,6 @@ if(isset($_GET['no']) && strval($_GET['no']) === '1241'){
 }
 // このページの正規URL（絶対URL・canonical/og:url用）
 $data1['03010092'] = 'https://www.55810.com/girls.php?no=' . $girldata["no"][$gid];
-$candyGirlsBreadcrumbLabel = $girldata["name"][$gid] . 'のプロフィール・出勤情報';
-$candyGirlsBreadcrumbLabelHtml = candyGirlsPageEscape($candyGirlsBreadcrumbLabel);
-$candyGirlsBreadcrumbLabelJsonEncoded = json_encode(
-	$candyGirlsBreadcrumbLabel,
-	JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE
-);
-if($candyGirlsBreadcrumbLabelJsonEncoded === false){
-	$candyGirlsBreadcrumbLabelJsonEncoded = '""';
-}
-$candyGirlsBreadcrumbLabelJson = substr($candyGirlsBreadcrumbLabelJsonEncoded, 1, -1);
 
 // デバイス判定（PC版かSP版かを判定）
 $isSP = (strpos($_SERVER['HTTP_USER_AGENT'], 'Mobile') !== false || 
@@ -1203,8 +1193,6 @@ if($girldata["next_photo_update"][$gid] != ""){
 * 独自タグから表示枠ソースを取得
 */
 $source = file_get_contents($source_file);
-$source = str_replace('rep09000002eot', $candyGirlsBreadcrumbLabelHtml, $source);
-$source = str_replace('rep09000003eot', $candyGirlsBreadcrumbLabelJson, $source);
 $source = str_replace('class="mainImg-image nolazy" alt="在籍女性のプロフィール画像">', 'class="mainImg-image nolazy" alt="在籍女性のプロフィール画像" width="1200" height="800">', $source);
 $source = str_replace('class="media-image nolazy" alt="在籍女性のプロフィール画像">', 'class="media-image nolazy" alt="在籍女性のプロフィール画像" width="800" height="1200">', $source);
 $source = str_replace('class="fade media-image nolazy" alt="在籍女性のプロフィール画像">', 'class="fade media-image nolazy" alt="在籍女性のプロフィール画像" width="800" height="1200">', $source);
@@ -1533,7 +1521,7 @@ if($cddata["status"] == "0"){
 $source = str_replace("window.onload = CookieWrite('did', value, days);", '', $source);//
 }
 
-// Candy女の子ページ追加コンテンツ（7日以内の出勤または公開済みの追加項目がある場合だけ表示）
+// Candy女の子ページ追加コンテンツと女性固有SEO
 $candyGirlsPageData = candyGirlsPageLoadContent(isset($Database->Conn) ? $Database->Conn : null, (int)$gid, 1);
 $candyGirlsScheduleRows = candyGirlsPageBuildScheduleRows($yyy, $mmm, $ddd, $www, $scheduledata, (int)$gid);
 $candyGirlsMovie = array('sources' => array(), 'poster' => '');
@@ -1554,7 +1542,43 @@ foreach($candyGirlsMovieTypes as $candyGirlsFileType => $candyGirlsMimeType){
 if(isset($filedata['filename'][4]) && trim((string)$filedata['filename'][4]) !== ''){
 	$candyGirlsMovie['poster'] = buildMovieUrl(CLUBID, $filedata['filename'][4]);
 }
-$candyGirlsPageHtml = candyGirlsPageRender($candyGirlsPageData, $candyGirlsScheduleRows, $candyGirlsMovie);
+$candyGirlsVisibility = candyGirlsPageBuildVisibility($candyGirlsPageData, $candyGirlsScheduleRows, $candyGirlsMovie);
+$candyGirlsHorizontalImageCandidates = array();
+$candyGirlsVerticalImageCandidates = array();
+$candyGirlsImageTypes = array(2 => array('dir' => UP_DIR_W, 'target' => 'horizontal'), 3 => array('dir' => UP_DIR_H, 'target' => 'vertical'));
+foreach($candyGirlsImageTypes as $candyGirlsImageType => $candyGirlsImageRule){
+	if(!isset($imagedata['filename'][$gid][$candyGirlsImageType]) || !is_array($imagedata['filename'][$gid][$candyGirlsImageType])){
+		continue;
+	}
+	foreach($imagedata['filename'][$gid][$candyGirlsImageType] as $candyGirlsImageFilename){
+		$candyGirlsImageCandidate = array(
+			'filename' => $candyGirlsImageFilename,
+			'url' => buildStaticImageUrl(CLUBID, $candyGirlsImageRule['dir'], $candyGirlsImageFilename)
+		);
+		if($candyGirlsImageRule['target'] === 'horizontal'){
+			$candyGirlsHorizontalImageCandidates[] = $candyGirlsImageCandidate;
+		}else{
+			$candyGirlsVerticalImageCandidates[] = $candyGirlsImageCandidate;
+		}
+	}
+}
+$candyGirlsMainUsesHorizontalImage = (!isset($horizontal_movie) || trim((string)$horizontal_movie) === '') && count($candyGirlsHorizontalImageCandidates) > 0;
+$candyGirlsProfileImageCandidates = candyGirlsPageOrderProfileImageCandidates(
+	$candyGirlsHorizontalImageCandidates,
+	$candyGirlsVerticalImageCandidates,
+	$candyGirlsMainUsesHorizontalImage
+);
+$candyGirlsProfileImage = candyGirlsPageSelectProfileImage($candyGirlsProfileImageCandidates);
+$candyGirlsSeo = candyGirlsPageBuildSeoData(
+	$girldata['name'][$gid],
+	$data1['03010092'],
+	$candyGirlsVisibility,
+	$candyGirlsProfileImage,
+	'https://www.55810.com/imgHtml/new_202601/sample.jpg'
+);
+$source = candyGirlsPageApplySeo($source, $candyGirlsSeo);
+$source = str_replace('rep09000002eot', candyGirlsPageEscape($candyGirlsSeo['h1']), $source);
+$candyGirlsPageHtml = candyGirlsPageRender($candyGirlsPageData, $candyGirlsScheduleRows, $candyGirlsMovie, $candyGirlsVisibility);
 $source = str_replace('rep09000001eot', $candyGirlsPageHtml, $source);
 if($candyGirlsPageHtml !== ''){
 	$source = str_replace('</head>', '<link href="./css/girls_page_content.css?v=20260812" rel="stylesheet" type="text/css">' . "\n" . '</head>', $source);

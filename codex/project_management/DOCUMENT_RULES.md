@@ -15,6 +15,7 @@
 - Canonical management information belongs under `codex/`, except for repository-root `AGENTS.md` and `docs/rules/GIT_RULES.md` that the Candy authority and routing documents explicitly select; project-management documents belong under `codex/project_management/`.
 - Do not convert unverified information into confirmed information.
 - Keep stable specifications, current state, generated facts, and task history separate.
+- Route durable history through `records/CASE_HISTORY.md` to exactly one of the three category indexes, then to one canonical individual detail. Category indexes are navigation metadata, not duplicate detail owners.
 - Every persistent management document MUST belong to the formal structure shown in both `codex/README.md` and `codex/WORK_ROUTING.md`.
 - A Markdown file created for management analysis, planning, phases, implementation, verification, or completion MUST belong to a registered case before it is treated as a persistent management document. Existing source-attached technical references classified under Section 3.19 remain outside the formal management structure.
 
@@ -78,6 +79,7 @@ Japanese proper nouns and source data MAY remain inside an English document. Rep
 ### 3.5 Document-Type Structures
 
 - Entry and router documents MUST remain short and route to detailed canonical documents.
+- `records/CASE_HISTORY.md` is the single history entrypoint. `CONSULTATION_HISTORY.md`, `DEFECT_RESPONSE_HISTORY.md`, and `CHANGE_HISTORY.md` MUST classify cases and link to individual details without copying their findings, decisions, state, or execution evidence.
 - Rule documents MUST identify purpose, status, canonical scope, mandatory rules, prohibited operations, STOP conditions, and validation when those sections apply.
 - Stable specifications MUST contain non-volatile requirements and MUST NOT store current counts, Git state, HTTP results, or task history.
 - Runbooks MUST contain scope, preflight, procedure, validation, STOP conditions, completion criteria, and reporting requirements when applicable. They MUST link to the canonical specification instead of duplicating it.
@@ -126,6 +128,8 @@ Japanese proper nouns and source data MAY remain inside an English document. Rep
 ### 3.10 Central Case Registration
 
 `CASE_REGISTRY.md` is the canonical list of all change and investigation cases. Register a case before creating a persistent case document or changing implementation. The registry owns only the case ID, type, title, parent location, lifecycle, current phase, implementation relationship, and next action.
+
+`records/CASE_HISTORY.md` is the category-history entrypoint, not a second case registry. After registration, classify every case exactly once in `CONSULTATION_HISTORY.md`, `DEFECT_RESPONSE_HISTORY.md`, or `CHANGE_HISTORY.md` and link that row to the canonical individual detail. Existing case parents, task records, and retained historical evidence remain detail owners when complete.
 
 Cases include defect investigation, bug fixes, modifications, new features, new pages, new systems, refactoring, specification changes, migrations, production changes, audits, and other work that must remain traceable after the task ends.
 
@@ -180,13 +184,15 @@ When phases are required, the case parent MUST record each phase's purpose, orde
 Before creating a Markdown file, perform this decision in order:
 
 1. Identify the registered case and applicable canonical responsibility.
-2. Confirm that no existing canonical document owns the required information.
-3. Prefer adding the case-specific information to the existing case parent.
-4. Create a child only for a distinct responsibility or capacity split.
-5. Select the location and filename from Sections 3.1 and 3.2.
-6. For a new child or newly adopted orphan, add the necessary parent-child links, direct-open identification, lifecycle, and implementation relationships; do not retrofit a uniform block into an already clear normal document.
-7. Update the actual trees in `codex/README.md` and `codex/WORK_ROUTING.md` in the same task.
-8. Run the validation in Section 6.
+2. Select exactly one history category and identify the applicable category index under `records/`.
+3. Confirm that no existing canonical document owns the required individual detail.
+4. Prefer adding the case-specific information to the existing case parent or existing complete detail owner.
+5. Create a child only for a distinct responsibility or capacity split.
+6. Select the location and filename from Sections 3.1 and 3.2.
+7. Add or update the category-index row so it links to the individual detail without duplicating it.
+8. For a new child or newly adopted orphan, add the necessary parent-child links, direct-open identification, lifecycle, and implementation relationships; do not retrofit a uniform block into an already clear normal document.
+9. Update the actual trees in `codex/README.md` and `codex/WORK_ROUTING.md` in the same task.
+10. Run the validation in Section 6.
 
 ### 3.16 Capacity and Responsibility-Based Splitting
 
@@ -217,15 +223,16 @@ Classify new information by responsibility before deciding whether to write a pe
 | Information | Required owner and handling |
 |---|---|
 | Transient question, consultation, or explanation | Keep it in the conversation. Do not create a persistent file merely because a conversation occurred |
-| Adopted decision, consultation outcome, or unresolved requirement that must persist | Register or identify the case in `CASE_REGISTRY.md`; store case-specific detail in the case parent only when the registry row is insufficient; update a stable specification only when permanent behavior changed |
-| Unresolved defect requiring an owner decision | `CANDY_FIX_BACKLOG.md`, with case detail in the registered case parent when required |
+| Adopted decision, consultation outcome, investigation, audit, or unresolved consultation requirement that must persist | Register or identify the case in `CASE_REGISTRY.md`; add it to `records/CONSULTATION_HISTORY.md`; route to the existing or required individual detail; update a stable specification only when permanent behavior changed |
+| Defect and response history | Add the registered case to `records/DEFECT_RESPONSE_HISTORY.md` and route it to one individual detail |
+| Unresolved defect requiring an owner decision | `CANDY_FIX_BACKLOG.md`, with category routing in `DEFECT_RESPONSE_HISTORY.md` and case detail in the registered parent when required |
 | Current cross-case blocker, priority, or next action | `PROJECT_STATUS.md` |
-| Modification, addition, new creation, investigation, or migration | `CASE_REGISTRY.md` and its case parent when required; permanent behavior remains in the applicable specification or runbook |
+| Modification, addition, new creation, refactoring, or migration | Register or identify the case in `CASE_REGISTRY.md`; add it to `records/CHANGE_HISTORY.md`; route to the existing or required individual detail; permanent behavior remains in the applicable specification or runbook |
 | Completed execution result | The time-bounded child selected by `TASK_LOG.md` |
 | Inter-task request, caution, handoff, or response | `CODEX_COMMUNICATION.md` |
 | System and operational information | Use the field-specific owner in `codex/README.md` and `codex/WORK_ROUTING.md`; verify volatile external state from the actual configuration, provider, server, or service and label it `UNVERIFIED` until checked |
 
-Do not create one file per chat, consultation, date, defect, or phase when an existing canonical document, registry row, case parent, backlog, status document, or task-history child can hold the information without mixing responsibilities. Do not create generic parallel sources such as `CONSULTATION_HISTORY.md`, `BUG_HISTORY.md`, `CHANGE_HISTORY.md`, or `SYSTEM_INFORMATION.md`.
+Do not create one file per chat, consultation, date, defect, or phase when an existing canonical document, registry row, case parent, backlog, status document, or task-history child can hold the individual detail without mixing responsibilities. The exact routed indexes `CONSULTATION_HISTORY.md`, `DEFECT_RESPONSE_HISTORY.md`, and `CHANGE_HISTORY.md` are permitted only under `records/CASE_HISTORY.md`; do not create parallel category indexes, `BUG_HISTORY.md`, or `SYSTEM_INFORMATION.md`.
 
 ### 3.19 Existing Source-Attached Technical Markdown
 
@@ -253,7 +260,7 @@ Do not create a new source-attached technical Markdown file outside `codex/` wit
 - Do not store page counts, file counts, Git state, HTTP state, Actions state, or other volatile values in a stable specification.
 - Do not create a persistent Markdown file outside the formal tree or without a case or canonical owner.
 - Do not create duplicate case parents, disconnected phase files, arbitrary size chunks, or a second work-routing index.
-- Do not create a persistent file solely to mirror a conversation, consultation, defect label, change type, or operational category already owned by Section 3.18.
+- Do not create a persistent detail file solely to mirror a conversation, consultation, defect label, change type, or operational category when an existing complete detail owner exists. The routed category indexes under `records/CASE_HISTORY.md` are navigation documents and are not detail duplicates.
 
 ## 5. Information-State Labels
 
@@ -279,6 +286,7 @@ At minimum, verify:
 - Enumerate repository Markdown and distinguish formal management documents and formally retained implementation references from generated output, historical or compatibility material, source-attached technical documentation, and other non-management Markdown. Do not promote a file into the management hierarchy merely because its extension is `.md`.
 - Every formal management document is reachable from the formal entry point and has a determinable purpose and canonical responsibility through its existing content, parent index, or routing entry. Apply the direct-open identification block only where Section 3.12 requires it.
 - Parent-child links are bidirectional; registered cases resolve to their parent; case children resolve back to the parent and registry.
+- Every `CASE_REGISTRY.md` case appears in exactly one of the three category indexes, no unregistered case appears there, and every category row resolves to an individual detail.
 - No broken relative Markdown links, duplicate canonical responsibility, orphan management document, or formal management Markdown file over 70,000 bytes remains.
 - The formal management-document count, capacity bands, required classifications, formal trees, and actual formal-file population agree; separately identified non-management Markdown is not forced into the formal tree.
 - Generated Markdown and deterministic sidecars pass a second no-change generation.
@@ -329,12 +337,16 @@ At minimum, verify:
 |---|---|
 | Overall project current state, cross-case blockers, priorities, and next work | `PROJECT_STATUS.md` |
 | All case IDs, case types, lifecycle, parent locations, current phases, and next actions | `CASE_REGISTRY.md` |
+| Three-category management and record-history entrypoint | `records/CASE_HISTORY.md` |
+| Consultation History (相談履歴) category routing | `records/CONSULTATION_HISTORY.md` |
+| Defect and Response History (不具合・対応履歴) category routing | `records/DEFECT_RESPONSE_HISTORY.md` |
+| Modification, Addition, and New-Creation History (改修・追加・新規作成等) category routing | `records/CHANGE_HISTORY.md` |
 | Detailed facts, decisions, phases, files, verification, and completion for one non-atomic case | Its case parent under `cases/` or its registered historical parent |
 | Concurrent task ownership and file reservation | `TASK_RESERVATIONS.md` |
 | Inter-task request, caution, handoff, and response | `CODEX_COMMUNICATION.md` |
 | Completed task execution results and verified or unverified evidence | `TASK_LOG.md` and its history children |
-| Persistent consultation outcomes and adopted case-specific decisions | `CASE_REGISTRY.md` and the registered case parent when required |
-| Unresolved defects requiring owner decisions | `codex/docs/CANDY_FIX_BACKLOG.md` |
+| Persistent consultation outcomes and adopted case-specific decisions | The individual detail selected through `records/CONSULTATION_HISTORY.md`; `CASE_REGISTRY.md` retains lifecycle and parent mapping |
+| Unresolved defects requiring owner decisions | `codex/docs/CANDY_FIX_BACKLOG.md`; category routing remains in `records/DEFECT_RESPONSE_HISTORY.md` |
 | Repository, GitHub, database, server, authentication, domain, DNS, TLS, placement, and other system or operational information | The field-specific owner in `codex/README.md` and `codex/WORK_ROUTING.md`, plus verified live evidence for volatile external state |
 
 Do not permanently maintain the same information in two owners. A document may link to another owner's record and summarize only what is necessary for navigation.

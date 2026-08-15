@@ -16,6 +16,12 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 ROUTER = REPO_ROOT / "codex" / "WORK_ROUTING.md"
 README = REPO_ROOT / "codex" / "README.md"
 REGISTRY = REPO_ROOT / "codex" / "project_management" / "CASE_REGISTRY.md"
+CASE_HISTORY = REPO_ROOT / "codex" / "project_management" / "records" / "CASE_HISTORY.md"
+HISTORY_CATALOGS = {
+    "consultation": REPO_ROOT / "codex" / "project_management" / "records" / "CONSULTATION_HISTORY.md",
+    "defect_response": REPO_ROOT / "codex" / "project_management" / "records" / "DEFECT_RESPONSE_HISTORY.md",
+    "change": REPO_ROOT / "codex" / "project_management" / "records" / "CHANGE_HISTORY.md",
+}
 MAX_MARKDOWN_BYTES = 70_000
 NORMAL_MARKDOWN_BYTES = 60_000
 SOURCE_ATTACHED_TECHNICAL_REFERENCES = {
@@ -281,6 +287,55 @@ def registry_parent_failures(texts: dict[str, str]) -> list[str]:
     return failures
 
 
+def case_history_catalog_failures(
+    texts: dict[str, str],
+) -> tuple[list[str], dict[str, int]]:
+    failures: list[str] = []
+    registry_text = texts.get(relative(REGISTRY), "")
+    registry_ids = {
+        match.group(1)
+        for match in re.finditer(r"^\|\s*(CANDY-[A-Z0-9-]+)\s*\|", registry_text, re.MULTILINE)
+    }
+    history_text = texts.get(relative(CASE_HISTORY), "")
+    if not history_text:
+        failures.append("case_history_entry_missing")
+
+    catalog_membership: list[str] = []
+    catalog_counts: dict[str, int] = {}
+    for category, path in HISTORY_CATALOGS.items():
+        rel_path = relative(path)
+        text = texts.get(rel_path, "")
+        if not text:
+            failures.append(f"case_history_catalog_missing:{category}")
+            catalog_counts[category] = 0
+            continue
+        if path.name not in history_text:
+            failures.append(f"case_history_entry_missing_catalog:{category}")
+        rows = [
+            line
+            for line in text.splitlines()
+            if re.match(r"^\|\s*CANDY-[A-Z0-9-]+\s*\|", line)
+        ]
+        ids = [re.match(r"^\|\s*(CANDY-[A-Z0-9-]+)\s*\|", line).group(1) for line in rows]
+        catalog_counts[category] = len(ids)
+        catalog_membership.extend(ids)
+        for case_id, line in zip(ids, rows):
+            if not LINK_RE.findall(line):
+                failures.append(f"case_history_detail_link_missing:{case_id}")
+
+    membership_counts = Counter(catalog_membership)
+    missing = sorted(registry_ids - set(membership_counts))
+    extra = sorted(set(membership_counts) - registry_ids)
+    duplicate = sorted(case_id for case_id, count in membership_counts.items() if count != 1)
+    if missing:
+        failures.append("case_history_catalog_missing_ids=" + ",".join(missing))
+    if extra:
+        failures.append("case_history_catalog_unregistered_ids=" + ",".join(extra))
+    if duplicate:
+        failures.append("case_history_catalog_duplicate_ids=" + ",".join(duplicate))
+    return failures, catalog_counts
+
+
 def implementation_reference_failures(texts: dict[str, str], lifecycles: dict[str, str]) -> list[str]:
     failures: list[str] = []
     for rel_path, lifecycle in lifecycles.items():
@@ -410,6 +465,7 @@ def audit() -> tuple[dict[str, object], list[str]]:
     )
     declared_parents = declared_parent_failures(formal_markdown, formal_texts)
     registry_parents = registry_parent_failures(formal_texts)
+    case_history_catalog, case_history_catalog_counts = case_history_catalog_failures(formal_texts)
     implementation_references = implementation_reference_failures(formal_texts, lifecycles)
     source_attached_references = source_attached_reference_failures(texts, formal_paths)
     relationship_unknown = relationship_values["UNVERIFIED"]
@@ -440,6 +496,8 @@ def audit() -> tuple[dict[str, object], list[str]]:
         failures.append(f"declared_parent={len(declared_parents)}")
     if registry_parents:
         failures.append(f"registry_parent={len(registry_parents)}")
+    if case_history_catalog:
+        failures.append(f"case_history_catalog={len(case_history_catalog)}")
     if implementation_references:
         failures.append(f"implementation_reference_boundary={len(implementation_references)}")
     if unclassified_markdown:
@@ -479,6 +537,8 @@ def audit() -> tuple[dict[str, object], list[str]]:
         "over_limit": over_limit,
         "declared_parent_failures": declared_parents,
         "registry_parent_failures": registry_parents,
+        "case_history_catalog_counts": case_history_catalog_counts,
+        "case_history_catalog_failures": case_history_catalog,
         "implementation_reference_failures": implementation_references,
         "unclassified_markdown": unclassified_markdown,
         "source_attached_reference_failures": source_attached_references,
@@ -506,6 +566,7 @@ def main() -> int:
         print(f"max_markdown={result['max_markdown'][0]} bytes={result['max_markdown'][1]}")
         print(f"lifecycle={result['lifecycle_counts']}")
         print(f"case_relationship={result['case_relationship_counts']}")
+        print(f"case_history_catalog={result['case_history_catalog_counts']}")
         if failures:
             print("failures=" + ",".join(failures), file=sys.stderr)
     return 0 if not failures else 1

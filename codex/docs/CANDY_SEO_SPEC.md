@@ -23,6 +23,19 @@ applicable documents selected from `codex/WORK_ROUTING.md` Section 5.2.
 
 Do not duplicate title, description, or H1 copy as fixed text in this document. Detail pages use their matching `Text_*_data`; indexes and dynamic pages use actual source and feature requirements.
 
+### 2.1 Dynamic Girls Profile Contract
+
+For `girls.php?no={resolved no}`, derive every woman-specific value from the active woman actually resolved by the dataset. Do not use the raw request value as the profile identity.
+
+- `title` and `og:title` use `{name}のプロフィール・出勤情報｜鹿児島デリヘル キャンディ`.
+- H1 and the final visible/structured breadcrumb name use `{name}のプロフィール・出勤情報`.
+- Canonical, `og:url`, ProfilePage URL, Person URL, and the final BreadcrumbList item use the same resolved HTTPS profile URL.
+- Description and `og:description` use one deterministic template. The weekly-schedule statement is always present; movie, manager comment, Q&A, detail-profile, and sales-point statements are included only from the same normalized visibility facts used by the renderer.
+- Render the seven-day schedule section even when every row is off. An off row remains present and states that the woman is off and that the next schedule should be checked.
+- When a real profile image is visibly eligible, use it for `og:image` and `Person.image`. Reject video, dummy, placeholder, and common-store images as person images. When no real profile image is eligible, use the verified common-store OGP image only for `og:image` and omit `Person.image`.
+- Output woman-specific ProfilePage, Person, and BreadcrumbList data through JSON serialization. If serialization fails, omit the malformed JSON-LD block and log the failure.
+- Preserve the current URL, database schema, robots policy, and separate invalid-number behavior unless a different case explicitly authorizes their change.
+
 ## 3. Meta Description
 
 - Each current public content page has one page-specific description.

@@ -23,12 +23,12 @@ This classification is the logical route for existing and future information. It
 | Highest authority | Repository-root `AGENTS.md`; read and apply it, but do not modify it without the exact authorization required there |
 | Existing management documents, formal specifications, runbooks, ledgers, and other canonical sources | `codex/README.md` owns locations and responsibilities; `codex/docs/CANDY_MASTER_DOC_INDEX.md` owns HP subject lookup; routed specifications and runbooks own stable requirements; `codex/docs/generated/` owns generated current state |
 | Management-document creation rules | `codex/project_management/DOCUMENT_RULES.md` owns creation, placement, naming, capacity, splitting, parent-child relationships, links, lifecycle, adoption, and validation |
-| Consultation history | A consultation remains in the conversation unless an adopted decision or unresolved issue must persist. Persistent consultation outcomes belong to `CASE_REGISTRY.md` and its case parent when required; completed execution evidence belongs to `TASK_LOG.md` |
-| Defect and response history | Unresolved owner decisions belong to `CANDY_FIX_BACKLOG.md`; case-specific analysis and decisions belong to `CASE_REGISTRY.md` and the case parent; cross-case current blockers belong to `PROJECT_STATUS.md`; completed execution belongs to `TASK_LOG.md` |
-| Modifications, additions, and new creation | `CASE_REGISTRY.md` and the case parent own the traceable case; the applicable canonical specification or runbook owns permanent behavior; `TASK_LOG.md` owns completed execution results |
+| Consultation History (相談履歴) | `codex/project_management/records/CONSULTATION_HISTORY.md` is the category route. A transient answered consultation remains in the conversation; a persistent outcome is registered in `CASE_REGISTRY.md` and linked to its individual detail |
+| Defect and Response History (不具合・対応履歴) | `codex/project_management/records/DEFECT_RESPONSE_HISTORY.md` is the category route. Unresolved decisions remain in `CANDY_FIX_BACKLOG.md`; individual detail remains in the registered case parent or existing detail owner; blockers remain in `PROJECT_STATUS.md`; completed execution remains in `TASK_LOG.md` |
+| Modification, Addition, and New-Creation History (改修・追加・新規作成等) | `codex/project_management/records/CHANGE_HISTORY.md` is the category route. `CASE_REGISTRY.md` owns lifecycle and parent mapping; individual detail remains in its existing owner; permanent behavior remains in the applicable specification or runbook; completed execution remains in `TASK_LOG.md` |
 | System and operational information | `codex/README.md` owns repository, URL, and location identity; `docs/rules/GIT_RULES.md` owns Git and GitHub procedure; `CANDY_OPERATION_BASICS.md` owns database and external-configuration boundaries; `CANDY_OTHER_PAGES_MANAGEMENT.md` owns session, Cookie, authentication, API, and member-page impact; `CANDY_PRODUCTION_MIGRATION_MASTER.md` owns server, deployment, runtime-placement, recovery, DNS, and TLS operation boundaries; `CANDY_SEO_SPEC.md` owns canonical-host requirements. Actual configuration or external-service state remains the live source and MUST be labelled `UNVERIFIED` until checked |
 
-Do not create category-wide duplicates such as a second consultation ledger, bug history, change history, or system-information book. Route each item to the existing owner above, and create a case child only when `DOCUMENT_RULES.md` requires one.
+`codex/project_management/records/CASE_HISTORY.md` is the single history entrypoint. Its three category indexes contain routing metadata only and MUST NOT duplicate individual detail, current state, specifications, backlog decisions, or completed task evidence. Do not create a second category index or system-information book.
 
 ### 5.1 Management Document Structure
 
@@ -45,10 +45,17 @@ C:\Codex\FSG\Candy
    │  ├─ DOCUMENT_RULES.md
    │  ├─ PROJECT_STATUS.md
    │  ├─ CASE_REGISTRY.md
+   │  ├─ records/
+   │  │  ├─ CASE_HISTORY.md
+   │  │  ├─ CONSULTATION_HISTORY.md
+   │  │  ├─ DEFECT_RESPONSE_HISTORY.md
+   │  │  └─ CHANGE_HISTORY.md
    │  ├─ cases/
+   │  │  ├─ CANDY_GIRLS_INVALID_NO_BEHAVIOR.md
    │  │  ├─ CANDY_GIRLS_PROFILE_SEO_REMEDIATION.md
    │  │  ├─ CANDY_MANAGEMENT_SYSTEM_REBUILD.md
-   │  │  └─ CANDY_MANAGEMENT_SYSTEM_REPAIR.md
+   │  │  ├─ CANDY_MANAGEMENT_SYSTEM_REPAIR.md
+   │  │  └─ CANDY_RECORD_HISTORY_STRUCTURE.md
    │  ├─ SAFETY_PROTOCOL.md
    │  ├─ TASK_RESERVATIONS.md
    │  ├─ CODEX_COMMUNICATION.md
@@ -118,10 +125,10 @@ C:\Codex\FSG\Candy
 | Select management documents or perform general website or implementation investigation | `codex/README.md`, `codex/docs/CANDY_MASTER_DOC_INDEX.md`, and `codex/docs/CANDY_OPERATION_BASICS.md` |
 | Audit management-document structure, routing, responsibilities, consistency, or drift | `codex/README.md`, `codex/MANAGEMENT_SYSTEM_OVERVIEW.md`, `codex/project_management/DOCUMENT_RULES.md`, `codex/docs/CANDY_MASTER_DOC_INDEX.md`, `codex/docs/CANDY_OPERATION_BASICS.md`, and the management documents being audited |
 | Create or modify the management structure, instructions, specifications, or management documents | `codex/README.md`, `codex/MANAGEMENT_SYSTEM_OVERVIEW.md`, `codex/project_management/DOCUMENT_RULES.md`, and the canonical document being changed |
-| Register, plan, phase, document, complete, archive, or review a change or investigation case | `codex/project_management/DOCUMENT_RULES.md`, `codex/project_management/CASE_REGISTRY.md`, and the registered case parent when one exists |
-| Record or review a persistent user consultation, adopted decision, or unresolved requirement | `codex/project_management/DOCUMENT_RULES.md`, `codex/project_management/CASE_REGISTRY.md`, and the registered case parent when one exists; do not create a persistent record for a transient answered consultation |
-| Record or review defect and response history | `codex/docs/CANDY_FIX_BACKLOG.md` for unresolved owner decisions, `codex/project_management/CASE_REGISTRY.md` and the case parent for individual detail, `codex/project_management/PROJECT_STATUS.md` for current cross-case blockers, and the time-bounded `TASK_LOG.md` child for completed execution |
-| Record or review modification, addition, or new-creation history | `codex/project_management/CASE_REGISTRY.md`, the case parent when required, the applicable canonical specification or runbook for permanent behavior, and the time-bounded `TASK_LOG.md` child for completed execution |
+| Register, plan, phase, document, complete, archive, or review a change or investigation case | `codex/project_management/DOCUMENT_RULES.md`, `codex/project_management/CASE_REGISTRY.md`, `codex/project_management/records/CASE_HISTORY.md`, the selected category index, and the registered individual detail when one exists |
+| Record or review a persistent user consultation, adopted decision, or unresolved requirement | `codex/project_management/DOCUMENT_RULES.md`, `codex/project_management/records/CONSULTATION_HISTORY.md`, `codex/project_management/CASE_REGISTRY.md`, and the individual detail; do not persist a transient answered consultation |
+| Record or review defect and response history | `codex/project_management/records/DEFECT_RESPONSE_HISTORY.md` for category routing, `codex/docs/CANDY_FIX_BACKLOG.md` for unresolved owner decisions, `codex/project_management/CASE_REGISTRY.md` and the case parent for individual detail, `codex/project_management/PROJECT_STATUS.md` for current cross-case blockers, and the time-bounded `TASK_LOG.md` child for completed execution |
+| Record or review modification, addition, or new-creation history | `codex/project_management/records/CHANGE_HISTORY.md` for category routing, `codex/project_management/CASE_REGISTRY.md` and the individual detail, the applicable canonical specification or runbook for permanent behavior, and the time-bounded `TASK_LOG.md` child for completed execution |
 | Review or update system and operational information | `codex/README.md` for repository, URL, and location identity, then only the responsible source named in Section 5.0: `docs/rules/GIT_RULES.md`, `CANDY_OPERATION_BASICS.md`, `CANDY_OTHER_PAGES_MANAGEMENT.md`, `CANDY_PRODUCTION_MIGRATION_MASTER.md`, or `CANDY_SEO_SPEC.md`, plus the exact implementation, configuration, or external environment required by the request |
 | Confirm current status, issues, decisions, priorities, or next work | `codex/project_management/PROJECT_STATUS.md`; read `codex/project_management/CODEX_COMMUNICATION.md` only when required |
 | Coordinate ownership, reservations, conflict prevention, or handoff among multiple Codex agents | `codex/project_management/TASK_RESERVATIONS.md` and `codex/project_management/CODEX_COMMUNICATION.md` |
@@ -162,4 +169,4 @@ C:\Codex\FSG\Candy
 
 Files under `codex/docs/generated/` are current-state documents and deterministic detail sidecars generated from actual project files. Do not edit them manually.
 
-`codex/project_management/TASK_LOG.md`, `codex/project_management/CODEX_COMMUNICATION.md`, `codex/docs/CANDY_FIX_BACKLOG.md`, and `codex/docs/CANDY_20260713_CONTEXT_AND_IMPROVEMENT.md` contain history or supporting information. Do not use any of them alone as the canonical source for determining the current specification, state, or implementation.
+`codex/project_management/records/CASE_HISTORY.md` and its category indexes route history but do not replace individual detail owners. `codex/project_management/TASK_LOG.md`, `codex/project_management/CODEX_COMMUNICATION.md`, `codex/docs/CANDY_FIX_BACKLOG.md`, and `codex/docs/CANDY_20260713_CONTEXT_AND_IMPROVEMENT.md` contain history or supporting information. Do not use any of them alone as the canonical source for determining the current specification, state, or implementation.

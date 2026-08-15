@@ -5,10 +5,10 @@
 - Scope: `girls.php?no={id}` for every current and future active woman, including the shared dynamic metadata path and the approved always-present weekly schedule section
 - Status / Lifecycle: Active / Partial GitHub Publication
 - Source of Truth Responsibility: Case-specific plan and evidence for `CANDY-GIRLS-SEO-20260815`; permanent behavior must be transferred to the routed canonical specification during implementation
-- Related Documents: [`CANDY_SEO_SPEC.md`](../../docs/CANDY_SEO_SPEC.md), [`CANDY_OTHER_PAGES_MANAGEMENT.md`](../../docs/CANDY_OTHER_PAGES_MANAGEMENT.md), [`CANDY_OPERATION_BASICS.md`](../../docs/CANDY_OPERATION_BASICS.md), [`CANDY_CODE_FILE_STRUCTURE.md`](../../docs/CANDY_CODE_FILE_STRUCTURE.md), [`CANDY_VERIFICATION_PLAN.md`](../../docs/CANDY_VERIFICATION_PLAN.md), [`CANDY_PRODUCTION_MIGRATION_MASTER.md`](../../docs/CANDY_PRODUCTION_MIGRATION_MASTER.md), and [`TASK_LOG_2026_08.md`](../task_history/TASK_LOG_2026_08.md)
+- Related Documents: [`DEFECT_RESPONSE_HISTORY.md`](../records/DEFECT_RESPONSE_HISTORY.md), [`CANDY_GIRLS_INVALID_NO_BEHAVIOR.md`](CANDY_GIRLS_INVALID_NO_BEHAVIOR.md), [`CANDY_SEO_SPEC.md`](../../docs/CANDY_SEO_SPEC.md), [`CANDY_OTHER_PAGES_MANAGEMENT.md`](../../docs/CANDY_OTHER_PAGES_MANAGEMENT.md), [`CANDY_OPERATION_BASICS.md`](../../docs/CANDY_OPERATION_BASICS.md), [`CANDY_CODE_FILE_STRUCTURE.md`](../../docs/CANDY_CODE_FILE_STRUCTURE.md), [`CANDY_VERIFICATION_PLAN.md`](../../docs/CANDY_VERIFICATION_PLAN.md), [`CANDY_PRODUCTION_MIGRATION_MASTER.md`](../../docs/CANDY_PRODUCTION_MIGRATION_MASTER.md), [`CANDY_FIX_BACKLOG.md`](../../docs/CANDY_FIX_BACKLOG.md), and [`TASK_LOG_2026_08.md`](../task_history/TASK_LOG_2026_08.md)
 - Related Implementation Files: [`HP/girls.php`](../../../HP/girls.php), [`HP/source/girls.html`](../../../HP/source/girls.html), [`HP/includefile/dataset_girls.php`](../../../HP/includefile/dataset_girls.php), [`HP/includefile/candy_girls_page_content.php`](../../../HP/includefile/candy_girls_page_content.php), and conditionally [`HP/css/girls_page_content.css`](../../../HP/css/girls_page_content.css)
 - Case ID: `CANDY-GIRLS-SEO-20260815`
-- Updated: 2026-08-15
+- Updated: 2026-08-16
 
 ## 1. Objective and Approved Target
 
@@ -98,7 +98,7 @@ Reject empty values, video URLs, dummy assets, placeholders, and an image belong
 | The current top-media/OGP token can select video media or a dummy image | Verified from source | Reusing that token for `og:image` or `Person.image` can produce an invalid person-image claim |
 | The content helper defaults missing schedule rows to `お休み` and `次回出勤をご確認ください` | Verified from source | The row data already supports the approved all-women schedule behavior |
 | The renderer hides the whole schedule unless at least one row is a working shift | Verified from source | This is a current conflict with the adopted always-present weekly schedule requirement |
-| A missing or unknown `no` is statically replaced with the first active woman | Verified from source; HTTP behavior unverified | Do not silently change this legacy behavior in the SEO implementation; test and report the resulting status, robots, canonical, and identity |
+| A missing or unknown `no` is statically replaced with the first active woman | Verified from source and the constructed production invalid-number test URL | This separately discovered system URL-behavior problem is registered as `CANDY-GIRLS-INVALID-NO-20260816`; do not change it inside this SEO implementation |
 | No committed girls-profile-specific automated test was found | Verified by targeted repository search | Add a focused deterministic regression harness during implementation |
 | Generated static SEO state reports the special girls template as SEO `OK` | Verified from generated state | This is template-token validation, not proof of per-woman runtime values, images, or production behavior |
 | Target state check reports `girls` as `SPECIAL`, SEO `OK`, and images `UNVERIFIED` | Verified locally | Dynamic runtime and image checks remain mandatory |
@@ -125,7 +125,7 @@ Reject empty values, video URLs, dummy assets, placeholders, and an image belong
 
 ### 4.3 Explicit Exclusions
 
-Do not change `HP/includefile/dataset_base.php`, `HP/girls.php`, the URL form, image/gallery behavior, video behavior, review links, favorites or my-page behavior, management input forms, database schema or values, unrelated pages, shared SEO behavior, robots policy, or legacy invalid-`no` behavior. Preserve the later approved visible breadcrumb and its PC/SP placement; do not redesign any other part of the page. Any newly proven issue in those areas is reported with cause and impact before separate authorization.
+Do not change `HP/includefile/dataset_base.php`, `HP/girls.php`, the URL form, image/gallery behavior, video behavior, review links, favorites or my-page behavior, management input forms, database schema or values, unrelated pages, shared SEO behavior, robots policy, or legacy invalid-`no` behavior. The invalid-`no` behavior is tracked separately as `CANDY-GIRLS-INVALID-NO-20260816`. Preserve the later approved visible breadcrumb and its PC/SP placement; do not redesign any other part of the page. Any newly proven issue in those areas is reported with cause and impact before separate authorization.
 
 ## 5. Regression and Failure Matrix
 
@@ -222,13 +222,14 @@ The implementation case is complete only when all of the following are evidenced
 - Production HTTP and image checks pass after deployment.
 - Schema validation and Rich Results Test outcomes are reported separately.
 - Search Console is either verified after publication or explicitly `UNVERIFIED`.
-- Every unresolved legacy issue, including invalid-`no` behavior if still present, is reported without being silently changed or marked complete.
+- Every unresolved legacy issue is reported without being silently changed or marked complete; invalid-`no` behavior is reported through the separate case `CANDY-GIRLS-INVALID-NO-20260816`.
 
 The final report must list changed files, exact changes, Emi results, at least two other women, canonical parameter results, JSON-LD/schema results, existing-function impact results, production/Actions evidence, Search Console state, and unresolved items.
 
 ## 9. Current Position
 
 - Plan and static impact analysis: Complete.
-- Breadcrumb/H1 subset: Implemented locally. `girls.html` now has matching PC/SP visible breadcrumbs, the approved H1 form, and a woman-specific BreadcrumbList final label and canonical URL; `dataset_girls.php` performs context-safe HTML and JSON escaping. PHP lint, special-character JSON safety, local rendered-fixture comparison, and PC/SP placement checks passed.
-- Remaining implementation: Title, description, ProfilePage, Person, real-image/common-OGP decisions, always-visible schedule behavior, full regression harness, live database-backed women, invalid-`no` runtime, external validators, and Search Console remain pending.
-- Publication state: The breadcrumb/H1 subset was committed as `b8adf4fa8219c3cf12d7daab04004d380fbbe9ce`, pushed from the existing `main` branch to GitHub `main`, and live-SHA verified. No branch creation, branch switch, deployment, production mutation, database operation, external-validator run, or Search Console operation was performed. Continue the remaining phases without reverting the published subset; request direct database or production permission only when that exact operation is required.
+- Local implementation: Complete for the approved title/OG title, deterministic description/OG description, woman-specific ProfilePage/Person, real-profile/common-OGP image branching, and always-visible seven-day schedule. The prior visible PC/SP breadcrumb and H1 subset remains intact. One shared SEO object and one shared visibility result now drive the corresponding outputs without new database queries.
+- Local audit: The focused PHP harness passes 53 assertions covering exact metadata, deterministic optional-content order, ProfilePage/Person/Breadcrumb identity, real-image/no-image/video-first/dummy rejection, all-off schedule rendering, actual section visibility, special characters, and JSON-encoding failure. PHP lint, static source audit, generated-state audit, PC 1280 x 900 rendering, SP 390 x 844 rendering, seven all-off rows, zero horizontal overflow, JSON parsing, and zero browser warnings pass. The verified common OGP fallback returns HTTPS 200 with `Content-Type: image/jpeg`. Schema Markup Validator reports two items with zero errors and zero warnings, and Google Rich Results Test reports one valid BreadcrumbList and one valid ProfilePage for the deterministic local rendered HTML.
+- Remaining verification and publication: Live database-backed comparison for Emi and at least two other women, real production profile-image HTTP checks, production PHP-version/log verification, validator reruns against the deployed production URL, Commit, Push, deployment, production HTTP, Actions, and Search Console remain unperformed or unverified. Invalid-`no` behavior remains the separate case `CANDY-GIRLS-INVALID-NO-20260816` and was not changed.
+- Publication state: Only the earlier breadcrumb/H1 subset is published in Commit `b8adf4fa8219c3cf12d7daab04004d380fbbe9ce`. The five-item implementation described above exists only in the current local worktree. No branch creation, branch switch, Stage, Commit, Push, deployment, production mutation, database operation, production-URL validator run, or Search Console operation was performed by this implementation task.

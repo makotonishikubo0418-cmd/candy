@@ -14,6 +14,218 @@ function candyGirlsPageText($value)
 	return nl2br(candyGirlsPageEscape($value), false);
 }
 
+function candyGirlsPageHasText($value)
+{
+	return trim((string)$value) !== '';
+}
+
+function candyGirlsPageNormalizeHttpsUrl($url)
+{
+	$url = trim((string)$url);
+	if ($url === '') {
+		return '';
+	}
+	if (strpos($url, '//') === 0) {
+		$url = 'https:' . $url;
+	} elseif (stripos($url, 'http://') === 0) {
+		$url = 'https://' . substr($url, 7);
+	}
+	$parts = @parse_url($url);
+	if (!is_array($parts) || !isset($parts['scheme']) || strtolower($parts['scheme']) !== 'https' || empty($parts['host'])) {
+		return '';
+	}
+	return $url;
+}
+
+function candyGirlsPageSelectProfileImage($candidates)
+{
+	if (!is_array($candidates)) {
+		return '';
+	}
+	foreach ($candidates as $candidate) {
+		if (!is_array($candidate)) {
+			continue;
+		}
+		$filename = isset($candidate['filename']) ? trim((string)$candidate['filename']) : '';
+		$url = isset($candidate['url']) ? candyGirlsPageNormalizeHttpsUrl($candidate['url']) : '';
+		if ($filename === '' || $url === '') {
+			continue;
+		}
+		$basename = strtolower(basename(str_replace('\\', '/', $filename)));
+		if (!preg_match('/\.(?:jpe?g|png|gif|webp|avif)$/i', $basename)) {
+			continue;
+		}
+		if (preg_match('/^(?:dmy(?:_[hw])?|dummy(?:_[hw])?|sample|no[-_]?image|placeholder)\.(?:jpe?g|png|gif|webp|avif)$/i', $basename)) {
+			continue;
+		}
+		return $url;
+	}
+	return '';
+}
+
+function candyGirlsPageOrderProfileImageCandidates($horizontalCandidates, $verticalCandidates, $mainUsesHorizontalImage)
+{
+	$ordered = array();
+	if ($mainUsesHorizontalImage && is_array($horizontalCandidates)) {
+		$ordered = array_merge($ordered, $horizontalCandidates);
+	}
+	if (is_array($verticalCandidates)) {
+		$ordered = array_merge($ordered, $verticalCandidates);
+	}
+	return $ordered;
+}
+
+function candyGirlsPageBuildVisibility($pageData, $scheduleRows, $movie)
+{
+	$content = isset($pageData['content']) && is_array($pageData['content']) ? $pageData['content'] : array();
+	$qaSource = isset($pageData['qa']) && is_array($pageData['qa']) ? $pageData['qa'] : array();
+	$movieSource = isset($movie['sources']) && is_array($movie['sources']) ? $movie['sources'] : array();
+	$profileFields = array(
+		'profile_hobby' => '趣味',
+		'profile_favorite_food' => '好きな食べ物',
+		'profile_favorite_color' => '好きな色',
+		'profile_strength' => '長所',
+		'profile_specialty' => '得意なこと',
+		'profile_day_off' => '休日の過ごし方'
+	);
+	$qaRows = array();
+	foreach ($qaSource as $row) {
+		if (is_array($row) && isset($row['question']) && isset($row['answer']) && candyGirlsPageHasText($row['question']) && candyGirlsPageHasText($row['answer'])) {
+			$qaRows[] = array('question' => $row['question'], 'answer' => $row['answer']);
+		}
+	}
+	$profileRows = array();
+	foreach ($profileFields as $key => $label) {
+		if (isset($content[$key]) && candyGirlsPageHasText($content[$key])) {
+			$profileRows[] = array('label' => $label, 'value' => $content[$key]);
+		}
+	}
+	$movieSources = array();
+	foreach ($movieSource as $source) {
+		if (is_array($source) && isset($source['src']) && isset($source['type']) && candyGirlsPageHasText($source['src']) && candyGirlsPageHasText($source['type'])) {
+			$movieSources[] = array('src' => $source['src'], 'type' => $source['type']);
+		}
+	}
+	$managerVisible = (isset($content['manager_comment_title']) && candyGirlsPageHasText($content['manager_comment_title'])) || (isset($content['manager_comment_body']) && candyGirlsPageHasText($content['manager_comment_body']));
+	$salesVisible = (isset($content['sales_point_title']) && candyGirlsPageHasText($content['sales_point_title'])) || (isset($content['sales_point_body']) && candyGirlsPageHasText($content['sales_point_body']));
+
+	return array(
+		'schedule' => is_array($scheduleRows) && count($scheduleRows) === 7,
+		'movie' => count($movieSources) > 0,
+		'manager' => $managerVisible,
+		'qa' => count($qaRows) > 0,
+		'profile' => count($profileRows) > 0,
+		'sales' => $salesVisible,
+		'qa_rows' => $qaRows,
+		'profile_rows' => $profileRows,
+		'movie_sources' => $movieSources
+	);
+}
+
+function candyGirlsPageBuildDescription($name, $visibility)
+{
+	$name = trim((string)$name);
+	$labels = array();
+	$optionalGroups = array(
+		'movie' => 'プロフィール動画',
+		'manager' => '店長紹介コメント',
+		'qa' => '本人Q&A',
+		'profile' => '詳細プロフィール',
+		'sales' => 'セールスポイント'
+	);
+	foreach ($optionalGroups as $key => $label) {
+		if (!empty($visibility[$key])) {
+			$labels[] = $label;
+		}
+	}
+	$description = $name . 'のプロフィール・週間出勤情報を掲載。';
+	if (count($labels) > 0) {
+		$description .= implode('、', $labels) . 'も確認できます。';
+	}
+	return $description . '鹿児島デリヘル「キャンディ」公式。';
+}
+
+function candyGirlsPageBuildSeoData($name, $canonical, $visibility, $profileImage, $fallbackImage)
+{
+	$name = trim((string)$name);
+	$canonical = candyGirlsPageNormalizeHttpsUrl($canonical);
+	$profileImage = candyGirlsPageNormalizeHttpsUrl($profileImage);
+	$fallbackImage = candyGirlsPageNormalizeHttpsUrl($fallbackImage);
+	$heading = $name . 'のプロフィール・出勤情報';
+	$description = candyGirlsPageBuildDescription($name, $visibility);
+	return array(
+		'name' => $name,
+		'h1' => $heading,
+		'title' => $heading . '｜鹿児島デリヘル キャンディ',
+		'og_title' => $heading . '｜鹿児島デリヘル キャンディ',
+		'description' => $description,
+		'og_description' => $description,
+		'canonical' => $canonical,
+		'og_image' => $profileImage !== '' ? $profileImage : $fallbackImage,
+		'person_image' => $profileImage
+	);
+}
+
+function candyGirlsPageBuildStructuredData($seo)
+{
+	$person = array(
+		'@type' => 'Person',
+		'name' => isset($seo['name']) ? $seo['name'] : '',
+		'url' => isset($seo['canonical']) ? $seo['canonical'] : ''
+	);
+	if (!empty($seo['person_image'])) {
+		$person['image'] = $seo['person_image'];
+	}
+	return array(
+		array(
+			'@context' => 'https://schema.org',
+			'@type' => 'ProfilePage',
+			'name' => isset($seo['h1']) ? $seo['h1'] : '',
+			'url' => isset($seo['canonical']) ? $seo['canonical'] : '',
+			'description' => isset($seo['description']) ? $seo['description'] : '',
+			'mainEntity' => $person
+		),
+		array(
+			'@context' => 'https://schema.org',
+			'@type' => 'BreadcrumbList',
+			'itemListElement' => array(
+				array('@type' => 'ListItem', 'position' => 1, 'name' => 'TOP', 'item' => 'https://www.55810.com/'),
+				array('@type' => 'ListItem', 'position' => 2, 'name' => '女の子一覧', 'item' => 'https://www.55810.com/girls_list.php'),
+				array('@type' => 'ListItem', 'position' => 3, 'name' => isset($seo['h1']) ? $seo['h1'] : '', 'item' => isset($seo['canonical']) ? $seo['canonical'] : '')
+			)
+		)
+	);
+}
+
+function candyGirlsPageJsonLdScript($structuredData)
+{
+	$json = json_encode(
+		$structuredData,
+		JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES
+	);
+	if ($json === false) {
+		$error = function_exists('json_last_error_msg') ? json_last_error_msg() : (string)json_last_error();
+		error_log('[candy][girls-profile-seo] JSON-LD encoding failed: ' . $error);
+		return '';
+	}
+	return '<script type="application/ld+json">' . $json . '</script>';
+}
+
+function candyGirlsPageApplySeo($source, $seo)
+{
+	$jsonLd = candyGirlsPageJsonLdScript(candyGirlsPageBuildStructuredData($seo));
+	return str_replace(
+		array('rep09000004eot', 'rep09000005eot', 'rep09000006eot', 'rep09000007eot'),
+		array(
+			candyGirlsPageEscape(isset($seo['title']) ? $seo['title'] : ''),
+			candyGirlsPageEscape(isset($seo['description']) ? $seo['description'] : ''),
+			candyGirlsPageEscape(isset($seo['og_image']) ? $seo['og_image'] : ''),
+			$jsonLd
+		),
+		$source
+	);
+}
+
 function candyGirlsPageHashEquals($known, $actual)
 {
 	if (function_exists('hash_equals')) {
@@ -223,35 +435,19 @@ function candyGirlsPageBuildScheduleRows($years, $months, $days, $weekdays, $sch
 	return $rows;
 }
 
-function candyGirlsPageRender($pageData, $scheduleRows, $movie)
+function candyGirlsPageRender($pageData, $scheduleRows, $movie, $visibility = null)
 {
 	$content = isset($pageData['content']) && is_array($pageData['content']) ? $pageData['content'] : array();
-	$qa = isset($pageData['qa']) && is_array($pageData['qa']) ? $pageData['qa'] : array();
-	$movieSources = isset($movie['sources']) && is_array($movie['sources']) ? $movie['sources'] : array();
-	$profileFields = array(
-		'profile_hobby' => '趣味',
-		'profile_favorite_food' => '好きな食べ物',
-		'profile_favorite_color' => '好きな色',
-		'profile_strength' => '長所',
-		'profile_specialty' => '得意なこと',
-		'profile_day_off' => '休日の過ごし方'
-	);
-	$profileRows = array();
-	foreach ($profileFields as $key => $label) {
-		if (isset($content[$key]) && trim((string)$content[$key]) !== '') {
-			$profileRows[] = array('label' => $label, 'value' => $content[$key]);
-		}
+	if (!is_array($visibility)) {
+		$visibility = candyGirlsPageBuildVisibility($pageData, $scheduleRows, $movie);
 	}
-	$managerVisible = (isset($content['manager_comment_title']) && trim((string)$content['manager_comment_title']) !== '') || (isset($content['manager_comment_body']) && trim((string)$content['manager_comment_body']) !== '');
-	$salesVisible = (isset($content['sales_point_title']) && trim((string)$content['sales_point_title']) !== '') || (isset($content['sales_point_body']) && trim((string)$content['sales_point_body']) !== '');
-	$scheduleVisible = false;
-	foreach ($scheduleRows as $scheduleRow) {
-		if (isset($scheduleRow['off']) && $scheduleRow['off'] === false) {
-			$scheduleVisible = true;
-			break;
-		}
-	}
-	$hasVisibleContent = $scheduleVisible || $managerVisible || count($qa) > 0 || count($profileRows) > 0 || $salesVisible;
+	$qa = isset($visibility['qa_rows']) && is_array($visibility['qa_rows']) ? $visibility['qa_rows'] : array();
+	$profileRows = isset($visibility['profile_rows']) && is_array($visibility['profile_rows']) ? $visibility['profile_rows'] : array();
+	$movieSources = isset($visibility['movie_sources']) && is_array($visibility['movie_sources']) ? $visibility['movie_sources'] : array();
+	$managerVisible = !empty($visibility['manager']);
+	$salesVisible = !empty($visibility['sales']);
+	$scheduleVisible = !empty($visibility['schedule']);
+	$hasVisibleContent = $scheduleVisible || !empty($visibility['movie']) || $managerVisible || !empty($visibility['qa']) || !empty($visibility['profile']) || $salesVisible;
 	if (!$hasVisibleContent) {
 		return '';
 	}

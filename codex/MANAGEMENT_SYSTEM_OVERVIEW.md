@@ -5,7 +5,7 @@
 - Detailed canonical sources: The management documents listed in `codex/README.md`
 - Status: canonical document for the candy management-system overview
 - Canonical location: `C:\Codex\FSG\Candy\codex`
-- Updated: 2026-08-14
+- Updated: 2026-08-16
 
 ## 1. Intended Outcome
 
@@ -23,7 +23,7 @@ The intended state is:
 - Separate stable specifications from current state that can be regenerated from actual files.
 - Maintain necessary communication and never report unverified work as complete.
 - Preserve a structure that remains maintainable when expanded across categories.
-- Classify daily consultations, defects, changes, and system or operational information into their existing owners without creating parallel category-wide ledgers.
+- Route durable consultations, defect responses, and modifications/additions/new creation through one three-category history entrypoint while preserving each existing individual-detail owner.
 
 Here, "shortest route" does not mean rushed or incomplete work. It means completing every required step and omitting only unnecessary steps.
 
@@ -39,8 +39,12 @@ C:\Codex\FSG\Candy\AGENTS.md
        ├─ docs/rules/GIT_RULES.md
        │    └─ pre-work Git verification and branch rules
        └─ codex/project_management/DOCUMENT_RULES.md
+            ├─ codex/project_management/records/CASE_HISTORY.md
+            │    ├─ CONSULTATION_HISTORY.md → individual consultation detail
+            │    ├─ DEFECT_RESPONSE_HISTORY.md → individual defect detail
+            │    └─ CHANGE_HISTORY.md → individual change detail
             ├─ codex/project_management/CASE_REGISTRY.md
-            │    └─ registered case parent when required
+            │    └─ lifecycle and registered case-parent mapping
             └─ routed canonical document
                  └─ target code, specification, asset, or environment
 ```
@@ -49,7 +53,7 @@ This route avoids broad document reading for simple work while preserving every 
 
 ## 3. Separation of Markdown Responsibilities
 
-Maintain separate canonical documents for common rules, the overall plan, specifications, code structure, inter-Codex communication, and individual task history.
+Maintain separate canonical documents for common rules, the overall plan, specifications, code structure, inter-Codex communication, category-history routing, individual case detail, and individual task history.
 
 Maintain required-document routing only in `codex/WORK_ROUTING.md` and
 common Git procedure only in `docs/rules/GIT_RULES.md`. Maintain canonical
@@ -83,7 +87,7 @@ overview never adds an execution step.
 | One-off analysis documents remain isolated | Register the case, use one parent, and classify every retained child by lifecycle |
 | Case phases and implementation cannot be traced | Route registry → case parent → specification → implementation → verification → completion |
 | A document grows beyond a usable size | Split by responsibility, data class, time period, or lifecycle under one parent |
-| Daily consultations, defects, changes, or operational facts create scattered files | Use the logical classification in `WORK_ROUTING.md` and the persistence decision in `DOCUMENT_RULES.md` |
+| Daily consultations, defects, or changes create scattered files | Route them through `CASE_HISTORY.md` to exactly one of the three category indexes and then to one canonical individual detail |
 | Source-attached technical Markdown becomes isolated or a competing authority | Classify it outside the formal management tree, link canonical owner → one technical index → technical children, preserve the unverified-state boundary, and audit it as a separate non-management population |
 | Repeated changes degrade the code | Enforce one responsibility per canonical source, integration into existing routes, and no appended override blocks |
 | Specifications differ between documents | Assign one canonical document to each subject and prohibit duplicate specifications |
