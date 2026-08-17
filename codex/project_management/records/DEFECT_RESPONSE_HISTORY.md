@@ -17,6 +17,7 @@ Use this index to reach one individual detail for each defect case. Unresolved o
 
 | Case ID | Subject | Individual detail owner | Boundary |
 |---|---|---|---|
+| CANDY-MEMBER-DEVELOPMENT-ISOLATION-20260817 | Isolate development-only member pages from public navigation and indexing | [`CASE_REGISTRY.md`](../CASE_REGISTRY.md) (`CANDY-MEMBER-DEVELOPMENT-ISOLATION-20260817`) | Local implementation and verification complete; publication, deployment, and production confirmation remain separate |
 | CANDY-INTERNAL-PATH-ACCESS-20260817 | Restrict direct HTTP access to source HTML and server-side include files | [`CANDY_INTERNAL_PATH_ACCESS_CONTROL.md`](../cases/CANDY_INTERNAL_PATH_ACCESS_CONTROL.md) | Completed through separated GitHub publication, protected one-file deployment, SHA-256 verification, and production HTTP validation |
 | CANDY-GIRLS-INVALID-NO-20260816 | A nonexistent girls number returns HTTP 200 and renders another woman's profile | [`CANDY_GIRLS_INVALID_NO_BEHAVIOR.md`](../cases/CANDY_GIRLS_INVALID_NO_BEHAVIOR.md) | Active separate system URL-behavior problem; no remedy adopted |
 | CANDY-BREADCRUMB-CLOSURE-20260815 | Close all remaining visible breadcrumb and BreadcrumbList inconsistencies | [`TASK_LOG_2026_08.md`](../task_history/TASK_LOG_2026_08.md) (`TASK-20260815-BREADCRUMB-CLOSURE-001`) | Completed execution detail |

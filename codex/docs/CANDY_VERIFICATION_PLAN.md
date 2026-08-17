@@ -112,6 +112,7 @@ For the internal-path access contract, verify separately that direct requests to
 - Do not confuse same-name HTML with public PHP.
 - Verify HTML-to-PHP transformation from `dataset_base.php`.
 - Match each anchor to an `id` or `name` at the destination.
+- For a development-only route, distinguish links inside its isolated feature from links in formal public source navigation. Confirm that formal public sources do not link to the development route and that an unavailable development destination is not linked at all.
 
 ### 3.5 Images, Movies, Fonts, and CSS
 
@@ -235,6 +236,7 @@ Do not report a local fix as a production fix.
 - Pending decisions are reported as unverified.
 - Every fix was revalidated.
 - When internal-path access control changed, source HTML and directory requests are `404`, include requests are `403`, `source/style.css` is `200`, and public PHP rendering remains valid.
+- When development-only member isolation changed, all member entries emit `noindex,nofollow`, the public legacy mypage fallback remains selected while integration is disabled, public source links and sitemap membership are zero, and unavailable legal destinations are unlinked.
 - Unexecuted browser, database, and external-service checks are not reported complete.
 
 When pending decisions remain, report that the full population was scanned but

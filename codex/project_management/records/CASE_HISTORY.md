@@ -26,7 +26,7 @@ Management and record history
 | Required category | Category index | Registered cases | Individual-detail rule |
 |---|---|---:|---|
 | Consultation History (相談履歴) | [`CONSULTATION_HISTORY.md`](CONSULTATION_HISTORY.md) | 3 | Route to the adopted consultation, investigation, audit, or retained evidence detail |
-| Defect and Response History (不具合・対応履歴) | [`DEFECT_RESPONSE_HISTORY.md`](DEFECT_RESPONSE_HISTORY.md) | 7 | Route to the defect case parent, response record, or completed task detail |
+| Defect and Response History (不具合・対応履歴) | [`DEFECT_RESPONSE_HISTORY.md`](DEFECT_RESPONSE_HISTORY.md) | 8 | Route to the defect case parent, response record, or completed task detail |
 | Modification, Addition, and New-Creation History (改修・追加・新規作成等) | [`CHANGE_HISTORY.md`](CHANGE_HISTORY.md) | 4 | Route to the change case parent, completed handoff, or completed task detail |
 
 ## 3. Responsibility Boundary

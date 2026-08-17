@@ -74,6 +74,15 @@ For `girls.php?no={resolved no}`, derive every woman-specific value from the act
 - Source HTML and include paths MUST NOT be added to canonical URLs, internal navigation, or `sitemap.xml`.
 - The public PHP response retains its existing robots, canonical, OGP, JSON-LD, and sitemap contract. Blocking direct HTTP access MUST NOT prevent PHP from reading the same files through server-side filesystem operations.
 
+### 5.2 Development-Only Member Routes
+
+- While `MEMBER_SITE_INTEGRATION_ENABLED` is `false`, `member_login.php`, `member_register.php`, `member_mypage.php`, `member_password_reset.php`, `member_logout.php`, `privacy.php`, and `customers/index.php` are development-only routes, not formal public content pages.
+- Every response and redirect from those routes MUST return `X-Robots-Tag: noindex, nofollow`. Source-backed and layout-rendered HTML MUST also declare `noindex,nofollow`.
+- The member API and cron entry files use the same protected bootstrap and MUST also emit the header when reached over HTTP; this robots control does not replace authentication, scheduler, or direct-access security controls.
+- These routes MUST remain absent from `sitemap.xml` and normal public source navigation. Their public-page title, description, canonical, H1, OGP, JSON-LD, breadcrumb, sitemap-membership, duplicate, and orphan requirements are `NOT_APPLICABLE` while this classification is active.
+- Public `mypage.php` MUST retain the existing Cookie-favorite rendering while integration is disabled and MUST NOT redirect into the development-only routes.
+- Links inside the isolated development feature MAY remain for testing, but an absent destination such as `terms.php` MUST NOT be linked.
+
 ## 6. Headings
 
 - A public content page normally has one H1 for its subject. It MUST NOT conflict with the breadcrumb, title, or canonical target.
@@ -180,5 +189,6 @@ After a change, validate the category runbook requirements and:
 - Duplicate title/canonical, legacy URL, and different slug
 - Zero unresolved sitemap-date drift after `preview-sitemap-lastmod` and `sync-sitemap-lastmod`, followed by a successful `check` after `candy-site-state write`
 - Direct source HTML and source-directory `404`, direct include-path `403`, and `/source/style.css` `200` when the access-control contract is affected
+- Development member response/header robots, public-link isolation, sitemap exclusion, legacy `mypage.php` fallback, and unavailable legal-route links when the development-member contract is affected
 
 Use `generated/CANDY_SEO_STATUS.md` for current findings, each area/hotel/blog specification for category-specific generation exceptions, and `CANDY_FIX_BACKLOG.md` for issues requiring fixes or owner decisions.

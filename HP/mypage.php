@@ -1,17 +1,24 @@
 <?php
 /**
- * 新会員マイページへの振り分け（member_login / member_mypage）。
- * 旧 Cookie お気に入り mypage は表示せず、新会員へ誘導する。
+ * 公開マイページ入口。
+ * 会員サイト統合が無効な間は既存 Cookie お気に入りを表示し、
+ * 有効化された場合にだけ新会員マイページへ振り分ける。
  */
 error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED);
-require_once __DIR__ . '/includefile/member/bootstrap.php';
+require_once __DIR__ . '/includefile/member/config.php';
 
-$mdb = new MemberDb($Database);
-$auth = new MemberAuth($mdb);
+if (MEMBER_SITE_INTEGRATION_ENABLED) {
+    require_once __DIR__ . '/includefile/member/bootstrap.php';
 
-if ($auth->getCurrentMember() !== null) {
-    header('Location: member_mypage.php');
-} else {
-    header('Location: member_login.php');
+    $mdb = new MemberDb($Database);
+    $auth = new MemberAuth($mdb);
+
+    if ($auth->getCurrentMember() !== null) {
+        header('Location: member_mypage.php');
+    } else {
+        header('Location: member_login.php');
+    }
+    exit;
 }
-exit;
+
+include __DIR__ . '/includefile/dataset_base.php';

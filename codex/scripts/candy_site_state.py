@@ -75,6 +75,14 @@ SPECIAL_STEMS = {"create", "girls", "main", "makeSitemap", "movie_iframe", "page
 SYSTEM_STEMS = {"confirm", "contact", "login", "mypage", "system"}
 SEO_HELPER_STEMS = {"create", "movie_iframe"}
 SEO_ADMIN_STEMS = {"create"}
+SEO_DEVELOPMENT_STEMS = {
+    "member_login",
+    "member_logout",
+    "member_mypage",
+    "member_password_reset",
+    "member_register",
+    "privacy",
+}
 SOURCE_SCOPE = (
     "HP",
     "Text_area_data",
@@ -728,6 +736,7 @@ def collect() -> dict[str, object]:
         source_exists = source_path.is_file()
         dataset_exists = dataset_path.is_file()
         source = read_utf8(source_path) if source_exists else ""
+        public_source = read_utf8(public_path)
         title = first_match(source, r"<title[^>]*>(.*?)</title>", re.I | re.S)
         h1_values = [strip_tags(item) for item in re.findall(r"<h1\b[^>]*>(.*?)</h1>", source, re.I | re.S)]
         canonical = first_match(source, r'<link\s+rel=["\']canonical["\'][^>]+href=["\']([^"\']+)', re.I)
@@ -805,11 +814,14 @@ def collect() -> dict[str, object]:
                 "structure": structure,
                 "role": role_for(category, stem),
                 "source_text": source,
+                "public_text": public_source,
             }
         )
 
     title_counts = Counter(page["title"] for page in pages if page["title"])
     canonical_counts = Counter(page["canonical"] for page in pages if page["canonical"])
+    member_bootstrap_path = HP_ROOT / "includefile" / "member" / "bootstrap.php"
+    member_bootstrap_source = read_utf8(member_bootstrap_path) if member_bootstrap_path.is_file() else ""
     seo_rows: list[dict[str, object]] = []
     for page in pages:
         source = str(page["source_text"])
@@ -852,8 +864,20 @@ def collect() -> dict[str, object]:
         expected_path = "" if page["stem"] == "index" else f"/{page['stem']}.php"
         seo_helper = page["stem"] in SEO_HELPER_STEMS
         seo_admin = page["stem"] in SEO_ADMIN_STEMS
+        seo_development = page["stem"] in SEO_DEVELOPMENT_STEMS
+        development_header = (
+            "includefile/member/bootstrap.php" in str(page["public_text"])
+            and "X-Robots-Tag: noindex, nofollow"
+            in member_bootstrap_source
+        )
+        development_meta = "noindex" in robots.lower() and "nofollow" in robots.lower()
+        development_robots = development_header and (
+            development_meta if page["source"] else True
+        )
         canonical_path = urlparse(canonical).path.rstrip("/") if canonical else ""
-        if page["sitemap_count"] == 1:
+        if seo_development:
+            sitemap_status = "NOT_APPLICABLE" if page["sitemap_count"] == 0 else "ISSUE"
+        elif page["sitemap_count"] == 1:
             if page["expected_sitemap_lastmod"] == "UNVERIFIED":
                 sitemap_status = "UNVERIFIED"
             elif (
@@ -870,14 +894,14 @@ def collect() -> dict[str, object]:
                 else "ISSUE"
             )
         checks = {
-            "title": "OK" if title else "ISSUE" if page["source"] else "UNVERIFIED",
-            "description": "OK" if description else "ISSUE" if page["source"] else "UNVERIFIED",
-            "canonical": "NOT_APPLICABLE" if seo_helper else "OK" if canonical else "ISSUE" if page["source"] else "UNVERIFIED",
-            "robots": "OK" if robots else "ISSUE" if page["source"] else "UNVERIFIED",
-            "h1": "NOT_APPLICABLE" if seo_helper else "OK" if h1_count == 1 else "ISSUE" if page["source"] else "UNVERIFIED",
-            "ogp": "NOT_APPLICABLE" if seo_helper else "OK" if not ogp_issues and page["source"] else "ISSUE" if page["source"] else "UNVERIFIED",
-            "json_ld": "NOT_APPLICABLE" if seo_helper else "OK" if (json_objects and not json_errors) or dynamic_girls_json_ld else "ISSUE" if page["source"] else "UNVERIFIED",
-            "breadcrumb": "NOT_APPLICABLE" if seo_helper else "OK" if breadcrumb_count or dynamic_girls_json_ld else "NOT_APPLICABLE" if page["category"] in {"top", "system"} else "ISSUE",
+            "title": "NOT_APPLICABLE" if seo_development else "OK" if title else "ISSUE" if page["source"] else "UNVERIFIED",
+            "description": "NOT_APPLICABLE" if seo_development else "OK" if description else "ISSUE" if page["source"] else "UNVERIFIED",
+            "canonical": "NOT_APPLICABLE" if seo_helper or seo_development else "OK" if canonical else "ISSUE" if page["source"] else "UNVERIFIED",
+            "robots": "OK" if development_robots else "ISSUE" if seo_development else "OK" if robots else "ISSUE" if page["source"] else "UNVERIFIED",
+            "h1": "NOT_APPLICABLE" if seo_helper or seo_development else "OK" if h1_count == 1 else "ISSUE" if page["source"] else "UNVERIFIED",
+            "ogp": "NOT_APPLICABLE" if seo_helper or seo_development else "OK" if not ogp_issues and page["source"] else "ISSUE" if page["source"] else "UNVERIFIED",
+            "json_ld": "NOT_APPLICABLE" if seo_helper or seo_development else "OK" if (json_objects and not json_errors) or dynamic_girls_json_ld else "ISSUE" if page["source"] else "UNVERIFIED",
+            "breadcrumb": "NOT_APPLICABLE" if seo_helper or seo_development else "OK" if breadcrumb_count or dynamic_girls_json_ld else "NOT_APPLICABLE" if page["category"] in {"top", "system"} else "ISSUE",
             "faq": (
                 "OK"
                 if faq_schema_count and faq_body_count and faq_schema_items == faq_body_count
@@ -887,12 +911,12 @@ def collect() -> dict[str, object]:
             ),
             "item_list": "OK" if item_count else "NOT_APPLICABLE",
             "internal_links": "NOT_APPLICABLE" if seo_admin else "ISSUE" if missing_internal else "OK" if internal_refs else "NOT_APPLICABLE",
-            "image_alt": "ISSUE" if img_alt_missing else "OK" if img_tags else "NOT_APPLICABLE",
+            "image_alt": "NOT_APPLICABLE" if seo_development else "ISSUE" if img_alt_missing else "OK" if img_tags else "NOT_APPLICABLE",
             "sitemap": sitemap_status,
-            "url_canonical": "NOT_APPLICABLE" if seo_helper else "OK" if canonical and (canonical_path == expected_path or (page["stem"] == "girls" and canonical == "rep03010092eot")) else "ISSUE" if canonical else "UNVERIFIED",
-            "duplicate_title": "ISSUE" if title and title_counts[title] > 1 else "OK" if title else "UNVERIFIED",
-            "duplicate_canonical": "NOT_APPLICABLE" if seo_helper else "ISSUE" if canonical and canonical_counts[canonical] > 1 else "OK" if canonical else "UNVERIFIED",
-            "orphan": "NOT_APPLICABLE" if page["stem"] == "index" or page["stem"] in SPECIAL_STEMS else "ISSUE" if page["incoming"] == 0 else "OK",
+            "url_canonical": "NOT_APPLICABLE" if seo_helper or seo_development else "OK" if canonical and (canonical_path == expected_path or (page["stem"] == "girls" and canonical == "rep03010092eot")) else "ISSUE" if canonical else "UNVERIFIED",
+            "duplicate_title": "NOT_APPLICABLE" if seo_development else "ISSUE" if title and title_counts[title] > 1 else "OK" if title else "UNVERIFIED",
+            "duplicate_canonical": "NOT_APPLICABLE" if seo_helper or seo_development else "ISSUE" if canonical and canonical_counts[canonical] > 1 else "OK" if canonical else "UNVERIFIED",
+            "orphan": "NOT_APPLICABLE" if page["stem"] == "index" or page["stem"] in SPECIAL_STEMS or seo_development else "ISSUE" if page["incoming"] == 0 else "OK",
         }
         overall = "ISSUE" if "ISSUE" in checks.values() else "UNVERIFIED" if "UNVERIFIED" in checks.values() else "OK"
         issues = []
@@ -912,7 +936,7 @@ def collect() -> dict[str, object]:
                 "sitemap_lastmod="
                 f"{page['sitemap_lastmod']}->{page['expected_sitemap_lastmod']}"
             )
-        if not seo_helper:
+        if not seo_helper and not seo_development:
             issues.extend(ogp_issues)
         seo_rows.append(
             {
@@ -921,7 +945,7 @@ def collect() -> dict[str, object]:
                 "title": title or "UNVERIFIED",
                 "description": description or "UNVERIFIED",
                 "canonical": canonical or "UNVERIFIED",
-                "robots": robots or "UNVERIFIED",
+                "robots": robots or ("X-Robots-Tag: noindex, nofollow" if seo_development and development_header else "UNVERIFIED"),
                 "h1": page["h1_values"][0] if page["h1_values"] else "UNVERIFIED",
                 "h1_count": h1_count,
                 "ogp": checks["ogp"],

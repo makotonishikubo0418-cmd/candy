@@ -6,7 +6,7 @@ function member_page_header($title)
     echo '<!DOCTYPE html><html lang="ja"><head>';
     echo '<meta charset="UTF-8">';
     echo '<meta name="viewport" content="width=device-width, initial-scale=1.0">';
-    echo '<meta name="robots" content="noindex">';
+    echo '<meta name="robots" content="noindex,nofollow">';
     echo '<title>' . $t . ' | ' . htmlspecialchars(MEMBER_CLUB_NAME, ENT_QUOTES, 'UTF-8') . '</title>';
     echo '<link href="./css/member.css" rel="stylesheet" type="text/css">';
     echo '</head><body class="member-page">';
@@ -19,7 +19,7 @@ function member_page_header($title)
 function member_page_footer()
 {
     echo '</div></main>';
-    echo '<footer class="member-footer"><a href="./terms.php">利用規約</a> · <a href="./privacy.php">プライバシーポリシー</a></footer>';
+    echo '<footer class="member-footer"><a href="./privacy.php">プライバシーポリシー</a></footer>';
     echo '<script src="./js/member.js"></script>';
     echo '</body></html>';
 }
