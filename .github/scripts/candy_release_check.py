@@ -24,6 +24,13 @@ PUBLIC_INDEX = "https://www.55810.com/index.php"
 CANONICAL_ROOT = "https://www.55810.com"
 DIRECT_ROOT = "http://firststar.kir.jp/group/candy/"
 TOP_TEXT = "鹿児島 デリヘル キャンディ"
+SOURCE_DIRECTORY = f"{PUBLIC_ROOT}source/"
+SOURCE_HTML = f"{PUBLIC_ROOT}source/mypage.html"
+SOURCE_TEMPLATE = f"{PUBLIC_ROOT}source/template_girls.html"
+SOURCE_STYLE = f"{PUBLIC_ROOT}source/style.css"
+INCLUDE_DIRECTORY = f"{PUBLIC_ROOT}includefile/"
+INCLUDE_FILE = f"{PUBLIC_ROOT}includefile/dataset_base.php"
+INCLUDE_NESTED_FILE = f"{PUBLIC_ROOT}includefile/member/bootstrap.php"
 
 
 class NoRedirect(HTTPRedirectHandler):
@@ -210,6 +217,30 @@ def verify_entry_contract(
     print("ENTRY_CONTRACT_OK=" + ",".join(checks))
 
 
+def verify_internal_path_access_contract(
+    fetch: Callable[[str], tuple[int, str, object, bytes]] | None = None,
+) -> None:
+    fetcher = fetch or http_fetch
+    expectations = (
+        ("source_directory_404", SOURCE_DIRECTORY, 404),
+        ("source_html_404", SOURCE_HTML, 404),
+        ("source_template_404", SOURCE_TEMPLATE, 404),
+        ("source_style_200", SOURCE_STYLE, 200),
+        ("include_directory_403", INCLUDE_DIRECTORY, 403),
+        ("include_file_403", INCLUDE_FILE, 403),
+        ("include_nested_file_403", INCLUDE_NESTED_FILE, 403),
+    )
+    checks: dict[str, bool] = {}
+    for label, url, expected_status in expectations:
+        status, final_url, _headers, _body = fetcher(url)
+        checks[label] = status == expected_status and final_url == url
+
+    if not all(checks.values()):
+        failed = ", ".join(name for name, passed in checks.items() if not passed)
+        raise RuntimeError(f"production internal-path access contract failed: {failed}")
+    print("INTERNAL_PATH_ACCESS_OK=" + ",".join(checks))
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--sha")
@@ -218,21 +249,42 @@ def main() -> int:
     parser.add_argument("--expect-visible-text", action="append", default=[])
     parser.add_argument("--timeout", type=int, default=300)
     parser.add_argument("--entry-only", action="store_true")
+    parser.add_argument("--access-control-only", action="store_true")
     parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
     if args.self_test:
-        if args.sha or args.url or args.expect_text or args.expect_visible_text or args.entry_only:
+        if (
+            args.sha
+            or args.url
+            or args.expect_text
+            or args.expect_visible_text
+            or args.entry_only
+            or args.access_control_only
+        ):
             parser.error("--self-test cannot be combined with network-check options")
         return self_test()
     if args.entry_only:
-        if args.sha or args.url or args.expect_text or args.expect_visible_text:
+        if (
+            args.sha
+            or args.url
+            or args.expect_text
+            or args.expect_visible_text
+            or args.access_control_only
+        ):
             parser.error(
-                "--entry-only cannot be combined with --sha, --url, --expect-text, or --expect-visible-text"
+                "--entry-only cannot be combined with other network-check options"
             )
         verify_entry_contract()
         return 0
+    if args.access_control_only:
+        if args.sha or args.url or args.expect_text or args.expect_visible_text:
+            parser.error(
+                "--access-control-only cannot be combined with --sha, --url, --expect-text, or --expect-visible-text"
+            )
+        verify_internal_path_access_contract()
+        return 0
     if not args.sha:
-        parser.error("--sha is required unless --entry-only is used")
+        parser.error("--sha is required unless an independent verification mode is used")
     if len(args.sha) != 40 or any(character not in "0123456789abcdef" for character in args.sha):
         parser.error("--sha must be a lowercase 40-character commit SHA")
     if args.timeout < 30 or args.timeout > 600:

@@ -143,5 +143,7 @@ jobs:
           grep -Fx "SUCCESS: deployed and SHA256-verified 1 file(s); deleted 0 obsolete file(s)" deploy-result.txt
           cat deploy-result.txt >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Verify the production entry contract
-        run: python3 .github/scripts/candy_release_check.py --entry-only
+      - name: Verify the production entry and internal-path access contracts
+        run: |
+          python3 .github/scripts/candy_release_check.py --entry-only
+          python3 .github/scripts/candy_release_check.py --access-control-only

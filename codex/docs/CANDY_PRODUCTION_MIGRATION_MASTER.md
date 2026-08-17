@@ -55,6 +55,14 @@ Normal PHP, include, source, CSS, JavaScript, image, and movie deployment MUST
 leave protected `HP/index.php` and `HP/.htaccess` unchanged. Verify the common
 entry contract separately from target-page correctness.
 
+### 3.3 Internal-Path Access Contract
+
+- Direct requests to `/source/` and `/source/*.html` MUST return `404`.
+- Direct requests to `/includefile/` and `/includefile/**` MUST return `403`.
+- `/source/style.css` MUST remain publicly available with HTTP `200`.
+- Public PHP rendering and server-side filesystem access to source HTML and include files MUST remain unchanged.
+- The protected `.htaccess` route MUST run the automated internal-path access check after deployment in addition to the common entry-contract check.
+
 ## 4. Current GitHub Actions Design
 
 Workflow:
@@ -141,7 +149,8 @@ Do not infer this list for a future workflow; recheck actual preview output.
 - The normal transactional upload, SHA-256 verification, backup, and automatic rollback procedure remains mandatory.
 - After deployment, run the common entry-contract check for root `200`, HTTP
   and non-www canonical redirects, explicit index removal, public indexability,
-  and direct-host noindex.
+  and direct-host noindex. When the change affects internal-path access, also run
+  the source-HTML `404`, include-path `403`, and source-CSS `200` contract check.
 
 ## 5. FTP Deployment Safety Requirements
 

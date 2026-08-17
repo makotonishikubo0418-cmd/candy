@@ -101,6 +101,8 @@ canonical response remains indexable.
 
 Obtain generated HTML from PHP HTTP responses and extract browser-facing internal PHP, images, movies, fonts, CSS, JavaScript, anchors, external URLs, form actions, canonical, OGP, JSON-LD, and placeholders. Static inspection of `source/*.html` is insufficient.
 
+For the internal-path access contract, verify separately that direct requests to `source/` and representative `source/*.html` files return `404`, direct requests to the `includefile/` directory and representative top-level and nested include files return `403`, and `source/style.css` returns `200`. These results do not replace generated-HTML checks through public PHP.
+
 ### 3.4 Internal Links
 
 - Separate query and fragment, then normalize relative paths.
@@ -232,6 +234,7 @@ Do not report a local fix as a production fix.
 - Machine false positives have documented exclusion evidence.
 - Pending decisions are reported as unverified.
 - Every fix was revalidated.
+- When internal-path access control changed, source HTML and directory requests are `404`, include requests are `403`, `source/style.css` is `200`, and public PHP rendering remains valid.
 - Unexecuted browser, database, and external-service checks are not reported complete.
 
 When pending decisions remain, report that the full population was scanned but

@@ -32,7 +32,14 @@ The local counterparts are under `HP/includefile/`. Public rendering wrappers us
 
 `dataset_base.php` requires external session and database settings on the production server. Do not copy those values into management documents. Actual database, session, and external-include targets are unverified by local static inspection.
 
-### 2.3 Placeholders and Runtime Dependencies
+### 2.3 HTTP Access Boundary
+
+- Public PHP directly under `HP` is the formal page route. `HP/source/*.html` remains readable by server-side PHP as generation input but MUST return HTTP `404` when requested directly.
+- `HP/includefile/**` remains readable through server-side filesystem includes but MUST return HTTP `403` when requested directly.
+- `HP/source/style.css` is a public stylesheet used by formal pages and MUST remain directly retrievable with HTTP `200`.
+- The HTTP restriction MUST NOT rename, move, delete, or change the contents of source HTML, include PHP, or the public stylesheet.
+
+### 2.4 Placeholders and Runtime Dependencies
 
 - `rep...eot` in source HTML is subject to transformation.
 - The switch in `class.hpgcoder2.php` is the implementation for mapping tokens to replacement functions.
@@ -41,7 +48,7 @@ The local counterparts are under `HP/includefile/`. Public rendering wrappers us
 - JavaScript also depends on GET, Cookie, localStorage, AJAX, and fetch.
 - Management audits MUST NOT read secret values or raw `log/` contents. Record only the existence and location of dependencies.
 
-### 2.4 Special Entry Points
+### 2.5 Special Entry Points
 
 - `create.php` affects authentication and file generation. It retains
   `dataset_test.php` and the `test.html` routing anchors as internal generation

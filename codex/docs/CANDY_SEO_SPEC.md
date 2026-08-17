@@ -66,6 +66,14 @@ For `girls.php?no={resolved no}`, derive every woman-specific value from the act
 - Treat a change between index and noindex as a behavior change whose SEO impact
   includes publication scope, canonical URLs, the sitemap, and internal links.
 
+### 5.1 Generation-Source and Include Access
+
+- Public PHP is the formal page URL. Generation-source HTML under `/source/*.html` MUST return HTTP `404` and MUST NOT be treated as an independent indexable page.
+- `/source/` MUST return HTTP `404`. `/includefile/` and every directly requested path below it MUST return HTTP `403`.
+- `/source/style.css` MUST remain publicly retrievable with HTTP `200` because formal pages reference it.
+- Source HTML and include paths MUST NOT be added to canonical URLs, internal navigation, or `sitemap.xml`.
+- The public PHP response retains its existing robots, canonical, OGP, JSON-LD, and sitemap contract. Blocking direct HTTP access MUST NOT prevent PHP from reading the same files through server-side filesystem operations.
+
 ## 6. Headings
 
 - A public content page normally has one H1 for its subject. It MUST NOT conflict with the breadcrumb, title, or canonical target.
@@ -171,5 +179,6 @@ After a change, validate the category runbook requirements and:
 - Sitemap and public URL
 - Duplicate title/canonical, legacy URL, and different slug
 - Zero unresolved sitemap-date drift after `preview-sitemap-lastmod` and `sync-sitemap-lastmod`, followed by a successful `check` after `candy-site-state write`
+- Direct source HTML and source-directory `404`, direct include-path `403`, and `/source/style.css` `200` when the access-control contract is affected
 
 Use `generated/CANDY_SEO_STATUS.md` for current findings, each area/hotel/blog specification for category-specific generation exceptions, and `CANDY_FIX_BACKLOG.md` for issues requiring fixes or owner decisions.
