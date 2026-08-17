@@ -110,6 +110,16 @@ The case itself MUST remain active until the separately authorized Phase 4 deplo
 - Production internal-path verification passed `/source/`, representative source HTML, and a source template as `404`; `/includefile/`, a top-level include file, and a nested include file as `403`; and `/source/style.css` as `200`.
 - The same entry and internal-path contracts passed independently from the local checkout after the Workflow completed.
 
-## 10. Remaining Work
+## 10. Final Production Confirmation
+
+The 2026-08-17 Phase 6 recheck independently confirmed the completed production state:
+
+- Entry and canonical-host contract: `PASS`; root `200`, title, canonical, H1, public indexability, explicit-index redirect, HTTP and non-`www` redirects to `https://www.55810.com`, and direct-host noindex all matched the expected state.
+- Internal-path contract: `PASS`; source directory, representative source HTML, and source template returned `404`; include directory, top-level include file, and nested include file returned `403`; and `/source/style.css` returned `200`.
+- Representative public PHP generation: `PASS`; `mypage.php`, `area.php`, `hotel.php`, and `blog.php` each returned `200`, declared its expected `https://www.55810.com/...` canonical URL, and contained no unresolved `rep[0-9]+eot` replacement token.
+- Public source CSS: `PASS`; `/source/style.css` returned `200`, `Content-Type: text/css`, and 11,460 response bytes.
+- The permanent specification and verification criteria were already recorded in `CANDY_SEO_SPEC.md`, `CANDY_VERIFICATION_PLAN.md`, and `CANDY_PRODUCTION_MIGRATION_MASTER.md`; the volatile HTTP observations above remain owned by this case and the task history rather than being duplicated into those specifications.
+
+## 11. Remaining Work
 
 None for this case. Access-log investigation and Search Console were explicitly excluded and are not required for completion.
