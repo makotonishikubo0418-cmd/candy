@@ -9,13 +9,13 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `codex/scripts/candy_site_state.py`, `codex/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-08-17T13:15:18+09:00 (reproducible generation baseline)
+> Generated at: 2026-08-17T17:38:48+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: b547cf350c847fe4713048afb36656cd6153662b
-> State fingerprint: sha256:269896dc48c01ae8e48e45ce5e7fb0b46126349a158b269babd72a5ea485106f
-> Population: Public PHP files: 149 / assets: 709
+> Commit: 309088d19bacc41a4f492dc97b6a951af61fe4d0
+> State fingerprint: sha256:c2cd90b1db6ca2c3f25a33553df3088836e2e0bec549d7e7b006a94b040c5168
+> Population: Public PHP files: 149 / assets: 655
 > Generator: `codex/scripts/candy_site_state.py` with `codex/scripts/candy_site_state_render.py`
-> Result: Missing references: 20 / duplicate hash groups: 10
+> Result: Missing references: 14 / duplicate hash groups: 3
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
 
 Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by [CANDY_CODE_REFERENCE_INVENTORY.md](CANDY_CODE_REFERENCE_INVENTORY.md).
@@ -26,29 +26,29 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 
 | extension | count |
 |---|---:|
-| .css | 20 |
-| .eot | 16 |
+| .css | 16 |
+| .eot | 14 |
 | .gif | 5 |
 | .jpg | 536 |
-| .js | 19 |
+| .js | 13 |
 | .mp4 | 2 |
-| .png | 66 |
-| .svg | 2 |
-| .ttf | 16 |
+| .png | 29 |
+| .svg | 1 |
+| .ttf | 14 |
 | .webm | 1 |
 | .webp | 9 |
-| .woff | 16 |
+| .woff | 14 |
 | .woff2 | 1 |
 
 ### By Folder
 
 | folder | count |
 |---|---:|
-| HP/css | 19 |
-| HP/font | 50 |
-| HP/imgCss/pc | 19 |
-| HP/imgCss/s | 22 |
-| HP/imgHtml | 19 |
+| HP/css | 15 |
+| HP/font | 44 |
+| HP/imgCss/pc | 2 |
+| HP/imgCss/s | 2 |
+| HP/imgHtml | 18 |
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 202 |
 | HP/imgHtml/new_202601/banner | 23 |
@@ -58,7 +58,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601/shop | 22 |
 | HP/imgHtml/pc | 20 |
 | HP/imgHtml/s | 14 |
-| HP/js | 19 |
+| HP/js | 13 |
 | HP/movie | 3 |
 | HP/source | 1 |
 
@@ -220,12 +220,6 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 
 | target | referrers |
 |---|---|
-| HP/css/ytp-regular.eot | HP/css/YTPlayer.css |
-| HP/css/ytp-regular.ttf | HP/css/YTPlayer.css |
-| HP/images/raster.png | HP/css/YTPlayer.css |
-| HP/images/raster@2x.png | HP/css/YTPlayer.css |
-| HP/images/raster_dot.png | HP/css/YTPlayer.css |
-| HP/images/raster_dot@2x.png | HP/css/YTPlayer.css |
 | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-aaaaaaaaaaaaaaaaaaaa_1.jpg | HP/source/template_kagoshima-deliveryhealth-area.html |
 | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-aaaaaaaaaaaaaaaaaaaa_2.jpg | HP/source/template_kagoshima-deliveryhealth-area.html |
 | HP/imgHtml/new_202601/blog/aaaaaaaaaaaaaaaaaaaa.jpg | HP/source/template_kagoshima-deliveryhealth-blog.html |
@@ -247,28 +241,19 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/css | 6 | girls_page_content.css, job.css, member.css, new_main.css, new_page.css |
-| HP/font | 6 | freightdispbold-webfont.eot, freightdispbold-webfont.ttf, freightdispbold-webfont.woff, PlayfairDisplay-Bold.eot, PlayfairDisplay-Bold.ttf |
-| HP/imgCss/pc | 18 | cdIcoLoveBtn.png, cdIcoLoveBtn_on.png, cdIcoPhoto.png, cssSprite_sp.png, entranceLogo.png |
-| HP/imgCss/s | 20 | cdIcoLoveBtn.png, cdIcoLoveBtn_on.png, cdIcoPhoto.png, entranceLogo.png, entranceR18.png |
-| HP/imgHtml | 4 | age_verification.jpg, entranceBg.jpg, twitter.svg, unnamed.jpg |
+| HP/css | 2 | girls_page_content.css, member.css |
+| HP/imgCss/pc | 1 | newsClose.png |
+| HP/imgHtml | 3 | age_verification.jpg, entranceBg.jpg, unnamed.jpg |
 | HP/imgHtml/new_202601 | 4 | candy_discount_information_sp.jpg, candy_img1.jpg, candy_img1_sp.jpg, candy_manager_recommendation_sp.jpg |
 | HP/imgHtml/new_202601/girl | 56 | alice_1_sp.jpg, ami_1_sp.jpg, ann_1_sp.jpg, anya_1_sp.jpg, aoba_1_sp.jpg |
 | HP/imgHtml/new_202601/hotel | 96 | businesshotelatelier_1.jpg, businesshotelatelier_2.jpg, businesshotelorientalizuro_1.jpg, businesshotelorientalizuro_2.jpg, businesshoteltenmonkan_1.jpg |
 | HP/imgHtml/new_202601/shop | 11 | after5_sp.jpg, beloved_sp.jpg, candy_sp.jpg, danzuma_sp.jpg, hitozuma_sp.jpg |
-| HP/js | 10 | api.js, candyKissDijest.js, commonLite.js, diary.js, fav_gen.js |
+| HP/js | 4 | fav_gen.js, fav_ka.js, mdrwbpp2.4.js, member_favorite.js |
 
 ## Duplicate Hash Candidates
 
 | SHA-256 | files |
 |---|---|
-| `52054dbf31093399b28e197a95663b9f705f1ec810888f2ecd36849b17358b45` | HP/imgCss/pc/cssSprite_sp.png<br>HP/imgCss/s/cssSprite.png |
-| `996ee9604d436162957e01f72ac58716692fec33cdc1963be8cc97b79a515403` | HP/imgCss/pc/girlsTagNew2.png<br>HP/imgCss/s/girlsTagNew2.png |
-| `ca4c5bfc3390318970103c7ca807e4981854710de6af2d0c737066c40c2609dd` | HP/imgCss/pc/girlsTagTrial2.png<br>HP/imgCss/s/girlsTagTrial2.png |
-| `d68dbc4e429c4d379e2fa296935966907380c4064339ca51d68f7b15b9b782e7` | HP/imgCss/pc/headLogo2.png<br>HP/imgCss/s/headLogo2.png |
-| `def77e4996ed1e02ea4fca34174b04403b9be1fb9691c93dca2ef3c986e47852` | HP/imgCss/pc/topIconDiary.png<br>HP/imgCss/s/topIconDiary.png |
-| `8498750503a358e508b4db4d78c374f3df407a59fcde5ce318d42b72ee40cf2c` | HP/imgCss/pc/topIconFav.png<br>HP/imgCss/s/topIconFav.png |
-| `25fb3b0fe86614a438efdcca6022f4ded522c6df27c8a9e5ba4d9ceedfbe6686` | HP/imgCss/pc/topIconPhoto.png<br>HP/imgCss/s/topIconPhoto.png |
 | `11c401ffab12108eb3c491cfca8fd27c550e2b6ada1a09b952ea33109b536605` | HP/imgHtml/cdHr.png<br>HP/imgHtml/pc/cdHr.png |
 | `1adf420fbd88aaf88563e9833963a0116832d8c858315d50c3a182a5b5078691` | HP/imgHtml/cdTtlDiary.png<br>HP/imgHtml/pc/cdTtlDiary.png |
 | `2ea2ba07d7bb5df930c25231c4e1000bdba40ce0e4b9472ea39416992bbeb7ea` | HP/imgHtml/listShadow.png<br>HP/imgHtml/pc/listShadow.png |
@@ -285,11 +270,5 @@ These candidates may be referenced dynamically and are not deletion decisions.
 | HP/docs/PHASE4_API.md | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
 | HP/docs/PHASE5_API.md | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
 | HP/docs/PHASE6_API.md | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
-| HP/font/freightdispbold-webfont.eot | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
-| HP/font/freightdispbold-webfont.ttf | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
-| HP/font/freightdispbold-webfont.woff | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
-| HP/font/PlayfairDisplay-Bold.eot | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
-| HP/font/PlayfairDisplay-Bold.ttf | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
-| HP/font/PlayfairDisplay-Bold.woff | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
 | HP/js/api.txt | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
 | HP/robots.txt | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |

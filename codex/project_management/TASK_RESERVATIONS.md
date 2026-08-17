@@ -19,6 +19,7 @@
 
 | Task ID | Codex | Period | Scope | Status |
 |---|---|---|---|---|
+| TASK-20260818-UNUSED-GIT-DATA-CLEANUP-001 | current | 2026-08-18 | Delete only the fixed 55 verified Git-managed files under `HP/css/`, `HP/font/`, `HP/imgCss/`, `HP/imgHtml/`, and `HP/js/`; update only the required atomic case, change-history route, reservation, and August task-history records; keep branch `main`; explicitly stage, Commit, Push, verify automatic Actions deletion and production absence; exclude all other HP files, the 16 already manually deleted server-only files, database work, branch operations, and unrelated cleanup | IN_PROGRESS |
 ## 3. Completed and Released Reservations
 
 | Task ID | Codex | Period | Scope | Status |
