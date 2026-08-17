@@ -67,9 +67,7 @@ function buildStaticImageUrl($clubId, $dir, $filename){
 }
 
 function buildResizeImageUrl($clubId, $imgfile, $imgsize, $imgtype, $extra = array()){
-	global $debug_log;
 	if($imgfile === ''){
-		$debug_log .= "buildResizeImageUrl: imgfileが空のため空文字を返します\n";
 		return '';
 	}
 	$params = array_merge(array(
@@ -80,14 +78,11 @@ function buildResizeImageUrl($clubId, $imgfile, $imgsize, $imgtype, $extra = arr
 	), $extra);
 	$query = http_build_query($params);
 	$dir = mapImageTypeToDir($imgtype);
-	$debug_log .= "buildResizeImageUrl: clubId=$clubId, imgfile=$imgfile, imgsize=$imgsize, imgtype=$imgtype, dir=$dir\n";
 	if(USE_TEST_UPLOADS && $dir !== '' && mediaFileExistsLocal($clubId, $dir, $imgfile)){
 		$url = TEST_RESIZE_BASE_URL . 'resizeimg.php?' . $query;
-		$debug_log .= "buildResizeImageUrl: テスト環境URL生成: $url\n";
 		return $url;
 	}
 	$url = IMG_HOME . 'resizeimg.php?' . $query;
-	$debug_log .= "buildResizeImageUrl: 本番環境URL生成: $url\n";
 	return $url;
 }
 
@@ -233,101 +228,35 @@ if(isset($flw) && $flw == 1){
 	}
 }
 
-// 画像制限用デバッグログ初期化
-$debug_log = "";
-// ログファイルパス設定（girls.phpと同じディレクトリのlogフォルダ）
-// サーバー上とローカルでパスが異なる可能性があるため、両方を試す
-$possible_log_dirs = array(
-	dirname(dirname(__FILE__)) . '/log/',  // ローカル: C:\Work\nishikubo\Candy_HP\log\
-	'/home/firststar/public_html/group_test/candy/log/',  // サーバー上: フロントエンド側
-	__DIR__ . '/log/'  // includefileディレクトリ内のlogフォルダ
-);
-$log_dir = null;
-foreach($possible_log_dirs as $dir){
-	if(is_dir(dirname($dir)) || @mkdir(dirname($dir), 0777, true)){
-		if(!is_dir($dir)){
-			@mkdir($dir, 0777, true);
-		}
-		if(is_dir($dir) && is_writable($dir)){
-			$log_dir = $dir;
-			break;
-		}
-	}
-}
-// どのディレクトリも使えない場合は、最初のディレクトリを使用
-if($log_dir === null){
-	$log_dir = $possible_log_dirs[0];
-	if(!is_dir($log_dir)){
-		@mkdir($log_dir, 0777, true);
-	}
-}
-$log_timestamp = date("Y-m-d_H-i-s");
-$log_file = $log_dir . 'mainImg_debug_' . $log_timestamp . '.log';
-$debug_log .= "ログファイルパス: " . $log_file . "\n";
-$debug_log .= "__FILE__: " . __FILE__ . "\n";
-$debug_log .= "dirname(__FILE__): " . dirname(__FILE__) . "\n";
-$debug_log .= "dirname(dirname(__FILE__)): " . dirname(dirname(__FILE__)) . "\n";
-
 // 画像枚数制限関数
 // SP版とPC版で同じ制限を適用（MAX_VERTICAL_IMAGES = 10）
 function limitImageCounts(&$imagedata, $girl_id, $isSP) {
-    global $debug_log;
-    
-    $debug_log .= "制限関数開始 - girl_id: $girl_id\n";
-    $debug_log .= "SP版は最大 " . MAX_VERTICAL_IMAGES . " 枚、PC版は無制限（MIN " . MIN_VERTICAL_IMAGES . " を保証）\n";
-    
     // 横向き画像（type=2）を1枚に制限（SP版とPC版で同じ）
     if (isset($imagedata["filename"][$girl_id][2])) {
-        $original_count = count($imagedata["filename"][$girl_id][2]);
         $imagedata["filename"][$girl_id][2] = array_slice($imagedata["filename"][$girl_id][2], 0, MAX_HORIZONTAL_IMAGES);
-        $debug_log .= "横向き画像制限: $original_count → " . count($imagedata["filename"][$girl_id][2]) . "枚\n";
-    } else {
-        $debug_log .= "横向き画像なし\n";
     }
     
     // 縦向き画像（type=3）: 最低枚数のみ保証（上限はPC/SPともに解除）
     if (isset($imagedata["filename"][$girl_id][3])) {
         $count = count($imagedata["filename"][$girl_id][3]);
-        $debug_log .= "縦向き画像処理前: $count枚\n";
-        $debug_log .= "MIN_VERTICAL_IMAGES: " . MIN_VERTICAL_IMAGES . ", MAX_VERTICAL_IMAGES: " . MAX_VERTICAL_IMAGES . "（上限は適用しない）\n";
-        
+
         if ($count < MIN_VERTICAL_IMAGES) {
             // 最小枚数に満たない場合はダミー画像で補完
             $dummy_needed = MIN_VERTICAL_IMAGES - $count;
-            $debug_log .= "ダミー画像追加: $dummy_needed枚\n";
             for ($i = 0; $i < $dummy_needed; $i++) {
                 $imagedata["filename"][$girl_id][3][] = DAMMY_IMG_SQ_h;
             }
-        } elseif ($count > MAX_VERTICAL_IMAGES) {
-            // 以前はSPのみMAX_VERTICAL_IMAGESで上限をかけていたが、PC版と同様に上限は撤廃
-            $debug_log .= "縦向き画像はPC/SPともに上限制限を適用しません（$count枚）\n";
-        } else {
-            $debug_log .= "縦向き画像数は適切範囲内: $count枚\n";
         }
-        
-        $debug_log .= "縦向き画像処理後: " . count($imagedata["filename"][$girl_id][3]) . "枚\n";
-    } else {
-        $debug_log .= "縦向き画像なし\n";
     }
-    
-    $debug_log .= "制限関数完了\n";
 }
 
 // 画像データを動的に処理する関数
 function processImageData($imagedata, $gid, $isSP) {
-    global $debug_log, $vertical_movies;
+    global $vertical_movies;
     $data1 = array();
     
     // 縦向き画像（type=3）の処理
     $vertical_images = isset($imagedata["filename"][$gid][3]) ? $imagedata["filename"][$gid][3] : array();
-    $vertical_count = count($vertical_images);
-    
-    $debug_log .= "processImageData開始 - 縦向き画像: $vertical_count枚\n";
-    $debug_log .= "縦向き動画: " . count($vertical_movies) . "個\n";
-    $debug_log .= "縦向き画像配列: " . print_r($vertical_images, true) . "\n";
-    if ($vertical_count > 0) {
-        $debug_log .= "縦向き画像: " . implode(', ', $vertical_images) . "\n";
-    }
     
     // 画像と動画を統合して設定順にソート
     $combined_media = array();
@@ -336,7 +265,6 @@ function processImageData($imagedata, $gid, $isSP) {
     foreach($vertical_images as $index => $filename){
         // ダミー画像は除外
         if ($filename === DAMMY_IMG_SQ_h) {
-            $debug_log .= "ダミー画像を除外: $filename\n";
             continue;
         }
         $combined_media[] = array(
@@ -357,8 +285,6 @@ function processImageData($imagedata, $gid, $isSP) {
     }
     
     $total_media = count($combined_media);
-    $debug_log .= "統合メディア総数: $total_media個\n";
-    $debug_log .= "統合メディア配列: " . print_r($combined_media, true) . "\n";
     
     // detailセクション用スロット（最初の2枚）
     $detail_slots = array('01010009', '01010010');
@@ -370,11 +296,6 @@ function processImageData($imagedata, $gid, $isSP) {
         '01010021', '01010022'
     );
     
-    // 画像のみが1枚の場合のみダミー画像を使用（0枚の場合はダミー画像なし）
-    $use_dummy = ($vertical_count == 1 && count($vertical_movies) == 0);
-    
-    $debug_log .= "総メディア数: $total_media個, ダミー画像使用: " . ($use_dummy ? "はい" : "いいえ") . "\n";
-    
     // detailセクションに最初の2枚を割り当て
     for ($i = 0; $i < count($detail_slots); $i++) {
         $slot = $detail_slots[$i];
@@ -382,7 +303,6 @@ function processImageData($imagedata, $gid, $isSP) {
         if ($i < $total_media) {
             // 実際のメディア（画像または動画）がある場合
             $media = $combined_media[$i];
-            $debug_log .= "detailスロット $slot にメディア割り当て: " . $media['type'] . " - " . $media['filename'] . "\n";
             
             if ($media['type'] == 'image') {
                 // 画像の場合
@@ -391,17 +311,11 @@ function processImageData($imagedata, $gid, $isSP) {
                 $img_dir = ($imgfile === DAMMY_IMG_SQ_h) ? 'dmy/' : UP_DIR_H;
                 // resizeimg.phpが正しく動作していないため、SP版でもbuildStaticImageUrlを使用
                 $data1[$slot] = buildStaticImageUrl(CLUBID, $img_dir, $imgfile);
-                $debug_log .= "画像URL生成: slot=$slot, imgfile=$imgfile, dir=$img_dir, URL=" . $data1[$slot] . "\n";
             } elseif ($media['type'] == 'movie') {
                 // 動画の場合
                 $movie_url = buildMovieUrl(CLUBID, $media['filename']);
                 $data1[$slot] = $movie_url;
-                $debug_log .= "動画URL設定: $movie_url\n";
             }
-        } else {
-            // メディアが0個または2個以上ある場合はスロットを設定しない（空のまま）
-            // ダミー画像は表示しない
-            $debug_log .= "detailスロット $slot は設定しない（メディア0個または十分、ダミー画像は表示しない）\n";
         }
     }
     
@@ -409,21 +323,18 @@ function processImageData($imagedata, $gid, $isSP) {
     // 総メディアが2個以上の場合はギャラリーにメディアを設定、それ以外は設定しない
     if ($total_media >= 2) {
         $gallery_start_index = 2; // 3個目から開始
-        $assigned_gallery_count = 0;
         for ($i = 0; $i < count($gallery_slots); $i++) {
             $slot = $gallery_slots[$i];
             $media_index = $gallery_start_index + $i;
             
             // detailセクションで使用しているスロットはギャラリーでは再利用しない
             if (in_array($slot, $detail_slots, true)) {
-                $debug_log .= "ギャラリースロット $slot はdetailセクションで使用されているためスキップ\n";
                 continue;
             }
             
             if ($media_index < $total_media) {
                 // 実際のメディア（画像または動画）がある場合
                 $media = $combined_media[$media_index];
-                $debug_log .= "ギャラリースロット $slot にメディア割り当て: " . $media['type'] . " - " . $media['filename'] . "\n";
                 
                 if ($media['type'] == 'image') {
                     // 画像の場合
@@ -432,26 +343,13 @@ function processImageData($imagedata, $gid, $isSP) {
                     $img_dir = ($imgfile === DAMMY_IMG_SQ_h) ? 'dmy/' : UP_DIR_H;
                     // resizeimg.phpが正しく動作していないため、SP版でもbuildStaticImageUrlを使用
                     $data1[$slot] = buildStaticImageUrl(CLUBID, $img_dir, $imgfile);
-                    $debug_log .= "ギャラリー画像URL生成: slot=$slot, imgfile=$imgfile, dir=$img_dir, URL=" . $data1[$slot] . "\n";
                 } elseif ($media['type'] == 'movie') {
                     // 動画の場合
                     $movie_url = buildMovieUrl(CLUBID, $media['filename']);
                     $data1[$slot] = $movie_url;
-                    $debug_log .= "ギャラリー動画URL設定: $movie_url\n";
                 }
-                $assigned_gallery_count++;
-            } else {
-                // メディアが十分にある場合はスロットを設定しない（空のまま）
-                $debug_log .= "ギャラリースロット $slot は設定しない（メディア十分）\n";
             }
         }
-
-        // 2列レイアウトで奇数枚になった場合のダミー画像補完は行わない（ダミー画像は表示しない）
-        if($assigned_gallery_count % 2 === 1){
-            $debug_log .= "ギャラリーが奇数枚ですが、ダミー画像は表示しない\n";
-        }
-    } else {
-        $debug_log .= "総メディアが2個未満のため、ギャラリーにはメディアを設定しない\n";
     }
     
     // 横向き画像スロットを削除（01010007はmainImgで使用するため除外）
@@ -459,18 +357,6 @@ function processImageData($imagedata, $gid, $isSP) {
     foreach ($horizontal_slots as $slot) {
         if (isset($data1[$slot])) {
             unset($data1[$slot]);
-            $debug_log .= "横向き画像スロット削除: " . $slot . "\n";
-        }
-    }
-    
-    $debug_log .= "processImageData完了 - 処理された画像スロット数: " . count($data1) . "\n";
-    $debug_log .= "処理されたスロット: " . implode(', ', array_keys($data1)) . "\n";
-    
-    // 最終確認：すべての必要なスロットが設定されているかチェック
-    $required_slots = array('01010003', '01010004', '01010005', '01010006', '01010008', '01010009', '01010010', '01010011', '01010012', '01010013', '01010014', '01010015', '01010016', '01010017', '01010018', '01010019', '01010020', '01010021', '01010022');
-    foreach ($required_slots as $slot) {
-        if (!isset($data1[$slot])) {
-            $debug_log .= "警告: スロット $slot が設定されていません\n";
         }
     }
     
@@ -487,14 +373,11 @@ $QUERY .= " AND (type = '2' || type = '3')"; //31:pc,32:sp
 $QUERY .= " AND girls_id = '". $gid ."'"; //31:pc,32:sp
 $QUERY .= " ORDER BY sort, id DESC";
 
-$debug_log .= "SQLクエリ: $QUERY\n";
 $RESULT = $Database->Query($QUERY);
 $ROWS = $Database->Num_Rows($RESULT);
-$debug_log .= "取得行数: $ROWS\n";
 
 if($ROWS != 0){
 	while($row = $Database->Fetch_Array($RESULT)){
-		$debug_log .= "取得行: type=" . $row["type"] . ", filename=" . $row["filename"] . ", status=" . $row["status"] . "\n";
 		//$imagedata["id"][]       = $row["id"];
 		//$imagedata["club_id"][]  = $row["club_id"];
 		//$imagedata["girls_id"][] = $row["girls_id"];
@@ -508,11 +391,6 @@ if($ROWS != 0){
             $imagedata["filename"][$gid][$row["type"]][] = $row["filename"];
         }
 	}
-	
-	// 画像データ取得完了ログ
-	$debug_log .= "画像データ取得完了 - gid: $gid\n";
-	$debug_log .= "横向き画像数: " . (isset($imagedata["filename"][$gid][2]) ? count($imagedata["filename"][$gid][2]) : 0) . "\n";
-	$debug_log .= "縦向き画像数: " . (isset($imagedata["filename"][$gid][3]) ? count($imagedata["filename"][$gid][3]) : 0) . "\n";
 	
 }
 
@@ -567,12 +445,9 @@ $isSP = (strpos($_SERVER['HTTP_USER_AGENT'], 'Mobile') !== false ||
          strpos($_SERVER['HTTP_USER_AGENT'], 'Android') !== false ||
          strpos($_SERVER['HTTP_USER_AGENT'], 'iPhone') !== false ||
          strpos($_SERVER['HTTP_USER_AGENT'], 'iPad') !== false);
-$debug_log .= "デバイス判定: isSP=" . ($isSP ? "true" : "false") . ", User-Agent=" . (isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : 'N/A') . "\n";
 
 // デバイス別枚数制限を適用
 limitImageCounts($imagedata, $gid, $isSP);
-$debug_log .= "制限適用後 - 横向き画像数: " . (isset($imagedata["filename"][$gid][2]) ? count($imagedata["filename"][$gid][2]) : 0) . "\n";
-$debug_log .= "制限適用後 - 縦向き画像数: " . (isset($imagedata["filename"][$gid][3]) ? count($imagedata["filename"][$gid][3]) : 0) . "\n";
 
 /*
 * 動画情報取得
@@ -586,22 +461,14 @@ $QUERY .= " WHERE club_id = '" . CLUBID . "'";
 $QUERY .= " AND girls_id = '" . $gid . "'";
 $QUERY .= " AND status = '1'";
 $QUERY .= " ORDER BY sort ASC, id DESC";
-$debug_log .= "動画データクエリ: $QUERY\n";
-$debug_log .= "動画データ取得パラメータ: club_id=$club_id, girls_id=$gid\n";
 $RESULT = $Database->Query($QUERY);
 $ROWS = $Database->Num_Rows($RESULT);
-$debug_log .= "動画データ取得行数: $ROWS\n";
 if($ROWS != 0){
-	$debug_log .= "取得された動画データ一覧:\n";
 	while($row = $Database->Fetch_Array($RESULT)){
 		$filedata["id"][$row["filetype"]]       = $row["id"];
         $filedata["filename"][$row["filetype"]]       = $row["filename"];
         $filedata["filetype"][$row["id"]]       = $row["filetype"];
-		$debug_log .= "  動画データ: id=" . $row["id"] . ", filetype=" . $row["filetype"] . ", filename=" . $row["filename"] . ", sort=" . (isset($row["sort"]) ? $row["sort"] : "未設定") . "\n";
 	}
-	$debug_log .= "filedata配列に設定された動画: " . print_r($filedata, true) . "\n";
-} else {
-	$debug_log .= "動画データなし - girls_id=$gid, club_id=$club_id の条件で動画が見つかりませんでした\n";
 }
 
 // 縦型画像用動画データを取得（v5以降のみ、v1-v4は横型動画として除外）
@@ -617,32 +484,21 @@ foreach($filedata["filename"] as $filetype => $filename){
 				'filename' => $filename,
                 'id' => $filedata["id"][$filetype]
 			);
-			$debug_log .= "縦型動画データ取得: filetype=$filetype, filename=$filename\n";
-		} else {
-			$debug_log .= "横型動画（除外）: filetype=$filetype, filename=$filename\n";
 		}
 	}
 }
-$debug_log .= "縦型動画総数: " . count($vertical_movies) . "個\n";
 
 // 動的画像処理関数を呼び出し（データベースに画像があるかどうかに関係なく実行）
-$debug_log .= "processImageData関数呼び出し開始\n";
-$debug_log .= "縦型動画データ: " . print_r($vertical_movies, true) . "\n";
 $image_data = processImageData($imagedata, $gid, $isSP);
 
 // 戻り値の安全性チェック
 if (is_array($image_data)) {
-    $debug_log .= "processImageData関数呼び出し完了 - 取得した画像データ数: " . count($image_data) . "\n";
-    $debug_log .= "processImageData戻り値: " . print_r($image_data, true) . "\n";
     // 01010007はmainImgで使用するため、processImageDataの戻り値から除外
     if (isset($image_data['01010007'])) {
         unset($image_data['01010007']);
-        $debug_log .= "processImageDataの戻り値から01010007を除外（mainImgで使用するため）\n";
     }
     $data1 = array_merge($data1, $image_data);
-    $debug_log .= "data1配列マージ完了 - 総データ数: " . count($data1) . "\n";
 } else {
-    $debug_log .= "processImageData関数が配列を返しませんでした\n";
     $image_data = array(); // 空の配列を設定
 }
 
@@ -650,48 +506,29 @@ if (is_array($image_data)) {
 if($girldata["newface"][$gid] == 1){ //体験
 
 //SQimg - mainImgは横型動画（v1-v4）を優先、なければ横向き画像を使用（縦型動画は除外）
-$debug_log .= "mainImg(体験版)処理開始 - girl_id: $gid\n";
 $main_media_set_trial = false;
 
 // 1. 横型動画（v1, v2, v3, v4）を優先
 $horizontal_movie = null;
 $horizontal_movie_id = 0;
-$horizontal_movie_filetype = null;
-$debug_log .= "横型動画検索開始(体験版) - filedata[\"filename\"]の全件数: " . (isset($filedata["filename"]) ? count($filedata["filename"]) : 0) . "\n";
 foreach($filedata["filename"] as $filetype => $filename){
-	$debug_log .= "  チェック中(体験版): filetype=$filetype, filename=$filename\n";
 	if($filename != "" && strpos($filetype, 'v') === 0){
 		// 横型動画（v1, v2, v3, v4）をチェック
 		$slot_num = str_replace('v', '', $filetype);
-		$debug_log .= "    スロット番号(体験版): $slot_num\n";
 		if(in_array($slot_num, array('1', '2', '3', '4'))){
 			$movie_id = isset($filedata["id"][$filetype]) ? intval($filedata["id"][$filetype]) : 0;
-			$debug_log .= "    横型動画候補(体験版): filetype=$filetype, filename=$filename, movie_id=$movie_id, current_max_id=$horizontal_movie_id\n";
 			// 最新のIDを持つ動画を選択
 			if($movie_id > $horizontal_movie_id){
 				$horizontal_movie_id = $movie_id;
 				$horizontal_movie = $filename;
-				$horizontal_movie_filetype = $filetype;
-				$debug_log .= "    新しい最大ID動画を選択(体験版): filetype=$filetype, filename=$filename, movie_id=$movie_id\n";
 			}
-		} else {
-			$debug_log .= "    スロット番号 $slot_num は横型動画スロット（1-4）ではないためスキップ(体験版)\n";
-		}
-	} else {
-		if($filename == ""){
-			$debug_log .= "    ファイル名が空のためスキップ(体験版): filetype=$filetype\n";
-		} else {
-			$debug_log .= "    'v'で始まらないためスキップ(体験版): filetype=$filetype\n";
 		}
 	}
 }
 if($horizontal_movie != null){
 	$movie_url = buildMovieUrl(CLUBID, $horizontal_movie);
 	$data1['01010007'] = $movie_url;
-	$debug_log .= "mainImg(体験版): 横型動画を表示 - filetype=$horizontal_movie_filetype, filename=$horizontal_movie, movie_id=$horizontal_movie_id, URL=$movie_url\n";
 	$main_media_set_trial = true;
-} else {
-	$debug_log .= "mainImg(体験版): 横型動画が見つかりませんでした\n";
 }
 
 // 2. 横型動画がない場合、横向き画像を使用
@@ -699,14 +536,12 @@ if(!$main_media_set_trial && $imagedata["filename"][$gid][2][0] != ""){ //横
 	// 横型動画もない場合、横向き画像を使用
 	// resizeimg.phpが正しく動作していないため、SP版でもbuildStaticImageUrlを使用
 	$data1['01010007'] = buildStaticImageUrl(CLUBID, UP_DIR_W, $imagedata["filename"][$gid][2][0]);
-	$debug_log .= "mainImg(体験版): 横向き画像を使用: " . $imagedata["filename"][$gid][2][0] . "\n";
 	$main_media_set_trial = true;
 }
 
 // 3. どちらもない場合はダミー画像を使用
 if(!$main_media_set_trial){
 	// 横型動画も横向き画像もない場合はダミー画像を使用
-	$debug_log .= "mainImg(体験版): 横型動画も横向き画像も見つからないためダミー画像を使用\n";
 	// resizeimg.phpが正しく動作していないため、SP版でもbuildStaticImageUrlを使用
 	$data1['01010007'] = buildStaticImageUrl(CLUBID, 'dmy/', DAMMY_IMG_SQ_w);
 }
@@ -715,52 +550,29 @@ if(!$main_media_set_trial){
 }else{
 
 //TOP - mainImgは横型動画（v1-v4）を優先、なければ横向き画像を使用（縦型動画は除外）
-$debug_log .= "mainImg処理開始 - girl_id: $gid\n";
-$debug_log .= "横向き画像配列: " . print_r($imagedata["filename"][$gid][2], true) . "\n";
-$debug_log .= "横向き画像[0]: " . (isset($imagedata["filename"][$gid][2][0]) ? $imagedata["filename"][$gid][2][0] : "未設定") . "\n";
-$debug_log .= "filedata配列全体: " . print_r($filedata, true) . "\n";
-
 $main_media_set = false;
 
 // 1. 横型動画（v1, v2, v3, v4）を優先
 $horizontal_movie = null;
 $horizontal_movie_id = 0;
-$horizontal_movie_filetype = null;
-$debug_log .= "横型動画検索開始 - filedata[\"filename\"]の全件数: " . (isset($filedata["filename"]) ? count($filedata["filename"]) : 0) . "\n";
 foreach($filedata["filename"] as $filetype => $filename){
-	$debug_log .= "  チェック中: filetype=$filetype, filename=$filename\n";
 	if($filename != "" && strpos($filetype, 'v') === 0){
 		// 横型動画（v1, v2, v3, v4）をチェック
 		$slot_num = str_replace('v', '', $filetype);
-		$debug_log .= "    スロット番号: $slot_num\n";
 		if(in_array($slot_num, array('1', '2', '3', '4'))){
 			$movie_id = isset($filedata["id"][$filetype]) ? intval($filedata["id"][$filetype]) : 0;
-			$debug_log .= "    横型動画候補: filetype=$filetype, filename=$filename, movie_id=$movie_id, current_max_id=$horizontal_movie_id\n";
 			// 最新のIDを持つ動画を選択
 			if($movie_id > $horizontal_movie_id){
 				$horizontal_movie_id = $movie_id;
 				$horizontal_movie = $filename;
-				$horizontal_movie_filetype = $filetype;
-				$debug_log .= "    新しい最大ID動画を選択: filetype=$filetype, filename=$filename, movie_id=$movie_id\n";
 			}
-		} else {
-			$debug_log .= "    スロット番号 $slot_num は横型動画スロット（1-4）ではないためスキップ\n";
-		}
-	} else {
-		if($filename == ""){
-			$debug_log .= "    ファイル名が空のためスキップ: filetype=$filetype\n";
-		} else {
-			$debug_log .= "    'v'で始まらないためスキップ: filetype=$filetype\n";
 		}
 	}
 }
 if($horizontal_movie != null){
 	$movie_url = buildMovieUrl(CLUBID, $horizontal_movie);
 	$data1['01010007'] = $movie_url;
-	$debug_log .= "mainImg: 横型動画を表示 - filetype=$horizontal_movie_filetype, filename=$horizontal_movie, movie_id=$horizontal_movie_id, URL=$movie_url\n";
 	$main_media_set = true;
-} else {
-	$debug_log .= "mainImg: 横型動画が見つかりませんでした\n";
 }
 
 // 3. 動画がない場合、横向き画像を使用
@@ -768,14 +580,12 @@ if(!$main_media_set && isset($imagedata["filename"][$gid][2][0]) && $imagedata["
 	// 縦型動画も横型動画もない場合、横向き画像を使用
 	// resizeimg.phpが正しく動作していないため、SP版でもbuildStaticImageUrlを使用
 	$data1['01010007'] = buildStaticImageUrl(CLUBID, UP_DIR_W, $imagedata["filename"][$gid][2][0]);
-	$debug_log .= "mainImg: 横向き画像を使用: " . $imagedata["filename"][$gid][2][0] . "\n";
 	$main_media_set = true;
 }
 
 // 4. どちらもない場合はダミー画像を使用
 if(!$main_media_set){
 	// 縦型動画も横型動画も横向き画像もない場合はダミー画像を使用
-	$debug_log .= "mainImg: 縦型動画も横型動画も横向き画像も見つからないためダミー画像を使用\n";
 	// resizeimg.phpが正しく動作していないため、SP版でもbuildStaticImageUrlを使用
 	$data1['01010007'] = buildStaticImageUrl(CLUBID, 'dmy/', DAMMY_IMG_SQ_w);
 }
@@ -787,29 +597,8 @@ $horizontal_slots = array('01010001', '01010002'); // 01010005, 01010006, 010100
 foreach ($horizontal_slots as $slot) {
     if (isset($data1[$slot])) {
         unset($data1[$slot]);
-        $debug_log .= "横向き画像スロット削除: " . $slot . "\n";
     }
 }
-
-// data1配列の内容をデバッグ出力
-$debug_log .= "data1配列の内容:\n";
-foreach ($data1 as $key => $value) {
-    if (strpos($key, '0101') === 0) { // 画像関連のキーのみ
-        $debug_log .= "  $key => $value\n";
-    }
-}
-
-// デバッグログをファイルに書き込み
-$debug_log .= "=== 最終的なdata1配列の内容 ===\n";
-foreach ($data1 as $key => $value) {
-    if (strpos($key, '0101') === 0) { // 画像関連のキーのみ
-        $debug_log .= "  $key => $value\n";
-    }
-}
-$debug_log .= "=== ログ書き込み完了 ===\n";
-// ログファイルに日時秒数を付けて出力
-$log_entry = "[" . date("Y-m-d H:i:s") . "] " . $debug_log;
-file_put_contents($log_file, $log_entry, FILE_APPEND | LOCK_EX);
 
 }
 
@@ -1237,20 +1026,15 @@ if($filedata["filename"][4] != ""){
 $has_new_format_movie = false;
 if(isset($main_media_set_trial) && $main_media_set_trial){
 	$has_new_format_movie = true;
-	$debug_log .= "体験版: 横型動画v1-v4が設定されている\n";
 }
 if(isset($main_media_set) && $main_media_set){
 	$has_new_format_movie = true;
-	$debug_log .= "通常版: 横型動画v1-v4が設定されている\n";
 }
 if($mvck == 1 && !$has_new_format_movie){
 		$source = str_replace('<!-- TOPPHOTO -->', '<!-- TOPPHOTO', $source);//コメントアウト
 		$source = str_replace('<!-- /TOPPHOTO -->', '/TOPPHOTO -->', $source);//
 		$source = str_replace('<!-- TOPMOVIE', '<!-- TOPMOVIE -->', $source);//コメントイン
 		$source = str_replace('/TOPMOVIE -->', '<!-- /TOPMOVIE -->', $source);//
-		$debug_log .= "古い形式の動画タグを有効化（横型動画v1-v4が存在しないため）\n";
-}else if($mvck == 1 && $has_new_format_movie){
-		$debug_log .= "古い形式の動画は存在するが、横型動画v1-v4が優先されるため、古い形式の動画タグは無効のまま\n";
 }
 
 
@@ -1344,9 +1128,6 @@ if($flw == 1){
 }elseif(isset($_COOKIE["candyfav"])){//btnlink
 	$favarr = array();
 	$favarr = explode(',', urldecode($_COOKIE["candyfav"]));
-	
-	// デバッグ：現在のクッキー内容とgidを確認
-	$debug_log .= "Checking fav button display - gid: " . $gid . ", favarr: " . print_r($favarr, true) . "\n";
 	
 	// クッキーに保存されている値がno（女の子番号）かid（内部ID）かを判定
 	// 現在のgid（内部ID）がfavarrに含まれているかチェック
@@ -1583,20 +1364,6 @@ $source = str_replace('rep09000001eot', $candyGirlsPageHtml, $source);
 if($candyGirlsPageHtml !== ''){
 	$source = str_replace('</head>', '<link href="./css/girls_page_content.css?v=20260812" rel="stylesheet" type="text/css">' . "\n" . '</head>', $source);
 }
-
-// デバッグ: 最終的な$sourceの一部をファイルに出力（空の横向きスロット削除処理の確認用）
-$debug_log = "=== 最終的な$sourceの横向きギャラリー部分 ===\n";
-$debug_log .= "PC版ギャラリー:\n";
-if (preg_match('/<!-- PC版ギャラリー -->.*?<\/div>/s', $source, $matches)) {
-    $debug_log .= $matches[0] . "\n";
-}
-$debug_log .= "\nSP版ギャラリー:\n";
-if (preg_match('/<!-- SP版ギャラリー -->.*?<\/div>\s*<\/div>/s', $source, $matches)) {
-    $debug_log .= $matches[0] . "\n";
-}
-// ログファイルに日時秒数を付けて出力
-$log_entry = "[" . date("Y-m-d H:i:s") . "] " . $debug_log;
-file_put_contents($log_file, $log_entry, FILE_APPEND | LOCK_EX);
 
 // $data1配列を$data['code']に設定（HTMLテンプレートの置換用）
 foreach ($data1 as $key => $value) {
