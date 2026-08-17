@@ -52,6 +52,12 @@ RewriteRule ^ https://www.55810.com%{REQUEST_URI} [R=301,L,NE]
 RewriteCond %{HTTP_HOST} ^55810\.com$ [NC]
 RewriteRule ^ https://www.55810.com%{REQUEST_URI} [R=301,L,NE]
 
+# Generation-source HTML is not a public page, and server-side includes are not public files.
+# Keep source/style.css available because formal public pages load it directly.
+RewriteRule ^source/?$ - [R=404,L,NC]
+RewriteRule ^source/.*\.html$ - [R=404,L,NC]
+RewriteRule ^includefile(?:/|$) - [F,L,NC]
+
 # Remove an explicitly requested index.php/index.html from public URLs.
 RewriteCond %{HTTP_HOST} ^(?:www\.)?55810\.com$ [NC]
 RewriteCond %{THE_REQUEST} \s/+(.*/)?index\.(?:php|html?)(?:[?\s]) [NC]
