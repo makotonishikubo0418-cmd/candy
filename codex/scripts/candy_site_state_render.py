@@ -207,7 +207,6 @@ def render_code_reference(data: dict[str, object]) -> str:
         "HP/includefile/dataset_base.php": "Included by public PHP files. Common entry for source selection, external session and database settings, dataset branching, and HTML link conversion.",
         "HP/includefile/class.hpgcoder2.php": "Loaded by dataset_base. Assigns rep...eot placeholders to their functions.",
         "HP/includefile/funcs.php": "Loaded by dataset_base and the class file. Provides shared database, HTML, header, and related functions.",
-        "HP/create.php": "Special file-generation entry point. MUST NOT be used during ordinary production.",
     }
     lines += ["", "## Shared PHP", "", "| path | role and impact |", "|---|---|"]
     for path, role in common.items():

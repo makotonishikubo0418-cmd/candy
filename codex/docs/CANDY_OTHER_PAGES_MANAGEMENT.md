@@ -17,7 +17,6 @@ Primary classes:
 - girls: `girls.php`, `girls_list.php`, `schedule.php`, and related files
 - system/other: `movie.php`, `movie_iframe.php`, `mypage.php`, `news.php`, `system.php`, and related files
 - member: `member_login.php`, `member_register.php`, `member_mypage.php`, `member_password_reset.php`, `member_logout.php`, `member/api.php`, member cron entry points, and their source-attached technical references under `HP/docs/`
-- special: `create.php` and its retained internal generation scaffold
 - public generated output: `sitemap.xml`
 
 Excluded:
@@ -51,7 +50,7 @@ Important:
 - Root PHP mostly loads `dataset_base.php`; visible content belongs in source and dataset.
 - `dataset_base.php` is common to all pages and can cause a site-wide failure even for an intended one-page change.
 - For an entry point without the normal source/dataset pair, inspect `SPECIAL/PARTIAL` in the ledger and do not infer intent.
-- `create.php` does not use the normal route.
+- The retired `create.php` generator is not a supported route and MUST NOT be restored as a second page-generation path.
 
 ## 4. Page Management Table
 
@@ -70,7 +69,6 @@ Important:
 | `member_password_reset.php`, `member_logout.php`, `customers/index.php` | Development-only password-reset, logout, and compatibility entry points | Standalone member bootstrap and authentication or redirect logic | Development isolation, token/session invalidation, redirect, SMS, and failure behavior | Keep the common member `X-Robots-Tag: noindex, nofollow` response. Generated structure may classify root entries as `SPECIAL`; verify the implementation directly |
 | `member/api.php` | JSON member API entry | `includefile/member/bootstrap.php` and `MemberApi.php` dispatch by `fno` | Authentication, validation, database writes, CTI reads, SMS, email, and error serialization | Do not invoke write-capable API operations during a read-only investigation |
 | `member/cron_notify_info.php`, `member/cron_notify_favorite_schedule.php` | Member notification batch entry points | Member configuration, mail, notification, favorite, schedule, and database classes | Scheduler, duplicate prevention, mail mode, database state, logs, and deployment environment | Schedule and live execution state remain `UNVERIFIED` until checked in the authorized environment |
-| `create.php` | Noindex authenticated page-generation feature | Standalone; accepts a page name by POST, creates root PHP, dataset, and source, and appends a case and transformation to `dataset_base.php`; retains `dataset_test.php` and the `test.html` case and link transformation as internal generation anchors | Authentication, three generated files, shared-PHP diff, rollback, and noindex | Exclude from public-page SEO requirements; prohibited for normal production. Do not copy authentication values into documents or logs |
 | `sitemap.xml` | Public URL list for search engines | Static XML; use the generated ledger for current URLs | New/changed/removed URLs, canonical, HTTP state, and index eligibility | Confirm intent before addition, deletion, or redirect |
 
 ## 5. Common-Navigation Impact
@@ -128,7 +126,7 @@ Validate together:
 8. `sitemap.xml`
 9. Production HTTP and legacy URL
 
-Do not generate with `create.php`. For a new page outside a dedicated category tool, prepare the impact table and stage allowlist first.
+The retired `create.php` generator MUST NOT be recreated. For a new page outside a dedicated category tool, prepare the impact table and stage allowlist first.
 
 ### 6.4 Top Change
 
@@ -151,16 +149,15 @@ verification, or the root URL without prior approval.
 - Validate playback from `movie.php`, valid and invalid GET handling, movie format behavior, and direct-access safety.
 - A future change from noindex to index requires a separate explicit decision and full SEO impact review.
 
-### 6.6 Noindex Authenticated Page-Generation Feature
+### 6.6 Retired Authenticated Page-Generation Feature
 
-`create.php` is an authenticated operational feature, not a public search-entry page.
+The former `create.php` page-generation feature is retired.
 
-- Keep an `X-Robots-Tag: noindex, nofollow` response header on both authenticated and unauthenticated responses.
-- Keep it excluded from `sitemap.xml` and normal public navigation.
-- Public-page title, description, canonical, H1, OGP, JSON-LD, breadcrumb, internal-link, image-alt, sitemap, and orphan-page requirements are `NOT_APPLICABLE`.
-- Keep authentication and operational safety in scope; SEO exclusion MUST NOT be treated as exclusion from security or maintenance controls.
-- Do not use it for normal production. A future return to normal use requires a separate explicit decision and review of its generation behavior.
-- Keep `includefile/dataset_test.php`, the `test.html` case, and the `test.html` to `test.php` transformation as internal generation anchors while `create.php` remains. They are not a public test page and do not receive HTML robots metadata.
+- `create.php`, `source/create.html`, `includefile/dataset_create.php`, and its create-only `includefile/dataset_test.php` scaffold MUST remain absent.
+- The `create.html` and `test.html` cases and link transformations MUST remain absent from `includefile/dataset_base.php`.
+- Do not retain a robots exclusion for the absent URL and do not add it to `sitemap.xml` or normal public navigation.
+- Normal page creation uses only the applicable Codex-managed category workflow or an explicitly reviewed file bundle.
+- Reintroducing a web generator requires a new explicit decision and a fresh authentication, filesystem-write, shared-PHP, rollback, and production-security review.
 
 ### 6.7 Sitemap Change
 
@@ -205,7 +202,6 @@ Run only checks required for the target and do not duplicate them.
 
 Prior approval is required for:
 
-- `create.php`
 - Production deployment of `index.php`
 - Authentication, database writes, payments, external submission, and noindex/index
 - `.htaccess`, `log/`, and `.well-known/`

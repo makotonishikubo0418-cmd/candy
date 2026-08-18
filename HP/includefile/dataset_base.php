@@ -105,13 +105,6 @@ $mmm = substr($hdir, 0, 2);
 
 
 switch ($hdir) {
-	case 'create.html':
-		include(INCLUDE_DIR . 'dataset_create.php');
-		break;
-
-	case 'test.html':
-		include(INCLUDE_DIR . 'dataset_test.php');
-		break;
 	case 'kagoshima-deliveryhealth-area-koyamadacho.html':
 		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-area-koyamadacho.php');
 		break;
@@ -1612,8 +1605,6 @@ $source = str_replace('kagoshima-deliveryhealth-slendergirl.html', 'kagoshima-de
 $source = str_replace('kagodeli_girl_slender.html', 'kagodeli_girl_slender.php', $source);
 $source = str_replace('sample_123.html', 'sample_123.php', $source);
 $source = str_replace('testda.html', 'testda.php', $source);
-$source = str_replace('create.html', 'create.php', $source);
-$source = str_replace('test.html', 'test.php', $source);
 $source = str_replace('index.html', 'index.php', $source);
 $source = str_replace('movie.html', 'movie.php', $source);
 $source = str_replace('pc_index.html', 'pc_index.php', $source);

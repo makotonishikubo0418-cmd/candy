@@ -19,6 +19,8 @@
 
 | Task ID | Codex | Period | Scope | Status |
 |---|---|---|---|---|
+| TASK-20260818-SERVER-LOCAL-RECONCILIATION-001 | current | 2026-08-18 | Compare every file in `Candy_Server Data_20260818` with canonical `HP`; distinguish semantic changes from line-ending-only differences; inspect current production through authorized HTTP/static-asset evidence; recover production-confirmed newer content into `HP/source/system.html`; correct the petitegirl OGP and JSON-LD image reference to its existing public blog image; preserve the active create-retirement changes, public/local-only woman-image placement, protected files, Git branch, and the supplied snapshot; perform no database operation, snapshot deletion, branch operation, or unplanned production deletion | IN_PROGRESS |
+| TASK-20260818-CREATE-RETIREMENT-001 | current | 2026-08-18 | Delete the obsolete Git-managed `HP/create.php`, `HP/source/create.html`, `HP/includefile/dataset_create.php`, and create-only `HP/includefile/dataset_test.php`; remove only their create/test cases and HTML-to-PHP transformations from shared `HP/includefile/dataset_base.php`; remove only the create exclusion from `HP/robots.txt`; update directly required generator, canonical specifications, generated current state, case, reservation, and local task records; preserve every normal page route, shared CSS/JavaScript, database behavior, branch, Git index/history, GitHub, Actions, production, and the supplied server-data snapshot | IN_PROGRESS |
 ## 3. Completed and Released Reservations
 
 | Task ID | Codex | Period | Scope | Status |

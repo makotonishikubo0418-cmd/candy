@@ -50,11 +50,10 @@ The local counterparts are under `HP/includefile/`. Public rendering wrappers us
 
 ### 2.5 Special Entry Points
 
-- `create.php` affects authentication and file generation. It retains
-  `dataset_test.php` and the `test.html` routing anchors as internal generation
-  scaffolding. It is outside normal page production; execution or modification
-  is a separate operation selected by an applicable route in `codex/WORK_ROUTING.md`
-  Section 5.2.
+- The former `create.php` web generator and its `dataset_create.php`,
+  `dataset_test.php`, `create.html`, and shared-routing anchors are retired and
+  MUST remain absent. Normal generation uses the Codex-managed category workflow
+  or an explicitly reviewed complete file bundle.
 - Do not automatically classify a public PHP file without source or dataset as missing. Mark it `SPECIAL` in the ledger and confirm implementation intent.
 
 ## 3. CSS
