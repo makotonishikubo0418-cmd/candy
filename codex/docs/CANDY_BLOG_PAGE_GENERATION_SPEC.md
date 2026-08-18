@@ -16,6 +16,7 @@ Section 5.2.
 
 - Use the target text file under `Text_blog_data` as source data.
 - Use `HP/source/template_kagoshima-deliveryhealth-blog.html` as the HTML template.
+- Load woman information from `codex/data/CANDY_GIRL_INFORMATION.json` through `candy_girl_information.py`, and select only records whose image state is `PUBLIC`.
 - Adjust the table of contents, normal scenes, girl introductions, customer comments, FAQ, and summary to source-data counts.
 - Keep JSON-LD, visible content, and the table of contents consistent in content and count.
 - Apply the common collision, incomplete-input, change-boundary, and completion
@@ -26,6 +27,7 @@ Section 5.2.
 ```text
 Text_blog_data/<対象記事>.txt
 HP/source/template_kagoshima-deliveryhealth-blog.html
+codex/data/CANDY_GIRL_INFORMATION.json
 
 HP/kagoshima-deliveryhealth-blog-<slug>.php
 HP/source/kagoshima-deliveryhealth-blog-<slug>.html
@@ -101,7 +103,7 @@ A single block change affects multiple locations. Update together:
 Add or remove customer comments, normal articles, FAQs, and table-of-contents
 entries according to source data; none of these counts is fixed.
 
-For girl introductions, compare the template and current complete pages and include only specified girls. Match name, image, `girls.php?no=`, and JSON-LD ItemList. Do not infer girl information.
+For girl introductions, compare the local woman-information ledger and current complete pages and include only specified `PUBLIC` records. Match name, image, profile URL, and JSON-LD ItemList. Do not infer girl information or render a `LOCAL_ONLY` record.
 
 ## 7. JSON-LD
 
@@ -161,7 +163,7 @@ The common generation gates remain in
 `CANDY_PAGE_GENERATION_GOVERNANCE.md`. Within those gates:
 
 1. Verify required source-text items, canonical, slug, and images.
-2. Compare the blog template and a current complete page.
+2. Compare the blog template, the local woman-information ledger, and a current complete page.
 3. Generate source HTML and apply SEO, OGP, H1, body, and images.
 4. Build normal scenes, girl introductions, customer comments, and FAQs
    according to source-data counts.

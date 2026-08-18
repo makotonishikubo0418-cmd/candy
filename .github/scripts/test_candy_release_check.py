@@ -115,7 +115,7 @@ def assert_htaccess_access_contract() -> None:
     include_pattern = re.compile(r"^includefile(?:/|$)", flags=re.IGNORECASE)
     assert source_directory_pattern.search("source/")
     assert source_html_pattern.search("source/mypage.html")
-    assert source_html_pattern.search("source/template_girls.html")
+    assert source_html_pattern.search("source/template_kagoshima-deliveryhealth-blog.html")
     assert include_pattern.search("includefile/dataset_base.php")
     assert include_pattern.search("includefile/member/bootstrap.php")
     assert not source_directory_pattern.search("source/style.css")

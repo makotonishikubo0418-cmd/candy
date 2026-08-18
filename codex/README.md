@@ -14,7 +14,7 @@ This README is the entry point for the management documents under `C:\Codex\FSG\
 | Canonical Codex management source | `C:\Codex\FSG\Candy\codex` | Contains the management entry point, management documents, HP production specifications, and work tools |
 | Project management | `C:\Codex\FSG\Candy\codex\project_management` | Canonical source for rules, current state, central cases, case parents, reservations, history, communication, and safety procedures |
 | Actual site tree | `C:\Codex\FSG\Candy\HP` | Contains HP data such as PHP, source, includefile, images, logs, and movies |
-| Production inputs | Root-level `Text_area_data`, `Text_blog_data`, and `Text_hotel_data` | Source data for page production that is not published directly to HP |
+| Production inputs | Root-level `Text_area_data`, `Text_blog_data`, `Text_girl_data`, and `Text_hotel_data` | Source data and local-only assets for page production that are not published directly to HP |
 | NAS storage | `\\192.168.1.3\disk1\FSG_SEO\candy` | Storage-only location for `Backup/`. Git operations are prohibited |
 
 ### 1.1 Local Git Layout
@@ -64,6 +64,7 @@ reporting, reading, or execution rules.
 | `HP/docs/` | Source-attached member-system technical references outside the formal management-document tree. `MEMBER_ARCHITECTURE.md` is their technical index; `codex/docs/CANDY_OTHER_PAGES_MANAGEMENT.md` remains the canonical management owner |
 | `Text_area_data/` | Area-page production inputs. Accepted area images are stored in the Git-managed local `Text_area_data/画像データ/` directory |
 | `Text_blog_data/` | Blog-page production inputs |
+| `Text_girl_data/` | Git-managed woman images retained locally but excluded from HP and production; publication state and exact woman information are owned by `codex/docs/CANDY_GIRL_INFORMATION_MANAGEMENT.md` and `codex/data/CANDY_GIRL_INFORMATION.json` |
 | `Text_hotel_data/` | Hotel-page production inputs. Accepted hotel-image source pairs are stored under the Git-managed local `Text_hotel_data/画像データ/` directory and are never referenced directly by public HTML |
 | NAS `Backup/` | Stores backups, isolated files, and legacy materials outside Git. Do not run Git operations on the NAS |
 
@@ -87,6 +88,7 @@ reporting, reading, or execution rules.
 | Completed task execution history | `codex/project_management/TASK_LOG.md` and its children under `codex/project_management/task_history/` |
 | Safety procedure for deletion, movement, and bulk operations | `codex/project_management/SAFETY_PROTOCOL.md` |
 | HP production and generation specifications | `codex/docs/CANDY_MASTER_DOC_INDEX.md` |
+| Woman information and public/local-only woman-image state | `codex/docs/CANDY_GIRL_INFORMATION_MANAGEMENT.md`; exact records are in `codex/data/CANDY_GIRL_INFORMATION.json` |
 | Member mypage, API, authentication, and notification management | `codex/docs/CANDY_OTHER_PAGES_MANAGEMENT.md`; the non-management technical index is `HP/docs/MEMBER_ARCHITECTURE.md`, and actual behavior remains in the implementation and verified environment |
 | Area nearby-link mapping | `codex/data/CANDY_AREA_RELATED_LINKS.json` |
 | Stable HP structure | `codex/docs/CANDY_HP_STRUCTURE_MAP.md`, `codex/docs/CANDY_CODE_FILE_STRUCTURE.md`, and `codex/docs/CANDY_SEO_SPEC.md` |
@@ -166,6 +168,7 @@ C:\Codex\FSG\Candy
    │  ├─ CANDY_HOTEL_IMAGE_CREATION_SPEC.md
    │  ├─ CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md
    │  ├─ CANDY_BLOG_PAGE_GENERATION_SPEC.md
+   │  ├─ CANDY_GIRL_INFORMATION_MANAGEMENT.md
    │  ├─ CANDY_OTHER_PAGES_MANAGEMENT.md
    │  ├─ CANDY_SEO_SPEC.md
    │  ├─ CANDY_VERIFICATION_PLAN.md

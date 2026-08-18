@@ -86,7 +86,7 @@ description_
 scene（h2 / 店長おすすめの女の子）
 鹿児島デリヘルの<br class="spOnly"><span class="fc_p">「素人っぽい女の子」</span>
 
-template_girls.html ファイル内より「素人っぽい魅力のある」女の子を5人選出して、
+CANDY_GIRL_INFORMATION.json の公開対象から「素人っぽい魅力のある」女の子を5人選出して、
 <!-- 名前 --><li class="girls-info-item">～</li>をページ内に設置してください。
 項目下部にある「description_」はsceneに合わせて番号を設置してください。
 -------------------------------------------------------------------

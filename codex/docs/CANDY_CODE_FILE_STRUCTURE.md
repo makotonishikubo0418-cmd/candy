@@ -98,6 +98,7 @@ The `<script>` elements in source HTML are the canonical loading source. Before 
 | `HP/movie/` | Public movies and related assets. Deletion or replacement belongs to the applicable asset and safety routes selected from `codex/WORK_ROUTING.md` Section 5.2 |
 | `HP/font/` and related locations | Fonts referenced from CSS |
 | `Text_area_data/画像データ/` | Git-managed accepted or candidate source assets before production. Do not treat them as public assets; public HTML uses the copied files under `HP/imgHtml/new_202601/area/` |
+| `Text_girl_data/画像データ/` | Git-managed woman images retained locally in `LOCAL_ONLY` state. They are absent from HP and production until an authorized current public reference changes them to `PUBLIC` |
 | `Text_hotel_data/画像データ/` | Git-managed accepted hotel-image source pairs. Public HTML never references this folder; local/public page assets use matching copies under `HP/imgHtml/new_202601/hotel/` |
 
 For detail-page images, use the category specification's naming and required count, then synchronize source, OGP, JSON-LD, and alt values. The generated inventory identifies missing, unconfirmed-reference, and same-hash candidates, but machine evaluation alone MUST NOT trigger deletion or replacement.
@@ -105,6 +106,8 @@ For detail-page images, use the category specification's naming and required cou
 Hotel-image acceptance and public installation use `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`. Accepted and local-public same-name files have separate storage responsibilities and MUST have identical SHA-256 values after first installation. A public hotel pair without an accepted-source counterpart remains `LEGACY_PUBLIC_ONLY` and MUST NOT be backfilled or replaced automatically.
 
 Before deletion or replacement, verify HTML, CSS, dynamic PHP/JavaScript references, database references, desktop/mobile display, OGP/JSON-LD, and recovery methods.
+
+Woman records and public/local-only image placement use `CANDY_GIRL_INFORMATION_MANAGEMENT.md`. `codex/data/CANDY_GIRL_INFORMATION.json` is the local structured ledger; `HP/source/template_girls.html` is not a current source and MUST NOT be recreated.
 
 Existing public area-image replacements also pass `.github/scripts/candy_area_image_replacement_guard.py`. The guard compares the Git base and target, checks the accepted/public pair and hash-based content-version references, and is called automatically by the protected production deployment before its FTP plan.
 

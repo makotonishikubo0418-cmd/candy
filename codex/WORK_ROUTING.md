@@ -87,6 +87,7 @@ C:\Codex\FSG\Candy
    │  ├─ CANDY_HOTEL_IMAGE_CREATION_SPEC.md
    │  ├─ CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md
    │  ├─ CANDY_BLOG_PAGE_GENERATION_SPEC.md
+   │  ├─ CANDY_GIRL_INFORMATION_MANAGEMENT.md
    │  ├─ CANDY_OTHER_PAGES_MANAGEMENT.md
    │  ├─ CANDY_SEO_SPEC.md
    │  ├─ CANDY_VERIFICATION_PLAN.md
@@ -153,6 +154,7 @@ C:\Codex\FSG\Candy
 | Create or modify hotel images, or perform pre-adoption review | `codex/docs/CANDY_HOTEL_IMAGE_CREATION_SPEC.md`, `codex/docs/CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`, the target text, and the target images |
 | Adopt, save, install, replace, or manage the publication status of hotel images | `codex/docs/CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`, the target text, the adopted source image, and the published image; also read `codex/docs/CANDY_PRODUCTION_MIGRATION_MASTER.md` when replacing an existing published image under the same filename or performing production work |
 | Produce a blog page | `codex/docs/CANDY_PAGE_GENERATION_GOVERNANCE.md` and `codex/docs/CANDY_BLOG_PAGE_GENERATION_SPEC.md` |
+| Manage woman information or change a woman image between public and local-only state | `codex/docs/CANDY_GIRL_INFORMATION_MANAGEMENT.md`, `codex/docs/CANDY_CODE_FILE_STRUCTURE.md`, and the exact ledger and image pair; production work also uses the separate production route |
 | Investigate or modify a page that is not an area, hotel, or blog page | `codex/docs/CANDY_OTHER_PAGES_MANAGEMENT.md`, `codex/docs/CANDY_OPERATION_BASICS.md`, and the applicable generated current-state document; when the target is an area, blog, or hotel section in `HP/source/index.html`, also read `codex/docs/CANDY_PAGE_GENERATION_GOVERNANCE.md` |
 | Investigate or modify the member mypage, member API, authentication, notification, or related SQL | `codex/docs/CANDY_OTHER_PAGES_MANAGEMENT.md` and `codex/docs/CANDY_OPERATION_BASICS.md`; then inspect the non-management source-attached technical index `HP/docs/MEMBER_ARCHITECTURE.md`, its applicable `HP/docs/PHASE*_API.md` child, and the exact implementation. Database or production operations activate their separate routes and permissions |
 | Investigate or modify SEO | `codex/docs/CANDY_SEO_SPEC.md`, `codex/docs/generated/CANDY_SEO_STATUS.md`, the applicable category specification, and the affected pages, indexes, sitemaps, internal links, and images; also read `codex/docs/CANDY_OPERATION_BASICS.md` before making changes |

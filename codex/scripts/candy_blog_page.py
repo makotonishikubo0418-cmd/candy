@@ -12,6 +12,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import candy_page_common as common
+import candy_girl_information as girl_information
 
 
 class BlogToolError(common.PageToolError):
@@ -169,21 +170,22 @@ def strip_tags(value: str) -> str:
     return html.unescape(re.sub(r"<[^>]+>", "", value)).strip()
 
 
-def load_girl_templates(path: Path) -> dict[str, GirlTemplate]:
-    source = common.read_utf8(path)
-    matches = list(re.finditer(r"(?ms)^\s*<!-- ([a-z0-9_]+) -->\s*\n(?P<block>\s*<li\b.*?^\s*</li>)", source))
+def load_girl_templates() -> dict[str, GirlTemplate]:
     templates: dict[str, GirlTemplate] = {}
-    for match in matches:
-        key = match.group(1)
-        block = f"\t\t\t\t\t\t<!-- {key} -->\n{match.group('block')}"
-        button = re.search(r'<a href="(\./girls\.php\?no=[^"]+)" class="bt-pk-m">\s*([^<]+?)\s+詳細</a>', block)
-        heading = re.search(r"<h3[^>]*>(.*?)</h3>", block, re.S)
-        image = re.search(r'<img src="(\./imgHtml/[^"]+)"', block)
-        if not button or not heading or not image:
+    for record in girl_information.load_records():
+        if record.image_state != girl_information.PUBLIC:
             continue
-        templates[key] = GirlTemplate(key, button.group(2).strip(), strip_tags(heading.group(1)), image.group(1), button.group(1), block)
+        image = f"./imgHtml/new_202601/girl/{record.image_pc}"
+        templates[record.key] = GirlTemplate(
+            record.key,
+            record.name,
+            strip_tags(record.title_html),
+            image,
+            record.profile_url,
+            girl_information.render_block(record),
+        )
     if not templates:
-        raise BlogToolError("template_girls.htmlに女の子ブロックがありません")
+        raise BlogToolError("女性情報台帳に公開対象の女の子がありません")
     return templates
 
 
@@ -200,7 +202,7 @@ def existing_girl_keys(data: BlogData, templates: dict[str, GirlTemplate]) -> li
 
 
 def resolve_girls(data: BlogData) -> list[GirlTemplate]:
-    templates = load_girl_templates(common.hp_root() / "source" / "template_girls.html")
+    templates = load_girl_templates()
     keys = data.requested_girls or existing_girl_keys(data, templates)
     if not keys:
         raise BlogToolError("女の子を推測選出できません。元txtへ「女の子指定」とtemplate keyを記載してください")
@@ -210,7 +212,7 @@ def resolve_girls(data: BlogData) -> list[GirlTemplate]:
         raise BlogToolError(f"女の子指定件数不一致: expected={data.requested_girl_count} actual={len(keys)}")
     missing = [key for key in keys if key not in templates]
     if missing:
-        raise BlogToolError("template_girls key不足: " + ", ".join(missing))
+        raise BlogToolError("女性情報台帳の公開対象key不足: " + ", ".join(missing))
     return [templates[key] for key in keys]
 
 

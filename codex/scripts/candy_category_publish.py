@@ -85,7 +85,12 @@ def dependency_paths(category: str, data, input_path: Path) -> list[Path]:
             }
         )
     else:
-        dependencies.add(hp / "source" / "template_girls.html")
+        dependencies.update(
+            {
+                root / "codex" / "data" / "CANDY_GIRL_INFORMATION.json",
+                common.SCRIPTS_DIR / "candy_girl_information.py",
+            }
+        )
         girls = module_for(category).resolve_girls(data)
         dependencies.update(hp / girl.image.removeprefix("./") for girl in girls)
     return sorted(dependencies, key=lambda path: path.as_posix())

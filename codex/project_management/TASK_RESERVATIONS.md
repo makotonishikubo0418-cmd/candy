@@ -19,6 +19,7 @@
 
 | Task ID | Codex | Period | Scope | Status |
 |---|---|---|---|---|
+| TASK-20260818-GIRL-INFORMATION-MANAGEMENT-001 | current | 2026-08-18 | Create the canonical woman-information management specification and local structured ledger; migrate all 56 woman records from `HP/source/template_girls.html`; change blog generation to consume the local ledger; retain 34 currently referenced public image pairs under `HP/imgHtml/new_202601/girl/`; move exactly 22 unreferenced pairs (44 images) to Git-managed local-only storage under `Text_girl_data/画像データ/`; delete the obsolete public/server `HP/source/template_girls.html`; update only directly required routing, code-structure, generation, generated-state, case, reservation, and task-history files; keep branch `main`; explicitly stage, Commit, Push, verify automatic Actions deletion and production absence; exclude public page content, public images outside the fixed 44-file set, `moca` images, database work, branch operations, and unrelated cleanup | IN_PROGRESS |
 ## 3. Completed and Released Reservations
 
 | Task ID | Codex | Period | Scope | Status |

@@ -128,12 +128,15 @@ Primary exclusions verified from actual workflow/script:
 - `HP/log/`
 - `Text_area_data/`
 - `Text_blog_data/`
+- `Text_girl_data/`
 - `Text_hotel_data/`
 - `HP/.well-known/`
 - Markdown
 - `.env`
 - `.bak`, `.backup`, and `.zip`
 - `.candy-backup-*` and `.candy-upload-*`
+
+Woman information under `codex/data/` and local-only woman images under `Text_girl_data/` are outside the HP deployment plan. The production workflow runs `candy_girl_information.py check` before FTP so their ledger state, public image placement, and local-only image placement must agree before any related HP deletion or upload can proceed.
 
 Do not infer this list for a future workflow; recheck actual preview output.
 
