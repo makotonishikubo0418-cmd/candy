@@ -7,7 +7,7 @@
 - Source of Truth Responsibility: Sole change-category index; each linked individual detail owns its substantive content
 - Related Documents: [`CASE_REGISTRY.md`](../CASE_REGISTRY.md), [`TASK_LOG.md`](../TASK_LOG.md), [`DOCUMENT_RULES.md`](../DOCUMENT_RULES.md), and [`CASE_HISTORY.md`](CASE_HISTORY.md)
 - Related Implementation Files: None; linked individual details identify their own scope
-- Updated: 2026-08-16
+- Updated: 2026-08-18
 
 ## 1. Recording Rule
 
