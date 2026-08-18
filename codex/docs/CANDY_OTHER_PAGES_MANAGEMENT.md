@@ -107,6 +107,11 @@ Targets:
 - GET, Cookie, date, device, external form, and related input conditions
 - Paired detail/index/iframe pages
 
+Runtime diagnostics MUST NOT persist the complete `$_COOKIE` array, session or
+authentication values, or equivalent browser secrets. A target-limited
+diagnostic may record only the minimum approved non-secret fields and must be
+removed when the investigation ends.
+
 STOP rather than including database writes, authentication, payments, or external-submission changes in a normal page fix.
 
 ### 6.3 New URL or URL Change

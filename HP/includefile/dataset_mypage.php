@@ -532,20 +532,14 @@ $source = file_get_contents($source_file);
 
 // お気に入り解除処理を最初に実行
 if ($unf != "") {
-	$debug_log = "=== MYPAGE UNFAVORITE DEBUG ===\n";
-	$debug_log .= "unf parameter: " . $unf . "\n";
-	
 	// 現在のクッキーからfavcastを取得
 	$temp_favcast = array();
 	if (isset($_COOKIE["candyfav"])) {
 		$temp_favcast = explode(',', urldecode($_COOKIE["candyfav"]));
 	}
 	
-	$debug_log .= "Current temp_favcast array: " . print_r($temp_favcast, true) . "\n";
-	
 	// noから内部IDに変換
 	$girl_id = isset($girldata["no2id"][$unf]) ? $girldata["no2id"][$unf] : "";
-	$debug_log .= "Converted girl_id: " . $girl_id . "\n";
 	
 	if ($girl_id != "" && count($temp_favcast) > 0) {
 		// 配列から削除
@@ -562,48 +556,19 @@ if ($unf != "") {
 			$seturl = str_replace('/', '', $seturl);
 			setcookie("candyfav", $cookie_value, time() + (60 * 60 * 24 * 30), "/", $seturl);
 			$_COOKIE["candyfav"] = $cookie_value; // 即座に反映
-			
-			$debug_log .= "Removed girl_id " . $girl_id . " from temp_favcast\n";
-			$debug_log .= "New temp_favcast array: " . print_r($temp_favcast, true) . "\n";
-			$debug_log .= "New cookie value: " . $cookie_value . "\n";
-			$debug_log .= "Updated \$_COOKIE[candyfav]: " . $_COOKIE["candyfav"] . "\n";
-		} else {
-			$debug_log .= "Girl_id " . $girl_id . " not found in temp_favcast\n";
 		}
-	} else {
-		$debug_log .= "Invalid girl_id or no favorites\n";
 	}
-	
-	$debug_log .= "=== END MYPAGE UNFAVORITE DEBUG ===\n";
 }
 
 //COOKIE取得（お気に入り解除処理後）
 $favcast = array();
-$debug_log .= "=== MYPAGE COOKIE DEBUG ===\n";
-$debug_log .= "Timestamp: " . date('Y-m-d H:i:s') . "\n";
-$debug_log .= "URL Parameters: " . print_r($_GET, true) . "\n";
-$debug_log .= "unf parameter value: '" . $unf . "'\n";
-$debug_log .= "All cookies: " . print_r($_COOKIE, true) . "\n";
 
 if (isset($_COOKIE["candyfav"])) {
 	$favcast = explode(',', urldecode($_COOKIE["candyfav"]));
-	$debug_log .= "candyfav cookie found: " . $_COOKIE["candyfav"] . "\n";
-	$debug_log .= "Decoded favcast: " . print_r($favcast, true) . "\n";
-} else {
-	$debug_log .= "candyfav cookie NOT found\n";
 }
-$debug_log .= "Favcast count: " . count($favcast) . "\n";
-$debug_log .= "Initial favcast array: " . print_r($favcast, true) . "\n";
-$debug_log .= "=== END MYPAGE COOKIE DEBUG ===\n";
-
-$debug_log .= "Checking unf condition: unf='" . $unf . "', empty check: " . (empty($unf) ? "TRUE" : "FALSE") . "\n";
 
 // お気に入り数を設定
 $data1['00010601'] = count($favcast);
-$debug_log .= "Set data1['00010601']: " . $data1['00010601'] . "\n";
-
-// デバッグログをファイルに書き込み
-file_put_contents('includefile/debug_mypage.log', $debug_log, FILE_APPEND | LOCK_EX);
 
 
 

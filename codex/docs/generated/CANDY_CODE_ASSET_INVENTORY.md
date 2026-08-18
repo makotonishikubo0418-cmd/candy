@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `codex/scripts/candy_site_state.py`, `codex/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-08-17T17:38:48+09:00 (reproducible generation baseline)
+> Generated at: 2026-08-18T09:06:25+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 309088d19bacc41a4f492dc97b6a951af61fe4d0
-> State fingerprint: sha256:c2cd90b1db6ca2c3f25a33553df3088836e2e0bec549d7e7b006a94b040c5168
-> Population: Public PHP files: 149 / assets: 655
+> Commit: b223d3960c188a81e936fff058b16d9e76ce711b
+> State fingerprint: sha256:669d367670d9758b4f51b32a592c5cfc852fd86873e2ca83e2a8f4e10890bed3
+> Population: Public PHP files: 149 / assets: 559
 > Generator: `codex/scripts/candy_site_state.py` with `codex/scripts/candy_site_state_render.py`
 > Result: Missing references: 14 / duplicate hash groups: 3
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 16 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 536 |
+| .jpg | 440 |
 | .js | 13 |
 | .mp4 | 2 |
 | .png | 29 |
@@ -54,7 +54,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601/banner | 23 |
 | HP/imgHtml/new_202601/blog | 12 |
 | HP/imgHtml/new_202601/girl | 112 |
-| HP/imgHtml/new_202601/hotel | 142 |
+| HP/imgHtml/new_202601/hotel | 46 |
 | HP/imgHtml/new_202601/shop | 22 |
 | HP/imgHtml/pc | 20 |
 | HP/imgHtml/s | 14 |
@@ -246,7 +246,6 @@ These candidates may be referenced dynamically and are not deletion decisions.
 | HP/imgHtml | 3 | age_verification.jpg, entranceBg.jpg, unnamed.jpg |
 | HP/imgHtml/new_202601 | 4 | candy_discount_information_sp.jpg, candy_img1.jpg, candy_img1_sp.jpg, candy_manager_recommendation_sp.jpg |
 | HP/imgHtml/new_202601/girl | 56 | alice_1_sp.jpg, ami_1_sp.jpg, ann_1_sp.jpg, anya_1_sp.jpg, aoba_1_sp.jpg |
-| HP/imgHtml/new_202601/hotel | 96 | businesshotelatelier_1.jpg, businesshotelatelier_2.jpg, businesshotelorientalizuro_1.jpg, businesshotelorientalizuro_2.jpg, businesshoteltenmonkan_1.jpg |
 | HP/imgHtml/new_202601/shop | 11 | after5_sp.jpg, beloved_sp.jpg, candy_sp.jpg, danzuma_sp.jpg, hitozuma_sp.jpg |
 | HP/js | 4 | fav_gen.js, fav_ka.js, mdrwbpp2.4.js, member_favorite.js |
 

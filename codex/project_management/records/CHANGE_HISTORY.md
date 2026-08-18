@@ -17,6 +17,9 @@ Use this index for modifications, additions, new creation, refactoring, migratio
 
 | Case ID | Subject | Individual detail owner | Boundary |
 |---|---|---|---|
+| CANDY-HOTEL-UNPUBLISHED-PUBLIC-COPY-REMOVAL-20260818 | Remove the verified 48 unpublished hotel-image public pairs while retaining accepted sources | Atomic case row in [`CASE_REGISTRY.md`](../CASE_REGISTRY.md) | Exact 96 public image files, required generated state, Git publication, automatic production deletion, and production absence verification; accepted-source images remain protected |
+| CANDY-MYPAGE-DEBUG-LOG-REMOVAL-20260818 | Stop raw Cookie debug logging and remove the generated runtime log | Atomic case row in [`CASE_REGISTRY.md`](../CASE_REGISTRY.md) | `dataset_mypage.php` debug-only statements and production `includefile/debug_mypage.log`; favorite registration and removal behavior remain unchanged |
+| CANDY-HOTEL-UNPUBLISHED-PUBLIC-COPY-20260818 | Preserve accepted hotel images and permit removal of unpublished public copies | Atomic case row in [`CASE_REGISTRY.md`](../CASE_REGISTRY.md) | Permanent hotel-image lifecycle rule only; no image deletion, Git publication, or production operation |
 | CANDY-UNUSED-GIT-DATA-CLEANUP-20260818 | Remove 55 verified unused Git-managed files from the repository and production | Atomic case row in [`CASE_REGISTRY.md`](../CASE_REGISTRY.md) | Fixed 55-file deletion population, exact Git publication, automatic production deployment, and production absence verification |
 | CANDY-RECORD-HISTORY-20260816 | Establish the required three-category management and record-history structure | [`CANDY_RECORD_HISTORY_STRUCTURE.md`](../cases/CANDY_RECORD_HISTORY_STRUCTURE.md) | Completed management-structure change detail |
 | CANDY-MGMT-REPAIR-20260814 | Repair and organize the lower management-document system | [`CANDY_MANAGEMENT_SYSTEM_REPAIR.md`](../cases/CANDY_MANAGEMENT_SYSTEM_REPAIR.md) | Completed management repair detail |
