@@ -9,10 +9,10 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `codex/scripts/candy_site_state.py`, `codex/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-08-18T15:16:26+09:00 (reproducible generation baseline)
+> Generated at: 2026-08-18T16:29:00+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: db5117fe606e7674371ba181f484515a8be7566e
-> State fingerprint: sha256:64df28ade50c3682fa5098ee71ca437eee846433a882546d7187992a9f23441f
+> Commit: 9c4a107fb94129afea998f776abf9ad39f4eb252
+> State fingerprint: sha256:a1f01022964c43b01c498d0b25ebcc81078e3f9beb82db506f28c5ad0272aec8
 > Population: Public PHP files: 148 / assets: 515
 > Generator: `codex/scripts/candy_site_state.py` with `codex/scripts/candy_site_state_render.py`
 > Result: Missing references: 14 / duplicate hash groups: 3
@@ -260,7 +260,6 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | path | assessment |
 |---|---|
-| HP/codex-production-deploy-smoke-test.txt | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
 | HP/docs/MEMBER_ARCHITECTURE.md | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
 | HP/docs/PHASE1_API.md | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
 | HP/docs/PHASE2_API.md | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
@@ -268,5 +267,4 @@ These candidates may be referenced dynamically and are not deletion decisions.
 | HP/docs/PHASE4_API.md | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
 | HP/docs/PHASE5_API.md | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
 | HP/docs/PHASE6_API.md | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
-| HP/js/api.txt | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
 | HP/robots.txt | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |

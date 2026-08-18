@@ -19,6 +19,7 @@
 
 | Task ID | Codex | Period | Scope | Status |
 |---|---|---|---|---|
+| TASK-20260818-LOCAL-RESIDUE-CLEANUP-001 | current | 2026-08-18 | Delete exactly `HP/.vscode/settings.json`, `HP/includefile/dataset_base_def.php`, `HP/js/api.txt`, `HP/includefile/member/config.sms.local.example.php`, and `HP/codex-production-deploy-smoke-test.txt`; update only directly required generated state, atomic case, change-history route, reservation, and August task-history records; keep branch `main`; explicitly stage, Commit, Push, verify automatic Actions deletion for eligible targets and production absence; exclude every other HP file, database work, branch operations, and unrelated cleanup | IN_PROGRESS |
 ## 3. Completed and Released Reservations
 
 | Task ID | Codex | Period | Scope | Status |
