@@ -27,7 +27,7 @@ The local counterparts are under `HP/includefile/`. Public rendering wrappers us
 | `HP/source/*.html` | Static body, metadata, headings, links, images, JSON-LD, and placeholders | Normally shares a stem with public PHP. A template is not a public page |
 | `HP/includefile/dataset_base.php` | Common entry point for source selection, external configuration loading, page-specific dataset routing, HTML link transformation, and final output | A change may affect every page. It requires external session and database settings |
 | `HP/includefile/dataset_*.php` | Page-specific or feature-specific data acquisition and replacement | Pairing is not uniform. Check both cases and link transformations |
-| `HP/includefile/class.hpgcoder2.php` | Extracts `rep...eot` placeholders and assigns each token to a function | Contains a debug branch using GET `no` and calls to `error_log` |
+| `HP/includefile/class.hpgcoder2.php` | Extracts `rep...eot` placeholders and assigns each token to a function | Shared conversion logic; request-specific public debug output is prohibited |
 | `HP/includefile/funcs.php` | Common functions for HTML generation from database results, file or external acquisition, headers, and redirects | May affect external communication, databases, and responses |
 
 `dataset_base.php` requires external session and database settings on the production server. Do not copy those values into management documents. Actual database, session, and external-include targets are unverified by local static inspection.

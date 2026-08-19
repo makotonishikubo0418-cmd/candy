@@ -230,16 +230,23 @@ def write_records(path: Path, records: list[GirlRecord]) -> None:
 def render_block(record: GirlRecord) -> str:
     if record.image_state != PUBLIC:
         raise GirlInformationError(f"Local-only woman cannot be rendered publicly: {record.key}")
+    profile_open = f'<a href="{record.profile_url}" class="girls-info-img-link">' if record.profile_no is not None else ""
+    profile_close = "</a>" if record.profile_no is not None else ""
+    detail = (
+        f'<div class="lmt_20"><a href="{record.profile_url}" class="bt-pk-m">{record.name} 詳細</a></div>'
+        if record.profile_no is not None
+        else ""
+    )
     return f'''\t\t\t\t\t\t<!-- {record.key} -->
 \t\t\t\t\t\t<li class="girls-info-item">
 \t\t\t\t\t\t\t<div class="girls-info bg_f lmt_20">
 \t\t\t\t\t\t\t\t<div class="girls-info-img-wrap">
-\t\t\t\t\t\t\t\t\t<a href="{record.profile_url}" class="girls-info-img-link">
+\t\t\t\t\t\t\t\t\t{profile_open}
 \t\t\t\t\t\t\t\t\t\t<picture>
 \t\t\t\t\t\t\t\t\t\t\t<source media="(max-width: 768px)" srcset="./imgHtml/new_202601/girl/{record.image_sp}">
 \t\t\t\t\t\t\t\t\t\t\t<img src="./imgHtml/new_202601/girl/{record.image_pc}" alt="{record.image_alt}" width="300" height="498" loading="{record.loading}" class="nolazy">
 \t\t\t\t\t\t\t\t\t\t</picture>
-\t\t\t\t\t\t\t\t\t</a>
+\t\t\t\t\t\t\t\t\t{profile_close}
 \t\t\t\t\t\t\t\t</div>
 \t\t\t\t\t\t\t\t<div class="girls-info-text lp_25">
 \t\t\t\t\t\t\t\t\t<h3 class="lpb_15 fs_xl fc_p">{record.title_html}</h3>
@@ -255,7 +262,7 @@ def render_block(record: GirlRecord) -> str:
 \t\t\t\t\t\t\t\t\t\t\t<td>{record.hobby_html}</td>
 \t\t\t\t\t\t\t\t\t\t</tr>
 \t\t\t\t\t\t\t\t\t</table>
-\t\t\t\t\t\t\t\t\t<div class="lmt_20"><a href="{record.profile_url}" class="bt-pk-m">{record.name} 詳細</a></div>
+\t\t\t\t\t\t\t\t\t{detail}
 \t\t\t\t\t\t\t\t</div>
 \t\t\t\t\t\t\t</div>
 \t\t\t\t\t\t</li>'''

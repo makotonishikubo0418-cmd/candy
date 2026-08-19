@@ -9,10 +9,10 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `codex/scripts/candy_site_state.py`, `codex/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-08-19T09:51:06+09:00 (reproducible generation baseline)
+> Generated at: 2026-08-19T11:20:17+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 66f199bd8f00c916c6d693fea00d1fa94557c7d3
-> State fingerprint: sha256:a1091285e12584214f9d2fbf36a117c883e8a252d1f5c00778ad7f5da712f5d4
+> Commit: afa0bb7c773f599cf4fe2340922ebed59d46a402
+> State fingerprint: sha256:45779b9c8c569787f2896af26fd48c9d45afe015f88045bf1b20b98c35fd19dd
 > Population: Public PHP files: 148 / assets: 511
 > Generator: `codex/scripts/candy_site_state.py` with `codex/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 4 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 0
@@ -238,12 +238,6 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/css | 2 | girls_page_content.css, member.css |
-| HP/imgHtml | 3 | age_verification.jpg, entranceBg.jpg, unnamed.jpg |
-| HP/imgHtml/new_202601 | 3 | candy_discount_information_sp.jpg, candy_manager_recommendation_sp.jpg, sample.jpg |
-| HP/imgHtml/new_202601/girl | 33 | alice_1_sp.jpg, ami_1_sp.jpg, ann_1_sp.jpg, aoba_1_sp.jpg, aru_1_sp.jpg |
-| HP/imgHtml/new_202601/shop | 7 | after5_sp.jpg, beloved_sp.jpg, danzuma_sp.jpg, loveel_kirishima_sp.jpg, loveel_sp.jpg |
-| HP/js | 3 | fav_gen.js, mdrwbpp2.4.js, member_favorite.js |
 
 ## Required Same-Content Path Groups
 

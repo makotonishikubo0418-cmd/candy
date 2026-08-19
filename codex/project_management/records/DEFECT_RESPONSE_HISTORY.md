@@ -17,6 +17,7 @@ Use this index to reach one individual detail for each defect case. Unresolved o
 
 | Case ID | Subject | Individual detail owner | Boundary |
 |---|---|---|---|
+| CANDY-FINAL-SEO-REMEDIATION-20260819 | Correct confirmed final-audit SEO, link, image, debug, and audit-tool defects | [`CASE_REGISTRY.md`](../CASE_REGISTRY.md) (`CANDY-FINAL-SEO-REMEDIATION-20260819`) | Local implementation and validation complete; Commit, Push, deployment, production HTTP, database, access logs, and Search Console remain separate |
 | CANDY-UNUSED-ASSET-BROKEN-LINK-FIX-20260819 | Remove four unused public assets and correct two broken-link sources | [`CASE_REGISTRY.md`](../CASE_REGISTRY.md) (`CANDY-UNUSED-ASSET-BROKEN-LINK-FIX-20260819`) | Completed by Commit `5a4892539b1e8c1b0ce1dd4ea30542c4ab1d3cc8`; Actions run `32207751580` uploaded five files and deleted four files; production HTTP and DOM checks passed |
 | CANDY-EXPECTED-EXCEPTION-CLASSIFICATION-20260819 | Separate intentional exceptions from actionable problems | [`CASE_REGISTRY.md`](../CASE_REGISTRY.md) (`CANDY-EXPECTED-EXCEPTION-CLASSIFICATION-20260819`) | Local management and generated-state correction complete; Commit and Push remain separate; no HP or production change was made |
 | CANDY-MOVIE-IFRAME-INVALID-INPUT-20260819 | Return 404 for invalid or non-playable movie helper requests | [`CASE_REGISTRY.md`](../CASE_REGISTRY.md) (`CANDY-MOVIE-IFRAME-INVALID-INPUT-20260819`) | Local implementation and validation complete; Commit, Push, deployment, and production verification remain separate |

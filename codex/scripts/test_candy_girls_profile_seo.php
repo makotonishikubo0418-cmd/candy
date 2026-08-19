@@ -50,6 +50,7 @@ function candyGirlsSeoTestScheduleRows()
 $requiredFunctions = array(
 	'candyGirlsPageBuildVisibility',
 	'candyGirlsPageBuildDescription',
+	'candyGirlsPageNormalizePublicImageFilename',
 	'candyGirlsPageSelectProfileImage',
 	'candyGirlsPageOrderProfileImageCandidates',
 	'candyGirlsPageBuildSeoData',
@@ -68,6 +69,12 @@ if (count($failures) > 0) {
 }
 
 $scheduleRows = candyGirlsSeoTestScheduleRows();
+
+candyGirlsSeoTestAssertSame('profile.jpg', candyGirlsPageNormalizePublicImageFilename('profile.JPG'), 'public JPG extension must be lowercase');
+candyGirlsSeoTestAssertSame('profile.jpeg', candyGirlsPageNormalizePublicImageFilename('profile.JPEG'), 'public JPEG extension must be lowercase');
+candyGirlsSeoTestAssertSame('profile.png', candyGirlsPageNormalizePublicImageFilename('profile.PNG'), 'public PNG extension must be lowercase');
+candyGirlsSeoTestAssertSame('profile.mp4', candyGirlsPageNormalizePublicImageFilename('profile.mp4'), 'non-image extensions must remain unchanged');
+candyGirlsSeoTestAssertSame('profile', candyGirlsPageNormalizePublicImageFilename('profile'), 'extensionless filenames must remain unchanged');
 
 if (PHP_SAPI === 'cli-server') {
 	$pageData = array('content' => array(), 'qa' => array());

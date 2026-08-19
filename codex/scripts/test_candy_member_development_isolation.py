@@ -53,6 +53,14 @@ def main() -> int:
         "member bootstrap must emit noindex,nofollow for direct and redirect responses",
     )
 
+    htaccess = read(HP_ROOT / ".htaccess")
+    require(
+        "CANDY_DEVELOPMENT_REDIRECT" in htaccess
+        and 'Header always set X-Robots-Tag "noindex, nofollow" env=CANDY_DEVELOPMENT_REDIRECT' in htaccess
+        and r"customers/index\.(?:php|html?)" in htaccess,
+        "customers/index canonical redirect must retain noindex,nofollow",
+    )
+
     for relative_path in DEVELOPMENT_ENTRY_PATHS:
         public_php = read(HP_ROOT / relative_path)
         require(

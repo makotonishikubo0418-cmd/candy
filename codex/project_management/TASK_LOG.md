@@ -24,7 +24,7 @@
 |---|---|---:|---|
 | 2026-07-01 through 2026-07-20 | [`TASK_LOG_2026_07_01_20.md`](task_history/TASK_LOG_2026_07_01_20.md) | 46 | Historical Evidence |
 | 2026-07-21 through 2026-07-31 | [`TASK_LOG_2026_07_21_31.md`](task_history/TASK_LOG_2026_07_21_31.md) | 30 | Historical Evidence |
-| 2026-08-01 through 2026-08-31 | [`TASK_LOG_2026_08.md`](task_history/TASK_LOG_2026_08.md) | 35 | Historical Evidence |
+| 2026-08-01 through 2026-08-31 | [`TASK_LOG_2026_08.md`](task_history/TASK_LOG_2026_08.md) | 36 | Historical Evidence |
 
 ## 3. Approval Basis Notes
 

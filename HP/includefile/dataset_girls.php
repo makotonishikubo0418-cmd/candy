@@ -63,7 +63,8 @@ function buildStaticImageUrl($clubId, $dir, $filename){
 	if(USE_TEST_UPLOADS && mediaFileExistsLocal($clubId, $dir, $filename)){
 		return TEST_UPLOAD_BASE_URL . $clubId . '/' . $dir . $filename;
 	}
-	return IMG_HOME . $clubId . '/' . $dir . $filename;
+	$publicFilename = candyGirlsPageNormalizePublicImageFilename($filename);
+	return IMG_HOME . $clubId . '/' . $dir . $publicFilename;
 }
 
 function buildResizeImageUrl($clubId, $imgfile, $imgsize, $imgtype, $extra = array()){
@@ -437,10 +438,6 @@ if($chGirlId !== ''){
 }
 $data1['03010093'] = $chreview;
 
-if(isset($_GET['no']) && strval($_GET['no']) === '1241'){
-	$debugGid = isset($gid) ? $gid : '(no gid)';
-	error_log('[candy][dataset_girls] no=1241 gid=' . $debugGid . ' chGirlId=' . $chGirlId . ' chreview=' . $chreview);
-}
 // このページの正規URL（絶対URL・canonical/og:url用）
 $data1['03010092'] = 'https://www.55810.com/girls.php?no=' . $girldata["no"][$gid];
 

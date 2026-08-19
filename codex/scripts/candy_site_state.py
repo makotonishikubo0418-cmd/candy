@@ -46,9 +46,18 @@ CANONICAL_RE = re.compile(
 TAG_RE = re.compile(r"<[^>]+>")
 JSON_RE = re.compile(r'<script\s+type=["\']application/ld\+json["\'][^>]*>(.*?)</script>', re.I | re.S)
 LINK_RE = re.compile(r'(?:href|src)=["\']([^"\']+)["\']', re.I)
+SRCSET_RE = re.compile(r'srcset=["\']([^"\']+)["\']', re.I)
 ANCHOR_LINK_RE = re.compile(r'<a\b[^>]*\bhref=["\']([^"\']+)["\']', re.I)
 SCRIPT_SRC_RE = re.compile(r'<script\b[^>]*\bsrc=["\']([^"\']+)["\']', re.I)
 CSS_URL_RE = re.compile(r"url\(\s*['\"]?([^)'\"]+)", re.I)
+RUNTIME_ASSET_RE = re.compile(
+    r'["\']((?:/|\./|\.\./)?(?:css|js|imgHtml|imgCss|movie)/[^"\']+?\.(?:css|js|jpe?g|png|gif|svg|webp|mp4|webm|mov|avi|ttf|otf|woff2?|eot)(?:[?#][^"\']*)?)["\']',
+    re.I,
+)
+FILE_CONTENT_ASSET_RE = re.compile(
+    r'file_get_contents\(\s*["\']([^"\']+\.(?:css|js|jpe?g|png|gif|svg|webp|mp4|webm|mov|avi|ttf|otf|woff2?|eot))["\']\s*\)',
+    re.I,
+)
 ASSET_EXTENSIONS = {
     ".css",
     ".js",
@@ -562,6 +571,16 @@ def normalize_asset_ref(
         return None
     if cleaned.startswith("/"):
         return HP_ROOT / cleaned.lstrip("/")
+    if base.suffix.lower() in {".php", ".js"} and cleaned.startswith("./"):
+        return HP_ROOT / cleaned.removeprefix("./")
+    if base.suffix.lower() in {".php", ".js"} and cleaned.split("/", 1)[0] in {
+        "css",
+        "js",
+        "imgHtml",
+        "imgCss",
+        "movie",
+    }:
+        return HP_ROOT / cleaned
     if base.suffix.lower() == ".css":
         return (base.parent / cleaned).resolve()
     # source HTML is rendered from the HP public root, not from HP/source.
@@ -629,12 +648,23 @@ def asset_references() -> tuple[
     referenced_by: dict[Path, set[Path]] = defaultdict(set)
     missing_by: dict[Path, set[Path]] = defaultdict(set)
     template_placeholder_by: dict[Path, set[Path]] = defaultdict(set)
-    source_files = sorted((HP_ROOT / "source").glob("*.html")) + sorted(HP_ROOT.rglob("*.css"))
+    source_files = (
+        sorted((HP_ROOT / "source").glob("*.html"))
+        + sorted(HP_ROOT.rglob("*.css"))
+        + sorted(HP_ROOT.rglob("*.php"))
+        + sorted(HP_ROOT.rglob("*.js"))
+    )
     for source_path in source_files:
         source = read_utf8(source_path)
         values = LINK_RE.findall(source)
-        if source_path.suffix.lower() == ".css":
-            values.extend(CSS_URL_RE.findall(source))
+        for srcset in SRCSET_RE.findall(source):
+            values.extend(candidate.strip().split()[0] for candidate in srcset.split(",") if candidate.strip())
+        values.extend(CSS_URL_RE.findall(source))
+        if source_path.suffix.lower() == ".html":
+            values.extend(meta_property_values(source, "og:image"))
+        if source_path.suffix.lower() in {".php", ".js"}:
+            values.extend(RUNTIME_ASSET_RE.findall(source))
+            values.extend(FILE_CONTENT_ASSET_RE.findall(source))
         for value in values:
             target = normalize_asset_ref(value, source_path)
             if target is None:
@@ -773,6 +803,8 @@ def collect() -> dict[str, object]:
         canonical = first_match(source, r'<link\s+rel=["\']canonical["\'][^>]+href=["\']([^"\']+)', re.I)
         case_count = dataset_base.count(f"case '{stem}.html':")
         conversion_count = len(re.findall(rf"str_replace\(\s*['\"]{re.escape(stem)}\.html['\"]\s*,\s*['\"]{re.escape(stem)}\.php['\"]", dataset_base))
+        if stem == "index":
+            conversion_count = dataset_base.count(r"((?:\.\/|\/)?index)\.html")
         detail = DETAIL_RE.match(stem)
         list_count: int | None = None
         if detail:
@@ -857,8 +889,16 @@ def collect() -> dict[str, object]:
             }
         )
 
-    title_counts = Counter(page["title"] for page in pages if page["title"])
-    canonical_counts = Counter(page["canonical"] for page in pages if page["canonical"])
+    title_counts = Counter(
+        page["title"]
+        for page in pages
+        if page["title"] and page["stem"] not in SEO_DEVELOPMENT_STEMS
+    )
+    canonical_counts = Counter(
+        page["canonical"]
+        for page in pages
+        if page["canonical"] and page["stem"] not in SEO_DEVELOPMENT_STEMS
+    )
     member_bootstrap_path = HP_ROOT / "includefile" / "member" / "bootstrap.php"
     member_bootstrap_source = read_utf8(member_bootstrap_path) if member_bootstrap_path.is_file() else ""
     seo_rows: list[dict[str, object]] = []

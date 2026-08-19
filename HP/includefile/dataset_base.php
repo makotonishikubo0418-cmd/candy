@@ -1605,7 +1605,13 @@ $source = str_replace('kagoshima-deliveryhealth-slendergirl.html', 'kagoshima-de
 $source = str_replace('kagodeli_girl_slender.html', 'kagodeli_girl_slender.php', $source);
 $source = str_replace('sample_123.html', 'sample_123.php', $source);
 $source = str_replace('testda.html', 'testda.php', $source);
-$source = str_replace('index.html', 'index.php', $source);
+$source = preg_replace_callback(
+	'/\b(href|action)=(["\'])((?:\.\/|\/)?index)\.html((?:[?#][^"\']*)?)\2/i',
+	function($matches){
+		return $matches[1] . '=' . $matches[2] . $matches[3] . '.php' . $matches[4] . $matches[2];
+	},
+	$source
+);
 $source = str_replace('movie.html', 'movie.php', $source);
 $source = str_replace('pc_index.html', 'pc_index.php', $source);
 $source = str_replace('sp_index.html', 'sp_index.php', $source);
@@ -1710,15 +1716,6 @@ if (defined('MEMBER_SITE_INTEGRATION_ENABLED') && MEMBER_SITE_INTEGRATION_ENABLE
 }
 
 //変換&表示
-if(isset($_GET['no']) && strval($_GET['no']) === '1241'){
-	$hasToken = (strpos($HpgCoder->Converted, 'rep03010093eot') !== false);
-	$data03010093 = isset($data['code']['03010093']) ? $data['code']['03010093'] : '';
-	$dbgExtractHas = isset($HpgCoder->dbg_extractedHas03010093) ? $HpgCoder->dbg_extractedHas03010093 : '';
-	$dbgExtractCount = isset($HpgCoder->dbg_extractedTokenCount) ? $HpgCoder->dbg_extractedTokenCount : '';
-	$dbgOutHas = isset($HpgCoder->dbg_outHas03010093) ? $HpgCoder->dbg_outHas03010093 : '';
-	$dbgOutValue = isset($HpgCoder->dbg_outValue03010093) ? $HpgCoder->dbg_outValue03010093 : '';
-	$HpgCoder->Converted .= "\n<!-- DEBUG rep03010093eot: tokenStillPresent=" . ($hasToken ? '1' : '0') . " extractedHas=" . htmlspecialchars($dbgExtractHas, ENT_QUOTES, 'UTF-8') . " extractedCount=" . htmlspecialchars($dbgExtractCount, ENT_QUOTES, 'UTF-8') . " outHas=" . htmlspecialchars($dbgOutHas, ENT_QUOTES, 'UTF-8') . " outValue=" . htmlspecialchars($dbgOutValue, ENT_QUOTES, 'UTF-8') . " data03010093=" . htmlspecialchars($data03010093, ENT_QUOTES, 'UTF-8') . " -->\n";
-}
 print($HpgCoder->Converted);
 
 //ＤＢ切断//

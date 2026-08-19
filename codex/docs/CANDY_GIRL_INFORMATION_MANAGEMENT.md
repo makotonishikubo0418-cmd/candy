@@ -46,6 +46,10 @@ Presence in the local ledger does not make an image `PUBLIC`. A generation templ
 
 Database references, access logs, external inbound links, and third-party caches are separate evidence classes. Label them `UNVERIFIED` until checked through an authorized route; do not report them as current internal use.
 
+### 3.1 Profile-Link Availability
+
+When a specific `girls.php?no=<number>` route is verified as HTTP `404`, set that ledger record's `profile_no` to `null` and `profile_url` to `./girls_list.php`. A public historical introduction may retain the woman's text and images, but its image and detail button MUST NOT link to the unavailable profile, and its `Person` structured data MUST omit `url`. Image publication state is decided separately from profile-route availability.
+
 ## 4. Installing a Local-Only Pair for Publication
 
 Before changing `LOCAL_ONLY` to `PUBLIC`:

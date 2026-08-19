@@ -41,7 +41,6 @@
                 mainImgSrc.indexOf('.mov') !== -1 || mainImgSrc.indexOf('.wmv') !== -1 || 
                 mainImgSrc.indexOf('.flv') !== -1 || mainImgSrc.indexOf('.webm') !== -1)) {
                 // 動画の場合
-                console.log('mainImg: 動画を検出:', mainImgSrc);
                 $mainImgImage.hide();
                 $mainImgVideo.show();
                 $mainImgVideo.find('source').attr('src', mainImgSrc);
@@ -71,7 +70,6 @@
                     imgSrc.indexOf('.mov') !== -1 || imgSrc.indexOf('.wmv') !== -1 || 
                     imgSrc.indexOf('.flv') !== -1 || imgSrc.indexOf('.webm') !== -1)) {
                     // 動画の場合
-                    console.log('動画を検出:', imgSrc);
                     $img.hide();
                     $video.show();
                     $video.find('source').attr('src', imgSrc);
@@ -85,10 +83,8 @@
                     });
                     
                     // 動画の場合はlightboxクラスを削除してオリジナル拡大表示を使用
-                    console.log('lightboxクラス削除前:', $link.attr('class'));
                     $link.removeClass('lightbox box');
                     $link.addClass('video-lightbox');
-                    console.log('lightboxクラス削除後:', $link.attr('class'));
                     
                     $video[0].load(); // 動画を再読み込み
                 } else {
@@ -781,10 +777,6 @@
                 gid = CookieRead("gid");
                 did = CookieRead("did");
 
-                console.log(gid);
-                console.log(did);
-
-
 //                  getObj("seeMore").setAttribute("href","./diary/list.html?gid="+gid);
 //            getObj("moreTxt").setAttribute("href","./diary/blog.html?gid="+gid+"&did="+did);
 
@@ -797,8 +789,6 @@
 //            gid = CookieRead("gid");
 //            did = CookieRead("did");
 //
-//            console.log(gid);
-//            console.log(did);
 //
 //
 //            getObj("seeMore").setAttribute("href","./diary/list.html?gid="+gid);
@@ -845,7 +835,6 @@
 
         // ブラウザーが addEventListener または Page Visibility API をサポートしない場合に警告
         if (typeof document.addEventListener === "undefined" || typeof document[hidden] === "undefined") {
-//    console.log("This demo requires a browser, such as Google Chrome or Firefox, that supports the Page Visibility API.");
         } else {
             // Page Visibility の変更を扱う
             document.addEventListener(visibilityChange, handleVisibilityChange, false);
@@ -880,15 +869,12 @@
 
                 // "最初にcheckがついていたら"
                 if(event.data.substr(0,5) == "check"){
-//		    console.log(event.data);
                     var ids = event.data.slice(5);
                     ids = JSON.parse(ids);
                     for (key in ids) {
                         var idArr = key.split("/__/");
-//              console.log(idArr);
                         if (idArr[0].slice(1) == gid && idArr[1].slice(1) == did) {
 
-//                  console.log(getObj("loveon"));
                             loveCheckGet();
 //
 			      if(getObj("loveon").getAttribute("data-lovebtn") != "on"){

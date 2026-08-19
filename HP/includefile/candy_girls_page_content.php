@@ -37,6 +37,17 @@ function candyGirlsPageNormalizeHttpsUrl($url)
 	return $url;
 }
 
+function candyGirlsPageNormalizePublicImageFilename($filename)
+{
+	return preg_replace_callback(
+		'/\.(?:jpe?g|png|gif|webp|avif)$/i',
+		function($matches) {
+			return strtolower($matches[0]);
+		},
+		(string)$filename
+	);
+}
+
 function candyGirlsPageSelectProfileImage($candidates)
 {
 	if (!is_array($candidates)) {

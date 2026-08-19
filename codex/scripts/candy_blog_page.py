@@ -181,7 +181,7 @@ def load_girl_templates() -> dict[str, GirlTemplate]:
             record.name,
             strip_tags(record.title_html),
             image,
-            record.profile_url,
+            record.profile_url if record.profile_no is not None else "",
             girl_information.render_block(record),
         )
     if not templates:
@@ -239,24 +239,22 @@ def structured_data(data: BlogData, girls: list[GirlTemplate]) -> list[dict[str,
             for question, answer in faq_pairs(data)
         ],
     }
+    girl_items = []
+    for index, girl in enumerate(girls, 1):
+        item = {
+            "@type": "Person",
+            "name": girl.name,
+            "image": "https://www.55810.com/" + girl.image.removeprefix("./"),
+        }
+        if girl.url:
+            item["url"] = "https://www.55810.com/" + girl.url.removeprefix("./")
+        girl_items.append({"@type": "ListItem", "position": index, "item": item})
     item_list = {
         "@context": "https://schema.org",
         "@type": "ItemList",
         "name": next(item.heading for item in data.blocks if item.kind == "girls"),
         "numberOfItems": len(girls),
-        "itemListElement": [
-            {
-                "@type": "ListItem",
-                "position": index,
-                "item": {
-                    "@type": "Person",
-                    "name": girl.name,
-                    "image": "https://www.55810.com/" + girl.image.removeprefix("./"),
-                    "url": "https://www.55810.com/" + girl.url.removeprefix("./"),
-                },
-            }
-            for index, girl in enumerate(girls, 1)
-        ],
+        "itemListElement": girl_items,
     }
     return [breadcrumb, faq, item_list]
 

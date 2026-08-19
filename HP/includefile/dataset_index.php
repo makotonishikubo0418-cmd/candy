@@ -1302,7 +1302,6 @@ $jsc  = "window.__gBoxCountFromServer=" . $que_count . ";window.__castOrderCount
 foreach($que as $val){
 	$jsc .= "gBox.push(" . json_encode($val, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE) . ");\n";
 }
-$jsc .= "if(typeof console!=='undefined')console.log('[candyTile] PHP: count(que)='+" . $que_count . "+', count(cast_order)='+" . $cast_count . "+', gBox.length='+(typeof gBox!=='undefined'?gBox.length:'n/a')+((typeof gBox!=='undefined'&&gBox.length!==" . $que_count . ")?' ★ MISMATCH':''));\n";
 $data1['00010010'] = $jsc;
 
 // エントランス画像設定

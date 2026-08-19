@@ -8,11 +8,6 @@
 class HpgCoder{
 
 	public $Converted = '';
-	public $dbg_extractedHas03010093 = '';
-	public $dbg_extractedTokenCount = '';
-	public $dbg_data03010093 = '';
-	public $dbg_outHas03010093 = '';
-	public $dbg_outValue03010093 = '';
 
 	function HpgCoder($source, $data){
 	
@@ -20,23 +15,7 @@ class HpgCoder{
 		//$source = file_get_contents($source_file);
 		
 		//使用変換コードの抽出
-		$debugNo = isset($_GET['no']) ? strval($_GET['no']) : '';
-		$isDebugTarget = ($debugNo === '1241');
-
-		if($isDebugTarget){
-			error_log('[candy][HpgCoder] start __FILE__=' . __FILE__);
-		}
-
 		$result = preg_match_all('/(rep[0-9a-zA-Z]+eot)/', $source, $get_code);
-
-		if($isDebugTarget){
-			$hasToken = in_array('rep03010093eot', $get_code[0], true);
-			$codeVal = isset($data['code']['03010093']) ? $data['code']['03010093'] : '(not set)';
-			$this->dbg_extractedHas03010093 = $hasToken ? '1' : '0';
-			$this->dbg_extractedTokenCount = strval(count($get_code[0]));
-			$this->dbg_data03010093 = strval($codeVal);
-			error_log('[candy][HpgCoder] extractedTokenHas03010093=' . ($hasToken ? '1' : '0') . ' tokenCount=' . count($get_code[0]) . ' data[03010093]=' . $codeVal);
-		}
 		
 		//初期化
 		$out_code = array();
@@ -611,14 +590,6 @@ class HpgCoder{
 			
 		}
 		
-		if($isDebugTarget){
-			$hasOut = array_key_exists('rep03010093eot', $out_code);
-			$valOut = $hasOut ? $out_code['rep03010093eot'] : '(missing)';
-			$this->dbg_outHas03010093 = $hasOut ? '1' : '0';
-			$this->dbg_outValue03010093 = strval($valOut);
-			error_log('[candy][HpgCoder] out_code has rep03010093eot=' . ($hasOut ? '1' : '0') . ' out_value=' . $valOut);
-		}
-
 		//keyと値の再配列化
 		$code_array = array_keys($out_code);
 		$out_array  = array_values($out_code);

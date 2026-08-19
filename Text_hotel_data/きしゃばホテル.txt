@@ -94,7 +94,7 @@ scene（h2）
 きしゃばホテル
 
 URL
-https://travel.rakuten.co.jp/HOTEL/40385/40385.html（楽天トラベル）
+https://travel.rakuten.co.jp/HOTEL/40385/40385.html
 
 住所
 〒890-0054<改行>
