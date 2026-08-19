@@ -1210,8 +1210,6 @@ if($kog == "g"){
 	if($isSP) {
 		$jss = 'favCount+=1;CookieWrite("favCount", favCount, 1);' . "\n";
 		$source = str_replace('favTask();', $jss . 'favTask();', $source);
-} else {
-		// $source = str_replace('js/fav.js', 'js/fav_ka.js', $source);
 	}
 }
 

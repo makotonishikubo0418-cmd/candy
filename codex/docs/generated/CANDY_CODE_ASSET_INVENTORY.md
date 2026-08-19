@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `codex/scripts/candy_site_state.py`, `codex/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-08-18T17:10:16+09:00 (reproducible generation baseline)
+> Generated at: 2026-08-19T09:51:06+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 8e03cc03edf83ab841f838c495027a39675ae7cf
-> State fingerprint: sha256:7c3772fcc0d8b93e095f6377fdea671a8941941636708674c7bee342c3c298d8
-> Population: Public PHP files: 148 / assets: 515
+> Commit: 66f199bd8f00c916c6d693fea00d1fa94557c7d3
+> State fingerprint: sha256:a1091285e12584214f9d2fbf36a117c883e8a252d1f5c00778ad7f5da712f5d4
+> Population: Public PHP files: 148 / assets: 511
 > Generator: `codex/scripts/candy_site_state.py` with `codex/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 4 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 0
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,10 +29,10 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 16 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 396 |
-| .js | 13 |
+| .jpg | 394 |
+| .js | 12 |
 | .mp4 | 2 |
-| .png | 29 |
+| .png | 28 |
 | .svg | 1 |
 | .ttf | 14 |
 | .webm | 1 |
@@ -46,19 +46,19 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 |---|---:|
 | HP/css | 15 |
 | HP/font | 44 |
-| HP/imgCss/pc | 2 |
+| HP/imgCss/pc | 1 |
 | HP/imgCss/s | 2 |
 | HP/imgHtml | 18 |
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 202 |
 | HP/imgHtml/new_202601/banner | 23 |
 | HP/imgHtml/new_202601/blog | 12 |
-| HP/imgHtml/new_202601/girl | 68 |
+| HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 46 |
 | HP/imgHtml/new_202601/shop | 22 |
 | HP/imgHtml/pc | 20 |
 | HP/imgHtml/s | 14 |
-| HP/js | 13 |
+| HP/js | 12 |
 | HP/movie | 3 |
 | HP/source | 1 |
 
@@ -239,12 +239,11 @@ These candidates may be referenced dynamically and are not deletion decisions.
 | folder | count | examples (first five) |
 |---|---:|---|
 | HP/css | 2 | girls_page_content.css, member.css |
-| HP/imgCss/pc | 1 | newsClose.png |
 | HP/imgHtml | 3 | age_verification.jpg, entranceBg.jpg, unnamed.jpg |
 | HP/imgHtml/new_202601 | 3 | candy_discount_information_sp.jpg, candy_manager_recommendation_sp.jpg, sample.jpg |
-| HP/imgHtml/new_202601/girl | 35 | alice_1_sp.jpg, ami_1_sp.jpg, ann_1_sp.jpg, aoba_1_sp.jpg, aru_1_sp.jpg |
+| HP/imgHtml/new_202601/girl | 33 | alice_1_sp.jpg, ami_1_sp.jpg, ann_1_sp.jpg, aoba_1_sp.jpg, aru_1_sp.jpg |
 | HP/imgHtml/new_202601/shop | 7 | after5_sp.jpg, beloved_sp.jpg, danzuma_sp.jpg, loveel_kirishima_sp.jpg, loveel_sp.jpg |
-| HP/js | 4 | fav_gen.js, fav_ka.js, mdrwbpp2.4.js, member_favorite.js |
+| HP/js | 3 | fav_gen.js, mdrwbpp2.4.js, member_favorite.js |
 
 ## Required Same-Content Path Groups
 

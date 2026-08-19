@@ -19,6 +19,7 @@
 
 | Task ID | Codex | Period | Scope | Status |
 |---|---|---|---|---|
+| TASK-20260819-UNUSED-ASSET-BROKEN-LINK-FIX-001 | Primary Codex | 2026-08-19 | Return the unused `ria_1.jpg` / `ria_1_sp.jpg` pair from `HP/imgHtml/new_202601/girl/` to Git-managed local-only storage and change only Ria's ledger state to `LOCAL_ONLY`; delete unused `HP/js/fav_ka.js` and `HP/imgCss/pc/newsClose.png` and remove only the disabled `fav_ka.js` branch from `HP/includefile/dataset_girls.php`; correct the reversed telephone/map values in the canonical Yamadacho Text and `HP/source/kagoshima-deliveryhealth-area-yamadacho.html`; remove the three crawlable `____link____` template hrefs from `HP/source/index.html` while preserving generated woman links through `HP/js/candyTile.js`; update only directly required sitemap, deterministic generated state, case, reservation, and task-history records; Commit and Push on the current `main`, verify automatic Actions deletion/upload and production HTTP/DOM; exclude `HP/index.php`, `.htaccess`, database work, branch operations, unrelated assets, and unrelated fixes | IN_PROGRESS |
 ## 3. Completed and Released Reservations
 
 | Task ID | Codex | Period | Scope | Status |

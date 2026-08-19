@@ -92,7 +92,6 @@ function firstTile(){
 		html=html.replace("____cup____",para[4]);
 		html=html.replace("____waist____",para[5]);
 		html=html.replace("____hip____",para[6]);
-		html=html.replace("____link____",para[18]);
 		switch(para[7]){
 			case "TEL確認":
 				html=html.replace("____state____",'<div class="tel">電話確認</div>');
@@ -170,6 +169,10 @@ function firstTile(){
 */		
 		
 		o.innerHTML=html;
+		var profileLink=o.getElementsByTagName("a")[0];
+		if(profileLink && para[18]){
+			profileLink.setAttribute("href",para[18]);
+		}
 		o.style.position="absolute";
 		getObj("tile").appendChild(o);
 

@@ -101,8 +101,8 @@ subtitle_
 小宿 福衛門右邸
 description_
  鹿児島市中山町803<改行>
-TEL https://maps.app.goo.gl/GDryUUNe4iFdJT8a8
-URL 090-2506-2583
+TEL 090-2506-2583
+URL https://maps.app.goo.gl/GDryUUNe4iFdJT8a8
 
 subtitle_
 鹿児島の高級ヴィラ 萌 蘖

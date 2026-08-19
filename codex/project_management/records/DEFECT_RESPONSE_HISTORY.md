@@ -17,6 +17,7 @@ Use this index to reach one individual detail for each defect case. Unresolved o
 
 | Case ID | Subject | Individual detail owner | Boundary |
 |---|---|---|---|
+| CANDY-UNUSED-ASSET-BROKEN-LINK-FIX-20260819 | Remove four unused public assets and correct two broken-link sources | [`CASE_REGISTRY.md`](../CASE_REGISTRY.md) (`CANDY-UNUSED-ASSET-BROKEN-LINK-FIX-20260819`) | Authorized implementation, GitHub publication, production deletion/upload, and target verification are in progress |
 | CANDY-EXPECTED-EXCEPTION-CLASSIFICATION-20260819 | Separate intentional exceptions from actionable problems | [`CASE_REGISTRY.md`](../CASE_REGISTRY.md) (`CANDY-EXPECTED-EXCEPTION-CLASSIFICATION-20260819`) | Local management and generated-state correction complete; Commit and Push remain separate; no HP or production change was made |
 | CANDY-MOVIE-IFRAME-INVALID-INPUT-20260819 | Return 404 for invalid or non-playable movie helper requests | [`CASE_REGISTRY.md`](../CASE_REGISTRY.md) (`CANDY-MOVIE-IFRAME-INVALID-INPUT-20260819`) | Local implementation and validation complete; Commit, Push, deployment, and production verification remain separate |
 | CANDY-MEMBER-DEVELOPMENT-ISOLATION-20260817 | Isolate development-only member pages from public navigation and indexing | [`CASE_REGISTRY.md`](../CASE_REGISTRY.md) (`CANDY-MEMBER-DEVELOPMENT-ISOLATION-20260817`) | Implementation Commit `dd9588135158bb3ecba0e248ca602d5956a68bf1` is GitHub-published; deployment and production confirmation remain separate |
