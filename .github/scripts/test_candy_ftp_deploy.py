@@ -278,6 +278,9 @@ def assert_workflow_contract() -> None:
         '"codex/scripts/candy_page_common.py"',
         '"!HP/codex/**"',
         '"!HP/Text_area_data/**"',
+        '"!HP/sql/**"',
+        '"!HP/.gitignore"',
+        '"!HP/.well-known/**"',
         "github.event.before",
         "github.sha",
         "steps.plan.outputs.count",
@@ -293,6 +296,9 @@ def assert_workflow_contract() -> None:
     for marker in required:
         assert marker in text, f"workflow contract is missing: {marker}"
     assert "validate_area_image_replacements(Path.cwd(), args.before, args.after)" in deploy_text
+    module = load_deploy_module()
+    assert module.is_excluded("HP/sql/001_phase1_member.sql")
+    assert module.is_excluded("HP/.gitignore")
     assert "full_deploy" not in text
     assert "--full-deploy" not in text
 

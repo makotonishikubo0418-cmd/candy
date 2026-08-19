@@ -2,13 +2,14 @@
 
 - Purpose: Provide one location for the overall plan, current state, problems, and next work
 - Status: canonical document
-- Updated: 2026-08-14
+- Updated: 2026-08-19
 
 ## 1. Current State
 
 - Management locations and document responsibilities are defined in `codex/README.md`.
 - Current page, candidate, code/asset, and SEO facts are defined by the generated Markdown parents and deterministic detail children under `codex/docs/generated/`.
 - This document contains only current project-level problems, remaining work, and next actions that cannot be derived from those generated documents.
+- A generated structural label is not a problem by itself. Treat only explicit `ISSUE`, `CONFLICT`, `BLOCKED`, `UNREVIEWED`, actionable-candidate, or unresolved-backlog classifications as problems. Intentional special structures and required same-content path groups with no issue MUST NOT appear in problem reports.
 - Git, production, authority, and execution procedures are not defined here.
 
 ## 2. Completed Management Foundation
@@ -31,7 +32,7 @@
 | Type | Reference or evidence source | Handling |
 |---|---|---|
 | Dated repository-wide SEO audit | `CANDY_REPOSITORY_SEO_AUDIT_2026-07-18.md` | Use this as the 2026-07-18 repository evidence snapshot and remediation handoff. Reverify volatile repository and production state before implementing a finding |
-| Machine-detected page-structure, Text-candidate, SEO, and asset issues | `codex/docs/generated/` | Regenerate after actual-file changes. Detection alone MUST NOT trigger automatic fixes or deletion |
+| Machine-detected page-structure, Text-candidate, SEO, and asset issues | `codex/docs/generated/` | Regenerate after actual-file changes. Use only rows explicitly classified as issues, conflicts, blockers, unreviewed structures, or actionable candidates. Intentional and required classifications are not problems and MUST NOT trigger reporting, fixes, or deletion |
 | Issues requiring specification or owner decisions | `codex/docs/CANDY_FIX_BACKLOG.md` | Handle in a separate task after an explicit decision for the target |
 | Area production order | `CANDY_AREA_105_PAGE_QUEUE.md` and generated upcoming pages | Handle only one target that passes the target gate |
 | Hotel input and production order | Hotel classification, hotel content/image runbooks, and generated upcoming pages | Run `legacy-check` for a legacy Text, use `direct-check` for a staff-completed current Text, and keep Phase preparation independent; resolve the reported image, input, and existing-registration blockers before production |
@@ -44,7 +45,7 @@
 1. For further repository-wide SEO remediation, treat `CANDY_REPOSITORY_SEO_AUDIT_2026-07-18.md` as a dated snapshot, recheck each finding against the generated current state, and skip the completed area-placeholder, obsolete-contact, category-index, internal-link, sitemap, and public-wrapper runtime-path work recorded in `TASK_LOG.md`.
 2. Resolve category-specific blockers in `codex/docs/generated/CANDY_UPCOMING_PAGES.md`, then use the dedicated target gate to select an eligible production target.
 3. Handle issues explicitly selected by the owner from `codex/docs/generated/CANDY_SEO_STATUS.md` and `CANDY_FIX_BACKLOG.md` in separate tasks.
-4. For missing, unconfirmed-reference, and duplicate candidates in `codex/docs/generated/CANDY_CODE_ASSET_INVENTORY.md`, verify dynamic references and recovery methods before requesting target-specific deletion approval.
+4. For missing, unconfirmed-reference, and duplicate candidates in `codex/docs/generated/CANDY_CODE_ASSET_INVENTORY.md`, exclude required same-content path groups first, then verify dynamic references and recovery methods before requesting target-specific deletion approval.
 
 ## 5. Update Rules
 

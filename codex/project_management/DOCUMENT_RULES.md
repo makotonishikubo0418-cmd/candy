@@ -272,6 +272,14 @@ When a document contains uncertain information, label it with one of:
 - `UNVERIFIED`
 - `AWAITING_APPROVAL`
 
+A structural or descriptive classification such as `SPECIAL`, duplicate hash,
+local-only, historical, or compatibility MUST NOT be treated as a problem by
+its label alone. Report it as a current problem only when its canonical owner
+or generated current-state source also classifies it as `ISSUE`, `CONFLICT`,
+`BLOCKED`, `UNREVIEWED`, an actionable candidate, or an unresolved backlog
+item. An explicitly intentional or required classification with no issue MUST
+remain outside problem lists.
+
 ## 6. Validation After a Document Change
 
 At minimum, verify:

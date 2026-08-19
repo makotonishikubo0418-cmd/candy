@@ -2,7 +2,7 @@
 
 - Purpose: Prevent multiple Codex tasks from changing the same files concurrently.
 - Status: Canonical document
-- Last updated: 2026-08-18
+- Last updated: 2026-08-19
 
 ## 1. Reservation Rules
 
@@ -23,6 +23,7 @@
 
 | Task ID | Codex | Period | Scope | Status |
 |---|---|---|---|---|
+| TASK-20260819-STALE-ACME-TOKEN-CLEANUP-001 | Primary Codex | 2026-08-19 | Deleted exactly 33 tracked one-time files under `HP/.well-known/acme-challenge/`; retained `HP/.well-known/.htaccess`; added re-entry prevention to `HP/.gitignore` and the normal deployment workflow; updated only the directly required deployment specification, case route, reservation, generated state, and task history; no Stage, Commit, Push, production mutation, certificate operation, database work, or unrelated cleanup | COMPLETE |
 | TASK-20260818-LOCAL-RESIDUE-CLEANUP-001 | current | 2026-08-18 | Delete exactly `HP/.vscode/settings.json`, `HP/includefile/dataset_base_def.php`, `HP/js/api.txt`, `HP/includefile/member/config.sms.local.example.php`, and `HP/codex-production-deploy-smoke-test.txt`; update only directly required generated state, atomic case, change-history route, reservation, and August task-history records; keep branch `main`; explicitly stage, Commit, Push, verify automatic Actions deletion for eligible targets and production absence; exclude every other HP file, database work, branch operations, and unrelated cleanup | COMPLETE |
 | TASK-20260818-SERVER-LOCAL-RECONCILIATION-001 | current | 2026-08-18 | Compare every file in `Candy_Server Data_20260818` with canonical `HP`; distinguish semantic changes from line-ending-only differences; inspect current production through authorized HTTP/static-asset evidence; recover production-confirmed newer content into `HP/source/system.html`; correct the petitegirl OGP and JSON-LD image reference to its existing public blog image; preserve create retirement, public/local-only woman-image placement, protected files, branch `main`, and the supplied snapshot; publish and verify only the fixed plan; perform no database operation, snapshot deletion, branch operation, or unplanned production deletion | COMPLETE |
 | TASK-20260818-CREATE-RETIREMENT-001 | current | 2026-08-18 | Delete the obsolete Git-managed `HP/create.php`, `HP/source/create.html`, `HP/includefile/dataset_create.php`, and create-only `HP/includefile/dataset_test.php`; remove only their create/test cases and HTML-to-PHP transformations from shared `HP/includefile/dataset_base.php`; remove only the create exclusion from `HP/robots.txt`; update directly required generator, canonical specifications, generated current state, case, reservation, and local task records; preserve every normal page route, shared CSS/JavaScript, database behavior, branch, Git index/history, and supplied snapshot; publish and verify the exact production removal | COMPLETE |

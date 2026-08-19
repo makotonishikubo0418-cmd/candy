@@ -28,6 +28,9 @@ on:
       - "!HP/Text_area_data/**"
       - "!HP/Text_blog_data/**"
       - "!HP/Text_hotel_data/**"
+      - "!HP/sql/**"
+      - "!HP/.gitignore"
+      - "!HP/.well-known/**"
   workflow_dispatch:
     inputs:
       target_mode:

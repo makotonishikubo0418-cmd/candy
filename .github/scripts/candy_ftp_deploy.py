@@ -36,6 +36,7 @@ ZERO_SHA = "0" * 40
 DEPLOYABLE_STATUSES = {"A", "M", "T"}
 BLOCKED_STATUSES = {"D", "R"}
 PROTECTED_PATHS = {"HP/index.php", "HP/.htaccess"}
+EXCLUDED_PATHS = {"HP/.gitignore"}
 INDEX_PATH = "HP/index.php"
 HTACCESS_PATH = "HP/.htaccess"
 BLOCKED_FILE_MARKERS = (".candy-backup-", ".candy-upload-")
@@ -56,6 +57,7 @@ EXCLUDED_PREFIXES = (
     "HP/.git/",
     "HP/.github/",
     "HP/.vscode/",
+    "HP/sql/",
 )
 CATEGORY_INDEX_PATHS = {
     "area": "HP/source/area.html",
@@ -97,6 +99,8 @@ class DeleteTarget:
 def is_excluded(path: str, *, allow_htaccess: bool = False) -> bool:
     if path in PROTECTED_PATHS:
         return not (allow_htaccess and path == HTACCESS_PATH)
+    if path in EXCLUDED_PATHS:
+        return True
     lower_path = path.lower()
     name = PurePosixPath(path).name.lower()
     if lower_path.endswith(".md"):
@@ -743,6 +747,8 @@ def self_test() -> None:
     assert is_excluded("HP/.env")
     assert is_excluded("HP/codex/example.txt")
     assert is_excluded("HP/log/example.log")
+    assert is_excluded("HP/sql/001_phase1_member.sql")
+    assert is_excluded("HP/.gitignore")
     assert is_excluded("HP/example.md")
     assert not is_excluded("HP/main.php")
     assert server_path_for("HP/css/style.css").as_posix() == (

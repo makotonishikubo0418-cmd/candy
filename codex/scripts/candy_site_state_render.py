@@ -66,6 +66,11 @@ def render_ledger_summary(data: dict[str, object]) -> str:
     pages = data["pages"]
     categories = Counter(page["category"] for page in pages)
     structures = Counter(page["structure"] for page in pages)
+    special_classifications = Counter(
+        page["special_classification"]
+        for page in pages
+        if page["structure"] == "SPECIAL"
+    )
     lines = ["# CANDY SITE PAGE LEDGER", ""]
     lines += header(
         data,
@@ -73,13 +78,16 @@ def render_ledger_summary(data: dict[str, object]) -> str:
         "`../CANDY_MASTER_DOC_INDEX.md`",
         "Public PHP files directly under HP and their source, dataset, Text, index, sitemap, SEO, and image relationships",
         f"Public PHP files: {len(pages)}",
-        " / ".join(f"{key}={structures[key]}" for key in sorted(structures)),
+        " / ".join(f"{key}={structures[key]}" for key in sorted(structures))
+        + f" (intentional={special_classifications['INTENTIONAL']}, unreviewed={special_classifications['UNREVIEWED']})",
         "Production HTTP, database state, and external include targets",
         "`CANDY_SITE_PAGE_LEDGER.tsv`, stable structure specifications, and category specifications",
     )
     lines += [
         "",
         "The Markdown parent owns scope, provenance, and summary. The complete one-page-per-row population is in [CANDY_SITE_PAGE_LEDGER.tsv](CANDY_SITE_PAGE_LEDGER.tsv).",
+        "",
+        "`SPECIAL` describes an intentional or unreviewed nonstandard structure; it is not itself a problem. Only `UNREVIEWED` special structures or rows with a non-`NONE` issue are actionable.",
         "",
         "| category | pages |",
         "|---|---:|",
@@ -89,6 +97,9 @@ def render_ledger_summary(data: dict[str, object]) -> str:
     lines += ["", "| structure | pages |", "|---|---:|"]
     for structure, count in sorted(structures.items()):
         lines.append(f"| {md(structure)} | {count} |")
+    lines += ["", "| special classification | pages |", "|---|---:|"]
+    for classification in ("INTENTIONAL", "UNREVIEWED"):
+        lines.append(f"| {classification} | {special_classifications[classification]} |")
     return "\n".join(lines) + "\n"
 
 
@@ -96,7 +107,7 @@ def render_ledger_tsv(data: dict[str, object]) -> str:
     fields = (
         "page ID", "category", "page name", "slug", "role", "public PHP", "source HTML",
         "dataset PHP", "dataset_base", "source Text", "template", "index registrations",
-        "sitemap entries", "SEO", "images", "structure", "issues", "verification source",
+        "sitemap entries", "SEO", "images", "structure", "special classification", "issues", "verification source",
     )
     lines = ["\t".join(fields)]
     for page in data["pages"]:
@@ -108,7 +119,7 @@ def render_ledger_tsv(data: dict[str, object]) -> str:
             rel(page["dataset"]) if page["dataset"] else "MISSING",
             f"case {page['case_count']} / conversions {page['conversion_count']}", texts, template,
             page["list_count"] if page["list_count"] is not None else "NOT_APPLICABLE",
-            page["sitemap_count"], page["seo"], page["image_status"], page["structure"],
+            page["sitemap_count"], page["seo"], page["image_status"], page["structure"], page["special_classification"],
             "; ".join(page["issues"]) or "NONE", f"{data['head']} / {data['generation_time']}",
         )
         lines.append("\t".join(tsv(value) for value in values))
@@ -231,9 +242,9 @@ def render_asset_summary(data: dict[str, object]) -> str:
         data,
         "Summarize current assets, page relationships, missing targets, and review candidates",
         "`../CANDY_MASTER_DOC_INDEX.md`",
-        "Images, videos, fonts, asset counts, missing references, unconfirmed referrers, duplicate hashes, and publication candidates",
+        "Images, videos, fonts, asset counts, missing references, template placeholders, unconfirmed referrers, required same-content paths, duplicate candidates, publication exceptions, and publication candidates",
         f"Public PHP files: {len(pages)} / assets: {len(assets)}",
-        f"Missing references: {len(data['missing_by'])} / duplicate hash groups: {len(data['duplicate_groups'])}",
+        f"Missing references: {len(data['missing_by'])} / template placeholders: {len(data['template_placeholder_by'])} / required same-content groups: {len(data['required_same_content_groups'])} / duplicate candidates: {len(data['duplicate_groups'])} / publication candidates: {len(data['public_candidates'])}",
         "Runtime-generated references, database-derived references, external URLs, and log contents",
         "`CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`",
     )
@@ -262,6 +273,16 @@ def render_asset_summary(data: dict[str, object]) -> str:
     else:
         for path, referrers in sorted(data["missing_by"].items(), key=lambda item: rel(item[0]).casefold()):
             lines.append(f"| {md(rel(path))} | {md('<br>'.join(sorted(rel(item) for item in referrers)))} |")
+    lines += [
+        "", "## Template Placeholder Targets", "",
+        "These missing-looking targets use explicit template placeholder names. They are not current page defects or deletion candidates.", "",
+        "| target | template |", "|---|---|",
+    ]
+    if not data["template_placeholder_by"]:
+        lines.append("| NONE | - |")
+    else:
+        for path, referrers in sorted(data["template_placeholder_by"].items(), key=lambda item: rel(item[0]).casefold()):
+            lines.append(f"| {md(rel(path))} | {md('<br>'.join(sorted(rel(item) for item in referrers)))} |")
     by_folder = defaultdict(list)
     for path in data["unreferenced"]:
         by_folder[rel(path.parent)].append(path)
@@ -272,14 +293,48 @@ def render_asset_summary(data: dict[str, object]) -> str:
     ]
     for folder, paths in sorted(by_folder.items()):
         lines.append(f"| {md(folder)} | {len(paths)} | {md(', '.join(path.name for path in paths[:5]))} |")
-    lines += ["", "## Duplicate Hash Candidates", "", "| SHA-256 | files |", "|---|---|"]
+    lines += [
+        "", "## Required Same-Content Path Groups", "",
+        "Every path in these groups is actively referenced for a distinct desktop or mobile role. They are required paths, not deletion candidates.", "",
+        "| SHA-256 | files | confirmed referrers |", "|---|---|---|",
+    ]
+    if not data["required_same_content_groups"]:
+        lines.append("| NONE | - | - |")
+    else:
+        for paths in sorted(data["required_same_content_groups"], key=lambda group: rel(group[0]).casefold()):
+            digest = hashlib.sha256(paths[0].read_bytes()).hexdigest()
+            reference_rows = []
+            for path in paths:
+                referrers = sorted(rel(item) for item in data["referenced_by"].get(path.resolve(), set()))
+                reference_rows.append(f"{rel(path)} <- {', '.join(referrers) or 'NONE'}")
+            lines.append(
+                f"| `{digest}` | {md('<br>'.join(rel(path) for path in paths))} | {md('<br>'.join(reference_rows))} |"
+            )
+    lines += [
+        "", "## Duplicate Hash Candidates", "",
+        "Required same-content path groups are excluded. Only groups listed here require duplicate-file review.", "",
+        "| SHA-256 | files |", "|---|---|",
+    ]
     if not data["duplicate_groups"]:
         lines.append("| NONE | - |")
     else:
         for paths in sorted(data["duplicate_groups"], key=lambda group: rel(group[0]).casefold()):
             digest = hashlib.sha256(paths[0].read_bytes()).hexdigest()
             lines.append(f"| `{digest}` | {md('<br>'.join(rel(path) for path in paths))} |")
-    lines += ["", "## Candidates That May Not Require Publication", "", "| path | assessment |", "|---|---|"]
+    lines += [
+        "", "## Intentional Publication Exceptions", "",
+        "These paths have confirmed management roles. They are not unreviewed publication or deletion candidates.", "",
+        "| path | classification |", "|---|---|",
+    ]
+    if not data["intentional_publication_exceptions"]:
+        lines.append("| NONE | - |")
+    else:
+        for path, classification in sorted(
+            data["intentional_publication_exceptions"].items(),
+            key=lambda item: rel(item[0]).casefold(),
+        ):
+            lines.append(f"| {md(rel(path))} | {classification} |")
+    lines += ["", "## Unreviewed Publication Candidates", "", "| path | assessment |", "|---|---|"]
     if not data["public_candidates"]:
         lines.append("| NONE | No automatic assessment |")
     else:

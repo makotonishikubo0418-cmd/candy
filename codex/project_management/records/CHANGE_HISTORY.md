@@ -7,7 +7,7 @@
 - Source of Truth Responsibility: Sole change-category index; each linked individual detail owns its substantive content
 - Related Documents: [`CASE_REGISTRY.md`](../CASE_REGISTRY.md), [`TASK_LOG.md`](../TASK_LOG.md), [`DOCUMENT_RULES.md`](../DOCUMENT_RULES.md), and [`CASE_HISTORY.md`](CASE_HISTORY.md)
 - Related Implementation Files: None; linked individual details identify their own scope
-- Updated: 2026-08-18
+- Updated: 2026-08-19
 
 ## 1. Recording Rule
 
@@ -17,6 +17,8 @@ Use this index for modifications, additions, new creation, refactoring, migratio
 
 | Case ID | Subject | Individual detail owner | Boundary |
 |---|---|---|---|
+| CANDY-STALE-ACME-TOKEN-CLEANUP-20260819 | Remove stale one-time ACME challenge files while retaining certificate access configuration | Atomic case row in [`CASE_REGISTRY.md`](../CASE_REGISTRY.md) | Exact 33 tracked files under `HP/.well-known/acme-challenge/`, re-entry prevention, and normal-workflow exclusion alignment; `HP/.well-known/.htaccess`, certificate operations, Commit, Push, and production mutation are excluded |
+| CANDY-DEPLOY-EXCLUSION-MOVIE-RECOVERY-20260819 | Exclude local development files from deployment and place required movies under Git management | Atomic case row in [`CASE_REGISTRY.md`](../CASE_REGISTRY.md) | Normal-deployment exclusion for `HP/sql/**` and `HP/.gitignore`; exact four referenced movie files under `HP/movie/` become Git targets; Commit, Push, GitHub publication, and production deployment are separate |
 | CANDY-LOCAL-RESIDUE-CLEANUP-20260818 | Remove five obsolete local and repository residue files | Atomic case row in [`CASE_REGISTRY.md`](../CASE_REGISTRY.md) | Fixed five-file deletion population, exact Git publication, automatic production deletion for eligible targets, and production absence verification; every other HP file is excluded |
 | CANDY-SERVER-LOCAL-RECONCILIATION-20260818 | Reconcile the supplied production snapshot, current production evidence, and canonical local HP | Atomic case row in [`CASE_REGISTRY.md`](../CASE_REGISTRY.md) | Three-way full-file comparison, recovery of production-confirmed newer content into `HP`, correction of the petitegirl OGP/JSON-LD reference to its existing public image, preservation of newer local work and local-only assets, and production HTTP/static-asset verification; no snapshot deletion, database work, or branch operation |
 | CANDY-CREATE-RETIREMENT-20260818 | Retire the unused authenticated create generator and its dedicated scaffold | Atomic case row in [`CASE_REGISTRY.md`](../CASE_REGISTRY.md) | Fixed create-only files and shared-routing lines, direct canonical specifications and generated state, local validation, and explicit preservation of normal page generation; Git publication and production are separate |

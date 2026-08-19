@@ -7,7 +7,7 @@
 - Source of Truth Responsibility: Sole defect-response category index; linked case, backlog, and task documents retain their existing responsibilities
 - Related Documents: [`CASE_REGISTRY.md`](../CASE_REGISTRY.md), [`CANDY_FIX_BACKLOG.md`](../../docs/CANDY_FIX_BACKLOG.md), [`TASK_LOG.md`](../TASK_LOG.md), and [`CASE_HISTORY.md`](CASE_HISTORY.md)
 - Related Implementation Files: None; linked individual details identify their own scope
-- Updated: 2026-08-16
+- Updated: 2026-08-19
 
 ## 1. Recording Rule
 
@@ -17,9 +17,11 @@ Use this index to reach one individual detail for each defect case. Unresolved o
 
 | Case ID | Subject | Individual detail owner | Boundary |
 |---|---|---|---|
+| CANDY-EXPECTED-EXCEPTION-CLASSIFICATION-20260819 | Separate intentional exceptions from actionable problems | [`CASE_REGISTRY.md`](../CASE_REGISTRY.md) (`CANDY-EXPECTED-EXCEPTION-CLASSIFICATION-20260819`) | Local management and generated-state correction complete; Commit and Push remain separate; no HP or production change was made |
+| CANDY-MOVIE-IFRAME-INVALID-INPUT-20260819 | Return 404 for invalid or non-playable movie helper requests | [`CASE_REGISTRY.md`](../CASE_REGISTRY.md) (`CANDY-MOVIE-IFRAME-INVALID-INPUT-20260819`) | Local implementation and validation complete; Commit, Push, deployment, and production verification remain separate |
 | CANDY-MEMBER-DEVELOPMENT-ISOLATION-20260817 | Isolate development-only member pages from public navigation and indexing | [`CASE_REGISTRY.md`](../CASE_REGISTRY.md) (`CANDY-MEMBER-DEVELOPMENT-ISOLATION-20260817`) | Implementation Commit `dd9588135158bb3ecba0e248ca602d5956a68bf1` is GitHub-published; deployment and production confirmation remain separate |
 | CANDY-INTERNAL-PATH-ACCESS-20260817 | Restrict direct HTTP access to source HTML and server-side include files | [`CANDY_INTERNAL_PATH_ACCESS_CONTROL.md`](../cases/CANDY_INTERNAL_PATH_ACCESS_CONTROL.md) | Completed through separated GitHub publication, protected one-file deployment, SHA-256 verification, and production HTTP validation |
-| CANDY-GIRLS-INVALID-NO-20260816 | A nonexistent girls number returns HTTP 200 and renders another woman's profile | [`CANDY_GIRLS_INVALID_NO_BEHAVIOR.md`](../cases/CANDY_GIRLS_INVALID_NO_BEHAVIOR.md) | Active separate system URL-behavior problem; no remedy adopted |
+| CANDY-GIRLS-INVALID-NO-20260816 | Correct missing and invalid girls-number responses | [`CANDY_GIRLS_INVALID_NO_BEHAVIOR.md`](../cases/CANDY_GIRLS_INVALID_NO_BEHAVIOR.md) | Local implementation and validation complete; Commit, Push, deployment, and production verification remain separate |
 | CANDY-BREADCRUMB-CLOSURE-20260815 | Close all remaining visible breadcrumb and BreadcrumbList inconsistencies | [`TASK_LOG_2026_08.md`](../task_history/TASK_LOG_2026_08.md) (`TASK-20260815-BREADCRUMB-CLOSURE-001`) | Completed execution detail |
 | CANDY-BREADCRUMB-SYNC-20260815 | Synchronize six detail-page BreadcrumbList names with visible breadcrumbs | [`TASK_LOG_2026_08.md`](../task_history/TASK_LOG_2026_08.md) (`TASK-20260815-BREADCRUMB-SYNC-001`) | Completed execution detail |
 | CANDY-GIRLS-SEO-20260815 | Correct dynamic girls-profile SEO and structured data | [`CANDY_GIRLS_PROFILE_SEO_REMEDIATION.md`](../cases/CANDY_GIRLS_PROFILE_SEO_REMEDIATION.md) | Five approved corrections complete and audited locally; live verification and publication remain pending in the case detail |

@@ -188,10 +188,14 @@ if($ROWS != 0){
 // $gidの設定とチェック
 $gid = isset($girldata["no2id"][$no]) ? $girldata["no2id"][$no] : "";
 
-// $gidが空の場合の処理
+// 存在しない女性番号は、別の女性へ置き換えず404にする。
 if($gid == ""){
-	$gid = $girldata["id"][0];
-	$no = $girldata["no"][$gid];
+	http_response_code(404);
+	$notFoundPage = dirname(__DIR__) . '/404.html';
+	if(is_readable($notFoundPage)){
+		readfile($notFoundPage);
+	}
+	exit;
 }
 $gg = $gid;
 

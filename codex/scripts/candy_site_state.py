@@ -72,6 +72,28 @@ IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".gif", ".svg", ".webp"}
 VIDEO_EXTENSIONS = {".mp4", ".webm", ".mov", ".avi"}
 FONT_EXTENSIONS = {".ttf", ".otf", ".woff", ".woff2", ".eot"}
 SPECIAL_STEMS = {"create", "girls", "main", "makeSitemap", "movie_iframe", "page", "test"}
+INTENTIONAL_SPECIAL_STEMS = {
+    "girls",
+    "member_logout",
+    "member_password_reset",
+    "movie_iframe",
+    "privacy",
+}
+REQUIRED_SAME_CONTENT_PATH_GROUPS = {
+    frozenset({"HP/imgHtml/cdHr.png", "HP/imgHtml/pc/cdHr.png"}),
+    frozenset({"HP/imgHtml/cdTtlDiary.png", "HP/imgHtml/pc/cdTtlDiary.png"}),
+    frozenset({"HP/imgHtml/listShadow.png", "HP/imgHtml/pc/listShadow.png"}),
+}
+INTENTIONAL_PUBLICATION_EXCEPTIONS = {
+    "HP/docs/MEMBER_ARCHITECTURE.md": "LOCAL_TECHNICAL_REFERENCE",
+    "HP/docs/PHASE1_API.md": "LOCAL_TECHNICAL_REFERENCE",
+    "HP/docs/PHASE2_API.md": "LOCAL_TECHNICAL_REFERENCE",
+    "HP/docs/PHASE3_API.md": "LOCAL_TECHNICAL_REFERENCE",
+    "HP/docs/PHASE4_API.md": "LOCAL_TECHNICAL_REFERENCE",
+    "HP/docs/PHASE5_API.md": "LOCAL_TECHNICAL_REFERENCE",
+    "HP/docs/PHASE6_API.md": "LOCAL_TECHNICAL_REFERENCE",
+    "HP/robots.txt": "REQUIRED_PUBLIC",
+}
 SYSTEM_STEMS = {"confirm", "contact", "login", "mypage", "system"}
 SEO_HELPER_STEMS = {"create", "movie_iframe"}
 SEO_ADMIN_STEMS = {"create"}
@@ -540,6 +562,8 @@ def normalize_asset_ref(
         return None
     if cleaned.startswith("/"):
         return HP_ROOT / cleaned.lstrip("/")
+    if base.suffix.lower() == ".css":
+        return (base.parent / cleaned).resolve()
     # source HTML is rendered from the HP public root, not from HP/source.
     if base.parent == HP_ROOT / "source":
         return HP_ROOT / cleaned.removeprefix("./")
@@ -597,9 +621,14 @@ def ogp_validation_issues(source: str, hp_root: Path = HP_ROOT) -> list[str]:
     return issues
 
 
-def asset_references() -> tuple[dict[Path, set[Path]], dict[Path, set[Path]]]:
+def asset_references() -> tuple[
+    dict[Path, set[Path]],
+    dict[Path, set[Path]],
+    dict[Path, set[Path]],
+]:
     referenced_by: dict[Path, set[Path]] = defaultdict(set)
     missing_by: dict[Path, set[Path]] = defaultdict(set)
+    template_placeholder_by: dict[Path, set[Path]] = defaultdict(set)
     source_files = sorted((HP_ROOT / "source").glob("*.html")) + sorted(HP_ROOT.rglob("*.css"))
     for source_path in source_files:
         source = read_utf8(source_path)
@@ -613,6 +642,8 @@ def asset_references() -> tuple[dict[Path, set[Path]], dict[Path, set[Path]]]:
             target = target.resolve()
             if target.is_file():
                 referenced_by[target].add(source_path)
+            elif source_path.name.startswith("template_") and re.search(r"a{8,}", value, re.I):
+                template_placeholder_by[target].add(source_path)
             else:
                 missing_by[target].add(source_path)
         for value in SCRIPT_SRC_RE.findall(source):
@@ -624,7 +655,7 @@ def asset_references() -> tuple[dict[Path, set[Path]], dict[Path, set[Path]]]:
                 referenced_by[target].add(source_path)
             else:
                 missing_by[target].add(source_path)
-    return referenced_by, missing_by
+    return referenced_by, missing_by, template_placeholder_by
 
 
 def extract_json(source: str) -> tuple[list[object], list[str]]:
@@ -776,6 +807,13 @@ def collect() -> dict[str, object]:
         image_status, images, missing_images = source_image_state(source_path if source_exists else None)
         text_matches = texts_by_key.get((category, slug), []) if detail else []
         special = stem in SPECIAL_STEMS or not source_exists
+        special_classification = (
+            "INTENTIONAL"
+            if special and stem in INTENTIONAL_SPECIAL_STEMS
+            else "UNREVIEWED"
+            if special
+            else "NOT_APPLICABLE"
+        )
         expected_complete = source_exists and dataset_exists and case_count == 1 and conversion_count == 1
         registration_conflict = case_count > 1 or conversion_count > 1 or (list_count is not None and list_count > 1)
         if special:
@@ -812,6 +850,7 @@ def collect() -> dict[str, object]:
                 "images": images,
                 "missing_images": missing_images,
                 "structure": structure,
+                "special_classification": special_classification,
                 "role": role_for(category, stem),
                 "source_text": source,
                 "public_text": public_source,
@@ -972,6 +1011,8 @@ def collect() -> dict[str, object]:
             issues.append("Missing structure file or dataset_base registration")
         if page["structure"] == "CONFLICT":
             issues.append("Duplicate registration")
+        if page["structure"] == "SPECIAL" and page["special_classification"] == "UNREVIEWED":
+            issues.append("Unreviewed special structure")
         if page["image_status"] == "ISSUE":
             issues.append("Missing image reference")
         if page["seo"] == "ISSUE":
@@ -1073,7 +1114,7 @@ def collect() -> dict[str, object]:
             }
         )
 
-    referenced_by, missing_by = asset_references()
+    referenced_by, missing_by, template_placeholder_by = asset_references()
     all_assets = sorted(
         (path for path in HP_ROOT.rglob("*") if path.is_file() and path.suffix.lower() in ASSET_EXTENSIONS),
         key=lambda item: rel(item).casefold(),
@@ -1082,8 +1123,17 @@ def collect() -> dict[str, object]:
     duplicate_hashes: dict[str, list[Path]] = defaultdict(list)
     for path in all_assets:
         duplicate_hashes[hashlib.sha256(path.read_bytes()).hexdigest()].append(path)
-    duplicate_groups = [paths for paths in duplicate_hashes.values() if len(paths) > 1]
-    public_candidates = [
+    all_duplicate_groups = [paths for paths in duplicate_hashes.values() if len(paths) > 1]
+    required_same_content_groups: list[list[Path]] = []
+    duplicate_groups: list[list[Path]] = []
+    for paths in all_duplicate_groups:
+        group_key = frozenset(rel(path) for path in paths)
+        all_referenced = all(path.resolve() in referenced_by for path in paths)
+        if group_key in REQUIRED_SAME_CONTENT_PATH_GROUPS and all_referenced:
+            required_same_content_groups.append(paths)
+        else:
+            duplicate_groups.append(paths)
+    all_public_candidates = [
         path
         for path in HP_ROOT.rglob("*")
         if path.is_file()
@@ -1092,6 +1142,16 @@ def collect() -> dict[str, object]:
             or re.search(r"(?:backup|copy|コピー|old|before)", path.name, re.I)
         )
         and "log" not in {part.lower() for part in path.parts}
+    ]
+    intentional_publication_exceptions = {
+        path: INTENTIONAL_PUBLICATION_EXCEPTIONS[rel(path)]
+        for path in all_public_candidates
+        if rel(path) in INTENTIONAL_PUBLICATION_EXCEPTIONS
+    }
+    public_candidates = [
+        path
+        for path in all_public_candidates
+        if rel(path) not in INTENTIONAL_PUBLICATION_EXCEPTIONS
     ]
     generation_head, generation_time = generation_base_head()
     return {
@@ -1102,8 +1162,11 @@ def collect() -> dict[str, object]:
         "assets": all_assets,
         "referenced_by": referenced_by,
         "missing_by": missing_by,
+        "template_placeholder_by": template_placeholder_by,
         "unreferenced": unreferenced,
+        "required_same_content_groups": required_same_content_groups,
         "duplicate_groups": duplicate_groups,
+        "intentional_publication_exceptions": intentional_publication_exceptions,
         "public_candidates": public_candidates,
         "dataset_base": dataset_base,
         "sitemap_errors": sitemap_errors,
@@ -1124,10 +1187,10 @@ def audit(data: dict[str, object]) -> int:
     gates = Counter(row["gate"] for row in data["upcoming"])
     print("AUDIT=OK")
     print(f"branch={data['branch']} current_head={data['current_head']} generation_base_head={data['head']}")
-    print(f"pages={len(pages)} complete={sum(page['structure'] == 'COMPLETE' for page in pages)} partial={sum(page['structure'] == 'PARTIAL' for page in pages)} special={sum(page['structure'] == 'SPECIAL' for page in pages)} conflict={sum(page['structure'] == 'CONFLICT' for page in pages)}")
+    print(f"pages={len(pages)} complete={sum(page['structure'] == 'COMPLETE' for page in pages)} partial={sum(page['structure'] == 'PARTIAL' for page in pages)} special_intentional={sum(page['special_classification'] == 'INTENTIONAL' for page in pages)} special_unreviewed={sum(page['special_classification'] == 'UNREVIEWED' for page in pages)} conflict={sum(page['structure'] == 'CONFLICT' for page in pages)}")
     print(f"texts={len(data['texts'])} upcoming={len(data['upcoming'])} ready={gates['READY']} blocked={gates['BLOCKED']} existing={gates['EXISTING']} conflict={gates['CONFLICT']}")
     print(f"seo_ok={seo['OK']} seo_issue={seo['ISSUE']} seo_unverified={seo['UNVERIFIED']}")
-    print(f"assets={len(data['assets'])} missing_refs={len(data['missing_by'])} unreferenced_candidates={len(data['unreferenced'])} duplicate_hash_groups={len(data['duplicate_groups'])}")
+    print(f"assets={len(data['assets'])} missing_refs={len(data['missing_by'])} template_placeholders={len(data['template_placeholder_by'])} unreferenced_candidates={len(data['unreferenced'])} required_same_content_groups={len(data['required_same_content_groups'])} duplicate_candidates={len(data['duplicate_groups'])} intentional_publication_exceptions={len(data['intentional_publication_exceptions'])} publication_candidates={len(data['public_candidates'])}")
     return 0
 
 
@@ -1241,7 +1304,7 @@ def check(
         candidates = [row for row in data["upcoming"] if row["slug"] == target]
         print(f"TARGET={target} pages={len(matches)} upcoming={len(candidates)}")
         for page in matches:
-            print(f"TARGET_PAGE={page['page_id']} structure={page['structure']} seo={page['seo']} images={page['image_status']} list={page['list_count']} sitemap={page['sitemap_count']}")
+            print(f"TARGET_PAGE={page['page_id']} structure={page['structure']} special={page['special_classification']} seo={page['seo']} images={page['image_status']} list={page['list_count']} sitemap={page['sitemap_count']} issues={';'.join(page['issues']) or 'NONE'}")
         for row in candidates:
             print(f"TARGET_UPCOMING={row['category']}:{row['slug']} gate={row['gate']} blocker={row['blocker']}")
         if not matches and not candidates:

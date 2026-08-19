@@ -34,7 +34,9 @@ For `girls.php?no={resolved no}`, derive every woman-specific value from the act
 - Render the seven-day schedule section even when every row is off. An off row remains present and states that the woman is off and that the next schedule should be checked.
 - When a real profile image is visibly eligible, use it for `og:image` and `Person.image`. Reject video, dummy, placeholder, and common-store images as person images. When no real profile image is eligible, use the verified common-store OGP image only for `og:image` and omit `Person.image`.
 - Output woman-specific ProfilePage, Person, and BreadcrumbList data through JSON serialization. If serialization fails, omit the malformed JSON-LD block and log the failure.
-- Preserve the current URL, database schema, robots policy, and separate invalid-number behavior unless a different case explicitly authorizes their change.
+- Preserve the current URL, database schema, and robots policy for a resolved active woman.
+- A missing or empty `no` is not an independent search page and returns `301` to `girls_list.php`; do not add a separate `noindex` response for that redirect.
+- A malformed or active-woman-unresolved `no` returns HTTP `404` with the existing noindex 404 body. It MUST NOT return HTTP `200`, render another woman, or declare another woman's canonical URL.
 
 ## 3. Meta Description
 
@@ -82,6 +84,14 @@ For `girls.php?no={resolved no}`, derive every woman-specific value from the act
 - These routes MUST remain absent from `sitemap.xml` and normal public source navigation. Their public-page title, description, canonical, H1, OGP, JSON-LD, breadcrumb, sitemap-membership, duplicate, and orphan requirements are `NOT_APPLICABLE` while this classification is active.
 - Public `mypage.php` MUST retain the existing Cookie-favorite rendering while integration is disabled and MUST NOT redirect into the development-only routes.
 - Links inside the isolated development feature MAY remain for testing, but an absent destination such as `terms.php` MUST NOT be linked.
+
+### 5.3 Movie-Playback Helper
+
+- `movie_iframe.php` is an embedded playback helper, not an independent search-entry page.
+- Every success and error response MUST return `X-Robots-Tag: noindex, nofollow`; its source HTML MUST retain `<meta name="robots" content="noindex,nofollow">`.
+- Only a request containing exactly one valid positive numeric `mids` or `midg` and resolving to an active playable mp4, ogv, or webm record may render the player.
+- Missing, empty, malformed, both-selector, unresolved, and non-playable requests MUST return HTTP `404` with a noindex response. They MUST NOT render an empty player with HTTP `200`.
+- Keep this route out of `sitemap.xml`, canonical URLs, normal navigation, OGP, JSON-LD, and breadcrumb requirements.
 
 ## 6. Headings
 

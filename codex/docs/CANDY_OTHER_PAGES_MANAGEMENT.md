@@ -49,8 +49,16 @@ Important:
 
 - Root PHP mostly loads `dataset_base.php`; visible content belongs in source and dataset.
 - `dataset_base.php` is common to all pages and can cause a site-wide failure even for an intended one-page change.
-- For an entry point without the normal source/dataset pair, inspect `SPECIAL/PARTIAL` in the ledger and do not infer intent.
+- For an entry point without the normal source/dataset pair, inspect its generated special classification and issue field. `INTENTIONAL` with `issues=NONE` is a confirmed design and MUST NOT be reported as a problem.
 - The retired `create.php` generator is not a supported route and MUST NOT be restored as a second page-generation path.
+
+The intentional special-structure set is `girls.php`, `movie_iframe.php`,
+`member_logout.php`, `member_password_reset.php`, and `privacy.php`. Their roles
+and required behavior are defined in the page table and Sections 6.2, 6.5, and
+6.9. They are not deletion, missing-file, or unresolved-structure candidates
+while the generated ledger reports `special classification=INTENTIONAL` and
+`issues=NONE`. A new `UNREVIEWED` special entry or any non-`NONE` issue is the
+only special-structure state that belongs in a problem report.
 
 ## 4. Page Management Table
 
@@ -58,12 +66,12 @@ Important:
 |---|---|---|---|---|
 | `index.php` | Top and entry point to all primary routes and categories | `source/index.html` + `dataset_index.php`; generates girls, schedules, banners, movies, and shops from the database | Area/blog/hotel sections follow the canonical synchronization contract in `CANDY_PAGE_GENERATION_GOVERNANCE.md`; also check common navigation, images, JSON-LD, and `sitemap.xml` | Normal runtime route exists. Production publication or recovery of this protected file uses the manual index-only deployment route |
 | `girls_list.php` | Girl index | `source/girls_list.html` + `dataset_girls_list.php`; girls, images, schedules, order, and Cookie favorites | `girls.php?no=...`, images, schedules, and common navigation | Normal route exists |
-| `girls.php` | Girl profile | `source/girls.html` + `dataset_girls.php`; GET girl number, girl, images, movie, schedule, and Cookie favorites | Return routes to indexes/schedules/movies, canonical and structured data, images/movies | Normal route exists. Validate GET and zero-result behavior |
+| `girls.php` | Girl profile | `source/girls.html` + `dataset_girls.php`; GET girl number, girl, images, movie, schedule, and Cookie favorites | Return routes to indexes/schedules/movies, canonical and structured data, images/movies | Missing or empty `no` returns `301` to `girls_list.php`; malformed or unresolved `no` returns `404`; a resolved active woman keeps the normal indexable profile response |
 | `schedule.php` | Daily and weekly schedules | `source/schedule.html` + `dataset_schedule.php`; girls, images, schedule, date switching, and Cookie favorites | Girl detail, date tabs, zero-result display, and common navigation | Normal route exists |
 | `news.php` | News index | `source/news.html` + `dataset_news.php`; displays `newstopics` | Date, images, zero-result display, and common navigation | Normal route exists |
 | `system.php` | Fees, system, and terms | `source/system.html` + `dataset_system.php`; includes hotel coupon display and an external payment form | Fees, terms, external endpoint, hidden values, and common navigation | Normal route exists. External submission and authentication values are gated |
 | `movie.php` | Shop and girl movie index | `source/movie.html` + `dataset_movie.php`; shop/girl movies, device-specific display, and iframe links | `movie_iframe.php`, movie files, thumbnails, and zero-result display | Normal route exists |
-| `movie_iframe.php` | Noindex movie-playback helper | `source/movie_iframe.html` + `dataset_movie_iframe.php`; selects a shop/girl movie from GET | Caller `movie.php`, movie formats, invalid GET, and direct access | Keep `noindex,nofollow`; exclude canonical, H1, OGP, JSON-LD, breadcrumb, sitemap, and orphan requirements; no direct common-navigation route |
+| `movie_iframe.php` | Noindex movie-playback helper | `source/movie_iframe.html` + `dataset_movie_iframe.php`; accepts exactly one positive numeric `mids` or `midg` and selects an active shop/girl movie | Caller `movie.php`, movie formats, invalid GET, unresolved or non-playable records, and direct access | Display only when an active mp4, ogv, or webm record exists; otherwise return `404`; keep every response `noindex,nofollow`; exclude canonical, H1, OGP, JSON-LD, breadcrumb, sitemap, and orphan requirements; no direct common-navigation route |
 | `mypage.php` | Public compatibility entry | Renders the existing Cookie-favorite mypage while `MEMBER_SITE_INTEGRATION_ENABLED` is `false`; only the enabled branch loads the member bootstrap and redirects to `member_mypage.php` or `member_login.php` | Integration flag, legacy dataset rendering, member bootstrap, session authentication, redirect result, and incoming links | Development-only member pages MUST NOT replace or receive a route from this public entry while integration is disabled. Live database, session, and production behavior remain `UNVERIFIED` |
 | `member_login.php`, `member_register.php`, `member_mypage.php`, `privacy.php` | Development-only member authentication, account, and legal UI | Member source/dataset pairs or standalone member rendering plus `includefile/member/`, `js/member.js`, and member CSS | Development isolation, Session, Cookie, database, SMS, email, CTI, legal text, and zero/failure paths | Keep `noindex,nofollow`, exclude from sitemap and public navigation, and do not treat these as formal public pages while integration is disabled. Authentication and database operations require their routed scope and permission |
 | `member_password_reset.php`, `member_logout.php`, `customers/index.php` | Development-only password-reset, logout, and compatibility entry points | Standalone member bootstrap and authentication or redirect logic | Development isolation, token/session invalidation, redirect, SMS, and failure behavior | Keep the common member `X-Robots-Tag: noindex, nofollow` response. Generated structure may classify root entries as `SPECIAL`; verify the implementation directly |
@@ -112,6 +120,12 @@ removed when the investigation ends.
 
 STOP rather than including database writes, authentication, payments, or external-submission changes in a normal page fix.
 
+For `girls.php`, apply the following input boundary before favorites, media, schedule, or profile rendering:
+
+- A missing or empty `no` returns `301` to the same-host `girls_list.php` route.
+- A non-scalar or active-woman-unresolved `no` returns HTTP `404` and the existing noindex 404 body. It MUST NOT fall back to another woman.
+- A resolved active woman continues through the existing profile render and woman-specific canonical path.
+
 ### 6.3 New URL or URL Change
 
 Validate together:
@@ -143,10 +157,13 @@ verification, or the root URL without prior approval.
 
 `movie_iframe.php` is an embedded playback helper for `movie.php`, not an independent search-entry page.
 
-- Keep its existing `noindex,nofollow` directive.
+- Keep the HTML `noindex,nofollow` directive and return `X-Robots-Tag: noindex, nofollow` on every response, including errors.
+- Accept exactly one selector: positive numeric `mids` for a shop movie or positive numeric `midg` for a woman movie.
+- Render the player only when the selected active record contains at least one non-empty mp4, ogv, or webm filename. A poster image alone is not a playable movie.
+- Return HTTP `404` with the existing noindex 404 body when the selector is missing, empty, malformed, non-scalar, duplicated through both selector types, unresolved, or has no playable movie record.
 - Do not add it to `sitemap.xml`.
 - Canonical, H1, OGP, JSON-LD, BreadcrumbList, and orphan-page requirements are `NOT_APPLICABLE`.
-- Validate playback from `movie.php`, valid and invalid GET handling, movie format behavior, and direct-access safety.
+- Validate playback from `movie.php`, both valid selector types, every invalid-selector class, unresolved and non-playable records, movie format behavior, response robots, and direct-access safety.
 - A future change from noindex to index requires a separate explicit decision and full SEO impact review.
 
 ### 6.6 Retired Authenticated Page-Generation Feature
@@ -240,6 +257,11 @@ Show the affected scope before changing:
 
 In addition to the common response structure in root `AGENTS.md`, report these
 target-page facts:
+
+Report only target facts that affect the user's decision or require action.
+Do not place an intentional special structure with `issues=NONE` in a problem
+list. If it must be mentioned for scope accounting, label it separately as
+confirmed normal and no action required.
 
 ```text
 対象ページ:

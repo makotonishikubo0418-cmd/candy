@@ -38,6 +38,7 @@ The local counterparts are under `HP/includefile/`. Public rendering wrappers us
 - `HP/includefile/**` remains readable through server-side filesystem includes but MUST return HTTP `403` when requested directly.
 - `HP/source/style.css` is a public stylesheet used by formal pages and MUST remain directly retrievable with HTTP `200`.
 - The HTTP restriction MUST NOT rename, move, delete, or change the contents of source HTML, include PHP, or the public stylesheet.
+- Asset URLs inside source HTML are resolved from the rendered public root. Asset URLs inside CSS, including `HP/source/style.css`, are resolved from the CSS file's own directory. Generated missing-reference checks MUST preserve this distinction.
 
 ### 2.4 Placeholders and Runtime Dependencies
 
@@ -54,7 +55,9 @@ The local counterparts are under `HP/includefile/`. Public rendering wrappers us
   `dataset_test.php`, `create.html`, and shared-routing anchors are retired and
   MUST remain absent. Normal generation uses the Codex-managed category workflow
   or an explicitly reviewed complete file bundle.
-- Do not automatically classify a public PHP file without source or dataset as missing. Mark it `SPECIAL` in the ledger and confirm implementation intent.
+- Do not automatically classify a public PHP file without source or dataset as missing. Mark its structure `SPECIAL`, then use the generated special classification.
+- `SPECIAL` is a structural description, not a defect. `INTENTIONAL` with `issues=NONE` MUST NOT be included in problem, deletion, or missing-file reports. Only `UNREVIEWED` or a non-`NONE` issue requires investigation.
+- The canonical intended roles for the current intentional special entries belong to `CANDY_OTHER_PAGES_MANAGEMENT.md`; do not create a second page-role list here.
 
 ## 3. CSS
 
@@ -100,7 +103,9 @@ The `<script>` elements in source HTML are the canonical loading source. Before 
 | `Text_girl_data/画像データ/` | Git-managed woman images retained locally in `LOCAL_ONLY` state. They are absent from HP and production until an authorized current public reference changes them to `PUBLIC` |
 | `Text_hotel_data/画像データ/` | Git-managed accepted hotel-image source pairs. Public HTML never references this folder; local/public page assets use matching copies under `HP/imgHtml/new_202601/hotel/` |
 
-For detail-page images, use the category specification's naming and required count, then synchronize source, OGP, JSON-LD, and alt values. The generated inventory identifies missing, unconfirmed-reference, and same-hash candidates, but machine evaluation alone MUST NOT trigger deletion or replacement.
+For detail-page images, use the category specification's naming and required count, then synchronize source, OGP, JSON-LD, and alt values. The generated inventory separates required same-content path groups from duplicate candidates. Every required-group path is actively referenced for a distinct desktop or mobile role and MUST NOT be included in problem or deletion-candidate reports. If a required path loses all confirmed references or an unregistered same-hash group appears, the generator moves it to duplicate candidates for review. Machine evaluation alone MUST NOT trigger deletion or replacement.
+
+Explicit `aaaaaaaa...` asset names in category template HTML are generation placeholders, not current missing public assets. The generated inventory MUST list them separately from missing references. The seven source-attached member technical Markdown files and required public `HP/robots.txt` are intentional publication classifications; they MUST remain outside unreviewed publication-candidate reports while their canonical roles remain unchanged.
 
 Hotel-image acceptance and public installation use `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`. Accepted and local-public same-name files have separate storage responsibilities and MUST have identical SHA-256 values after first installation. A public hotel pair without an accepted-source counterpart remains `LEGACY_PUBLIC_ONLY` and MUST NOT be backfilled or replaced automatically.
 

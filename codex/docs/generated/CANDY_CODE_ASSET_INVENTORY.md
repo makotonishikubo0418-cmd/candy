@@ -4,18 +4,18 @@
 >
 > Purpose: Summarize current assets, page relationships, missing targets, and review candidates
 > Parent / Owner: `../CANDY_MASTER_DOC_INDEX.md`
-> Scope: Images, videos, fonts, asset counts, missing references, unconfirmed referrers, duplicate hashes, and publication candidates
+> Scope: Images, videos, fonts, asset counts, missing references, template placeholders, unconfirmed referrers, required same-content paths, duplicate candidates, publication exceptions, and publication candidates
 > Status / Lifecycle: Generated Current State / Active
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `codex/scripts/candy_site_state.py`, `codex/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-08-18T16:29:00+09:00 (reproducible generation baseline)
+> Generated at: 2026-08-18T17:10:16+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 9c4a107fb94129afea998f776abf9ad39f4eb252
-> State fingerprint: sha256:a1f01022964c43b01c498d0b25ebcc81078e3f9beb82db506f28c5ad0272aec8
+> Commit: 8e03cc03edf83ab841f838c495027a39675ae7cf
+> State fingerprint: sha256:7c3772fcc0d8b93e095f6377fdea671a8941941636708674c7bee342c3c298d8
 > Population: Public PHP files: 148 / assets: 515
 > Generator: `codex/scripts/candy_site_state.py` with `codex/scripts/candy_site_state_render.py`
-> Result: Missing references: 14 / duplicate hash groups: 3
+> Result: Missing references: 0 / template placeholders: 4 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 0
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
 
 Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by [CANDY_CODE_REFERENCE_INVENTORY.md](CANDY_CODE_REFERENCE_INVENTORY.md).
@@ -219,20 +219,18 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 
 | target | referrers |
 |---|---|
+| NONE | - |
+
+## Template Placeholder Targets
+
+These missing-looking targets use explicit template placeholder names. They are not current page defects or deletion candidates.
+
+| target | template |
+|---|---|
 | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-aaaaaaaaaaaaaaaaaaaa_1.jpg | HP/source/template_kagoshima-deliveryhealth-area.html |
 | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-aaaaaaaaaaaaaaaaaaaa_2.jpg | HP/source/template_kagoshima-deliveryhealth-area.html |
 | HP/imgHtml/new_202601/blog/aaaaaaaaaaaaaaaaaaaa.jpg | HP/source/template_kagoshima-deliveryhealth-blog.html |
 | HP/imgHtml/new_202601/hotel/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.jpg | HP/source/template_kagoshima-deliveryhealth-hotel.html |
-| imgHtml/new_202601/candy_img1.jpg | HP/source/style.css |
-| imgHtml/new_202601/candy_img1_sp.jpg | HP/source/style.css |
-| imgHtml/new_202601/shop/candy.jpg | HP/source/style.css |
-| imgHtml/new_202601/shop/candy_sp.jpg | HP/source/style.css |
-| imgHtml/new_202601/shop/hitozuma.jpg | HP/source/style.css |
-| imgHtml/new_202601/shop/hitozuma_sp.jpg | HP/source/style.css |
-| imgHtml/new_202601/shop/kurobara.jpg | HP/source/style.css |
-| imgHtml/new_202601/shop/kurobara_sp.jpg | HP/source/style.css |
-| imgHtml/new_202601/shop/reborn.jpg | HP/source/style.css |
-| imgHtml/new_202601/shop/reborn_sp.jpg | HP/source/style.css |
 
 ## Assets Without a Confirmed Referrer
 
@@ -243,28 +241,46 @@ These candidates may be referenced dynamically and are not deletion decisions.
 | HP/css | 2 | girls_page_content.css, member.css |
 | HP/imgCss/pc | 1 | newsClose.png |
 | HP/imgHtml | 3 | age_verification.jpg, entranceBg.jpg, unnamed.jpg |
-| HP/imgHtml/new_202601 | 5 | candy_discount_information_sp.jpg, candy_img1.jpg, candy_img1_sp.jpg, candy_manager_recommendation_sp.jpg, sample.jpg |
+| HP/imgHtml/new_202601 | 3 | candy_discount_information_sp.jpg, candy_manager_recommendation_sp.jpg, sample.jpg |
 | HP/imgHtml/new_202601/girl | 35 | alice_1_sp.jpg, ami_1_sp.jpg, ann_1_sp.jpg, aoba_1_sp.jpg, aru_1_sp.jpg |
-| HP/imgHtml/new_202601/shop | 11 | after5_sp.jpg, beloved_sp.jpg, candy_sp.jpg, danzuma_sp.jpg, hitozuma_sp.jpg |
+| HP/imgHtml/new_202601/shop | 7 | after5_sp.jpg, beloved_sp.jpg, danzuma_sp.jpg, loveel_kirishima_sp.jpg, loveel_sp.jpg |
 | HP/js | 4 | fav_gen.js, fav_ka.js, mdrwbpp2.4.js, member_favorite.js |
+
+## Required Same-Content Path Groups
+
+Every path in these groups is actively referenced for a distinct desktop or mobile role. They are required paths, not deletion candidates.
+
+| SHA-256 | files | confirmed referrers |
+|---|---|---|
+| `11c401ffab12108eb3c491cfca8fd27c550e2b6ada1a09b952ea33109b536605` | HP/imgHtml/cdHr.png<br>HP/imgHtml/pc/cdHr.png | HP/imgHtml/cdHr.png <- HP/css/girls.css<br>HP/imgHtml/pc/cdHr.png <- HP/css/girls.css |
+| `1adf420fbd88aaf88563e9833963a0116832d8c858315d50c3a182a5b5078691` | HP/imgHtml/cdTtlDiary.png<br>HP/imgHtml/pc/cdTtlDiary.png | HP/imgHtml/cdTtlDiary.png <- HP/css/girls.css<br>HP/imgHtml/pc/cdTtlDiary.png <- HP/css/girls.css |
+| `2ea2ba07d7bb5df930c25231c4e1000bdba40ce0e4b9472ea39416992bbeb7ea` | HP/imgHtml/listShadow.png<br>HP/imgHtml/pc/listShadow.png | HP/imgHtml/listShadow.png <- HP/css/schedule.css<br>HP/imgHtml/pc/listShadow.png <- HP/css/girls_list.css, HP/css/mypage.css |
 
 ## Duplicate Hash Candidates
 
+Required same-content path groups are excluded. Only groups listed here require duplicate-file review.
+
 | SHA-256 | files |
 |---|---|
-| `11c401ffab12108eb3c491cfca8fd27c550e2b6ada1a09b952ea33109b536605` | HP/imgHtml/cdHr.png<br>HP/imgHtml/pc/cdHr.png |
-| `1adf420fbd88aaf88563e9833963a0116832d8c858315d50c3a182a5b5078691` | HP/imgHtml/cdTtlDiary.png<br>HP/imgHtml/pc/cdTtlDiary.png |
-| `2ea2ba07d7bb5df930c25231c4e1000bdba40ce0e4b9472ea39416992bbeb7ea` | HP/imgHtml/listShadow.png<br>HP/imgHtml/pc/listShadow.png |
+| NONE | - |
 
-## Candidates That May Not Require Publication
+## Intentional Publication Exceptions
+
+These paths have confirmed management roles. They are not unreviewed publication or deletion candidates.
+
+| path | classification |
+|---|---|
+| HP/docs/MEMBER_ARCHITECTURE.md | LOCAL_TECHNICAL_REFERENCE |
+| HP/docs/PHASE1_API.md | LOCAL_TECHNICAL_REFERENCE |
+| HP/docs/PHASE2_API.md | LOCAL_TECHNICAL_REFERENCE |
+| HP/docs/PHASE3_API.md | LOCAL_TECHNICAL_REFERENCE |
+| HP/docs/PHASE4_API.md | LOCAL_TECHNICAL_REFERENCE |
+| HP/docs/PHASE5_API.md | LOCAL_TECHNICAL_REFERENCE |
+| HP/docs/PHASE6_API.md | LOCAL_TECHNICAL_REFERENCE |
+| HP/robots.txt | REQUIRED_PUBLIC |
+
+## Unreviewed Publication Candidates
 
 | path | assessment |
 |---|---|
-| HP/docs/MEMBER_ARCHITECTURE.md | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
-| HP/docs/PHASE1_API.md | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
-| HP/docs/PHASE2_API.md | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
-| HP/docs/PHASE3_API.md | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
-| HP/docs/PHASE4_API.md | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
-| HP/docs/PHASE5_API.md | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
-| HP/docs/PHASE6_API.md | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
-| HP/robots.txt | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
+| NONE | No automatic assessment |

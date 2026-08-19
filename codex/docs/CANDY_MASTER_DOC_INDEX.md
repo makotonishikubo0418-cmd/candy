@@ -66,9 +66,9 @@ Do not use fixed-count examples in a category specification as current state. Co
 
 | Document | Contents |
 |---|---|
-| `generated/CANDY_SITE_PAGE_LEDGER.md` | Public-page structure summary and owner of `CANDY_SITE_PAGE_LEDGER.tsv` row detail |
+| `generated/CANDY_SITE_PAGE_LEDGER.md` | Public-page structure summary, intentional-versus-unreviewed special classification, and owner of `CANDY_SITE_PAGE_LEDGER.tsv` row detail |
 | `generated/CANDY_UPCOMING_PAGES.md` | Cross-category candidate summary and owner of the area, hotel, and blog TSV detail children |
-| `generated/CANDY_CODE_ASSET_INVENTORY.md` | Asset summary, missing references, unconfirmed referrers, duplicate hashes, and publication candidates |
+| `generated/CANDY_CODE_ASSET_INVENTORY.md` | Asset summary, missing references, template placeholders, unconfirmed referrers, required same-content path groups, actionable duplicate candidates, intentional publication exceptions, and unreviewed publication candidates |
 | `generated/CANDY_CODE_REFERENCE_INVENTORY.md` | Child of the code/asset parent for detailed public PHP, shared PHP, CSS, and JavaScript relationships |
 | `generated/CANDY_SEO_STATUS.md` | SEO summary and owner of `CANDY_SEO_STATUS.tsv` per-page detail |
 

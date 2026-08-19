@@ -5,7 +5,7 @@
 - Detailed canonical sources: The management documents listed in `codex/README.md`
 - Status: canonical document for the candy management-system overview
 - Canonical location: `C:\Codex\FSG\Candy\codex`
-- Updated: 2026-08-16
+- Updated: 2026-08-19
 
 ## 1. Intended Outcome
 
@@ -92,6 +92,7 @@ overview never adds an execution step.
 | Repeated changes degrade the code | Enforce one responsibility per canonical source, integration into existing routes, and no appended override blocks |
 | Specifications differ between documents | Assign one canonical document to each subject and prohibit duplicate specifications |
 | Unverified work is reported as complete | Distinguish canonical, user-reported, implementation-verified, and unverified information |
+| Intentional structures or required same-content paths are reported as problems | Generated state MUST separate intentional exceptions from unreviewed or actionable candidates; problem reports use only explicit issue, conflict, blocker, unreviewed, or backlog classifications |
 
 ## 6. Target State
 

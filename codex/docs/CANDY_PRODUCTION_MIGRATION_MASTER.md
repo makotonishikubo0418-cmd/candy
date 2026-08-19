@@ -131,12 +131,18 @@ Primary exclusions verified from actual workflow/script:
 - `Text_girl_data/`
 - `Text_hotel_data/`
 - `HP/.well-known/`
+- `HP/sql/`
+- `HP/.gitignore`
 - Markdown
 - `.env`
 - `.bak`, `.backup`, and `.zip`
 - `.candy-backup-*` and `.candy-upload-*`
 
 Woman information under `codex/data/` and local-only woman images under `Text_girl_data/` are outside the HP deployment plan. The production workflow runs `candy_girl_information.py check` before FTP so their ledger state, public image placement, and local-only image placement must agree before any related HP deletion or upload can proceed.
+
+Every movie under `HP/movie/` that is referenced by a public or generated page MUST be Git-managed so a Git-based recovery restores the required media. A referenced movie MUST NOT remain only on the server or only as an ignored local file.
+
+ACME HTTP-01 token files under `HP/.well-known/acme-challenge/` are one-time runtime artifacts and MUST NOT be retained in Git or included in a normal deployment. Retain `HP/.well-known/.htaccess` as the local access-rule recovery copy. Current certificate renewal behavior and live challenge files remain server-managed external state.
 
 Do not infer this list for a future workflow; recheck actual preview output.
 

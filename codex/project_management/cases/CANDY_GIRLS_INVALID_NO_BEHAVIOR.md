@@ -1,14 +1,14 @@
 # Candy Girls Invalid-Number Response Behavior
 
-- Purpose: Preserve the separately discovered problem in which a nonexistent girls number returns HTTP 200 and renders another woman's profile
+- Purpose: Correct the separately discovered problem in which a missing or invalid girls number could render an unrelated woman's profile
 - Parent / Owner: [`CASE_REGISTRY.md`](../CASE_REGISTRY.md)
-- Scope: Invalid `no` values supplied to `girls.php?no={id}`; this record does not define or implement a remedy
-- Status / Lifecycle: AWAITING_APPROVAL / Active
+- Scope: Missing, empty, malformed, and active-woman-unresolved `no` values supplied to `girls.php`
+- Status / Lifecycle: Local implementation complete / Active
 - Source of Truth Responsibility: Individual detail for case `CANDY-GIRLS-INVALID-NO-20260816`
 - Related Documents: [`DEFECT_RESPONSE_HISTORY.md`](../records/DEFECT_RESPONSE_HISTORY.md), [`CANDY_FIX_BACKLOG.md`](../../docs/CANDY_FIX_BACKLOG.md), [`CANDY_GIRLS_PROFILE_SEO_REMEDIATION.md`](CANDY_GIRLS_PROFILE_SEO_REMEDIATION.md), [`CANDY_OTHER_PAGES_MANAGEMENT.md`](../../docs/CANDY_OTHER_PAGES_MANAGEMENT.md), and [`TASK_LOG_2026_08.md`](../task_history/TASK_LOG_2026_08.md)
-- Related Implementation Files: [`HP/includefile/dataset_girls.php`](../../../HP/includefile/dataset_girls.php)
+- Related Implementation Files: [`HP/girls.php`](../../../HP/girls.php), [`HP/includefile/dataset_girls.php`](../../../HP/includefile/dataset_girls.php), and [`test_candy_girls_invalid_no_behavior.py`](../../scripts/test_candy_girls_invalid_no_behavior.py)
 - Case ID: `CANDY-GIRLS-INVALID-NO-20260816`
-- Updated: 2026-08-16
+- Updated: 2026-08-19
 
 ## 1. Recorded Problem
 
@@ -37,8 +37,28 @@ The test URL was created for the investigation. It was not discovered from a cur
 - Current external inbound link, bookmark, crawl, or index state: `UNVERIFIED`
 - Priority or severity: Not decided by this record
 
-## 5. Exclusions and Next Action
+## 5. Adopted Response Contract
 
-This record does not adopt a 404, redirect, noindex, fallback, or other response design. It authorizes no implementation, database operation, deployment, production mutation, Commit, or Push.
+On 2026-08-19, the user approved and instructed implementation of this exact behavior:
 
-Preserve the recorded behavior until the user separately instructs investigation, prioritization, or modification of this case.
+- `girls.php` with missing or empty `no` returns `301` to the same-host `girls_list.php` route.
+- A non-scalar `no` returns HTTP `404` before the common dataset is loaded.
+- A scalar `no` that does not resolve to an active woman returns HTTP `404` from `dataset_girls.php` and renders the existing noindex 404 body.
+- A resolved active woman keeps the existing indexable profile response and woman-specific canonical URL.
+- Do not apply `noindex` to `girls.php` as a whole.
+
+## 6. Local Implementation and Verification
+
+`HP/girls.php` now handles missing, empty, and malformed input before loading the common dataset. `HP/includefile/dataset_girls.php` no longer selects the first active woman when the requested number does not resolve.
+
+Local verification completed:
+
+- `girls.php` without `no`: HTTP `301`, `Location: girls_list.php`
+- non-scalar `no`: HTTP `404`, existing 404 body contains `noindex,follow`
+- PHP 8.3 lint: both changed PHP files pass
+- Existing girls-profile SEO regression: `PASS`, 53 assertions
+- Invalid-number focused regression: `PASS`, 5 assertions
+
+## 7. Remaining Work
+
+Commit, Push, GitHub publication, deployment, production HTTP verification, production database-backed valid/invalid-number comparison, access-log review, external inbound-link state, and Search Console remain unperformed or unverified. They require their separately authorized routes.

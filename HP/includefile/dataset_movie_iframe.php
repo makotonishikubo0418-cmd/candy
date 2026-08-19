@@ -22,7 +22,7 @@ if($mids != ""){//店舗動画
 	$QUERY .= " AND arch_id = '". $mids ."'";
 	$QUERY .= " ORDER BY id DESC";
 	$RESULT = $Database->Query($QUERY);
-	$ROWS = $Database->Num_Rows($RESULT);
+	$ROWS = ($RESULT !== false) ? $Database->Num_Rows($RESULT) : 0;
 	if($ROWS != 0){
 		while($row = $Database->Fetch_Array($RESULT)){
 			$filedata[$row["filetype"]]       = $row["filename"];
@@ -41,7 +41,7 @@ if($mids != ""){//店舗動画
 	$QUERY .= " AND status = '1'";
 	$QUERY .= " ORDER BY id DESC";
 	$RESULT = $Database->Query($QUERY);
-	$ROWS = $Database->Num_Rows($RESULT);
+	$ROWS = ($RESULT !== false) ? $Database->Num_Rows($RESULT) : 0;
 	if($ROWS != 0){
 		while($row = $Database->Fetch_Array($RESULT)){
 			$filedata[$row["filetype"]]       = $row["filename"];
@@ -53,6 +53,12 @@ if($mids != ""){//店舗動画
 
 } else {
 	$filedata = array();
+}
+
+// 公開中の再生可能な動画がない場合は、空のプレーヤーを表示しない。
+$hasPlayableMovie = !empty($filedata[1]) || !empty($filedata[2]) || !empty($filedata[3]);
+if (!$hasPlayableMovie) {
+	candyMovieIframeNotFound();
 }
 
 /*
