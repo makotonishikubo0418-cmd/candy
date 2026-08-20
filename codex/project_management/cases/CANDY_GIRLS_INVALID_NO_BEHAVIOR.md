@@ -3,12 +3,12 @@
 - Purpose: Correct the separately discovered problem in which a missing or invalid girls number could render an unrelated woman's profile
 - Parent / Owner: [`CASE_REGISTRY.md`](../CASE_REGISTRY.md)
 - Scope: Missing, empty, malformed, and active-woman-unresolved `no` values supplied to `girls.php`
-- Status / Lifecycle: Local implementation complete / Active
+- Status / Lifecycle: GitHub Published / Active
 - Source of Truth Responsibility: Individual detail for case `CANDY-GIRLS-INVALID-NO-20260816`
 - Related Documents: [`DEFECT_RESPONSE_HISTORY.md`](../records/DEFECT_RESPONSE_HISTORY.md), [`CANDY_FIX_BACKLOG.md`](../../docs/CANDY_FIX_BACKLOG.md), [`CANDY_GIRLS_PROFILE_SEO_REMEDIATION.md`](CANDY_GIRLS_PROFILE_SEO_REMEDIATION.md), [`CANDY_OTHER_PAGES_MANAGEMENT.md`](../../docs/CANDY_OTHER_PAGES_MANAGEMENT.md), and [`TASK_LOG_2026_08.md`](../task_history/TASK_LOG_2026_08.md)
 - Related Implementation Files: [`HP/girls.php`](../../../HP/girls.php), [`HP/includefile/dataset_girls.php`](../../../HP/includefile/dataset_girls.php), and [`test_candy_girls_invalid_no_behavior.py`](../../scripts/test_candy_girls_invalid_no_behavior.py)
 - Case ID: `CANDY-GIRLS-INVALID-NO-20260816`
-- Updated: 2026-08-19
+- Updated: 2026-08-20
 
 ## 1. Recorded Problem
 
@@ -59,6 +59,8 @@ Local verification completed:
 - Existing girls-profile SEO regression: `PASS`, 53 assertions
 - Invalid-number focused regression: `PASS`, 5 assertions
 
-## 7. Remaining Work
+## 7. GitHub Publication and Remaining Work
 
-Commit, Push, GitHub publication, deployment, production HTTP verification, production database-backed valid/invalid-number comparison, access-log review, external inbound-link state, and Search Console remain unperformed or unverified. They require their separately authorized routes.
+- Commit `66f199bd8f00c916c6d693fea00d1fa94557c7d3` contains `HP/girls.php`, `HP/includefile/dataset_girls.php`, the focused regression, permanent behavior records, and this case detail.
+- That Commit is contained in live GitHub `main`; Commit and Push are complete.
+- Deployment, production HTTP verification, production database-backed valid and invalid-number comparison, access-log review, external inbound-link state, and Search Console remain `UNVERIFIED`.

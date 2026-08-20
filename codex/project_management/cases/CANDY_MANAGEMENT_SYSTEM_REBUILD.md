@@ -9,7 +9,7 @@
 - Source of Truth Responsibility: Case-specific analysis, decisions, phases, changed management files, verification, and completion result for `CANDY-MGMT-20260812`
 - Related Documents: [`DOCUMENT_RULES.md`](../DOCUMENT_RULES.md), [`codex/WORK_ROUTING.md`](../../WORK_ROUTING.md), [`codex/README.md`](../../README.md), and [`TASK_LOG.md`](../TASK_LOG.md)
 - Related Implementation Files: `codex/scripts/candy_site_state.py`, `codex/scripts/candy_site_state_render.py`, `codex/scripts/candy_page_common.py`, and `codex/scripts/audit_candy_management_docs.py`
-- Updated: 2026-08-12
+- Updated: 2026-08-20
 - Corrected: 2026-08-14 to distinguish the then-defined formal population from the repository-wide Markdown population
 
 ## 1. Verified Starting State
@@ -62,7 +62,9 @@ Completed on 2026-08-12 with these verified results for the then-defined formal 
 - Capacity: 59 Markdown files at or below 60,000 bytes; one cohesive generated code-reference child at 65,940 bytes; zero Markdown files over 70,000 bytes.
 - Existing task history: all 84 preexisting rows preserved exactly after the time-responsibility split; sorted-row SHA-256 `AC0C3DB0F73AE5EDB4362C168EEB05B107EAF983173CFFF5555FE6FF643F7277` before and after.
 - Generated state: ten-file output set written; second write changed zero files.
-- Scope protection: tracked `HP/` diff count was zero. No database, Control, deployment, production, Commit, or Push operation was performed.
+- Scope protection: tracked `HP/` diff count was zero. At the end of the original reconstruction task, no database, Control, deployment, production, Commit, or Push operation had been performed.
+
+The completed reconstruction was subsequently published to GitHub `main` in Commit `746406348848a4cacb41db343936563932dc3d70`, which is contained in live GitHub `main`. That GitHub publication did not establish database, Control, deployment, production, or public-site verification. The later repository-wide classification corrections remain owned by `CANDY-MGMT-REPAIR-20260814`.
 
 On 2026-08-14, case `CANDY-MGMT-REPAIR-20260814` expanded the audit to the repository-wide Markdown population and adopted the seven preexisting `HP/docs/` member references without moving, renaming, or treating their live-environment claims as verified. The original 2026-08-12 counts remain historical evidence and MUST NOT be reported as the current repository-wide count.
 

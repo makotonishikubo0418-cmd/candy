@@ -8,6 +8,7 @@
 - Related Documents: [`DOCUMENT_RULES.md`](../DOCUMENT_RULES.md), [`WORK_ROUTING.md`](../../WORK_ROUTING.md), [`README.md`](../../README.md), and [`TASK_LOG_2026_08.md`](../task_history/TASK_LOG_2026_08.md)
 - Related Implementation Files: `codex/scripts/audit_candy_management_docs.py` and the seven source-attached technical Markdown files under `HP/docs/`; no HP implementation file was changed
 - Case ID: `CANDY-MGMT-REPAIR-20260814`
+- Updated: 2026-08-20
 
 ## Objective and Exclusions
 
@@ -175,6 +176,16 @@ The approved technical-reference reclassification and audit-contract update chan
 - The global site-state observation continues to report the six preexisting member/privacy findings recorded in the task history; this management-only repair does not claim to fix them.
 - Database migrations, runtime enablement, scheduler state, server placement, DNS, TLS, deployment, browser behavior, and production behavior remain `UNVERIFIED`.
 - `AGENTS.md` preservation is verified separately by its starting and ending byte count and SHA-256.
+
+## 2026-08-20 GitHub Publication-State Reconciliation
+
+The follow-up task `TASK-20260820-GITHUB-PUBLICATION-STATE-RECONCILIATION-001` compared all 29 registered cases, the three category indexes, every routed individual detail, and all task-history rows with live GitHub `main`.
+
+- Eleven cases had GitHub-published changes whose final Commit and Push state was missing or incomplete in one or more current or historical management owners.
+- The corrected evidence uses only Commits verified as ancestors of live GitHub `main`: `9f71a703ccdd3f5552b7cf57100939a2e39a236c`, `66f199bd8f00c916c6d693fea00d1fa94557c7d3`, `5ea270eb4fd79d398c68e85a29e0d511ec338f29`, `19e22b4bf1ac4fecb4096e384fa32aab1f9f78dc`, `746406348848a4cacb41db343936563932dc3d70`, `6a66137d28bdd6aebbcd73b381a1a37464a54e79`, and `b25bd53050f57255576ad992627565e5a3b4c319`.
+- Original task-time statements that Commit or Push had not yet occurred remain identified as original-time facts; each affected task row now states the later verified GitHub result.
+- GitHub publication was not treated as production proof. Each affected runtime case retains an explicit `UNVERIFIED` production boundary, while management-only cases state that no production deployment is required.
+- No new management document, case, category, implementation change, generated-state change, HP change, database operation, or production operation was introduced.
 
 ## Completion
 
