@@ -18,12 +18,17 @@
   }
 
   function postJson(fno, body) {
-    return fetch(API + '?fno=' + encodeURIComponent(fno), {
+    var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 12000) : null;
+    var opts = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'same-origin',
       body: JSON.stringify(body || {})
-    }).then(function (r) {
+    };
+    if (ctrl) opts.signal = ctrl.signal;
+    return fetch(API + '?fno=' + encodeURIComponent(fno), opts).then(function (r) {
+      if (timer) clearTimeout(timer);
       return r.text().then(function (text) {
         if (!text) {
           throw new Error('empty response');
@@ -35,12 +40,21 @@
           throw new Error('invalid json');
         }
       });
+    }, function (err) {
+      if (timer) clearTimeout(timer);
+      if (err && err.name === 'AbortError') {
+        throw new Error('timeout');
+      }
+      throw err;
     });
   }
 
   function apiErrorMessage(err, fallback) {
     if (err && err.message === 'invalid json') {
       return 'サーバー応答が不正です（APIエラー）。ファイルのアップロード漏れがないかご確認ください。';
+    }
+    if (err && err.message === 'timeout') {
+      return '応答がありません。時間をおいて再度お試しください。';
     }
     return fallback || '通信エラーが発生しました';
   }
@@ -402,11 +416,91 @@
       });
     }
 
+    bindLoyalty(msg);
     loadFavoriteIds().then(function () {
       bindAnnouncements(msg);
       bindHistory(msg);
       bindFavorites(msg);
     });
+  }
+
+  function bindLoyalty(msg) {
+    var bodyEl = document.getElementById('memberLoyaltyBody');
+    var noteEl = document.getElementById('memberLoyaltyNote');
+    if (!bodyEl) return;
+
+    postJson('203', {}).then(function (res) {
+      if (res.status !== 0) {
+        bodyEl.textContent = res.message || '会員ランク・ポイントの取得に失敗しました';
+        return;
+      }
+      var d = res.data || {};
+      if (d.link_message === 'cti_unavailable') {
+        if (noteEl) {
+          noteEl.textContent = '会員ランク・ポイントの参照先に接続できませんでした。時間をおいて再度お試しください。';
+        }
+        bodyEl.textContent = '表示できません';
+        return;
+      }
+      if (!d.guest_linked || !d.available || !d.rank) {
+        if (noteEl) {
+          noteEl.textContent = 'CTI顧客と未連携のため、会員ランク・ポイントを表示できません。会員登録の電話番号がCTI顧客マスタと一致しているかご確認ください。';
+        }
+        bodyEl.textContent = '表示できる情報がありません';
+        return;
+      }
+      if (noteEl) noteEl.textContent = '';
+      bodyEl.innerHTML = renderLoyalty(d);
+    }).catch(function (err) {
+      bodyEl.textContent = apiErrorMessage(err, '通信エラーが発生しました');
+    });
+  }
+
+  function renderLoyalty(d) {
+    var rank = d.rank || {};
+    var points = d.points || {};
+    var coupons = d.coupons || {};
+    var html = '';
+
+    html += '<div class="member-loyalty-block">';
+    html += '<h4 class="member-settings-heading">会員ランク</h4>';
+    html += '<dl class="member-loyalty-dl">';
+    html += '<dt>現在のランク</dt><dd><span class="member-loyalty-rank">' + escapeHtml(rank.name || '—') + '</span></dd>';
+    html += '<dt>累計利用回数</dt><dd>' + escapeHtml(String(rank.visit_count != null ? rank.visit_count : 0)) + '回</dd>';
+    html += '<dt>最終利用日</dt><dd>' + escapeHtml(rank.last_visit_display || '—') + '</dd>';
+    html += '</dl>';
+    if (rank.demotion && rank.demotion.message) {
+      html += '<p class="member-loyalty-alert">' + escapeHtml(rank.demotion.message) + '</p>';
+    }
+    if (rank.return && rank.return.message) {
+      html += '<p class="member-loyalty-alert member-loyalty-return">' + escapeHtml(rank.return.message) + '</p>';
+    }
+    html += '</div>';
+
+    html += '<div class="member-loyalty-block">';
+    html += '<h4 class="member-settings-heading">ポイント</h4>';
+    html += '<dl class="member-loyalty-dl">';
+    html += '<dt>現在の保有ポイント</dt><dd>' + escapeHtml(points.held_display || '0P') + '</dd>';
+    html += '<dt>利用可能ポイント</dt><dd>' + escapeHtml(points.usable_display || '0P') + '</dd>';
+    if (points.show_shortfall) {
+      html += '<dt>ポイント利用に必要な不足ポイント</dt><dd>' + escapeHtml(points.shortfall_display || '0P') + '</dd>';
+    }
+    html += '<dt>1回あたりの利用上限ポイント</dt><dd>' + escapeHtml(points.use_max_display || '—') + '</dd>';
+    html += '<dt>有効期限が近いポイント</dt><dd>' + escapeHtml(points.expiring_soon_display || '0P') + '</dd>';
+    html += '</dl>';
+    html += '</div>';
+
+    html += '<div class="member-loyalty-block">';
+    html += '<h4 class="member-settings-heading">クーポンチケット</h4>';
+    html += '<dl class="member-loyalty-dl">';
+    html += '<dt>保有クーポンチケット</dt><dd>' + escapeHtml(coupons.held_display || '0円') + '</dd>';
+    html += '<dt>利用可能クーポンチケット</dt><dd>' + escapeHtml(coupons.usable_display || '0円') + '</dd>';
+    html += '<dt>1回あたりの利用上限</dt><dd>' + escapeHtml(coupons.use_max_display || '—') + '</dd>';
+    html += '<dt>有効期限が近いクーポンチケット</dt><dd>' + escapeHtml(coupons.expiring_soon_display || '0円') + '</dd>';
+    html += '</dl>';
+    html += '</div>';
+
+    return html;
   }
 
   function bindProfileEvents(msg, getPendingPhone, setPendingPhone, getPhoneAction, setPhoneAction) {
@@ -1106,12 +1200,13 @@
     if (overlay) overlay.addEventListener('click', closeModal);
     if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
-    window.openHistoryModal = function (taskId) {
-      var item = historyDetailCache[taskId];
+    window.openHistoryModal = function (cacheKey) {
+      var item = historyDetailCache[cacheKey];
       if (!item) return;
       var bodyEl = document.getElementById('memberHistoryModalBody');
       if (!bodyEl) return;
 
+      var isPastOnly = item.source === 'history' || !item.task_id;
       var html = '<div class="member-history-modal-visit">' + formatVisitSummary(item) + '</div>';
       if (item.girl) {
         html += '<div class="member-fav-item member-fav-item-inmodal">' + renderGirlCardBody(item.girl) + '</div>';
@@ -1124,26 +1219,30 @@
       html += '<dt>日付</dt><dd>' + escapeHtml(item.date_display || item.date || '—') + '</dd>';
       html += '<dt>女の子</dt><dd>' + escapeHtml(historyGirlLabel(item)) + '</dd>';
       html += '<dt>コース</dt><dd>' + escapeHtml(item.course_label || (item.course ? (item.course + '分') : '—')) + '</dd>';
-      html += '<dt>オプション</dt><dd>' + escapeHtml(item.options_text || 'なし') + '</dd>';
-      html += '<dt>割引</dt><dd>' + escapeHtml(item.discounts_text || 'なし') + '</dd>';
-      html += '<dt>利用ポイント</dt><dd>' + escapeHtml(item.points_used_display || '0ポイント') + '</dd>';
-      html += '<dt>指名</dt><dd>' + escapeHtml(item.nominate_label || (item.nominate ? '指名' : 'なし')) + '</dd>';
+      html += '<dt>オプション</dt><dd>' + escapeHtml(item.options_text || (isPastOnly ? '—' : 'なし')) + '</dd>';
+      html += '<dt>割引</dt><dd>' + escapeHtml(item.discounts_text || (isPastOnly ? '—' : 'なし')) + '</dd>';
+      html += '<dt>利用ポイント</dt><dd>' + escapeHtml(item.points_used_display || (isPastOnly ? '—' : '0ポイント')) + '</dd>';
+      html += '<dt>指名</dt><dd>' + escapeHtml(item.nominate_label || (item.nominate ? '指名' : (isPastOnly ? '—' : 'なし'))) + '</dd>';
       html += '<dt>支払方法</dt><dd>' + escapeHtml(item.payment_label || '—') + '</dd>';
       html += '<dt>派遣先</dt><dd>' + escapeHtml(item.destination_display || '—') + '</dd>';
-      html += '<dt>金額</dt><dd>' + escapeHtml(item.total_price_display ? (item.total_price_display + '円') : formatYen(item.total_price)) + '</dd>';
+      html += '<dt>金額</dt><dd>' + escapeHtml(formatHistoryPrice(item)) + '</dd>';
       html += '</dl>';
 
-      html += '<div class="member-history-breakdown">';
-      html += '<p class="member-modal-subtitle">金額内訳</p>';
-      html += '<ul>';
-      html += '<li>コース料金：' + formatYen(pb.course_price) + '</li>';
-      html += '<li>オプション料金：' + formatYen(pb.options_total) + '</li>';
-      if (pb.nominate_fee) html += '<li>指名料金：' + formatYen(pb.nominate_fee) + '</li>';
-      if (pb.traffic_fare) html += '<li>交通費：' + formatYen(pb.traffic_fare) + '</li>';
-      html += '<li>割引額：' + formatYen(pb.discount_total) + '</li>';
-      html += '<li>利用ポイント：' + formatYen(pb.points_used) + '</li>';
-      html += '<li class="member-history-breakdown-total">合計金額：' + formatYen(pb.total_price != null ? pb.total_price : item.total_price) + '</li>';
-      html += '</ul></div>';
+      if (!isPastOnly) {
+        html += '<div class="member-history-breakdown">';
+        html += '<p class="member-modal-subtitle">金額内訳</p>';
+        html += '<ul>';
+        html += '<li>コース料金：' + formatYen(pb.course_price) + '</li>';
+        html += '<li>オプション料金：' + formatYen(pb.options_total) + '</li>';
+        if (pb.nominate_fee) html += '<li>指名料金：' + formatYen(pb.nominate_fee) + '</li>';
+        if (pb.traffic_fare) html += '<li>交通費：' + formatYen(pb.traffic_fare) + '</li>';
+        html += '<li>割引額：' + formatYen(pb.discount_total) + '</li>';
+        html += '<li>利用ポイント：' + formatYen(pb.points_used) + '</li>';
+        html += '<li class="member-history-breakdown-total">合計金額：' + formatYen(pb.total_price != null ? pb.total_price : item.total_price) + '</li>';
+        html += '</ul></div>';
+      } else {
+        html += '<p class="member-note">過去履歴のため、金額・詳細の一部は表示できません。</p>';
+      }
 
       if (item.girls_id) {
         var favActive = isFavorite(item.girls_id);
@@ -1168,8 +1267,8 @@
   function bindHistoryDetailButtons(container, msg) {
     container.querySelectorAll('.member-history-detail-btn, .member-history-eval-btn').forEach(function (btn) {
       btn.addEventListener('click', function () {
-        var taskId = parseInt(btn.getAttribute('data-task-id'), 10);
-        if (window.openHistoryModal) window.openHistoryModal(taskId);
+        var key = btn.getAttribute('data-history-key') || btn.getAttribute('data-task-id');
+        if (window.openHistoryModal) window.openHistoryModal(key);
       });
     });
   }
@@ -1220,21 +1319,47 @@
     loadPage(1);
   }
 
+  function historyCacheKey(item) {
+    if (item.task_id) {
+      return 't:' + item.task_id;
+    }
+    if (item.history_id) {
+      return 'h:' + item.history_id;
+    }
+    return 'x:' + (item.date || '') + ':' + (item.cast_id || 0);
+  }
+
+  function formatHistoryPrice(item) {
+    if (item.source === 'history' || !item.task_id) {
+      if (!item.total_price_display || item.total_price_display === '—' || item.total_price_display === '0') {
+        return '—';
+      }
+    }
+    if (item.total_price_display) {
+      return String(item.total_price_display).indexOf('円') >= 0
+        ? item.total_price_display
+        : (item.total_price_display + '円');
+    }
+    return formatYen(item.total_price);
+  }
+
   function renderHistoryItem(item) {
-    historyDetailCache[item.task_id] = item;
+    var key = historyCacheKey(item);
+    historyDetailCache[key] = item;
     var meta = escapeHtml(item.date_display || (item.date + ' ' + (item.start || '') + '〜' + (item.end || '')));
     var badge = item.stat === 2 ? ' <span class="member-history-badge reserved">予約</span>' : '';
     var evalBadge = item.evaluation ? ' <span class="member-history-badge evaluated">評価済み</span>' : '';
     var course = item.course_label || (item.course ? (String(item.course) + '分') : '');
-    var price = item.total_price_display ? (item.total_price_display + '円') : '';
+    var price = formatHistoryPrice(item);
+    if (price === '—') price = '';
     var evalBtn = '';
     if (item.evaluation) {
       evalBtn = '<span class="member-history-eval-status">評価済み</span>';
     } else if (item.can_evaluate) {
-      evalBtn = '<button type="button" class="member-history-eval-btn" data-task-id="' + item.task_id + '">評価</button>';
+      evalBtn = '<button type="button" class="member-history-eval-btn" data-history-key="' + escapeHtml(key) + '">評価</button>';
     }
 
-    var html = '<div class="member-history-item" data-task-id="' + item.task_id + '">';
+    var html = '<div class="member-history-item" data-history-key="' + escapeHtml(key) + '">';
     html += '<div class="member-history-item-head">';
     html += '<div class="member-history-item-main">';
     html += '<div class="member-history-meta">' + meta + badge + evalBadge + '</div>';
@@ -1246,7 +1371,7 @@
     html += '</div>';
     html += '<div class="member-history-item-actions">';
     html += evalBtn;
-    html += '<button type="button" class="member-history-detail-btn" data-task-id="' + item.task_id + '">詳細</button>';
+    html += '<button type="button" class="member-history-detail-btn" data-history-key="' + escapeHtml(key) + '">詳細</button>';
     html += '</div>';
     html += '</div>';
     html += '</div>';

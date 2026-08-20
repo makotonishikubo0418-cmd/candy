@@ -20,18 +20,22 @@ class MemberCti
 
         }
 
-        self::$conn = @mysqli_connect(
-
+        $conn = mysqli_init();
+        if (!$conn) {
+            return null;
+        }
+        @mysqli_options($conn, MYSQLI_OPT_CONNECT_TIMEOUT, 3);
+        if (defined('MYSQLI_OPT_READ_TIMEOUT')) {
+            @mysqli_options($conn, MYSQLI_OPT_READ_TIMEOUT, 8);
+        }
+        $ok = @mysqli_real_connect(
+            $conn,
             MEMBER_CTI_HOST,
-
             MEMBER_CTI_USER,
-
             MEMBER_CTI_PASS,
-
             MEMBER_CTI_DB
-
         );
-
+        self::$conn = $ok ? $conn : null;
         return self::$conn;
 
     }

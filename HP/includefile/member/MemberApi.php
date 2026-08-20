@@ -88,6 +88,9 @@ class MemberApi
             case '202':
                 $this->evaluationSave($input);
                 break;
+            case '203':
+                $this->loyaltySummary();
+                break;
             case '301':
                 $this->favoriteList($input);
                 break;
@@ -536,32 +539,71 @@ class MemberApi
             $eval = new MemberEvaluation($this->mdb);
             $castIds = array();
             $taskIds = array();
+            $historyGirlsIds = array();
             foreach ($result['items'] as $item) {
-                $castIds[] = $item['cast_id'];
-                $taskIds[] = $item['task_id'];
+                if (!empty($item['cast_id'])) {
+                    $castIds[] = (int)$item['cast_id'];
+                }
+                if (!empty($item['task_id'])) {
+                    $taskIds[] = (int)$item['task_id'];
+                }
+                if (!empty($item['girls_id'])) {
+                    $historyGirlsIds[] = (int)$item['girls_id'];
+                }
             }
             $girlsMap = MemberGirlCard::loadByCastIds($this->mdb, $castIds);
             $rowsByGid = array();
             foreach ($girlsMap as $girlRow) {
                 $rowsByGid[(int)$girlRow['id']] = $girlRow;
             }
+            // history.girls_id のみ残っているケース用
+            $missingGids = array();
+            foreach ($historyGirlsIds as $gid) {
+                if (!isset($rowsByGid[$gid])) {
+                    $missingGids[] = $gid;
+                }
+            }
+            if (!empty($missingGids)) {
+                $clubId = (int)MEMBER_CLUB_ID;
+                $idList = implode(',', array_values(array_unique($missingGids)));
+                $extraSql = 'SELECT id, cast_id, no, name, name_kana, name_romaji, age, height, bust, cup,'
+                    . ' waist, hip, newface, status'
+                    . ' FROM girls_data'
+                    . " WHERE club_id = {$clubId} AND id IN ({$idList})";
+                foreach ($this->mdb->fetchAll($extraSql) as $girlRow) {
+                    $rowsByGid[(int)$girlRow['id']] = $girlRow;
+                }
+            }
             $girlCards = MemberGirlCard::enrichByGirlsIds($this->mdb, $rowsByGid);
             $evalMap = $eval->getEvaluationsByTaskIds((int)$member['id'], $taskIds);
 
             $items = array();
             foreach ($result['items'] as $item) {
-                $cid = $item['cast_id'];
+                $cid = (int)$item['cast_id'];
                 $girlRow = isset($girlsMap[$cid]) ? $girlsMap[$cid] : null;
                 $girlCard = null;
                 if ($girlRow !== null) {
                     $gid = (int)$girlRow['id'];
                     $girlCard = isset($girlCards[$gid]) ? $girlCards[$gid] : null;
+                } elseif (!empty($item['girls_id']) && isset($girlCards[(int)$item['girls_id']])) {
+                    $girlCard = $girlCards[(int)$item['girls_id']];
+                    $girlRow = isset($rowsByGid[(int)$item['girls_id']]) ? $rowsByGid[(int)$item['girls_id']] : null;
                 }
-                $ev = isset($evalMap[$item['task_id']]) ? $evalMap[$item['task_id']] : null;
+                if ($girlCard === null && !empty($item['girl_name'])) {
+                    $girlCard = array(
+                        'girls_id' => !empty($item['girls_id']) ? (int)$item['girls_id'] : null,
+                        'name' => (string)$item['girl_name'],
+                        'age' => null,
+                    );
+                }
+                $taskId = !empty($item['task_id']) ? (int)$item['task_id'] : 0;
+                $ev = ($taskId > 0 && isset($evalMap[$taskId])) ? $evalMap[$taskId] : null;
                 $items[] = array_merge($item, array(
-                    'girls_id' => $girlCard ? (int)$girlCard['girls_id'] : null,
+                    'girls_id' => $girlCard && !empty($girlCard['girls_id'])
+                        ? (int)$girlCard['girls_id']
+                        : (!empty($item['girls_id']) ? (int)$item['girls_id'] : null),
                     'girl' => $girlCard,
-                    'can_evaluate' => $item['can_evaluate'] && $girlRow !== null && $ev === null,
+                    'can_evaluate' => !empty($item['can_evaluate']) && $taskId > 0 && $girlRow !== null && $ev === null,
                     'evaluation' => $ev ? MemberEvaluation::formatEvaluation($ev) : null,
                 ));
             }
@@ -619,6 +661,34 @@ class MemberApi
             'task_id' => $taskId,
             'ratings' => $ratings,
         ));
+    }
+
+    private function loyaltySummary()
+    {
+        try {
+            $member = $this->requireMember();
+            $this->auth->linkCtiGuestForMember((int)$member['id']);
+            $member = $this->mdb->findMemberById((int)$member['id']);
+
+            if (empty($member['guest_id'])) {
+                MemberUtil::jsonResponse(0, '', array(
+                    'available' => false,
+                    'guest_linked' => false,
+                    'link_message' => 'cti_not_linked',
+                    'rank' => null,
+                    'points' => null,
+                    'coupons' => null,
+                ));
+            }
+
+            $result = MemberLoyalty::getSummary((int)$member['guest_id'], (int)MEMBER_CLUB_ID);
+            if ($result['status'] !== 0) {
+                MemberUtil::jsonResponse($result['status'], $result['message']);
+            }
+            MemberUtil::jsonResponse(0, '', $result['data']);
+        } catch (Throwable $e) {
+            MemberUtil::jsonResponse(-1, '会員ランク・ポイント情報の取得に失敗しました');
+        }
     }
 
     private function favoriteList($input)

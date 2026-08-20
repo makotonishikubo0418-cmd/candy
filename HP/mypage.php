@@ -1,17 +1,7 @@
 <?php
 /**
- * 新会員マイページへの振り分け（member_login / member_mypage）。
- * 旧 Cookie お気に入り mypage は表示せず、新会員へ誘導する。
+ * 一時対応: ナビ「マイページ」は旧 Cookie お気に入り画面を表示する。
+ * 新会員ログインは member_login.php を直接開く。
  */
 error_reporting(E_ALL ^ E_NOTICE ^ E_DEPRECATED);
-require_once __DIR__ . '/includefile/member/bootstrap.php';
-
-$mdb = new MemberDb($Database);
-$auth = new MemberAuth($mdb);
-
-if ($auth->getCurrentMember() !== null) {
-    header('Location: member_mypage.php');
-} else {
-    header('Location: member_login.php');
-}
-exit;
+include __DIR__ . '/includefile/dataset_base.php';
