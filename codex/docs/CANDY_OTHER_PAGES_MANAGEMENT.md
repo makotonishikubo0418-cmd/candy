@@ -92,6 +92,17 @@ Many `source/*.html` files contain their own common navigation. Recalculate the 
 
 Do not update every source for a body-only change. Only when changing a URL, navigation label, common header, or common footer, treat every source as the population and count references, changes, exclusions, and failures.
 
+The common `求人情報` navigation link in `HP/source/*.html` MUST point to
+`https://kyusyu-okinawa.qzin.jp/candy98/?v=official`. Its title MUST identify
+Vanilla, and generation templates MUST retain the same target so future pages
+do not reintroduce the legacy route.
+
+This common-navigation contract does not replace or remove independently
+identified related-site banners or portal-specific FAQ links on the top page.
+The legacy external `new-cast.com` redirect is a compatibility route outside
+the Candy HP repository; verify its live redirect separately and do not add
+either external job URL to Candy canonical, JSON-LD, or `sitemap.xml`.
+
 ## 6. Change Units
 
 ### 6.1 Existing Static Content

@@ -4,70 +4,70 @@
   <!-- トップ・主要ページ -->
   <url>
     <loc>https://www.55810.com/</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/area.php</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/hotel.php</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/blog.php</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/news.php</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/schedule.php</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>hourly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/girls_list.php</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/mypage.php</loc>
-    <lastmod>2026-07-25</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/system.php</loc>
-    <lastmod>2026-08-18</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/movie.php</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.7</priority>
   </url>
@@ -75,28 +75,28 @@
   <!-- エリアページ -->
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-arata.php</loc>
-    <lastmod>2026-07-25</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-ariyadacho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-hanaomachi.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-minayoshicho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -110,28 +110,28 @@
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-irisacho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-ikenouecho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-izumicho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-ishidanicho.php</loc>
-    <lastmod>2026-07-25</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -173,7 +173,7 @@
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-inusakocho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -201,7 +201,7 @@
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-inaricho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -215,21 +215,21 @@
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-ishikidai.php</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-ishiki.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-kinkocho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -329,21 +329,21 @@
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-harara.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-hikariyama.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-hiroki.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -378,28 +378,28 @@
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-chuokoshinmachi.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-nanatsujima.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-jigenjicho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-jiyugaoka.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -413,126 +413,126 @@
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-gionnosucho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-gofukucho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-gokabeppucho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-kasugacho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-kibougaokacho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-kiirecho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-kiirenakamyocho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-kinkodai.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-kinseicho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-koraicho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-korimoto.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-korimotocho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-koriyamacho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-koriyamadakecho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-kotsukicho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-koutokujidai.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-koyamadacho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-koyo.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -588,63 +588,63 @@
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-kenohikarigaoka.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-kiirehitokuracho.php</loc>
-    <lastmod>2026-07-25</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-kajiyacho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-kamoike.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-kamoikeshinmachi.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-kiireikemicho.php</loc>
-    <lastmod>2026-07-25</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-kiiremaenohamacho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-kiiresesekushicho.php</loc>
-    <lastmod>2026-07-25</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-nagayoshi.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -679,7 +679,7 @@
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-murasakibaru.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -693,7 +693,7 @@
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-haruyamacho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -742,7 +742,7 @@
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-matsubaracho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -770,7 +770,7 @@
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-josei.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -861,14 +861,14 @@
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-masagocho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-hoshigamine.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -882,7 +882,7 @@
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-nishiishiki.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -966,21 +966,21 @@
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-nishida.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-nishibeppucho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-nishimatacho.php</loc>
-    <lastmod>2026-08-19</lastmod>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
