@@ -47,10 +47,18 @@
 	max-width: 100%;
 }
 
-#entrance .entranceAdditionalBanner {
-	width: 468px;
-	max-width: 100%;
+#entrance .entranceAdditionalBanners {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 468px));
+	justify-content: center;
+	gap: 4px;
+	width: 100%;
+	max-width: 940px;
 	margin: 4px auto 0;
+}
+
+#entrance .entranceAdditionalBanner {
+	width: 100%;
 }
 
 @media screen and (min-width: 769px) {
