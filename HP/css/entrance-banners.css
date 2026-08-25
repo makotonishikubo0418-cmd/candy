@@ -40,7 +40,7 @@
 	margin: 10px auto 0;
 }
 
-#entrance .entrancePureloversBanner:last-child {
+#entrance .entranceAdditionalBanners .entranceAdditionalBanner:only-child {
 	grid-column: 1 / -1;
 	justify-self: center;
 	width: 468px;
@@ -177,7 +177,7 @@
 		max-width: 616px;
 	}
 
-	#entrance .entrancePureloversBanner:last-child {
+	#entrance .entranceAdditionalBanners .entranceAdditionalBanner:only-child {
 		width: calc((100% - 4px) / 2);
 	}
 }
