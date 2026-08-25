@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `codex/scripts/candy_site_state.py`, `codex/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-08-25T10:10:32+09:00 (reproducible generation baseline)
+> Generated at: 2026-08-25T10:18:02+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 5330274def87f096c2538b930497f948a93b0c5b
-> State fingerprint: sha256:06c3c414574be142a8c442d01f40a3b75c2e60895597a6409e799e74be151489
-> Population: Public PHP files: 148 / assets: 511
+> Commit: b6eb359102c24b21742ffa49b2b65bb2566b894e
+> State fingerprint: sha256:adaf56784f401af3298a90ddab470afe1f374f483d700856df4209c9bd2031d9
+> Population: Public PHP files: 148 / assets: 512
 > Generator: `codex/scripts/candy_site_state.py` with `codex/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 4 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 0
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -32,7 +32,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .jpg | 394 |
 | .js | 12 |
 | .mp4 | 2 |
-| .png | 28 |
+| .png | 29 |
 | .svg | 1 |
 | .ttf | 14 |
 | .webm | 1 |
@@ -51,7 +51,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml | 18 |
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 202 |
-| HP/imgHtml/new_202601/banner | 23 |
+| HP/imgHtml/new_202601/banner | 24 |
 | HP/imgHtml/new_202601/blog | 12 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 46 |
@@ -71,7 +71,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | girls:girls | 0 | NONE | UNVERIFIED |
 | girls:girls_list | 1 | NONE | OK |
 | hotel:hotel | 0 | NONE | UNVERIFIED |
-| top:index | 51 | NONE | OK |
+| top:index | 52 | NONE | OK |
 | area:arata | 6 | NONE | OK |
 | area:ariyadacho | 6 | NONE | OK |
 | area:chuokoshinmachi | 6 | NONE | OK |
