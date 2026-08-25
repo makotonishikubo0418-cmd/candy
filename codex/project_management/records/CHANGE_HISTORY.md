@@ -7,7 +7,7 @@
 - Source of Truth Responsibility: Sole change-category index; each linked individual detail owns its substantive content
 - Related Documents: [`CASE_REGISTRY.md`](../CASE_REGISTRY.md), [`TASK_LOG.md`](../TASK_LOG.md), [`DOCUMENT_RULES.md`](../DOCUMENT_RULES.md), and [`CASE_HISTORY.md`](CASE_HISTORY.md)
 - Related Implementation Files: None; linked individual details identify their own scope
-- Updated: 2026-08-21
+- Updated: 2026-08-25
 
 ## 1. Recording Rule
 
@@ -17,6 +17,7 @@ Use this index for modifications, additions, new creation, refactoring, migratio
 
 | Case ID | Subject | Individual detail owner | Boundary |
 |---|---|---|---|
+| CANDY-AGE-VERIFICATION-BANNERS-20260825 | Add Vanilla and Qプリ banners to the index age-verification screen | Atomic case row in [`CASE_REGISTRY.md`](../CASE_REGISTRY.md) | Add exactly two external-image link banners to the existing age-verification related-banner group in the confirmed order and existing display size; preserve PHP, database behavior, unrelated page content, and protected `HP/index.php` |
 | CANDY-JOB-LINK-VANILLA-MIGRATION-20260821 | Replace the common CANDY job-offer link with the verified Vanilla destination | Atomic case row in [`CASE_REGISTRY.md`](../CASE_REGISTRY.md) | Commits `39de47b4ca5970622cfe2bca6563826cea6afb35` and `cc70e610611dc95f1a27c1bbf90c06db1558fa13` changed the exact 147-source population and were deployed by successful Actions Runs `32477514447` and `32478450970`; independent GirlsHeaven portal links, PHP, database, structured-data contents, Candy `.htaccess`, and unrelated assets remained excluded |
 | CANDY-STALE-ACME-TOKEN-CLEANUP-20260819 | Remove stale one-time ACME challenge files while retaining certificate access configuration | Atomic case row in [`CASE_REGISTRY.md`](../CASE_REGISTRY.md) | Exact 33 deletions, re-entry prevention, and normal-workflow exclusion alignment were published to GitHub `main` in Commit `66f199bd8f00c916c6d693fea00d1fa94557c7d3`; `HP/.well-known/.htaccess` remained unchanged, while certificate runtime and production behavior remain `UNVERIFIED` |
 | CANDY-DEPLOY-EXCLUSION-MOVIE-RECOVERY-20260819 | Exclude local development files from deployment and place required movies under Git management | Atomic case row in [`CASE_REGISTRY.md`](../CASE_REGISTRY.md) | The deployment exclusions and exact four referenced movie files were published to GitHub `main` in Commit `66f199bd8f00c916c6d693fea00d1fa94557c7d3`; production deployment, hash equality, and playback remain `UNVERIFIED` |
