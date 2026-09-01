@@ -7,7 +7,7 @@
 - Source of Truth Responsibility: Sole category-history entrypoint; lifecycle and parent mapping remain in `CASE_REGISTRY.md`
 - Related Documents: [`CASE_REGISTRY.md`](../CASE_REGISTRY.md), [`DOCUMENT_RULES.md`](../DOCUMENT_RULES.md), [`CONSULTATION_HISTORY.md`](CONSULTATION_HISTORY.md), [`DEFECT_RESPONSE_HISTORY.md`](DEFECT_RESPONSE_HISTORY.md), and [`CHANGE_HISTORY.md`](CHANGE_HISTORY.md)
 - Related Implementation Files: None; individual records identify their own implementation files
-- Updated: 2026-08-25
+- Updated: 2026-09-02
 
 ## 1. Required Structure
 
@@ -27,7 +27,7 @@ Management and record history
 |---|---|---:|---|
 | Consultation History (相談履歴) | [`CONSULTATION_HISTORY.md`](CONSULTATION_HISTORY.md) | 3 | Route to the adopted consultation, investigation, audit, or retained evidence detail |
 | Defect and Response History (不具合・対応履歴) | [`DEFECT_RESPONSE_HISTORY.md`](DEFECT_RESPONSE_HISTORY.md) | 12 | Route to the defect case parent, response record, or completed task detail |
-| Modification, Addition, and New-Creation History (改修・追加・新規作成等) | [`CHANGE_HISTORY.md`](CHANGE_HISTORY.md) | 16 | Route to the change case parent, completed handoff, or completed task detail |
+| Modification, Addition, and New-Creation History (改修・追加・新規作成等) | [`CHANGE_HISTORY.md`](CHANGE_HISTORY.md) | 17 | Route to the change case parent, completed handoff, or completed task detail |
 
 ## 3. Responsibility Boundary
 
