@@ -7,7 +7,7 @@
 - Source of Truth Responsibility: Sole index and recording rules for completed task execution history
 - Related Documents: `CASE_REGISTRY.md`, `records/CASE_HISTORY.md`, `TASK_RESERVATIONS.md`, `CODEX_COMMUNICATION.md`, and `task_history/`
 - Related Implementation Files: Recorded per task row in the selected child
-- Last updated: 2026-08-25
+- Last updated: 2026-09-02
 
 ## 1. Recording Rules
 
@@ -25,6 +25,7 @@
 | 2026-07-01 through 2026-07-20 | [`TASK_LOG_2026_07_01_20.md`](task_history/TASK_LOG_2026_07_01_20.md) | 46 | Historical Evidence |
 | 2026-07-21 through 2026-07-31 | [`TASK_LOG_2026_07_21_31.md`](task_history/TASK_LOG_2026_07_21_31.md) | 30 | Historical Evidence |
 | 2026-08-01 through 2026-08-31 | [`TASK_LOG_2026_08.md`](task_history/TASK_LOG_2026_08.md) | 38 | Historical Evidence |
+| 2026-09-01 through 2026-09-30 | [`TASK_LOG_2026_09.md`](task_history/TASK_LOG_2026_09.md) | 1 | Historical Evidence |
 
 ## 3. Approval Basis Notes
 

@@ -64,7 +64,8 @@ C:\Codex\FSG\Candy
    │  ├─ task_history/
    │  │  ├─ TASK_LOG_2026_07_01_20.md
    │  │  ├─ TASK_LOG_2026_07_21_31.md
-   │  │  └─ TASK_LOG_2026_08.md
+   │  │  ├─ TASK_LOG_2026_08.md
+   │  │  └─ TASK_LOG_2026_09.md
    │  ├─ CODE_STRUCTURE.md [Deprecated Compatibility]
    │  └─ CANDY_REPOSITORY_SEO_AUDIT_2026-07-18.md [Historical Evidence]
    ├─ docs/
