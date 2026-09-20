@@ -34,6 +34,32 @@
 
 /* girls */
 
+/* プロフィールのアクションボタン */
+#girls div.wrap div.detail div.prof div.btn {
+	display: flex;
+	gap: 15px;
+	width: 100%;
+}
+
+#girls div.wrap div.detail div.prof div.btn a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex: 1;
+	min-width: 0;
+	min-height: 40px;
+	padding: 8px 6px;
+	background: #f961a6;
+	color: #fff;
+	font-size: 14px;
+	line-height: 1.5;
+	text-align: center;
+}
+
+#girls div.wrap div.detail div.prof div.btn a.delete {
+	background: #a0a0a0;
+}
+
 @media screen and (min-width: 769px) {
 	/* girils */
 
@@ -137,30 +163,6 @@
 		font-weight: bold;
 		text-align: center;
 		padding: 15px 0 10px;
-	}
-
-	#girls div.wrap div.detail div.prof div.btn {
-		display: table;
-		width: 100%;
-	}
-
-	#girls div.wrap div.detail div.prof div.btn a {
-		display: table-cell;
-		background: #f961a6;
-		color: #fff;
-		height: 40px;
-		line-height: 40px;
-		text-align: center;
-		font-size: 14px;
-	}
-
-	#girls div.wrap div.detail div.prof div.btn a.delete {
-		background: #a0a0a0;
-	}
-
-	#girls div.wrap div.detail div.prof div.btn a:last-child {
-		width: 141px;
-		border-left: 2px solid #fff;
 	}
 
 	#girls div.wrap div.gallery {
@@ -267,7 +269,7 @@
 	#girls div.wrap div.detail {
 		background: #fff url(../imgHtml/girlsBg.jpg);
 		margin-top: 10px;
-		padding: 40px;
+		padding: 20px;
 		position: relative;
 	}
 
@@ -328,28 +330,13 @@
 	}
 
 	#girls div.wrap div.detail div.prof div.btn {
-		display: table;
-		width: 100%;
+		flex-direction: column;
 		padding: 40px 0 60px;
 	}
 
 	#girls div.wrap div.detail div.prof div.btn a {
-		display: table-cell;
-		background: #f961a6;
-		color: #fff;
-		height: 60px;
-		line-height: 60px;
-		text-align: center;
-		font-size: 18px;
-	}
-
-	#girls div.wrap div.detail div.prof div.btn a.delete {
-		background: #a0a0a0;
-	}
-
-	#girls div.wrap div.detail div.prof div.btn a:last-child {
-		width: 241px;
-		border-left: 2px solid #fff;
+		min-height: 60px;
+		font-size: 16px;
 	}
 
 	#girls div.wrap div.gallery {
@@ -448,10 +435,6 @@
 	}
 	
 	#girls div.wrap div.detail div.prof div.text h3 {
-		font-size: 16px !important;
-	}
-	
-	#girls div.wrap div.detail div.prof div.btn a {
 		font-size: 16px !important;
 	}
 	
