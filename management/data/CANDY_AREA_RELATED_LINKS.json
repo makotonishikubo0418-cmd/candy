@@ -59,6 +59,14 @@
       "latitude": 31.537075,
       "links": ["kinkocho", "shimoarata", "arata", "jiyugaoka"]
     },
+    "funatsucho": {
+      "region": "船津町",
+      "longitude": 130.5578,
+      "latitude": 31.588787,
+      "index_group": "は",
+      "index_before": "hoshigamine",
+      "links": ["yamanokuchicho", "yamashitacho", "shimoarata", "kinkocho"]
+    },
     "gionnosucho": {
       "region": "祇園之洲町",
       "longitude": 130.573074,
@@ -481,6 +489,13 @@
       "latitude": 31.53574,
       "index_group": "さ",
       "links": ["jiyugaoka", "jigenjicho", "yamadacho", "hiroki"]
+    },
+    "sennichicho": {
+      "region": "千日町",
+      "longitude": 130.555832,
+      "latitude": 31.589106,
+      "index_group": "さ",
+      "links": ["yamanokuchicho", "yamashitacho", "shimoarata", "arata"]
     },
     "shimoarata": {
       "region": "下荒田",

@@ -4,6 +4,7 @@ Updated: 2026-09-29
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | 千日町・船津町エリアページのローカル作成 | [20260929_CREATE_area-two-page-local-generation.md](history/20260929_CREATE_area-two-page-local-generation.md) |
 | OPERATION | コンフォートイン鹿児島谷山・ホテル サントリーニのGitHub本番公開 | [20260929_OPERATION_hotel-two-page-production-publication.md](history/20260929_OPERATION_hotel-two-page-production-publication.md) |
 | CREATE | コンフォートイン鹿児島谷山・ホテル サントリーニのローカルページ作成 | [20260929_CREATE_hotel-two-page-local-generation.md](history/20260929_CREATE_hotel-two-page-local-generation.md) |
 | MODIFY | ホテル・エリア制作ツールの実用性回復 | [20260929_MODIFY_area-hotel-tooling-recovery.md](history/20260929_MODIFY_area-hotel-tooling-recovery.md) |
