@@ -16,6 +16,9 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlparse
 
+# Git status/diff probes must not refresh the index as a side effect.
+os.environ["GIT_OPTIONAL_LOCKS"] = "0"
+
 
 RELATED_TEXT = "ここにはリンク先のタイトルを表示します。"
 RELATED_PER_CATEGORY = 3
@@ -73,7 +76,9 @@ HP_ROOT = REPO_ROOT / "HP"
 TEXT_AREA_DIR = REPO_ROOT / "Text_area_data"
 TEXT_HOTEL_DIR = REPO_ROOT / "Text_hotel_data"
 TEXT_BLOG_DIR = REPO_ROOT / "Text_blog_data"
-DOCS_DIR = REPO_ROOT / "codex" / "docs"
+MANAGEMENT_DIR = REPO_ROOT / "management"
+DOCS_DIR = MANAGEMENT_DIR / "specs"
+DATA_DIR = MANAGEMENT_DIR / "data"
 SITE_STATE_OUTPUT_NAMES = (
     "CANDY_SITE_PAGE_LEDGER.md",
     "CANDY_SITE_PAGE_LEDGER.tsv",
@@ -94,6 +99,18 @@ def repo_root() -> Path:
 
 def hp_root() -> Path:
     return HP_ROOT
+
+
+def text_input_paths(root: Path) -> list[Path]:
+    if not root.is_dir():
+        raise PageToolError(f"input directory missing: {root}")
+    paths = sorted(root.rglob("*.txt"), key=lambda path: path.relative_to(root).as_posix())
+    if not paths:
+        raise PageToolError(f"no Text inputs found: {root}")
+    for path in paths:
+        if path.is_symlink() or not path.resolve().is_relative_to(root.resolve()):
+            raise PageToolError(f"input escapes canonical directory or is a symlink: {path}")
+    return paths
 
 
 def site_state_output_paths() -> list[Path]:
@@ -628,11 +645,11 @@ def shared_validation(category: str, slug: str, canonical: str) -> list[str]:
     return errors
 
 
-def atomic_write(path: Path, content: str) -> None:
+def atomic_write_bytes(path: Path, content: bytes) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     handle, temp_name = tempfile.mkstemp(prefix=f".{path.name}.", suffix=".tmp", dir=path.parent)
     try:
-        with os.fdopen(handle, "w", encoding="utf-8", newline="\n") as stream:
+        with os.fdopen(handle, "wb") as stream:
             stream.write(content)
         os.replace(temp_name, path)
     except Exception:
@@ -643,13 +660,81 @@ def atomic_write(path: Path, content: str) -> None:
         raise
 
 
+def atomic_write(path: Path, content: str) -> None:
+    atomic_write_bytes(path, content.encode("utf-8"))
+
+
+def snapshot_paths(paths) -> dict[Path, bytes | None]:
+    return {path: path.read_bytes() if path.exists() else None for path in paths}
+
+
+def write_transaction(outputs: dict[Path, str], validate, *, expected=None) -> None:
+    """Restore only this transaction's bytes on failure; never revert another writer."""
+    before = snapshot_paths(outputs) if expected is None else expected
+    payloads = {}
+    for path, content in outputs.items():
+        if path.is_symlink() or path not in before:
+            raise PageToolError(f"unsafe transaction output: {path}")
+        old = before[path]
+        normalized = content.replace("\r\n", "\n")
+        if old is not None and b"\r\n" in old:
+            normalized = normalized.replace("\n", "\r\n")
+        payloads[path] = (b"\xef\xbb\xbf" if old and old.startswith(b"\xef\xbb\xbf") else b"") + normalized.encode("utf-8")
+    if snapshot_paths(outputs) != before:
+        raise PageToolError("output changed after planning; no writes performed")
+    attempted = []
+    try:
+        for path, payload in payloads.items():
+            current = path.read_bytes() if path.exists() else None
+            if current != before[path]:
+                raise PageToolError(f"output changed during transaction: {path}")
+            if current == payload:
+                continue
+            attempted.append(path)
+            atomic_write_bytes(path, payload)
+        validate()
+    except BaseException as exc:
+        conflicts = []
+        for path in reversed(attempted):
+            current = path.read_bytes() if path.exists() else None
+            if current == before[path]:
+                continue
+            if current != payloads[path]:
+                conflicts.append(str(path))
+                continue
+            try:
+                if before[path] is None:
+                    path.unlink()
+                else:
+                    atomic_write_bytes(path, before[path])
+            except OSError:
+                conflicts.append(str(path))
+        if conflicts:
+            raise PageToolError("rollback needs review; concurrent/unrestored paths preserved: " + ",".join(conflicts)) from exc
+        raise
+
+
+def lint_planned_php(outputs: dict[Path, str]) -> str:
+    with tempfile.TemporaryDirectory(prefix="candy-lint-") as directory:
+        paths = []
+        for index, (path, content) in enumerate(outputs.items()):
+            if path.suffix == ".php":
+                target = Path(directory) / f"{index}-{path.name}"
+                target.write_text(content, encoding="utf-8")
+                paths.append(target)
+        status, errors = php_lint(paths)
+        if status != "PASSED":
+            raise PageToolError("planned PHP lint " + status + ": " + "; ".join(errors))
+        return status
+
+
 def php_lint(paths: list[Path]) -> tuple[str, list[str]]:
     php = shutil.which("php")
     if not php:
         return "UNAVAILABLE", []
     errors: list[str] = []
     for path in paths:
-        result = subprocess.run([php, "-l", str(path)], capture_output=True, text=True, encoding="utf-8", errors="replace")
+        result = subprocess.run([php, "-d", "short_open_tag=1", "-l", str(path)], capture_output=True, text=True, encoding="utf-8", errors="replace")
         if result.returncode:
             errors.append(f"{path}: {(result.stdout + result.stderr).strip()}")
     return ("PASSED" if not errors else "FAILED"), errors

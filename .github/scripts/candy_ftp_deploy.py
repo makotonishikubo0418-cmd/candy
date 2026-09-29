@@ -16,7 +16,7 @@ import sys
 
 from candy_area_image_replacement_guard import validate_area_image_replacements
 
-CODEX_SCRIPTS_DIR = Path(__file__).resolve().parents[2] / "codex" / "scripts"
+CODEX_SCRIPTS_DIR = Path(__file__).resolve().parents[2] / "management" / "scripts"
 if str(CODEX_SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(CODEX_SCRIPTS_DIR))
 

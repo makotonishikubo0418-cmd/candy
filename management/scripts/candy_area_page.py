@@ -53,7 +53,7 @@ FORBIDDEN_PLACEHOLDERS = (
 RELATED_PLACEHOLDER_TEXT = "ここにはリンク先のタイトルを表示します。"
 RELATED_MARKER = "<!-- AREA_RELATED_LINKS -->"
 RELATED_HEADING = "周辺の対応エリア"
-RELATED_LINKS_PATH = path_config.REPO_ROOT / "codex" / "data" / "CANDY_AREA_RELATED_LINKS.json"
+RELATED_LINKS_PATH = path_config.REPO_ROOT / "management" / "data" / "CANDY_AREA_RELATED_LINKS.json"
 RELATED_BLOCK_PATTERN = (
     r'(?s)[ \t]*<div class="lmt_20 lp_40 bd">\s*'
     r'<h3 class="lpb_10 fs_l">(?:関連記事|周辺の対応エリア)</h3>\s*'
@@ -664,15 +664,29 @@ def haversine_km(left: tuple[float, float], right: tuple[float, float]) -> float
 
 
 def extract_existing_shop(block: str, key: str) -> tuple[str, str] | None:
-    match = re.search(
-        rf"(?ms)^[ \t]*<!-- {re.escape(key)} -->\s*\n(?P<block>[ \t]*<li\b.*?^[ \t]*</li>)",
-        block,
-    )
-    if not match:
+    matches = [item for item in re.findall(r"(?s)<li\b[^>]*>.*?</li>", block)
+               if key in shop_keys(item)]
+    if not matches:
+        matches = re.findall(rf"(?ms)^[ \t]*<!-- {re.escape(key)} -->\s*\n([ \t]*<li\b.*?^[ \t]*</li>)", block)
+    if len(matches) != 1:
         return None
-    time_text = table_value(match.group("block"), "移動時間")
-    fee_text = table_value(match.group("block"), "交通費")
+    time_text = table_value(matches[0], "移動時間")
+    fee_text = table_value(matches[0], "交通費")
     return (time_text, fee_text) if time_text and fee_text else None
+
+
+def shop_keys(source: str) -> list[str]:
+    """Identify rendered shop blocks by their visible image class, not comments."""
+    keys = []
+    for block in re.findall(r"(?s)<li\b[^>]*>.*?</li>", source):
+        identities = set(re.findall(r'\bcampaign-img-([a-z0-9_]+)\b', block))
+        identities.update(re.findall(r'imgHtml/new_202601/shop/([a-z0-9_]+)_(?:sp|pc)\.jpg', block))
+        known = identities.intersection(KEY_TO_NAME)
+        if len(known) == 1:
+            keys.append(next(iter(known)))
+        elif len(known) > 1:
+            keys.append("AMBIGUOUS_SHOP")
+    return keys or [key for key in re.findall(r"<!-- ([a-z0-9_]+) -->", source) if key in KEY_TO_NAME]
 
 
 def nearest_travel(
@@ -1035,6 +1049,7 @@ def validate_rendered(
     hp_root: Path,
     *,
     require_related_mapping: bool = True,
+    planned_images: set[Path] | None = None,
 ) -> list[str]:
     errors: list[str] = []
     for placeholder in FORBIDDEN_PLACEHOLDERS:
@@ -1065,7 +1080,7 @@ def validate_rendered(
                 json.loads(value)
             except json.JSONDecodeError as exc:
                 errors.append(f"JSON-LD {index}: {exc}")
-    actual_keys = [item for item in re.findall(r"<!-- ([a-z0-9_]+) -->", source) if item in KEY_TO_NAME]
+    actual_keys = shop_keys(source)
     expected_keys = [item.key for item in resolved]
     scene1_match = re.search(r'<h2[^>]+id="scene1">(.*?)</h2>', source, re.S)
     if not scene1_match or "「人気デリヘル店」情報" not in strip_tags(scene1_match.group(1)):
@@ -1077,8 +1092,8 @@ def validate_rendered(
         if not block or block != (item.time_text, item.fee_text):
             errors.append(f"店舗交通費不整合: {item.name}")
     for relative in (data.image1, data.image2):
-        image_path = hp_root / relative.removeprefix("./")
-        if not image_path.is_file():
+        image_path = hp_root / relative.removeprefix("./").split("?", 1)[0]
+        if not image_path.is_file() and image_path not in (planned_images or set()):
             errors.append(f"画像なし: {relative}")
     try:
         expected_og_image = expected_og_image_url(data.image1)
@@ -1345,7 +1360,7 @@ def php_lint(paths: list[Path]) -> tuple[str, list[str]]:
         return "UNAVAILABLE", []
     errors: list[str] = []
     for path in paths:
-        result = subprocess.run([php, "-l", str(path)], capture_output=True, text=True, encoding="utf-8", errors="replace")
+        result = subprocess.run([php, "-d", "short_open_tag=1", "-l", str(path)], capture_output=True, text=True, encoding="utf-8", errors="replace")
         if result.returncode != 0:
             errors.append(f"{path}: {(result.stdout + result.stderr).strip()}")
     return ("PASSED" if not errors else "FAILED"), errors
@@ -1391,6 +1406,12 @@ def run_build(args: argparse.Namespace) -> int:
     if not input_path.is_absolute():
         input_path = root / input_path
     data = parse_area_text(input_path)
+    planned_images: set[Path] = set()
+    if getattr(args, "plan_accepted_images", False):
+        if not args.dry_run:
+            raise AreaToolError("--plan-accepted-images requires --dry-run")
+        from candy_area_publish import image_install_plan
+        planned_images = {destination for _source, destination in image_install_plan(data)}
     related_config = load_related_config()
     if related_links_for(related_config, data.slug) is None:
         raise AreaToolError(f"周辺エリア設定がありません。生成前にリンク先を確定してください: {data.slug}")
@@ -1398,7 +1419,7 @@ def run_build(args: argparse.Namespace) -> int:
     templates = load_shop_templates(hp_root / "source" / "template_shop.html")
     resolved = resolve_shops(data, hp_root, templates)
     source_html = render_source(data, resolved, templates, hp_root / "source" / "template_kagoshima-deliveryhealth-area.html")
-    render_errors = validate_rendered(data, resolved, source_html, hp_root)
+    render_errors = validate_rendered(data, resolved, source_html, hp_root, planned_images=planned_images)
     if render_errors:
         raise AreaToolError("生成前検証失敗:\n- " + "\n- ".join(render_errors))
     rendered_at = time.perf_counter()
@@ -1412,6 +1433,7 @@ def run_build(args: argparse.Namespace) -> int:
     area_path = hp_root / "source" / "area.html"
     index_path = hp_root / "source" / "index.html"
     queue_path = path_config.DOCS_DIR / "CANDY_AREA_105_PAGE_QUEUE.md"
+    before = path_config.snapshot_paths([public_path, source_path, dataset_path, base_path, area_path, index_path, sitemap_path, queue_path])
     area_source = read_utf8(area_path)
     index_source = read_utf8(index_path)
     alignment_errors = area_registry_alignment_errors(area_source, index_source)
@@ -1425,6 +1447,11 @@ def run_build(args: argparse.Namespace) -> int:
     new_base = update_dataset_base(read_utf8(base_path), data.slug)
     new_sitemap = update_sitemap(read_utf8(sitemap_path), data.canonical)
 
+    outputs = {public_path: public_php_content(), source_path: source_html, dataset_path: dataset_content(),
+               base_path: new_base, area_path: new_area, index_path: new_index, sitemap_path: new_sitemap}
+    php_status = path_config.lint_planned_php(outputs)
+    outputs[queue_path] = update_queue(read_utf8(queue_path), data, php_status)
+
     if args.dry_run:
         print(f"RESULT=DRY_RUN_OK slug={data.slug} region={data.region}")
         print(f"COUNTS shops={len(resolved)} articles={len(data.articles)} hotels={len(data.hotels)} spots={len(data.spots)}")
@@ -1434,22 +1461,13 @@ def run_build(args: argparse.Namespace) -> int:
         print(f"TIMING parse={parsed_at-started:.3f}s render_validate={rendered_at-parsed_at:.3f}s total={time.perf_counter()-started:.3f}s")
         return 0
 
-    atomic_write(public_path, public_php_content())
-    atomic_write(source_path, source_html)
-    atomic_write(dataset_path, dataset_content())
-    atomic_write(base_path, new_base)
-    atomic_write(area_path, new_area)
-    atomic_write(index_path, new_index)
-    atomic_write(sitemap_path, new_sitemap)
+    def validate_written():
+        actual_errors = validate_rendered(data, resolved, read_utf8(source_path), hp_root)
+        actual_errors.extend(shared_validation(data, hp_root))
+        if actual_errors:
+            raise AreaToolError("書込後検証失敗:\n- " + "\n- ".join(actual_errors))
+    path_config.write_transaction(outputs, validate_written, expected=before)
     written_at = time.perf_counter()
-
-    actual_errors = validate_rendered(data, resolved, read_utf8(source_path), hp_root)
-    actual_errors.extend(shared_validation(data, hp_root))
-    php_status, php_errors = php_lint([public_path, dataset_path, base_path])
-    actual_errors.extend(php_errors)
-    if actual_errors:
-        raise AreaToolError("書込後検証失敗:\n- " + "\n- ".join(actual_errors))
-    atomic_write(queue_path, update_queue(read_utf8(queue_path), data, php_status))
     print(f"RESULT=BUILD_OK slug={data.slug} region={data.region}")
     print(f"FILES={public_path.relative_to(root)},{source_path.relative_to(root)},{dataset_path.relative_to(root)}")
     print(f"COUNTS shops={len(resolved)} articles={len(data.articles)} hotels={len(data.hotels)} spots={len(data.spots)}")
@@ -1502,6 +1520,8 @@ def run_related_write(args: argparse.Namespace) -> int:
     if config_errors:
         raise AreaToolError("周辺エリア設定検証失敗:\n- " + "\n- ".join(config_errors))
     changed: list[Path] = []
+    outputs: dict[Path, str] = {}
+    before = path_config.snapshot_paths(area_source_paths(hp_root))
     errors: list[str] = []
     for path in area_source_paths(hp_root):
         slug = path.stem.removeprefix("kagoshima-deliveryhealth-area-")
@@ -1523,10 +1543,11 @@ def run_related_write(args: argparse.Namespace) -> int:
             continue
         if rendered != source:
             changed.append(path)
-            if not args.dry_run:
-                atomic_write(path, rendered)
+            outputs[path] = rendered
     if errors:
         raise AreaToolError("周辺エリア一括更新失敗:\n- " + "\n- ".join(errors))
+    if not args.dry_run:
+        path_config.write_transaction(outputs, lambda: None, expected={path: before[path] for path in outputs})
     print(f"RESULT={'RELATED_DRY_RUN_OK' if args.dry_run else 'RELATED_WRITE_OK'}")
     print(f"SOURCE_FILES={len(area_source_paths(hp_root))} CHANGED={len(changed)}")
     print("CHANGED_PATHS=" + ",".join(str(path.relative_to(repo_root())) for path in changed))
@@ -1581,7 +1602,15 @@ def run_audit_inputs(args: argparse.Namespace) -> int:
     root = repo_root()
     hp_root = path_config.HP_ROOT
     base = path_config.TEXT_AREA_DIR
-    paths = sorted(list(base.glob("*.txt")) + (list((base / "Completion").glob("*.txt")) if args.include_completion else []))
+    all_paths = path_config.text_input_paths(base)
+    excluded = [path for path in all_paths if "Completion" in path.relative_to(base).parts and not args.include_completion]
+    paths = [path for path in all_paths if path not in excluded]
+    if not paths:
+        raise AreaToolError("no eligible audit inputs; use --include-completion if all inputs are archived")
+    print(f"TOTAL={len(all_paths)} EXCLUDED={len(excluded)}")
+    for path in excluded:
+        print(f"EXCLUDED={path.relative_to(root)} reason=Completion; use --include-completion")
+    slugs: dict[str, list[Path]] = {}
     parse_failures: list[str] = []
     render_failures: list[str] = []
     pattern_counts: Counter[tuple[int, int, int, int]] = Counter()
@@ -1589,8 +1618,9 @@ def run_audit_inputs(args: argparse.Namespace) -> int:
     for path in paths:
         try:
             data = parse_area_text(path)
+            slugs.setdefault(data.slug, []).append(path)
             pattern_counts[(len(data.shops), len(data.articles), len(data.hotels), len(data.spots))] += 1
-        except AreaToolError as exc:
+        except (AreaToolError, OSError, ValueError) as exc:
             parse_failures.append(f"{path.relative_to(root)}: {exc}")
             continue
         if args.render:
@@ -1606,8 +1636,12 @@ def run_audit_inputs(args: argparse.Namespace) -> int:
                 )
                 if errors:
                     render_failures.append(f"{path.relative_to(root)}: {"; ".join(errors)}")
-            except AreaToolError as exc:
+            except (AreaToolError, OSError, ValueError) as exc:
                 render_failures.append(f"{path.relative_to(root)}: {exc}")
+    duplicates = {slug: items for slug, items in slugs.items() if len(items) > 1}
+    for slug, items in duplicates.items():
+        print(f"DUPLICATE_SLUG={slug} inputs=" + ",".join(str(path.relative_to(root)) for path in items))
+    print("AUDIT=COMPLETED; SCOPE=INPUT_PARSE" + ("_AND_RENDER" if args.render else ""))
     print(f"INPUTS={len(paths)} PARSED={len(paths)-len(parse_failures)} PARSE_FAILED={len(parse_failures)}")
     for pattern, count in sorted(pattern_counts.items()):
         print(f"PATTERN shops={pattern[0]} articles={pattern[1]} hotels={pattern[2]} spots={pattern[3]} count={count}")
@@ -1619,7 +1653,7 @@ def run_audit_inputs(args: argparse.Namespace) -> int:
         for failure in render_failures:
             print(f"RENDER_STOP={failure}")
     print(f"TIMING total={time.perf_counter()-started:.3f}s")
-    return 1 if parse_failures or render_failures else 0
+    return 1 if parse_failures or render_failures or duplicates else 0
 
 def create_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="CANDY area page builder/validator")
@@ -1627,6 +1661,7 @@ def create_parser() -> argparse.ArgumentParser:
     build = subparsers.add_parser("build", help="テンプレートからareaページ一式を生成")
     build.add_argument("--input", required=True, help="Text_area_dataの入力ファイル")
     build.add_argument("--dry-run", action="store_true", help="ファイルを書かず解析・生成・検証")
+    build.add_argument("--plan-accepted-images", action="store_true", help="dry-run only: validate accepted image installation without copying")
     build.add_argument("--force", action="store_true", help="既存の3ファイルを意図的に上書き")
     build.add_argument("--no-docs", action="store_true", help=argparse.SUPPRESS)
     build.set_defaults(func=run_build)
@@ -1655,7 +1690,7 @@ def main() -> int:
     args = parser.parse_args()
     try:
         return args.func(args)
-    except AreaToolError as exc:
+    except (AreaToolError, path_config.PageToolError, OSError, ValueError) as exc:
         print(f"RESULT=STOP\nREASON={exc}", file=sys.stderr)
         return 2
 

@@ -175,7 +175,7 @@ def next_ready_input() -> Path:
     selected = select_ready_inputs(candy_hotel_target_gate.scan_inputs(), 1, verbose=False)
     if selected:
         return selected[0].path
-    raise PublishError("no eligible new hotel page target; run codex\\scripts\\candy-hotel.cmd audit-inputs")
+    raise PublishError("no eligible new hotel page target; run management\\scripts\\candy-hotel.cmd audit-inputs")
 
 
 def registry_target_checks(
@@ -233,7 +233,34 @@ def dependency_paths(input_path: Path, data: candy_hotel_page.HotelData) -> list
     templates = candy_hotel_page.common.load_shop_templates(hp / "source" / "template_shop.html")
     resolved = candy_hotel_page.resolve_shops(data, hp, templates)
     paths.update(hp / "source" / item.reference for item in resolved if item.reference)
+    paths.update(path_config.SCRIPTS_DIR / name for name in (
+        "candy_page_common.py", "candy_hotel_target_gate.py", "candy_image_assets.py", "candy_site_state_render.py"))
+    accepted = [path_config.TEXT_HOTEL_DIR / "画像データ" / f"{data.slug}_{i}.jpg" for i in (1, 2)]
+    paths.update(path for path in accepted if path.exists())
     return sorted(paths, key=lambda path: path.as_posix())
+
+
+def assert_new_target(input_path: Path) -> None:
+    candidate = candy_hotel_target_gate.candidate_from_path(input_path)
+    reasons, _blockers = candy_hotel_target_gate.check_candidate(candidate)
+    canonical_pattern = re.compile(r"https://www\.55810\.com/kagoshima-deliveryhealth-hotel-" + re.escape(candidate.slug) + r"\.php")
+    identities = [path for path in candy_hotel_target_gate.input_paths()
+                  if not candy_hotel_target_gate.is_admin_doc(path) and canonical_pattern.search(candy_hotel_target_gate.read_text(path))]
+    if len(identities) != 1:
+        reasons.append(f"duplicate or missing canonical input: count={len(identities)}")
+    if reasons:
+        raise PublishError("target gate rejected input:\n- " + "\n- ".join(reasons))
+
+
+def verify_predeployed_images(data: candy_hotel_page.HotelData, commit: str) -> None:
+    """Recheck separately deployed bytes before any page transaction writes."""
+    for image in (data.image1, data.image2):
+        local = path_config.HP_ROOT / image.removeprefix("./").split("?", 1)[0]
+        url = shared.cache_bust(urljoin(data.canonical, image.removeprefix("./")), commit)
+        status, final, headers, body = shared.http_fetch(url)
+        if status != 200 or final != url or not str(headers.get("Content-Type", "")).lower().startswith("image/") or body != local.read_bytes():
+            raise PublishError(f"separate image-asset deployment not verified: {local.name}")
+    print("IMAGE_ASSET_PREDEPLOYED_BYTES=VERIFIED")
 
 
 def assert_preflight(data: candy_hotel_page.HotelData, allowed: list[Path], *, check_remote: bool) -> str:
@@ -390,6 +417,8 @@ def publish(
     except ValueError as exc:
         raise PublishError("input must be under Text_hotel_data") from exc
     data = candy_hotel_page.parse_hotel_text(input_path)
+    if resume_state is None:
+        assert_new_target(input_path)
     allowed = paths_for(data)
     path_arguments = relative(allowed)
     page_paths = relative(allowed[:3])
@@ -410,6 +439,7 @@ def publish(
     if resume_state is None:
         before = assert_preflight(data, allowed, check_remote=True)
         shared.assert_dependencies_clean(dependencies)
+        verify_predeployed_images(data, before)
         state = {
             "slug": data.slug,
             "hotel": data.hotel_name,
@@ -639,7 +669,7 @@ def recovery_details(exc: Exception, phase: str, slug: str) -> tuple[str, str, s
     if phase in {"PAGE_PUSHED", "ACTIONS_SUCCESS"} and transient_communication_failure and slug != "UNKNOWN":
         return (
             "RESUME_ALLOWED",
-            f"codex\\scripts\\candy-hotel.cmd resume --slug {slug}",
+            f"management\\scripts\\candy-hotel.cmd resume --slug {slug}",
             "A transient communication failure may be retried only while saved snapshots remain unchanged.",
         )
     if phase in {"NOT_STARTED", "PREFLIGHT"}:
@@ -951,6 +981,8 @@ def main() -> int:
                 state = load_state(args.slug)
                 return publish(root() / state["input"], dry_run=False, resume_state=state)
         if args.command == "publish-next":
+            if args.dry_run:
+                return publish_next_batch(args.count, dry_run=True, verbose_candidates=args.verbose_candidates)
             with publish_lock():
                 return publish_next_batch(
                     args.count,

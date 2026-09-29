@@ -11,6 +11,7 @@ import hashlib
 import html
 import re
 import subprocess
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -190,6 +191,19 @@ def image_pair_reasons(candidate: Candidate) -> list[str]:
 
 def check_candidate(candidate: Candidate) -> tuple[bool, list[str]]:
     reasons: list[str] = []
+    allowed_parents = [TEXT_ROOT.resolve(), *(path.resolve() for path in latest_classification_ok_dirs())]
+    if candidate.source.is_symlink() or candidate.source.resolve().parent not in allowed_parents:
+        return False, ["input is outside direct/latest approved area input locations"]
+    import candy_area_page
+    try:
+        data = candy_area_page.parse_area_text(candidate.source)
+        if data.slug != candidate.slug:
+            reasons.append("input canonical slug mismatch")
+        config = candy_area_page.load_related_config()
+        if candy_area_page.related_links_for(config, candidate.slug) is None:
+            reasons.append("related-area mapping missing; resolve target links before build")
+    except (RuntimeError, OSError, ValueError) as exc:
+        reasons.append(f"input/config validation: {exc}")
     if not candidate.slug:
         reasons.append("canonical slug missing")
     if not git_tracked(candidate.source):
@@ -205,7 +219,12 @@ def check_candidate(candidate: Candidate) -> tuple[bool, list[str]]:
     for path in blocking_shared_paths():
         if path.exists() and needle in read_text(path):
             reasons.append(f"existing shared registration: {rel(path)}")
-    reasons.extend(image_pair_reasons(candidate))
+    image_reasons = image_pair_reasons(candidate)
+    reasons.extend(image_reasons)
+    if not image_reasons:
+        from candy_image_assets import inspect_pair
+        image_status = inspect_pair(accepted_image_paths(candidate.slug), image_paths(candidate.slug), require_rgb=False)
+        reasons.extend(image_status["issues"])
     return not reasons, reasons
 
 
@@ -222,6 +241,8 @@ def latest_classification_ok_dirs() -> list[Path]:
 
 
 def available_candidates() -> list[Candidate]:
+    if not TEXT_ROOT.is_dir():
+        raise common.PageToolError(f"area input directory missing: {TEXT_ROOT}")
     candidates: list[Candidate] = []
     seen_names: set[str] = set()
     for path in sorted(TEXT_ROOT.glob("*.txt"), key=lambda p: p.name):
@@ -242,15 +263,29 @@ def available_candidates() -> list[Candidate]:
 
 def ready_queue_rows() -> list[tuple[int, str, str]]:
     if not QUEUE_PATH.is_file():
-        return []
+        raise common.PageToolError(f"area queue missing: {QUEUE_PATH}")
     rows: list[tuple[int, str, str]] = []
+    identities: set[str] = set()
+    numbers: set[int] = set()
     for line in read_text(QUEUE_PATH).splitlines():
         parts = line.split("|")
-        if len(parts) < 7 or not parts[1].strip().isdigit():
+        if len(parts) < 2 or not parts[1].strip().isdigit():
             continue
+        if len(parts) != 7 or parts[4].strip() not in {
+            "READY_CANDIDATE", "IN_PROGRESS", "LOCAL_COMPLETE", "COMMITTED", "PUSHED", "PUBLISHED", "BLOCKED"
+        }:
+            raise common.PageToolError(f"malformed area queue row: {line}")
+        number = int(parts[1].strip())
+        slug = parts[3].strip().strip("`")
+        if number in numbers or slug in identities or not re.fullmatch(r"[a-z0-9-]+", slug):
+            raise common.PageToolError(f"invalid or duplicate area queue row: {line}")
+        numbers.add(number)
+        identities.add(slug)
         if parts[4].strip() != "READY_CANDIDATE":
             continue
         rows.append((int(parts[1].strip()), parts[2].strip(), parts[3].strip().strip("`")))
+    if numbers != set(range(1, 106)):
+        raise common.PageToolError(f"area queue must preserve numbered cohort 1..105: {QUEUE_PATH}")
     return rows
 
 
@@ -262,6 +297,7 @@ def iter_candidates() -> list[Candidate]:
     for queue_number, region, slug in ready_queue_rows():
         matches = [candidate for candidate in by_slug.get(slug, []) if candidate.region == region]
         if len(matches) != 1:
+            print(f"QUEUE_ROW_STOP=number={queue_number} region={region} slug={slug} input_count={len(matches)}; resolve missing/ambiguous input")
             continue
         candidate = matches[0]
         ordered.append(
@@ -325,7 +361,7 @@ def command_check(args: argparse.Namespace) -> int:
     if ok:
         print(f"NEW_PAGE_TARGET_OK={candidate.slug}")
         print(f"REGION={candidate.region}")
-        print(f"INPUT={rel(candidate.direct)}")
+        print(f"INPUT={rel(candidate.source)}")
         return 0
     print("RESULT=STOP")
     print(f"REGION={candidate.region}")
@@ -351,4 +387,8 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    try:
+        raise SystemExit(main())
+    except (common.PageToolError, OSError, ValueError, ImportError) as exc:
+        print(f"RESULT=STOP\nREASON={exc}", file=sys.stderr)
+        raise SystemExit(2)

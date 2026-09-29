@@ -1,6 +1,6 @@
 # CANDY Hotel Image Asset Management
 
-- Updated: 2026-08-18
+- Updated: 2026-09-29
 - Target: Acceptance, accepted-source storage, unpublished-public-copy retention and removal, local public installation, replacement-unit boundaries, and publication-state verification of hotel-page image pairs
 - Status: Canonical specification
 - Creation and visual authority: `CANDY_HOTEL_IMAGE_CREATION_SPEC.md`
@@ -19,7 +19,7 @@ It does not redefine image composition, capture, renderer, dimensions, title, or
 
 It does not define routing, operation authority, Git procedure, deployment
 procedure, or response format. Those remain in the documents selected
-from the applicable routes in `codex/WORK_ROUTING.md` Section 5.2.
+from the applicable routes in `management/INDEX.md`.
 
 ## 2. Storage Classes
 
@@ -27,7 +27,7 @@ from the applicable routes in `codex/WORK_ROUTING.md` Section 5.2.
 |---|---|---|
 | Candidate | Outside the canonical accepted and public folders | Unaccepted working output. It MUST NOT be referenced by a page or reported as accepted |
 | Accepted local source | `Text_hotel_data/画像データ/<CANONICAL_SLUG>_1.jpg` and `_2.jpg` | Git-managed, non-public source of an image pair that passed every creation and acceptance gate; retain it regardless of public-copy state |
-| Canonical local public source | `HP/imgHtml/new_202601/hotel/<CANONICAL_SLUG>_1.jpg` and `_2.jpg` | Deployable copy required by a published page or by an actively authorized page-publication operation; it may be absent otherwise |
+| Canonical local public source | `HP/imgHtml/new_202601/hotel/<CANONICAL_SLUG>_1.jpg` and `_2.jpg` | Deployable copy required by an instructed local page build, its resulting local page, or a published page; local installation is not production publication |
 | Target Text reference | `./imgHtml/new_202601/hotel/<CANONICAL_SLUG>_1.jpg` and `_2.jpg` | Canonical relative references used by the hotel generator |
 | OGP reference | `https://www.55810.com/imgHtml/new_202601/hotel/<CANONICAL_SLUG>_1.jpg` | Canonical absolute OGP reference |
 | Production public asset | The deployed public URL under `/imgHtml/new_202601/hotel/` | Runtime copy required by a published page; it is not an accepted-source or specification authority |
@@ -35,10 +35,11 @@ from the applicable routes in `codex/WORK_ROUTING.md` Section 5.2.
 Public HTML, OGP, JSON-LD, CSS, and PHP MUST NOT reference `Text_hotel_data/画像データ/`.
 
 Accepted-source retention and public-copy retention are separate decisions.
-The accepted pair MUST remain stored. A public pair MUST be retained only while
-an exact published page requires it or while the exact page is moving through
-an authorized publication operation. Do not install, register, or deploy public
-copies merely because an accepted pair exists.
+The accepted pair MUST remain stored. Retain the local-public pair when the
+exact instructed page build, its resulting local page, or a published page
+requires it. Local installation and retention follow Section 7 and do not
+depend on publication permission. The existence of an accepted pair alone
+does not authorize unrelated bulk installation, Git changes, or deployment.
 
 The accepted-source directory MAY be absent before its first accepted pair.
 Create it only while accepting the first pair; do not add a placeholder file
@@ -67,8 +68,8 @@ One hotel image unit contains exactly two files:
 | State | Meaning | Permitted next action |
 |---|---|---|
 | `CANDIDATE` | The pair has not passed every hard gate | Correct or reject it outside the accepted/public folders |
-| `ACCEPTED` | Both accepted-source files exist and passed the creation and acceptance gates; the public pair may be absent | Retain the accepted pair until the exact page publication is authorized |
-| `INSTALLED_LOCAL` | Accepted and public pairs exist under the same names and each same-name SHA-256 matches | Continue only within the exact active page-publication route or retain it for an already published page |
+| `ACCEPTED` | Both accepted-source files exist and passed the creation and acceptance gates; the public pair may be absent | Install for an instructed page build under Section 7 without additional installation or publication permission |
+| `INSTALLED_LOCAL` | Accepted and public pairs exist under the same names and each same-name SHA-256 matches | Continue the instructed local page build and checks; retain the pair with the resulting local page; Git changes and publication remain separate |
 | `REGISTERED_GIT` | Both pairs are tracked and clean in the current `HEAD`, and that `HEAD` is synchronized with `origin/main` | Deploy only as the immediate image prerequisite of the authorized page publication |
 | `DEPLOYED_ASSET` | Actions deployed the public pair and production bytes match; the hotel page publication is the active next operation | Complete the page-publication route; if that route stops, preserve the accepted pair and resolve or remove the unpublished public copy under Section 7.1 |
 | `PUBLISHED` | The hotel page was deployed, its image references and production bytes were verified, and the required rendering checks passed | Maintain the pair under normal Git and production rules |
@@ -93,7 +94,7 @@ remains published.
 6. Verify `_1` and `_2` have different SHA-256 values and materially different compositions.
 7. Check complete-hash duplication against other hotel images. A match to
    another hotel is `STOP`; reuse is a separate target operation selected by
-   an applicable route in `codex/WORK_ROUTING.md` Section 5.2.
+   an applicable route in `management/INDEX.md`.
 8. Verify the target Text relative paths and OGP absolute path.
 9. Inspect both exact accepted-source and public-source names before writing either location.
 10. Apply the reconciliation matrix in Section 6.
@@ -108,9 +109,9 @@ A partial pair is never accepted. Do not place one accepted file while the other
 | Accepted source | Local public source | Hash relationship | State and action |
 |---|---|---|---|
 | Absent pair | Absent pair | Not applicable | New acceptance may create the accepted pair; first installation is a separate next state |
-| Complete pair | Absent pair | Not applicable | `ACCEPTED`; copy exact accepted bytes only when an applicable route selected from `codex/WORK_ROUTING.md` Section 5.2 includes first installation |
-| Complete pair | Complete pair | Each same-name hash matches | `INSTALLED_LOCAL` when a published page or active authorized publication requires it; otherwise it is eligible for the target-specific removal decision in Section 7.1; do not rewrite either pair |
-| Complete pair | Complete pair | Any same-name hash differs | `REVIEW`; do not overwrite. Use the applicable replacement route selected from `codex/WORK_ROUTING.md` Section 5.2 |
+| Complete pair | Absent pair | Not applicable | `ACCEPTED`; copy exact accepted bytes as part of instructed local page creation under Section 7 without additional permission |
+| Complete pair | Complete pair | Each same-name hash matches | `INSTALLED_LOCAL`; reuse without rewriting either pair for the instructed local build or existing page; removal remains a separate decision under Section 7.1 |
+| Complete pair | Complete pair | Any same-name hash differs | `REVIEW`; do not overwrite. Use the applicable replacement route selected from `management/INDEX.md` |
 | Absent pair | Complete pair | Not applicable | `LEGACY_PUBLIC_ONLY`; preserve the public pair and do not create an accepted copy by assumption |
 | Partial pair | Any state | Any state | `STOP`; identify the missing or extra file and recovery method |
 | Any state | Partial pair | Any state | `STOP`; do not publish or repair by inference |
@@ -119,14 +120,44 @@ If `_1` and `_2` have the same hash, the pair is `STOP` even when accepted/publi
 
 ## 7. First Local Public Installation
 
+A hotel-page creation instruction includes the first local installation of
+the image pairs required by those pages. Do not ask the user for separate
+image-copy, installation, or publication permission before that local work.
+This applies to an instructed page count as well as named targets; fix the
+exact targets through the applicable page-selection procedure before copying.
+Local creation may finish at `INSTALLED_LOCAL` without Git registration,
+deployment, or production publication.
+
+This rule does not authorize Git-state changes, database operations,
+production publication, same-name replacement, or deletion. Their existing
+permission and safety requirements remain in force.
+
+Read-only commands for one exact Text target:
+
+```powershell
+management\scripts\candy-hotel.cmd image-status --input "Text_hotel_data/対象ホテル.txt"
+management\scripts\candy-hotel.cmd image-install --input "Text_hotel_data/対象ホテル.txt" --dry-run
+```
+
+`ACCEPTED_SOURCE_PRESENT` is a filesystem diagnosis: readable, different,
+correctly sized RGB JPG files exist. It does not establish visual `ACCEPTED`
+status. Inspect acceptance evidence first. `--image-result-pass` records the
+verified image acceptance result; it is not a request for user permission.
+An installation implementation MUST NOT require `--publication-authorized`
+for a local-only page build. A remaining requirement for that flag is an
+implementation mismatch, not a reason to request additional installation
+permission or to assert publication authority that was not given.
+First installation must create only absent public names, copy exact bytes,
+and roll back its own new files on pair failure. It must not register Git
+changes, deploy assets, or publish pages.
+
 First installation applies only when both canonical public filenames are absent.
 
 1. Require `IMAGE RESULT: PASS` and a complete accepted pair.
-2. Perform first local installation only while the exact hotel page publication
-   is explicitly authorized and active through the applicable routes selected
-   from `codex/WORK_ROUTING.md` Section 5.2. An acceptance-only, preparation,
-   normalization, or future-page task MUST end at `ACCEPTED` and MUST NOT create
-   the public pair.
+2. Perform first local installation for the exact hotel pages covered by the
+   creation instruction. Do not require a separate installation or publication
+   approval. An image-acceptance-only task with no page-creation instruction
+   still ends at `ACCEPTED`; do not expand it into unrelated page preparation.
 3. Copy the accepted files without re-rendering, re-encoding, resizing, metadata editing, or renaming.
 4. Verify that each accepted/public same-name SHA-256 matches.
 5. Verify that the public pair remains two different hashes.
@@ -135,15 +166,14 @@ First installation applies only when both canonical public filenames are absent.
 
 Local installation does not mean that a page exists, a Commit was created,
 GitHub was updated, or production serves the image. It is nevertheless a
-required prerequisite when first installation is included in the authorized
-page-production scope. The current hotel publication command
+required prerequisite of the instructed local page build. The hotel publication command
 requires public images to be tracked and clean dependencies, so a newly
 installed pair MUST complete Section 9 before page publication.
 
-Do not stockpile local-public or production-public copies for future hotel
-pages. Installation, image registration, deployment, and page publication must
-remain one target-limited publication objective even when technical safeguards
-require separate Commits or Actions runs.
+Retain the installed pair with the resulting local page even when publication
+has not been instructed. Do not install pairs outside the instructed targets.
+Image registration, deployment, and page publication are separate from local
+creation and proceed only within their authorized scope.
 
 ### 7.1 Unpublished Public-Copy Removal
 
@@ -153,8 +183,8 @@ retained. Removal is permitted only when all of the following are verified:
 1. The accepted-source pair is complete, readable, correctly named, internally
    different, and still passes its recorded format, dimensions, and SHA-256
    checks.
-2. No page in `PUBLISHED` state requires the pair, and no currently authorized
-   page-publication operation is using it.
+2. No local or published page requires the pair, and no instructed page build
+   or authorized page-publication operation is using it.
 3. The local-public pair is complete and each same-name SHA-256 matches the
    accepted-source pair before removal.
 4. The exact pair and the intended local, GitHub, and production removal scope
@@ -171,7 +201,7 @@ When removal is authorized:
    production public URLs are absent.
 4. Reverify the accepted-source paths and SHA-256 values after removal and set
    the lifecycle to `ACCEPTED`.
-5. If the page is authorized later, recreate the public pair only by the first
+5. If page creation is instructed later, recreate the public pair only by the first
    local installation procedure using the unchanged accepted bytes.
 
 This procedure does not apply to `PUBLISHED`, partial, hash-mismatched, or
@@ -183,7 +213,7 @@ reconciliation, recovery, or legacy review route before any deletion.
 An existing public filename with different proposed bytes is not a first installation.
 
 - Treat replacement or overwrite as a separate target operation under the
-  applicable replacement route selected from `codex/WORK_ROUTING.md` Section 5.2.
+  applicable replacement route selected from `management/INDEX.md`.
 - Treat the hotel pair as one inspection and rollback unit. Inspect both accepted and public files even when only one file's bytes change.
 - Validate the proposed pair through `CANDY_HOTEL_IMAGE_CREATION_SPEC.md` before acceptance.
 - Do not create an accepted-source copy of a legacy public file merely to make the hashes agree.
@@ -196,9 +226,10 @@ No hotel-specific replacement automation or production guard is established by t
 
 ## 9. Asset Registration and Deployment Unit
 
-- The accepted-source pair is always Git-managed and retained. The local-public
-  pair is Git-managed only while required by a published page or the exact
-  active page-publication operation.
+- The accepted-source pair is managed as source material and retained.
+  Local installation does not itself register either pair in Git. A pair
+  required by an instructed local build or resulting local page may remain
+  unregistered until the relevant Git operation is specifically authorized.
 - Do not register or deploy a public pair merely because its accepted pair is
   complete. When the exact page publication is authorized, keep the new public
   pair in one target-limited image-asset Git unit and proceed directly to the
@@ -209,8 +240,8 @@ No hotel-specific replacement automation or production guard is established by t
   be deployed immediately before the page because deployment safeguards require
   that order, but only within the same authorized page-publication objective;
   that temporary state is `DEPLOYED_ASSET`, not `PUBLISHED`.
-- When the applicable authorized routes selected from `codex/WORK_ROUTING.md`
-  Section 5.2 include creation and publication of a hotel page whose complete
+- When the applicable authorized routes selected from `management/INDEX.md`
+  Sections 5.1 and 6.2 include creation and publication of a hotel page whose complete
   accepted pair is not yet locally public, preserve
   two distinct units: first image-asset registration, deployment, and
   production-byte verification; then page registration, deployment, and page
@@ -228,11 +259,11 @@ local public hashes.
 
 ## 10. Production Publication and Verification
 
-A newly created pair MUST reach `DEPLOYED_ASSET` within the same authorized
-page-publication objective; an unchanged legacy
+For production publication, a newly created pair MUST reach `DEPLOYED_ASSET`
+within the same authorized page-publication objective; an unchanged legacy
 public-only pair MUST already be tracked and clean. Publication follows the
-applicable page, Git, and production routes selected from `codex/WORK_ROUTING.md`
-Section 5.2 and does not create a separate image-specific authority path.
+applicable page, Git, and production routes selected from `management/INDEX.md`
+Sections 5.1 and 6.2 and does not create a separate image-specific authority path.
 
 Before staging:
 
@@ -265,8 +296,8 @@ Only then may the pair be reported as `PUBLISHED`.
 - A write, replacement, deletion, rename, or publication exceeds the authorized target.
 - An accepted-source pair would be deleted, altered, or left incomplete while
   removing a public copy.
-- A public pair is proposed for removal while its page remains `PUBLISHED` or
-  while an active authorized publication requires it.
+- A public pair is proposed for removal while a local or published page,
+  an instructed local build, or an active authorized publication requires it.
 - A production replacement cannot preserve cache correctness and rollback.
 
 Use `REVIEW` when:
@@ -281,6 +312,7 @@ Use `REVIEW` when:
 SOURCE_ROUTE: DIRECT_TEXT / PHASE_PREPARED
 IMAGE LIFECYCLE: CANDIDATE / ACCEPTED / INSTALLED_LOCAL / REGISTERED_GIT / DEPLOYED_ASSET / PUBLISHED / LEGACY_PUBLIC_ONLY / REVIEW / STOP
 PUBLIC_COPY_RETENTION: REQUIRED / REMOVABLE / REMOVED / NOT_APPLICABLE
+LOCAL_PAGE_REQUIREMENT: YES / NO / UNVERIFIED
 PUBLISHED_PAGE_REQUIREMENT: YES / NO / UNVERIFIED
 TARGET_TEXT_PATH:
 CANONICAL_SLUG:
@@ -316,16 +348,23 @@ HUMAN_DECISION_REQUIRED:
 - [ ] The accepted-source pair remains stored regardless of public-copy state.
 - [ ] Same-name accepted/public states were reconciled without inference.
 - [ ] Any local public installation copied exact accepted bytes.
-- [ ] A public pair exists only for a published page or an active authorized
-      page-publication operation.
+- [ ] A local-public pair is limited to the instructed page targets and is
+      retained while their local build, resulting local page, or publication requires it.
+- [ ] Local first installation did not request additional installation or
+      publication permission; no Git or production permission was inferred.
 - [ ] Any unpublished public-copy removal preserved both accepted files,
       removed the public pair as one unit, and verified the resulting state as
       `ACCEPTED`.
 - [ ] Target Text paths and OGP agree.
 - [ ] Any replacement followed the applicable replacement route selected from
-      `codex/WORK_ROUTING.md` Section 5.2 with cache handling and rollback.
+      `management/INDEX.md` with cache handling and rollback.
 - [ ] A newly accepted pair reached `REGISTERED_GIT` and `DEPLOYED_ASSET` before page publication.
 - [ ] Local acceptance, local installation, image-asset Git/Actions, page
       Git/Actions, production bytes, page references, and rendering were
       recorded separately.
 - [ ] No unverified state was reported as `PUBLISHED`.
+
+For local-only page creation, Git registration, Actions, deployment, and
+production verification are `NOT_EXECUTED`, not missing local-completion
+requirements. Do not require them or an additional permission request before
+reporting the verified local scope complete.

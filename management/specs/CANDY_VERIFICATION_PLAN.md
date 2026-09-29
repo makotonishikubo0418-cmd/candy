@@ -1,6 +1,6 @@
 # CANDY Full-Population Verification Plan
 
-- Updated: 2026-07-25
+- Updated: 2026-09-29
 - Applies to: `HP`, generation source data, test, and production
 - Position: Canonical method for full-population evidence classification
 
@@ -9,6 +9,20 @@ classifications, and revalidation. It does not define routing, authority, Git,
 deployment limits, workflow behavior, or current defect counts.
 
 ## 1. Definition of Full-Population Verification
+
+For area/hotel tooling, `audit-inputs` covers recursive Text inputs and
+`audit-existing` independently covers public PHP. Record totals, exclusions,
+input failures, core issues and current-contract mismatches separately. An audit
+exit code is scoped to its declared checks, not production or visual approval.
+With Python 3.12+ and Pillow, run:
+
+```powershell
+python -B management/scripts/test_candy_tooling_recovery.py
+```
+
+This regression suite uses temporary files and mocks, without Git mutations
+or network operations. Deployment fixtures that create Git repositories remain
+separate; obtain the required Git-operation authority before running them.
 
 Full-population verification means enumerating every target, separating normal cases, exceptions, dynamic generation, and incomplete data, and recording actual validation results. There is no count limit; more than 100 files or 1,000 URLs remain fully in scope.
 
@@ -158,7 +172,7 @@ A template-only value is not a current public failure. A value remaining in gene
 
 When production deployment is inside the verified scope, validate the exact
 workflow and deploy script selected by the applicable production route in root
-`codex/WORK_ROUTING.md` Section 5.2. This plan requires only that the following evidence
+`management/INDEX.md`. This plan requires only that the following evidence
 states remain
 separate:
 

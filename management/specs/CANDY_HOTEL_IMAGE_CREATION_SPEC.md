@@ -1,6 +1,6 @@
 # CANDY Hotel Image Creation Specification
 
-- Updated: 2026-07-25
+- Updated: 2026-09-29
 - Target: Two images for one hotel page
 - Status: Canonical specification
 - Route: Direct staff-completed Text image preparation or Phase 4
@@ -15,7 +15,7 @@ This specification supports two independent starts. Select one `SOURCE_ROUTE` an
 Use this route when staff already completed the target Text. Run:
 
 ```powershell
-codex\scripts\candy-hotel.cmd direct-check --input "Text_hotel_data/対象ホテル.txt"
+management\scripts\candy-hotel.cmd direct-check --input "Text_hotel_data/対象ホテル.txt"
 ```
 
 Start image creation only when the result is `DIRECT_TEXT_STATUS=READY_FOR_IMAGES`. This result confirms that the Text parsed, the slug is unique, the input is tracked, no page or shared registration exists, and the only blockers are the two declared image files. Phase results and Phase hash records are not required.
@@ -43,7 +43,7 @@ Use the dedicated helper to remove repeated manual cropping, font sizing, placem
 Plan one target before capture:
 
 ```powershell
-codex\scripts\candy-hotel.cmd image-plan `
+management\scripts\candy-hotel.cmd image-plan `
   --input "Text_hotel_data/対象ホテル.txt" `
   --hotel-name-en "Exact approved English name" `
   --source-route DIRECT_TEXT
@@ -54,7 +54,7 @@ Keep one Google Earth browser session for consecutive targets. Disable labels on
 Render both candidates and one evidence manifest in a single command:
 
 ```powershell
-codex\scripts\candy-hotel.cmd image-render `
+management\scripts\candy-hotel.cmd image-render `
   --input "Text_hotel_data/対象ホテル.txt" `
   --hotel-name-en "Exact approved English name" `
   --source-route DIRECT_TEXT `
@@ -67,7 +67,7 @@ The default candidate directory is `%TEMP%\candy-hotel-images\<CANONICAL_SLUG>`.
 Recheck an existing candidate manifest without rendering again:
 
 ```powershell
-codex\scripts\candy-hotel.cmd image-check `
+management\scripts\candy-hotel.cmd image-check `
   --input "Text_hotel_data/対象ホテル.txt" `
   --hotel-name-en "Exact approved English name" `
   --source-route DIRECT_TEXT `
@@ -83,7 +83,7 @@ deterministic result alone.
 Validate the helper contract after changing its implementation:
 
 ```powershell
-codex\scripts\candy-hotel.cmd image-self-test
+management\scripts\candy-hotel.cmd image-self-test
 ```
 
 ## 2. Deliverables

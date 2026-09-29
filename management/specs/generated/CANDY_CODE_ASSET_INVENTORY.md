@@ -8,13 +8,13 @@
 > Status / Lifecycle: Generated Current State / Active
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
-> Related Implementation Files: `codex/scripts/candy_site_state.py`, `codex/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-08-19T11:20:17+09:00 (reproducible generation baseline)
+> Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
+> Generated at: 2026-09-29T11:10:58+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: afa0bb7c773f599cf4fe2340922ebed59d46a402
-> State fingerprint: sha256:45779b9c8c569787f2896af26fd48c9d45afe015f88045bf1b20b98c35fd19dd
-> Population: Public PHP files: 148 / assets: 511
-> Generator: `codex/scripts/candy_site_state.py` with `codex/scripts/candy_site_state_render.py`
+> Commit: b1c8b3fc1190c7119aaa55fd84367aee3bd52c92
+> State fingerprint: sha256:208d394fa77d24f6315afdabacb78cd87ffe4611e79dcaedb9f33837b6f40ad9
+> Population: Public PHP files: 148 / assets: 512
+> Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 4 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 0
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
 
@@ -32,7 +32,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .jpg | 394 |
 | .js | 12 |
 | .mp4 | 2 |
-| .png | 28 |
+| .png | 29 |
 | .svg | 1 |
 | .ttf | 14 |
 | .webm | 1 |
@@ -51,7 +51,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml | 18 |
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 202 |
-| HP/imgHtml/new_202601/banner | 23 |
+| HP/imgHtml/new_202601/banner | 24 |
 | HP/imgHtml/new_202601/blog | 12 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 46 |
@@ -71,7 +71,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | girls:girls | 0 | NONE | UNVERIFIED |
 | girls:girls_list | 1 | NONE | OK |
 | hotel:hotel | 0 | NONE | UNVERIFIED |
-| top:index | 51 | NONE | OK |
+| top:index | 52 | NONE | OK |
 | area:arata | 6 | NONE | OK |
 | area:ariyadacho | 6 | NONE | OK |
 | area:chuokoshinmachi | 6 | NONE | OK |

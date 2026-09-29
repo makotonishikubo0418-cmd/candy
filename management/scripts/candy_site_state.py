@@ -31,13 +31,14 @@ from candy_page_common import (
     TEXT_HOTEL_DIR,
     SITE_STATE_OUTPUT_NAMES,
     atomic_write,
+    write_transaction,
     read_utf8,
 )
 
 
 GENERATED_DIR = DOCS_DIR / "generated"
 OUTPUT_NAMES = SITE_STATE_OUTPUT_NAMES
-SCRIPT_REL = "codex/scripts/candy_site_state.py"
+SCRIPT_REL = "management/scripts/candy_site_state.py"
 DETAIL_RE = re.compile(r"^kagoshima-deliveryhealth-(area|hotel|blog)-([a-z0-9-]+)$")
 CANONICAL_RE = re.compile(
     r"https?://(?:www\.)?55810\.com/kagoshima-deliveryhealth-(area|hotel|blog)-([a-z0-9-]+)\.php",
@@ -119,9 +120,10 @@ SOURCE_SCOPE = (
     "Text_area_data",
     "Text_blog_data",
     "Text_hotel_data",
-    "codex/scripts/candy_hotel_text_migration.py",
-    "codex/scripts/candy_site_state.py",
-    "codex/scripts/candy_site_state_render.py",
+    "management/scripts/candy_hotel_text_migration.py",
+    "management/scripts/candy_site_state.py",
+    "management/scripts/candy_site_state_render.py",
+    "management/scripts/candy_page_common.py",
 )
 STATE_FINGERPRINT_EXCLUDED_HP_PARTS = {
     ".git",
@@ -425,7 +427,7 @@ def generation_base_head() -> tuple[str, str]:
             changed = set(
                 git_value("diff-tree", "--no-commit-id", "--name-only", "-r", source_commit).splitlines()
             )
-            generated_paths = {f"codex/docs/generated/{name}" for name in OUTPUT_NAMES}
+            generated_paths = {f"management/specs/generated/{name}" for name in OUTPUT_NAMES}
             if changed & generated_paths:
                 parent = git_value("rev-parse", f"{source_commit}^")
                 base = parent if re.fullmatch(r"[0-9a-f]{40}", parent) else source_commit
@@ -440,6 +442,7 @@ def generation_base_head() -> tuple[str, str]:
 def state_fingerprint_paths() -> list[Path]:
     paths: set[Path] = {
         Path(__file__).resolve(),
+        Path(__file__).with_name("candy_page_common.py").resolve(),
         Path(hotel_text_migration.__file__).resolve(),
         Path(state_render.__file__).resolve(),
     }
@@ -1089,6 +1092,11 @@ def collect() -> dict[str, object]:
                 if not any(option.is_file() for option in options):
                     missing_images.add(cleaned)
         image_state = "ISSUE" if missing_images else "OK" if referenced_images else "UNVERIFIED"
+        if category == "hotel" and slug and missing_images:
+            accepted_pair = [TEXT_HOTEL_DIR / "画像データ" / f"{slug}_{i}.jpg" for i in (1, 2)]
+            public_pair = [HP_ROOT / "imgHtml" / "new_202601" / "hotel" / f"{slug}_{i}.jpg" for i in (1, 2)]
+            if all(path.is_file() and path.stat().st_size > 0 for path in accepted_pair) and not any(path.exists() for path in public_pair):
+                image_state = "ACCEPTED_SOURCE_PRESENT (integrity/visual approval: use image-status)"
         if page and page["structure"] == "COMPLETE":
             existing = "COMPLETE"
         elif page:
@@ -1112,8 +1120,6 @@ def collect() -> dict[str, object]:
             blockers.append("Existing page structure: " + str(page["structure"]))
         if list_count and int(list_count) > 1:
             blockers.append("Duplicate index registration")
-        if category == "area" and not page and list_count != 1:
-            blockers.append("Missing area index registration")
         if page and page["structure"] == "COMPLETE" and not duplicate:
             gate = "EXISTING"
             next_action = "Use the category specification when changing the existing page"
@@ -1125,11 +1131,13 @@ def collect() -> dict[str, object]:
             next_action = (
                 "Run legacy-check and resolve every migration issue"
                 if legacy_formats
-                else "Resolve missing data or the partial structure"
+                else "Run image-status and the separate authorized image-asset route"
+                if image_state.startswith("ACCEPTED_SOURCE_PRESENT")
+                else "Resolve missing data or the partial structure; use category audit-inputs for exact blockers"
             )
         else:
             gate = "READY"
-            next_action = "Production may proceed under the category runbook"
+            next_action = "Inventory checks only; require category target-check and runbook before production"
         upcoming.append(
             {
                 "category": category,
@@ -1225,7 +1233,8 @@ def audit(data: dict[str, object]) -> int:
     pages = data["pages"]
     seo = Counter(row["overall"] for row in data["seo"])
     gates = Counter(row["gate"] for row in data["upcoming"])
-    print("AUDIT=OK")
+    print("AUDIT=COMPLETED")
+    print("AUDIT_SCOPE=structural_inventory_and_seo; NOT_A_FULL_CONTENT_OR_PUBLICATION_APPROVAL")
     print(f"branch={data['branch']} current_head={data['current_head']} generation_base_head={data['head']}")
     print(f"pages={len(pages)} complete={sum(page['structure'] == 'COMPLETE' for page in pages)} partial={sum(page['structure'] == 'PARTIAL' for page in pages)} special_intentional={sum(page['special_classification'] == 'INTENTIONAL' for page in pages)} special_unreviewed={sum(page['special_classification'] == 'UNREVIEWED' for page in pages)} conflict={sum(page['structure'] == 'CONFLICT' for page in pages)}")
     print(f"texts={len(data['texts'])} upcoming={len(data['upcoming'])} ready={gates['READY']} blocked={gates['BLOCKED']} existing={gates['EXISTING']} conflict={gates['CONFLICT']}")
@@ -1305,15 +1314,18 @@ def preview(rendered: dict[str, str], strict_metadata: bool = False) -> int:
 def write(rendered: dict[str, str], strict_metadata: bool = False) -> int:
     changed = 0
     metadata_ignored = 0
+    planned: dict[Path, str] = {}
     for name, expected in rendered.items():
         target = GENERATED_DIR / name
         current = read_utf8(target) if target.is_file() else None
         if document_differs(current, expected, strict_metadata):
-            atomic_write(target, expected)
+            planned[target] = expected
             changed += 1
-            print(f"WRITE={rel(target)}")
         elif current != expected:
             metadata_ignored += 1
+    write_transaction(planned, lambda: None)
+    for path in planned:
+        print(f"WRITE={rel(path)}")
     print(
         f"WRITE=OK changed={changed} unchanged={len(rendered) - changed} "
         f"metadata_only_ignored={metadata_ignored}"

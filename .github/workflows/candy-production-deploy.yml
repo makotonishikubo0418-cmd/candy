@@ -15,13 +15,13 @@ on:
       - ".github/scripts/test_candy_site_state_metadata.py"
       - ".github/scripts/candy_release_check.py"
       - ".github/scripts/test_candy_release_check.py"
-      - "codex/scripts/candy_area_image_replace.py"
-      - "codex/scripts/candy-area.cmd"
-      - "codex/scripts/candy_site_state.py"
-      - "codex/scripts/candy-site-state.cmd"
-      - "codex/scripts/candy_page_common.py"
-      - "codex/scripts/candy_girl_information.py"
-      - "codex/data/CANDY_GIRL_INFORMATION.json"
+      - "management/scripts/candy_area_image_replace.py"
+      - "management/scripts/candy-area.cmd"
+      - "management/scripts/candy_site_state.py"
+      - "management/scripts/candy-site-state.cmd"
+      - "management/scripts/candy_page_common.py"
+      - "management/scripts/candy_girl_information.py"
+      - "management/data/CANDY_GIRL_INFORMATION.json"
       - "Text_girl_data/**"
       - "!HP/codex/**"
       - "!HP/**/*.md"
@@ -95,12 +95,12 @@ jobs:
 
       - name: Validate deployment script
         run: |
-          python3 -m py_compile .github/scripts/candy_ftp_deploy.py .github/scripts/candy_area_image_replacement_guard.py codex/scripts/candy_area_image_replace.py codex/scripts/candy_site_state.py codex/scripts/candy_page_common.py .github/scripts/candy_release_check.py
+          python3 -m py_compile .github/scripts/candy_ftp_deploy.py .github/scripts/candy_area_image_replacement_guard.py management/scripts/candy_area_image_replace.py management/scripts/candy_site_state.py management/scripts/candy_page_common.py .github/scripts/candy_release_check.py
           python3 .github/scripts/candy_ftp_deploy.py --self-test
           python3 .github/scripts/test_candy_area_image_replacement_guard.py
           python3 .github/scripts/test_candy_area_image_replace.py
           python3 .github/scripts/test_candy_site_state_metadata.py
-          python3 codex/scripts/candy_girl_information.py check
+          python3 management/scripts/candy_girl_information.py check
           python3 .github/scripts/test_candy_ftp_deploy.py
           python3 .github/scripts/test_candy_release_check.py
 
@@ -143,12 +143,12 @@ jobs:
 
       - name: Validate deployment script
         run: |
-          python3 -m py_compile .github/scripts/candy_ftp_deploy.py .github/scripts/candy_area_image_replacement_guard.py codex/scripts/candy_area_image_replace.py codex/scripts/candy_site_state.py codex/scripts/candy_page_common.py .github/scripts/candy_release_check.py
+          python3 -m py_compile .github/scripts/candy_ftp_deploy.py .github/scripts/candy_area_image_replacement_guard.py management/scripts/candy_area_image_replace.py management/scripts/candy_site_state.py management/scripts/candy_page_common.py .github/scripts/candy_release_check.py
           python3 .github/scripts/candy_ftp_deploy.py --self-test
           python3 .github/scripts/test_candy_area_image_replacement_guard.py
           python3 .github/scripts/test_candy_area_image_replace.py
           python3 .github/scripts/test_candy_site_state_metadata.py
-          python3 codex/scripts/candy_girl_information.py check
+          python3 management/scripts/candy_girl_information.py check
           python3 .github/scripts/test_candy_ftp_deploy.py
           python3 .github/scripts/test_candy_release_check.py
 

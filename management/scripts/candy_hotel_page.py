@@ -1044,7 +1044,7 @@ def validate_rendered(data: HotelData, resolved: list[common.ShopResolved], sour
             actual_item_names.append(item.get("name"))
         if actual_item_names != expected_item_names:
             errors.append("ItemList本文順序不一致")
-    actual_keys = [value for value in re.findall(r"<!-- ([a-z0-9_]+) -->", source) if value in common.KEY_TO_NAME]
+    actual_keys = common.shop_keys(source)
     expected_keys = [value.key for value in resolved]
     if actual_keys != expected_keys:
         errors.append(f"店舗順不整合: expected={expected_keys} actual={actual_keys}")
@@ -1150,7 +1150,7 @@ def update_hotel_list(source: str, data: HotelData) -> str:
         source = common.replace_exact(
             source,
             (
-                rf'(?ms)(?:^[ \t]*\r?\n)*^[ \t]*<div class="lpt_15 bd_t"><a href="\./{re.escape(php_name)}".*?</div>'
+                rf'(?ms)(?:^[ \t]*\r?\n)*^[ \t]*<div class="lpt_15(?: bd_t)?"><a href="\./{re.escape(php_name)}".*?</div>'
                 r'\s*^[ \t]*<div class="lp_10_0_15 f_xxs fc_g">.*?</div>'
             ),
             "\n" + entry,
@@ -1245,7 +1245,11 @@ def update_hotel_top_index(source: str, data: HotelData) -> str:
     if block.count(href) > 1:
         raise HotelToolError("indexホテル登録重複")
     if href in block:
-        return source
+        pattern = re.compile(r'(<a\b[^>]*href="' + re.escape(href) + r'"[^>]*>)(.*?)(</a>)', re.S)
+        block, count = pattern.subn(lambda match: match[1] + common.htext(data.hotel_name) + match[3], block)
+        if count != 1:
+            raise HotelToolError("indexホテル既存リンク照合が1件ではありません")
+        return source[:start] + block + source[end:]
     escaped_name = common.htext(data.hotel_name)
     plain_pattern = re.compile(rf'(<div class="[^"]*">){re.escape(escaped_name)}(</div>)')
     if plain_pattern.search(block):
@@ -1311,6 +1315,7 @@ def run_build(args: argparse.Namespace) -> int:
     hotel_path = hp_root / "source" / "hotel.html"
     index_path = hp_root / "source" / "index.html"
     sitemap_path = hp_root / "sitemap.xml"
+    before = path_config.snapshot_paths([public_path, source_path, dataset_path, base_path, hotel_path, index_path, sitemap_path])
     hotel_source = read_utf8(hotel_path)
     index_source = read_utf8(index_path)
     alignment_errors = hotel_registry_alignment_errors(hotel_source, index_source)
@@ -1323,24 +1328,20 @@ def run_build(args: argparse.Namespace) -> int:
     if alignment_errors:
         raise HotelToolError("生成後公開経路検証失敗:\n- " + "\n- ".join(alignment_errors))
     new_sitemap = common.update_sitemap(read_utf8(sitemap_path), data.canonical)
+    outputs = {public_path: public_php_content(), source_path: rendered, dataset_path: dataset_content(),
+               base_path: new_base, hotel_path: new_hotel, index_path: new_index, sitemap_path: new_sitemap}
+    php_status = path_config.lint_planned_php(outputs)
     if args.dry_run:
         print(f"RESULT=DRY_RUN_OK hotel={data.hotel_name} slug={data.slug}")
         print(f"COUNTS shops={len(resolved)} faqs={len(data.faqs)} rates={len(data.rates)} spots={len(data.spots)}")
         print(f"TIMING total={time.perf_counter()-started:.3f}s")
         return 0
-    common.atomic_write(public_path, public_php_content())
-    common.atomic_write(source_path, rendered)
-    common.atomic_write(dataset_path, dataset_content())
-    common.atomic_write(base_path, new_base)
-    common.atomic_write(hotel_path, new_hotel)
-    common.atomic_write(index_path, new_index)
-    common.atomic_write(sitemap_path, new_sitemap)
-    actual_errors = validate_rendered(data, resolved, read_utf8(source_path), hp_root)
-    actual_errors.extend(shared_validation(data, hp_root))
-    php_status, php_errors = common.php_lint([public_path, dataset_path, base_path])
-    actual_errors.extend(php_errors)
-    if actual_errors:
-        raise HotelToolError("書込後検証失敗:\n- " + "\n- ".join(actual_errors))
+    def validate_written():
+        actual_errors = validate_rendered(data, resolved, read_utf8(source_path), hp_root)
+        actual_errors.extend(shared_validation(data, hp_root))
+        if actual_errors:
+            raise HotelToolError("書込後検証失敗:\n- " + "\n- ".join(actual_errors))
+    path_config.write_transaction(outputs, validate_written, expected=before)
     print(f"RESULT=BUILD_OK hotel={data.hotel_name} slug={data.slug}")
     changed_paths = (public_path, source_path, dataset_path, base_path, hotel_path, index_path, sitemap_path)
     print("FILES=" + ",".join(str(path.relative_to(root)) for path in changed_paths))
@@ -1800,7 +1801,7 @@ def main() -> int:
     args = create_parser().parse_args()
     try:
         return args.func(args)
-    except (HotelToolError, common.AreaToolError) as exc:
+    except (HotelToolError, common.AreaToolError, path_config.PageToolError, OSError, ValueError) as exc:
         print(f"RESULT=STOP\nREASON={exc}", file=sys.stderr)
         return 2
 

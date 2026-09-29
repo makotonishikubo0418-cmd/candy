@@ -1,6 +1,6 @@
 # CANDY AREA 105 PAGE QUEUE
 
-- Updated: 2026-08-08
+- Updated: 2026-09-29
 - Purpose: Preserve the fixed 105-target cohort and its production order
 
 ## 1. Cohort Provenance
@@ -21,7 +21,7 @@ population, or eligibility result.
 
 Membership in this cohort does not prove current eligibility. For each target,
 the current gate and generated current-state documents selected by root
-`AGENTS.md` through `codex/WORK_ROUTING.md` determine whether production may proceed.
+`AGENTS.md` through `management/INDEX.md` determine whether production may proceed.
 
 ## 2. Operating Rules
 

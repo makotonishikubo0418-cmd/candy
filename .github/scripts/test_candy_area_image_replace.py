@@ -10,7 +10,7 @@ import tempfile
 
 GIT = shutil.which("git") or r"C:\Program Files\Git\cmd\git.exe"
 SCRIPT = (
-    Path(__file__).resolve().parents[2] / "codex" / "scripts" / "candy_area_image_replace.py"
+    Path(__file__).resolve().parents[2] / "management" / "scripts" / "candy_area_image_replace.py"
 )
 PREFIX = "kagoshima-deliveryhealth-area-testcho"
 PUBLIC = Path("HP/imgHtml/new_202601/area")

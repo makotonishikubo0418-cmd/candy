@@ -17,7 +17,7 @@ try:
     from PIL import Image, ImageDraw, ImageFont
 except ImportError as exc:  # pragma: no cover - environment failure
     raise SystemExit(
-        "Pillow is required. Run this tool through codex\\scripts\\candy-hotel.cmd."
+        "Pillow is required. Run this tool through management\\scripts\\candy-hotel.cmd."
     ) from exc
 
 import candy_hotel_page as hotel_page

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Audit Candy formal management documents and classified repository Markdown."""
+"""Retained auditor for the former codex/ layout, not the current management index."""
 
 from __future__ import annotations
 
@@ -551,6 +551,9 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Audit Candy management-document structure")
     parser.add_argument("--json", action="store_true", help="emit the complete audit result as JSON")
     args = parser.parse_args()
+    if not ROUTER.is_file():
+        print("MANAGEMENT_AUDIT=NOT_APPLICABLE; legacy codex layout only; use management/INDEX.md", file=sys.stderr)
+        return 2
     result, failures = audit()
     if args.json:
         print(json.dumps(result, ensure_ascii=False, indent=2))

@@ -1,6 +1,6 @@
 # CANDY Page Generation Governance
 
-- Updated: 2026-07-26
+- Updated: 2026-09-29
 - Applies to: Normal new-page generation for area, blog, and hotel by Codex;
   Section 10.1 also governs direct changes to their top-page sections
 
@@ -15,7 +15,7 @@ operation authority, Git procedure, production procedure, or response format.
 - Blog detail: `CANDY_BLOG_PAGE_GENERATION_SPEC.md`
 - Hotel detail: `CANDY_HOTEL_PAGE_GENERATION_SPEC.md`
 
-Except for Section 10.1 when `codex/WORK_ROUTING.md` routes a direct top-page category
+Except for Section 10.1 when `management/INDEX.md` routes a direct top-page category
 section task here, apply this document only to normal new-page generation. Do
 not apply its other sections to development changes, bug fixes,
 common-structure changes, or refactoring.
@@ -24,7 +24,7 @@ common-structure changes, or refactoring.
 
 - Do not infer content absent from source data.
 - Do not force the template's block count onto the completed page.
-- Area pages render three to six verified nearby-area links from `codex/data/CANDY_AREA_RELATED_LINKS.json`, or omit the block when fewer than three suitable targets exist. Hotel pages render exactly three current indexable blog-detail links and three current indexable area-detail links selected deterministically by the generator.
+- Area pages render three to six verified nearby-area links from `management/data/CANDY_AREA_RELATED_LINKS.json`, or omit the block when fewer than three suitable targets exist. Hotel pages render exactly three current indexable blog-detail links and three current indexable area-detail links selected deterministically by the generator.
 - Add or remove items, blocks, and sections according to available information.
 - After a structural change, synchronize IDs, table of contents, JSON-LD, links, and counts.
 - Treat public PHP, source HTML, dataset PHP, and dataset_base registration as one change unit.
@@ -97,7 +97,7 @@ When a required item is missing, a slug conflicts, a same-name file exists, or a
 For area and hotel pages, distinguish a genuinely missing image from a pending
 first local installation. A complete category-approved accepted-source pair is
 available production input. When the applicable authorized routes selected
-from `codex/WORK_ROUTING.md` Section 5.2 include first installation and its same-name
+from `management/INDEX.md` include first installation and its same-name
 local-public pair is absent, copy the
 exact accepted bytes to the canonical local-public directory before the final
 target gate.

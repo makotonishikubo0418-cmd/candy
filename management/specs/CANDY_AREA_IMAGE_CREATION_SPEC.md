@@ -2,7 +2,7 @@
 
 - Purpose: Safely produce two regional images for an area page while matching the existing design
 - Status: canonical document
-- Updated: 2026-07-25
+- Updated: 2026-09-29
 - Applies to: Image production for candy area pages
 
 ## 1. Responsibility and Scope
@@ -11,7 +11,7 @@ This document owns only the area-image visual deliverable: source-view
 requirements, two-image composition, crop, title treatment, legibility, and
 visual acceptance. Naming, storage, asset lifecycle, first installation,
 replacement, Git, and publication belong to the other documents selected
-from the applicable routes in `codex/WORK_ROUTING.md` Section 5.2.
+from `management/INDEX.md` Sections 4 and 5.1.
 
 Do not use generative AI. Use images that verify the actual region.
 

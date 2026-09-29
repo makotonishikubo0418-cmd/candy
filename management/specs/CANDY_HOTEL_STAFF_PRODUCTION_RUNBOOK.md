@@ -1,6 +1,6 @@
 # CANDY Hotel Staff Production Runbook
 
-- Updated: 2026-08-09
+- Updated: 2026-09-29
 - Applies to: Normal production of one or more standard hotel pages from either staff-completed Text or Phase-prepared Text
 - Start condition: Explicit instruction to produce or publish one or more hotel pages
 - Completion criteria: Every requested target completes its dedicated validation and authorized local or publication scope; otherwise the run stops with completed, failed, and unexecuted targets distinguished
@@ -16,7 +16,7 @@ Use `DIRECT_TEXT` when staff already completed the production input under `Text_
 Before `direct-check`, inspect the Text format:
 
 ```powershell
-codex\scripts\candy-hotel.cmd legacy-check --input "Text_hotel_data/対象ホテル.txt"
+management\scripts\candy-hotel.cmd legacy-check --input "Text_hotel_data/対象ホテル.txt"
 ```
 
 - `CURRENT_TEXT_STATUS=VALID` means no format conversion is required.
@@ -36,7 +36,7 @@ Authorized scope: local build / publication
 Run:
 
 ```powershell
-codex\scripts\candy-hotel.cmd direct-check --input "Text_hotel_data/対象ホテル.txt"
+management\scripts\candy-hotel.cmd direct-check --input "Text_hotel_data/対象ホテル.txt"
 ```
 
 - `DIRECT_TEXT_STATUS=READY_FOR_IMAGES` means that the Text, slug, Git tracking,
@@ -49,6 +49,10 @@ codex\scripts\candy-hotel.cmd direct-check --input "Text_hotel_data/対象ホテ
   as page-publication readiness. Complete first installation and the required
   image lifecycle before invoking automatic page publication.
 - `DIRECT_TEXT_STATUS=READY_FOR_BUILD` means that the completed Text and both locally installed public images are ready for the normal target gate and local build. For publication, a newly accepted pair must first reach `DEPLOYED_ASSET` through `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`; an unchanged legacy public-only pair must already be tracked and clean.
+- `DIRECT_TEXT_STATUS=READY_FOR_IMAGE_INSTALLATION` means the Text gate passed
+  and a structurally valid accepted-source pair exists while public files are
+  absent. It does not certify visual acceptance or publication readiness. Use
+  `image-status`, then the separately authorized image-asset route.
 - `DIRECT_TEXT_STATUS=STOP` means that the Text is incomplete, untracked, duplicated, already registered, or otherwise ineligible. Do not invoke a Phase solely to bypass that blocker.
 
 ### 1.2 `PHASE_PREPARED`
@@ -96,6 +100,18 @@ Validation covers:
 
 ## 2. Standard Execution
 
+Use `management\scripts\candy-hotel.cmd --help` for every command and `doctor`
+for local diagnostics. `audit-inputs` covers nested Text files while automatic
+generation remains limited to direct inputs. `--strict` returns nonzero for
+preparation blockers. `audit-existing` independently enumerates public PHP and
+returns nonzero for core issues, unresolved inputs, or current-contract mismatches.
+Legacy differences are not proof of production failure and are not auto-repaired.
+Normal `check` keeps the current generation contract strict.
+
+Dry-runs are read-only, including batch lock/state handling. Builds validate
+planned PHP before writing and roll back only their own bytes on failure;
+concurrent edits are preserved and reported.
+
 For an exact request to create the next eligible page from the available staff-completed Text population, upload it, and report the production URL, run only the following. `publish-next` is the automatic `DIRECT_TEXT` selection route. It scans, classifies, selects, checks, and publishes one target by default; it does not select or validate Phase evidence.
 
 Before running any build or publication command, confirm that the dedicated
@@ -104,13 +120,13 @@ Section 10.1 of `CANDY_PAGE_GENERATION_GOVERNANCE.md`. If it does not, STOP
 before generation.
 
 ```powershell
-codex\scripts\candy-hotel.cmd publish-next
+management\scripts\candy-hotel.cmd publish-next
 ```
 
 For an exact request to publish multiple next eligible pages, specify the count. The count must be from 1 through 20.
 
 ```powershell
-codex\scripts\candy-hotel.cmd publish-next --count 3
+management\scripts\candy-hotel.cmd publish-next --count 3
 ```
 
 Do not run `target-next`, `build`, or `check` before this normal automatic route. `publish-next` owns those internal decisions and checks. Use `--verbose-candidates` only when candidate-level skip details are explicitly required.
@@ -126,23 +142,23 @@ Report the completed target count, failed target, and unexecuted target count se
 Preflight an explicit staff-completed Text target before image creation or build:
 
 ```powershell
-codex\scripts\candy-hotel.cmd legacy-check --input "Text_hotel_data/対象ホテル.txt"
-codex\scripts\candy-hotel.cmd direct-check --input "Text_hotel_data/対象ホテル.txt"
+management\scripts\candy-hotel.cmd legacy-check --input "Text_hotel_data/対象ホテル.txt"
+management\scripts\candy-hotel.cmd direct-check --input "Text_hotel_data/対象ホテル.txt"
 ```
 
 Classify the full input population:
 
 ```powershell
-codex\scripts\candy-hotel.cmd audit-inputs
-codex\scripts\candy-hotel.cmd audit-inputs --write-report
-codex\scripts\candy-hotel.cmd audit-existing
+management\scripts\candy-hotel.cmd audit-inputs
+management\scripts\candy-hotel.cmd audit-inputs --write-report
+management\scripts\candy-hotel.cmd audit-existing
 ```
 
 Without production operations:
 
 ```powershell
-codex\scripts\candy-hotel.cmd build --input "Text_hotel_data/対象ホテル.txt"
-codex\scripts\candy-hotel.cmd check --input "Text_hotel_data/対象ホテル.txt"
+management\scripts\candy-hotel.cmd build --input "Text_hotel_data/対象ホテル.txt"
+management\scripts\candy-hotel.cmd check --input "Text_hotel_data/対象ホテル.txt"
 ```
 
 For the normal path, do not add redundant preliminary `build` or `check`
@@ -197,20 +213,20 @@ complete the applicable preparation route first.
 Select `SOURCE_ROUTE: DIRECT_TEXT` or `SOURCE_ROUTE: PHASE_PREPARED` according to Section 1. For `DIRECT_TEXT`, require `DIRECT_TEXT_STATUS=READY_FOR_BUILD`. For `PHASE_PREPARED`, require the completed Phase evidence. Then run the common target gate:
 
 ```powershell
-codex\scripts\candy-hotel.cmd target-check --input "Text_hotel_data/対象ホテル.txt"
+management\scripts\candy-hotel.cmd target-check --input "Text_hotel_data/対象ホテル.txt"
 ```
 
 For an authorized local-only build:
 
 ```powershell
-codex\scripts\candy-hotel.cmd build --input "Text_hotel_data/対象ホテル.txt"
-codex\scripts\candy-hotel.cmd check --input "Text_hotel_data/対象ホテル.txt"
+management\scripts\candy-hotel.cmd build --input "Text_hotel_data/対象ホテル.txt"
+management\scripts\candy-hotel.cmd check --input "Text_hotel_data/対象ホテル.txt"
 ```
 
 For an explicit instruction to create, publish, and report the production URL:
 
 ```powershell
-codex\scripts\candy-hotel.cmd publish --input "Text_hotel_data/対象ホテル.txt"
+management\scripts\candy-hotel.cmd publish --input "Text_hotel_data/対象ホテル.txt"
 ```
 
 Do not run manual HTML creation or a separate FTP upload before or after these commands. Do not use `publish-next` when the user explicitly selected the target through either source route.
@@ -243,7 +259,7 @@ For each selected target, complete the following transaction before beginning th
 - On any failure after an independent page transaction begins, record the completed targets, failed target, and unexecuted targets, then STOP.
 - Report `BATCH_RESULT=COMPLETED` only when every requested target is completed. Otherwise report `BATCH_RESULT=STOP`.
 
-After generation or a fix and before staging, run `codex\scripts\candy-site-state.cmd preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`. Treat required input-classification updates and generated-document updates as the same work unit.
+After generation or a fix and before staging, run `management\scripts\candy-site-state.cmd preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`. Treat required input-classification updates and generated-document updates as the same work unit.
 
 ## 4. Input and Generation Unit
 
@@ -287,7 +303,7 @@ HP/imgHtml/new_202601/hotel/<slug>_2.jpg
 ```
 
 When either source route created or first-installed a new image pair and the
-applicable authorized routes selected from `codex/WORK_ROUTING.md` Section 5.2 include
+applicable authorized routes selected from `management/INDEX.md` include
 publication, complete the image-asset registration, Actions deployment, and
 production-byte verification in
 `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md` before invoking page publication. The

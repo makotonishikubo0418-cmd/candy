@@ -1,5 +1,7 @@
 # CANDY Production Deployment and Migration Control
 
+Updated: 2026-09-29
+
 ## 1. Purpose
 Control current `HP/` deployment, protected-entry publication, recovery, and
 the remaining migration-history boundary while preventing rendering damage,
@@ -138,7 +140,7 @@ Primary exclusions verified from actual workflow/script:
 - `.bak`, `.backup`, and `.zip`
 - `.candy-backup-*` and `.candy-upload-*`
 
-Woman information under `codex/data/` and local-only woman images under `Text_girl_data/` are outside the HP deployment plan. The production workflow runs `candy_girl_information.py check` before FTP so their ledger state, public image placement, and local-only image placement must agree before any related HP deletion or upload can proceed.
+Woman information under `management/data/` and local-only woman images under `Text_girl_data/` are outside the HP deployment plan. The production workflow runs `candy_girl_information.py check` before FTP so their ledger state, public image placement, and local-only image placement must agree before any related HP deletion or upload can proceed.
 
 Every movie under `HP/movie/` that is referenced by a public or generated page MUST be Git-managed so a Git-based recovery restores the required media. A referenced movie MUST NOT remain only on the server or only as an ignored local file.
 
@@ -186,7 +188,7 @@ On failure:
 
 After changing workflow/script, run syntax and integration tests, then verify
 the automatic GitHub run if the applicable Git and production routes selected
-from `codex/WORK_ROUTING.md` Section 5.2 authorize publication.
+from `management/INDEX.md` authorize publication.
 
 ### 5.1 Same-Path Static Asset Replacement and Client Cache Safety
 
@@ -229,7 +231,7 @@ The tracked [`CANDY_PRODUCTION_MIGRATION_INVENTORY.csv`](CANDY_PRODUCTION_MIGRAT
 
 ## 7. Production-Specific Pre-Deployment Procedure
 
-The applicable Git route in `codex/WORK_ROUTING.md` Section 5.2 owns branch, remote,
+The applicable Git route in `management/INDEX.md` owns branch, remote,
 staging, Commit, and Push checks. This document adds only the
 production-specific gates:
 
@@ -285,4 +287,4 @@ python .github/scripts/candy_release_check.py --entry-only
 This document does not store current remaining work, deployment history, current
 server inventory, or unresolved website defects. Obtain those from actual
 workflow runs, production evidence, `PROJECT_STATUS.md`, and the applicable
-generated current-state documents selected by `codex/WORK_ROUTING.md`.
+generated current-state documents selected by `management/INDEX.md`.

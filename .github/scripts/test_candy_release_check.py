@@ -12,9 +12,9 @@ PRODUCTION_WORKFLOW = REPOSITORY_ROOT / ".github" / "workflows" / "candy-product
 HTACCESS_WORKFLOW = REPOSITORY_ROOT / ".github" / "workflows" / "candy-htaccess-deploy.yml"
 HTACCESS = REPOSITORY_ROOT / "HP" / ".htaccess"
 PUBLISHERS = (
-    REPOSITORY_ROOT / "codex" / "scripts" / "candy_area_publish.py",
-    REPOSITORY_ROOT / "codex" / "scripts" / "candy_hotel_publish.py",
-    REPOSITORY_ROOT / "codex" / "scripts" / "candy_category_publish.py",
+    REPOSITORY_ROOT / "management" / "scripts" / "candy_area_publish.py",
+    REPOSITORY_ROOT / "management" / "scripts" / "candy_hotel_publish.py",
+    REPOSITORY_ROOT / "management" / "scripts" / "candy_category_publish.py",
 )
 
 

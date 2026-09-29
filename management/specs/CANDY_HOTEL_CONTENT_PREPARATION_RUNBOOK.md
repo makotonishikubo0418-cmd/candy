@@ -2,7 +2,7 @@
 
 - Purpose: Research and prepare one hotel input through three independently validated phases
 - Status: Canonical execution runbook
-- Updated: 2026-07-25
+- Updated: 2026-09-29
 - Applies to: Hotel identity and business research, access research, page copy, FAQ, SEO input, shop selection, and nearby-spot preparation
 - Production output: `Text_hotel_data/<hotel-name>.txt`
 
@@ -22,7 +22,7 @@ Phase result Markdown is evidence and handoff material. It is not a production s
 
 This runbook owns only Phases 1-3. Image preparation, page generation,
 publication, Git, production, and reporting remain in the documents selected
-from the applicable routes in `codex/WORK_ROUTING.md` Section 5.2.
+from `management/INDEX.md` Sections 4 and 5.1.
 
 Phases 1-3 MUST NOT edit HTML, PHP, dataset PHP, shared registrations, CSS, JavaScript, images, or production data.
 
@@ -403,7 +403,7 @@ There is no fixed comparison-page count. Continue only until meaningful similari
 
 ### 6.9 Target Text Completion
 
-Serialize every confirmed Phase 1-3 result into the exact labels accepted by `codex/scripts/candy_hotel_page.py`.
+Serialize every confirmed Phase 1-3 result into the exact labels accepted by `management/scripts/candy_hotel_page.py`.
 
 Required before Phase 4 handoff:
 

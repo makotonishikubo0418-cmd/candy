@@ -1,5 +1,7 @@
 # CANDY Operation Basics
 
+Updated: 2026-09-29
+
 ## 1. Responsibility
 
 This document owns the short common procedure for investigating, fixing, and
@@ -8,11 +10,24 @@ document routing, Git authority, production limits, or response format.
 
 ## 2. Target-State Preflight
 
+The current entry points are `management/scripts/candy-area.cmd`,
+`candy-hotel.cmd`, and `candy-site-state.cmd`. Run `--help` for the complete
+command list and `doctor` for read-only runtime/path diagnostics. Windows
+entry points select an already installed Python 3.12+ with required capabilities;
+area/hotel tools require Pillow. They do not install software. Use Python `-B`
+when invoking individual Python scripts directly.
+
+`audit` reports inventory collection, not full content approval or publication
+readiness. Use category `audit-inputs` and `audit-existing` for detailed blockers.
+Help, diagnostics, checks, previews and dry-runs do not write workspace files
+or Git state. Write/build/convert/install/publish/resume are separate operations
+requiring the applicable task authority.
+
 When a target page exists, verify agreement between the generated ledger and
 actual files before treating the page state as known.
 
 ```powershell
-codex\scripts\candy-site-state.cmd check --target "<slug>"
+management\scripts\candy-site-state.cmd check --target "<slug>"
 ```
 
 ## 3. Investigation Unit
@@ -55,10 +70,10 @@ Do not create mechanical `.before` copies beside Git-tracked files. Use Git and 
 After changing an HP page, PHP, source, dataset, CSS, JavaScript, image, or SEO, update the generated documents and verify agreement before staging.
 
 ```powershell
-codex\scripts\candy-site-state.cmd preview-sitemap-lastmod
-codex\scripts\candy-site-state.cmd sync-sitemap-lastmod
-codex\scripts\candy-site-state.cmd write
-codex\scripts\candy-site-state.cmd check
+management\scripts\candy-site-state.cmd preview-sitemap-lastmod
+management\scripts\candy-site-state.cmd sync-sitemap-lastmod
+management\scripts\candy-site-state.cmd write
+management\scripts\candy-site-state.cmd check
 ```
 
 Sitemap synchronization changes only `lastmod` values whose matching
@@ -96,7 +111,7 @@ Add as required:
 Environment behavior, protection targets, workflow triggers, limits, rollback,
 and production verification are owned by
 `CANDY_PRODUCTION_MIGRATION_MASTER.md` and the exact workflow/scripts selected
-by the applicable production route in `codex/WORK_ROUTING.md` Section 5.2.
+by the applicable production route in `management/INDEX.md`.
 
 ## 8. Database and Read-Only Access Boundary
 

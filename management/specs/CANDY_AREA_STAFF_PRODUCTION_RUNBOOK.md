@@ -1,11 +1,29 @@
 # CANDY Area Staff Production Runbook
 
-- Updated: 2026-07-26
+- Updated: 2026-09-29
 - Applies to: Normal production of one area page
 - Start condition: Explicit instruction to produce or publish an area page
 - Completion criteria: Dedicated validation succeeds and the authorized local or publication scope completes
 
 ## 1. Standard Execution
+
+Read-only entry points: `management\scripts\candy-area.cmd --help`, `doctor`,
+`audit-inputs --include-completion --render`, and `audit-existing`. Input audit
+recursively includes classification directories; `Completion` is excluded with
+a reason unless requested. Empty populations, parse/render failures, and duplicate
+slugs return nonzero. Existing audit independently enumerates public PHP and
+distinguishes core issues, unresolved inputs, and current-template mismatches.
+The wider audit population does not enlarge the production cohort below.
+
+The queue must exist and contain unambiguous rows. Unresolved inputs are reported
+as `QUEUE_ROW_STOP`. Selection requires valid Text and an existing related-area
+mapping; missing mapping data must be resolved before generation, not invented.
+
+`build --dry-run --plan-accepted-images` validates pending first installation from
+the accepted pair without copying; `publish --dry-run` uses this when needed.
+Real builds validate all planned PHP before writing and restore only their own
+bytes on failure. Concurrent changes are preserved and reported. `related-write`
+also validates every target before writing any target.
 
 For the exact user request to create the next page, upload it, and report the production URL, run only:
 
@@ -15,7 +33,7 @@ Section 10.1 of `CANDY_PAGE_GENERATION_GOVERNANCE.md`. If it does not, STOP
 before generation.
 
 ```powershell
-codex\scripts\candy-area.cmd publish-next
+management\scripts\candy-area.cmd publish-next
 ```
 
 `publish-next` is the complete normal target-selection route. Its dedicated
@@ -30,14 +48,14 @@ requires it.
 Explicit target:
 
 ```powershell
-codex\scripts\candy-area.cmd publish --input "Text_area_data/対象.txt"
+management\scripts\candy-area.cmd publish --input "Text_area_data/対象.txt"
 ```
 
 Without production operations:
 
 ```powershell
-codex\scripts\candy-area.cmd build --input "Text_area_data/対象.txt"
-codex\scripts\candy-area.cmd check --input "Text_area_data/対象.txt"
+management\scripts\candy-area.cmd build --input "Text_area_data/対象.txt"
+management\scripts\candy-area.cmd check --input "Text_area_data/対象.txt"
 ```
 
 Before target selection, treat a complete pair under
@@ -45,16 +63,16 @@ Before target selection, treat a complete pair under
 the target and before the final target gate, copy exact accepted bytes to
 `HP/imgHtml/new_202601/area/` when both same-name public files are absent. A
 pending first installation is not a missing-image failure when the applicable
-authorized routes selected from `codex/WORK_ROUTING.md` Section 5.2 include
+authorized routes selected from `management/INDEX.md` include
 installation. When the accepted pair itself is absent, image creation and
-acceptance belong to the applicable image route selected from `codex/WORK_ROUTING.md`
-Section 5.2.
+acceptance belong to the applicable image route selected from `management/INDEX.md`
+Sections 5.1 and 6.2.
 
 Run these commands only when investigating exceptions across the full input population:
 
 ```powershell
-codex\scripts\candy-area.cmd audit-inputs
-codex\scripts\candy-area.cmd audit-inputs --render
+management\scripts\candy-area.cmd audit-inputs
+management\scripts\candy-area.cmd audit-inputs --render
 ```
 
 For the normal path, do not add redundant preliminary `build` or `check`
@@ -89,7 +107,7 @@ following ordered preparation and final-gate process:
 `01_間違い無し` classifies text-file content; it does not mean a new page is eligible for production.
 
 ```powershell
-codex\scripts\candy-area.cmd target-next
+management\scripts\candy-area.cmd target-next
 ```
 
 Use the bounded `target-next` output as the authoritative normal candidate
@@ -102,7 +120,7 @@ Keep a classified input at its tracked source path. `publish-next` passes that s
 Validate an explicit target:
 
 ```powershell
-codex\scripts\candy-area.cmd target-check --input "Text_area_data/対象.txt"
+management\scripts\candy-area.cmd target-check --input "Text_area_data/対象.txt"
 ```
 
 Do not run `publish` for a target that does not return
@@ -127,7 +145,7 @@ selection or use the applicable exception route.
    and top-page links.
 5. Run static validation and synchronize sitemap dates and generated management documents with `candy-site-state preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`.
 6. When publication is included, continue through the applicable Git and
-   production routes selected from `codex/WORK_ROUTING.md` Section 5.2 and verify
+   production routes selected from `management/INDEX.md` and verify
    Actions and production HTTP.
 
 ## 3. Generation Rules
@@ -140,7 +158,7 @@ selection or use the applicable exception route.
 - When a value is unspecified, use map coordinates and settings for the same shop from nearby complete pages.
 - Match shops, articles, hotels, spots, and telephone numbers to input counts.
 - Do not infer a value, image, or URL absent from source data.
-- Configure `周辺の対応エリア` from `codex/data/CANDY_AREA_RELATED_LINKS.json`. Use three to six verified nearby published area links, normally four, with link text `鹿児島市{地域名}で呼べるデリヘル`; omit the block when fewer than three suitable targets exist.
+- Configure `周辺の対応エリア` from `management/data/CANDY_AREA_RELATED_LINKS.json`. Use three to six verified nearby published area links, normally four, with link text `鹿児島市{地域名}で呼べるデリヘル`; omit the block when fewer than three suitable targets exist.
 - Add known exceptions to the dedicated tool; do not create page-specific improvised handling.
 
 Created or updated targets:
@@ -153,12 +171,12 @@ HP/includefile/dataset_base.php
 HP/source/area.html
 HP/source/index.html
 HP/sitemap.xml
-one target row in codex/docs/CANDY_AREA_105_PAGE_QUEUE.md
-one target entry in codex/data/CANDY_AREA_RELATED_LINKS.json
+one target row in management/specs/CANDY_AREA_105_PAGE_QUEUE.md
+one target entry in management/data/CANDY_AREA_RELATED_LINKS.json
 the accepted/public image pair when first local installation is required
 ```
 
-After generation or a fix and before staging, run `codex\scripts\candy-site-state.cmd preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`. Treat the queue update and generated-document update as the same work unit.
+After generation or a fix and before staging, run `management\scripts\candy-site-state.cmd preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`. Treat the queue update and generated-document update as the same work unit.
 
 ## 4. Validation
 

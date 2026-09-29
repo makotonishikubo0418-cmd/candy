@@ -1,6 +1,6 @@
 # CANDY Area Page Generation Specification
 
-- Updated: 2026-07-26
+- Updated: 2026-09-29
 - Applies to: Area-page structure changes, defect fixes, and exceptions that the standard procedure cannot resolve
 
 ## 1. Purpose
@@ -16,7 +16,7 @@ handling an exception that the standard procedure cannot resolve.
 This document owns only area-specific page structure, input mapping, output
 shape, and validation requirements. Common generation rules, image-asset
 lifecycle, staff execution order, Git, production, and document routing remain
-in the applicable documents selected from `codex/WORK_ROUTING.md` Section 5.2; this
+in the applicable documents selected from `management/INDEX.md`; this
 specification does not add or redefine those routes.
 
 ### 1.1 Responsibility and Page Structure
@@ -166,7 +166,7 @@ classification alone.
 | Population, area, and establishment date | Basic-information table |
 | Hotel information | FAQ blocks |
 | Meeting and nearby spots | FAQ blocks |
-| Nearby supported areas | Render the exact target order from `codex/data/CANDY_AREA_RELATED_LINKS.json`; link text is `鹿児島市{リンク先地域名}で呼べるデリヘル` |
+| Nearby supported areas | Render the exact target order from `management/data/CANDY_AREA_RELATED_LINKS.json`; link text is `鹿児島市{リンク先地域名}で呼べるデリヘル` |
 | Page-wide information | Two JSON-LD blocks |
 
 The OGP `image` value MUST equal the absolute `https://www.55810.com/...`
@@ -222,7 +222,7 @@ FAQ item counts are variable and MUST follow the complete source data for the ta
 
 ### 6.1 Nearby Supported Areas
 
-- The canonical mapping is `codex/data/CANDY_AREA_RELATED_LINKS.json`. Do not maintain another page-by-page mapping.
+- The canonical mapping is `management/data/CANDY_AREA_RELATED_LINKS.json`. Do not maintain another page-by-page mapping.
 - Use the heading `周辺の対応エリア` and the link text `鹿児島市{リンク先地域名}で呼べるデリヘル`.
 - Normally output four links. Output five or six only when multiple strong nearby candidates exist, and stop at three when only three suitable candidates exist.
 - Do not add an unrelated target to reach six. Self-links, duplicate links, incomplete targets, non-public targets, `href="#"`, and placeholder copy are prohibited.
@@ -360,7 +360,7 @@ kagoshima-deliveryhealth-area-<slug>_2.jpg
 ```
 
 Acceptance, first installation, replacement, and missing-image STOP decisions
-belong to the applicable image-asset route selected from `codex/WORK_ROUTING.md`
+belong to the applicable image-asset route selected from `management/INDEX.md`
 Section 5.2.
 
 ### 12.5 Partial Existing Three-File Set or Registration

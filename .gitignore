@@ -9,6 +9,7 @@
 !/docs/rules/GIT_RULES.md
 !/HP/
 !/codex/
+!/management/
 !/Text_area_data/
 !/Text_blog_data/
 !/Text_girl_data/
@@ -17,4 +18,8 @@
 /HP/log/*.log
 /HP/includefile/debug_mypage.log
 /codex/scripts/__pycache__/
+/management/scripts/__pycache__/
+/.github/scripts/__pycache__/
+/management/**/.env*
+/management/**/*.tmp
 *.pyc

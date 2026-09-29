@@ -1,5 +1,7 @@
 # CANDY Existing Area-Image Replacement Runbook
 
+Updated: 2026-09-29
+
 - Purpose: Replace an existing public area-image pair quickly, once, and without retaining obsolete live content
 - Status: Canonical execution runbook for existing area-image replacement
 - Applies to: Approved replacement images that retain the existing canonical `_1` and `_2` filenames
@@ -17,7 +19,7 @@ these conditions hold:
 
 Image creation, asset ownership ambiguity, deployment exceptions, Git, and
 production authority remain in the applicable documents selected from root
-`codex/WORK_ROUTING.md` Section 5.2; this runbook does not add or override those routes.
+`management/INDEX.md`; this runbook does not add or override those routes.
 
 ## 2. Replacement Preconditions
 
@@ -52,13 +54,13 @@ Use the integrated replacement command. `<new-image-1>` and `<new-image-2>` are 
 Preview without changing files:
 
 ```powershell
-codex\scripts\candy-area.cmd replace-images --slug "<slug>" --image1 "<new-image-1>" --image2 "<new-image-2>"
+management\scripts\candy-area.cmd replace-images --slug "<slug>" --image1 "<new-image-1>" --image2 "<new-image-2>"
 ```
 
 After reviewing the exact targets and hashes printed by preview, execute the same plan:
 
 ```powershell
-codex\scripts\candy-area.cmd replace-images --slug "<slug>" --image1 "<new-image-1>" --image2 "<new-image-2>" --write
+management\scripts\candy-area.cmd replace-images --slug "<slug>" --image1 "<new-image-1>" --image2 "<new-image-2>" --write
 ```
 
 The command performs one transaction:
@@ -81,10 +83,10 @@ Run only the checks required for this replacement:
 2. Run:
 
 ```powershell
-codex\scripts\candy-site-state.cmd preview-sitemap-lastmod
-codex\scripts\candy-site-state.cmd sync-sitemap-lastmod
-codex\scripts\candy-site-state.cmd write
-codex\scripts\candy-site-state.cmd check --target "<slug>"
+management\scripts\candy-site-state.cmd preview-sitemap-lastmod
+management\scripts\candy-site-state.cmd sync-sitemap-lastmod
+management\scripts\candy-site-state.cmd write
+management\scripts\candy-site-state.cmd check --target "<slug>"
 ```
 
 3. Review the exact target-file diff. Do not repeat the same validation through multiple tools when one authoritative result already passed.
@@ -94,7 +96,7 @@ For diagnosis or an explicit guard rerun, use `python .github\scripts\candy_area
 ## 6. Publication-Specific Verification
 
 When publication is included by the applicable Git and production routes
-selected from `codex/WORK_ROUTING.md` Section 5.2, keep the asset and every controlled
+selected from `management/INDEX.md`, keep the asset and every controlled
 reference in one deployment unit.
 
 The normal production deployment invokes the same area-image replacement guard before it creates the FTP plan. A failed guard exits the Actions run before any FTP connection or production change.

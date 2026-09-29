@@ -7,7 +7,7 @@ import sys
 import tempfile
 
 
-SCRIPTS = Path(__file__).resolve().parents[2] / "codex" / "scripts"
+SCRIPTS = Path(__file__).resolve().parents[2] / "management" / "scripts"
 if str(SCRIPTS) not in sys.path:
     sys.path.insert(0, str(SCRIPTS))
 

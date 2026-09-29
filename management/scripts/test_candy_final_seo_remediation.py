@@ -70,7 +70,7 @@ inactive_profiles = {
     "ramu": (975, "kagoshima-deliveryhealth-blog-glamourgirl.html"),
     "yuano": (1443, "kagoshima-deliveryhealth-blog-petitegirl.html"),
 }
-ledger = json.loads(read(ROOT / "codex/data/CANDY_GIRL_INFORMATION.json"))
+ledger = json.loads(read(ROOT / "management/data/CANDY_GIRL_INFORMATION.json"))
 records = {item["key"]: item for item in ledger["women"]}
 for key, (profile_no, source_name) in inactive_profiles.items():
     source = read(HP_ROOT / "source" / source_name)

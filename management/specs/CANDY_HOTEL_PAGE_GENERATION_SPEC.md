@@ -1,6 +1,6 @@
 # CANDY Hotel Page Generation Specification
 
-- Updated: 2026-07-26
+- Updated: 2026-09-29
 - Applies to: Hotel-page structure changes, defect fixes, and exceptions that the standard procedure cannot resolve
 
 ## 1. Purpose and Scope
@@ -13,7 +13,7 @@ directly when changing hotel-page structure, fixing hotel-specific behavior, or
 handling an exception that the standard procedure cannot resolve. It owns
 hotel-specific page structure, source-route semantics, output shape, and
 validation requirements. Common generation rules, Git, publication, and
-routing remain in the applicable documents selected from `codex/WORK_ROUTING.md`
+routing remain in the applicable documents selected from `management/INDEX.md`
 Section 5.2.
 
 Select one source route before production:
@@ -141,20 +141,20 @@ The Japanese labels below are exact website display concepts and are preserved.
 Standard production and publication runs only:
 
 ```powershell
-codex\scripts\candy-hotel.cmd publish --input "Text_hotel_data/対象ホテル.txt"
+management\scripts\candy-hotel.cmd publish --input "Text_hotel_data/対象ホテル.txt"
 ```
 
 Direct staff-completed Text preflight:
 
 ```powershell
-codex\scripts\candy-hotel.cmd legacy-check --input "Text_hotel_data/対象ホテル.txt"
-codex\scripts\candy-hotel.cmd direct-check --input "Text_hotel_data/対象ホテル.txt"
+management\scripts\candy-hotel.cmd legacy-check --input "Text_hotel_data/対象ホテル.txt"
+management\scripts\candy-hotel.cmd direct-check --input "Text_hotel_data/対象ホテル.txt"
 ```
 
 Only `DIRECT_TEXT_STATUS=READY_FOR_IMAGES` may enter direct image creation.
 When a complete accepted pair exists and only its local-public copy is absent,
 perform first installation when it is included by the applicable authorized
-routes selected from `codex/WORK_ROUTING.md` Section 5.2 instead of reporting a
+routes selected from `management/INDEX.md` instead of reporting a
 missing-image STOP. Only
 `DIRECT_TEXT_STATUS=READY_FOR_BUILD` may continue to the common target gate and
 page generation.
@@ -162,16 +162,16 @@ page generation.
 The dedicated tool always performs generation and validation. It performs
 staging, Commit, Push, Actions, production HTTP validation, and URL output only
 when those operations are included by the applicable authorized routes selected
-from `codex/WORK_ROUTING.md` Section 5.2.
+from `management/INDEX.md`.
 
 ## 3. Current-State Source
 
 Do not store hotel input, image, page, registration, or eligibility counts in this stable specification. Use actual files, `generated/CANDY_UPCOMING_PAGES.md`, and the dedicated commands:
 
 ```powershell
-codex\scripts\candy-hotel.cmd audit-inputs
-codex\scripts\candy-hotel.cmd audit-existing
-codex\scripts\candy-hotel.cmd target-next
+management\scripts\candy-hotel.cmd audit-inputs
+management\scripts\candy-hotel.cmd audit-existing
+management\scripts\candy-hotel.cmd target-next
 ```
 
 Inspect input classification through `BLOCKER_COUNTS_JSON` and do not hide simultaneous blockers such as missing images and untracked input.

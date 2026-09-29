@@ -14,7 +14,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-DATA_PATH = REPO_ROOT / "codex" / "data" / "CANDY_GIRL_INFORMATION.json"
+DATA_PATH = REPO_ROOT / "management" / "data" / "CANDY_GIRL_INFORMATION.json"
 PUBLIC_IMAGE_DIR = REPO_ROOT / "HP" / "imgHtml" / "new_202601" / "girl"
 LOCAL_IMAGE_DIR = REPO_ROOT / "Text_girl_data" / "画像データ"
 LEGACY_TEMPLATE_PATH = REPO_ROOT / "HP" / "source" / "template_girls.html"
@@ -326,7 +326,7 @@ def create_parser() -> argparse.ArgumentParser:
     commands = parser.add_subparsers(dest="command", required=True)
     importer = commands.add_parser("import-template")
     importer.add_argument("--template", default="HP/source/template_girls.html")
-    importer.add_argument("--output", default="codex/data/CANDY_GIRL_INFORMATION.json")
+    importer.add_argument("--output", default="management/data/CANDY_GIRL_INFORMATION.json")
     importer.add_argument("--local-only-keys", required=True)
     importer.add_argument("--force", action="store_true")
     importer.set_defaults(func=run_import)

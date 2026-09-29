@@ -1,5 +1,7 @@
 # CANDY Area Image Asset Management
 
+Updated: 2026-09-29
+
 - Purpose: Define the lifecycle of accepted and public area-image pairs
 - Creation requirements: `CANDY_AREA_IMAGE_CREATION_SPEC.md`
 - Creation sequence: `CANDY_AREA_IMAGE_CREATION_RUNBOOK.md`
@@ -61,7 +63,7 @@ specification.
 When a complete accepted pair exists and both local-public names are absent,
 the state is `PENDING_FIRST_INSTALL`, not missing images. The target-limited
 installation step may copy the exact accepted bytes only when it is included
-by the applicable authorized routes selected from `codex/WORK_ROUTING.md` Section 5.2.
+by the applicable authorized routes selected from `management/INDEX.md`.
 
 After copying:
 
@@ -84,10 +86,10 @@ After copying:
 
 For page integration, verify the target source references, alt values, OGP
 value, page files, shared registration, index, links, and sitemap through the
-applicable routes selected from `codex/WORK_ROUTING.md` Section 5.2.
+applicable routes selected from `management/INDEX.md`.
 
 For Git or production work, use the applicable Git and production routes
-selected from `codex/WORK_ROUTING.md` Section 5.2. This document grants no Commit,
+selected from `management/INDEX.md`. This document grants no Commit,
 Push, or deployment authority.
 
 ## 8. Completion Record

@@ -4,6 +4,8 @@ Updated: 2026-09-29
 
 | Type | Title | History |
 |---|---|---|
+| MODIFY | ホテル・エリア制作ツールの実用性回復 | [20260929_MODIFY_area-hotel-tooling-recovery.md](history/20260929_MODIFY_area-hotel-tooling-recovery.md) |
+| INVESTIGATE | ホテル・エリア制作スクリプトの現行稼働監査 | [20260929_INVESTIGATE_area-hotel-tooling-audit.md](history/20260929_INVESTIGATE_area-hotel-tooling-audit.md) |
 | OPERATION | HP以外をローカル正本としてGitHubへ同期 | [20260929_OPERATION_non-hp-local-authoritative-sync.md](history/20260929_OPERATION_non-hp-local-authoritative-sync.md) |
 | CONSULT | 店長おすすめの女の子の管理画面対応に関する相談 | [20260926_CONSULT_manager-recommendation-admin.md](history/20260926_CONSULT_manager-recommendation-admin.md) |
 | OPERATION | 女性プロフィールのボタン・余白改修のGitHub本番公開 | [20260920_OPERATION_girls-profile-publication.md](history/20260920_OPERATION_girls-profile-publication.md) |

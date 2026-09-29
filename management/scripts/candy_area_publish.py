@@ -172,8 +172,12 @@ def relative(paths: list[Path]) -> list[str]:
 
 
 def image_install_plan(data: candy_area_page.AreaData) -> list[tuple[Path, Path]]:
+    import candy_image_assets
     public = candy_area_target_gate.image_paths(data.slug)
     accepted = candy_area_target_gate.accepted_image_paths(data.slug)
+    status = candy_image_assets.inspect_pair(accepted, public, require_rgb=False)
+    if status["state"] in {"STOP", "REVIEW", "MISSING"}:
+        raise PublishError(f"image state={status['state']}: " + "; ".join(status["issues"]))
     referenced = [
         path_config.HP_ROOT / data.image1.removeprefix("./").split("?", 1)[0],
         path_config.HP_ROOT / data.image2.removeprefix("./").split("?", 1)[0],
@@ -204,34 +208,22 @@ def image_install_plan(data: candy_area_page.AreaData) -> list[tuple[Path, Path]
 
 
 def install_accepted_images(plan: list[tuple[Path, Path]]) -> None:
-    for source, destination in plan:
-        source_hash = hashlib.sha256(source.read_bytes()).digest()
-        if destination.exists():
-            if not destination.is_file() or hashlib.sha256(destination.read_bytes()).digest() != source_hash:
-                raise PublishError(f"public image first-install conflict: {destination.relative_to(root())}")
-            print(f"IMAGE_FIRST_INSTALL_ALREADY_OK={destination.relative_to(root())}")
-            continue
-        destination.parent.mkdir(parents=True, exist_ok=True)
-        handle, temporary = tempfile.mkstemp(
-            prefix=f".{destination.name}.",
-            suffix=".tmp",
-            dir=destination.parent,
-        )
-        os.close(handle)
-        try:
-            shutil.copyfile(source, temporary)
-            if hashlib.sha256(Path(temporary).read_bytes()).digest() != source_hash:
-                raise PublishError(f"temporary image hash mismatch: {destination.relative_to(root())}")
-            os.replace(temporary, destination)
-        except Exception:
-            try:
-                os.unlink(temporary)
-            except FileNotFoundError:
-                pass
-            raise
-        if hashlib.sha256(destination.read_bytes()).digest() != source_hash:
-            raise PublishError(f"installed image hash mismatch: {destination.relative_to(root())}")
-        print(f"IMAGE_FIRST_INSTALL_OK={destination.relative_to(root())}")
+    if not plan:
+        return
+    import candy_image_assets
+    accepted = [source for source, _destination in plan]
+    public = [destination for _source, destination in plan]
+    if len(plan) != 2:
+        raise PublishError("first installation requires exactly two images")
+    status = candy_image_assets.inspect_pair(accepted, public, require_rgb=False)
+    if status["state"] == "INSTALLED_LOCAL":
+        print("IMAGE_FIRST_INSTALL_ALREADY_OK=pair")
+        return
+    if status["state"] != "ACCEPTED_SOURCE_PRESENT":
+        raise PublishError(f"image installation blocked: {status['state']}; {status['issues']}")
+    candy_image_assets.install_pair(accepted, public, expected_hashes=status["hashes"])
+    for path in public:
+        print(f"IMAGE_FIRST_INSTALL_OK={path.relative_to(root())}")
 
 
 def state_path(slug: str) -> Path:
@@ -292,6 +284,9 @@ def dependency_paths(
             hp / data.image2.removeprefix("./").split("?", 1)[0],
         ]
     )
+    dependencies.update(path_config.SCRIPTS_DIR / name for name in (
+        "candy_page_common.py", "candy_image_assets.py", "candy_site_state_render.py"))
+    dependencies.add(candy_area_page.RELATED_LINKS_PATH)
     area_sources = list((hp / "source").glob("kagoshima-deliveryhealth-area-*.html"))
     if not data.shops or any(
         not request.time_text or not request.fee_text or candy_area_page.suspicious_fee(request.fee_text)
@@ -564,9 +559,10 @@ def publish(
         assert_preflight(data, allowed, check_remote=False)
         image_dependencies = [source for source, _destination in install_plan] or None
         assert_dependencies_clean(dependency_paths(input_path, data, image_dependencies))
+        command = [sys.executable, str(page_tool), "build", "--input", relative_input, "--dry-run"]
         if install_plan:
-            raise PublishError("dry-run cannot simulate pending accepted-image first installation")
-        run([sys.executable, str(page_tool), "build", "--input", relative_input, "--dry-run"])
+            command.append("--plan-accepted-images")
+        run(command)
         print(f"RESULT=DRY_RUN_OK region={data.region} slug={data.slug}")
         return 0
 
@@ -724,6 +720,7 @@ def self_test() -> int:
         'class="fade">皆与志町</a></div>\n'
         '</div>\n'
     )
+    index_source += path_config.CATEGORY_INDEX_TERMINAL_CTA + "\n</div>\n<!-- メインコンテンツ END -->\n"
     index_config = {
         "pages": {
             data.slug: {
@@ -817,7 +814,7 @@ def main() -> int:
         remote_state = ACTIVE_STATE.get("remote_state", "UNVERIFIED")
         slug = ACTIVE_STATE.get("slug", "UNKNOWN")
         recovery = (
-            f"codex\\scripts\\candy-area.cmd resume --slug {slug}"
+            f"management\\scripts\\candy-area.cmd resume --slug {slug}"
             if slug != "UNKNOWN"
             else "Fix the reported preflight error, then rerun the original command"
         )

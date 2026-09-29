@@ -87,7 +87,7 @@ def dependency_paths(category: str, data, input_path: Path) -> list[Path]:
     else:
         dependencies.update(
             {
-                root / "codex" / "data" / "CANDY_GIRL_INFORMATION.json",
+                root / "management" / "data" / "CANDY_GIRL_INFORMATION.json",
                 common.SCRIPTS_DIR / "candy_girl_information.py",
             }
         )
@@ -346,7 +346,7 @@ def main() -> int:
     except (CategoryPublishError, common.PageToolError, release.PublishError, OSError, json.JSONDecodeError) as exc:
         phase = ACTIVE_STATE.get("phase", "NOT_STARTED")
         slug = ACTIVE_STATE.get("slug", "UNKNOWN")
-        recovery = f"codex\\scripts\\candy-{args.category}.cmd resume --slug {slug}" if slug != "UNKNOWN" else "Fix preflight error and rerun"
+        recovery = f"management\\scripts\\candy-{args.category}.cmd resume --slug {slug}" if slug != "UNKNOWN" else "Fix preflight error and rerun"
         print(f"RESULT=STOP\nREASON={exc}\nPHASE={phase}\nRECOVERY_COMMAND={recovery}", file=sys.stderr)
         return 2
 

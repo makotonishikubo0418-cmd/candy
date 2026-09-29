@@ -10,8 +10,8 @@ from pathlib import Path
 from candy_page_common import HP_ROOT, REPO_ROOT
 
 
-SCRIPT_REL = "codex/scripts/candy_site_state.py"
-RENDERER_REL = "codex/scripts/candy_site_state_render.py"
+SCRIPT_REL = "management/scripts/candy_site_state.py"
+RENDERER_REL = "management/scripts/candy_site_state_render.py"
 
 
 def rel(path: Path) -> str:

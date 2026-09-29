@@ -1,6 +1,7 @@
 # CANDY Area Image Creation Runbook
 
 - Purpose: Define the execution order for creating one area-image pair
+- Updated: 2026-09-29
 - Requirement source: `CANDY_AREA_IMAGE_CREATION_SPEC.md`
 - Asset-lifecycle source: `CANDY_AREA_IMAGE_ASSET_MANAGEMENT.md`
 - Applies to: Creation, editing, and pre-adoption review
@@ -51,7 +52,7 @@ the other.
    filename, storage, collision, first-installation, replacement, and Git
    lifecycle handling.
 10. When page integration or publication is included, apply the applicable
-    routes selected from `codex/WORK_ROUTING.md` Section 5.2 for the area page, Git,
+    documents selected from `management/INDEX.md` Sections 4 and 5.1 for the area page, Git,
     verification, and production portions of that work.
 
 ## 4. Validation Record
@@ -86,7 +87,7 @@ STOP when:
 - Any specification acceptance gate fails.
 - Same-name handling cannot follow the asset-lifecycle document within the
   authorized scope.
-- An applicable route selected from `codex/WORK_ROUTING.md` Section 5.2 identifies a
+- An applicable document selected from `management/INDEX.md` Sections 4 and 5.1 identifies a
   conflict, missing authority, or failed verification.
 
 Do not replace a STOP with inferred spelling, unrelated imagery, a second live

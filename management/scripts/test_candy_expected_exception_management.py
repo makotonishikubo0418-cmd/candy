@@ -53,14 +53,11 @@ required_referrers_present = all(
     for path in paths
 )
 
-backlog = (ROOT / "codex" / "docs" / "CANDY_FIX_BACKLOG.md").read_text(
+backlog = (ROOT / "management" / "specs" / "CANDY_FIX_BACKLOG.md").read_text(
     encoding="utf-8"
 )
-document_rules = (
-    ROOT / "codex" / "project_management" / "DOCUMENT_RULES.md"
-).read_text(encoding="utf-8")
 other_pages = (
-    ROOT / "codex" / "docs" / "CANDY_OTHER_PAGES_MANAGEMENT.md"
+    ROOT / "management" / "specs" / "CANDY_OTHER_PAGES_MANAGEMENT.md"
 ).read_text(encoding="utf-8")
 ledger = rendered["CANDY_SITE_PAGE_LEDGER.md"]
 assets = rendered["CANDY_CODE_ASSET_INVENTORY.md"]
@@ -84,8 +81,8 @@ checks = [
     ),
     ("HP-SPECIAL-PAGES" not in backlog, "the obsolete special-page backlog item remains"),
     (
-        "MUST NOT be treated as a problem by" in document_rules,
-        "the management-wide problem-classification rule is missing",
+        "MUST NOT be reported as a problem" in other_pages,
+        "the responsible specification's intentional-exception rule is missing",
     ),
     (
         "special classification=INTENTIONAL" in other_pages,

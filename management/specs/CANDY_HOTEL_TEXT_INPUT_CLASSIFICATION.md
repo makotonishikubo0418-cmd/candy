@@ -1,7 +1,7 @@
 # CANDY Hotel Text Input Classification
 
-- Updated: 2026-07-23
-- Target: `Text_hotel_data/*.txt`
+- Updated: 2026-09-29
+- Target: all Text files under `Text_hotel_data/` for audit; direct `*.txt` only for automatic production
 - Status: canonical document
 
 ## 1. Purpose
@@ -18,12 +18,15 @@ These classification names are exact domain values used by the hotel-input workf
 |---|---|---|
 | `作成可能` | The target passes the gate and returns `NEW_HOTEL_TARGET_OK` | `direct-check` returns `READY_FOR_BUILD`; proceed with only one target |
 | `画像なし` | The input is readable but the two required images are absent | When no other blocker exists, `direct-check` returns `READY_FOR_IMAGES`; prepare both images, then rerun it |
+| `採用元画像あり/公開準備待ち` | Valid accepted-source files exist but public copies are absent | `READY_FOR_IMAGE_INSTALLATION`; verify visual acceptance and complete the authorized image-asset route; not page READY |
+| `画像整合性要確認` | Partial, corrupt, incorrectly formatted or duplicated pair, or same-name hash difference | Resolve exact findings; do not overwrite or promote to READY |
 | `旧形式要変換` | The Text uses legacy metadata labels, generic photo labels, or numbered scene structure | Run `legacy-check`; convert only when it returns `READY_TO_CONVERT` |
 | `入力不備` | Placeholder, missing canonical value, unsafe URL, unregistered shop, partial input, or another input defect exists | Correct the text file, then re-evaluate |
 | `作成済み/登録あり` | An existing state is present in public PHP, source, dataset, dataset_base, the hotel index, or the sitemap | Do not proceed as new production. Handle it as an existing-page fix task |
 | `入力未追跡` | The text file is absent from Git HEAD | Decide whether to register it in Git before production |
 | `重複slug` | Multiple text files have the same slug | STOP until one canonical input is selected |
 | `管理用txt` | The text file is an instruction or another non-production file | Exclude it from production targets |
+| `その他停止` | Another blocker, including non-production input location | Resolve the reported blocker |
 
 ## 3. Current State
 
@@ -34,18 +37,22 @@ Multiple blockers may apply at the same time. Review both the primary classifica
 ## 4. Commands
 
 ```powershell
-codex\scripts\candy-hotel.cmd audit-inputs
-codex\scripts\candy-hotel.cmd audit-inputs --write-report
-codex\scripts\candy-hotel.cmd audit-existing
-codex\scripts\candy-hotel.cmd target-next
-codex\scripts\candy-hotel.cmd legacy-check --input "Text_hotel_data/対象ホテル.txt"
-codex\scripts\candy-hotel.cmd legacy-convert --input "Text_hotel_data/対象ホテル.txt" --output "$env:TEMP\対象ホテル_現行形式.txt"
-codex\scripts\candy-hotel.cmd legacy-convert --input "Text_hotel_data/対象ホテル.txt" --replace
-codex\scripts\candy-hotel.cmd direct-check --input "Text_hotel_data/対象ホテル.txt"
-codex\scripts\candy-hotel.cmd target-check --input "Text_hotel_data/対象ホテル.txt"
+management\scripts\candy-hotel.cmd audit-inputs
+management\scripts\candy-hotel.cmd audit-inputs --write-report
+management\scripts\candy-hotel.cmd audit-existing
+management\scripts\candy-hotel.cmd target-next
+management\scripts\candy-hotel.cmd legacy-check --input "Text_hotel_data/対象ホテル.txt"
+management\scripts\candy-hotel.cmd legacy-convert --input "Text_hotel_data/対象ホテル.txt" --output "$env:TEMP\対象ホテル_現行形式.txt"
+management\scripts\candy-hotel.cmd legacy-convert --input "Text_hotel_data/対象ホテル.txt" --replace
+management\scripts\candy-hotel.cmd direct-check --input "Text_hotel_data/対象ホテル.txt"
+management\scripts\candy-hotel.cmd target-check --input "Text_hotel_data/対象ホテル.txt"
 ```
 
-`direct-check` is the authoritative entry gate for a staff-completed Text. It returns success for exactly two continuation states: `READY_FOR_IMAGES` when the only blockers are the declared image files, or `READY_FOR_BUILD` when the common new-page gate is ready. Every other state returns `STOP`.
+`direct-check` succeeds for three continuation states: `READY_FOR_IMAGES`,
+`READY_FOR_IMAGE_INSTALLATION`, and `READY_FOR_BUILD`, as defined above. Preparation
+success is not publication authorization or readiness. Other conditions return
+`STOP`. Audit is read-only unless `--write-report` is supplied; `--strict` returns
+nonzero for unresolved preparation blockers.
 
 `--write-report` produces the current classification report files defined by the tool. Treat them as generated current state, not as a second canonical specification.
 

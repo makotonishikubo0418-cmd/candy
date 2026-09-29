@@ -13,7 +13,7 @@ from pathlib import Path
 GIT = shutil.which("git") or r"C:\Program Files\Git\cmd\git.exe"
 SCRIPT = Path(__file__).with_name("candy_ftp_deploy.py").resolve()
 AREA_IMAGE_GUARD = Path(__file__).with_name("candy_area_image_replacement_guard.py").resolve()
-PAGE_COMMON = SCRIPT.parents[2] / "codex" / "scripts" / "candy_page_common.py"
+PAGE_COMMON = SCRIPT.parents[2] / "management" / "scripts" / "candy_page_common.py"
 WORKFLOW = SCRIPT.parent.parent / "workflows" / "candy-production-deploy.yml"
 HTACCESS_WORKFLOW = SCRIPT.parent.parent / "workflows" / "candy-htaccess-deploy.yml"
 CONFIRMATION = "DEPLOY-CANDY-PRODUCTION"
@@ -208,7 +208,7 @@ def commit(root: Path, message: str) -> str:
 
 def copy_deploy_sources(root: Path) -> None:
     github_scripts = root / ".github" / "scripts"
-    codex_scripts = root / "codex" / "scripts"
+    codex_scripts = root / "management" / "scripts"
     github_scripts.mkdir(parents=True)
     codex_scripts.mkdir(parents=True)
     shutil.copy2(SCRIPT, github_scripts / SCRIPT.name)
@@ -270,12 +270,12 @@ def assert_workflow_contract() -> None:
         '".github/scripts/candy_area_image_replacement_guard.py"',
         '".github/scripts/test_candy_area_image_replacement_guard.py"',
         '".github/scripts/test_candy_area_image_replace.py"',
-        '"codex/scripts/candy_area_image_replace.py"',
-        '"codex/scripts/candy-area.cmd"',
+        '"management/scripts/candy_area_image_replace.py"',
+        '"management/scripts/candy-area.cmd"',
         '".github/scripts/test_candy_site_state_metadata.py"',
-        '"codex/scripts/candy_site_state.py"',
-        '"codex/scripts/candy-site-state.cmd"',
-        '"codex/scripts/candy_page_common.py"',
+        '"management/scripts/candy_site_state.py"',
+        '"management/scripts/candy-site-state.cmd"',
+        '"management/scripts/candy_page_common.py"',
         '"!HP/codex/**"',
         '"!HP/Text_area_data/**"',
         '"!HP/sql/**"',
