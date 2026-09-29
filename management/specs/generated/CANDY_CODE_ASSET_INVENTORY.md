@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-09-29T15:19:12+09:00 (reproducible generation baseline)
+> Generated at: 2026-09-29T15:22:42+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 92bb37bb14e1180053761e72d0b5a0d5103e327c
-> State fingerprint: sha256:4ed662e1437174c9a7c68801479f8d64dc4f034222e68cc908a8a062fa7e7a16
-> Population: Public PHP files: 149 / assets: 516
+> Commit: 23d319d2ea666113ed3c5b1664186c640c09d47d
+> State fingerprint: sha256:dd97f44502ff3a4f869d44a7074db5d0f38c1f893402fc54e980af742b5f1b94
+> Population: Public PHP files: 150 / assets: 516
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 4 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 0
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -191,6 +191,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | hotel:hotelkukita | 6 | NONE | OK |
 | hotel:hotelm | 2 | NONE | OK |
 | hotel:hotelresidencenanshukan | 6 | NONE | OK |
+| hotel:hotelsantorini | 6 | NONE | OK |
 | hotel:hotelsera | 6 | NONE | OK |
 | hotel:jrkyushuhotelkagoshima | 6 | NONE | OK |
 | hotel:kagoshimadaiichihotelkamoike | 6 | NONE | OK |
@@ -239,7 +240,6 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/imgHtml/new_202601/hotel | 2 | hotelsantorini_1.jpg, hotelsantorini_2.jpg |
 
 ## Required Same-Content Path Groups
 
