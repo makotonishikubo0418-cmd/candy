@@ -4,6 +4,8 @@ Updated: 2026-09-29
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | コンフォートイン鹿児島谷山・ホテル サントリーニのGitHub本番公開 | [20260929_OPERATION_hotel-two-page-production-publication.md](history/20260929_OPERATION_hotel-two-page-production-publication.md) |
+| CREATE | コンフォートイン鹿児島谷山・ホテル サントリーニのローカルページ作成 | [20260929_CREATE_hotel-two-page-local-generation.md](history/20260929_CREATE_hotel-two-page-local-generation.md) |
 | MODIFY | ホテル・エリア制作ツールの実用性回復 | [20260929_MODIFY_area-hotel-tooling-recovery.md](history/20260929_MODIFY_area-hotel-tooling-recovery.md) |
 | INVESTIGATE | ホテル・エリア制作スクリプトの現行稼働監査 | [20260929_INVESTIGATE_area-hotel-tooling-audit.md](history/20260929_INVESTIGATE_area-hotel-tooling-audit.md) |
 | OPERATION | HP以外をローカル正本としてGitHubへ同期 | [20260929_OPERATION_non-hp-local-authoritative-sync.md](history/20260929_OPERATION_non-hp-local-authoritative-sync.md) |
