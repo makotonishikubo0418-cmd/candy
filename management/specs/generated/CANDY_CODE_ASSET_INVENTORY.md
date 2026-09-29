@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-09-29T11:10:58+09:00 (reproducible generation baseline)
+> Generated at: 2026-09-29T15:19:12+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: b1c8b3fc1190c7119aaa55fd84367aee3bd52c92
-> State fingerprint: sha256:208d394fa77d24f6315afdabacb78cd87ffe4611e79dcaedb9f33837b6f40ad9
-> Population: Public PHP files: 148 / assets: 512
+> Commit: 92bb37bb14e1180053761e72d0b5a0d5103e327c
+> State fingerprint: sha256:4ed662e1437174c9a7c68801479f8d64dc4f034222e68cc908a8a062fa7e7a16
+> Population: Public PHP files: 149 / assets: 516
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 4 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 0
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 16 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 394 |
+| .jpg | 398 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 29 |
@@ -54,7 +54,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601/banner | 24 |
 | HP/imgHtml/new_202601/blog | 12 |
 | HP/imgHtml/new_202601/girl | 66 |
-| HP/imgHtml/new_202601/hotel | 46 |
+| HP/imgHtml/new_202601/hotel | 50 |
 | HP/imgHtml/new_202601/shop | 22 |
 | HP/imgHtml/pc | 20 |
 | HP/imgHtml/s | 14 |
@@ -182,6 +182,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | hotel:aquagardenhotelfukumaru | 6 | NONE | OK |
 | hotel:arthotelkagoshima | 6 | NONE | OK |
 | hotel:cococlass | 6 | NONE | OK |
+| hotel:comfortinnkagoshimataniyama | 6 | NONE | OK |
 | hotel:favhotelkagoshimachuo | 6 | NONE | OK |
 | hotel:favluxkagoshimatenmonkan | 6 | NONE | OK |
 | hotel:grandbasekagoshimachuo | 6 | NONE | OK |
@@ -238,6 +239,7 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
+| HP/imgHtml/new_202601/hotel | 2 | hotelsantorini_1.jpg, hotelsantorini_2.jpg |
 
 ## Required Same-Content Path Groups
 
