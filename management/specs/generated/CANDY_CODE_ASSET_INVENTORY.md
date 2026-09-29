@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-09-29T15:48:25+09:00 (reproducible generation baseline)
+> Generated at: 2026-09-29T15:51:03+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: b61831cefa7fce738748a2cd6a85727f38272f23
-> State fingerprint: sha256:8f1812184039c72c724383e69463b70e7d95b79d72ea857af7b40c59dfe59838
-> Population: Public PHP files: 151 / assets: 518
+> Commit: 8bc7c8e7c53bf87aa0f0d9e0e3dc13cfac008082
+> State fingerprint: sha256:754134b9a546caf08ac3e46a4c4e48da8bd095081c28a4421a0bcdd1d45b016f
+> Population: Public PHP files: 152 / assets: 520
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 4 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 0
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 16 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 400 |
+| .jpg | 402 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 29 |
@@ -50,7 +50,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgCss/s | 2 |
 | HP/imgHtml | 18 |
 | HP/imgHtml/new_202601 | 10 |
-| HP/imgHtml/new_202601/area | 204 |
+| HP/imgHtml/new_202601/area | 206 |
 | HP/imgHtml/new_202601/banner | 24 |
 | HP/imgHtml/new_202601/blog | 12 |
 | HP/imgHtml/new_202601/girl | 66 |
@@ -75,6 +75,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | area:arata | 6 | NONE | OK |
 | area:ariyadacho | 6 | NONE | OK |
 | area:chuokoshinmachi | 6 | NONE | OK |
+| area:funatsucho | 6 | NONE | OK |
 | area:gionnosucho | 6 | NONE | OK |
 | area:gofukucho | 6 | NONE | OK |
 | area:gokabeppucho | 6 | NONE | OK |

@@ -88,7 +88,7 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 50 | 千日町 | `sennichicho` | LOCAL_COMPLETE | Dedicated tool / 2026-09-29 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 51 | 川上町 | `kawakamicho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
 | 52 | 川田町 | `kawadacho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
-| 53 | 船津町 | `funatsucho` | READY_CANDIDATE | |
+| 53 | 船津町 | `funatsucho` | LOCAL_COMPLETE | Dedicated tool / 2026-09-29 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 54 | 草牟田 | `soumuta` | READY_CANDIDATE | |
 | 55 | 草牟田町 | `soumutacho` | READY_CANDIDATE | |
 | 56 | 大黒町 | `daikokucho` | READY_CANDIDATE | |
