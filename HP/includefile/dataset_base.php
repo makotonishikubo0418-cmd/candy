@@ -1735,6 +1735,11 @@ if (defined('MEMBER_SITE_INTEGRATION_ENABLED') && MEMBER_SITE_INTEGRATION_ENABLE
 	}
 }
 
+// 店長おすすめはトップだけ、既存の全変換後に一度だけ挿入する。
+if ($hdir === 'index.html' && isset($candyRecommendationParts) && function_exists('cmr_insert')) {
+	$HpgCoder->Converted = cmr_insert($HpgCoder->Converted, $candyRecommendationParts);
+}
+
 //変換&表示
 print($HpgCoder->Converted);
 

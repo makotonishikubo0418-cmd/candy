@@ -9,10 +9,10 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_ASSET_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-09-29T15:51:03+09:00 (reproducible generation baseline)
+> Generated at: 2026-09-29T15:57:24+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 8bc7c8e7c53bf87aa0f0d9e0e3dc13cfac008082
-> State fingerprint: sha256:754134b9a546caf08ac3e46a4c4e48da8bd095081c28a4421a0bcdd1d45b016f
+> Commit: 11fdcd1d3f6e53e6800457d06ec7f61d547058d1
+> State fingerprint: sha256:22361a241f04746c60ab7148a4f291b56dde130417115612eb53cff8c2cc740a
 > Population: Public PHP files: 152
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: OK

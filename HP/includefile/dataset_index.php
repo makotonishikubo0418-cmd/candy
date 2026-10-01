@@ -1482,4 +1482,24 @@ if(isset($get_code[0][0]) && count($bnrsetdata["id"]) > 0){
 	$source = str_replace($waku0, $waku_html, $source);
 }
 
+// 店長おすすめ: fixed content remains untouched while disabled.
+$candyRecommendationConfig = require __DIR__ . '/candy_recommendation_config.php';
+if ($candyRecommendationConfig['enabled']) {
+    $candyRecommendationParts = array('html'=>'', 'json'=>'');
+    if (is_file(__DIR__ . '/candy_recommendation.php')) {
+        define('CANDY_RECOMMENDATION_READER', true);
+        require_once __DIR__ . '/candy_recommendation.php';
+        $candyRecommendationSlots = cmr_slots($source);
+        $source = $candyRecommendationSlots['source'];
+        try {
+            if (!$candyRecommendationSlots['valid']) { throw new RuntimeException('Recommendation template mismatch'); }
+            $candyRecommendationParts = cmr_render(cmr_load($DSN), $candyRecommendationSlots['header'], $candyRecommendationConfig);
+        } catch (Exception $e) { error_log('CANDY_RECOMMENDATION: public read/render failed'); }
+    } else {
+        // A partial deployment must not resurrect the fixed 12-person selection.
+        $source = preg_replace(array('/<!-- 店長おすすめの女の子 START -->.*?<!-- 店長おすすめの女の子 END -->/s',
+            '/<!-- CANDY_RECOMMENDATION_JSON_START -->.*?<!-- CANDY_RECOMMENDATION_JSON_END -->/s'), '', $source);
+        error_log('CANDY_RECOMMENDATION: reader missing');
+    }
+}
 ?>

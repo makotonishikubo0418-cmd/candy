@@ -4,6 +4,7 @@ Updated: 2026-09-29
 
 | Type | Title | History |
 |---|---|---|
+| INVESTIGATE | 店長おすすめ管理対応の認識と対象箇所調査 | [20260929_INVESTIGATE_manager-recommendation-targets.md](history/20260929_INVESTIGATE_manager-recommendation-targets.md) |
 | OPERATION | 千日町・船津町エリアページのGitHub本番公開 | [20260929_OPERATION_area-two-page-production-publication.md](history/20260929_OPERATION_area-two-page-production-publication.md) |
 | CREATE | 千日町・船津町エリアページのローカル作成 | [20260929_CREATE_area-two-page-local-generation.md](history/20260929_CREATE_area-two-page-local-generation.md) |
 | OPERATION | コンフォートイン鹿児島谷山・ホテル サントリーニのGitHub本番公開 | [20260929_OPERATION_hotel-two-page-production-publication.md](history/20260929_OPERATION_hotel-two-page-production-publication.md) |
