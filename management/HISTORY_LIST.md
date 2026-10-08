@@ -1,9 +1,10 @@
 # Candy 履歴一覧
 
-Updated: 2026-09-29
+Updated: 2026-10-08
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | ホテル3ページのローカル作成 | [20261008_CREATE_hotel-three-page-local-generation.md](history/20261008_CREATE_hotel-three-page-local-generation.md) |
 | INVESTIGATE | 店長おすすめ管理対応の認識と対象箇所調査 | [20260929_INVESTIGATE_manager-recommendation-targets.md](history/20260929_INVESTIGATE_manager-recommendation-targets.md) |
 | OPERATION | 千日町・船津町エリアページのGitHub本番公開 | [20260929_OPERATION_area-two-page-production-publication.md](history/20260929_OPERATION_area-two-page-production-publication.md) |
 | CREATE | 千日町・船津町エリアページのローカル作成 | [20260929_CREATE_area-two-page-local-generation.md](history/20260929_CREATE_area-two-page-local-generation.md) |
