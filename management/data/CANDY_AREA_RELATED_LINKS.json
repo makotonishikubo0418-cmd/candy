@@ -67,6 +67,14 @@
       "index_before": "chuokoshinmachi",
       "links": ["yamanokuchicho", "yamashitacho", "shimoarata", "kinkocho"]
     },
+    "daimyogaoka": {
+      "region": "大明丘",
+      "longitude": 130.565292,
+      "latitude": 31.629276,
+      "index_group": "た",
+      "index_before": "chuokoshinmachi",
+      "links": ["shimoishikicho", "shimotacho", "yoshino", "tamazatodanchi"]
+    },
     "funatsucho": {
       "region": "船津町",
       "longitude": 130.5578,
@@ -609,6 +617,14 @@
       "latitude": 31.590073,
       "links": ["yamanokuchicho", "yamashitacho", "shimoarata", "kinkocho"]
     },
+    "takashi": {
+      "region": "鷹師",
+      "longitude": 130.544266,
+      "latitude": 31.59041,
+      "index_group": "た",
+      "index_before": "chuokoshinmachi",
+      "links": ["yamanokuchicho", "harara", "yamashitacho", "nagayoshi"]
+    },
     "tamazatocho": {
       "region": "玉里町",
       "longitude": 130.542114,
@@ -620,6 +636,14 @@
       "longitude": 130.543167,
       "latitude": 31.619595,
       "links": ["tamazatocho", "shimoishiki", "shimoishikicho", "shimotacho", "nagayoshi", "harara"]
+    },
+    "taniyamakou": {
+      "region": "谷山港",
+      "longitude": 130.524323,
+      "latitude": 31.500528,
+      "index_group": "た",
+      "index_before": "chuokoshinmachi",
+      "links": ["hikariyama", "jigenjicho", "nanatsujima", "jiyugaoka"]
     },
     "terukunicho": {
       "region": "照国町",
