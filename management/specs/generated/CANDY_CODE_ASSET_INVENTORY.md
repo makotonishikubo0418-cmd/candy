@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-08T12:35:11+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-08T12:39:27+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 8e1461f407b2b2bec6475106559538993c7fbf25
-> State fingerprint: sha256:bdd975d7500c2bca9452037dfdc7109723ade7a5259da0b2e021e72cdfefd414
-> Population: Public PHP files: 159 / assets: 618
+> Commit: 351a38a3473fad4d3020329106d25d5e88aea433
+> State fingerprint: sha256:28ffccadfb3161374a0f37430434f846a5343d1d716587891b32f265c2f9d9f3
+> Population: Public PHP files: 160 / assets: 618
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 4 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 0
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -209,6 +209,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | hotel:quintessahotelkagoshimatenmonkanrelaxsleep | 6 | NONE | OK |
 | hotel:sheratonkagoshima | 6 | NONE | OK |
 | hotel:shiroyamahotelkagoshima | 6 | NONE | OK |
+| hotel:silkinnkagoshima | 6 | NONE | OK |
 | hotel:solarianishitetsuhotelkagoshima | 6 | NONE | OK |
 | hotel:villacosta500 | 2 | NONE | OK |
 | hotel:youstylehotelmarine | 6 | NONE | OK |
@@ -249,7 +250,7 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/imgHtml/new_202601/hotel | 84 | businesshotelatelier_1.jpg, businesshotelatelier_2.jpg, businesshotelorientalizuro_1.jpg, businesshotelorientalizuro_2.jpg, businesshoteltenmonkan_1.jpg |
+| HP/imgHtml/new_202601/hotel | 82 | businesshotelatelier_1.jpg, businesshotelatelier_2.jpg, businesshotelorientalizuro_1.jpg, businesshotelorientalizuro_2.jpg, businesshoteltenmonkan_1.jpg |
 
 ## Required Same-Content Path Groups
 
