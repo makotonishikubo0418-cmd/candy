@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-08T10:50:43+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-08T10:53:07+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 0771d49587218e9a61b3baa52963ef92328ae1f2
-> State fingerprint: sha256:f9875a5b444998d767d65b138155522fde90c04ca1fd2aa1c1a73926b10dd554
-> Population: Public PHP files: 153 / assets: 526
+> Commit: 7fe0722345e7f1be4ce23fdfb97e3923eac3c806
+> State fingerprint: sha256:122d9e6f2a4562b4d1b0d66a320658a44cf0e46d18863d6084fb641efa5247dd
+> Population: Public PHP files: 154 / assets: 526
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 4 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 0
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -185,6 +185,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | hotel:arthotelkagoshima | 6 | NONE | OK |
 | hotel:cococlass | 6 | NONE | OK |
 | hotel:comfortinnkagoshimataniyama | 6 | NONE | OK |
+| hotel:daiwaroynethotelkagoshimatenmonkanpremier | 6 | NONE | OK |
 | hotel:favhotelkagoshimachuo | 6 | NONE | OK |
 | hotel:favluxkagoshimatenmonkan | 6 | NONE | OK |
 | hotel:grandbasekagoshimachuo | 6 | NONE | OK |
@@ -243,7 +244,7 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/imgHtml/new_202601/hotel | 4 | daiwaroynethotelkagoshimatenmonkanpremier_1.jpg, daiwaroynethotelkagoshimatenmonkanpremier_2.jpg, hotelwatergatekagoshima_1.jpg, hotelwatergatekagoshima_2.jpg |
+| HP/imgHtml/new_202601/hotel | 2 | hotelwatergatekagoshima_1.jpg, hotelwatergatekagoshima_2.jpg |
 
 ## Required Same-Content Path Groups
 
