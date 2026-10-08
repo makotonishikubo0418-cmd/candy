@@ -371,7 +371,7 @@ def verify_production(data: candy_hotel_page.HotelData, commit: str) -> None:
         )
     hotel_url = shared.cache_bust("https://www.55810.com/hotel.php", commit)
     hotel_status, hotel_final, _hotel_headers, hotel_bytes = shared.http_fetch(hotel_url)
-    top_source_url = shared.cache_bust("https://www.55810.com/source/", commit)
+    top_source_url = shared.cache_bust("https://www.55810.com/", commit)
     top_status, top_final, _top_headers, top_bytes = shared.http_fetch(top_source_url)
     sitemap_url = shared.cache_bust("https://www.55810.com/sitemap.xml", commit)
     sitemap_status, sitemap_final, _sitemap_headers, sitemap_bytes = shared.http_fetch(sitemap_url)

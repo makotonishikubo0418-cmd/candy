@@ -29,6 +29,12 @@ PLACEHOLDER_RE = re.compile(r"a{8,}|placeholder|replace[_ -]?me|\b(?:todo|tbd)\b
 RATE_LABELS = ("休憩", "休憩等", "ショート", "フリー", "宿泊", "延長")
 CANONICAL_HOST = "www.55810.com"
 DEFAULT_SPOT_NOTE = "周辺スポット情報は変更されている場合がございますので、詳細は直接お問い合わせください。"
+HOTEL_TOP_LATEST_LIMIT = 15
+HOTEL_TOP_ENTRY_RE = re.compile(
+    r'(?m)^[ \t]*<div class="(?:lp_20_0 fs_sm2|lp_14_0 fs_sm2 bd_t)">'
+    r'<a href="\./kagoshima-deliveryhealth-hotel-[a-z0-9-]+\.php" class="fade">'
+    r'.*?</a></div>\n?'
+)
 
 
 @dataclass
@@ -1207,6 +1213,7 @@ def hotel_registry_links(source: str, *, top_page: bool) -> list[tuple[str, str]
 def hotel_registry_alignment_errors(hotel_source: str, index_source: str) -> list[str]:
     hotel_entries = hotel_registry_links(hotel_source, top_page=False)
     index_entries = hotel_registry_links(index_source, top_page=True)
+    expected_index_entries = hotel_entries[-HOTEL_TOP_LATEST_LIMIT:]
     errors: list[str] = []
     hotel_counts = Counter(href for href, _name in hotel_entries)
     index_counts = Counter(href for href, _name in index_entries)
@@ -1216,55 +1223,65 @@ def hotel_registry_alignment_errors(hotel_source: str, index_source: str) -> lis
         errors.append("hotel一覧URL重複: " + ",".join(hotel_duplicates))
     if index_duplicates:
         errors.append("indexホテルURL重複: " + ",".join(index_duplicates))
-    hotel_names = dict(hotel_entries)
+    expected_names = dict(expected_index_entries)
     index_names = dict(index_entries)
-    missing_from_index = sorted(set(hotel_names) - set(index_names))
-    extra_in_index = sorted(set(index_names) - set(hotel_names))
+    missing_from_index = sorted(set(expected_names) - set(index_names))
+    extra_in_index = sorted(set(index_names) - set(expected_names))
     if missing_from_index:
-        errors.append("indexホテルリンク不足: " + ",".join(missing_from_index))
+        errors.append("indexホテル最新15件リンク不足: " + ",".join(missing_from_index))
     if extra_in_index:
-        errors.append("indexホテル余分リンク: " + ",".join(extra_in_index))
+        errors.append("indexホテル最新15件以外のリンク: " + ",".join(extra_in_index))
     mismatched_names = sorted(
         href
-        for href in set(hotel_names) & set(index_names)
-        if hotel_names[href] != index_names[href]
+        for href in set(expected_names) & set(index_names)
+        if expected_names[href] != index_names[href]
     )
     if mismatched_names:
         errors.append("hotel一覧とindexの表示名不一致: " + ",".join(mismatched_names))
+    if (
+        [href for href, _name in index_entries]
+        != [href for href, _name in expected_index_entries]
+        and not missing_from_index
+        and not extra_in_index
+    ):
+        errors.append("indexホテル最新15件の表示順不一致")
     return errors
 
 
-def update_hotel_top_index(source: str, data: HotelData) -> str:
-    php_name = f"kagoshima-deliveryhealth-hotel-{data.slug}.php"
-    href = f"./{php_name}"
+def synchronize_hotel_top_index(source: str, hotel_source: str) -> str:
+    expected_entries = hotel_registry_links(hotel_source, top_page=False)[-HOTEL_TOP_LATEST_LIMIT:]
     start = source.find("<!-- 対応ホテル情報 START -->")
     end = source.find("<!-- 対応ホテル情報 END -->", start)
     if start < 0 or end < 0:
         raise HotelToolError("indexホテル領域がありません")
     block = source[start:end]
-    if block.count(href) > 1:
-        raise HotelToolError("indexホテル登録重複")
-    if href in block:
-        pattern = re.compile(r'(<a\b[^>]*href="' + re.escape(href) + r'"[^>]*>)(.*?)(</a>)', re.S)
-        block, count = pattern.subn(lambda match: match[1] + common.htext(data.hotel_name) + match[3], block)
-        if count != 1:
-            raise HotelToolError("indexホテル既存リンク照合が1件ではありません")
-        return source[:start] + block + source[end:]
-    escaped_name = common.htext(data.hotel_name)
-    plain_pattern = re.compile(rf'(<div class="[^"]*">){re.escape(escaped_name)}(</div>)')
-    if plain_pattern.search(block):
-        block = plain_pattern.sub(
-            rf'\1<a href="{href}" class="fade">{escaped_name}</a>\2',
-            block,
-            count=1,
+    parsed_entries = hotel_registry_links(source, top_page=True)
+    matched_rows = HOTEL_TOP_ENTRY_RE.findall(block)
+    if len(matched_rows) != len(parsed_entries):
+        raise HotelToolError("indexホテル行の構造を安全に置換できません")
+    block = HOTEL_TOP_ENTRY_RE.sub("", block)
+    rows = []
+    for position, (entry_href, entry_name) in enumerate(expected_entries):
+        css_class = "lp_20_0 fs_sm2" if position == 0 else "lp_14_0 fs_sm2 bd_t"
+        rows.append(
+            f'\t\t\t<div class="{css_class}"><a href="./{entry_href}" class="fade">'
+            f'{common.htext(entry_name)}</a></div>'
         )
-    else:
-        entry = (
-            f'\t\t\t<div class="lp_14_0 fs_sm2 bd_t">'
-            f'<a href="{href}" class="fade">{escaped_name}</a></div>'
-        )
-        block = path_config.insert_before_button(block, entry)
+    if rows:
+        block = path_config.insert_before_button(block, "\n".join(rows))
     return source[:start] + block + source[end:]
+
+
+def update_hotel_top_index(source: str, data: HotelData, hotel_source: str) -> str:
+    php_name = f"kagoshima-deliveryhealth-hotel-{data.slug}.php"
+    target_entries = [
+        name
+        for href, name in hotel_registry_links(hotel_source, top_page=False)
+        if href == php_name
+    ]
+    if target_entries != [data.hotel_name]:
+        raise HotelToolError("hotel一覧の対象登録が1件ではありません")
+    return synchronize_hotel_top_index(source, hotel_source)
 
 
 def shared_validation(data: HotelData, hp_root: Path) -> list[str]:
@@ -1284,8 +1301,15 @@ def shared_validation(data: HotelData, hp_root: Path) -> list[str]:
     if hotel_list.count(data.canonical) != 1:
         errors.append("hotel一覧JSON-LDが1件ではありません")
     index_source = read_utf8(hp_root / "source" / "index.html")
-    if index_source.count(f'./{php_name}') != 1:
-        errors.append("indexホテルリンクが1件ではありません")
+    expected_top_entries = hotel_registry_links(hotel_list, top_page=False)[-HOTEL_TOP_LATEST_LIMIT:]
+    expected_top_count = 1 if php_name in {href for href, _name in expected_top_entries} else 0
+    actual_top_count = sum(
+        1
+        for href, _name in hotel_registry_links(index_source, top_page=True)
+        if href == php_name
+    )
+    if actual_top_count != expected_top_count:
+        errors.append("indexホテル最新15件の対象リンク件数が不正です")
     errors.extend(hotel_registry_alignment_errors(hotel_list, index_source))
     sitemap = read_utf8(hp_root / "sitemap.xml")
     if sitemap.count(f"<loc>{data.canonical}</loc>") != 1:
@@ -1323,7 +1347,7 @@ def run_build(args: argparse.Namespace) -> int:
         raise HotelToolError("生成前公開経路検証失敗:\n- " + "\n- ".join(alignment_errors))
     new_base = update_dataset_base(read_utf8(base_path), data.slug)
     new_hotel = update_hotel_list(hotel_source, data)
-    new_index = update_hotel_top_index(index_source, data)
+    new_index = update_hotel_top_index(index_source, data, new_hotel)
     alignment_errors = hotel_registry_alignment_errors(new_hotel, new_index)
     if alignment_errors:
         raise HotelToolError("生成後公開経路検証失敗:\n- " + "\n- ".join(alignment_errors))
@@ -1700,7 +1724,7 @@ def run_self_test(_: argparse.Namespace) -> int:
             '\t</div>\n'
             '<!-- 対応ホテル情報 END -->'
         )
-        sparse_index = update_hotel_top_index(sparse_index_fixture, sparse_data)
+        sparse_index = update_hotel_top_index(sparse_index_fixture, sparse_data, sparse_hotel_list)
         sparse_alignment_errors = hotel_registry_alignment_errors(sparse_hotel_list, sparse_index)
         if sparse_alignment_errors:
             raise HotelToolError(
@@ -1752,12 +1776,13 @@ def run_self_test(_: argparse.Namespace) -> int:
             + "; ".join(current_alignment_errors)
         )
     hotel_list_source = update_hotel_list(current_hotel_source, data)
-    top_index_source = update_hotel_top_index(current_index_source, data)
+    top_index_source = update_hotel_top_index(current_index_source, data, hotel_list_source)
     php_name = f"kagoshima-deliveryhealth-hotel-{data.slug}.php"
     if hotel_list_source.count(f"./{php_name}") != 1 or hotel_list_source.count(data.canonical) != 1:
         raise HotelToolError("hotel list self-test failed")
-    if top_index_source.count(f"./{php_name}") != 1:
-        raise HotelToolError("top-page hotel self-test failed")
+    expected_top_entries = hotel_registry_links(hotel_list_source, top_page=False)[-HOTEL_TOP_LATEST_LIMIT:]
+    if hotel_registry_links(top_index_source, top_page=True) != expected_top_entries:
+        raise HotelToolError("top-page latest hotel selection self-test failed")
     updated_alignment_errors = hotel_registry_alignment_errors(hotel_list_source, top_index_source)
     if updated_alignment_errors:
         raise HotelToolError(

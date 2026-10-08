@@ -4,6 +4,7 @@ Updated: 2026-10-08
 
 | Type | Title | History |
 |---|---|---|
+| MODIFY | トップページのホテル情報を最新15件に限定 | [20261008_MODIFY_hotel-top-latest-fifteen.md](history/20261008_MODIFY_hotel-top-latest-fifteen.md) |
 | OPERATION | シェラトン鹿児島・シルクイン鹿児島のGitHub本番公開 | [20261008_OPERATION_hotel-two-page-production-publication.md](history/20261008_OPERATION_hotel-two-page-production-publication.md) |
 | CREATE | シェラトン鹿児島・シルクイン鹿児島のローカルページ作成 | [20261008_CREATE_hotel-two-page-local-generation.md](history/20261008_CREATE_hotel-two-page-local-generation.md) |
 | MODIFY | 未作成ホテル43件の画像86枚を公開用に先行配置 | [20261008_MODIFY_hotel-image-bulk-preinstallation.md](history/20261008_MODIFY_hotel-image-bulk-preinstallation.md) |

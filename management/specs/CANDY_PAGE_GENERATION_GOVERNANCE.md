@@ -1,6 +1,6 @@
 # CANDY Page Generation Governance
 
-- Updated: 2026-09-29
+- Updated: 2026-10-08
 - Applies to: Normal new-page generation for area, blog, and hotel by Codex;
   Section 10.1 also governs direct changes to their top-page sections
 
@@ -203,9 +203,18 @@ The public-route sources are:
 | Blog | `HP/source/blog.html` | `鹿児島デリヘル「キャンディ」スタッフブログ` in `HP/source/index.html` |
 | Hotel | `HP/source/hotel.html` | `鹿児島のデリヘルが呼べる「ホテル情報」` in `HP/source/index.html` |
 
-For blog and hotel, the category index and top-page section MUST contain the
-same public detail-page URL set exactly once, with the same visible name for
-each URL. A smaller top-page selection is allowed only when a
+For blog, the category index and top-page section MUST contain the same public
+detail-page URL set exactly once, with the same visible name for each URL.
+
+For hotel, the category index MUST contain every public hotel-detail URL
+exactly once. The top-page section MUST contain only the latest 15 entries, or
+all entries when fewer than 15 exist. "Latest" means the final 15 entries in
+the canonical registration order of `HP/source/hotel.html`; do not infer it
+from a file name, filesystem timestamp, or hand selection. Preserve those
+entries' relative order and visible names on the top page. Older hotel entries
+remain available only through the complete hotel index.
+
+Any smaller top-page selection for another category is allowed only when a
 category-specific canonical specification defines a deterministic selection
 policy; an undocumented hand-selected subset is prohibited.
 
@@ -249,8 +258,9 @@ For a normal public page, determine:
 - Whether related pages require internal links
 - Whether the index count or order requires an update
 
-Before generating files, compare the category index with its top-page section.
-If a pre-existing missing, stale, duplicate, differently named, or
+Before generating files, compare the category index with its top-page section
+under the applicable category relationship above. If a pre-existing missing,
+stale, duplicate, differently named, wrongly selected, wrongly ordered, or
 wrong-category entry exists, classify it as an existing inconsistency and STOP
 normal generation. Do not silently repair the wider inconsistency inside a
 one-page generation task.
@@ -297,6 +307,9 @@ Current area, blog, and hotel templates use `<meta name="robots" content="index"
 - Internal links point to public PHP.
 - Robots agrees with publication policy.
 - Category-index registration requirements were checked.
+- The hotel top-page section, when applicable, is exactly the final 15 hotel
+  index registrations (or all registrations when fewer than 15 exist), in the
+  same relative order and with the same visible names.
 - Sitemap registration requirements were checked.
 - PHP syntax is valid.
 

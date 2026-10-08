@@ -1,6 +1,6 @@
 # CANDY Hotel Staff Production Runbook
 
-- Updated: 2026-09-29
+- Updated: 2026-10-08
 - Applies to: Normal production of one or more standard hotel pages from either staff-completed Text or Phase-prepared Text
 - Start condition: Explicit instruction to produce or publish one or more hotel pages
 - Completion criteria: Every requested target completes its dedicated validation and authorized local or publication scope; otherwise the run stops with completed, failed, and unexecuted targets distinguished
@@ -116,8 +116,10 @@ For an exact request to create the next eligible page from the available staff-c
 
 Before running any build or publication command, confirm that the dedicated
 workflow plans and validates the top-page hotel-section update required by
-Section 10.1 of `CANDY_PAGE_GENERATION_GOVERNANCE.md`. If it does not, STOP
-before generation.
+Section 10.1 of `CANDY_PAGE_GENERATION_GOVERNANCE.md`: the hotel index retains
+all public hotels, while the top page is rebuilt from only the final 15 index
+registrations (or all when fewer than 15 exist). If it does not, STOP before
+generation.
 
 ```powershell
 management\scripts\candy-hotel.cmd publish-next
@@ -247,10 +249,18 @@ For each selected target, complete the following transaction before beginning th
 1. Re-run the target-specific branch, remote, working-file, dependency, existing-file, and shared-registration preflight against the state left by the previously completed target.
 2. Verify that the separate image-asset route already completed the accepted/public reconciliation, required lifecycle, and same-name hash checks. Do not install, register, deploy, or replace images inside the page transaction.
 3. Freeze dependency hashes, generate the complete page set from the hotel template and `template_shop.html`, and validate all input blocks, related links, scenes, JSON-LD, and images.
-4. Register only the target in `dataset_base.php`, the hotel index, the top-page hotel section, and sitemap as the seven-file page change unit.
+4. Register only the target in `dataset_base.php`, the complete hotel index,
+   and sitemap, then rebuild the top-page hotel section from the final 15 hotel
+   index registrations (or all when fewer than 15 exist) as the seven-file page
+   change unit.
 5. Synchronize sitemap dates and the complete generated current-state output set with `candy-site-state preview-sitemap-lastmod`, `sync-sitemap-lastmod`, `write`, and `check`, then freeze hashes for the complete authorized output set.
 6. When publication is included, create the target's own Commit, Push it, wait for its own Actions run, and complete its production verification before beginning the next target. Never combine targets into one Commit, Push, or Actions run.
-7. Verify the production page, H1, JSON-LD, images, sitemap, and redirects. In both the hotel index and the top-page hotel region, require the target URL exactly once, require its visible link name to equal the hotel name exactly, and require the complete URL/name registries to align.
+7. Verify the production page, H1, JSON-LD, images, sitemap, and redirects. On
+   the canonical top URL `/`, require the top-page hotel region to contain
+   exactly the final 15 complete-index registrations (or all when fewer than
+   15 exist), in the same relative order and with matching visible names. A
+   newly appended target MUST appear exactly once on both the complete hotel
+   index and the top page.
 8. Mark the target completed only after all required checks pass.
 
 ### 3.3 Batch Completion Boundary
@@ -325,8 +335,12 @@ Existing public images without accepted-source counterparts are `LEGACY_PUBLIC_O
 - An explicit `target-check` does not return `NEW_HOTEL_TARGET_OK=<slug>` for the selected target.
 - A shop is unknown, or travel time/transportation fees are unspecified and cannot be derived from hotel coordinates or a nearby complete area page.
 - A target registration is duplicated in dataset_base, the hotel index, the
-  top-page hotel section, or sitemap, or the hotel index has no reserved slot.
-- The target URL is absent, duplicated, or paired with a different visible name in the hotel index or top-page hotel region, or the complete hotel registries do not align.
+  selected top-page hotel subset, or sitemap, or the hotel index has no
+  reserved slot.
+- The target URL is absent, duplicated, or paired with a different visible name
+  in the hotel index; a newly appended target is absent or duplicated on the
+  top page; or the top page is not exactly the final 15 complete-index
+  registrations (or all when fewer than 15 exist) in the same relative order.
 - Dependency/output hash, PHP, JSON, Actions, or production HTTP validation fails.
 - For `PHASE_PREPARED`, a Phase 1-4 result is not `PASS`, the target Text hash chain is broken, or a Phase 4 image hash differs.
 - The production route would require reference-HTML copying, direct HTML editing, an independent upload method, or an unverified public path.

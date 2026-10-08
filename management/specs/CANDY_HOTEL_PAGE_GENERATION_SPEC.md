@@ -1,6 +1,6 @@
 # CANDY Hotel Page Generation Specification
 
-- Updated: 2026-09-29
+- Updated: 2026-10-08
 - Applies to: Hotel-page structure changes, defect fixes, and exceptions that the standard procedure cannot resolve
 
 ## 1. Purpose and Scope
@@ -315,12 +315,23 @@ $source = str_replace(
 );
 ```
 
-Register the target slug in the hotel index, the top-page hotel section, and
-sitemap under Section 10.1 of
-`CANDY_PAGE_GENERATION_GOVERNANCE.md`.
+Register the target slug in the complete hotel index and sitemap under Section
+10.1 of `CANDY_PAGE_GENERATION_GOVERNANCE.md`. Rebuild the top-page hotel
+section from the complete hotel index after registration:
+
+- `HP/source/hotel.html` contains every public hotel exactly once.
+- The top-page hotel section contains the final 15 entries in that canonical
+  registration order, or every entry when the complete index has fewer than
+  15.
+- Preserve the selected entries' relative order and visible names.
+- An older entry that falls outside the final 15 remains on the hotel index and
+  is removed only from the top-page hotel section.
+- Determine "latest" only from this canonical registration order. Do not use
+  file names, filesystem timestamps, or a manually selected subset.
 
 Every existing hotel detail page MUST have the three page files plus
-dataset_base, hotel-index, top-page, and sitemap registration. Keep
+dataset_base, complete hotel-index, and sitemap registration. It appears on the
+top page only while it is in the final 15 hotel-index registrations. Keep
 existing-page exceptions such as the Hotel M legacy IDs separate from new
 production.
 
@@ -347,8 +358,10 @@ The common generation gates remain in
 9. Renumber scenes, subtitles, and descriptions in visible order.
 10. Synchronize FAQPage and ItemList to visible presence, count, and order.
 11. Generate public entry PHP, source HTML, dataset PHP, shared registrations,
-    hotel index, top-page hotel-section integration, and sitemap for the target
-    only.
+    the target's complete hotel-index entry, the deterministic latest-15
+    top-page hotel section, and sitemap. The top-page rebuild may remove only
+    entries that have fallen outside the final 15; it MUST NOT remove them from
+    the complete hotel index.
 12. Check placeholders, empty containers, duplicate IDs, gaps, missing body content, the terminal CTA, canonical, images, official URL, map, internal links, PHP, and JSON.
 
 ## 13. Exceptions and Cautions
@@ -382,6 +395,9 @@ canonical hotel documents. It is not a current route or instruction source.
 - [ ] Hotel name, official URL, address, and map correspond correctly.
 - [ ] When the accepted pair existed without a local-public pair, the exact
       accepted bytes were first-installed before the final target gate.
-- [ ] Hotel-index, top-page hotel-section, and sitemap registration
-      requirements satisfy the common public-route synchronization contract.
+- [ ] The hotel index contains every public hotel once, while the top-page
+      hotel section contains exactly its final 15 registrations (or all when
+      fewer than 15 exist), in the same relative order and with matching names.
+- [ ] Sitemap registration requirements satisfy the common public-route
+      synchronization contract.
 - [ ] No duplicate ID exists.

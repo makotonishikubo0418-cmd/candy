@@ -274,13 +274,31 @@ class RecoveryTests(unittest.TestCase):
             docs.mkdir(parents=True)
             shutil.copyfile(area_gate.QUEUE_PATH, docs / area_gate.QUEUE_PATH.name)
             area_input = next(path for path in common.TEXT_AREA_DIR.rglob("*.txt") if path.name == "皆与志町_テンプレート.txt")
-            cases = ((hotel, original_root / "Text_hotel_data/ヴィラコスタ500.txt"), (area, area_input))
+            cases = (
+                (hotel, original_root / "Text_hotel_data/ビジネスホテル　アトリエ.txt"),
+                (area, area_input),
+            )
             with patch.object(common, "REPO_ROOT", root), patch.object(common, "HP_ROOT", root / "HP"), patch.object(common, "DOCS_DIR", docs):
                 for module, input_path in cases:
                     with self.subTest(module=module.__name__), redirect_stdout(io.StringIO()):
                         args = argparse.Namespace(input=str(input_path), force=True, dry_run=False, no_docs=True)
                         self.assertEqual(module.run_build(args), 0)
                         self.assertEqual(module.run_check(argparse.Namespace(input=str(input_path), require_php=True)), 0)
+                        if module is hotel:
+                            hotel_entries = hotel.hotel_registry_links(
+                                common.read_utf8(root / "HP/source/hotel.html"),
+                                top_page=False,
+                            )
+                            top_entries = hotel.hotel_registry_links(
+                                common.read_utf8(root / "HP/source/index.html"),
+                                top_page=True,
+                            )
+                            self.assertEqual(len(top_entries), hotel.HOTEL_TOP_LATEST_LIMIT)
+                            self.assertEqual(top_entries, hotel_entries[-hotel.HOTEL_TOP_LATEST_LIMIT:])
+                            self.assertEqual(
+                                top_entries[-1][0],
+                                "kagoshima-deliveryhealth-hotel-businesshotelatelier.php",
+                            )
                         before = {path: path.read_bytes() for path in (root / "HP").rglob("*") if path.is_file()}
                         self.assertEqual(module.run_build(args), 0)
                         self.assertEqual(before, {path: path.read_bytes() for path in (root / "HP").rglob("*") if path.is_file()})
@@ -289,10 +307,41 @@ class RecoveryTests(unittest.TestCase):
     def test_hotel_existing_first_entry_and_top_name(self):
         data = hotel.parse_hotel_text(common.TEXT_HOTEL_DIR / "ヴィラコスタ500.txt")
         listing = hotel.update_hotel_list(common.read_utf8(common.HP_ROOT / "source/hotel.html"), data)
-        top = hotel.update_hotel_top_index(common.read_utf8(common.HP_ROOT / "source/index.html"), data)
+        top = hotel.update_hotel_top_index(
+            common.read_utf8(common.HP_ROOT / "source/index.html"),
+            data,
+            listing,
+        )
         self.assertEqual(hotel.hotel_registry_alignment_errors(listing, top), [])
-        self.assertEqual(hotel.update_hotel_top_index(top, data), top)
+        self.assertEqual(hotel.update_hotel_top_index(top, data, listing), top)
         self.assertEqual(hotel.update_hotel_list(listing, data), listing)
+        self.assertEqual(
+            hotel.hotel_registry_links(top, top_page=True),
+            hotel.hotel_registry_links(listing, top_page=False)[-hotel.HOTEL_TOP_LATEST_LIMIT:],
+        )
+
+    def test_hotel_top_keeps_only_latest_fifteen_in_registry_order(self):
+        entries = [
+            (f"kagoshima-deliveryhealth-hotel-test-{index:02d}.php", f"ホテル{index:02d}")
+            for index in range(1, 18)
+        ]
+        listing = "\n".join(
+            f'<a href="./{href}" class="fade">{name}</a>'
+            for href, name in entries
+        )
+        top_fixture = (
+            '<!-- 対応ホテル情報 START -->\n'
+            '\t<div class="lp_0_55_40 w_1050 lm_0_auto bg_f">\n'
+            '\t\t<div class="lp_5 lm_0_auto w_130 center bg_p fs_xs fc_w">HOTEL INFO</div>\n'
+            '\t\t<div class="center"><a href="./hotel.php" class="bt-pk-xl">ホテル情報一覧</a></div>\n'
+            '\t</div>\n'
+            '<!-- 対応ホテル情報 END -->'
+        )
+        top = hotel.synchronize_hotel_top_index(top_fixture, listing)
+        self.assertEqual(hotel.hotel_registry_links(top, top_page=True), entries[-15:])
+        self.assertNotIn(entries[0][0], top)
+        self.assertEqual(hotel.hotel_registry_alignment_errors(listing, top), [])
+        self.assertEqual(hotel.synchronize_hotel_top_index(top, listing), top)
 
 
 if __name__ == "__main__":
