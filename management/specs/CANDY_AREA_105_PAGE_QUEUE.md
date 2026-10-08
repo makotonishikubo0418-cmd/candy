@@ -92,7 +92,7 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 54 | 草牟田 | `soumuta` | LOCAL_COMPLETE | Dedicated tool / 2026-10-08 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 55 | 草牟田町 | `soumutacho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-08 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 56 | 大黒町 | `daikokucho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-08 / Three files, shared registration, and static validation complete / PHP syntax verified |
-| 57 | 大明丘 | `daimyogaoka` | READY_CANDIDATE | |
+| 57 | 大明丘 | `daimyogaoka` | LOCAL_COMPLETE | Dedicated tool / 2026-10-08 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 58 | 鷹師 | `takashi` | READY_CANDIDATE | |
 | 59 | 谷山港 | `taniyamakou` | READY_CANDIDATE | |
 | 60 | 谷山中央 | `taniyamachuuou` | READY_CANDIDATE | |

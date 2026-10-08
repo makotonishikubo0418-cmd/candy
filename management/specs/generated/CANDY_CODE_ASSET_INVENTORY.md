@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-08T12:39:27+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-08T13:14:40+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 351a38a3473fad4d3020329106d25d5e88aea433
-> State fingerprint: sha256:28ffccadfb3161374a0f37430434f846a5343d1d716587891b32f265c2f9d9f3
-> Population: Public PHP files: 160 / assets: 618
+> Commit: acb37b1c090619a8f7fc7cc6cd988a7053afb384
+> State fingerprint: sha256:55e374d6aace5cde389b6f5603c7881d27ad6fd76fd9fb882c0399b32f632863
+> Population: Public PHP files: 161 / assets: 712
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 4 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 0
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 16 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 500 |
+| .jpg | 594 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 29 |
@@ -50,7 +50,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgCss/s | 2 |
 | HP/imgHtml | 18 |
 | HP/imgHtml/new_202601 | 10 |
-| HP/imgHtml/new_202601/area | 212 |
+| HP/imgHtml/new_202601/area | 306 |
 | HP/imgHtml/new_202601/banner | 24 |
 | HP/imgHtml/new_202601/blog | 12 |
 | HP/imgHtml/new_202601/girl | 66 |
@@ -76,6 +76,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | area:ariyadacho | 6 | NONE | OK |
 | area:chuokoshinmachi | 6 | NONE | OK |
 | area:daikokucho | 6 | NONE | OK |
+| area:daimyogaoka | 6 | NONE | OK |
 | area:funatsucho | 6 | NONE | OK |
 | area:gionnosucho | 6 | NONE | OK |
 | area:gofukucho | 6 | NONE | OK |
@@ -250,6 +251,7 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
+| HP/imgHtml/new_202601/area | 92 | kagoshima-deliveryhealth-area-chuocho_1.jpg, kagoshima-deliveryhealth-area-chuocho_2.jpg, kagoshima-deliveryhealth-area-chuzan_1.jpg, kagoshima-deliveryhealth-area-chuzan_2.jpg, kagoshima-deliveryhealth-area-chuzancho_1.jpg |
 | HP/imgHtml/new_202601/hotel | 82 | businesshotelatelier_1.jpg, businesshotelatelier_2.jpg, businesshotelorientalizuro_1.jpg, businesshotelorientalizuro_2.jpg, businesshoteltenmonkan_1.jpg |
 
 ## Required Same-Content Path Groups
