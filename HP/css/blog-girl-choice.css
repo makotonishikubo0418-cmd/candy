@@ -379,7 +379,8 @@
 
 .girl-choice-page .girl-choice-faq .faq-answer {
 	padding: 0 22px 26px 44px;
-	line-height: 1.9;
+	font-size: 16px;
+	line-height: 2;
 }
 
 .girl-choice-page .girl-choice-cta {
@@ -556,6 +557,10 @@
 
 	.girl-choice-page .girl-choice-section p,
 	.girl-choice-page .girl-choice-section li {
+		line-height: 1.9;
+	}
+
+	.girl-choice-page .girl-choice-faq .faq-answer {
 		line-height: 1.9;
 	}
 
