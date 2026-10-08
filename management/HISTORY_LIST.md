@@ -4,6 +4,9 @@ Updated: 2026-10-08
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | シェラトン鹿児島・シルクイン鹿児島のGitHub本番公開 | [20261008_OPERATION_hotel-two-page-production-publication.md](history/20261008_OPERATION_hotel-two-page-production-publication.md) |
+| CREATE | シェラトン鹿児島・シルクイン鹿児島のローカルページ作成 | [20261008_CREATE_hotel-two-page-local-generation.md](history/20261008_CREATE_hotel-two-page-local-generation.md) |
+| MODIFY | 未作成ホテル43件の画像86枚を公開用に先行配置 | [20261008_MODIFY_hotel-image-bulk-preinstallation.md](history/20261008_MODIFY_hotel-image-bulk-preinstallation.md) |
 | OPERATION | 草牟田・草牟田町・大黒町エリアページのGitHub本番公開 | [20261008_OPERATION_area-three-page-production-publication.md](history/20261008_OPERATION_area-three-page-production-publication.md) |
 | CREATE | 草牟田・草牟田町・大黒町エリアページのローカル作成 | [20261008_CREATE_area-three-page-local-generation.md](history/20261008_CREATE_area-three-page-local-generation.md) |
 | OPERATION | ホテル3ページのGitHub本番公開 | [20261008_OPERATION_hotel-three-page-production-publication.md](history/20261008_OPERATION_hotel-three-page-production-publication.md) |
