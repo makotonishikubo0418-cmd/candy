@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-08T10:53:07+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-08T10:56:20+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 7fe0722345e7f1be4ce23fdfb97e3923eac3c806
-> State fingerprint: sha256:122d9e6f2a4562b4d1b0d66a320658a44cf0e46d18863d6084fb641efa5247dd
-> Population: Public PHP files: 154 / assets: 526
+> Commit: 31af793372e5b33876c6567a6838271f64f63577
+> State fingerprint: sha256:851e86bc5174374326c3dab9c48a0d0d8e195586f84093d9656b097cb3209217
+> Population: Public PHP files: 155 / assets: 526
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 4 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 0
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -196,6 +196,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | hotel:hotelresidencenanshukan | 6 | NONE | OK |
 | hotel:hotelsantorini | 6 | NONE | OK |
 | hotel:hotelsera | 6 | NONE | OK |
+| hotel:hotelwatergatekagoshima | 6 | NONE | OK |
 | hotel:jrkyushuhotelkagoshima | 6 | NONE | OK |
 | hotel:kagoshimadaiichihotelkamoike | 6 | NONE | OK |
 | hotel:kagoshimadaiichihotelkishaba | 6 | NONE | OK |
@@ -244,7 +245,6 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/imgHtml/new_202601/hotel | 2 | hotelwatergatekagoshima_1.jpg, hotelwatergatekagoshima_2.jpg |
 
 ## Required Same-Content Path Groups
 

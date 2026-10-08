@@ -657,6 +657,10 @@ switch ($hdir) {
 		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-hotel-daiwaroynethotelkagoshimatenmonkanpremier.php');
 		break;
 
+	case 'kagoshima-deliveryhealth-hotel-hotelwatergatekagoshima.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-hotel-hotelwatergatekagoshima.php');
+		break;
+
 	case 'area.html':
 		include(INCLUDE_DIR . 'dataset_area.php');
 		break;
@@ -1625,6 +1629,7 @@ $source = str_replace('kagoshima-deliveryhealth-area-sennichicho.html', 'kagoshi
 $source = str_replace('kagoshima-deliveryhealth-area-funatsucho.html', 'kagoshima-deliveryhealth-area-funatsucho.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-hotel-solarianishitetsuhotelkagoshima.html', 'kagoshima-deliveryhealth-hotel-solarianishitetsuhotelkagoshima.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-hotel-daiwaroynethotelkagoshimatenmonkanpremier.html', 'kagoshima-deliveryhealth-hotel-daiwaroynethotelkagoshimatenmonkanpremier.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-hotel-hotelwatergatekagoshima.html', 'kagoshima-deliveryhealth-hotel-hotelwatergatekagoshima.php', $source);
 $source = str_replace('area.html', 'area.php', $source);
 $source = str_replace('hotel.html', 'hotel.php', $source);
 $source = str_replace('blog.html', 'blog.php', $source);
