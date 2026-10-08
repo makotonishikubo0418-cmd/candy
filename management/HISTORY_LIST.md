@@ -4,6 +4,8 @@ Updated: 2026-10-08
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | 草牟田・草牟田町・大黒町エリアページのGitHub本番公開 | [20261008_OPERATION_area-three-page-production-publication.md](history/20261008_OPERATION_area-three-page-production-publication.md) |
+| CREATE | 草牟田・草牟田町・大黒町エリアページのローカル作成 | [20261008_CREATE_area-three-page-local-generation.md](history/20261008_CREATE_area-three-page-local-generation.md) |
 | OPERATION | ホテル3ページのGitHub本番公開 | [20261008_OPERATION_hotel-three-page-production-publication.md](history/20261008_OPERATION_hotel-three-page-production-publication.md) |
 | CREATE | ホテル3ページのローカル作成 | [20261008_CREATE_hotel-three-page-local-generation.md](history/20261008_CREATE_hotel-three-page-local-generation.md) |
 | INVESTIGATE | 店長おすすめ管理対応の認識と対象箇所調査 | [20260929_INVESTIGATE_manager-recommendation-targets.md](history/20260929_INVESTIGATE_manager-recommendation-targets.md) |

@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-08T10:56:20+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-08T11:01:16+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 31af793372e5b33876c6567a6838271f64f63577
-> State fingerprint: sha256:851e86bc5174374326c3dab9c48a0d0d8e195586f84093d9656b097cb3209217
-> Population: Public PHP files: 155 / assets: 526
+> Commit: 86d78e2395dd1f60d95a1434bcb86a1c3159f8df
+> State fingerprint: sha256:0265209305e9fb68b4f292ce29e6fa5c1f17e66a4ebfd94fc268afa8636daa4f
+> Population: Public PHP files: 158 / assets: 532
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 4 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 0
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 16 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 408 |
+| .jpg | 414 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 29 |
@@ -50,7 +50,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgCss/s | 2 |
 | HP/imgHtml | 18 |
 | HP/imgHtml/new_202601 | 10 |
-| HP/imgHtml/new_202601/area | 206 |
+| HP/imgHtml/new_202601/area | 212 |
 | HP/imgHtml/new_202601/banner | 24 |
 | HP/imgHtml/new_202601/blog | 12 |
 | HP/imgHtml/new_202601/girl | 66 |
@@ -75,6 +75,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | area:arata | 6 | NONE | OK |
 | area:ariyadacho | 6 | NONE | OK |
 | area:chuokoshinmachi | 6 | NONE | OK |
+| area:daikokucho | 6 | NONE | OK |
 | area:funatsucho | 6 | NONE | OK |
 | area:gionnosucho | 6 | NONE | OK |
 | area:gofukucho | 6 | NONE | OK |
@@ -157,6 +158,8 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | area:shinshoincho | 6 | NONE | OK |
 | area:shiroyama | 6 | NONE | OK |
 | area:shiroyamacho | 6 | NONE | OK |
+| area:soumuta | 6 | NONE | OK |
+| area:soumutacho | 6 | NONE | OK |
 | area:sumiyoshicho | 6 | NONE | OK |
 | area:tamazatocho | 6 | NONE | OK |
 | area:tamazatodanchi | 6 | NONE | OK |

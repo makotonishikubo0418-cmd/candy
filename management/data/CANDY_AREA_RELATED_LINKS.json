@@ -59,6 +59,14 @@
       "latitude": 31.537075,
       "links": ["kinkocho", "shimoarata", "arata", "jiyugaoka"]
     },
+    "daikokucho": {
+      "region": "大黒町",
+      "longitude": 130.558243,
+      "latitude": 31.59087,
+      "index_group": "た",
+      "index_before": "chuokoshinmachi",
+      "links": ["yamanokuchicho", "yamashitacho", "shimoarata", "kinkocho"]
+    },
     "funatsucho": {
       "region": "船津町",
       "longitude": 130.5578,
@@ -580,6 +588,20 @@
       "index_group": "さ",
       "index_before": "jigenjicho",
       "links": ["harara", "nagayoshi", "yamanokuchicho", "shimoishiki"]
+    },
+    "soumuta": {
+      "region": "草牟田",
+      "longitude": 130.542847,
+      "latitude": 31.600105,
+      "index_group": "さ",
+      "links": ["harara", "nagayoshi", "yamashitacho", "tamazatocho"]
+    },
+    "soumutacho": {
+      "region": "草牟田町",
+      "longitude": 130.536743,
+      "latitude": 31.607376,
+      "index_group": "さ",
+      "links": ["shimoishiki", "nagayoshi", "tamazatocho", "harara"]
     },
     "sumiyoshicho": {
       "region": "住吉町",

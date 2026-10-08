@@ -11,7 +11,7 @@
 
   <url>
     <loc>https://www.55810.com/area.php</loc>
-    <lastmod>2026-09-29</lastmod>
+    <lastmod>2026-10-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
@@ -1029,6 +1029,27 @@
 
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-hotel-hotelwatergatekagoshima.php</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.55810.com/kagoshima-deliveryhealth-area-soumuta.php</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.55810.com/kagoshima-deliveryhealth-area-soumutacho.php</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.55810.com/kagoshima-deliveryhealth-area-daikokucho.php</loc>
     <lastmod>2026-10-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
