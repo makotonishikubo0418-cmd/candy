@@ -1,5 +1,7 @@
 # CANDY Other Pages Management
 
+Updated: 2026-10-09
+
 ## 1. Purpose
 
 Centralize responsibility, internal structure, coupled-change scope, validation, and STOP conditions for pages outside area, hotel, and blog.
@@ -125,6 +127,26 @@ For `girls.php`, apply the following input boundary before favorites, media, sch
 - A missing or empty `no` returns `301` to the same-host `girls_list.php` route.
 - A non-scalar or active-woman-unresolved `no` returns HTTP `404` and the existing noindex 404 body. It MUST NOT fall back to another woman.
 - A resolved active woman continues through the existing profile render and woman-specific canonical path.
+
+For profile images, `dataset_girls.php` MUST select only `girls_images.status=1`
+in SQL and admit only status 1 into the PHP image array. Status 0 is hidden and
+status 2 is deleted; neither may reach desktop/mobile image slots or profile
+SEO image candidates. This contract covers type 2 and type 3. The Control
+management page intentionally retains hidden thumbnails so an operator can
+make an image visible again.
+
+After assigning visible vertical images and movies, fill each missing detail
+slot (`01010009`, `01010010`) with the vertical fallback image from
+`dmy/dmy_h.jpg`. This applies even when the vertical image array does not exist.
+Real media keeps its order and takes priority over fallback images. Fill only
+the two detail slots; do not create fallback-only gallery entries.
+
+Run `management/scripts/test_candy_profile_image_visibility.php` with PHP and
+short tags enabled. It checks acquisition, count handling, the public image URL
+builder, and the real desktop/mobile detail template tags through HpgCoder.
+Cover all-hidden data, zero/one/two images, image/movie combinations, and real
+surplus gallery media. Empty detail URLs and missing-key warnings are failures.
+It does not connect to production or prove live database persistence.
 
 ### 6.3 New URL or URL Change
 

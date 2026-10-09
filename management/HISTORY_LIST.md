@@ -4,6 +4,7 @@ Updated: 2026-10-09
 
 | Type | Title | History |
 |---|---|---|
+| PROBLEM | プロフィール画像の非表示が公開表示に反映されない問題（Controlと共通の案件） | [20261009_PROBLEM_profile-media-visibility.md](https://github.com/makotonishikubo0418-cmd/fsg_control/blob/main/management/history/20261009_PROBLEM_profile-media-visibility.md) |
 | OPERATION | エリア40ページと監査修正10ページの本番公開 | [20261009_OPERATION_area-forty-and-fixes-publication.md](history/20261009_OPERATION_area-forty-and-fixes-publication.md) |
 | PROBLEM | エリア10ページの監査指摘修正 | [20261009_PROBLEM_area-ten-page-audit-remediation.md](history/20261009_PROBLEM_area-ten-page-audit-remediation.md) |
 | CREATE | エリア残り40ページのローカル作成完了 | [20261009_CREATE_area-remaining-forty-local-completion.md](history/20261009_CREATE_area-remaining-forty-local-completion.md) |

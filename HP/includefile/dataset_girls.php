@@ -321,6 +321,9 @@ function processImageData($imagedata, $gid, $isSP) {
                 $movie_url = buildMovieUrl(CLUBID, $media['filename']);
                 $data1[$slot] = $movie_url;
             }
+        } else {
+            // Fill only missing detail slots after assigning real images and movies.
+            $data1[$slot] = buildStaticImageUrl(CLUBID, 'dmy/', DAMMY_IMG_SQ_h);
         }
     }
     
@@ -374,6 +377,7 @@ function processImageData($imagedata, $gid, $isSP) {
 $imagedata = array();
 $QUERY  = "SELECT `type`, girls_id, filename, horw, status FROM girls_images";
 $QUERY .= " WHERE club_id = '" . CLUBID . "'";
+$QUERY .= " AND status = 1";
 $QUERY .= " AND (type = '2' || type = '3')"; //31:pc,32:sp
 $QUERY .= " AND girls_id = '". $gid ."'"; //31:pc,32:sp
 $QUERY .= " ORDER BY sort, id DESC";
@@ -391,8 +395,8 @@ if($ROWS != 0){
 		//$imagedata["name"][$row["type"]][$row["girls_id"]][]     = $row["name"];
 		//$imagedata["filename"][$row["type"]][$row["girls_id"]][] = $row["filename"];
 		//$imagedata["status"][$row["type"]][$row["girls_id"]][]   = $row["status"];
-		// status = 1または0の条件をここで適用（0も表示可能にする）
-        if ($row["status"] == 1 || $row["status"] == 0) {
+		// 公開プロフィールには表示中の画像だけを渡す。
+        if ($row["status"] == 1) {
             $imagedata["filename"][$gid][$row["type"]][] = $row["filename"];
         }
 	}
