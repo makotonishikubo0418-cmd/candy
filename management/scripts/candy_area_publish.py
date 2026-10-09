@@ -31,6 +31,10 @@ ACTIONS_PATTERN = re.compile(
     rf"^https://github\.com/{re.escape(REPOSITORY)}/actions/runs/(?P<run_id>\d+)$"
 )
 ACTIVE_STATE: dict[str, str] = {}
+AREA_SITE_STATE_OPTIONAL_NAMES = {
+    "CANDY_UPCOMING_BLOG_PAGES.tsv",
+    "CANDY_UPCOMING_HOTEL_PAGES.tsv",
+}
 
 
 class PublishError(RuntimeError):
@@ -476,8 +480,8 @@ def verify_production(data: candy_area_page.AreaData, commit: str) -> None:
         )
     area_url = cache_bust("https://www.55810.com/area.php", commit)
     area_status, area_final, _area_headers, area_bytes = http_fetch(area_url)
-    top_source_url = cache_bust("https://www.55810.com/source/", commit)
-    top_status, top_final, _top_headers, top_bytes = http_fetch(top_source_url)
+    top_url = cache_bust("https://www.55810.com/", commit)
+    top_status, top_final, _top_headers, top_bytes = http_fetch(top_url)
     sitemap_url = cache_bust("https://www.55810.com/sitemap.xml", commit)
     sitemap_status, sitemap_final, _sitemap_headers, sitemap_bytes = http_fetch(sitemap_url)
     area_body = area_bytes.decode("utf-8", errors="replace")
@@ -488,9 +492,9 @@ def verify_production(data: candy_area_page.AreaData, commit: str) -> None:
         and area_final == area_url
         and f"kagoshima-deliveryhealth-area-{data.slug}.php" in area_body
     )
-    checks["top_source"] = (
+    checks["top"] = (
         top_status == 200
-        and top_final == top_source_url
+        and top_final == top_url
         and f'./kagoshima-deliveryhealth-area-{data.slug}.php' in top_body
     )
     checks["sitemap"] = (
@@ -546,12 +550,17 @@ def publish(
         **{path: "A" for path in image_paths},
     }
     generated_paths = set(relative(path_config.site_state_output_paths()))
+    generated_required = {
+        path
+        for path in generated_paths
+        if Path(path).name not in AREA_SITE_STATE_OPTIONAL_NAMES
+    }
     shared_required = set(relative([allowed[3], allowed[6], allowed[7]]))
     target_link = f"./kagoshima-deliveryhealth-area-{data.slug}.php"
     for registry_path in (allowed[4], allowed[5]):
         if target_link not in registry_path.read_text(encoding="utf-8"):
             shared_required.add(relative([registry_path])[0])
-    page_required = set(page_paths) | shared_required | image_paths | generated_paths
+    page_required = set(page_paths) | shared_required | image_paths | generated_required
     page_tool = path_config.SCRIPTS_DIR / "candy_area_page.py"
     relative_input = input_path.relative_to(root()).as_posix()
 
@@ -745,6 +754,12 @@ def self_test() -> int:
     assert candy_area_page.update_area_top_index(topped, data) == topped
     assert not candy_area_page.area_registry_alignment_errors(indexed, topped)
     assert_exact_changes("A\tHP/new.php\nM\tHP/shared.php", {"HP/new.php": "A", "HP/shared.php": "M"}, {"HP/new.php"}, "test")
+    generated = set(relative(path_config.site_state_output_paths()))
+    generated_required = {
+        path for path in generated if Path(path).name not in AREA_SITE_STATE_OPTIONAL_NAMES
+    }
+    assert len(generated_required) == len(generated) - 2
+    assert not any(Path(path).name in AREA_SITE_STATE_OPTIONAL_NAMES for path in generated_required)
     for unsafe in ("D\tHP/new.php", "R100\tHP/a.php\tHP/b.php", "T\tHP/new.php"):
         try:
             parse_name_status(unsafe)
