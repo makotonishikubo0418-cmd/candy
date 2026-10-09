@@ -4,14 +4,14 @@
   <!-- トップ・主要ページ -->
   <url>
     <loc>https://www.55810.com/</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
     <loc>https://www.55810.com/area.php</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
@@ -25,7 +25,7 @@
 
   <url>
     <loc>https://www.55810.com/blog.php</loc>
-    <lastmod>2026-08-21</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -257,6 +257,13 @@
   </url>
 
   <!-- ブログカテゴリページ -->
+  <url>
+    <loc>https://www.55810.com/kagoshima-deliveryhealth-blog-girl-choice.php</loc>
+    <lastmod>2026-10-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-blog-shiroutogirl.php</loc>
     <lastmod>2026-08-21</lastmod>
@@ -1086,6 +1093,13 @@
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-area-taniyamakou.php</loc>
     <lastmod>2026-10-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.55810.com/kagoshima-deliveryhealth-area-taniyamachuuou.php</loc>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
