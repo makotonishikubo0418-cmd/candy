@@ -4,6 +4,7 @@ Updated: 2026-10-09
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | 谷山中央・中央町・中山・中山町・中町エリアページの作成と公開 | [20261009_CREATE_area-five-page-publication.md](history/20261009_CREATE_area-five-page-publication.md) |
 | MODIFY | エリアキューの旧IN_PROGRESS状態訂正 | [20261009_MODIFY_area-queue-status-correction.md](history/20261009_MODIFY_area-queue-status-correction.md) |
 | OPERATION | ブログ継続作成・画像共通管理のGitHub公開 | [20261009_OPERATION_blog-management-github-publication.md](history/20261009_OPERATION_blog-management-github-publication.md) |
 | CREATE | ブログ継続作成・画像共通管理の整備 | [20261008_CREATE_blog-and-image-management.md](history/20261008_CREATE_blog-and-image-management.md) |
