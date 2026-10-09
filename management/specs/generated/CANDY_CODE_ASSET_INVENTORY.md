@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-09T10:52:31+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-09T11:08:31+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 15586f442c476474010a3f353351991a49aeb698
-> State fingerprint: sha256:481fa9da92882edacf62dc615ed35adffb74c24949a09be87c0133aa9298ce03
-> Population: Public PHP files: 170 / assets: 718
+> Commit: 017a34fd690ddbd1b47c78cc6475f348c3816bcc
+> State fingerprint: sha256:c7261070790ba58cb1754211312921ebc277b79baa8342dcd38b1b07c900c8cc
+> Population: Public PHP files: 179 / assets: 736
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 4 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 0
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 599 |
+| .jpg | 617 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 29 |
@@ -50,7 +50,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgCss/s | 2 |
 | HP/imgHtml | 18 |
 | HP/imgHtml/new_202601 | 10 |
-| HP/imgHtml/new_202601/area | 308 |
+| HP/imgHtml/new_202601/area | 326 |
 | HP/imgHtml/new_202601/banner | 24 |
 | HP/imgHtml/new_202601/blog | 15 |
 | HP/imgHtml/new_202601/girl | 66 |
@@ -88,6 +88,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | area:harara | 6 | NONE | OK |
 | area:haruyamacho | 6 | NONE | OK |
 | area:hikariyama | 6 | NONE | OK |
+| area:hirakawacho | 6 | NONE | OK |
 | area:hiroki | 6 | NONE | OK |
 | area:hoshigamine | 6 | NONE | OK |
 | area:ikenouecho | 6 | NONE | OK |
@@ -102,9 +103,15 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | area:jiyugaoka | 6 | NONE | OK |
 | area:josei | 6 | NONE | OK |
 | area:kajiyacho | 6 | NONE | OK |
+| area:kamifukumotocho | 6 | NONE | OK |
+| area:kamihonmachi | 6 | NONE | OK |
+| area:kamitaniguchicho | 6 | NONE | OK |
+| area:kamitatsuocho | 6 | NONE | OK |
 | area:kamoike | 6 | NONE | OK |
 | area:kamoikeshinmachi | 6 | NONE | OK |
 | area:kasugacho | 6 | NONE | OK |
+| area:kawadacho | 6 | NONE | OK |
+| area:kawakamicho | 6 | NONE | OK |
 | area:kenohikarigaoka | 6 | NONE | OK |
 | area:kibougaokacho | 6 | NONE | OK |
 | area:kiirecho | 6 | NONE | OK |
@@ -116,6 +123,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | area:kinkocho | 6 | NONE | OK |
 | area:kinkodai | 6 | NONE | OK |
 | area:kinseicho | 6 | NONE | OK |
+| area:komatsubara | 6 | NONE | OK |
 | area:koraicho | 6 | NONE | OK |
 | area:korimoto | 6 | NONE | OK |
 | area:korimotocho | 6 | NONE | OK |
@@ -153,6 +161,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | area:sanwacho | 6 | NONE | OK |
 | area:seiwa | 6 | NONE | OK |
 | area:sennichicho | 6 | NONE | OK |
+| area:shimizucho | 6 | NONE | OK |
 | area:shimmachi | 6 | NONE | OK |
 | area:shimoarata | 6 | NONE | OK |
 | area:shimofukumotocho | 6 | NONE | OK |

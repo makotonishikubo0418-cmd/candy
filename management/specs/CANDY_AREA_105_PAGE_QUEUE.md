@@ -57,13 +57,13 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 19 | 若葉町 | `wakabacho` | LOCAL_COMPLETE | Status correction / 2026-10-09 / Three files and shared registration complete / Existing audit passed / PHP syntax verified |
 | 20 | 住吉町 | `sumiyoshicho` | LOCAL_COMPLETE | Dedicated tool / 2026-07-24 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 21 | 春山町 | `haruyamacho` | LOCAL_COMPLETE | Dedicated tool / 2026-07-24 / Three files, shared registration, and static validation complete / PHP syntax verified |
-| 22 | 小松原 | `komatsubara` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
+| 22 | 小松原 | `komatsubara` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 23 | 松原町 | `matsubaracho` | LOCAL_COMPLETE | Dedicated tool / 2026-07-24 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 24 | 照国町 | `terukunicho` | LOCAL_COMPLETE | Dedicated tool / 2026-07-24 / Three files, shared registration, and static validation complete / PHP syntax verified |
-| 25 | 上谷口町 | `kamitaniguchicho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
-| 26 | 上福元町 | `kamifukumotocho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
-| 27 | 上本町 | `kamihonmachi` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
-| 28 | 上竜尾町 | `kamitatsuocho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
+| 25 | 上谷口町 | `kamitaniguchicho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 26 | 上福元町 | `kamifukumotocho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 27 | 上本町 | `kamihonmachi` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 28 | 上竜尾町 | `kamitatsuocho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 29 | 城山 | `shiroyama` | LOCAL_COMPLETE | Dedicated tool / 2026-07-24 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 30 | 城山町 | `shiroyamacho` | LOCAL_COMPLETE | Dedicated tool / 2026-07-25 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 31 | 城西 | `josei` | LOCAL_COMPLETE | Dedicated tool / 2026-07-25 / Three files, shared registration, and static validation complete / PHP syntax verified |
@@ -74,7 +74,7 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 36 | 真砂町 | `masagocho` | LOCAL_COMPLETE | Dedicated tool / 2026-07-28 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 37 | 真砂本町 | `masagohonmachi` | READY_CANDIDATE | |
 | 38 | 星ヶ峯 | `hoshigamine` | LOCAL_COMPLETE | Dedicated tool / 2026-07-28 / Three files, shared registration, and static validation complete / PHP syntax verified |
-| 39 | 清水町 | `shimizucho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
+| 39 | 清水町 | `shimizucho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 40 | 清和 | `seiwa` | LOCAL_COMPLETE | Dedicated tool / 2026-07-28 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 41 | 西伊敷 | `nishiishiki` | LOCAL_COMPLETE | Dedicated tool / 2026-07-28 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 42 | 西佐多町 | `nishisatacho` | LOCAL_COMPLETE | Dedicated tool / 2026-07-29 / Three files, shared registration, and static validation complete / PHP syntax verified |
@@ -86,8 +86,8 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 48 | 西別府町 | `nishibeppucho` | LOCAL_COMPLETE | Dedicated tool / 2026-08-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 49 | 西俣町 | `nishimatacho` | LOCAL_COMPLETE | Dedicated tool / 2026-08-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 50 | 千日町 | `sennichicho` | LOCAL_COMPLETE | Dedicated tool / 2026-09-29 / Three files, shared registration, and static validation complete / PHP syntax verified |
-| 51 | 川上町 | `kawakamicho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
-| 52 | 川田町 | `kawadacho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
+| 51 | 川上町 | `kawakamicho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 52 | 川田町 | `kawadacho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 53 | 船津町 | `funatsucho` | LOCAL_COMPLETE | Dedicated tool / 2026-09-29 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 54 | 草牟田 | `soumuta` | LOCAL_COMPLETE | Dedicated tool / 2026-10-08 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 55 | 草牟田町 | `soumutacho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-08 / Three files, shared registration, and static validation complete / PHP syntax verified |
@@ -124,7 +124,7 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 86 | 武 | `take` | READY_CANDIDATE | |
 | 87 | 武岡 | `takeoka` | READY_CANDIDATE | |
 | 88 | 福山町 | `fukuyamacho` | READY_CANDIDATE | |
-| 89 | 平川町 | `hirakawacho` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
+| 89 | 平川町 | `hirakawacho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 90 | 平田町 | `hiratacho` | READY_CANDIDATE | |
 | 91 | 平之町 | `hiranocho` | READY_CANDIDATE | |
 | 92 | 堀江町 | `horiecho` | READY_CANDIDATE | |
