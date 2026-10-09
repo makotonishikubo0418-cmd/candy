@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-09T10:44:56+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-09T10:47:18+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: df96005743f6d530a3b48a2bad3eaecb06185f78
-> State fingerprint: sha256:2724810a82e3100e474cc4ec30342e244db9e7b51b11074ef9f9bde20c950abc
-> Population: Public PHP files: 168 / assets: 716
+> Commit: f99542f2f7e0b8e18e9730020486ff50e328d102
+> State fingerprint: sha256:3ec553392a6390653ca0ede09841c7d9728b0e5b7a00e599c1d3648da458f818
+> Population: Public PHP files: 169 / assets: 716
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 4 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 0
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -130,6 +130,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | area:minayoshicho | 6 | NONE | OK |
 | area:murasakibaru | 6 | NONE | OK |
 | area:nagayoshi | 6 | NONE | OK |
+| area:nakamachi | 6 | NONE | OK |
 | area:nanatsujima | 6 | NONE | OK |
 | area:nishibeppucho | 6 | NONE | OK |
 | area:nishida | 6 | NONE | OK |
@@ -258,7 +259,7 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/imgHtml/new_202601/area | 80 | kagoshima-deliveryhealth-area-fukuyamacho_1.jpg, kagoshima-deliveryhealth-area-fukuyamacho_2.jpg, kagoshima-deliveryhealth-area-hamamachi_1.jpg, kagoshima-deliveryhealth-area-hamamachi_2.jpg, kagoshima-deliveryhealth-area-higashikoorimotocho_1.jpg |
+| HP/imgHtml/new_202601/area | 78 | kagoshima-deliveryhealth-area-fukuyamacho_1.jpg, kagoshima-deliveryhealth-area-fukuyamacho_2.jpg, kagoshima-deliveryhealth-area-hamamachi_1.jpg, kagoshima-deliveryhealth-area-hamamachi_2.jpg, kagoshima-deliveryhealth-area-higashikoorimotocho_1.jpg |
 | HP/imgHtml/new_202601/hotel | 82 | businesshotelatelier_1.jpg, businesshotelatelier_2.jpg, businesshotelorientalizuro_1.jpg, businesshotelorientalizuro_2.jpg, businesshoteltenmonkan_1.jpg |
 
 ## Required Same-Content Path Groups

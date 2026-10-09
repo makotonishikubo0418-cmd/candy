@@ -100,7 +100,7 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 62 | 中央町 | `chuocho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 63 | 中山 | `chuzan` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 64 | 中山町 | `chuzancho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
-| 65 | 中町 | `nakamachi` | READY_CANDIDATE | |
+| 65 | 中町 | `nakamachi` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 66 | 長田町 | `nagatacho` | READY_CANDIDATE | |
 | 67 | 直木町 | `naokicho` | READY_CANDIDATE | |
 | 68 | 田上 | `tagami` | READY_CANDIDATE | |
