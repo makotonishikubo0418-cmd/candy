@@ -53,11 +53,35 @@
       "latitude": 31.665058,
       "links": ["hanaomachi", "minayoshicho", "shimotacho", "shimoishiki"]
     },
+    "chuocho": {
+      "region": "中央町",
+      "longitude": 130.543777,
+      "latitude": 31.58268,
+      "index_group": "た",
+      "index_before": "terukunicho",
+      "links": ["arata", "yamanokuchicho", "shimoarata", "harara"]
+    },
     "chuokoshinmachi": {
       "region": "中央港新町",
       "longitude": 130.55217,
       "latitude": 31.537075,
       "links": ["kinkocho", "shimoarata", "arata", "jiyugaoka"]
+    },
+    "chuzan": {
+      "region": "中山",
+      "longitude": 130.511566,
+      "latitude": 31.548416,
+      "index_group": "た",
+      "index_before": "terukunicho",
+      "links": ["jiyugaoka", "hiroki", "yamadacho", "jigenjicho"]
+    },
+    "chuzancho": {
+      "region": "中山町",
+      "longitude": 130.47821,
+      "latitude": 31.541668,
+      "index_group": "た",
+      "index_before": "terukunicho",
+      "links": ["jiyugaoka", "yamadacho", "jigenjicho", "yotsumotocho"]
     },
     "daikokucho": {
       "region": "大黒町",
@@ -370,6 +394,14 @@
       "latitude": 31.559765,
       "links": ["hiroki", "arata", "shimoarata", "chuokoshinmachi"]
     },
+    "nakamachi": {
+      "region": "中町",
+      "longitude": 130.556107,
+      "latitude": 31.592674,
+      "index_group": "な",
+      "index_before": "nagayoshi",
+      "links": ["yamashitacho", "yamanokuchicho", "shimoarata", "harara"]
+    },
     "nagayoshi": {
       "region": "永吉",
       "longitude": 130.535751,
@@ -644,6 +676,14 @@
       "index_group": "た",
       "index_before": "chuokoshinmachi",
       "links": ["hikariyama", "jigenjicho", "nanatsujima", "jiyugaoka"]
+    },
+    "taniyamachuuou": {
+      "region": "谷山中央",
+      "longitude": 130.516907,
+      "latitude": 31.524612,
+      "index_group": "た",
+      "index_before": "chuokoshinmachi",
+      "links": ["jigenjicho", "jiyugaoka", "hikariyama", "chuokoshinmachi"]
     },
     "terukunicho": {
       "region": "照国町",
