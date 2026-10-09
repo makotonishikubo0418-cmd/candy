@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-09T11:08:31+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-09T11:25:49+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 017a34fd690ddbd1b47c78cc6475f348c3816bcc
-> State fingerprint: sha256:c7261070790ba58cb1754211312921ebc277b79baa8342dcd38b1b07c900c8cc
-> Population: Public PHP files: 179 / assets: 736
+> Commit: ea9112e4f612421ab7b627cf8659a29c82f9d464
+> State fingerprint: sha256:0aee377c92ad8cded5f59d81ab0d9206319ab491d0096fff7e3ef5afc001ac17
+> Population: Public PHP files: 219 / assets: 738
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 4 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 0
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 617 |
+| .jpg | 619 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 29 |
@@ -50,7 +50,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgCss/s | 2 |
 | HP/imgHtml | 18 |
 | HP/imgHtml/new_202601 | 10 |
-| HP/imgHtml/new_202601/area | 326 |
+| HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
 | HP/imgHtml/new_202601/blog | 15 |
 | HP/imgHtml/new_202601/girl | 66 |
@@ -80,16 +80,32 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | area:chuzancho | 6 | NONE | OK |
 | area:daikokucho | 6 | NONE | OK |
 | area:daimyogaoka | 6 | NONE | OK |
+| area:fukuyamacho | 6 | NONE | OK |
 | area:funatsucho | 6 | NONE | OK |
 | area:gionnosucho | 6 | NONE | OK |
 | area:gofukucho | 6 | NONE | OK |
 | area:gokabeppucho | 6 | NONE | OK |
+| area:hamamachi | 6 | NONE | OK |
 | area:hanaomachi | 6 | NONE | OK |
 | area:harara | 6 | NONE | OK |
 | area:haruyamacho | 6 | NONE | OK |
+| area:higashikoorimotocho | 6 | NONE | OK |
+| area:higashimatacho | 6 | NONE | OK |
+| area:higashisakamoto | 6 | NONE | OK |
+| area:higashisatacho | 6 | NONE | OK |
+| area:higashisengokucho | 6 | NONE | OK |
+| area:higashitaniyama | 6 | NONE | OK |
 | area:hikariyama | 6 | NONE | OK |
+| area:hinodecho | 6 | NONE | OK |
 | area:hirakawacho | 6 | NONE | OK |
+| area:hiranocho | 6 | NONE | OK |
+| area:hiratacho | 6 | NONE | OK |
 | area:hiroki | 6 | NONE | OK |
+| area:hiyamizucho | 6 | NONE | OK |
+| area:honjocho | 6 | NONE | OK |
+| area:honkoshinmachi | 6 | NONE | OK |
+| area:honmyocho | 6 | NONE | OK |
+| area:horiecho | 6 | NONE | OK |
 | area:hoshigamine | 6 | NONE | OK |
 | area:ikenouecho | 6 | NONE | OK |
 | area:inaricho | 6 | NONE | OK |
@@ -134,13 +150,24 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | area:koyamadacho | 6 | NONE | OK |
 | area:koyo | 6 | NONE | OK |
 | area:masagocho | 6 | NONE | OK |
+| area:masagohonmachi | 6 | NONE | OK |
 | area:matsubaracho | 6 | NONE | OK |
+| area:meiwa | 6 | NONE | OK |
+| area:meizancho | 6 | NONE | OK |
+| area:midorigaokacho | 6 | NONE | OK |
+| area:minamikorimotocho | 6 | NONE | OK |
+| area:minamishinmachi | 6 | NONE | OK |
 | area:minayoshicho | 6 | NONE | OK |
 | area:miyanouracho | 6 | NONE | OK |
 | area:murasakibaru | 6 | NONE | OK |
+| area:muregaoka | 6 | NONE | OK |
+| area:nagatacho | 6 | NONE | OK |
 | area:nagayoshi | 6 | NONE | OK |
 | area:nakamachi | 6 | NONE | OK |
 | area:nanatsujima | 6 | NONE | OK |
+| area:nanei | 6 | NONE | OK |
+| area:nanrinjicho | 6 | NONE | OK |
+| area:naokicho | 6 | NONE | OK |
 | area:nishibeppucho | 6 | NONE | OK |
 | area:nishida | 6 | NONE | OK |
 | area:nishiishiki | 6 | NONE | OK |
@@ -176,26 +203,39 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | area:soumuta | 6 | NONE | OK |
 | area:soumutacho | 6 | NONE | OK |
 | area:sumiyoshicho | 6 | NONE | OK |
+| area:tagami | 6 | NONE | OK |
+| area:tagamicho | 6 | NONE | OK |
+| area:tagamidai | 6 | NONE | OK |
 | area:takashi | 6 | NONE | OK |
+| area:take | 6 | NONE | OK |
+| area:takeoka | 6 | NONE | OK |
 | area:tamazatocho | 6 | NONE | OK |
 | area:tamazatodanchi | 6 | NONE | OK |
 | area:taniyamachuuou | 6 | NONE | OK |
 | area:taniyamakou | 6 | NONE | OK |
+| area:tenokuchicho | 6 | NONE | OK |
 | area:terukunicho | 6 | NONE | OK |
+| area:tokaicho | 6 | NONE | OK |
 | area:tokiwa | 6 | NONE | OK |
+| area:toso | 6 | NONE | OK |
+| area:tsuzugawacho | 6 | NONE | OK |
 | area:uearatacho | 6 | NONE | OK |
 | area:uenosonocho | 6 | NONE | OK |
 | area:uomicho | 6 | NONE | OK |
 | area:usuki | 6 | NONE | OK |
+| area:wada | 6 | NONE | OK |
 | area:wakabacho | 6 | NONE | OK |
 | area:yakushi | 6 | NONE | OK |
 | area:yamadacho | 6 | NONE | OK |
 | area:yamanokuchicho | 6 | NONE | OK |
 | area:yamashitacho | 6 | NONE | OK |
+| area:yanagimachi | 6 | NONE | OK |
 | area:yasuicho | 6 | NONE | OK |
+| area:yojiro | 6 | NONE | OK |
 | area:yoshino | 6 | NONE | OK |
 | area:yoshinocho | 6 | NONE | OK |
 | area:yotsumotocho | 6 | NONE | OK |
+| area:yusukicho | 6 | NONE | OK |
 | blog:girl-choice | 3 | NONE | OK |
 | blog:glamourgirl | 7 | NONE | OK |
 | blog:petitegirl | 7 | NONE | OK |
@@ -269,7 +309,6 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/imgHtml/new_202601/area | 78 | kagoshima-deliveryhealth-area-fukuyamacho_1.jpg, kagoshima-deliveryhealth-area-fukuyamacho_2.jpg, kagoshima-deliveryhealth-area-hamamachi_1.jpg, kagoshima-deliveryhealth-area-hamamachi_2.jpg, kagoshima-deliveryhealth-area-higashikoorimotocho_1.jpg |
 | HP/imgHtml/new_202601/hotel | 82 | businesshotelatelier_1.jpg, businesshotelatelier_2.jpg, businesshotelorientalizuro_1.jpg, businesshotelorientalizuro_2.jpg, businesshoteltenmonkan_1.jpg |
 
 ## Required Same-Content Path Groups

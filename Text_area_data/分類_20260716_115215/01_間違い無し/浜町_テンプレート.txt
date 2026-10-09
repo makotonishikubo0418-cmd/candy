@@ -101,7 +101,7 @@ subtitle_
 guesthouse建築
 description_
  鹿児島市柳町1-5 2F<改行>
-URL 〒892-0819 鹿児島県鹿児島市柳町１−５ 2F
+URL https://www.guesthousekenchiku.com/
 
 subtitle_
 ホテルリブマックスBUDGET鹿児島

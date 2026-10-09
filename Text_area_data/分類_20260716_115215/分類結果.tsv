@@ -116,7 +116,7 @@ file	category	slug	parsed_ok	issues
 皇徳寺台_テンプレート.txt	09_作成済み	koutokujidai	yes	-
 皷川町_テンプレート.txt	01_間違い無し	tsuzugawacho	yes	-
 直木町_テンプレート.txt	01_間違い無し	naokicho	yes	-
-真砂本町_テンプレート .txt	06_複合_画像無し_間違い	masagohonmachi	yes	画像無し: image referenced file missing: https://www.55810.com/imgHtml/new_202601/area/kagoshima-deliveryhealth-masagohonmachi_1.jpg / 間違い: image URL mismatch: expected https://www.55810.com/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-masagohonmachi_1.jpg, actual https://www.55810.com/imgHtml/new_202601/area/kagoshima-deliveryhealth-masagohonmachi_1.jpg
+真砂本町_テンプレート.txt	01_間違い無し	masagohonmachi	yes	-
 真砂町_テンプレート.txt	01_間違い無し	masagocho	yes	-
 石谷町_テンプレート.txt	07_複合_情報足りない_間違い	ishidanicho	no	情報足りない: parser: 基本情報sceneの情報が不足しています / 間違い: L75: placeholder aaaaaaaaaaaaaaaaaaaa
 祇園之洲町_テンプレート.txt	09_作成済み	gionnosucho	yes	-

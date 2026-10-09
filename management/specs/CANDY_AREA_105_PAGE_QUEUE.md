@@ -36,7 +36,7 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 
 | No. | Region name | Slug | Status | Record |
 |---:|---|---|---|---|
-| 1 | 花尾町 | `hanaomachi` | PUBLISHED | Codex / 2026-07-14 / Commit `44df27b` / Actions `29289499915` / Production HTTP and browser verified |
+| 1 | 花尾町 | `hanaomachi` | PUBLISHED | Codex / 2026-07-14 / Commit `44df27b` / Actions `29289499915` / Production HTTP and browser verified / Local Sチャンネル fee corrected to source Text on 2026-10-09; Git and production publication not yet performed |
 | 2 | 皆与志町 | `minayoshicho` | PUBLISHED | Codex / 2026-07-14 / Commit `f1ba7fd` / Actions `29294348852` / Production HTTP verified |
 | 3 | 吉野 | `yoshino` | PUBLISHED | Codex / 2026-07-14 / Commit `f1ba7fd` / Actions `29294348852` / Production HTTP verified |
 | 4 | 吉野町 | `yoshinocho` | PUBLISHED | Codex / 2026-07-14 / Commit `98b009d` / Actions `29295020132` / Production HTTP verified |
@@ -49,11 +49,11 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 11 | 山下町 | `yamashitacho` | PUBLISHED | Codex / 2026-07-14 / Commit `2a8a9c4` / Actions `29301766001` / Production HTTP verified |
 | 12 | 山田町 | `yamadacho` | LOCAL_COMPLETE | Status correction / 2026-10-09 / Three files and shared registration complete / Existing audit passed / PHP syntax verified |
 | 13 | 山之口町 | `yamanokuchicho` | LOCAL_COMPLETE | Status correction / 2026-10-09 / Three files and shared registration complete / Existing audit passed / PHP syntax verified |
-| 14 | 四元町 | `yotsumotocho` | LOCAL_COMPLETE | Status correction / 2026-10-09 / Three files and shared registration complete / PHP syntax verified / Current source Text is missing or unidentifiable |
+| 14 | 四元町 | `yotsumotocho` | LOCAL_COMPLETE | Status correction / 2026-10-09 / Three files and shared registration complete / PHP syntax verified / Current source Text is missing or unidentifiable / User confirmed on 2026-10-09 that the existing page must remain and this state is acceptable |
 | 15 | 紫原 | `murasakibaru` | LOCAL_COMPLETE | Dedicated tool / 2026-07-24 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 16 | 慈眼寺町 | `jigenjicho` | LOCAL_COMPLETE | Status correction / 2026-10-09 / Three files and shared registration complete / Existing audit passed / PHP syntax verified |
 | 17 | 自由ヶ丘 | `jiyugaoka` | LOCAL_COMPLETE | Status correction / 2026-10-09 / Three files and shared registration complete / Existing audit passed / PHP syntax verified |
-| 18 | 七ツ島 | `nanatsujima` | LOCAL_COMPLETE | Status correction / 2026-10-09 / Three files and shared registration complete / PHP syntax verified / Current source Text is missing or unidentifiable |
+| 18 | 七ツ島 | `nanatsujima` | LOCAL_COMPLETE | Status correction / 2026-10-09 / Three files and shared registration complete / PHP syntax verified / Current source Text is missing or unidentifiable / User confirmed on 2026-10-09 that the existing page must remain and this state is acceptable |
 | 19 | 若葉町 | `wakabacho` | LOCAL_COMPLETE | Status correction / 2026-10-09 / Three files and shared registration complete / Existing audit passed / PHP syntax verified |
 | 20 | 住吉町 | `sumiyoshicho` | LOCAL_COMPLETE | Dedicated tool / 2026-07-24 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 21 | 春山町 | `haruyamacho` | LOCAL_COMPLETE | Dedicated tool / 2026-07-24 / Three files, shared registration, and static validation complete / PHP syntax verified |
@@ -72,7 +72,7 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 34 | 新照院町 | `shinshoincho` | LOCAL_COMPLETE | Dedicated tool / 2026-07-25 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 35 | 新町 | `shimmachi` | LOCAL_COMPLETE | Dedicated tool / 2026-07-28 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 36 | 真砂町 | `masagocho` | LOCAL_COMPLETE | Dedicated tool / 2026-07-28 / Three files, shared registration, and static validation complete / PHP syntax verified |
-| 37 | 真砂本町 | `masagohonmachi` | READY_CANDIDATE | |
+| 37 | 真砂本町 | `masagohonmachi` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 38 | 星ヶ峯 | `hoshigamine` | LOCAL_COMPLETE | Dedicated tool / 2026-07-28 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 39 | 清水町 | `shimizucho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 40 | 清和 | `seiwa` | LOCAL_COMPLETE | Dedicated tool / 2026-07-28 / Three files, shared registration, and static validation complete / PHP syntax verified |
@@ -96,51 +96,51 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 58 | 鷹師 | `takashi` | LOCAL_COMPLETE | Dedicated tool / 2026-10-08 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 59 | 谷山港 | `taniyamakou` | LOCAL_COMPLETE | Dedicated tool / 2026-10-08 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 60 | 谷山中央 | `taniyamachuuou` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
-| 61 | 中央港新町 | `chuokoshinmachi` | LOCAL_COMPLETE | Status correction / 2026-10-09 / Three files and shared registration complete / PHP syntax verified / Current source Text is missing or unidentifiable |
+| 61 | 中央港新町 | `chuokoshinmachi` | LOCAL_COMPLETE | Status correction / 2026-10-09 / Three files and shared registration complete / PHP syntax verified / Current source Text is missing or unidentifiable / User confirmed on 2026-10-09 that the existing page must remain and this state is acceptable |
 | 62 | 中央町 | `chuocho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 63 | 中山 | `chuzan` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 64 | 中山町 | `chuzancho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 65 | 中町 | `nakamachi` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
-| 66 | 長田町 | `nagatacho` | READY_CANDIDATE | |
-| 67 | 直木町 | `naokicho` | READY_CANDIDATE | |
-| 68 | 田上 | `tagami` | READY_CANDIDATE | |
-| 69 | 田上台 | `tagamidai` | READY_CANDIDATE | |
-| 70 | 田上町 | `tagamicho` | READY_CANDIDATE | |
-| 71 | 唐湊 | `toso` | READY_CANDIDATE | |
-| 72 | 東開町 | `tokaicho` | READY_CANDIDATE | |
-| 73 | 東郡元町 | `higashikoorimotocho` | READY_CANDIDATE | |
-| 74 | 東佐多町 | `higashisatacho` | READY_CANDIDATE | |
-| 75 | 東坂元 | `higashisakamoto` | READY_CANDIDATE | |
-| 76 | 東千石町 | `higashisengokucho` | READY_CANDIDATE | |
-| 77 | 東谷山 | `higashitaniyama` | READY_CANDIDATE | |
-| 78 | 東俣町 | `higashimatacho` | READY_CANDIDATE | |
-| 79 | 南栄 | `nanei` | READY_CANDIDATE | |
-| 80 | 南郡元町 | `minamikorimotocho` | READY_CANDIDATE | |
-| 81 | 南新町 | `minamishinmachi` | READY_CANDIDATE | |
-| 82 | 南林寺町 | `nanrinjicho` | READY_CANDIDATE | |
-| 83 | 日之出町 | `hinodecho` | READY_CANDIDATE | |
-| 84 | 樋之口町 | `tenokuchicho` | READY_CANDIDATE | |
-| 85 | 浜町 | `hamamachi` | READY_CANDIDATE | |
-| 86 | 武 | `take` | READY_CANDIDATE | |
-| 87 | 武岡 | `takeoka` | READY_CANDIDATE | |
-| 88 | 福山町 | `fukuyamacho` | READY_CANDIDATE | |
+| 66 | 長田町 | `nagatacho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 67 | 直木町 | `naokicho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 68 | 田上 | `tagami` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 69 | 田上台 | `tagamidai` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 70 | 田上町 | `tagamicho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 71 | 唐湊 | `toso` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 72 | 東開町 | `tokaicho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 73 | 東郡元町 | `higashikoorimotocho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 74 | 東佐多町 | `higashisatacho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 75 | 東坂元 | `higashisakamoto` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 76 | 東千石町 | `higashisengokucho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 77 | 東谷山 | `higashitaniyama` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 78 | 東俣町 | `higashimatacho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 79 | 南栄 | `nanei` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 80 | 南郡元町 | `minamikorimotocho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 81 | 南新町 | `minamishinmachi` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 82 | 南林寺町 | `nanrinjicho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 83 | 日之出町 | `hinodecho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 84 | 樋之口町 | `tenokuchicho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 85 | 浜町 | `hamamachi` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 86 | 武 | `take` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 87 | 武岡 | `takeoka` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 88 | 福山町 | `fukuyamacho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 89 | 平川町 | `hirakawacho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
-| 90 | 平田町 | `hiratacho` | READY_CANDIDATE | |
-| 91 | 平之町 | `hiranocho` | READY_CANDIDATE | |
-| 92 | 堀江町 | `horiecho` | READY_CANDIDATE | |
-| 93 | 本港新町 | `honkoshinmachi` | READY_CANDIDATE | |
-| 94 | 本城町 | `honjocho` | READY_CANDIDATE | |
-| 95 | 本名町 | `honmyocho` | READY_CANDIDATE | |
-| 96 | 牟礼岡 | `muregaoka` | READY_CANDIDATE | |
-| 97 | 名山町 | `meizancho` | READY_CANDIDATE | |
-| 98 | 明和 | `meiwa` | READY_CANDIDATE | |
-| 99 | 柳町 | `yanagimachi` | READY_CANDIDATE | |
-| 100 | 油須木町 | `yusukicho` | READY_CANDIDATE | |
-| 101 | 与次郎 | `yojiro` | READY_CANDIDATE | |
-| 102 | 緑ヶ丘町 | `midorigaokacho` | READY_CANDIDATE | |
-| 103 | 冷水町 | `hiyamizucho` | READY_CANDIDATE | |
-| 104 | 和田 | `wada` | READY_CANDIDATE | |
-| 105 | 皷川町 | `tsuzugawacho` | READY_CANDIDATE | |
+| 90 | 平田町 | `hiratacho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 91 | 平之町 | `hiranocho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 92 | 堀江町 | `horiecho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 93 | 本港新町 | `honkoshinmachi` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 94 | 本城町 | `honjocho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 95 | 本名町 | `honmyocho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 96 | 牟礼岡 | `muregaoka` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 97 | 名山町 | `meizancho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 98 | 明和 | `meiwa` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 99 | 柳町 | `yanagimachi` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 100 | 油須木町 | `yusukicho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 101 | 与次郎 | `yojiro` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 102 | 緑ヶ丘町 | `midorigaokacho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 103 | 冷水町 | `hiyamizucho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 104 | 和田 | `wada` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
+| 105 | 皷川町 | `tsuzugawacho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
 
 Current image availability, artifact consistency, and eligibility are not
 stored as queue-wide counts here. Use each row's status as workflow state, then

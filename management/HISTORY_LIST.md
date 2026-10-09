@@ -4,6 +4,10 @@ Updated: 2026-10-09
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | エリア40ページと監査修正10ページの本番公開 | [20261009_OPERATION_area-forty-and-fixes-publication.md](history/20261009_OPERATION_area-forty-and-fixes-publication.md) |
+| PROBLEM | エリア10ページの監査指摘修正 | [20261009_PROBLEM_area-ten-page-audit-remediation.md](history/20261009_PROBLEM_area-ten-page-audit-remediation.md) |
+| CREATE | エリア残り40ページのローカル作成完了 | [20261009_CREATE_area-remaining-forty-local-completion.md](history/20261009_CREATE_area-remaining-forty-local-completion.md) |
+| MODIFY | 花尾町の交通費修正と元Text未特定3ページの現状維持確定 | [20261009_MODIFY_area-audit-followup.md](history/20261009_MODIFY_area-audit-followup.md) |
 | CREATE | エリア9ページの再作成と本番公開 | [20261009_CREATE_area-nine-page-publication.md](history/20261009_CREATE_area-nine-page-publication.md) |
 | OPERATION | 宮之浦町エリアページのGitHub本番公開 | [20261009_OPERATION_miyanouracho-production-publication.md](history/20261009_OPERATION_miyanouracho-production-publication.md) |
 | CREATE | 宮之浦町エリアページのローカル作成 | [20261009_CREATE_miyanouracho-area-page.md](history/20261009_CREATE_miyanouracho-area-page.md) |

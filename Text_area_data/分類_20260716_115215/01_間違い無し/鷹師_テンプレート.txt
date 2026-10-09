@@ -95,7 +95,7 @@ GRAND BASE 鹿児島中央
 description_
  鹿児島市西田2丁目12-25<改行>
 TEL 092-292-2431
-URL https://grand-base.jp/hotel/gb-kagoshima-chuo/
+URL https://www.booking.com/hotel/jp/grand-base-kagoshima-chuo.ja.html
 
 subtitle_
 ホテルユニオン
