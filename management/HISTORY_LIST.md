@@ -4,6 +4,7 @@ Updated: 2026-10-09
 
 | Type | Title | History |
 |---|---|---|
+| MODIFY | エリアキューの旧IN_PROGRESS状態訂正 | [20261009_MODIFY_area-queue-status-correction.md](history/20261009_MODIFY_area-queue-status-correction.md) |
 | OPERATION | ブログ継続作成・画像共通管理のGitHub公開 | [20261009_OPERATION_blog-management-github-publication.md](history/20261009_OPERATION_blog-management-github-publication.md) |
 | CREATE | ブログ継続作成・画像共通管理の整備 | [20261008_CREATE_blog-and-image-management.md](history/20261008_CREATE_blog-and-image-management.md) |
 | CREATE | 初めてのデリヘル向け女の子選びブログの作成と公開 | [20261008_CREATE_first-deliveryhealth-girl-choice-blog.md](history/20261008_CREATE_first-deliveryhealth-girl-choice-blog.md) |

@@ -1,6 +1,6 @@
 # CANDY AREA 105 PAGE QUEUE
 
-- Updated: 2026-09-29
+- Updated: 2026-10-09
 - Purpose: Preserve the fixed 105-target cohort and its production order
 
 ## 1. Cohort Provenance
@@ -47,14 +47,14 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 9 | 光山 | `hikariyama` | PUBLISHED | Codex / 2026-07-14 / Commit `03ba6e6` / Actions `29301654365` / Production HTTP verified |
 | 10 | 広木 | `hiroki` | PUBLISHED | Codex / 2026-07-14 / Commit `1620c16` / Actions `29301707302` / Production HTTP verified |
 | 11 | 山下町 | `yamashitacho` | PUBLISHED | Codex / 2026-07-14 / Commit `2a8a9c4` / Actions `29301766001` / Production HTTP verified |
-| 12 | 山田町 | `yamadacho` | IN_PROGRESS | Dedicated tool / 2026-07-14 / Three files, shared registration, and static validation complete / PHP CLI unverified |
-| 13 | 山之口町 | `yamanokuchicho` | IN_PROGRESS | Dedicated tool / 2026-07-14 / Three files, shared registration, and static validation complete / PHP CLI unverified |
-| 14 | 四元町 | `yotsumotocho` | IN_PROGRESS | Dedicated tool / 2026-07-15 / Three files, shared registration, and static validation complete / PHP CLI unverified |
+| 12 | 山田町 | `yamadacho` | LOCAL_COMPLETE | Status correction / 2026-10-09 / Three files and shared registration complete / Existing audit passed / PHP syntax verified |
+| 13 | 山之口町 | `yamanokuchicho` | LOCAL_COMPLETE | Status correction / 2026-10-09 / Three files and shared registration complete / Existing audit passed / PHP syntax verified |
+| 14 | 四元町 | `yotsumotocho` | LOCAL_COMPLETE | Status correction / 2026-10-09 / Three files and shared registration complete / PHP syntax verified / Current source Text is missing or unidentifiable |
 | 15 | 紫原 | `murasakibaru` | LOCAL_COMPLETE | Dedicated tool / 2026-07-24 / Three files, shared registration, and static validation complete / PHP syntax verified |
-| 16 | 慈眼寺町 | `jigenjicho` | IN_PROGRESS | Dedicated tool / 2026-07-18 / Three files, shared registration, and static validation complete / PHP CLI unverified |
-| 17 | 自由ヶ丘 | `jiyugaoka` | IN_PROGRESS | Dedicated tool / 2026-07-18 / Three files, shared registration, and static validation complete / PHP CLI unverified |
-| 18 | 七ツ島 | `nanatsujima` | IN_PROGRESS | Dedicated tool / 2026-07-16 / Three files, shared registration, and static validation complete / PHP CLI unverified |
-| 19 | 若葉町 | `wakabacho` | IN_PROGRESS | Dedicated tool / 2026-07-18 / Three files, shared registration, and static validation complete / PHP CLI unverified |
+| 16 | 慈眼寺町 | `jigenjicho` | LOCAL_COMPLETE | Status correction / 2026-10-09 / Three files and shared registration complete / Existing audit passed / PHP syntax verified |
+| 17 | 自由ヶ丘 | `jiyugaoka` | LOCAL_COMPLETE | Status correction / 2026-10-09 / Three files and shared registration complete / Existing audit passed / PHP syntax verified |
+| 18 | 七ツ島 | `nanatsujima` | LOCAL_COMPLETE | Status correction / 2026-10-09 / Three files and shared registration complete / PHP syntax verified / Current source Text is missing or unidentifiable |
+| 19 | 若葉町 | `wakabacho` | LOCAL_COMPLETE | Status correction / 2026-10-09 / Three files and shared registration complete / Existing audit passed / PHP syntax verified |
 | 20 | 住吉町 | `sumiyoshicho` | LOCAL_COMPLETE | Dedicated tool / 2026-07-24 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 21 | 春山町 | `haruyamacho` | LOCAL_COMPLETE | Dedicated tool / 2026-07-24 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 22 | 小松原 | `komatsubara` | BLOCKED | Broken partial files removed on 2026-07-20; area-index registration is missing |
@@ -96,7 +96,7 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 58 | 鷹師 | `takashi` | LOCAL_COMPLETE | Dedicated tool / 2026-10-08 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 59 | 谷山港 | `taniyamakou` | LOCAL_COMPLETE | Dedicated tool / 2026-10-08 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 60 | 谷山中央 | `taniyamachuuou` | READY_CANDIDATE | |
-| 61 | 中央港新町 | `chuokoshinmachi` | IN_PROGRESS | Dedicated tool / 2026-07-16 / Three files, shared registration, and static validation complete / PHP CLI unverified |
+| 61 | 中央港新町 | `chuokoshinmachi` | LOCAL_COMPLETE | Status correction / 2026-10-09 / Three files and shared registration complete / PHP syntax verified / Current source Text is missing or unidentifiable |
 | 62 | 中央町 | `chuocho` | READY_CANDIDATE | |
 | 63 | 中山 | `chuzan` | READY_CANDIDATE | |
 | 64 | 中山町 | `chuzancho` | READY_CANDIDATE | |
