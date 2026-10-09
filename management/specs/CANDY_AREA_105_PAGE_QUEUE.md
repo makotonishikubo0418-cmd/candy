@@ -97,7 +97,7 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 59 | 谷山港 | `taniyamakou` | LOCAL_COMPLETE | Dedicated tool / 2026-10-08 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 60 | 谷山中央 | `taniyamachuuou` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 61 | 中央港新町 | `chuokoshinmachi` | LOCAL_COMPLETE | Status correction / 2026-10-09 / Three files and shared registration complete / PHP syntax verified / Current source Text is missing or unidentifiable |
-| 62 | 中央町 | `chuocho` | READY_CANDIDATE | |
+| 62 | 中央町 | `chuocho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 63 | 中山 | `chuzan` | READY_CANDIDATE | |
 | 64 | 中山町 | `chuzancho` | READY_CANDIDATE | |
 | 65 | 中町 | `nakamachi` | READY_CANDIDATE | |
