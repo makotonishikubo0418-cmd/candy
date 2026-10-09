@@ -1,9 +1,11 @@
 # Candy 履歴一覧
 
-Updated: 2026-10-08
+Updated: 2026-10-09
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | ブログ継続作成・画像共通管理のGitHub公開 | [20261009_OPERATION_blog-management-github-publication.md](history/20261009_OPERATION_blog-management-github-publication.md) |
+| CREATE | ブログ継続作成・画像共通管理の整備 | [20261008_CREATE_blog-and-image-management.md](history/20261008_CREATE_blog-and-image-management.md) |
 | CREATE | 初めてのデリヘル向け女の子選びブログの作成と公開 | [20261008_CREATE_first-deliveryhealth-girl-choice-blog.md](history/20261008_CREATE_first-deliveryhealth-girl-choice-blog.md) |
 | MODIFY | トップページのホテル情報を最新15件に限定 | [20261008_MODIFY_hotel-top-latest-fifteen.md](history/20261008_MODIFY_hotel-top-latest-fifteen.md) |
 | OPERATION | シェラトン鹿児島・シルクイン鹿児島のGitHub本番公開 | [20261008_OPERATION_hotel-two-page-production-publication.md](history/20261008_OPERATION_hotel-two-page-production-publication.md) |

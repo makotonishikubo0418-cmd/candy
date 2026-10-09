@@ -23,6 +23,7 @@ os.environ["GIT_OPTIONAL_LOCKS"] = "0"
 RELATED_TEXT = "ここにはリンク先のタイトルを表示します。"
 RELATED_PER_CATEGORY = 3
 RELATED_COUNT = RELATED_PER_CATEGORY * 2
+BLOG_TOP_LATEST_LIMIT = 15
 RELATED_BLOG_SLUGS = (
     "glamourgirl",
     "petitegirl",
@@ -51,6 +52,15 @@ CATEGORY_INDEX_TERMINAL_CTA = (
     '<a href="./#shopinfo" class="bt-pk-xl">お問い合わせはコチラ</a></div>'
 )
 MAIN_CONTENT_END_MARKER = "<!-- メインコンテンツ END -->"
+BLOG_LINK_RE = re.compile(
+    r'<a href="\./(kagoshima-deliveryhealth-blog-[a-z0-9-]+\.php)"[^>]*>(.*?)</a>',
+    re.S,
+)
+BLOG_TOP_ENTRY_RE = re.compile(
+    r'^[ \t]*<div class="(?:lp_20_0|lp_14_0) fs_sm2(?: bd_t)?">'
+    r'<a href="\./kagoshima-deliveryhealth-blog-[a-z0-9-]+\.php"[^>]*>.*?</a></div>[ \t]*\r?\n?',
+    re.M | re.S,
+)
 
 
 class PageToolError(RuntimeError):
@@ -254,6 +264,10 @@ def htext(value: str) -> str:
 
 def hattr(value: str) -> str:
     return html.escape(value, quote=True)
+
+
+def strip_tags(value: str) -> str:
+    return html.unescape(re.sub(r"<[^>]+>", "", value)).strip()
 
 
 def replace_one(source: str, pattern: str, replacement: str, label: str, flags: int = 0) -> str:
@@ -467,6 +481,64 @@ def insert_before_button(block: str, entry: str) -> str:
     return block[: match.start()] + entry.rstrip() + "\n" + block[match.start() :]
 
 
+def blog_registry_links(source: str, *, top_page: bool) -> list[tuple[str, str]]:
+    if top_page:
+        start = source.find("<!-- スタッフブログ START -->")
+        end = source.find("<!-- スタッフブログ END -->", start)
+        if start < 0 or end < 0:
+            raise PageToolError("indexブログ領域がありません")
+        source = source[start:end]
+    else:
+        start = source.find("BLOG INFO</div>")
+        end = source.find(CATEGORY_INDEX_TERMINAL_CTA, start)
+        if start < 0 or end < 0:
+            raise PageToolError("blog一覧領域がありません")
+        source = source[start:end]
+    return [(href, strip_tags(label)) for href, label in BLOG_LINK_RE.findall(source)]
+
+
+def blog_registry_alignment_errors(blog_source: str, index_source: str) -> list[str]:
+    blog_entries = blog_registry_links(blog_source, top_page=False)
+    index_entries = blog_registry_links(index_source, top_page=True)
+    expected_entries = blog_entries[-BLOG_TOP_LATEST_LIMIT:]
+    errors: list[str] = []
+    blog_counts = {href: sum(1 for item_href, _name in blog_entries if item_href == href) for href, _name in blog_entries}
+    index_counts = {href: sum(1 for item_href, _name in index_entries if item_href == href) for href, _name in index_entries}
+    blog_duplicates = sorted(href for href, count in blog_counts.items() if count != 1)
+    index_duplicates = sorted(href for href, count in index_counts.items() if count != 1)
+    if blog_duplicates:
+        errors.append("blog一覧URL重複: " + ",".join(blog_duplicates))
+    if index_duplicates:
+        errors.append("indexブログURL重複: " + ",".join(index_duplicates))
+    if index_entries != expected_entries:
+        errors.append("indexブログ最新15件がblog一覧の末尾15件と一致しません")
+    return errors
+
+
+def synchronize_blog_top_index(index_source: str, blog_source: str) -> str:
+    expected_entries = blog_registry_links(blog_source, top_page=False)[-BLOG_TOP_LATEST_LIMIT:]
+    start = index_source.find("<!-- スタッフブログ START -->")
+    end = index_source.find("<!-- スタッフブログ END -->", start)
+    if start < 0 or end < 0:
+        raise PageToolError("indexブログ領域がありません")
+    block = index_source[start:end]
+    parsed_entries = blog_registry_links(index_source, top_page=True)
+    matched_rows = BLOG_TOP_ENTRY_RE.findall(block)
+    if len(matched_rows) != len(parsed_entries):
+        raise PageToolError("indexブログ行の構造を安全に置換できません")
+    block = BLOG_TOP_ENTRY_RE.sub("", block)
+    rows = []
+    for position, (entry_href, entry_name) in enumerate(expected_entries):
+        css_class = "lp_20_0 fs_sm2" if position == 0 else "lp_14_0 fs_sm2 bd_t"
+        rows.append(
+            f'\t\t\t<div class="{css_class}"><a href="./{entry_href}" class="fade">'
+            f'{htext(entry_name)}</a></div>'
+        )
+    if rows:
+        block = insert_before_button(block, "\n".join(rows))
+    return index_source[:start] + block + index_source[end:]
+
+
 def update_blog_registries(blog_source: str, index_source: str, slug: str, title: str) -> tuple[str, str]:
     php_name = f"kagoshima-deliveryhealth-blog-{slug}.php"
     href = f"./{php_name}"
@@ -485,15 +557,7 @@ def update_blog_registries(blog_source: str, index_source: str, slug: str, title
             raise PageToolError("blog一覧挿入位置がありません")
         body = match.group(2).rstrip() + "\n" + entry
         blog_source = blog_source[: match.start()] + match.group(1) + body + match.group(3) + blog_source[match.end() :]
-    if href not in index_source:
-        start = index_source.find("<!-- スタッフブログ START -->")
-        end = index_source.find("<!-- スタッフブログ END -->", start)
-        if start < 0 or end < 0:
-            raise PageToolError("indexブログ領域がありません")
-        block = index_source[start:end]
-        entry = f'\t\t\t<div class="lp_14_0 fs_sm2 bd_t"><a href="{href}" class="fade">{html.escape(title)}</a></div>'
-        block = insert_before_button(block, entry)
-        index_source = index_source[:start] + block + index_source[end:]
+    index_source = synchronize_blog_top_index(index_source, blog_source)
     return blog_source, index_source
 
 
@@ -638,10 +702,22 @@ def shared_validation(category: str, slug: str, canonical: str) -> list[str]:
         errors.append("sitemap登録が1件ではありません")
     category_source = read_utf8(hp / "source" / f"{category}.html")
     errors.extend(category_index_terminal_cta_errors(category, category_source))
-    for name in (category, "index"):
-        source = category_source if name == category else read_utf8(hp / "source" / f"{name}.html")
-        if source.count(f"./{php_name}") != 1:
-            errors.append(f"{name}一覧リンクが1件ではありません")
+    if category_source.count(f"./{php_name}") != 1:
+        errors.append(f"{category}一覧リンクが1件ではありません")
+    index_source = read_utf8(hp / "source" / "index.html")
+    if category == "blog":
+        expected_entries = blog_registry_links(category_source, top_page=False)[-BLOG_TOP_LATEST_LIMIT:]
+        expected_count = 1 if php_name in {href for href, _name in expected_entries} else 0
+        actual_count = sum(
+            1
+            for href, _name in blog_registry_links(index_source, top_page=True)
+            if href == php_name
+        )
+        if actual_count != expected_count:
+            errors.append("indexブログ最新15件の対象リンク件数が不正です")
+        errors.extend(blog_registry_alignment_errors(category_source, index_source))
+    elif index_source.count(f"./{php_name}") != 1:
+        errors.append("index一覧リンクが1件ではありません")
     return errors
 
 

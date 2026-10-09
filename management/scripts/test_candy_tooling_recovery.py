@@ -343,6 +343,45 @@ class RecoveryTests(unittest.TestCase):
         self.assertEqual(hotel.hotel_registry_alignment_errors(listing, top), [])
         self.assertEqual(hotel.synchronize_hotel_top_index(top, listing), top)
 
+    def test_blog_top_keeps_only_latest_fifteen_in_registry_order(self):
+        entries = [
+            (f"kagoshima-deliveryhealth-blog-test-{index:02d}.php", f"ブログ{index:02d}")
+            for index in range(1, 18)
+        ]
+        listing = (
+            '<div class="blog-list">\n'
+            '<div class="lp_5 lm_0_auto w_130 center bg_p fs_xs fc_w">BLOG INFO</div>\n'
+            + "\n".join(
+                f'<div class="lp_20_0 fs_md3 bd_t"><a href="./{href}" class="fade">{name}</a></div>'
+                for href, name in entries
+            )
+            + "\n</div>\n"
+            + common.CATEGORY_INDEX_TERMINAL_CTA
+            + "\n</div>\n"
+            + common.MAIN_CONTENT_END_MARKER
+        )
+        top_fixture = (
+            '<!-- スタッフブログ START -->\n'
+            '\t<div class="lp_5 lm_0_auto w_130 center bg_p fs_xs fc_w">BLOG INFO</div>\n'
+            '\t<div class="center"><a href="./blog.php" class="bt-pk-xl">ブログ一覧はコチラ</a></div>\n'
+            '<!-- スタッフブログ END -->'
+        )
+        top = common.synchronize_blog_top_index(top_fixture, listing)
+        self.assertEqual(common.blog_registry_links(top, top_page=True), entries[-15:])
+        self.assertNotIn(entries[0][0], top)
+        self.assertEqual(common.blog_registry_alignment_errors(listing, top), [])
+        self.assertEqual(common.synchronize_blog_top_index(top, listing), top)
+        updated_listing, updated_top = common.update_blog_registries(
+            listing,
+            top,
+            "test-18",
+            "ブログ18",
+        )
+        updated_entries = entries + [("kagoshima-deliveryhealth-blog-test-18.php", "ブログ18")]
+        self.assertEqual(common.blog_registry_links(updated_listing, top_page=False), updated_entries)
+        self.assertEqual(common.blog_registry_links(updated_top, top_page=True), updated_entries[-15:])
+        self.assertEqual(common.blog_registry_alignment_errors(updated_listing, updated_top), [])
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

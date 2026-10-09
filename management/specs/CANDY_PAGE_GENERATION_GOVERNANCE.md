@@ -203,8 +203,14 @@ The public-route sources are:
 | Blog | `HP/source/blog.html` | `鹿児島デリヘル「キャンディ」スタッフブログ` in `HP/source/index.html` |
 | Hotel | `HP/source/hotel.html` | `鹿児島のデリヘルが呼べる「ホテル情報」` in `HP/source/index.html` |
 
-For blog, the category index and top-page section MUST contain the same public
-detail-page URL set exactly once, with the same visible name for each URL.
+For blog, the category index MUST contain every public blog-detail URL exactly
+once. The top-page section MUST contain only the latest 15 entries, or all
+entries when fewer than 15 exist. "Latest" means the final 15 entries in the
+canonical registration order of `HP/source/blog.html`; do not infer it from a
+file name, filesystem timestamp, or hand selection. Preserve those entries'
+relative order and visible names on the top page. Older blog entries remain
+available only through the complete blog index. The operational procedure is
+defined in `BLOG_CREATION.md`.
 
 For hotel, the category index MUST contain every public hotel-detail URL
 exactly once. The top-page section MUST contain only the latest 15 entries, or
@@ -307,6 +313,9 @@ Current area, blog, and hotel templates use `<meta name="robots" content="index"
 - Internal links point to public PHP.
 - Robots agrees with publication policy.
 - Category-index registration requirements were checked.
+- The blog top-page section, when applicable, is exactly the final 15 blog
+  index registrations (or all registrations when fewer than 15 exist), in the
+  same relative order and with the same visible names.
 - The hotel top-page section, when applicable, is exactly the final 15 hotel
   index registrations (or all registrations when fewer than 15 exist), in the
   same relative order and with the same visible names.

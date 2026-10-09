@@ -1,7 +1,9 @@
 # CANDY Blog Page Generation Specification
 
-- Updated: 2026-07-26
+- Updated: 2026-10-08
 - Applies to: Normal new generation of CANDY blog detail pages by Codex
+- Operational sequence: `BLOG_CREATION.md`
+- Common image requirements: `IMAGE_MANAGEMENT.md`
 
 ## 1. Purpose and Scope
 
@@ -173,8 +175,8 @@ The common generation gates remain in
 8. Register the `dataset_base.php` case and link transformation.
 9. Check placeholders, duplicate IDs, numbering gaps, table-of-contents
    mismatches, canonical, images, internal links, and girl numbers.
-10. Synchronize the blog index, its JSON-LD, the top-page blog section, and
-    `sitemap.xml` under Section 10.1 of
+10. Synchronize the complete blog index, its JSON-LD, the top-page latest 15
+    blog entries, and `sitemap.xml` under Section 10.1 of
     `CANDY_PAGE_GENERATION_GOVERNANCE.md`.
 
 ## 11. Exceptions and Cautions
@@ -195,8 +197,11 @@ The common generation gates remain in
 - [ ] Visible and JSON-LD counts agree for customer comments, FAQs, and girl introductions.
 - [ ] Visible FAQ matches FAQPage JSON-LD.
 - [ ] Visible girl content matches ItemList JSON-LD.
-- [ ] Blog-index, top-page blog-section, and sitemap registration requirements
-      satisfy the common public-route synchronization contract.
+- [ ] The blog index contains every public blog once, and the top-page blog
+      section contains its final 15 registrations, or all when fewer than 15
+      exist, in the same order and with the same names.
+- [ ] Sitemap registration requirements satisfy the common public-route
+      synchronization contract.
 - [ ] No duplicate ID exists.
 
 ## 13. Specification Boundary
