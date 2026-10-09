@@ -40,7 +40,7 @@ Status values: `READY_CANDIDATE / IN_PROGRESS / LOCAL_COMPLETE / COMMITTED / PUS
 | 2 | 皆与志町 | `minayoshicho` | PUBLISHED | Codex / 2026-07-14 / Commit `f1ba7fd` / Actions `29294348852` / Production HTTP verified |
 | 3 | 吉野 | `yoshino` | PUBLISHED | Codex / 2026-07-14 / Commit `f1ba7fd` / Actions `29294348852` / Production HTTP verified |
 | 4 | 吉野町 | `yoshinocho` | PUBLISHED | Codex / 2026-07-14 / Commit `98b009d` / Actions `29295020132` / Production HTTP verified |
-| 5 | 宮之浦町 | `miyanouracho` | BLOCKED | Slug conflict: the area index uses `miyanouramachi`; Text canonical is `miyanouracho`. Awaiting a decision without automatic replacement |
+| 5 | 宮之浦町 | `miyanouracho` | LOCAL_COMPLETE | Dedicated tool / 2026-10-09 / Three files, shared registration, and static validation complete / PHP syntax verified |
 | 6 | 玉里団地 | `tamazatodanchi` | PUBLISHED | Codex / 2026-07-14 / Commit `60fa1ab` / Actions `29300812695` / Production HTTP verified |
 | 7 | 玉里町 | `tamazatocho` | PUBLISHED | Codex / 2026-07-14 / Commit `80eb495` / Actions `29301384229` / Production HTTP verified |
 | 8 | 原良 | `harara` | PUBLISHED | Codex / 2026-07-14 / Commit `edc27df` / Actions `29301447744` / Production HTTP verified |

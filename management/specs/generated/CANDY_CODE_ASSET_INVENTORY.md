@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-09T10:47:18+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-09T10:52:31+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: f99542f2f7e0b8e18e9730020486ff50e328d102
-> State fingerprint: sha256:3ec553392a6390653ca0ede09841c7d9728b0e5b7a00e599c1d3648da458f818
-> Population: Public PHP files: 169 / assets: 716
+> Commit: 15586f442c476474010a3f353351991a49aeb698
+> State fingerprint: sha256:481fa9da92882edacf62dc615ed35adffb74c24949a09be87c0133aa9298ce03
+> Population: Public PHP files: 170 / assets: 718
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 4 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 0
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 597 |
+| .jpg | 599 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 29 |
@@ -50,7 +50,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgCss/s | 2 |
 | HP/imgHtml | 18 |
 | HP/imgHtml/new_202601 | 10 |
-| HP/imgHtml/new_202601/area | 306 |
+| HP/imgHtml/new_202601/area | 308 |
 | HP/imgHtml/new_202601/banner | 24 |
 | HP/imgHtml/new_202601/blog | 15 |
 | HP/imgHtml/new_202601/girl | 66 |
@@ -128,6 +128,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | area:masagocho | 6 | NONE | OK |
 | area:matsubaracho | 6 | NONE | OK |
 | area:minayoshicho | 6 | NONE | OK |
+| area:miyanouracho | 6 | NONE | OK |
 | area:murasakibaru | 6 | NONE | OK |
 | area:nagayoshi | 6 | NONE | OK |
 | area:nakamachi | 6 | NONE | OK |

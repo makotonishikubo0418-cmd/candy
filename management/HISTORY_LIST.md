@@ -4,6 +4,8 @@ Updated: 2026-10-09
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | 宮之浦町エリアページのローカル作成 | [20261009_CREATE_miyanouracho-area-page.md](history/20261009_CREATE_miyanouracho-area-page.md) |
+| MODIFY | 宮之浦町の正式slug確定 | [20261009_MODIFY_miyanouracho-canonical-slug.md](history/20261009_MODIFY_miyanouracho-canonical-slug.md) |
 | CREATE | 谷山中央・中央町・中山・中山町・中町エリアページの作成と公開 | [20261009_CREATE_area-five-page-publication.md](history/20261009_CREATE_area-five-page-publication.md) |
 | MODIFY | エリアキューの旧IN_PROGRESS状態訂正 | [20261009_MODIFY_area-queue-status-correction.md](history/20261009_MODIFY_area-queue-status-correction.md) |
 | OPERATION | ブログ継続作成・画像共通管理のGitHub公開 | [20261009_OPERATION_blog-management-github-publication.md](history/20261009_OPERATION_blog-management-github-publication.md) |

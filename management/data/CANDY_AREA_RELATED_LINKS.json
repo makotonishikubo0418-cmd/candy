@@ -388,6 +388,14 @@
       "latitude": 31.667522,
       "links": ["shimotacho", "yoshino", "shimoishikicho", "hanaomachi"]
     },
+    "miyanouracho": {
+      "region": "宮之浦町",
+      "longitude": 130.567932,
+      "latitude": 31.682465,
+      "index_group": "ま",
+      "index_before": "murasakibaru",
+      "links": ["yoshino", "yoshinocho", "minayoshicho", "shimotacho"]
+    },
     "murasakibaru": {
       "region": "紫原",
       "longitude": 130.540085,
