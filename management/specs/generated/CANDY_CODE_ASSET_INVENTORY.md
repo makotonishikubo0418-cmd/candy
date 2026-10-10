@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-10T17:27:45+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-10T17:30:07+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 770f54db26f80452e626004f9f7da5db14982077
-> State fingerprint: sha256:4ea1a6385921bfb787418562c8ec0e94bae4fa47ab0eb5a312fe94b64d724ad5
-> Population: Public PHP files: 250 / assets: 738
+> Commit: 617867712033cc6db3bacc84a1beafc9c3442bd7
+> State fingerprint: sha256:55e42cc122de4d4506ff97700cd87be3e3ee4fd9dc203a2e440ac1f8f88bd5cb
+> Population: Public PHP files: 251 / assets: 738
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 4 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 0
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -255,6 +255,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | hotel:favluxkagoshimatenmonkan | 6 | NONE | OK |
 | hotel:grandbasekagoshimachuo | 6 | NONE | OK |
 | hotel:greenrichkagoshimatenmonkan | 6 | NONE | OK |
+| hotel:hennnahotelpremierkagoshimatenmonkan | 6 | NONE | OK |
 | hotel:hotelazkagoshimakiireten | 6 | NONE | OK |
 | hotel:hotelcoconutsresortmarinakagoshima | 6 | NONE | OK |
 | hotel:hotelfukiageso | 6 | NONE | OK |
@@ -340,7 +341,7 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/imgHtml/new_202601/hotel | 20 | dormyinnkagoshima_1.jpg, dormyinnkagoshima_2.jpg, hennnahotelpremierkagoshimatenmonkan_1.jpg, hennnahotelpremierkagoshimatenmonkan_2.jpg, hoteltaisei_1.jpg |
+| HP/imgHtml/new_202601/hotel | 18 | dormyinnkagoshima_1.jpg, dormyinnkagoshima_2.jpg, hoteltaisei_1.jpg, hoteltaisei_2.jpg, kagoshimaaine_1.jpg |
 
 ## Required Same-Content Path Groups
 
