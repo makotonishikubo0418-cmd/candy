@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-10T17:41:52+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-10T17:44:06+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: ad1c435595b11f3ba440cada363b6e397a1b92ef
-> State fingerprint: sha256:6747ffd11943e152bd0d947adb1c98c4c1968f4750b70add40c1afdafe0afa87
-> Population: Public PHP files: 256 / assets: 738
+> Commit: a5f6f1c054da8ab493ec2f9f7a04394365327d4c
+> State fingerprint: sha256:ab7abfb7bde6b0bea2c899575cacac3f0c8db28dfbe5ceb076e970f343b25058
+> Population: Public PHP files: 257 / assets: 738
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 4 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 0
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -307,6 +307,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | hotel:toyokoinnkagoshimachuoekihigashiguchi | 6 | NONE | OK |
 | hotel:toyokoinnkagoshimachuostationnishi | 6 | NONE | OK |
 | hotel:toyokoinnkagoshimatemmonkanno1 | 6 | NONE | OK |
+| hotel:toyokoinnkagoshimatemmonkanno2 | 6 | NONE | OK |
 | hotel:villacosta500 | 6 | NONE | OK |
 | hotel:youstylehotelmarine | 6 | NONE | OK |
 | hotel:youstylehotelmate | 6 | NONE | OK |
@@ -346,7 +347,7 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/imgHtml/new_202601/hotel | 8 | hoteltaisei_1.jpg, hoteltaisei_2.jpg, kagoshimaaine_1.jpg, kagoshimaaine_2.jpg, kagoshimasunroyalhotel_1.jpg |
+| HP/imgHtml/new_202601/hotel | 6 | hoteltaisei_1.jpg, hoteltaisei_2.jpg, kagoshimaaine_1.jpg, kagoshimaaine_2.jpg, kagoshimasunroyalhotel_1.jpg |
 
 ## Required Same-Content Path Groups
 
