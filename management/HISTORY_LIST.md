@@ -4,6 +4,7 @@ Updated: 2026-10-10
 
 | Type | Title | History |
 |---|---|---|
+| PROBLEM | エリア7ページの監査指摘修正と本番公開 | [20261010_PROBLEM_area-seven-page-audit-remediation.md](history/20261010_PROBLEM_area-seven-page-audit-remediation.md) |
 | CREATE | ホテルタイセイページの完成と本番公開 | [20261010_CREATE_hotel-taisei-completion.md](history/20261010_CREATE_hotel-taisei-completion.md) |
 | CREATE | 残りホテル15ページの作成と本番公開 | [20261010_CREATE_hotel-remaining-fifteen-publication.md](history/20261010_CREATE_hotel-remaining-fifteen-publication.md) |
 | CREATE | 次のホテル10ページの作成と本番公開 | [20261010_CREATE_hotel-next-ten-page-publication.md](history/20261010_CREATE_hotel-next-ten-page-publication.md) |

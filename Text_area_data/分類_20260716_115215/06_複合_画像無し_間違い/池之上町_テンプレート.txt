@@ -23,13 +23,13 @@ canonical
 https://www.55810.com/kagoshima-deliveryhealth-area-ikenouecho.php
 -------------------------------------------------------------------
 image
-https://www.55810.com/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-ikenouecho.jpg
+https://www.55810.com/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-ikenouecho_1.jpg
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 記事内容
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 img_1
-src : ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-ikenouecho.jpg
+src : ./imgHtml/new_202601/area/kagoshima-deliveryhealth-area-ikenouecho_1.jpg
 -------------------------------------------------------------------
 page_title_h1 / パンくずリスト
 鹿児島市池之上町で呼べるデリヘル
@@ -47,9 +47,9 @@ scene（h2 / 「人気デリヘル店」情報）
 id="scene1" : 鹿児島池之上町に呼べる
 
 ・CANDY（内容は同じ）
-・after5（移動時間 : 10分～17分前後 / 交通費 : 無料～1,000円）
-・REBORN（移動時間 : 10分～20分前後 / 交通費 : 無料～2,000円）
-・CANDY BELOVED（移動時間 : 50分～60分前後 / 交通費 : 4,000円～要相談）
+・after5（移動時間 : 10～17分前後 / 交通費 : 無料～1,000円）
+・REBORN（移動時間 : 10～20分前後 / 交通費 : 無料～2,000円）
+・CANDY BELOVED（移動時間 : 50～60分前後 / 交通費 : 4,000円～要相談）
 
 【重要】template_shop.htmlから、上記店舗の情報を取得して<!-- 店舗名 -->～</li>までを設置。その際、移動時間と交通費は上記内容に合わせて修正してください。項目下部にある「description_」はsceneに合わせて番号を設置してください。
 
