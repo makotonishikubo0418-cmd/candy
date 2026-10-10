@@ -9,10 +9,10 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-10T14:50:27+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-10T14:55:28+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 91738082fcfa6133f663f82bf916383c7a404a40
-> State fingerprint: sha256:40ab6a0a2bc685b3a9b91299c6bb4fe12ae13f815e8eef96761a36c77677f59f
+> Commit: caa3c73c5d696e72c385a0f233942aa8597a8051
+> State fingerprint: sha256:1130814831806cccb625cfe824621bdd84eddbe5754619cdea3b6c3a3ffd02d1
 > Population: Public PHP files: 234 / assets: 738
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 4 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 0
@@ -261,7 +261,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | hotel:hotelgateinkagoshima | 6 | NONE | OK |
 | hotel:hotelgrancerezo | 6 | NONE | OK |
 | hotel:hotelkukita | 6 | NONE | OK |
-| hotel:hotelm | 2 | NONE | OK |
+| hotel:hotelm | 6 | NONE | OK |
 | hotel:hotelorientalexpresskagoshimatenmonkan | 6 | NONE | OK |
 | hotel:hotelpalmstenmonkan | 6 | NONE | OK |
 | hotel:hotelparcs | 6 | NONE | OK |
@@ -285,7 +285,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | hotel:shiroyamahotelkagoshima | 6 | NONE | OK |
 | hotel:silkinnkagoshima | 6 | NONE | OK |
 | hotel:solarianishitetsuhotelkagoshima | 6 | NONE | OK |
-| hotel:villacosta500 | 2 | NONE | OK |
+| hotel:villacosta500 | 6 | NONE | OK |
 | hotel:youstylehotelmarine | 6 | NONE | OK |
 | hotel:youstylehotelmate | 6 | NONE | OK |
 | other:member_login | 2 | NONE | OK |

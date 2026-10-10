@@ -149,6 +149,20 @@ def assert_site_state_checks_og_image_target() -> None:
         assert site_state.ogp_validation_issues(source("rep01010007eot"), hp_root) == []
 
 
+def assert_faq_items_do_not_depend_on_heading_copy() -> None:
+    source = (
+        '<section id="scene10">\n'
+        '<h2>よくある「女の子選び」の疑問</h2>\n'
+        '<div class="girl-choice-faq">\n'
+        '<div class="faq-item"><h3>質問1</h3><div>回答1</div></div>\n'
+        '<div class="faq-item bd_b"><h3>質問2</h3><div>回答2</div></div>\n'
+        '</div>\n'
+        '</section>\n'
+        '<script>document.querySelectorAll(".faq-item")</script>\n'
+    )
+    assert site_state.visible_faq_item_count(source) == 2
+
+
 def assert_sitemap_lastmod_rendering_is_exact() -> None:
     root_url = "https://www.55810.com"
     area_url = "https://www.55810.com/area.php"
@@ -211,6 +225,7 @@ def main() -> None:
     assert_check_preview_and_write_modes()
     assert_area_og_image_pair_is_enforced()
     assert_site_state_checks_og_image_target()
+    assert_faq_items_do_not_depend_on_heading_copy()
     assert_sitemap_lastmod_rendering_is_exact()
     assert_sitemap_lastmod_rejects_ambiguous_or_invalid_input()
     print("SITE_STATE_METADATA_TESTS: passed")

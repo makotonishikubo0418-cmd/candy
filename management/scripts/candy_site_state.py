@@ -721,6 +721,24 @@ def json_main_entity_count(value: object) -> int:
     return 0
 
 
+def visible_faq_item_count(source: str) -> int:
+    count = 0
+    for faq_heading in re.finditer(r"<h2\b[^>]*>(.*?)</h2>", source, re.I | re.S):
+        heading = strip_tags(faq_heading.group(1))
+        if not re.search(r"FAQ|よくある(?:ご質問|.*疑問)", heading, re.I):
+            continue
+        next_heading = re.search(r"<h2\b", source[faq_heading.end() :], re.I)
+        section_end = faq_heading.end() + next_heading.start() if next_heading else len(source)
+        count += len(
+            re.findall(
+                r'class=["\'][^"\']*\bfaq-item\b',
+                source[faq_heading.end() : section_end],
+                re.I,
+            )
+        )
+    return count
+
+
 def category_for(stem: str) -> tuple[str, str]:
     detail = DETAIL_RE.match(stem)
     if detail:
@@ -918,15 +936,7 @@ def collect() -> dict[str, object]:
         breadcrumb_count = sum(json_type_count(obj, "BreadcrumbList") for obj in json_objects)
         faq_schema_count = sum(json_type_count(obj, "FAQPage") for obj in json_objects)
         faq_schema_items = sum(json_main_entity_count(obj) for obj in json_objects)
-        faq_body_count = 0
-        for faq_heading in re.finditer(r"<h2\b[^>]*>(.*?)</h2>", source, re.I | re.S):
-            if not re.search(r"FAQ|よくあるご質問", strip_tags(faq_heading.group(1)), re.I):
-                continue
-            next_heading = re.search(r"<h2\b", source[faq_heading.end() :], re.I)
-            section_end = faq_heading.end() + next_heading.start() if next_heading else len(source)
-            faq_body_count += len(
-                re.findall(r'class=["\'][^"\']*faq-item', source[faq_heading.end() : section_end], re.I)
-            )
+        faq_body_count = visible_faq_item_count(source)
         item_count = sum(json_type_count(obj, "ItemList") for obj in json_objects)
         internal_refs = []
         missing_internal = []

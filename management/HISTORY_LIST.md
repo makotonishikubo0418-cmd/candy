@@ -4,6 +4,7 @@ Updated: 2026-10-10
 
 | Type | Title | History |
 |---|---|---|
+| MODIFY | 旧ホテル5ページと女の子選びブログのSEO整合修正 | [20261010_MODIFY_legacy-hotel-blog-seo-remediation.md](history/20261010_MODIFY_legacy-hotel-blog-seo-remediation.md) |
 | CREATE | ホテル10ページの作成と本番公開 | [20261010_CREATE_hotel-ten-page-publication.md](history/20261010_CREATE_hotel-ten-page-publication.md) |
 | CREATE | ホテル5ページの作成と本番公開 | [20261010_CREATE_hotel-five-page-publication.md](history/20261010_CREATE_hotel-five-page-publication.md) |
 | PROBLEM | プロフィール画像の非表示が公開表示に反映されない問題（Controlと共通の案件） | [20261009_PROBLEM_profile-media-visibility.md](https://github.com/makotonishikubo0418-cmd/fsg_control/blob/main/management/history/20261009_PROBLEM_profile-media-visibility.md) |
