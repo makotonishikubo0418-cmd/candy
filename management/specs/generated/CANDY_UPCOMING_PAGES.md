@@ -9,13 +9,13 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: Category queue/classification documents and the three TSV children listed below
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-10T13:58:41+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-10T14:02:13+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 19b1e175b2378af01e2fa58173f4e3f0088f15c0
-> State fingerprint: sha256:4f3c268ac2570c6de01a8e7246bbee1eef3baa8fd8eef3219747fdf0d0a1fbf4
+> Commit: ff811f9db37945d74ca9095e70720f84b7dfca0c
+> State fingerprint: sha256:a25f038c808b57352c0c7f268d1f17b280952d4cfcade3705aaf5987f461116b
 > Population: Unique candidates: 234 / Text records: 234
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
-> Result: READY=44 / BLOCKED=8 / EXISTING=182 / CONFLICT=0
+> Result: READY=43 / BLOCKED=8 / EXISTING=183 / CONFLICT=0
 > Unverified scope: Text accuracy, Git tracking, and the owner's publication decision
 
 This Markdown parent owns cross-category scope and summary. Complete candidate rows are split by data class, not arbitrary parts:
@@ -28,7 +28,7 @@ This Markdown parent owns cross-category scope and summary. Complete candidate r
 
 | gate | candidates |
 |---|---:|
-| READY | 44 |
+| READY | 43 |
 | BLOCKED | 8 |
-| EXISTING | 182 |
+| EXISTING | 183 |
 | CONFLICT | 0 |
