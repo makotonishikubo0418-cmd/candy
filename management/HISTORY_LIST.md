@@ -4,6 +4,7 @@ Updated: 2026-10-10
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | ホテルタイセイページの完成と本番公開 | [20261010_CREATE_hotel-taisei-completion.md](history/20261010_CREATE_hotel-taisei-completion.md) |
 | CREATE | 残りホテル15ページの作成と本番公開 | [20261010_CREATE_hotel-remaining-fifteen-publication.md](history/20261010_CREATE_hotel-remaining-fifteen-publication.md) |
 | CREATE | 次のホテル10ページの作成と本番公開 | [20261010_CREATE_hotel-next-ten-page-publication.md](history/20261010_CREATE_hotel-next-ten-page-publication.md) |
 | MODIFY | 旧ホテル5ページと女の子選びブログのSEO整合修正 | [20261010_MODIFY_legacy-hotel-blog-seo-remediation.md](history/20261010_MODIFY_legacy-hotel-blog-seo-remediation.md) |
