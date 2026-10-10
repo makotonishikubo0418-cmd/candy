@@ -143,7 +143,8 @@ description_
 TEL 099-293-9977
 URL https://maps.app.goo.gl/9nB987KrHiCUp8Mi9
 
-subtitle_ローソン 照国神社前店
+subtitle_
+ローソン 照国神社前店
 description_
 〒892-0841 鹿児島県鹿児島市照国町12-20<改行>
 TEL 099-226-3965
