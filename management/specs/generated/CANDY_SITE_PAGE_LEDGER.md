@@ -9,13 +9,13 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_SITE_PAGE_LEDGER.tsv`, stable structure specifications, and category specifications
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-10T16:48:28+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-10T16:50:59+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 92ce0df9937f76c7dc3aa983b1a627b4ab9a474c
-> State fingerprint: sha256:dde1c3166d43f4d64861056d8b54b90f16a93399df34081e6e75daa7291b9660
-> Population: Public PHP files: 241
+> Commit: 0feb45b3435aa1b114cfbcdd0e23339d0c8b8055
+> State fingerprint: sha256:1408cc842f7b50526b8121361600bb7f2eeaaf02f4be6ff9bb9d877bc7f5eca8
+> Population: Public PHP files: 242
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
-> Result: COMPLETE=236 / SPECIAL=5 (intentional=5, unreviewed=0)
+> Result: COMPLETE=237 / SPECIAL=5 (intentional=5, unreviewed=0)
 > Unverified scope: Production HTTP, database state, and external include targets
 
 The Markdown parent owns scope, provenance, and summary. The complete one-page-per-row population is in [CANDY_SITE_PAGE_LEDGER.tsv](CANDY_SITE_PAGE_LEDGER.tsv).
@@ -27,14 +27,14 @@ The Markdown parent owns scope, provenance, and summary. The complete one-page-p
 | area | 165 |
 | blog | 8 |
 | girls | 3 |
-| hotel | 53 |
+| hotel | 54 |
 | other | 8 |
 | system | 3 |
 | top | 1 |
 
 | structure | pages |
 |---|---:|
-| COMPLETE | 236 |
+| COMPLETE | 237 |
 | SPECIAL | 5 |
 
 | special classification | pages |
