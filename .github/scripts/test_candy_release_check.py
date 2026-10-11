@@ -3,6 +3,7 @@ from __future__ import annotations
 import importlib.util
 import re
 import sys
+import tempfile
 from pathlib import Path
 
 
@@ -124,9 +125,115 @@ def assert_htaccess_access_contract() -> None:
     print("HTACCESS_ACCESS_RULES_OK=source_404,include_403,source_style_unmatched")
 
 
+def seo_body(url: str, title: str, extra_body: str = "") -> bytes:
+    return (
+        "<html><head>"
+        f"<title>{title}</title>"
+        '<meta name="description" content="説明">'
+        '<meta name="robots" content="index">'
+        f'<link rel="canonical" href="{url}">'
+        f'<meta property="og:title" content="{title}">'
+        '<meta property="og:type" content="website">'
+        f'<meta property="og:url" content="{url}">'
+        '<meta property="og:image" content="https://www.55810.com/image.jpg">'
+        '<meta property="og:description" content="説明">'
+        '<meta property="og:site_name" content="CANDY">'
+        '<script type="application/ld+json">{"@type":"WebPage"}</script>'
+        "</head><body>"
+        f"<h1>{title}</h1>{extra_body}"
+        "</body></html>"
+    ).encode("utf-8")
+
+
+def assert_full_seo_contract(module) -> None:
+    with tempfile.TemporaryDirectory() as temp_dir:
+        root = Path(temp_dir)
+        hp_root = root / "HP"
+        hp_root.mkdir()
+        sitemap_urls = [module.PUBLIC_ROOT, module.PUBLIC_GIRLS_LIST]
+        sitemap_body = (
+            '<?xml version="1.0" encoding="UTF-8"?>'
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+            + "".join(f"<url><loc>{url}</loc></url>" for url in sitemap_urls)
+            + "</urlset>"
+        ).encode("utf-8")
+        sitemap_path = hp_root / "sitemap.xml"
+        sitemap_path.write_bytes(sitemap_body)
+        for name in module.ACTIVE_NON_SITEMAP_ROOTS | {"girls_list.php"}:
+            (hp_root / name).write_text("<?php", encoding="utf-8")
+
+        profile_url = f"{module.PUBLIC_ROOT}girls.php?no=7"
+        responses = response_map(module)
+        responses.update(access_response_map(module))
+        responses[module.PUBLIC_SITEMAP] = (
+            200,
+            module.PUBLIC_SITEMAP,
+            {},
+            sitemap_body,
+        )
+        responses[module.PUBLIC_ROOT] = (
+            200,
+            module.PUBLIC_ROOT,
+            {},
+            seo_body(module.PUBLIC_ROOT, module.TOP_TEXT),
+        )
+        responses[module.PUBLIC_GIRLS_LIST] = (
+            200,
+            module.PUBLIC_GIRLS_LIST,
+            {},
+            seo_body(
+                module.PUBLIC_GIRLS_LIST,
+                "女の子一覧",
+                '<a href="girls.php?no=7">プロフィール</a>',
+            ),
+        )
+        responses[profile_url] = (
+            200,
+            profile_url,
+            {},
+            seo_body(profile_url, "テストのプロフィール"),
+        )
+        girls_url = f"{module.PUBLIC_ROOT}girls.php"
+        responses[girls_url] = (
+            301,
+            girls_url,
+            {"Location": module.PUBLIC_GIRLS_LIST},
+            b"",
+        )
+        movie_url = f"{module.PUBLIC_ROOT}movie_iframe.php"
+        responses[movie_url] = (
+            404,
+            movie_url,
+            {"X-Robots-Tag": "noindex, nofollow"},
+            b"",
+        )
+
+        result = module.verify_full_seo_contract(
+            responses.__getitem__, sitemap_path, hp_root
+        )
+        assert result == {
+            "sitemap_pages": 2,
+            "profile_pages": 1,
+            "public_pages": 3,
+            "active_non_sitemap_routes": 2,
+        }
+
+        (hp_root / "unmanaged.php").write_text("<?php", encoding="utf-8")
+        try:
+            module.verify_full_seo_contract(responses.__getitem__, sitemap_path, hp_root)
+        except module.FullSeoAuditError as exc:
+            assert any(
+                "local_php:unclassified_non_sitemap:unmanaged.php" in issue
+                for issue in exc.issues
+            )
+        else:
+            raise AssertionError("unmanaged non-sitemap page was accepted")
+
+
 def main() -> int:
     module = load_module()
     assert_htaccess_access_contract()
+    assert_full_seo_contract(module)
     responses = response_map(module)
     requested: list[str] = []
 

@@ -1,12 +1,14 @@
 # CANDY Common SEO Specification
 
+Updated: 2026-10-11
+
 ## 1. Responsibility
 
 This is the canonical common SEO specification verified from current CANDY source HTML and category specifications. Per-page current state and inconsistencies belong in `generated/CANDY_SEO_STATUS.md`.
 
 This specification owns SEO behavior only. It does not define operation
 authority, task scope, Git, deployment, or response rules. Those remain in the
-applicable documents selected from `codex/WORK_ROUTING.md` Section 5.2.
+applicable documents selected from [`management/INDEX.md`](../INDEX.md).
 
 ## 2. Page-Type Fundamentals
 
@@ -78,10 +80,9 @@ For `girls.php?no={resolved no}`, derive every woman-specific value from the act
 
 ### 5.2 Development-Only Member Routes
 
-- While `MEMBER_SITE_INTEGRATION_ENABLED` is `false`, `member_login.php`, `member_register.php`, `member_mypage.php`, `member_password_reset.php`, `member_logout.php`, `privacy.php`, and `customers/index.php` are development-only routes, not formal public content pages.
-- Every response and redirect from those routes MUST return `X-Robots-Tag: noindex, nofollow`. Source-backed and layout-rendered HTML MUST also declare `noindex,nofollow`.
-- The member API and cron entry files use the same protected bootstrap and MUST also emit the header when reached over HTTP; this robots control does not replace authentication, scheduler, or direct-access security controls.
-- These routes MUST remain absent from `sitemap.xml` and normal public source navigation. Their public-page title, description, canonical, H1, OGP, JSON-LD, breadcrumb, sitemap-membership, duplicate, and orphan requirements are `NOT_APPLICABLE` while this classification is active.
+- Current use of the member routes is owned by the `Current use` column in [`CANDY_OTHER_PAGES_MANAGEMENT.md`](CANDY_OTHER_PAGES_MANAGEMENT.md). While `MEMBER_SITE_INTEGRATION_ENABLED` is `false`, routes classified as `INACTIVE_DEVELOPMENT` are not current site pages.
+- `INACTIVE_DEVELOPMENT` routes remain outside the current production SEO population. Their public-page title, description, canonical, H1, OGP, JSON-LD, breadcrumb, sitemap-membership, duplicate, orphan, and live redirect requirements are `NOT_APPLICABLE` while this classification is active.
+- The member-isolation regression separately verifies the disabled integration flag, absence from `sitemap.xml` and normal public navigation, and retained source/bootstrap robots safeguards. Those safeguards do not make an inactive route a current SEO page, and their result MUST NOT be converted into a current-page SEO issue.
 - Public `mypage.php` MUST retain the existing Cookie-favorite rendering while integration is disabled and MUST NOT redirect into the development-only routes.
 - Links inside the isolated development feature MAY remain for testing, but an absent destination such as `terms.php` MUST NOT be linked.
 
@@ -142,7 +143,7 @@ Current content pages use a structure containing `og:title`, `og:type`, `og:url`
 
 - Category indexes are the normal route to detail pages.
 - For top category sections, breadcrumbs, nearby-area links, and cross-category links, verify both display names and public-PHP existence.
-- Area detail pages use `周辺の対応エリア` with three to six exact links from `codex/data/CANDY_AREA_RELATED_LINKS.json`, normally four. Use descriptive link text, reject self-links and duplicates, and omit the block when fewer than three suitable completed targets exist.
+- Area detail pages use `周辺の対応エリア` with three to six exact links from `management/data/CANDY_AREA_RELATED_LINKS.json`, normally four. Use descriptive link text, reject self-links and duplicates, and omit the block when fewer than three suitable completed targets exist.
 - Placeholder link copy and `href="#"` are prohibited in generated public area sources.
 - A page with no detected static-source references is an orphan candidate. Do not delete or redirect it until PHP-, database-, or JavaScript-generated links are excluded.
 - Record broken internal links, different slugs, and legacy URLs as findings. Do not fix them automatically.
@@ -176,7 +177,7 @@ Current content pages use a structure containing `og:title`, `og:type`, `og:url`
 - `HP/.htaccess` implements the public-root and canonical-redirect contract in
   Section 4, including explicit `index.php` and `index.html` removal.
 - `.htaccess` production handling belongs to the applicable production route
-  selected from `codex/WORK_ROUTING.md` Section 5.2 and its exact workflow; this
+  selected from [`management/INDEX.md`](../INDEX.md) and its exact workflow; this
   specification owns only the required redirect
   and live-SEO verification outcome.
 - Creating or changing a legacy URL or redirect requires a separate task that verifies inbound traffic, canonical URLs, internal links, the sitemap, and production behavior.
@@ -185,8 +186,19 @@ Current content pages use a structure containing `og:title`, `og:type`, `og:url`
 ## 12. Validation
 
 ```powershell
-codex\scripts\candy-site-state.cmd check --target "<slug>"
+management\scripts\candy-site-state.cmd check --target "<slug>"
+python -B .github/scripts/candy_release_check.py --full-seo
 ```
+
+`candy-site-state` verifies the deterministic local source population. The
+`--full-seo` production check compares the local and live sitemap populations,
+then verifies every sitemap URL, every profile URL currently emitted by
+`girls_list.php`, active non-sitemap helpers, canonical entry redirects, and
+protected internal paths from actual HTTP responses. Routes classified as
+`INACTIVE_DEVELOPMENT` in [`CANDY_OTHER_PAGES_MANAGEMENT.md`](CANDY_OTHER_PAGES_MANAGEMENT.md) are excluded. It
+reports only detected issues and one aggregate line when no issue exists.
+Actual search engine index state requires official Search Console evidence and
+MUST NOT be inferred from HTTP success or sitemap membership.
 
 After a change, validate the category runbook requirements and:
 
@@ -199,6 +211,6 @@ After a change, validate the category runbook requirements and:
 - Duplicate title/canonical, legacy URL, and different slug
 - Zero unresolved sitemap-date drift after `preview-sitemap-lastmod` and `sync-sitemap-lastmod`, followed by a successful `check` after `candy-site-state write`
 - Direct source HTML and source-directory `404`, direct include-path `403`, and `/source/style.css` `200` when the access-control contract is affected
-- Development member response/header robots, public-link isolation, sitemap exclusion, legacy `mypage.php` fallback, and unavailable legal-route links when the development-member contract is affected
+- Development-member current-use classification, public-link isolation, sitemap exclusion, legacy `mypage.php` fallback, and unavailable legal-route links when the development-member contract is affected
 
 Use `generated/CANDY_SEO_STATUS.md` for current findings, each area/hotel/blog specification for category-specific generation exceptions, and `CANDY_FIX_BACKLOG.md` for issues requiring fixes or owner decisions.

@@ -1,6 +1,6 @@
 # CANDY Full-Population Verification Plan
 
-- Updated: 2026-09-29
+- Updated: 2026-10-11
 - Applies to: `HP`, generation source data, test, and production
 - Position: Canonical method for full-population evidence classification
 
@@ -115,6 +115,22 @@ canonical response remains indexable.
 
 Obtain generated HTML from PHP HTTP responses and extract browser-facing internal PHP, images, movies, fonts, CSS, JavaScript, anchors, external URLs, form actions, canonical, OGP, JSON-LD, and placeholders. Static inspection of `source/*.html` is insufficient.
 
+For the current production SEO population, run:
+
+```powershell
+python -B .github/scripts/candy_release_check.py --full-seo
+```
+
+This command uses the local and live sitemap populations, adds every valid
+profile URL emitted by the live `girls_list.php`, and separately verifies active
+non-sitemap helpers. It validates the rendered title, description, robots,
+canonical, H1, OGP, JSON-LD, unresolved placeholders, duplicate
+title/canonical, entry redirects, and protected-path responses. Routes marked
+`INACTIVE_DEVELOPMENT` by [`CANDY_OTHER_PAGES_MANAGEMENT.md`](CANDY_OTHER_PAGES_MANAGEMENT.md) are not current pages and
+are excluded from this SEO population. A new root PHP outside the
+sitemap and the classified active or inactive sets is an issue, not an implicit
+exclusion.
+
 For the internal-path access contract, verify separately that direct requests to `source/` and representative `source/*.html` files return `404`, direct requests to the `includefile/` directory and representative top-level and nested include files return `403`, and `source/style.css` returns `200`. These results do not replace generated-HTML checks through public PHP.
 
 ### 3.4 Internal Links
@@ -127,6 +143,7 @@ For the internal-path access contract, verify separately that direct requests to
 - Verify HTML-to-PHP transformation from `dataset_base.php`.
 - Match each anchor to an `id` or `name` at the destination.
 - For a development-only route, distinguish links inside its isolated feature from links in formal public source navigation. Confirm that formal public sources do not link to the development route and that an unavailable development destination is not linked at all.
+- Do not infer current use from file existence, direct URL accessibility, or structural completeness. Use the `Current use` classification in [`CANDY_OTHER_PAGES_MANAGEMENT.md`](CANDY_OTHER_PAGES_MANAGEMENT.md).
 
 ### 3.5 Images, Movies, Fonts, and CSS
 
@@ -250,8 +267,9 @@ Do not report a local fix as a production fix.
 - Pending decisions are reported as unverified.
 - Every fix was revalidated.
 - When internal-path access control changed, source HTML and directory requests are `404`, include requests are `403`, `source/style.css` is `200`, and public PHP rendering remains valid.
-- When development-only member isolation changed, all member entries emit `noindex,nofollow`, the public legacy mypage fallback remains selected while integration is disabled, public source links and sitemap membership are zero, and unavailable legal destinations are unlinked.
+- When development-only member isolation changed, the current-use classification remains `INACTIVE_DEVELOPMENT`, the public legacy mypage fallback remains selected while integration is disabled, public source links and sitemap membership are zero, and unavailable legal destinations are unlinked.
 - Unexecuted browser, database, and external-service checks are not reported complete.
+- The production full-SEO check completes with zero issues; actual search-engine index state remains separate official Search Console evidence.
 
 When pending decisions remain, report that the full population was scanned but
 unverified items remain. Do not report everything normal until the unverified

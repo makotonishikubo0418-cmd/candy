@@ -1,8 +1,10 @@
 # Git Rules
 
-- Purpose: Define local branch selection, management-branch handling, pre-work Git verification, required reporting, and STOP conditions.
+Updated: 2026-10-11
+
+- Purpose: Define local branch selection, full-repository synchronization judgment, management-branch handling, pre-work Git verification, required reporting, and STOP conditions.
 - Status: canonical rule document
-- Canonical scope: Git repository discovery, branch selection, live GitHub branch verification, management-document publication through Git, and unverifiable-state handling
+- Canonical scope: Git repository discovery, branch selection, whole-checkout and live GitHub branch verification, management-document publication through Git, and unverifiable-state handling
 - Higher authority: `C:\Codex\FSG\Candy\AGENTS.md`
 - Work routing: `codex/WORK_ROUTING.md`
 
@@ -25,6 +27,13 @@
 - Before an authorized publication, verify the target repository, target branch, source `HEAD`, staged paths, staged diff, uncommitted out-of-scope changes, remote URL, and live target-branch SHA.
 - After an authorized publication, verify that the pushed remote branch SHA equals the intended local commit and report any unmerged or unpublished branch separately.
 
+## Synchronization Verdict
+
+- Unless the user limits the paths, a branch synchronization check covers the entire repository root; a partial-path check cannot determine the branch verdict.
+- Obtain the root status without a pathspec and with all untracked files. Include every staged, tracked working-tree, unmerged, and untracked entry; `.git/` and ignored files are not branch contents.
+- Report the requested branch as synchronized only when it is checked out, its local and live GitHub SHAs match with ahead `0` / behind `0`, and the root status has no entries.
+- Otherwise report the branch as not synchronized and provide the SHA relationship, total and category counts, and every affected path. Other branches do not affect a verdict limited to the requested branch.
+
 ## Pre-Work Git Verification
 
 - For each directly involved repository, perform this procedure exactly once on the first repository-related work of the day before investigation or modification.
@@ -35,11 +44,11 @@
 ### Verification Method
 
 1. Within the user-approved project root, identify every `.git` directory or file and resolve each unique repository root.
-2. For every local repository, obtain the current branch, working-tree state, current `HEAD`, every local branch name and SHA, and configured remotes.
+2. For every local repository, obtain the current branch, current `HEAD`, every local branch name and SHA, configured remotes, and the complete root status required by `Synchronization Verdict`.
 3. For every GitHub remote, obtain every live branch name and SHA without updating local remote-tracking references.
 4. Compare branches with the same name by their verified SHAs. Treat a missing same-name branch or different SHA as a difference; do not infer ahead, behind, or divergence direction without complete evidence.
 5. Report ahead and behind as `0 / 0` when the local and live same-name branch SHAs are identical. When they differ, report counts only when both verified commit objects are available and a complete graph comparison succeeds; otherwise report the counts as `UNVERIFIED`.
-6. Identify the proposed work branch by applying `Work Branch Selection`.
+6. Apply `Synchronization Verdict` and identify the proposed work branch by applying `Work Branch Selection`.
 
 Use the following read-only Git commands as applicable:
 
@@ -58,7 +67,8 @@ Do not run `fetch`, `pull`, `switch`, `checkout`, `reset`, `merge`, `rebase`, `c
 Report the following verified facts before work begins:
 
 - Total local repository count and every repository root
-- Current branch, current `HEAD`, and whether uncommitted changes exist for each repository
+- Current branch and current `HEAD` for each repository
+- The result and required difference details defined in `Synchronization Verdict`
 - Current branch upstream ahead and behind counts, or `UNVERIFIED` with the exact reason when complete graph evidence is unavailable
 - Every local branch name and SHA
 - Every GitHub remote URL and every live GitHub branch name and SHA

@@ -1,9 +1,11 @@
 # CANDY Canonical Responsibility Index
 
+Updated: 2026-10-11
+
 ## 1. Purpose
 
-`codex/WORK_ROUTING.md` Section 5.2 is the sole routing authority. This file is a
-non-authoritative ownership lookup used only when that route names it. It
+[`management/INDEX.md`](../INDEX.md) is the sole current routing authority. This file is a
+non-authoritative ownership lookup used only when that index names it. It
 identifies which HP document owns a topic but cannot add mandatory reading,
 change priority, grant authority, or define an execution sequence.
 
@@ -20,7 +22,7 @@ Do not mix stable specifications with current state. Regenerate `generated/` to 
 | Replace an existing approved area-image pair under the same canonical filenames | `CANDY_AREA_IMAGE_REPLACEMENT_RUNBOOK.md` → actual target files |
 | Replace another existing public image, CSS, JavaScript, or static asset at the same path | `CANDY_OPERATION_BASICS.md` → applicable asset/category specification → `CANDY_PRODUCTION_MIGRATION_MASTER.md` |
 | Review SEO state or make an SEO change | `CANDY_SEO_SPEC.md` → `generated/CANDY_SEO_STATUS.md` → target category specification |
-| Check management-document drift | `codex\scripts\candy-site-state.cmd check` |
+| Check generated current-state drift | `management\scripts\candy-site-state.cmd check` |
 | Fix an existing page | `CANDY_OPERATION_BASICS.md` → target category specification → ledger/SEO status |
 
 ## 3. Category Responsibility Lookup
@@ -62,7 +64,7 @@ Do not use fixed-count examples in a category specification as current state. Co
 
 ## 5. Generated Current State
 
-`codex/docs/generated/` contains only output from `candy_site_state.py` and its renderer. Manual editing is prohibited. Markdown parents own scope and summary; Markdown or TSV children preserve responsibility-specific detail.
+`management/specs/generated/` contains only output from `candy_site_state.py` and its renderer. Manual editing is prohibited. Markdown parents own scope and summary; Markdown or TSV children preserve responsibility-specific detail.
 
 | Document | Contents |
 |---|---|

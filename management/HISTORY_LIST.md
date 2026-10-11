@@ -4,8 +4,11 @@ Updated: 2026-10-11
 
 | Type | Title | History |
 |---|---|---|
+| MODIFY | main全体Git同期判定の明確化 | [20261011_MODIFY_git-full-main-sync-definition.md](history/20261011_MODIFY_git-full-main-sync-definition.md) |
 | CREATE | Candy個室待機スペース紹介ブログの作成と公開 | [20261011_CREATE_private-waiting-room-blog.md](history/20261011_CREATE_private-waiting-room-blog.md) |
 | MODIFY | 女の子選びブログの2枚目・3枚目画像置換と本番公開 | [20261011_MODIFY_girl-choice-blog-image-replacement.md](history/20261011_MODIFY_girl-choice-blog-image-replacement.md) |
+| MODIFY | 全ページ本番SEO検証の追加 | [20261011_MODIFY_full-population-live-seo-verification.md](history/20261011_MODIFY_full-population-live-seo-verification.md) |
+| MODIFY | SEO関連管理書の旧パス参照修正 | [20261011_MODIFY_legacy-management-path-references.md](history/20261011_MODIFY_legacy-management-path-references.md) |
 | PROBLEM | エリア7ページの監査指摘修正と本番公開 | [20261010_PROBLEM_area-seven-page-audit-remediation.md](history/20261010_PROBLEM_area-seven-page-audit-remediation.md) |
 | CREATE | ホテルタイセイページの完成と本番公開 | [20261010_CREATE_hotel-taisei-completion.md](history/20261010_CREATE_hotel-taisei-completion.md) |
 | CREATE | 残りホテル15ページの作成と本番公開 | [20261010_CREATE_hotel-remaining-fifteen-publication.md](history/20261010_CREATE_hotel-remaining-fifteen-publication.md) |

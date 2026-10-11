@@ -1,6 +1,6 @@
 # CANDY Production Deployment and Migration Control
 
-Updated: 2026-09-29
+Updated: 2026-10-11
 
 ## 1. Purpose
 Control current `HP/` deployment, protected-entry publication, recovery, and
@@ -255,6 +255,18 @@ Protected or manual deployment routes run the entry check directly:
 ```powershell
 python .github/scripts/candy_release_check.py --entry-only
 ```
+
+Independent full-population production SEO verification uses the same checker:
+
+```powershell
+python -B .github/scripts/candy_release_check.py --full-seo
+```
+
+This mode is read-only. It verifies current live generated HTML and active
+non-sitemap helpers. Routes classified as `INACTIVE_DEVELOPMENT` by
+[`CANDY_OTHER_PAGES_MANAGEMENT.md`](CANDY_OTHER_PAGES_MANAGEMENT.md) are excluded from the current-page SEO
+population. This mode does not wait for Actions or establish Search Console
+index state.
 
 ## 8. During Deployment
 
