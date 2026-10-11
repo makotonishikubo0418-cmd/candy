@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-10T18:38:34+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-11T10:23:14+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 78458ac7d274afb558574044e9c02d30ff914fbd
-> State fingerprint: sha256:aece29eae0a2ae4403350078975e960d8438f1b66fda804279211dc30e320e9f
-> Population: Public PHP files: 260 / assets: 738
+> Commit: 714e2c8bbb8cec1ec70dbaadfb5adbfce16df16b
+> State fingerprint: sha256:07ba651e48ca493f5153bf8d1ffb44062f6335d88c3bf26e83b34a1f50b4bdcf
+> Population: Public PHP files: 261 / assets: 742
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 4 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 0
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -26,10 +26,10 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 
 | extension | count |
 |---|---:|
-| .css | 17 |
+| .css | 18 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 619 |
+| .jpg | 622 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 29 |
@@ -44,7 +44,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 
 | folder | count |
 |---|---:|
-| HP/css | 16 |
+| HP/css | 17 |
 | HP/font | 44 |
 | HP/imgCss/pc | 1 |
 | HP/imgCss/s | 2 |
@@ -52,7 +52,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 15 |
+| HP/imgHtml/new_202601/blog | 18 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -240,6 +240,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:glamourgirl | 7 | NONE | OK |
 | blog:petitegirl | 7 | NONE | OK |
 | blog:poccharigirl | 7 | NONE | OK |
+| blog:private-waiting-room | 3 | NONE | OK |
 | blog:shiroutogirl | 7 | NONE | OK |
 | blog:slendergirl | 7 | NONE | OK |
 | blog:tallbeautygirl | 7 | NONE | OK |

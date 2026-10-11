@@ -4,6 +4,7 @@ Updated: 2026-10-11
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | Candy個室待機スペース紹介ブログの作成と公開 | [20261011_CREATE_private-waiting-room-blog.md](history/20261011_CREATE_private-waiting-room-blog.md) |
 | MODIFY | 女の子選びブログの2枚目・3枚目画像置換と本番公開 | [20261011_MODIFY_girl-choice-blog-image-replacement.md](history/20261011_MODIFY_girl-choice-blog-image-replacement.md) |
 | PROBLEM | エリア7ページの監査指摘修正と本番公開 | [20261010_PROBLEM_area-seven-page-audit-remediation.md](history/20261010_PROBLEM_area-seven-page-audit-remediation.md) |
 | CREATE | ホテルタイセイページの完成と本番公開 | [20261010_CREATE_hotel-taisei-completion.md](history/20261010_CREATE_hotel-taisei-completion.md) |

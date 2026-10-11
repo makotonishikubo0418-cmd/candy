@@ -4,7 +4,7 @@
   <!-- トップ・主要ページ -->
   <url>
     <loc>https://www.55810.com/</loc>
-    <lastmod>2026-10-10</lastmod>
+    <lastmod>2026-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -25,7 +25,7 @@
 
   <url>
     <loc>https://www.55810.com/blog.php</loc>
-    <lastmod>2026-10-09</lastmod>
+    <lastmod>2026-10-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -1765,6 +1765,13 @@
   <url>
     <loc>https://www.55810.com/kagoshima-deliveryhealth-hotel-hoteltaisei.php</loc>
     <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.55810.com/kagoshima-deliveryhealth-blog-private-waiting-room.php</loc>
+    <lastmod>2026-10-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
