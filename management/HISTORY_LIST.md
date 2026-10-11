@@ -1,9 +1,10 @@
 # Candy 履歴一覧
 
-Updated: 2026-10-10
+Updated: 2026-10-11
 
 | Type | Title | History |
 |---|---|---|
+| MODIFY | 女の子選びブログの2枚目・3枚目画像置換と本番公開 | [20261011_MODIFY_girl-choice-blog-image-replacement.md](history/20261011_MODIFY_girl-choice-blog-image-replacement.md) |
 | PROBLEM | エリア7ページの監査指摘修正と本番公開 | [20261010_PROBLEM_area-seven-page-audit-remediation.md](history/20261010_PROBLEM_area-seven-page-audit-remediation.md) |
 | CREATE | ホテルタイセイページの完成と本番公開 | [20261010_CREATE_hotel-taisei-completion.md](history/20261010_CREATE_hotel-taisei-completion.md) |
 | CREATE | 残りホテル15ページの作成と本番公開 | [20261010_CREATE_hotel-remaining-fifteen-publication.md](history/20261010_CREATE_hotel-remaining-fifteen-publication.md) |

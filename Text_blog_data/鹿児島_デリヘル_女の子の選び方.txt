@@ -71,7 +71,7 @@ body
 最初から細かく考えすぎなくても、「なんかこの子好きかも」「この雰囲気タイプかも」くらいで十分です。写真は気になる子を見つける入口。できれば1枚だけでなく何枚か見て、表情や全身の雰囲気も確かめてみてください。
 -------------------------------------------------------------------
 img_2
-src : ./imgHtml/new_202601/blog/kagoshima-deliveryhealth-girl-choice_2.jpg
+src : ./imgHtml/new_202601/blog/kagoshima-deliveryhealth-girl-choice_2.jpg?v=ba3cbfa6
 alt : スタイルや雰囲気が異なる女の子を見比べるイメージ｜鹿児島Candy
 -------------------------------------------------------------------
 scene4（h2）
@@ -88,7 +88,7 @@ types
 長身タイプ / すらっとした長身や、大人っぽいスタイルが好みの方に。
 -------------------------------------------------------------------
 img_3
-src : ./imgHtml/new_202601/blog/kagoshima-deliveryhealth-girl-choice_3.jpg
+src : ./imgHtml/new_202601/blog/kagoshima-deliveryhealth-girl-choice_3.jpg?v=d29ba82a
 alt : Candyの女の子プロフィールページで確認できる4つの情報
 -------------------------------------------------------------------
 scene5（h2）
