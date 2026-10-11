@@ -4,6 +4,7 @@ Updated: 2026-10-11
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | main全体のGitHub同期 | [20261011_OPERATION_main-full-github-synchronization.md](history/20261011_OPERATION_main-full-github-synchronization.md) |
 | MODIFY | main全体Git同期判定の明確化 | [20261011_MODIFY_git-full-main-sync-definition.md](history/20261011_MODIFY_git-full-main-sync-definition.md) |
 | CREATE | Candy個室待機スペース紹介ブログの作成と公開 | [20261011_CREATE_private-waiting-room-blog.md](history/20261011_CREATE_private-waiting-room-blog.md) |
 | MODIFY | 女の子選びブログの2枚目・3枚目画像置換と本番公開 | [20261011_MODIFY_girl-choice-blog-image-replacement.md](history/20261011_MODIFY_girl-choice-blog-image-replacement.md) |
