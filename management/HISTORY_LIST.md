@@ -4,6 +4,7 @@ Updated: 2026-10-11
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | 作業PCのmain更新と確認履歴のGitHub同期 | [20261011_OPERATION_local-main-github-synchronization.md](history/20261011_OPERATION_local-main-github-synchronization.md) |
 | INVESTIGATE | ローカルとGitHubの同期状態確認 | [20261011_INVESTIGATE_github-synchronization-check.md](history/20261011_INVESTIGATE_github-synchronization-check.md) |
 | INVESTIGATE | DB・サーバー・Gitの確認可否調査 | [20261011_INVESTIGATE_db-server-git-access.md](history/20261011_INVESTIGATE_db-server-git-access.md) |
 | OPERATION | main全体のGitHub同期 | [20261011_OPERATION_main-full-github-synchronization.md](history/20261011_OPERATION_main-full-github-synchronization.md) |
