@@ -457,6 +457,10 @@ switch ($hdir) {
 		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-blog-private-waiting-room.php');
 		break;
 
+	case 'kagoshima-deliveryhealth-blog-tokyo-souvenir.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-blog-tokyo-souvenir.php');
+		break;
+
 	case 'kagoshima-deliveryhealth-hotel-greenrichkagoshimatenmonkan.html':
 		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-hotel-greenrichkagoshimatenmonkan.php');
 		break;
@@ -2003,6 +2007,7 @@ $source = str_replace('kagoshima-deliveryhealth-blog-slendergirl.html', 'kagoshi
 $source = str_replace('kagoshima-deliveryhealth-blog-tallbeautygirl.html', 'kagoshima-deliveryhealth-blog-tallbeautygirl.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-blog-girl-choice.html', 'kagoshima-deliveryhealth-blog-girl-choice.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-blog-private-waiting-room.html', 'kagoshima-deliveryhealth-blog-private-waiting-room.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-blog-tokyo-souvenir.html', 'kagoshima-deliveryhealth-blog-tokyo-souvenir.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-hotel-greenrichkagoshimatenmonkan.html', 'kagoshima-deliveryhealth-hotel-greenrichkagoshimatenmonkan.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-hotel-hotelm.html', 'kagoshima-deliveryhealth-hotel-hotelm.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-area-murasakibaru.html', 'kagoshima-deliveryhealth-area-murasakibaru.php', $source);

@@ -1,9 +1,10 @@
 # Candy 履歴一覧
 
-Updated: 2026-10-11
+Updated: 2026-10-13
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | Candy東京土産ブログの作成と公開 | [20261013_CREATE_tokyo-souvenir-blog.md](history/20261013_CREATE_tokyo-souvenir-blog.md) |
 | OPERATION | 作業PCのmain更新と確認履歴のGitHub同期 | [20261011_OPERATION_local-main-github-synchronization.md](history/20261011_OPERATION_local-main-github-synchronization.md) |
 | INVESTIGATE | ローカルとGitHubの同期状態確認 | [20261011_INVESTIGATE_github-synchronization-check.md](history/20261011_INVESTIGATE_github-synchronization-check.md) |
 | INVESTIGATE | DB・サーバー・Gitの確認可否調査 | [20261011_INVESTIGATE_db-server-git-access.md](history/20261011_INVESTIGATE_db-server-git-access.md) |

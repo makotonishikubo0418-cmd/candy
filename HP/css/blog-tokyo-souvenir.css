@@ -1,0 +1,447 @@
+.souvenir-page {
+	--souvenir-ink: #30261d;
+	--souvenir-muted: #76695b;
+	--souvenir-gold: #d59c22;
+	--souvenir-gold-dark: #9b6712;
+	--souvenir-cocoa: #633820;
+	--souvenir-cream: #fff9e9;
+	--souvenir-surface: #fffdf8;
+	--souvenir-border: rgba(155, 103, 18, 0.22);
+	--souvenir-shadow-sm: 0 10px 30px rgba(87, 57, 23, 0.08);
+	--souvenir-shadow-md: 0 20px 52px rgba(87, 57, 23, 0.15);
+	color: var(--souvenir-ink);
+	background: #fff;
+	font-feature-settings: "palt";
+	letter-spacing: 0.015em;
+}
+
+.souvenir-page .souvenir-hero {
+	position: relative;
+	overflow: hidden;
+	background: #bde3f4;
+}
+
+.souvenir-page .souvenir-hero img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.souvenir-page .souvenir-article {
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 0 32px 96px;
+}
+
+.souvenir-page .souvenir-intro {
+	max-width: 860px;
+	margin: -48px auto 0;
+	padding: 46px 58px 50px;
+	position: relative;
+	z-index: 1;
+	box-sizing: border-box;
+	background: rgba(255, 253, 248, 0.98);
+	border: 1px solid var(--souvenir-border);
+	border-radius: 24px;
+	box-shadow: var(--souvenir-shadow-md);
+}
+
+.souvenir-page .souvenir-eyebrow {
+	margin: 0 0 16px;
+	color: var(--souvenir-gold-dark);
+	font-size: 12px;
+	font-weight: bold;
+	letter-spacing: 0.2em;
+	text-align: center;
+}
+
+.souvenir-page .souvenir-intro h1 {
+	margin: 0;
+	font-size: 36px;
+	line-height: 1.5;
+	letter-spacing: 0.01em;
+	text-align: center;
+}
+
+.souvenir-page .souvenir-lead {
+	margin-top: 32px;
+	padding-top: 30px;
+	border-top: 1px solid var(--souvenir-border);
+	font-size: 17px;
+	line-height: 2;
+}
+
+.souvenir-page .souvenir-lead p,
+.souvenir-page .souvenir-section p {
+	margin: 0 0 20px;
+}
+
+.souvenir-page .souvenir-toc {
+	margin: 48px 0 72px;
+	padding: 34px 40px;
+	background: linear-gradient(145deg, #fff7d8 0%, #fffdf8 74%);
+	border: 1px solid var(--souvenir-border);
+	border-radius: 20px;
+	box-shadow: var(--souvenir-shadow-sm);
+}
+
+.souvenir-page .souvenir-toc h2 {
+	margin: 0 0 24px;
+	font-size: 22px;
+	letter-spacing: 0.04em;
+	text-align: center;
+}
+
+.souvenir-page .souvenir-toc ol {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 12px 32px;
+	margin: 0;
+	padding-left: 28px;
+}
+
+.souvenir-page .souvenir-toc li {
+	padding-left: 5px;
+	line-height: 1.75;
+}
+
+.souvenir-page .souvenir-toc a {
+	color: var(--souvenir-ink);
+	text-decoration: none;
+}
+
+.souvenir-page .souvenir-toc a:hover {
+	color: var(--souvenir-gold-dark);
+	text-decoration: underline;
+}
+
+.souvenir-page .souvenir-section {
+	margin-top: 80px;
+	scroll-margin-top: 28px;
+}
+
+.souvenir-page .souvenir-section > h2 {
+	margin: 0 0 32px;
+	padding: 2px 0 20px 24px;
+	position: relative;
+	border-bottom: 1px solid var(--souvenir-border);
+	font-size: 28px;
+	line-height: 1.55;
+}
+
+.souvenir-page .souvenir-section > h2::before {
+	content: '';
+	width: 5px;
+	height: calc(100% - 20px);
+	position: absolute;
+	left: 0;
+	top: 2px;
+	border-radius: 999px;
+	background: linear-gradient(180deg, #f2ca48, var(--souvenir-gold-dark));
+}
+
+.souvenir-page .souvenir-section p {
+	font-size: 16px;
+	line-height: 2;
+}
+
+.souvenir-page .souvenir-callout {
+	display: grid;
+	grid-template-columns: 90px minmax(0, 1fr);
+	align-items: center;
+	gap: 22px;
+	margin: 34px 0;
+	padding: 26px 30px;
+	position: relative;
+	overflow: hidden;
+	background: linear-gradient(135deg, #fff6cf, #fffdf8);
+	border: 1px solid var(--souvenir-border);
+	border-radius: 18px;
+	box-shadow: var(--souvenir-shadow-sm);
+}
+
+.souvenir-page .souvenir-callout::before {
+	content: '';
+	width: 5px;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: linear-gradient(180deg, #efc441, var(--souvenir-gold-dark));
+}
+
+.souvenir-page .souvenir-callout-label {
+	color: var(--souvenir-gold-dark);
+	font-size: 11px;
+	font-weight: bold;
+	letter-spacing: 0.18em;
+}
+
+.souvenir-page .souvenir-callout strong {
+	font-size: 20px;
+	line-height: 1.75;
+}
+
+.souvenir-page .souvenir-figure {
+	margin: 72px auto 84px;
+	text-align: center;
+}
+
+.souvenir-page .souvenir-figure img {
+	display: block;
+	width: 100%;
+	height: auto;
+	border-radius: 22px;
+	box-shadow: 0 20px 50px rgba(73, 48, 23, 0.16);
+}
+
+.souvenir-page .souvenir-figure figcaption {
+	width: calc(100% - 72px);
+	margin: -24px auto 0;
+	padding: 20px 24px;
+	position: relative;
+	z-index: 1;
+	box-sizing: border-box;
+	color: #584a3d;
+	background: rgba(255, 253, 248, 0.98);
+	border: 1px solid var(--souvenir-border);
+	border-top: 3px solid var(--souvenir-gold);
+	border-radius: 14px;
+	box-shadow: 0 14px 32px rgba(73, 48, 23, 0.11);
+	font-size: 14px;
+	line-height: 1.8;
+	text-align: left;
+}
+
+.souvenir-page .souvenir-figure figcaption::before {
+	content: 'PHOTO NOTE';
+	display: block;
+	margin-bottom: 6px;
+	color: var(--souvenir-gold-dark);
+	font-size: 10px;
+	font-weight: bold;
+	letter-spacing: 0.18em;
+}
+
+.souvenir-page .souvenir-tasting {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 20px;
+	margin: 34px 0;
+}
+
+.souvenir-page .souvenir-tasting-card {
+	padding: 28px;
+	background: linear-gradient(180deg, #fff 0%, var(--souvenir-cream) 100%);
+	border: 1px solid var(--souvenir-border);
+	border-radius: 18px;
+	box-shadow: var(--souvenir-shadow-sm);
+}
+
+.souvenir-page .souvenir-tasting-card h3 {
+	margin: 0 0 14px;
+	color: var(--souvenir-cocoa);
+	font-size: 20px;
+	line-height: 1.55;
+}
+
+.souvenir-page .souvenir-tasting-card p {
+	margin: 0;
+	line-height: 1.9;
+}
+
+.souvenir-page .souvenir-cta {
+	margin-top: 80px;
+	padding: 44px 46px 46px;
+	position: relative;
+	overflow: hidden;
+	color: #fff;
+	background: linear-gradient(135deg, #49301f 0%, #7b4a21 62%, #9b6712 100%);
+	border-radius: 24px;
+	box-shadow: 0 20px 48px rgba(73, 48, 31, 0.24);
+}
+
+.souvenir-page .souvenir-cta-eyebrow {
+	margin: 0 0 12px;
+	color: #ffe18a;
+	font-size: 11px;
+	font-weight: bold;
+	letter-spacing: 0.2em;
+}
+
+.souvenir-page .souvenir-cta-title {
+	max-width: 660px;
+	margin: 0;
+	font-size: 20px;
+	line-height: 1.75;
+}
+
+.souvenir-page .souvenir-cta-actions {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 14px;
+	margin-top: 28px;
+}
+
+.souvenir-page .souvenir-cta-link {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 58px;
+	padding: 0 24px;
+	box-sizing: border-box;
+	color: #fff;
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	border-radius: 999px;
+	font-size: 15px;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+}
+
+.souvenir-page .souvenir-cta-link.is-primary {
+	color: #563611;
+	background: #ffe08a;
+	border-color: #ffe08a;
+}
+
+.souvenir-page .souvenir-cta-link:hover {
+	transform: translateY(-2px);
+	text-decoration: none;
+}
+
+.souvenir-page .souvenir-related {
+	margin-top: 64px;
+	padding: 34px;
+	background: var(--souvenir-surface);
+	border: 1px solid var(--souvenir-border);
+	border-radius: 18px;
+}
+
+.souvenir-page .souvenir-related h2 {
+	margin: 0 0 18px;
+	font-size: 20px;
+}
+
+.souvenir-page .souvenir-related a {
+	display: block;
+	padding: 12px 0;
+	border-top: 1px solid rgba(155, 103, 18, 0.16);
+	line-height: 1.7;
+}
+
+@media screen and (max-width: 768px) {
+	.souvenir-page {
+		width: 100vw;
+		max-width: 100vw;
+		min-width: 0;
+		overflow-x: hidden;
+	}
+
+	.souvenir-page .souvenir-hero,
+	.souvenir-page .souvenir-hero img {
+		width: 100%;
+		max-width: 100%;
+		height: auto;
+	}
+
+	.souvenir-page .souvenir-article {
+		width: 100vw;
+		max-width: 100vw;
+		min-width: 0;
+		padding: 0 18px 72px;
+		box-sizing: border-box;
+	}
+
+	.souvenir-page .souvenir-intro {
+		width: 100vw;
+		max-width: 100vw;
+		margin: 0 -18px;
+		padding: 38px 22px 42px;
+		border: 0;
+		border-radius: 0;
+		box-shadow: none;
+	}
+
+	.souvenir-page .souvenir-intro h1 {
+		font-size: 27px;
+		line-height: 1.55;
+		overflow-wrap: anywhere;
+	}
+
+	.souvenir-page .souvenir-lead {
+		font-size: 16px;
+		line-height: 1.95;
+	}
+
+	.souvenir-page .souvenir-toc {
+		margin: 32px 0 56px;
+		padding: 28px 24px;
+		border-radius: 16px;
+	}
+
+	.souvenir-page .souvenir-toc ol,
+	.souvenir-page .souvenir-tasting,
+	.souvenir-page .souvenir-cta-actions {
+		grid-template-columns: 1fr;
+	}
+
+	.souvenir-page .souvenir-section {
+		margin-top: 64px;
+	}
+
+	.souvenir-page .souvenir-section > h2 {
+		margin-bottom: 28px;
+		padding: 2px 0 18px 20px;
+		font-size: 23px;
+	}
+
+	.souvenir-page .souvenir-section p {
+		line-height: 1.9;
+	}
+
+	.souvenir-page .souvenir-callout {
+		grid-template-columns: 1fr;
+		gap: 10px;
+		padding: 24px;
+	}
+
+	.souvenir-page .souvenir-callout strong {
+		font-size: 19px;
+	}
+
+	.souvenir-page .souvenir-figure {
+		margin: 58px -18px 70px;
+	}
+
+	.souvenir-page .souvenir-figure img {
+		border-radius: 0;
+		box-shadow: none;
+	}
+
+	.souvenir-page .souvenir-figure figcaption {
+		width: calc(100% - 36px);
+		margin-top: -18px;
+		padding: 18px 20px;
+		font-size: 13px;
+	}
+
+	.souvenir-page .souvenir-tasting-card {
+		padding: 26px 24px;
+	}
+
+	.souvenir-page .souvenir-cta {
+		margin-top: 68px;
+		padding: 34px 24px 28px;
+		border-radius: 20px;
+	}
+
+	.souvenir-page .souvenir-cta-title {
+		font-size: 18px;
+	}
+
+	.souvenir-page .souvenir-related {
+		margin-top: 54px;
+		padding: 28px 22px;
+	}
+}
