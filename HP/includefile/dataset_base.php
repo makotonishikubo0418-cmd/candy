@@ -461,6 +461,11 @@ switch ($hdir) {
 		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-blog-tokyo-souvenir.php');
 		break;
 
+	// 編集用テンプレート（noindex）。公開一覧・サイトマップには登録しない。
+	case 'kagoshima-deliveryhealth-blog-candy_dominant_girls.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-blog-candy_dominant_girls.php');
+		break;
+
 	case 'kagoshima-deliveryhealth-hotel-greenrichkagoshimatenmonkan.html':
 		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-hotel-greenrichkagoshimatenmonkan.php');
 		break;
@@ -2008,6 +2013,7 @@ $source = str_replace('kagoshima-deliveryhealth-blog-tallbeautygirl.html', 'kago
 $source = str_replace('kagoshima-deliveryhealth-blog-girl-choice.html', 'kagoshima-deliveryhealth-blog-girl-choice.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-blog-private-waiting-room.html', 'kagoshima-deliveryhealth-blog-private-waiting-room.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-blog-tokyo-souvenir.html', 'kagoshima-deliveryhealth-blog-tokyo-souvenir.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-blog-candy_dominant_girls.html', 'kagoshima-deliveryhealth-blog-candy_dominant_girls.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-hotel-greenrichkagoshimatenmonkan.html', 'kagoshima-deliveryhealth-hotel-greenrichkagoshimatenmonkan.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-hotel-hotelm.html', 'kagoshima-deliveryhealth-hotel-hotelm.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-area-murasakibaru.html', 'kagoshima-deliveryhealth-area-murasakibaru.php', $source);

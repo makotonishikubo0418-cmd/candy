@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="750" viewBox="0 0 1000 750" role="img" aria-labelledby="title desc">
+<title id="title">差し替え用の画像枠</title><desc id="desc">ここに画像を設置。推奨サイズ1000×750ピクセル。</desc>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#ffe4ef"/><stop offset="1" stop-color="#fffafd"/></linearGradient></defs>
+<rect width="1000" height="750" fill="url(#bg)"/>
+<rect x="48" y="48" width="904" height="654" rx="36" fill="none" stroke="#c32165" stroke-width="2" stroke-dasharray="10 10"/>
+<g fill="none" stroke="#971343" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"><rect x="425" y="235" width="150" height="116" rx="14"/><circle cx="463" cy="271" r="12"/><path d="M433 337l43-43 32 29 25-23 34 37"/></g>
+<g fill="#971343" text-anchor="middle" font-family="sans-serif"><text x="500" y="423" font-size="40">ここに画像を設置</text><text x="500" y="476" font-size="25">1000 × 750 px ／ 4:3</text></g></svg>
