@@ -4,6 +4,7 @@ Updated: 2026-10-13
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | タイトル再発防止・ホテル掲載順試験と関連管理資料のGitHub公開 | [20261013_OPERATION_title-tooling-github-publication.md](history/20261013_OPERATION_title-tooling-github-publication.md) |
 | OPERATION | 谷山港ページの修正タイトルの本番公開 | [20261013_OPERATION_taniyamakou-title-publication.md](history/20261013_OPERATION_taniyamakou-title-publication.md) |
 | PROBLEM | ホテル掲載順テストの期待値修正 | [20261013_PROBLEM_hotel-registration-order-test.md](history/20261013_PROBLEM_hotel-registration-order-test.md) |
 | PROBLEM | 谷山港ページのタイトル混入修正と再発防止 | [20261013_PROBLEM_taniyamakou-title-contamination.md](history/20261013_PROBLEM_taniyamakou-title-contamination.md) |
