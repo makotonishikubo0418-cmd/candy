@@ -476,12 +476,26 @@ def parse_shop_requests(section: list[str]) -> list[ShopRequest]:
     return requests
 
 
+def title_input_issues(title: str) -> list[str]:
+    issues = path_config.title_text_issues(title)
+    if len(title.splitlines()) != 1:
+        issues.append("titleは1行のプレーンテキストで指定してください")
+    return issues
+
+
 def parse_area_text(path: Path) -> AreaData:
     text = read_utf8(path)
     lines = text.splitlines()
     scene_start = next((i for i, value in enumerate(lines) if SCENE_RE.fullmatch(value.strip())), len(lines))
 
+    for index, line in enumerate(lines[:scene_start], 1):
+        if re.match(r"^(?:-{10,}|━{10,})", line.strip()) and not is_separator(line):
+            raise AreaToolError(f"原稿の区切り線不正: {path.name}:{index}: {line.strip()}")
+
     title = labeled_value(lines, "title", 0, scene_start)
+    title_errors = title_input_issues(title)
+    if title_errors:
+        raise AreaToolError("原稿title不正: " + ", ".join(title_errors))
     meta_description = labeled_value(lines, "description", 0, scene_start)
     canonical = labeled_value(lines, "canonical", 0, scene_start)
     og_image = labeled_value(lines, "image", 0, scene_start)
@@ -957,9 +971,12 @@ def render_source(
     templates: dict[str, ShopTemplate],
     template_path: Path,
 ) -> str:
+    title_errors = title_input_issues(data.title)
+    if title_errors:
+        raise AreaToolError("生成title不正: " + ", ".join(title_errors))
     source = read_utf8(template_path)
     source = replace_exact(source, r'(<meta name="description" content=")[^"]*(">)', rf"\g<1>{hattr(data.meta_description)}\g<2>", "meta description")
-    source = replace_exact(source, r"<title>.*?</title>", f"<title>{htext(data.title)}</title>", "title")
+    source = replace_exact(source, r"<title>.*?</title>", f"<title>{hattr(data.title)}</title>", "title")
     source = replace_exact(source, r'(<link rel="canonical" href=")[^"]*(">)', rf"\g<1>{hattr(data.canonical)}\g<2>", "canonical")
     source = replace_exact(source, r'(<meta property="og:title" content=")[^"]*(">)', rf"\g<1>{hattr(data.title)}\g<2>", "og:title")
     source = replace_exact(source, r'(<meta property="og:url" content=")[^"]*(">)', rf"\g<1>{hattr(data.canonical)}\g<2>", "og:url")
@@ -1052,6 +1069,9 @@ def validate_rendered(
     planned_images: set[Path] | None = None,
 ) -> list[str]:
     errors: list[str] = []
+    errors.extend("原稿title不正: " + issue for issue in title_input_issues(data.title))
+    for field, issues in path_config.title_metadata_issues(source).items():
+        errors.extend(f"{field}不正: {issue}" for issue in issues)
     for placeholder in FORBIDDEN_PLACEHOLDERS:
         if placeholder in source:
             errors.append(f"placeholder残存: {placeholder}")
@@ -1104,8 +1124,10 @@ def validate_rendered(
             errors.append("og:image不整合")
     if f'<link rel="canonical" href="{hattr(data.canonical)}">' not in source:
         errors.append("canonical不整合")
-    if f"<title>{htext(data.title)}</title>" not in source:
+    if f"<title>{hattr(data.title)}</title>" not in source:
         errors.append("title不整合")
+    if f'<meta property="og:title" content="{hattr(data.title)}">' not in source:
+        errors.append("og:title不整合")
     parser = BalanceParser()
     parser.feed(source)
     if parser.errors or parser.stack:

@@ -1,6 +1,6 @@
 # CANDY Common SEO Specification
 
-Updated: 2026-10-11
+Updated: 2026-10-13
 
 ## 1. Responsibility
 
@@ -24,6 +24,13 @@ applicable documents selected from [`management/INDEX.md`](../INDEX.md).
 | girls/system/other | Verify the target feature and runtime content in actual files | Matches the public URL | Do not apply category-wide assumptions because content may be database-generated |
 
 Do not duplicate title, description, or H1 copy as fixed text in this document. Detail pages use their matching `Text_*_data`; indexes and dynamic pages use actual source and feature requirements.
+
+Public content pages MUST have one non-empty `<title>` and one non-empty
+`og:title`. Local site-state checks and public-response checks MUST reject
+HTML or comments (including encoded tags), source separator runs, and
+standalone source-field labels in either title. Presence alone is insufficient.
+Normal punctuation, character references, and HTML-formatting whitespace are
+permitted. Preserve the existing exclusions for helper and development routes.
 
 ### 2.1 Dynamic Girls Profile Contract
 

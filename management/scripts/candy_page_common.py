@@ -270,6 +270,102 @@ def strip_tags(value: str) -> str:
     return html.unescape(re.sub(r"<[^>]+>", "", value)).strip()
 
 
+def title_text_issues(value: str) -> list[str]:
+    """Reject markup and source-field spillover without rejecting normal title text."""
+    decoded = html.unescape(value)
+    issues: list[str] = []
+    if not decoded.strip():
+        issues.append("title_empty")
+    if re.search(r"<!--|<![^<>]*>|<\?[^<>]*>|</?[^\W\d][^<>]*>", decoded):
+        issues.append("title_markup")
+    if re.search(r"[-━]{5,}", decoded):
+        issues.append("title_separator")
+    if re.search(
+        r"^[ \t]*(?:title|description|canonical|image|robots|keywords|"
+        r"og:(?:title|description|url|image|type|site_name)|"
+        r"page_title_h1|subtitle_h1|description_h1|img_[12])"
+        r"[ \t]*(?:[:：][^\r\n]*)?\r?$",
+        decoded,
+        re.I | re.M,
+    ):
+        issues.append("title_metadata_label")
+    return issues
+
+
+class _TitleMetadataParser(HTMLParser):
+    """Keep title markup instead of silently dropping it during text extraction."""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self.values: dict[str, list[str]] = {"title": [], "og:title": []}
+        self.title_count = 0
+        self.title_parts: list[str] | None = None
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        if tag == "title":
+            self.title_count += 1
+            if self.title_parts is None:
+                self.title_parts = []
+                return
+        if self.title_parts is not None:
+            self.title_parts.append(self.get_starttag_text())
+        elif tag == "meta":
+            attributes = dict(attrs)
+            if (attributes.get("property") or "").strip().lower() == "og:title":
+                self.values["og:title"].append(attributes.get("content") or "")
+
+    def handle_startendtag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+        self.handle_starttag(tag, attrs)
+        if tag == "title":
+            self.handle_endtag(tag)
+
+    def handle_endtag(self, tag: str) -> None:
+        if self.title_parts is None:
+            return
+        if tag == "title":
+            self.values["title"].append("".join(self.title_parts))
+            self.title_parts = None
+        else:
+            self.title_parts.append(f"</{tag}>")
+
+    def handle_data(self, data: str) -> None:
+        if self.title_parts is not None:
+            self.title_parts.append(data)
+
+    def handle_comment(self, data: str) -> None:
+        if self.title_parts is not None:
+            self.title_parts.append(f"<!--{data}-->")
+
+    def handle_decl(self, decl: str) -> None:
+        if self.title_parts is not None:
+            self.title_parts.append(f"<!{decl}>")
+
+    def handle_pi(self, data: str) -> None:
+        if self.title_parts is not None:
+            self.title_parts.append(f"<?{data}>")
+
+
+def title_metadata_issues(source: str) -> dict[str, list[str]]:
+    """Return issues only for invalid title/og:title fields; valid fields are absent."""
+    parser = _TitleMetadataParser()
+    parser.feed(source)
+    parser.close()
+    unclosed_title = parser.title_parts is not None
+    if unclosed_title:
+        parser.values["title"].append("".join(parser.title_parts))
+    result: dict[str, list[str]] = {}
+    for field, values in parser.values.items():
+        count = parser.title_count if field == "title" else len(values)
+        issues = [f"title_count={count}"] if count != 1 else []
+        if field == "title" and unclosed_title:
+            issues.append("title_markup")
+        for value in values:
+            issues.extend(title_text_issues(value))
+        if issues:
+            result[field] = list(dict.fromkeys(issues))
+    return result
+
+
 def replace_one(source: str, pattern: str, replacement: str, label: str, flags: int = 0) -> str:
     result, count = re.subn(pattern, lambda _match: replacement, source, count=1, flags=flags)
     if count != 1:

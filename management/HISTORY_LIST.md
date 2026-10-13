@@ -4,6 +4,10 @@ Updated: 2026-10-13
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | 谷山港ページの修正タイトルの本番公開 | [20261013_OPERATION_taniyamakou-title-publication.md](history/20261013_OPERATION_taniyamakou-title-publication.md) |
+| PROBLEM | ホテル掲載順テストの期待値修正 | [20261013_PROBLEM_hotel-registration-order-test.md](history/20261013_PROBLEM_hotel-registration-order-test.md) |
+| PROBLEM | 谷山港ページのタイトル混入修正と再発防止 | [20261013_PROBLEM_taniyamakou-title-contamination.md](history/20261013_PROBLEM_taniyamakou-title-contamination.md) |
+| INVESTIGATE | 全公開ページのSEO監査と検索流入拡大策の評価 | [20261013_INVESTIGATE_sitewide-seo-growth-audit.md](history/20261013_INVESTIGATE_sitewide-seo-growth-audit.md) |
 | CREATE | Candy東京土産ブログの作成と公開 | [20261013_CREATE_tokyo-souvenir-blog.md](history/20261013_CREATE_tokyo-souvenir-blog.md) |
 | OPERATION | 作業PCのmain更新と確認履歴のGitHub同期 | [20261011_OPERATION_local-main-github-synchronization.md](history/20261011_OPERATION_local-main-github-synchronization.md) |
 | INVESTIGATE | ローカルとGitHubの同期状態確認 | [20261011_INVESTIGATE_github-synchronization-check.md](history/20261011_INVESTIGATE_github-synchronization-check.md) |

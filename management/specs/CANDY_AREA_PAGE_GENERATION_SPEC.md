@@ -1,6 +1,6 @@
 # CANDY Area Page Generation Specification
 
-- Updated: 2026-09-29
+- Updated: 2026-10-13
 - Applies to: Area-page structure changes, defect fixes, and exceptions that the standard procedure cannot resolve
 
 ## 1. Purpose
@@ -168,6 +168,15 @@ classification alone.
 | Meeting and nearby spots | FAQ blocks |
 | Nearby supported areas | Render the exact target order from `management/data/CANDY_AREA_RELATED_LINKS.json`; link text is `鹿児島市{リンク先地域名}で呼べるデリヘル` |
 | Page-wide information | Two JSON-LD blocks |
+
+The source `title` MUST be one non-empty line of plain text. Reject malformed
+separator lines in the header before generation; do not absorb a following
+field label or description into the title. Reject markup (including encoded
+tags and `<改行>`), separator runs, and standalone metadata labels in the
+title. Escape the title as text without applying body-copy `<br>` conversion.
+Validate both `<title>` and `og:title` independently for content integrity and
+agreement with the source title. Equality with malformed source data is not
+a successful validation.
 
 The OGP `image` value MUST equal the absolute `https://www.55810.com/...`
 public URL for `img_1`, including any query string. Do not derive it by

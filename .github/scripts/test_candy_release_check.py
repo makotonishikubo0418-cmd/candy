@@ -145,6 +145,80 @@ def seo_body(url: str, title: str, extra_body: str = "") -> bytes:
     ).encode("utf-8")
 
 
+def assert_title_content_contract(module) -> None:
+    url = f"{module.PUBLIC_ROOT}kagoshima-deliveryhealth-area-taniyamakou.php"
+    baseline = seo_body(url, "正常なタイトル")
+    original_title = "<title>正常なタイトル</title>".encode("utf-8")
+    invalid = (
+        ("谷山港<br>ホテル情報", {"contains_markup"}),
+        ("谷山港<BR />ホテル情報", {"contains_markup"}),
+        ("谷山港<b>ホテル情報</b>", {"contains_markup"}),
+        ("谷山港<!-- 原稿 -->ホテル情報", {"contains_markup"}),
+        ("谷山港<?draft metadata?>ホテル情報", {"contains_markup"}),
+        ("谷山港&lt;br&gt;ホテル情報", {"contains_markup"}),
+        ("谷山港&#60;br&#62;ホテル情報", {"contains_markup"}),
+        ("谷山港<改行>ホテル情報", {"contains_markup"}),
+        ("谷山港\n-------------------------------------------------------------------s", {"contains_separator"}),
+        ("谷山港\n━━━━━━━━━━━━━━━━\nホテル情報", {"contains_separator"}),
+        ("谷山港\ndescription\n説明文", {"contains_field_label"}),
+        ("谷山港\r\ncanonical\r\nhttps://www.55810.com/", {"contains_field_label"}),
+        ("谷山港\nimage\n画像URL", {"contains_field_label"}),
+        (
+            "鹿児島市谷山港で呼べるデリヘル｜対応店舗・ホテル情報"
+            "<br>-------------------------------------------------------------------s"
+            "<br>description<br>鹿児島市「谷山港」の店舗情報",
+            {"contains_markup", "contains_separator"},
+        ),
+    )
+    for value, expected in invalid:
+        body = baseline.replace(original_title, f"<title>{value}</title>".encode("utf-8"), 1)
+        issues, _title, canonical = module.validate_public_seo_page(url, (200, url, {}, body))
+        assert canonical == url
+        assert set(issues) == {f"{url}:title_{item}" for item in expected}, (value, issues)
+
+    valid = (
+        ("鹿児島市谷山港で呼べるデリヘル｜対応店舗・ホテル情報", "鹿児島市谷山港で呼べるデリヘル｜対応店舗・ホテル情報"),
+        ("鹿児島 - 谷山港・ホテル情報", "鹿児島 - 谷山港・ホテル情報"),
+        ("Relax &amp; Sleep - 鹿児島", "Relax & Sleep - 鹿児島"),
+        ("1 &lt; 2・鹿児島", "1 < 2・鹿児島"),
+        ("description付きの案内 - 鹿児島", "description付きの案内 - 鹿児島"),
+        ("A--Bの案内", "A--Bの案内"),
+        ("\n  鹿児島 -\n  谷山港・ホテル情報\n", "鹿児島 - 谷山港・ホテル情報"),
+    )
+    for value, expected_title in valid:
+        body = baseline.replace(original_title, f"<title>{value}</title>".encode("utf-8"), 1)
+        issues, title, canonical = module.validate_public_seo_page(url, (200, url, {}, body))
+        assert (issues, title, canonical) == ([], expected_title, url), (value, issues, title)
+
+    # OGP uses the same plain-text contract, even when the document title is clean.
+    bad_ogp = baseline.replace(
+        'content="正常なタイトル"'.encode("utf-8"),
+        'content="谷山港\n-------------------------------------------------------------------s\ndescription\n説明文"'.encode("utf-8"),
+        1,
+    )
+    issues, _title, _canonical = module.validate_public_seo_page(url, (200, url, {}, bad_ogp))
+    assert set(issues) == {
+        f"{url}:og:title_contains_separator",
+        f"{url}:og:title_contains_field_label",
+    }, issues
+    for extra in (
+        '<meta property="og:title" content="">',
+        '<meta property="og:title" content="   ">',
+        '<meta property="og:title" content="別タイトル">',
+    ):
+        body = baseline.replace(b"</head>", (extra + "</head>").encode("utf-8"), 1)
+        issues, _title, _canonical = module.validate_public_seo_page(url, (200, url, {}, body))
+        assert issues == [f"{url}:og:title_count:2"], (extra, issues)
+    empty_ogp = baseline.replace(
+        'property="og:title" content="正常なタイトル"'.encode("utf-8"),
+        b'property="og:title" content=""',
+        1,
+    )
+    issues, _title, _canonical = module.validate_public_seo_page(url, (200, url, {}, empty_ogp))
+    assert issues == [f"{url}:og:title_count:1"], issues
+    print("TITLE_CONTENT_CONTRACT_TESTS: passed")
+
+
 def assert_full_seo_contract(module) -> None:
     with tempfile.TemporaryDirectory() as temp_dir:
         root = Path(temp_dir)
@@ -218,6 +292,21 @@ def assert_full_seo_contract(module) -> None:
             "active_non_sitemap_routes": 2,
         }
 
+        clean_profile = responses[profile_url]
+        responses[profile_url] = (
+            200,
+            profile_url,
+            {},
+            seo_body(profile_url, "プロフィール&lt;br&gt;description"),
+        )
+        try:
+            module.verify_full_seo_contract(responses.__getitem__, sitemap_path, hp_root)
+        except module.FullSeoAuditError as exc:
+            assert f"{profile_url}:title_contains_markup" in exc.issues, exc.issues
+        else:
+            raise AssertionError("full SEO accepted a contaminated title")
+        responses[profile_url] = clean_profile
+
         (hp_root / "unmanaged.php").write_text("<?php", encoding="utf-8")
         try:
             module.verify_full_seo_contract(responses.__getitem__, sitemap_path, hp_root)
@@ -233,6 +322,7 @@ def assert_full_seo_contract(module) -> None:
 def main() -> int:
     module = load_module()
     assert_htaccess_access_contract()
+    assert_title_content_contract(module)
     assert_full_seo_contract(module)
     responses = response_map(module)
     requested: list[str] = []

@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 from contextlib import redirect_stdout, redirect_stderr
+from dataclasses import replace
 import io
 import json
 import os
@@ -29,6 +30,68 @@ import candy_existing_audit as existing
 
 
 class RecoveryTests(unittest.TestCase):
+    def taniyamakou_fixture(self):
+        input_path = common.TEXT_AREA_DIR / "分類_20260716_115215/01_間違い無し/谷山港_テンプレート.txt"
+        data = area.parse_area_text(input_path)
+        templates = area.load_shop_templates(common.HP_ROOT / "source/template_shop.html")
+        resolved = area.resolve_shops(data, common.HP_ROOT, templates)
+        template_path = common.HP_ROOT / "source/template_kagoshima-deliveryhealth-area.html"
+        return data, templates, resolved, template_path
+
+    def test_taniyamakou_title_source_and_regeneration(self):
+        data, templates, resolved, template_path = self.taniyamakou_fixture()
+        title = "鹿児島市谷山港で呼べるデリヘル｜対応店舗・ホテル情報"
+        self.assertEqual(data.title, title)
+        self.assertEqual(data.meta_description, "鹿児島市「谷山港」で呼べる人気デリヘル店舗情報！交通費・ホテル一覧も掲載中！")
+        source = area.render_source(data, resolved, templates, template_path)
+        self.assertIn(f"<title>{title}</title>", source)
+        self.assertIn(f'<meta property="og:title" content="{title}">', source)
+        self.assertEqual(area.validate_rendered(data, resolved, source, common.HP_ROOT), [])
+        self.assertEqual(source, common.read_utf8(common.HP_ROOT / "source/kagoshima-deliveryhealth-area-taniyamakou.html"))
+        plain = replace(data, title=title + " - 料金 & ホテル")
+        escaped = area.render_source(plain, resolved, templates, template_path)
+        self.assertIn(f"<title>{title} - 料金 &amp; ホテル</title>", escaped)
+        self.assertEqual(area.validate_rendered(plain, resolved, escaped, common.HP_ROOT), [])
+
+    def test_invalid_area_title_stops_build_before_writes(self):
+        data, _, _, _ = self.taniyamakou_fixture()
+        original = common.read_utf8(data.input_path)
+        boundary = data.title + "\n" + "-" * 67
+        self.assertIn(boundary, original)
+        cases = {
+            "malformed_separator": original.replace(boundary, boundary + "s", 1),
+            "missing_separator": original.replace(boundary, data.title, 1),
+            "multiline_title": original.replace(data.title, data.title + "\n説明文", 1),
+            "html_title": original.replace(data.title, data.title + "<br>説明文", 1),
+            "encoded_html_title": original.replace(data.title, data.title + "&lt;br&gt;説明文", 1),
+            "source_linebreak_marker": original.replace(data.title, data.title + "<改行>説明文", 1),
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            input_path = Path(directory) / "谷山港.txt"
+            for name, text in cases.items():
+                with self.subTest(name=name):
+                    input_path.write_text(text, encoding="utf-8")
+                    with patch.object(area, "render_source") as render, patch.object(common, "write_transaction") as write:
+                        with self.assertRaisesRegex(area.AreaToolError, "区切り線不正|原稿title不正"):
+                            area.run_build(argparse.Namespace(input=str(input_path), force=True, dry_run=False, no_docs=True))
+                        render.assert_not_called()
+                        write.assert_not_called()
+
+    def test_contaminated_title_cannot_pass_by_matching_input(self):
+        data, templates, resolved, template_path = self.taniyamakou_fixture()
+        source = area.render_source(data, resolved, templates, template_path)
+        bad_title = data.title + "\n" + "-" * 67 + "s\ndescription\n" + data.meta_description
+        bad_data = replace(data, title=bad_title)
+        with self.assertRaisesRegex(area.AreaToolError, "生成title不正"):
+            area.render_source(bad_data, resolved, templates, template_path)
+        bad_source = source.replace(f"<title>{area.hattr(data.title)}</title>", f"<title>{area.htext(bad_title)}</title>")
+        bad_source = bad_source.replace(f'<meta property="og:title" content="{area.hattr(data.title)}">', f'<meta property="og:title" content="{area.hattr(bad_title)}">')
+        issues = area.validate_rendered(bad_data, resolved, bad_source, common.HP_ROOT)
+        self.assertTrue(any(issue.startswith("title不正:") for issue in issues), issues)
+        self.assertTrue(any(issue.startswith("og:title不正:") for issue in issues), issues)
+        og_only = source.replace(f'<meta property="og:title" content="{area.hattr(data.title)}">', '<meta property="og:title" content="別のタイトル">')
+        self.assertIn("og:title不整合", area.validate_rendered(data, resolved, og_only, common.HP_ROOT))
+
     def test_current_paths(self):
         self.assertEqual(common.DOCS_DIR, common.REPO_ROOT / "management/specs")
         self.assertTrue(area.RELATED_LINKS_PATH.is_file())
@@ -282,6 +345,20 @@ class RecoveryTests(unittest.TestCase):
                 for module, input_path in cases:
                     with self.subTest(module=module.__name__), redirect_stdout(io.StringIO()):
                         args = argparse.Namespace(input=str(input_path), force=True, dry_run=False, no_docs=True)
+                        if module is hotel:
+                            data = hotel.parse_hotel_text(input_path)
+                            target_href = f"kagoshima-deliveryhealth-hotel-{data.slug}.php"
+                            original_entries = hotel.hotel_registry_links(
+                                common.read_utf8(root / "HP/source/hotel.html"),
+                                top_page=False,
+                            )
+                            # Existing registrations retain their order; only a new one is appended.
+                            expected_entries = [
+                                (href, data.hotel_name if href == target_href else name)
+                                for href, name in original_entries
+                            ]
+                            if target_href not in [href for href, _name in original_entries]:
+                                expected_entries.append((target_href, data.hotel_name))
                         self.assertEqual(module.run_build(args), 0)
                         self.assertEqual(module.run_check(argparse.Namespace(input=str(input_path), require_php=True)), 0)
                         if module is hotel:
@@ -293,12 +370,12 @@ class RecoveryTests(unittest.TestCase):
                                 common.read_utf8(root / "HP/source/index.html"),
                                 top_page=True,
                             )
-                            self.assertEqual(len(top_entries), hotel.HOTEL_TOP_LATEST_LIMIT)
-                            self.assertEqual(top_entries, hotel_entries[-hotel.HOTEL_TOP_LATEST_LIMIT:])
+                            self.assertEqual(hotel_entries, expected_entries)
                             self.assertEqual(
-                                top_entries[-1][0],
-                                "kagoshima-deliveryhealth-hotel-businesshotelatelier.php",
+                                len(top_entries),
+                                min(len(expected_entries), hotel.HOTEL_TOP_LATEST_LIMIT),
                             )
+                            self.assertEqual(top_entries, expected_entries[-hotel.HOTEL_TOP_LATEST_LIMIT:])
                         before = {path: path.read_bytes() for path in (root / "HP").rglob("*") if path.is_file()}
                         self.assertEqual(module.run_build(args), 0)
                         self.assertEqual(before, {path: path.read_bytes() for path in (root / "HP").rglob("*") if path.is_file()})
@@ -319,6 +396,28 @@ class RecoveryTests(unittest.TestCase):
             hotel.hotel_registry_links(top, top_page=True),
             hotel.hotel_registry_links(listing, top_page=False)[-hotel.HOTEL_TOP_LATEST_LIMIT:],
         )
+
+    def test_new_hotel_registration_appends_without_reordering_existing_entries(self):
+        original = common.read_utf8(common.HP_ROOT / "source/hotel.html")
+        original_entries = hotel.hotel_registry_links(original, top_page=False)
+        original_data = hotel.parse_hotel_text(common.TEXT_HOTEL_DIR / "ビジネスホテル　アトリエ.txt")
+        data = replace(
+            original_data,
+            slug="test-hotel-registration",
+            basic=replace(original_data.basic, hotel_name="登録順テスト用ホテル"),
+            canonical="https://www.55810.com/kagoshima-deliveryhealth-hotel-test-hotel-registration.php",
+        )
+        target_href = f"kagoshima-deliveryhealth-hotel-{data.slug}.php"
+        self.assertNotIn(target_href, [href for href, _name in original_entries])
+        expected_entries = original_entries + [(target_href, data.hotel_name)]
+        listing = hotel.update_hotel_list(original, data)
+        top = hotel.update_hotel_top_index(
+            common.read_utf8(common.HP_ROOT / "source/index.html"), data, listing,
+        )
+        self.assertEqual(hotel.hotel_registry_links(listing, top_page=False), expected_entries)
+        self.assertEqual(hotel.hotel_registry_links(top, top_page=True), expected_entries[-15:])
+        self.assertEqual(hotel.hotel_registry_alignment_errors(listing, top), [])
+        self.assertEqual(hotel.update_hotel_list(listing, data), listing)
 
     def test_hotel_top_keeps_only_latest_fifteen_in_registry_order(self):
         entries = [

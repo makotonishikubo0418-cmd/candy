@@ -33,6 +33,7 @@ from candy_page_common import (
     atomic_write,
     write_transaction,
     read_utf8,
+    title_metadata_issues,
 )
 
 
@@ -930,7 +931,9 @@ def collect() -> dict[str, object]:
         robots = first_match(source, r'<meta\s+name=["\']robots["\'][^>]+content=["\']([^"\']*)', re.I)
         canonical = str(page["canonical"])
         h1_count = len(page["h1_values"])
+        title_issues = title_metadata_issues(source)
         ogp_issues = ogp_validation_issues(source)
+        ogp_issues.extend(f"og:title:{issue}" for issue in title_issues.get("og:title", []))
         json_objects, json_errors = extract_json(source)
         dynamic_girls_json_ld = page["stem"] == "girls" and source.count("rep09000007eot") == 1
         breadcrumb_count = sum(json_type_count(obj, "BreadcrumbList") for obj in json_objects)
@@ -986,7 +989,7 @@ def collect() -> dict[str, object]:
                 else "ISSUE"
             )
         checks = {
-            "title": "NOT_APPLICABLE" if seo_development else "OK" if title else "ISSUE" if page["source"] else "UNVERIFIED",
+            "title": "NOT_APPLICABLE" if seo_development else "OK" if page["source"] and not title_issues.get("title") else "ISSUE" if page["source"] else "UNVERIFIED",
             "description": "NOT_APPLICABLE" if seo_development else "OK" if description else "ISSUE" if page["source"] else "UNVERIFIED",
             "canonical": "NOT_APPLICABLE" if seo_helper or seo_development else "OK" if canonical else "ISSUE" if page["source"] else "UNVERIFIED",
             "robots": "OK" if development_robots else "ISSUE" if seo_development else "OK" if robots else "ISSUE" if page["source"] else "UNVERIFIED",
@@ -1015,6 +1018,8 @@ def collect() -> dict[str, object]:
         for key, value in checks.items():
             if value == "ISSUE":
                 issues.append(key)
+        if page["source"] and not seo_development:
+            issues.extend(title_issues.get("title", []))
         if json_errors:
             issues.extend(json_errors)
         if missing_internal and not seo_admin:

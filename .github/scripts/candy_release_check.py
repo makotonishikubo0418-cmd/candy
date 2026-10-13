@@ -65,6 +65,7 @@ class SeoHtmlParser(HTMLParser):
         super().__init__(convert_charrefs=True)
         self.title_parts: list[str] = []
         self.title_count = 0
+        self.title_has_markup = False
         self.h1_parts: list[list[str]] = []
         self.meta: list[dict[str, str]] = []
         self.canonicals: list[str] = []
@@ -78,6 +79,8 @@ class SeoHtmlParser(HTMLParser):
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         attributes = {name.lower(): value or "" for name, value in attrs}
         lowered = tag.lower()
+        if self._in_title:
+            self.title_has_markup = True
         if lowered == "title":
             self._in_title = True
             self.title_count += 1
@@ -101,6 +104,8 @@ class SeoHtmlParser(HTMLParser):
 
     def handle_endtag(self, tag: str) -> None:
         lowered = tag.lower()
+        if self._in_title and lowered != "title":
+            self.title_has_markup = True
         if lowered == "title":
             self._in_title = False
         elif lowered == "h1" and self._h1_depth:
@@ -110,6 +115,18 @@ class SeoHtmlParser(HTMLParser):
                 self.json_ld.append("".join(self._script_parts).strip())
             self._script_type = ""
             self._script_parts = []
+
+    def handle_comment(self, data: str) -> None:
+        if self._in_title:
+            self.title_has_markup = True
+
+    def handle_decl(self, decl: str) -> None:
+        if self._in_title:
+            self.title_has_markup = True
+
+    def handle_pi(self, data: str) -> None:
+        if self._in_title:
+            self.title_has_markup = True
 
     def handle_data(self, data: str) -> None:
         if self._in_title:
@@ -122,6 +139,28 @@ class SeoHtmlParser(HTMLParser):
 
 def normalized_text(parts: list[str]) -> str:
     return re.sub(r"\s+", " ", html.unescape("".join(parts))).strip()
+
+
+def title_content_issues(value: str, has_markup: bool = False) -> list[str]:
+    """Reject source-field leakage without treating normal punctuation as markup."""
+    decoded = html.unescape(value)
+    issues: list[str] = []
+    if has_markup or re.search(
+        r"<\s*(?:/?[a-z][a-z0-9:-]*(?=[\s/>])|!--|!doctype|\?|改行>)",
+        decoded,
+        flags=re.IGNORECASE,
+    ):
+        issues.append("contains_markup")
+    if re.search(r"[-=━─_*]{5,}", decoded):
+        issues.append("contains_separator")
+    if re.search(
+        r"^\s*(?:title|description|canonical|image|page_title_h1|subtitle_h1|description_h1)"
+        r"\s*[:：]?\s*$",
+        decoded,
+        flags=re.IGNORECASE | re.MULTILINE,
+    ):
+        issues.append("contains_field_label")
+    return issues
 
 
 def header_value(headers: object, name: str) -> str:
@@ -199,6 +238,10 @@ def validate_public_seo_page(
     title = normalized_text(parser.title_parts)
     if parser.title_count != 1 or not title:
         issues.append(f"{url}:title_count:{parser.title_count}")
+    issues.extend(
+        f"{url}:title_{issue}"
+        for issue in title_content_issues("".join(parser.title_parts), parser.title_has_markup)
+    )
     descriptions = [value for value in meta_values(parser, "name", "description") if value]
     if len(descriptions) != 1:
         issues.append(f"{url}:description_count:{len(descriptions)}")
@@ -218,8 +261,15 @@ def validate_public_seo_page(
     required_ogp = ("og:title", "og:type", "og:url", "og:image", "og:description", "og:site_name")
     ogp = {key: meta_values(parser, "property", key) for key in required_ogp}
     for key, values in ogp.items():
-        if len([value for value in values if value]) != 1:
+        if key == "og:title":
+            if len(values) != 1 or not values[0]:
+                issues.append(f"{url}:{key}_count:{len(values)}")
+        elif len([value for value in values if value]) != 1:
             issues.append(f"{url}:{key}_count:{len([value for value in values if value])}")
+    for value in ogp["og:title"]:
+        issues.extend(
+            f"{url}:og:title_{issue}" for issue in title_content_issues(value)
+        )
     if len(ogp["og:url"]) == 1 and canonical_key(ogp["og:url"][0]) != canonical_key(url):
         issues.append(f"{url}:og_url_mismatch:{ogp['og:url'][0]}")
     for index, source in enumerate(parser.json_ld, start=1):
