@@ -1,0 +1,1446 @@
+/*
+ * Candyブログ共通CSS
+ *
+ * 【編集する場所】
+ * 文章・タイトル・画像・リンク → HP/source/ の各記事HTMLで編集します。
+ * 記事の配色 → 「01. テーマ別の色・背景・影」で、使うテーマだけを編集します。
+ * 部品の幅・余白・文字サイズ → 「02〜14. 共通部品」で編集します。
+ * スマホの幅・余白・文字サイズ → 「15. スマートフォン表示」で編集します。
+ *
+ * 【HTMLでのテーマ指定】
+ * <main id="main" class="main blog-page blog-theme-deep-pink">
+ * blog-page は必須です。blog-theme-* は次の4種類から1つだけ指定します。
+ * pink      ：girl-choice
+ * brown     ：private-waiting-room
+ * gold      ：tokyo-souvenir
+ * deep-pink ：candy_dominant_girls（編集用テンプレート）
+ *
+ * 【注意】
+ * 共通部品を変えると、このCSSを使う4記事に影響します。
+ * 各テーマの寸法差は既存表示を維持するための指定です。色変更時には触りません。
+ * :where(...) は、指定したテーマにだけ適用する条件です。
+ * このCSSの適用範囲は .blog-page 内だけです。ヘッダー・フッターは既存CSSを使います。
+ * 配色の直接指定は「01」に集約しています。グラデーション・影も同じ場所で編集できます。
+ * PHOTO NOTE・Q・矢印はCSSの表示ラベルです。本文・画像説明文はHTMLで編集します。
+ * ファイル更新後は、4記事の blog.css?v=... を同じ更新キーに揃え、PC・スマホで確認します。
+ */
+
+/* ==========================================================================
+   01. テーマ別の色・背景・影
+   基本色だけでなく、各部品の背景・グラデーション・影もここで管理します。
+   ========================================================================== */
+
+/* 01-1. ピンク系：girl-choice */
+.blog-page:where(.blog-theme-pink) {
+	/* 基本色・共通の背景と影 */
+	--blog-ink: #231c22; /* 本文・目次リンクの文字色 */
+	--blog-muted: #746770; /* 補助文字色 */
+	--blog-accent: #d64b86; /* 主なアクセント色 */
+	--blog-accent-dark: #a62960; /* ラベル・リンクの濃い色 */
+	--blog-accent-deep: #702040; /* カード見出し・ホバー時の色 */
+	--blog-pale: #fdf4f8; /* 淡い背景色 */
+	--blog-surface: #ffffff; /* 記事の明るい背景色 */
+	--blog-surface-soft: #fcfafb; /* カード・関連記事の淡い背景色 */
+	--blog-border: rgba(166, 41, 96, 0.16); /* 共通の枠線色 */
+	--blog-shadow-sm: 0 10px 30px rgba(72, 39, 55, 0.07); /* 小さな部品の影 */
+	--blog-shadow-md: 0 18px 48px rgba(72, 39, 55, 0.12); /* 導入カードの影 */
+	--blog-page-background: #fff; /* 記事全体の背景 */
+	--blog-cta-text: #fff; /* 最終セクションの文字色 */
+
+	/* メイン画像・導入文・目次・見出し */
+	--blog-hero-background: #191519; /* メイン画像の背景 */
+	--blog-intro-background: rgba(255, 255, 255, 0.98); /* タイトル・導入文の背景 */
+	--blog-toc-background: linear-gradient(145deg, #fdf5f8 0%, #fff 76%); /* 目次の背景 */
+	--blog-heading-bar-background: linear-gradient(180deg, #ee78aa, var(--blog-accent-dark)); /* 通常見出しの縦線 */
+
+	/* アクセント・チェックリスト・比較カード */
+	--blog-callout-background: linear-gradient(135deg, #fff7fa, #fff); /* アクセント枠の背景 */
+	--blog-callout-bar-background: linear-gradient(180deg, #ef75a8, var(--blog-accent-dark)); /* アクセント枠の縦線 */
+	--blog-checklist-border: rgba(35, 28, 34, 0.07); /* チェックリストの枠線色 */
+	--blog-checklist-dot-shadow: 0 0 0 5px rgba(214, 75, 134, 0.1); /* チェックリストの丸印の影 */
+	--blog-card-background: linear-gradient(180deg, #fff 0%, #fff 72%, #fefbfc 100%); /* 比較カードの背景 */
+	--blog-card-bar-background: linear-gradient(90deg, var(--blog-accent), #ef98bd); /* カード上辺の飾り */
+	--blog-card-text: #4f454c; /* カード本文の文字色 */
+
+	/* 画像セット（写真と説明枠） */
+	--blog-photo-shadow: 0 20px 50px rgba(50, 32, 40, 0.15); /* 本文画像の影 */
+	--blog-caption-text: #51464d; /* 画像説明文の文字色 */
+	--blog-caption-background: rgba(255, 255, 255, 0.97); /* 画像説明枠の背景 */
+	--blog-caption-shadow: 0 14px 32px rgba(72, 39, 55, 0.1); /* 画像説明枠の影 */
+
+	/* 最終セクションとボタン */
+	--blog-cta-background: linear-gradient(135deg, #321f2a 0%, #5d2942 100%); /* 最終セクションの背景 */
+	--blog-cta-border: rgba(255, 255, 255, 0.1); /* 最終セクションの枠線色 */
+	--blog-cta-shadow: 0 20px 48px rgba(58, 27, 42, 0.2); /* 最終セクションの影 */
+	--blog-cta-decoration-background: radial-gradient(circle, rgba(238, 119, 170, 0.28), rgba(238, 119, 170, 0)); /* 最終セクションの円形の飾り */
+	--blog-cta-eyebrow: #f4a6c7; /* 最終セクションの小見出し色 */
+	--blog-primary-text: #fff; /* 主ボタンの文字色 */
+	--blog-primary-background: linear-gradient(135deg, #e05b95, #bd356f); /* 主ボタンの背景 */
+	--blog-primary-shadow: 0 10px 24px rgba(163, 38, 91, 0.3); /* 主ボタンの影 */
+	--blog-primary-hover-background: linear-gradient(135deg, #e86aa1, #c33d77); /* 主ボタンのホバー背景 */
+	--blog-secondary-text: #fff; /* 副ボタンの文字色 */
+	--blog-secondary-background: rgba(255, 255, 255, 0.06); /* 副ボタンの背景 */
+	--blog-secondary-border: rgba(255, 255, 255, 0.48); /* 副ボタンの枠線色 */
+	--blog-secondary-hover-background: rgba(255, 255, 255, 0.12); /* 副ボタンのホバー背景 */
+	--blog-secondary-hover-border: rgba(255, 255, 255, 0.8); /* 副ボタンのホバー枠線色 */
+
+	/* 関連記事 */
+	--blog-related-border: rgba(35, 28, 34, 0.08); /* 関連記事枠の線の色 */
+	--blog-related-link-border: rgba(35, 28, 34, 0.08); /* 関連記事リンク間の線の色 */
+}
+
+/* 01-2. ブラウン系：private-waiting-room */
+.blog-page:where(.blog-theme-brown) {
+	/* 基本色・共通の背景と影 */
+	--blog-ink: #29251f; /* 本文・目次リンクの文字色 */
+	--blog-muted: #746b62; /* 補助文字色 */
+	--blog-accent: #b96846; /* 主なアクセント色 */
+	--blog-accent-dark: #8e452d; /* ラベル・リンクの濃い色 */
+	--blog-accent-deep: #59352a; /* カード見出し・ホバー時の色 */
+	--blog-pale: #fbf4ed; /* 淡い背景色 */
+	--blog-surface: #ffffff; /* 記事の明るい背景色 */
+	--blog-surface-soft: #fbfaf8; /* カード・関連記事の淡い背景色 */
+	--blog-border: rgba(142, 69, 45, 0.18); /* 共通の枠線色 */
+	--blog-shadow-sm: 0 10px 30px rgba(72, 51, 39, 0.07); /* 小さな部品の影 */
+	--blog-shadow-md: 0 18px 48px rgba(72, 51, 39, 0.12); /* 導入カードの影 */
+	--blog-page-background: #fff; /* 記事全体の背景 */
+	--blog-cta-text: #fff; /* 最終セクションの文字色 */
+
+	/* メイン画像・導入文・目次・見出し */
+	--blog-hero-background: #211d19; /* メイン画像の背景 */
+	--blog-intro-background: rgba(255, 255, 255, 0.98); /* タイトル・導入文の背景 */
+	--blog-toc-background: linear-gradient(145deg, #fbf5ef 0%, #fff 76%); /* 目次の背景 */
+	--blog-heading-bar-background: linear-gradient(180deg, #dc8b66, var(--blog-accent-dark)); /* 通常見出しの縦線 */
+
+	/* アクセント・チェックリスト・比較カード */
+	--blog-callout-background: linear-gradient(135deg, #fff8f2, #fff); /* アクセント枠の背景 */
+	--blog-callout-bar-background: linear-gradient(180deg, #d9825f, var(--blog-accent-dark)); /* アクセント枠の縦線 */
+	--blog-checklist-border: rgba(35, 28, 34, 0.07); /* チェックリストの枠線色 */
+	--blog-checklist-dot-shadow: 0 0 0 5px rgba(185, 104, 70, 0.12); /* チェックリストの丸印の影 */
+	--blog-card-background: linear-gradient(180deg, #fff 0%, #fff 72%, #fefbfc 100%); /* 比較カードの背景 */
+	--blog-card-bar-background: linear-gradient(90deg, var(--blog-accent), #ef98bd); /* カード上辺の飾り */
+	--blog-card-text: #4f454c; /* カード本文の文字色 */
+
+	/* 画像セット（写真と説明枠） */
+	--blog-photo-shadow: 0 20px 50px rgba(50, 32, 40, 0.15); /* 本文画像の影 */
+	--blog-caption-text: #51464d; /* 画像説明文の文字色 */
+	--blog-caption-background: rgba(255, 255, 255, 0.97); /* 画像説明枠の背景 */
+	--blog-caption-shadow: 0 14px 32px rgba(72, 39, 55, 0.1); /* 画像説明枠の影 */
+
+	/* 最終セクションとボタン */
+	--blog-cta-background: linear-gradient(135deg, #321f2a 0%, #5d2942 100%); /* 最終セクションの背景 */
+	--blog-cta-border: rgba(255, 255, 255, 0.1); /* 最終セクションの枠線色 */
+	--blog-cta-shadow: 0 20px 48px rgba(58, 27, 42, 0.2); /* 最終セクションの影 */
+	--blog-cta-decoration-background: radial-gradient(circle, rgba(218, 133, 95, 0.28), rgba(238, 119, 170, 0)); /* 最終セクションの円形の飾り */
+	--blog-cta-eyebrow: #f2b99f; /* 最終セクションの小見出し色 */
+	--blog-primary-text: #fff; /* 主ボタンの文字色 */
+	--blog-primary-background: linear-gradient(135deg, #c87550, #9d4e34); /* 主ボタンの背景 */
+	--blog-primary-shadow: 0 10px 24px rgba(123, 58, 36, 0.28); /* 主ボタンの影 */
+	--blog-primary-hover-background: linear-gradient(135deg, #d38360, #a6573b); /* 主ボタンのホバー背景 */
+	--blog-secondary-text: #fff; /* 副ボタンの文字色 */
+	--blog-secondary-background: rgba(255, 255, 255, 0.06); /* 副ボタンの背景 */
+	--blog-secondary-border: rgba(255, 255, 255, 0.48); /* 副ボタンの枠線色 */
+	--blog-secondary-hover-background: rgba(255, 255, 255, 0.12); /* 副ボタンのホバー背景 */
+	--blog-secondary-hover-border: rgba(255, 255, 255, 0.8); /* 副ボタンのホバー枠線色 */
+
+	/* 関連記事 */
+	--blog-related-border: rgba(35, 28, 34, 0.08); /* 関連記事枠の線の色 */
+	--blog-related-link-border: rgba(35, 28, 34, 0.08); /* 関連記事リンク間の線の色 */
+}
+
+/* 01-3. ゴールド系：tokyo-souvenir */
+.blog-page:where(.blog-theme-gold) {
+	/* 基本色・共通の背景と影 */
+	--blog-ink: #30261d; /* 本文・目次リンクの文字色 */
+	--blog-muted: #76695b; /* 補助文字色 */
+	--blog-accent: #d59c22; /* 主なアクセント色 */
+	--blog-accent-dark: #9b6712; /* ラベル・リンクの濃い色 */
+	--blog-accent-deep: #633820; /* カード見出し・ホバー時の色 */
+	--blog-pale: #fff9e9; /* 淡い背景色 */
+	--blog-surface: #fffdf8; /* 記事の明るい背景色 */
+	--blog-border: rgba(155, 103, 18, 0.22); /* 共通の枠線色 */
+	--blog-shadow-sm: 0 10px 30px rgba(87, 57, 23, 0.08); /* 小さな部品の影 */
+	--blog-shadow-md: 0 20px 52px rgba(87, 57, 23, 0.15); /* 導入カードの影 */
+	--blog-page-background: #fff; /* 記事全体の背景 */
+	--blog-cta-text: #fff; /* 最終セクションの文字色 */
+
+	/* メイン画像・導入文・目次・見出し */
+	--blog-hero-background: #bde3f4; /* メイン画像の背景 */
+	--blog-intro-background: rgba(255, 253, 248, 0.98); /* タイトル・導入文の背景 */
+	--blog-toc-background: linear-gradient(145deg, #fff7d8 0%, #fffdf8 74%); /* 目次の背景 */
+	--blog-heading-bar-background: linear-gradient(180deg, #f2ca48, var(--blog-accent-dark)); /* 通常見出しの縦線 */
+
+	/* アクセント・チェックリスト・比較カード */
+	--blog-callout-background: linear-gradient(135deg, #fff6cf, #fffdf8); /* アクセント枠の背景 */
+	--blog-callout-bar-background: linear-gradient(180deg, #efc441, var(--blog-accent-dark)); /* アクセント枠の縦線 */
+	--blog-tasting-background: linear-gradient(180deg, #fff 0%, var(--blog-pale) 100%); /* 食べ物の比較カードの背景 */
+
+	/* 画像セット（写真と説明枠） */
+	--blog-photo-shadow: 0 20px 50px rgba(73, 48, 23, 0.16); /* 本文画像の影 */
+	--blog-caption-text: #584a3d; /* 画像説明文の文字色 */
+	--blog-caption-background: rgba(255, 253, 248, 0.98); /* 画像説明枠の背景 */
+	--blog-caption-shadow: 0 14px 32px rgba(73, 48, 23, 0.11); /* 画像説明枠の影 */
+
+	/* 最終セクションとボタン */
+	--blog-cta-background: linear-gradient(135deg, #49301f 0%, #7b4a21 62%, #9b6712 100%); /* 最終セクションの背景 */
+	--blog-cta-shadow: 0 20px 48px rgba(73, 48, 31, 0.24); /* 最終セクションの影 */
+	--blog-cta-eyebrow: #ffe18a; /* 最終セクションの小見出し色 */
+	--blog-button-text: #fff; /* ボタンの基本文字色 */
+	--blog-button-border: rgba(255, 255, 255, 0.5); /* ボタンの基本枠線色 */
+	--blog-primary-text: #563611; /* 主ボタンの文字色 */
+	--blog-primary-background: #ffe08a; /* 主ボタンの背景 */
+	--blog-primary-border: #ffe08a; /* 主ボタンの枠線色 */
+
+	/* 関連記事 */
+	--blog-related-link-border: rgba(155, 103, 18, 0.16); /* 関連記事リンク間の線の色 */
+}
+
+/* 01-4. 濃いピンク系：candy_dominant_girls（編集用テンプレート） */
+.blog-page:where(.blog-theme-deep-pink) {
+	/* 基本色・共通の背景と影 */
+	--blog-ink: #351523; /* 本文・目次リンクの文字色 */
+	--blog-muted: #7c5263; /* 補助文字色 */
+	--blog-accent: #c81762; /* 主なアクセント色 */
+	--blog-accent-dark: #971343; /* ラベル・リンクの濃い色 */
+	--blog-accent-deep: #6b1640; /* カード見出し・ホバー時の色 */
+	--blog-pale: #fff0f6; /* 淡い背景色 */
+	--blog-surface: #ffffff; /* 記事の明るい背景色 */
+	--blog-surface-soft: #fffafd; /* カード・関連記事の淡い背景色 */
+	--blog-border: rgba(151, 19, 67, 0.16); /* 共通の枠線色 */
+	--blog-shadow-sm: 0 10px 30px rgba(107, 22, 64, 0.07); /* 小さな部品の影 */
+	--blog-shadow-md: 0 18px 48px rgba(107, 22, 64, 0.12); /* 導入カードの影 */
+	--blog-page-background: #fff; /* 記事全体の背景 */
+	--blog-cta-text: #fff; /* 最終セクションの文字色 */
+
+	/* メイン画像・導入文・目次・見出し */
+	--blog-hero-background: #2b1020; /* メイン画像の背景 */
+	--blog-intro-background: rgba(255, 255, 255, 0.98); /* タイトル・導入文の背景 */
+	--blog-toc-background: linear-gradient(145deg, #fff0f6 0%, #fff 76%); /* 目次の背景 */
+	--blog-heading-bar-background: linear-gradient(180deg, #e34b8e, var(--blog-accent-dark)); /* 通常見出しの縦線 */
+
+	/* アクセント・チェックリスト・比較カード */
+	--blog-callout-background: linear-gradient(135deg, #fff1f7, #fff); /* アクセント枠の背景 */
+	--blog-callout-bar-background: linear-gradient(180deg, #e44387, var(--blog-accent-dark)); /* アクセント枠の縦線 */
+	--blog-checklist-border: rgba(53, 21, 35, 0.07); /* チェックリストの枠線色 */
+	--blog-checklist-dot-shadow: 0 0 0 5px rgba(200, 23, 98, 0.1); /* チェックリストの丸印の影 */
+	--blog-card-background: linear-gradient(180deg, #fff 0%, #fff 72%, #fffafd 100%); /* 比較カードの背景 */
+	--blog-card-bar-background: linear-gradient(90deg, var(--blog-accent), #e673a5); /* カード上辺の飾り */
+	--blog-card-text: #67384e; /* カード本文の文字色 */
+
+	/* 画像セット（写真と説明枠） */
+	--blog-photo-shadow: 0 20px 50px rgba(107, 22, 64, 0.15); /* 本文画像の影 */
+	--blog-caption-text: #674151; /* 画像説明文の文字色 */
+	--blog-caption-background: rgba(255, 255, 255, 0.97); /* 画像説明枠の背景 */
+	--blog-caption-shadow: 0 14px 32px rgba(107, 22, 64, 0.1); /* 画像説明枠の影 */
+
+	/* 最終セクションとボタン */
+	--blog-cta-background: linear-gradient(135deg, #55102f 0%, #8b1549 100%); /* 最終セクションの背景 */
+	--blog-cta-border: rgba(255, 255, 255, 0.1); /* 最終セクションの枠線色 */
+	--blog-cta-shadow: 0 20px 48px rgba(107, 22, 64, 0.2); /* 最終セクションの影 */
+	--blog-cta-decoration-background: radial-gradient(circle, rgba(227, 75, 142, 0.28), rgba(227, 75, 142, 0)); /* 最終セクションの円形の飾り */
+	--blog-cta-eyebrow: #f3a0c3; /* 最終セクションの小見出し色 */
+	--blog-primary-text: #fff; /* 主ボタンの文字色 */
+	--blog-primary-background: linear-gradient(135deg, #d32570, #971343); /* 主ボタンの背景 */
+	--blog-primary-shadow: 0 10px 24px rgba(151, 19, 67, 0.3); /* 主ボタンの影 */
+	--blog-primary-hover-background: linear-gradient(135deg, #da3e83, #a71551); /* 主ボタンのホバー背景 */
+	--blog-secondary-text: #fff; /* 副ボタンの文字色 */
+	--blog-secondary-background: rgba(255, 255, 255, 0.06); /* 副ボタンの背景 */
+	--blog-secondary-border: rgba(255, 255, 255, 0.48); /* 副ボタンの枠線色 */
+	--blog-secondary-hover-background: rgba(255, 255, 255, 0.12); /* 副ボタンのホバー背景 */
+	--blog-secondary-hover-border: rgba(255, 255, 255, 0.8); /* 副ボタンのホバー枠線色 */
+
+	/* 関連記事 */
+	--blog-related-border: rgba(53, 21, 35, 0.08); /* 関連記事枠の線の色 */
+	--blog-related-link-border: rgba(53, 21, 35, 0.08); /* 関連記事リンク間の線の色 */
+}
+
+/* 02. 記事全体の基本設定 */
+
+.blog-page {
+	color: var(--blog-ink);
+	background: var(--blog-page-background);
+	font-feature-settings: "palt";
+	letter-spacing: 0.015em;
+}
+
+/* 03. メイン画像 */
+
+.blog-page .blog-hero {
+	position: relative;
+	overflow: hidden;
+}
+
+.blog-page:where(.blog-theme-pink) .blog-hero {
+	background: var(--blog-hero-background);
+}
+
+.blog-page:where(.blog-theme-brown) .blog-hero {
+	background: var(--blog-hero-background);
+}
+
+.blog-page:where(.blog-theme-gold) .blog-hero {
+	background: var(--blog-hero-background);
+}
+
+.blog-page:where(.blog-theme-deep-pink) .blog-hero {
+	background: var(--blog-hero-background);
+}
+
+.blog-page .blog-hero img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+/* 04. タイトル・セクション1（導入文） */
+
+.blog-page .blog-intro {
+	max-width: 860px;
+	margin: -48px auto 0;
+	padding: 46px 58px 50px;
+	position: relative;
+	z-index: 1;
+	border: 1px solid var(--blog-border);
+	border-radius: 24px;
+	box-shadow: var(--blog-shadow-md);
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-intro {
+	background: var(--blog-intro-background);
+}
+
+.blog-page:where(.blog-theme-gold) .blog-intro {
+	background: var(--blog-intro-background);
+	box-sizing: border-box;
+}
+
+.blog-page .blog-eyebrow {
+	margin: 0 0 16px;
+	color: var(--blog-accent-dark);
+	font-size: 12px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-eyebrow {
+	letter-spacing: 0.18em;
+}
+
+.blog-page:where(.blog-theme-gold) .blog-eyebrow {
+	letter-spacing: 0.2em;
+}
+
+.blog-page .blog-intro h1 {
+	margin: 0;
+	line-height: 1.5;
+	letter-spacing: 0.01em;
+	text-align: center;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-intro h1 {
+	font-size: 34px;
+}
+
+.blog-page:where(.blog-theme-gold) .blog-intro h1 {
+	font-size: 36px;
+}
+
+.blog-page .blog-lead {
+	padding-top: 30px;
+	border-top: 1px solid var(--blog-border);
+	font-size: 17px;
+	line-height: 2;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-lead {
+	margin: 32px 0 0;
+}
+
+.blog-page:where(.blog-theme-gold) .blog-lead {
+	margin-top: 32px;
+}
+
+/* 05. この記事の目次 */
+
+.blog-page .blog-toc {
+	margin: 48px 0 72px;
+	border: 1px solid var(--blog-border);
+	border-radius: 20px;
+	box-shadow: var(--blog-shadow-sm);
+}
+
+.blog-page:where(.blog-theme-pink) .blog-toc {
+	padding: 36px 40px 34px;
+	background: var(--blog-toc-background);
+}
+
+.blog-page:where(.blog-theme-brown) .blog-toc {
+	padding: 36px 40px 34px;
+	background: var(--blog-toc-background);
+}
+
+.blog-page:where(.blog-theme-gold) .blog-toc {
+	padding: 34px 40px;
+	background: var(--blog-toc-background);
+}
+
+.blog-page:where(.blog-theme-deep-pink) .blog-toc {
+	padding: 36px 40px 34px;
+	background: var(--blog-toc-background);
+}
+
+.blog-page .blog-toc h2 {
+	margin: 0 0 24px;
+	font-size: 22px;
+	letter-spacing: 0.04em;
+	text-align: center;
+}
+
+.blog-page .blog-toc ol {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 12px 32px;
+	margin: 0;
+	padding-left: 28px;
+}
+
+.blog-page .blog-toc li {
+	padding-left: 5px;
+	line-height: 1.75;
+}
+
+.blog-page .blog-toc a {
+	color: var(--blog-ink);
+	text-decoration: none;
+}
+
+.blog-page .blog-toc a:hover {
+	color: var(--blog-accent-dark);
+	text-decoration: underline;
+}
+
+/* 06. 本文の幅・通常セクション・見出し */
+
+.blog-page .blog-article {
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 0 32px 96px;
+}
+
+.blog-page .blog-section {
+	margin-top: 80px;
+	scroll-margin-top: 28px;
+}
+
+.blog-page .blog-section > h2 {
+	margin: 0 0 32px;
+	padding: 2px 0 20px 24px;
+	position: relative;
+	border-bottom: 1px solid var(--blog-border);
+	font-size: 28px;
+	line-height: 1.55;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-section > h2 {
+	letter-spacing: 0.015em;
+}
+
+.blog-page .blog-section > h2::before {
+	content: '';
+	width: 5px;
+	height: calc(100% - 20px);
+	position: absolute;
+	left: 0;
+	top: 2px;
+	border-radius: 999px;
+}
+
+.blog-page:where(.blog-theme-pink) .blog-section > h2::before {
+	background: var(--blog-heading-bar-background);
+}
+
+.blog-page:where(.blog-theme-brown) .blog-section > h2::before {
+	background: var(--blog-heading-bar-background);
+}
+
+.blog-page:where(.blog-theme-gold) .blog-section > h2::before {
+	background: var(--blog-heading-bar-background);
+}
+
+.blog-page:where(.blog-theme-deep-pink) .blog-section > h2::before {
+	background: var(--blog-heading-bar-background);
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-section h3 {
+	margin: 38px 0 16px;
+	font-size: 20px;
+	line-height: 1.6;
+	letter-spacing: 0.02em;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-section p,
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-section li {
+	font-size: 16px;
+	line-height: 2;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-section p {
+	margin: 0 0 20px;
+}
+
+.blog-page:where(.blog-theme-gold) .blog-section p {
+	font-size: 16px;
+	line-height: 2;
+}
+
+.blog-page:where(.blog-theme-gold) .blog-lead p,
+.blog-page:where(.blog-theme-gold) .blog-section p {
+	margin: 0 0 20px;
+}
+
+/* 07. アクセント（横長の強調枠） */
+
+.blog-page .blog-callout {
+	display: grid;
+	align-items: center;
+	position: relative;
+	overflow: hidden;
+	border: 1px solid var(--blog-border);
+	border-radius: 18px;
+	box-shadow: var(--blog-shadow-sm);
+}
+
+.blog-page:where(.blog-theme-pink) .blog-callout {
+	grid-template-columns: 82px minmax(0, 1fr);
+	gap: 24px;
+	margin: 36px 0;
+	padding: 28px 32px;
+	background: var(--blog-callout-background);
+}
+
+.blog-page:where(.blog-theme-brown) .blog-callout {
+	grid-template-columns: 82px minmax(0, 1fr);
+	gap: 24px;
+	margin: 36px 0;
+	padding: 28px 32px;
+	background: var(--blog-callout-background);
+}
+
+.blog-page:where(.blog-theme-gold) .blog-callout {
+	grid-template-columns: 90px minmax(0, 1fr);
+	gap: 22px;
+	margin: 34px 0;
+	padding: 26px 30px;
+	background: var(--blog-callout-background);
+}
+
+.blog-page:where(.blog-theme-deep-pink) .blog-callout {
+	grid-template-columns: 82px minmax(0, 1fr);
+	gap: 24px;
+	margin: 36px 0;
+	padding: 28px 32px;
+	background: var(--blog-callout-background);
+}
+
+.blog-page .blog-callout::before {
+	content: '';
+	width: 5px;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.blog-page:where(.blog-theme-pink) .blog-callout::before {
+	background: var(--blog-callout-bar-background);
+}
+
+.blog-page:where(.blog-theme-brown) .blog-callout::before {
+	background: var(--blog-callout-bar-background);
+}
+
+.blog-page:where(.blog-theme-gold) .blog-callout::before {
+	background: var(--blog-callout-bar-background);
+}
+
+.blog-page:where(.blog-theme-deep-pink) .blog-callout::before {
+	background: var(--blog-callout-bar-background);
+}
+
+.blog-page .blog-callout-label {
+	color: var(--blog-accent-dark);
+	font-weight: bold;
+	letter-spacing: 0.18em;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-callout-label {
+	font-size: 12px;
+}
+
+.blog-page:where(.blog-theme-gold) .blog-callout-label {
+	font-size: 11px;
+}
+
+.blog-page .blog-callout strong {
+	font-size: 20px;
+	line-height: 1.75;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-callout strong {
+	letter-spacing: 0.015em;
+}
+
+/* 08. チェックリスト */
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-checklist {
+	margin: 30px 0 34px;
+	padding: 26px 30px;
+	background: var(--blog-surface-soft);
+	border-radius: 16px;
+	list-style: none;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown) .blog-checklist {
+	border: 1px solid var(--blog-checklist-border);
+}
+
+.blog-page:where(.blog-theme-deep-pink) .blog-checklist {
+	border: 1px solid var(--blog-checklist-border);
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-checklist li {
+	padding-left: 28px;
+	position: relative;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-checklist li + li {
+	margin-top: 8px;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-checklist li::before {
+	content: '';
+	width: 9px;
+	height: 9px;
+	position: absolute;
+	left: 2px;
+	top: 0.78em;
+	border-radius: 50%;
+	background: var(--blog-accent);
+}
+
+.blog-page:where(.blog-theme-pink) .blog-checklist li::before {
+	box-shadow: var(--blog-checklist-dot-shadow);
+}
+
+.blog-page:where(.blog-theme-brown) .blog-checklist li::before {
+	box-shadow: var(--blog-checklist-dot-shadow);
+}
+
+.blog-page:where(.blog-theme-deep-pink) .blog-checklist li::before {
+	box-shadow: var(--blog-checklist-dot-shadow);
+}
+
+/* 09. アクセント2（比較カード） */
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-type-grid,
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-profile-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 22px;
+	margin-top: 34px;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-type-grid + p,
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-profile-grid + p {
+	margin-top: 36px;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-type-card,
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-profile-card {
+	padding: 32px 30px 30px;
+	position: relative;
+	overflow: hidden;
+	border: 1px solid var(--blog-border);
+	border-radius: 20px;
+	box-shadow: var(--blog-shadow-sm);
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown) .blog-type-card,
+.blog-page:where(.blog-theme-pink, .blog-theme-brown) .blog-profile-card {
+	background: var(--blog-card-background);
+}
+
+.blog-page:where(.blog-theme-deep-pink) .blog-type-card,
+.blog-page:where(.blog-theme-deep-pink) .blog-profile-card {
+	background: var(--blog-card-background);
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-type-card::before,
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-profile-card::before {
+	content: '';
+	width: 64px;
+	height: 3px;
+	position: absolute;
+	left: 30px;
+	top: 0;
+	border-radius: 0 0 999px 999px;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown) .blog-type-card::before,
+.blog-page:where(.blog-theme-pink, .blog-theme-brown) .blog-profile-card::before {
+	background: var(--blog-card-bar-background);
+}
+
+.blog-page:where(.blog-theme-deep-pink) .blog-type-card::before,
+.blog-page:where(.blog-theme-deep-pink) .blog-profile-card::before {
+	background: var(--blog-card-bar-background);
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-type-card {
+	display: flex;
+	min-height: 218px;
+	flex-direction: column;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-profile-card {
+	min-height: 152px;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-type-card h3,
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-profile-card h3 {
+	margin: 0 0 16px;
+	font-size: 20px;
+	line-height: 1.55;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-type-card p,
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-profile-card p {
+	margin-bottom: 0;
+	line-height: 1.9;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown) .blog-type-card p,
+.blog-page:where(.blog-theme-pink, .blog-theme-brown) .blog-profile-card p {
+	color: var(--blog-card-text);
+}
+
+.blog-page:where(.blog-theme-deep-pink) .blog-type-card p,
+.blog-page:where(.blog-theme-deep-pink) .blog-profile-card p {
+	color: var(--blog-card-text);
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-type-card a {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	min-height: 48px;
+	margin-top: auto;
+	padding-top: 18px;
+	color: var(--blog-accent-dark);
+	border-top: 1px solid var(--blog-border);
+	font-weight: bold;
+	line-height: 1.5;
+	text-decoration: none;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-type-card a::after {
+	content: '\2192';
+	margin-left: 12px;
+	font-size: 18px;
+	transition: transform 0.2s ease;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-type-card a:hover {
+	color: var(--blog-accent-deep);
+	text-decoration: underline;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-type-card a:hover::after {
+	transform: translateX(4px);
+}
+
+/* 10. 画像セット（写真・説明文・PHOTO NOTE） */
+
+.blog-page .blog-figure {
+	text-align: center;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-figure {
+	margin: 76px auto 88px;
+}
+
+.blog-page:where(.blog-theme-gold) .blog-figure {
+	margin: 72px auto 84px;
+}
+
+.blog-page .blog-figure img {
+	display: block;
+	width: 100%;
+	height: auto;
+	border-radius: 22px;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown) .blog-figure img {
+	box-shadow: var(--blog-photo-shadow);
+}
+
+.blog-page:where(.blog-theme-gold) .blog-figure img {
+	box-shadow: var(--blog-photo-shadow);
+}
+
+.blog-page:where(.blog-theme-deep-pink) .blog-figure img {
+	box-shadow: var(--blog-photo-shadow);
+}
+
+.blog-page .blog-figure figcaption {
+	width: calc(100% - 72px);
+	margin: -24px auto 0;
+	padding: 20px 24px;
+	position: relative;
+	z-index: 1;
+	box-sizing: border-box;
+	border: 1px solid var(--blog-border);
+	border-top: 3px solid var(--blog-accent);
+	border-radius: 14px;
+	font-size: 14px;
+	line-height: 1.8;
+	text-align: left;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown) .blog-figure figcaption {
+	color: var(--blog-caption-text);
+	background: var(--blog-caption-background);
+	box-shadow: var(--blog-caption-shadow);
+}
+
+.blog-page:where(.blog-theme-gold) .blog-figure figcaption {
+	color: var(--blog-caption-text);
+	background: var(--blog-caption-background);
+	box-shadow: var(--blog-caption-shadow);
+}
+
+.blog-page:where(.blog-theme-deep-pink) .blog-figure figcaption {
+	color: var(--blog-caption-text);
+	background: var(--blog-caption-background);
+	box-shadow: var(--blog-caption-shadow);
+}
+
+.blog-page .blog-figure figcaption::before {
+	content: 'PHOTO NOTE';
+	display: block;
+	margin-bottom: 6px;
+	color: var(--blog-accent-dark);
+	font-size: 10px;
+	font-weight: bold;
+	letter-spacing: 0.18em;
+}
+
+/* 11. よくある質問 */
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-faq {
+	margin-top: 32px;
+	border-top: 1px solid var(--blog-border);
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-faq .faq-item {
+	border-bottom: 1px solid var(--blog-border);
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-faq .faq-question {
+	height: auto;
+	min-height: 76px;
+	padding: 20px 54px 20px 44px;
+	font-weight: bold;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-faq .faq-question::before {
+	content: 'Q';
+	position: absolute;
+	left: 8px;
+	color: var(--blog-accent);
+	font-size: 21px;
+	font-family: Georgia, serif;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-faq .faq-answer {
+	padding: 0 22px 26px 44px;
+	font-size: 16px;
+	line-height: 2;
+}
+
+/* 12. 最終セクション・ボタン */
+
+.blog-page .blog-cta {
+	margin-top: 80px;
+	position: relative;
+	overflow: hidden;
+	color: var(--blog-cta-text);
+	border-radius: 24px;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown) .blog-cta {
+	padding: 46px 48px 48px;
+	background: var(--blog-cta-background);
+	border: 1px solid var(--blog-cta-border);
+	box-shadow: var(--blog-cta-shadow);
+	text-align: left;
+}
+
+.blog-page:where(.blog-theme-gold) .blog-cta {
+	padding: 44px 46px 46px;
+	background: var(--blog-cta-background);
+	box-shadow: var(--blog-cta-shadow);
+}
+
+.blog-page:where(.blog-theme-deep-pink) .blog-cta {
+	padding: 46px 48px 48px;
+	background: var(--blog-cta-background);
+	border: 1px solid var(--blog-cta-border);
+	box-shadow: var(--blog-cta-shadow);
+	text-align: left;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-cta::after {
+	content: '';
+	width: 240px;
+	height: 240px;
+	position: absolute;
+	right: -100px;
+	top: -130px;
+	border-radius: 50%;
+	pointer-events: none;
+}
+
+.blog-page:where(.blog-theme-pink) .blog-cta::after {
+	background: var(--blog-cta-decoration-background);
+}
+
+.blog-page:where(.blog-theme-brown) .blog-cta::after {
+	background: var(--blog-cta-decoration-background);
+}
+
+.blog-page:where(.blog-theme-deep-pink) .blog-cta::after {
+	background: var(--blog-cta-decoration-background);
+}
+
+.blog-page .blog-cta-eyebrow {
+	margin: 0 0 12px;
+	font-size: 11px;
+	font-weight: bold;
+	letter-spacing: 0.2em;
+}
+
+.blog-page:where(.blog-theme-pink) .blog-cta-eyebrow {
+	color: var(--blog-cta-eyebrow);
+}
+
+.blog-page:where(.blog-theme-brown) .blog-cta-eyebrow {
+	color: var(--blog-cta-eyebrow);
+}
+
+.blog-page:where(.blog-theme-gold) .blog-cta-eyebrow {
+	color: var(--blog-cta-eyebrow);
+}
+
+.blog-page:where(.blog-theme-deep-pink) .blog-cta-eyebrow {
+	color: var(--blog-cta-eyebrow);
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-cta .blog-cta-title {
+	max-width: 640px;
+	margin: 0;
+	font-size: 20px;
+	line-height: 1.75;
+}
+
+.blog-page:where(.blog-theme-gold) .blog-cta-title {
+	max-width: 660px;
+	margin: 0;
+	font-size: 20px;
+	line-height: 1.75;
+}
+
+.blog-page .blog-cta-actions {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 14px;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-cta-actions {
+	margin-top: 30px;
+}
+
+.blog-page:where(.blog-theme-gold) .blog-cta-actions {
+	margin-top: 28px;
+}
+
+.blog-page .blog-cta-link {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	border-radius: 999px;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-cta-link {
+	min-height: 60px;
+	padding: 0 28px;
+	position: relative;
+	z-index: 1;
+	font-size: 16px;
+	letter-spacing: 0.04em;
+	transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.blog-page:where(.blog-theme-gold) .blog-cta-link {
+	min-height: 58px;
+	padding: 0 24px;
+	font-size: 15px;
+	color: var(--blog-button-text);
+	border: 1px solid var(--blog-button-border);
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-cta-link::after {
+	content: '\2192';
+	margin-left: 12px;
+	font-size: 18px;
+}
+
+.blog-page .blog-cta-link:hover {
+	transform: translateY(-2px);
+	text-decoration: none;
+}
+
+.blog-page:where(.blog-theme-pink) .blog-cta-link.is-primary {
+	color: var(--blog-primary-text);
+	background: var(--blog-primary-background);
+	box-shadow: var(--blog-primary-shadow);
+}
+
+.blog-page:where(.blog-theme-brown) .blog-cta-link.is-primary {
+	color: var(--blog-primary-text);
+	background: var(--blog-primary-background);
+	box-shadow: var(--blog-primary-shadow);
+}
+
+.blog-page:where(.blog-theme-gold) .blog-cta-link.is-primary {
+	color: var(--blog-primary-text);
+	background: var(--blog-primary-background);
+	border-color: var(--blog-primary-border);
+}
+
+.blog-page:where(.blog-theme-deep-pink) .blog-cta-link.is-primary {
+	color: var(--blog-primary-text);
+	background: var(--blog-primary-background);
+	box-shadow: var(--blog-primary-shadow);
+}
+
+.blog-page:where(.blog-theme-pink) .blog-cta-link.is-primary:hover {
+	background: var(--blog-primary-hover-background);
+}
+
+.blog-page:where(.blog-theme-brown) .blog-cta-link.is-primary:hover {
+	background: var(--blog-primary-hover-background);
+}
+
+.blog-page:where(.blog-theme-deep-pink) .blog-cta-link.is-primary:hover {
+	background: var(--blog-primary-hover-background);
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-cta-link.is-secondary {
+	color: var(--blog-secondary-text);
+	background: var(--blog-secondary-background);
+	border: 1px solid var(--blog-secondary-border);
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-cta-link.is-secondary:hover {
+	background: var(--blog-secondary-hover-background);
+	border-color: var(--blog-secondary-hover-border);
+}
+
+/* 13. 関連記事 */
+
+.blog-page .blog-related {
+	margin-top: 64px;
+	padding: 34px;
+	border-radius: 18px;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown) .blog-related {
+	background: var(--blog-surface-soft);
+	border: 1px solid var(--blog-related-border);
+}
+
+.blog-page:where(.blog-theme-gold) .blog-related {
+	background: var(--blog-surface);
+	border: 1px solid var(--blog-border);
+}
+
+.blog-page:where(.blog-theme-deep-pink) .blog-related {
+	background: var(--blog-surface-soft);
+	border: 1px solid var(--blog-related-border);
+}
+
+.blog-page .blog-related h2 {
+	margin: 0 0 18px;
+	font-size: 20px;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-related h2 {
+	letter-spacing: 0.03em;
+}
+
+.blog-page .blog-related a {
+	display: block;
+	padding: 12px 0;
+	line-height: 1.7;
+}
+
+.blog-page:where(.blog-theme-pink, .blog-theme-brown) .blog-related a {
+	border-top: 1px solid var(--blog-related-link-border);
+}
+
+.blog-page:where(.blog-theme-gold) .blog-related a {
+	border-top: 1px solid var(--blog-related-link-border);
+}
+
+.blog-page:where(.blog-theme-deep-pink) .blog-related a {
+	border-top: 1px solid var(--blog-related-link-border);
+}
+
+/* 14. 食べ物の比較カード（ゴールド系専用） */
+
+.blog-page:where(.blog-theme-gold) .blog-tasting {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 20px;
+	margin: 34px 0;
+}
+
+.blog-page:where(.blog-theme-gold) .blog-tasting-card {
+	padding: 28px;
+	background: var(--blog-tasting-background);
+	border: 1px solid var(--blog-border);
+	border-radius: 18px;
+	box-shadow: var(--blog-shadow-sm);
+}
+
+.blog-page:where(.blog-theme-gold) .blog-tasting-card h3 {
+	margin: 0 0 14px;
+	color: var(--blog-accent-deep);
+	font-size: 20px;
+	line-height: 1.55;
+}
+
+.blog-page:where(.blog-theme-gold) .blog-tasting-card p {
+	margin: 0;
+	line-height: 1.9;
+}
+
+/* ==========================================================================
+   15. スマートフォン表示（画面幅768px以下）
+   PC用の共通部品に対し、スマホで必要な寸法だけを上書きします。
+   ========================================================================== */
+
+@media screen and (max-width: 768px) {
+
+	/* 15-02. 記事全体の基本設定 */
+
+	.blog-page:where(.blog-theme-pink, .blog-theme-deep-pink) {
+		letter-spacing: 0.01em;
+	}
+
+	.blog-page:where(.blog-theme-brown) {
+		letter-spacing: 0.01em;
+		width: 100vw;
+		max-width: 100vw;
+		min-width: 0;
+		overflow-x: hidden;
+	}
+
+	.blog-page:where(.blog-theme-gold) {
+		width: 100vw;
+		max-width: 100vw;
+		min-width: 0;
+		overflow-x: hidden;
+	}
+
+	/* 15-03. メイン画像 */
+
+	.blog-page:where(.blog-theme-brown) .blog-hero {
+		width: 100vw;
+		max-width: 100vw;
+		min-width: 0;
+	}
+
+	/* 既存の画像サイズ指定より優先し、ブラウン系のスマホ表示を維持します。 */
+
+	.blog-page:where(.blog-theme-brown) .blog-hero img {
+		width: 100% !important;
+		max-width: 100% !important;
+		height: auto !important;
+	}
+
+	.blog-page:where(.blog-theme-gold) .blog-hero,
+	.blog-page:where(.blog-theme-gold) .blog-hero img {
+		width: 100%;
+		max-width: 100%;
+		height: auto;
+	}
+
+	/* 15-04. タイトル・セクション1（導入文） */
+
+	.blog-page .blog-intro {
+		padding: 38px 22px 42px;
+		border: 0;
+		border-radius: 0;
+		box-shadow: none;
+	}
+
+	.blog-page:where(.blog-theme-pink, .blog-theme-deep-pink) .blog-intro {
+		margin: 0;
+	}
+
+	.blog-page:where(.blog-theme-brown) .blog-intro {
+		margin: 0;
+		width: 100vw;
+		max-width: 100vw;
+		min-width: 0;
+	}
+
+	.blog-page:where(.blog-theme-gold) .blog-intro {
+		margin: 0 -18px;
+		width: 100vw;
+		max-width: 100vw;
+	}
+
+	.blog-page .blog-intro h1 {
+		line-height: 1.55;
+	}
+
+	.blog-page:where(.blog-theme-pink, .blog-theme-deep-pink) .blog-intro h1 {
+		font-size: 26px;
+	}
+
+	.blog-page:where(.blog-theme-brown) .blog-intro h1 {
+		font-size: 26px;
+		overflow-wrap: anywhere;
+		word-break: break-word;
+	}
+
+	.blog-page:where(.blog-theme-gold) .blog-intro h1 {
+		font-size: 27px;
+		overflow-wrap: anywhere;
+	}
+
+	.blog-page .blog-lead {
+		font-size: 16px;
+		line-height: 1.95;
+	}
+
+	.blog-page:where(.blog-theme-brown) .blog-eyebrow {
+		overflow-wrap: anywhere;
+	}
+
+	/* 15-05. この記事の目次 */
+
+	.blog-page .blog-toc {
+		margin: 32px 0 56px;
+		padding: 28px 24px;
+		border-radius: 16px;
+	}
+
+	.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-toc ol,
+	.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-type-grid,
+	.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-profile-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.blog-page:where(.blog-theme-gold) .blog-toc ol,
+	.blog-page:where(.blog-theme-gold) .blog-tasting,
+	.blog-page:where(.blog-theme-gold) .blog-cta-actions {
+		grid-template-columns: 1fr;
+	}
+
+	/* 15-06. 本文の幅・通常セクション・見出し */
+
+	.blog-page .blog-article {
+		padding: 0 18px 72px;
+	}
+
+	.blog-page:where(.blog-theme-brown) .blog-article {
+		width: 100vw;
+		max-width: 100vw;
+		min-width: 0;
+	}
+
+	.blog-page:where(.blog-theme-gold) .blog-article {
+		width: 100vw;
+		max-width: 100vw;
+		min-width: 0;
+		box-sizing: border-box;
+	}
+
+	.blog-page .blog-section {
+		margin-top: 64px;
+	}
+
+	.blog-page .blog-section > h2 {
+		margin-bottom: 28px;
+		padding: 2px 0 18px 20px;
+		font-size: 23px;
+	}
+
+	.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-section > h2 {
+		line-height: 1.55;
+	}
+
+	.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-section > h2::before {
+		height: calc(100% - 18px);
+	}
+
+	.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-section p,
+	.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-section li {
+		line-height: 1.9;
+	}
+
+	.blog-page:where(.blog-theme-gold) .blog-section p {
+		line-height: 1.9;
+	}
+
+	/* 15-07. アクセント（横長の強調枠） */
+
+	.blog-page .blog-callout {
+		grid-template-columns: 1fr;
+		gap: 10px;
+	}
+
+	.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-callout {
+		margin: 32px 0;
+		padding: 24px 24px 26px;
+		border-radius: 16px;
+	}
+
+	.blog-page:where(.blog-theme-gold) .blog-callout {
+		padding: 24px;
+	}
+
+	.blog-page .blog-callout strong {
+		font-size: 19px;
+	}
+
+	.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-callout strong {
+		line-height: 1.7;
+	}
+
+	/* 15-09. アクセント2（比較カード） */
+
+	.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-type-grid,
+	.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-profile-grid {
+		gap: 18px;
+		margin-top: 30px;
+	}
+
+	.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-type-grid + p,
+	.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-profile-grid + p {
+		margin-top: 30px;
+	}
+
+	.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-type-card,
+	.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-profile-card {
+		padding: 28px 24px 26px;
+		border-radius: 18px;
+		min-height: 0;
+	}
+
+	.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-type-card::before,
+	.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-profile-card::before {
+		left: 24px;
+	}
+
+	/* 15-10. 画像セット（写真・説明文・PHOTO NOTE） */
+
+	.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-figure {
+		margin: 60px -18px 72px;
+	}
+
+	.blog-page:where(.blog-theme-gold) .blog-figure {
+		margin: 58px -18px 70px;
+	}
+
+	.blog-page .blog-figure img {
+		border-radius: 0;
+		box-shadow: none;
+	}
+
+	.blog-page .blog-figure figcaption {
+		width: calc(100% - 36px);
+		margin-top: -18px;
+		padding: 18px 20px;
+		font-size: 13px;
+	}
+
+	.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-figure figcaption {
+		border-radius: 13px;
+	}
+
+	/* 15-11. よくある質問 */
+
+	.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-faq .faq-answer {
+		line-height: 1.9;
+	}
+
+	/* 15-12. 最終セクション・ボタン */
+
+	.blog-page .blog-cta {
+		margin-top: 68px;
+		padding: 34px 24px 28px;
+		border-radius: 20px;
+	}
+
+	.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-cta .blog-cta-title {
+		font-size: 18px;
+		line-height: 1.7;
+	}
+
+	.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-cta-actions {
+		gap: 10px;
+		margin-top: 26px;
+	}
+
+	.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-cta-link {
+		min-height: 56px;
+		padding: 0 8px;
+		font-size: 13px;
+		letter-spacing: 0;
+	}
+
+	.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-cta-link::after {
+		margin-left: 6px;
+		font-size: 15px;
+	}
+
+	.blog-page:where(.blog-theme-gold) .blog-cta-title {
+		font-size: 18px;
+	}
+
+	/* 15-13. 関連記事 */
+
+	.blog-page .blog-related {
+		margin-top: 54px;
+		padding: 28px 22px;
+	}
+
+	.blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-related {
+		border-radius: 16px;
+	}
+
+	/* 15-14. 食べ物の比較カード（ゴールド系専用） */
+
+	.blog-page:where(.blog-theme-gold) .blog-tasting-card {
+		padding: 26px 24px;
+	}
+}

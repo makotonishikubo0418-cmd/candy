@@ -1,9 +1,11 @@
 # Candy 履歴一覧
 
-Updated: 2026-10-13
+Updated: 2026-10-14
 
 | Type | Title | History |
 |---|---|---|
+| MODIFY | ブログ4ページの共通CSS統合 | [20261014_MODIFY_shared-blog-css.md](history/20261014_MODIFY_shared-blog-css.md) |
+| CREATE | 濃いピンク系スタッフブログテンプレート1組 | [20261014_CREATE_dark-pink-staff-blog-template.md](history/20261014_CREATE_dark-pink-staff-blog-template.md) |
 | OPERATION | タイトル再発防止・ホテル掲載順試験と関連管理資料のGitHub公開 | [20261013_OPERATION_title-tooling-github-publication.md](history/20261013_OPERATION_title-tooling-github-publication.md) |
 | OPERATION | 谷山港ページの修正タイトルの本番公開 | [20261013_OPERATION_taniyamakou-title-publication.md](history/20261013_OPERATION_taniyamakou-title-publication.md) |
 | PROBLEM | ホテル掲載順テストの期待値修正 | [20261013_PROBLEM_hotel-registration-order-test.md](history/20261013_PROBLEM_hotel-registration-order-test.md) |

@@ -9,13 +9,13 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-13T06:18:28+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-14T07:16:20+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: d7b3ff7c0492529c437ceddc39788bd62171cc60
-> State fingerprint: sha256:1262c8e094b804c20d3ad33530a99e1e27f016d3fb8898d4a9979d7e86aa5d66
-> Population: Public PHP files: 262 / assets: 746
+> Commit: 6e5a9a782ac08c479d7d8de5f18419df5566bc7f
+> State fingerprint: sha256:afceb6efc99b3970e2bd5879cca76339727c10b073a667f416274b65d6a419be
+> Population: Public PHP files: 263 / assets: 749
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
-> Result: Missing references: 0 / template placeholders: 4 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 0
+> Result: Missing references: 0 / template placeholders: 4 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
 
 Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by [CANDY_CODE_REFERENCE_INVENTORY.md](CANDY_CODE_REFERENCE_INVENTORY.md).
@@ -26,14 +26,14 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 
 | extension | count |
 |---|---:|
-| .css | 19 |
+| .css | 21 |
 | .eot | 14 |
 | .gif | 5 |
 | .jpg | 625 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 29 |
-| .svg | 1 |
+| .svg | 2 |
 | .ttf | 14 |
 | .webm | 1 |
 | .webp | 9 |
@@ -44,7 +44,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 
 | folder | count |
 |---|---:|
-| HP/css | 18 |
+| HP/css | 20 |
 | HP/font | 44 |
 | HP/imgCss/pc | 1 |
 | HP/imgCss/s | 2 |
@@ -52,7 +52,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 21 |
+| HP/imgHtml/new_202601/blog | 22 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -236,6 +236,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | area:yoshinocho | 6 | NONE | OK |
 | area:yotsumotocho | 6 | NONE | OK |
 | area:yusukicho | 6 | NONE | OK |
+| other:kagoshima-deliveryhealth-blog-candy_dominant_girls | 1 | NONE | OK |
 | blog:girl-choice | 3 | NONE | OK |
 | blog:glamourgirl | 7 | NONE | OK |
 | blog:petitegirl | 7 | NONE | OK |
@@ -352,6 +353,7 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
+| HP/css | 4 | blog-candy_dominant_girls.css, blog-girl-choice.css, blog-private-waiting-room.css, blog-tokyo-souvenir.css |
 
 ## Required Same-Content Path Groups
 
@@ -390,4 +392,4 @@ These paths have confirmed management roles. They are not unreviewed publication
 
 | path | assessment |
 |---|---|
-| NONE | No automatic assessment |
+| HP/imgHtml/new_202601/blog/staff-blog-template-placeholder.svg | Candidate based only on extension and name. MUST NOT be deleted before the owner decides. |
