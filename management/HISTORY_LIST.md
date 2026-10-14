@@ -4,6 +4,7 @@ Updated: 2026-10-15
 
 | Type | Title | History |
 |---|---|---|
+| MODIFY | 東京土産ブログの1枚目画像差し替え | [20261015_MODIFY_tokyo-souvenir-first-image.md](history/20261015_MODIFY_tokyo-souvenir-first-image.md) |
 | MODIFY | カレーブログのアクセントカラー変更 | [20261015_MODIFY_curry-blog-colors.md](history/20261015_MODIFY_curry-blog-colors.md) |
 | CREATE | レトルトカレーブログの作成と本番公開 | [20261015_CREATE_retort-curry-blog.md](history/20261015_CREATE_retort-curry-blog.md) |
 | MODIFY | ブログ旧専用CSS削除と作成禁止ルールの整備 | [20261014_MODIFY_blog-css-cleanup.md](history/20261014_MODIFY_blog-css-cleanup.md) |

@@ -11,7 +11,7 @@ canonical
 https://www.55810.com/kagoshima-deliveryhealth-blog-tokyo-souvenir.php
 -------------------------------------------------------------------
 image
-https://www.55810.com/imgHtml/new_202601/blog/kagoshima-deliveryhealth-tokyo-souvenir_1.jpg
+https://www.55810.com/imgHtml/new_202601/blog/kagoshima-deliveryhealth-tokyo-souvenir_1.jpg?v=35c02055
 -------------------------------------------------------------------
 source_document
 Google Docs: 1FYAyKS86l7Z7JIJvRagcLa_kLh4quDL3VAtZFsmHoT0 / tab t.3jmfs1ic8dbh
@@ -23,7 +23,7 @@ generation_mode
 記事内容
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 img_1
-src : ./imgHtml/new_202601/blog/kagoshima-deliveryhealth-tokyo-souvenir_1.jpg
+src : ./imgHtml/new_202601/blog/kagoshima-deliveryhealth-tokyo-souvenir_1.jpg?v=35c02055
 alt : 鹿児島と東京を結ぶ飛行機と東京土産を描いたCandyブログのメイン画像
 -------------------------------------------------------------------
 page_title_h1 / パンくずリスト
