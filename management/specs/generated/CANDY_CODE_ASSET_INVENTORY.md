@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-14T12:32:15+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-14T13:50:42+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: da9e8b7f746109126b8175a80868c244d1987437
-> State fingerprint: sha256:9383c577566f2db817fc6a149c242f1f241a1e4aa235df567e135ef91df542bb
-> Population: Public PHP files: 263 / assets: 745
+> Commit: e29e783a611d1161348406c5444a31b88023a4e1
+> State fingerprint: sha256:bae0656504078682528c64ced18ea03fc744c5942006a40001e7b18424db0d48
+> Population: Public PHP files: 264 / assets: 748
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 625 |
+| .jpg | 628 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 29 |
@@ -52,7 +52,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 22 |
+| HP/imgHtml/new_202601/blog | 25 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -242,6 +242,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:petitegirl | 7 | NONE | OK |
 | blog:poccharigirl | 7 | NONE | OK |
 | blog:private-waiting-room | 3 | NONE | OK |
+| blog:retort-curry | 3 | NONE | OK |
 | blog:shiroutogirl | 7 | NONE | OK |
 | blog:slendergirl | 7 | NONE | OK |
 | blog:tallbeautygirl | 7 | NONE | OK |

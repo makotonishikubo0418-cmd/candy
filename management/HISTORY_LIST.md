@@ -1,9 +1,10 @@
 # Candy 履歴一覧
 
-Updated: 2026-10-14
+Updated: 2026-10-15
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | レトルトカレーブログの作成と本番公開 | [20261015_CREATE_retort-curry-blog.md](history/20261015_CREATE_retort-curry-blog.md) |
 | MODIFY | ブログ旧専用CSS削除と作成禁止ルールの整備 | [20261014_MODIFY_blog-css-cleanup.md](history/20261014_MODIFY_blog-css-cleanup.md) |
 | MODIFY | 正式ブログテンプレートの内容更新 | [20261014_MODIFY_official-blog-template.md](history/20261014_MODIFY_official-blog-template.md) |
 | MODIFY | ブログ4ページの共通CSS統合 | [20261014_MODIFY_shared-blog-css.md](history/20261014_MODIFY_shared-blog-css.md) |
