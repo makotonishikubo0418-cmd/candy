@@ -1,6 +1,6 @@
 # CANDY Blog Page Generation Specification
 
-- Updated: 2026-10-08
+- Updated: 2026-10-14
 - Applies to: Normal new generation of CANDY blog detail pages by Codex
 - Operational sequence: `BLOG_CREATION.md`
 - Common image requirements: `IMAGE_MANAGEMENT.md`
@@ -23,6 +23,24 @@ Section 5.2.
 - Keep JSON-LD, visible content, and the table of contents consistent in content and count.
 - Apply the common collision, incomplete-input, change-boundary, and completion
   gates from `CANDY_PAGE_GENERATION_GOVERNANCE.md`.
+
+### 2.1 Official Editable Blog Template
+
+The official editable template is [`HP/source/template_kagoshima-deliveryhealth-blog.html`](../../HP/source/template_kagoshima-deliveryhealth-blog.html). Its staff-blog layout uses the shared `HP/css/blog.css`, `blog-page` components, and the `blog-theme-deep-pink` theme. Maintain future template changes in this file. `kagoshima-deliveryhealth-blog-candy_dominant_girls.html` is a separate page reserved for another purpose; do not use it as the template authority or synchronize subsequent template edits into it.
+
+The template intentionally contains sample text, a placeholder SVG, sample links, `noindex, nofollow`, and sample canonical/OGP/JSON-LD URLs. When creating a publishable article, replace these with the approved article content, images, destinations, indexing directive, and canonical URL. Do not publish the template unchanged or register the template itself in the blog index or sitemap.
+
+For this editable staff-blog layout, `sceneN` belongs to the section containing its H2; the table of contents targets those sections. The table-of-contents and related-content headings are outside the numbered article scenes. Introductory text uses `blog-lead`; article bodies use the `blog-section` components rather than requiring the legacy `subtitle_N` / `description_N` wrappers. Keep scene order, visible headings, and table-of-contents links consistent. The sample has Article, BreadcrumbList, and FAQPage JSON-LD. Update Article to the actual article and author, and add ItemList only when a corresponding girl-introduction block is present. Sample block counts are not fixed requirements. These are the staff-template exceptions to the legacy structure in Sections 4–7; source-content and visible/structured-data consistency requirements still apply.
+
+`candy_blog_page.py` currently reads this template as a shell, then replaces the main content and JSON-LD with its own legacy renderers. It does not reproduce the editable staff-blog layout and does not replace the template's robots directive. Its successful execution alone therefore does not verify staff-template design or publication readiness. Apply the official template directly for that layout and verify the article's robots directive before publication; do not treat the existing generator as supporting the new layout.
+
+### 2.2 Blog CSS Ownership
+
+- Put all blog-specific styles, components, and theme variations in [`HP/css/blog.css`](../../HP/css/blog.css). Do not create, restore, or reference per-article CSS files such as `blog-<slug>.css`.
+- Reuse the site's existing [`HP/source/style.css`](../../HP/source/style.css) and [`HP/css/default.css`](../../HP/css/default.css) for site-wide components, including the header and footer. Do not duplicate site-wide styling in blog.css.
+- Scope blog-only styling under `.blog-page`, and use shared `blog-*` components and `blog-theme-*` classes in article HTML and the official template. Do not move per-article styling into HTML style blocks or style attributes to bypass this rule. Existing articles that use only site-wide components need no artificial blog-only styles.
+- When blog.css changes, use the same SHA-256 prefix (first eight lowercase hexadecimal characters) as the `v` query value in every HTML file that references it, including the official template. Preserve unrelated article content.
+- Verify that the old per-article CSS files are absent, no implementation references them, and each article/template references existing CSS files. When style declarations or markup change, verify desktop and mobile display for the affected pages.
 
 ## 3. Required File and Public-Route Change Unit
 

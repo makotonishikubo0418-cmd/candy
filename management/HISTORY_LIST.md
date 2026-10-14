@@ -4,6 +4,8 @@ Updated: 2026-10-14
 
 | Type | Title | History |
 |---|---|---|
+| MODIFY | ブログ旧専用CSS削除と作成禁止ルールの整備 | [20261014_MODIFY_blog-css-cleanup.md](history/20261014_MODIFY_blog-css-cleanup.md) |
+| MODIFY | 正式ブログテンプレートの内容更新 | [20261014_MODIFY_official-blog-template.md](history/20261014_MODIFY_official-blog-template.md) |
 | MODIFY | ブログ4ページの共通CSS統合 | [20261014_MODIFY_shared-blog-css.md](history/20261014_MODIFY_shared-blog-css.md) |
 | CREATE | 濃いピンク系スタッフブログテンプレート1組 | [20261014_CREATE_dark-pink-staff-blog-template.md](history/20261014_CREATE_dark-pink-staff-blog-template.md) |
 | OPERATION | タイトル再発防止・ホテル掲載順試験と関連管理資料のGitHub公開 | [20261013_OPERATION_title-tooling-github-publication.md](history/20261013_OPERATION_title-tooling-github-publication.md) |

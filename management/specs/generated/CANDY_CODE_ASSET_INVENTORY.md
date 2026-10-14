@@ -9,13 +9,13 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-14T07:16:20+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-14T12:32:15+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 6e5a9a782ac08c479d7d8de5f18419df5566bc7f
-> State fingerprint: sha256:afceb6efc99b3970e2bd5879cca76339727c10b073a667f416274b65d6a419be
-> Population: Public PHP files: 263 / assets: 749
+> Commit: da9e8b7f746109126b8175a80868c244d1987437
+> State fingerprint: sha256:9383c577566f2db817fc6a149c242f1f241a1e4aa235df567e135ef91df542bb
+> Population: Public PHP files: 263 / assets: 745
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
-> Result: Missing references: 0 / template placeholders: 4 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
+> Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
 
 Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by [CANDY_CODE_REFERENCE_INVENTORY.md](CANDY_CODE_REFERENCE_INVENTORY.md).
@@ -26,7 +26,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 
 | extension | count |
 |---|---:|
-| .css | 21 |
+| .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
 | .jpg | 625 |
@@ -44,7 +44,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 
 | folder | count |
 |---|---:|
-| HP/css | 20 |
+| HP/css | 16 |
 | HP/font | 44 |
 | HP/imgCss/pc | 1 |
 | HP/imgCss/s | 2 |
@@ -344,7 +344,6 @@ These missing-looking targets use explicit template placeholder names. They are 
 |---|---|
 | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-aaaaaaaaaaaaaaaaaaaa_1.jpg | HP/source/template_kagoshima-deliveryhealth-area.html |
 | HP/imgHtml/new_202601/area/kagoshima-deliveryhealth-area-aaaaaaaaaaaaaaaaaaaa_2.jpg | HP/source/template_kagoshima-deliveryhealth-area.html |
-| HP/imgHtml/new_202601/blog/aaaaaaaaaaaaaaaaaaaa.jpg | HP/source/template_kagoshima-deliveryhealth-blog.html |
 | HP/imgHtml/new_202601/hotel/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.jpg | HP/source/template_kagoshima-deliveryhealth-hotel.html |
 
 ## Assets Without a Confirmed Referrer
@@ -353,7 +352,6 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/css | 4 | blog-candy_dominant_girls.css, blog-girl-choice.css, blog-private-waiting-room.css, blog-tokyo-souvenir.css |
 
 ## Required Same-Content Path Groups
 

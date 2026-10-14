@@ -1,6 +1,6 @@
 # CANDY Blog Creation Runbook
 
-- Updated: 2026-10-08
+- Updated: 2026-10-14
 - Applies to: 2件目以降の通常ブログ作成、一覧登録、トップページ連携、検証
 - Status: Supporting operational document
 - Canonical page specification: `CANDY_BLOG_PAGE_GENERATION_SPEC.md`
@@ -16,7 +16,7 @@
 
 1. `AGENTS.md` と `management/INDEX.md` から、現在有効なブログ、画像、SEO、Git、本番公開の管理書を確認する。
 2. 原本、公開タイトル、検索意図、canonical URL、slug、使用画像、掲載順を確定する。
-3. `Text_blog_data/` の対象原稿、ブログテンプレート、現在の完成ページを確認する。既存ページは構造と品質の参考にし、古い例外や文章を機械的に複製しない。
+3. `Text_blog_data/` の対象原稿、[正規仕様の第2.1節](CANDY_BLOG_PAGE_GENERATION_SPEC.md#21-official-editable-blog-template)で指定する正式テンプレート、現在の完成ページを確認する。同節のスタッフブログ構造、公開時の差し替え事項、自動生成処理の適用限界に従う。既存ページは構造と品質の参考にし、古い例外や文章を機械的に複製しない。
 4. 既存の同一slug、canonical、一覧リンク、サイトマップ登録、画像名を確認する。衝突または不明点があれば作成前に停止する。
 5. 目的、対象ファイル、完了条件を固定し、無関係な修正を同じ変更に含めない。
 
@@ -31,9 +31,9 @@
 - `HP/source/blog.html`
 - `HP/source/index.html`
 - `HP/sitemap.xml`
-- 対象ブログ専用CSSまたは画像。ただし必要な場合だけ追加する。
+- 必要な画像、およびブログ独自の装飾が必要な場合の `HP/css/blog.css` 更新。
 
-既存CSSと共通コンポーネントを優先して再利用する。専用CSSを追加するときは対象ブログのスコープ内に限定し、他ページの表示を変更しない。
+CSSの配置・禁止事項・HTMLとの対応は、[正規仕様の第2.2節](CANDY_BLOG_PAGE_GENERATION_SPEC.md#22-blog-css-ownership)に従う。
 
 ## 4. 作成順序
 
@@ -89,5 +89,6 @@
 - [ ] トップページはブログ一覧の末尾15件以下と、URL、表示名、順序が一致している。
 - [ ] サイトマップと必要な内部リンクが同期している。
 - [ ] PHP構文、HTML構造、重複ID、リンク、画像、生成処理の再実行結果を確認した。
+- [ ] 正規仕様第2.2節のCSS配置・禁止事項・参照先・更新キーを、記事HTMLと正式テンプレートの両方で確認した。
 
 本番公開が指示された場合だけ、該当するGitおよび本番公開管理書に従い、Commit、Push、Actions、production HTTP/DOM、画像表示まで確認する。ローカル作成だけの場合、本番状態を完了として報告しない。
