@@ -9,13 +9,13 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: Category queue/classification documents and the three TSV children listed below
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-15T08:13:06+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-15T08:32:21+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 3cf720874b3fecf3126028342eb57dbf4bebdec6
-> State fingerprint: sha256:6eafa8bdedd0a1aa40167ba12ed373cd09c6507668410e5abd58fafd2efde4d8
-> Population: Unique candidates: 237 / Text records: 237
+> Commit: 649fdd58a84c70c805c6c19341247afa08d86c7a
+> State fingerprint: sha256:6a8fd69bee580d9b410433ddf9716569f8382b3fdd13dab99c14a8af518b44f9
+> Population: Unique candidates: 238 / Text records: 238
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
-> Result: READY=5 / BLOCKED=8 / EXISTING=224 / CONFLICT=0
+> Result: READY=5 / BLOCKED=8 / EXISTING=225 / CONFLICT=0
 > Unverified scope: Text accuracy, Git tracking, and the owner's publication decision
 
 This Markdown parent owns cross-category scope and summary. Complete candidate rows are split by data class, not arbitrary parts:
@@ -23,12 +23,12 @@ This Markdown parent owns cross-category scope and summary. Complete candidate r
 | category | candidates | detail child |
 |---|---:|---|
 | area | 158 | [CANDY_UPCOMING_AREA_PAGES.tsv](CANDY_UPCOMING_AREA_PAGES.tsv) |
-| blog | 7 | [CANDY_UPCOMING_BLOG_PAGES.tsv](CANDY_UPCOMING_BLOG_PAGES.tsv) |
+| blog | 8 | [CANDY_UPCOMING_BLOG_PAGES.tsv](CANDY_UPCOMING_BLOG_PAGES.tsv) |
 | hotel | 72 | [CANDY_UPCOMING_HOTEL_PAGES.tsv](CANDY_UPCOMING_HOTEL_PAGES.tsv) |
 
 | gate | candidates |
 |---|---:|
 | READY | 5 |
 | BLOCKED | 8 |
-| EXISTING | 224 |
+| EXISTING | 225 |
 | CONFLICT | 0 |
