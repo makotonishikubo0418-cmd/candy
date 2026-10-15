@@ -4,6 +4,7 @@ Updated: 2026-10-15
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | candy_dominant_girlsの未コミット変更のGitHub保存 | [20261015_OPERATION_dominant-girls-github-upload.md](history/20261015_OPERATION_dominant-girls-github-upload.md) |
 | CREATE | 待機設備・備品ブログの作成と本番公開 | [20261015_CREATE_waiting-room-facilities-blog.md](history/20261015_CREATE_waiting-room-facilities-blog.md) |
 | MODIFY | 東京土産ブログの1枚目画像差し替え | [20261015_MODIFY_tokyo-souvenir-first-image.md](history/20261015_MODIFY_tokyo-souvenir-first-image.md) |
 | MODIFY | カレーブログのアクセントカラー変更 | [20261015_MODIFY_curry-blog-colors.md](history/20261015_MODIFY_curry-blog-colors.md) |

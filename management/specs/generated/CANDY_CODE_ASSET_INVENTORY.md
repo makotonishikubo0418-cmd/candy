@@ -12,8 +12,8 @@
 > Generated at: 2026-10-15T08:32:21+09:00 (reproducible generation baseline)
 > Branch: main
 > Commit: 649fdd58a84c70c805c6c19341247afa08d86c7a
-> State fingerprint: sha256:6a8fd69bee580d9b410433ddf9716569f8382b3fdd13dab99c14a8af518b44f9
-> Population: Public PHP files: 265 / assets: 752
+> State fingerprint: sha256:bcd2aa056eb41b3ee6b0e6da211a2520b185ec6a9b1c91e29de776caf060f3a3
+> Population: Public PHP files: 265 / assets: 755
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 631 |
+| .jpg | 634 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 30 |
@@ -52,7 +52,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 29 |
+| HP/imgHtml/new_202601/blog | 32 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -236,7 +236,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | area:yoshinocho | 6 | NONE | OK |
 | area:yotsumotocho | 6 | NONE | OK |
 | area:yusukicho | 6 | NONE | OK |
-| other:kagoshima-deliveryhealth-blog-candy_dominant_girls | 1 | NONE | OK |
+| other:kagoshima-deliveryhealth-blog-candy_dominant_girls | 3 | NONE | OK |
 | blog:girl-choice | 3 | NONE | OK |
 | blog:glamourgirl | 7 | NONE | OK |
 | blog:petitegirl | 7 | NONE | OK |
