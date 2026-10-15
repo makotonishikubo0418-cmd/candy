@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-15T08:32:21+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-15T10:07:26+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 649fdd58a84c70c805c6c19341247afa08d86c7a
-> State fingerprint: sha256:bcd2aa056eb41b3ee6b0e6da211a2520b185ec6a9b1c91e29de776caf060f3a3
-> Population: Public PHP files: 265 / assets: 755
+> Commit: b12ed8cd5449caa21ded4834130fe3f6c3090bb3
+> State fingerprint: sha256:6a1a5bfebfb771d67bbf76ca584207c83d657be3674b741fca61ac08e344d0e8
+> Population: Public PHP files: 266 / assets: 758
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,10 +29,10 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 634 |
+| .jpg | 636 |
 | .js | 12 |
 | .mp4 | 2 |
-| .png | 30 |
+| .png | 31 |
 | .svg | 2 |
 | .ttf | 14 |
 | .webm | 1 |
@@ -52,7 +52,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 32 |
+| HP/imgHtml/new_202601/blog | 35 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -239,6 +239,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | other:kagoshima-deliveryhealth-blog-candy_dominant_girls | 3 | NONE | OK |
 | blog:girl-choice | 3 | NONE | OK |
 | blog:glamourgirl | 7 | NONE | OK |
+| blog:maimai-profile | 3 | NONE | OK |
 | blog:petitegirl | 7 | NONE | OK |
 | blog:poccharigirl | 7 | NONE | OK |
 | blog:private-waiting-room | 3 | NONE | OK |
