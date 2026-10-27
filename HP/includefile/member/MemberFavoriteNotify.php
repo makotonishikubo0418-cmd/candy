@@ -50,7 +50,7 @@ class MemberFavoriteNotify
             $favs = $this->mdb->fetchAll(
                 "SELECT f.member_id, a.email, COALESCE(s.notify_mypage_info, 0) AS notify_on"
                 . " FROM customers_favorites f"
-                . " INNER JOIN customers_accounts a ON a.id = f.member_id AND a.status = 1"
+                . " INNER JOIN customers_accounts a ON a.id = f.member_id AND a.status = 'active'"
                 . " LEFT JOIN customers_notification_settings s ON s.member_id = f.member_id"
                 . " WHERE f.club_id = {$clubId} AND f.girls_id = {$girlsId}"
             );
@@ -84,7 +84,7 @@ class MemberFavoriteNotify
                     $girlName = $girl ? (string)$girl['name'] : ('ID:' . $girlsId);
                     $profileUrl = '';
                     if ($girl && !empty($girl['no'])) {
-                        $profileUrl = 'girls.php?no=' . rawurlencode($girl['no']);
+                        $profileUrl = self::siteBaseUrl() . '/girls.php?no=' . rawurlencode($girl['no']);
                     }
                     $subject = '【CANDY】お気に入りの女の子が出勤登録されました';
                     $body = $girlName . " さんが出勤登録されました。\n"
@@ -102,6 +102,15 @@ class MemberFavoriteNotify
         }
 
         return array('created' => $created, 'mailed' => $mailed, 'errors' => $errors);
+    }
+
+    /**
+     * メールに載せるサイトの絶対URL（バッチ実行時はホスト名が取れないため、未設定時は CANDY の公開URL）
+     */
+    private static function siteBaseUrl()
+    {
+        $base = defined('MEMBER_SITE_BASE_URL') ? (string)MEMBER_SITE_BASE_URL : 'https://www.55810.com';
+        return rtrim($base, '/');
     }
 
     public function unreadCount($memberId)

@@ -41,6 +41,7 @@ require_once MEMBER_INCLUDE_DIR . '/MemberProfile.php';
 require_once MEMBER_INCLUDE_DIR . '/MemberAuth.php';
 require_once MEMBER_INCLUDE_DIR . '/MemberHistory.php';
 require_once MEMBER_INCLUDE_DIR . '/MemberLoyalty.php';
+require_once MEMBER_INCLUDE_DIR . '/MemberGacha.php';
 require_once MEMBER_INCLUDE_DIR . '/MemberEvaluation.php';
 require_once MEMBER_INCLUDE_DIR . '/MemberGirlSchedule.php';
 require_once MEMBER_INCLUDE_DIR . '/MemberGirlImage.php';

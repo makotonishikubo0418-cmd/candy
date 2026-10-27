@@ -78,6 +78,7 @@ class MemberLoyalty
         $soonP = self::pointsExpiringSoon($conn, $guestId, 10);
         $couponHeld = self::couponBalanceYen($conn, $guestId);
         $soonC = self::couponsExpiringSoonYen($conn, $guestId, 10);
+        $notices = self::recentGrantNotices($conn, $guestId, 14, 5);
 
         mysqli_close($conn);
 
@@ -94,7 +95,7 @@ class MemberLoyalty
         $pointMax = (int)$shop['point_use_max'];
         $couponMax = (int)$shop['coupon_use_max'];
 
-        $demotion = self::buildDemotionInfo($member, $shop);
+        $demotion = self::buildDemotionInfo($member, $shop, $rankDefs);
         $returnInfo = self::buildReturnInfo($member, $shop, $rankDefs);
 
         return array(
@@ -140,8 +141,352 @@ class MemberLoyalty
                     'expiring_soon_yen' => $soonC,
                     'expiring_soon_display' => number_format($soonC) . '円',
                 ),
+                'notices' => $notices,
             ),
         );
+    }
+
+    /**
+     * 直近に獲得した特典（再来店・連続ログイン・誕生日などのボーナス）のお知らせ
+     * @param mysqli $conn
+     * @return list<array>
+     */
+    private static function recentGrantNotices($conn, $guestId, $withinDays, $limit)
+    {
+        $guestId = (int)$guestId;
+        $withinDays = (int)$withinDays;
+        $limit = (int)$limit;
+        $out = array();
+        $rows = self::fetchRows($conn, "SELECT occurred_on, item_label, points FROM point_ledger"
+            . " WHERE guest_id = {$guestId} AND points > 0 AND item_code NOT IN ('refund')"
+            . " AND occurred_on >= DATE_SUB(CURDATE(), INTERVAL {$withinDays} DAY)"
+            . " ORDER BY occurred_on DESC, id DESC LIMIT {$limit}");
+        foreach ($rows as $r) {
+            $out[] = array(
+                'date' => (string)$r['occurred_on'],
+                'date_display' => self::formatDateJp($r['occurred_on']),
+                'message' => self::bonusLabel($r['item_label'], 'ポイント') . ' ' . number_format((int)$r['points']) . 'P を獲得しました',
+            );
+        }
+        $rows = self::fetchRows($conn, "SELECT occurred_on, item_label, amount_yen FROM coupon_ledger"
+            . " WHERE guest_id = {$guestId} AND op = 'grant' AND (note IS NULL OR note <> 'restore')"
+            . " AND occurred_on >= DATE_SUB(CURDATE(), INTERVAL {$withinDays} DAY)"
+            . " ORDER BY occurred_on DESC, id DESC LIMIT {$limit}");
+        foreach ($rows as $r) {
+            $out[] = array(
+                'date' => (string)$r['occurred_on'],
+                'date_display' => self::formatDateJp($r['occurred_on']),
+                'message' => self::bonusLabel($r['item_label'], 'クーポンチケット') . ' ' . number_format((int)$r['amount_yen']) . '円分 を獲得しました',
+            );
+        }
+        usort($out, function ($a, $b) {
+            return strcmp($b['date'], $a['date']);
+        });
+        return array_slice($out, 0, $limit);
+    }
+
+    private static function bonusLabel($label, $fallback)
+    {
+        $label = trim((string)$label);
+        return $label !== '' ? $label : $fallback;
+    }
+
+    /**
+     * @param mysqli $conn
+     * @return list<array>
+     */
+    private static function fetchRows($conn, $sql)
+    {
+        $rows = array();
+        $res = @mysqli_query($conn, $sql);
+        if ($res) {
+            while ($row = mysqli_fetch_assoc($res)) {
+                $rows[] = $row;
+            }
+            mysqli_free_result($res);
+        }
+        return $rows;
+    }
+
+    /**
+     * 失効日＝有効期限（最終の有効日）の翌日（CTI と同じ）
+     */
+    private static function expiredOn($expiresAt)
+    {
+        $ts = strtotime(substr((string)$expiresAt, 0, 10) . ' +1 day');
+        return $ts === false ? (string)$expiresAt : date('Y-m-d', $ts);
+    }
+
+    private static function daysLeft($expiresAt)
+    {
+        if ($expiresAt === null || $expiresAt === '') {
+            return null;
+        }
+        $ts = strtotime(substr((string)$expiresAt, 0, 10));
+        if ($ts === false) {
+            return null;
+        }
+        return (int)floor(($ts - strtotime(date('Y-m-d'))) / 86400);
+    }
+
+    private static function pageSlice(array $rows, $page, $perPage)
+    {
+        $page = max(1, (int)$page);
+        $perPage = min(100, max(1, (int)$perPage));
+        return array(
+            'items' => array_slice($rows, ($page - 1) * $perPage, $perPage),
+            'total' => count($rows),
+            'page' => $page,
+            'per_page' => $perPage,
+        );
+    }
+
+    /**
+     * ポイント履歴（獲得・利用・失効と各時点の残高）。CTI で失効処理がまだの期限切れ分も「失効」として含める
+     * @return array{status:int,message:string,data?:array}
+     */
+    public static function getPointHistory($guestId, $page = 1, $perPage = 30)
+    {
+        $guestId = (int)$guestId;
+        $conn = self::ctiConnection();
+        if (!$conn) {
+            return array('status' => -1, 'message' => 'ポイント情報の参照先に接続できませんでした');
+        }
+        $rows = array();
+        foreach (self::fetchRows($conn, "SELECT id, occurred_on, item_code, item_label, points, balance_after FROM point_ledger"
+            . " WHERE guest_id = {$guestId} ORDER BY occurred_on DESC, id DESC LIMIT 2000") as $r) {
+            $rows[] = array(
+                'sort' => (string)$r['occurred_on'] . sprintf('%012d', (int)$r['id']),
+                'date' => (string)$r['occurred_on'],
+                'date_display' => self::formatDateJp($r['occurred_on']),
+                'kind' => self::pointKind((string)$r['item_code'], (int)$r['points']),
+                'label' => self::pointItemLabel((string)$r['item_code'], (string)$r['item_label']),
+                'points' => (int)$r['points'],
+                'points_display' => ((int)$r['points'] > 0 ? '+' : '') . number_format((int)$r['points']) . 'P',
+                'balance_after' => (int)$r['balance_after'],
+                'balance_display' => number_format((int)$r['balance_after']) . 'P',
+            );
+        }
+        foreach (self::fetchRows($conn, "SELECT id, amount_remaining, expires_at FROM point_lots"
+            . " WHERE guest_id = {$guestId} AND amount_remaining > 0 AND expires_at IS NOT NULL AND expires_at < CURDATE()") as $r) {
+            $on = self::expiredOn($r['expires_at']);
+            $rows[] = array(
+                'sort' => $on . '999999999999',
+                'date' => $on,
+                'date_display' => self::formatDateJp($on),
+                'kind' => '失効',
+                'label' => '有効期限切れ',
+                'points' => -(int)$r['amount_remaining'],
+                'points_display' => '-' . number_format((int)$r['amount_remaining']) . 'P',
+                'balance_after' => null,
+                'balance_display' => '—',
+            );
+        }
+        mysqli_close($conn);
+        usort($rows, function ($a, $b) {
+            return strcmp($b['sort'], $a['sort']);
+        });
+        return array('status' => 0, 'message' => '', 'data' => self::pageSlice($rows, $page, $perPage));
+    }
+
+    private static function pointKind($code, $points)
+    {
+        if ($code === 'use') {
+            return '利用';
+        }
+        if ($code === 'expire') {
+            return '失効';
+        }
+        if ($code === 'revoke') {
+            return '取消';
+        }
+        if ($code === 'adjust') {
+            return '調整';
+        }
+        if ($code === 'refund') {
+            return '返却';
+        }
+        return $points >= 0 ? '獲得' : '調整';
+    }
+
+    private static function pointItemLabel($code, $label)
+    {
+        $label = trim($label);
+        if ($code === 'use') {
+            return 'ご利用時に使用';
+        }
+        if ($code === 'expire') {
+            return '有効期限切れ';
+        }
+        return $label !== '' ? $label : '—';
+    }
+
+    /**
+     * クーポンチケット履歴（付与・利用済み・失効、内容・有効期限・現在の状態）
+     * @return array{status:int,message:string,data?:array}
+     */
+    public static function getCouponHistory($guestId, $page = 1, $perPage = 30)
+    {
+        $guestId = (int)$guestId;
+        $conn = self::ctiConnection();
+        if (!$conn) {
+            return array('status' => -1, 'message' => 'クーポン情報の参照先に接続できませんでした');
+        }
+        $rows = array();
+        foreach (self::fetchRows($conn, "SELECT l.id, l.occurred_on, l.op, l.item_label, l.amount_yen, l.expires_at, l.note,"
+            . " t.source_label AS ticket_label, t.status AS ticket_status, t.expires_at AS ticket_expires"
+            . " FROM coupon_ledger l LEFT JOIN coupon_tickets t ON t.id = l.ticket_id"
+            . " WHERE l.guest_id = {$guestId} ORDER BY l.occurred_on DESC, l.id DESC LIMIT 2000") as $r) {
+            $op = (string)$r['op'];
+            $kind = '付与';
+            if ($op === 'use') {
+                $kind = '利用済み';
+            } elseif ($op === 'expire') {
+                $kind = '失効';
+            } elseif ((string)$r['note'] === 'restore') {
+                $kind = '利用取消';
+            }
+            $label = trim((string)$r['ticket_label']);
+            if ($label === '') {
+                $label = trim((string)$r['item_label']);
+            }
+            $expires = $r['expires_at'] !== null && $r['expires_at'] !== '' ? $r['expires_at'] : $r['ticket_expires'];
+            $rows[] = array(
+                'sort' => (string)$r['occurred_on'] . sprintf('%012d', (int)$r['id']),
+                'date' => (string)$r['occurred_on'],
+                'date_display' => self::formatDateJp($r['occurred_on']),
+                'kind' => $kind,
+                'label' => $label !== '' ? $label : 'クーポンチケット',
+                'amount_display' => number_format((int)$r['amount_yen']) . '円',
+                'expires_display' => ($expires !== null && $expires !== '') ? self::formatDateJp($expires) : '無期限',
+                'status_display' => self::couponStatusLabel((string)$r['ticket_status'], $r['ticket_expires']),
+            );
+        }
+        foreach (self::fetchRows($conn, "SELECT id, amount_yen, expires_at, source_label FROM coupon_tickets"
+            . " WHERE guest_id = {$guestId} AND status = 'unused' AND expires_at IS NOT NULL AND expires_at < CURDATE()") as $r) {
+            $on = self::expiredOn($r['expires_at']);
+            $label = trim((string)$r['source_label']);
+            $rows[] = array(
+                'sort' => $on . '999999999999',
+                'date' => $on,
+                'date_display' => self::formatDateJp($on),
+                'kind' => '失効',
+                'label' => $label !== '' ? $label : 'クーポンチケット',
+                'amount_display' => number_format((int)$r['amount_yen']) . '円',
+                'expires_display' => self::formatDateJp($r['expires_at']),
+                'status_display' => '期限切れ',
+            );
+        }
+        mysqli_close($conn);
+        usort($rows, function ($a, $b) {
+            return strcmp($b['sort'], $a['sort']);
+        });
+        return array('status' => 0, 'message' => '', 'data' => self::pageSlice($rows, $page, $perPage));
+    }
+
+    private static function couponStatusLabel($status, $expiresAt)
+    {
+        if ($status === 'used') {
+            return '利用済み';
+        }
+        if ($status === 'expired') {
+            return '期限切れ';
+        }
+        if ($status === 'unused') {
+            $left = self::daysLeft($expiresAt);
+            return ($left !== null && $left < 0) ? '期限切れ' : '未使用';
+        }
+        return '—';
+    }
+
+    /**
+     * 失効予定（付与ごとの残り・有効期限・残り日数）と失効済みの一覧
+     * @return array{status:int,message:string,data?:array}
+     */
+    public static function getExpiryList($guestId)
+    {
+        $guestId = (int)$guestId;
+        $conn = self::ctiConnection();
+        if (!$conn) {
+            return array('status' => -1, 'message' => 'ポイント・クーポン情報の参照先に接続できませんでした');
+        }
+        $pointUpcoming = array();
+        foreach (self::fetchRows($conn, "SELECT created_at, source_label, amount_original, amount_remaining, expires_at FROM point_lots"
+            . " WHERE guest_id = {$guestId} AND amount_remaining > 0 AND (expires_at IS NULL OR expires_at >= CURDATE())"
+            . " ORDER BY (expires_at IS NULL) ASC, expires_at ASC, id ASC LIMIT 200") as $r) {
+            $left = self::daysLeft($r['expires_at']);
+            $pointUpcoming[] = array(
+                'granted_display' => self::formatDateJp($r['created_at']),
+                'label' => self::bonusLabel($r['source_label'], 'ポイント'),
+                'remaining_display' => number_format((int)$r['amount_remaining']) . 'P',
+                'original_display' => number_format((int)$r['amount_original']) . 'P',
+                'expires_display' => $r['expires_at'] ? self::formatDateJp($r['expires_at']) : '無期限',
+                'days_left' => $left,
+                'days_left_display' => $left === null ? '—' : ('残り' . $left . '日'),
+                'soon' => $left !== null && $left <= 10,
+            );
+        }
+        $pointExpired = array();
+        foreach (self::fetchRows($conn, "SELECT occurred_on, points FROM point_ledger"
+            . " WHERE guest_id = {$guestId} AND item_code = 'expire' ORDER BY occurred_on DESC, id DESC LIMIT 100") as $r) {
+            $pointExpired[] = array(
+                'sort' => (string)$r['occurred_on'],
+                'expired_display' => self::formatDateJp($r['occurred_on']),
+                'amount_display' => number_format(abs((int)$r['points'])) . 'P',
+                'status_display' => '失効',
+            );
+        }
+        foreach (self::fetchRows($conn, "SELECT amount_remaining, expires_at FROM point_lots"
+            . " WHERE guest_id = {$guestId} AND amount_remaining > 0 AND expires_at IS NOT NULL AND expires_at < CURDATE()") as $r) {
+            $on = self::expiredOn($r['expires_at']);
+            $pointExpired[] = array(
+                'sort' => $on,
+                'expired_display' => self::formatDateJp($on),
+                'amount_display' => number_format((int)$r['amount_remaining']) . 'P',
+                'status_display' => '失効',
+            );
+        }
+        usort($pointExpired, function ($a, $b) {
+            return strcmp($b['sort'], $a['sort']);
+        });
+
+        $couponUpcoming = array();
+        $couponExpired = array();
+        foreach (self::fetchRows($conn, "SELECT created_at, source_label, amount_yen, status, expires_at FROM coupon_tickets"
+            . " WHERE guest_id = {$guestId} AND status IN ('unused', 'expired')"
+            . " ORDER BY (expires_at IS NULL) ASC, expires_at ASC, id ASC LIMIT 300") as $r) {
+            $left = self::daysLeft($r['expires_at']);
+            $isExpired = (string)$r['status'] === 'expired' || ($left !== null && $left < 0);
+            $row = array(
+                'granted_display' => self::formatDateJp($r['created_at']),
+                'label' => self::bonusLabel($r['source_label'], 'クーポンチケット'),
+                'amount_display' => number_format((int)$r['amount_yen']) . '円',
+                'expires_display' => $r['expires_at'] ? self::formatDateJp($r['expires_at']) : '無期限',
+            );
+            if ($isExpired) {
+                $on = $r['expires_at'] ? self::expiredOn($r['expires_at']) : '';
+                $row['sort'] = $on;
+                $row['expired_display'] = $on !== '' ? self::formatDateJp($on) : '—';
+                $row['status_display'] = '期限切れ';
+                $couponExpired[] = $row;
+            } else {
+                $row['days_left'] = $left;
+                $row['days_left_display'] = $left === null ? '—' : ('残り' . $left . '日');
+                $row['soon'] = $left !== null && $left <= 10;
+                $couponUpcoming[] = $row;
+            }
+        }
+        usort($couponExpired, function ($a, $b) {
+            return strcmp($b['sort'], $a['sort']);
+        });
+        mysqli_close($conn);
+
+        return array('status' => 0, 'message' => '', 'data' => array(
+            'point_upcoming' => $pointUpcoming,
+            'point_expired' => array_slice($pointExpired, 0, 100),
+            'coupon_upcoming' => $couponUpcoming,
+            'coupon_expired' => array_slice($couponExpired, 0, 100),
+        ));
     }
 
     /**
@@ -356,9 +701,27 @@ class MemberLoyalty
      * @param array $shop
      * @return array|null
      */
-    private static function buildDemotionInfo($member, $shop)
+    /**
+     * ランクごとの設定（未設定は店舗共通）。CTI の LoyaltyService::rankSetting と同じ判定
+     * @param list<array> $rankDefs
+     */
+    private static function rankSetting($rankCode, $key, $shop, $rankDefs, $default)
     {
-        $months = (int)$shop['demotion_months'];
+        foreach ($rankDefs as $d) {
+            if ((string)$d['rank_code'] === (string)$rankCode && isset($d[$key]) && $d[$key] !== null && $d[$key] !== '') {
+                return (int)$d[$key];
+            }
+        }
+        return isset($shop[$key]) ? (int)$shop[$key] : (int)$default;
+    }
+
+    private static function buildDemotionInfo($member, $shop, $rankDefs)
+    {
+        $rank = isset($member['rank_code']) && $member['rank_code'] !== '' ? (string)$member['rank_code'] : 'bronze';
+        if ($rank === 'bronze') {
+            return null;
+        }
+        $months = self::rankSetting($rank, 'demotion_months', $shop, $rankDefs, 6);
         if ($months <= 0) {
             return null;
         }
@@ -399,7 +762,7 @@ class MemberLoyalty
             return null;
         }
         $prevCode = (string)$member['prev_rank_code'];
-        $need = (int)$shop['return_needed_visits'];
+        $need = self::rankSetting($prevCode, 'return_needed_visits', $shop, $rankDefs, 10);
         $have = isset($member['return_visit_count']) ? (int)$member['return_visit_count'] : 0;
         $remaining = max(0, $need - $have);
         $prevName = self::resolveRankName($prevCode, $rankDefs);

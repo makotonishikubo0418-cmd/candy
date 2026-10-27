@@ -125,6 +125,13 @@ class MemberHistory
         }
         // history テーブルが無い／権限エラーでも tasks のみで継続
 
+        $taskIds = array();
+        foreach ($tasks as $task) {
+            $taskIds[] = (int)$task['id'];
+        }
+        $salesByTask = self::loadSalesByTask($conn, $taskIds);
+        $courseNames = self::loadCourseNames($conn, $clubId);
+
         mysqli_close($conn);
 
         $tasksByDate = array();
@@ -157,7 +164,7 @@ class MemberHistory
 
             if ($matched !== null) {
                 $usedTaskIds[] = (int)$matched['id'];
-                $item = self::formatTaskItem($matched);
+                $item = self::formatTaskItem($matched, self::taskExtra($matched, $salesByTask, $courseNames));
                 $item['history_id'] = (int)$h['id'];
                 $item['source'] = 'task';
                 if (empty($item['girls_id']) && !empty($h['girls_id'])) {
@@ -168,7 +175,7 @@ class MemberHistory
                 }
                 $merged[] = $item;
             } else {
-                $merged[] = self::formatHistoryItem($h);
+                $merged[] = self::formatHistoryItem($h, $courseNames);
             }
         }
 
@@ -178,7 +185,7 @@ class MemberHistory
             if (in_array($tid, $usedTaskIds, true)) {
                 continue;
             }
-            $item = self::formatTaskItem($task);
+            $item = self::formatTaskItem($task, self::taskExtra($task, $salesByTask, $courseNames));
             $item['history_id'] = null;
             $item['source'] = 'task';
             $merged[] = $item;
@@ -190,6 +197,94 @@ class MemberHistory
         $items = array_slice($merged, $offset, $perPage);
 
         return array('status' => 0, 'items' => $items, 'total' => $total, 'message' => '');
+    }
+
+    /**
+     * CTI 売上（確定時に保存した女の子名・コース名・お客様支払額）を予約ごとに取得
+     * @param mysqli $conn
+     * @param int[] $taskIds
+     * @return array<int,array>
+     */
+    private static function loadSalesByTask($conn, array $taskIds)
+    {
+        $taskIds = array_values(array_unique(array_filter(array_map('intval', $taskIds))));
+        if (empty($taskIds)) {
+            return array();
+        }
+        $out = array();
+        foreach (array_chunk($taskIds, 500) as $chunk) {
+            $sql = 'SELECT id, task_id, cast_name, course_name, course_min, customer_pay, coupon_used_total, points_used'
+                . ' FROM sales WHERE status = \'active\' AND task_id IN (' . implode(',', $chunk) . ')'
+                . ' ORDER BY id ASC';
+            $res = @mysqli_query($conn, $sql);
+            if (!$res) {
+                return $out;
+            }
+            while ($row = mysqli_fetch_assoc($res)) {
+                $out[(int)$row['task_id']] = $row;
+            }
+            mysqli_free_result($res);
+        }
+        return $out;
+    }
+
+    /**
+     * コース分数 => コース名（コース名に含まれる数字＝分数）
+     * @param mysqli $conn
+     * @return array<int,string>
+     */
+    private static function loadCourseNames($conn, $clubId)
+    {
+        $clubId = (int)$clubId;
+        $out = array();
+        $res = @mysqli_query($conn, "SELECT course_name FROM course_master WHERE shop_id = {$clubId} AND status = 1 ORDER BY sort_order ASC, id ASC");
+        if (!$res) {
+            return $out;
+        }
+        while ($row = mysqli_fetch_assoc($res)) {
+            $name = trim((string)$row['course_name']);
+            $min = (int)preg_replace('/\D+/', '', $name);
+            if ($min > 0 && $name !== '' && !isset($out[$min])) {
+                $out[$min] = $name;
+            }
+        }
+        mysqli_free_result($res);
+        return $out;
+    }
+
+    /**
+     * @param array $task
+     * @param array<int,array> $salesByTask
+     * @param array<int,string> $courseNames
+     * @return array
+     */
+    private static function taskExtra($task, array $salesByTask, array $courseNames)
+    {
+        $tid = (int)$task['id'];
+        return array(
+            'sale' => isset($salesByTask[$tid]) ? $salesByTask[$tid] : null,
+            'course_names' => $courseNames,
+        );
+    }
+
+    /**
+     * 「コース名（N分）」。コース名が分からない場合は「N分コース」
+     * @param array<int,string> $courseNames
+     */
+    private static function courseLabel($courseMin, $courseName, array $courseNames)
+    {
+        $courseMin = (int)$courseMin;
+        $name = trim((string)$courseName);
+        if ($name === '' && $courseMin > 0 && isset($courseNames[$courseMin])) {
+            $name = $courseNames[$courseMin];
+        }
+        if ($name === '') {
+            return $courseMin > 0 ? ($courseMin . '分コース') : '';
+        }
+        if ($courseMin > 0 && strpos($name, (string)$courseMin) === false) {
+            return $name . '（' . $courseMin . '分）';
+        }
+        return $name;
     }
 
     /**
@@ -266,7 +361,7 @@ class MemberHistory
      * @param array $row
      * @return array
      */
-    public static function formatHistoryItem($row)
+    public static function formatHistoryItem($row, array $courseNames = array())
     {
         $dateRaw = isset($row['date']) ? $row['date'] : '';
         $ymd = self::normalizeDateYmd($dateRaw);
@@ -287,7 +382,7 @@ class MemberHistory
             'start' => null,
             'end' => null,
             'course' => $courseMin,
-            'course_label' => $courseMin > 0 ? ($courseMin . '分コース') : '',
+            'course_label' => self::courseLabel($courseMin, '', $courseNames),
             'cast_id' => (int)(isset($row['cast_id']) ? $row['cast_id'] : 0),
             'girls_id' => $girlsId,
             'girl_name' => $girlName,
@@ -315,6 +410,7 @@ class MemberHistory
                 'traffic_fare' => 0,
                 'discount_total' => 0,
                 'points_used' => 0,
+                'coupon_used' => 0,
                 'total_price' => 0,
             ),
         );
@@ -324,8 +420,10 @@ class MemberHistory
      * @param array $row
      * @return array
      */
-    public static function formatTaskItem($row)
+    public static function formatTaskItem($row, array $extra = array())
     {
+        $sale = isset($extra['sale']) ? $extra['sale'] : null;
+        $courseNames = isset($extra['course_names']) ? $extra['course_names'] : array();
         $startHm = self::min2hm(isset($row['start']) ? $row['start'] : null);
         $endHm = self::min2hm(isset($row['end']) ? $row['end'] : null);
         $dateRaw = isset($row['date']) ? $row['date'] : '';
@@ -342,10 +440,17 @@ class MemberHistory
         $pointsUsed = isset($row['points_used']) ? (int)$row['points_used'] : 0;
         $nominateFee = isset($row['nominate_fee']) ? (int)$row['nominate_fee'] : 0;
         $trafficFare = isset($row['traffic_fare']) ? (int)$row['traffic_fare'] : 0;
+        $couponUsed = isset($row['coupon_used_total']) ? (int)$row['coupon_used_total'] : 0;
         $totalPrice = isset($row['total_price']) ? (int)$row['total_price'] : 0;
-        if ($totalPrice <= 0 && ($coursePrice > 0 || $optionsTotal > 0)) {
-            $totalPrice = max(0, $coursePrice + $optionsTotal + $nominateFee + $trafficFare - $discountTotal - $pointsUsed);
+        if ($sale !== null && $sale['customer_pay'] !== null && $sale['customer_pay'] !== '') {
+            // 売上確定済みは確定時のお客様支払額（ポイント・クーポン控除後）
+            $totalPrice = max(0, (int)$sale['customer_pay']);
+        } elseif ($totalPrice <= 0 && $pointsUsed <= 0 && $couponUsed <= 0 && ($coursePrice > 0 || $optionsTotal > 0)) {
+            // 合計未保存の古い予約のみ再計算する（ポイント・クーポンで0円になった予約は再計算しない）
+            $totalPrice = max(0, $coursePrice + $optionsTotal + $nominateFee + $trafficFare - $discountTotal);
         }
+        $saleCastName = ($sale !== null && isset($sale['cast_name'])) ? trim((string)$sale['cast_name']) : '';
+        $saleCourseName = ($sale !== null && isset($sale['course_name'])) ? (string)$sale['course_name'] : '';
 
         $payment = isset($row['payment_method']) ? (string)$row['payment_method'] : '';
         $paymentLabel = ($payment === 'credit') ? 'クレジットカード' : (($payment === 'cash' || $payment === '') ? '現金' : $payment);
@@ -372,10 +477,10 @@ class MemberHistory
             'start' => $startHm,
             'end' => $endHm,
             'course' => $courseMin,
-            'course_label' => $courseMin > 0 ? ($courseMin . '分コース') : '',
+            'course_label' => self::courseLabel($courseMin, $saleCourseName, $courseNames),
             'cast_id' => (int)$row['cast_id'],
             'girls_id' => null,
-            'girl_name' => '',
+            'girl_name' => ($saleCastName !== '' && $saleCastName !== '0') ? $saleCastName : '',
             'stat' => (int)$row['stat'],
             'nominate' => $nominate,
             'nominate_label' => $nominateLabel,
@@ -400,6 +505,7 @@ class MemberHistory
                 'traffic_fare' => $trafficFare,
                 'discount_total' => $discountTotal,
                 'points_used' => $pointsUsed,
+                'coupon_used' => $couponUsed,
                 'total_price' => $totalPrice,
             ),
         );
@@ -447,9 +553,10 @@ class MemberHistory
             if ($text === '') {
                 return '自宅派遣';
             }
-            // 丁目・番地・号より前まで（簡易マスク）
+            // 丁目・番地・号より前まで（簡易マスク）。漢数字の番地（十一番地・三丁目など）も省く
             $masked = preg_replace('/[0-9０-９]+.*$/u', '', $text);
-            $masked = preg_replace('/[‐\-－ー−].*$/u', '', (string)$masked);
+            $masked = preg_replace('/[〇一二三四五六七八九十百千]+(丁目|番地|番|号|の)(?![町街通])[\s\S]*$/u', '', (string)$masked);
+            $masked = preg_replace('/[‐\-－−].*$/u', '', (string)$masked);
             $masked = trim((string)$masked);
             if ($masked === '') {
                 $masked = mb_substr($text, 0, 12);

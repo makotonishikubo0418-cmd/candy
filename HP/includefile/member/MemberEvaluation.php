@@ -144,13 +144,9 @@ class MemberEvaluation
             . " '{$commentEsc}', 1"
             . ")";
 
+        // 6項目は1件の INSERT でまとめて保存し、一部だけの保存は行わない
         if (!$this->mdb->query($sql)) {
-            // カラム未追加環境向けフォールバック（総合のみ）
-            $sqlLegacy = "INSERT INTO customers_girl_evaluations (club_id, member_id, girls_id, cast_id, task_id, rating, comment, status)"
-                . " VALUES ({$clubId}, {$memberId}, {$girlsId}, {$castId}, {$taskId}, {$normalized['rating']}, '{$commentEsc}', 1)";
-            if (!$this->mdb->query($sqlLegacy)) {
-                return array('status' => -1, 'message' => '評価の保存に失敗しました（sql/007_fsg_eval_multi.sql の適用を確認してください）');
-            }
+            return array('status' => -1, 'message' => '評価の保存に失敗しました。時間をおいて再度お試しください');
         }
 
         $this->mdb->audit($memberId, 'evaluation_save', 'task_id=' . $taskId . ' rating=' . $normalized['rating']);

@@ -91,6 +91,21 @@ class MemberApi
             case '203':
                 $this->loyaltySummary();
                 break;
+            case '204':
+                $this->gachaStatus();
+                break;
+            case '205':
+                $this->gachaDraw();
+                break;
+            case '206':
+                $this->loyaltyList('points', $input);
+                break;
+            case '207':
+                $this->loyaltyList('coupons', $input);
+                break;
+            case '208':
+                $this->loyaltyList('expiry', $input);
+                break;
             case '301':
                 $this->favoriteList($input);
                 break;
@@ -139,7 +154,7 @@ class MemberApi
             MemberUtil::jsonResponse(-2, '電話番号の形式が正しくありません');
         }
         if ($this->mdb->phoneExists($phone)) {
-            MemberUtil::jsonResponse(-4, 'この電話番号は既に登録されています');
+            MemberUtil::jsonResponse(-4, 'この電話番号は既に会員登録されています。ログインするか、パスワードをお忘れの場合はパスワード再設定を行ってください', array('guide' => 'login_or_reset'));
         }
         $verifyTpl = '';
         if (!empty($_SERVER['HTTP_HOST'])) {
@@ -193,6 +208,9 @@ class MemberApi
         }
 
         $result = $this->auth->register($phone, $password, $nickname, $termsAgreed, $privacyAgreed, $rememberMe);
+        if ($result['status'] === -4) {
+            MemberUtil::jsonResponse(-4, 'この電話番号は既に会員登録されています。ログインするか、パスワードをお忘れの場合はパスワード再設定を行ってください', array('guide' => 'login_or_reset'));
+        }
         if ($result['status'] !== 0 && $result['status'] !== -8) {
             MemberUtil::jsonResponse($result['status'], '登録に失敗しました');
         }
@@ -293,7 +311,9 @@ class MemberApi
         $memberId = (int)$member['id'];
         $hash = password_hash($password, PASSWORD_DEFAULT);
         $hashEsc = $this->mdb->escape($hash);
-        $this->mdb->query("UPDATE customers_accounts SET password_hash = '{$hashEsc}', updated_at = NOW() WHERE id = {$memberId}");
+        if (!$this->mdb->query("UPDATE customers_accounts SET password_hash = '{$hashEsc}', updated_at = NOW() WHERE id = {$memberId}")) {
+            MemberUtil::jsonResponse(-1, 'パスワードの保存に失敗しました。時間をおいて再度お試しください');
+        }
         $this->auth->revokeAllSessions($memberId);
         $this->mdb->audit($memberId, 'password_reset', '');
         MemberUtil::jsonResponse(0, 'パスワードを変更しました。再度ログインしてください');
@@ -691,6 +711,86 @@ class MemberApi
         }
     }
 
+    /**
+     * ポイント履歴（points）・クーポン履歴（coupons）・失効予定と失効済み（expiry）
+     */
+    private function loyaltyList($kind, $input)
+    {
+        try {
+            $member = $this->requireMember();
+            $this->auth->linkCtiGuestForMember((int)$member['id']);
+            $member = $this->mdb->findMemberById((int)$member['id']);
+            if (empty($member['guest_id'])) {
+                MemberUtil::jsonResponse(0, '', array('guest_linked' => false, 'items' => array(), 'total' => 0, 'page' => 1, 'per_page' => 30));
+            }
+            $guestId = (int)$member['guest_id'];
+            $page = isset($input['page']) ? (int)$input['page'] : 1;
+            $perPage = isset($input['per_page']) ? (int)$input['per_page'] : 30;
+            if ($kind === 'points') {
+                $result = MemberLoyalty::getPointHistory($guestId, $page, $perPage);
+            } elseif ($kind === 'coupons') {
+                $result = MemberLoyalty::getCouponHistory($guestId, $page, $perPage);
+            } else {
+                $result = MemberLoyalty::getExpiryList($guestId);
+            }
+            if ($result['status'] !== 0) {
+                MemberUtil::jsonResponse($result['status'], $result['message']);
+            }
+            $data = $result['data'];
+            $data['guest_linked'] = true;
+            MemberUtil::jsonResponse(0, '', $data);
+        } catch (Throwable $e) {
+            MemberUtil::jsonResponse(-1, 'ポイント・クーポン情報の取得に失敗しました');
+        }
+    }
+
+    private function gachaStatus()
+    {
+        try {
+            $member = $this->requireMember();
+            $this->auth->linkCtiGuestForMember((int)$member['id']);
+            $member = $this->mdb->findMemberById((int)$member['id']);
+            if (empty($member['guest_id'])) {
+                MemberUtil::jsonResponse(0, '', array(
+                    'available' => false,
+                    'can_play' => false,
+                    'reason' => 'cti_not_linked',
+                    'message' => 'CTI顧客と未連携です',
+                ));
+            }
+            $result = MemberGacha::getStatus((int)$member['guest_id'], (int)MEMBER_CLUB_ID);
+            if ($result['status'] !== 0) {
+                MemberUtil::jsonResponse($result['status'], $result['message']);
+            }
+            MemberUtil::jsonResponse(0, '', $result['data']);
+        } catch (Throwable $e) {
+            MemberUtil::jsonResponse(-1, 'ガチャ情報の取得に失敗しました');
+        }
+    }
+
+    private function gachaDraw()
+    {
+        try {
+            $member = $this->requireMember();
+            $this->auth->linkCtiGuestForMember((int)$member['id']);
+            $member = $this->mdb->findMemberById((int)$member['id']);
+            if (empty($member['guest_id'])) {
+                MemberUtil::jsonResponse(-2, 'CTI顧客と未連携です');
+            }
+            $result = MemberGacha::draw(
+                (int)$member['guest_id'],
+                (int)MEMBER_CLUB_ID,
+                (int)$member['id']
+            );
+            if ($result['status'] !== 0) {
+                MemberUtil::jsonResponse($result['status'], $result['message']);
+            }
+            MemberUtil::jsonResponse(0, '当選しました', $result['data']);
+        } catch (Throwable $e) {
+            MemberUtil::jsonResponse(-1, '抽選処理に失敗しました');
+        }
+    }
+
     private function favoriteList($input)
     {
         try {
@@ -867,6 +967,9 @@ class MemberApi
         $member = $this->requireMember();
         $email = isset($input['email']) ? (string)$input['email'] : '';
         $result = MemberMail::sendVerificationCode($this->mdb, (int)$member['id'], $email);
+        if ($result['status'] === -2 || $result['status'] === -4) {
+            MemberUtil::fieldErrorResponse($result['message'], array('email' => $result['message']));
+        }
         $data = array('expires_in' => (int)MEMBER_EMAIL_TTL);
         if (isset($result['mock_code'])) {
             $data['mock_code'] = $result['mock_code'];
@@ -882,7 +985,7 @@ class MemberApi
         $emailNorm = MemberUtil::normalizeEmail($email);
 
         if (!MemberMail::verifyCode($this->mdb, (int)$member['id'], $emailNorm, $code)) {
-            MemberUtil::jsonResponse(-5, '認証コードが正しくないか、期限切れです');
+            MemberUtil::fieldErrorResponse('認証コードが正しくないか、期限切れです', array('email_code' => '認証コードが正しくないか、期限切れです'));
         }
 
         $memberId = (int)$member['id'];
@@ -893,10 +996,12 @@ class MemberApi
             . " AND id != {$memberId} AND status = 'active' LIMIT 1"
         );
         if ($dup !== null) {
-            MemberUtil::jsonResponse(-4, 'このメールアドレスは既に使用されています');
+            MemberUtil::fieldErrorResponse('このメールアドレスは既に使用されています', array('email' => 'このメールアドレスは既に使用されています'));
         }
 
-        $this->mdb->query("UPDATE customers_accounts SET email = '{$emailEsc}', updated_at = NOW() WHERE id = {$memberId}");
+        if (!$this->mdb->query("UPDATE customers_accounts SET email = '{$emailEsc}', updated_at = NOW() WHERE id = {$memberId}")) {
+            MemberUtil::jsonResponse(-1, 'メールアドレスの登録に失敗しました');
+        }
         $this->mdb->audit($memberId, 'email_set', MemberUtil::maskEmail($emailNorm));
         $member = $this->mdb->findMemberById($memberId);
         MemberUtil::jsonResponse(0, 'メールアドレスを登録しました', $this->auth->memberPayload($member));

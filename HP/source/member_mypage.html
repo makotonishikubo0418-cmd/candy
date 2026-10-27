@@ -17,7 +17,7 @@
 	<link href="./css/default.css" rel="stylesheet" type="text/css">
 	<link href="./css/colorbox.css" rel="stylesheet" type="text/css" />
 	<link href="./css/mypage.css" rel="stylesheet" type="text/css">
-	<link href="./css/member_site.css?v=20260808b" rel="stylesheet" type="text/css">
+	<link href="./css/member_site.css?v=20261027a" rel="stylesheet" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script type="text/javascript" src="./js/amadare_webapp2.4.php"></script>
 <script type="text/javascript" src="./js/common.js"></script>
@@ -131,11 +131,13 @@
 						<div class="member-field">
 							<label for="editNickname">ニックネーム</label>
 							<input type="text" id="editNickname" name="nickname" maxlength="64" placeholder="未登録の場合は空欄">
+							<p class="member-field-status" id="statusNickname"></p>
 							<p class="member-field-error" id="errNickname"></p>
 						</div>
 						<div class="member-field">
 							<label for="editBirthday">誕生日</label>
 							<input type="date" id="editBirthday" name="birthday">
+							<p class="member-field-status" id="statusBirthday"></p>
 							<p class="member-field-error" id="errBirthday"></p>
 						</div>
 						<div class="member-field member-notify-field">
@@ -186,6 +188,7 @@
 						<div class="member-field member-email-code-field" id="memberEmailCodeField" style="display:none;">
 							<label for="editEmailCode">認証コード（6桁）</label>
 							<input type="text" id="editEmailCode" name="code" maxlength="6" inputmode="numeric">
+							<p class="member-field-error" id="errEmailCode"></p>
 						</div>
 						<button type="button" id="memberEmailConfirm" class="member-site-btn-secondary member-email-confirm-btn" style="display:none;">メールアドレスを登録</button>
 					</div>
@@ -193,6 +196,7 @@
 					<div class="member-settings-block" id="memberPasswordBlock">
 						<h4 class="member-settings-heading">パスワード変更</h4>
 						<p class="member-settings-note">現在のパスワードを入力のうえ、新しいパスワードを設定します。</p>
+						<p class="member-note">登録済みのパスワード：<span id="memberPasswordMasked" class="member-password-masked">********</span></p>
 						<div class="member-field">
 							<label for="currentPassword">現在のパスワード</label>
 							<input type="password" id="currentPassword" autocomplete="current-password">
@@ -219,6 +223,26 @@
 					</dl>
 					<p id="memberLoyaltyNote" class="member-note"></p>
 					<div id="memberLoyaltyBody" class="member-loyalty">読み込み中…</div>
+					<div id="memberLoyaltyLists" class="member-loyalty-lists" style="display:none;">
+						<h4 class="member-loyalty-panel-title">ポイント・クーポンチケット履歴</h4>
+						<div class="member-tabs" role="tablist">
+							<button type="button" class="member-tab active" role="tab" data-tab="points" aria-selected="true">ポイント履歴</button>
+							<button type="button" class="member-tab" role="tab" data-tab="coupons" aria-selected="false">クーポンチケット履歴</button>
+							<button type="button" class="member-tab" role="tab" data-tab="point_expiry" aria-selected="false">失効ポイント</button>
+							<button type="button" class="member-tab" role="tab" data-tab="coupon_expiry" aria-selected="false">クーポンチケットの期限</button>
+						</div>
+						<div id="memberLoyaltyListBody" class="member-loyalty-list-body"></div>
+						<div id="memberLoyaltyListPager" class="member-pager"></div>
+					</div>
+				</section>
+
+				<section class="member-section" id="memberGachaSection">
+					<dl class="title">
+						<dt><h3><span>Event</span> Gacha</h3></dt>
+						<dd>イベントガチャ</dd>
+					</dl>
+					<p id="memberGachaNote" class="member-note"></p>
+					<div id="memberGachaBody" class="member-gacha">読み込み中…</div>
 				</section>
 
 				<section class="member-section" id="memberFavoritesSection">
@@ -319,7 +343,7 @@ function favTask(){
 </script>
 <script type="text/javascript" src="./js/fav.js"></script>
 <script type="text/javascript" src="./js/amadareAccess.1.0.js"></script>
-<script type="text/javascript" src="./js/member.js?v=20260815a"></script>
+		<script type="text/javascript" src="./js/member.js?v=20261027a"></script>
 </body>
 </html>
 

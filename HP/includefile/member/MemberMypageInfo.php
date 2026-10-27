@@ -69,21 +69,17 @@ class MemberMypageInfo
         $total = min(self::LIST_LIMIT, $totalAll);
         $unread = $this->unreadCount($memberId);
 
+        // 表示日（未設定は作成日）の新しい順に選んでから件数を絞る
+        $orderKey = $this->hasDisplayDate() ? 'COALESCE(i.display_date, DATE(i.created_at))' : 'DATE(i.created_at)';
         $sql = "SELECT i.*,"
             . " (r.id IS NOT NULL) AS is_read"
             . " FROM customers_mypage_info i"
             . " LEFT JOIN customers_mypage_info_read r ON r.info_id = i.id AND r.member_id = {$memberId}"
             . " WHERE {$where}"
-            . " ORDER BY i.created_at DESC, i.id DESC"
+            . " ORDER BY {$orderKey} DESC, i.created_at DESC, i.id DESC"
             . " LIMIT {$offset}, {$perPage}";
 
         $rows = $this->mdb->fetchAll($sql);
-        // display_date がある場合は表示日優先で並べ替え（PHP側）
-        usort($rows, function ($a, $b) {
-            $da = !empty($a['display_date']) ? $a['display_date'] : (isset($a['created_at']) ? $a['created_at'] : '');
-            $db = !empty($b['display_date']) ? $b['display_date'] : (isset($b['created_at']) ? $b['created_at'] : '');
-            return strcmp((string)$db, (string)$da);
-        });
 
         $items = array();
         foreach ($rows as $row) {
@@ -91,6 +87,15 @@ class MemberMypageInfo
         }
 
         return array('items' => $items, 'total' => $total, 'unread_count' => $unread);
+    }
+
+    private function hasDisplayDate()
+    {
+        static $has = null;
+        if ($has === null) {
+            $has = $this->mdb->fetchOne("SHOW COLUMNS FROM customers_mypage_info LIKE 'display_date'") !== null;
+        }
+        return $has;
     }
 
     private function publishedTotal()

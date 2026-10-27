@@ -1194,6 +1194,616 @@
 	margin-top: 8px;
 }
 
+/* 会員ランク・ポイント表示 */
+#mypage .member-loyalty {
+	max-width: 720px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+#mypage .member-loyalty-empty {
+	max-width: 520px;
+	margin: 0 auto;
+	padding: 28px 20px;
+	border: 1px dashed #ccc;
+	background: #fafafa;
+	text-align: center;
+	font-size: 14px;
+	line-height: 1.7;
+	color: #666;
+	box-sizing: border-box;
+}
+
+#mypage .member-loyalty-rank-panel,
+#mypage .member-loyalty-panel {
+	margin: 0;
+	padding: 24px 22px;
+	border: 1px solid #ccc;
+	background: #fafafa;
+	box-sizing: border-box;
+}
+
+#mypage .member-loyalty-rank-panel {
+	border-left: 4px solid #b08d57;
+	background: linear-gradient(180deg, #fff 0%, #fafafa 100%);
+}
+
+#mypage .member-loyalty-rank-bronze {
+	border-left-color: #b08d57;
+}
+
+#mypage .member-loyalty-rank-silver {
+	border-left-color: #8a93a0;
+}
+
+#mypage .member-loyalty-rank-gold {
+	border-left-color: #c9a227;
+}
+
+#mypage .member-loyalty-rank-platinum,
+#mypage .member-loyalty-rank-diamond {
+	border-left-color: #6b7c93;
+}
+
+#mypage .member-loyalty-kicker {
+	margin: 0 0 8px;
+	font-size: 12px;
+	letter-spacing: 0.08em;
+	color: #666;
+}
+
+#mypage .member-loyalty-rank-name {
+	margin: 0 0 18px;
+	font-family: 'freightdispbooksc', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+	font-size: 34px;
+	line-height: 1.15;
+	font-weight: normal;
+	color: #111;
+}
+
+#mypage .member-loyalty-rank-meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px 12px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#mypage .member-loyalty-rank-meta li {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	min-width: 140px;
+	padding: 12px 14px;
+	background: #fff;
+	border: 1px solid #e2e2e2;
+	box-sizing: border-box;
+}
+
+#mypage .member-loyalty-meta-label {
+	font-size: 11px;
+	color: #777;
+}
+
+#mypage .member-loyalty-meta-value {
+	font-size: 15px;
+	font-weight: bold;
+	color: #222;
+	line-height: 1.4;
+}
+
+#mypage .member-loyalty-alert {
+	margin: 16px 0 0;
+	padding: 12px 14px;
+	border: 1px solid #e0c08a;
+	background: #fff8ec;
+	color: #7a4e12;
+	font-size: 13px;
+	line-height: 1.6;
+}
+
+#mypage .member-loyalty-return {
+	border-color: #a9c7de;
+	background: #f2f8fc;
+	color: #1f4f73;
+}
+
+#mypage .member-loyalty-panel-title {
+	margin: 0 0 16px;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 1.4;
+}
+
+#mypage .member-loyalty-metrics {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 12px;
+	margin-bottom: 16px;
+}
+
+#mypage .member-loyalty-metric {
+	padding: 16px 14px;
+	background: #fff;
+	border: 1px solid #e2e2e2;
+	box-sizing: border-box;
+}
+
+#mypage .member-loyalty-metric-primary {
+	border-color: #f0b4c8;
+	background: var(--member-pink-light, #fdf0f5);
+}
+
+#mypage .member-loyalty-metric-label {
+	display: block;
+	margin-bottom: 8px;
+	font-size: 12px;
+	color: #666;
+}
+
+#mypage .member-loyalty-metric-value {
+	display: block;
+	font-size: 22px;
+	font-weight: bold;
+	line-height: 1.2;
+	color: #111;
+	word-break: break-all;
+}
+
+#mypage .member-loyalty-metric-primary .member-loyalty-metric-value {
+	color: var(--member-pink-dark, #e5006e);
+}
+
+#mypage .member-loyalty-details {
+	margin: 0;
+	padding: 0;
+	border-top: 1px solid #e5e5e5;
+}
+
+#mypage .member-loyalty-detail {
+	display: grid;
+	grid-template-columns: minmax(10em, 1.5fr) minmax(0, 1fr);
+	gap: 8px 16px;
+	padding: 12px 2px;
+	border-bottom: 1px solid #eee;
+}
+
+#mypage .member-loyalty-detail:last-child {
+	border-bottom: none;
+	padding-bottom: 0;
+}
+
+#mypage .member-loyalty-detail dt {
+	margin: 0;
+	font-size: 13px;
+	color: #666;
+	line-height: 1.5;
+}
+
+#mypage .member-loyalty-detail dd {
+	margin: 0;
+	font-size: 14px;
+	font-weight: bold;
+	color: #222;
+	text-align: right;
+	line-height: 1.5;
+}
+
+#mypage .member-loyalty-notices {
+	margin: 0 0 16px;
+	padding: 0;
+	list-style: none;
+}
+
+#mypage .member-loyalty-notices li {
+	margin: 0 0 6px;
+	padding: 10px 14px;
+	border: 1px solid #b9d7b0;
+	background: #f2faef;
+	color: #2f5a22;
+	font-size: 13px;
+	line-height: 1.6;
+}
+
+#mypage .member-loyalty-notice-date {
+	margin-right: 10px;
+	color: #5a7d4e;
+	font-size: 12px;
+}
+
+#mypage .member-loyalty-lists {
+	margin-top: 24px;
+	padding: 24px 22px;
+	border: 1px solid #ccc;
+	background: #fff;
+	box-sizing: border-box;
+}
+
+#mypage .member-tabs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	margin-bottom: 16px;
+}
+
+#mypage .member-tab {
+	padding: 8px 12px;
+	border: 1px solid #000;
+	background: #fff;
+	color: #000;
+	font-size: 13px;
+	cursor: pointer;
+}
+
+#mypage .member-tab.active {
+	background: #000;
+	color: #fff;
+}
+
+#mypage .member-loyalty-table-wrap {
+	overflow-x: auto;
+	margin-bottom: 16px;
+}
+
+#mypage .member-loyalty-table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 13px;
+	line-height: 1.5;
+}
+
+#mypage .member-loyalty-table th,
+#mypage .member-loyalty-table td {
+	padding: 8px 6px;
+	border-bottom: 1px solid #eee;
+	text-align: left;
+	white-space: nowrap;
+}
+
+#mypage .member-loyalty-table th {
+	background: #f5f5f5;
+	font-weight: bold;
+}
+
+#mypage .member-loyalty-table tr.is-soon td {
+	background: #fff8ec;
+	color: #7a4e12;
+}
+
+#mypage .member-pager-info {
+	align-self: center;
+	font-size: 13px;
+}
+
+#mypage .member-field-status {
+	margin: 6px 0 0;
+	color: #666;
+	font-size: 12px;
+}
+
+#mypage .member-password-masked {
+	letter-spacing: 2px;
+}
+
+#mypage .member-history-item.is-clickable {
+	cursor: pointer;
+}
+
+#mypage .member-history-item.is-clickable:hover {
+	background: #fafafa;
+}
+
+#mypage .member-history-name-link {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.member-msg-links a {
+	text-decoration: underline;
+}
+
+#mypage .member-gacha {
+	margin-top: 8px;
+}
+
+#mypage .member-gacha-panel {
+	padding: 18px 16px 20px;
+	background: linear-gradient(160deg, #fff8f0 0%, #fff 55%);
+	border: 1px solid #ead9c8;
+}
+
+#mypage .member-gacha-stage {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 8px 0 4px;
+}
+
+#mypage .member-gacha-machine {
+	position: relative;
+	width: min(100%, 150px);
+	margin: 0 auto 12px;
+	aspect-ratio: 407 / 612;
+}
+
+#mypage .member-gacha-machine-img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	user-select: none;
+	pointer-events: none;
+}
+
+#mypage .member-gacha-glow {
+	position: absolute;
+	left: 18%;
+	top: 8%;
+	width: 64%;
+	height: 42%;
+	border-radius: 50%;
+	background: radial-gradient(circle, rgba(255, 230, 120, 0.55) 0%, rgba(255, 230, 120, 0) 70%);
+	opacity: 0;
+	pointer-events: none;
+}
+
+#mypage .member-gacha-machine.is-playing .member-gacha-glow {
+	animation: member-gacha-glow 0.55s ease-in-out infinite alternate;
+}
+
+#mypage .member-gacha-handle-wrap {
+	position: absolute;
+	left: 38%;
+	right: 38%;
+	top: 64.7%;
+	transform: translateY(-50%);
+	transform-origin: center center;
+	pointer-events: none;
+	z-index: 2;
+}
+
+#mypage .member-gacha-handle-img {
+	display: block;
+	width: 100%;
+	height: auto;
+	filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.22));
+}
+
+#mypage .member-gacha-machine.is-playing .member-gacha-handle-wrap {
+	animation: member-gacha-handle-spin 0.38s linear infinite;
+}
+
+#mypage .member-gacha-machine.is-playing {
+	animation: member-gacha-shake 0.12s ease-in-out infinite;
+}
+
+#mypage .member-gacha-capsule-out {
+	position: absolute;
+	left: 50%;
+	bottom: 1.5%;
+	width: 22%;
+	margin-left: -11%;
+	z-index: 3;
+	opacity: 0;
+	transform: translateY(-130%) scale(0.55);
+}
+
+#mypage .member-gacha-capsule-img {
+	display: block;
+	width: 100%;
+	height: auto;
+	filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.22));
+}
+
+#mypage .member-gacha-capsule-out.is-drop {
+	animation: member-gacha-capsule-drop 0.7s ease-out forwards;
+}
+
+#mypage .member-gacha-name {
+	margin: 0 0 6px;
+	font-size: 20px;
+	font-weight: bold;
+	color: #2a2a2a;
+}
+
+#mypage .member-gacha-period,
+#mypage .member-gacha-hint,
+#mypage .member-gacha-disabled {
+	margin: 16px 0 12px;
+	font-size: 13px;
+	color: #666;
+	line-height: 1.5;
+}
+
+#mypage .member-gacha-play {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0;
+	min-width: 220px;
+	width: auto;
+	max-width: 100%;
+	margin: 0 auto 0;
+	padding: 16px 32px;
+	font-size: 18px;
+	font-weight: bold;
+	letter-spacing: 0.08em;
+	color: #fff;
+	text-shadow: 0 1px 2px rgba(120, 20, 0, 0.35);
+	background: linear-gradient(180deg, #ff7a3d 0%, #f03828 48%, #d41e1e 100%);
+	border: 2px solid #fff6e8;
+	border-radius: 999px;
+	box-shadow:
+		0 6px 0 #9a1212,
+		0 12px 28px rgba(232, 48, 32, 0.42),
+		inset 0 2px 0 rgba(255, 255, 255, 0.38);
+	cursor: pointer;
+	overflow: hidden;
+	animation: member-gacha-play-bounce 2.2s ease-in-out infinite;
+	transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+
+#mypage .member-gacha-play::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -120%;
+	width: 55%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.42), transparent);
+	transform: skewX(-18deg);
+	animation: member-gacha-play-shine 2.8s ease-in-out infinite;
+	pointer-events: none;
+}
+
+#mypage .member-gacha-play-label {
+	position: relative;
+	z-index: 1;
+}
+
+#mypage .member-gacha-play:hover {
+	transform: translateY(-3px) scale(1.03);
+	box-shadow:
+		0 9px 0 #9a1212,
+		0 16px 32px rgba(232, 48, 32, 0.5),
+		inset 0 2px 0 rgba(255, 255, 255, 0.42);
+}
+
+#mypage .member-gacha-play:active {
+	transform: translateY(3px) scale(0.98);
+	box-shadow:
+		0 2px 0 #9a1212,
+		0 6px 16px rgba(232, 48, 32, 0.35),
+		inset 0 2px 0 rgba(255, 255, 255, 0.3);
+	animation: none;
+}
+
+#mypage .member-gacha-play.is-busy,
+#mypage .member-gacha-play:disabled {
+	animation: none;
+	opacity: 0.82;
+	cursor: wait;
+	transform: none;
+	box-shadow:
+		0 4px 0 #9a1212,
+		0 8px 18px rgba(232, 48, 32, 0.28),
+		inset 0 2px 0 rgba(255, 255, 255, 0.28);
+}
+
+#mypage .member-gacha-play.is-busy .member-gacha-play-label::after,
+#mypage .member-gacha-play:disabled .member-gacha-play-label::after {
+	content: '…';
+}
+
+#mypage .member-gacha-result {
+	margin-top: 16px;
+	padding: 14px 12px;
+	text-align: center;
+	min-height: 64px;
+}
+
+#mypage .member-gacha-result.is-spinning {
+	background: #f7f3ee;
+}
+
+#mypage .member-gacha-spin {
+	display: inline-block;
+	animation: member-gacha-pulse 0.9s ease-in-out infinite;
+	font-size: 15px;
+	color: #555;
+}
+
+#mypage .member-gacha-result.is-win {
+	background: #fff4e6;
+	border: 1px solid #e0b989;
+	animation: member-gacha-reveal 0.45s ease-out;
+}
+
+#mypage .member-gacha-win-label {
+	margin: 0 0 4px;
+	font-size: 12px;
+	letter-spacing: 0.08em;
+	color: #8a5a2b;
+}
+
+#mypage .member-gacha-win-amount {
+	margin: 0 0 4px;
+	font-size: 28px;
+	font-weight: bold;
+	color: #c45c26;
+	animation: member-gacha-pop 0.5s ease-out;
+}
+
+#mypage .member-gacha-win-sub {
+	margin: 0 0 6px;
+	font-size: 13px;
+	color: #8a5a2b;
+}
+
+#mypage .member-gacha-win-exp {
+	margin: 0;
+	font-size: 12px;
+	color: #666;
+}
+
+#mypage .member-gacha-result.is-error {
+	background: #fdf0f0;
+	color: #a33;
+	font-size: 13px;
+}
+
+@keyframes member-gacha-pulse {
+	0%, 100% { opacity: 0.45; }
+	50% { opacity: 1; }
+}
+
+@keyframes member-gacha-reveal {
+	from { opacity: 0; transform: translateY(6px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes member-gacha-pop {
+	0% { transform: scale(0.86); opacity: 0.2; }
+	70% { transform: scale(1.04); opacity: 1; }
+	100% { transform: scale(1); }
+}
+
+@keyframes member-gacha-shake {
+	0%, 100% { transform: rotate(0deg); }
+	25% { transform: rotate(-1.2deg); }
+	75% { transform: rotate(1.2deg); }
+}
+
+@keyframes member-gacha-handle-spin {
+	from { transform: translateY(-50%) rotate(0deg); }
+	to { transform: translateY(-50%) rotate(360deg); }
+}
+
+@keyframes member-gacha-play-bounce {
+	0%, 100% { transform: translateY(0); }
+	50% { transform: translateY(-4px); }
+}
+
+@keyframes member-gacha-play-shine {
+	0%, 35% { left: -120%; }
+	55%, 100% { left: 140%; }
+}
+
+@keyframes member-gacha-glow {
+	from { opacity: 0.15; }
+	to { opacity: 0.75; }
+}
+
+@keyframes member-gacha-capsule-drop {
+	0% { opacity: 0; transform: translateY(-120%) scale(0.5); }
+	60% { opacity: 1; transform: translateY(8%) scale(1.05); }
+	100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 @media screen and (max-width: 768px) {
 	#mypage .member-mypage-body {
 		width: auto;
@@ -1202,5 +1812,23 @@
 
 	#mypage .member-section dl.title dt h3 {
 		font-size: 26px;
+	}
+
+	#mypage .member-loyalty-rank-name {
+		font-size: 28px;
+	}
+
+	#mypage .member-loyalty-metrics {
+		grid-template-columns: 1fr;
+	}
+
+	#mypage .member-loyalty-detail {
+		grid-template-columns: 1fr;
+		gap: 4px;
+	}
+
+	#mypage .member-loyalty-detail dd {
+		text-align: left;
+		margin-bottom: 4px;
 	}
 }
