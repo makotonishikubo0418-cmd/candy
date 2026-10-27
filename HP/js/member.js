@@ -440,6 +440,7 @@
     }
 
     bindLoyalty(msg);
+    bindLoginBonus(msg);
     bindGacha(msg);
     loadFavoriteIds().then(function () {
       bindAnnouncements(msg);
@@ -544,6 +545,132 @@
     html += '</div>';
 
     return html;
+  }
+
+  var ROULETTE_COLORS = ['#e8b04a', '#f3d9e6', '#d9ecf7', '#e3f1dc', '#f7ead9', '#ece3f5'];
+
+  function bindLoginBonus(msg) {
+    var section = document.getElementById('memberLoginBonusSection');
+    var bodyEl = document.getElementById('memberLoginBonusBody');
+    var modal = document.getElementById('memberRouletteModal');
+    if (!section || !bodyEl || !modal) return;
+    var wheel = document.getElementById('memberRouletteWheel');
+    var spinBtn = document.getElementById('memberRouletteSpin');
+    var resultEl = document.getElementById('memberRouletteResult');
+    var prizes = [];
+    var spinning = false;
+
+    function closeModal() {
+      if (spinning) return;
+      modal.hidden = true;
+      modal.setAttribute('aria-hidden', 'true');
+    }
+    function openModal() {
+      modal.hidden = false;
+      modal.setAttribute('aria-hidden', 'false');
+    }
+    modal.querySelector('.member-modal-overlay').addEventListener('click', closeModal);
+    modal.querySelector('.member-modal-close').addEventListener('click', closeModal);
+
+    function drawWheel() {
+      var n = prizes.length;
+      var seg = 360 / n;
+      var stops = prizes.map(function (p, i) {
+        return ROULETTE_COLORS[i % ROULETTE_COLORS.length] + ' ' + (i * seg) + 'deg ' + ((i + 1) * seg) + 'deg';
+      });
+      wheel.style.background = 'conic-gradient(' + stops.join(',') + ')';
+      wheel.innerHTML = prizes.map(function (p, i) {
+        var angle = i * seg + seg / 2;
+        return '<span class="member-roulette-label" style="transform: translateX(-50%) rotate(' + angle + 'deg);">'
+          + '<em>' + escapeHtml(p.rank + '位') + '</em>' + escapeHtml(p.display) + '</span>';
+      }).join('');
+    }
+
+    function renderBody(d) {
+      var daily = d.daily || {};
+      var streak = d.streak || {};
+      var html = '';
+      if (streak.enabled) {
+        html += '<p class="member-login-bonus-streak">連続ログイン <strong>' + escapeHtml(String(streak.days || 0)) + '日目</strong>';
+        if (streak.next) {
+          html += '（あと' + escapeHtml(String(streak.next.remaining)) + '日で ' + escapeHtml(Number(streak.next.points).toLocaleString()) + 'P）';
+        }
+        html += '</p>';
+      }
+      if (daily.enabled) {
+        if (daily.played_today) {
+          html += '<p class="member-login-bonus-done">本日の結果：' + escapeHtml(daily.played_today.rank + '位 ' + daily.played_today.display) + '（受け取り済み）</p>';
+        } else if (daily.reason === 'need_visits') {
+          html += '<p class="member-note">ログイン特典のルーレットは、ご利用' + escapeHtml(String(daily.need_visits)) + '回以上の会員様が対象です。</p>';
+        } else if (daily.can_play) {
+          html += '<button type="button" class="member-site-btn" id="memberLoginBonusOpen">ルーレットを回す（1日1回）</button>';
+        }
+      }
+      bodyEl.innerHTML = html || '<p class="member-note">現在実施中のログイン特典はありません。</p>';
+      var openBtn = document.getElementById('memberLoginBonusOpen');
+      if (openBtn) openBtn.addEventListener('click', openModal);
+    }
+
+    function load(autoOpen) {
+      postJson('209', {}).then(function (res) {
+        if (res.status !== 0 || !res.data || !res.data.available) {
+          section.style.display = 'none';
+          return;
+        }
+        var d = res.data;
+        section.style.display = '';
+        prizes = ((d.daily && d.daily.prizes) || []).filter(function (p) { return p.amount > 0; });
+        renderBody(d);
+        (d.streak && d.streak.granted_today || []).forEach(function (g) {
+          showMsg(msg, '連続ログイン' + g.days + '日ボーナス ' + g.display + ' を獲得しました', 'success');
+        });
+        if (autoOpen && d.daily && d.daily.can_play && prizes.length) {
+          drawWheel();
+          spinBtn.disabled = false;
+          resultEl.textContent = '';
+          openModal();
+        } else if (prizes.length) {
+          drawWheel();
+        }
+      }).catch(function () {
+        section.style.display = 'none';
+      });
+    }
+
+    spinBtn.addEventListener('click', function () {
+      if (spinning) return;
+      spinning = true;
+      spinBtn.disabled = true;
+      resultEl.textContent = '';
+      postJson('210', {}).then(function (res) {
+        if (res.status !== 0 || !res.data) {
+          spinning = false;
+          resultEl.textContent = res.message || 'ログイン特典の処理に失敗しました';
+          return;
+        }
+        var won = res.data;
+        var idx = 0;
+        prizes.forEach(function (p, i) { if (p.rank === won.rank) idx = i; });
+        var seg = 360 / Math.max(1, prizes.length);
+        var target = 360 * 6 + (360 - (idx * seg + seg / 2));
+        wheel.style.transition = 'none';
+        wheel.style.transform = 'rotate(0deg)';
+        void wheel.offsetWidth;
+        wheel.style.transition = 'transform 4s cubic-bezier(0.17, 0.67, 0.21, 1)';
+        wheel.style.transform = 'rotate(' + target + 'deg)';
+        setTimeout(function () {
+          spinning = false;
+          resultEl.textContent = won.rank + '位 ' + won.display + ' が当たりました！';
+          load(false);
+          bindLoyalty(msg);
+        }, 4200);
+      }).catch(function (err) {
+        spinning = false;
+        resultEl.textContent = apiErrorMessage(err, '通信エラーが発生しました');
+      });
+    });
+
+    load(true);
   }
 
   var LOYALTY_PER_PAGE = 30;
@@ -711,7 +838,7 @@
         html += '<button type="button" id="memberGachaPlay" class="member-gacha-play">' +
           '<span class="member-gacha-play-label">ガチャを回す！</span>' +
           '</button>';
-        html += '<p class="member-gacha-hint">ガチャを回してクーポンをゲット！当選分は上のクーポンチケットに反映されます。</p>';
+        html += '<p class="member-gacha-hint">ガチャを回してクーポン・ポイントをゲット！当選分は上の会員ランク・ポイント欄に反映されます。</p>';
       }
       html += '<div id="memberGachaResult" class="member-gacha-result" hidden></div>';
       html += '</div>';
@@ -815,7 +942,7 @@
         var winHtml =
           '<p class="member-gacha-win-label">当選おめでとう！</p>' +
           '<p class="member-gacha-win-amount">' + escapeHtml(prize.amount_display || '') + '</p>' +
-          '<p class="member-gacha-win-sub">クーポン券を獲得しました</p>' +
+          '<p class="member-gacha-win-sub">' + (prize.prize_type === 'point' ? 'ポイントを獲得しました' : 'クーポン券を獲得しました') + '</p>' +
           (data.expires_at
             ? '<p class="member-gacha-win-exp">有効期限: ' + escapeHtml(String(data.expires_at)) + '</p>'
             : '<p class="member-gacha-win-exp">有効期限: 無期限</p>');

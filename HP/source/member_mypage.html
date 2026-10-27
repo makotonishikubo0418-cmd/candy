@@ -17,7 +17,7 @@
 	<link href="./css/default.css" rel="stylesheet" type="text/css">
 	<link href="./css/colorbox.css" rel="stylesheet" type="text/css" />
 	<link href="./css/mypage.css" rel="stylesheet" type="text/css">
-	<link href="./css/member_site.css?v=20261027a" rel="stylesheet" type="text/css">
+	<link href="./css/member_site.css?v=20261027b" rel="stylesheet" type="text/css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script type="text/javascript" src="./js/amadare_webapp2.4.php"></script>
 <script type="text/javascript" src="./js/common.js"></script>
@@ -236,6 +236,27 @@
 					</div>
 				</section>
 
+				<section class="member-section" id="memberLoginBonusSection" style="display:none;">
+					<dl class="title">
+						<dt><h3><span>Login</span> Bonus</h3></dt>
+						<dd>ログイン特典</dd>
+					</dl>
+					<div id="memberLoginBonusBody" class="member-login-bonus"></div>
+					<div id="memberRouletteModal" class="member-modal" hidden aria-hidden="true">
+						<div class="member-modal-overlay" tabindex="-1"></div>
+						<div class="member-modal-panel member-roulette-panel" role="dialog" aria-modal="true" aria-labelledby="memberRouletteTitle">
+							<button type="button" class="member-modal-close" aria-label="閉じる">×</button>
+							<h4 id="memberRouletteTitle" class="member-modal-title">本日のログイン特典</h4>
+							<div class="member-roulette">
+								<div class="member-roulette-pointer" aria-hidden="true"></div>
+								<div class="member-roulette-wheel" id="memberRouletteWheel"></div>
+							</div>
+							<p id="memberRouletteResult" class="member-roulette-result" aria-live="polite"></p>
+							<button type="button" id="memberRouletteSpin" class="member-site-btn">ルーレットを回す</button>
+						</div>
+					</div>
+				</section>
+
 				<section class="member-section" id="memberGachaSection">
 					<dl class="title">
 						<dt><h3><span>Event</span> Gacha</h3></dt>
@@ -343,7 +364,7 @@ function favTask(){
 </script>
 <script type="text/javascript" src="./js/fav.js"></script>
 <script type="text/javascript" src="./js/amadareAccess.1.0.js"></script>
-		<script type="text/javascript" src="./js/member.js?v=20261027a"></script>
+		<script type="text/javascript" src="./js/member.js?v=20261027b"></script>
 </body>
 </html>
 

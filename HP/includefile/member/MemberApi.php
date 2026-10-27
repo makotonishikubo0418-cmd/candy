@@ -106,6 +106,12 @@ class MemberApi
             case '208':
                 $this->loyaltyList('expiry', $input);
                 break;
+            case '209':
+                $this->loginBonus(false);
+                break;
+            case '210':
+                $this->loginBonus(true);
+                break;
             case '301':
                 $this->favoriteList($input);
                 break;
@@ -741,6 +747,33 @@ class MemberApi
             MemberUtil::jsonResponse(0, '', $data);
         } catch (Throwable $e) {
             MemberUtil::jsonResponse(-1, 'ポイント・クーポン情報の取得に失敗しました');
+        }
+    }
+
+    /**
+     * ログイン特典: 状態（今日のログイン記録・連続ログインボーナス付与を含む）／ルーレット抽選
+     */
+    private function loginBonus($draw)
+    {
+        try {
+            $member = $this->requireMember();
+            $this->auth->linkCtiGuestForMember((int)$member['id']);
+            $member = $this->mdb->findMemberById((int)$member['id']);
+            if (empty($member['guest_id'])) {
+                if ($draw) {
+                    MemberUtil::jsonResponse(-2, 'CTI顧客と未連携です');
+                }
+                MemberUtil::jsonResponse(0, '', array('available' => false));
+            }
+            $result = $draw
+                ? MemberLoginBonus::draw((int)$member['guest_id'], (int)MEMBER_CLUB_ID, (int)$member['id'])
+                : MemberLoginBonus::status((int)$member['guest_id'], (int)MEMBER_CLUB_ID, (int)$member['id']);
+            if ($result['status'] !== 0) {
+                MemberUtil::jsonResponse($result['status'], $result['message']);
+            }
+            MemberUtil::jsonResponse(0, '', $result['data']);
+        } catch (Throwable $e) {
+            MemberUtil::jsonResponse(-1, 'ログイン特典の処理に失敗しました');
         }
     }
 

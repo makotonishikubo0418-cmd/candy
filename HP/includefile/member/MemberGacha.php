@@ -216,15 +216,20 @@ class MemberGacha
                 return array('status' => -5, 'message' => '本日の抽選上限に達しています');
             }
 
+            $hasCaps = self::hasCapColumns($conn);
             $prizes = self::fetchPrizes($conn, $campaignId);
+            if ($hasCaps) {
+                $prizes = self::availablePrizes($conn, $campaign, $prizes);
+            }
             $prize = self::drawPrize($prizes);
             if ($prize === null) {
                 mysqli_rollback($conn);
                 mysqli_close($conn);
-                return array('status' => -1, 'message' => '賞品設定が不正です');
+                return array('status' => -6, 'message' => '賞品が上限に達したため、現在は抽選できません');
             }
 
             $amountYen = (int)$prize['amount_yen'];
+            $isPoint = $hasCaps && isset($prize['prize_type']) && (string)$prize['prize_type'] === 'point';
             $expireDays = (int)$campaign['expire_days'];
             $expiresAt = $expireDays > 0 ? date('Y-m-d', strtotime('+' . $expireDays . ' days')) : null;
             $label = trim((string)$campaign['name']);
@@ -232,7 +237,13 @@ class MemberGacha
                 $label = 'イベントガチャ';
             }
 
-            $ticketId = self::grantCoupon($conn, $guestId, $amountYen, $label, $expiresAt, $clubId);
+            $ticketId = null;
+            $lotId = null;
+            if ($isPoint) {
+                $lotId = MemberLoginBonus::grantPoints($conn, $guestId, $clubId, $amountYen, 'event_gacha', $label, $expiresAt);
+            } else {
+                $ticketId = self::grantCoupon($conn, $guestId, $amountYen, $label, $expiresAt, $clubId);
+            }
             $playId = self::insertPlay(
                 $conn,
                 $campaignId,
@@ -243,7 +254,9 @@ class MemberGacha
                 (int)$prize['slot_no'],
                 $amountYen,
                 $ticketId,
-                $today
+                $today,
+                $hasCaps ? ($isPoint ? 'point' : 'coupon') : null,
+                $lotId
             );
 
             mysqli_commit($conn);
@@ -256,8 +269,9 @@ class MemberGacha
                     'play_id' => $playId,
                     'prize' => array(
                         'slot_no' => (int)$prize['slot_no'],
+                        'prize_type' => $isPoint ? 'point' : 'coupon',
                         'amount_yen' => $amountYen,
-                        'amount_display' => number_format($amountYen) . '円',
+                        'amount_display' => number_format($amountYen) . ($isPoint ? 'P' : '円'),
                     ),
                     'coupon_ticket_id' => $ticketId,
                     'expires_at' => $expiresAt,
@@ -414,6 +428,62 @@ class MemberGacha
     }
 
     /**
+     * 当選上限・ポイント賞品の列（CTI の alter_event_gacha_caps.sql）があるか
+     */
+    private static function hasCapColumns($conn)
+    {
+        $res = @mysqli_query($conn, "SHOW COLUMNS FROM gacha_prizes LIKE 'max_wins'");
+        if (!$res) {
+            return false;
+        }
+        $ok = mysqli_num_rows($res) > 0;
+        mysqli_free_result($res);
+        return $ok;
+    }
+
+    /**
+     * 当選総数の上限・総付与額の上限に達した賞品を除く（CTI の GachaService::availablePrizes と同じ判定）
+     * @return list<array>
+     */
+    private static function availablePrizes($conn, $campaign, $prizes)
+    {
+        $campaignId = (int)$campaign['id'];
+        $wins = array();
+        $res = mysqli_query($conn, "SELECT slot_no, COUNT(*) AS c FROM gacha_plays WHERE campaign_id = {$campaignId} GROUP BY slot_no");
+        if (!$res) {
+            throw new RuntimeException('wins query failed');
+        }
+        while ($row = mysqli_fetch_assoc($res)) {
+            $wins[(int)$row['slot_no']] = (int)$row['c'];
+        }
+        mysqli_free_result($res);
+        $budget = (isset($campaign['budget_yen']) && $campaign['budget_yen'] !== null && $campaign['budget_yen'] !== '')
+            ? (int)$campaign['budget_yen'] : null;
+        $granted = 0;
+        if ($budget !== null) {
+            $res = mysqli_query($conn, "SELECT COALESCE(SUM(amount_yen), 0) AS s FROM gacha_plays WHERE campaign_id = {$campaignId}");
+            if (!$res) {
+                throw new RuntimeException('granted query failed');
+            }
+            $row = mysqli_fetch_assoc($res);
+            $granted = $row ? (int)$row['s'] : 0;
+            mysqli_free_result($res);
+        }
+        $out = array();
+        foreach ($prizes as $p) {
+            $max = (isset($p['max_wins']) && $p['max_wins'] !== null && $p['max_wins'] !== '') ? (int)$p['max_wins'] : null;
+            if ($max !== null && (isset($wins[(int)$p['slot_no']]) ? $wins[(int)$p['slot_no']] : 0) >= $max) {
+                continue;
+            }
+            if ($budget !== null && $granted + (int)$p['amount_yen'] > $budget) {
+                continue;
+            }
+            $out[] = $p;
+        }
+        return $out;
+    }
+
+    /**
      * @param list<array> $prizes
      * @return array|null
      */
@@ -504,7 +574,9 @@ class MemberGacha
         $slotNo,
         $amountYen,
         $couponTicketId,
-        $playedOn
+        $playedOn,
+        $prizeType = null,
+        $pointLotId = null
     ) {
         $campaignId = (int)$campaignId;
         $clubId = (int)$clubId;
@@ -512,14 +584,24 @@ class MemberGacha
         $prizeId = (int)$prizeId;
         $slotNo = (int)$slotNo;
         $amountYen = (int)$amountYen;
-        $couponTicketId = (int)$couponTicketId;
+        $ticketSql = $couponTicketId === null ? 'NULL' : (string)(int)$couponTicketId;
         $memberSql = $memberAccountId === null ? 'NULL' : (string)(int)$memberAccountId;
         $playedOn = mysqli_real_escape_string($conn, $playedOn);
-        $sql = "INSERT INTO gacha_plays
-            (campaign_id, club_id, guest_id, member_account_id, prize_id, slot_no,
-             amount_yen, coupon_ticket_id, played_on, played_at)
-            VALUES ({$campaignId}, {$clubId}, {$guestId}, {$memberSql}, {$prizeId}, {$slotNo},
-                    {$amountYen}, {$couponTicketId}, '{$playedOn}', NOW())";
+        if ($prizeType !== null) {
+            $typeSql = $prizeType === 'point' ? 'point' : 'coupon';
+            $lotSql = $pointLotId === null ? 'NULL' : (string)(int)$pointLotId;
+            $sql = "INSERT INTO gacha_plays
+                (campaign_id, club_id, guest_id, member_account_id, prize_id, slot_no, prize_type,
+                 amount_yen, coupon_ticket_id, point_lot_id, played_on, played_at)
+                VALUES ({$campaignId}, {$clubId}, {$guestId}, {$memberSql}, {$prizeId}, {$slotNo}, '{$typeSql}',
+                        {$amountYen}, {$ticketSql}, {$lotSql}, '{$playedOn}', NOW())";
+        } else {
+            $sql = "INSERT INTO gacha_plays
+                (campaign_id, club_id, guest_id, member_account_id, prize_id, slot_no,
+                 amount_yen, coupon_ticket_id, played_on, played_at)
+                VALUES ({$campaignId}, {$clubId}, {$guestId}, {$memberSql}, {$prizeId}, {$slotNo},
+                        {$amountYen}, {$ticketSql}, '{$playedOn}', NOW())";
+        }
         if (!mysqli_query($conn, $sql)) {
             throw new RuntimeException('play insert failed');
         }
