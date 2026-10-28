@@ -4,6 +4,8 @@ Updated: 2026-10-28
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | 短時間バイトブログ関連の最新ローカル情報のGitHub保存 | [20261028_OPERATION_short-time-job-github-publication.md](history/20261028_OPERATION_short-time-job-github-publication.md) |
+| CREATE | 短時間バイトブログのローカルテンプレート作成 | [20261028_CREATE_short-time-job-blog-template.md](history/20261028_CREATE_short-time-job-blog-template.md) |
 | OPERATION | ブログテンプレート作成環境のGitHub保存 | [20261028_OPERATION_blog-template-github-publication.md](history/20261028_OPERATION_blog-template-github-publication.md) |
 | CREATE | URL・タイトル指定のブログテンプレート作成環境 | [20261028_CREATE_blog-template-environment.md](history/20261028_CREATE_blog-template-environment.md) |
 | OPERATION | 追加ブログの関連修正のGitHub保存と本番反映 | [20261028_OPERATION_dominant-blog-publication.md](history/20261028_OPERATION_dominant-blog-publication.md) |
