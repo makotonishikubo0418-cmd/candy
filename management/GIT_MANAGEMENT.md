@@ -1,6 +1,6 @@
 # Git Rules
 
-Updated: 2026-10-11
+Updated: 2026-10-28
 
 - Purpose: Define local branch selection, full-repository synchronization judgment, management-branch handling, pre-work Git verification, required reporting, and STOP conditions.
 - Status: canonical rule document
@@ -26,6 +26,16 @@ Updated: 2026-10-11
 - Publication means that the approved commit is pushed to the approved GitHub branch and the live remote SHA is verified. It does not mean production deployment.
 - Before an authorized publication, verify the target repository, target branch, source `HEAD`, staged paths, staged diff, uncommitted out-of-scope changes, remote URL, and live target-branch SHA.
 - After an authorized publication, verify that the pushed remote branch SHA equals the intended local commit and report any unmerged or unpublished branch separately.
+
+### 通常のGitHub更新の実行手順
+
+- 最初に依頼の完了条件を確定する。「GitHub更新」はGitHub保存まで。「アップ公開」は本番反映確認までとし、本番手順は [CANDY_PRODUCTION_MIGRATION_MASTER.md](specs/CANDY_PRODUCTION_MIGRATION_MASTER.md) に従う。各操作の許可は上記ルールに従い、依頼にない操作を追加しない。
+- 同日・同一リポジトリで完了済みの初回確認を繰り返さない。対象ブランチ・HEAD・リモート・ルート全体の状態・対象差分・ライブGitHub SHAを一括取得し、その結果を作業中に再利用する。変更や競合の兆候がある項目だけ再確認する。
+- 必要な管理書はINDEXから対象節を特定して読む。同じ会話内で確認済みで内容も変わっていない節は再読しない。対象外の履歴・全サイト・生成台帳の調査や再生成を更新作業へ追加しない。
+- GitHub保存だけの場合は、Actionsの起動条件を確認し、対象コミットに `[skip ci]` を付けて意図しない本番公開を防ぐ。本番公開を含む場合は本番管理書の起動方法を選ぶ。
+- 許可された対象パスを明示してステージし、ステージ済み差分を1回確認してコミット・Pushする。更新内容に変更がない状態で同じ検査を別コマンドや別ツールで繰り返さない。
+- Push後はライブGitHub SHAとルート全体の状態を一括確認する。一致確認と必要な履歴保存が済んだら終了する。履歴の保存自体を記録するための追加履歴・追加コミットを連鎖させない。
+- 正常終了の報告は結果・コミット・本番反映の有無に絞る。不一致や未確認事項がある場合だけ、その対象と影響を追記する。手順短縮のためだけに新しいスクリプトや仕組みを作らない。
 
 ## Synchronization Verdict
 

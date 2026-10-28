@@ -4,6 +4,7 @@ Updated: 2026-10-28
 
 | Type | Title | History |
 |---|---|---|
+| MODIFY | 生成管理書の更新日補完とコード参照台帳のサイズ特例 | [20261028_MODIFY_generated-document-metadata.md](history/20261028_MODIFY_generated-document-metadata.md) |
 | OPERATION | 短時間バイトブログの本番公開 | [20261028_OPERATION_short-time-job-production-publication.md](history/20261028_OPERATION_short-time-job-production-publication.md) |
 | OPERATION | 短時間バイトブログ関連の最新ローカル情報のGitHub保存 | [20261028_OPERATION_short-time-job-github-publication.md](history/20261028_OPERATION_short-time-job-github-publication.md) |
 | CREATE | 短時間バイトブログのローカルテンプレート作成 | [20261028_CREATE_short-time-job-blog-template.md](history/20261028_CREATE_short-time-job-blog-template.md) |

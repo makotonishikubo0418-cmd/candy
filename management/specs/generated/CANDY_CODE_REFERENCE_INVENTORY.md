@@ -1,5 +1,9 @@
 # CANDY CODE REFERENCE INVENTORY
 
+Updated: 2026-10-28
+
+サイズ上限の特例: [管理書作成・管理ルール 第10章](../../DOCUMENT_RULES.md#10-サイズ上限) に基づき、70,000バイト超の単一ファイルとして維持します。公開PHP・共有PHP・CSS・JavaScriptの参照関係を横断検索できるよう、必要な参照情報を一括して保持するためです。
+
 > **Automatically generated. Manual editing is prohibited.**
 >
 > Purpose: Preserve detailed public PHP, shared PHP, CSS, and JavaScript reference relationships

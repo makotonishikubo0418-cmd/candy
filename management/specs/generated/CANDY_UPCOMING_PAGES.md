@@ -1,5 +1,7 @@
 # CANDY UPCOMING PAGES
 
+Updated: 2026-10-28
+
 > **Automatically generated. Manual editing is prohibited.**
 >
 > Purpose: Route current production-candidate state to category-specific deterministic detail files

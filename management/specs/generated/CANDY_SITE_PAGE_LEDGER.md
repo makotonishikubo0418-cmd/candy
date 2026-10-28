@@ -1,5 +1,7 @@
 # CANDY SITE PAGE LEDGER
 
+Updated: 2026-10-28
+
 > **Automatically generated. Manual editing is prohibited.**
 >
 > Purpose: Route current public-page structure to a deterministic row-level detail file

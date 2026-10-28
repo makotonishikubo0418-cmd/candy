@@ -1,5 +1,7 @@
 # CANDY CODE ASSET INVENTORY
 
+Updated: 2026-10-28
+
 > **Automatically generated. Manual editing is prohibited.**
 >
 > Purpose: Summarize current assets, page relationships, missing targets, and review candidates

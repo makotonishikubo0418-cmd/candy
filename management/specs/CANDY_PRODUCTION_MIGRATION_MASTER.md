@@ -1,6 +1,6 @@
 # CANDY Production Deployment and Migration Control
 
-Updated: 2026-10-11
+Updated: 2026-10-28
 
 ## 1. Purpose
 Control current `HP/` deployment, protected-entry publication, recovery, and
@@ -235,14 +235,22 @@ The applicable Git route in `management/INDEX.md` owns branch, remote,
 staging, Commit, and Push checks. This document adds only the
 production-specific gates:
 
-1. Inspect the exact workflow and deploy script used by the operation.
-2. Run their syntax, self-test, and integration checks.
+1. Identify the exact workflow and deploy script used by the operation. Reuse an inspection from the same conversation when those files are unchanged; inspect changed portions and their dependencies when they differ.
+2. Require their syntax, self-test, and integration checks to pass. For unchanged deployment tooling, the exact target run's successful pre-FTP checks satisfy this requirement; do not also rerun the same checks locally. Changed deployment tooling still requires the checks in Section 5.
 3. Confirm the expected trigger and absence of a full-deploy route.
 4. Verify target SHA, lists, exclusions, deletion/rename state, operation count,
    uploaded size, and `PLAN_TOKEN`.
 5. Require target PHP to pass `php -d short_open_tag=1 -l` before FTP.
-6. After Actions succeeds, verify the common production entry contract,
-   target-page HTTP, and production URLs.
+6. After Actions succeeds, complete Section 9 once; reuse successful entry-contract evidence from that exact run.
+
+### 7.1 通常の少量公開で省く重複作業
+
+- Git側の確認は [GIT_MANAGEMENT.md](../GIT_MANAGEMENT.md) の結果を引き継ぐ。公開開始のために初回調査をやり直さない。対象差分から必要な検査と完了条件を最初に決める。
+- 本番公開を含む新しい変更は、通常のPushによる自動デプロイを使う。同じ対象の手動preview・deployを重ねて起動しない。GitHub保存済みで未公開の変更は、未反映範囲のbefore/after SHAを確定し、既存の手動preview・deployを使う。起動だけを目的とする空コミットは作らない。
+- 手動preview成功後は、そのSHA・件数・PLAN_TOKENを用いてdeployへ進む。必要な事前検査が済んでいる場合、途中でローカルプレビューサーバーを起動したり、同じ画面・FAQ検査を繰り返したりしない。
+- 検証結果の再利用は同じ対象内容・依存ファイル・検査条件に限る。内容変更、失敗、競合、環境差に関係する検査だけ再実行する。ローカルでの成功を本番反映の証拠にはしない。
+- 公開対象と関係のない既存不備、管理書監査、全件SEO検査を追加しない。公開を妨げる問題が出た場合だけ、その原因と影響範囲を調べる。
+- 少量公開は指示受領から必要な記録・報告まで5分以内を目標とする。時間短縮のために必須検査を省略したり、未完了を完了扱いにしたりしない。超過時は現在状態と実際の待ち・失敗原因を短く伝える。新しいスクリプトの作成や既存スクリプトの改修を通常公開へ追加しない。
 
 Normal tracking command:
 
@@ -273,19 +281,19 @@ index state.
 - Record Actions run number and commit SHA.
 - Record and report the Actions run URL with progress.
 - Normally query state through the GitHub API; do not search and operate the browser UI.
+- Use one monitoring route for the selected run. Do not alternate API polling, CLI watching, and browser checks for the same status. Prepare the required history fields while waiting; do not fill waiting time with unrelated investigation.
 - Check actual log `DEPLOYED current/total`, failing target, and exit code.
 
 ## 9. After Deployment
 
 1. Verify the final Actions result.
-2. Verify production target existence and SHA-256 equality.
-3. Check for remaining temporary and backup files.
+2. Verify production target existence and SHA-256 equality. Reuse the exact run's successful final-file hash verification; batch any required public-URL byte checks rather than fetching the same asset repeatedly.
+3. Check for remaining temporary and backup files using the exact run's cleanup result. Investigate the server separately only when that evidence is missing or indicates failure.
 4. Verify root `200`, `index.php` to root, canonical host and scheme redirects,
-   public indexability, and direct-host noindex through the common entry check.
-5. Check target-PHP HTTP.
-6. Check CSS/JavaScript/images, internal links, and desktop/mobile browser rendering as required. For a same-path static-asset replacement, apply Section 5.1 and verify the new content-version reference and rendered content.
-7. Add the target SHA, Actions run, deployed targets, production hashes, HTTP
-   results, and rendering results to the response required by root `AGENTS.md`.
+   public indexability, and direct-host noindex through the common entry check. A successful check in this deployment's Actions run satisfies this item; do not run it again without contrary evidence.
+5. Check target-PHP HTTP and required changed links, list/top entries, and sitemap entries in one batch. Reuse each fetched response for status, content, link, and structured-data checks.
+6. Check CSS/JavaScript/images, internal links, and desktop/mobile browser rendering as required by the changed content and applicable specification. Complete each required viewport's image and interaction checks together; do not repeat successful screenshots or FAQ operations. For a same-path static-asset replacement, apply Section 5.1 and verify the new content-version reference and rendered content.
+7. Save one concise completion record under [HISTORY.md](../HISTORY.md), including the target SHA, Actions run, deployed targets, and verification results. Report the publication result and URL immediately after the required checks and record are complete; do not add further routine checks. Retain detailed evidence in the record rather than repeating it in the response.
 
 ## 10. Rollback
 
