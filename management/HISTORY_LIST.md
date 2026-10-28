@@ -1,9 +1,10 @@
 # Candy 履歴一覧
 
-Updated: 2026-10-15
+Updated: 2026-10-28
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | 作業PCとGitHubのmain最新差分同期 | [20261028_OPERATION_main-latest-synchronization.md](history/20261028_OPERATION_main-latest-synchronization.md) |
 | CREATE | まいまい自己紹介ブログの作成と本番公開 | [20261015_CREATE_maimai-profile-blog.md](history/20261015_CREATE_maimai-profile-blog.md) |
 | OPERATION | candy_dominant_girlsの未コミット変更のGitHub保存 | [20261015_OPERATION_dominant-girls-github-upload.md](history/20261015_OPERATION_dominant-girls-github-upload.md) |
 | CREATE | 待機設備・備品ブログの作成と本番公開 | [20261015_CREATE_waiting-room-facilities-blog.md](history/20261015_CREATE_waiting-room-facilities-blog.md) |
