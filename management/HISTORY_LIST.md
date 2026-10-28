@@ -4,6 +4,9 @@ Updated: 2026-10-28
 
 | Type | Title | History |
 |---|---|---|
+| MODIFY | 追加ブログのトップ掲載・サイトマップ登録・更新日修正 | [20261028_MODIFY_dominant-blog-public-integration.md](history/20261028_MODIFY_dominant-blog-public-integration.md) |
+| OPERATION | ローカルPHP実行環境の整備と未完了テストの再検証 | [20261028_OPERATION_local-php-runtime.md](history/20261028_OPERATION_local-php-runtime.md) |
+| PROBLEM | アンダースコアを含むブログ名の認識漏れ修正 | [20261028_PROBLEM_blog-underscore-recognition.md](history/20261028_PROBLEM_blog-underscore-recognition.md) |
 | OPERATION | 作業PCとGitHubのmain最新差分同期 | [20261028_OPERATION_main-latest-synchronization.md](history/20261028_OPERATION_main-latest-synchronization.md) |
 | CREATE | まいまい自己紹介ブログの作成と本番公開 | [20261015_CREATE_maimai-profile-blog.md](history/20261015_CREATE_maimai-profile-blog.md) |
 | OPERATION | candy_dominant_girlsの未コミット変更のGitHub保存 | [20261015_OPERATION_dominant-girls-github-upload.md](history/20261015_OPERATION_dominant-girls-github-upload.md) |

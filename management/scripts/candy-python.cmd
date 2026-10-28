@@ -6,6 +6,8 @@ set "PYTHONIOENCODING=utf-8"
 set "GIT_OPTIONAL_LOCKS=0"
 set "BUNDLED_GIT=%USERPROFILE%\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\git\cmd"
 if exist "%BUNDLED_GIT%\git.exe" set "PATH=%BUNDLED_GIT%;%PATH%"
+where php >nul 2>nul
+if errorlevel 1 if exist "%LOCALAPPDATA%\Programs\CandyPHP\php.cmd" set "PATH=%LOCALAPPDATA%\Programs\CandyPHP;%PATH%"
 set "CANDY_PROBE=import sys; assert sys.version_info >= (3,12)"
 if /I "%~1"=="hotel" set "CANDY_PROBE=import sys; assert sys.version_info >= (3,12); from PIL import Image"
 if /I "%~1"=="area" set "CANDY_PROBE=import sys; assert sys.version_info >= (3,12); from PIL import Image"

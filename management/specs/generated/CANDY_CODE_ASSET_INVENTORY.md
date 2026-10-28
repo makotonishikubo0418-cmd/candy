@@ -9,10 +9,10 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-15T10:07:26+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-28T13:43:05+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: b12ed8cd5449caa21ded4834130fe3f6c3090bb3
-> State fingerprint: sha256:6a1a5bfebfb771d67bbf76ca584207c83d657be3674b741fca61ac08e344d0e8
+> Commit: 5c607c84c45c08eb7cedf7a711fe3b263a2a33be
+> State fingerprint: sha256:b4bbe8ee556c7da04c3433b9ec01278013455c90507736f7665faca3f2ffb55e
 > Population: Public PHP files: 266 / assets: 758
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
@@ -236,7 +236,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | area:yoshinocho | 6 | NONE | OK |
 | area:yotsumotocho | 6 | NONE | OK |
 | area:yusukicho | 6 | NONE | OK |
-| other:kagoshima-deliveryhealth-blog-candy_dominant_girls | 3 | NONE | OK |
+| blog:candy_dominant_girls | 3 | NONE | OK |
 | blog:girl-choice | 3 | NONE | OK |
 | blog:glamourgirl | 7 | NONE | OK |
 | blog:maimai-profile | 3 | NONE | OK |

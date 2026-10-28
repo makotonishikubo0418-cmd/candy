@@ -24,6 +24,8 @@ RELATED_TEXT = "ここにはリンク先のタイトルを表示します。"
 RELATED_PER_CATEGORY = 3
 RELATED_COUNT = RELATED_PER_CATEGORY * 2
 BLOG_TOP_LATEST_LIMIT = 15
+# Existing public article names include underscores, e.g. candy_dominant_girls.
+PAGE_SLUG_PATTERN = r"[a-z0-9_-]+"
 RELATED_BLOG_SLUGS = (
     "glamourgirl",
     "petitegirl",
@@ -53,12 +55,12 @@ CATEGORY_INDEX_TERMINAL_CTA = (
 )
 MAIN_CONTENT_END_MARKER = "<!-- メインコンテンツ END -->"
 BLOG_LINK_RE = re.compile(
-    r'<a href="\./(kagoshima-deliveryhealth-blog-[a-z0-9-]+\.php)"[^>]*>(.*?)</a>',
+    rf'<a href="\./(kagoshima-deliveryhealth-blog-{PAGE_SLUG_PATTERN}\.php)"[^>]*>(.*?)</a>',
     re.S,
 )
 BLOG_TOP_ENTRY_RE = re.compile(
     r'^[ \t]*<div class="(?:lp_20_0|lp_14_0) fs_sm2(?: bd_t)?">'
-    r'<a href="\./kagoshima-deliveryhealth-blog-[a-z0-9-]+\.php"[^>]*>.*?</a></div>[ \t]*\r?\n?',
+    rf'<a href="\./kagoshima-deliveryhealth-blog-{PAGE_SLUG_PATTERN}\.php"[^>]*>.*?</a></div>[ \t]*\r?\n?',
     re.M | re.S,
 )
 
@@ -252,7 +254,7 @@ def ensure_value(name: str, value: str) -> str:
 
 def slug_from_canonical(canonical: str, category: str) -> str:
     path = urlparse(canonical).path
-    match = re.fullmatch(rf"/kagoshima-deliveryhealth-{category}-([a-z0-9-]+)\.php", path)
+    match = re.fullmatch(rf"/kagoshima-deliveryhealth-{category}-({PAGE_SLUG_PATTERN})\.php", path)
     if not match:
         raise PageToolError(f"canonicalが{category}形式ではありません")
     return match.group(1)
@@ -456,7 +458,7 @@ def _related_candidates(target_category: str, current_category: str, current_slu
 
 def related_link_targets(source: str) -> list[str]:
     return re.findall(
-        r'<a href="\./(kagoshima-deliveryhealth-(?:blog|area)-[a-z0-9-]+\.php)" class="fade">',
+        rf'<a href="\./(kagoshima-deliveryhealth-(?:blog|area)-{PAGE_SLUG_PATTERN}\.php)" class="fade">',
         source,
     )
 

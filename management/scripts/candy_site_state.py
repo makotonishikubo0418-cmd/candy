@@ -30,6 +30,7 @@ from candy_page_common import (
     TEXT_BLOG_DIR,
     TEXT_HOTEL_DIR,
     SITE_STATE_OUTPUT_NAMES,
+    PAGE_SLUG_PATTERN,
     atomic_write,
     write_transaction,
     read_utf8,
@@ -40,9 +41,9 @@ from candy_page_common import (
 GENERATED_DIR = DOCS_DIR / "generated"
 OUTPUT_NAMES = SITE_STATE_OUTPUT_NAMES
 SCRIPT_REL = "management/scripts/candy_site_state.py"
-DETAIL_RE = re.compile(r"^kagoshima-deliveryhealth-(area|hotel|blog)-([a-z0-9-]+)$")
+DETAIL_RE = re.compile(rf"^kagoshima-deliveryhealth-(area|hotel|blog)-({PAGE_SLUG_PATTERN})$")
 CANONICAL_RE = re.compile(
-    r"https?://(?:www\.)?55810\.com/kagoshima-deliveryhealth-(area|hotel|blog)-([a-z0-9-]+)\.php",
+    rf"https?://(?:www\.)?55810\.com/kagoshima-deliveryhealth-(area|hotel|blog)-({PAGE_SLUG_PATTERN})\.php",
     re.I,
 )
 TAG_RE = re.compile(r"<[^>]+>")

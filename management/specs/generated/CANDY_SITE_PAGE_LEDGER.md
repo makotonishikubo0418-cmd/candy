@@ -9,10 +9,10 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_SITE_PAGE_LEDGER.tsv`, stable structure specifications, and category specifications
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-15T10:07:26+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-28T13:43:05+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: b12ed8cd5449caa21ded4834130fe3f6c3090bb3
-> State fingerprint: sha256:6a1a5bfebfb771d67bbf76ca584207c83d657be3674b741fca61ac08e344d0e8
+> Commit: 5c607c84c45c08eb7cedf7a711fe3b263a2a33be
+> State fingerprint: sha256:b4bbe8ee556c7da04c3433b9ec01278013455c90507736f7665faca3f2ffb55e
 > Population: Public PHP files: 266
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: COMPLETE=261 / SPECIAL=5 (intentional=5, unreviewed=0)
@@ -25,10 +25,10 @@ The Markdown parent owns scope, provenance, and summary. The complete one-page-p
 | category | pages |
 |---|---:|
 | area | 165 |
-| blog | 13 |
+| blog | 14 |
 | girls | 3 |
 | hotel | 72 |
-| other | 9 |
+| other | 8 |
 | system | 3 |
 | top | 1 |
 

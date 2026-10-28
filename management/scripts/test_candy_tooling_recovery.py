@@ -447,6 +447,7 @@ class RecoveryTests(unittest.TestCase):
             (f"kagoshima-deliveryhealth-blog-test-{index:02d}.php", f"ブログ{index:02d}")
             for index in range(1, 18)
         ]
+        entries[-1] = ("kagoshima-deliveryhealth-blog-candy_dominant_girls.php", "ブログ17")
         listing = (
             '<div class="blog-list">\n'
             '<div class="lp_5 lm_0_auto w_130 center bg_p fs_xs fc_w">BLOG INFO</div>\n'
@@ -473,13 +474,70 @@ class RecoveryTests(unittest.TestCase):
         updated_listing, updated_top = common.update_blog_registries(
             listing,
             top,
-            "test-18",
+            "test_18",
             "ブログ18",
         )
-        updated_entries = entries + [("kagoshima-deliveryhealth-blog-test-18.php", "ブログ18")]
+        updated_entries = entries + [("kagoshima-deliveryhealth-blog-test_18.php", "ブログ18")]
         self.assertEqual(common.blog_registry_links(updated_listing, top_page=False), updated_entries)
         self.assertEqual(common.blog_registry_links(updated_top, top_page=True), updated_entries[-15:])
         self.assertEqual(common.blog_registry_alignment_errors(updated_listing, updated_top), [])
+
+    def test_blog_underscore_slug_identity_and_input(self):
+        for slug in ("candy_dominant_girls", "girl-choice", "staff_2-news"):
+            with self.subTest(slug=slug):
+                stem = f"kagoshima-deliveryhealth-blog-{slug}"
+                canonical = f"https://www.55810.com/{stem}.php"
+                self.assertEqual(common.slug_from_canonical(canonical, "blog"), slug)
+                self.assertEqual(state.category_for(stem), ("blog", slug))
+                self.assertEqual(state.CANONICAL_RE.fullmatch(canonical).groups(), ("blog", slug))
+                self.assertEqual(
+                    common.related_link_targets(f'<a href="./{stem}.php" class="fade">記事</a>'),
+                    [f"{stem}.php"],
+                )
+        for slug in ("bad/name", "bad.name", "bad name", "bad%2fname"):
+            with self.subTest(invalid=slug), self.assertRaises(common.PageToolError):
+                common.slug_from_canonical(f"https://www.55810.com/kagoshima-deliveryhealth-blog-{slug}.php", "blog")
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            text_dir = root / "Text_blog_data"
+            text_dir.mkdir()
+            canonical = "https://www.55810.com/kagoshima-deliveryhealth-blog-candy_dominant_girls.php"
+            (text_dir / "article.txt").write_text(f"canonical\n{canonical}\n", encoding="utf-8")
+            with (
+                patch.object(state, "REPO_ROOT", root),
+                patch.object(state, "TEXT_BLOG_DIR", text_dir),
+                patch.object(state, "TEXT_AREA_DIR", root / "missing-area"),
+                patch.object(state, "TEXT_HOTEL_DIR", root / "missing-hotel"),
+            ):
+                records = state.parse_text_records()
+            self.assertEqual(len(records), 1)
+            self.assertEqual((records[0].category, records[0].slug), ("blog", "candy_dominant_girls"))
+            self.assertNotIn("canonical", records[0].required_missing)
+
+    def test_blog_underscore_entry_is_not_silently_omitted(self):
+        slug = "candy_dominant_girls"
+        filename = f"kagoshima-deliveryhealth-blog-{slug}.php"
+        entry = f'<div class="lp_20_0 fs_md3"><a href="./{filename}" class="fade">記事</a></div>\n'
+        listing = (
+            '<div><div class="lp_5">BLOG INFO</div>\n' + entry
+            + common.CATEGORY_INDEX_TERMINAL_CTA + '\n</div>\n' + common.MAIN_CONTENT_END_MARKER
+        )
+        empty_top = (
+            '<!-- スタッフブログ START -->\n'
+            '<div class="center"><a href="./blog.php">ブログ一覧</a></div>\n'
+            '<!-- スタッフブログ END -->'
+        )
+        self.assertEqual(common.blog_registry_links(listing, top_page=False), [(filename, "記事")])
+        self.assertIn("indexブログ最新15件がblog一覧の末尾15件と一致しません",
+                      common.blog_registry_alignment_errors(listing, empty_top))
+        top = common.synchronize_blog_top_index(empty_top, listing)
+        self.assertEqual(common.blog_registry_links(top, top_page=True), [(filename, "記事")])
+        self.assertEqual(common.blog_registry_alignment_errors(listing, top), [])
+        self.assertEqual(common.synchronize_blog_top_index(top, listing), top)
+        self.assertEqual(common.update_blog_registries(listing, top, slug, "記事"), (listing, top))
+        duplicate = listing.replace(entry, entry + entry)
+        self.assertTrue(any("blog一覧URL重複" in error
+                            for error in common.blog_registry_alignment_errors(duplicate, top)))
 
 
 if __name__ == "__main__":
