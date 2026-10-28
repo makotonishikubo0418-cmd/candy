@@ -4,6 +4,7 @@ Updated: 2026-10-28
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | 追加ブログの関連修正のGitHub保存と本番反映 | [20261028_OPERATION_dominant-blog-publication.md](history/20261028_OPERATION_dominant-blog-publication.md) |
 | MODIFY | 追加ブログのトップ掲載・サイトマップ登録・更新日修正 | [20261028_MODIFY_dominant-blog-public-integration.md](history/20261028_MODIFY_dominant-blog-public-integration.md) |
 | OPERATION | ローカルPHP実行環境の整備と未完了テストの再検証 | [20261028_OPERATION_local-php-runtime.md](history/20261028_OPERATION_local-php-runtime.md) |
 | PROBLEM | アンダースコアを含むブログ名の認識漏れ修正 | [20261028_PROBLEM_blog-underscore-recognition.md](history/20261028_PROBLEM_blog-underscore-recognition.md) |
