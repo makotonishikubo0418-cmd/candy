@@ -1,6 +1,6 @@
 # CANDY Blog Creation Runbook
 
-- Updated: 2026-10-14
+- Updated: 2026-10-28
 - Applies to: 2件目以降の通常ブログ作成、一覧登録、トップページ連携、検証
 - Status: Supporting operational document
 - Canonical page specification: `CANDY_BLOG_PAGE_GENERATION_SPEC.md`
@@ -11,6 +11,8 @@
 この管理書は、スタッフが用意した原稿からブログを繰り返し作成するときの実行順序と完了確認を管理する。ブログ本文の構造、可変ブロック、JSON-LD、生成ファイルの正規仕様は `CANDY_BLOG_PAGE_GENERATION_SPEC.md` が管理し、この管理書では重複定義しない。
 
 対象は、入力確認、デザイン、SEO、画像、ブログ一覧、トップページの最新15件、サイトマップ、ローカル検証である。Git、GitHub Actions、本番公開、DB操作の権限は付与しない。
+
+URLとタイトルだけで「テンプレを作成して」と依頼され、ユーザーが後からHTMLを作成する場合は、[BLOG_TEMPLATE.md](../template/BLOG_TEMPLATE.md) の経路を使用する。原稿不足として通常生成へ進めず、同書のコードからPHP・HTML・一覧・TOP・サイトマップの一式を準備する。本文完成後は本書の該当する完了確認を適用する。
 
 ## 2. 作業開始前の確定事項
 

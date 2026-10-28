@@ -4,6 +4,8 @@ Updated: 2026-10-28
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | ブログテンプレート作成環境のGitHub保存 | [20261028_OPERATION_blog-template-github-publication.md](history/20261028_OPERATION_blog-template-github-publication.md) |
+| CREATE | URL・タイトル指定のブログテンプレート作成環境 | [20261028_CREATE_blog-template-environment.md](history/20261028_CREATE_blog-template-environment.md) |
 | OPERATION | 追加ブログの関連修正のGitHub保存と本番反映 | [20261028_OPERATION_dominant-blog-publication.md](history/20261028_OPERATION_dominant-blog-publication.md) |
 | MODIFY | 追加ブログのトップ掲載・サイトマップ登録・更新日修正 | [20261028_MODIFY_dominant-blog-public-integration.md](history/20261028_MODIFY_dominant-blog-public-integration.md) |
 | OPERATION | ローカルPHP実行環境の整備と未完了テストの再検証 | [20261028_OPERATION_local-php-runtime.md](history/20261028_OPERATION_local-php-runtime.md) |

@@ -1,6 +1,6 @@
 # CANDY Page Generation Governance
 
-- Updated: 2026-10-08
+- Updated: 2026-10-28
 - Applies to: Normal new-page generation for area, blog, and hotel by Codex;
   Section 10.1 also governs direct changes to their top-page sections
 
@@ -19,6 +19,8 @@ Except for Section 10.1 when `management/INDEX.md` routes a direct top-page cate
 section task here, apply this document only to normal new-page generation. Do
 not apply its other sections to development changes, bug fixes,
 common-structure changes, or refactoring.
+
+URL/title-only blog preparation before user-authored HTML is a separate scaffold route defined in [BLOG_TEMPLATE.md](../template/BLOG_TEMPLATE.md). Its minimal-input, unfinished-content, and completion rules replace the normal completed-article gates for that route. Section 10.1 still governs its local category/top/sitemap integration. Preparing those files does not establish article completion or production publication.
 
 ## 2. Primary Principles
 

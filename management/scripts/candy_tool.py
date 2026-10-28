@@ -14,6 +14,7 @@ os.environ["PYTHONDONTWRITEBYTECODE"] = "1"
 import candy_page_common as common
 
 COMMANDS = {
+    "blog-template": dict.fromkeys(("create", "check"), "candy_blog_template"),
     "area": {
         **dict.fromkeys(("build", "check", "audit-inputs", "related-write", "related-check"), "candy_area_page"),
         **dict.fromkeys(("target-next", "target-check"), "candy_area_target_gate"),
@@ -36,6 +37,8 @@ COMMANDS = {
 
 def doctor(category: str) -> int:
     paths = [common.DOCS_DIR, common.SCRIPTS_DIR, common.HP_ROOT]
+    if category == "blog-template":
+        paths += [common.REPO_ROOT / "management/template/BLOG_TEMPLATE.md", common.HP_ROOT / "css/blog.css"]
     if category == "area":
         paths += [common.DATA_DIR / "CANDY_AREA_RELATED_LINKS.json", common.DOCS_DIR / "CANDY_AREA_105_PAGE_QUEUE.md"]
     missing = [str(path) for path in paths if not path.exists()]
@@ -46,7 +49,7 @@ def doctor(category: str) -> int:
               "php": php, "php_short_tag_lint": php_ok, "git": shutil.which("git"),
               "missing_paths": missing, "production": "NOT_VERIFIED"}
     print("ENVIRONMENT_JSON=" + json.dumps(result, ensure_ascii=False))
-    ok = not missing and sys.version_info >= (3, 12) and php_ok and bool(result["git"]) and (category == "site-state" or pillow)
+    ok = not missing and sys.version_info >= (3, 12) and php_ok and bool(result["git"]) and (category in ("site-state", "blog-template") or pillow)
     print("RESULT=" + ("READY_LOCAL" if ok else "STOP"))
     return 0 if ok else 2
 

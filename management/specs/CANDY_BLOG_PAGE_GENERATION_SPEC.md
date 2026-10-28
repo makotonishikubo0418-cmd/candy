@@ -1,6 +1,6 @@
 # CANDY Blog Page Generation Specification
 
-- Updated: 2026-10-14
+- Updated: 2026-10-28
 - Applies to: Normal new generation of CANDY blog detail pages by Codex
 - Operational sequence: `BLOG_CREATION.md`
 - Common image requirements: `IMAGE_MANAGEMENT.md`
@@ -13,6 +13,8 @@ This document owns only blog-specific page structure, source mapping, variable
 blocks, and validation requirements. Common generation rules, Git, publication,
 and routing remain in the applicable documents selected from `codex/WORK_ROUTING.md`
 Section 5.2.
+
+For a URL/title-only request to prepare a template before the user writes the article HTML, use [BLOG_TEMPLATE.md](../template/BLOG_TEMPLATE.md). That document owns the executable scaffold code, minimal inputs, local PHP/registry/sitemap preparation, and the separate scaffold completion state. The source-Text requirements below apply to completed-article generation, not to that preparation route.
 
 ## 2. Mandatory Rules
 
@@ -41,6 +43,10 @@ For this editable staff-blog layout, `sceneN` belongs to the section containing 
 - Scope blog-only styling under `.blog-page`, and use shared `blog-*` components and `blog-theme-*` classes in article HTML and the official template. Do not move per-article styling into HTML style blocks or style attributes to bypass this rule. Existing articles that use only site-wide components need no artificial blog-only styles.
 - When blog.css changes, use the same SHA-256 prefix (first eight lowercase hexadecimal characters) as the `v` query value in every HTML file that references it, including the official template. Preserve unrelated article content.
 - Verify that the old per-article CSS files are absent, no implementation references them, and each article/template references existing CSS files. When style declarations or markup change, verify desktop and mobile display for the affected pages.
+
+### 2.3 URL/Title-Only Template Code
+
+The management-side code authority for URL/title-only scaffolds is [BLOG_TEMPLATE.md](../template/BLOG_TEMPLATE.md), consumed directly by [candy_blog_template.py](../scripts/candy_blog_template.py). It prepares HTML, public PHP, dataset PHP, shared routing, category/top links, and sitemap together. The editable staff template in Section 2.1 remains the full article component/design reference. Scaffold-specific handling of unfinished body content, metadata, images, and JSON-LD is defined only in the management-side template document. Once the user supplies completed HTML, apply this specification's relevant content, CSS, SEO, and display checks.
 
 ## 3. Required File and Public-Route Change Unit
 

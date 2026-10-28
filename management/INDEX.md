@@ -1,6 +1,6 @@
 # Candy Management Document Index
 
-Updated: 2026-10-08
+Updated: 2026-10-28
 
 Parent document: [`AGENTS.md`](../AGENTS.md)
 
@@ -10,7 +10,7 @@ This document is the index that manages the official locations, responsibilities
 
 The managed locations below are relative to the `Candy/` workspace root. Markdown links are relative to this file, `management/INDEX.md`.
 
-Common management documents and the `specs/`, `history/`, `scripts/`, `data/`, and `image/` folders are all located under `management/`. The current locations are `management/specs/`, `management/history/`, `management/scripts/`, `management/data/`, and `management/image/`; this index does not prescribe a future relocation.
+Common management documents and the `specs/`, `template/`, `history/`, `scripts/`, `data/`, and `image/` folders are all located under `management/`. The current locations are `management/specs/`, `management/template/`, `management/history/`, `management/scripts/`, `management/data/`, and `management/image/`; this index does not prescribe a future relocation.
 
 The highest-authority management document, `AGENTS.md`, is located at the root of the Candy workspace.
 
@@ -28,6 +28,7 @@ Candy/
 │  ├─ INDEX.md                   Common documents are listed in Section 4
 │  ├─ specs/
 │  │  └─ generated/
+│  ├─ template/
 │  ├─ history/
 │  │  ├─ records/
 │  │  └─ 履歴/
@@ -112,7 +113,7 @@ Common management documents are stored under `management/`.
 
 ## 5. Feature Management Documents
 
-Feature management documents are stored under `management/specs/`.
+Feature specifications are stored under `management/specs/`; executable template management documents are stored under `management/template/`.
 
 ### 5.1 Management Locations by Feature
 
@@ -129,6 +130,7 @@ Feature management documents are stored under `management/specs/`.
 | Hotel Input Preparation | [`CANDY_HOTEL_TEXT_INPUT_CLASSIFICATION.md`](specs/CANDY_HOTEL_TEXT_INPUT_CLASSIFICATION.md) | [`CANDY_HOTEL_CONTENT_PREPARATION_RUNBOOK.md`](specs/CANDY_HOTEL_CONTENT_PREPARATION_RUNBOOK.md) | None | Input-format classification, legacy conversion requirements, hotel research, access information, and page-text preparation |
 | Hotel Image Management | [`CANDY_HOTEL_IMAGE_CREATION_SPEC.md`](specs/CANDY_HOTEL_IMAGE_CREATION_SPEC.md) | [`CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`](specs/CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md) | None | Hotel image-pair creation, acceptance, source retention, local installation, replacement, and publication states |
 | Blog Page Management | [`CANDY_BLOG_PAGE_GENERATION_SPEC.md`](specs/CANDY_BLOG_PAGE_GENERATION_SPEC.md) | [`BLOG_CREATION.md`](specs/BLOG_CREATION.md)<br>[`CANDY_GIRL_INFORMATION_MANAGEMENT.md`](specs/CANDY_GIRL_INFORMATION_MANAGEMENT.md) | [`IMAGE_MANAGEMENT.md`](specs/IMAGE_MANAGEMENT.md) | Blog-page generation, repeatable production, top-page latest 15 entries, manager-recommended girl blocks, and validation |
+| Blog Template Preparation | [`BLOG_TEMPLATE.md`](template/BLOG_TEMPLATE.md) | [`CANDY_BLOG_PAGE_GENERATION_SPEC.md`](specs/CANDY_BLOG_PAGE_GENERATION_SPEC.md) | None | URL/title-only HTML and PHP code templates, JSON-LD, public-route preparation, and later user HTML replacement |
 | Girl Information Management | [`CANDY_GIRL_INFORMATION_MANAGEMENT.md`](specs/CANDY_GIRL_INFORMATION_MANAGEMENT.md) | [`CANDY_CODE_FILE_STRUCTURE.md`](specs/CANDY_CODE_FILE_STRUCTURE.md) | None | Structured girl information, blog-generation use, local-only image retention, and public-image states |
 | Other Page Management | [`CANDY_OTHER_PAGES_MANAGEMENT.md`](specs/CANDY_OTHER_PAGES_MANAGEMENT.md) | [`MEMBER_ARCHITECTURE.md`](../HP/docs/MEMBER_ARCHITECTURE.md) (source-attached technical reference) | None | Pages outside area, hotel, and blog, including dynamic profiles, member pages, authentication, APIs, and related technical references |
 | SEO Management | [`CANDY_SEO_SPEC.md`](specs/CANDY_SEO_SPEC.md) | Generated SEO documents in Section 5.2 | None | Common SEO requirements, canonical URLs, metadata, structured data, and per-page verification |
@@ -172,6 +174,7 @@ Page-production and management tools are stored under `management/scripts/`. Dep
 | [`candy_hotel_image.py`](scripts/candy_hotel_image.py) | Plans, renders, and validates hotel image candidates | [`CANDY_HOTEL_IMAGE_CREATION_SPEC.md`](specs/CANDY_HOTEL_IMAGE_CREATION_SPEC.md), [`CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`](specs/CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md) |
 | [`candy_hotel_publish.py`](scripts/candy_hotel_publish.py) | Coordinates hotel-page production, publication, and resumption | [`CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md`](specs/CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md), [`GIT_MANAGEMENT.md`](GIT_MANAGEMENT.md) |
 | [`candy-blog.cmd`](scripts/candy-blog.cmd)<br>[`candy_blog_page.py`](scripts/candy_blog_page.py) | Entry point, builder, registry synchronizer, and validator for blog pages | [`CANDY_BLOG_PAGE_GENERATION_SPEC.md`](specs/CANDY_BLOG_PAGE_GENERATION_SPEC.md), [`BLOG_CREATION.md`](specs/BLOG_CREATION.md) |
+| [`candy-blog-template.cmd`](scripts/candy-blog-template.cmd)<br>[`candy_blog_template.py`](scripts/candy_blog_template.py)<br>[`test_candy_blog_template.py`](scripts/test_candy_blog_template.py) | URL/title-only blog scaffold creation, integration checks, and offline regression tests | [`BLOG_TEMPLATE.md`](template/BLOG_TEMPLATE.md) |
 | [`candy_category_publish.py`](scripts/candy_category_publish.py) | Provides category publication and resumption processing for hotel and blog pages | Applicable category specification, [`CANDY_PRODUCTION_MIGRATION_MASTER.md`](specs/CANDY_PRODUCTION_MIGRATION_MASTER.md), [`GIT_MANAGEMENT.md`](GIT_MANAGEMENT.md) |
 | [`candy_girl_information.py`](scripts/candy_girl_information.py) | Imports and validates structured girl information and image-publication state | [`CANDY_GIRL_INFORMATION_MANAGEMENT.md`](specs/CANDY_GIRL_INFORMATION_MANAGEMENT.md) |
 | [`candy_page_common.py`](scripts/candy_page_common.py) | Provides shared page-generation, validation, path, and asset helpers | [`CANDY_PAGE_GENERATION_GOVERNANCE.md`](specs/CANDY_PAGE_GENERATION_GOVERNANCE.md), [`CANDY_OPERATION_BASICS.md`](specs/CANDY_OPERATION_BASICS.md) |
@@ -205,6 +208,7 @@ Page-production and management tools are stored under `management/scripts/`. Dep
 |---|---|---|
 | [`AGENTS.md`](../AGENTS.md) | Highest-authority project instructions at the Candy workspace root | `AGENTS.md` |
 | [`management/`](./) | Common management documents | [`INDEX.md`](INDEX.md), [`DOCUMENT_RULES.md`](DOCUMENT_RULES.md) |
+| [`management/template/`](template/) | Executable template code and preparation procedures | [`BLOG_TEMPLATE.md`](template/BLOG_TEMPLATE.md) |
 | [`management/specs/`](specs/)<br>[`management/specs/generated/`](specs/generated/) | Specifications and supporting documents; generated current-state views have their own subdirectory | Documents in Section 5; retained non-current sources in Section 8 |
 | [`management/history/`](history/) | Case overview files, located through the case list | [`HISTORY.md`](HISTORY.md), [`HISTORY_LIST.md`](HISTORY_LIST.md) |
 | [`management/history/records/`](history/records/) | Append-only progress records; the latest record for each case owns its current status, remaining work, and next action | [`HISTORY.md`](HISTORY.md), the corresponding case overview |
