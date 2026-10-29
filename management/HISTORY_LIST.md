@@ -1,9 +1,10 @@
 # Candy 履歴一覧
 
-Updated: 2026-10-28
+Updated: 2026-10-29
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | 短時間バイトブログの最新HTML公開 | [20261029_OPERATION_short-time-job-html-publication.md](history/20261029_OPERATION_short-time-job-html-publication.md) |
 | MODIFY | 生成管理書の更新日補完とコード参照台帳のサイズ特例 | [20261028_MODIFY_generated-document-metadata.md](history/20261028_MODIFY_generated-document-metadata.md) |
 | OPERATION | 短時間バイトブログの本番公開 | [20261028_OPERATION_short-time-job-production-publication.md](history/20261028_OPERATION_short-time-job-production-publication.md) |
 | OPERATION | 短時間バイトブログ関連の最新ローカル情報のGitHub保存 | [20261028_OPERATION_short-time-job-github-publication.md](history/20261028_OPERATION_short-time-job-github-publication.md) |
