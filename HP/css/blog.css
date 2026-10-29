@@ -204,6 +204,18 @@
 	--blog-related-link-border: rgba(155, 103, 18, 0.16); /* 関連記事リンク間の線の色 */
 }
 
+/* 秋冬記事のCTA配色のみ。2ボタンの寸法・配置は既存指定を維持します。 */
+.blog-page .blog-cta.blog-cta-autumn-winter {
+	--blog-cta-background: inherit;
+	--blog-cta-shadow: inherit;
+	--blog-cta-eyebrow: inherit;
+	--blog-primary-text: inherit;
+	--blog-primary-background: inherit;
+	--blog-cta-decoration-background: radial-gradient(circle, rgba(213, 156, 34, 0.28), rgba(213, 156, 34, 0));
+	--blog-primary-shadow: 0 10px 24px rgba(73, 48, 31, 0.3);
+	--blog-primary-hover-background: #f2ca48;
+}
+
 /* 01-4. 濃いピンク系：正式ブログテンプレート・candy_dominant_girls */
 .blog-page:where(.blog-theme-deep-pink) {
 	/* 基本色・共通の背景と影 */
