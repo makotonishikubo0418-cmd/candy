@@ -4,6 +4,7 @@ Updated: 2026-10-29
 
 | Type | Title | History |
 |---|---|---|
+| MODIFY | 秋冬ブログの末尾CTA統一 | [20261029_MODIFY_autumn-winter-cuddle-cta.md](history/20261029_MODIFY_autumn-winter-cuddle-cta.md) |
 | OPERATION | 秋冬ブログの本番公開 | [20261029_OPERATION_autumn-winter-cuddle-production-publication.md](history/20261029_OPERATION_autumn-winter-cuddle-production-publication.md) |
 | OPERATION | 秋冬ブログ関連の最新ローカル情報のGitHub保存 | [20261029_OPERATION_autumn-winter-cuddle-github-publication.md](history/20261029_OPERATION_autumn-winter-cuddle-github-publication.md) |
 | CREATE | 秋冬のくっつきたくなる気持ちブログのローカルテンプレート作成 | [20261029_CREATE_autumn-winter-cuddle-blog-template.md](history/20261029_CREATE_autumn-winter-cuddle-blog-template.md) |
