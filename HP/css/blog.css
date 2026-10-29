@@ -1389,6 +1389,18 @@
 		box-sizing: border-box;
 	}
 
+	/* 指定記事のみ、スクロールバーを含まない親要素の幅に合わせます。 */
+	.blog-page.blog-container-width,
+	.blog-page.blog-container-width .blog-article {
+		width: 100%;
+		max-width: 100%;
+	}
+
+	.blog-page.blog-container-width .blog-intro {
+		width: auto;
+		max-width: none;
+	}
+
 	.blog-page .blog-section {
 		margin-top: 64px;
 	}

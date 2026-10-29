@@ -11,10 +11,10 @@ Updated: 2026-10-29
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-29T10:44:29+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-29T14:47:48+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 437ee2f60bacda646cf7e3bd95dab61e02d978e2
-> State fingerprint: sha256:ac4861aafab014addae96df8100d3807c15d1ebc0400b10eac9a5b3d6ebd4f09
+> Commit: 655f7b21b18cebaf2b9bebbbf129fa4c2d7eba57
+> State fingerprint: sha256:69111b880b5d37a0c52deb66dda362ecec5d51430aff1b9a7260dfb877daac29
 > Population: Public PHP files: 268 / assets: 761
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
@@ -238,7 +238,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | area:yoshinocho | 6 | NONE | OK |
 | area:yotsumotocho | 6 | NONE | OK |
 | area:yusukicho | 6 | NONE | OK |
-| blog:autumn-winter-cuddle | 0 | NONE | UNVERIFIED |
+| blog:autumn-winter-cuddle | 1 | NONE | OK |
 | blog:candy_dominant_girls | 3 | NONE | OK |
 | blog:girl-choice | 3 | NONE | OK |
 | blog:glamourgirl | 7 | NONE | OK |
@@ -359,7 +359,6 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/imgHtml/new_202601/blog | 1 | autumn-winter-cuddle.jpg |
 
 ## Required Same-Content Path Groups
 
