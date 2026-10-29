@@ -1,6 +1,6 @@
 # CANDY CODE ASSET INVENTORY
 
-Updated: 2026-10-28
+Updated: 2026-10-29
 
 > **Automatically generated. Manual editing is prohibited.**
 >
@@ -11,11 +11,11 @@ Updated: 2026-10-28
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-28T14:24:11+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-29T10:44:29+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: f7d95f992dad3e97378deaf21a181d0bf269e671
-> State fingerprint: sha256:276c7c0b4397601fe127ac92951a86df334fb69395fc31f344195e2c11efe5ab
-> Population: Public PHP files: 267 / assets: 760
+> Commit: 437ee2f60bacda646cf7e3bd95dab61e02d978e2
+> State fingerprint: sha256:ac4861aafab014addae96df8100d3807c15d1ebc0400b10eac9a5b3d6ebd4f09
+> Population: Public PHP files: 268 / assets: 761
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -31,7 +31,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 638 |
+| .jpg | 639 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 31 |
@@ -54,7 +54,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 37 |
+| HP/imgHtml/new_202601/blog | 38 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -238,6 +238,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | area:yoshinocho | 6 | NONE | OK |
 | area:yotsumotocho | 6 | NONE | OK |
 | area:yusukicho | 6 | NONE | OK |
+| blog:autumn-winter-cuddle | 0 | NONE | UNVERIFIED |
 | blog:candy_dominant_girls | 3 | NONE | OK |
 | blog:girl-choice | 3 | NONE | OK |
 | blog:glamourgirl | 7 | NONE | OK |
@@ -358,6 +359,7 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
+| HP/imgHtml/new_202601/blog | 1 | autumn-winter-cuddle.jpg |
 
 ## Required Same-Content Path Groups
 

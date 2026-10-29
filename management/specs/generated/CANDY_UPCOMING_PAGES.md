@@ -1,6 +1,6 @@
 # CANDY UPCOMING PAGES
 
-Updated: 2026-10-28
+Updated: 2026-10-29
 
 > **Automatically generated. Manual editing is prohibited.**
 >
@@ -11,10 +11,10 @@ Updated: 2026-10-28
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: Category queue/classification documents and the three TSV children listed below
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-28T14:24:11+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-29T10:44:29+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: f7d95f992dad3e97378deaf21a181d0bf269e671
-> State fingerprint: sha256:276c7c0b4397601fe127ac92951a86df334fb69395fc31f344195e2c11efe5ab
+> Commit: 437ee2f60bacda646cf7e3bd95dab61e02d978e2
+> State fingerprint: sha256:ac4861aafab014addae96df8100d3807c15d1ebc0400b10eac9a5b3d6ebd4f09
 > Population: Unique candidates: 239 / Text records: 239
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: READY=5 / BLOCKED=8 / EXISTING=226 / CONFLICT=0

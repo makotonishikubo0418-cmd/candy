@@ -4,6 +4,8 @@ Updated: 2026-10-29
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | 秋冬ブログ関連の最新ローカル情報のGitHub保存 | [20261029_OPERATION_autumn-winter-cuddle-github-publication.md](history/20261029_OPERATION_autumn-winter-cuddle-github-publication.md) |
+| CREATE | 秋冬のくっつきたくなる気持ちブログのローカルテンプレート作成 | [20261029_CREATE_autumn-winter-cuddle-blog-template.md](history/20261029_CREATE_autumn-winter-cuddle-blog-template.md) |
 | OPERATION | 短時間バイトブログの最新HTML公開 | [20261029_OPERATION_short-time-job-html-publication.md](history/20261029_OPERATION_short-time-job-html-publication.md) |
 | MODIFY | 生成管理書の更新日補完とコード参照台帳のサイズ特例 | [20261028_MODIFY_generated-document-metadata.md](history/20261028_MODIFY_generated-document-metadata.md) |
 | OPERATION | 短時間バイトブログの本番公開 | [20261028_OPERATION_short-time-job-production-publication.md](history/20261028_OPERATION_short-time-job-production-publication.md) |
