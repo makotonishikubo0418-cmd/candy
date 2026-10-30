@@ -4,6 +4,7 @@ Updated: 2026-10-30
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | コース時間記事のデザイン変更の本番公開 | [20261030_OPERATION_course-time-design-publication.md](history/20261030_OPERATION_course-time-design-publication.md) |
 | MODIFY | コース時間ブログの比較表・配色・導入表記の調整 | [20261030_MODIFY_course-time-design.md](history/20261030_MODIFY_course-time-design.md) |
 | OPERATION | コース時間ブログのタイトル修正と本番公開 | [20261030_OPERATION_course-time-production-publication.md](history/20261030_OPERATION_course-time-production-publication.md) |
 | OPERATION | コース時間ブログ関連の最新ローカル情報のGitHub保存 | [20261030_OPERATION_course-time-github-publication.md](history/20261030_OPERATION_course-time-github-publication.md) |
