@@ -1,9 +1,11 @@
 # Candy 履歴一覧
 
-Updated: 2026-10-29
+Updated: 2026-10-30
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | ダブルワークブログ関連の最新ローカル情報のGitHub保存 | [20261030_OPERATION_double-work-github-publication.md](history/20261030_OPERATION_double-work-github-publication.md) |
+| CREATE | ダブルワークブログのローカルテンプレート作成 | [20261030_CREATE_double-work-blog-template.md](history/20261030_CREATE_double-work-blog-template.md) |
 | OPERATION | 秋冬ブログの手動改行修正の検証と公開 | [20261029_OPERATION_autumn-winter-cuddle-line-break-publication.md](history/20261029_OPERATION_autumn-winter-cuddle-line-break-publication.md) |
 | MODIFY | 秋冬ブログの末尾CTA統一 | [20261029_MODIFY_autumn-winter-cuddle-cta.md](history/20261029_MODIFY_autumn-winter-cuddle-cta.md) |
 | OPERATION | 秋冬ブログの本番公開 | [20261029_OPERATION_autumn-winter-cuddle-production-publication.md](history/20261029_OPERATION_autumn-winter-cuddle-production-publication.md) |

@@ -1,6 +1,6 @@
 # CANDY CODE ASSET INVENTORY
 
-Updated: 2026-10-29
+Updated: 2026-10-30
 
 > **Automatically generated. Manual editing is prohibited.**
 >
@@ -11,11 +11,11 @@ Updated: 2026-10-29
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-29T15:19:22+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-29T15:35:04+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 1a41fb9953405106c1b66c3210751dbe11e68699
-> State fingerprint: sha256:40f919b88606da5c0d9fe8303a7185d8a339a090a57f0401cc18ddf12cd1b9a8
-> Population: Public PHP files: 268 / assets: 761
+> Commit: 604fae587ffc45c0b1da329c6d8a8de87f8079a0
+> State fingerprint: sha256:bef64ef3879898b51d70638734a66d3ec627ea9590768ebeb33fc73d2e0b8d4d
+> Population: Public PHP files: 269 / assets: 761
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -240,6 +240,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | area:yusukicho | 6 | NONE | OK |
 | blog:autumn-winter-cuddle | 1 | NONE | OK |
 | blog:candy_dominant_girls | 3 | NONE | OK |
+| blog:double-work | 0 | NONE | UNVERIFIED |
 | blog:girl-choice | 3 | NONE | OK |
 | blog:glamourgirl | 7 | NONE | OK |
 | blog:maimai-profile | 3 | NONE | OK |

@@ -1,6 +1,6 @@
 # CANDY SITE PAGE LEDGER
 
-Updated: 2026-10-29
+Updated: 2026-10-30
 
 > **Automatically generated. Manual editing is prohibited.**
 >
@@ -11,13 +11,13 @@ Updated: 2026-10-29
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_SITE_PAGE_LEDGER.tsv`, stable structure specifications, and category specifications
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-29T15:19:22+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-29T15:35:04+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 1a41fb9953405106c1b66c3210751dbe11e68699
-> State fingerprint: sha256:40f919b88606da5c0d9fe8303a7185d8a339a090a57f0401cc18ddf12cd1b9a8
-> Population: Public PHP files: 268
+> Commit: 604fae587ffc45c0b1da329c6d8a8de87f8079a0
+> State fingerprint: sha256:bef64ef3879898b51d70638734a66d3ec627ea9590768ebeb33fc73d2e0b8d4d
+> Population: Public PHP files: 269
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
-> Result: COMPLETE=263 / SPECIAL=5 (intentional=5, unreviewed=0)
+> Result: COMPLETE=264 / SPECIAL=5 (intentional=5, unreviewed=0)
 > Unverified scope: Production HTTP, database state, and external include targets
 
 The Markdown parent owns scope, provenance, and summary. The complete one-page-per-row population is in [CANDY_SITE_PAGE_LEDGER.tsv](CANDY_SITE_PAGE_LEDGER.tsv).
@@ -27,7 +27,7 @@ The Markdown parent owns scope, provenance, and summary. The complete one-page-p
 | category | pages |
 |---|---:|
 | area | 165 |
-| blog | 16 |
+| blog | 17 |
 | girls | 3 |
 | hotel | 72 |
 | other | 8 |
@@ -36,7 +36,7 @@ The Markdown parent owns scope, provenance, and summary. The complete one-page-p
 
 | structure | pages |
 |---|---:|
-| COMPLETE | 263 |
+| COMPLETE | 264 |
 | SPECIAL | 5 |
 
 | special classification | pages |

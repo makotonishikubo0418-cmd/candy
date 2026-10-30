@@ -1,6 +1,6 @@
 # CANDY SEO STATUS
 
-Updated: 2026-10-29
+Updated: 2026-10-30
 
 > **Automatically generated. Manual editing is prohibited.**
 >
@@ -11,20 +11,20 @@ Updated: 2026-10-29
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_SEO_STATUS.tsv` and `../CANDY_SEO_SPEC.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-29T15:19:22+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-29T15:35:04+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 1a41fb9953405106c1b66c3210751dbe11e68699
-> State fingerprint: sha256:40f919b88606da5c0d9fe8303a7185d8a339a090a57f0401cc18ddf12cd1b9a8
-> Population: Pages: 268
+> Commit: 604fae587ffc45c0b1da329c6d8a8de87f8079a0
+> State fingerprint: sha256:bef64ef3879898b51d70638734a66d3ec627ea9590768ebeb33fc73d2e0b8d4d
+> Population: Pages: 269
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
-> Result: OK=267 / ISSUE=1 / UNVERIFIED=0
+> Result: OK=268 / ISSUE=1 / UNVERIFIED=0
 > Unverified scope: Production HTTP, search-engine index state, redirects, and database-generated HTML
 
 The complete per-page SEO population is in [CANDY_SEO_STATUS.tsv](CANDY_SEO_STATUS.tsv). Detected issues are not corrected automatically.
 
 | result | pages |
 |---|---:|
-| OK | 267 |
+| OK | 268 |
 | ISSUE | 1 |
 | UNVERIFIED | 0 |
 
