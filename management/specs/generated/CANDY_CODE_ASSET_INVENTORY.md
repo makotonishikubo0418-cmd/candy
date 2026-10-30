@@ -11,11 +11,11 @@ Updated: 2026-10-30
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-30T14:59:28+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-30T15:13:34+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 31d30a274a237f2eabf267948d96e5512be09a30
-> State fingerprint: sha256:e4e197a1ef7511fa4dffbbeeed676a6a228526e43fdcf1bfc13f1a5f4c7838ed
-> Population: Public PHP files: 269 / assets: 763
+> Commit: 1b52e2555680a933d5232d8ac8652478b266f615
+> State fingerprint: sha256:c8d9797904dbe6fd4a544bf8edd0139b80fa9c43af494be00711f3c8b3b629be
+> Population: Public PHP files: 270 / assets: 766
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -31,7 +31,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 641 |
+| .jpg | 644 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 31 |
@@ -54,7 +54,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 40 |
+| HP/imgHtml/new_202601/blog | 43 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -240,6 +240,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | area:yusukicho | 6 | NONE | OK |
 | blog:autumn-winter-cuddle | 1 | NONE | OK |
 | blog:candy_dominant_girls | 3 | NONE | OK |
+| blog:course-time | 0 | NONE | UNVERIFIED |
 | blog:double-work | 2 | NONE | OK |
 | blog:girl-choice | 3 | NONE | OK |
 | blog:glamourgirl | 7 | NONE | OK |
@@ -360,6 +361,7 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
+| HP/imgHtml/new_202601/blog | 3 | kagoshima-deliveryhealth-blog-course-time_1.jpg, kagoshima-deliveryhealth-blog-course-time_2.jpg, kagoshima-deliveryhealth-blog-course-time_3.jpg |
 
 ## Required Same-Content Path Groups
 
