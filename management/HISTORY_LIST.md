@@ -4,6 +4,7 @@ Updated: 2026-10-30
 
 | Type | Title | History |
 |---|---|---|
+| MODIFY | ダブルワークブログの末尾CTA追加 | [20261030_MODIFY_double-work-cta.md](history/20261030_MODIFY_double-work-cta.md) |
 | OPERATION | ダブルワークブログの本番公開 | [20261030_OPERATION_double-work-production-publication.md](history/20261030_OPERATION_double-work-production-publication.md) |
 | OPERATION | ダブルワークブログ関連の最新ローカル情報のGitHub保存 | [20261030_OPERATION_double-work-github-publication.md](history/20261030_OPERATION_double-work-github-publication.md) |
 | CREATE | ダブルワークブログのローカルテンプレート作成 | [20261030_CREATE_double-work-blog-template.md](history/20261030_CREATE_double-work-blog-template.md) |

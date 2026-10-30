@@ -11,10 +11,10 @@ Updated: 2026-10-30
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_SEO_STATUS.tsv` and `../CANDY_SEO_SPEC.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-30T14:49:40+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-30T14:59:28+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 5e3f0147c086909e4f73c166c5c94f5aaa562d1e
-> State fingerprint: sha256:bae3b931267d176a0bb7ad225cbe5d60f8a2ff6df45dd9a05f995a5ce1997383
+> Commit: 31d30a274a237f2eabf267948d96e5512be09a30
+> State fingerprint: sha256:e4e197a1ef7511fa4dffbbeeed676a6a228526e43fdcf1bfc13f1a5f4c7838ed
 > Population: Pages: 269
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: OK=268 / ISSUE=1 / UNVERIFIED=0
