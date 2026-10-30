@@ -14,7 +14,7 @@
  * brown     ：private-waiting-room
  * gold      ：tokyo-souvenir
  * deep-pink ：正式ブログテンプレート・candy_dominant_girls
- * deep-pink に追加する配色：blog-theme-curry（カレー色）、blog-theme-purple（紫）
+ * deep-pink に追加する配色：blog-theme-curry（カレー色）、blog-theme-purple（紫）、blog-theme-antique-gold（アンティークゴールド）
  *
  * 【注意】
  * ブログ独自の装飾はこのファイルに集約し、記事別CSSは作成・復活・参照しません。
@@ -377,6 +377,55 @@
 	background: var(--blog-primary-hover-background);
 }
 
+/* 01-7. アンティークゴールド：スタッフブログの寸法を保つ配色 */
+.blog-page:where(.blog-theme-antique-gold) {
+	--blog-ink: #332c23;
+	--blog-muted: #776955;
+	--blog-accent: #a27b43;
+	--blog-accent-dark: #76572e;
+	--blog-accent-deep: #4d3922;
+	--blog-pale: #f8f3e9;
+	--blog-surface-soft: #fcfaf6;
+	--blog-border: rgba(162, 123, 67, 0.22);
+	--blog-shadow-sm: 0 10px 30px rgba(77, 57, 34, 0.07);
+	--blog-shadow-md: 0 18px 48px rgba(77, 57, 34, 0.12);
+	--blog-hero-background: #332c23;
+	--blog-toc-background: linear-gradient(145deg, #f8f3e9 0%, #fff 76%);
+	--blog-heading-bar-background: var(--blog-accent);
+	--blog-callout-background: linear-gradient(135deg, #faf6ee, #fff);
+	--blog-callout-bar-background: var(--blog-accent);
+	--blog-checklist-border: rgba(77, 57, 34, 0.08);
+	--blog-checklist-dot-shadow: 0 0 0 5px rgba(162, 123, 67, 0.1);
+	--blog-card-background: linear-gradient(180deg, #fff 0%, #fff 72%, #fcfaf6 100%);
+	--blog-card-bar-background: linear-gradient(90deg, var(--blog-accent), #cfb78e);
+	--blog-card-text: #62513c;
+	--blog-photo-shadow: 0 20px 50px rgba(77, 57, 34, 0.15);
+	--blog-caption-text: #62513c;
+	--blog-caption-shadow: 0 14px 32px rgba(77, 57, 34, 0.1);
+	--blog-cta-background: linear-gradient(135deg, #3f3021 0%, #6c5130 100%);
+	--blog-cta-shadow: 0 20px 48px rgba(77, 57, 34, 0.2);
+	--blog-cta-decoration-background: radial-gradient(circle, rgba(162, 123, 67, 0.28), rgba(162, 123, 67, 0));
+	--blog-cta-eyebrow: #e4cfaa;
+	--blog-primary-background: linear-gradient(135deg, #a27b43, #76572e);
+	--blog-primary-shadow: 0 10px 24px rgba(77, 57, 34, 0.25);
+	--blog-primary-hover-background: linear-gradient(135deg, #92703d, #604523);
+	--blog-related-border: rgba(162, 123, 67, 0.18);
+	--blog-related-link-border: rgba(162, 123, 67, 0.18);
+}
+
+.blog-page:where(.blog-theme-antique-gold) .bt-pk-xl {
+	background: var(--blog-primary-background);
+}
+
+.blog-page:where(.blog-theme-antique-gold) .bt-pk-xl:hover {
+	background: var(--blog-primary-hover-background);
+}
+
+.blog-page:where(.blog-theme-antique-gold) .faq-question:hover,
+.blog-page:where(.blog-theme-antique-gold) .faq-item.active .faq-question {
+	color: var(--blog-accent-dark);
+}
+
 /* 02. 記事全体の基本設定 */
 
 .blog-page {
@@ -619,6 +668,43 @@
 .blog-page:where(.blog-theme-gold) .blog-lead p,
 .blog-page:where(.blog-theme-gold) .blog-section p {
 	margin: 0 0 20px;
+}
+
+/* 06-1. 余白を確保した2列の比較表（指定した表だけに適用） */
+.blog-page .blog-table-spacious {
+	width: 100%;
+	margin: 28px 0 32px;
+	border-collapse: collapse;
+	table-layout: fixed;
+	border: 1px solid var(--blog-border);
+	font-size: 16px;
+	line-height: 1.8;
+}
+
+.blog-page .blog-table-spacious th,
+.blog-page .blog-table-spacious td {
+	padding: 18px 24px;
+	border-bottom: 1px solid var(--blog-border);
+	text-align: left;
+	vertical-align: middle;
+	overflow-wrap: anywhere;
+}
+
+.blog-page .blog-table-spacious th {
+	background: var(--blog-pale);
+	color: var(--blog-accent-dark);
+	font-weight: bold;
+}
+
+.blog-page .blog-table-spacious th + th,
+.blog-page .blog-table-spacious td + td {
+	width: 28%;
+	border-left: 1px solid var(--blog-border);
+	text-align: center;
+}
+
+.blog-page .blog-table-spacious tbody tr:nth-child(even) {
+	background: var(--blog-surface-soft);
 }
 
 /* 07. アクセント（横長の強調枠） */
@@ -1281,6 +1367,21 @@
    ========================================================================== */
 
 @media screen and (max-width: 768px) {
+	.blog-page .blog-table-spacious {
+		font-size: 14px;
+		line-height: 1.85;
+	}
+
+	.blog-page .blog-table-spacious th,
+	.blog-page .blog-table-spacious td {
+		padding: 14px 12px;
+	}
+
+	.blog-page .blog-table-spacious th + th,
+	.blog-page .blog-table-spacious td + td {
+		width: 38%;
+	}
+
 
 	/* 15-02. 記事全体の基本設定 */
 
