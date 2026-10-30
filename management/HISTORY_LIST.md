@@ -4,6 +4,7 @@ Updated: 2026-10-30
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | コース時間ブログのタイトル修正と本番公開 | [20261030_OPERATION_course-time-production-publication.md](history/20261030_OPERATION_course-time-production-publication.md) |
 | OPERATION | コース時間ブログ関連の最新ローカル情報のGitHub保存 | [20261030_OPERATION_course-time-github-publication.md](history/20261030_OPERATION_course-time-github-publication.md) |
 | CREATE | コース時間ブログのローカルテンプレート作成 | [20261030_CREATE_course-time-blog-template.md](history/20261030_CREATE_course-time-blog-template.md) |
 | MODIFY | ダブルワークブログの末尾CTA追加 | [20261030_MODIFY_double-work-cta.md](history/20261030_MODIFY_double-work-cta.md) |
