@@ -4,6 +4,8 @@ Updated: 2026-10-31
 
 | Type | Title | History |
 |---|---|---|
+| PROBLEM | 短時間バイト記事の既存FAQ検査警告 | [20261031_PROBLEM_short-time-job-faq-seo-warning.md](history/20261031_PROBLEM_short-time-job-faq-seo-warning.md) |
+| MODIFY | ブログの表示用店舗名をカタカナへ統一 | [20261031_MODIFY_blog-store-name-katakana.md](history/20261031_MODIFY_blog-store-name-katakana.md) |
 | OPERATION | 未経験のお仕事ブログCTA誘導文の本番公開 | [20261031_OPERATION_beginner-job-cta-guidance-publication.md](history/20261031_OPERATION_beginner-job-cta-guidance-publication.md) |
 | OPERATION | 未経験のお仕事ブログ2ボタンCTAのGitHub保存と本番公開 | [20261031_OPERATION_beginner-job-two-button-cta-publication.md](history/20261031_OPERATION_beginner-job-two-button-cta-publication.md) |
 | MODIFY | 未経験のお仕事ブログCTAの2ボタン化 | [20261031_MODIFY_beginner-job-two-button-cta.md](history/20261031_MODIFY_beginner-job-two-button-cta.md) |

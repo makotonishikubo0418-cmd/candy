@@ -11,11 +11,11 @@ Updated: 2026-10-31
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-31T15:26:58+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-31T15:46:26+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 5e070b200c53d00d5f5d98c24c819c8e8a1d2a9c
-> State fingerprint: sha256:9b961d5c84163585721a39709d69b3a0e405dd0140625bb9b93e69e0202de5e5
-> Population: Public PHP files: 271 / assets: 769
+> Commit: 24b1f868586806919685286f5693cee934110a73
+> State fingerprint: sha256:0fce08fe2b3ce34c5eadf4dd2871bede88807dac73e80f3afa159e4e3ef0bb20
+> Population: Public PHP files: 271 / assets: 770
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -31,7 +31,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 647 |
+| .jpg | 648 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 31 |
@@ -54,7 +54,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 46 |
+| HP/imgHtml/new_202601/blog | 47 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -362,6 +362,7 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
+| HP/imgHtml/new_202601/blog | 1 | kagoshima-deliveryhealth-blog-fun-conversation_1.jpg |
 
 ## Required Same-Content Path Groups
 
