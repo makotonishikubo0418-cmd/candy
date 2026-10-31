@@ -4,6 +4,7 @@ Updated: 2026-10-31
 
 | Type | Title | History |
 |---|---|---|
+| MODIFY | 未経験のお仕事ブログCTAの2ボタン化 | [20261031_MODIFY_beginner-job-two-button-cta.md](history/20261031_MODIFY_beginner-job-two-button-cta.md) |
 | OPERATION | 未経験のお仕事ブログのデザイン修正を本番公開 | [20261031_OPERATION_beginner-job-design-production-publication.md](history/20261031_OPERATION_beginner-job-design-production-publication.md) |
 | OPERATION | ブログデザイン修正後の最新ローカル情報のGitHub保存 | [20261031_OPERATION_beginner-job-design-github-publication.md](history/20261031_OPERATION_beginner-job-design-github-publication.md) |
 | MODIFY | 未経験のお仕事ブログの報酬表・配色・CTA調整 | [20261031_MODIFY_beginner-job-design.md](history/20261031_MODIFY_beginner-job-design.md) |

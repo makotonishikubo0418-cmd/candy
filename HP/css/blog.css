@@ -1336,15 +1336,6 @@
 	border-color: var(--blog-secondary-hover-border);
 }
 
-.blog-page.blog-theme-smoky-blue .blog-cta-actions {
-	grid-template-columns: minmax(0, 1fr);
-	max-width: 360px;
-}
-
-.blog-page.blog-theme-smoky-blue .blog-cta-link {
-	font-size: 16px;
-}
-
 /* 13. 関連記事 */
 
 .blog-page .blog-related {
