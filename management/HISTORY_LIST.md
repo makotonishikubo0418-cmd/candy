@@ -1,9 +1,11 @@
 # Candy 履歴一覧
 
-Updated: 2026-10-30
+Updated: 2026-10-31
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | 未経験のお仕事ブログ関連の最新ローカル情報のGitHub保存 | [20261031_OPERATION_beginner-job-github-publication.md](history/20261031_OPERATION_beginner-job-github-publication.md) |
+| CREATE | 未経験のお仕事ブログのローカルテンプレート作成 | [20261031_CREATE_beginner-job-blog-template.md](history/20261031_CREATE_beginner-job-blog-template.md) |
 | OPERATION | コース時間記事のデザイン変更の本番公開 | [20261030_OPERATION_course-time-design-publication.md](history/20261030_OPERATION_course-time-design-publication.md) |
 | MODIFY | コース時間ブログの比較表・配色・導入表記の調整 | [20261030_MODIFY_course-time-design.md](history/20261030_MODIFY_course-time-design.md) |
 | OPERATION | コース時間ブログのタイトル修正と本番公開 | [20261030_OPERATION_course-time-production-publication.md](history/20261030_OPERATION_course-time-production-publication.md) |
