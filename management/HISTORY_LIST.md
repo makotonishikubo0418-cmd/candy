@@ -4,6 +4,7 @@ Updated: 2026-10-31
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | 未経験のお仕事ブログの本番公開 | [20261031_OPERATION_beginner-job-production-publication.md](history/20261031_OPERATION_beginner-job-production-publication.md) |
 | OPERATION | 未経験のお仕事ブログ関連の最新ローカル情報のGitHub保存 | [20261031_OPERATION_beginner-job-github-publication.md](history/20261031_OPERATION_beginner-job-github-publication.md) |
 | CREATE | 未経験のお仕事ブログのローカルテンプレート作成 | [20261031_CREATE_beginner-job-blog-template.md](history/20261031_CREATE_beginner-job-blog-template.md) |
 | OPERATION | コース時間記事のデザイン変更の本番公開 | [20261030_OPERATION_course-time-design-publication.md](history/20261030_OPERATION_course-time-design-publication.md) |
