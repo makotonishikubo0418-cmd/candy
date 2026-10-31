@@ -4,6 +4,7 @@ Updated: 2026-10-31
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | 会話が楽しい女の子ブログの本番公開 | [20261031_OPERATION_fun-conversation-production-publication.md](history/20261031_OPERATION_fun-conversation-production-publication.md) |
 | OPERATION | 会話が楽しい女の子ブログ関連の最新ローカル情報のGitHub保存 | [20261031_OPERATION_fun-conversation-github-publication.md](history/20261031_OPERATION_fun-conversation-github-publication.md) |
 | CREATE | 会話が楽しい女の子ブログのローカルテンプレート作成 | [20261031_CREATE_fun-conversation-blog-template.md](history/20261031_CREATE_fun-conversation-blog-template.md) |
 | OPERATION | 短時間バイト記事の報酬表の本番公開 | [20261031_OPERATION_short-time-job-reward-table-publication.md](history/20261031_OPERATION_short-time-job-reward-table-publication.md) |
