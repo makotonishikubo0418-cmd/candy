@@ -4,6 +4,7 @@ Updated: 2026-10-31
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | ブログデザイン修正後の最新ローカル情報のGitHub保存 | [20261031_OPERATION_beginner-job-design-github-publication.md](history/20261031_OPERATION_beginner-job-design-github-publication.md) |
 | MODIFY | 未経験のお仕事ブログの報酬表・配色・CTA調整 | [20261031_MODIFY_beginner-job-design.md](history/20261031_MODIFY_beginner-job-design.md) |
 | OPERATION | 未経験のお仕事ブログの本番公開 | [20261031_OPERATION_beginner-job-production-publication.md](history/20261031_OPERATION_beginner-job-production-publication.md) |
 | OPERATION | 未経験のお仕事ブログ関連の最新ローカル情報のGitHub保存 | [20261031_OPERATION_beginner-job-github-publication.md](history/20261031_OPERATION_beginner-job-github-publication.md) |
