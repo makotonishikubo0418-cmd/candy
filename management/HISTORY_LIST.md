@@ -4,6 +4,7 @@ Updated: 2026-10-31
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | 短時間バイト記事の報酬表の本番公開 | [20261031_OPERATION_short-time-job-reward-table-publication.md](history/20261031_OPERATION_short-time-job-reward-table-publication.md) |
 | MODIFY | 短時間バイト記事の基本報酬表の表示改善 | [20261031_MODIFY_short-time-job-reward-table.md](history/20261031_MODIFY_short-time-job-reward-table.md) |
 | OPERATION | ブログ店舗名表記統一のGitHub保存と本番公開 | [20261031_OPERATION_blog-store-name-publication.md](history/20261031_OPERATION_blog-store-name-publication.md) |
 | PROBLEM | 短時間バイト記事の既存FAQ検査警告 | [20261031_PROBLEM_short-time-job-faq-seo-warning.md](history/20261031_PROBLEM_short-time-job-faq-seo-warning.md) |
