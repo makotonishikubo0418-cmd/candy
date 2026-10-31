@@ -4,6 +4,7 @@ Updated: 2026-10-31
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | 未経験のお仕事ブログCTA誘導文の本番公開 | [20261031_OPERATION_beginner-job-cta-guidance-publication.md](history/20261031_OPERATION_beginner-job-cta-guidance-publication.md) |
 | OPERATION | 未経験のお仕事ブログ2ボタンCTAのGitHub保存と本番公開 | [20261031_OPERATION_beginner-job-two-button-cta-publication.md](history/20261031_OPERATION_beginner-job-two-button-cta-publication.md) |
 | MODIFY | 未経験のお仕事ブログCTAの2ボタン化 | [20261031_MODIFY_beginner-job-two-button-cta.md](history/20261031_MODIFY_beginner-job-two-button-cta.md) |
 | OPERATION | 未経験のお仕事ブログのデザイン修正を本番公開 | [20261031_OPERATION_beginner-job-design-production-publication.md](history/20261031_OPERATION_beginner-job-design-production-publication.md) |
