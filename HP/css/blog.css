@@ -14,7 +14,7 @@
  * brown     ：private-waiting-room
  * gold      ：tokyo-souvenir
  * deep-pink ：正式ブログテンプレート・candy_dominant_girls
- * deep-pink に追加する配色：blog-theme-curry（カレー色）、blog-theme-purple（紫）、blog-theme-antique-gold（アンティークゴールド）
+ * deep-pink に追加する配色：blog-theme-curry（カレー色）、blog-theme-purple（紫）、blog-theme-antique-gold（アンティークゴールド）、blog-theme-smoky-blue（スモーキーブルー）
  *
  * 【注意】
  * ブログ独自の装飾はこのファイルに集約し、記事別CSSは作成・復活・参照しません。
@@ -423,6 +423,60 @@
 
 .blog-page:where(.blog-theme-antique-gold) .faq-question:hover,
 .blog-page:where(.blog-theme-antique-gold) .faq-item.active .faq-question {
+	color: var(--blog-accent-dark);
+}
+
+/* 01-8. スモーキーブルー：スタッフブログの寸法を保つ配色 */
+.blog-page:where(.blog-theme-smoky-blue) {
+	--blog-ink: #263744;
+	--blog-muted: #627585;
+	--blog-accent: #547FA1;
+	--blog-accent-dark: #3e617e;
+	--blog-accent-deep: #2d475c;
+	--blog-pale: #edf3f7;
+	--blog-surface-soft: #f7fafc;
+	--blog-border: rgba(84, 127, 161, 0.22);
+	--blog-shadow-sm: 0 10px 30px rgba(45, 71, 92, 0.07);
+	--blog-shadow-md: 0 18px 48px rgba(45, 71, 92, 0.12);
+	--blog-hero-background: #263744;
+	--blog-toc-background: linear-gradient(145deg, #edf3f7 0%, #fff 76%);
+	--blog-heading-bar-background: var(--blog-accent);
+	--blog-callout-background: linear-gradient(135deg, #f1f6fa, #fff);
+	--blog-callout-bar-background: var(--blog-accent);
+	--blog-checklist-border: rgba(45, 71, 92, 0.08);
+	--blog-checklist-dot-shadow: 0 0 0 5px rgba(84, 127, 161, 0.1);
+	--blog-card-background: linear-gradient(180deg, #fff 0%, #fff 72%, #f7fafc 100%);
+	--blog-card-bar-background: linear-gradient(90deg, var(--blog-accent), #a8c0d2);
+	--blog-card-text: #4c6375;
+	--blog-photo-shadow: 0 20px 50px rgba(45, 71, 92, 0.15);
+	--blog-caption-text: #4c6375;
+	--blog-caption-shadow: 0 14px 32px rgba(45, 71, 92, 0.1);
+	--blog-cta-background: linear-gradient(135deg, #293f51 0%, #436782 100%);
+	--blog-cta-shadow: 0 20px 48px rgba(45, 71, 92, 0.2);
+	--blog-cta-decoration-background: radial-gradient(circle, rgba(84, 127, 161, 0.28), rgba(84, 127, 161, 0));
+	--blog-cta-eyebrow: #c6dbe9;
+	--blog-primary-background: linear-gradient(135deg, #547FA1, #3e617e);
+	--blog-primary-shadow: 0 10px 24px rgba(45, 71, 92, 0.25);
+	--blog-primary-hover-background: linear-gradient(135deg, #476d8b, #304d64);
+	--blog-related-border: rgba(84, 127, 161, 0.18);
+	--blog-related-link-border: rgba(84, 127, 161, 0.18);
+}
+
+.blog-page:where(.blog-theme-smoky-blue) .bt-pk-xl {
+	background: var(--blog-primary-background);
+}
+
+.blog-page:where(.blog-theme-smoky-blue) .bt-pk-xl:hover {
+	background: var(--blog-primary-hover-background);
+}
+
+.blog-page:where(.blog-theme-smoky-blue) .faq-question:hover,
+.blog-page:where(.blog-theme-smoky-blue) .faq-item.active .faq-question {
+	color: var(--blog-accent-dark);
+}
+
+.blog-page:where(.blog-theme-smoky-blue) .blog-section strong,
+.blog-page:where(.blog-theme-smoky-blue) .blog-lead strong {
 	color: var(--blog-accent-dark);
 }
 
@@ -1282,6 +1336,15 @@
 	border-color: var(--blog-secondary-hover-border);
 }
 
+.blog-page.blog-theme-smoky-blue .blog-cta-actions {
+	grid-template-columns: minmax(0, 1fr);
+	max-width: 360px;
+}
+
+.blog-page.blog-theme-smoky-blue .blog-cta-link {
+	font-size: 16px;
+}
+
 /* 13. 関連記事 */
 
 .blog-page .blog-related {
@@ -1370,6 +1433,10 @@
 	.blog-page .blog-table-spacious {
 		font-size: 14px;
 		line-height: 1.85;
+	}
+
+	.blog-page.blog-theme-smoky-blue .blog-table-spacious {
+		font-size: 16px;
 	}
 
 	.blog-page .blog-table-spacious th,
