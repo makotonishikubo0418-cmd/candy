@@ -707,6 +707,9 @@ class MemberApi
                 ));
             }
 
+            // お誕生日特典の付与（期間内・未付与のときだけ）。付与したクーポンはこの後のお知らせに出る
+            MemberBirthday::grantIfDue((int)$member['guest_id'], (int)MEMBER_CLUB_ID,
+                isset($member['birthday']) ? $member['birthday'] : null, (int)$member['id']);
             $result = MemberLoyalty::getSummary((int)$member['guest_id'], (int)MEMBER_CLUB_ID);
             if ($result['status'] !== 0) {
                 MemberUtil::jsonResponse($result['status'], $result['message']);

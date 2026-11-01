@@ -191,7 +191,11 @@ class MemberLoginBonus
         return $lotId;
     }
 
-    private static function grantCoupon($conn, $guestId, $clubId, $amountYen, $sourceType, $label, $expiresAt)
+    /**
+     * CTI のクーポン付与（チケット＋台帳）。呼び出し側でトランザクションを持つ
+     * @return int coupon_tickets.id
+     */
+    public static function grantCoupon($conn, $guestId, $clubId, $amountYen, $sourceType, $label, $expiresAt)
     {
         $guestId = (int)$guestId;
         $clubId = (int)$clubId;

@@ -10,12 +10,26 @@ class MemberAuth
         $this->mdb = $mdb;
     }
 
-    public function createSession($memberId, $ttl = null, $setCookie = true)
+    /**
+     * 無操作でログアウトするまでの秒数（「ログインを維持する」未選択時）
+     */
+    public static function idleTimeout()
+    {
+        return defined('MEMBER_IDLE_TIMEOUT') ? (int)MEMBER_IDLE_TIMEOUT : 3600;
+    }
+
+    /**
+     * @param bool $persistent false＝ブラウザ終了で消えるCookieにし、有効期限を無操作時間にする
+     */
+    public function createSession($memberId, $ttl = null, $setCookie = true, $persistent = true)
     {
         $token = MemberUtil::generateToken();
         $hash = MemberUtil::hashToken($token);
         $memberId = (int)$memberId;
-        $ttl = ($ttl === null) ? (int)MEMBER_SESSION_TTL : (int)$ttl;
+        if ($ttl === null) {
+            $ttl = $persistent ? (int)MEMBER_SESSION_TTL : self::idleTimeout();
+        }
+        $ttl = (int)$ttl;
         $hashEsc = $this->mdb->escape($hash);
         $ip = $this->mdb->escape(MemberUtil::clientIp());
         $ua = $this->mdb->escape(isset($_SERVER['HTTP_USER_AGENT']) ? substr($_SERVER['HTTP_USER_AGENT'], 0, 512) : '');
@@ -23,9 +37,20 @@ class MemberAuth
             . "VALUES ({$memberId}, '{$hashEsc}', DATE_ADD(NOW(), INTERVAL {$ttl} SECOND), '{$ip}', '{$ua}')";
         $this->mdb->query($sql);
         if ($setCookie) {
-            MemberUtil::setCookie(MemberUtil::cookieName('session'), $token, time() + $ttl);
+            MemberUtil::setCookie(MemberUtil::cookieName('session'), $token, $persistent ? (time() + $ttl) : 0);
         }
         return $token;
+    }
+
+    /**
+     * 操作があったセッションの有効期限を「今から無操作時間」まで延ばす（短くはしない）
+     */
+    private function touchSession($rawToken)
+    {
+        $hashEsc = $this->mdb->escape(MemberUtil::hashToken($rawToken));
+        $idle = self::idleTimeout();
+        $this->mdb->query("UPDATE customers_sessions SET expires_at = GREATEST(expires_at, DATE_ADD(NOW(), INTERVAL {$idle} SECOND))"
+            . " WHERE session_token = '{$hashEsc}' AND revoked_at IS NULL AND expires_at > NOW()");
     }
 
     public function createRememberToken($memberId)
@@ -63,6 +88,7 @@ class MemberAuth
         if ($sessionCookie !== '') {
             $member = $this->memberFromSessionToken($sessionCookie);
             if ($member !== null) {
+                $this->touchSession($sessionCookie);
                 return $member;
             }
         }
@@ -80,6 +106,7 @@ class MemberAuth
         if (preg_match('/Bearer\s+(\S+)/i', $authHeader, $m)) {
             $member = $this->memberFromSessionToken($m[1]);
             if ($member !== null) {
+                $this->touchSession($m[1]);
                 return $member;
             }
         }
@@ -194,7 +221,8 @@ class MemberAuth
         $memberId = (int)$member['id'];
         $this->mdb->query("UPDATE customers_accounts SET last_login_at = NOW() WHERE id = {$memberId}");
         $link = $this->linkCtiGuestForMember($memberId);
-        $sessionToken = $this->createSession($memberId);
+        // 「ログインを維持する」未選択時はブラウザ終了で消えるCookie・無操作でログアウト
+        $sessionToken = $this->createSession($memberId, null, true, (bool)$rememberMe);
         if ($rememberMe) {
             $this->createRememberToken($memberId);
         }
