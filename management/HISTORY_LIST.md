@@ -4,6 +4,7 @@ Updated: 2026-10-31
 
 | Type | Title | History |
 |---|---|---|
+| PROBLEM | 会話が楽しい女の子ブログの表示崩れ修正 | [20261031_PROBLEM_fun-conversation-blog-layout.md](history/20261031_PROBLEM_fun-conversation-blog-layout.md) |
 | OPERATION | 会話が楽しい女の子ブログの本番公開 | [20261031_OPERATION_fun-conversation-production-publication.md](history/20261031_OPERATION_fun-conversation-production-publication.md) |
 | OPERATION | 会話が楽しい女の子ブログ関連の最新ローカル情報のGitHub保存 | [20261031_OPERATION_fun-conversation-github-publication.md](history/20261031_OPERATION_fun-conversation-github-publication.md) |
 | CREATE | 会話が楽しい女の子ブログのローカルテンプレート作成 | [20261031_CREATE_fun-conversation-blog-template.md](history/20261031_CREATE_fun-conversation-blog-template.md) |

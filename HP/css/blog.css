@@ -480,6 +480,26 @@
 	color: var(--blog-accent-dark);
 }
 
+/* 01-9. ボルドー：deep-pinkの基本レイアウトに重ねる配色 */
+.blog-page:where(.blog-theme-bordeaux) {
+	--blog-accent: #722F45;
+	--blog-accent-dark: #5a2538;
+	--blog-accent-deep: #4a1e2e;
+	--blog-heading-bar-background: linear-gradient(180deg, #8a3a55, #5a2538);
+	--blog-callout-bar-background: linear-gradient(180deg, #8a3a55, #5a2538);
+	--blog-card-bar-background: linear-gradient(90deg, #722F45, #a04a62);
+	--blog-cta-background: linear-gradient(135deg, #4a1e2e 0%, #722F45 100%);
+	--blog-cta-eyebrow: #e0b0c0;
+	--blog-primary-background: linear-gradient(135deg, #8a3a55, #722F45);
+	--blog-primary-hover-background: linear-gradient(135deg, #9a4a65, #822f4f);
+	--blog-primary-shadow: 0 10px 24px rgba(114, 47, 69, 0.35);
+}
+
+/* 絵文字を直前の短い語句と一緒に折り返します。 */
+.blog-page:where(.blog-theme-bordeaux) .blog-nowrap {
+	white-space: nowrap;
+}
+
 /* 02. 記事全体の基本設定 */
 
 .blog-page {

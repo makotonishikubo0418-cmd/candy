@@ -11,10 +11,10 @@ Updated: 2026-10-31
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-31T18:14:16+09:00 (reproducible generation baseline)
+> Generated at: 2026-10-31T18:34:27+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 87d6c442b416f608e1336a3c5dcca25b39dfbe62
-> State fingerprint: sha256:c8b194c694f8cf8c8b94393b87bf42d9d7836a6e986e91b42f111ea8f7fa1c17
+> Commit: 12d91e5e17258dcde97acb34ee7817968af585a8
+> State fingerprint: sha256:abc4e2a74f9b07da87a4a930085bc19b2b6f0ede2640bdf9e170e511e96833fa
 > Population: Public PHP files: 272 / assets: 770
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
@@ -243,7 +243,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:candy_dominant_girls | 3 | NONE | OK |
 | blog:course-time | 3 | NONE | OK |
 | blog:double-work | 2 | NONE | OK |
-| blog:fun-conversation | 0 | NONE | UNVERIFIED |
+| blog:fun-conversation | 1 | NONE | OK |
 | blog:girl-choice | 3 | NONE | OK |
 | blog:glamourgirl | 7 | NONE | OK |
 | blog:maimai-profile | 3 | NONE | OK |
@@ -363,7 +363,6 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/imgHtml/new_202601/blog | 1 | kagoshima-deliveryhealth-blog-fun-conversation_1.jpg |
 
 ## Required Same-Content Path Groups
 
