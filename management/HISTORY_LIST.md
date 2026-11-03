@@ -1,9 +1,10 @@
 # Candy 履歴一覧
 
-Updated: 2026-10-31
+Updated: 2026-11-03
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | ブログ表示修正の本番公開とmain全体同期 | [20261103_OPERATION_blog-layout-publication.md](history/20261103_OPERATION_blog-layout-publication.md) |
 | PROBLEM | 会話が楽しい女の子ブログの表示崩れ修正 | [20261031_PROBLEM_fun-conversation-blog-layout.md](history/20261031_PROBLEM_fun-conversation-blog-layout.md) |
 | OPERATION | 会話が楽しい女の子ブログの本番公開 | [20261031_OPERATION_fun-conversation-production-publication.md](history/20261031_OPERATION_fun-conversation-production-publication.md) |
 | OPERATION | 会話が楽しい女の子ブログ関連の最新ローカル情報のGitHub保存 | [20261031_OPERATION_fun-conversation-github-publication.md](history/20261031_OPERATION_fun-conversation-github-publication.md) |
