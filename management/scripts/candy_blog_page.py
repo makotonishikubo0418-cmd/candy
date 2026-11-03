@@ -432,6 +432,10 @@ def run_build(args: argparse.Namespace) -> int:
     existing = [path for path in (public_path, source_path, dataset_path) if path.exists()]
     if existing and not args.force and not args.dry_run:
         raise BlogToolError("既存ファイルがあります。上書きは--forceが必要: " + ", ".join(str(path) for path in existing))
+    hp = common.hp_root()
+    before = common.snapshot_paths((public_path, source_path, dataset_path,
+        hp / "includefile" / "dataset_base.php", hp / "sitemap.xml",
+        hp / "source" / "blog.html", hp / "source" / "index.html"))
     base, sitemap, blog_list, index = registry_sources(data)
     if args.dry_run:
         print(f"RESULT=DRY_RUN_OK category=blog slug={data.slug}")
@@ -447,14 +451,16 @@ def run_build(args: argparse.Namespace) -> int:
         hp / "source" / "blog.html": blog_list,
         hp / "source" / "index.html": index,
     }
-    for path, content in writes.items():
-        common.atomic_write(path, content)
-    actual_errors = validate_rendered(data, common.read_utf8(source_path), girls)
-    actual_errors.extend(common.shared_validation("blog", data.slug, data.canonical))
-    php_status, php_errors = common.php_lint([public_path, dataset_path, hp / "includefile" / "dataset_base.php"])
-    actual_errors.extend(php_errors)
-    if actual_errors:
-        raise BlogToolError("書込後検証失敗:\n- " + "\n- ".join(actual_errors))
+    php_status = "UNAVAILABLE"
+    def validate_written() -> None:
+        nonlocal php_status
+        actual_errors = validate_rendered(data, common.read_utf8(source_path), girls)
+        actual_errors.extend(common.shared_validation("blog", data.slug, data.canonical))
+        php_status, php_errors = common.php_lint([public_path, dataset_path, hp / "includefile" / "dataset_base.php"])
+        actual_errors.extend(php_errors)
+        if actual_errors:
+            raise BlogToolError("書込後検証失敗:\n- " + "\n- ".join(actual_errors))
+    common.write_transaction(writes, validate_written, expected=before)
     print(f"RESULT=BUILD_OK category=blog slug={data.slug}")
     print("FILES=" + ",".join(path.relative_to(common.repo_root()).as_posix() for path in writes))
     print(f"COUNTS scenes={len(data.blocks)} girls={len(girls)} faq={len(faq_pairs(data))}")

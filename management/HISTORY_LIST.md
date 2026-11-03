@@ -4,6 +4,7 @@ Updated: 2026-11-03
 
 | Type | Title | History |
 |---|---|---|
+| PROBLEM | TOPスタッフブログ枠の表示崩れと再発防止 | [20261103_PROBLEM_top-blog-frame-collapse.md](history/20261103_PROBLEM_top-blog-frame-collapse.md) |
 | CREATE | Cursor版での出稼ぎ寮ブログ全工程実行 | [20261103_CREATE_dormitory-blog-cursor-full-workflow.md](history/20261103_CREATE_dormitory-blog-cursor-full-workflow.md) |
 | CONSULT | ブログ完成HTML作成用3情報の履歴保存 | [20261103_CONSULT_blog-html-instruction-set.md](history/20261103_CONSULT_blog-html-instruction-set.md) |
 | OPERATION | ブログ表示修正の本番公開とmain全体同期 | [20261103_OPERATION_blog-layout-publication.md](history/20261103_OPERATION_blog-layout-publication.md) |

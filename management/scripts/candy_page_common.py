@@ -63,6 +63,16 @@ BLOG_TOP_ENTRY_RE = re.compile(
     rf'<a href="\./kagoshima-deliveryhealth-blog-{PAGE_SLUG_PATTERN}\.php"[^>]*>.*?</a></div>[ \t]*\r?\n?',
     re.M | re.S,
 )
+TOP_BLOG_FRAME_OPEN_RE = re.compile(
+    r'<div class="lp_0_55_35 w_1050 lm_0_auto bg_f">'
+)
+TOP_BLOG_INFO_RE = re.compile(
+    r'<div class="lp_5 lm_0_auto w_130 center bg_p fs_xs fc_w">BLOG INFO</div>'
+)
+TOP_BLOG_LIST_BUTTON_RE = re.compile(
+    r'<div class="center"><a href="\./blog\.php"[^>]*>ブログ一覧はコチラ</a></div>'
+)
+DIV_OPEN_RE = re.compile(r"<div(?:\s|>|/)", re.I)
 
 
 class PageToolError(RuntimeError):
@@ -595,11 +605,102 @@ def blog_registry_links(source: str, *, top_page: bool) -> list[tuple[str, str]]
     return [(href, strip_tags(label)) for href, label in BLOG_LINK_RE.findall(source)]
 
 
+def _staff_blog_section_bounds(index_source: str) -> tuple[int, int]:
+    for marker in ("<!-- スタッフブログ START -->", "<!-- スタッフブログ END -->"):
+        if index_source.count(marker) != 1:
+            raise PageToolError("indexブログ領域の境界が1件ではありません")
+    start = index_source.find("<!-- スタッフブログ START -->")
+    end = index_source.find("<!-- スタッフブログ END -->", start)
+    if start < 0 or end < 0:
+        raise PageToolError("indexブログ領域がありません")
+    return start, end
+
+
+def _matching_div_close(html: str, open_start: int) -> tuple[int, int]:
+    if not html.startswith("<div", open_start):
+        raise PageToolError("indexブログ枠の開始タグが不正です")
+    tag_end = html.find(">", open_start)
+    if tag_end < 0:
+        raise PageToolError("indexブログ枠の開始タグが閉じていません")
+    depth = 1
+    pos = tag_end + 1
+    while pos < len(html) and depth > 0:
+        next_open = DIV_OPEN_RE.search(html, pos)
+        next_close = html.find("</div>", pos)
+        if next_close < 0:
+            raise PageToolError("indexブログ枠の閉じタグを特定できません")
+        next_open_at = next_open.start() if next_open else -1
+        if next_open_at >= 0 and next_open_at < next_close:
+            depth += 1
+            pos = next_open_at + 4
+            continue
+        depth -= 1
+        close_end = next_close + len("</div>")
+        if depth == 0:
+            return next_close, close_end
+        pos = close_end
+    raise PageToolError("indexブログ枠の閉じタグを特定できません")
+
+
+def locate_top_blog_frame(index_source: str) -> dict[str, object]:
+    section_start, section_end = _staff_blog_section_bounds(index_source)
+    section = index_source[section_start:section_end]
+    balance = BalanceParser()
+    balance.feed(section)
+    if balance.errors or balance.stack:
+        raise PageToolError("indexブログ領域のタグ構造が不正です")
+    opens = list(TOP_BLOG_FRAME_OPEN_RE.finditer(section))
+    if len(opens) != 1:
+        raise PageToolError(f"indexブログ枠数が不正です: {len(opens)}")
+    open_rel = opens[0].start()
+    close_rel, close_end_rel = _matching_div_close(section, open_rel)
+    infos = list(TOP_BLOG_INFO_RE.finditer(section))
+    if len(infos) != 1 or not (open_rel < infos[0].start() < close_rel):
+        raise PageToolError("indexブログ枠内のBLOG INFOが1件ではありません")
+    info = infos[0]
+    buttons = list(TOP_BLOG_LIST_BUTTON_RE.finditer(section))
+    if len(buttons) != 1:
+        raise PageToolError("indexブログ一覧ボタンが1件ではありません")
+    button = buttons[0]
+    if not (close_end_rel <= button.start()):
+        raise PageToolError("indexブログ一覧ボタンが枠外にありません")
+    frame_html = section[open_rel:close_end_rel]
+    frame_links = [(href, strip_tags(label)) for href, label in BLOG_LINK_RE.findall(frame_html)]
+    section_links = [(href, strip_tags(label)) for href, label in BLOG_LINK_RE.findall(section)]
+    if frame_links != section_links:
+        raise PageToolError("indexブログ記事が枠内に揃っていません")
+    return {
+        "section_start": section_start,
+        "section_end": section_end,
+        "section": section,
+        "open_rel": open_rel,
+        "info_end_rel": info.end(),
+        "close_rel": close_rel,
+        "close_end_rel": close_end_rel,
+        "button_rel": button.start(),
+        "frame_links": frame_links,
+    }
+
+
+def top_blog_frame_structure_errors(index_source: str) -> list[str]:
+    try:
+        locate_top_blog_frame(index_source)
+    except PageToolError as exc:
+        return [str(exc)]
+    # Counts depend on the registry, not on the frame alone (0..15 are valid).
+    return []
+
+
 def blog_registry_alignment_errors(blog_source: str, index_source: str) -> list[str]:
-    blog_entries = blog_registry_links(blog_source, top_page=False)
-    index_entries = blog_registry_links(index_source, top_page=True)
-    expected_entries = blog_entries[-BLOG_TOP_LATEST_LIMIT:]
     errors: list[str] = []
+    errors.extend(top_blog_frame_structure_errors(index_source))
+    try:
+        blog_entries = blog_registry_links(blog_source, top_page=False)
+        index_entries = blog_registry_links(index_source, top_page=True)
+    except PageToolError as exc:
+        errors.append(str(exc))
+        return errors
+    expected_entries = blog_entries[-BLOG_TOP_LATEST_LIMIT:]
     blog_counts = {href: sum(1 for item_href, _name in blog_entries if item_href == href) for href, _name in blog_entries}
     index_counts = {href: sum(1 for item_href, _name in index_entries if item_href == href) for href, _name in index_entries}
     blog_duplicates = sorted(href for href, count in blog_counts.items() if count != 1)
@@ -615,29 +716,44 @@ def blog_registry_alignment_errors(blog_source: str, index_source: str) -> list[
 
 def synchronize_blog_top_index(index_source: str, blog_source: str) -> str:
     expected_entries = blog_registry_links(blog_source, top_page=False)[-BLOG_TOP_LATEST_LIMIT:]
-    start = index_source.find("<!-- スタッフブログ START -->")
-    end = index_source.find("<!-- スタッフブログ END -->", start)
-    if start < 0 or end < 0:
-        raise PageToolError("indexブログ領域がありません")
-    block = index_source[start:end]
-    parsed_entries = blog_registry_links(index_source, top_page=True)
-    matched_rows = BLOG_TOP_ENTRY_RE.findall(block)
-    if len(matched_rows) != len(parsed_entries):
+    frame = locate_top_blog_frame(index_source)
+    section = str(frame["section"])
+    info_end_rel = int(frame["info_end_rel"])
+    close_rel = int(frame["close_rel"])
+    section_start = int(frame["section_start"])
+    section_end = int(frame["section_end"])
+    close_prefix_match = re.search(r"(\r?\n[ \t]*)$", section[:close_rel])
+    close_prefix = close_prefix_match.group(1) if close_prefix_match else "\n\t\t\t"
+    article_end = close_rel - len(close_prefix) if close_prefix_match else close_rel
+    article_region = section[info_end_rel:article_end]
+    matched_rows = BLOG_TOP_ENTRY_RE.findall(article_region)
+    leftover = BLOG_TOP_ENTRY_RE.sub("", article_region).strip()
+    if leftover:
+        raise PageToolError("indexブログ枠内に記事行以外の未処理内容があります")
+    parsed_in_frame = [(href, strip_tags(label)) for href, label in BLOG_LINK_RE.findall(article_region)]
+    if len(matched_rows) != len(parsed_in_frame):
         raise PageToolError("indexブログ行の構造を安全に置換できません")
-    block = BLOG_TOP_ENTRY_RE.sub("", block)
-    rows = []
+    rows: list[str] = []
     for position, (entry_href, entry_name) in enumerate(expected_entries):
         css_class = "lp_20_0 fs_sm2" if position == 0 else "lp_14_0 fs_sm2 bd_t"
         rows.append(
             f'\t\t\t<div class="{css_class}"><a href="./{entry_href}" class="fade">'
             f'{htext(entry_name)}</a></div>'
         )
-    if rows:
-        block = insert_before_button(block, "\n".join(rows))
-    return index_source[:start] + block + index_source[end:]
+    row_block = ("\n" + "\n".join(rows) + close_prefix) if rows else close_prefix
+    new_section = section[:info_end_rel] + row_block + section[close_rel:]
+    # Re-validate before returning so broken parents never get written.
+    probe = index_source[:section_start] + new_section + index_source[section_end:]
+    locate_top_blog_frame(probe)
+    if blog_registry_links(probe, top_page=True) != expected_entries:
+        raise PageToolError("indexブログ最新15件の同期結果が不正です")
+    return probe
 
 
 def update_blog_registries(blog_source: str, index_source: str, slug: str, title: str) -> tuple[str, str]:
+    errors = blog_registry_alignment_errors(blog_source, index_source)
+    if errors:
+        raise PageToolError("ブログ登録前検証失敗:\n- " + "\n- ".join(errors))
     php_name = f"kagoshima-deliveryhealth-blog-{slug}.php"
     href = f"./{php_name}"
     require_category_index_terminal_cta("blog", blog_source)

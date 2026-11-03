@@ -24,6 +24,7 @@ from candy_page_common import (  # noqa: E402
     CATEGORY_INDEX_NAMES,
     CATEGORY_INDEX_TERMINAL_CTA,
     MAIN_CONTENT_END_MARKER,
+    blog_registry_alignment_errors,
     category_index_terminal_cta_errors,
     read_utf8,
     require_category_index_terminal_cta,
@@ -274,6 +275,23 @@ def validate_changed_category_index_ctas(repository_root: Path, deployable: list
         require_category_index_terminal_cta(category, read_utf8(local_path))
         checked.append(repository_path)
     print(f"CATEGORY_INDEX_TERMINAL_CTA_CHECK: passed changed={len(checked)}")
+
+
+def validate_changed_blog_top(repository_root: Path, deployable: list[str]) -> None:
+    """Block broken TOP/list HTML before planning, approval or FTP access."""
+    paths = ("HP/source/blog.html", "HP/source/index.html")
+    if not set(paths).intersection(deployable):
+        return
+    sources = []
+    for relative in paths:
+        path = repository_root / relative
+        if path.is_symlink() or not path.is_file():
+            raise RuntimeError(f"Blog/TOP source is not a regular file: {relative}")
+        sources.append(read_utf8(path))
+    errors = blog_registry_alignment_errors(*sources)
+    if errors:
+        raise RuntimeError("BLOG_TOP_CHECK failed:\n- " + "\n- ".join(errors))
+    print("BLOG_TOP_CHECK: passed")
 
 
 def print_plan(
@@ -873,6 +891,7 @@ def main() -> int:
             changes, allow_htaccess=args.allow_htaccess
         )
     validate_changed_category_index_ctas(Path.cwd(), deployable)
+    validate_changed_blog_top(Path.cwd(), deployable)
     if args.allow_htaccess:
         exact_change = [
             change.status == "M"
