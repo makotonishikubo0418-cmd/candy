@@ -1,7 +1,5 @@
 # CANDY UPCOMING PAGES
 
-Updated: 2026-10-31
-
 > **Automatically generated. Manual editing is prohibited.**
 >
 > Purpose: Route current production-candidate state to category-specific deterministic detail files
@@ -11,10 +9,10 @@ Updated: 2026-10-31
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: Category queue/classification documents and the three TSV children listed below
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-31T18:34:27+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-03T14:14:47+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 12d91e5e17258dcde97acb34ee7817968af585a8
-> State fingerprint: sha256:abc4e2a74f9b07da87a4a930085bc19b2b6f0ede2640bdf9e170e511e96833fa
+> Commit: 6423a2f9ef127c1fc137ab6b2b4a02df0fe33542
+> State fingerprint: sha256:d2834de02f50674ec6ae1c5d17c49b5fef9dc4aaff8da8d38c5677457ff15435
 > Population: Unique candidates: 239 / Text records: 239
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: READY=5 / BLOCKED=8 / EXISTING=226 / CONFLICT=0

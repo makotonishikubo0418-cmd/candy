@@ -1,7 +1,5 @@
 # CANDY CODE ASSET INVENTORY
 
-Updated: 2026-10-31
-
 > **Automatically generated. Manual editing is prohibited.**
 >
 > Purpose: Summarize current assets, page relationships, missing targets, and review candidates
@@ -11,11 +9,11 @@ Updated: 2026-10-31
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-10-31T18:34:27+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-03T14:14:47+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 12d91e5e17258dcde97acb34ee7817968af585a8
-> State fingerprint: sha256:abc4e2a74f9b07da87a4a930085bc19b2b6f0ede2640bdf9e170e511e96833fa
-> Population: Public PHP files: 272 / assets: 770
+> Commit: 6423a2f9ef127c1fc137ab6b2b4a02df0fe33542
+> State fingerprint: sha256:d2834de02f50674ec6ae1c5d17c49b5fef9dc4aaff8da8d38c5677457ff15435
+> Population: Public PHP files: 273 / assets: 774
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -31,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 648 |
+| .jpg | 652 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 31 |
@@ -54,7 +52,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 47 |
+| HP/imgHtml/new_202601/blog | 51 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -242,6 +240,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:beginner-job | 3 | NONE | OK |
 | blog:candy_dominant_girls | 3 | NONE | OK |
 | blog:course-time | 3 | NONE | OK |
+| blog:dormitory | 4 | NONE | OK |
 | blog:double-work | 2 | NONE | OK |
 | blog:fun-conversation | 1 | NONE | OK |
 | blog:girl-choice | 3 | NONE | OK |

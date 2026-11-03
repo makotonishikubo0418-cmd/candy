@@ -4,6 +4,8 @@ Updated: 2026-11-03
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | Cursor版での出稼ぎ寮ブログ全工程実行 | [20261103_CREATE_dormitory-blog-cursor-full-workflow.md](history/20261103_CREATE_dormitory-blog-cursor-full-workflow.md) |
+| CONSULT | ブログ完成HTML作成用3情報の履歴保存 | [20261103_CONSULT_blog-html-instruction-set.md](history/20261103_CONSULT_blog-html-instruction-set.md) |
 | OPERATION | ブログ表示修正の本番公開とmain全体同期 | [20261103_OPERATION_blog-layout-publication.md](history/20261103_OPERATION_blog-layout-publication.md) |
 | PROBLEM | 会話が楽しい女の子ブログの表示崩れ修正 | [20261031_PROBLEM_fun-conversation-blog-layout.md](history/20261031_PROBLEM_fun-conversation-blog-layout.md) |
 | OPERATION | 会話が楽しい女の子ブログの本番公開 | [20261031_OPERATION_fun-conversation-production-publication.md](history/20261031_OPERATION_fun-conversation-production-publication.md) |
