@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-03T15:50:41+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-04T18:07:20+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 9882add7717a3bd3a0ceed1ed67586ea843a4cd7
-> State fingerprint: sha256:c8411554d6f94fe1027b37f4e088a16ca29593b278ed8f03a65c736fa06b7e1d
-> Population: Public PHP files: 274 / assets: 776
+> Commit: bf4ccfec26f40468ed63812e9fce22b5f49216aa
+> State fingerprint: sha256:1454a43aebc1584d60586f2c864d21cf62a48f10ebee9133ad8482e1ced9f854
+> Population: Public PHP files: 275 / assets: 778
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 654 |
+| .jpg | 656 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 31 |
@@ -52,7 +52,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 53 |
+| HP/imgHtml/new_202601/blog | 55 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -247,6 +247,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:glamourgirl | 7 | NONE | OK |
 | blog:maimai-profile | 3 | NONE | OK |
 | blog:newcomer-veteran | 2 | NONE | OK |
+| blog:nightwork-style | 2 | NONE | OK |
 | blog:petitegirl | 7 | NONE | OK |
 | blog:poccharigirl | 7 | NONE | OK |
 | blog:private-waiting-room | 3 | NONE | OK |

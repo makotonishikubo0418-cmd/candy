@@ -1,6 +1,6 @@
 # Candy Management Document Index
 
-Updated: 2026-10-28
+Updated: 2026-11-04
 
 Parent document: [`AGENTS.md`](../AGENTS.md)
 
@@ -129,7 +129,7 @@ Feature specifications are stored under `management/specs/`; executable template
 | Hotel Page Management | [`CANDY_HOTEL_PAGE_GENERATION_SPEC.md`](specs/CANDY_HOTEL_PAGE_GENERATION_SPEC.md) | [`CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md`](specs/CANDY_HOTEL_STAFF_PRODUCTION_RUNBOOK.md) | None | Hotel-page structure, source routes, production, publication, and validation |
 | Hotel Input Preparation | [`CANDY_HOTEL_TEXT_INPUT_CLASSIFICATION.md`](specs/CANDY_HOTEL_TEXT_INPUT_CLASSIFICATION.md) | [`CANDY_HOTEL_CONTENT_PREPARATION_RUNBOOK.md`](specs/CANDY_HOTEL_CONTENT_PREPARATION_RUNBOOK.md) | None | Input-format classification, legacy conversion requirements, hotel research, access information, and page-text preparation |
 | Hotel Image Management | [`CANDY_HOTEL_IMAGE_CREATION_SPEC.md`](specs/CANDY_HOTEL_IMAGE_CREATION_SPEC.md) | [`CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`](specs/CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md) | None | Hotel image-pair creation, acceptance, source retention, local installation, replacement, and publication states |
-| Blog Page Management | [`CANDY_BLOG_PAGE_GENERATION_SPEC.md`](specs/CANDY_BLOG_PAGE_GENERATION_SPEC.md) | [`BLOG_CREATION.md`](specs/BLOG_CREATION.md)<br>[`CANDY_GIRL_INFORMATION_MANAGEMENT.md`](specs/CANDY_GIRL_INFORMATION_MANAGEMENT.md) | [`IMAGE_MANAGEMENT.md`](specs/IMAGE_MANAGEMENT.md) | Blog-page generation, repeatable production, top-page latest 15 entries, manager-recommended girl blocks, and validation |
+| Blog Page Management | [`CANDY_BLOG_PAGE_GENERATION_SPEC.md`](specs/CANDY_BLOG_PAGE_GENERATION_SPEC.md) | [`BLOG_CREATION.md`](specs/BLOG_CREATION.md)<br>[`CANDY_GIRL_INFORMATION_MANAGEMENT.md`](specs/CANDY_GIRL_INFORMATION_MANAGEMENT.md)<br>[`CANDY_OPERATION_BASICS.md`](specs/CANDY_OPERATION_BASICS.md) | [`IMAGE_MANAGEMENT.md`](specs/IMAGE_MANAGEMENT.md) | Blog-page generation, repeatable production, top-page latest 15 entries, manager-recommended girl blocks, and validation |
 | Blog Template Preparation | [`BLOG_TEMPLATE.md`](template/BLOG_TEMPLATE.md) | [`CANDY_BLOG_PAGE_GENERATION_SPEC.md`](specs/CANDY_BLOG_PAGE_GENERATION_SPEC.md) | None | URL/title-only HTML and PHP code templates, JSON-LD, public-route preparation, and later user HTML replacement |
 | Girl Information Management | [`CANDY_GIRL_INFORMATION_MANAGEMENT.md`](specs/CANDY_GIRL_INFORMATION_MANAGEMENT.md) | [`CANDY_CODE_FILE_STRUCTURE.md`](specs/CANDY_CODE_FILE_STRUCTURE.md) | None | Structured girl information, blog-generation use, local-only image retention, and public-image states |
 | Other Page Management | [`CANDY_OTHER_PAGES_MANAGEMENT.md`](specs/CANDY_OTHER_PAGES_MANAGEMENT.md) | [`MEMBER_ARCHITECTURE.md`](../HP/docs/MEMBER_ARCHITECTURE.md) (source-attached technical reference) | None | Pages outside area, hotel, and blog, including dynamic profiles, member pages, authentication, APIs, and related technical references |

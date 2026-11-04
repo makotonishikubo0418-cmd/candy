@@ -16,6 +16,7 @@ import tempfile
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 from datetime import date
+from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -724,21 +725,48 @@ def json_main_entity_count(value: object) -> int:
 
 
 def visible_faq_item_count(source: str) -> int:
-    count = 0
-    for faq_heading in re.finditer(r"<h2\b[^>]*>(.*?)</h2>", source, re.I | re.S):
-        heading = strip_tags(faq_heading.group(1))
-        if not re.search(r"FAQ|よくある(?:ご質問|.*疑問)", heading, re.I):
-            continue
-        next_heading = re.search(r"<h2\b", source[faq_heading.end() :], re.I)
-        section_end = faq_heading.end() + next_heading.start() if next_heading else len(source)
-        count += len(
-            re.findall(
-                r'class=["\'][^"\']*\bfaq-item\b',
-                source[faq_heading.end() : section_end],
-                re.I,
-            )
-        )
-    return count
+    """Count real FAQ elements within FAQ sections, excluding reused styles."""
+    class FAQItemCounter(HTMLParser):
+        def __init__(self) -> None:
+            super().__init__()
+            self.count = 0
+            self.template_depth = 0
+            self.raw_text = False
+            self.heading: list[str] | None = None
+            self.in_faq = False
+
+        def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
+            if tag == "template":
+                self.template_depth += 1
+            if self.template_depth:
+                return
+            if tag in {"script", "style"}:
+                self.raw_text = True
+                return
+            if tag == "h2":
+                self.heading = []
+                self.in_faq = False
+            classes = next((value or "" for name, value in attrs if name == "class"), "")
+            if self.in_faq and "faq-item" in classes.split():
+                self.count += 1
+
+        def handle_endtag(self, tag: str) -> None:
+            if tag == "template" and self.template_depth:
+                self.template_depth -= 1
+            elif tag in {"script", "style"}:
+                self.raw_text = False
+            elif not self.template_depth and tag == "h2" and self.heading is not None:
+                self.in_faq = bool(re.search(r"FAQ|よくある.*(?:質問|疑問)", "".join(self.heading), re.I | re.S))
+                self.heading = None
+
+        def handle_data(self, data: str) -> None:
+            if self.heading is not None and not self.template_depth and not self.raw_text:
+                self.heading.append(data)
+
+    counter = FAQItemCounter()
+    counter.feed(source)
+    counter.close()
+    return counter.count
 
 
 def category_for(stem: str) -> tuple[str, str]:

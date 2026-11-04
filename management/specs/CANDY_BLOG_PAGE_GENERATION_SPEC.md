@@ -1,6 +1,6 @@
 # CANDY Blog Page Generation Specification
 
-- Updated: 2026-10-28
+- Updated: 2026-11-04
 - Applies to: Normal new generation of CANDY blog detail pages by Codex
 - Operational sequence: `BLOG_CREATION.md`
 - Common image requirements: `IMAGE_MANAGEMENT.md`
@@ -226,6 +226,7 @@ The common generation gates remain in
       exist, in the same order and with the same names.
 - [ ] Sitemap registration requirements satisfy the common public-route
       synchronization contract.
+- [ ] The generated-state and sitemap-date gate in [BLOG_CREATION.md Section 8](BLOG_CREATION.md#8-完了確認) has passed before staging or publication.
 - [ ] No duplicate ID exists.
 
 ## 13. Specification Boundary

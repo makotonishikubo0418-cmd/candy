@@ -1,6 +1,6 @@
 # CANDY Blog Creation Runbook
 
-- Updated: 2026-10-28
+- Updated: 2026-11-04
 - Applies to: 2件目以降の通常ブログ作成、一覧登録、トップページ連携、検証
 - Status: Supporting operational document
 - Canonical page specification: `CANDY_BLOG_PAGE_GENERATION_SPEC.md`
@@ -33,6 +33,7 @@ URLとタイトルだけで「テンプレを作成して」と依頼され、�
 - `HP/source/blog.html`
 - `HP/source/index.html`
 - `HP/sitemap.xml`
+- [既存サイト運用第6章](CANDY_OPERATION_BASICS.md#6-after-a-change)で更新する生成管理書の差分。
 - 必要な画像、およびブログ独自の装飾が必要な場合の `HP/css/blog.css` 更新。
 
 CSSの配置・禁止事項・HTMLとの対応は、[正規仕様の第2.2節](CANDY_BLOG_PAGE_GENERATION_SPEC.md#22-blog-css-ownership)に従う。
@@ -47,7 +48,7 @@ CSSの配置・禁止事項・HTMLとの対応は、[正規仕様の第2.2節](C
 6. 公開PHP、source HTML、dataset PHP、`dataset_base.php` を同期する。
 7. ブログ一覧へ新規記事を正規登録順の末尾に1件追加する。
 8. トップページのブログ欄を第7章の最新15件へ同期する。
-9. サイトマップと必要な内部リンクを同期する。
+9. サイトマップへの記事登録と必要な内部リンクを同期する。HP側の変更が揃った後、[既存サイト運用第6章](CANDY_OPERATION_BASICS.md#6-after-a-change)の手順で、今回変更した既存ページを含むサイトマップ更新日と生成管理書を同期し、整合検証を完了する。
 10. 第8章の検証を完了する。
 
 ## 5. デザイン品質
@@ -89,8 +90,9 @@ CSSの配置・禁止事項・HTMLとの対応は、[正規仕様の第2.2節](C
 - [ ] PCとスマートフォンで、文字、余白、画像説明、CTA、横スクロールを確認した。
 - [ ] ブログ一覧は全公開記事を正規登録順で1件ずつ保持している。
 - [ ] トップページはブログ一覧の末尾15件以下と、URL、表示名、順序が一致している。
-- [ ] サイトマップと必要な内部リンクが同期している。
+- [ ] サイトマップへの記事登録と必要な内部リンクが同期している。
+- [ ] 第4章手順9が完了し、今回変更したTOP・ブログ一覧・既存記事のサイトマップ更新日に不一致がなく、ページ台帳・SEO管理データに対象記事が反映され、生成管理書の整合検証が合格している。
 - [ ] PHP構文、HTML構造、重複ID、リンク、画像、生成処理の再実行結果を確認した。
 - [ ] 正規仕様第2.2節のCSS配置・禁止事項・参照先・更新キーを、記事HTMLと正式テンプレートの両方で確認した。
 
-本番公開が指示された場合だけ、該当するGitおよび本番公開管理書に従い、Commit、Push、Actions、production HTTP/DOM、画像表示まで確認する。ローカル作成だけの場合、本番状態を完了として報告しない。
+本章に未確認・不合格がある場合は、作成完了とせず、ステージング・Commit・Push・本番公開へ進まない。本番公開が指示された場合だけ、該当するGitおよび本番公開管理書に従い、Commit、Push、Actions、production HTTP/DOM、画像表示まで確認する。ローカル作成だけの場合、本番状態を完了として報告しない。

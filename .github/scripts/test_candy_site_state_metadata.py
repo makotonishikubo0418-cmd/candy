@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from contextlib import redirect_stderr, redirect_stdout
 import io
+import json
 from pathlib import Path
 import sys
 import tempfile
@@ -256,17 +257,45 @@ def assert_collect_reports_title_and_og_title_separately() -> None:
 
 
 def assert_faq_items_do_not_depend_on_heading_copy() -> None:
-    source = (
-        '<section id="scene10">\n'
-        '<h2>よくある「女の子選び」の疑問</h2>\n'
-        '<div class="girl-choice-faq">\n'
-        '<div class="faq-item"><h3>質問1</h3><div>回答1</div></div>\n'
-        '<div class="faq-item bd_b"><h3>質問2</h3><div>回答2</div></div>\n'
-        '</div>\n'
-        '</section>\n'
-        '<script>document.querySelectorAll(".faq-item")</script>\n'
+    items = (
+        '<div class="faq-item"><h3>質問1</h3><div>回答1</div></div>'
+        "<div class = 'bd_b faq-item'><h3>質問2</h3><div>回答2</div></div>"
     )
-    assert site_state.visible_faq_item_count(source) == 2
+    for heading in (
+        '<h2>よくある「女の子選び」の疑問</h2>',
+        '<h2>よくある質問</h2>',
+        '<h2>ナイトワークについてよくある質問🤔</h2>',
+        '<h2>よくあるご質問</h2>',
+        '<h2>FAQ</h2>',
+        '<h2>よくある<span>質問</span>について</h2>',
+    ):
+        source = f'<section>{heading}{items}</section>'
+        assert site_state.visible_faq_item_count(source) == 2, heading
+
+    non_items = (
+        '<h2>よくある質問</h2>'
+        '<!-- <div class="faq-item">コメント</div> -->'
+        '<script>const example = \'<div class="faq-item"></div>\';</script>'
+        '<style>.faq-item::after { content: \'class="faq-item"\'; }</style>'
+        '<template><div class="faq-item"></div>'
+        '<template><div class="faq-item"></div></template></template>'
+        '<div class="faq-item-wrapper faq-item-extra" data-class="faq-item"></div>'
+        '<p>faq-itemという文字だけ</p>'
+    )
+    assert site_state.visible_faq_item_count(non_items) == 0
+    assert site_state.visible_faq_item_count(non_items + items) == 2
+    assert site_state.visible_faq_item_count('<h2>周辺スポット</h2>' + items) == 0
+    assert site_state.visible_faq_item_count('<h2>FAQ</h2>' + items + '<h2>関連記事</h2>' + items) == 2
+    assert site_state.visible_faq_item_count(items) == 0
+
+    for slug, count in (('nightwork-style', 4), ('short-time-job', 5)):
+        article = SCRIPTS.parents[1] / f'HP/source/kagoshima-deliveryhealth-blog-{slug}.html'
+        source = article.read_text(encoding='utf-8-sig')
+        schema_count = sum(
+            site_state.json_main_entity_count(json.loads(match))
+            for match in site_state.JSON_RE.findall(source)
+        )
+        assert site_state.visible_faq_item_count(source) == schema_count == count, slug
 
 
 def assert_sitemap_lastmod_rendering_is_exact() -> None:
