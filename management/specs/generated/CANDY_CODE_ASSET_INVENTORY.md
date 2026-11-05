@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-04T18:36:42+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-05T17:17:41+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 936b8a59a5d02e04fa2ed5774e4492ac8d206c10
-> State fingerprint: sha256:a7dafc82468a422e67ca3c17d75f46d1fe19f533d4f8bf418e14cf84e9339c68
-> Population: Public PHP files: 276 / assets: 785
+> Commit: 84c36eb70f4679424005a3bd5f5f0daca9784f3f
+> State fingerprint: sha256:cabd380736442c027158b0d660f4ab137494a38cb3355c57b383efe5c6ad0938
+> Population: Public PHP files: 277 / assets: 785
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -250,6 +250,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:nightwork-style | 2 | NONE | OK |
 | blog:petitegirl | 7 | NONE | OK |
 | blog:poccharigirl | 7 | NONE | OK |
+| blog:privacy-measures | 2 | NONE | OK |
 | blog:private-waiting-room | 3 | NONE | OK |
 | blog:retort-curry | 3 | NONE | OK |
 | blog:shimei-change | 3 | NONE | OK |
@@ -365,7 +366,7 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/imgHtml/new_202601/blog | 4 | kagoshima-deliveryhealth-blog-making_1.jpg, kagoshima-deliveryhealth-blog-making_2.jpg, kagoshima-deliveryhealth-blog-privacy-measures_1.jpg, kagoshima-deliveryhealth-blog-privacy-measures_2.jpg |
+| HP/imgHtml/new_202601/blog | 2 | kagoshima-deliveryhealth-blog-making_1.jpg, kagoshima-deliveryhealth-blog-making_2.jpg |
 
 ## Required Same-Content Path Groups
 
