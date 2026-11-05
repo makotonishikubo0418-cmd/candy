@@ -4,6 +4,7 @@ Updated: 2026-11-05
 
 | Type | Title | History |
 |---|---|---|
+| PROBLEM | 身バレ対策ブログFAQのQ重複と上線 | [20261105_PROBLEM_privacy-measures-faq-display.md](history/20261105_PROBLEM_privacy-measures-faq-display.md) |
 | CREATE | 身バレ対策ブログの作成と公開 | [20261105_CREATE_privacy-measures-blog.md](history/20261105_CREATE_privacy-measures-blog.md) |
 | MODIFY | 指名替えブログ末尾CTAの2ボタン化 | [20261105_MODIFY_shimei-change-cta-buttons.md](history/20261105_MODIFY_shimei-change-cta-buttons.md) |
 | CREATE | 指名替えブログの作成と公開 | [20261105_CREATE_shimei-change-blog-article.md](history/20261105_CREATE_shimei-change-blog-article.md) |

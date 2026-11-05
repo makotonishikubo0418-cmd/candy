@@ -1235,6 +1235,11 @@
 	border-top: 1px solid var(--blog-border);
 }
 
+.blog-page .blog-section.is-faq > h2 {
+	margin-bottom: 0;
+	border-bottom: none;
+}
+
 .blog-page:where(.blog-theme-pink, .blog-theme-brown, .blog-theme-deep-pink) .blog-faq .faq-item {
 	border-bottom: 1px solid var(--blog-border);
 }

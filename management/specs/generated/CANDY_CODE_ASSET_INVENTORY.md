@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-05T17:17:41+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-05T17:49:31+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 84c36eb70f4679424005a3bd5f5f0daca9784f3f
-> State fingerprint: sha256:cabd380736442c027158b0d660f4ab137494a38cb3355c57b383efe5c6ad0938
-> Population: Public PHP files: 277 / assets: 785
+> Commit: 2829c7cbf554e1ca69fc30074a91c753c1f4be21
+> State fingerprint: sha256:a96b551672dc8a0dd55747e6cca38e289950004adc39242296a5f291b3f68414
+> Population: Public PHP files: 277 / assets: 783
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 663 |
+| .jpg | 661 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 31 |
@@ -52,7 +52,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 62 |
+| HP/imgHtml/new_202601/blog | 60 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -366,7 +366,6 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/imgHtml/new_202601/blog | 2 | kagoshima-deliveryhealth-blog-making_1.jpg, kagoshima-deliveryhealth-blog-making_2.jpg |
 
 ## Required Same-Content Path Groups
 
