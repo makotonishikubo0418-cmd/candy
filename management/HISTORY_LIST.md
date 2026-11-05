@@ -1,9 +1,10 @@
 # Candy 履歴一覧
 
-Updated: 2026-11-04
+Updated: 2026-11-05
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | 指名替えブログの作成と公開 | [20261105_CREATE_shimei-change-blog-article.md](history/20261105_CREATE_shimei-change-blog-article.md) |
 | CREATE | ナイトワーク働き方ブログの作成と公開 | [20261104_CREATE_nightwork-style-blog-article.md](history/20261104_CREATE_nightwork-style-blog-article.md) |
 | OPERATION | 新人とベテラン比較ブログのGitHub保存と本番公開 | [20261103_OPERATION_newcomer-veteran-publication.md](history/20261103_OPERATION_newcomer-veteran-publication.md) |
 | CREATE | 新人とベテラン比較ブログの完成HTML作成 | [20261103_CREATE_newcomer-veteran-blog-article.md](history/20261103_CREATE_newcomer-veteran-blog-article.md) |
