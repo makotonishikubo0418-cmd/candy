@@ -14,7 +14,7 @@
  * brown     ：private-waiting-room
  * gold      ：tokyo-souvenir
  * deep-pink ：正式ブログテンプレート・candy_dominant_girls
- * deep-pink に追加する配色：blog-theme-curry（カレー色）、blog-theme-purple（紫）、blog-theme-antique-gold（アンティークゴールド）、blog-theme-smoky-blue（スモーキーブルー）、blog-theme-terracotta（テラコッタ）、blog-theme-bordeaux（ボルドー）、blog-theme-rose-pink（ローズピンク #B65B86）
+ * deep-pink に追加する配色：blog-theme-curry（カレー色）、blog-theme-purple（紫）、blog-theme-antique-gold（アンティークゴールド）、blog-theme-smoky-blue（スモーキーブルー）、blog-theme-terracotta（テラコッタ）、blog-theme-bordeaux（ボルドー）、blog-theme-rose-pink（ローズピンク #B65B86）、blog-theme-warm-terracotta（ウォームテラコッタ #B67A5E）
  *
  * 【注意】
  * ブログ独自の装飾はこのファイルに集約し、記事別CSSは作成・復活・参照しません。
@@ -607,6 +607,62 @@
 }
 
 .blog-page:where(.blog-theme-rose-pink) .blog-nowrap {
+	white-space: nowrap;
+}
+
+/* 01-11. ウォームテラコッタ：deep-pinkの基本レイアウトに重ねる配色（基準 #B67A5E） */
+.blog-page:where(.blog-theme-warm-terracotta) {
+	--blog-accent: #B67A5E;
+	--blog-accent-dark: #8E5C46;
+	--blog-accent-deep: #5C3A2C;
+	--blog-pale: #FBF4F0;
+	--blog-surface-soft: #FDF8F6;
+	--blog-border: rgba(182, 122, 94, 0.22);
+	--blog-shadow-sm: 0 10px 30px rgba(92, 58, 44, 0.07);
+	--blog-shadow-md: 0 18px 48px rgba(92, 58, 44, 0.12);
+	--blog-hero-background: #3A2C26;
+	--blog-toc-background: linear-gradient(145deg, #FBF4F0 0%, #fff 76%);
+	--blog-heading-bar-background: var(--blog-accent);
+	--blog-callout-background: linear-gradient(135deg, #FBF4F0, #fff);
+	--blog-callout-bar-background: var(--blog-accent);
+	--blog-checklist-border: rgba(92, 58, 44, 0.08);
+	--blog-checklist-dot-shadow: 0 0 0 5px rgba(182, 122, 94, 0.1);
+	--blog-card-background: linear-gradient(180deg, #fff 0%, #fff 72%, #FDF8F6 100%);
+	--blog-card-bar-background: linear-gradient(90deg, var(--blog-accent), #E0B5A2);
+	--blog-card-text: #5C463E;
+	--blog-photo-shadow: 0 20px 50px rgba(92, 58, 44, 0.15);
+	--blog-caption-text: #5C463E;
+	--blog-caption-shadow: 0 14px 32px rgba(92, 58, 44, 0.1);
+	--blog-cta-background: linear-gradient(135deg, #4E342C 0%, #8E5C46 100%);
+	--blog-cta-shadow: 0 20px 48px rgba(92, 58, 44, 0.2);
+	--blog-cta-decoration-background: radial-gradient(circle, rgba(182, 122, 94, 0.28), rgba(182, 122, 94, 0));
+	--blog-cta-eyebrow: #F0D2C4;
+	--blog-primary-background: linear-gradient(135deg, #B67A5E, #8E5C46);
+	--blog-primary-shadow: 0 10px 24px rgba(92, 58, 44, 0.25);
+	--blog-primary-hover-background: linear-gradient(135deg, #C48B70, #7A4E3C);
+	--blog-related-border: rgba(182, 122, 94, 0.18);
+	--blog-related-link-border: rgba(182, 122, 94, 0.18);
+}
+
+.blog-page:where(.blog-theme-warm-terracotta) .bt-pk-xl {
+	background: var(--blog-primary-background);
+}
+
+.blog-page:where(.blog-theme-warm-terracotta) .bt-pk-xl:hover {
+	background: var(--blog-primary-hover-background);
+}
+
+.blog-page:where(.blog-theme-warm-terracotta) .faq-question:hover,
+.blog-page:where(.blog-theme-warm-terracotta) .faq-item.active .faq-question {
+	color: var(--blog-accent-dark);
+}
+
+.blog-page:where(.blog-theme-warm-terracotta) .blog-section strong,
+.blog-page:where(.blog-theme-warm-terracotta) .blog-lead strong {
+	color: var(--blog-accent-dark);
+}
+
+.blog-page:where(.blog-theme-warm-terracotta) .blog-nowrap {
 	white-space: nowrap;
 }
 
