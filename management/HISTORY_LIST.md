@@ -1,9 +1,10 @@
 # Candy 履歴一覧
 
-Updated: 2026-11-05
+Updated: 2026-11-06
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | ブログ制作の裏側ブログの作成と公開 | [20261106_CREATE_blog-making-article.md](history/20261106_CREATE_blog-making-article.md) |
 | PROBLEM | 身バレ対策ブログFAQのQ重複と上線 | [20261105_PROBLEM_privacy-measures-faq-display.md](history/20261105_PROBLEM_privacy-measures-faq-display.md) |
 | CREATE | 身バレ対策ブログの作成と公開 | [20261105_CREATE_privacy-measures-blog.md](history/20261105_CREATE_privacy-measures-blog.md) |
 | MODIFY | 指名替えブログ末尾CTAの2ボタン化 | [20261105_MODIFY_shimei-change-cta-buttons.md](history/20261105_MODIFY_shimei-change-cta-buttons.md) |
