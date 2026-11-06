@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-06T16:28:17+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-06T16:39:30+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 48ee7c34be5f74f82325f607786d7b248422189a
-> State fingerprint: sha256:76845f2cbe6987a8d1015417c2b98c49ad0cb492fb279230fe9f3064cf2da59a
-> Population: Public PHP files: 280 / assets: 792
+> Commit: 1205e582a2dd6caeaab18994c92ddc94fe84f530
+> State fingerprint: sha256:2d7420fe9902b15ffc2db8ab4709ca6e605d156fd5bb0a360c891ce38840d117
+> Population: Public PHP files: 281 / assets: 796
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 670 |
+| .jpg | 674 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 31 |
@@ -52,7 +52,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 69 |
+| HP/imgHtml/new_202601/blog | 73 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -244,6 +244,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:dormitory | 4 | NONE | OK |
 | blog:double-work | 2 | NONE | OK |
 | blog:fun-conversation | 1 | NONE | OK |
+| blog:gap-moe | 4 | NONE | OK |
 | blog:girl-choice | 3 | NONE | OK |
 | blog:glamourgirl | 7 | NONE | OK |
 | blog:maimai-profile | 3 | NONE | OK |

@@ -4,6 +4,7 @@ Updated: 2026-11-06
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | ギャップ萌えブログの作成と公開 | [20261106_CREATE_blog-gap-moe.md](history/20261106_CREATE_blog-gap-moe.md) |
 | MODIFY | 1ヶ月ブログCTAの求人リンク修正 | [20261106_MODIFY_one-month-blog-cta.md](history/20261106_MODIFY_one-month-blog-cta.md) |
 | CREATE | 1ヶ月だけ働きたい女性向けブログの作成と公開 | [20261106_CREATE_one-month-blog.md](history/20261106_CREATE_one-month-blog.md) |
 | CREATE | きれい系とかわいい系ブログの作成と公開 | [20261106_CREATE_beautiful-cute-blog.md](history/20261106_CREATE_beautiful-cute-blog.md) |
