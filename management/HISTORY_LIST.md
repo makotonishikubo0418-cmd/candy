@@ -4,6 +4,7 @@ Updated: 2026-11-06
 
 | Type | Title | History |
 |---|---|---|
+| MODIFY | ブログ制作記事の文言とPOINT装飾の修正 | [20261106_MODIFY_blog-making-wording.md](history/20261106_MODIFY_blog-making-wording.md) |
 | CREATE | ブログ制作の裏側ブログの作成と公開 | [20261106_CREATE_blog-making-article.md](history/20261106_CREATE_blog-making-article.md) |
 | PROBLEM | 身バレ対策ブログFAQのQ重複と上線 | [20261105_PROBLEM_privacy-measures-faq-display.md](history/20261105_PROBLEM_privacy-measures-faq-display.md) |
 | CREATE | 身バレ対策ブログの作成と公開 | [20261105_CREATE_privacy-measures-blog.md](history/20261105_CREATE_privacy-measures-blog.md) |
