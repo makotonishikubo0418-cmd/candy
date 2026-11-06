@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-05T18:20:14+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-06T11:00:08+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: ac81b3a26d95b1933d514d4cd81ef13079ec99cb
-> State fingerprint: sha256:a97f6e36d9e9c405f156aaca954bc38afb60daaf10781bdadd9e6f03a06829b4
-> Population: Public PHP files: 278 / assets: 790
+> Commit: c9f572e108464ed85b10c423eaae0c4ee50d940a
+> State fingerprint: sha256:5b34fc76ddc014304b3e9ccf78152a6a281e6b9bbe54bdc0b1a8b313be3ec010
+> Population: Public PHP files: 279 / assets: 790
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -237,6 +237,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | area:yotsumotocho | 6 | NONE | OK |
 | area:yusukicho | 6 | NONE | OK |
 | blog:autumn-winter-cuddle | 1 | NONE | OK |
+| blog:beautiful-cute | 5 | NONE | OK |
 | blog:beginner-job | 3 | NONE | OK |
 | blog:candy_dominant_girls | 3 | NONE | OK |
 | blog:course-time | 3 | NONE | OK |
@@ -367,7 +368,6 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/imgHtml/new_202601/blog | 5 | kagoshima-deliveryhealth-blog-beautiful-cute_1.jpg, kagoshima-deliveryhealth-blog-beautiful-cute_2.jpg, kagoshima-deliveryhealth-blog-beautiful-cute_3.jpg, kagoshima-deliveryhealth-blog-beautiful-cute_4.jpg, kagoshima-deliveryhealth-blog-beautiful-cute_5.jpg |
 
 ## Required Same-Content Path Groups
 
