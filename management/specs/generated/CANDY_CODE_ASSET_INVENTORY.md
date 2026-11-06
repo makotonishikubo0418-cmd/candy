@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-06T11:00:08+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-06T11:58:12+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: c9f572e108464ed85b10c423eaae0c4ee50d940a
-> State fingerprint: sha256:5b34fc76ddc014304b3e9ccf78152a6a281e6b9bbe54bdc0b1a8b313be3ec010
-> Population: Public PHP files: 279 / assets: 790
+> Commit: e6f66a355a22b93834cfab8d60b0800e67a65cbe
+> State fingerprint: sha256:44b6e3f6bc60d1860876f5d78bb2024e76acd3f3123bf188b486b3a2a9e4c283
+> Population: Public PHP files: 280 / assets: 792
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 668 |
+| .jpg | 670 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 31 |
@@ -52,7 +52,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 67 |
+| HP/imgHtml/new_202601/blog | 69 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -250,6 +250,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:making | 2 | NONE | OK |
 | blog:newcomer-veteran | 2 | NONE | OK |
 | blog:nightwork-style | 2 | NONE | OK |
+| blog:one-month | 2 | NONE | OK |
 | blog:petitegirl | 7 | NONE | OK |
 | blog:poccharigirl | 7 | NONE | OK |
 | blog:privacy-measures | 2 | NONE | OK |
