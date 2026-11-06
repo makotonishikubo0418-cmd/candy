@@ -4,6 +4,7 @@ Updated: 2026-11-06
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | 1ヶ月だけ働きたい女性向けブログの作成と公開 | [20261106_CREATE_one-month-blog.md](history/20261106_CREATE_one-month-blog.md) |
 | CREATE | きれい系とかわいい系ブログの作成と公開 | [20261106_CREATE_beautiful-cute-blog.md](history/20261106_CREATE_beautiful-cute-blog.md) |
 | MODIFY | ブログ制作記事の文言とPOINT装飾の修正 | [20261106_MODIFY_blog-making-wording.md](history/20261106_MODIFY_blog-making-wording.md) |
 | CREATE | ブログ制作の裏側ブログの作成と公開 | [20261106_CREATE_blog-making-article.md](history/20261106_CREATE_blog-making-article.md) |
