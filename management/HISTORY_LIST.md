@@ -4,6 +4,7 @@ Updated: 2026-11-06
 
 | Type | Title | History |
 |---|---|---|
+| MODIFY | ギャップ萌えブログ導入見出しの接頭辞削除 | [20261106_MODIFY_gap-moe-heading.md](history/20261106_MODIFY_gap-moe-heading.md) |
 | CREATE | ギャップ萌えブログの作成と公開 | [20261106_CREATE_blog-gap-moe.md](history/20261106_CREATE_blog-gap-moe.md) |
 | MODIFY | 1ヶ月ブログCTAの求人リンク修正 | [20261106_MODIFY_one-month-blog-cta.md](history/20261106_MODIFY_one-month-blog-cta.md) |
 | CREATE | 1ヶ月だけ働きたい女性向けブログの作成と公開 | [20261106_CREATE_one-month-blog.md](history/20261106_CREATE_one-month-blog.md) |
