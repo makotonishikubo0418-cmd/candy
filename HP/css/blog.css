@@ -14,7 +14,7 @@
  * brown     ：private-waiting-room
  * gold      ：tokyo-souvenir
  * deep-pink ：正式ブログテンプレート・candy_dominant_girls
- * deep-pink に追加する配色：blog-theme-curry（カレー色）、blog-theme-purple（紫）、blog-theme-antique-gold（アンティークゴールド）、blog-theme-smoky-blue（スモーキーブルー）、blog-theme-terracotta（テラコッタ）、blog-theme-bordeaux（ボルドー）、blog-theme-rose-pink（ローズピンク #B65B86）、blog-theme-warm-terracotta（ウォームテラコッタ #B67A5E）、blog-theme-dusty-lavender（くすみラベンダー #8976AF）、blog-theme-calm-lavender（落ち着いたラベンダー #9275B6）、blog-theme-deep-mint（ディープミント #438C83）
+ * deep-pink に追加する配色：blog-theme-curry（カレー色）、blog-theme-purple（紫）、blog-theme-antique-gold（アンティークゴールド）、blog-theme-smoky-blue（スモーキーブルー）、blog-theme-terracotta（テラコッタ）、blog-theme-bordeaux（ボルドー）、blog-theme-rose-pink（ローズピンク #B65B86）、blog-theme-warm-terracotta（ウォームテラコッタ #B67A5E）、blog-theme-dusty-lavender（くすみラベンダー #8976AF）、blog-theme-calm-lavender（落ち着いたラベンダー #9275B6）、blog-theme-deep-mint（ディープミント #438C83）、blog-theme-midnight-blue（ミッドナイトブルー #46658C）
  *
  * 【注意】
  * ブログ独自の装飾はこのファイルに集約し、記事別CSSは作成・復活・参照しません。
@@ -832,6 +832,63 @@
 }
 
 .blog-page:where(.blog-theme-deep-mint) .blog-nowrap {
+	white-space: nowrap;
+}
+
+
+/* 01-15. ミッドナイトブルー：deep-pinkの基本レイアウトに重ねる配色（基準 #46658C） */
+.blog-page:where(.blog-theme-midnight-blue) {
+	--blog-accent: #46658C;
+	--blog-accent-dark: #365070;
+	--blog-accent-deep: #24364F;
+	--blog-pale: #F1F4F8;
+	--blog-surface-soft: #F7F9FB;
+	--blog-border: rgba(70, 101, 140, 0.22);
+	--blog-shadow-sm: 0 10px 30px rgba(36, 54, 79, 0.07);
+	--blog-shadow-md: 0 18px 48px rgba(36, 54, 79, 0.12);
+	--blog-hero-background: #243040;
+	--blog-toc-background: linear-gradient(145deg, #F1F4F8 0%, #fff 76%);
+	--blog-heading-bar-background: var(--blog-accent);
+	--blog-callout-background: linear-gradient(135deg, #F1F4F8, #fff);
+	--blog-callout-bar-background: var(--blog-accent);
+	--blog-checklist-border: rgba(36, 54, 79, 0.08);
+	--blog-checklist-dot-shadow: 0 0 0 5px rgba(70, 101, 140, 0.1);
+	--blog-card-background: linear-gradient(180deg, #fff 0%, #fff 72%, #F7F9FB 100%);
+	--blog-card-bar-background: linear-gradient(90deg, var(--blog-accent), #A3B7CF);
+	--blog-card-text: #3E4A58;
+	--blog-photo-shadow: 0 20px 50px rgba(36, 54, 79, 0.15);
+	--blog-caption-text: #3E4A58;
+	--blog-caption-shadow: 0 14px 32px rgba(36, 54, 79, 0.1);
+	--blog-cta-background: linear-gradient(135deg, #24364F 0%, #365070 100%);
+	--blog-cta-shadow: 0 20px 48px rgba(36, 54, 79, 0.2);
+	--blog-cta-decoration-background: radial-gradient(circle, rgba(70, 101, 140, 0.28), rgba(70, 101, 140, 0));
+	--blog-cta-eyebrow: #D5E0EC;
+	--blog-primary-background: linear-gradient(135deg, #46658C, #365070);
+	--blog-primary-shadow: 0 10px 24px rgba(36, 54, 79, 0.25);
+	--blog-primary-hover-background: linear-gradient(135deg, #5578A1, #2E4662);
+	--blog-related-border: rgba(70, 101, 140, 0.18);
+	--blog-related-link-border: rgba(70, 101, 140, 0.18);
+}
+
+.blog-page:where(.blog-theme-midnight-blue) .bt-pk-xl {
+	background: var(--blog-primary-background);
+}
+
+.blog-page:where(.blog-theme-midnight-blue) .bt-pk-xl:hover {
+	background: var(--blog-primary-hover-background);
+}
+
+.blog-page:where(.blog-theme-midnight-blue) .faq-question:hover,
+.blog-page:where(.blog-theme-midnight-blue) .faq-item.active .faq-question {
+	color: var(--blog-accent-dark);
+}
+
+.blog-page:where(.blog-theme-midnight-blue) .blog-section strong,
+.blog-page:where(.blog-theme-midnight-blue) .blog-lead strong {
+	color: var(--blog-accent-dark);
+}
+
+.blog-page:where(.blog-theme-midnight-blue) .blog-nowrap {
 	white-space: nowrap;
 }
 

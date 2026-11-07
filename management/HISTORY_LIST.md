@@ -1,9 +1,10 @@
 # Candy 履歴一覧
 
-Updated: 2026-11-06
+Updated: 2026-11-07
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | 深夜バイトブログの作成と公開 | [20261107_CREATE_blog-late-night-job.md](history/20261107_CREATE_blog-late-night-job.md) |
 | MODIFY | ギャップ萌えブログ導入見出しの接頭辞削除 | [20261106_MODIFY_gap-moe-heading.md](history/20261106_MODIFY_gap-moe-heading.md) |
 | CREATE | ギャップ萌えブログの作成と公開 | [20261106_CREATE_blog-gap-moe.md](history/20261106_CREATE_blog-gap-moe.md) |
 | MODIFY | 1ヶ月ブログCTAの求人リンク修正 | [20261106_MODIFY_one-month-blog-cta.md](history/20261106_MODIFY_one-month-blog-cta.md) |
@@ -13,6 +14,7 @@ Updated: 2026-11-06
 | CREATE | ブログ制作の裏側ブログの作成と公開 | [20261106_CREATE_blog-making-article.md](history/20261106_CREATE_blog-making-article.md) |
 | PROBLEM | 身バレ対策ブログFAQのQ重複と上線 | [20261105_PROBLEM_privacy-measures-faq-display.md](history/20261105_PROBLEM_privacy-measures-faq-display.md) |
 | CREATE | 身バレ対策ブログの作成と公開 | [20261105_CREATE_privacy-measures-blog.md](history/20261105_CREATE_privacy-measures-blog.md) |
+| MODIFY | ブログ固定CTAと関連管理体系の整合 | [20261105_MODIFY_blog-cta-management.md](history/20261105_MODIFY_blog-cta-management.md) |
 | MODIFY | 指名替えブログ末尾CTAの2ボタン化 | [20261105_MODIFY_shimei-change-cta-buttons.md](history/20261105_MODIFY_shimei-change-cta-buttons.md) |
 | CREATE | 指名替えブログの作成と公開 | [20261105_CREATE_shimei-change-blog-article.md](history/20261105_CREATE_shimei-change-blog-article.md) |
 | CREATE | ナイトワーク働き方ブログの作成と公開 | [20261104_CREATE_nightwork-style-blog-article.md](history/20261104_CREATE_nightwork-style-blog-article.md) |
