@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-07T11:31:38+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-07T11:55:47+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 38379ab1eb7033c7da82aff0257db3028e1d4abf
-> State fingerprint: sha256:2d0d16f1696cf7001f3d5f8148f1cda25303e562810c404cf250b9f699666a48
-> Population: Public PHP files: 283 / assets: 800
+> Commit: a6c3c87e0df23c545310a35e2fd56052fccd2991
+> State fingerprint: sha256:287dca77e6dcc32738073f961bdceb410a13228ecbf3392ff295ddd86ff93662
+> Population: Public PHP files: 284 / assets: 802
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 678 |
+| .jpg | 680 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 31 |
@@ -52,7 +52,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 77 |
+| HP/imgHtml/new_202601/blog | 79 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -248,6 +248,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:gap-moe | 4 | NONE | OK |
 | blog:girl-choice | 3 | NONE | OK |
 | blog:glamourgirl | 7 | NONE | OK |
+| blog:high-income-salary | 2 | NONE | OK |
 | blog:late-night-job | 2 | NONE | OK |
 | blog:maimai-profile | 3 | NONE | OK |
 | blog:making | 2 | NONE | OK |
