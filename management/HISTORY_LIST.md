@@ -4,6 +4,7 @@ Updated: 2026-11-07
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | 初対面ブログの作成と公開 | [20261107_CREATE_blog-first-impression.md](history/20261107_CREATE_blog-first-impression.md) |
 | PROBLEM | 深夜バイトブログFAQのQ重複 | [20261107_PROBLEM_late-night-job-faq-q-display.md](history/20261107_PROBLEM_late-night-job-faq-q-display.md) |
 | CREATE | 深夜バイトブログの作成と公開 | [20261107_CREATE_blog-late-night-job.md](history/20261107_CREATE_blog-late-night-job.md) |
 | MODIFY | ギャップ萌えブログ導入見出しの接頭辞削除 | [20261106_MODIFY_gap-moe-heading.md](history/20261106_MODIFY_gap-moe-heading.md) |
