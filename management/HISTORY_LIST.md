@@ -1,9 +1,10 @@
 # Candy 履歴一覧
 
-Updated: 2026-11-07
+Updated: 2026-11-09
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | 出稼ぎ初出勤5ステップブログの作成と公開 | [20261109_CREATE_blog-dekasegi-steps.md](history/20261109_CREATE_blog-dekasegi-steps.md) |
 | CREATE | お姉さん系女子ブログの作成と公開 | [20261107_CREATE_blog-oneesan.md](history/20261107_CREATE_blog-oneesan.md) |
 | CREATE | 高収入お給料事情ブログの作成と公開 | [20261107_CREATE_blog-high-income-salary.md](history/20261107_CREATE_blog-high-income-salary.md) |
 | CREATE | 初対面ブログの作成と公開 | [20261107_CREATE_blog-first-impression.md](history/20261107_CREATE_blog-first-impression.md) |
