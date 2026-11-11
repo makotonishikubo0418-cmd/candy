@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-09T17:57:13+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-10T18:07:51+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 346760e2cb63724c57b06a47875da12b373a19dd
-> State fingerprint: sha256:5e9ea00ea4ba0c41e47675db0775095d7cc9e0158bba7b32dbc16d06f7ab4ab3
-> Population: Public PHP files: 287 / assets: 813
+> Commit: fae93223578cc6a62e74373e120547e7cc3c05cf
+> State fingerprint: sha256:20145931cdbac467afd16a293e78a07ddb2bc2b530f3d584f623859832776518
+> Population: Public PHP files: 288 / assets: 817
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 691 |
+| .jpg | 695 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 31 |
@@ -52,7 +52,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 90 |
+| HP/imgHtml/new_202601/blog | 94 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -241,6 +241,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:beginner-job | 3 | NONE | OK |
 | blog:candy_dominant_girls | 3 | NONE | OK |
 | blog:course-time | 3 | NONE | OK |
+| blog:dekasegi-sightseeing | 4 | NONE | OK |
 | blog:dekasegi-steps | 2 | NONE | OK |
 | blog:dormitory | 4 | NONE | OK |
 | blog:double-work | 2 | NONE | OK |
