@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-11T17:48:50+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-12T15:04:58+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: f7af3cee57bfabd5662a46a7c36fd0e3152b449a
-> State fingerprint: sha256:6937c41463728ab6bda123868fd771b02fc649541df88654d6a7cb082253f49f
-> Population: Public PHP files: 289 / assets: 821
+> Commit: d17c8c5902dc2798454d553ba39629cf501dab6b
+> State fingerprint: sha256:6165c4da743919c586d9eb7a73c583aa29613d729b264a599265e1038330579a
+> Population: Public PHP files: 290 / assets: 825
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 699 |
+| .jpg | 703 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 31 |
@@ -52,7 +52,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 98 |
+| HP/imgHtml/new_202601/blog | 102 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -260,6 +260,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:one-month | 2 | NONE | OK |
 | blog:oneesan | 5 | NONE | OK |
 | blog:petitegirl | 7 | NONE | OK |
+| blog:photo-diary | 4 | NONE | OK |
 | blog:poccharigirl | 7 | NONE | OK |
 | blog:privacy-measures | 2 | NONE | OK |
 | blog:private-waiting-room | 3 | NONE | OK |
