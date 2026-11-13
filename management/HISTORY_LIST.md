@@ -4,6 +4,7 @@ Updated: 2026-11-13
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | Candy開発側Googleアナリティクスの分離設置 | [20261113_CREATE_developer-ga4.md](history/20261113_CREATE_developer-ga4.md) |
 | OPERATION | Candy本番を正本とするローカルHPの同期 | [20261113_OPERATION_server-authoritative-local-sync.md](history/20261113_OPERATION_server-authoritative-local-sync.md) |
 | INVESTIGATE | Candy本番全階層とローカルHPのファイル差分調査 | [20261113_INVESTIGATE_server-local-file-comparison.md](history/20261113_INVESTIGATE_server-local-file-comparison.md) |
 | MODIFY | 写メ日記ブログ画像コメントの修正と公開 | [20261112_MODIFY_blog-photo-diary-captions.md](history/20261112_MODIFY_blog-photo-diary-captions.md) |

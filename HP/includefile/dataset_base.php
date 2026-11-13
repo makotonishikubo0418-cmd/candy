@@ -2431,6 +2431,15 @@ if ($hdir === 'index.html' && isset($candyRecommendationParts) && function_exist
 	$HpgCoder->Converted = cmr_insert($HpgCoder->Converted, $candyRecommendationParts);
 }
 
+// 開発側GA4は本番のHTML出力へ一度だけ追加する。運営者用タグは維持する。
+require_once(__DIR__ . '/candy_developer_analytics.php');
+$HpgCoder->Converted = candy_developer_analytics(
+	$HpgCoder->Converted,
+	'G-5RN2Z12HB8',
+	isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '',
+	$__useGroupTest
+);
+
 //変換&表示
 print($HpgCoder->Converted);
 

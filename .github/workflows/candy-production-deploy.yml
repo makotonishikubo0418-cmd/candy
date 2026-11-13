@@ -200,6 +200,10 @@ jobs:
             echo "confirmation=$MANUAL_CONFIRMATION" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Verify developer analytics injection before FTP
+        if: steps.plan.outputs.count != '0'
+        run: php -d short_open_tag=1 management/scripts/test_candy_developer_analytics.php
+
       - name: Lint every deployable PHP file before FTP
         if: steps.plan.outputs.count != '0'
         env:
