@@ -18,9 +18,9 @@ $fixture = '<html><head><script async src="https://www.googletagmanager.com/gtag
 $result = candy_developer_analytics($fixture, $id, 'www.55810.com', false);
 analytics_assert(substr_count($result, 'gtag/js?id=') === 1, 'Existing loader must not be duplicated');
 analytics_assert(substr_count($result, 'gtag("config","' . $owner . '")') === 1, 'Operator configuration must stay unchanged');
-analytics_assert(substr_count($result, 'w.gtag("config", "' . $id . '")') === 1, 'Developer configuration must occur once');
+analytics_assert(substr_count($result, 'gtag(\'config\', "' . $id . '")') === 1, 'Developer configuration must occur once');
 analytics_assert(candy_developer_analytics($result, $id, 'www.55810.com', false) === $result, 'Repeated injection must be idempotent');
-analytics_assert(strpos($result, "</script>\n</head>") !== false, 'Tag must be inside head');
+analytics_assert(strpos($result, $id) < strpos($result, '</head>'), 'Tag must be inside head');
 analytics_assert(substr($result, strpos($result, '</head>')) === substr($fixture, strpos($fixture, '</head>')), 'Page body must be unchanged');
 foreach (array('localhost', 'firststar.kir.jp', 'www.55810.com.example.com', '') as $host) {
     analytics_assert(candy_developer_analytics($fixture, $id, $host, false) === $fixture, 'Excluded host changed: ' . $host);
@@ -39,8 +39,11 @@ foreach (glob(dirname(dirname(__DIR__)) . '/HP/source/*.html') as $path) {
         continue;
     }
     $output = candy_developer_analytics($source, $id, 'www.55810.com', false);
-    analytics_assert(substr_count($output, 'id="candy-developer-analytics"') === 1, 'Missing or duplicate tag: ' . basename($path));
+    analytics_assert(preg_match_all('~gtag\(\s*["\']config["\']\s*,\s*["\']' . $id . '["\']~', $output) === 1, 'Missing or duplicate tag: ' . basename($path));
+    analytics_assert(strpos($output, $id) < stripos($output, '</head>'), 'Tag outside head: ' . basename($path));
     analytics_assert(substr_count($source, $owner) === substr_count($output, $owner), 'Operator tag changed: ' . basename($path));
+    $loaders = substr_count($source, 'googletagmanager.com/gtag/js?');
+    analytics_assert(substr_count($output, 'googletagmanager.com/gtag/js?') === max(1, $loaders), 'Duplicate loader: ' . basename($path));
     analytics_assert(candy_developer_analytics($output, $id, 'www.55810.com', false) === $output, 'Duplicate on repeat: ' . basename($path));
     $tested++;
 }
