@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-13T11:34:59+09:00 (reproducible generation baseline)
-> Branch: main
-> Commit: 5cc491453894b085747be37115916975ae65826c
-> State fingerprint: sha256:a6ab1310e235f6292a8a7d82670c7916c958921e20a5c974721371a367ca6f14
-> Population: Public PHP files: 290 / assets: 825
+> Generated at: 2026-11-13T11:42:22+09:00 (reproducible generation baseline)
+> Branch: 
+> Commit: 1d4f9fe4a3e280f2563cdca6032f6c45ceb9a493
+> State fingerprint: sha256:0cec245022bc043c5aeb9e3c53f149e9ac21de42c65a08fac7a5740c83b2d89d
+> Population: Public PHP files: 291 / assets: 830
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 703 |
+| .jpg | 708 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 31 |
@@ -52,7 +52,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 102 |
+| HP/imgHtml/new_202601/blog | 107 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -239,6 +239,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:autumn-winter-cuddle | 1 | NONE | OK |
 | blog:beautiful-cute | 5 | NONE | OK |
 | blog:beginner-job | 3 | NONE | OK |
+| blog:bikyaku-girls | 5 | NONE | OK |
 | blog:candy_dominant_girls | 3 | NONE | OK |
 | blog:course-time | 3 | NONE | OK |
 | blog:dekasegi-sightseeing | 4 | NONE | OK |
