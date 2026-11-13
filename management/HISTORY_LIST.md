@@ -1,9 +1,11 @@
 # Candy 履歴一覧
 
-Updated: 2026-11-12
+Updated: 2026-11-13
 
 | Type | Title | History |
 |---|---|---|
+| OPERATION | Candy本番を正本とするローカルHPの同期 | [20261113_OPERATION_server-authoritative-local-sync.md](history/20261113_OPERATION_server-authoritative-local-sync.md) |
+| INVESTIGATE | Candy本番全階層とローカルHPのファイル差分調査 | [20261113_INVESTIGATE_server-local-file-comparison.md](history/20261113_INVESTIGATE_server-local-file-comparison.md) |
 | MODIFY | 写メ日記ブログ画像コメントの修正と公開 | [20261112_MODIFY_blog-photo-diary-captions.md](history/20261112_MODIFY_blog-photo-diary-captions.md) |
 | CREATE | 写メ日記ブログの作成と公開 | [20261112_CREATE_blog-photo-diary.md](history/20261112_CREATE_blog-photo-diary.md) |
 | CREATE | 癒やし系女子ブログの作成と公開 | [20261112_CREATE_blog-healing-girls.md](history/20261112_CREATE_blog-healing-girls.md) |

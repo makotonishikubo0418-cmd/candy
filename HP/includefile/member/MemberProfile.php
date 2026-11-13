@@ -67,7 +67,7 @@ class MemberProfile
             if ($nickname !== '' && !MemberUtil::isValidNickname($nickname)) {
                 $fieldErrors['nickname'] = 'ニックネームは日本語・カタカナ・英数字で入力してください';
             } else {
-                $updates['nickname'] = $this->mdb->escape($nickname);
+                $updates['nickname'] = ($nickname === '') ? 'NULL' : ("'" . $this->mdb->escape($nickname) . "'");
             }
         }
 
@@ -82,22 +82,60 @@ class MemberProfile
             }
         }
 
+        $notifyFlag = null;
+        if (array_key_exists('notify_mypage_info', $input)) {
+            $notifyFlag = !empty($input['notify_mypage_info']);
+            $hasEmail = isset($member['email']) && $member['email'] !== null && $member['email'] !== '';
+            if ($notifyFlag && !$hasEmail) {
+                $fieldErrors['notify_mypage_info'] = 'メール通知にはメールアドレスの登録が必要です';
+            }
+        }
+
         if (!empty($fieldErrors)) {
             return array('status' => -2, 'message' => '入力内容に不備があります', 'field_errors' => $fieldErrors);
         }
-        if (empty($updates)) {
+        if (empty($updates) && $notifyFlag === null) {
             return array('status' => -2, 'message' => '更新する項目がありません');
         }
 
-        $sets = array();
-        foreach ($updates as $col => $val) {
-            $sets[] = "{$col} = {$val}";
+        // 基本情報と配信設定は両方保存できた場合だけ確定する
+        $this->mdb->query('START TRANSACTION');
+        if (!empty($updates)) {
+            $sets = array();
+            foreach ($updates as $col => $val) {
+                $sets[] = "{$col} = {$val}";
+            }
+            $sets[] = 'updated_at = NOW()';
+            if (!$this->mdb->query('UPDATE customers_accounts SET ' . implode(', ', $sets) . " WHERE id = {$memberId}")) {
+                $this->mdb->query('ROLLBACK');
+                return array('status' => -1, 'message' => '会員情報の保存に失敗しました');
+            }
         }
-        $sets[] = 'updated_at = NOW()';
-        $this->mdb->query('UPDATE customers_accounts SET ' . implode(', ', $sets) . " WHERE id = {$memberId}");
-        $this->mdb->audit($memberId, 'profile_update', implode(',', array_keys($updates)));
+        if ($notifyFlag !== null) {
+            $notify = new MemberNotification($this->mdb);
+            $nres = $notify->updateSettings($memberId, $notifyFlag, true);
+            if ($nres['status'] !== 0) {
+                $this->mdb->query('ROLLBACK');
+                return array('status' => -1, 'message' => $nres['message']);
+            }
+        }
+        $this->mdb->query('COMMIT');
+        $auditKeys = array_keys($updates);
+        if ($notifyFlag !== null) {
+            $auditKeys[] = 'notify_mypage_info=' . ($notifyFlag ? '1' : '0');
+        }
+        $this->mdb->audit($memberId, 'profile_update', implode(',', $auditKeys));
 
         $member = $this->mdb->findMemberById($memberId);
+        if (!$member) {
+            return array('status' => -1, 'message' => '会員情報の保存結果を確認できませんでした');
+        }
+        if (array_key_exists('nickname', $updates)) {
+            $saved = isset($member['nickname']) ? (string)$member['nickname'] : '';
+            if ($saved !== trim((string)$input['nickname'])) {
+                return array('status' => -1, 'message' => 'ニックネームを保存できませんでした');
+            }
+        }
         return array('status' => 0, 'message' => '会員情報を更新しました', 'data' => $this->buildPayload($member));
     }
 
@@ -129,7 +167,9 @@ class MemberProfile
 
         $hash = password_hash($newPass, PASSWORD_DEFAULT);
         $hashEsc = $this->mdb->escape($hash);
-        $this->mdb->query("UPDATE customers_accounts SET password_hash = '{$hashEsc}', updated_at = NOW() WHERE id = {$memberId}");
+        if (!$this->mdb->query("UPDATE customers_accounts SET password_hash = '{$hashEsc}', updated_at = NOW() WHERE id = {$memberId}")) {
+            return array('status' => -1, 'message' => 'パスワードの保存に失敗しました');
+        }
         $this->auth->revokeAllSessions($memberId);
         $this->mdb->audit($memberId, 'password_change', '');
 
@@ -142,7 +182,9 @@ class MemberProfile
     public function deleteEmail($member)
     {
         $memberId = (int)$member['id'];
-        $this->mdb->query("UPDATE customers_accounts SET email = NULL, updated_at = NOW() WHERE id = {$memberId}");
+        if (!$this->mdb->query("UPDATE customers_accounts SET email = NULL, updated_at = NOW() WHERE id = {$memberId}")) {
+            return array('status' => -1, 'message' => 'メールアドレスの削除に失敗しました');
+        }
         $notify = new MemberNotification($this->mdb);
         $notify->updateSettings($memberId, false, false);
         $this->mdb->audit($memberId, 'email_delete', '');

@@ -69,21 +69,17 @@ class MemberMypageInfo
         $total = min(self::LIST_LIMIT, $totalAll);
         $unread = $this->unreadCount($memberId);
 
+        // 表示日（未設定は作成日）の新しい順に選んでから件数を絞る
+        $orderKey = $this->hasDisplayDate() ? 'COALESCE(i.display_date, DATE(i.created_at))' : 'DATE(i.created_at)';
         $sql = "SELECT i.*,"
             . " (r.id IS NOT NULL) AS is_read"
             . " FROM customers_mypage_info i"
             . " LEFT JOIN customers_mypage_info_read r ON r.info_id = i.id AND r.member_id = {$memberId}"
             . " WHERE {$where}"
-            . " ORDER BY i.created_at DESC, i.id DESC"
+            . " ORDER BY {$orderKey} DESC, i.created_at DESC, i.id DESC"
             . " LIMIT {$offset}, {$perPage}";
 
         $rows = $this->mdb->fetchAll($sql);
-        // display_date がある場合は表示日優先で並べ替え（PHP側）
-        usort($rows, function ($a, $b) {
-            $da = !empty($a['display_date']) ? $a['display_date'] : (isset($a['created_at']) ? $a['created_at'] : '');
-            $db = !empty($b['display_date']) ? $b['display_date'] : (isset($b['created_at']) ? $b['created_at'] : '');
-            return strcmp((string)$db, (string)$da);
-        });
 
         $items = array();
         foreach ($rows as $row) {
@@ -91,6 +87,15 @@ class MemberMypageInfo
         }
 
         return array('items' => $items, 'total' => $total, 'unread_count' => $unread);
+    }
+
+    private function hasDisplayDate()
+    {
+        static $has = null;
+        if ($has === null) {
+            $has = $this->mdb->fetchOne("SHOW COLUMNS FROM customers_mypage_info LIKE 'display_date'") !== null;
+        }
+        return $has;
     }
 
     private function publishedTotal()
@@ -121,7 +126,9 @@ class MemberMypageInfo
     }
 
     /**
-     * 許可タグのみ残す簡易サニタイズ
+     * お知らせ本文のHTMLを、許可したタグ・属性・リンク先だけにする。
+     * 属性は class・style（危険な書き方を含まないもの）と、a の href（http・https・mailto・tel・サイト内）・target だけ残す。
+     * onclick などのイベント属性、javascript: などのリンク先は除く。
      */
     public static function sanitizeHtmlComment($html)
     {
@@ -130,7 +137,74 @@ class MemberMypageInfo
             return '';
         }
         $allowed = '<p><br><br/><b><strong><i><em><u><a><ul><ol><li><span><div>';
-        return strip_tags($html, $allowed);
+        $html = strip_tags($html, $allowed);
+        if (!class_exists('DOMDocument')) {
+            return self::sanitizeAttributesFallback($html);
+        }
+        $prev = libxml_use_internal_errors(true);
+        $doc = new DOMDocument();
+        $ok = $doc->loadHTML('<?xml encoding="UTF-8"?><div id="member-info-root">' . $html . '</div>', LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);
+        libxml_clear_errors();
+        libxml_use_internal_errors($prev);
+        $root = $ok ? $doc->getElementById('member-info-root') : null;
+        if (!$root) {
+            return self::sanitizeAttributesFallback($html);
+        }
+        foreach (iterator_to_array($root->getElementsByTagName('*')) as $el) {
+            $tag = strtolower($el->nodeName);
+            foreach (iterator_to_array($el->attributes) as $attr) {
+                $name = strtolower($attr->nodeName);
+                $value = (string)$attr->nodeValue;
+                $keep = false;
+                if ($name === 'class') {
+                    $keep = true;
+                } elseif ($name === 'style') {
+                    $keep = !preg_match('/expression|javascript|vbscript|url\s*\(|@import|behavior|-moz-binding/i', $value);
+                } elseif ($tag === 'a' && $name === 'href') {
+                    $keep = self::isSafeHref($value);
+                } elseif ($tag === 'a' && $name === 'target') {
+                    $keep = ($value === '_blank');
+                }
+                if (!$keep) {
+                    $el->removeAttribute($attr->nodeName);
+                }
+            }
+            if ($tag === 'a' && $el->getAttribute('target') === '_blank') {
+                $el->setAttribute('rel', 'noopener noreferrer');
+            }
+        }
+        $out = '';
+        foreach ($root->childNodes as $child) {
+            $out .= $doc->saveHTML($child);
+        }
+        return $out;
+    }
+
+    /** リンク先は http・https・mailto・tel と、サイト内（/ や # から始まるもの、または相対パス）だけ */
+    private static function isSafeHref($href)
+    {
+        $h = trim(preg_replace('/[\x00-\x20]+/', '', html_entity_decode((string)$href, ENT_QUOTES, 'UTF-8')));
+        if ($h === '') {
+            return false;
+        }
+        if (preg_match('/^(https?:|mailto:|tel:)/i', $h)) {
+            return true;
+        }
+        if (preg_match('/^[a-z][a-z0-9+.\-]*:/i', $h)) {
+            return false;
+        }
+        return strpos($h, '//') !== 0;
+    }
+
+    /** DOMDocument が使えない環境の代替：イベント属性と危険なリンク先・style を除く */
+    private static function sanitizeAttributesFallback($html)
+    {
+        $html = preg_replace('/\s+on[a-z]+\s*=\s*("[^"]*"|\'[^\']*\'|[^\s>]+)/i', '', $html);
+        $html = preg_replace('/\s+style\s*=\s*("[^"]*"|\'[^\']*\'|[^\s>]+)/i', '', $html);
+        return preg_replace_callback('/\s+href\s*=\s*("([^"]*)"|\'([^\']*)\'|([^\s>]+))/i', function ($m) {
+            $v = isset($m[4]) && $m[4] !== '' ? $m[4] : (isset($m[3]) && $m[3] !== '' ? $m[3] : $m[2]);
+            return self::isSafeHref($v) ? $m[0] : '';
+        }, $html);
     }
 
     /**

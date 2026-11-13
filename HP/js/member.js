@@ -18,12 +18,17 @@
   }
 
   function postJson(fno, body) {
-    return fetch(API + '?fno=' + encodeURIComponent(fno), {
+    var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 12000) : null;
+    var opts = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'same-origin',
       body: JSON.stringify(body || {})
-    }).then(function (r) {
+    };
+    if (ctrl) opts.signal = ctrl.signal;
+    return fetch(API + '?fno=' + encodeURIComponent(fno), opts).then(function (r) {
+      if (timer) clearTimeout(timer);
       return r.text().then(function (text) {
         if (!text) {
           throw new Error('empty response');
@@ -35,12 +40,21 @@
           throw new Error('invalid json');
         }
       });
+    }, function (err) {
+      if (timer) clearTimeout(timer);
+      if (err && err.name === 'AbortError') {
+        throw new Error('timeout');
+      }
+      throw err;
     });
   }
 
   function apiErrorMessage(err, fallback) {
     if (err && err.message === 'invalid json') {
       return 'サーバー応答が不正です（APIエラー）。ファイルのアップロード漏れがないかご確認ください。';
+    }
+    if (err && err.message === 'timeout') {
+      return '応答がありません。時間をおいて再度お試しください。';
     }
     return fallback || '通信エラーが発生しました';
   }
@@ -155,6 +169,10 @@
         hideMsg(msg);
         var phone = document.getElementById('regPhone').value;
         postJson('001', { phone: phone }).then(function (res) {
+          if (res.status === -4) {
+            showRegisteredGuide(msg, res.message);
+            return;
+          }
           if (res.status !== 0) {
             showMsg(msg, res.message || 'SMS送信に失敗しました', 'error');
             return;
@@ -199,6 +217,10 @@
           window.location.href = 'member_login.php?registered=1';
           return;
         }
+        if (res.status === -4) {
+          showRegisteredGuide(msg, res.message);
+          return;
+        }
         showMsg(msg, res.message || '登録に失敗しました', 'error');
       }).catch(function () {
         showMsg(msg, '通信エラーが発生しました', 'error');
@@ -215,6 +237,15 @@
     }
   }
 
+  function showRegisteredGuide(msg, text) {
+    showMsg(msg, text || 'この電話番号は既に会員登録されています', 'error');
+    if (!msg) return;
+    var links = document.createElement('span');
+    links.className = 'member-msg-links';
+    links.innerHTML = ' <a href="member_login.php">ログインする</a> / <a href="member_password_reset.php">パスワードを再設定する</a>';
+    msg.appendChild(links);
+  }
+
   function clearFieldErrors(prefix) {
     document.querySelectorAll('.member-field-error').forEach(function (el) {
       el.textContent = '';
@@ -228,6 +259,7 @@
         nickname: 'errNickname',
         birthday: 'errBirthday',
         email: 'errEmail',
+        email_code: 'errEmailCode',
         phone: 'errPhone',
         code: 'errPhone',
         notify_mypage_info: 'errNotify',
@@ -305,8 +337,16 @@
     if (nick) nick.value = d.nickname || '';
     var bd = document.getElementById('editBirthday');
     if (bd) bd.value = d.birthday || '';
+    setText('statusNickname', '現在：' + (d.nickname ? d.nickname : '未登録'));
+    setText('statusBirthday', '現在：' + (d.birthday ? (d.birthday_display || d.birthday) : '未登録'));
+    setText('memberPasswordMasked', d.password_display || '********');
     renderPhoneList(d.phones || [], d.phone_slots_remaining);
     refreshEmailStatus(d);
+  }
+
+  function setText(id, text) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = text;
   }
 
   function refreshEmailStatus(d) {
@@ -344,10 +384,13 @@
       e.preventDefault();
       hideMsg(msg);
       clearFieldErrors();
+      var notifyChk = document.getElementById('notifyMypageInfo');
       var body = {
         nickname: document.getElementById('editNickname').value,
-        birthday: document.getElementById('editBirthday').value
+        birthday: document.getElementById('editBirthday').value,
+        notify_mypage_info: !!(notifyChk && notifyChk.checked)
       };
+      // 基本情報と配信設定は1回の保存でまとめて確定する（どちらかに不備があれば何も更新しない）
       postJson('102', body).then(function (res) {
         if (res.field_errors) {
           applyFieldErrors(res.field_errors);
@@ -358,16 +401,10 @@
           showMsg(msg, res.message || '更新に失敗しました', 'error');
           return;
         }
-        var notifyChk = document.getElementById('notifyMypageInfo');
-        postJson('502', { notify_mypage_info: notifyChk && notifyChk.checked }).then(function (nres) {
-          if (nres.field_errors) applyFieldErrors(nres.field_errors);
-          if (nres.status !== 0) {
-            showMsg(msg, nres.message || 'お知らせ配信設定を保存できません', 'error');
-            return;
-          }
-          fillProfileForm(nres.data || res.data);
-          showMsg(msg, '会員情報を更新しました', 'success');
-        });
+        fillProfileForm(res.data);
+        showMsg(msg, res.message || '会員情報を更新しました', 'success');
+      }).catch(function (err) {
+        showMsg(msg, apiErrorMessage(err, '通信エラーが発生しました'), 'error');
       });
       });
     }
@@ -402,11 +439,554 @@
       });
     }
 
+    bindLoyalty(msg);
+    bindLoginBonus(msg);
+    bindGacha(msg);
     loadFavoriteIds().then(function () {
       bindAnnouncements(msg);
       bindHistory(msg);
       bindFavorites(msg);
     });
+  }
+
+  function bindLoyalty(msg) {
+    var bodyEl = document.getElementById('memberLoyaltyBody');
+    var noteEl = document.getElementById('memberLoyaltyNote');
+    if (!bodyEl) return;
+
+    postJson('203', {}).then(function (res) {
+      if (res.status !== 0) {
+        bodyEl.innerHTML = '<p class="member-loyalty-empty">' + escapeHtml(res.message || '会員ランク・ポイントの取得に失敗しました') + '</p>';
+        return;
+      }
+      var d = res.data || {};
+      if (d.link_message === 'cti_unavailable') {
+        if (noteEl) {
+          noteEl.textContent = '会員ランク・ポイントの参照先に接続できませんでした。時間をおいて再度お試しください。';
+        }
+        bodyEl.innerHTML = '<p class="member-loyalty-empty">表示できません</p>';
+        return;
+      }
+      if (!d.guest_linked || !d.available || !d.rank) {
+        if (noteEl) {
+          noteEl.textContent = 'CTI顧客と未連携のため、会員ランク・ポイントを表示できません。会員登録の電話番号がCTI顧客マスタと一致しているかご確認ください。';
+        }
+        bodyEl.innerHTML = '<p class="member-loyalty-empty">表示できる情報がありません</p>';
+        return;
+      }
+      if (noteEl) noteEl.textContent = '';
+      bodyEl.innerHTML = renderLoyalty(d);
+      bindLoyaltyLists();
+    }).catch(function (err) {
+      bodyEl.innerHTML = '<p class="member-loyalty-empty">' + escapeHtml(apiErrorMessage(err, '通信エラーが発生しました')) + '</p>';
+    });
+  }
+
+  function loyaltyRankCode(code) {
+    var c = String(code || 'bronze').toLowerCase().replace(/[^a-z0-9_-]/g, '');
+    return c || 'bronze';
+  }
+
+  function renderLoyalty(d) {
+    var rank = d.rank || {};
+    var points = d.points || {};
+    var coupons = d.coupons || {};
+    var rankCode = loyaltyRankCode(rank.code);
+    var html = '';
+
+    if (d.notices && d.notices.length) {
+      html += '<ul class="member-loyalty-notices">';
+      d.notices.forEach(function (n) {
+        html += '<li><span class="member-loyalty-notice-date">' + escapeHtml(n.date_display || '') + '</span>' + escapeHtml(n.message || '') + '</li>';
+      });
+      html += '</ul>';
+    }
+
+    html += '<div class="member-loyalty-rank-panel member-loyalty-rank-' + escapeHtml(rankCode) + '" data-rank="' + escapeHtml(rankCode) + '">';
+    html += '<p class="member-loyalty-kicker">現在のランク</p>';
+    html += '<p class="member-loyalty-rank-name">' + escapeHtml(rank.name || '—') + '</p>';
+    html += '<ul class="member-loyalty-rank-meta">';
+    html += '<li><span class="member-loyalty-meta-label">累計利用</span><span class="member-loyalty-meta-value">' + escapeHtml(String(rank.visit_count != null ? rank.visit_count : 0)) + '回</span></li>';
+    html += '<li><span class="member-loyalty-meta-label">最終利用日</span><span class="member-loyalty-meta-value">' + escapeHtml(rank.last_visit_display || '—') + '</span></li>';
+    html += '</ul>';
+    if (rank.demotion && rank.demotion.message) {
+      html += '<p class="member-loyalty-alert">' + escapeHtml(rank.demotion.message) + '</p>';
+    }
+    if (rank.return && rank.return.message) {
+      html += '<p class="member-loyalty-alert member-loyalty-return">' + escapeHtml(rank.return.message) + '</p>';
+    }
+    html += '</div>';
+
+    html += '<div class="member-loyalty-panel">';
+    html += '<h4 class="member-loyalty-panel-title">ポイント</h4>';
+    html += '<div class="member-loyalty-metrics">';
+    html += '<div class="member-loyalty-metric member-loyalty-metric-primary"><span class="member-loyalty-metric-label">保有ポイント</span><span class="member-loyalty-metric-value">' + escapeHtml(points.held_display || '0P') + '</span></div>';
+    html += '<div class="member-loyalty-metric member-loyalty-metric-primary"><span class="member-loyalty-metric-label">利用可能ポイント</span><span class="member-loyalty-metric-value">' + escapeHtml(points.usable_display || '0P') + '</span></div>';
+    html += '</div>';
+    html += '<dl class="member-loyalty-details">';
+    if (points.show_shortfall) {
+      html += '<div class="member-loyalty-detail"><dt>利用に必要な不足ポイント</dt><dd>' + escapeHtml(points.shortfall_display || '0P') + '</dd></div>';
+    }
+    html += '<div class="member-loyalty-detail"><dt>1回あたりの利用上限</dt><dd>' + escapeHtml(points.use_max_display || '—') + '</dd></div>';
+    html += '<div class="member-loyalty-detail"><dt>有効期限が近いポイント</dt><dd>' + escapeHtml(points.expiring_soon_display || '0P') + '</dd></div>';
+    html += '</dl>';
+    html += '</div>';
+
+    html += '<div class="member-loyalty-panel">';
+    html += '<h4 class="member-loyalty-panel-title">クーポンチケット</h4>';
+    html += '<div class="member-loyalty-metrics">';
+    html += '<div class="member-loyalty-metric"><span class="member-loyalty-metric-label">保有クーポン</span><span class="member-loyalty-metric-value">' + escapeHtml(coupons.held_display || '0円') + '</span></div>';
+    html += '<div class="member-loyalty-metric"><span class="member-loyalty-metric-label">利用可能クーポン</span><span class="member-loyalty-metric-value">' + escapeHtml(coupons.usable_display || '0円') + '</span></div>';
+    html += '</div>';
+    html += '<dl class="member-loyalty-details">';
+    html += '<div class="member-loyalty-detail"><dt>1回あたりの利用上限</dt><dd>' + escapeHtml(coupons.use_max_display || '—') + '</dd></div>';
+    html += '<div class="member-loyalty-detail"><dt>有効期限が近いクーポン</dt><dd>' + escapeHtml(coupons.expiring_soon_display || '0円') + '</dd></div>';
+    html += '</dl>';
+    html += '</div>';
+
+    return html;
+  }
+
+  var ROULETTE_COLORS = ['#e8b04a', '#f3d9e6', '#d9ecf7', '#e3f1dc', '#f7ead9', '#ece3f5'];
+
+  function bindLoginBonus(msg) {
+    var section = document.getElementById('memberLoginBonusSection');
+    var bodyEl = document.getElementById('memberLoginBonusBody');
+    var modal = document.getElementById('memberRouletteModal');
+    if (!section || !bodyEl || !modal) return;
+    var wheel = document.getElementById('memberRouletteWheel');
+    var spinBtn = document.getElementById('memberRouletteSpin');
+    var resultEl = document.getElementById('memberRouletteResult');
+    var prizes = [];
+    var spinning = false;
+
+    function closeModal() {
+      if (spinning) return;
+      modal.hidden = true;
+      modal.setAttribute('aria-hidden', 'true');
+    }
+    function openModal() {
+      modal.hidden = false;
+      modal.setAttribute('aria-hidden', 'false');
+    }
+    modal.querySelector('.member-modal-overlay').addEventListener('click', closeModal);
+    modal.querySelector('.member-modal-close').addEventListener('click', closeModal);
+
+    function drawWheel() {
+      var n = prizes.length;
+      var seg = 360 / n;
+      var stops = prizes.map(function (p, i) {
+        return ROULETTE_COLORS[i % ROULETTE_COLORS.length] + ' ' + (i * seg) + 'deg ' + ((i + 1) * seg) + 'deg';
+      });
+      wheel.style.background = 'conic-gradient(' + stops.join(',') + ')';
+      wheel.innerHTML = prizes.map(function (p, i) {
+        var angle = i * seg + seg / 2;
+        return '<span class="member-roulette-label" style="transform: translateX(-50%) rotate(' + angle + 'deg);">'
+          + '<em>' + escapeHtml(p.rank + '位') + '</em>' + escapeHtml(p.display) + '</span>';
+      }).join('');
+    }
+
+    function renderBody(d) {
+      var daily = d.daily || {};
+      var streak = d.streak || {};
+      var html = '';
+      if (streak.enabled) {
+        html += '<p class="member-login-bonus-streak">連続ログイン <strong>' + escapeHtml(String(streak.days || 0)) + '日目</strong>';
+        if (streak.next) {
+          html += '（あと' + escapeHtml(String(streak.next.remaining)) + '日で ' + escapeHtml(Number(streak.next.points).toLocaleString()) + 'P）';
+        }
+        html += '</p>';
+      }
+      if (daily.enabled) {
+        if (daily.played_today) {
+          html += '<p class="member-login-bonus-done">本日の結果：' + escapeHtml(daily.played_today.rank + '位 ' + daily.played_today.display) + '（受け取り済み）</p>';
+        } else if (daily.reason === 'need_visits') {
+          html += '<p class="member-note">ログイン特典のルーレットは、ご利用' + escapeHtml(String(daily.need_visits)) + '回以上の会員様が対象です。</p>';
+        } else if (daily.can_play) {
+          html += '<button type="button" class="member-site-btn" id="memberLoginBonusOpen">ルーレットを回す（1日1回）</button>';
+        }
+      }
+      bodyEl.innerHTML = html || '<p class="member-note">現在実施中のログイン特典はありません。</p>';
+      var openBtn = document.getElementById('memberLoginBonusOpen');
+      if (openBtn) openBtn.addEventListener('click', openModal);
+    }
+
+    function load(autoOpen) {
+      postJson('209', {}).then(function (res) {
+        if (res.status !== 0 || !res.data || !res.data.available) {
+          section.style.display = 'none';
+          return;
+        }
+        var d = res.data;
+        section.style.display = '';
+        prizes = ((d.daily && d.daily.prizes) || []).filter(function (p) { return p.amount > 0; });
+        renderBody(d);
+        (d.streak && d.streak.granted_today || []).forEach(function (g) {
+          showMsg(msg, '連続ログイン' + g.days + '日ボーナス ' + g.display + ' を獲得しました', 'success');
+        });
+        if (autoOpen && d.daily && d.daily.can_play && prizes.length) {
+          drawWheel();
+          spinBtn.disabled = false;
+          resultEl.textContent = '';
+          openModal();
+        } else if (prizes.length) {
+          drawWheel();
+        }
+      }).catch(function () {
+        section.style.display = 'none';
+      });
+    }
+
+    spinBtn.addEventListener('click', function () {
+      if (spinning) return;
+      spinning = true;
+      spinBtn.disabled = true;
+      resultEl.textContent = '';
+      postJson('210', {}).then(function (res) {
+        if (res.status !== 0 || !res.data) {
+          spinning = false;
+          resultEl.textContent = res.message || 'ログイン特典の処理に失敗しました';
+          return;
+        }
+        var won = res.data;
+        var idx = 0;
+        prizes.forEach(function (p, i) { if (p.rank === won.rank) idx = i; });
+        var seg = 360 / Math.max(1, prizes.length);
+        var target = 360 * 6 + (360 - (idx * seg + seg / 2));
+        wheel.style.transition = 'none';
+        wheel.style.transform = 'rotate(0deg)';
+        void wheel.offsetWidth;
+        wheel.style.transition = 'transform 4s cubic-bezier(0.17, 0.67, 0.21, 1)';
+        wheel.style.transform = 'rotate(' + target + 'deg)';
+        setTimeout(function () {
+          spinning = false;
+          resultEl.textContent = won.rank + '位 ' + won.display + ' が当たりました！';
+          load(false);
+          bindLoyalty(msg);
+        }, 4200);
+      }).catch(function (err) {
+        spinning = false;
+        resultEl.textContent = apiErrorMessage(err, '通信エラーが発生しました');
+      });
+    });
+
+    load(true);
+  }
+
+  var LOYALTY_PER_PAGE = 30;
+
+  function bindLoyaltyLists() {
+    var wrap = document.getElementById('memberLoyaltyLists');
+    var bodyEl = document.getElementById('memberLoyaltyListBody');
+    var pagerEl = document.getElementById('memberLoyaltyListPager');
+    if (!wrap || !bodyEl || wrap.getAttribute('data-bound') === '1') return;
+    wrap.setAttribute('data-bound', '1');
+    wrap.style.display = '';
+    var expiryCache = null;
+    var tabs = wrap.querySelectorAll('.member-tab');
+
+    function table(headers, rows) {
+      if (!rows.length) return '<p class="member-loyalty-empty">該当する履歴はありません</p>';
+      var html = '<div class="member-loyalty-table-wrap"><table class="member-loyalty-table"><thead><tr>';
+      headers.forEach(function (h) { html += '<th>' + escapeHtml(h) + '</th>'; });
+      html += '</tr></thead><tbody>';
+      rows.forEach(function (cells) {
+        html += '<tr' + (cells.soon ? ' class="is-soon"' : '') + '>';
+        cells.forEach(function (c) { html += '<td>' + escapeHtml(c == null ? '—' : c) + '</td>'; });
+        html += '</tr>';
+      });
+      return html + '</tbody></table></div>';
+    }
+
+    function pager(total, page, perPage, load) {
+      if (!pagerEl) return;
+      pagerEl.innerHTML = '';
+      if (total <= perPage) return;
+      var maxPage = Math.ceil(total / perPage);
+      var prev = document.createElement('button');
+      prev.type = 'button';
+      prev.textContent = '前へ';
+      prev.disabled = page <= 1;
+      prev.addEventListener('click', function () { load(page - 1); });
+      var info = document.createElement('span');
+      info.className = 'member-pager-info';
+      info.textContent = page + ' / ' + maxPage;
+      var next = document.createElement('button');
+      next.type = 'button';
+      next.textContent = '次へ';
+      next.disabled = page >= maxPage;
+      next.addEventListener('click', function () { load(page + 1); });
+      pagerEl.appendChild(prev);
+      pagerEl.appendChild(info);
+      pagerEl.appendChild(next);
+    }
+
+    function loadHistory(kind, page) {
+      bodyEl.textContent = '読み込み中…';
+      if (pagerEl) pagerEl.innerHTML = '';
+      postJson(kind === 'points' ? '206' : '207', { page: page, per_page: LOYALTY_PER_PAGE }).then(function (res) {
+        if (res.status !== 0) {
+          bodyEl.textContent = res.message || '履歴の取得に失敗しました';
+          return;
+        }
+        var d = res.data || {};
+        var items = d.items || [];
+        if (kind === 'points') {
+          bodyEl.innerHTML = table(['日付', '項目', '内容', 'ポイント', '残高'], items.map(function (r) {
+            return [r.date_display, r.kind, r.label, r.points_display, r.balance_display];
+          }));
+        } else {
+          bodyEl.innerHTML = table(['日付', '項目', '内容', '金額', '有効期限', '現在の状態'], items.map(function (r) {
+            return [r.date_display, r.kind, r.label, r.amount_display, r.expires_display, r.status_display];
+          }));
+        }
+        pager(d.total || 0, d.page || page, d.per_page || LOYALTY_PER_PAGE, function (p) { loadHistory(kind, p); });
+      }).catch(function (err) {
+        bodyEl.textContent = apiErrorMessage(err, '通信エラーが発生しました');
+      });
+    }
+
+    function renderExpiry(kind, d) {
+      var html = '';
+      if (kind === 'point_expiry') {
+        html += '<p class="member-modal-subtitle">失効予定のポイント（有効期限の近い順）</p>';
+        html += table(['付与日', '内容', '残りポイント', '有効期限', '残り日数'], (d.point_upcoming || []).map(function (r) {
+          var row = [r.granted_display, r.label, r.remaining_display, r.expires_display, r.days_left_display];
+          row.soon = r.soon;
+          return row;
+        }));
+        html += '<p class="member-modal-subtitle">失効済みのポイント</p>';
+        html += table(['失効日', 'ポイント', '状態'], (d.point_expired || []).map(function (r) {
+          return [r.expired_display, r.amount_display, r.status_display];
+        }));
+      } else {
+        html += '<p class="member-modal-subtitle">利用できるクーポンチケット（有効期限の近い順）</p>';
+        html += table(['付与日', '内容', '金額', '有効期限', '残り日数'], (d.coupon_upcoming || []).map(function (r) {
+          var row = [r.granted_display, r.label, r.amount_display, r.expires_display, r.days_left_display];
+          row.soon = r.soon;
+          return row;
+        }));
+        html += '<p class="member-modal-subtitle">期限切れのクーポンチケット</p>';
+        html += table(['付与日', '内容', '金額', '有効期限', '失効日', '状態'], (d.coupon_expired || []).map(function (r) {
+          return [r.granted_display, r.label, r.amount_display, r.expires_display, r.expired_display, r.status_display];
+        }));
+      }
+      bodyEl.innerHTML = html;
+    }
+
+    function loadExpiry(kind) {
+      if (pagerEl) pagerEl.innerHTML = '';
+      if (expiryCache) {
+        renderExpiry(kind, expiryCache);
+        return;
+      }
+      bodyEl.textContent = '読み込み中…';
+      postJson('208', {}).then(function (res) {
+        if (res.status !== 0) {
+          bodyEl.textContent = res.message || '失効情報の取得に失敗しました';
+          return;
+        }
+        expiryCache = res.data || {};
+        renderExpiry(kind, expiryCache);
+      }).catch(function (err) {
+        bodyEl.textContent = apiErrorMessage(err, '通信エラーが発生しました');
+      });
+    }
+
+    function show(kind) {
+      tabs.forEach(function (t) {
+        var on = t.getAttribute('data-tab') === kind;
+        t.classList.toggle('active', on);
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      if (kind === 'points' || kind === 'coupons') {
+        loadHistory(kind, 1);
+      } else {
+        loadExpiry(kind);
+      }
+    }
+
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () { show(t.getAttribute('data-tab')); });
+    });
+    show('points');
+  }
+
+  function bindGacha(msg) {
+    var bodyEl = document.getElementById('memberGachaBody');
+    var noteEl = document.getElementById('memberGachaNote');
+    var sectionEl = document.getElementById('memberGachaSection');
+    var GACHA_IMG = './images/member/gacha-machine.png';
+    var GACHA_HANDLE_IMG = './images/member/gacha-handle.png';
+    var GACHA_CAPSULE_IMG = './images/member/gacha-capsule.png';
+    var GACHA_ANIM_MS = 2400;
+    if (!bodyEl) return;
+
+    function gachaMachineBlock(playable) {
+      var html = '<div class="member-gacha-stage">';
+      html += '<div class="member-gacha-machine" id="memberGachaMachine">';
+      html += '<img src="' + GACHA_IMG + '" alt="" class="member-gacha-machine-img" width="407" height="612" decoding="async">';
+      html += '<span class="member-gacha-glow" aria-hidden="true"></span>';
+      html += '<span class="member-gacha-handle-wrap" aria-hidden="true">' +
+        '<img src="' + GACHA_HANDLE_IMG + '" alt="" class="member-gacha-handle-img" decoding="async">' +
+        '</span>';
+      html += '<span class="member-gacha-capsule-out" id="memberGachaCapsule" hidden aria-hidden="true">' +
+        '<img src="' + GACHA_CAPSULE_IMG + '" alt="" class="member-gacha-capsule-img" decoding="async">' +
+        '</span>';
+      html += '</div>';
+      if (playable) {
+        html += '<button type="button" id="memberGachaPlay" class="member-gacha-play">' +
+          '<span class="member-gacha-play-label">ガチャを回す！</span>' +
+          '</button>';
+        html += '<p class="member-gacha-hint">ガチャを回してクーポン・ポイントをゲット！当選分は上の会員ランク・ポイント欄に反映されます。</p>';
+      }
+      html += '<div id="memberGachaResult" class="member-gacha-result" hidden></div>';
+      html += '</div>';
+      return html;
+    }
+
+    function renderIdle(d) {
+      if (sectionEl) sectionEl.style.display = '';
+      if (!d.available) {
+        var idleMsg = d.message || '現在はご利用いただけません';
+        if (d.reason === 'cti_not_linked') {
+          idleMsg = 'CTI顧客と未連携のため、ガチャを利用できません。会員登録の電話番号がCTI顧客マスタと一致しているかご確認ください。';
+        }
+        bodyEl.innerHTML = '<p class="member-loyalty-empty">' + escapeHtml(idleMsg) + '</p>';
+        if (noteEl) {
+          noteEl.textContent = d.reason ? ('状態: ' + d.reason) : '';
+        }
+        return;
+      }
+      var camp = d.campaign || {};
+      var html = '<div class="member-gacha-panel">';
+      html += '<p class="member-gacha-name">' + escapeHtml(camp.name || 'イベントガチャ') + '</p>';
+      html += '<p class="member-gacha-period">期間: ' + escapeHtml(String(camp.starts_at || '').slice(0, 16)) +
+        ' 〜 ' + escapeHtml(String(camp.ends_at || '').slice(0, 16)) + '</p>';
+      html += gachaMachineBlock(!!d.can_play);
+      if (!d.can_play) {
+        html += '<p class="member-gacha-disabled">' + escapeHtml(d.message || '現在は抽選できません') + '</p>';
+      }
+      html += '</div>';
+      bodyEl.innerHTML = html;
+      if (noteEl) noteEl.textContent = '';
+
+      var btn = document.getElementById('memberGachaPlay');
+      if (btn) {
+        btn.addEventListener('click', function () {
+          playGacha(btn);
+        });
+      }
+    }
+
+    function startGachaAnim() {
+      var machine = document.getElementById('memberGachaMachine');
+      var capsule = document.getElementById('memberGachaCapsule');
+      if (capsule) {
+        capsule.hidden = true;
+        capsule.classList.remove('is-drop');
+      }
+      if (machine) machine.classList.add('is-playing');
+    }
+
+    function stopGachaAnim() {
+      var machine = document.getElementById('memberGachaMachine');
+      if (machine) machine.classList.remove('is-playing');
+    }
+
+    function showCapsuleDrop() {
+      var capsule = document.getElementById('memberGachaCapsule');
+      if (!capsule) return;
+      capsule.hidden = false;
+      capsule.classList.remove('is-drop');
+      void capsule.offsetWidth;
+      capsule.classList.add('is-drop');
+    }
+
+    function delay(ms) {
+      return new Promise(function (resolve) {
+        window.setTimeout(resolve, ms);
+      });
+    }
+
+    function playGacha(btn) {
+      if (btn.disabled) return;
+      btn.disabled = true;
+      btn.classList.add('is-busy');
+      var resultEl = document.getElementById('memberGachaResult');
+      if (resultEl) {
+        resultEl.hidden = true;
+        resultEl.className = 'member-gacha-result';
+        resultEl.innerHTML = '';
+      }
+      startGachaAnim();
+
+      var apiPromise = postJson('205', {});
+      delay(GACHA_ANIM_MS).then(function () {
+        return apiPromise;
+      }).then(function (res) {
+        stopGachaAnim();
+        if (res.status !== 0) {
+          if (resultEl) {
+            resultEl.hidden = false;
+            resultEl.className = 'member-gacha-result is-error';
+            resultEl.innerHTML = '<p>' + escapeHtml(res.message || '抽選に失敗しました') + '</p>';
+          }
+          btn.disabled = false;
+          btn.classList.remove('is-busy');
+          return;
+        }
+        var data = res.data || {};
+        var prize = data.prize || {};
+        showCapsuleDrop();
+        var winHtml =
+          '<p class="member-gacha-win-label">当選おめでとう！</p>' +
+          '<p class="member-gacha-win-amount">' + escapeHtml(prize.amount_display || '') + '</p>' +
+          '<p class="member-gacha-win-sub">' + (prize.prize_type === 'point' ? 'ポイントを獲得しました' : 'クーポン券を獲得しました') + '</p>' +
+          (data.expires_at
+            ? '<p class="member-gacha-win-exp">有効期限: ' + escapeHtml(String(data.expires_at)) + '</p>'
+            : '<p class="member-gacha-win-exp">有効期限: 無期限</p>');
+        return delay(700).then(function () {
+          return postJson('204', {}).then(function (st) {
+            if (st.status === 0) {
+              renderIdle(st.data || {});
+            }
+            var resultEl2 = document.getElementById('memberGachaResult');
+            if (resultEl2) {
+              resultEl2.hidden = false;
+              resultEl2.className = 'member-gacha-result is-win';
+              resultEl2.innerHTML = winHtml;
+            }
+            bindLoyalty(msg);
+          });
+        });
+      }).catch(function () {
+        stopGachaAnim();
+        if (resultEl) {
+          resultEl.hidden = false;
+          resultEl.className = 'member-gacha-result is-error';
+          resultEl.innerHTML = '<p>通信エラーが発生しました</p>';
+        }
+        btn.disabled = false;
+        btn.classList.remove('is-busy');
+      });
+    }
+
+    function refreshGachaStatus() {
+      postJson('204', {}).then(function (res) {
+        if (res.status !== 0) {
+          if (sectionEl) sectionEl.style.display = '';
+          bodyEl.innerHTML = '<p class="member-loyalty-empty">' + escapeHtml(res.message || '取得に失敗しました') + '</p>';
+          if (noteEl) noteEl.textContent = 'ガチャAPIエラー（fno=204）';
+          return;
+        }
+        renderIdle(res.data || {});
+      }).catch(function () {
+        bodyEl.innerHTML = '<p class="member-loyalty-empty">通信エラーが発生しました</p>';
+      });
+    }
+
+    refreshGachaStatus();
   }
 
   function bindProfileEvents(msg, getPendingPhone, setPendingPhone, getPhoneAction, setPhoneAction) {
@@ -512,9 +1092,11 @@
     if (sendEmailBtn) {
       sendEmailBtn.addEventListener('click', function () {
         hideMsg(msg);
+        setText('errEmail', '');
+        setText('errEmailCode', '');
         postJson('107', { email: document.getElementById('editEmail').value }).then(function (res) {
           if (res.status !== 0) {
-            showMsg(msg, res.message || '送信に失敗しました', 'error');
+            setText('errEmail', res.message || '送信に失敗しました');
             return;
           }
           var mockEl = document.getElementById('memberEmailMockCode');
@@ -531,12 +1113,19 @@
     var confirmEmailBtn = document.getElementById('memberEmailConfirm');
     if (confirmEmailBtn) {
       confirmEmailBtn.addEventListener('click', function () {
+        hideMsg(msg);
+        setText('errEmail', '');
+        setText('errEmailCode', '');
         postJson('108', {
           email: document.getElementById('editEmail').value,
           code: document.getElementById('editEmailCode').value
         }).then(function (res) {
+          if (res.field_errors) {
+            applyFieldErrors(res.field_errors);
+            return;
+          }
           if (res.status !== 0) {
-            showMsg(msg, res.message || '登録に失敗しました', 'error');
+            setText('errEmail', res.message || '登録に失敗しました');
             return;
           }
           fillProfileForm(res.data);
@@ -1106,12 +1695,13 @@
     if (overlay) overlay.addEventListener('click', closeModal);
     if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
-    window.openHistoryModal = function (taskId) {
-      var item = historyDetailCache[taskId];
+    window.openHistoryModal = function (cacheKey) {
+      var item = historyDetailCache[cacheKey];
       if (!item) return;
       var bodyEl = document.getElementById('memberHistoryModalBody');
       if (!bodyEl) return;
 
+      var isPastOnly = item.source === 'history' || !item.task_id;
       var html = '<div class="member-history-modal-visit">' + formatVisitSummary(item) + '</div>';
       if (item.girl) {
         html += '<div class="member-fav-item member-fav-item-inmodal">' + renderGirlCardBody(item.girl) + '</div>';
@@ -1124,26 +1714,31 @@
       html += '<dt>日付</dt><dd>' + escapeHtml(item.date_display || item.date || '—') + '</dd>';
       html += '<dt>女の子</dt><dd>' + escapeHtml(historyGirlLabel(item)) + '</dd>';
       html += '<dt>コース</dt><dd>' + escapeHtml(item.course_label || (item.course ? (item.course + '分') : '—')) + '</dd>';
-      html += '<dt>オプション</dt><dd>' + escapeHtml(item.options_text || 'なし') + '</dd>';
-      html += '<dt>割引</dt><dd>' + escapeHtml(item.discounts_text || 'なし') + '</dd>';
-      html += '<dt>利用ポイント</dt><dd>' + escapeHtml(item.points_used_display || '0ポイント') + '</dd>';
-      html += '<dt>指名</dt><dd>' + escapeHtml(item.nominate_label || (item.nominate ? '指名' : 'なし')) + '</dd>';
+      html += '<dt>オプション</dt><dd>' + escapeHtml(item.options_text || (isPastOnly ? '—' : 'なし')) + '</dd>';
+      html += '<dt>割引</dt><dd>' + escapeHtml(item.discounts_text || (isPastOnly ? '—' : 'なし')) + '</dd>';
+      html += '<dt>利用ポイント</dt><dd>' + escapeHtml(item.points_used_display || (isPastOnly ? '—' : '0ポイント')) + '</dd>';
+      html += '<dt>指名</dt><dd>' + escapeHtml(item.nominate_label || (item.nominate ? '指名' : (isPastOnly ? '—' : 'なし'))) + '</dd>';
       html += '<dt>支払方法</dt><dd>' + escapeHtml(item.payment_label || '—') + '</dd>';
       html += '<dt>派遣先</dt><dd>' + escapeHtml(item.destination_display || '—') + '</dd>';
-      html += '<dt>金額</dt><dd>' + escapeHtml(item.total_price_display ? (item.total_price_display + '円') : formatYen(item.total_price)) + '</dd>';
+      html += '<dt>金額</dt><dd>' + escapeHtml(formatHistoryPrice(item)) + '</dd>';
       html += '</dl>';
 
-      html += '<div class="member-history-breakdown">';
-      html += '<p class="member-modal-subtitle">金額内訳</p>';
-      html += '<ul>';
-      html += '<li>コース料金：' + formatYen(pb.course_price) + '</li>';
-      html += '<li>オプション料金：' + formatYen(pb.options_total) + '</li>';
-      if (pb.nominate_fee) html += '<li>指名料金：' + formatYen(pb.nominate_fee) + '</li>';
-      if (pb.traffic_fare) html += '<li>交通費：' + formatYen(pb.traffic_fare) + '</li>';
-      html += '<li>割引額：' + formatYen(pb.discount_total) + '</li>';
-      html += '<li>利用ポイント：' + formatYen(pb.points_used) + '</li>';
-      html += '<li class="member-history-breakdown-total">合計金額：' + formatYen(pb.total_price != null ? pb.total_price : item.total_price) + '</li>';
-      html += '</ul></div>';
+      if (!isPastOnly) {
+        html += '<div class="member-history-breakdown">';
+        html += '<p class="member-modal-subtitle">金額内訳</p>';
+        html += '<ul>';
+        html += '<li>コース料金：' + formatYen(pb.course_price) + '</li>';
+        html += '<li>オプション料金：' + formatYen(pb.options_total) + '</li>';
+        if (pb.nominate_fee) html += '<li>指名料金：' + formatYen(pb.nominate_fee) + '</li>';
+        if (pb.traffic_fare) html += '<li>交通費：' + formatYen(pb.traffic_fare) + '</li>';
+        html += '<li>割引額：' + formatYen(pb.discount_total) + '</li>';
+        html += '<li>利用ポイント：' + formatYen(pb.points_used) + '</li>';
+        if (pb.coupon_used) html += '<li>クーポンチケット：' + formatYen(pb.coupon_used) + '</li>';
+        html += '<li class="member-history-breakdown-total">合計金額：' + formatYen(pb.total_price != null ? pb.total_price : item.total_price) + '</li>';
+        html += '</ul></div>';
+      } else {
+        html += '<p class="member-note">過去履歴のため、金額・詳細の一部は表示できません。</p>';
+      }
 
       if (item.girls_id) {
         var favActive = isFavorite(item.girls_id);
@@ -1167,9 +1762,28 @@
 
   function bindHistoryDetailButtons(container, msg) {
     container.querySelectorAll('.member-history-detail-btn, .member-history-eval-btn').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var taskId = parseInt(btn.getAttribute('data-task-id'), 10);
-        if (window.openHistoryModal) window.openHistoryModal(taskId);
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        var key = btn.getAttribute('data-history-key') || btn.getAttribute('data-task-id');
+        if (window.openHistoryModal) window.openHistoryModal(key);
+      });
+    });
+    // 行全体のクリック（女の子名のリンクは除く）でも詳細を開く
+    container.querySelectorAll('.member-history-item').forEach(function (row) {
+      function open() {
+        var key = row.getAttribute('data-history-key');
+        if (window.openHistoryModal) window.openHistoryModal(key);
+      }
+      row.addEventListener('click', function (e) {
+        if (e.target.closest && e.target.closest('a, button')) return;
+        open();
+      });
+      row.addEventListener('keydown', function (e) {
+        if (e.target !== row) return;
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          open();
+        }
       });
     });
   }
@@ -1220,25 +1834,56 @@
     loadPage(1);
   }
 
+  function historyCacheKey(item) {
+    if (item.task_id) {
+      return 't:' + item.task_id;
+    }
+    if (item.history_id) {
+      return 'h:' + item.history_id;
+    }
+    return 'x:' + (item.date || '') + ':' + (item.cast_id || 0);
+  }
+
+  function formatHistoryPrice(item) {
+    if (item.source === 'history' || !item.task_id) {
+      if (!item.total_price_display || item.total_price_display === '—' || item.total_price_display === '0') {
+        return '—';
+      }
+    }
+    if (item.total_price_display) {
+      return String(item.total_price_display).indexOf('円') >= 0
+        ? item.total_price_display
+        : (item.total_price_display + '円');
+    }
+    return formatYen(item.total_price);
+  }
+
   function renderHistoryItem(item) {
-    historyDetailCache[item.task_id] = item;
+    var key = historyCacheKey(item);
+    historyDetailCache[key] = item;
     var meta = escapeHtml(item.date_display || (item.date + ' ' + (item.start || '') + '〜' + (item.end || '')));
     var badge = item.stat === 2 ? ' <span class="member-history-badge reserved">予約</span>' : '';
     var evalBadge = item.evaluation ? ' <span class="member-history-badge evaluated">評価済み</span>' : '';
     var course = item.course_label || (item.course ? (String(item.course) + '分') : '');
-    var price = item.total_price_display ? (item.total_price_display + '円') : '';
+    var price = formatHistoryPrice(item);
+    if (price === '—') price = '';
     var evalBtn = '';
     if (item.evaluation) {
       evalBtn = '<span class="member-history-eval-status">評価済み</span>';
     } else if (item.can_evaluate) {
-      evalBtn = '<button type="button" class="member-history-eval-btn" data-task-id="' + item.task_id + '">評価</button>';
+      evalBtn = '<button type="button" class="member-history-eval-btn" data-history-key="' + escapeHtml(key) + '">評価</button>';
     }
 
-    var html = '<div class="member-history-item" data-task-id="' + item.task_id + '">';
+    var nameHtml = escapeHtml(historyGirlLabel(item));
+    if (item.girl && item.girl.profile_url) {
+      nameHtml = '<a href="' + escapeAttr(item.girl.profile_url) + '" class="member-history-name-link">' + nameHtml + '</a>';
+    }
+
+    var html = '<div class="member-history-item is-clickable" data-history-key="' + escapeHtml(key) + '" role="button" tabindex="0">';
     html += '<div class="member-history-item-head">';
     html += '<div class="member-history-item-main">';
     html += '<div class="member-history-meta">' + meta + badge + evalBadge + '</div>';
-    html += '<div class="member-history-name">' + escapeHtml(historyGirlLabel(item)) + '</div>';
+    html += '<div class="member-history-name">' + nameHtml + '</div>';
     html += '<div class="member-history-course">';
     if (course) html += escapeHtml(course);
     if (price) html += (course ? ' · ' : '') + escapeHtml(price);
@@ -1246,7 +1891,7 @@
     html += '</div>';
     html += '<div class="member-history-item-actions">';
     html += evalBtn;
-    html += '<button type="button" class="member-history-detail-btn" data-task-id="' + item.task_id + '">詳細</button>';
+    html += '<button type="button" class="member-history-detail-btn" data-history-key="' + escapeHtml(key) + '">詳細</button>';
     html += '</div>';
     html += '</div>';
     html += '</div>';
