@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-13T11:42:22+09:00 (reproducible generation baseline)
-> Branch: 
-> Commit: 1d4f9fe4a3e280f2563cdca6032f6c45ceb9a493
-> State fingerprint: sha256:0cec245022bc043c5aeb9e3c53f149e9ac21de42c65a08fac7a5740c83b2d89d
-> Population: Public PHP files: 291 / assets: 830
+> Generated at: 2026-11-13T14:31:58+09:00 (reproducible generation baseline)
+> Branch: main
+> Commit: de83d02bcd0e8e00381bcd01949f54a3b6c2b598
+> State fingerprint: sha256:3fc1297852659302505b44daf55a432cfe6b8e50631382cd90f3be58acdb5625
+> Population: Public PHP files: 292 / assets: 832
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 708 |
+| .jpg | 710 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 31 |
@@ -52,7 +52,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 107 |
+| HP/imgHtml/new_202601/blog | 109 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -270,6 +270,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:shimei-change | 3 | NONE | OK |
 | blog:shiroutogirl | 7 | NONE | OK |
 | blog:short-time-job | 2 | NONE | OK |
+| blog:shy | 2 | NONE | OK |
 | blog:slendergirl | 7 | NONE | OK |
 | blog:tallbeautygirl | 7 | NONE | OK |
 | blog:tokyo-souvenir | 3 | NONE | OK |

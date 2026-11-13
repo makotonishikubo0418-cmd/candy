@@ -4,6 +4,7 @@ Updated: 2026-11-13
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | 人見知りブログの作成と公開 | [20261113_CREATE_blog-shy.md](history/20261113_CREATE_blog-shy.md) |
 | CREATE | 美脚女子ブログの作成と公開 | [20261113_CREATE_blog-bikyaku-girls.md](history/20261113_CREATE_blog-bikyaku-girls.md) |
 | CREATE | Candy開発側Googleアナリティクスの分離設置 | [20261113_CREATE_developer-ga4.md](history/20261113_CREATE_developer-ga4.md) |
 | OPERATION | Candy本番を正本とするローカルHPの同期 | [20261113_OPERATION_server-authoritative-local-sync.md](history/20261113_OPERATION_server-authoritative-local-sync.md) |
