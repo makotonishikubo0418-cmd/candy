@@ -14,7 +14,7 @@
  * brown     ：private-waiting-room
  * gold      ：tokyo-souvenir
  * deep-pink ：正式ブログテンプレート・candy_dominant_girls
- * deep-pink に追加する配色：blog-theme-curry（カレー色）、blog-theme-purple（紫）、blog-theme-antique-gold（アンティークゴールド）、blog-theme-smoky-blue（スモーキーブルー）、blog-theme-terracotta（テラコッタ）、blog-theme-bordeaux（ボルドー）、blog-theme-rose-pink（ローズピンク #B65B86）、blog-theme-warm-terracotta（ウォームテラコッタ #B67A5E）、blog-theme-dusty-lavender（くすみラベンダー #8976AF）、blog-theme-calm-lavender（落ち着いたラベンダー #9275B6）、blog-theme-deep-mint（ディープミント #438C83）、blog-theme-midnight-blue（ミッドナイトブルー #46658C）、blog-theme-deep-teal（ディープティール #417F80）、blog-theme-champagne-gold（シャンパンゴールド #B68C52）、blog-theme-mauve-wine（モーヴワイン #98566F）、blog-theme-dusty-pink（ダスティピンク #C58E9B）、blog-theme-coral-pink（コーラルピンク #E87991）、blog-theme-dusty-rose（ダスティローズ #D58D9F）、blog-theme-dusty-coral-pink（くすみコーラルピンク #C77985）、blog-theme-vivid-magenta（ビビッドマゼンタ #D41470）、blog-theme-apricot-orange（アプリコットオレンジ #D98754）
+ * deep-pink に追加する配色：blog-theme-curry（カレー色）、blog-theme-purple（紫）、blog-theme-antique-gold（アンティークゴールド）、blog-theme-smoky-blue（スモーキーブルー）、blog-theme-terracotta（テラコッタ）、blog-theme-bordeaux（ボルドー）、blog-theme-rose-pink（ローズピンク #B65B86）、blog-theme-warm-terracotta（ウォームテラコッタ #B67A5E）、blog-theme-dusty-lavender（くすみラベンダー #8976AF）、blog-theme-calm-lavender（落ち着いたラベンダー #9275B6）、blog-theme-deep-mint（ディープミント #438C83）、blog-theme-midnight-blue（ミッドナイトブルー #46658C）、blog-theme-deep-teal（ディープティール #417F80）、blog-theme-champagne-gold（シャンパンゴールド #B68C52）、blog-theme-mauve-wine（モーヴワイン #98566F）、blog-theme-dusty-pink（ダスティピンク #C58E9B）、blog-theme-coral-pink（コーラルピンク #E87991）、blog-theme-dusty-rose（ダスティローズ #D58D9F）、blog-theme-dusty-coral-pink（くすみコーラルピンク #C77985）、blog-theme-vivid-magenta（ビビッドマゼンタ #D41470）、blog-theme-apricot-orange（アプリコットオレンジ #D98754）、blog-theme-ruby-red（ルビーレッド #A72C47）
  *
  * 【注意】
  * ブログ独自の装飾はこのファイルに集約し、記事別CSSは作成・復活・参照しません。
@@ -1390,6 +1390,62 @@
 }
 
 .blog-page:where(.blog-theme-apricot-orange) .blog-nowrap {
+	white-space: nowrap;
+}
+
+
+.blog-page:where(.blog-theme-ruby-red) {
+	--blog-accent: #A72C47;
+	--blog-accent-dark: #821F36;
+	--blog-accent-deep: #5A1525;
+	--blog-pale: #FBF0F3;
+	--blog-surface-soft: #FDF7F8;
+	--blog-border: rgba(167, 44, 71, 0.22);
+	--blog-shadow-sm: 0 10px 30px rgba(90, 21, 37, 0.07);
+	--blog-shadow-md: 0 18px 48px rgba(90, 21, 37, 0.12);
+	--blog-hero-background: #3A1822;
+	--blog-toc-background: linear-gradient(145deg, #FBF0F3 0%, #fff 76%);
+	--blog-heading-bar-background: var(--blog-accent);
+	--blog-callout-background: linear-gradient(135deg, #FBF0F3, #fff);
+	--blog-callout-bar-background: var(--blog-accent);
+	--blog-checklist-border: rgba(90, 21, 37, 0.08);
+	--blog-checklist-dot-shadow: 0 0 0 5px rgba(167, 44, 71, 0.1);
+	--blog-card-background: linear-gradient(180deg, #fff 0%, #fff 72%, #FDF7F8 100%);
+	--blog-card-bar-background: linear-gradient(90deg, var(--blog-accent), #D56A7E);
+	--blog-card-text: #5A1525;
+	--blog-photo-shadow: 0 20px 50px rgba(90, 21, 37, 0.15);
+	--blog-caption-text: #5A1525;
+	--blog-caption-shadow: 0 14px 32px rgba(90, 21, 37, 0.1);
+	--blog-cta-background: linear-gradient(135deg, #5A1525 0%, #821F36 100%);
+	--blog-cta-shadow: 0 20px 48px rgba(90, 21, 37, 0.2);
+	--blog-cta-decoration-background: radial-gradient(circle, rgba(167, 44, 71, 0.28), rgba(167, 44, 71, 0));
+	--blog-cta-eyebrow: #F0C4CD;
+	--blog-primary-background: linear-gradient(135deg, #A72C47, #821F36);
+	--blog-primary-shadow: 0 10px 24px rgba(90, 21, 37, 0.25);
+	--blog-primary-hover-background: linear-gradient(135deg, #BF3A58, #6F1A2E);
+	--blog-related-border: rgba(167, 44, 71, 0.18);
+	--blog-related-link-border: rgba(167, 44, 71, 0.18);
+}
+
+.blog-page:where(.blog-theme-ruby-red) .bt-pk-xl {
+	background: var(--blog-primary-background);
+}
+
+.blog-page:where(.blog-theme-ruby-red) .bt-pk-xl:hover {
+	background: var(--blog-primary-hover-background);
+}
+
+.blog-page:where(.blog-theme-ruby-red) .faq-question:hover,
+.blog-page:where(.blog-theme-ruby-red) .faq-item.active .faq-question {
+	color: var(--blog-accent-dark);
+}
+
+.blog-page:where(.blog-theme-ruby-red) .blog-section strong,
+.blog-page:where(.blog-theme-ruby-red) .blog-lead strong {
+	color: var(--blog-accent-dark);
+}
+
+.blog-page:where(.blog-theme-ruby-red) .blog-nowrap {
 	white-space: nowrap;
 }
 
