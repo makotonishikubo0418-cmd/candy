@@ -4,6 +4,7 @@ Updated: 2026-11-18
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | 本番ぶっちゃけトークブログの作成と公開 | [20261118_CREATE_blog-honban.md](history/20261118_CREATE_blog-honban.md) |
 | CREATE | 髪色自由バイトブログの作成と公開 | [20261118_CREATE_blog-haircolor-free.md](history/20261118_CREATE_blog-haircolor-free.md) |
 | CREATE | 巨乳美女4選ブログの作成と公開 | [20261116_CREATE_blog-kyonyu-girls.md](history/20261116_CREATE_blog-kyonyu-girls.md) |
 | CREATE | 人見知りブログの作成と公開 | [20261113_CREATE_blog-shy.md](history/20261113_CREATE_blog-shy.md) |

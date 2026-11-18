@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-16T15:34:26+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-18T13:24:46+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 585399bb93388237cb297728cd1b688bbd89598b
-> State fingerprint: sha256:b437497f0dee6955b3f2db846fcd8f805da1359499f0747d1c05075f2f695585
-> Population: Public PHP files: 294 / assets: 839
+> Commit: 7ed9efd21ec4cee85abc3f2eafd1ac772e6dbc29
+> State fingerprint: sha256:f7222be1887e4e2582bd906b32b88805dbe83eedf6ae53825c880d803527c50d
+> Population: Public PHP files: 295 / assets: 842
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 717 |
+| .jpg | 720 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 31 |
@@ -52,7 +52,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 116 |
+| HP/imgHtml/new_202601/blog | 119 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -254,6 +254,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:haircolor-free | 2 | NONE | OK |
 | blog:healing-girls | 4 | NONE | OK |
 | blog:high-income-salary | 2 | NONE | OK |
+| blog:honban | 3 | NONE | OK |
 | blog:kyonyu-girls | 5 | NONE | OK |
 | blog:late-night-job | 2 | NONE | OK |
 | blog:maimai-profile | 3 | NONE | OK |
