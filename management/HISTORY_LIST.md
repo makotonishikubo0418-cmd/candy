@@ -4,6 +4,7 @@ Updated: 2026-11-19
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | 当日予約ブログの作成と公開 | [20261119_CREATE_blog-same-day-reservation.md](history/20261119_CREATE_blog-same-day-reservation.md) |
 | CREATE | ぽっちゃり採用ブログの作成と公開 | [20261119_CREATE_blog-pocchari-recruit.md](history/20261119_CREATE_blog-pocchari-recruit.md) |
 | CREATE | 本番ぶっちゃけトークブログの作成と公開 | [20261118_CREATE_blog-honban.md](history/20261118_CREATE_blog-honban.md) |
 | CREATE | 髪色自由バイトブログの作成と公開 | [20261118_CREATE_blog-haircolor-free.md](history/20261118_CREATE_blog-haircolor-free.md) |
