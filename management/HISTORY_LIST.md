@@ -4,6 +4,7 @@ Updated: 2026-11-19
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | 体験入店ブログの作成と公開 | [20261119_CREATE_blog-trial-entry.md](history/20261119_CREATE_blog-trial-entry.md) |
 | CREATE | 静電気ブログの作成と公開 | [20261119_CREATE_blog-static-electricity.md](history/20261119_CREATE_blog-static-electricity.md) |
 | CREATE | 当日予約ブログの作成と公開 | [20261119_CREATE_blog-same-day-reservation.md](history/20261119_CREATE_blog-same-day-reservation.md) |
 | CREATE | ぽっちゃり採用ブログの作成と公開 | [20261119_CREATE_blog-pocchari-recruit.md](history/20261119_CREATE_blog-pocchari-recruit.md) |

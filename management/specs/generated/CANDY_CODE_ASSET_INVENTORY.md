@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-19T14:07:59+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-19T14:31:16+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 1e171fe6438c2e33003e2543dfb8b74ae5c9acb7
-> State fingerprint: sha256:c95a385cb18e71469627359838d64ab21390db9dd765d68a2a851b408a1ab433
-> Population: Public PHP files: 298 / assets: 850
+> Commit: 8bfbb7a4e7158e0df934f9d73427c80637acd49e
+> State fingerprint: sha256:abbb36faacbcab099ad356175a0eeb9809b5467243828d6d8b37a2716c9c9400
+> Population: Public PHP files: 299 / assets: 853
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 728 |
+| .jpg | 731 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 31 |
@@ -52,7 +52,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 127 |
+| HP/imgHtml/new_202601/blog | 130 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -280,6 +280,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:static-electricity | 3 | NONE | OK |
 | blog:tallbeautygirl | 7 | NONE | OK |
 | blog:tokyo-souvenir | 3 | NONE | OK |
+| blog:trial-entry | 3 | NONE | OK |
 | blog:waiting-room-facilities | 4 | NONE | OK |
 | hotel:aquagardenhotelfukumaru | 6 | NONE | OK |
 | hotel:arthotelkagoshima | 6 | NONE | OK |
