@@ -9,10 +9,10 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_SITE_PAGE_LEDGER.tsv`, stable structure specifications, and category specifications
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-20T14:43:08+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-20T16:16:14+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 32455dfe142479d1fbfdd302e87c558dba8da59d
-> State fingerprint: sha256:0d8b8a822ec257087be5c0402f8dbabe921ee8932c08d719f35b6d269bdb807b
+> Commit: 24d13910855855fa9a89311de9defb7e382d9e28
+> State fingerprint: sha256:6ab2b4a5356176a474e7da51e921dfc09f0f79985feb7f681f242cdcc1f0fe71
 > Population: Public PHP files: 302
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: COMPLETE=297 / SPECIAL=5 (intentional=5, unreviewed=0)
