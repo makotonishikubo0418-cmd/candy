@@ -1,9 +1,10 @@
 # Candy 履歴一覧
 
-Updated: 2026-11-19
+Updated: 2026-11-20
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | Mっ気女子ブログの作成と公開 | [20261120_CREATE_blog-m-girls.md](history/20261120_CREATE_blog-m-girls.md) |
 | CREATE | 体験入店ブログの作成と公開 | [20261119_CREATE_blog-trial-entry.md](history/20261119_CREATE_blog-trial-entry.md) |
 | CREATE | 静電気ブログの作成と公開 | [20261119_CREATE_blog-static-electricity.md](history/20261119_CREATE_blog-static-electricity.md) |
 | CREATE | 当日予約ブログの作成と公開 | [20261119_CREATE_blog-same-day-reservation.md](history/20261119_CREATE_blog-same-day-reservation.md) |
