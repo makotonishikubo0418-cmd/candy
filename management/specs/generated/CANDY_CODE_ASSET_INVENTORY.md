@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-20T13:39:22+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-20T14:10:37+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 440b608da48c6aabf70c774f591a0da19519a75c
-> State fingerprint: sha256:0be021d895fd150d51f1451dad5c885d74d3ec0f5401862551e9acd14e33fa63
-> Population: Public PHP files: 300 / assets: 861
+> Commit: cf4dde911d0cbedb932eeb859115af5ac59ffe78
+> State fingerprint: sha256:92632805f95262e7de81402d316ea2762d82946266fc31c87c815619dcb111ad
+> Population: Public PHP files: 301 / assets: 861
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -264,6 +264,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:nightwork-style | 2 | NONE | OK |
 | blog:one-month | 2 | NONE | OK |
 | blog:oneesan | 5 | NONE | OK |
+| blog:peaceofmindsupport | 4 | NONE | OK |
 | blog:petitegirl | 7 | NONE | OK |
 | blog:photo-diary | 4 | NONE | OK |
 | blog:pocchari-recruit | 3 | NONE | OK |
@@ -389,7 +390,6 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/imgHtml/new_202601/blog | 4 | kagoshima-deliveryhealth-blog-peaceofmindsupport_1.jpg, kagoshima-deliveryhealth-blog-peaceofmindsupport_2.jpg, kagoshima-deliveryhealth-blog-peaceofmindsupport_3.jpg, kagoshima-deliveryhealth-blog-peaceofmindsupport_4.jpg |
 
 ## Required Same-Content Path Groups
 

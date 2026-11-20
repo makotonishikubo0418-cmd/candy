@@ -4,6 +4,7 @@ Updated: 2026-11-20
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | 安心サポート求人ブログの作成と公開 | [20261120_CREATE_blog-peaceofmindsupport.md](history/20261120_CREATE_blog-peaceofmindsupport.md) |
 | MODIFY | Mっ気女子ブログの表現修正と公開 | [20261120_MODIFY_blog-m-girls-wording.md](history/20261120_MODIFY_blog-m-girls-wording.md) |
 | CREATE | Mっ気女子ブログの作成と公開 | [20261120_CREATE_blog-m-girls.md](history/20261120_CREATE_blog-m-girls.md) |
 | CREATE | 体験入店ブログの作成と公開 | [20261119_CREATE_blog-trial-entry.md](history/20261119_CREATE_blog-trial-entry.md) |
