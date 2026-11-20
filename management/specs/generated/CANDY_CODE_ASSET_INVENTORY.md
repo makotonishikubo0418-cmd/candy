@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-20T14:10:37+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-20T14:43:08+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: cf4dde911d0cbedb932eeb859115af5ac59ffe78
-> State fingerprint: sha256:92632805f95262e7de81402d316ea2762d82946266fc31c87c815619dcb111ad
-> Population: Public PHP files: 301 / assets: 861
+> Commit: 32455dfe142479d1fbfdd302e87c558dba8da59d
+> State fingerprint: sha256:0d8b8a822ec257087be5c0402f8dbabe921ee8932c08d719f35b6d269bdb807b
+> Population: Public PHP files: 302 / assets: 865
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 739 |
+| .jpg | 743 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 31 |
@@ -52,7 +52,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 138 |
+| HP/imgHtml/new_202601/blog | 142 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -269,6 +269,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:photo-diary | 4 | NONE | OK |
 | blog:pocchari-recruit | 3 | NONE | OK |
 | blog:poccharigirl | 7 | NONE | OK |
+| blog:premiumqueen | 4 | NONE | OK |
 | blog:privacy-measures | 2 | NONE | OK |
 | blog:private-waiting-room | 3 | NONE | OK |
 | blog:retort-curry | 3 | NONE | OK |
