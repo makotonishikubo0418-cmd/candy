@@ -4,6 +4,7 @@ Updated: 2026-11-20
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | 他店移籍体験談ブログの作成と公開 | [20261120_CREATE_blog-transferfromanothershop.md](history/20261120_CREATE_blog-transferfromanothershop.md) |
 | CREATE | プレミアムキャストブログの作成と公開 | [20261120_CREATE_blog-premiumqueen.md](history/20261120_CREATE_blog-premiumqueen.md) |
 | MODIFY | 安心サポート求人ブログの表現修正 | [20261120_MODIFY_blog-peaceofmindsupport-wording.md](history/20261120_MODIFY_blog-peaceofmindsupport-wording.md) |
 | CREATE | 安心サポート求人ブログの作成と公開 | [20261120_CREATE_blog-peaceofmindsupport.md](history/20261120_CREATE_blog-peaceofmindsupport.md) |
