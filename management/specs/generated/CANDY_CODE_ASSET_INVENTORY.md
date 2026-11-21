@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-21T15:40:47+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-21T16:18:50+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 48fc57faf45174d126d3eb97a92a53fb003d5ddf
-> State fingerprint: sha256:22485a721cd97d6c7551a0f32cee134cb2a9cba4637aff55d2f168a96f157bd7
-> Population: Public PHP files: 305 / assets: 879
+> Commit: 3cc626fc4a01516ec8c634c7660112152ae91347
+> State fingerprint: sha256:f4fb7e4f1ccbea01990ce2f774f7ff7097ba0b5797862b50c8ac1eae7e294b17
+> Population: Public PHP files: 306 / assets: 879
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -239,6 +239,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:autumn-winter-cuddle | 1 | NONE | OK |
 | blog:beautiful-cute | 5 | NONE | OK |
 | blog:beginner-job | 3 | NONE | OK |
+| blog:bijiri-girls | 5 | NONE | OK |
 | blog:bikyaku-girls | 5 | NONE | OK |
 | blog:candy_dominant_girls | 3 | NONE | OK |
 | blog:course-time | 3 | NONE | OK |
@@ -394,7 +395,6 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/imgHtml/new_202601/blog | 5 | kagoshima-deliveryhealth-blog-bijiri-girls_1.jpg, kagoshima-deliveryhealth-blog-bijiri-girls_2.jpg, kagoshima-deliveryhealth-blog-bijiri-girls_3.jpg, kagoshima-deliveryhealth-blog-bijiri-girls_4.jpg, kagoshima-deliveryhealth-blog-bijiri-girls_5.jpg |
 
 ## Required Same-Content Path Groups
 
