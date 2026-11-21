@@ -4,6 +4,7 @@ Updated: 2026-11-21
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | 指名アップサポート求人ブログの作成と公開 | [20261121_CREATE_blog-shimei-up-tips.md](history/20261121_CREATE_blog-shimei-up-tips.md) |
 | CREATE | 指名と本指名の違いブログの作成と公開 | [20261121_CREATE_blog-shimei-honshimei.md](history/20261121_CREATE_blog-shimei-honshimei.md) |
 | CREATE | 他店移籍体験談ブログの作成と公開 | [20261120_CREATE_blog-transferfromanothershop.md](history/20261120_CREATE_blog-transferfromanothershop.md) |
 | CREATE | プレミアムキャストブログの作成と公開 | [20261120_CREATE_blog-premiumqueen.md](history/20261120_CREATE_blog-premiumqueen.md) |

@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-20T18:14:27+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-21T15:40:47+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 090d5498c04adef89c29a006c88e22aa546918b8
-> State fingerprint: sha256:43b3fe6a9bde97aacebe9c5ef0e354d426bfd6b8761e5ccab7cd51d8d9b3ad0c
-> Population: Public PHP files: 304 / assets: 879
+> Commit: 48fc57faf45174d126d3eb97a92a53fb003d5ddf
+> State fingerprint: sha256:22485a721cd97d6c7551a0f32cee134cb2a9cba4637aff55d2f168a96f157bd7
+> Population: Public PHP files: 305 / assets: 879
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -277,6 +277,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:seiso-girls | 4 | NONE | OK |
 | blog:shimei-change | 3 | NONE | OK |
 | blog:shimei-honshimei | 3 | NONE | OK |
+| blog:shimei-up-tips | 3 | NONE | OK |
 | blog:shiroutogirl | 7 | NONE | OK |
 | blog:short-time-job | 2 | NONE | OK |
 | blog:shy | 2 | NONE | OK |
@@ -393,7 +394,7 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/imgHtml/new_202601/blog | 8 | kagoshima-deliveryhealth-blog-bijiri-girls_1.jpg, kagoshima-deliveryhealth-blog-bijiri-girls_2.jpg, kagoshima-deliveryhealth-blog-bijiri-girls_3.jpg, kagoshima-deliveryhealth-blog-bijiri-girls_4.jpg, kagoshima-deliveryhealth-blog-bijiri-girls_5.jpg |
+| HP/imgHtml/new_202601/blog | 5 | kagoshima-deliveryhealth-blog-bijiri-girls_1.jpg, kagoshima-deliveryhealth-blog-bijiri-girls_2.jpg, kagoshima-deliveryhealth-blog-bijiri-girls_3.jpg, kagoshima-deliveryhealth-blog-bijiri-girls_4.jpg, kagoshima-deliveryhealth-blog-bijiri-girls_5.jpg |
 
 ## Required Same-Content Path Groups
 
