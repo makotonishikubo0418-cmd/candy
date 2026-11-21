@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-21T16:18:50+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-21T16:45:01+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 3cc626fc4a01516ec8c634c7660112152ae91347
-> State fingerprint: sha256:f4fb7e4f1ccbea01990ce2f774f7ff7097ba0b5797862b50c8ac1eae7e294b17
-> Population: Public PHP files: 306 / assets: 879
+> Commit: 2ae149272df72c4add92b77567d1372b0a3eeebe
+> State fingerprint: sha256:20da2c8c7769e45a8e5d3bc210c5dbf8e3ad7ea44cfc8da5b447e9170f3a901d
+> Population: Public PHP files: 307 / assets: 882
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 757 |
+| .jpg | 760 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 31 |
@@ -52,7 +52,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 156 |
+| HP/imgHtml/new_202601/blog | 159 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -236,6 +236,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | area:yoshinocho | 6 | NONE | OK |
 | area:yotsumotocho | 6 | NONE | OK |
 | area:yusukicho | 6 | NONE | OK |
+| blog:30s-40s-job | 3 | NONE | OK |
 | blog:autumn-winter-cuddle | 1 | NONE | OK |
 | blog:beautiful-cute | 5 | NONE | OK |
 | blog:beginner-job | 3 | NONE | OK |
