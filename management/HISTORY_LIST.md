@@ -1,9 +1,10 @@
 # Candy 履歴一覧
 
-Updated: 2026-11-21
+Updated: 2026-11-23
 
 | Type | Title | History |
 |---|---|---|
+| PROBLEM | ブログ一覧ページの横幅崩れ | [20261123_PROBLEM_blog-list-frame-collapse.md](history/20261123_PROBLEM_blog-list-frame-collapse.md) |
 | CREATE | 30代・40代求人ブログの作成と公開 | [20261121_CREATE_blog-30s-40s-job.md](history/20261121_CREATE_blog-30s-40s-job.md) |
 | CREATE | 美尻女子ブログの作成と公開 | [20261121_CREATE_blog-bijiri-girls.md](history/20261121_CREATE_blog-bijiri-girls.md) |
 | CREATE | 指名アップサポート求人ブログの作成と公開 | [20261121_CREATE_blog-shimei-up-tips.md](history/20261121_CREATE_blog-shimei-up-tips.md) |
