@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-21T16:45:01+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-23T14:23:03+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 2ae149272df72c4add92b77567d1372b0a3eeebe
-> State fingerprint: sha256:20da2c8c7769e45a8e5d3bc210c5dbf8e3ad7ea44cfc8da5b447e9170f3a901d
-> Population: Public PHP files: 307 / assets: 882
+> Commit: 116245c1fd0541460d342f42d14d01369a1df6b6
+> State fingerprint: sha256:7f23564f8000442bd7866c138f32bf467dbc06e0683f4d793c5e3d6a9df5967f
+> Population: Public PHP files: 308 / assets: 892
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 760 |
+| .jpg | 770 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 31 |
@@ -52,7 +52,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 159 |
+| HP/imgHtml/new_202601/blog | 169 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -237,6 +237,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | area:yotsumotocho | 6 | NONE | OK |
 | area:yusukicho | 6 | NONE | OK |
 | blog:30s-40s-job | 3 | NONE | OK |
+| blog:3p-course | 7 | NONE | OK |
 | blog:autumn-winter-cuddle | 1 | NONE | OK |
 | blog:beautiful-cute | 5 | NONE | OK |
 | blog:beginner-job | 3 | NONE | OK |
@@ -396,6 +397,7 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
+| HP/imgHtml/new_202601/blog | 3 | kagoshima-deliveryhealth-blog-papakatsu-deliveryhealth_1.jpg, kagoshima-deliveryhealth-blog-papakatsu-deliveryhealth_2.jpg, kagoshima-deliveryhealth-blog-papakatsu-deliveryhealth_3.jpg |
 
 ## Required Same-Content Path Groups
 
