@@ -4,6 +4,7 @@ Updated: 2026-11-23
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | 個性派女子特技紹介ブログの作成と公開 | [20261123_CREATE_blog-unique-skills-girls.md](history/20261123_CREATE_blog-unique-skills-girls.md) |
 | CREATE | パパ活×デリヘル求人ブログの作成と公開 | [20261123_CREATE_blog-papakatsu-deliveryhealth.md](history/20261123_CREATE_blog-papakatsu-deliveryhealth.md) |
 | CREATE | 限定3Pコースブログの作成と公開 | [20261123_CREATE_blog-3p-course.md](history/20261123_CREATE_blog-3p-course.md) |
 | PROBLEM | ブログ一覧ページの横幅崩れ | [20261123_PROBLEM_blog-list-frame-collapse.md](history/20261123_PROBLEM_blog-list-frame-collapse.md) |
