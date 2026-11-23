@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-23T14:23:03+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-23T15:05:59+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 116245c1fd0541460d342f42d14d01369a1df6b6
-> State fingerprint: sha256:7f23564f8000442bd7866c138f32bf467dbc06e0683f4d793c5e3d6a9df5967f
-> Population: Public PHP files: 308 / assets: 892
+> Commit: 53c12c56c2462122bb24941e2fd2f9db054e462f
+> State fingerprint: sha256:0133d10725d5ebda963bd0c15e42747886e35ee116f8a0e4aefb01faba1fe4d7
+> Population: Public PHP files: 309 / assets: 892
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -267,6 +267,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:nightwork-style | 2 | NONE | OK |
 | blog:one-month | 2 | NONE | OK |
 | blog:oneesan | 5 | NONE | OK |
+| blog:papakatsu-deliveryhealth | 3 | NONE | OK |
 | blog:peaceofmindsupport | 4 | NONE | OK |
 | blog:petitegirl | 7 | NONE | OK |
 | blog:photo-diary | 4 | NONE | OK |
@@ -397,7 +398,6 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/imgHtml/new_202601/blog | 3 | kagoshima-deliveryhealth-blog-papakatsu-deliveryhealth_1.jpg, kagoshima-deliveryhealth-blog-papakatsu-deliveryhealth_2.jpg, kagoshima-deliveryhealth-blog-papakatsu-deliveryhealth_3.jpg |
 
 ## Required Same-Content Path Groups
 
