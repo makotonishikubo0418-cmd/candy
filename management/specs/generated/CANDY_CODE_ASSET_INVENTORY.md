@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-24T17:17:46+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-24T18:20:45+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: f28329ff6fa2e46a357f68da418c4ffd099f8bf9
-> State fingerprint: sha256:fca7932765a0e881e3dd88db5805a6a9f861c0e30cf8ebe3d7aea1359b0cfff2
-> Population: Public PHP files: 314 / assets: 912
+> Commit: 6974fc618f667355e463b8d369eaca1844c20959
+> State fingerprint: sha256:50deccf6fcd90fb0aa899fe35c22456f018f5e619adca0e49c47857a677ac5bd
+> Population: Public PHP files: 315 / assets: 912
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 1 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -265,6 +265,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:m-girls | 4 | NONE | OK |
 | blog:maimai-profile | 3 | NONE | OK |
 | blog:making | 2 | NONE | OK |
+| blog:mens-esthe-comparison | 3 | NONE | OK |
 | blog:newcomer-veteran | 2 | NONE | OK |
 | blog:nightwork-style | 2 | NONE | OK |
 | blog:no-quota-penalty | 3 | NONE | OK |
@@ -403,7 +404,6 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/imgHtml/new_202601/blog | 3 | kagoshima-deliveryhealth-blog-mens-esthe-comparison_1.jpg, kagoshima-deliveryhealth-blog-mens-esthe-comparison_2.jpg, kagoshima-deliveryhealth-blog-mens-esthe-comparison_3.jpg |
 
 ## Required Same-Content Path Groups
 

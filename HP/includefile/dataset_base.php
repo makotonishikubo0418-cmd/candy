@@ -1297,6 +1297,10 @@ switch ($hdir) {
 		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-blog-review-rating.php');
 		break;
 
+	case 'kagoshima-deliveryhealth-blog-mens-esthe-comparison.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-blog-mens-esthe-comparison.php');
+		break;
+
 	case 'area.html':
 		include(INCLUDE_DIR . 'dataset_area.php');
 		break;
@@ -2425,6 +2429,7 @@ $source = str_replace('kagoshima-deliveryhealth-blog-daily-pay.html', 'kagoshima
 $source = str_replace('kagoshima-deliveryhealth-blog-black-long-hair.html', 'kagoshima-deliveryhealth-blog-black-long-hair.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-blog-no-quota-penalty.html', 'kagoshima-deliveryhealth-blog-no-quota-penalty.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-blog-review-rating.html', 'kagoshima-deliveryhealth-blog-review-rating.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-blog-mens-esthe-comparison.html', 'kagoshima-deliveryhealth-blog-mens-esthe-comparison.php', $source);
 $source = str_replace('area.html', 'area.php', $source);
 $source = str_replace('hotel.html', 'hotel.php', $source);
 $source = str_replace('blog.html', 'blog.php', $source);

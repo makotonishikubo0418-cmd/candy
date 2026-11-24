@@ -14,7 +14,7 @@
  * brown     ：private-waiting-room
  * gold      ：tokyo-souvenir
  * deep-pink ：正式ブログテンプレート・candy_dominant_girls
- * deep-pink に追加する配色：blog-theme-curry（カレー色）、blog-theme-purple（紫）、blog-theme-antique-gold（アンティークゴールド）、blog-theme-smoky-blue（スモーキーブルー）、blog-theme-terracotta（テラコッタ）、blog-theme-bordeaux（ボルドー）、blog-theme-rose-pink（ローズピンク #B65B86）、blog-theme-bright-rose-pink（ローズピンク #C85A7C）、blog-theme-dusty-rose-brown（くすみローズブラウン #955C68）、blog-theme-warm-terracotta（ウォームテラコッタ #B67A5E）、blog-theme-dusty-lavender（くすみラベンダー #8976AF）、blog-theme-calm-lavender（落ち着いたラベンダー #9275B6）、blog-theme-deep-mint（ディープミント #438C83）、blog-theme-midnight-blue（ミッドナイトブルー #46658C）、blog-theme-deep-teal（ディープティール #417F80）、blog-theme-champagne-gold（シャンパンゴールド #B68C52）、blog-theme-burnt-copper（バーントコッパー #A34F38）、blog-theme-dusty-mauve（くすみモーヴ #8C687E）、blog-theme-classic-gold（ゴールド #C9A23C）、blog-theme-mauve-wine（モーヴワイン #98566F）、blog-theme-dusty-pink（ダスティピンク #C58E9B）、blog-theme-coral-pink（コーラルピンク #E87991）、blog-theme-dusty-rose（ダスティローズ #D58D9F）、blog-theme-dusty-coral-pink（くすみコーラルピンク #C77985）、blog-theme-vivid-magenta（ビビッドマゼンタ #D41470）、blog-theme-apricot-orange（アプリコットオレンジ #D98754）、blog-theme-ruby-red（ルビーレッド #A72C47）、blog-theme-dusty-rose-pink（ダスティローズピンク #C76A92）、blog-theme-deep-wine（ディープワイン #8E3C5A）、blog-theme-wine-red（ワインレッド #8D3F55）、blog-theme-deep-green（深緑 #346B5B）、blog-theme-dark-green（ダークグリーン #34574D）、blog-theme-deep-plum（ディーププラム #814C70）、blog-theme-dusty-purple（ダスティパープル #754B91）、blog-theme-dark-orange（ダークオレンジ #ff8c00）、blog-theme-sohi（纁色 #E48B63）、blog-theme-amber-gold（アンバーゴールド #B66A30）、blog-theme-smoky-lavender（スモーキーラベンダー #75668F）、blog-theme-sage-green（セージグリーン #65877A）、blog-theme-caramel-brown（キャラメルブラウン #A87545）
+ * deep-pink に追加する配色：blog-theme-curry（カレー色）、blog-theme-purple（紫）、blog-theme-antique-gold（アンティークゴールド）、blog-theme-smoky-blue（スモーキーブルー）、blog-theme-terracotta（テラコッタ）、blog-theme-bordeaux（ボルドー）、blog-theme-rose-pink（ローズピンク #B65B86）、blog-theme-bright-rose-pink（ローズピンク #C85A7C）、blog-theme-dusty-rose-brown（くすみローズブラウン #955C68）、blog-theme-warm-terracotta（ウォームテラコッタ #B67A5E）、blog-theme-dusty-lavender（くすみラベンダー #8976AF）、blog-theme-calm-lavender（落ち着いたラベンダー #9275B6）、blog-theme-deep-mint（ディープミント #438C83）、blog-theme-midnight-blue（ミッドナイトブルー #46658C）、blog-theme-deep-teal（ディープティール #417F80）、blog-theme-champagne-gold（シャンパンゴールド #B68C52）、blog-theme-burnt-copper（バーントコッパー #A34F38）、blog-theme-dusty-mauve（くすみモーヴ #8C687E）、blog-theme-classic-gold（ゴールド #C9A23C）、blog-theme-mauve-wine（モーヴワイン #98566F）、blog-theme-dusty-pink（ダスティピンク #C58E9B）、blog-theme-coral-pink（コーラルピンク #E87991）、blog-theme-dusty-rose（ダスティローズ #D58D9F）、blog-theme-dusty-coral-pink（くすみコーラルピンク #C77985）、blog-theme-vivid-magenta（ビビッドマゼンタ #D41470）、blog-theme-apricot-orange（アプリコットオレンジ #D98754）、blog-theme-ruby-red（ルビーレッド #A72C47）、blog-theme-dusty-rose-pink（ダスティローズピンク #C76A92）、blog-theme-deep-wine（ディープワイン #8E3C5A）、blog-theme-wine-red（ワインレッド #8D3F55）、blog-theme-deep-green（深緑 #346B5B）、blog-theme-dark-green（ダークグリーン #34574D）、blog-theme-deep-plum（ディーププラム #814C70）、blog-theme-dusty-purple（ダスティパープル #754B91）、blog-theme-dark-orange（ダークオレンジ #ff8c00）、blog-theme-sohi（纁色 #E48B63）、blog-theme-amber-gold（アンバーゴールド #B66A30）、blog-theme-smoky-lavender（スモーキーラベンダー #75668F）、blog-theme-sage-green（セージグリーン #65877A）、blog-theme-caramel-brown（キャラメルブラウン #A87545）、blog-theme-dusty-navy（ダスティネイビー #546B91）
  *
  * 【注意】
  * ブログ独自の装飾はこのファイルに集約し、記事別CSSは作成・復活・参照しません。
@@ -2448,6 +2448,62 @@
 	white-space: nowrap;
 }
 
+
+/* ダスティネイビー：deep-pinkの基本レイアウトに重ねる配色（基準 #546B91） */
+.blog-page:where(.blog-theme-dusty-navy) {
+	--blog-accent: #546B91;
+	--blog-accent-dark: #425771;
+	--blog-accent-deep: #2C3B52;
+	--blog-pale: #F1F4F8;
+	--blog-surface-soft: #F7F9FB;
+	--blog-border: rgba(84, 107, 145, 0.22);
+	--blog-shadow-sm: 0 10px 30px rgba(44, 59, 82, 0.07);
+	--blog-shadow-md: 0 18px 48px rgba(44, 59, 82, 0.12);
+	--blog-hero-background: #243040;
+	--blog-toc-background: linear-gradient(145deg, #F1F4F8 0%, #fff 76%);
+	--blog-heading-bar-background: var(--blog-accent);
+	--blog-callout-background: linear-gradient(135deg, #F1F4F8, #fff);
+	--blog-callout-bar-background: var(--blog-accent);
+	--blog-checklist-border: rgba(44, 59, 82, 0.08);
+	--blog-checklist-dot-shadow: 0 0 0 5px rgba(84, 107, 145, 0.1);
+	--blog-card-background: linear-gradient(180deg, #fff 0%, #fff 72%, #F7F9FB 100%);
+	--blog-card-bar-background: linear-gradient(90deg, var(--blog-accent), #A3B7CF);
+	--blog-card-text: #3E4A58;
+	--blog-photo-shadow: 0 20px 50px rgba(44, 59, 82, 0.15);
+	--blog-caption-text: #3E4A58;
+	--blog-caption-shadow: 0 14px 32px rgba(44, 59, 82, 0.1);
+	--blog-cta-background: linear-gradient(135deg, #2C3B52 0%, #425771 100%);
+	--blog-cta-shadow: 0 20px 48px rgba(44, 59, 82, 0.2);
+	--blog-cta-decoration-background: radial-gradient(circle, rgba(84, 107, 145, 0.28), rgba(84, 107, 145, 0));
+	--blog-cta-eyebrow: #D5E0EC;
+	--blog-primary-background: linear-gradient(135deg, #546B91, #425771);
+	--blog-primary-shadow: 0 10px 24px rgba(44, 59, 82, 0.25);
+	--blog-primary-hover-background: linear-gradient(135deg, #657CA3, #364861);
+	--blog-related-border: rgba(84, 107, 145, 0.18);
+	--blog-related-link-border: rgba(84, 107, 145, 0.18);
+}
+
+.blog-page:where(.blog-theme-dusty-navy) .bt-pk-xl {
+	background: var(--blog-primary-background);
+}
+
+.blog-page:where(.blog-theme-dusty-navy) .bt-pk-xl:hover {
+	background: var(--blog-primary-hover-background);
+}
+
+.blog-page:where(.blog-theme-dusty-navy) .faq-question:hover,
+.blog-page:where(.blog-theme-dusty-navy) .faq-item.active .faq-question {
+	color: var(--blog-accent-dark);
+}
+
+.blog-page:where(.blog-theme-dusty-navy) .blog-section strong,
+.blog-page:where(.blog-theme-dusty-navy) .blog-lead strong {
+	color: var(--blog-accent-dark);
+}
+
+.blog-page:where(.blog-theme-dusty-navy) .blog-nowrap {
+	white-space: nowrap;
+}
 /* 02. 記事全体の基本設定 */
 
 .blog-page {
