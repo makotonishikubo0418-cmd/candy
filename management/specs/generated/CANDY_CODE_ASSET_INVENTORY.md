@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-24T16:18:44+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-24T17:17:46+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 55f8e22edbe9b9511c1df247e78bff75ce38f71d
-> State fingerprint: sha256:b07dad5c4a4a2944dba2abedbf193585d6b383f81a7c5fb676c2825c8911eda6
-> Population: Public PHP files: 313 / assets: 909
+> Commit: f28329ff6fa2e46a357f68da418c4ffd099f8bf9
+> State fingerprint: sha256:fca7932765a0e881e3dd88db5805a6a9f861c0e30cf8ebe3d7aea1359b0cfff2
+> Population: Public PHP files: 314 / assets: 912
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 1 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 787 |
+| .jpg | 790 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 31 |
@@ -52,7 +52,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 186 |
+| HP/imgHtml/new_202601/blog | 189 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -280,6 +280,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:privacy-measures | 2 | NONE | OK |
 | blog:private-waiting-room | 3 | NONE | OK |
 | blog:retort-curry | 3 | NONE | OK |
+| blog:review-rating | 3 | NONE | OK |
 | blog:same-day-reservation | 2 | NONE | OK |
 | blog:seiso-girls | 4 | NONE | OK |
 | blog:shimei-change | 3 | NONE | OK |
