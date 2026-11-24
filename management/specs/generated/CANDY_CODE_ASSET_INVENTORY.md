@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-24T14:55:42+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-24T16:18:44+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 1203399f63ccb22d598931b502c719321aeec39f
-> State fingerprint: sha256:a44753ee61ca33020f6ef22e45093ee2c4f543470e49d2104770d2ea976bb074
-> Population: Public PHP files: 312 / assets: 909
+> Commit: 55f8e22edbe9b9511c1df247e78bff75ce38f71d
+> State fingerprint: sha256:b07dad5c4a4a2944dba2abedbf193585d6b383f81a7c5fb676c2825c8911eda6
+> Population: Public PHP files: 313 / assets: 909
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 1 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -267,6 +267,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:making | 2 | NONE | OK |
 | blog:newcomer-veteran | 2 | NONE | OK |
 | blog:nightwork-style | 2 | NONE | OK |
+| blog:no-quota-penalty | 3 | NONE | OK |
 | blog:one-month | 2 | NONE | OK |
 | blog:oneesan | 5 | NONE | OK |
 | blog:papakatsu-deliveryhealth | 3 | NONE | OK |
@@ -401,7 +402,7 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/imgHtml/new_202601/blog | 6 | kagoshima-deliveryhealth-blog-mens-esthe-comparison_1.jpg, kagoshima-deliveryhealth-blog-mens-esthe-comparison_2.jpg, kagoshima-deliveryhealth-blog-mens-esthe-comparison_3.jpg, kagoshima-deliveryhealth-blog-no-quota-penalty_1.jpg, kagoshima-deliveryhealth-blog-no-quota-penalty_2.jpg |
+| HP/imgHtml/new_202601/blog | 3 | kagoshima-deliveryhealth-blog-mens-esthe-comparison_1.jpg, kagoshima-deliveryhealth-blog-mens-esthe-comparison_2.jpg, kagoshima-deliveryhealth-blog-mens-esthe-comparison_3.jpg |
 
 ## Required Same-Content Path Groups
 

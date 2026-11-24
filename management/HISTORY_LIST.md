@@ -4,6 +4,7 @@ Updated: 2026-11-24
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | ノルマ・罰金なし求人ブログの作成と公開 | [20261124_CREATE_blog-no-quota-penalty.md](history/20261124_CREATE_blog-no-quota-penalty.md) |
 | CREATE | 黒髪ロング美女特集ブログの作成と公開 | [20261124_CREATE_blog-black-long-hair.md](history/20261124_CREATE_blog-black-long-hair.md) |
 | CREATE | 全額即日払い求人ブログの作成と公開 | [20261124_CREATE_blog-daily-pay.md](history/20261124_CREATE_blog-daily-pay.md) |
 | CREATE | 個性派女子特技紹介ブログの作成と公開 | [20261123_CREATE_blog-unique-skills-girls.md](history/20261123_CREATE_blog-unique-skills-girls.md) |
