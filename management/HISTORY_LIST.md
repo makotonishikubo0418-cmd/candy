@@ -1,9 +1,10 @@
 # Candy 履歴一覧
 
-Updated: 2026-11-23
+Updated: 2026-11-24
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | 全額即日払い求人ブログの作成と公開 | [20261124_CREATE_blog-daily-pay.md](history/20261124_CREATE_blog-daily-pay.md) |
 | CREATE | 個性派女子特技紹介ブログの作成と公開 | [20261123_CREATE_blog-unique-skills-girls.md](history/20261123_CREATE_blog-unique-skills-girls.md) |
 | CREATE | パパ活×デリヘル求人ブログの作成と公開 | [20261123_CREATE_blog-papakatsu-deliveryhealth.md](history/20261123_CREATE_blog-papakatsu-deliveryhealth.md) |
 | CREATE | 限定3Pコースブログの作成と公開 | [20261123_CREATE_blog-3p-course.md](history/20261123_CREATE_blog-3p-course.md) |
