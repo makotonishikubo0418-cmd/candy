@@ -9,13 +9,13 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-23T19:26:17+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-24T14:55:42+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 7784fee3208289a1166ee87f8ab9cadec59c6115
-> State fingerprint: sha256:46c1216bd960d4d3aff19d074ba635347570d009836626628d094c19d3532e54
-> Population: Public PHP files: 311 / assets: 904
+> Commit: 1203399f63ccb22d598931b502c719321aeec39f
+> State fingerprint: sha256:a44753ee61ca33020f6ef22e45093ee2c4f543470e49d2104770d2ea976bb074
+> Population: Public PHP files: 312 / assets: 909
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
-> Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 0 / publication candidates: 1
+> Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 1 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
 
 Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by [CANDY_CODE_REFERENCE_INVENTORY.md](CANDY_CODE_REFERENCE_INVENTORY.md).
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 782 |
+| .jpg | 787 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 31 |
@@ -52,7 +52,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 181 |
+| HP/imgHtml/new_202601/blog | 186 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -243,6 +243,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:beginner-job | 3 | NONE | OK |
 | blog:bijiri-girls | 5 | NONE | OK |
 | blog:bikyaku-girls | 5 | NONE | OK |
+| blog:black-long-hair | 5 | NONE | OK |
 | blog:candy_dominant_girls | 3 | NONE | OK |
 | blog:course-time | 3 | NONE | OK |
 | blog:daily-pay | 2 | NONE | OK |
@@ -418,7 +419,7 @@ Required same-content path groups are excluded. Only groups listed here require 
 
 | SHA-256 | files |
 |---|---|
-| NONE | - |
+| `4d72b6e95e7e19e1d82fc4aee8ca7cb957294e9e66e4dcded650fa4a9efcf1b7` | HP/imgHtml/new_202601/blog/kagoshima-deliveryhealth-blog-black-long-hair_3.jpg<br>HP/imgHtml/new_202601/blog/kagoshima-deliveryhealth-blog-black-long-hair_5.jpg |
 
 ## Intentional Publication Exceptions
 
