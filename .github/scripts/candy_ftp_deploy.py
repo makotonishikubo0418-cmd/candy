@@ -277,9 +277,11 @@ def validate_changed_category_index_ctas(repository_root: Path, deployable: list
     print(f"CATEGORY_INDEX_TERMINAL_CTA_CHECK: passed changed={len(checked)}")
 
 
-def validate_changed_blog_top(repository_root: Path, deployable: list[str]) -> None:
+def validate_changed_blog_top(repository_root: Path, deployable: list[str], blocked: list[Change] | None = None) -> None:
     """Block broken TOP/list HTML before planning, approval or FTP access."""
     paths = ("HP/source/blog.html", "HP/source/index.html")
+    if any({change.path, change.old_path}.intersection(paths) for change in blocked or []):
+        raise RuntimeError("BLOG_TOP_CHECK failed: TOP/blog sources cannot be deleted or renamed")
     if not set(paths).intersection(deployable):
         return
     sources = []
@@ -891,7 +893,7 @@ def main() -> int:
             changes, allow_htaccess=args.allow_htaccess
         )
     validate_changed_category_index_ctas(Path.cwd(), deployable)
-    validate_changed_blog_top(Path.cwd(), deployable)
+    validate_changed_blog_top(Path.cwd(), deployable, blocked)
     if args.allow_htaccess:
         exact_change = [
             change.status == "M"

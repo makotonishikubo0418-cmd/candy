@@ -7,7 +7,10 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import contextlib
+import io
 from pathlib import Path
+from unittest.mock import patch
 
 
 GIT = shutil.which("git") or r"C:\Program Files\Git\cmd\git.exe"
@@ -321,11 +324,87 @@ def assert_htaccess_workflow_contract() -> None:
     assert "HP/index.php" not in text
 
 
+def assert_blog_top_pre_ftp_guard() -> None:
+    module = load_deploy_module()
+    info = '<div class="lp_5 lm_0_auto w_130 center bg_p fs_xs fc_w">BLOG INFO</div>'
+    row = '<div class="lp_20_0 fs_sm2"><a href="./kagoshima-deliveryhealth-blog-sample.php" class="fade">Sample</a></div>'
+    button = '<div class="center"><a href="./blog.php">ブログ一覧はコチラ</a></div>'
+    top = ('<!-- スタッフブログ START -->\n<div class="lp_0_55_35 w_1050 lm_0_auto bg_f">\n'
+           + info + '\n' + row + '\n</div>\n' + button + '\n<!-- スタッフブログ END -->')
+    blog = info + row + module.CATEGORY_INDEX_TERMINAL_CTA + module.MAIN_CONTENT_END_MARKER
+    broken = top.replace(info + '\n' + row + '\n</div>', info + '\n</div>\n' + row)
+    with tempfile.TemporaryDirectory(prefix="candy-blog-gate-") as directory:
+        root = Path(directory)
+        (root / "HP/source").mkdir(parents=True)
+        blog_path = root / "HP/source/blog.html"
+        top_path = root / "HP/source/index.html"
+        blog_path.write_text(blog, encoding="utf-8")
+        for paths in (["HP/source/index.html"], ["HP/source/blog.html"], ["HP/source/index.html", "HP/source/blog.html"]):
+            top_path.write_text(top, encoding="utf-8")
+            with contextlib.redirect_stdout(io.StringIO()):
+                module.validate_changed_blog_top(root, paths)
+            for bad in (broken, top.replace("Sample", "Wrong name")):
+                top_path.write_text(bad, encoding="utf-8")
+                try:
+                    module.validate_changed_blog_top(root, paths)
+                except RuntimeError as exc:
+                    assert "BLOG_TOP_CHECK failed" in str(exc)
+                else:
+                    raise AssertionError("Broken blog/TOP passed the guard")
+        # The actual entry point must reject before plan/approval/deploy, even
+        # if invoked without --dry-run. All Git reads and network calls are mocked.
+        top_path.write_text(broken, encoding="utf-8")
+        args = [str(SCRIPT), "--before", "a" * 40, "--after", "b" * 40]
+        for mode in ([], ["--dry-run"], ["--verify-approval"], ["--lint-php"]):
+            with patch.object(sys, "argv", args + mode), \
+                 patch.object(module, "current_head", return_value="b" * 40), \
+                 patch.object(module, "collect_changes", return_value=[module.Change("M", "HP/source/index.html")]), \
+                 patch.object(module, "validate_area_image_replacements"), \
+                 patch.object(module.Path, "cwd", return_value=root), \
+                 patch.object(module, "print_plan") as plan, \
+                 patch.object(module, "validate_deploy_approval") as approval, \
+                 patch.object(module, "deploy") as deploy, \
+                 patch.object(module.ftplib, "FTP") as ftp, \
+                 contextlib.redirect_stdout(io.StringIO()):
+                try:
+                    module.main()
+                except RuntimeError as exc:
+                    assert "BLOG_TOP_CHECK failed" in str(exc)
+                else:
+                    raise AssertionError("Entry point bypassed the blog gate")
+                plan.assert_not_called()
+                approval.assert_not_called()
+                deploy.assert_not_called()
+                ftp.assert_not_called()
+        # Unrelated operations require no TOP/list sources, while deletion and
+        # missing sources in a relevant operation must fail closed.
+        for missing in (top_path, blog_path):
+            top_path.write_text(top, encoding="utf-8")
+            blog_path.write_text(blog, encoding="utf-8")
+            missing.unlink()
+            try:
+                module.validate_changed_blog_top(root, ["HP/source/index.html"])
+            except RuntimeError:
+                pass
+            else:
+                raise AssertionError("Missing source passed the guard")
+        module.validate_changed_blog_top(root, ["HP/source/hotel.html"])
+        for change in (module.Change("D", "HP/source/index.html"), module.Change("R", "HP/source/renamed.html", "HP/source/blog.html")):
+            try:
+                module.validate_changed_blog_top(root, [], [change])
+            except RuntimeError:
+                pass
+            else:
+                raise AssertionError("Deletion/rename passed the guard")
+    print("BLOG_TOP_PRE_FTP_GUARD: passed")
+
+
 def main() -> None:
     assert_workflow_contract()
     assert_htaccess_workflow_contract()
     assert_transactional_rollback()
     assert_deletion_only_and_empty_directory_cleanup()
+    assert_blog_top_pre_ftp_guard()
     with tempfile.TemporaryDirectory() as temp_dir:
         root = Path(temp_dir)
         before, after = make_repository(root)
