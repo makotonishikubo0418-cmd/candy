@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-25T13:18:31+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-25T14:13:49+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: e2ae516a5a8ea797e10ec49719b8c557200b6d6f
-> State fingerprint: sha256:704c41db60dba7e6d4806bda4676fb7829ce457934766311d9ccc4e7da9b7084
-> Population: Public PHP files: 317 / assets: 925
+> Commit: 09d553804aeebe15af12f70d5e2597aea2ce9648
+> State fingerprint: sha256:cf9fde44f5d410abd2b5164789f2b6ccd2208e15b94b3a3e9ada6534989040e4
+> Population: Public PHP files: 318 / assets: 925
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 1 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -294,6 +294,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:shy | 2 | NONE | OK |
 | blog:slendergirl | 7 | NONE | OK |
 | blog:static-electricity | 3 | NONE | OK |
+| blog:sudden-ideas | 2 | NONE | OK |
 | blog:tallbeautygirl | 7 | NONE | OK |
 | blog:tokyo-souvenir | 3 | NONE | OK |
 | blog:transferfromanothershop | 3 | NONE | OK |
@@ -406,7 +407,7 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/imgHtml/new_202601/blog | 7 | kagoshima-deliveryhealth-blog-idol-type_1.jpg, kagoshima-deliveryhealth-blog-idol-type_2.jpg, kagoshima-deliveryhealth-blog-idol-type_3.jpg, kagoshima-deliveryhealth-blog-idol-type_4.jpg, kagoshima-deliveryhealth-blog-idol-type_5.jpg |
+| HP/imgHtml/new_202601/blog | 5 | kagoshima-deliveryhealth-blog-idol-type_1.jpg, kagoshima-deliveryhealth-blog-idol-type_2.jpg, kagoshima-deliveryhealth-blog-idol-type_3.jpg, kagoshima-deliveryhealth-blog-idol-type_4.jpg, kagoshima-deliveryhealth-blog-idol-type_5.jpg |
 
 ## Required Same-Content Path Groups
 

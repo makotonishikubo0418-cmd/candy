@@ -4,6 +4,7 @@ Updated: 2026-11-25
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | アイディア突然ブログの作成と公開 | [20261125_CREATE_blog-sudden-ideas.md](history/20261125_CREATE_blog-sudden-ideas.md) |
 | CREATE | 老舗店と新規店比較求人ブログの作成と公開 | [20261125_CREATE_blog-established-vs-new-shop.md](history/20261125_CREATE_blog-established-vs-new-shop.md) |
 | CREATE | 写メ日記の魅力ブログの作成と公開 | [20261125_CREATE_blog-photo-diary-charm.md](history/20261125_CREATE_blog-photo-diary-charm.md) |
 | CREATE | メンズエステ比較求人ブログの作成と公開 | [20261124_CREATE_blog-mens-esthe-comparison.md](history/20261124_CREATE_blog-mens-esthe-comparison.md) |
