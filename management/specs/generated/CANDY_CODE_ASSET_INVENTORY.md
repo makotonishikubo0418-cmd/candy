@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-24T18:44:15+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-25T13:18:31+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 39447a0760dd236113a1f4b89dd6e05fbe7b156f
-> State fingerprint: sha256:28cb887607c428af8d3997b614455aa22c01e2d4c54540905c874be2a0080e56
-> Population: Public PHP files: 316 / assets: 922
+> Commit: e2ae516a5a8ea797e10ec49719b8c557200b6d6f
+> State fingerprint: sha256:704c41db60dba7e6d4806bda4676fb7829ce457934766311d9ccc4e7da9b7084
+> Population: Public PHP files: 317 / assets: 925
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 1 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 800 |
+| .jpg | 803 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 31 |
@@ -52,7 +52,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 199 |
+| HP/imgHtml/new_202601/blog | 202 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -251,6 +251,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:dekasegi-steps | 2 | NONE | OK |
 | blog:dormitory | 4 | NONE | OK |
 | blog:double-work | 2 | NONE | OK |
+| blog:established-vs-new-shop | 3 | NONE | OK |
 | blog:first-impression | 2 | NONE | OK |
 | blog:fun-conversation | 1 | NONE | OK |
 | blog:gap-moe | 4 | NONE | OK |
