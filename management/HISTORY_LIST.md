@@ -1,9 +1,10 @@
 # Candy 履歴一覧
 
-Updated: 2026-11-24
+Updated: 2026-11-25
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | 写メ日記の魅力ブログの作成と公開 | [20261125_CREATE_blog-photo-diary-charm.md](history/20261125_CREATE_blog-photo-diary-charm.md) |
 | CREATE | メンズエステ比較求人ブログの作成と公開 | [20261124_CREATE_blog-mens-esthe-comparison.md](history/20261124_CREATE_blog-mens-esthe-comparison.md) |
 | CREATE | 口コミ評価ブログの作成と公開 | [20261124_CREATE_blog-review-rating.md](history/20261124_CREATE_blog-review-rating.md) |
 | CREATE | ノルマ・罰金なし求人ブログの作成と公開 | [20261124_CREATE_blog-no-quota-penalty.md](history/20261124_CREATE_blog-no-quota-penalty.md) |
