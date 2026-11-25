@@ -1,6 +1,6 @@
 # CANDY Production Deployment and Migration Control
 
-Updated: 2026-10-28
+Updated: 2026-11-03
 
 ## 1. Purpose
 Control current `HP/` deployment, protected-entry publication, recovery, and
@@ -166,6 +166,16 @@ Do not infer this list for a future workflow; recheck actual preview output.
 ## 5. FTP Deployment Safety Requirements
 
 Before FTP connection, validate 40-character SHAs, ancestor relationship, checked-out HEAD, deployment-operation count, 125-operation maximum, 50 MiB of uploaded data, `PLAN_TOKEN`, and confirmation phrase. On failure, STOP without using FTP secrets.
+
+If `HP/source/index.html` or `HP/source/blog.html` is an upload target,
+`candy_ftp_deploy.py` validates both local sources against the
+[blog TOP/list contract](CANDY_PAGE_GENERATION_GOVERNANCE.md#101-integration-into-public-routes)
+before printing a deployment plan, checking approval, linting PHP, or opening
+FTP. Missing/non-regular sources, structural errors, or registry disagreement
+stop the run. Deleting or renaming either source is also blocked. Unrelated
+deployments do not require these sources. The existing deployment integration
+tests cover this guard and assert that failure never reaches approval or FTP.
+This preflight does not replace the post-publication browser checks.
 
 For each target, retain backups until every target validates:
 

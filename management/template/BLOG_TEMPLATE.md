@@ -1,6 +1,6 @@
 # ブログテンプレート作成管理
 
-Updated: 2026-10-28
+Updated: 2026-11-05
 
 親管理書: [INDEX.md](../INDEX.md)
 ページ仕様: [CANDY_BLOG_PAGE_GENERATION_SPEC.md](../specs/CANDY_BLOG_PAGE_GENERATION_SPEC.md)
@@ -13,10 +13,12 @@ URLとタイトルを指定した「ブログのテンプレを作成して」�
 
 ## 2. 入力と出力
 
-必須入力は次の2項目のみ。
+作成ツールに渡す必須入力は次の2項目。
 
 - URL: `https://www.55810.com/kagoshima-deliveryhealth-blog-<slug>.php`
 - タイトル: ユーザー指定の記事タイトル
+
+作成指示書には、これに加えて[作成手順の記事指定欄](../specs/BLOG_CREATION.md#21-作成指示書の記事指定欄)の「ブログカテゴリ」を含める。選択・未指定時の扱いは[正規仕様第2.4節](../specs/CANDY_BLOG_PAGE_GENERATION_SPEC.md#24-fixed-article-cta)に従う。現行CLIにカテゴリ引数はなく、自動切替もしないため、下記の生成後工程で対象HTMLに指定カテゴリを適用する。
 
 slugは英小文字・数字・ハイフン・アンダースコアを許可する。クエリ、フラグメント、別ホスト、別カテゴリ、パス階層は使用しない。URLからファイル名を決定し、タイトルをtitle・H1・OGP・パンくず・Article・リンク表示名へ反映する。
 
@@ -45,23 +47,24 @@ slugは英小文字・数字・ハイフン・アンダースコアを許可す�
 
 ## 4. 実行手順
 
-1. プロジェクト指示とINDEXから本書へ到達し、URL・タイトルを確定する。
-2. 同一URLの衝突、既存記事のPHP・HTML・dataset、一覧・TOP・サイトマップの整合と参照資産を確認する。
+1. プロジェクト指示とINDEXから本書へ到達し、URL・タイトルと指示書のブログカテゴリを確認する。カテゴリ未確定の状態でCTA確認を完了扱いしない。
+2. 同一URLの衝突、既存記事のPHP・HTML・dataset、一覧・TOP・サイトマップの整合と参照資産を確認する。TOPの構造条件は[共通生成規則第10.1節](../specs/CANDY_PAGE_GENERATION_GOVERNANCE.md#101-integration-into-public-routes)に従い、生成前・生成予定HTML・書込後に検証する。
 3. 次のdry-runで作成予定7ファイルとPHP構文を検証する。引数を実際の指定へ置き換える。
 
 ```powershell
 management\scripts\candy-blog-template.cmd create --url "https://www.55810.com/kagoshima-deliveryhealth-blog-<slug>.php" --title "<タイトル>" --dry-run
 ```
 
-4. 成功した場合、同じコマンドから `--dry-run` を外して実行する。書込後の検証失敗時は、この実行による変更を元のバイトへ戻す。他の作業による変更は保持する。
+4. 成功した場合、同じコマンドから `--dry-run` を外して実行する。書込後の検証失敗時は、この実行による変更を元のバイトへ戻す。他の作業による変更は保持し、戻せない競合は対象を明示して未解決とする。生成された対象HTMLの右CTAボタンと誘導文に、正規仕様第2.4節の指定カテゴリを適用し、同仕様との一致を独立して確認する。共通テンプレートの初期値を記事ごとに書き換えない。
 5. 作成後は以下で一式の整合を確認する。
 
 ```powershell
 management\scripts\candy-blog-template.cmd check --url "https://www.55810.com/kagoshima-deliveryhealth-blog-<slug>.php" --title "<タイトル>"
 ```
 
-6. HP変更後は [既存サイト運用第6章](../specs/CANDY_OPERATION_BASICS.md#6-after-a-change) に従い、サイトマップ更新日・生成管理書を同期して検証する。
-7. 作成ファイル、差し替えるHTMLの場所、本文未作成、本番反映の有無を報告し、[HISTORY.md](../HISTORY.md) に従い記録する。
+6. 同期の再実行で記事・構造・対象外領域が変わらないことを確認する。ローカルのTOPブログ欄をPC・スマートフォンで表示し、枠内配置・余白・折返し・一覧ボタン・隣接セクションを確認する。`SCAFFOLD_OK`・`CHECK_OK`は機械検証結果であり、実表示確認の代わりにしない。
+7. HP変更後は [既存サイト運用第6章](../specs/CANDY_OPERATION_BASICS.md#6-after-a-change) に従い、サイトマップ更新日・生成管理書を同期して検証する。
+8. 作成ファイル、差し替えるHTMLの場所、本文未作成、本番反映の有無、表示確認の環境・画面幅・証跡・未確認事項を報告し、[HISTORY.md](../HISTORY.md) に従い記録する。表示確認が未実施なら、その残作業を含めて記録し、ローカル一式の検証完了とは扱わない。
 
 既存不整合、slug衝突、PHP CLI不足、資産不足は書込前に停止する。既存不整合を別の記事作成のついでに修正しない。Git・DB・本番の権限は [AGENTS.md](../../AGENTS.md) と担当管理書に従う。
 
@@ -70,6 +73,8 @@ management\scripts\candy-blog-template.cmd check --url "https://www.55810.com/ka
 編集対象は `HP/source/kagoshima-deliveryhealth-blog-<slug>.html`。公開URLは対応するPHPであり、source HTMLの直接URLではない。
 
 `CANDY_BLOG_BODY_START` から `CANDY_BLOG_BODY_END` の間に本文・画像・目次・必要なFAQなどを設置し、準備中表示と `CANDY_BLOG_BODY_PENDING` を除去する。HTML全体を差し替える場合も、URL・タイトル、共通CSS/JS、ヘッダー・フッター、JSON-LDを保持・同期する。記事別CSSは作らず [ブログCSS仕様](../specs/CANDY_BLOG_PAGE_GENERATION_SPEC.md#22-blog-css-ownership) に従う。
+
+本文差し替え範囲の直後にある共通CTAは、[正規仕様第2.4節](../specs/CANDY_BLOG_PAGE_GENERATION_SPEC.md#24-fixed-article-cta)で選択したカテゴリの構成を保持する。原稿のリンク指定数から作り直さず、下記コードの初期値へ戻さない。HTML全体を差し替えた場合も指定カテゴリの固定部品と誘導文を復元し、[検証計画第3.9節](../specs/CANDY_VERIFICATION_PLAN.md#39-fixed-page-components)で確認する。下記の準備用HTMLにCTAが存在しても、本文未作成という状態は変わらない。
 
 | 表示内容 | JSON-LDの処理 |
 |---|---|
@@ -197,6 +202,14 @@ management\scripts\candy-blog-template.cmd check --url "https://www.55810.com/ka
 <!-- CANDY_BLOG_BODY_PENDING -->
 <div class="blog-lead"><p>記事本文は準備中です。</p></div>
 <!-- CANDY_BLOG_BODY_END -->
+<div class="blog-cta">
+<p class="blog-cta-eyebrow">NEXT STEP</p>
+<p class="blog-cta-title"><strong>女の子のプロフィールと本日の出勤情報をご確認ください。</strong></p>
+<div class="blog-cta-actions">
+<a href="./girls_list.php" class="blog-cta-link is-primary">女の子一覧</a>
+<a href="./schedule.php" class="blog-cta-link is-secondary">本日の出勤情報</a>
+</div>
+</div>
 {{RELATED_HTML}}
 <div class="lm_40_0_75 center"><a href="./" class="bt-pk-xl">HOME</a></div>
 </div>

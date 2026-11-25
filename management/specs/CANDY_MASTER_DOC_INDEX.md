@@ -1,6 +1,6 @@
 # CANDY Canonical Responsibility Index
 
-Updated: 2026-10-28
+Updated: 2026-11-05
 
 ## 1. Purpose
 
@@ -42,7 +42,8 @@ Do not mix stable specifications with current state. Regenerate `generated/` to 
 | Hotel-input classification and production order | `CANDY_HOTEL_TEXT_INPUT_CLASSIFICATION.md` and `generated/CANDY_UPCOMING_PAGES.md` |
 | Hotel-image creation and pre-acceptance validation | `CANDY_HOTEL_IMAGE_CREATION_SPEC.md` → `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md` |
 | Hotel-image acceptance, accepted-source storage, first local public installation, replacement, and publication state | `CANDY_HOTEL_IMAGE_ASSET_MANAGEMENT.md`; use `CANDY_PRODUCTION_MIGRATION_MASTER.md` for existing same-name replacement, production deployment exceptions, recovery, or rollback |
-| Normal blog production or unknown exception | `CANDY_PAGE_GENERATION_GOVERNANCE.md` and `CANDY_BLOG_PAGE_GENERATION_SPEC.md` |
+| Blog structure, fixed components, or unknown exception | [CANDY_BLOG_PAGE_GENERATION_SPEC.md](CANDY_BLOG_PAGE_GENERATION_SPEC.md) |
+| Completed blog production sequence | [BLOG_CREATION.md](BLOG_CREATION.md), under `CANDY_PAGE_GENERATION_GOVERNANCE.md` |
 | Blog template from URL and title, followed by user-authored HTML | [BLOG_TEMPLATE.md](../template/BLOG_TEMPLATE.md) |
 | Woman information, woman-image local retention, and public/local-only state | `CANDY_GIRL_INFORMATION_MANAGEMENT.md` → exact ledger and image pair |
 | Pages outside area, hotel, and blog | `CANDY_OTHER_PAGES_MANAGEMENT.md` and `CANDY_OPERATION_BASICS.md` |

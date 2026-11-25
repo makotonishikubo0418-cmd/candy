@@ -1,6 +1,6 @@
 # CANDY Page Generation Governance
 
-- Updated: 2026-10-28
+- Updated: 2026-11-05
 - Applies to: Normal new-page generation for area, blog, and hotel by Codex;
   Section 10.1 also governs direct changes to their top-page sections
 
@@ -25,9 +25,9 @@ URL/title-only blog preparation before user-authored HTML is a separate scaffold
 ## 2. Primary Principles
 
 - Do not infer content absent from source data.
-- Do not force the template's block count onto the completed page.
+- Do not force sample counts onto source-derived repeated content. Category-defined fixed components retain their required counts, order, labels, and destinations even when the manuscript does not mention them.
 - Area pages render three to six verified nearby-area links from `management/data/CANDY_AREA_RELATED_LINKS.json`, or omit the block when fewer than three suitable targets exist. Hotel pages render exactly three current indexable blog-detail links and three current indexable area-detail links selected deterministically by the generator.
-- Add or remove items, blocks, and sections according to available information.
+- Add or remove source-derived items, blocks, and sections according to available information; do not apply this omission rule to required site-navigation components.
 - After a structural change, synchronize IDs, table of contents, JSON-LD, links, and counts.
 - Treat public PHP, source HTML, dataset PHP, and dataset_base registration as one change unit.
 - Do not report completion when any component is missing.
@@ -53,7 +53,7 @@ STOP generation when any required item is missing:
 
 ### 3.2 Optional Items
 
-Do not infer a missing optional item. Use the category specification and completed pages to decide whether to omit its row or section.
+Do not infer a missing optional item. The category specification determines whether its row or section may be omitted; completed pages provide examples, not exceptions to that specification.
 
 - Subtitle
 - Supplemental description
@@ -107,6 +107,8 @@ target gate.
 ## 5. Reference-Page Selection
 
 Select a reference by structural similarity, not name similarity.
+
+First identify fixed components and variable content in the current category specification. A reference page or template placeholder cannot override those requirements. For blog details, the component contract is [CANDY_BLOG_PAGE_GENERATION_SPEC.md](CANDY_BLOG_PAGE_GENERATION_SPEC.md#24-fixed-article-cta).
 
 Priority:
 
@@ -214,6 +216,30 @@ relative order and visible names on the top page. Older blog entries remain
 available only through the complete blog index. The operational procedure is
 defined in `BLOG_CREATION.md`.
 
+For the blog TOP section, URL membership alone is insufficient. Keep exactly
+one existing white frame (`lp_0_55_35 w_1050 lm_0_auto bg_f`), with one
+`BLOG INFO` label and every selected article row inside it. Close the frame
+after the final row and retain exactly one blog-list button outside the frame.
+Section boundaries and tags must be unambiguous and balanced. Preserve the
+frame, button, and content outside the article rows when synchronizing entries;
+do not insert rows relative to the outside button. Zero to 15 rows are valid
+according to the registry population, not an unconditional fixed count of 15.
+
+Both URL/title scaffolds and source-Text builds must validate the existing
+TOP/list relationship before planning writes, validate the proposed result,
+and validate the written result. Reject malformed or ambiguous structure before
+writing. On a post-write failure, restore only this transaction's changes using
+the guarded transaction helper; preserve concurrent changes and report any
+unrestored conflict. A normal generation request must not silently repair a
+pre-existing broken frame.
+
+Regression coverage must include the historical early frame close, outside
+links, missing/extra tags, duplicate frames/boundaries/buttons, registry sizes
+0, 1, 14, 15 and 16+, repeated additions, and unchanged output on a repeated
+sync. Define expected HTML independently of the synchronizer and assert element
+parentage independently of the production frame locator. A count/order check
+alone cannot establish structural or visual correctness.
+
 For hotel, the category index MUST contain every public hotel-detail URL
 exactly once. The top-page section MUST contain only the latest 15 entries, or
 all entries when fewer than 15 exist. "Latest" means the final 15 entries in
@@ -290,7 +316,7 @@ or the page-generation task as complete.
 
 ### 10.2 Robots
 
-Current area, blog, and hotel templates use `<meta name="robots" content="index">`. Preserve the current template setting for normal public-page generation.
+Normal public area, blog, and hotel pages require `<meta name="robots" content="index">`. An editable sample template may intentionally use `noindex, nofollow`; apply the category's publication rules rather than copying that sample value into the public article.
 
 - Do not change it to noindex.
 - Do not omit robots.
@@ -313,11 +339,14 @@ Current area, blog, and hotel templates use `<meta name="robots" content="index"
 - Canonical and file slug agree.
 - Images exist.
 - Internal links point to public PHP.
+- Fixed page components satisfy the applicable category specification. For checks not implemented by the selected tool, obtain independent evidence under [the verification plan](CANDY_VERIFICATION_PLAN.md#39-fixed-page-components); do not infer coverage from an overall success result.
 - Robots agrees with publication policy.
 - Category-index registration requirements were checked.
 - The blog top-page section, when applicable, is exactly the final 15 blog
   index registrations (or all registrations when fewer than 15 exist), in the
   same relative order and with the same visible names.
+- The blog TOP frame and transactional checks satisfy Section 10.1. Apply them
+  to both template preparation and normal blog generation.
 - The hotel top-page section, when applicable, is exactly the final 15 hotel
   index registrations (or all registrations when fewer than 15 exist), in the
   same relative order and with the same visible names.

@@ -1,26 +1,23 @@
 # CANDY Blog Page Generation Specification
 
-- Updated: 2026-11-04
-- Applies to: Normal new generation of CANDY blog detail pages by Codex
+- Updated: 2026-11-05
+- Applies to: CANDY blog-detail structure and validation within authorized creation or modification work
 - Operational sequence: `BLOG_CREATION.md`
 - Common image requirements: `IMAGE_MANAGEMENT.md`
 
 ## 1. Purpose and Scope
 
-This is the canonical specification for generating blog pages from source Text without damage. Use it for normal new-page generation, not for bug fixes, existing-feature changes, common-processing changes, or refactoring.
+This is the canonical specification for blog-detail content mapping, fixed components, variable blocks, and validation. Apply it to the article being created or to the explicitly authorized existing-page modification. It does not authorize changes to other articles or common processing.
 
-This document owns only blog-specific page structure, source mapping, variable
-blocks, and validation requirements. Common generation rules, Git, publication,
-and routing remain in the applicable documents selected from `codex/WORK_ROUTING.md`
-Section 5.2.
+Use [INDEX.md](../INDEX.md) for common generation, existing-site operation, Git, and production responsibilities. [BLOG_CREATION.md](BLOG_CREATION.md) owns the completed-article execution sequence; this specification owns the required result.
 
 For a URL/title-only request to prepare a template before the user writes the article HTML, use [BLOG_TEMPLATE.md](../template/BLOG_TEMPLATE.md). That document owns the executable scaffold code, minimal inputs, local PHP/registry/sitemap preparation, and the separate scaffold completion state. The source-Text requirements below apply to completed-article generation, not to that preparation route.
 
 ## 2. Mandatory Rules
 
-- Use the target text file under `Text_blog_data` as source data.
+- Use the user-designated article manuscript as source data. For structured Text generation, use its target file under `Text_blog_data`; do not invent missing content to satisfy a legacy input format.
 - Use `HP/source/template_kagoshima-deliveryhealth-blog.html` as the HTML template.
-- Load woman information from `codex/data/CANDY_GIRL_INFORMATION.json` through `candy_girl_information.py`, and select only records whose image state is `PUBLIC`.
+- When a girl-introduction block is required, load information from `management/data/CANDY_GIRL_INFORMATION.json` through `candy_girl_information.py`, following [the girl-information specification](CANDY_GIRL_INFORMATION_MANAGEMENT.md). Select only specified records whose image state is `PUBLIC`.
 - Adjust the table of contents, normal scenes, girl introductions, customer comments, FAQ, and summary to source-data counts.
 - Keep JSON-LD, visible content, and the table of contents consistent in content and count.
 - Apply the common collision, incomplete-input, change-boundary, and completion
@@ -30,9 +27,9 @@ For a URL/title-only request to prepare a template before the user writes the ar
 
 The official editable template is [`HP/source/template_kagoshima-deliveryhealth-blog.html`](../../HP/source/template_kagoshima-deliveryhealth-blog.html). Its staff-blog layout uses the shared `HP/css/blog.css`, `blog-page` components, and the `blog-theme-deep-pink` theme. Maintain future template changes in this file. `kagoshima-deliveryhealth-blog-candy_dominant_girls.html` is a separate page reserved for another purpose; do not use it as the template authority or synchronize subsequent template edits into it.
 
-The template intentionally contains sample text, a placeholder SVG, sample links, `noindex, nofollow`, and sample canonical/OGP/JSON-LD URLs. When creating a publishable article, replace these with the approved article content, images, destinations, indexing directive, and canonical URL. Do not publish the template unchanged or register the template itself in the blog index or sitemap.
+The template contains sample article text, a placeholder SVG, sample related links, `noindex, nofollow`, and sample canonical/OGP/JSON-LD URLs. Replace those article-specific placeholders with approved content and publication metadata. Fixed site-navigation components follow Section 2.4 and are not article-specific placeholders. Do not publish or register the template itself in the blog index or sitemap.
 
-For this editable staff-blog layout, `sceneN` belongs to the section containing its H2; the table of contents targets those sections. The table-of-contents and related-content headings are outside the numbered article scenes. Introductory text uses `blog-lead`; article bodies use the `blog-section` components rather than requiring the legacy `subtitle_N` / `description_N` wrappers. Keep scene order, visible headings, and table-of-contents links consistent. The sample has Article, BreadcrumbList, and FAQPage JSON-LD. Update Article to the actual article and author, and add ItemList only when a corresponding girl-introduction block is present. Sample block counts are not fixed requirements. These are the staff-template exceptions to the legacy structure in Sections 4–7; source-content and visible/structured-data consistency requirements still apply.
+The staff-blog structure is defined in Sections 4–7. Sample counts for source-derived article scenes, comments, FAQs, and girl introductions are variable; fixed navigation and related-link requirements remain mandatory. Existing articles are references for appearance, not authorities for changing these requirements.
 
 `candy_blog_page.py` currently reads this template as a shell, then replaces the main content and JSON-LD with its own legacy renderers. It does not reproduce the editable staff-blog layout and does not replace the template's robots directive. Its successful execution alone therefore does not verify staff-template design or publication readiness. Apply the official template directly for that layout and verify the article's robots directive before publication; do not treat the existing generator as supporting the new layout.
 
@@ -48,13 +45,25 @@ For this editable staff-blog layout, `sceneN` belongs to the section containing 
 
 The management-side code authority for URL/title-only scaffolds is [BLOG_TEMPLATE.md](../template/BLOG_TEMPLATE.md), consumed directly by [candy_blog_template.py](../scripts/candy_blog_template.py). It prepares HTML, public PHP, dataset PHP, shared routing, category/top links, and sitemap together. The editable staff template in Section 2.1 remains the full article component/design reference. Scaffold-specific handling of unfinished body content, metadata, images, and JSON-LD is defined only in the management-side template document. Once the user supplies completed HTML, apply this specification's relevant content, CSS, SEO, and display checks.
 
+### 2.4 Fixed Article CTA
+
+Every completed blog detail has one `.blog-cta` after the article body and before `.blog-related`. Its `.blog-cta-actions` contains exactly two links. Select the right link from the user's explicit `ブログカテゴリ` instruction; the only accepted values are `一般` and `求人`. If the value is missing, ambiguous, or unsupported, confirm it before finalizing the CTA. Do not infer it from the title, manuscript, URL, or an older article, and do not silently default to `一般`.
+
+| ブログカテゴリ | Position | Exact visible label | href | Link class |
+|---|---|---|---|---|
+| Both | Left; first in DOM / when stacked | 女の子一覧 | `./girls_list.php` | `blog-cta-link is-primary` |
+| 一般 | Right; second in DOM / when stacked | 本日の出勤情報 | `./schedule.php` | `blog-cta-link is-secondary` |
+| 求人 | Right; second in DOM / when stacked | 求人情報はコチラ | `./kagoshima-deliveryhealth-blog-privacy-measures.php` | `blog-cta-link is-secondary` |
+
+The recruitment destination is `https://www.55810.com/kagoshima-deliveryhealth-blog-privacy-measures.php`. This category selection controls the CTA only; it does not create separate blog registries or change the article URL, breadcrumb, or JSON-LD type.
+
+Do not omit, add, reverse, rename, or substitute the selected buttons based on article content or supplied body links. Source-derived links elsewhere in the article remain separate. The introductory CTA sentence and article theme may vary, but the sentence must describe the selected destinations and use no invented facts. For `求人`, replace any invitation to view today's schedule with an invitation to view recruitment information. Shared CSS owns layout; preserve both buttons on desktop and mobile.
+
+The editable template and scaffold code contain the `一般` initial example, not a category decision. Apply the explicitly selected category to the article's right link and introductory sentence, and preserve that result when article content is replaced. Record the selected category with CTA evidence under [the verification plan](CANDY_VERIFICATION_PLAN.md#39-fixed-page-components); a successful SEO, registry, or scaffold check alone does not establish CTA compliance.
+
 ## 3. Required File and Public-Route Change Unit
 
 ```text
-Text_blog_data/<対象記事>.txt
-HP/source/template_kagoshima-deliveryhealth-blog.html
-codex/data/CANDY_GIRL_INFORMATION.json
-
 HP/kagoshima-deliveryhealth-blog-<slug>.php
 HP/source/kagoshima-deliveryhealth-blog-<slug>.html
 HP/includefile/dataset_kagoshima-deliveryhealth-blog-<slug>.php
@@ -64,7 +73,7 @@ HP/source/index.html
 HP/sitemap.xml
 ```
 
-Determine the slug by reconciling canonical in source Text, image names, and filenames.
+The manuscript, editable template, and conditional girl-information ledger are inputs, not files to modify for every article. Determine the slug from the approved canonical, image names, and filenames. Include necessary assets and generated-state updates through [BLOG_CREATION.md](BLOG_CREATION.md#3-標準作成単位).
 
 ## 4. Source-Data to HTML Mapping
 
@@ -75,15 +84,15 @@ Determine the slug by reconciling canonical in source Text, image names, and fil
 | canonical | Canonical and OGP URL |
 | img_1 | Main image, OGP image, and alt |
 | page_title_h1 | Breadcrumb and H1 |
-| subtitle_h1 | `subtitle_h1` |
-| description_h1 | `description_h1` |
+| Introductory copy | `blog-lead` within `blog-intro` |
 | img_2 | Article image and alt |
-| Normal articles | Scenes, subtitles, and descriptions |
+| Normal articles | `blog-section` sections, H2/H3 headings, and body content |
 | Manager recommendations | Girl-introduction blocks |
 | Customer comments | Multiple items under one scene |
 | FAQ | Multiple FAQ items |
 | Summary | Final scene, subtitle, and description |
-| Entire page | Table of contents and three JSON-LD blocks |
+| Site navigation | Fixed CTA in Section 2.4; independent of manuscript link count |
+| Entire page | Table of contents and applicable JSON-LD in Section 7 |
 
 Do not add unnecessary visible line breaks when source data does not specify them.
 
@@ -103,12 +112,11 @@ customer-comments-before-FAQ order.
 
 Rules:
 
-- Number H2 elements sequentially from `scene1` through `sceneN`.
-- Normal content uses `subtitle_N` and `description_N`.
-- Include every H2 in the table of contents and match each `href="#sceneN"` to the actual H2 ID.
+- Number article sections sequentially from `scene1` through `sceneN`; put the ID on the `blog-section` containing its H2.
+- Use `blog-section` body components. Legacy `subtitle_N` / `description_N` wrappers are not required for this layout.
+- Include each article H2 in the table of contents and match each `href="#sceneN"` to its section ID. The table-of-contents and related-content headings are outside article numbering.
 - Renumber every following scene after a scene is added or removed.
-- For customer comments under parent scene S, use `sceneS_1`, `subtitle_S_1`, and `description_S_1`.
-- For FAQ under parent scene S, use `subtitle_S_1` and `description_S_1`.
+- Where child IDs are used, keep them unique and tied to their parent scene; do not add legacy wrappers solely to satisfy the old renderer.
 - Duplicate IDs, numbering gaps, and scenes that exist only in the table of contents are prohibited.
 - Under `関連記事`, publish three distinct indexable blog-detail links and three distinct indexable area-detail links selected deterministically from current public files. Exclude the current page, duplicate destinations, placeholder text, and `href="#"`.
 
@@ -116,9 +124,8 @@ Rules:
 
 A single block change affects multiple locations. Update together:
 
-- Main H2 scene numbers
-- Child scene/subtitle/description numbers for customer comments
-- Child subtitle/description numbers for FAQ
+- Article section IDs
+- Child IDs for customer comments and FAQs, when present
 - Table-of-contents copy, order, and href values
 - FAQPage JSON-LD questions, answers, order, and count
 - Girl ItemList names, images, URLs, positions, and count
@@ -133,11 +140,14 @@ For girl introductions, compare the local woman-information ledger and current c
 
 ## 7. JSON-LD
 
-A blog page uses three JSON-LD blocks:
+A completed staff blog uses the following applicable JSON-LD. Do not force a fixed total block count.
 
-- BreadcrumbList
-- FAQPage
-- Girl-introduction ItemList type
+| Type | Condition |
+|---|---|
+| Article | Required; use actual approved article metadata and omit unprovided author or date values |
+| BreadcrumbList | Required; match the visible breadcrumb and canonical |
+| FAQPage | Only when a visible FAQ exists; omit when there is none |
+| Girl-introduction ItemList | Only when the corresponding approved girl-introduction block is visible |
 
 Validate:
 
@@ -185,52 +195,18 @@ transformation. It does not permit omitted registration.
 
 ## 10. Blog-Specific Generation Sequence
 
-The common generation gates remain in
-`CANDY_PAGE_GENERATION_GOVERNANCE.md`. Within those gates:
+Follow [BLOG_CREATION.md Section 4](BLOG_CREATION.md#4-作成順序) for completed articles and [BLOG_TEMPLATE.md](../template/BLOG_TEMPLATE.md) for URL/title-only preparation. Common generation gates remain in [CANDY_PAGE_GENERATION_GOVERNANCE.md](CANDY_PAGE_GENERATION_GOVERNANCE.md). Tool limitations in Section 2.1 must be considered before selecting a build command.
 
-1. Verify required source-text items, canonical, slug, and images.
-2. Compare the blog template, the local woman-information ledger, and a current complete page.
-3. Generate source HTML and apply SEO, OGP, H1, body, and images.
-4. Build normal scenes, girl introductions, customer comments, and FAQs
-   according to source-data counts.
-5. Number scenes from the top and synchronize the table of contents.
-6. Synchronize all three JSON-LD blocks to visible content.
-7. Generate public entry PHP and dataset PHP.
-8. Register the `dataset_base.php` case and link transformation.
-9. Check placeholders, duplicate IDs, numbering gaps, table-of-contents
-   mismatches, canonical, images, internal links, and girl numbers.
-10. Synchronize the complete blog index, its JSON-LD, the top-page latest 15
-    blog entries, and `sitemap.xml` under Section 10.1 of
-    `CANDY_PAGE_GENERATION_GOVERNANCE.md`.
+## 11. Existing Pages
 
-## 11. Exceptions and Cautions
-
-- Scene count is not fixed.
-- Do not fix FAQ, customer-comment, or normal-article counts to template defaults.
-- Use a complete page without source Text only as a structural reference.
-- Only the slendergirl dataset PHP differs from the standard form.
-- Do not mix existing-exception fixes into new-page generation.
-- Follow source-data order for FAQ and customer comments instead of copying an existing-page order mechanically.
+Older articles may use legacy structures or navigation. Their existence does not define an exception to the current contract. Apply the applicable requirements to the authorized target while preserving unrelated body content and assets. An unrelated article's migration or an existing dataset exception remains separately scoped work under [CANDY_OPERATION_BASICS.md](CANDY_OPERATION_BASICS.md).
 
 ## 12. Blog-Specific Completion Criteria
 
-- [ ] Source Text, slug, and canonical are confirmed.
-- [ ] Scenes and table of contents agree.
-- [ ] Source H2 order matches actual scene order.
-- [ ] Customer-comment and FAQ numbering is correct.
-- [ ] Visible and JSON-LD counts agree for customer comments, FAQs, and girl introductions.
-- [ ] Visible FAQ matches FAQPage JSON-LD.
-- [ ] Visible girl content matches ItemList JSON-LD.
-- [ ] The blog index contains every public blog once, and the top-page blog
-      section contains its final 15 registrations, or all when fewer than 15
-      exist, in the same order and with the same names.
-- [ ] Sitemap registration requirements satisfy the common public-route
-      synchronization contract.
-- [ ] The generated-state and sitemap-date gate in [BLOG_CREATION.md Section 8](BLOG_CREATION.md#8-完了確認) has passed before staging or publication.
-- [ ] No duplicate ID exists.
+The execution checklist is [BLOG_CREATION.md Section 8](BLOG_CREATION.md#8-完了確認). It must establish compliance with this specification's fixed components, source-derived content, conditional JSON-LD, CSS, and public-route requirements before staging or publication. [CANDY_VERIFICATION_PLAN.md](CANDY_VERIFICATION_PLAN.md) owns evidence and result classification. A checklist, tool result, and actual browser observation must not be treated as interchangeable evidence.
 
 ## 13. Specification Boundary
 
 Current page counts, individual defects, source availability, Git state, and
 production state are intentionally not stored here. Obtain them from actual
-files and the generated current-state documents selected by `codex/WORK_ROUTING.md`.
+files and the generated current-state documents selected by [INDEX.md](../INDEX.md).

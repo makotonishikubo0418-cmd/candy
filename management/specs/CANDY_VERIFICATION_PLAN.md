@@ -1,6 +1,6 @@
 # CANDY Full-Population Verification Plan
 
-- Updated: 2026-10-11
+- Updated: 2026-11-05
 - Applies to: `HP`, generation source data, test, and production
 - Position: Canonical method for full-population evidence classification
 
@@ -115,6 +115,13 @@ canonical response remains indexable.
 
 Obtain generated HTML from PHP HTTP responses and extract browser-facing internal PHP, images, movies, fonts, CSS, JavaScript, anchors, external URLs, form actions, canonical, OGP, JSON-LD, and placeholders. Static inspection of `source/*.html` is insufficient.
 
+When blog work changes TOP or the blog index, enumerate those pages separately
+from the article. Verify the TOP parent/child structure against
+[the public-route contract](CANDY_PAGE_GENERATION_GOVERNANCE.md#101-integration-into-public-routes),
+not only link counts or matching tag counts. Production evidence must include
+the public PHP response and browser DOM; a local source preview is local
+evidence only.
+
 For the current production SEO population, run:
 
 ```powershell
@@ -203,6 +210,14 @@ separate:
 The production migration document and actual workflow/scripts own their
 constraints. This verification plan must not duplicate them.
 
+### 3.9 Fixed Page Components
+
+Identify expected fixed components from the current category specification before examining the generated result. Do not derive expected values from the same template or article being tested. For blog details, first record the user's explicit `ブログカテゴリ`, then select the corresponding requirements from [the fixed CTA contract](CANDY_BLOG_PAGE_GENERATION_SPEC.md#24-fixed-article-cta). An unspecified category is unverified, not an implicit general-category pass.
+
+For each target, record the component count and the actual ordered list of visible labels, hrefs, and classes. Compare every field to its canonical requirement, and confirm that the introductory sentence describes the selected destinations. Verify desktop/mobile visibility, visual order, wrapping, and click destinations separately; a valid URL or HTTP 200 does not establish the correct label, placement, or number of buttons. A missing, extra, reversed, renamed, hidden, substituted, or wrong-category component fails the target check.
+
+Record which command or manual DOM inspection checked each requirement and its result. The current blog scaffold, legacy blog renderer, and site-state checks do not validate the fixed article CTA contract. Their success is not evidence for this component; perform the separate comparison before completion. Any future automated implementation must test both supported blog categories and those failure cases against the specification, including an article with no CTA links supplied in its manuscript and rejection of an unspecified category.
+
 ## 4. Result Classifications
 
 | Status | Meaning |
@@ -252,6 +267,9 @@ Do not infer an unverified field.
 - In-page anchors
 - Canonical, OGP, and JSON-LD
 - Desktop/mobile rendering
+- For a changed blog TOP section, record its URL or local preview environment,
+  viewport width, checked frame/rows/button/adjacent sections, result, and
+  screenshot or equivalent inspectable evidence separately from article checks.
 - JavaScript console
 - Production or test deployment state
 
@@ -269,6 +287,9 @@ Do not report a local fix as a production fix.
 - When internal-path access control changed, source HTML and directory requests are `404`, include requests are `403`, `source/style.css` is `200`, and public PHP rendering remains valid.
 - When development-only member isolation changed, the current-use classification remains `INACTIVE_DEVELOPMENT`, the public legacy mypage fallback remains selected while integration is disabled, public source links and sitemap membership are zero, and unavailable legal destinations are unlinked.
 - Unexecuted browser, database, and external-service checks are not reported complete.
+- Generator success, inventory consistency, deployment success, and production
+  rendering are separate findings. A passed generator or inventory check does
+  not establish layout correctness or replace outstanding visual verification.
 - The production full-SEO check completes with zero issues; actual search-engine index state remains separate official Search Console evidence.
 
 When pending decisions remain, report that the full population was scanned but
