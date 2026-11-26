@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-26T14:14:11+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-26T15:40:39+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: acd4b26ddb20040e3c06e5a9cfa966cd5c42e70d
-> State fingerprint: sha256:8f377e566e89e0a1fe482fa34c8a1e7061343477339ea1c6ca2ad9a96fbf10b5
-> Population: Public PHP files: 322 / assets: 941
+> Commit: e3b850b4aaaddf88cb9c5de9e1a254b5e0b9bade
+> State fingerprint: sha256:e6a25d33b64e42462455b99fc220dfec83638f826a18396572cb72af7e4bca62
+> Population: Public PHP files: 323 / assets: 944
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 1 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 819 |
+| .jpg | 822 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 31 |
@@ -52,7 +52,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 218 |
+| HP/imgHtml/new_202601/blog | 221 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -276,6 +276,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:no-quota-penalty | 3 | NONE | OK |
 | blog:one-month | 2 | NONE | OK |
 | blog:oneesan | 5 | NONE | OK |
+| blog:option | 3 | NONE | OK |
 | blog:papakatsu-deliveryhealth | 3 | NONE | OK |
 | blog:peaceofmindsupport | 4 | NONE | OK |
 | blog:petitegirl | 7 | NONE | OK |
