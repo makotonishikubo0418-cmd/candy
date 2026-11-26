@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-26T15:40:39+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-26T16:51:18+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: e3b850b4aaaddf88cb9c5de9e1a254b5e0b9bade
-> State fingerprint: sha256:e6a25d33b64e42462455b99fc220dfec83638f826a18396572cb72af7e4bca62
-> Population: Public PHP files: 323 / assets: 944
+> Commit: 595dcca2a3455a514c6609f4e69533af6179cc62
+> State fingerprint: sha256:b24a1445de961428b2b6edc032dcca8c7f156b63ddf62ad9b840d9ddddde7c6a
+> Population: Public PHP files: 324 / assets: 944
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 1 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -288,6 +288,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:privacy-measures | 2 | NONE | OK |
 | blog:private-waiting-room | 3 | NONE | OK |
 | blog:retort-curry | 3 | NONE | OK |
+| blog:return-to-work | 4 | NONE | OK |
 | blog:review-rating | 3 | NONE | OK |
 | blog:same-day-reservation | 2 | NONE | OK |
 | blog:seiso-girls | 4 | NONE | OK |
@@ -412,7 +413,6 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/imgHtml/new_202601/blog | 4 | kagoshima-deliveryhealth-blog-return-to-work_1.jpg, kagoshima-deliveryhealth-blog-return-to-work_2.jpg, kagoshima-deliveryhealth-blog-return-to-work_3.jpg, kagoshima-deliveryhealth-blog-return-to-work_4.jpg |
 
 ## Required Same-Content Path Groups
 
