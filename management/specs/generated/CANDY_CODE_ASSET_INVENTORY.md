@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-25T14:54:33+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-26T13:52:23+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 8916a19fdbb35efb65f938ec7a3bfa132655f492
-> State fingerprint: sha256:aeb5734d8945f9daa9f45d705b2f31e72509133d812efa7ef2d8a5a5392c7ab1
-> Population: Public PHP files: 320 / assets: 941
+> Commit: 5f636a218ad058121aeddffe1a5643b323584228
+> State fingerprint: sha256:c71c064d7597f81793cf3c5473079797b4444ab0e3bc6e58f485310650b563c3
+> Population: Public PHP files: 321 / assets: 941
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 1 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -241,6 +241,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:autumn-winter-cuddle | 1 | NONE | OK |
 | blog:beautiful-cute | 5 | NONE | OK |
 | blog:beginner-job | 3 | NONE | OK |
+| blog:beyond-photos | 4 | NONE | OK |
 | blog:bijiri-girls | 5 | NONE | OK |
 | blog:bikyaku-girls | 5 | NONE | OK |
 | blog:black-long-hair | 5 | NONE | OK |
@@ -409,7 +410,7 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/imgHtml/new_202601/blog | 12 | kagoshima-deliveryhealth-blog-beyond-photos_1.jpg, kagoshima-deliveryhealth-blog-beyond-photos_2.jpg, kagoshima-deliveryhealth-blog-beyond-photos_3.jpg, kagoshima-deliveryhealth-blog-beyond-photos_4.jpg, kagoshima-deliveryhealth-blog-high-paying-jobs_1.jpg |
+| HP/imgHtml/new_202601/blog | 8 | kagoshima-deliveryhealth-blog-high-paying-jobs_1.jpg, kagoshima-deliveryhealth-blog-high-paying-jobs_2.jpg, kagoshima-deliveryhealth-blog-high-paying-jobs_3.jpg, kagoshima-deliveryhealth-blog-high-paying-jobs_4.jpg, kagoshima-deliveryhealth-blog-return-to-work_1.jpg |
 
 ## Required Same-Content Path Groups
 
