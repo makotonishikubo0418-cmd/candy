@@ -1142,6 +1142,10 @@ switch ($hdir) {
 		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-blog-nightwork-style.php');
 		break;
 
+	case 'kagoshima-deliveryhealth-blog-local-vs-away.html':
+		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-blog-local-vs-away.php');
+		break;
+
 	case 'kagoshima-deliveryhealth-blog-shimei-change.html':
 		include(INCLUDE_DIR . 'dataset_kagoshima-deliveryhealth-blog-shimei-change.php');
 		break;
@@ -2406,6 +2410,7 @@ $source = str_replace('kagoshima-deliveryhealth-blog-fun-conversation.html', 'ka
 $source = str_replace('kagoshima-deliveryhealth-blog-dormitory.html', 'kagoshima-deliveryhealth-blog-dormitory.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-blog-newcomer-veteran.html', 'kagoshima-deliveryhealth-blog-newcomer-veteran.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-blog-nightwork-style.html', 'kagoshima-deliveryhealth-blog-nightwork-style.php', $source);
+$source = str_replace('kagoshima-deliveryhealth-blog-local-vs-away.html', 'kagoshima-deliveryhealth-blog-local-vs-away.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-blog-shimei-change.html', 'kagoshima-deliveryhealth-blog-shimei-change.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-blog-privacy-measures.html', 'kagoshima-deliveryhealth-blog-privacy-measures.php', $source);
 $source = str_replace('kagoshima-deliveryhealth-blog-making.html', 'kagoshima-deliveryhealth-blog-making.php', $source);

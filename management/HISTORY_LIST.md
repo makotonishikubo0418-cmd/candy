@@ -1,9 +1,10 @@
 # Candy 履歴一覧
 
-Updated: 2026-11-25
+Updated: 2026-11-26
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | 地元派と出稼ぎ派ブログの作成と公開 | [20261126_CREATE_blog-local-vs-away.md](history/20261126_CREATE_blog-local-vs-away.md) |
 | CREATE | 王道アイドル系女子ブログの作成と公開 | [20261125_CREATE_blog-idol-type.md](history/20261125_CREATE_blog-idol-type.md) |
 | CREATE | アイディア突然ブログの作成と公開 | [20261125_CREATE_blog-sudden-ideas.md](history/20261125_CREATE_blog-sudden-ideas.md) |
 | CREATE | 老舗店と新規店比較求人ブログの作成と公開 | [20261125_CREATE_blog-established-vs-new-shop.md](history/20261125_CREATE_blog-established-vs-new-shop.md) |
