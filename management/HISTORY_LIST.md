@@ -4,6 +4,7 @@ Updated: 2026-11-28
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | 長く在籍・居心地の良さ求人ブログの作成と公開 | [20261128_CREATE_blog-long-term-employment.md](history/20261128_CREATE_blog-long-term-employment.md) |
 | CREATE | 女性が嬉しくなるひと言ブログの作成と公開 | [20261128_CREATE_blog-words-that-make-women-happy.md](history/20261128_CREATE_blog-words-that-make-women-happy.md) |
 | CREATE | 写メ日記ネタ切れ求人ブログの作成と公開 | [20261128_CREATE_blog-photo-diary-topics.md](history/20261128_CREATE_blog-photo-diary-topics.md) |
 | CREATE | ホテル比較ブログの作成と公開 | [20261128_CREATE_blog-hotel-comparison_1.md](history/20261128_CREATE_blog-hotel-comparison_1.md) |
