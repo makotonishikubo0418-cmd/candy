@@ -1,9 +1,10 @@
 # Candy 履歴一覧
 
-Updated: 2026-11-26
+Updated: 2026-11-28
 
 | Type | Title | History |
 |---|---|---|
+| CREATE | ホテル比較ブログの作成と公開 | [20261128_CREATE_blog-hotel-comparison_1.md](history/20261128_CREATE_blog-hotel-comparison_1.md) |
 | CREATE | 出戻り事情求人ブログの作成と公開 | [20261126_CREATE_blog-return-to-work.md](history/20261126_CREATE_blog-return-to-work.md) |
 | CREATE | オプション楽しみ方ブログの作成と公開 | [20261126_CREATE_blog-option.md](history/20261126_CREATE_blog-option.md) |
 | CREATE | 稼げる仕事求人ブログの作成と公開 | [20261126_CREATE_blog-high-paying-jobs.md](history/20261126_CREATE_blog-high-paying-jobs.md) |

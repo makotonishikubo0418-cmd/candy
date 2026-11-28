@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-26T16:51:18+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-26T17:11:20+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 595dcca2a3455a514c6609f4e69533af6179cc62
-> State fingerprint: sha256:b24a1445de961428b2b6edc032dcca8c7f156b63ddf62ad9b840d9ddddde7c6a
-> Population: Public PHP files: 324 / assets: 944
+> Commit: 4e7cf77e8bf15f4aee216eb2b66799531d67ec65
+> State fingerprint: sha256:066871d6713c9038af7797bff0ce79e676abb7df2842f3bba86751d38ba32504
+> Population: Public PHP files: 325 / assets: 955
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 1 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -29,7 +29,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | .css | 17 |
 | .eot | 14 |
 | .gif | 5 |
-| .jpg | 822 |
+| .jpg | 833 |
 | .js | 12 |
 | .mp4 | 2 |
 | .png | 31 |
@@ -52,7 +52,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | HP/imgHtml/new_202601 | 10 |
 | HP/imgHtml/new_202601/area | 328 |
 | HP/imgHtml/new_202601/banner | 24 |
-| HP/imgHtml/new_202601/blog | 221 |
+| HP/imgHtml/new_202601/blog | 232 |
 | HP/imgHtml/new_202601/girl | 66 |
 | HP/imgHtml/new_202601/hotel | 142 |
 | HP/imgHtml/new_202601/shop | 22 |
@@ -263,6 +263,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:high-income-salary | 2 | NONE | OK |
 | blog:high-paying-jobs | 4 | NONE | OK |
 | blog:honban | 3 | NONE | OK |
+| blog:hotel-comparison_1 | 3 | NONE | OK |
 | blog:idol-type | 5 | NONE | OK |
 | blog:kyonyu-girls | 5 | NONE | OK |
 | blog:late-night-job | 2 | NONE | OK |
@@ -413,6 +414,7 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
+| HP/imgHtml/new_202601/blog | 8 | kagoshima-deliveryhealth-blog-photo-diary-topics_1.jpg, kagoshima-deliveryhealth-blog-photo-diary-topics_2.jpg, kagoshima-deliveryhealth-blog-photo-diary-topics_3.jpg, kagoshima-deliveryhealth-blog-photo-diary-topics_4.jpg, kagoshima-deliveryhealth-blog-words-that-make-women-happy_1.jpg |
 
 ## Required Same-Content Path Groups
 
