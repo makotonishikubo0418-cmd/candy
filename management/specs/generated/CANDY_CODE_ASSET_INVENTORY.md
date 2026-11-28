@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-28T12:45:43+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-28T13:12:36+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: d189bc0a06db6864b769054280b364d713fad9f8
-> State fingerprint: sha256:501f83f6bf01fe5c86863bf8eb56200e64e03c9ad3754d0d9af8c4a5925671c3
-> Population: Public PHP files: 326 / assets: 955
+> Commit: f2fd21f7c0d7138ed9cba9cf8ae93aab9385e75f
+> State fingerprint: sha256:bb803cfd275b8a8206546ee56121b438121f32b7d3d20b11b0fa13a13108463f
+> Population: Public PHP files: 327 / assets: 955
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 1 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -309,6 +309,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:trial-entry | 3 | NONE | OK |
 | blog:unique-skills-girls | 4 | NONE | OK |
 | blog:waiting-room-facilities | 4 | NONE | OK |
+| blog:words-that-make-women-happy | 4 | NONE | OK |
 | hotel:aquagardenhotelfukumaru | 6 | NONE | OK |
 | hotel:arthotelkagoshima | 6 | NONE | OK |
 | hotel:businesshotelatelier | 6 | NONE | OK |
@@ -415,7 +416,6 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/imgHtml/new_202601/blog | 4 | kagoshima-deliveryhealth-blog-words-that-make-women-happy_1.jpg, kagoshima-deliveryhealth-blog-words-that-make-women-happy_2.jpg, kagoshima-deliveryhealth-blog-words-that-make-women-happy_3.jpg, kagoshima-deliveryhealth-blog-words-that-make-women-happy_4.jpg |
 
 ## Required Same-Content Path Groups
 
