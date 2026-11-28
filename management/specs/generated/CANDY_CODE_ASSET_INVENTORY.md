@@ -9,11 +9,11 @@
 > Source of Truth Responsibility: Deterministic current-state view; actual repository files are the underlying source
 > Related Documents: `CANDY_CODE_REFERENCE_INVENTORY.md` and `../CANDY_CODE_FILE_STRUCTURE.md`
 > Related Implementation Files: `management/scripts/candy_site_state.py`, `management/scripts/candy_site_state_render.py`, and the actual files represented by this output
-> Generated at: 2026-11-26T17:11:20+09:00 (reproducible generation baseline)
+> Generated at: 2026-11-28T12:45:43+09:00 (reproducible generation baseline)
 > Branch: main
-> Commit: 4e7cf77e8bf15f4aee216eb2b66799531d67ec65
-> State fingerprint: sha256:066871d6713c9038af7797bff0ce79e676abb7df2842f3bba86751d38ba32504
-> Population: Public PHP files: 325 / assets: 955
+> Commit: d189bc0a06db6864b769054280b364d713fad9f8
+> State fingerprint: sha256:501f83f6bf01fe5c86863bf8eb56200e64e03c9ad3754d0d9af8c4a5925671c3
+> Population: Public PHP files: 326 / assets: 955
 > Generator: `management/scripts/candy_site_state.py` with `management/scripts/candy_site_state_render.py`
 > Result: Missing references: 0 / template placeholders: 3 / required same-content groups: 3 / duplicate candidates: 1 / publication candidates: 1
 > Unverified scope: Runtime-generated references, database-derived references, external URLs, and log contents
@@ -282,6 +282,7 @@ Detailed public PHP, shared PHP, CSS, and JavaScript relationships are owned by 
 | blog:peaceofmindsupport | 4 | NONE | OK |
 | blog:petitegirl | 7 | NONE | OK |
 | blog:photo-diary-charm | 3 | NONE | OK |
+| blog:photo-diary-topics | 4 | NONE | OK |
 | blog:photo-diary | 4 | NONE | OK |
 | blog:pocchari-recruit | 3 | NONE | OK |
 | blog:poccharigirl | 7 | NONE | OK |
@@ -414,7 +415,7 @@ These candidates may be referenced dynamically and are not deletion decisions.
 
 | folder | count | examples (first five) |
 |---|---:|---|
-| HP/imgHtml/new_202601/blog | 8 | kagoshima-deliveryhealth-blog-photo-diary-topics_1.jpg, kagoshima-deliveryhealth-blog-photo-diary-topics_2.jpg, kagoshima-deliveryhealth-blog-photo-diary-topics_3.jpg, kagoshima-deliveryhealth-blog-photo-diary-topics_4.jpg, kagoshima-deliveryhealth-blog-words-that-make-women-happy_1.jpg |
+| HP/imgHtml/new_202601/blog | 4 | kagoshima-deliveryhealth-blog-words-that-make-women-happy_1.jpg, kagoshima-deliveryhealth-blog-words-that-make-women-happy_2.jpg, kagoshima-deliveryhealth-blog-words-that-make-women-happy_3.jpg, kagoshima-deliveryhealth-blog-words-that-make-women-happy_4.jpg |
 
 ## Required Same-Content Path Groups
 
